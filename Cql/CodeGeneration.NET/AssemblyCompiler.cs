@@ -17,6 +17,38 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private static readonly EmitOptions DefaultEmitOptions = new();
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
+
+        private static readonly string[] AssemblyFileNames = [
+            "System.Private.CoreLib.dll",
+            "System.Runtime.dll",
+            "System.Console.dll",
+            "netstandard.dll",
+
+            "System.Text.RegularExpressions.dll", // IMPORTANT!
+            "System.Linq.dll",
+            "System.Linq.Expressions.dll", // IMPORTANT!
+
+            "System.IO.dll",
+            "System.Net.Primitives.dll",
+            "System.Net.Http.dll",
+            "System.Private.Uri.dll",
+            "System.Reflection.dll",
+            "System.ComponentModel.Primitives.dll",
+            "System.Globalization.dll",
+            "System.Collections.Concurrent.dll",
+            "System.Collections.NonGeneric.dll",
+            "Microsoft.CSharp.dll",
+
+            "System.Diagnostics.Tools.dll",
+            "System.Diagnostics.Debug.dll",
+            "System.Collections.dll",
+
+            "System.ObjectModel.dll",
+            "System.ComponentModel.dll",
+            "System.ComponentModel.Annotations.dll",
+            "System.ComponentModel.TypeConverter.dll",
+        ];
+
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(TypeResolver typeResolver)
@@ -173,13 +205,17 @@ namespace Hl7.Cql.CodeGeneration.NET
             return syntaxTree;
         }
 
+
+
         private static string CreateAssemblyInfoSourceString(Library library)
         {
             var parts = library.GetVersionedIdentifier()!.Split('-');
             string name = parts[0];
             string version = string.Empty;
+
             if (parts.Length > 1)
                 version = parts[1];
+
             var text = $"""
                         [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
                         [assembly: System.Reflection.AssemblyVersion("{version}")]
@@ -189,38 +225,11 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {
-            var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location) ??
-                throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
+            var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location)
+                         ?? throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
 
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Private.CoreLib.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Runtime.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Console.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "netstandard.dll")));
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Text.RegularExpressions.dll"))); // IMPORTANT!
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Linq.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Linq.Expressions.dll"))); // IMPORTANT!
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.IO.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Net.Primitives.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Net.Http.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Private.Uri.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Reflection.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.Primitives.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Globalization.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.Concurrent.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.NonGeneric.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "Microsoft.CSharp.dll")));
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Tools.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Debug.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.dll")));
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ObjectModel.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.Annotations.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.TypeConverter.dll")));
-
+            foreach (var assemblyFileName in AssemblyFileNames)
+                metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, assemblyFileName)));
 
         }
     }

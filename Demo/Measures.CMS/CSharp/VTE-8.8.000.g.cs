@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("VTE", "8.8.000")]
 public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 {
@@ -30,20 +30,23 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
     #region Definition Methods
 
-    [CqlDeclaration("Obstetrical or Pregnancy Related Conditions")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263")]
+    [CqlValueSetDeclaration(
+        declarationName: "Obstetrical or Pregnancy Related Conditions",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263")]
     public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", default);
 
 
-    [CqlDeclaration("Obstetrics VTE")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264")]
+    [CqlValueSetDeclaration(
+        declarationName: "Obstetrics VTE",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264")]
     public CqlValueSet Obstetrics_VTE(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", default);
 
 
-    [CqlDeclaration("Venous Thromboembolism")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279")]
+    [CqlValueSetDeclaration(
+        declarationName: "Venous Thromboembolism",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279")]
     public CqlValueSet Venous_Thromboembolism(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", default);
 
@@ -139,6 +142,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);
@@ -156,6 +160,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
     {
         Encounter.LocationComponent a_ = CQMCommon_2_2_000.Instance.firstInpatientIntensiveCareUnit(context, Encounter);
@@ -167,6 +172,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);

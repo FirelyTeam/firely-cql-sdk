@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -30,92 +30,107 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
     #region Definition Methods
 
-    [CqlDeclaration("Absence of Left Breast")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329")]
+    [CqlValueSetDeclaration(
+        declarationName: "Absence of Left Breast",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329")]
     public CqlValueSet Absence_of_Left_Breast(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329", default);
 
 
-    [CqlDeclaration("Absence of Right Breast")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330")]
+    [CqlValueSetDeclaration(
+        declarationName: "Absence of Right Breast",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330")]
     public CqlValueSet Absence_of_Right_Breast(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330", default);
 
 
-    [CqlDeclaration("Bilateral Mastectomy")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042")]
+    [CqlValueSetDeclaration(
+        declarationName: "Bilateral Mastectomy",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042")]
     public CqlValueSet Bilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042", default);
 
 
-    [CqlDeclaration("Bilateral Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043")]
+    [CqlValueSetDeclaration(
+        declarationName: "Bilateral Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043")]
     public CqlValueSet Bilateral_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043", default);
 
 
-    [CqlDeclaration("Clinical Bilateral Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951")]
+    [CqlValueSetDeclaration(
+        declarationName: "Clinical Bilateral Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951")]
     public CqlValueSet Clinical_Bilateral_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951", default);
 
 
-    [CqlDeclaration("Clinical Left Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949")]
+    [CqlValueSetDeclaration(
+        declarationName: "Clinical Left Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949")]
     public CqlValueSet Clinical_Left_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949", default);
 
 
-    [CqlDeclaration("Clinical Right Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950")]
+    [CqlValueSetDeclaration(
+        declarationName: "Clinical Right Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950")]
     public CqlValueSet Clinical_Right_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950", default);
 
 
-    [CqlDeclaration("Clinical Unilateral Mastectomy")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948")]
+    [CqlValueSetDeclaration(
+        declarationName: "Clinical Unilateral Mastectomy",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948")]
     public CqlValueSet Clinical_Unilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948", default);
 
 
-    [CqlDeclaration("History of Bilateral Mastectomy")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331")]
+    [CqlValueSetDeclaration(
+        declarationName: "History of Bilateral Mastectomy",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331")]
     public CqlValueSet History_of_Bilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331", default);
 
 
-    [CqlDeclaration("Left Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148")]
+    [CqlValueSetDeclaration(
+        declarationName: "Left Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148")]
     public CqlValueSet Left_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148", default);
 
 
-    [CqlDeclaration("Mammography")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168")]
+    [CqlValueSetDeclaration(
+        declarationName: "Mammography",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168")]
     public CqlValueSet Mammography(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168", default);
 
 
-    [CqlDeclaration("Right Modifier")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230")]
+    [CqlValueSetDeclaration(
+        declarationName: "Right Modifier",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230")]
     public CqlValueSet Right_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230", default);
 
 
-    [CqlDeclaration("Unilateral Mastectomy")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256")]
+    [CqlValueSetDeclaration(
+        declarationName: "Unilateral Mastectomy",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256")]
     public CqlValueSet Unilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256", default);
 
 
-    [CqlDeclaration("Unilateral Mastectomy Left")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334")]
+    [CqlValueSetDeclaration(
+        declarationName: "Unilateral Mastectomy Left",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334")]
     public CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334", default);
 
 
-    [CqlDeclaration("Unilateral Mastectomy Right")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335")]
+    [CqlValueSetDeclaration(
+        declarationName: "Unilateral Mastectomy Right",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335")]
     public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335", default);
 

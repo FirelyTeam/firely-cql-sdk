@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
@@ -40,6 +40,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
     {
         CqlInterval<CqlDateTime> a_()
@@ -253,6 +254,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
     {
         CqlInterval<CqlDateTime> a_()
@@ -466,6 +468,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
     {
         DataType a_ = condition?.Onset;
@@ -480,6 +483,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_()
@@ -642,6 +646,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public string GetId(CqlContext context, string uri)
     {
         string a_()
@@ -670,10 +675,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) =>
         VSet;
 
 
+    // NOT A DEFINITION // 
     public (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
     {
         CqlDate a_(CqlDate d) =>

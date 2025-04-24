@@ -24,10 +24,10 @@ public class LibrarySetExpressionBuilderTests
 
         var librarySetExpressionBuilder = servicesScope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
         var librarySetDefinitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-        var lambdaExpression = librarySetDefinitions["CumulativeMedicationDuration-4.1.000", "Every eight hours (qualifier value)"];
-        Assert.IsNotNull(lambdaExpression);
+        var cqlDefinition = librarySetDefinitions["CumulativeMedicationDuration-4.1.000", "Every eight hours (qualifier value)"];
+        Assert.IsNotNull(cqlDefinition);
 
-        var del = lambdaExpression.Compile(true);
+        var del = cqlDefinition.Lambda.Compile(true);
         var cqlContext = new CqlContext(CqlOperators.Create(serviceProvider.GetRequiredService<TypeResolver>(), serviceProvider.GetRequiredService<TypeConverter>()));
         var res = (CqlCode)del.DynamicInvoke(cqlContext);
         Assert.AreEqual(("307469008", "http://snomed.info/sct"), (res.code, res.system));

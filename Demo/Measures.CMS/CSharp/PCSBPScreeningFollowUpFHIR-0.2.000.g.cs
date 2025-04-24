@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("PCSBPScreeningFollowUpFHIR", "0.2.000")]
 public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<PCSBPScreeningFollowUpFHIR_0_2_000>
 {
@@ -30,92 +30,107 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
 
     #region Definition Methods
 
-    [CqlDeclaration("Diagnosis of Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263")]
+    [CqlValueSetDeclaration(
+        declarationName: "Diagnosis of Hypertension",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263")]
     public CqlValueSet Diagnosis_of_Hypertension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263", default);
 
 
-    [CqlDeclaration("Dietary Recommendations")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515")]
+    [CqlValueSetDeclaration(
+        declarationName: "Dietary Recommendations",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515")]
     public CqlValueSet Dietary_Recommendations(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515", default);
 
 
-    [CqlDeclaration("Encounter to Screen for Blood Pressure")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920")]
+    [CqlValueSetDeclaration(
+        declarationName: "Encounter to Screen for Blood Pressure",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920")]
     public CqlValueSet Encounter_to_Screen_for_Blood_Pressure(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920", default);
 
 
-    [CqlDeclaration("Finding of Elevated Blood Pressure or Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514")]
+    [CqlValueSetDeclaration(
+        declarationName: "Finding of Elevated Blood Pressure or Hypertension",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514")]
     public CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514", default);
 
 
-    [CqlDeclaration("Follow Up Within 4 Weeks")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578")]
+    [CqlValueSetDeclaration(
+        declarationName: "Follow Up Within 4 Weeks",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578")]
     public CqlValueSet Follow_Up_Within_4_Weeks(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578", default);
 
 
-    [CqlDeclaration("Follow Up Within 6 Months")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.125")]
+    [CqlValueSetDeclaration(
+        declarationName: "Follow Up Within 6 Months",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.125")]
     public CqlValueSet Follow_Up_Within_6_Months(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.125", default);
 
 
-    [CqlDeclaration("Laboratory Tests for Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482")]
+    [CqlValueSetDeclaration(
+        declarationName: "Laboratory Tests for Hypertension",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482")]
     public CqlValueSet Laboratory_Tests_for_Hypertension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482", default);
 
 
-    [CqlDeclaration("Lifestyle Recommendation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581")]
+    [CqlValueSetDeclaration(
+        declarationName: "Lifestyle Recommendation",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581")]
     public CqlValueSet Lifestyle_Recommendation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581", default);
 
 
-    [CqlDeclaration("Medical Reason")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
+    [CqlValueSetDeclaration(
+        declarationName: "Medical Reason",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
 
-    [CqlDeclaration("Patient Declined")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
+    [CqlValueSetDeclaration(
+        declarationName: "Patient Declined",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
     public CqlValueSet Patient_Declined(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default);
 
 
-    [CqlDeclaration("Pharmacologic Therapy for Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577")]
+    [CqlValueSetDeclaration(
+        declarationName: "Pharmacologic Therapy for Hypertension",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577")]
     public CqlValueSet Pharmacologic_Therapy_for_Hypertension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577", default);
 
 
-    [CqlDeclaration("Recommendation to Increase Physical Activity")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518")]
+    [CqlValueSetDeclaration(
+        declarationName: "Recommendation to Increase Physical Activity",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518")]
     public CqlValueSet Recommendation_to_Increase_Physical_Activity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518", default);
 
 
-    [CqlDeclaration("Referral or Counseling for Alcohol Consumption")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583")]
+    [CqlValueSetDeclaration(
+        declarationName: "Referral or Counseling for Alcohol Consumption",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583")]
     public CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583", default);
 
 
-    [CqlDeclaration("Referral to Primary Care or Alternate Provider")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580")]
+    [CqlValueSetDeclaration(
+        declarationName: "Referral to Primary Care or Alternate Provider",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580")]
     public CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580", default);
 
 
-    [CqlDeclaration("Weight Reduction Recommended")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510")]
+    [CqlValueSetDeclaration(
+        declarationName: "Weight Reduction Recommended",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510")]
     public CqlValueSet Weight_Reduction_Recommended(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510", default);
 

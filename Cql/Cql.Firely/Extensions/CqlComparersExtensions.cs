@@ -83,9 +83,9 @@ namespace Hl7.Cql.Fhir.Extensions
         /// <returns></returns>
         public static CqlComparers CompareResourcesById(this CqlComparers comparers, StringComparer idComparer)
         {
-            var derviedFromResource = typeof(Patient).Assembly.GetTypes().Where(t => typeof(Resource).IsAssignableFrom(t));
+            var derivedFromResource = typeof(Patient).Assembly.GetTypes().Where(t => typeof(Resource).IsAssignableFrom(t));
             var resourceIdComparer = new ResourceIdCqlComparer(new StringCqlComparer(idComparer));
-            foreach (var type in derviedFromResource)
+            foreach (var type in derivedFromResource)
             {
                 comparers.Register(type, resourceIdComparer);
             }

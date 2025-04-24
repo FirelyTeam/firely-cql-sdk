@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("CumulativeMedicationDuration", "4.1.000")]
 public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton<CumulativeMedicationDuration_4_1_000>
 {
@@ -335,6 +335,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         decimal? a_()
@@ -738,6 +739,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         decimal? a_()
@@ -1326,12 +1328,14 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) =>
         ((context.Operators.Not((bool?)(value is null))) ?? false
             ? new CqlQuantity(value, unit)
             : default);
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1591,6 +1595,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> medicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1850,6 +1855,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2013,6 +2019,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> medicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2176,6 +2183,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
         CqlQuantity a_ = context.Operators.Quantity(14m, "days");
@@ -2184,6 +2192,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2243,6 +2252,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> medicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2302,6 +2312,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2333,6 +2344,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public int? cumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2364,6 +2376,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<CqlInterval<CqlDate>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2415,6 +2428,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<CqlInterval<CqlDate>> rolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2466,6 +2480,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2492,6 +2507,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDate> medicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2518,6 +2534,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -2558,6 +2575,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    // NOT A DEFINITION // 
     public int? cumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)

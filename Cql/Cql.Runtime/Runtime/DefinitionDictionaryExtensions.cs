@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Expressions;
+
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="visitors">Expression visitors to apply before compiling, or <see langword="null"/>.</param>
         /// <param name="debug">The debug info generator to use, or <see langword="null"/>.</param>
         /// <returns></returns>
-        public static DefinitionDictionary<Delegate> CompileAll(this DefinitionDictionary<LambdaExpression> expressions,
+        public static DefinitionDictionary<Delegate> CompileAll(this CqlDefinitionDictionary expressions,
             IList<ExpressionVisitor>? visitors = null,
             DebugInfoGenerator? debug = null)
         {
@@ -33,15 +35,15 @@ namespace Hl7.Cql.Runtime
                 {
                     foreach (var overload in kvp.Value)
                     {
-                        var lambda = overload.Item2;
+                        CqlDefinition cqlDefinition = overload.Item2;
                         if (visitors != null)
                         {
                             foreach (var visitor in visitors)
                             {
-                                lambda = (LambdaExpression)visitor.Visit(lambda);
+                                cqlDefinition = (CqlDefinition)visitor.Visit(cqlDefinition);
                             }
                         }
-                        var @delegate = debug is not null ? lambda!.Compile(debug) : lambda!.Compile();
+                        var @delegate = debug is not null ? cqlDefinition.Lambda.Compile(debug) : cqlDefinition.Lambda.Compile();
                         delegates.Add(library, kvp.Key, overload.Item1, @delegate);
                     }
                 }

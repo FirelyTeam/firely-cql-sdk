@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
@@ -30,14 +30,16 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #region Definition Methods
 
-    [CqlDeclaration("Lung Cancer")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
+    [CqlValueSetDeclaration(
+        declarationName: "Lung Cancer",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
     public CqlValueSet Lung_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
 
-    [CqlDeclaration("Condition Clinical Status")]
-    [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
+    [CqlValueSetDeclaration(
+        declarationName: "Condition Clinical Status",
+        valueSetId: "http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
     public CqlValueSet Condition_Clinical_Status(CqlContext context) =>
         new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
 

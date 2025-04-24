@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -222,7 +223,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions) =>
         cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
                 librarySet,
@@ -240,11 +241,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <returns>The dictionary of library set definitions.</returns>
-    private DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
+    private DefinitionDictionary<CqlDefinition> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet)
     {
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions = new();
         librarySetExpressionBuilderScoped
             .BuildEachLibraryDefinitions(
                 librarySet,

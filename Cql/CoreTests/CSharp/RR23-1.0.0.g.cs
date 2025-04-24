@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -30,14 +30,16 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #region Definition Methods
 
-    [CqlDeclaration("Injury due to falling rock")]
-    [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
+    [CqlValueSetDeclaration(
+        declarationName: "Injury due to falling rock",
+        valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public CqlValueSet Injury_due_to_falling_rock(CqlContext context) =>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
 
 
-    [CqlDeclaration("Roadrunners Syndrome Indicators")]
-    [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
+    [CqlValueSetDeclaration(
+        declarationName: "Roadrunners Syndrome Indicators",
+        valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
     public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) =>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 

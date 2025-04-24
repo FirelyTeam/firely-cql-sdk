@@ -1096,7 +1096,7 @@ partial class ExpressionBuilderContext(
 
     protected Expression ParameterRef(ParameterRef op)
     {
-        if (_libraryContext.LibraryDefinitions.TryGetValue(_libraryContext.LibraryVersionedIdentifier, op.name!, out var lambda) && lambda != null)
+        if (_libraryContext.LibraryDefinitions.TryGetValue(_libraryContext.LibraryVersionedIdentifier, op.name!, out var lambda))
         {
             var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
             return invoke;
@@ -1153,7 +1153,7 @@ partial class ExpressionBuilderContext(
     protected Expression InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
-        LambdaExpression definition)
+        CqlDefinition definition)
     {
         var type = definition.Type;
         if (type.IsGenericType)
@@ -2310,9 +2310,7 @@ internal partial class ExpressionBuilderContext
     }
 
 }
-
 #endregion
-
 file static class LocalExtensions
 {
     public static Type? GetListElementCqlIntervalPointType(

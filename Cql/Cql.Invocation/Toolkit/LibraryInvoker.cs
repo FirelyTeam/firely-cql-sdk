@@ -108,9 +108,9 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
+        if (LibraryInvoker_3_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_2_0_8_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
+            if (LibraryInvoker_3_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
                 return true;
         }
 

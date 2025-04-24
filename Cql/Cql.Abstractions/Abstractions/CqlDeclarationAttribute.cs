@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2025, Firely and NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -13,19 +13,11 @@ namespace Hl7.Cql.Abstractions
     /// Declares that this class is the translation of an ELM definition.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class CqlDeclarationAttribute : Attribute
+    public class CqlDeclarationAttribute(string declarationName) : Attribute
     {
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="Name">The name of the definition.</param>
-        public CqlDeclarationAttribute(string Name)
-        {
-            this.Name = Name;
-        }
         /// <summary>
         /// The name of the definition.
         /// </summary>
-        public string Name { get; }
+        public string DeclarationName { get; } = declarationName;
     }
 }

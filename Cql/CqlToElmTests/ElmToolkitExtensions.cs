@@ -2,7 +2,6 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
@@ -30,7 +29,7 @@ internal static class ElmToolkitExtensions
 
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
-    internal static DefinitionDictionary<LambdaExpression> ProcessLibrary(
+    internal static CqlDefinitionDictionary ProcessLibrary(
         this ElmToolkit elmToolkit,
         Library library)
     {
@@ -46,8 +45,8 @@ internal static class ElmToolkitExtensions
         using var scope = elmToolkit.CreateScope();
         var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
 
-        DefinitionDictionary<LambdaExpression> lambdas = new DefinitionDictionary<LambdaExpression>();
-        var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, lambdas);
+        CqlDefinitionDictionary definitions = new();
+        var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
         System.Linq.Expressions.Expression translated = ctx.TranslateArg(expression);
         var contextParameter = CqlExpressions.ParameterExpression;
         LambdaExpression lambda = System.Linq.Expressions.Expression.Lambda(translated, contextParameter);

@@ -11,7 +11,6 @@ using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
-
 /// <summary>
 /// Abstract class representing a definition invoker.
 /// </summary>

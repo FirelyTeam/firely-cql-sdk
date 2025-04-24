@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("CesareanBirthFHIR", "0.2.000")]
 public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBirthFHIR_0_2_000>
 {
@@ -30,50 +30,58 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
 
     #region Definition Methods
 
-    [CqlDeclaration("Abnormal Presentation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105")]
+    [CqlValueSetDeclaration(
+        declarationName: "Abnormal Presentation",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105")]
     public CqlValueSet Abnormal_Presentation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105", default);
 
 
-    [CqlDeclaration("Cesarean Birth")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282")]
+    [CqlValueSetDeclaration(
+        declarationName: "Cesarean Birth",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282")]
     public CqlValueSet Cesarean_Birth(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282", default);
 
 
-    [CqlDeclaration("Delivery of Singleton")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99")]
+    [CqlValueSetDeclaration(
+        declarationName: "Delivery of Singleton",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99")]
     public CqlValueSet Delivery_of_Singleton(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99", default);
 
 
-    [CqlDeclaration("Delivery Procedures")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
+    [CqlValueSetDeclaration(
+        declarationName: "Delivery Procedures",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
     public CqlValueSet Delivery_Procedures(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
 
-    [CqlDeclaration("Encounter Inpatient")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
+    [CqlValueSetDeclaration(
+        declarationName: "Encounter Inpatient",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
-    [CqlDeclaration("Genital Herpes")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049")]
+    [CqlValueSetDeclaration(
+        declarationName: "Genital Herpes",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049")]
     public CqlValueSet Genital_Herpes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049", default);
 
 
-    [CqlDeclaration("Placenta Accreta Spectrum Previa or Vasa Previa")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37")]
+    [CqlValueSetDeclaration(
+        declarationName: "Placenta Accreta Spectrum Previa or Vasa Previa",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37")]
     public CqlValueSet Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37", default);
 
 
-    [CqlDeclaration("37 to 42 Plus Weeks Gestation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68")]
+    [CqlValueSetDeclaration(
+        declarationName: "37 to 42 Plus Weeks Gestation",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68")]
     public CqlValueSet _37_to_42_Plus_Weeks_Gestation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68", default);
 
@@ -248,6 +256,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
+    // NOT A DEFINITION // 
     public int? lastGravida(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Pregnancies(context);
@@ -401,6 +410,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
+    // NOT A DEFINITION // 
     public int? lastParity(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Parity(context);
@@ -554,6 +564,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
+    // NOT A DEFINITION // 
     public int? lastHistoryPretermBirth(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Births_preterm(context);
@@ -707,6 +718,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
+    // NOT A DEFINITION // 
     public int? lastHistoryTermBirth(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Births_term(context);

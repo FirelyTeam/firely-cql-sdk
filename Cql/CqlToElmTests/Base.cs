@@ -6,6 +6,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Model;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
@@ -31,12 +32,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             ctx ??= DefaultCqlContext;
             var elmToolkit = CreateElmToolkit();
-            var lambda = elmToolkit.Lambda(expression);
             var expressionName = "TempExpression";
+            var definition = new CqlExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
-            DefinitionDictionary<LambdaExpression> definitions = new();
-            definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+            CqlDefinitionDictionary definitions = new();
+            definitions.Add(library.GetVersionedIdentifier()!, expressionName, definition);
 
             var generateCSharp =
                 elmToolkitServices

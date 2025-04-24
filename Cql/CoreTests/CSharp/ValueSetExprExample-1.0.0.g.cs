@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
@@ -30,26 +30,30 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #region Definition Methods
 
-    [CqlDeclaration("ValueSet-A-1")]
-    [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1")]
+    [CqlValueSetDeclaration(
+        declarationName: "ValueSet-A-1",
+        valueSetId: "http://fire.ly/ValueSet/ValueSet-A-1")]
     public CqlValueSet ValueSet_A_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", default);
 
 
-    [CqlDeclaration("ValueSet-A-2")]
-    [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2")]
+    [CqlValueSetDeclaration(
+        declarationName: "ValueSet-A-2",
+        valueSetId: "http://fire.ly/ValueSet/ValueSet-A-2")]
     public CqlValueSet ValueSet_A_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", default);
 
 
-    [CqlDeclaration("ValueSet-B-1")]
-    [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1")]
+    [CqlValueSetDeclaration(
+        declarationName: "ValueSet-B-1",
+        valueSetId: "http://fire.ly/ValueSet/ValueSet-B-1")]
     public CqlValueSet ValueSet_B_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", default);
 
 
-    [CqlDeclaration("ValueSet-B-2")]
-    [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2")]
+    [CqlValueSetDeclaration(
+        declarationName: "ValueSet-B-2",
+        valueSetId: "http://fire.ly/ValueSet/ValueSet-B-2")]
     public CqlValueSet ValueSet_B_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", default);
 
@@ -72,7 +76,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
-    [CqlDeclaration("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context)
     {
         CqlValueSet a_()
@@ -113,7 +116,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
-    [CqlDeclaration("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context)
     {
         CqlValueSet a_()

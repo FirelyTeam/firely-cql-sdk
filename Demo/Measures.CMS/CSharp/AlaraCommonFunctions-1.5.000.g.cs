@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.5.000")]
 public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_5_000>
 {
@@ -170,6 +170,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
+    // NOT A DEFINITION // 
     public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
     {
         List<Observation.ComponentComponent> a_ = Obs?.Component;
@@ -205,6 +206,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
+    // NOT A DEFINITION // 
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
     {
         List<Observation.ComponentComponent> a_ = Obs?.Component;
@@ -240,6 +242,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
+    // NOT A DEFINITION // 
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
     {
         DataType a_ = Obs?.Value;
@@ -257,6 +260,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
+    // NOT A DEFINITION // 
     public bool? CT_Scan_Qualifies(CqlContext context, Observation Obs)
     {
         CqlCode a_ = this.Abdomen_and_Pelvis_Low_Dose(context);

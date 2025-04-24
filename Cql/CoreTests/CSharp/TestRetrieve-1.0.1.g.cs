@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
@@ -30,68 +30,79 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #region Definition Methods
 
-    [CqlDeclaration("HIV")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.120.12.1003")]
+    [CqlValueSetDeclaration(
+        declarationName: "HIV",
+        valueSetId: "2.16.840.1.113883.3.464.1003.120.12.1003")]
     public CqlValueSet HIV(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
 
-    [CqlDeclaration("Syphilis")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1002")]
+    [CqlValueSetDeclaration(
+        declarationName: "Syphilis",
+        valueSetId: "2.16.840.1.113883.3.464.1003.112.12.1002")]
     public CqlValueSet Syphilis(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1002", default);
 
 
-    [CqlDeclaration("Complications of Pregnancy, Childbirth and the Puerperium")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1012")]
+    [CqlValueSetDeclaration(
+        declarationName: "Complications of Pregnancy, Childbirth and the Puerperium",
+        valueSetId: "2.16.840.1.113883.3.464.1003.111.12.1012")]
     public CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1012", default);
 
 
-    [CqlDeclaration("Pregnancy Test")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1011")]
+    [CqlValueSetDeclaration(
+        declarationName: "Pregnancy Test",
+        valueSetId: "2.16.840.1.113883.3.464.1003.111.12.1011")]
     public CqlValueSet Pregnancy_Test(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1011", default);
 
 
-    [CqlDeclaration("Pap Test")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.108.12.1017")]
+    [CqlValueSetDeclaration(
+        declarationName: "Pap Test",
+        valueSetId: "2.16.840.1.113883.3.464.1003.108.12.1017")]
     public CqlValueSet Pap_Test(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
 
-    [CqlDeclaration("Lab Tests During Pregnancy")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1007")]
+    [CqlValueSetDeclaration(
+        declarationName: "Lab Tests During Pregnancy",
+        valueSetId: "2.16.840.1.113883.3.464.1003.111.12.1007")]
     public CqlValueSet Lab_Tests_During_Pregnancy(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1007", default);
 
 
-    [CqlDeclaration("Lab Tests for Sexually Transmitted Infections")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1051")]
+    [CqlValueSetDeclaration(
+        declarationName: "Lab Tests for Sexually Transmitted Infections",
+        valueSetId: "2.16.840.1.113883.3.464.1003.110.12.1051")]
     public CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1051", default);
 
 
-    [CqlDeclaration("Chlamydia Screening")]
-    [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1052")]
+    [CqlValueSetDeclaration(
+        declarationName: "Chlamydia Screening",
+        valueSetId: "2.16.840.1.113883.3.464.1003.110.12.1052")]
     public CqlValueSet Chlamydia_Screening(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1052", default);
 
 
-    [CqlDeclaration("Palliative Care Assessment")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
+    [CqlValueSetDeclaration(
+        declarationName: "Palliative Care Assessment",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
     public CqlValueSet Palliative_Care_Assessment(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", default);
 
 
-    [CqlDeclaration("Palliative Care Encounter")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
+    [CqlValueSetDeclaration(
+        declarationName: "Palliative Care Encounter",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
     public CqlValueSet Palliative_Care_Encounter(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", default);
 
 
-    [CqlDeclaration("Palliative Care Intervention")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
+    [CqlValueSetDeclaration(
+        declarationName: "Palliative Care Intervention",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
     public CqlValueSet Palliative_Care_Intervention(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", default);
 

@@ -19,11 +19,10 @@ global using Microsoft.CodeAnalysis.Emit;
 global using Microsoft.CodeAnalysis.Text;
 global using Microsoft.Extensions.Logging;
 global using BinaryExpression = System.Linq.Expressions.BinaryExpression;
+global using CqlDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Compiler.Expressions.CqlDefinition>;
 global using Expression = System.Linq.Expressions.Expression;
 global using UnaryExpression = System.Linq.Expressions.UnaryExpression;
-
 global using ElmLibrary = Hl7.Cql.Elm.Library;
-
 global using ElmToolkitConversionDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConversionRecord>;
 global using ElmToolkitConversionReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConversionRecord>;
 

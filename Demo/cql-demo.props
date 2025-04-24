@@ -10,11 +10,11 @@
 			## Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			Keep this in sync between cql-sdk.props and cql-demo.props
 			-->
-		<VersionPrefix>2.0.14</VersionPrefix>
+		<VersionPrefix>2.0.15</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<!--
 			## Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props
-			The verion must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
+			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
 		<FirelySdkVersion>5.11.4</FirelySdkVersion>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
@@ -41,9 +41,9 @@
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 
 		<!-- ElmToCSharpEnabled must be true here for build to pass -->
-		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
-		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
-		<!--- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
+		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled> -->
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->

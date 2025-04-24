@@ -192,7 +192,7 @@ namespace CLI
                         CqlDeclarationAttribute? declaration = method.GetCustomAttribute<CqlDeclarationAttribute>();
                         CqlValueSetAttribute? valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
 
-                        if (declaration is { Name: { } declName } && valueset is null)
+                        if (declaration is { DeclarationName: { } declName } && valueset is null)
                         {
                             yield return (method, declName);
                         }

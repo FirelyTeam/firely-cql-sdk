@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
@@ -30,6 +30,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     #region Definition Methods
 
+    // NOT A DEFINITION // 
     public Account AccountResource(CqlContext context, Account arg)
     {
         Account[] a_ = [
@@ -73,6 +74,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ActivityDefinition ActivityDefinitionResource(CqlContext context, ActivityDefinition arg)
     {
         ActivityDefinition[] a_ = [
@@ -186,6 +188,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public AdverseEvent AdverseEventResource(CqlContext context, AdverseEvent arg)
     {
         AdverseEvent[] a_ = [
@@ -247,6 +250,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public AllergyIntolerance AllergyIntoleranceResource(CqlContext context, AllergyIntolerance arg)
     {
         AllergyIntolerance[] a_ = [
@@ -300,6 +304,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Appointment AppointmentResource(CqlContext context, Appointment arg)
     {
         Appointment[] a_ = [
@@ -369,6 +374,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public AppointmentResponse AppointmentResponseResource(CqlContext context, AppointmentResponse arg)
     {
         AppointmentResponse[] a_ = [
@@ -406,6 +412,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public AuditEvent AuditEventResource(CqlContext context, AuditEvent arg)
     {
         AuditEvent[] a_ = [
@@ -449,6 +456,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Basic BasicResource(CqlContext context, Basic arg)
     {
         Basic[] a_ = [
@@ -480,6 +488,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public BiologicallyDerivedProduct BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct arg)
     {
         BiologicallyDerivedProduct[] a_ = [
@@ -523,6 +532,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public BodyStructure BodyStructureResource(CqlContext context, BodyStructure arg)
     {
         BodyStructure[] a_ = [
@@ -560,6 +570,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CarePlan CarePlanResource(CqlContext context, CarePlan arg)
     {
         CarePlan[] a_ = [
@@ -627,6 +638,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CareTeam CareTeamResource(CqlContext context, CareTeam arg)
     {
         CareTeam[] a_ = [
@@ -674,6 +686,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CatalogEntry CatalogEntryResource(CqlContext context, CatalogEntry arg)
     {
         CatalogEntry[] a_ = [
@@ -721,6 +734,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ChargeItem ChargeItemResource(CqlContext context, ChargeItem arg)
     {
         ChargeItem[] a_ = [
@@ -794,6 +808,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ChargeItemDefinition ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition arg)
     {
         ChargeItemDefinition[] a_ = [
@@ -861,6 +876,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Claim ClaimResource(CqlContext context, Claim arg)
     {
         Claim[] a_ = [
@@ -936,6 +952,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ClaimResponse ClaimResponseResource(CqlContext context, ClaimResponse arg)
     {
         ClaimResponse[] a_ = [
@@ -1011,6 +1028,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ClinicalImpression ClinicalImpressionResource(CqlContext context, ClinicalImpression arg)
     {
         ClinicalImpression[] a_ = [
@@ -1072,6 +1090,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CodeSystem CodeSystemResource(CqlContext context, CodeSystem arg)
     {
         CodeSystem[] a_ = [
@@ -1147,6 +1166,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Communication CommunicationResource(CqlContext context, Communication arg)
     {
         Communication[] a_ = [
@@ -1214,6 +1234,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CommunicationRequest CommunicationRequestResource(CqlContext context, CommunicationRequest arg)
     {
         CommunicationRequest[] a_ = [
@@ -1279,6 +1300,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Composition CompositionResource(CqlContext context, Composition arg)
     {
         Composition[] a_ = [
@@ -1330,6 +1352,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ConceptMap ConceptMapResource(CqlContext context, ConceptMap arg)
     {
         ConceptMap[] a_ = [
@@ -1387,6 +1410,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Condition ConditionResource(CqlContext context, Condition arg)
     {
         Condition[] a_ = [
@@ -1442,6 +1466,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Consent ConsentResource(CqlContext context, Consent arg)
     {
         Consent[] a_ = [
@@ -1489,6 +1514,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Contract ContractResource(CqlContext context, Contract arg)
     {
         Contract[] a_ = [
@@ -1576,6 +1602,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Coverage CoverageResource(CqlContext context, Coverage arg)
     {
         Coverage[] a_ = [
@@ -1633,6 +1660,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CoverageEligibilityRequest CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest arg)
     {
         CoverageEligibilityRequest[] a_ = [
@@ -1682,6 +1710,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public CoverageEligibilityResponse CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse arg)
     {
         CoverageEligibilityResponse[] a_ = [
@@ -1733,6 +1762,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DetectedIssue DetectedIssueResource(CqlContext context, DetectedIssue arg)
     {
         DetectedIssue[] a_ = [
@@ -1778,6 +1808,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Device DeviceResource(CqlContext context, Device arg)
     {
         Device[] a_ = [
@@ -1851,6 +1882,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DeviceDefinition DeviceDefinitionResource(CqlContext context, DeviceDefinition arg)
     {
         DeviceDefinition[] a_ = [
@@ -1916,6 +1948,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DeviceMetric DeviceMetricResource(CqlContext context, DeviceMetric arg)
     {
         DeviceMetric[] a_ = [
@@ -1957,6 +1990,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DeviceRequest DeviceRequestResource(CqlContext context, DeviceRequest arg)
     {
         DeviceRequest[] a_ = [
@@ -2026,6 +2060,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DeviceUseStatement DeviceUseStatementResource(CqlContext context, DeviceUseStatement arg)
     {
         DeviceUseStatement[] a_ = [
@@ -2073,6 +2108,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DiagnosticReport DiagnosticReportResource(CqlContext context, DiagnosticReport arg)
     {
         DiagnosticReport[] a_ = [
@@ -2130,6 +2166,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DocumentManifest DocumentManifestResource(CqlContext context, DocumentManifest arg)
     {
         DocumentManifest[] a_ = [
@@ -2175,6 +2212,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public DocumentReference DocumentReferenceResource(CqlContext context, DocumentReference arg)
     {
         DocumentReference[] a_ = [
@@ -2228,6 +2266,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis arg)
     {
         EffectEvidenceSynthesis[] a_ = [
@@ -2315,6 +2354,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Encounter EncounterResource(CqlContext context, Encounter arg)
     {
         Encounter[] a_ = [
@@ -2382,6 +2422,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Endpoint EndpointResource(CqlContext context, Endpoint arg)
     {
         Endpoint[] a_ = [
@@ -2425,6 +2466,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EnrollmentRequest EnrollmentRequestResource(CqlContext context, EnrollmentRequest arg)
     {
         EnrollmentRequest[] a_ = [
@@ -2460,6 +2502,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EnrollmentResponse EnrollmentResponseResource(CqlContext context, EnrollmentResponse arg)
     {
         EnrollmentResponse[] a_ = [
@@ -2497,6 +2540,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EpisodeOfCare EpisodeOfCareResource(CqlContext context, EpisodeOfCare arg)
     {
         EpisodeOfCare[] a_ = [
@@ -2542,6 +2586,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EventDefinition EventDefinitionResource(CqlContext context, EventDefinition arg)
     {
         EventDefinition[] a_ = [
@@ -2619,6 +2664,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Evidence EvidenceResource(CqlContext context, Evidence arg)
     {
         Evidence[] a_ = [
@@ -2696,6 +2742,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public EvidenceVariable EvidenceVariableResource(CqlContext context, EvidenceVariable arg)
     {
         EvidenceVariable[] a_ = [
@@ -2771,6 +2818,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ExplanationOfBenefit ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit arg)
     {
         ExplanationOfBenefit[] a_ = [
@@ -2880,6 +2928,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public FamilyMemberHistory FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory arg)
     {
         FamilyMemberHistory[] a_ = [
@@ -2937,6 +2986,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Flag FlagResource(CqlContext context, Flag arg)
     {
         Flag[] a_ = [
@@ -2974,6 +3024,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Goal GoalResource(CqlContext context, Goal arg)
     {
         Goal[] a_ = [
@@ -3027,6 +3078,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Group GroupResource(CqlContext context, Group arg)
     {
         Group[] a_ = [
@@ -3070,6 +3122,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public GuidanceResponse GuidanceResponseResource(CqlContext context, GuidanceResponse arg)
     {
         GuidanceResponse[] a_ = [
@@ -3121,6 +3174,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public HealthcareService HealthcareServiceResource(CqlContext context, HealthcareService arg)
     {
         HealthcareService[] a_ = [
@@ -3190,6 +3244,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ImagingStudy ImagingStudyResource(CqlContext context, ImagingStudy arg)
     {
         ImagingStudy[] a_ = [
@@ -3255,6 +3310,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Immunization ImmunizationResource(CqlContext context, Immunization arg)
     {
         Immunization[] a_ = [
@@ -3332,6 +3388,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ImmunizationEvaluation ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation arg)
     {
         ImmunizationEvaluation[] a_ = [
@@ -3379,6 +3436,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ImmunizationRecommendation ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation arg)
     {
         ImmunizationRecommendation[] a_ = [
@@ -3410,6 +3468,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public InsurancePlan InsurancePlanResource(CqlContext context, InsurancePlan arg)
     {
         InsurancePlan[] a_ = [
@@ -3459,6 +3518,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Invoice InvoiceResource(CqlContext context, Invoice arg)
     {
         Invoice[] a_ = [
@@ -3512,6 +3572,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Library LibraryResource(CqlContext context, Library arg)
     {
         Library[] a_ = [
@@ -3595,6 +3656,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Linkage LinkageResource(CqlContext context, Linkage arg)
     {
         Linkage[] a_ = [
@@ -3622,6 +3684,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Location LocationResource(CqlContext context, Location arg)
     {
         Location[] a_ = [
@@ -3677,6 +3740,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Measure MeasureResource(CqlContext context, Measure arg)
     {
         Measure[] a_ = [
@@ -3780,6 +3844,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MeasureReport MeasureReportResource(CqlContext context, MeasureReport arg)
     {
         MeasureReport[] a_ = [
@@ -3823,6 +3888,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Medication MedicationResource(CqlContext context, Medication arg)
     {
         Medication[] a_ = [
@@ -3860,6 +3926,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicationAdministration MedicationAdministrationResource(CqlContext context, MedicationAdministration arg)
     {
         MedicationAdministration[] a_ = [
@@ -3919,6 +3986,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicationDispense MedicationDispenseResource(CqlContext context, MedicationDispense arg)
     {
         MedicationDispense[] a_ = [
@@ -3988,6 +4056,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicationKnowledge MedicationKnowledgeResource(CqlContext context, MedicationKnowledge arg)
     {
         MedicationKnowledge[] a_ = [
@@ -4053,6 +4122,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicationRequest MedicationRequestResource(CqlContext context, MedicationRequest arg)
     {
         MedicationRequest[] a_ = [
@@ -4138,6 +4208,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicationStatement MedicationStatementResource(CqlContext context, MedicationStatement arg)
     {
         MedicationStatement[] a_ = [
@@ -4193,6 +4264,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProduct MedicinalProductResource(CqlContext context, MedicinalProduct arg)
     {
         MedicinalProduct[] a_ = [
@@ -4254,6 +4326,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductAuthorization MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization arg)
     {
         MedicinalProductAuthorization[] a_ = [
@@ -4307,6 +4380,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductContraindication MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication arg)
     {
         MedicinalProductContraindication[] a_ = [
@@ -4342,6 +4416,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductIngredient MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient arg)
     {
         MedicinalProductIngredient[] a_ = [
@@ -4375,6 +4450,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductInteraction MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction arg)
     {
         MedicinalProductInteraction[] a_ = [
@@ -4410,6 +4486,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductManufactured MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured arg)
     {
         MedicinalProductManufactured[] a_ = [
@@ -4445,6 +4522,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductPackaged MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged arg)
     {
         MedicinalProductPackaged[] a_ = [
@@ -4484,6 +4562,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical arg)
     {
         MedicinalProductPharmaceutical[] a_ = [
@@ -4519,6 +4598,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect arg)
     {
         MedicinalProductUndesirableEffect[] a_ = [
@@ -4550,6 +4630,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MessageHeader MessageHeaderResource(CqlContext context, MessageHeader arg)
     {
         MessageHeader[] a_ = [
@@ -4593,6 +4674,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public MolecularSequence MolecularSequenceResource(CqlContext context, MolecularSequence arg)
     {
         MolecularSequence[] a_ = [
@@ -4646,6 +4728,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public NamingSystem NamingSystemResource(CqlContext context, NamingSystem arg)
     {
         NamingSystem[] a_ = [
@@ -4693,6 +4776,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public NutritionOrder NutritionOrderResource(CqlContext context, NutritionOrder arg)
     {
         NutritionOrder[] a_ = [
@@ -4748,6 +4832,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Observation ObservationResource(CqlContext context, Observation arg)
     {
         Observation[] a_ = [
@@ -4817,6 +4902,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ObservationDefinition ObservationDefinitionResource(CqlContext context, ObservationDefinition arg)
     {
         ObservationDefinition[] a_ = [
@@ -4864,6 +4950,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public OperationOutcome OperationOutcomeResource(CqlContext context, OperationOutcome arg)
     {
         OperationOutcome[] a_ = [
@@ -4887,6 +4974,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Organization OrganizationResource(CqlContext context, Organization arg)
     {
         Organization[] a_ = [
@@ -4928,6 +5016,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public OrganizationAffiliation OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation arg)
     {
         OrganizationAffiliation[] a_ = [
@@ -4973,6 +5062,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Patient PatientResource(CqlContext context, Patient arg)
     {
         Patient[] a_ = [
@@ -5026,6 +5116,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public PaymentNotice PaymentNoticeResource(CqlContext context, PaymentNotice arg)
     {
         PaymentNotice[] a_ = [
@@ -5071,6 +5162,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public PaymentReconciliation PaymentReconciliationResource(CqlContext context, PaymentReconciliation arg)
     {
         PaymentReconciliation[] a_ = [
@@ -5122,6 +5214,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Person PersonResource(CqlContext context, Person arg)
     {
         Person[] a_ = [
@@ -5163,6 +5256,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public PlanDefinition PlanDefinitionResource(CqlContext context, PlanDefinition arg)
     {
         PlanDefinition[] a_ = [
@@ -5246,6 +5340,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Practitioner PractitionerResource(CqlContext context, Practitioner arg)
     {
         Practitioner[] a_ = [
@@ -5287,6 +5382,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public PractitionerRole PractitionerRoleResource(CqlContext context, PractitionerRole arg)
     {
         PractitionerRole[] a_ = [
@@ -5336,6 +5432,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Procedure ProcedureResource(CqlContext context, Procedure arg)
     {
         Procedure[] a_ = [
@@ -5413,6 +5510,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Provenance ProvenanceResource(CqlContext context, Provenance arg)
     {
         Provenance[] a_ = [
@@ -5454,6 +5552,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public QuestionnaireResponse QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse arg)
     {
         QuestionnaireResponse[] a_ = [
@@ -5497,6 +5596,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public RelatedPerson RelatedPersonResource(CqlContext context, RelatedPerson arg)
     {
         RelatedPerson[] a_ = [
@@ -5542,6 +5642,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public RequestGroup RequestGroupResource(CqlContext context, RequestGroup arg)
     {
         RequestGroup[] a_ = [
@@ -5599,6 +5700,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ResearchDefinition ResearchDefinitionResource(CqlContext context, ResearchDefinition arg)
     {
         ResearchDefinition[] a_ = [
@@ -5688,6 +5790,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ResearchElementDefinition ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition arg)
     {
         ResearchElementDefinition[] a_ = [
@@ -5775,6 +5878,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ResearchStudy ResearchStudyResource(CqlContext context, ResearchStudy arg)
     {
         ResearchStudy[] a_ = [
@@ -5844,6 +5948,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ResearchSubject ResearchSubjectResource(CqlContext context, ResearchSubject arg)
     {
         ResearchSubject[] a_ = [
@@ -5881,6 +5986,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public RiskAssessment RiskAssessmentResource(CqlContext context, RiskAssessment arg)
     {
         RiskAssessment[] a_ = [
@@ -5936,6 +6042,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis arg)
     {
         RiskEvidenceSynthesis[] a_ = [
@@ -6019,6 +6126,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Schedule ScheduleResource(CqlContext context, Schedule arg)
     {
         Schedule[] a_ = [
@@ -6056,6 +6164,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ServiceRequest ServiceRequestResource(CqlContext context, ServiceRequest arg)
     {
         ServiceRequest[] a_ = [
@@ -6143,6 +6252,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Slot SlotResource(CqlContext context, Slot arg)
     {
         Slot[] a_ = [
@@ -6186,6 +6296,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Specimen SpecimenResource(CqlContext context, Specimen arg)
     {
         Specimen[] a_ = [
@@ -6233,6 +6344,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SpecimenDefinition SpecimenDefinitionResource(CqlContext context, SpecimenDefinition arg)
     {
         SpecimenDefinition[] a_ = [
@@ -6266,6 +6378,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public StructureDefinition StructureDefinitionResource(CqlContext context, StructureDefinition arg)
     {
         StructureDefinition[] a_ = [
@@ -6341,6 +6454,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public StructureMap StructureMapResource(CqlContext context, StructureMap arg)
     {
         StructureMap[] a_ = [
@@ -6398,6 +6512,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Subscription SubscriptionResource(CqlContext context, Subscription arg)
     {
         Subscription[] a_ = [
@@ -6433,6 +6548,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Substance SubstanceResource(CqlContext context, Substance arg)
     {
         Substance[] a_ = [
@@ -6468,6 +6584,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstanceNucleicAcid SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid arg)
     {
         SubstanceNucleicAcid[] a_ = [
@@ -6499,6 +6616,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstancePolymer SubstancePolymerResource(CqlContext context, SubstancePolymer arg)
     {
         SubstancePolymer[] a_ = [
@@ -6532,6 +6650,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstanceProtein SubstanceProteinResource(CqlContext context, SubstanceProtein arg)
     {
         SubstanceProtein[] a_ = [
@@ -6561,6 +6680,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstanceReferenceInformation SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation arg)
     {
         SubstanceReferenceInformation[] a_ = [
@@ -6592,6 +6712,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstanceSourceMaterial SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial arg)
     {
         SubstanceSourceMaterial[] a_ = [
@@ -6639,6 +6760,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SubstanceSpecification SubstanceSpecificationResource(CqlContext context, SubstanceSpecification arg)
     {
         SubstanceSpecification[] a_ = [
@@ -6698,6 +6820,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SupplyDelivery SupplyDeliveryResource(CqlContext context, SupplyDelivery arg)
     {
         SupplyDelivery[] a_ = [
@@ -6741,6 +6864,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public SupplyRequest SupplyRequestResource(CqlContext context, SupplyRequest arg)
     {
         SupplyRequest[] a_ = [
@@ -6792,6 +6916,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public Task TaskResource(CqlContext context, Task arg)
     {
         Task[] a_ = [
@@ -6875,6 +7000,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public TerminologyCapabilities TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities arg)
     {
         TerminologyCapabilities[] a_ = [
@@ -6944,6 +7070,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public TestReport TestReportResource(CqlContext context, TestReport arg)
     {
         TestReport[] a_ = [
@@ -6989,6 +7116,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public TestScript TestScriptResource(CqlContext context, TestScript arg)
     {
         TestScript[] a_ = [
@@ -7058,6 +7186,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public ValueSet ValueSetResource(CqlContext context, ValueSet arg)
     {
         ValueSet[] a_ = [
@@ -7115,6 +7244,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public VerificationResult VerificationResultResource(CqlContext context, VerificationResult arg)
     {
         VerificationResult[] a_ = [
@@ -7164,6 +7294,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
+    // NOT A DEFINITION // 
     public VisionPrescription VisionPrescriptionResource(CqlContext context, VisionPrescription arg)
     {
         VisionPrescription[] a_ = [

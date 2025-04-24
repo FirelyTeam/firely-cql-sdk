@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
@@ -538,6 +538,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isActive(CqlContext context, Condition condition)
     {
         CodeableConcept a_ = condition?.ClinicalStatus;
@@ -560,6 +561,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? hasCategory(CqlContext context, Condition condition, CqlCode category)
     {
         List<CodeableConcept> a_ = condition?.Category;
@@ -584,6 +586,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? hasCategory(CqlContext context, Observation observation, CqlCode category)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -608,6 +611,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isProblemListItem(CqlContext context, Condition condition)
     {
         List<CodeableConcept> a_ = condition?.Category;
@@ -633,6 +637,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isEncounterDiagnosis(CqlContext context, Condition condition)
     {
         List<CodeableConcept> a_ = condition?.Category;
@@ -658,6 +663,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isHealthConcern(CqlContext context, Condition condition)
     {
         List<CodeableConcept> a_ = condition?.Category;
@@ -683,6 +689,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isSocialHistory(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -708,6 +715,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isVitalSign(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -733,6 +741,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isImaging(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -758,6 +767,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isLaboratory(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -783,6 +793,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isProcedure(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -808,6 +819,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isSurvey(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -833,6 +845,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isExam(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -858,6 +871,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isTherapy(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -883,6 +897,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isActivity(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -908,6 +923,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isClinicalTest(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -933,6 +949,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isCommunity(CqlContext context, MedicationRequest medicationRequest)
     {
         List<CodeableConcept> a_ = medicationRequest?.Category;
@@ -958,6 +975,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? isDischarge(CqlContext context, MedicationRequest medicationRequest)
     {
         List<CodeableConcept> a_ = medicationRequest?.Category;
@@ -983,6 +1001,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? doNotPerform(CqlContext context, DeviceRequest deviceRequest)
     {
         bool? a_(Extension E)
@@ -1012,6 +1031,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1152,6 +1172,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1292,6 +1313,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> ToAbatementInterval(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1492,6 +1514,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> abatementInterval(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1692,6 +1715,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> ToPrevalenceInterval(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1775,6 +1799,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlInterval<CqlDateTime> prevalenceInterval(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1858,6 +1883,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public string GetId(CqlContext context, string uri)
     {
         IEnumerable<string> a_ = context.Operators.Split(uri, "/");
@@ -1867,6 +1893,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public string getId(CqlContext context, string uri)
     {
         IEnumerable<string> a_ = context.Operators.Split(uri, "/");
@@ -1876,6 +1903,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
@@ -1888,6 +1916,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? hasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
@@ -1900,6 +1929,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
@@ -1912,6 +1942,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public bool? hasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
@@ -1924,6 +1955,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlDateTime Latest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
@@ -1958,6 +1990,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlDateTime latest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
@@ -1992,6 +2025,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlDateTime Earliest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
@@ -2026,6 +2060,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public CqlDateTime earliest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
@@ -2060,6 +2095,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<int?> Interval_To_Day_Numbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         CqlDateTime a_ = context.Operators.Start(Period);
@@ -2083,6 +2119,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<int?> toDayNumbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         CqlDateTime a_ = context.Operators.Start(Period);
@@ -2106,6 +2143,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(context, Period);
@@ -2167,6 +2205,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(context, Period);

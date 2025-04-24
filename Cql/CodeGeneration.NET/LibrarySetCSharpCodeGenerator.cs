@@ -8,12 +8,13 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -85,7 +86,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions,
+        CqlDefinitionDictionary definitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
         Action<Library>? onBeforeProcessLibrary = null)
     {
@@ -99,7 +100,7 @@ internal partial class LibrarySetCSharpCodeGenerator
     (
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
-        DefinitionDictionary<LambdaExpression> Definitions)
+        CqlDefinitionDictionary Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
@@ -127,7 +128,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                     buildExceptionHandlingStrategy);
     }
 
-    private record LibraryWriter(
+    private record LibraryWriter
+    (
         LibrarySetWriter LibrarySetWriter,
         Library Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
@@ -227,9 +229,9 @@ internal partial class LibrarySetCSharpCodeGenerator
             var libraryName = LibraryName;
             bool first = true;
 
-            foreach (var (definition, overloads) in definitions.DefinitionsForLibrary(libraryName))
+            foreach (var (definitionName, overloads) in definitions.DefinitionsForLibrary(libraryName))
             {
-                foreach (var (signature, expression) in overloads)
+                foreach (var (signature, cqlDefinition) in overloads)
                 {
                     if (first)
                     {
@@ -238,8 +240,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         first = false;
                     }
 
-                    definitions.TryGetTags(libraryName, definition, signature, out var tags);
-                    var methodWriter = CreateMethodWriter(definition, expression, tags);
+                    var methodWriter = CreateMethodWriter(definitionName, cqlDefinition, cqlDefinition.Tags);
                     methodWriter.WriteMethod();
                     IndentedTextWriter.WriteLine();
                 }
@@ -289,19 +290,18 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private MethodWriter CreateMethodWriter(
             string definition,
-            LambdaExpression expression,
-            ILookup<string, string>? tags)
+            CqlDefinition cqlDefinition,
+            (string Name, string[] Values)[] tags)
         {
-            return new MethodWriter(this, definition, expression, tags);
+            return new MethodWriter(this, definition, cqlDefinition, tags);
         }
     }
 
-    private record MethodWriter
-    (
+    private record MethodWriter(
         LibraryWriter LibraryWriter,
         string CqlName,
-        LambdaExpression Overload,
-        ILookup<string, string>? Tags) : IAddIndentMutable<MethodWriter>
+        CqlDefinition CqlDefinition,
+        (string Name, string[] Values)[] Tags) : IAddIndentMutable<MethodWriter>
     {
         private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlName)!;
 
@@ -310,19 +310,20 @@ internal partial class LibrarySetCSharpCodeGenerator
             return this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
         }
 
-        private IndentedTextWriter IndentedTextWriter => LibraryWriter.IndentedTextWriter;
+        private IndentedTextWriter tw => LibraryWriter.IndentedTextWriter;
 
         public void WriteMethod()
         {
             string libraryName = LibraryWriter.LibraryName;
-            LambdaExpression overload = Overload;
+            var cqlDefinition = CqlDefinition.Lambda;
             TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
-            var isDef = IsDefinition(overload);
+
+            var isDef = cqlDefinition is { Parameters: [{ Type: { } p0Type }] } && p0Type == typeof(CqlContext);
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
             var visitedBody = Transform(
-                overload.Body,
+                cqlDefinition.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
@@ -330,47 +331,62 @@ internal partial class LibrarySetCSharpCodeGenerator
             );
 
             // Skip CqlContext
-            var parameters = overload.Parameters.Skip(1);
+            var parameters = cqlDefinition.Parameters.Skip(1);
 
-            overload = Expression.Lambda(visitedBody, parameters);
+            cqlDefinition = Expression.Lambda(visitedBody, parameters);
 
             if (isDef)
             {
-                IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
-                WriteTags();
-
-                if (overload.ReturnType == typeof(CqlValueSet))
+                if (cqlDefinition.ReturnType == typeof(CqlValueSet))
                 {
-                    if (overload.Body is NewExpression @new)
-                    {
-                        var arg = @new.Arguments[0];
-                        if (arg is ConstantExpression { Value: string valueSetId })
+                    if (cqlDefinition.Body is NewExpression
                         {
-                            IndentedTextWriter.WriteLine($"[CqlValueSet({valueSetId.QuoteString()})]");
+                            Arguments:
+                            [
+                                ConstantExpression { Value: string valueSetId },
+                                //ConstantExpression { Value: string valueSetVersion },
+                                ..
+                            ]
                         }
+                        //&& newExpression.Arguments[0] is ConstantExpression { Value: string valueSetId }
+                       )
+                    {
+                        tw.WriteLine($"[CqlValueSetDeclaration(");
+                        var tw1 = tw.AddIndent();
+                        tw1.WriteLine($"declarationName: {CqlName.QuoteString()},");
+                        //tw1.WriteLine($"valueSetVersion: {valueSetVersion.QuoteString()},");
+                        tw1.WriteLine($"valueSetId: {valueSetId.QuoteString()})]");
                     }
                 }
+                else
+                {
+                    tw.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
+                }
+
+                WriteTags();
+            }
+            else
+            {
+                tw.WriteLine("// NOT A DEFINITION // ");
             }
 
-            var definitionToCSharpCodeProcessor =
-                new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
-                                                         IndentedTextWriter.Indent);
-            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
-            IndentedTextWriter.WriteLine(definition);
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
+                tupleMetadataBuilder,
+                libraryName,
+                LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
+                tw.Indent);
+            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(
+                cqlDefinition,
+                MethodName,
+                specifiers: "public");
+            tw.WriteLine(definition);
         }
 
         private void WriteTags()
         {
-            if (Tags == null)
-                return;
-
-            foreach (var group in Tags)
-            {
-                foreach (var tag in group)
-                {
-                    IndentedTextWriter.WriteLine($"[CqlTag({group.Key.QuoteString()}, {tag.QuoteString()})]");
-                }
-            }
+            foreach (var tag in Tags ?? [])
+                foreach (var tagValue in tag.Values)
+                    tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
         }
 
         private static bool IsDefinition(LambdaExpression overload) =>

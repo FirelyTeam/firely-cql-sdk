@@ -106,7 +106,7 @@ namespace Hl7.Cql.Runtime
                 foreach (var prop in properties)
                 {
                     var cqlDeclaration = prop.GetCustomAttribute<CqlDeclarationAttribute>();
-                    if (cqlDeclaration != null && cqlDeclaration.Name == propertyName)
+                    if (cqlDeclaration != null && cqlDeclaration.DeclarationName == propertyName)
                         return prop;
                 }
             }

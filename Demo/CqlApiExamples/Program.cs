@@ -20,8 +20,6 @@ using System.Text;
 
 namespace CqlApiExamples;
 
-using static FormattableString;
-
 internal static class Program
 {
     private static readonly string ResourceCanonicalRoot = "https://fire.ly/fhir/";
@@ -38,15 +36,16 @@ internal static class Program
         //InvokeCqlFromExamplesFolder(loggerFactory);
         //PackageFromExamplesFolder(loggerFactory);
         //
-        string[] exampleSetNames = ["RR23"];
+
+        string[] exampleSetNames = ["Tests"];
         //string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
         //string[] exampleSetNames = ["CMS"];
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
             //PackageCqlToFhirExample(loggerFactory, dirs);
-            //PackageElmToFhirExample(loggerFactory, dirs);
-            InvokeResourceExample(loggerFactory, dirs);
+            PackageElmToFhirExample(loggerFactory, dirs);
+            //InvokeResourceExample(loggerFactory, dirs);
         }
     }
 
@@ -314,33 +313,34 @@ internal static class Program
         // Create fluent cql toolkit
         var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit =
-            new CqlToolkit(loggerFactory, config).SetIgnoreEnumerationExceptions();
+            new CqlToolkit(loggerFactory, config)
+                .SetIgnoreEnumerationExceptions()
+                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory);
 
-        var elmToolkit =
-            cqlToolkit.CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
-                      .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
-                      // ELM -> Assemblies
-                      .CompileToAssemblies()
-                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
-                      .With(elmToolkit =>
-                                elmToolkit.TryGetFirstCSharpFileLines()
-                                          .IfNotNull(t => logger.LogInformation(
-                                                         $"""
-                                                          First 50 C# lines for {t.LibraryIdentifier}:
-                                                          {t.CSharpSourceCode.TakeLines(50)}
-                                                          """)))
-                      .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
-                      .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
-                      .With(packagingToolkit =>
-                      {
-                          packagingToolkit.TryGetFirstPackageFileLines()
-                                          .IfNotNull(t => logger.LogInformation(
-                                                         $"""
-                                                          First 50 FHIR lines for {t.LibraryIdentifier}:
-                                                          {t.FhirLibraryJson.TakeLines(50)}
-                                                          """));
-                      });
+        cqlToolkit.CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
+                  .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
+                  // ELM -> Assemblies
+                  .CompileToAssemblies()
+                  .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                  .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                  .With(elmToolkit =>
+                            elmToolkit.TryGetFirstCSharpFileLines()
+                                      .IfNotNull(t => logger.LogInformation(
+                                                     $"""
+                                                      First 50 C# lines for {t.LibraryIdentifier}:
+                                                      {t.CSharpSourceCode.TakeLines(50)}
+                                                      """)))
+                  .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
+                  .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
+                  .With(packagingToolkit =>
+                  {
+                      packagingToolkit.TryGetFirstPackageFileLines()
+                                      .IfNotNull(t => logger.LogInformation(
+                                                     $"""
+                                                      First 50 FHIR lines for {t.LibraryIdentifier}:
+                                                      {t.FhirLibraryJson.TakeLines(50)}
+                                                      """));
+                  });
     }
 
     /// <summary>
@@ -403,8 +403,8 @@ file static class Extensions
 
         IEnumerable<(DefinitionInvoker def, object? result)> definitions =
             cqlContext is null
-            ? librarySetInvoker.EnumerateLibrarySetDefinitions().Select(def=> (def, default(object)))
-            : librarySetInvoker.EnumerateLibrarySetDefinitionsResults(cqlContext);
+                ? librarySetInvoker.EnumerateLibrarySetDefinitions().Select(def => (def, default(object)))
+                : librarySetInvoker.EnumerateLibrarySetDefinitionsResults(cqlContext);
 
         foreach (var grouping1 in
                  definitions.GroupBy(o => o.def.LibraryIdentifier))
@@ -412,9 +412,9 @@ file static class Extensions
             var libId = grouping1.Key;
             sb.AppendLine($"  - LibraryName: {libId}");
             foreach (var (index, (def, result)) in grouping1
-                                         .GroupBy(def => def.def.ValueSetId is not null)
-                                         .OrderBy(t => !t.Key)
-                                         .SelectMany(g => g.Indexed())
+                                                   .GroupBy(def => def.def.ValueSetId is not null)
+                                                   .OrderBy(t => !t.Key)
+                                                   .SelectMany(g => g.Indexed())
                      //.Indexed()
                     )
             {

@@ -7,9 +7,9 @@
  */
 
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
@@ -24,7 +24,7 @@ partial class LibraryExpressionBuilderContext
     /// If the library was processed within the context of a library set,
     /// then this dictionary will be merged with the library set's dictionary.
     /// </summary>
-    public DefinitionDictionary<LambdaExpression> LibraryDefinitions  => _libraryDefinitions;
+    public CqlDefinitionDictionary LibraryDefinitions  => _libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -44,7 +44,7 @@ partial class LibraryExpressionBuilderContext
 
             if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
                     libraryName,
-                    out IEnumerable<KeyValuePair<string, List<(Type[], LambdaExpression)>>>? definitions))
+                    out IEnumerable<KeyValuePair<string, List<(Type[], CqlDefinition)>>>? definitions))
             {
                 LibraryDefinitions.Merge(libraryName, definitions);
             }

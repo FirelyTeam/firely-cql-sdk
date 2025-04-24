@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Elm;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
@@ -15,14 +14,14 @@ internal partial class LibraryExpressionBuilderContext
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilder _expressionBuilder;
-    private readonly DefinitionDictionary<LambdaExpression> _libraryDefinitions;
+    private readonly CqlDefinitionDictionary _libraryDefinitions;
     private readonly LibrarySetExpressionBuilderContext? _libsCtx;
 
     public LibraryExpressionBuilderContext(
         ILogger<LibraryExpressionBuilder> logger,
         ExpressionBuilder expressionBuilder,
         Library library,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
+        CqlDefinitionDictionary libraryDefinitions,
         LibrarySetExpressionBuilderContext? libsCtx = null)
     {
         _libraryDefinitions = libraryDefinitions;
@@ -46,7 +45,7 @@ internal partial class LibraryExpressionBuilderContext
     /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedIdentifier"/>
     public string LibraryVersionedIdentifier { get; }
 
-    public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
+    public CqlDefinitionDictionary ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             // Make sure all overloads in the library are unique.

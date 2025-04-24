@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("Status", "1.8.000")]
 public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 {
@@ -68,6 +68,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isAssessmentPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -110,6 +111,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<DeviceRequest> isDeviceOrder(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
     {
         bool? a_(DeviceRequest D)
@@ -137,6 +139,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -164,6 +167,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<ServiceRequest> isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -191,6 +195,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<ServiceRequest> isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -218,6 +223,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -241,6 +247,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Encounter> isEncounterPerformed(CqlContext context, IEnumerable<Encounter> Enc)
     {
         bool? a_(Encounter E)
@@ -266,6 +273,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Immunization> isImmunizationAdministered(CqlContext context, IEnumerable<Immunization> Immunization)
     {
         bool? a_(Immunization I)
@@ -283,6 +291,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Procedure> isInterventionPerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -300,6 +309,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Procedure> isProcedurePerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -317,6 +327,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -359,6 +370,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<MedicationRequest> isMedicationActive(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -381,6 +393,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<MedicationDispense> isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
         bool? a_(MedicationDispense M)
@@ -404,6 +417,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<MedicationRequest> isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -430,6 +444,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -472,6 +487,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isObservationBP(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -494,6 +510,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isObservationBodyHeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -516,6 +533,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isObservationBodyWeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -538,6 +556,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isObservationBMI(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -560,6 +579,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+    // NOT A DEFINITION // 
     public IEnumerable<Observation> isSymptom(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
