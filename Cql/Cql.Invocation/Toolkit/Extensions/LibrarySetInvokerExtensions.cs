@@ -144,4 +144,19 @@ public static class LibrarySetInvokerExtensions
         var result = libraryDefinitionInvoker.Invoke(cqlContext);
         return result;
     }
+
+    [DebuggerStepperBoundary]
+    public static object? GetLibraryFunctionResult(
+        this LibrarySetInvoker librarySetInvoker,
+        CqlContext cqlContext,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        string functionName,
+        params object[] functionArguments)
+    {
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
+        var libraryFunctionInvoker = libraryInvoker.Functions[functionName];
+        var result = libraryFunctionInvoker.Invoke(cqlContext, functionArguments);
+
+        return result;
+    }
 }

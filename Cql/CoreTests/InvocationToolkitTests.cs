@@ -105,4 +105,27 @@ public class InvocationToolkitTests
                                  { "description", ["Patients in the IP"] }
                              });
     }
+
+    [TestMethod]
+    public void TestFunctionInvocation()
+    {
+        const int arg1 = 2;
+        const int arg2 = 3;
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library FunctionTest version '1.0.0'
+            define function Add(a Integer, b Integer): a + b
+            """);
+        var cqlToolkit = new CqlToolkit(config: cqlToElmProcessorSettings)
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+
+        var cqlContext = FhirCqlContext.ForBundle();
+        var result =
+            librarySetInvoker.GetLibraryFunctionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Add", arg1, arg2);
+
+        result.Should().Be(arg1+arg2, "The function should return the sum of the two arguments.");
+    }
 }

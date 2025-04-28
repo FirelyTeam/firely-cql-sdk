@@ -71,6 +71,11 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
     /// <summary>
+    /// Gets the dictionary of function invokers for the CQL library.
+    /// </summary>
+    public abstract IReadOnlyDictionary<string, FunctionInvoker> Functions { get; }
+
+    /// <summary>
     /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker that created the <see cref="LibraryInvoker"/>.</param>

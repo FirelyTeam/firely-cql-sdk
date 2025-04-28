@@ -51,12 +51,29 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                                                && o.Method.GetParameters() is [{ } p0]
                                                && p0.ParameterType == typeof(CqlContext)
                                                    ? (DefinitionInvoker)new DefinitionInvoker_2_0_8_0(
-                                                       this, declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
+                                                       this, declarationName, Library, o.Method, o.TagValuesByName,
+                                                       o.ValueSetId)
                                                    : null)
                       .ToImmutableDictionary(o => o.DefinitionName);
+
+        Functions = libraryMethodInfos
+            .SelectWhereNotNull(o => o.DeclarationName is { } functionName
+                                             && o.Method.GetParameters().Length > 1
+                                             && o.Method.GetParameters()[0].ParameterType == typeof(CqlContext)
+                                            //&& o.Method.GetParameters() is [{ } p0, .. var pRest]
+                                            //&& p0.ParameterType == typeof(CqlContext)
+                                            //&& pRest.Length > 0
+                                                ? (FunctionInvoker)new FunctionInvoker_2_0_8_0(
+                                                     this, functionName, Library, o.Method, o.TagValuesByName,
+                                                     o.ValueSetId)
+                                                : null)
+                    .ToImmutableDictionary(o => o.FunctionName);
     }
 
     public override IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
+
+    public override IReadOnlyDictionary<string, FunctionInvoker> Functions { get; }
+
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
     {
@@ -104,4 +121,17 @@ file class DefinitionInvoker_2_0_8_0
 {
     public override object? Invoke(CqlContext cqlContext) =>
         MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, [cqlContext], CultureInfo.InvariantCulture);
+}
+
+file class FunctionInvoker_2_0_8_0(
+    LibraryInvoker libraryInvoker,
+    string functionName,
+    ILibrary library,
+    MethodInfo methodInfo,
+    IReadOnlyDictionary<string, IReadOnlySet<string>> tagValuesByName,
+    string? valueSetId) : FunctionInvoker(libraryInvoker, functionName, methodInfo, tagValuesByName, valueSetId)
+{
+    public override object? Invoke(CqlContext cqlContext, params object[] args) =>
+        MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, [cqlContext, ..args], CultureInfo.InvariantCulture);
+
 }

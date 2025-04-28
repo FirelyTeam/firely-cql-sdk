@@ -318,6 +318,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             LambdaExpression overload = Overload;
             TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
             var isDef = IsDefinition(overload);
+            var isFunc = IsFunction(overload);
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
@@ -334,7 +335,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             overload = Expression.Lambda(visitedBody, parameters);
 
-            if (isDef)
+            if (isDef || isFunc)
             {
                 IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
                 WriteTags();
@@ -375,6 +376,10 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private static bool IsDefinition(LambdaExpression overload) =>
             overload.Parameters.Count == 1
+            && overload.Parameters[0].Type == typeof(CqlContext);
+
+        private static bool IsFunction(LambdaExpression overload) =>
+            overload.Parameters.Count > 1
             && overload.Parameters[0].Type == typeof(CqlContext);
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
