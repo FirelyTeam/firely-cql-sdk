@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Runtime
 {
@@ -15,39 +15,34 @@ namespace Hl7.Cql.Runtime
     /// </summary>
     internal static class DefinitionDictionaryExtensions
     {
-
         /// <summary>
         /// Compiles a <see cref="DefinitionDictionary{LambdaExpression}"/> to a <see cref="DefinitionDictionary{Delegate}"/>.
         /// This is accomplished by calling <see cref="LambdaExpression.Compile()"/>.
         /// </summary>
-        /// <param name="expressions">The expressions to compile.</param>
+        /// <param name="cqlDefinitionDictionary">The expressions to compile.</param>
         /// <param name="visitors">Expression visitors to apply before compiling, or <see langword="null"/>.</param>
         /// <param name="debug">The debug info generator to use, or <see langword="null"/>.</param>
         /// <returns></returns>
-        public static DefinitionDictionary<Delegate> CompileAll(this CqlDefinitionDictionary expressions,
+        public static DelegateDefinitionDictionary CompileAll(
+            this CqlDefinitionDictionary cqlDefinitionDictionary,
             IList<ExpressionVisitor>? visitors = null,
             DebugInfoGenerator? debug = null)
         {
-            var delegates = new DefinitionDictionary<Delegate>();
-            foreach (var library in expressions.Libraries)
+            var delegates = new DelegateDefinitionDictionary();
+
+            foreach (var (libraryName, definitionName, signature, expression) in cqlDefinitionDictionary.EnumerateExpressions())
             {
-                foreach (var kvp in expressions.DefinitionsForLibrary(library))
-                {
-                    foreach (var overload in kvp.Value)
-                    {
-                        CqlDefinition cqlDefinition = overload.Item2;
-                        if (visitors != null)
-                        {
-                            foreach (var visitor in visitors)
-                            {
-                                cqlDefinition = (CqlDefinition)visitor.Visit(cqlDefinition);
-                            }
-                        }
-                        var @delegate = debug is not null ? cqlDefinition.Lambda.Compile(debug) : cqlDefinition.Lambda.Compile();
-                        delegates.Add(library, kvp.Key, overload.Item1, @delegate);
-                    }
-                }
+                Expression expr = expression;
+                if (visitors != null)
+                    foreach (var visitor in visitors)
+                        expr = visitor.Visit(expr);
+
+                var @delegate = debug is not null
+                                    ? ((CqlDefinition)expr).Lambda.Compile(debug)
+                                    : ((CqlDefinition)expr).Lambda.Compile();
+                delegates.Add(libraryName, definitionName, signature, @delegate);
             }
+
             return delegates;
         }
 
@@ -61,7 +56,12 @@ namespace Hl7.Cql.Runtime
         /// <param name="rtx">The runtime context to use for the execution.</param>
         /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
         /// <returns></returns>
-        public static T? Invoke<T>(this DefinitionDictionary<Delegate> delegates, string libraryName, string define, CqlContext rtx, params object[] parameters)
+        public static T? Invoke<T>(
+            this DelegateDefinitionDictionary delegates,
+            string libraryName,
+            string define,
+            CqlContext rtx,
+            params object[] parameters)
         {
             var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
             var @delegate = delegates[libraryName, define, parameterTypes];

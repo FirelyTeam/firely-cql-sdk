@@ -1,9 +1,11 @@
-﻿using Hl7.Cql.Compiler.Expressions;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
+/// <seealso cref="ParameterDef"/>
+/// <seealso cref="CqlParameterDefinitionAttribute"/>
 internal class CqlParameterDefinition(
     LambdaExpression lambda,
-    string declarationName,
-    params (string tagName, string[] tagValues)[] tags)
-    : CqlDefinition(lambda, declarationName, tags);
+    string definitionName)
+    : CqlDefinition(lambda, definitionName);

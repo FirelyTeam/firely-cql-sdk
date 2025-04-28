@@ -20,7 +20,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
     (
         MethodInfo Method,
         IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName,
-        CqlDeclarationAttribute? CqlDeclarationAttribute)
+        CqlDefinitionAttribute? CqlDeclarationAttribute)
     {
         public LibraryMethodInfo(MethodInfo Method) : this(
             Method,
@@ -33,7 +33,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
                 { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Values).AsReadOnly(),
                 _                    => ReadOnlyDictionary<string, IReadOnlySet<string>>.Empty
             },
-            CqlDeclarationAttribute: Method.GetCustomAttribute<CqlDeclarationAttribute>()) { }
+            CqlDeclarationAttribute: Method.GetCustomAttribute<CqlDefinitionAttribute>()) { }
     }
 
     private LibraryInvoker_3_0(
@@ -46,7 +46,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
                                  .SelectToArray(m => new LibraryMethodInfo(m));
         Definitions = libraryMethodInfos
                       .SelectWhereNotNull(o =>
-                                              o.CqlDeclarationAttribute?.DeclarationName is { } declarationName
+                                              o.CqlDeclarationAttribute?.DefinitionName is { } declarationName
                                               && o.Method.GetParameters() is [{ } p0]
                                               && p0.ParameterType == typeof(CqlContext)
                                                   ? (DefinitionInvoker)new DefinitionInvoker_3_0(
@@ -55,7 +55,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
                                                       library: Library,
                                                       methodInfo: o.Method,
                                                       tagValuesByName: o.TagValuesByName,
-                                                      valueSetId: o.CqlDeclarationAttribute is CqlValueSetDeclarationAttribute vsa ? vsa.ValueSetId : null)
+                                                      valueSetId: o.CqlDeclarationAttribute is CqlValueSetDefinitionAttribute vsa ? vsa.ValueSetId : null)
                                                   : null)
                       .ToImmutableDictionary(o => o.DefinitionName);
     }

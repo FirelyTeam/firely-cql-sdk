@@ -9,13 +9,13 @@
 namespace Hl7.Cql.Abstractions;
 
 /// <summary>
-/// Declares that this method or property is translated from an ELM value set expression.
+/// Declares that this method or property is translated from an ELM value set definition.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-public class CqlValueSetDeclarationAttribute(
-    string declarationName,
+public class CqlValueSetDefinitionAttribute(
+    string definitionName,
     string valueSetId,
-    string? valueSetVersion = null) : CqlDeclarationAttribute(declarationName)
+    string? valueSetVersion = null) : CqlDefinitionAttribute(definitionName)
 {
     /// <summary>
     /// The canonical URI of the code.

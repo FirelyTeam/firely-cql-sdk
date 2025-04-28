@@ -61,7 +61,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                             // Core engine references
                             typeof(Iso8601.DateIso8601),         // Iso8601
-                            typeof(CqlDeclarationAttribute),     // Cql.Abstractions
+                            typeof(CqlDefinitionAttribute),     // Cql.Abstractions
                             typeof(CqlContext),                  // Cql.Runtime
 
                         }                                        // @formatter on
@@ -204,8 +204,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var syntaxTree = SyntaxFactory.ParseSyntaxTree(sourceText, CSharpParseOptions, path);
             return syntaxTree;
         }
-
-
 
         private static string CreateAssemblyInfoSourceString(Library library)
         {

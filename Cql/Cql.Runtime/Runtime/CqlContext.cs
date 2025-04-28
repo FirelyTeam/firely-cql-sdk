@@ -18,7 +18,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Contains all definitions required during execution.
         /// </summary>
-        public DefinitionDictionary<Delegate> Definitions { get; }
+        public DelegateDefinitionDictionary Definitions { get; }
 
         /// <summary>
         /// Gets the implementation of <see cref="ICqlOperators"/> this execution uses.
@@ -45,10 +45,10 @@ namespace Hl7.Cql.Runtime
         protected internal CqlContext(
             ICqlOperators operators,
             IDictionary<string, object>? parameters = null,
-            DefinitionDictionary<Delegate>? delegates = null)
+            DelegateDefinitionDictionary? delegates = null)
         {
             Operators = operators;
-            Definitions = delegates ?? new DefinitionDictionary<Delegate>();
+            Definitions = delegates ?? new DelegateDefinitionDictionary();
             Parameters = parameters ?? new Dictionary<string, object>();
         }
 

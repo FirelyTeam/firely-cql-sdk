@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Elm;
@@ -42,12 +43,8 @@ partial class LibraryExpressionBuilderContext
             if (!HasAliasForLibraryVersionedIdentifier(libraryName))
                 throw new CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(library).ToException();
 
-            if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
-                    libraryName,
-                    out IEnumerable<KeyValuePair<string, List<(Type[], CqlDefinition)>>>? definitions))
-            {
-                LibraryDefinitions.Merge(libraryName, definitions);
-            }
+            foreach (var (definitionName, signature, expression) in LibrarySetContext!.LibrarySetDefinitions.EnumerateExpressionsByLibraryName(libraryName))
+                LibraryDefinitions.Add(libraryName, definitionName, signature, expression);
         }
     }
 

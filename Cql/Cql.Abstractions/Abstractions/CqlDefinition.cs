@@ -1,13 +1,11 @@
-﻿namespace Hl7.Cql.Compiler.Expressions;
+﻿namespace Hl7.Cql.Abstractions;
 
 internal abstract class CqlDefinition(
     LambdaExpression lambda,
-    string declarationName,
-    params (string tagName, string[] tagValues)[] tags) : Expression
+    string definitionName) : Expression
 {
     public new LambdaExpression Lambda { get; } = lambda;
-    public string DeclarationName { get; } = declarationName;
-    public (string Name, string[] Values)[] Tags { get; } = tags;
+    public string DefinitionName { get; } = definitionName;
     public override Expression Reduce() => Lambda;
 
     public override bool CanReduce => true;

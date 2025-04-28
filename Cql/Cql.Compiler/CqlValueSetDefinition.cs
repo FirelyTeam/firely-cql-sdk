@@ -1,9 +1,14 @@
-﻿using Hl7.Cql.Compiler.Expressions;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler;
 
 internal class CqlValueSetDefinition(
     LambdaExpression lambda,
-    string declarationName,
-    params (string tagName, string[] tagValues)[] tags)
-    : CqlDefinition(lambda, declarationName, tags);
+    string definitionName,
+    string valueSetId,
+    string? valueSetVersion)
+    : CqlDefinition(lambda, definitionName) {
+    public string ValueSetId { get; } = valueSetId;
+    public string? ValueSetVersion { get; } = valueSetVersion;
+}

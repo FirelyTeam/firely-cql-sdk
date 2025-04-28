@@ -154,7 +154,7 @@ public class DefinitionDictionary<T> where T : class
 
 
     /// <summary>
-    /// Tries to get the value for <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="signature"/>.
+    /// Tries to get the best match value for <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="signature"/>.
     /// </summary>
     /// <param name="libraryName">The name of the library.</param>
     /// <param name="definitionName">The name of the definition.</param>
@@ -253,17 +253,47 @@ public class DefinitionDictionary<T> where T : class
     public IReadOnlyCollection<string> Libraries => _signatureExpressionsPerDefinitionPerLibrary.Keys;
 
     /// <summary>
-    /// Gets key-value pairs of definitions and their values.
+    /// Enumerates all definitions, their signatures, and their associated expressions for a given library name.
     /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <returns>Key-value pairs of definitions and their values.</returns>
-    /// <exception cref="ArgumentException">If <paramref name="libraryName"/> does not exist in the dictionary.</exception>
-    public IReadOnlyDictionary<string, List<(Type[] Signature, T T)>> DefinitionsForLibrary(string? libraryName)
+    /// <param name="libraryName">The name of the library to enumerate definitions expressions for.</param>
+    /// <returns>
+    /// An enumerable collection of tuples, where each tuple contains:
+    /// <list type="bullet">
+    /// <item><description>The definition name.</description></item>
+    /// <item><description>The type signature of the definition's expression.</description></item>
+    /// <item><description>The associated expression.</description></item>
+    /// </list>
+    /// </returns>
+    /// <exception cref="ArgumentException">Thrown if the specified library does not exist in the dictionary.</exception>
+    public IEnumerable<(string definitionName, Type[] signature, T expression)> EnumerateExpressionsByLibraryName(string? libraryName)
     {
         libraryName ??= string.Empty;
-        return _signatureExpressionsPerDefinitionPerLibrary.TryGetValue(libraryName, out var signatureExpressionsPerDefinition)
-                   ? signatureExpressionsPerDefinition
-                   : throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
+        if (!_signatureExpressionsPerDefinitionPerLibrary.TryGetValue(libraryName, out var signatureExpressionsPerDefinition))
+            throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
+
+        foreach (var (definitionName, signatureExpressions) in signatureExpressionsPerDefinition)
+            foreach (var (signature, expression) in signatureExpressions)
+                yield return (definitionName, signature, expression);
+    }
+
+    /// <summary>
+    /// Enumerates all definitions, their signatures, and their associated expressions across all libraries.
+    /// </summary>
+    /// <returns>
+    /// An enumerable collection of tuples, where each tuple contains:
+    /// <list type="bullet">
+    /// <item><description>The library name.</description></item>
+    /// <item><description>The definition name.</description></item>
+    /// <item><description>The type signature of the definition's expression.</description></item>
+    /// <item><description>The associated expression.</description></item>
+    /// </list>
+    /// </returns>
+    public IEnumerable<(string libraryName, string definitionName, Type[] signature, T expression)> EnumerateExpressions()
+    {
+        foreach (var (libraryName, definitions) in _signatureExpressionsPerDefinitionPerLibrary)
+            foreach (var (definitionName, signatureExpressions) in definitions)
+                foreach (var (signature, expression) in signatureExpressions)
+                    yield return (libraryName, definitionName, signature, expression);
     }
 
     /// <summary>
@@ -411,83 +441,42 @@ public class DefinitionDictionary<T> where T : class
     public void Merge(params DefinitionDictionary<T>[] dictionaries)
     {
         foreach (var dictionary in dictionaries)
-        {
             foreach (var libKey in dictionary.Libraries)
             {
                 // don't overwrite existing libraries
-                if (!Libraries.Contains(libKey))
-                {
-                    foreach (var def in dictionary.DefinitionsForLibrary(libKey))
-                    {
-                        foreach (var overload in def.Value)
-                        {
-                            Add(libKey, def.Key, overload.Item1, overload.Item2);
-                        }
-                    }
-                }
-            }
-            //
-            // foreach (var tagKey in dictionary.TagsByLibrary)
-            // {
-            //     if (!TagsByLibrary.Contains(tagKey))
-            //     {
-            //         TagsByLibrary.Add(tagKey.Key, tagKey.Value);
-            //     }
-            // }
-        }
-    }
+                if (Libraries.Contains(libKey))
+                    continue;
 
-    /// <summary>
-    /// Merges <paramref name="expressions"/> for a given <paramref name="libKey"></paramref> into this dictionary, with existing keys remaining preserved.
-    /// This means that if a key exists in this dictionary, it will not be overwritten by the value of keys in <paramref name="expressions"/>.
-    /// </summary>
-    /// <param name="libKey">The library name and version.</param>
-    /// <param name="expressions">The expressions to add.</param>
-    public void Merge(
-        string libKey,
-        IEnumerable<KeyValuePair<string, List<(Type[], T)>>> expressions)
-    {
-        foreach (var (definition, overloads) in expressions)
-        {
-            foreach (var (signature, expression) in overloads)
-            {
-                Add(libKey, definition, signature, expression);
+                foreach (var (definitionName, signature, expression) in dictionary.EnumerateExpressionsByLibraryName(libKey))
+                    Add(libKey, definitionName, signature, expression);
             }
-        }
     }
 
     /// <summary>
     /// One method is closer than another if all of its parameter types are narrower than (or the same as) the parameter types of the other method.
     /// If neither method's parameters are narrower than the other, then there is no way for to determine which method is closer to the arguments.
     /// </summary>
-    /// <param name="parameterTypes">The type of the parameters being passed to the method</param>
-    /// <param name="overloads">The signatures of overloads available</param>
+    /// <param name="signature">The type of the parameters being passed to the method</param>
+    /// <param name="signatureDefinitions">The signatures of overloads available</param>
     /// <param name="conversionCheck"></param>
-    /// <returns>The best match for <paramref name="parameterTypes"/>, or <c>null</c> if no match exists</returns>
+    /// <returns>The best match for <paramref name="signature"/>, or <c>null</c> if no match exists</returns>
     internal T? BestMatch(
-        Type[] parameterTypes,
-        IEnumerable<(Type[] Signature, T T)> overloads,
+        Type[] signature,
+        IEnumerable<(Type[] Signature, T T)> signatureDefinitions,
         Func<Type, Type, bool>? conversionCheck = null)
     {
-        var groups = (from overload in overloads
-                      let score = Score(parameterTypes, overload.Signature, conversionCheck)
+        var groups = (from overload in signatureDefinitions
+                      let score = Score(signature, overload.Signature, conversionCheck)
                       where score != null
                       group overload by score
                       into g
                       orderby g.Key
                       select g).ToArray();
-        if (groups.Length > 0)
-        {
-            var candidate = groups[0];
-            if (candidate != null)
-            {
-                var list = candidate.ToArray();
-                if (list.Length == 1)
-                    return list[0].T;
-            }
-        }
 
-        return default;
+        if (groups is [{ } item0, ..])
+            return item0.ToArray() is [{ } itemOnly] ? itemOnly.T : null;
+
+        return null;
     }
 
     /// <summary>
@@ -545,49 +534,5 @@ public class DefinitionDictionary<T> where T : class
             return distance;
         }
         else return null;
-    }
-
-    internal class Tag
-    {
-        public string Library { get; }
-        public string Definition { get; }
-        public Type[] Signature { get; }
-        public string Value { get; }
-        public string Name { get; }
-
-        /// <summary>
-        /// Constructor to create a tag.
-        /// </summary>
-        /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
-        /// <param name="definition">The definition name whose tags to set.</param>
-        /// <param name="signature">The signature, or an empty array for non-function definitions.</param>
-        /// <param name="name">The name of the tag.</param>
-        /// <param name="value">The value of the tag.</param>
-        public Tag(
-            string library,
-            string definition,
-            Type[] signature,
-            string name,
-            string value)
-        {
-            Library = library;
-            Definition = definition;
-            Signature = signature;
-            Name = name;
-            Value = CleanValue(value);
-        }
-
-        /// <summary>
-        /// Removes all whitespace from the value, except for a single space between 'words'.
-        /// All newlines, tabs, and other whitespace characters will be replaced by a single space.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns>The <paramref name="value"/> string with only single spaces</returns>
-        private static string CleanValue(string value)
-        {
-            value = value.Trim();
-            if (string.IsNullOrEmpty(value)) return value;
-            return Regex.Replace(value, @"\s+", " ");
-        }
     }
 }

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
@@ -15,6 +16,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
+using DateTime = Hl7.Cql.Elm.DateTime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -71,7 +73,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             typeof(ICollection<>).Namespace!, // System.Collections.Generic
             typeof(CqlContext).Namespace!,
             typeof(CqlPrimitiveType).Namespace!,
-            typeof(CqlDeclarationAttribute).Namespace!,
+            typeof(CqlDefinitionAttribute).Namespace!,
             typeof(IValueSetFacade).Namespace!,
             typeof(Iso8601.DateIso8601).Namespace!,
             typeof(PropertyInfo).Namespace!,
@@ -227,28 +229,38 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var definitions = LibrarySetWriter.Definitions;
             var libraryName = LibraryName;
-            bool first = true;
+            string lastDefinitionType = "";
 
-            foreach (var (definitionName, overloads) in definitions.DefinitionsForLibrary(libraryName))
+            // Assumption: definitions are already sorted by definition type
+            foreach ((_, _, CqlDefinition definition) in
+                     definitions.EnumerateExpressionsByLibraryName(libraryName))
             {
-                foreach (var (signature, cqlDefinition) in overloads)
+                // Assumption: type name will be Cql....Definition
+                Debug.Assert(definition.GetType().Name is {} name && name.StartsWith("Cql") && name.EndsWith("Definition"));
+                string definitionType = definition.GetType().Name["Cql".Length..^"Definition".Length];
+
+                if (lastDefinitionType != definitionType)
                 {
-                    if (first)
+                    if (lastDefinitionType != "")
                     {
-                        IndentedTextWriter.WriteLine("#region Definition Methods");
+                        IndentedTextWriter.WriteLine($"#endregion {lastDefinitionType}s");
                         IndentedTextWriter.WriteLine();
-                        first = false;
                     }
 
-                    var methodWriter = CreateMethodWriter(definitionName, cqlDefinition, cqlDefinition.Tags);
-                    methodWriter.WriteMethod();
+                    IndentedTextWriter.WriteLine($"#region {definitionType}s");
                     IndentedTextWriter.WriteLine();
                 }
+
+                lastDefinitionType = definitionType;
+
+                var methodWriter = new DefinitionWriter(this, definition);
+                methodWriter.WriteDefinition();
+                IndentedTextWriter.WriteLine();
             }
 
-            if (!first)
+            if (lastDefinitionType != "")
             {
-                IndentedTextWriter.WriteLine("#endregion Definition Methods");
+                IndentedTextWriter.WriteLine($"#endregion {lastDefinitionType}s");
                 IndentedTextWriter.WriteLine();
             }
         }
@@ -287,111 +299,134 @@ internal partial class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"private {ClassName}() {{}}");
             IndentedTextWriter.WriteLine();
         }
-
-        private MethodWriter CreateMethodWriter(
-            string definition,
-            CqlDefinition cqlDefinition,
-            (string Name, string[] Values)[] tags)
-        {
-            return new MethodWriter(this, definition, cqlDefinition, tags);
-        }
     }
 
-    private record MethodWriter(
+    private record DefinitionWriter(
         LibraryWriter LibraryWriter,
-        string CqlName,
-        CqlDefinition CqlDefinition,
-        (string Name, string[] Values)[] Tags) : IAddIndentMutable<MethodWriter>
+        CqlDefinition CqlDefinition) : IAddIndentMutable<DefinitionWriter>
     {
-        private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlName)!;
+        private static readonly VariableNameGenerator VariableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
 
-        public MethodWriter AddIndent(int addIndent = 1)
-        {
-            return this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
-        }
+        private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlDefinition.DefinitionName)!;
+
+        public DefinitionWriter AddIndent(int addIndent = 1) =>
+            this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
         private IndentedTextWriter tw => LibraryWriter.IndentedTextWriter;
 
-        public void WriteMethod()
+        public void WriteDefinition()
         {
             string libraryName = LibraryWriter.LibraryName;
-            var cqlDefinition = CqlDefinition.Lambda;
+            var lambda = CqlDefinition.Lambda;
+            var isDefinition = lambda is { Parameters: [{ Type: { } p0Type }] } && p0Type == typeof(CqlContext);
             TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
 
-            var isDef = cqlDefinition is { Parameters: [{ Type: { } p0Type }] } && p0Type == typeof(CqlContext);
-
-            var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
-
             var visitedBody = Transform(
-                cqlDefinition.Body,
+                lambda.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(vng),
+                new RenameVariablesVisitor(VariableNameGenerator),
                 new LocalVariableDeduper(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter)
             );
 
             // Skip CqlContext
-            var parameters = cqlDefinition.Parameters.Skip(1);
-
-            cqlDefinition = Expression.Lambda(visitedBody, parameters);
-
-            if (isDef)
-            {
-                if (cqlDefinition.ReturnType == typeof(CqlValueSet))
-                {
-                    if (cqlDefinition.Body is NewExpression
-                        {
-                            Arguments:
-                            [
-                                ConstantExpression { Value: string valueSetId },
-                                //ConstantExpression { Value: string valueSetVersion },
-                                ..
-                            ]
-                        }
-                        //&& newExpression.Arguments[0] is ConstantExpression { Value: string valueSetId }
-                       )
-                    {
-                        tw.WriteLine($"[CqlValueSetDeclaration(");
-                        var tw1 = tw.AddIndent();
-                        tw1.WriteLine($"declarationName: {CqlName.QuoteString()},");
-                        //tw1.WriteLine($"valueSetVersion: {valueSetVersion.QuoteString()},");
-                        tw1.WriteLine($"valueSetId: {valueSetId.QuoteString()})]");
-                    }
-                }
-                else
-                {
-                    tw.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
-                }
-
-                WriteTags();
-            }
-            else
-            {
-                tw.WriteLine("// NOT A DEFINITION // ");
-            }
+            var parameters = lambda.Parameters.Skip(1);
+            var transformedLambda = Expression.Lambda(visitedBody, parameters);
 
             var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
                 tupleMetadataBuilder,
                 libraryName,
                 LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
                 tw.Indent);
+
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(
-                cqlDefinition,
+                transformedLambda,
                 MethodName,
                 specifiers: "public");
+
+            var definitionTypeName = CqlDefinition.GetType().Name;
+            if (isDefinition)
+            {
+                List<string> lines = [$"definitionName: {CqlDefinition.DefinitionName.QuoteString()}"];
+                switch (CqlDefinition)
+                {
+                    case CqlValueSetDefinition vsd:
+                        //if (System.DateTime.Now.Second >= 0) return;
+                        if (vsd.ValueSetId is {} vsid)
+                            lines.Add($"valueSetId: {vsid.QuoteString()}");
+                        if (vsd.ValueSetVersion is {} vsv)
+                            lines.Add($"valueSetVersion: {vsv.QuoteString()}");
+                        break;
+
+                    case CqlCodeSystemDefinition csd:
+                        //if (System.DateTime.Now.Second >= 0) return;
+                        // if (csd.Codes.Length > 0)
+                        // {
+                        //     var indent = new string(' ', TextWriterExtensions.SpacesPerIndentLevel);
+                        //     for (var i = 0; i < csd.Codes.Length; i++)
+                        //     {
+                        //         bool isFirst = i == 0;
+                        //         bool isLast = i == csd.Codes.Length - 1;
+                        //         var c = csd.Codes[i];
+                        //         switch (isFirst, isLast)
+                        //         {
+                        //             case (false, false):
+                        //                 lines.Add($"{indent}({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})");
+                        //                 break;
+                        //             case (true, true):
+                        //                 lines.Add($"codes: [({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})]");
+                        //                 break;
+                        //             case (true, false):
+                        //                 lines.Add($"codes: [({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})");
+                        //                 break;
+                        //             case (false, true):
+                        //                 lines.Add($"{indent}({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()}))]");
+                        //                 break;
+                        //         }
+                        //     }}
+                        break;
+
+                    case CqlParameterDefinition pd:
+                        break;
+
+                    case CqlConceptDefinition cpd:
+                        break;
+
+                    case CqlCodeDefinition cd:
+                        //if (System.DateTime.Now.Second >= 0) return;
+                        if (cd.CodeId is {} cid)
+                            lines.Add($"codeId: {cid.QuoteString()}");
+                        if (cd.CodeSystem is {} cs)
+                            lines.Add($"codeSystem: {cs.QuoteString()}");
+                        break;
+                }
+
+                for (int i = 0; i < lines.Count-1; i++)
+                    lines[i] = $"{lines[i]},";
+                lines[^1] = $"{lines[^1]})]";
+
+                tw.WriteLine($"[{definitionTypeName}(");
+                var tw1 = tw.AddIndent();
+                for (int i = 0; i < lines.Count; i++)
+                    tw1.WriteLine($"{lines[i]}");
+            }
+            else
+            {
+                tw.WriteLine($"// NOT A DEFINITION {definitionTypeName}//");
+            }
+
+            if (CqlDefinition is CqlExpressionDefinition {} ed)
+                WriteTags(ed);
+
             tw.WriteLine(definition);
         }
 
-        private void WriteTags()
+        private void WriteTags(CqlExpressionDefinition ed)
         {
-            foreach (var tag in Tags ?? [])
+            foreach (var tag in ed.Tags)
                 foreach (var tagValue in tag.Values)
                     tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
         }
-
-        private static bool IsDefinition(LambdaExpression overload) =>
-            overload.Parameters.Count == 1
-            && overload.Parameters[0].Type == typeof(CqlContext);
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {

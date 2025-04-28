@@ -105,8 +105,8 @@ namespace Hl7.Cql.Runtime
                 var properties = type.GetProperties();
                 foreach (var prop in properties)
                 {
-                    var cqlDeclaration = prop.GetCustomAttribute<CqlDeclarationAttribute>();
-                    if (cqlDeclaration != null && cqlDeclaration.DeclarationName == propertyName)
+                    var cqlDeclaration = prop.GetCustomAttribute<CqlDefinitionAttribute>();
+                    if (cqlDeclaration != null && cqlDeclaration.DefinitionName == propertyName)
                         return prop;
                 }
             }

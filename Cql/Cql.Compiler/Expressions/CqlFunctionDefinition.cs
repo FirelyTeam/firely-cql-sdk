@@ -11,14 +11,9 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler.Expressions;
 
-/// <seealso cref="ExpressionDef"/>
-/// <seealso cref="CqlExpressionDefinitionAttribute"/>
-internal class CqlExpressionDefinition
-(
+/// <seealso cref="FunctionDef"/>
+/// <seealso cref="CqlFunctionDefinitionAttribute"/>
+internal class CqlFunctionDefinition(
     LambdaExpression lambda,
     string definitionName,
-    (string tagName, string[] tagValues)[] tags)
-    : CqlDefinition(lambda, definitionName)
-{
-    public (string Name, string[] Values)[] Tags { get; } = tags;
-}
+    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambda, definitionName, tags);
