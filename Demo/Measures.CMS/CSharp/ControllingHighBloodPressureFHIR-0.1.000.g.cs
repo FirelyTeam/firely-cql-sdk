@@ -97,12 +97,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime zzzzzzf_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime zzzzzzg_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> zzzzzzh_ = context.Operators.Interval(zzzzzzf_, zzzzzzg_, true, true);
-        object zzzzzzi_ = context.ResolveParameter("ControllingHighBloodPressureFHIR-0.1.000", "Measurement Period", zzzzzzh_);
+        CqlDateTime jzzzzzzzzzzzi_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime jzzzzzzzzzzzj_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> jzzzzzzzzzzzk_ = context.Operators.Interval(jzzzzzzzzzzzi_, jzzzzzzzzzzzj_, true, true);
+        object jzzzzzzzzzzzl_ = context.ResolveParameter("ControllingHighBloodPressureFHIR-0.1.000", "Measurement Period", jzzzzzzzzzzzk_);
 
-        return (CqlInterval<CqlDateTime>)zzzzzzi_;
+        return (CqlInterval<CqlDateTime>)jzzzzzzzzzzzl_;
     }
 
 
@@ -113,208 +113,208 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> zzzzzzj_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient zzzzzzk_ = context.Operators.SingletonFrom<Patient>(zzzzzzj_);
+        IEnumerable<Patient> jzzzzzzzzzzzm_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient jzzzzzzzzzzzn_ = context.Operators.SingletonFrom<Patient>(jzzzzzzzzzzzm_);
 
-        return zzzzzzk_;
+        return jzzzzzzzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("Essential Hypertension Diagnosis")]
     public IEnumerable<Condition> Essential_Hypertension_Diagnosis(CqlContext context)
     {
-        CqlValueSet zzzzzzl_ = this.Essential_Hypertension(context);
-        IEnumerable<Condition> zzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, zzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        bool? zzzzzzn_(Condition Hypertension)
+        CqlValueSet jzzzzzzzzzzzo_ = this.Essential_Hypertension(context);
+        IEnumerable<Condition> jzzzzzzzzzzzp_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, jzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        bool? jzzzzzzzzzzzq_(Condition Hypertension)
         {
-            CqlInterval<CqlDateTime> zzzzzzp_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Hypertension);
-            CqlInterval<CqlDateTime> zzzzzzq_ = this.Measurement_Period(context);
-            CqlDateTime zzzzzzr_ = context.Operators.Start(zzzzzzq_);
-            CqlDateTime zzzzzzt_ = context.Operators.Start(zzzzzzq_);
-            CqlQuantity zzzzzzu_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime zzzzzzv_ = context.Operators.Add(zzzzzzt_, zzzzzzu_);
-            CqlInterval<CqlDateTime> zzzzzzw_ = context.Operators.Interval(zzzzzzr_, zzzzzzv_, true, false);
-            bool? zzzzzzx_ = context.Operators.Overlaps(zzzzzzp_, zzzzzzw_, default);
+            CqlInterval<CqlDateTime> jzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Hypertension);
+            CqlInterval<CqlDateTime> jzzzzzzzzzzzt_ = this.Measurement_Period(context);
+            CqlDateTime jzzzzzzzzzzzu_ = context.Operators.Start(jzzzzzzzzzzzt_);
+            CqlDateTime jzzzzzzzzzzzw_ = context.Operators.Start(jzzzzzzzzzzzt_);
+            CqlQuantity jzzzzzzzzzzzx_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime jzzzzzzzzzzzy_ = context.Operators.Add(jzzzzzzzzzzzw_, jzzzzzzzzzzzx_);
+            CqlInterval<CqlDateTime> jzzzzzzzzzzzz_ = context.Operators.Interval(jzzzzzzzzzzzu_, jzzzzzzzzzzzy_, true, false);
+            bool? kzzzzzzzzzzza_ = context.Operators.Overlaps(jzzzzzzzzzzzs_, jzzzzzzzzzzzz_, default);
 
-            return zzzzzzx_;
+            return kzzzzzzzzzzza_;
         };
-        IEnumerable<Condition> zzzzzzo_ = context.Operators.Where<Condition>(zzzzzzm_, zzzzzzn_);
+        IEnumerable<Condition> jzzzzzzzzzzzr_ = context.Operators.Where<Condition>(jzzzzzzzzzzzp_, jzzzzzzzzzzzq_);
 
-        return zzzzzzo_;
+        return jzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
-        Patient zzzzzzy_ = this.Patient(context);
-        Date zzzzzzz_ = zzzzzzy_?.BirthDateElement;
-        string azzzzzza_ = zzzzzzz_?.Value;
-        CqlDate azzzzzzb_ = context.Operators.ConvertStringToDate(azzzzzza_);
-        CqlInterval<CqlDateTime> azzzzzzc_ = this.Measurement_Period(context);
-        CqlDateTime azzzzzzd_ = context.Operators.End(azzzzzzc_);
-        CqlDate azzzzzze_ = context.Operators.DateFrom(azzzzzzd_);
-        int? azzzzzzf_ = context.Operators.CalculateAgeAt(azzzzzzb_, azzzzzze_, "year");
-        CqlInterval<int?> azzzzzzg_ = context.Operators.Interval(18, 85, true, true);
-        bool? azzzzzzh_ = context.Operators.In<int?>(azzzzzzf_, azzzzzzg_, default);
-        IEnumerable<Condition> azzzzzzi_ = this.Essential_Hypertension_Diagnosis(context);
-        bool? azzzzzzj_ = context.Operators.Exists<Condition>(azzzzzzi_);
-        bool? azzzzzzk_ = context.Operators.And(azzzzzzh_, azzzzzzj_);
-        IEnumerable<Encounter> azzzzzzl_ = AdultOutpatientEncounters_4_11_000.Instance.Qualifying_Encounters(context);
-        bool? azzzzzzm_ = context.Operators.Exists<Encounter>(azzzzzzl_);
-        bool? azzzzzzn_ = context.Operators.And(azzzzzzk_, azzzzzzm_);
+        Patient kzzzzzzzzzzzb_ = this.Patient(context);
+        Date kzzzzzzzzzzzc_ = kzzzzzzzzzzzb_?.BirthDateElement;
+        string kzzzzzzzzzzzd_ = kzzzzzzzzzzzc_?.Value;
+        CqlDate kzzzzzzzzzzze_ = context.Operators.ConvertStringToDate(kzzzzzzzzzzzd_);
+        CqlInterval<CqlDateTime> kzzzzzzzzzzzf_ = this.Measurement_Period(context);
+        CqlDateTime kzzzzzzzzzzzg_ = context.Operators.End(kzzzzzzzzzzzf_);
+        CqlDate kzzzzzzzzzzzh_ = context.Operators.DateFrom(kzzzzzzzzzzzg_);
+        int? kzzzzzzzzzzzi_ = context.Operators.CalculateAgeAt(kzzzzzzzzzzze_, kzzzzzzzzzzzh_, "year");
+        CqlInterval<int?> kzzzzzzzzzzzj_ = context.Operators.Interval(18, 85, true, true);
+        bool? kzzzzzzzzzzzk_ = context.Operators.In<int?>(kzzzzzzzzzzzi_, kzzzzzzzzzzzj_, default);
+        IEnumerable<Condition> kzzzzzzzzzzzl_ = this.Essential_Hypertension_Diagnosis(context);
+        bool? kzzzzzzzzzzzm_ = context.Operators.Exists<Condition>(kzzzzzzzzzzzl_);
+        bool? kzzzzzzzzzzzn_ = context.Operators.And(kzzzzzzzzzzzk_, kzzzzzzzzzzzm_);
+        IEnumerable<Encounter> kzzzzzzzzzzzo_ = AdultOutpatientEncounters_4_11_000.Instance.Qualifying_Encounters(context);
+        bool? kzzzzzzzzzzzp_ = context.Operators.Exists<Encounter>(kzzzzzzzzzzzo_);
+        bool? kzzzzzzzzzzzq_ = context.Operators.And(kzzzzzzzzzzzn_, kzzzzzzzzzzzp_);
 
-        return azzzzzzn_;
+        return kzzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? azzzzzzo_ = this.Initial_Population(context);
+        bool? kzzzzzzzzzzzr_ = this.Initial_Population(context);
 
-        return azzzzzzo_;
+        return kzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Pregnancy or Renal Diagnosis")]
     public IEnumerable<Condition> Pregnancy_or_Renal_Diagnosis(CqlContext context)
     {
-        CqlValueSet azzzzzzp_ = this.Pregnancy(context);
-        IEnumerable<Condition> azzzzzzq_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, azzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        CqlValueSet azzzzzzr_ = this.End_Stage_Renal_Disease(context);
-        IEnumerable<Condition> azzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, azzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Condition> azzzzzzt_ = context.Operators.Union<Condition>(azzzzzzq_, azzzzzzs_);
-        CqlValueSet azzzzzzu_ = this.Kidney_Transplant_Recipient(context);
-        IEnumerable<Condition> azzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, azzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        CqlValueSet azzzzzzw_ = this.Chronic_Kidney_Disease__Stage_5(context);
-        IEnumerable<Condition> azzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, azzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Condition> azzzzzzy_ = context.Operators.Union<Condition>(azzzzzzv_, azzzzzzx_);
-        IEnumerable<Condition> azzzzzzz_ = context.Operators.Union<Condition>(azzzzzzt_, azzzzzzy_);
-        bool? bzzzzzza_(Condition PregnancyESRDDiagnosis)
+        CqlValueSet kzzzzzzzzzzzs_ = this.Pregnancy(context);
+        IEnumerable<Condition> kzzzzzzzzzzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, kzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        CqlValueSet kzzzzzzzzzzzu_ = this.End_Stage_Renal_Disease(context);
+        IEnumerable<Condition> kzzzzzzzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, kzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        IEnumerable<Condition> kzzzzzzzzzzzw_ = context.Operators.Union<Condition>(kzzzzzzzzzzzt_, kzzzzzzzzzzzv_);
+        CqlValueSet kzzzzzzzzzzzx_ = this.Kidney_Transplant_Recipient(context);
+        IEnumerable<Condition> kzzzzzzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, kzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        CqlValueSet kzzzzzzzzzzzz_ = this.Chronic_Kidney_Disease__Stage_5(context);
+        IEnumerable<Condition> lzzzzzzzzzzza_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, kzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        IEnumerable<Condition> lzzzzzzzzzzzb_ = context.Operators.Union<Condition>(kzzzzzzzzzzzy_, lzzzzzzzzzzza_);
+        IEnumerable<Condition> lzzzzzzzzzzzc_ = context.Operators.Union<Condition>(kzzzzzzzzzzzw_, lzzzzzzzzzzzb_);
+        bool? lzzzzzzzzzzzd_(Condition PregnancyESRDDiagnosis)
         {
-            CqlInterval<CqlDateTime> bzzzzzzc_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
-            CqlInterval<CqlDateTime> bzzzzzzd_ = this.Measurement_Period(context);
-            bool? bzzzzzze_ = context.Operators.Overlaps(bzzzzzzc_, bzzzzzzd_, default);
+            CqlInterval<CqlDateTime> lzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
+            CqlInterval<CqlDateTime> lzzzzzzzzzzzg_ = this.Measurement_Period(context);
+            bool? lzzzzzzzzzzzh_ = context.Operators.Overlaps(lzzzzzzzzzzzf_, lzzzzzzzzzzzg_, default);
 
-            return bzzzzzze_;
+            return lzzzzzzzzzzzh_;
         };
-        IEnumerable<Condition> bzzzzzzb_ = context.Operators.Where<Condition>(azzzzzzz_, bzzzzzza_);
+        IEnumerable<Condition> lzzzzzzzzzzze_ = context.Operators.Where<Condition>(lzzzzzzzzzzzc_, lzzzzzzzzzzzd_);
 
-        return bzzzzzzb_;
+        return lzzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("End Stage Renal Disease Procedures")]
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context)
     {
-        CqlValueSet bzzzzzzf_ = this.Kidney_Transplant(context);
-        IEnumerable<Procedure> bzzzzzzg_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, bzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        CqlValueSet bzzzzzzh_ = this.Dialysis_Services(context);
-        IEnumerable<Procedure> bzzzzzzi_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, bzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> bzzzzzzj_ = context.Operators.Union<Procedure>(bzzzzzzg_, bzzzzzzi_);
-        IEnumerable<Procedure> bzzzzzzk_ = Status_1_8_000.Instance.isProcedurePerformed(context, bzzzzzzj_);
-        bool? bzzzzzzl_(Procedure ESRDProcedure)
+        CqlValueSet lzzzzzzzzzzzi_ = this.Kidney_Transplant(context);
+        IEnumerable<Procedure> lzzzzzzzzzzzj_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, lzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        CqlValueSet lzzzzzzzzzzzk_ = this.Dialysis_Services(context);
+        IEnumerable<Procedure> lzzzzzzzzzzzl_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, lzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> lzzzzzzzzzzzm_ = context.Operators.Union<Procedure>(lzzzzzzzzzzzj_, lzzzzzzzzzzzl_);
+        IEnumerable<Procedure> lzzzzzzzzzzzn_ = Status_1_8_000.Instance.isProcedurePerformed(context, lzzzzzzzzzzzm_);
+        bool? lzzzzzzzzzzzo_(Procedure ESRDProcedure)
         {
-            DataType bzzzzzzn_ = ESRDProcedure?.Performed;
-            object bzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzn_);
-            CqlInterval<CqlDateTime> bzzzzzzp_ = QICoreCommon_2_1_000.Instance.toInterval(context, bzzzzzzo_);
-            CqlDateTime bzzzzzzq_ = context.Operators.End(bzzzzzzp_);
-            CqlInterval<CqlDateTime> bzzzzzzr_ = this.Measurement_Period(context);
-            CqlDateTime bzzzzzzs_ = context.Operators.End(bzzzzzzr_);
-            bool? bzzzzzzt_ = context.Operators.SameOrBefore(bzzzzzzq_, bzzzzzzs_, default);
+            DataType lzzzzzzzzzzzq_ = ESRDProcedure?.Performed;
+            object lzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzq_);
+            CqlInterval<CqlDateTime> lzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.toInterval(context, lzzzzzzzzzzzr_);
+            CqlDateTime lzzzzzzzzzzzt_ = context.Operators.End(lzzzzzzzzzzzs_);
+            CqlInterval<CqlDateTime> lzzzzzzzzzzzu_ = this.Measurement_Period(context);
+            CqlDateTime lzzzzzzzzzzzv_ = context.Operators.End(lzzzzzzzzzzzu_);
+            bool? lzzzzzzzzzzzw_ = context.Operators.SameOrBefore(lzzzzzzzzzzzt_, lzzzzzzzzzzzv_, default);
 
-            return bzzzzzzt_;
+            return lzzzzzzzzzzzw_;
         };
-        IEnumerable<Procedure> bzzzzzzm_ = context.Operators.Where<Procedure>(bzzzzzzk_, bzzzzzzl_);
+        IEnumerable<Procedure> lzzzzzzzzzzzp_ = context.Operators.Where<Procedure>(lzzzzzzzzzzzn_, lzzzzzzzzzzzo_);
 
-        return bzzzzzzm_;
+        return lzzzzzzzzzzzp_;
     }
 
 
     [CqlExpressionDefinition("End Stage Renal Disease Encounter")]
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context)
     {
-        CqlValueSet bzzzzzzu_ = this.ESRD_Monthly_Outpatient_Services(context);
-        IEnumerable<Encounter> bzzzzzzv_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> bzzzzzzw_ = Status_1_8_000.Instance.isEncounterPerformed(context, bzzzzzzv_);
-        bool? bzzzzzzx_(Encounter ESRDEncounter)
+        CqlValueSet lzzzzzzzzzzzx_ = this.ESRD_Monthly_Outpatient_Services(context);
+        IEnumerable<Encounter> lzzzzzzzzzzzy_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, lzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> lzzzzzzzzzzzz_ = Status_1_8_000.Instance.isEncounterPerformed(context, lzzzzzzzzzzzy_);
+        bool? mzzzzzzzzzzza_(Encounter ESRDEncounter)
         {
-            Period bzzzzzzz_ = ESRDEncounter?.Period;
-            CqlInterval<CqlDateTime> czzzzzza_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzzzzzzz_);
-            CqlInterval<CqlDateTime> czzzzzzb_ = QICoreCommon_2_1_000.Instance.toInterval(context, czzzzzza_ as object);
-            CqlDateTime czzzzzzc_ = context.Operators.Start(czzzzzzb_);
-            CqlInterval<CqlDateTime> czzzzzzd_ = this.Measurement_Period(context);
-            CqlDateTime czzzzzze_ = context.Operators.End(czzzzzzd_);
-            bool? czzzzzzf_ = context.Operators.SameOrBefore(czzzzzzc_, czzzzzze_, default);
+            Period mzzzzzzzzzzzc_ = ESRDEncounter?.Period;
+            CqlInterval<CqlDateTime> mzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, mzzzzzzzzzzzc_);
+            CqlInterval<CqlDateTime> mzzzzzzzzzzze_ = QICoreCommon_2_1_000.Instance.toInterval(context, mzzzzzzzzzzzd_ as object);
+            CqlDateTime mzzzzzzzzzzzf_ = context.Operators.Start(mzzzzzzzzzzze_);
+            CqlInterval<CqlDateTime> mzzzzzzzzzzzg_ = this.Measurement_Period(context);
+            CqlDateTime mzzzzzzzzzzzh_ = context.Operators.End(mzzzzzzzzzzzg_);
+            bool? mzzzzzzzzzzzi_ = context.Operators.SameOrBefore(mzzzzzzzzzzzf_, mzzzzzzzzzzzh_, default);
 
-            return czzzzzzf_;
+            return mzzzzzzzzzzzi_;
         };
-        IEnumerable<Encounter> bzzzzzzy_ = context.Operators.Where<Encounter>(bzzzzzzw_, bzzzzzzx_);
+        IEnumerable<Encounter> mzzzzzzzzzzzb_ = context.Operators.Where<Encounter>(lzzzzzzzzzzzz_, mzzzzzzzzzzza_);
 
-        return bzzzzzzy_;
+        return mzzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? czzzzzzg_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<Condition> czzzzzzh_ = this.Pregnancy_or_Renal_Diagnosis(context);
-        bool? czzzzzzi_ = context.Operators.Exists<Condition>(czzzzzzh_);
-        bool? czzzzzzj_ = context.Operators.Or(czzzzzzg_, czzzzzzi_);
-        IEnumerable<Procedure> czzzzzzk_ = this.End_Stage_Renal_Disease_Procedures(context);
-        bool? czzzzzzl_ = context.Operators.Exists<Procedure>(czzzzzzk_);
-        bool? czzzzzzm_ = context.Operators.Or(czzzzzzj_, czzzzzzl_);
-        IEnumerable<Encounter> czzzzzzn_ = this.End_Stage_Renal_Disease_Encounter(context);
-        bool? czzzzzzo_ = context.Operators.Exists<Encounter>(czzzzzzn_);
-        bool? czzzzzzp_ = context.Operators.Or(czzzzzzm_, czzzzzzo_);
-        bool? czzzzzzq_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
-        bool? czzzzzzr_ = context.Operators.Or(czzzzzzp_, czzzzzzq_);
-        bool? czzzzzzs_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-        bool? czzzzzzt_ = context.Operators.Or(czzzzzzr_, czzzzzzs_);
-        bool? czzzzzzu_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-        bool? czzzzzzv_ = context.Operators.Or(czzzzzzt_, czzzzzzu_);
+        bool? mzzzzzzzzzzzj_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        IEnumerable<Condition> mzzzzzzzzzzzk_ = this.Pregnancy_or_Renal_Diagnosis(context);
+        bool? mzzzzzzzzzzzl_ = context.Operators.Exists<Condition>(mzzzzzzzzzzzk_);
+        bool? mzzzzzzzzzzzm_ = context.Operators.Or(mzzzzzzzzzzzj_, mzzzzzzzzzzzl_);
+        IEnumerable<Procedure> mzzzzzzzzzzzn_ = this.End_Stage_Renal_Disease_Procedures(context);
+        bool? mzzzzzzzzzzzo_ = context.Operators.Exists<Procedure>(mzzzzzzzzzzzn_);
+        bool? mzzzzzzzzzzzp_ = context.Operators.Or(mzzzzzzzzzzzm_, mzzzzzzzzzzzo_);
+        IEnumerable<Encounter> mzzzzzzzzzzzq_ = this.End_Stage_Renal_Disease_Encounter(context);
+        bool? mzzzzzzzzzzzr_ = context.Operators.Exists<Encounter>(mzzzzzzzzzzzq_);
+        bool? mzzzzzzzzzzzs_ = context.Operators.Or(mzzzzzzzzzzzp_, mzzzzzzzzzzzr_);
+        bool? mzzzzzzzzzzzt_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
+        bool? mzzzzzzzzzzzu_ = context.Operators.Or(mzzzzzzzzzzzs_, mzzzzzzzzzzzt_);
+        bool? mzzzzzzzzzzzv_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+        bool? mzzzzzzzzzzzw_ = context.Operators.Or(mzzzzzzzzzzzu_, mzzzzzzzzzzzv_);
+        bool? mzzzzzzzzzzzx_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? mzzzzzzzzzzzy_ = context.Operators.Or(mzzzzzzzzzzzw_, mzzzzzzzzzzzx_);
 
-        return czzzzzzv_;
+        return mzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("getEncounter")]
     public Encounter getEncounter(CqlContext context, ResourceReference reference)
     {
-        IEnumerable<Encounter> czzzzzzw_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? czzzzzzx_(Encounter E)
+        IEnumerable<Encounter> mzzzzzzzzzzzz_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        bool? nzzzzzzzzzzza_(Encounter E)
         {
-            Id dzzzzzza_ = E?.IdElement;
-            string dzzzzzzb_ = dzzzzzza_?.Value;
-            FhirString dzzzzzzc_ = reference?.ReferenceElement;
-            string dzzzzzzd_ = dzzzzzzc_?.Value;
-            string dzzzzzze_ = QICoreCommon_2_1_000.Instance.getId(context, dzzzzzzd_);
-            bool? dzzzzzzf_ = context.Operators.Equal(dzzzzzzb_, dzzzzzze_);
+            Id nzzzzzzzzzzzd_ = E?.IdElement;
+            string nzzzzzzzzzzze_ = nzzzzzzzzzzzd_?.Value;
+            FhirString nzzzzzzzzzzzf_ = reference?.ReferenceElement;
+            string nzzzzzzzzzzzg_ = nzzzzzzzzzzzf_?.Value;
+            string nzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.getId(context, nzzzzzzzzzzzg_);
+            bool? nzzzzzzzzzzzi_ = context.Operators.Equal(nzzzzzzzzzzze_, nzzzzzzzzzzzh_);
 
-            return dzzzzzzf_;
+            return nzzzzzzzzzzzi_;
         };
-        IEnumerable<Encounter> czzzzzzy_ = context.Operators.Where<Encounter>(czzzzzzw_, czzzzzzx_);
-        Encounter czzzzzzz_ = context.Operators.SingletonFrom<Encounter>(czzzzzzy_);
+        IEnumerable<Encounter> nzzzzzzzzzzzb_ = context.Operators.Where<Encounter>(mzzzzzzzzzzzz_, nzzzzzzzzzzza_);
+        Encounter nzzzzzzzzzzzc_ = context.Operators.SingletonFrom<Encounter>(nzzzzzzzzzzzb_);
 
-        return czzzzzzz_;
+        return nzzzzzzzzzzzc_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Systolic Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Systolic_Blood_Pressure_Reading(CqlContext context)
     {
-        IEnumerable<Observation> dzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
-        IEnumerable<Observation> dzzzzzzh_ = Status_1_8_000.Instance.isObservationBP(context, dzzzzzzg_);
-        bool? dzzzzzzi_(Observation BloodPressure)
+        IEnumerable<Observation> nzzzzzzzzzzzj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
+        IEnumerable<Observation> nzzzzzzzzzzzk_ = Status_1_8_000.Instance.isObservationBP(context, nzzzzzzzzzzzj_);
+        bool? nzzzzzzzzzzzl_(Observation BloodPressure)
         {
-            ResourceReference dzzzzzzk_ = BloodPressure?.Encounter;
-            Encounter dzzzzzzl_ = this.getEncounter(context, dzzzzzzk_);
-            Coding dzzzzzzm_ = dzzzzzzl_?.Class;
-            CqlCode dzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToCode(context, dzzzzzzm_);
-            string dzzzzzzo_ = dzzzzzzn_?.code;
-            string[] dzzzzzzp_ = [
+            ResourceReference nzzzzzzzzzzzn_ = BloodPressure?.Encounter;
+            Encounter nzzzzzzzzzzzo_ = this.getEncounter(context, nzzzzzzzzzzzn_);
+            Coding nzzzzzzzzzzzp_ = nzzzzzzzzzzzo_?.Class;
+            CqlCode nzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToCode(context, nzzzzzzzzzzzp_);
+            string nzzzzzzzzzzzr_ = nzzzzzzzzzzzq_?.code;
+            string[] nzzzzzzzzzzzs_ = [
                 "EMER",
                 "IMP",
                 "ACUTE",
@@ -322,36 +322,36 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
                 "PRENC",
                 "SS",
             ];
-            bool? dzzzzzzq_ = context.Operators.In<string>(dzzzzzzo_, dzzzzzzp_ as IEnumerable<string>);
-            bool? dzzzzzzr_ = context.Operators.Not(dzzzzzzq_);
-            DataType dzzzzzzs_ = BloodPressure?.Effective;
-            object dzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzs_);
-            CqlDateTime dzzzzzzu_ = QICoreCommon_2_1_000.Instance.latest(context, dzzzzzzt_);
-            CqlInterval<CqlDateTime> dzzzzzzv_ = this.Measurement_Period(context);
-            bool? dzzzzzzw_ = context.Operators.In<CqlDateTime>(dzzzzzzu_, dzzzzzzv_, "day");
-            bool? dzzzzzzx_ = context.Operators.And(dzzzzzzr_, dzzzzzzw_);
+            bool? nzzzzzzzzzzzt_ = context.Operators.In<string>(nzzzzzzzzzzzr_, nzzzzzzzzzzzs_ as IEnumerable<string>);
+            bool? nzzzzzzzzzzzu_ = context.Operators.Not(nzzzzzzzzzzzt_);
+            DataType nzzzzzzzzzzzv_ = BloodPressure?.Effective;
+            object nzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzv_);
+            CqlDateTime nzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.latest(context, nzzzzzzzzzzzw_);
+            CqlInterval<CqlDateTime> nzzzzzzzzzzzy_ = this.Measurement_Period(context);
+            bool? nzzzzzzzzzzzz_ = context.Operators.In<CqlDateTime>(nzzzzzzzzzzzx_, nzzzzzzzzzzzy_, "day");
+            bool? ozzzzzzzzzzza_ = context.Operators.And(nzzzzzzzzzzzu_, nzzzzzzzzzzzz_);
 
-            return dzzzzzzx_;
+            return ozzzzzzzzzzza_;
         };
-        IEnumerable<Observation> dzzzzzzj_ = context.Operators.Where<Observation>(dzzzzzzh_, dzzzzzzi_);
+        IEnumerable<Observation> nzzzzzzzzzzzm_ = context.Operators.Where<Observation>(nzzzzzzzzzzzk_, nzzzzzzzzzzzl_);
 
-        return dzzzzzzj_;
+        return nzzzzzzzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Diastolic Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Diastolic_Blood_Pressure_Reading(CqlContext context)
     {
-        IEnumerable<Observation> dzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
-        IEnumerable<Observation> dzzzzzzz_ = Status_1_8_000.Instance.isObservationBP(context, dzzzzzzy_);
-        bool? ezzzzzza_(Observation BloodPressure)
+        IEnumerable<Observation> ozzzzzzzzzzzb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
+        IEnumerable<Observation> ozzzzzzzzzzzc_ = Status_1_8_000.Instance.isObservationBP(context, ozzzzzzzzzzzb_);
+        bool? ozzzzzzzzzzzd_(Observation BloodPressure)
         {
-            ResourceReference ezzzzzzc_ = BloodPressure?.Encounter;
-            Encounter ezzzzzzd_ = this.getEncounter(context, ezzzzzzc_);
-            Coding ezzzzzze_ = ezzzzzzd_?.Class;
-            CqlCode ezzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ezzzzzze_);
-            string ezzzzzzg_ = ezzzzzzf_?.code;
-            string[] ezzzzzzh_ = [
+            ResourceReference ozzzzzzzzzzzf_ = BloodPressure?.Encounter;
+            Encounter ozzzzzzzzzzzg_ = this.getEncounter(context, ozzzzzzzzzzzf_);
+            Coding ozzzzzzzzzzzh_ = ozzzzzzzzzzzg_?.Class;
+            CqlCode ozzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ozzzzzzzzzzzh_);
+            string ozzzzzzzzzzzj_ = ozzzzzzzzzzzi_?.code;
+            string[] ozzzzzzzzzzzk_ = [
                 "EMER",
                 "IMP",
                 "ACUTE",
@@ -359,237 +359,237 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
                 "PRENC",
                 "SS",
             ];
-            bool? ezzzzzzi_ = context.Operators.In<string>(ezzzzzzg_, ezzzzzzh_ as IEnumerable<string>);
-            bool? ezzzzzzj_ = context.Operators.Not(ezzzzzzi_);
-            DataType ezzzzzzk_ = BloodPressure?.Effective;
-            object ezzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzk_);
-            CqlDateTime ezzzzzzm_ = QICoreCommon_2_1_000.Instance.latest(context, ezzzzzzl_);
-            CqlInterval<CqlDateTime> ezzzzzzn_ = this.Measurement_Period(context);
-            bool? ezzzzzzo_ = context.Operators.In<CqlDateTime>(ezzzzzzm_, ezzzzzzn_, "day");
-            bool? ezzzzzzp_ = context.Operators.And(ezzzzzzj_, ezzzzzzo_);
+            bool? ozzzzzzzzzzzl_ = context.Operators.In<string>(ozzzzzzzzzzzj_, ozzzzzzzzzzzk_ as IEnumerable<string>);
+            bool? ozzzzzzzzzzzm_ = context.Operators.Not(ozzzzzzzzzzzl_);
+            DataType ozzzzzzzzzzzn_ = BloodPressure?.Effective;
+            object ozzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzn_);
+            CqlDateTime ozzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.latest(context, ozzzzzzzzzzzo_);
+            CqlInterval<CqlDateTime> ozzzzzzzzzzzq_ = this.Measurement_Period(context);
+            bool? ozzzzzzzzzzzr_ = context.Operators.In<CqlDateTime>(ozzzzzzzzzzzp_, ozzzzzzzzzzzq_, "day");
+            bool? ozzzzzzzzzzzs_ = context.Operators.And(ozzzzzzzzzzzm_, ozzzzzzzzzzzr_);
 
-            return ezzzzzzp_;
+            return ozzzzzzzzzzzs_;
         };
-        IEnumerable<Observation> ezzzzzzb_ = context.Operators.Where<Observation>(dzzzzzzz_, ezzzzzza_);
+        IEnumerable<Observation> ozzzzzzzzzzze_ = context.Operators.Where<Observation>(ozzzzzzzzzzzc_, ozzzzzzzzzzzd_);
 
-        return ezzzzzzb_;
+        return ozzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Blood Pressure Days")]
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context)
     {
-        IEnumerable<Observation> ezzzzzzq_ = this.Qualifying_Diastolic_Blood_Pressure_Reading(context);
-        CqlDate ezzzzzzr_(Observation DBPExam)
+        IEnumerable<Observation> ozzzzzzzzzzzt_ = this.Qualifying_Diastolic_Blood_Pressure_Reading(context);
+        CqlDate ozzzzzzzzzzzu_(Observation DBPExam)
         {
-            DataType ezzzzzzz_ = DBPExam?.Effective;
-            object fzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzz_);
-            CqlDateTime fzzzzzzb_ = QICoreCommon_2_1_000.Instance.latest(context, fzzzzzza_);
-            CqlDate fzzzzzzc_ = context.Operators.DateFrom(fzzzzzzb_);
+            DataType pzzzzzzzzzzzc_ = DBPExam?.Effective;
+            object pzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzc_);
+            CqlDateTime pzzzzzzzzzzze_ = QICoreCommon_2_1_000.Instance.latest(context, pzzzzzzzzzzzd_);
+            CqlDate pzzzzzzzzzzzf_ = context.Operators.DateFrom(pzzzzzzzzzzze_);
 
-            return fzzzzzzc_;
+            return pzzzzzzzzzzzf_;
         };
-        IEnumerable<CqlDate> ezzzzzzs_ = context.Operators.Select<Observation, CqlDate>(ezzzzzzq_, ezzzzzzr_);
-        IEnumerable<CqlDate> ezzzzzzt_ = context.Operators.Distinct<CqlDate>(ezzzzzzs_);
-        IEnumerable<Observation> ezzzzzzu_ = this.Qualifying_Systolic_Blood_Pressure_Reading(context);
-        CqlDate ezzzzzzv_(Observation SBPExam)
+        IEnumerable<CqlDate> ozzzzzzzzzzzv_ = context.Operators.Select<Observation, CqlDate>(ozzzzzzzzzzzt_, ozzzzzzzzzzzu_);
+        IEnumerable<CqlDate> ozzzzzzzzzzzw_ = context.Operators.Distinct<CqlDate>(ozzzzzzzzzzzv_);
+        IEnumerable<Observation> ozzzzzzzzzzzx_ = this.Qualifying_Systolic_Blood_Pressure_Reading(context);
+        CqlDate ozzzzzzzzzzzy_(Observation SBPExam)
         {
-            DataType fzzzzzzd_ = SBPExam?.Effective;
-            object fzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzd_);
-            CqlDateTime fzzzzzzf_ = QICoreCommon_2_1_000.Instance.latest(context, fzzzzzze_);
-            CqlDate fzzzzzzg_ = context.Operators.DateFrom(fzzzzzzf_);
+            DataType pzzzzzzzzzzzg_ = SBPExam?.Effective;
+            object pzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzg_);
+            CqlDateTime pzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.latest(context, pzzzzzzzzzzzh_);
+            CqlDate pzzzzzzzzzzzj_ = context.Operators.DateFrom(pzzzzzzzzzzzi_);
 
-            return fzzzzzzg_;
+            return pzzzzzzzzzzzj_;
         };
-        IEnumerable<CqlDate> ezzzzzzw_ = context.Operators.Select<Observation, CqlDate>(ezzzzzzu_, ezzzzzzv_);
-        IEnumerable<CqlDate> ezzzzzzx_ = context.Operators.Distinct<CqlDate>(ezzzzzzw_);
-        IEnumerable<CqlDate> ezzzzzzy_ = context.Operators.Intersect<CqlDate>(ezzzzzzt_, ezzzzzzx_);
+        IEnumerable<CqlDate> ozzzzzzzzzzzz_ = context.Operators.Select<Observation, CqlDate>(ozzzzzzzzzzzx_, ozzzzzzzzzzzy_);
+        IEnumerable<CqlDate> pzzzzzzzzzzza_ = context.Operators.Distinct<CqlDate>(ozzzzzzzzzzzz_);
+        IEnumerable<CqlDate> pzzzzzzzzzzzb_ = context.Operators.Intersect<CqlDate>(ozzzzzzzzzzzw_, pzzzzzzzzzzza_);
 
-        return ezzzzzzy_;
+        return pzzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("Most Recent Blood Pressure Day")]
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context)
     {
-        IEnumerable<CqlDate> fzzzzzzh_ = this.Blood_Pressure_Days(context);
-        IEnumerable<CqlDate> fzzzzzzi_ = context.Operators.ListSort<CqlDate>(fzzzzzzh_, System.ComponentModel.ListSortDirection.Ascending);
-        CqlDate fzzzzzzj_ = context.Operators.Last<CqlDate>(fzzzzzzi_);
+        IEnumerable<CqlDate> pzzzzzzzzzzzk_ = this.Blood_Pressure_Days(context);
+        IEnumerable<CqlDate> pzzzzzzzzzzzl_ = context.Operators.ListSort<CqlDate>(pzzzzzzzzzzzk_, System.ComponentModel.ListSortDirection.Ascending);
+        CqlDate pzzzzzzzzzzzm_ = context.Operators.Last<CqlDate>(pzzzzzzzzzzzl_);
 
-        return fzzzzzzj_;
+        return pzzzzzzzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("Lowest Systolic Reading on Most Recent Blood Pressure Day")]
     public CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context)
     {
-        IEnumerable<Observation> fzzzzzzk_ = this.Qualifying_Systolic_Blood_Pressure_Reading(context);
-        bool? fzzzzzzl_(Observation SBPReading)
+        IEnumerable<Observation> pzzzzzzzzzzzn_ = this.Qualifying_Systolic_Blood_Pressure_Reading(context);
+        bool? pzzzzzzzzzzzo_(Observation SBPReading)
         {
-            DataType fzzzzzzs_ = SBPReading?.Effective;
-            object fzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzs_);
-            CqlDateTime fzzzzzzu_ = QICoreCommon_2_1_000.Instance.latest(context, fzzzzzzt_);
-            CqlDate fzzzzzzv_ = this.Most_Recent_Blood_Pressure_Day(context);
-            CqlDateTime fzzzzzzw_ = context.Operators.ConvertDateToDateTime(fzzzzzzv_);
-            bool? fzzzzzzx_ = context.Operators.SameAs(fzzzzzzu_, fzzzzzzw_, "day");
+            DataType pzzzzzzzzzzzv_ = SBPReading?.Effective;
+            object pzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzv_);
+            CqlDateTime pzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.latest(context, pzzzzzzzzzzzw_);
+            CqlDate pzzzzzzzzzzzy_ = this.Most_Recent_Blood_Pressure_Day(context);
+            CqlDateTime pzzzzzzzzzzzz_ = context.Operators.ConvertDateToDateTime(pzzzzzzzzzzzy_);
+            bool? qzzzzzzzzzzza_ = context.Operators.SameAs(pzzzzzzzzzzzx_, pzzzzzzzzzzzz_, "day");
 
-            return fzzzzzzx_;
+            return qzzzzzzzzzzza_;
         };
-        IEnumerable<Observation> fzzzzzzm_ = context.Operators.Where<Observation>(fzzzzzzk_, fzzzzzzl_);
-        CqlQuantity fzzzzzzn_(Observation SBPReading)
+        IEnumerable<Observation> pzzzzzzzzzzzp_ = context.Operators.Where<Observation>(pzzzzzzzzzzzn_, pzzzzzzzzzzzo_);
+        CqlQuantity pzzzzzzzzzzzq_(Observation SBPReading)
         {
-            List<Observation.ComponentComponent> fzzzzzzy_ = SBPReading?.Component;
-            bool? fzzzzzzz_(Observation.ComponentComponent SBPComponent)
+            List<Observation.ComponentComponent> qzzzzzzzzzzzb_ = SBPReading?.Component;
+            bool? qzzzzzzzzzzzc_(Observation.ComponentComponent SBPComponent)
             {
-                CodeableConcept gzzzzzzf_ = SBPComponent?.Code;
-                CqlConcept gzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gzzzzzzf_);
-                CqlCode gzzzzzzh_ = this.Systolic_blood_pressure(context);
-                CqlConcept gzzzzzzi_ = context.Operators.ConvertCodeToConcept(gzzzzzzh_);
-                bool? gzzzzzzj_ = context.Operators.Equivalent(gzzzzzzg_, gzzzzzzi_);
+                CodeableConcept qzzzzzzzzzzzi_ = SBPComponent?.Code;
+                CqlConcept qzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, qzzzzzzzzzzzi_);
+                CqlCode qzzzzzzzzzzzk_ = this.Systolic_blood_pressure(context);
+                CqlConcept qzzzzzzzzzzzl_ = context.Operators.ConvertCodeToConcept(qzzzzzzzzzzzk_);
+                bool? qzzzzzzzzzzzm_ = context.Operators.Equivalent(qzzzzzzzzzzzj_, qzzzzzzzzzzzl_);
 
-                return gzzzzzzj_;
+                return qzzzzzzzzzzzm_;
             };
-            IEnumerable<Observation.ComponentComponent> gzzzzzza_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)fzzzzzzy_, fzzzzzzz_);
-            CqlQuantity gzzzzzzb_(Observation.ComponentComponent SBPComponent)
+            IEnumerable<Observation.ComponentComponent> qzzzzzzzzzzzd_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)qzzzzzzzzzzzb_, qzzzzzzzzzzzc_);
+            CqlQuantity qzzzzzzzzzzze_(Observation.ComponentComponent SBPComponent)
             {
-                DataType gzzzzzzk_ = SBPComponent?.Value;
-                object gzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzk_);
+                DataType qzzzzzzzzzzzn_ = SBPComponent?.Value;
+                object qzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzn_);
 
-                return gzzzzzzl_ as CqlQuantity;
+                return qzzzzzzzzzzzo_ as CqlQuantity;
             };
-            IEnumerable<CqlQuantity> gzzzzzzc_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(gzzzzzza_, gzzzzzzb_);
-            IEnumerable<CqlQuantity> gzzzzzzd_ = context.Operators.Distinct<CqlQuantity>(gzzzzzzc_);
-            CqlQuantity gzzzzzze_ = context.Operators.SingletonFrom<CqlQuantity>(gzzzzzzd_);
+            IEnumerable<CqlQuantity> qzzzzzzzzzzzf_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(qzzzzzzzzzzzd_, qzzzzzzzzzzze_);
+            IEnumerable<CqlQuantity> qzzzzzzzzzzzg_ = context.Operators.Distinct<CqlQuantity>(qzzzzzzzzzzzf_);
+            CqlQuantity qzzzzzzzzzzzh_ = context.Operators.SingletonFrom<CqlQuantity>(qzzzzzzzzzzzg_);
 
-            return gzzzzzze_;
+            return qzzzzzzzzzzzh_;
         };
-        IEnumerable<CqlQuantity> fzzzzzzo_ = context.Operators.Select<Observation, CqlQuantity>(fzzzzzzm_, fzzzzzzn_);
-        IEnumerable<CqlQuantity> fzzzzzzp_ = context.Operators.Distinct<CqlQuantity>(fzzzzzzo_);
-        IEnumerable<CqlQuantity> fzzzzzzq_ = context.Operators.ListSort<CqlQuantity>(fzzzzzzp_, System.ComponentModel.ListSortDirection.Ascending);
-        CqlQuantity fzzzzzzr_ = context.Operators.First<CqlQuantity>(fzzzzzzq_);
+        IEnumerable<CqlQuantity> pzzzzzzzzzzzr_ = context.Operators.Select<Observation, CqlQuantity>(pzzzzzzzzzzzp_, pzzzzzzzzzzzq_);
+        IEnumerable<CqlQuantity> pzzzzzzzzzzzs_ = context.Operators.Distinct<CqlQuantity>(pzzzzzzzzzzzr_);
+        IEnumerable<CqlQuantity> pzzzzzzzzzzzt_ = context.Operators.ListSort<CqlQuantity>(pzzzzzzzzzzzs_, System.ComponentModel.ListSortDirection.Ascending);
+        CqlQuantity pzzzzzzzzzzzu_ = context.Operators.First<CqlQuantity>(pzzzzzzzzzzzt_);
 
-        return fzzzzzzr_;
+        return pzzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Has Systolic Blood Pressure Less Than 140")]
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context)
     {
-        CqlQuantity gzzzzzzm_ = this.Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
-        CqlQuantity gzzzzzzn_ = context.Operators.Quantity(140m, "mm[Hg]");
-        bool? gzzzzzzo_ = context.Operators.Less(gzzzzzzm_, gzzzzzzn_);
+        CqlQuantity qzzzzzzzzzzzp_ = this.Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
+        CqlQuantity qzzzzzzzzzzzq_ = context.Operators.Quantity(140m, "mm[Hg]");
+        bool? qzzzzzzzzzzzr_ = context.Operators.Less(qzzzzzzzzzzzp_, qzzzzzzzzzzzq_);
 
-        return gzzzzzzo_;
+        return qzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Lowest Diastolic Reading on Most Recent Blood Pressure Day")]
     public CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context)
     {
-        IEnumerable<Observation> gzzzzzzp_ = this.Qualifying_Diastolic_Blood_Pressure_Reading(context);
-        bool? gzzzzzzq_(Observation DBPReading)
+        IEnumerable<Observation> qzzzzzzzzzzzs_ = this.Qualifying_Diastolic_Blood_Pressure_Reading(context);
+        bool? qzzzzzzzzzzzt_(Observation DBPReading)
         {
-            DataType gzzzzzzx_ = DBPReading?.Effective;
-            object gzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzx_);
-            CqlDateTime gzzzzzzz_ = QICoreCommon_2_1_000.Instance.latest(context, gzzzzzzy_);
-            CqlDate hzzzzzza_ = this.Most_Recent_Blood_Pressure_Day(context);
-            CqlDateTime hzzzzzzb_ = context.Operators.ConvertDateToDateTime(hzzzzzza_);
-            bool? hzzzzzzc_ = context.Operators.SameAs(gzzzzzzz_, hzzzzzzb_, "day");
+            DataType rzzzzzzzzzzza_ = DBPReading?.Effective;
+            object rzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzza_);
+            CqlDateTime rzzzzzzzzzzzc_ = QICoreCommon_2_1_000.Instance.latest(context, rzzzzzzzzzzzb_);
+            CqlDate rzzzzzzzzzzzd_ = this.Most_Recent_Blood_Pressure_Day(context);
+            CqlDateTime rzzzzzzzzzzze_ = context.Operators.ConvertDateToDateTime(rzzzzzzzzzzzd_);
+            bool? rzzzzzzzzzzzf_ = context.Operators.SameAs(rzzzzzzzzzzzc_, rzzzzzzzzzzze_, "day");
 
-            return hzzzzzzc_;
+            return rzzzzzzzzzzzf_;
         };
-        IEnumerable<Observation> gzzzzzzr_ = context.Operators.Where<Observation>(gzzzzzzp_, gzzzzzzq_);
-        CqlQuantity gzzzzzzs_(Observation DBPReading)
+        IEnumerable<Observation> qzzzzzzzzzzzu_ = context.Operators.Where<Observation>(qzzzzzzzzzzzs_, qzzzzzzzzzzzt_);
+        CqlQuantity qzzzzzzzzzzzv_(Observation DBPReading)
         {
-            List<Observation.ComponentComponent> hzzzzzzd_ = DBPReading?.Component;
-            bool? hzzzzzze_(Observation.ComponentComponent DBPComponent)
+            List<Observation.ComponentComponent> rzzzzzzzzzzzg_ = DBPReading?.Component;
+            bool? rzzzzzzzzzzzh_(Observation.ComponentComponent DBPComponent)
             {
-                CodeableConcept hzzzzzzk_ = DBPComponent?.Code;
-                CqlConcept hzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hzzzzzzk_);
-                CqlCode hzzzzzzm_ = this.Diastolic_blood_pressure(context);
-                CqlConcept hzzzzzzn_ = context.Operators.ConvertCodeToConcept(hzzzzzzm_);
-                bool? hzzzzzzo_ = context.Operators.Equivalent(hzzzzzzl_, hzzzzzzn_);
+                CodeableConcept rzzzzzzzzzzzn_ = DBPComponent?.Code;
+                CqlConcept rzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzzzzzzzzzzn_);
+                CqlCode rzzzzzzzzzzzp_ = this.Diastolic_blood_pressure(context);
+                CqlConcept rzzzzzzzzzzzq_ = context.Operators.ConvertCodeToConcept(rzzzzzzzzzzzp_);
+                bool? rzzzzzzzzzzzr_ = context.Operators.Equivalent(rzzzzzzzzzzzo_, rzzzzzzzzzzzq_);
 
-                return hzzzzzzo_;
+                return rzzzzzzzzzzzr_;
             };
-            IEnumerable<Observation.ComponentComponent> hzzzzzzf_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)hzzzzzzd_, hzzzzzze_);
-            CqlQuantity hzzzzzzg_(Observation.ComponentComponent DBPComponent)
+            IEnumerable<Observation.ComponentComponent> rzzzzzzzzzzzi_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)rzzzzzzzzzzzg_, rzzzzzzzzzzzh_);
+            CqlQuantity rzzzzzzzzzzzj_(Observation.ComponentComponent DBPComponent)
             {
-                DataType hzzzzzzp_ = DBPComponent?.Value;
-                object hzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzp_);
+                DataType rzzzzzzzzzzzs_ = DBPComponent?.Value;
+                object rzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzs_);
 
-                return hzzzzzzq_ as CqlQuantity;
+                return rzzzzzzzzzzzt_ as CqlQuantity;
             };
-            IEnumerable<CqlQuantity> hzzzzzzh_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(hzzzzzzf_, hzzzzzzg_);
-            IEnumerable<CqlQuantity> hzzzzzzi_ = context.Operators.Distinct<CqlQuantity>(hzzzzzzh_);
-            CqlQuantity hzzzzzzj_ = context.Operators.SingletonFrom<CqlQuantity>(hzzzzzzi_);
+            IEnumerable<CqlQuantity> rzzzzzzzzzzzk_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(rzzzzzzzzzzzi_, rzzzzzzzzzzzj_);
+            IEnumerable<CqlQuantity> rzzzzzzzzzzzl_ = context.Operators.Distinct<CqlQuantity>(rzzzzzzzzzzzk_);
+            CqlQuantity rzzzzzzzzzzzm_ = context.Operators.SingletonFrom<CqlQuantity>(rzzzzzzzzzzzl_);
 
-            return hzzzzzzj_;
+            return rzzzzzzzzzzzm_;
         };
-        IEnumerable<CqlQuantity> gzzzzzzt_ = context.Operators.Select<Observation, CqlQuantity>(gzzzzzzr_, gzzzzzzs_);
-        IEnumerable<CqlQuantity> gzzzzzzu_ = context.Operators.Distinct<CqlQuantity>(gzzzzzzt_);
-        IEnumerable<CqlQuantity> gzzzzzzv_ = context.Operators.ListSort<CqlQuantity>(gzzzzzzu_, System.ComponentModel.ListSortDirection.Ascending);
-        CqlQuantity gzzzzzzw_ = context.Operators.First<CqlQuantity>(gzzzzzzv_);
+        IEnumerable<CqlQuantity> qzzzzzzzzzzzw_ = context.Operators.Select<Observation, CqlQuantity>(qzzzzzzzzzzzu_, qzzzzzzzzzzzv_);
+        IEnumerable<CqlQuantity> qzzzzzzzzzzzx_ = context.Operators.Distinct<CqlQuantity>(qzzzzzzzzzzzw_);
+        IEnumerable<CqlQuantity> qzzzzzzzzzzzy_ = context.Operators.ListSort<CqlQuantity>(qzzzzzzzzzzzx_, System.ComponentModel.ListSortDirection.Ascending);
+        CqlQuantity qzzzzzzzzzzzz_ = context.Operators.First<CqlQuantity>(qzzzzzzzzzzzy_);
 
-        return gzzzzzzw_;
+        return qzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Has Diastolic Blood Pressure Less Than 90")]
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context)
     {
-        CqlQuantity hzzzzzzr_ = this.Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
-        CqlQuantity hzzzzzzs_ = context.Operators.Quantity(90m, "mm[Hg]");
-        bool? hzzzzzzt_ = context.Operators.Less(hzzzzzzr_, hzzzzzzs_);
+        CqlQuantity rzzzzzzzzzzzu_ = this.Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
+        CqlQuantity rzzzzzzzzzzzv_ = context.Operators.Quantity(90m, "mm[Hg]");
+        bool? rzzzzzzzzzzzw_ = context.Operators.Less(rzzzzzzzzzzzu_, rzzzzzzzzzzzv_);
 
-        return hzzzzzzt_;
+        return rzzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
-        bool? hzzzzzzu_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
-        bool? hzzzzzzv_ = this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
-        bool? hzzzzzzw_ = context.Operators.And(hzzzzzzu_, hzzzzzzv_);
+        bool? rzzzzzzzzzzzx_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
+        bool? rzzzzzzzzzzzy_ = this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
+        bool? rzzzzzzzzzzzz_ = context.Operators.And(rzzzzzzzzzzzx_, rzzzzzzzzzzzy_);
 
-        return hzzzzzzw_;
+        return rzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? hzzzzzzx_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? szzzzzzzzzzza_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return hzzzzzzx_;
+        return szzzzzzzzzzza_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> hzzzzzzy_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> szzzzzzzzzzzb_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return hzzzzzzy_;
+        return szzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? hzzzzzzz_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? szzzzzzzzzzzc_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return hzzzzzzz_;
+        return szzzzzzzzzzzc_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode izzzzzza_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode szzzzzzzzzzzd_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return izzzzzza_;
+        return szzzzzzzzzzzd_;
     }
 
 

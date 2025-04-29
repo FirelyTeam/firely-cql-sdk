@@ -18,111 +18,24 @@ public static class LibrarySetInvokerExtensions
     /// <summary>
     /// Enumerates the definitions in the library set.
     /// </summary>
-    /// <param name="librarySetInvoker">The library set invoker.</param>
-    public static IEnumerable<DefinitionInvoker> EnumerateLibrarySetDefinitions(
+    /// <param name="librarySetInvoker">The library set invoker of which to enumerate definitions for all libraries.</param>
+    public static IEnumerable<DefinitionInvoker> EnumerateDefinitions(
         this LibrarySetInvoker librarySetInvoker) =>
         librarySetInvoker
             .LibraryInvokers.Values
-            .SelectMany(libraryInvoker => libraryInvoker.Definitions.Values);
+            .SelectMany(libraryInvoker => libraryInvoker.EnumerateDefinitionInvokers());
 
     /// <summary>
-    /// Enumerates the results of all definitions in the library set.
+    /// Enumerates the definitions in the library set.
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker.</param>
-    /// <param name="cqlContext">The CQL context.</param>
-    /// <param name="includeDefinition">The selector for the definition</param>
-    /// <param name="definitionInvocationExceptionCallback">
-    /// <para>
-    /// An optional callback right after an exception is caught, and before it rethrown or ignored,
-    /// based on the currently selected
-    /// <see cref="LibrarySetInvoker.BatchProcessExceptionContinuation">LibrarySetInvoker.BatchProcessExceptionContinuation</see>.
-    /// </para>
-    /// <para>
-    /// In most cases this is only necessary when the selected strategy is set to Ignore exceptions and when the caller
-    /// has a special use case for it, e.g. to keep track of these exceptions.
-    /// </para>
-    /// <para>
-    /// Otherwise, it's best to just catch the exception the normal way.
-    /// </para>
-    /// </param>
-    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
-    ///
-    /// <remarks>
-    /// <para>
-    /// Exceptions are enriched such that the last <see cref="DefinitionInvoker"/> that caused
-    /// the exception is available when inspecting the <see cref="Exception.Data">Exception.Data["Current"]</see> property.
-    /// </para>
-    ///
-    /// <para>
-    /// From the <see cref="DefinitionInvoker"/> the name of the
-    /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
-    /// </para>
-    /// </remarks>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibrarySetDefinitionsResults(
+    /// <param name="libraryIdentifier">The library on which definitions enumerated.</param>
+    public static IEnumerable<DefinitionInvoker> EnumerateDefinitions(
         this LibrarySetInvoker librarySetInvoker,
-        CqlContext cqlContext,
-        Func<DefinitionInvoker, bool>? includeDefinition = null,
-        ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
-    {
-        var definitions = librarySetInvoker.EnumerateLibrarySetDefinitions();
-
-        if (includeDefinition is {} fn)
-            definitions = definitions.Where(definitionInvoker => fn(definitionInvoker));
-
-        return definitions.EnumerateResults(cqlContext, definitionInvocationExceptionCallback);
-    }
-
-    /// <summary>
-    /// Enumerates the results of all definitions in the library set.
-    /// </summary>
-    /// <param name="librarySetInvoker">The library set invoker.</param>
-    /// <param name="cqlContext">The CQL context.</param>
-    /// <param name="libraryIdentifier">The library on which definitions are run on.</param>
-    /// <param name="includeDefinition">The selector for the definition</param>
-    /// <param name="definitionInvocationExceptionCallback">
-    /// <para>
-    /// An optional callback right after an exception is caught, and before it rethrown or ignored,
-    /// based on the currently selected
-    /// <see cref="LibrarySetInvoker.BatchProcessExceptionContinuation">LibrarySetInvoker.BatchProcessExceptionContinuation</see>.
-    /// </para>
-    /// <para>
-    /// In most cases this is only necessary when the selected strategy is set to Ignore exceptions and when the caller
-    /// has a special use case for it, e.g. to keep track of these exceptions.
-    /// </para>
-    /// <para>
-    /// Otherwise, it's best to just catch the exception the normal way.
-    /// </para>
-    /// </param>
-    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
-    ///
-    /// <remarks>
-    /// <para>
-    /// Exceptions are enriched such that the last <see cref="DefinitionInvoker"/> that caused
-    /// the exception is available when inspecting the <see cref="Exception.Data">Exception.Data["Current"]</see> property.
-    /// </para>
-    ///
-    /// <para>
-    /// From the <see cref="DefinitionInvoker"/> the name of the
-    /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
-    /// </para>
-    /// </remarks>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
-        this LibrarySetInvoker librarySetInvoker,
-        CqlContext cqlContext,
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        Func<DefinitionInvoker, bool>? includeDefinition = null,
-        ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
-    {
-        if (librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier) is { Definitions.Values: {} definitions })
-        {
-            if (includeDefinition is { } fn)
-                definitions = definitions.Where(definitionInvoker => fn(definitionInvoker));
-
-            return definitions.EnumerateResults(cqlContext, definitionInvocationExceptionCallback);
-        }
-
-        return [];
-    }
+        CqlVersionedLibraryIdentifier libraryIdentifier) =>
+        librarySetInvoker.LibraryInvokers.TryGetValue(libraryIdentifier, out var libraryInvoker)
+            ? libraryInvoker.EnumerateDefinitionInvokers()
+            : [];
 
     /// <summary>
     /// Gets the result of a specific definition in a specific library.
@@ -133,7 +46,7 @@ public static class LibrarySetInvokerExtensions
     /// <param name="definitionName">The name of the definition.</param>
     /// <returns>The result of the definition invocation.</returns>
     [DebuggerStepperBoundary]
-    public static object? GetLibraryDefinitionResult(
+    public static object? InvokeLibraryDefinition(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier libraryIdentifier,

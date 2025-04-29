@@ -114,7 +114,7 @@ public abstract class LibraryInvoker
                 return true;
         }
 
-        logger?.LogDebug(
+        logger?.LogWarning(
             "Skipping type {type} because it was generated with an unsupported version {ver} of the CQL tool.",
             libraryType.FullName,
             cqlToolVersion);

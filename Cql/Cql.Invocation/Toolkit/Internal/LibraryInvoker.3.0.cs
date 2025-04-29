@@ -16,24 +16,22 @@ namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
 internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
 {
-    private record LibraryMethodInfo
-    (
+    private record LibraryMethodInfo(
         MethodInfo Method,
-        IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName,
-        CqlDefinitionAttribute? CqlDeclarationAttribute)
+        CqlDefinitionAttribute? CqlDefinitionAttribute,
+        CqlTagAttribute[] CqlTagAttributes)
     {
         public LibraryMethodInfo(MethodInfo Method) : this(
             Method,
-            TagValuesByName: Method
-                .GetCustomAttributes<CqlTagAttribute>()
-                .Select(t => (t.Name, t.Value))
-                .GroupBy(t => t.Name, (Name, items) => (Name, Values: (IReadOnlySet<string>)items.Select(i => i.Value).ToFrozenSet()))
-                .ToArray() switch
-            {
-                { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Values).AsReadOnly(),
-                _                    => ReadOnlyDictionary<string, IReadOnlySet<string>>.Empty
-            },
-            CqlDeclarationAttribute: Method.GetCustomAttribute<CqlDefinitionAttribute>()) { }
+            CqlDefinitionAttribute: Method.GetCustomAttributes<CqlDefinitionAttribute>()?.SingleOrDefault(),
+            CqlTagAttributes: Method.GetCustomAttributes<CqlTagAttribute>().ToArray()) {}
+        //     .Select(t => (t.Name, t.Value))
+        //     .GroupBy(t => t.Name, (Name, items) => (Name, Values: (IReadOnlySet<string>)items.Select(i => i.Value).ToFrozenSet()))
+        //     .ToArray() switch
+        // {
+        //     { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Values).AsReadOnly(),
+        //     _                    => ReadOnlyDictionary<string, IReadOnlySet<string>>.Empty
+        // }) { }
     }
 
     private LibraryInvoker_3_0(
@@ -46,27 +44,22 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
                                  .SelectToArray(m => new LibraryMethodInfo(m));
         Definitions = libraryMethodInfos
                       .SelectWhereNotNull(o =>
-                                              o.CqlDeclarationAttribute?.Name is { } declarationName
-                                              && o.Method.GetParameters() is [{ } p0]
-                                              && p0.ParameterType == typeof(CqlContext)
-                                                  ? (DefinitionInvoker)new DefinitionInvoker_3_0(
+                                              o.CqlDefinitionAttribute?.Name is { } name
+                                              ? (DefinitionInvoker)new DefinitionInvoker_3_0(
                                                       libraryInvoker: this,
-                                                      definitionName: declarationName,
                                                       library: Library,
                                                       methodInfo: o.Method,
-                                                      tagValuesByName: o.TagValuesByName,
-                                                      valueSetId: o.CqlDeclarationAttribute is CqlValueSetDefinitionAttribute vsa ? vsa.ValueSetId : null)
-                                                  : null)
+                                                      cqlDefinitionAttribute: o.CqlDefinitionAttribute,
+                                                      cqlTagAttributes: o.CqlTagAttributes)
+                                              : null)
                       .ToImmutableDictionary(o => o.DefinitionName);
     }
 
     public override IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
-    private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
-    {
-        return libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
-               ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
-    }
+    private static object GetLibraryFromStaticInstanceProperty(Type libraryType) =>
+        libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
+        ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
 
     public static bool TryCreate(
         LibrarySetInvoker librarySetInvoker,
@@ -78,9 +71,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
-            logger?.LogDebug(
-                "Skipping type {type} because it does not implement ILibrary.",
-                libraryType.FullName);
+            logger?.LogDebug("Skipping type {type} because it does not implement ILibrary.", libraryType.FullName);
             return false;
         }
 
@@ -97,14 +88,12 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
         && cqlToolVersion < new Version(4, 0, 0, 0);
 }
 
-file class DefinitionInvoker_3_0
-(
-    LibraryInvoker libraryInvoker,
-    string definitionName,
+file class DefinitionInvoker_3_0(
     ILibrary library,
+    LibraryInvoker libraryInvoker,
     MethodInfo methodInfo,
-    IReadOnlyDictionary<string, IReadOnlySet<string>> tagValuesByName,
-    string? valueSetId) : DefinitionInvoker(libraryInvoker, definitionName, methodInfo, tagValuesByName, valueSetId)
+    CqlDefinitionAttribute cqlDefinitionAttribute,
+    CqlTagAttribute[] cqlTagAttributes) : DefinitionInvoker(libraryInvoker, methodInfo, cqlDefinitionAttribute, cqlTagAttributes)
 {
     public override object? Invoke(CqlContext cqlContext) =>
         MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, [cqlContext], CultureInfo.InvariantCulture);

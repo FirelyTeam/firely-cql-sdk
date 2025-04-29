@@ -31,7 +31,8 @@ public class InvocationToolkitTests
 
         // Act
         var result = librarySetInvoker
-                     .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .EnumerateDefinitions(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .EnumerateResults(ctx, null, null)
                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         // Assert

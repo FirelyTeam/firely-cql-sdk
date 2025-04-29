@@ -33,10 +33,10 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> nzzz_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient ozza_ = context.Operators.SingletonFrom<Patient>(nzzz_);
+        IEnumerable<Patient> tzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient tzzzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<Patient>(tzzzzzzzzzzzzzzf_);
 
-        return ozza_;
+        return tzzzzzzzzzzzzzzg_;
     }
 
 
@@ -66,12 +66,12 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? ozzb_ = this.Initial_population(context);
-        bool? ozzc_ = this.Exclusion(context);
-        bool? ozzd_ = context.Operators.Not(ozzc_);
-        bool? ozze_ = context.Operators.And(ozzb_, ozzd_);
+        bool? tzzzzzzzzzzzzzzh_ = this.Initial_population(context);
+        bool? tzzzzzzzzzzzzzzi_ = this.Exclusion(context);
+        bool? tzzzzzzzzzzzzzzj_ = context.Operators.Not(tzzzzzzzzzzzzzzi_);
+        bool? tzzzzzzzzzzzzzzk_ = context.Operators.And(tzzzzzzzzzzzzzzh_, tzzzzzzzzzzzzzzj_);
 
-        return ozze_;
+        return tzzzzzzzzzzzzzzk_;
     }
 
 

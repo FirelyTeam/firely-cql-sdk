@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
@@ -15,21 +16,34 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Abstract class representing a definition invoker.
 /// </summary>
 /// <param name="libraryInvoker">The library invoker that created this instance.</param>
-/// <param name="definitionName">The name of the definition.</param>
+/// <param name="cqlDefinitionAttribute">The definition.</param>
 /// <param name="methodInfo">The method information for the definition.</param>
-/// <param name="tagValuesByName">The tag values associated with the definition.</param>
-/// <param name="valueSetId">The value set identifier, if any.</param>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    string definitionName,
     MethodInfo methodInfo,
-    IReadOnlyDictionary<string, IReadOnlySet<string>> tagValuesByName,
-    string? valueSetId)
+    CqlDefinitionAttribute cqlDefinitionAttribute,
+    CqlTagAttribute[] cqlTagAttributes)
 {
     /// <summary>
     /// The library invoker that created this instance.
     /// </summary>
     public LibraryInvoker LibraryInvoker { get; } = libraryInvoker;
+
+    /// <summary>
+    /// Gets the <see cref="CqlDefinitionAttribute"/> associated with this invoker.
+    /// </summary>
+    public CqlDefinitionAttribute CqlDefinitionAttribute { get; } = cqlDefinitionAttribute;
+
+    /// <summary>
+    /// Gets the tag values by tag name that is associated with the definition.
+    /// Where there duplicate tags by name, their values will be combined into a set.
+    /// </summary>
+    public IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName { get; }
+        = cqlTagAttributes
+          .GroupBy(a => a.Name)
+          .ToFrozenDictionary(
+              g => g.Key,
+              IReadOnlySet<string> (g) => g.Select(a => a.Value).ToFrozenSet());
 
     /// <summary>
     /// A convenience property to get the library set name.
@@ -44,23 +58,12 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
-    public string DefinitionName { get; } = definitionName;
+    public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
 
     /// <summary>
     /// Gets the return type of the method.
     /// </summary>
     public Type ReturnType => MethodInfo.ReturnType;
-
-    /// <summary>
-    /// Gets the tag values by tag name that is associated with the definition.
-    /// Where there duplicate tags by name, their values will be combined into a set.
-    /// </summary>
-    public IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName { get; } = tagValuesByName;
-
-    /// <summary>
-    /// Gets the value set identifier, if any.
-    /// </summary>
-    public string? ValueSetId { get; } = valueSetId;
 
     /// <summary>
     /// Gets the method information for the definition.
