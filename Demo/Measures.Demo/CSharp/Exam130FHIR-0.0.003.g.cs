@@ -177,12 +177,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime ozzzzzzd_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime ozzzzzze_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> ozzzzzzf_ = context.Operators.Interval(ozzzzzzd_, ozzzzzze_, true, false);
-        object ozzzzzzg_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", ozzzzzzf_);
+        CqlDateTime jzzzp_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime jzzzq_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> jzzzr_ = context.Operators.Interval(jzzzp_, jzzzq_, true, false);
+        object jzzzs_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", jzzzr_);
 
-        return (CqlInterval<CqlDateTime>)ozzzzzzg_;
+        return (CqlInterval<CqlDateTime>)jzzzs_;
     }
 
 
@@ -193,1329 +193,1329 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> ozzzzzzh_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient ozzzzzzi_ = context.Operators.SingletonFrom<Patient>(ozzzzzzh_);
+        IEnumerable<Patient> jzzzt_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient jzzzu_ = context.Operators.SingletonFrom<Patient>(jzzzt_);
 
-        return ozzzzzzi_;
+        return jzzzu_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
-        IEnumerable<Coding> ozzzzzzj_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
+        IEnumerable<Coding> jzzzv_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
-        return ozzzzzzj_;
+        return jzzzv_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> ozzzzzzk_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> jzzzw_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
-        return ozzzzzzk_;
+        return jzzzw_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
-        IEnumerable<Coding> ozzzzzzl_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
+        IEnumerable<Coding> jzzzx_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
-        return ozzzzzzl_;
+        return jzzzx_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode ozzzzzzm_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+        CqlCode jzzzy_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
-        return ozzzzzzm_;
+        return jzzzy_;
     }
 
 
     [CqlExpressionDefinition("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context)
     {
-        CqlValueSet ozzzzzzn_ = this.Online_Assessments(context);
-        IEnumerable<Encounter> ozzzzzzo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ozzzzzzn_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        CqlValueSet ozzzzzzp_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> ozzzzzzq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ozzzzzzp_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> ozzzzzzr_ = context.Operators.Union<Encounter>(ozzzzzzo_, ozzzzzzq_);
-        bool? ozzzzzzs_(Encounter TelehealthEncounter)
+        CqlValueSet jzzzz_ = this.Online_Assessments(context);
+        IEnumerable<Encounter> kzzza_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, jzzzz_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        CqlValueSet kzzzb_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter> kzzzc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kzzzb_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> kzzzd_ = context.Operators.Union<Encounter>(kzzza_, kzzzc_);
+        bool? kzzze_(Encounter TelehealthEncounter)
         {
-            Code<Encounter.EncounterStatus> ozzzzzzu_ = TelehealthEncounter?.StatusElement;
-            string ozzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, ozzzzzzu_);
-            bool? ozzzzzzw_ = context.Operators.Equal(ozzzzzzv_, "finished");
-            CqlInterval<CqlDateTime> ozzzzzzx_ = this.Measurement_Period(context);
-            Period ozzzzzzy_ = TelehealthEncounter?.Period;
-            CqlInterval<CqlDateTime> ozzzzzzz_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ozzzzzzy_ as object);
-            bool? pzzzzzza_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ozzzzzzx_, ozzzzzzz_, default);
-            bool? pzzzzzzb_ = context.Operators.And(ozzzzzzw_, pzzzzzza_);
+            Code<Encounter.EncounterStatus> kzzzg_ = TelehealthEncounter?.StatusElement;
+            string kzzzh_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzg_);
+            bool? kzzzi_ = context.Operators.Equal(kzzzh_, "finished");
+            CqlInterval<CqlDateTime> kzzzj_ = this.Measurement_Period(context);
+            Period kzzzk_ = TelehealthEncounter?.Period;
+            CqlInterval<CqlDateTime> kzzzl_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzk_ as object);
+            bool? kzzzm_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(kzzzj_, kzzzl_, default);
+            bool? kzzzn_ = context.Operators.And(kzzzi_, kzzzm_);
 
-            return pzzzzzzb_;
+            return kzzzn_;
         };
-        IEnumerable<Encounter> ozzzzzzt_ = context.Operators.Where<Encounter>(ozzzzzzr_, ozzzzzzs_);
+        IEnumerable<Encounter> kzzzf_ = context.Operators.Where<Encounter>(kzzzd_, kzzze_);
 
-        return ozzzzzzt_;
+        return kzzzf_;
     }
 
 
     [CqlExpressionDefinition("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period(CqlContext context)
     {
-        Patient pzzzzzzc_ = this.Patient(context);
-        Date pzzzzzzd_ = pzzzzzzc_?.BirthDateElement;
-        string pzzzzzze_ = pzzzzzzd_?.Value;
-        CqlDate pzzzzzzf_ = context.Operators.ConvertStringToDate(pzzzzzze_);
-        CqlInterval<CqlDateTime> pzzzzzzg_ = this.Measurement_Period(context);
-        CqlDateTime pzzzzzzh_ = context.Operators.Start(pzzzzzzg_);
-        CqlDate pzzzzzzi_ = context.Operators.DateFrom(pzzzzzzh_);
-        int? pzzzzzzj_ = context.Operators.CalculateAgeAt(pzzzzzzf_, pzzzzzzi_, "year");
+        Patient kzzzo_ = this.Patient(context);
+        Date kzzzp_ = kzzzo_?.BirthDateElement;
+        string kzzzq_ = kzzzp_?.Value;
+        CqlDate kzzzr_ = context.Operators.ConvertStringToDate(kzzzq_);
+        CqlInterval<CqlDateTime> kzzzs_ = this.Measurement_Period(context);
+        CqlDateTime kzzzt_ = context.Operators.Start(kzzzs_);
+        CqlDate kzzzu_ = context.Operators.DateFrom(kzzzt_);
+        int? kzzzv_ = context.Operators.CalculateAgeAt(kzzzr_, kzzzu_, "year");
 
-        return pzzzzzzj_;
+        return kzzzv_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
-        Patient pzzzzzzk_ = this.Patient(context);
-        Date pzzzzzzl_ = pzzzzzzk_?.BirthDateElement;
-        string pzzzzzzm_ = pzzzzzzl_?.Value;
-        CqlDate pzzzzzzn_ = context.Operators.ConvertStringToDate(pzzzzzzm_);
-        CqlInterval<CqlDateTime> pzzzzzzo_ = this.Measurement_Period(context);
-        CqlDateTime pzzzzzzp_ = context.Operators.Start(pzzzzzzo_);
-        CqlDate pzzzzzzq_ = context.Operators.DateFrom(pzzzzzzp_);
-        int? pzzzzzzr_ = context.Operators.CalculateAgeAt(pzzzzzzn_, pzzzzzzq_, "year");
-        CqlInterval<int?> pzzzzzzs_ = context.Operators.Interval(51, 75, true, false);
-        bool? pzzzzzzt_ = context.Operators.In<int?>(pzzzzzzr_, pzzzzzzs_, default);
-        IEnumerable<Encounter> pzzzzzzu_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
-        IEnumerable<Encounter> pzzzzzzv_ = this.Telehealth_Services(context);
-        IEnumerable<Encounter> pzzzzzzw_ = context.Operators.Union<Encounter>(pzzzzzzu_, pzzzzzzv_);
-        bool? pzzzzzzx_ = context.Operators.Exists<Encounter>(pzzzzzzw_);
-        bool? pzzzzzzy_ = context.Operators.And(pzzzzzzt_, pzzzzzzx_);
+        Patient kzzzw_ = this.Patient(context);
+        Date kzzzx_ = kzzzw_?.BirthDateElement;
+        string kzzzy_ = kzzzx_?.Value;
+        CqlDate kzzzz_ = context.Operators.ConvertStringToDate(kzzzy_);
+        CqlInterval<CqlDateTime> lzzza_ = this.Measurement_Period(context);
+        CqlDateTime lzzzb_ = context.Operators.Start(lzzza_);
+        CqlDate lzzzc_ = context.Operators.DateFrom(lzzzb_);
+        int? lzzzd_ = context.Operators.CalculateAgeAt(kzzzz_, lzzzc_, "year");
+        CqlInterval<int?> lzzze_ = context.Operators.Interval(51, 75, true, false);
+        bool? lzzzf_ = context.Operators.In<int?>(lzzzd_, lzzze_, default);
+        IEnumerable<Encounter> lzzzg_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> lzzzh_ = this.Telehealth_Services(context);
+        IEnumerable<Encounter> lzzzi_ = context.Operators.Union<Encounter>(lzzzg_, lzzzh_);
+        bool? lzzzj_ = context.Operators.Exists<Encounter>(lzzzi_);
+        bool? lzzzk_ = context.Operators.And(lzzzf_, lzzzj_);
 
-        return pzzzzzzy_;
+        return lzzzk_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? pzzzzzzz_ = this.Initial_Population(context);
+        bool? lzzzl_ = this.Initial_Population(context);
 
-        return pzzzzzzz_;
+        return lzzzl_;
     }
 
 
     [CqlExpressionDefinition("Malignant Neoplasm")]
     public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
     {
-        CqlValueSet qzzzzzza_ = this.Malignant_Neoplasm_of_Colon(context);
-        IEnumerable<Condition> qzzzzzzb_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzza_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? qzzzzzzc_(Condition ColorectalCancer)
+        CqlValueSet lzzzm_ = this.Malignant_Neoplasm_of_Colon(context);
+        IEnumerable<Condition> lzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, lzzzm_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? lzzzo_(Condition ColorectalCancer)
         {
-            CqlInterval<CqlDateTime> qzzzzzze_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColorectalCancer);
-            CqlDateTime qzzzzzzf_ = context.Operators.Start(qzzzzzze_);
-            CqlInterval<CqlDateTime> qzzzzzzg_ = this.Measurement_Period(context);
-            CqlDateTime qzzzzzzh_ = context.Operators.End(qzzzzzzg_);
-            bool? qzzzzzzi_ = context.Operators.SameOrBefore(qzzzzzzf_, qzzzzzzh_, default);
+            CqlInterval<CqlDateTime> lzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColorectalCancer);
+            CqlDateTime lzzzr_ = context.Operators.Start(lzzzq_);
+            CqlInterval<CqlDateTime> lzzzs_ = this.Measurement_Period(context);
+            CqlDateTime lzzzt_ = context.Operators.End(lzzzs_);
+            bool? lzzzu_ = context.Operators.SameOrBefore(lzzzr_, lzzzt_, default);
 
-            return qzzzzzzi_;
+            return lzzzu_;
         };
-        IEnumerable<Condition> qzzzzzzd_ = context.Operators.Where<Condition>(qzzzzzzb_, qzzzzzzc_);
+        IEnumerable<Condition> lzzzp_ = context.Operators.Where<Condition>(lzzzn_, lzzzo_);
 
-        return qzzzzzzd_;
+        return lzzzp_;
     }
 
 
     [CqlExpressionDefinition("Total Colectomy Performed")]
     public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
     {
-        CqlValueSet qzzzzzzj_ = this.Total_Colectomy(context);
-        IEnumerable<Procedure> qzzzzzzk_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, qzzzzzzj_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? qzzzzzzl_(Procedure Colectomy)
+        CqlValueSet lzzzv_ = this.Total_Colectomy(context);
+        IEnumerable<Procedure> lzzzw_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, lzzzv_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? lzzzx_(Procedure Colectomy)
         {
-            Code<EventStatus> qzzzzzzn_ = Colectomy?.StatusElement;
-            string qzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzzzzn_);
-            bool? qzzzzzzp_ = context.Operators.Equal(qzzzzzzo_, "completed");
-            DataType qzzzzzzq_ = Colectomy?.Performed;
-            CqlInterval<CqlDateTime> qzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, qzzzzzzq_);
-            CqlDateTime qzzzzzzs_ = context.Operators.End(qzzzzzzr_);
-            CqlInterval<CqlDateTime> qzzzzzzt_ = this.Measurement_Period(context);
-            CqlDateTime qzzzzzzu_ = context.Operators.End(qzzzzzzt_);
-            bool? qzzzzzzv_ = context.Operators.SameOrBefore(qzzzzzzs_, qzzzzzzu_, default);
-            bool? qzzzzzzw_ = context.Operators.And(qzzzzzzp_, qzzzzzzv_);
+            Code<EventStatus> lzzzz_ = Colectomy?.StatusElement;
+            string mzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, lzzzz_);
+            bool? mzzzb_ = context.Operators.Equal(mzzza_, "completed");
+            DataType mzzzc_ = Colectomy?.Performed;
+            CqlInterval<CqlDateTime> mzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, mzzzc_);
+            CqlDateTime mzzze_ = context.Operators.End(mzzzd_);
+            CqlInterval<CqlDateTime> mzzzf_ = this.Measurement_Period(context);
+            CqlDateTime mzzzg_ = context.Operators.End(mzzzf_);
+            bool? mzzzh_ = context.Operators.SameOrBefore(mzzze_, mzzzg_, default);
+            bool? mzzzi_ = context.Operators.And(mzzzb_, mzzzh_);
 
-            return qzzzzzzw_;
+            return mzzzi_;
         };
-        IEnumerable<Procedure> qzzzzzzm_ = context.Operators.Where<Procedure>(qzzzzzzk_, qzzzzzzl_);
+        IEnumerable<Procedure> lzzzy_ = context.Operators.Where<Procedure>(lzzzw_, lzzzx_);
 
-        return qzzzzzzm_;
+        return lzzzy_;
     }
 
 
     [CqlExpressionDefinition("Total Colectomy Condition")]
     public IEnumerable<Condition> Total_Colectomy_Condition(CqlContext context)
     {
-        CqlValueSet qzzzzzzx_ = this.Total_Colectomy_ICD9(context);
-        IEnumerable<Condition> qzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzx_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? qzzzzzzz_(Condition ColectomyDx)
+        CqlValueSet mzzzj_ = this.Total_Colectomy_ICD9(context);
+        IEnumerable<Condition> mzzzk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, mzzzj_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? mzzzl_(Condition ColectomyDx)
         {
-            CqlInterval<CqlDateTime> rzzzzzzb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColectomyDx);
-            CqlDateTime rzzzzzzc_ = context.Operators.Start(rzzzzzzb_);
-            CqlInterval<CqlDateTime> rzzzzzzd_ = this.Measurement_Period(context);
-            CqlDateTime rzzzzzze_ = context.Operators.End(rzzzzzzd_);
-            bool? rzzzzzzf_ = context.Operators.SameOrBefore(rzzzzzzc_, rzzzzzze_, default);
+            CqlInterval<CqlDateTime> mzzzn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColectomyDx);
+            CqlDateTime mzzzo_ = context.Operators.Start(mzzzn_);
+            CqlInterval<CqlDateTime> mzzzp_ = this.Measurement_Period(context);
+            CqlDateTime mzzzq_ = context.Operators.End(mzzzp_);
+            bool? mzzzr_ = context.Operators.SameOrBefore(mzzzo_, mzzzq_, default);
 
-            return rzzzzzzf_;
+            return mzzzr_;
         };
-        IEnumerable<Condition> rzzzzzza_ = context.Operators.Where<Condition>(qzzzzzzy_, qzzzzzzz_);
+        IEnumerable<Condition> mzzzm_ = context.Operators.Where<Condition>(mzzzk_, mzzzl_);
 
-        return rzzzzzza_;
+        return mzzzm_;
     }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? rzzzzzzg_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
-        IEnumerable<Condition> rzzzzzzh_ = this.Malignant_Neoplasm(context);
-        bool? rzzzzzzi_ = context.Operators.Exists<Condition>(rzzzzzzh_);
-        bool? rzzzzzzj_ = context.Operators.Or(rzzzzzzg_, rzzzzzzi_);
-        IEnumerable<Procedure> rzzzzzzk_ = this.Total_Colectomy_Performed(context);
-        bool? rzzzzzzl_ = context.Operators.Exists<Procedure>(rzzzzzzk_);
-        bool? rzzzzzzm_ = context.Operators.Or(rzzzzzzj_, rzzzzzzl_);
-        IEnumerable<Condition> rzzzzzzn_ = this.Total_Colectomy_Condition(context);
-        bool? rzzzzzzo_ = context.Operators.Exists<Condition>(rzzzzzzn_);
-        bool? rzzzzzzp_ = context.Operators.Or(rzzzzzzm_, rzzzzzzo_);
-        bool? rzzzzzzq_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
-        bool? rzzzzzzr_ = context.Operators.Or(rzzzzzzp_, rzzzzzzq_);
-        Patient rzzzzzzs_ = this.Patient(context);
-        Date rzzzzzzt_ = rzzzzzzs_?.BirthDateElement;
-        string rzzzzzzu_ = rzzzzzzt_?.Value;
-        CqlDate rzzzzzzv_ = context.Operators.ConvertStringToDate(rzzzzzzu_);
-        CqlInterval<CqlDateTime> rzzzzzzw_ = this.Measurement_Period(context);
-        CqlDateTime rzzzzzzx_ = context.Operators.Start(rzzzzzzw_);
-        CqlDate rzzzzzzy_ = context.Operators.DateFrom(rzzzzzzx_);
-        int? rzzzzzzz_ = context.Operators.CalculateAgeAt(rzzzzzzv_, rzzzzzzy_, "year");
-        bool? szzzzzza_ = context.Operators.GreaterOrEqual(rzzzzzzz_, 65);
-        bool? szzzzzzb_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
-        bool? szzzzzzc_ = context.Operators.And(szzzzzza_, szzzzzzb_);
-        bool? szzzzzzd_ = context.Operators.Or(rzzzzzzr_, szzzzzzc_);
-        bool? szzzzzze_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
-        bool? szzzzzzf_ = context.Operators.Or(szzzzzzd_, szzzzzze_);
+        bool? mzzzs_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
+        IEnumerable<Condition> mzzzt_ = this.Malignant_Neoplasm(context);
+        bool? mzzzu_ = context.Operators.Exists<Condition>(mzzzt_);
+        bool? mzzzv_ = context.Operators.Or(mzzzs_, mzzzu_);
+        IEnumerable<Procedure> mzzzw_ = this.Total_Colectomy_Performed(context);
+        bool? mzzzx_ = context.Operators.Exists<Procedure>(mzzzw_);
+        bool? mzzzy_ = context.Operators.Or(mzzzv_, mzzzx_);
+        IEnumerable<Condition> mzzzz_ = this.Total_Colectomy_Condition(context);
+        bool? nzzza_ = context.Operators.Exists<Condition>(mzzzz_);
+        bool? nzzzb_ = context.Operators.Or(mzzzy_, nzzza_);
+        bool? nzzzc_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+        bool? nzzzd_ = context.Operators.Or(nzzzb_, nzzzc_);
+        Patient nzzze_ = this.Patient(context);
+        Date nzzzf_ = nzzze_?.BirthDateElement;
+        string nzzzg_ = nzzzf_?.Value;
+        CqlDate nzzzh_ = context.Operators.ConvertStringToDate(nzzzg_);
+        CqlInterval<CqlDateTime> nzzzi_ = this.Measurement_Period(context);
+        CqlDateTime nzzzj_ = context.Operators.Start(nzzzi_);
+        CqlDate nzzzk_ = context.Operators.DateFrom(nzzzj_);
+        int? nzzzl_ = context.Operators.CalculateAgeAt(nzzzh_, nzzzk_, "year");
+        bool? nzzzm_ = context.Operators.GreaterOrEqual(nzzzl_, 65);
+        bool? nzzzn_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
+        bool? nzzzo_ = context.Operators.And(nzzzm_, nzzzn_);
+        bool? nzzzp_ = context.Operators.Or(nzzzd_, nzzzo_);
+        bool? nzzzq_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
+        bool? nzzzr_ = context.Operators.Or(nzzzp_, nzzzq_);
 
-        return szzzzzzf_;
+        return nzzzr_;
     }
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status(CqlContext context)
     {
-        CqlValueSet szzzzzzg_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> szzzzzzh_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, szzzzzzg_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? szzzzzzi_(Observation FecalOccult)
+        CqlValueSet nzzzs_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation> nzzzt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, nzzzs_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? nzzzu_(Observation FecalOccult)
         {
-            DataType szzzzzzn_ = FecalOccult?.Effective;
-            CqlDateTime szzzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, szzzzzzn_);
-            CqlInterval<CqlDateTime> szzzzzzp_ = this.Measurement_Period(context);
-            CqlDateTime szzzzzzq_ = context.Operators.Start(szzzzzzp_);
-            CqlQuantity szzzzzzr_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime szzzzzzs_ = context.Operators.Subtract(szzzzzzq_, szzzzzzr_);
-            CqlDateTime szzzzzzu_ = context.Operators.End(szzzzzzp_);
-            CqlInterval<CqlDateTime> szzzzzzv_ = context.Operators.Interval(szzzzzzs_, szzzzzzu_, false, false);
-            bool? szzzzzzw_ = context.Operators.In<CqlDateTime>(szzzzzzo_, szzzzzzv_, default);
+            DataType nzzzz_ = FecalOccult?.Effective;
+            CqlDateTime ozzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, nzzzz_);
+            CqlInterval<CqlDateTime> ozzzb_ = this.Measurement_Period(context);
+            CqlDateTime ozzzc_ = context.Operators.Start(ozzzb_);
+            CqlQuantity ozzzd_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime ozzze_ = context.Operators.Subtract(ozzzc_, ozzzd_);
+            CqlDateTime ozzzg_ = context.Operators.End(ozzzb_);
+            CqlInterval<CqlDateTime> ozzzh_ = context.Operators.Interval(ozzze_, ozzzg_, false, false);
+            bool? ozzzi_ = context.Operators.In<CqlDateTime>(ozzza_, ozzzh_, default);
 
-            return szzzzzzw_;
+            return ozzzi_;
         };
-        IEnumerable<Observation> szzzzzzj_ = context.Operators.Where<Observation>(szzzzzzh_, szzzzzzi_);
-        (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? szzzzzzk_(Observation FecalOccult)
+        IEnumerable<Observation> nzzzv_ = context.Operators.Where<Observation>(nzzzt_, nzzzu_);
+        (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? nzzzw_(Observation FecalOccult)
         {
-            DataType szzzzzzx_ = FecalOccult?.Effective;
-            CqlDateTime szzzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, szzzzzzx_);
-            DataType szzzzzzz_ = FecalOccult?.Value;
-            IEnumerable<Coding> tzzzzzza_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(szzzzzzz_, "coding");
-            bool? tzzzzzzb_(Coding @this)
+            DataType ozzzj_ = FecalOccult?.Effective;
+            CqlDateTime ozzzk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ozzzj_);
+            DataType ozzzl_ = FecalOccult?.Value;
+            IEnumerable<Coding> ozzzm_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(ozzzl_, "coding");
+            bool? ozzzn_(Coding @this)
             {
-                FhirString tzzzzzzv_ = @this?.DisplayElement;
-                bool? tzzzzzzw_ = context.Operators.Not((bool?)(tzzzzzzv_ is null));
+                FhirString pzzzh_ = @this?.DisplayElement;
+                bool? pzzzi_ = context.Operators.Not((bool?)(pzzzh_ is null));
 
-                return tzzzzzzw_;
+                return pzzzi_;
             };
-            IEnumerable<Coding> tzzzzzzc_ = context.Operators.Where<Coding>(tzzzzzza_, tzzzzzzb_);
-            FhirString tzzzzzzd_(Coding @this)
+            IEnumerable<Coding> ozzzo_ = context.Operators.Where<Coding>(ozzzm_, ozzzn_);
+            FhirString ozzzp_(Coding @this)
             {
-                FhirString tzzzzzzx_ = @this?.DisplayElement;
+                FhirString pzzzj_ = @this?.DisplayElement;
 
-                return tzzzzzzx_;
+                return pzzzj_;
             };
-            IEnumerable<FhirString> tzzzzzze_ = context.Operators.Select<Coding, FhirString>(tzzzzzzc_, tzzzzzzd_);
-            List<CodeableConcept> tzzzzzzf_ = FecalOccult?.Category;
-            bool? tzzzzzzg_(CodeableConcept @this)
+            IEnumerable<FhirString> ozzzq_ = context.Operators.Select<Coding, FhirString>(ozzzo_, ozzzp_);
+            List<CodeableConcept> ozzzr_ = FecalOccult?.Category;
+            bool? ozzzs_(CodeableConcept @this)
             {
-                List<Coding> tzzzzzzy_ = @this?.Coding;
-                bool? tzzzzzzz_ = context.Operators.Not((bool?)(tzzzzzzy_ is null));
+                List<Coding> pzzzk_ = @this?.Coding;
+                bool? pzzzl_ = context.Operators.Not((bool?)(pzzzk_ is null));
 
-                return tzzzzzzz_;
+                return pzzzl_;
             };
-            IEnumerable<CodeableConcept> tzzzzzzh_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)tzzzzzzf_, tzzzzzzg_);
-            List<Coding> tzzzzzzi_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> ozzzt_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzr_, ozzzs_);
+            List<Coding> ozzzu_(CodeableConcept @this)
             {
-                List<Coding> uzzzzzza_ = @this?.Coding;
+                List<Coding> pzzzm_ = @this?.Coding;
 
-                return uzzzzzza_;
+                return pzzzm_;
             };
-            IEnumerable<List<Coding>> tzzzzzzj_ = context.Operators.Select<CodeableConcept, List<Coding>>(tzzzzzzh_, tzzzzzzi_);
-            IEnumerable<Coding> tzzzzzzk_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)tzzzzzzj_);
-            bool? tzzzzzzl_(Coding @this)
+            IEnumerable<List<Coding>> ozzzv_ = context.Operators.Select<CodeableConcept, List<Coding>>(ozzzt_, ozzzu_);
+            IEnumerable<Coding> ozzzw_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ozzzv_);
+            bool? ozzzx_(Coding @this)
             {
-                Code uzzzzzzb_ = @this?.CodeElement;
-                bool? uzzzzzzc_ = context.Operators.Not((bool?)(uzzzzzzb_ is null));
+                Code pzzzn_ = @this?.CodeElement;
+                bool? pzzzo_ = context.Operators.Not((bool?)(pzzzn_ is null));
 
-                return uzzzzzzc_;
+                return pzzzo_;
             };
-            IEnumerable<Coding> tzzzzzzm_ = context.Operators.Where<Coding>(tzzzzzzk_, tzzzzzzl_);
-            Code tzzzzzzn_(Coding @this)
+            IEnumerable<Coding> ozzzy_ = context.Operators.Where<Coding>(ozzzw_, ozzzx_);
+            Code ozzzz_(Coding @this)
             {
-                Code uzzzzzzd_ = @this?.CodeElement;
+                Code pzzzp_ = @this?.CodeElement;
 
-                return uzzzzzzd_;
+                return pzzzp_;
             };
-            IEnumerable<Code> tzzzzzzo_ = context.Operators.Select<Coding, Code>(tzzzzzzm_, tzzzzzzn_);
-            bool? tzzzzzzp_(Code @this)
+            IEnumerable<Code> pzzza_ = context.Operators.Select<Coding, Code>(ozzzy_, ozzzz_);
+            bool? pzzzb_(Code @this)
             {
-                string uzzzzzze_ = @this?.Value;
-                bool? uzzzzzzf_ = context.Operators.Not((bool?)(uzzzzzze_ is null));
+                string pzzzq_ = @this?.Value;
+                bool? pzzzr_ = context.Operators.Not((bool?)(pzzzq_ is null));
 
-                return uzzzzzzf_;
+                return pzzzr_;
             };
-            IEnumerable<Code> tzzzzzzq_ = context.Operators.Where<Code>(tzzzzzzo_, tzzzzzzp_);
-            string tzzzzzzr_(Code @this)
+            IEnumerable<Code> pzzzc_ = context.Operators.Where<Code>(pzzza_, pzzzb_);
+            string pzzzd_(Code @this)
             {
-                string uzzzzzzg_ = @this?.Value;
+                string pzzzs_ = @this?.Value;
 
-                return uzzzzzzg_;
+                return pzzzs_;
             };
-            IEnumerable<string> tzzzzzzs_ = context.Operators.Select<Code, string>(tzzzzzzq_, tzzzzzzr_);
-            Code<ObservationStatus> tzzzzzzt_ = FecalOccult?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? tzzzzzzu_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, szzzzzzy_, tzzzzzze_, tzzzzzzs_, tzzzzzzt_);
+            IEnumerable<string> pzzze_ = context.Operators.Select<Code, string>(pzzzc_, pzzzd_);
+            Code<ObservationStatus> pzzzf_ = FecalOccult?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? pzzzg_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, ozzzk_, ozzzq_, pzzze_, pzzzf_);
 
-            return tzzzzzzu_;
+            return pzzzg_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> szzzzzzl_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(szzzzzzj_, szzzzzzk_);
-        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> szzzzzzm_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(szzzzzzl_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> nzzzx_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(nzzzv_, nzzzw_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> nzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(nzzzx_);
 
-        return szzzzzzm_;
+        return nzzzy_;
     }
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
     {
-        CqlValueSet uzzzzzzh_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> uzzzzzzi_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, uzzzzzzh_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? uzzzzzzj_(Observation FecalOccult)
+        CqlValueSet pzzzt_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation> pzzzu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, pzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? pzzzv_(Observation FecalOccult)
         {
-            Code<ObservationStatus> uzzzzzzl_ = FecalOccult?.StatusElement;
-            string uzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToString(context, uzzzzzzl_);
-            string[] uzzzzzzn_ = [
+            Code<ObservationStatus> pzzzx_ = FecalOccult?.StatusElement;
+            string pzzzy_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzx_);
+            string[] pzzzz_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? uzzzzzzo_ = context.Operators.In<string>(uzzzzzzm_, uzzzzzzn_ as IEnumerable<string>);
-            List<CodeableConcept> uzzzzzzp_ = FecalOccult?.Category;
-            bool? uzzzzzzq_(CodeableConcept FecalOccultCategory)
+            bool? qzzza_ = context.Operators.In<string>(pzzzy_, pzzzz_ as IEnumerable<string>);
+            List<CodeableConcept> qzzzb_ = FecalOccult?.Category;
+            bool? qzzzc_(CodeableConcept FecalOccultCategory)
             {
-                List<Coding> vzzzzzzc_ = FecalOccultCategory?.Coding;
-                bool? vzzzzzzd_(Coding @this)
+                List<Coding> qzzzo_ = FecalOccultCategory?.Coding;
+                bool? qzzzp_(Coding @this)
                 {
-                    Code vzzzzzzn_ = @this?.CodeElement;
-                    bool? vzzzzzzo_ = context.Operators.Not((bool?)(vzzzzzzn_ is null));
+                    Code qzzzz_ = @this?.CodeElement;
+                    bool? rzzza_ = context.Operators.Not((bool?)(qzzzz_ is null));
 
-                    return vzzzzzzo_;
+                    return rzzza_;
                 };
-                IEnumerable<Coding> vzzzzzze_ = context.Operators.Where<Coding>((IEnumerable<Coding>)vzzzzzzc_, vzzzzzzd_);
-                Code vzzzzzzf_(Coding @this)
+                IEnumerable<Coding> qzzzq_ = context.Operators.Where<Coding>((IEnumerable<Coding>)qzzzo_, qzzzp_);
+                Code qzzzr_(Coding @this)
                 {
-                    Code vzzzzzzp_ = @this?.CodeElement;
+                    Code rzzzb_ = @this?.CodeElement;
 
-                    return vzzzzzzp_;
+                    return rzzzb_;
                 };
-                IEnumerable<Code> vzzzzzzg_ = context.Operators.Select<Coding, Code>(vzzzzzze_, vzzzzzzf_);
-                bool? vzzzzzzh_(Code @this)
+                IEnumerable<Code> qzzzs_ = context.Operators.Select<Coding, Code>(qzzzq_, qzzzr_);
+                bool? qzzzt_(Code @this)
                 {
-                    string vzzzzzzq_ = @this?.Value;
-                    bool? vzzzzzzr_ = context.Operators.Not((bool?)(vzzzzzzq_ is null));
+                    string rzzzc_ = @this?.Value;
+                    bool? rzzzd_ = context.Operators.Not((bool?)(rzzzc_ is null));
 
-                    return vzzzzzzr_;
+                    return rzzzd_;
                 };
-                IEnumerable<Code> vzzzzzzi_ = context.Operators.Where<Code>(vzzzzzzg_, vzzzzzzh_);
-                string vzzzzzzj_(Code @this)
+                IEnumerable<Code> qzzzu_ = context.Operators.Where<Code>(qzzzs_, qzzzt_);
+                string qzzzv_(Code @this)
                 {
-                    string vzzzzzzs_ = @this?.Value;
+                    string rzzze_ = @this?.Value;
 
-                    return vzzzzzzs_;
+                    return rzzze_;
                 };
-                IEnumerable<string> vzzzzzzk_ = context.Operators.Select<Code, string>(vzzzzzzi_, vzzzzzzj_);
-                string[] vzzzzzzl_ = [
+                IEnumerable<string> qzzzw_ = context.Operators.Select<Code, string>(qzzzu_, qzzzv_);
+                string[] qzzzx_ = [
                     "laboratory",
                 ];
-                bool? vzzzzzzm_ = context.Operators.Equivalent<string>(vzzzzzzk_, vzzzzzzl_ as IEnumerable<string>);
+                bool? qzzzy_ = context.Operators.Equivalent<string>(qzzzw_, qzzzx_ as IEnumerable<string>);
 
-                return vzzzzzzm_;
+                return qzzzy_;
             };
-            IEnumerable<CodeableConcept> uzzzzzzr_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzzzzp_, uzzzzzzq_);
-            bool? uzzzzzzs_ = context.Operators.Exists<CodeableConcept>(uzzzzzzr_);
-            bool? uzzzzzzt_ = context.Operators.And(uzzzzzzo_, uzzzzzzs_);
-            DataType uzzzzzzu_ = FecalOccult?.Value;
-            bool? uzzzzzzv_ = context.Operators.Not((bool?)(uzzzzzzu_ is null));
-            bool? uzzzzzzw_ = context.Operators.And(uzzzzzzt_, uzzzzzzv_);
-            DataType uzzzzzzx_ = FecalOccult?.Effective;
-            CqlDateTime uzzzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, uzzzzzzx_);
-            CqlInterval<CqlDateTime> uzzzzzzz_ = this.Measurement_Period(context);
-            bool? vzzzzzza_ = context.Operators.In<CqlDateTime>(uzzzzzzy_, uzzzzzzz_, default);
-            bool? vzzzzzzb_ = context.Operators.And(uzzzzzzw_, vzzzzzza_);
+            IEnumerable<CodeableConcept> qzzzd_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzb_, qzzzc_);
+            bool? qzzze_ = context.Operators.Exists<CodeableConcept>(qzzzd_);
+            bool? qzzzf_ = context.Operators.And(qzzza_, qzzze_);
+            DataType qzzzg_ = FecalOccult?.Value;
+            bool? qzzzh_ = context.Operators.Not((bool?)(qzzzg_ is null));
+            bool? qzzzi_ = context.Operators.And(qzzzf_, qzzzh_);
+            DataType qzzzj_ = FecalOccult?.Effective;
+            CqlDateTime qzzzk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, qzzzj_);
+            CqlInterval<CqlDateTime> qzzzl_ = this.Measurement_Period(context);
+            bool? qzzzm_ = context.Operators.In<CqlDateTime>(qzzzk_, qzzzl_, default);
+            bool? qzzzn_ = context.Operators.And(qzzzi_, qzzzm_);
 
-            return vzzzzzzb_;
+            return qzzzn_;
         };
-        IEnumerable<Observation> uzzzzzzk_ = context.Operators.Where<Observation>(uzzzzzzi_, uzzzzzzj_);
+        IEnumerable<Observation> pzzzw_ = context.Operators.Where<Observation>(pzzzu_, pzzzv_);
 
-        return uzzzzzzk_;
+        return pzzzw_;
     }
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet vzzzzzzt_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> vzzzzzzu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, vzzzzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? vzzzzzzv_(Observation FecalOccult)
+        CqlValueSet rzzzf_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation> rzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, rzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? rzzzh_(Observation FecalOccult)
         {
-            Code<ObservationStatus> vzzzzzzx_ = FecalOccult?.StatusElement;
-            string vzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToString(context, vzzzzzzx_);
-            string[] vzzzzzzz_ = [
+            Code<ObservationStatus> rzzzj_ = FecalOccult?.StatusElement;
+            string rzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, rzzzj_);
+            string[] rzzzl_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? wzzzzzza_ = context.Operators.In<string>(vzzzzzzy_, vzzzzzzz_ as IEnumerable<string>);
-            List<CodeableConcept> wzzzzzzb_ = FecalOccult?.Category;
-            bool? wzzzzzzc_(CodeableConcept FecalOccultCategory)
+            bool? rzzzm_ = context.Operators.In<string>(rzzzk_, rzzzl_ as IEnumerable<string>);
+            List<CodeableConcept> rzzzn_ = FecalOccult?.Category;
+            bool? rzzzo_(CodeableConcept FecalOccultCategory)
             {
-                List<Coding> wzzzzzzo_ = FecalOccultCategory?.Coding;
-                bool? wzzzzzzp_(Coding @this)
+                List<Coding> szzza_ = FecalOccultCategory?.Coding;
+                bool? szzzb_(Coding @this)
                 {
-                    Code wzzzzzzz_ = @this?.CodeElement;
-                    bool? xzzzzzza_ = context.Operators.Not((bool?)(wzzzzzzz_ is null));
+                    Code szzzl_ = @this?.CodeElement;
+                    bool? szzzm_ = context.Operators.Not((bool?)(szzzl_ is null));
 
-                    return xzzzzzza_;
+                    return szzzm_;
                 };
-                IEnumerable<Coding> wzzzzzzq_ = context.Operators.Where<Coding>((IEnumerable<Coding>)wzzzzzzo_, wzzzzzzp_);
-                Code wzzzzzzr_(Coding @this)
+                IEnumerable<Coding> szzzc_ = context.Operators.Where<Coding>((IEnumerable<Coding>)szzza_, szzzb_);
+                Code szzzd_(Coding @this)
                 {
-                    Code xzzzzzzb_ = @this?.CodeElement;
+                    Code szzzn_ = @this?.CodeElement;
 
-                    return xzzzzzzb_;
+                    return szzzn_;
                 };
-                IEnumerable<Code> wzzzzzzs_ = context.Operators.Select<Coding, Code>(wzzzzzzq_, wzzzzzzr_);
-                bool? wzzzzzzt_(Code @this)
+                IEnumerable<Code> szzze_ = context.Operators.Select<Coding, Code>(szzzc_, szzzd_);
+                bool? szzzf_(Code @this)
                 {
-                    string xzzzzzzc_ = @this?.Value;
-                    bool? xzzzzzzd_ = context.Operators.Not((bool?)(xzzzzzzc_ is null));
+                    string szzzo_ = @this?.Value;
+                    bool? szzzp_ = context.Operators.Not((bool?)(szzzo_ is null));
 
-                    return xzzzzzzd_;
+                    return szzzp_;
                 };
-                IEnumerable<Code> wzzzzzzu_ = context.Operators.Where<Code>(wzzzzzzs_, wzzzzzzt_);
-                string wzzzzzzv_(Code @this)
+                IEnumerable<Code> szzzg_ = context.Operators.Where<Code>(szzze_, szzzf_);
+                string szzzh_(Code @this)
                 {
-                    string xzzzzzze_ = @this?.Value;
+                    string szzzq_ = @this?.Value;
 
-                    return xzzzzzze_;
+                    return szzzq_;
                 };
-                IEnumerable<string> wzzzzzzw_ = context.Operators.Select<Code, string>(wzzzzzzu_, wzzzzzzv_);
-                string[] wzzzzzzx_ = [
+                IEnumerable<string> szzzi_ = context.Operators.Select<Code, string>(szzzg_, szzzh_);
+                string[] szzzj_ = [
                     "laboratory",
                 ];
-                bool? wzzzzzzy_ = context.Operators.Equivalent<string>(wzzzzzzw_, wzzzzzzx_ as IEnumerable<string>);
+                bool? szzzk_ = context.Operators.Equivalent<string>(szzzi_, szzzj_ as IEnumerable<string>);
 
-                return wzzzzzzy_;
+                return szzzk_;
             };
-            IEnumerable<CodeableConcept> wzzzzzzd_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzzzzb_, wzzzzzzc_);
-            bool? wzzzzzze_ = context.Operators.Exists<CodeableConcept>(wzzzzzzd_);
-            bool? wzzzzzzf_ = context.Operators.And(wzzzzzza_, wzzzzzze_);
-            DataType wzzzzzzg_ = FecalOccult?.Value;
-            bool? wzzzzzzh_ = context.Operators.Not((bool?)(wzzzzzzg_ is null));
-            bool? wzzzzzzi_ = context.Operators.And(wzzzzzzf_, wzzzzzzh_);
-            DataType wzzzzzzj_ = FecalOccult?.Effective;
-            CqlDateTime wzzzzzzk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, wzzzzzzj_);
-            CqlInterval<CqlDateTime> wzzzzzzl_ = this.Measurement_Period(context);
-            bool? wzzzzzzm_ = context.Operators.In<CqlDateTime>(wzzzzzzk_, wzzzzzzl_, "day");
-            bool? wzzzzzzn_ = context.Operators.And(wzzzzzzi_, wzzzzzzm_);
+            IEnumerable<CodeableConcept> rzzzp_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)rzzzn_, rzzzo_);
+            bool? rzzzq_ = context.Operators.Exists<CodeableConcept>(rzzzp_);
+            bool? rzzzr_ = context.Operators.And(rzzzm_, rzzzq_);
+            DataType rzzzs_ = FecalOccult?.Value;
+            bool? rzzzt_ = context.Operators.Not((bool?)(rzzzs_ is null));
+            bool? rzzzu_ = context.Operators.And(rzzzr_, rzzzt_);
+            DataType rzzzv_ = FecalOccult?.Effective;
+            CqlDateTime rzzzw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, rzzzv_);
+            CqlInterval<CqlDateTime> rzzzx_ = this.Measurement_Period(context);
+            bool? rzzzy_ = context.Operators.In<CqlDateTime>(rzzzw_, rzzzx_, "day");
+            bool? rzzzz_ = context.Operators.And(rzzzu_, rzzzy_);
 
-            return wzzzzzzn_;
+            return rzzzz_;
         };
-        IEnumerable<Observation> vzzzzzzw_ = context.Operators.Where<Observation>(vzzzzzzu_, vzzzzzzv_);
+        IEnumerable<Observation> rzzzi_ = context.Operators.Where<Observation>(rzzzg_, rzzzh_);
 
-        return vzzzzzzw_;
+        return rzzzi_;
     }
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet xzzzzzzf_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> xzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, xzzzzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? xzzzzzzh_(Observation FecalOccult)
+        CqlValueSet szzzr_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation> szzzs_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, szzzr_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? szzzt_(Observation FecalOccult)
         {
-            List<CodeableConcept> xzzzzzzj_ = FecalOccult?.Category;
-            bool? xzzzzzzk_(CodeableConcept FecalOccultCategory)
+            List<CodeableConcept> szzzv_ = FecalOccult?.Category;
+            bool? szzzw_(CodeableConcept FecalOccultCategory)
             {
-                List<Coding> xzzzzzzv_ = FecalOccultCategory?.Coding;
-                bool? xzzzzzzw_(Coding @this)
+                List<Coding> tzzzh_ = FecalOccultCategory?.Coding;
+                bool? tzzzi_(Coding @this)
                 {
-                    Code yzzzzzzh_ = @this?.CodeElement;
-                    bool? yzzzzzzi_ = context.Operators.Not((bool?)(yzzzzzzh_ is null));
+                    Code tzzzt_ = @this?.CodeElement;
+                    bool? tzzzu_ = context.Operators.Not((bool?)(tzzzt_ is null));
 
-                    return yzzzzzzi_;
+                    return tzzzu_;
                 };
-                IEnumerable<Coding> xzzzzzzx_ = context.Operators.Where<Coding>((IEnumerable<Coding>)xzzzzzzv_, xzzzzzzw_);
-                Code xzzzzzzy_(Coding @this)
+                IEnumerable<Coding> tzzzj_ = context.Operators.Where<Coding>((IEnumerable<Coding>)tzzzh_, tzzzi_);
+                Code tzzzk_(Coding @this)
                 {
-                    Code yzzzzzzj_ = @this?.CodeElement;
+                    Code tzzzv_ = @this?.CodeElement;
 
-                    return yzzzzzzj_;
+                    return tzzzv_;
                 };
-                IEnumerable<Code> xzzzzzzz_ = context.Operators.Select<Coding, Code>(xzzzzzzx_, xzzzzzzy_);
-                bool? yzzzzzza_(Code @this)
+                IEnumerable<Code> tzzzl_ = context.Operators.Select<Coding, Code>(tzzzj_, tzzzk_);
+                bool? tzzzm_(Code @this)
                 {
-                    string yzzzzzzk_ = @this?.Value;
-                    bool? yzzzzzzl_ = context.Operators.Not((bool?)(yzzzzzzk_ is null));
+                    string tzzzw_ = @this?.Value;
+                    bool? tzzzx_ = context.Operators.Not((bool?)(tzzzw_ is null));
 
-                    return yzzzzzzl_;
+                    return tzzzx_;
                 };
-                IEnumerable<Code> yzzzzzzb_ = context.Operators.Where<Code>(xzzzzzzz_, yzzzzzza_);
-                string yzzzzzzc_(Code @this)
+                IEnumerable<Code> tzzzn_ = context.Operators.Where<Code>(tzzzl_, tzzzm_);
+                string tzzzo_(Code @this)
                 {
-                    string yzzzzzzm_ = @this?.Value;
+                    string tzzzy_ = @this?.Value;
 
-                    return yzzzzzzm_;
+                    return tzzzy_;
                 };
-                IEnumerable<string> yzzzzzzd_ = context.Operators.Select<Code, string>(yzzzzzzb_, yzzzzzzc_);
-                string[] yzzzzzze_ = [
+                IEnumerable<string> tzzzp_ = context.Operators.Select<Code, string>(tzzzn_, tzzzo_);
+                string[] tzzzq_ = [
                     "laboratory",
                 ];
-                bool? yzzzzzzf_ = context.Operators.Equivalent<string>(yzzzzzzd_, yzzzzzze_ as IEnumerable<string>);
-                bool? yzzzzzzg_ = context.Operators.Not(yzzzzzzf_);
+                bool? tzzzr_ = context.Operators.Equivalent<string>(tzzzp_, tzzzq_ as IEnumerable<string>);
+                bool? tzzzs_ = context.Operators.Not(tzzzr_);
 
-                return yzzzzzzg_;
+                return tzzzs_;
             };
-            IEnumerable<CodeableConcept> xzzzzzzl_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzzzzj_, xzzzzzzk_);
-            bool? xzzzzzzm_ = context.Operators.Exists<CodeableConcept>(xzzzzzzl_);
-            DataType xzzzzzzn_ = FecalOccult?.Value;
-            bool? xzzzzzzo_ = context.Operators.Not((bool?)(xzzzzzzn_ is null));
-            bool? xzzzzzzp_ = context.Operators.And(xzzzzzzm_, xzzzzzzo_);
-            DataType xzzzzzzq_ = FecalOccult?.Effective;
-            CqlDateTime xzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, xzzzzzzq_);
-            CqlInterval<CqlDateTime> xzzzzzzs_ = this.Measurement_Period(context);
-            bool? xzzzzzzt_ = context.Operators.In<CqlDateTime>(xzzzzzzr_, xzzzzzzs_, "day");
-            bool? xzzzzzzu_ = context.Operators.And(xzzzzzzp_, xzzzzzzt_);
+            IEnumerable<CodeableConcept> szzzx_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)szzzv_, szzzw_);
+            bool? szzzy_ = context.Operators.Exists<CodeableConcept>(szzzx_);
+            DataType szzzz_ = FecalOccult?.Value;
+            bool? tzzza_ = context.Operators.Not((bool?)(szzzz_ is null));
+            bool? tzzzb_ = context.Operators.And(szzzy_, tzzza_);
+            DataType tzzzc_ = FecalOccult?.Effective;
+            CqlDateTime tzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, tzzzc_);
+            CqlInterval<CqlDateTime> tzzze_ = this.Measurement_Period(context);
+            bool? tzzzf_ = context.Operators.In<CqlDateTime>(tzzzd_, tzzze_, "day");
+            bool? tzzzg_ = context.Operators.And(tzzzb_, tzzzf_);
 
-            return xzzzzzzu_;
+            return tzzzg_;
         };
-        IEnumerable<Observation> xzzzzzzi_ = context.Operators.Where<Observation>(xzzzzzzg_, xzzzzzzh_);
+        IEnumerable<Observation> szzzu_ = context.Operators.Where<Observation>(szzzs_, szzzt_);
 
-        return xzzzzzzi_;
+        return szzzu_;
     }
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet yzzzzzzn_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> yzzzzzzo_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, yzzzzzzn_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? yzzzzzzp_(Observation FecalOccult)
+        CqlValueSet tzzzz_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation> uzzza_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, tzzzz_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? uzzzb_(Observation FecalOccult)
         {
-            Code<ObservationStatus> yzzzzzzr_ = FecalOccult?.StatusElement;
-            string yzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzr_);
-            string[] yzzzzzzt_ = [
+            Code<ObservationStatus> uzzzd_ = FecalOccult?.StatusElement;
+            string uzzze_ = FHIRHelpers_4_0_001.Instance.ToString(context, uzzzd_);
+            string[] uzzzf_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? yzzzzzzu_ = context.Operators.In<string>(yzzzzzzs_, yzzzzzzt_ as IEnumerable<string>);
-            bool? yzzzzzzv_ = context.Operators.Not(yzzzzzzu_);
-            DataType yzzzzzzw_ = FecalOccult?.Value;
-            bool? yzzzzzzx_ = context.Operators.Not((bool?)(yzzzzzzw_ is null));
-            bool? yzzzzzzy_ = context.Operators.And(yzzzzzzv_, yzzzzzzx_);
-            DataType yzzzzzzz_ = FecalOccult?.Effective;
-            CqlDateTime zzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, yzzzzzzz_);
-            CqlInterval<CqlDateTime> zzzzzzzb_ = this.Measurement_Period(context);
-            bool? zzzzzzzc_ = context.Operators.In<CqlDateTime>(zzzzzzza_, zzzzzzzb_, "day");
-            bool? zzzzzzzd_ = context.Operators.And(yzzzzzzy_, zzzzzzzc_);
+            bool? uzzzg_ = context.Operators.In<string>(uzzze_, uzzzf_ as IEnumerable<string>);
+            bool? uzzzh_ = context.Operators.Not(uzzzg_);
+            DataType uzzzi_ = FecalOccult?.Value;
+            bool? uzzzj_ = context.Operators.Not((bool?)(uzzzi_ is null));
+            bool? uzzzk_ = context.Operators.And(uzzzh_, uzzzj_);
+            DataType uzzzl_ = FecalOccult?.Effective;
+            CqlDateTime uzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, uzzzl_);
+            CqlInterval<CqlDateTime> uzzzn_ = this.Measurement_Period(context);
+            bool? uzzzo_ = context.Operators.In<CqlDateTime>(uzzzm_, uzzzn_, "day");
+            bool? uzzzp_ = context.Operators.And(uzzzk_, uzzzo_);
 
-            return zzzzzzzd_;
+            return uzzzp_;
         };
-        IEnumerable<Observation> yzzzzzzq_ = context.Operators.Where<Observation>(yzzzzzzo_, yzzzzzzp_);
+        IEnumerable<Observation> uzzzc_ = context.Operators.Where<Observation>(uzzza_, uzzzb_);
 
-        return yzzzzzzq_;
+        return uzzzc_;
     }
 
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status(CqlContext context)
     {
-        CqlValueSet zzzzzzze_ = this.FIT_DNA(context);
-        IEnumerable<Observation> zzzzzzzf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, zzzzzzze_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? zzzzzzzg_(Observation FitDNA)
+        CqlValueSet uzzzq_ = this.FIT_DNA(context);
+        IEnumerable<Observation> uzzzr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, uzzzq_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? uzzzs_(Observation FitDNA)
         {
-            DataType zzzzzzzl_ = FitDNA?.Effective;
-            CqlDateTime zzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, zzzzzzzl_);
-            CqlInterval<CqlDateTime> zzzzzzzn_ = this.Measurement_Period(context);
-            CqlDateTime zzzzzzzo_ = context.Operators.End(zzzzzzzn_);
-            CqlQuantity zzzzzzzp_ = context.Operators.Quantity(4m, "years");
-            CqlDateTime zzzzzzzq_ = context.Operators.Subtract(zzzzzzzo_, zzzzzzzp_);
-            CqlDateTime zzzzzzzs_ = context.Operators.End(zzzzzzzn_);
-            CqlInterval<CqlDateTime> zzzzzzzt_ = context.Operators.Interval(zzzzzzzq_, zzzzzzzs_, true, true);
-            bool? zzzzzzzu_ = context.Operators.In<CqlDateTime>(zzzzzzzm_, zzzzzzzt_, default);
-            CqlDateTime zzzzzzzw_ = context.Operators.End(zzzzzzzn_);
-            bool? zzzzzzzx_ = context.Operators.Not((bool?)(zzzzzzzw_ is null));
-            bool? zzzzzzzy_ = context.Operators.And(zzzzzzzu_, zzzzzzzx_);
+            DataType uzzzx_ = FitDNA?.Effective;
+            CqlDateTime uzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, uzzzx_);
+            CqlInterval<CqlDateTime> uzzzz_ = this.Measurement_Period(context);
+            CqlDateTime vzzza_ = context.Operators.End(uzzzz_);
+            CqlQuantity vzzzb_ = context.Operators.Quantity(4m, "years");
+            CqlDateTime vzzzc_ = context.Operators.Subtract(vzzza_, vzzzb_);
+            CqlDateTime vzzze_ = context.Operators.End(uzzzz_);
+            CqlInterval<CqlDateTime> vzzzf_ = context.Operators.Interval(vzzzc_, vzzze_, true, true);
+            bool? vzzzg_ = context.Operators.In<CqlDateTime>(uzzzy_, vzzzf_, default);
+            CqlDateTime vzzzi_ = context.Operators.End(uzzzz_);
+            bool? vzzzj_ = context.Operators.Not((bool?)(vzzzi_ is null));
+            bool? vzzzk_ = context.Operators.And(vzzzg_, vzzzj_);
 
-            return zzzzzzzy_;
+            return vzzzk_;
         };
-        IEnumerable<Observation> zzzzzzzh_ = context.Operators.Where<Observation>(zzzzzzzf_, zzzzzzzg_);
-        (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? zzzzzzzi_(Observation FitDNA)
+        IEnumerable<Observation> uzzzt_ = context.Operators.Where<Observation>(uzzzr_, uzzzs_);
+        (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? uzzzu_(Observation FitDNA)
         {
-            DataType zzzzzzzz_ = FitDNA?.Effective;
-            CqlDateTime azzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, zzzzzzzz_);
-            DataType azzzzzzzb_ = FitDNA?.Value;
-            IEnumerable<Coding> azzzzzzzc_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(azzzzzzzb_, "coding");
-            bool? azzzzzzzd_(Coding @this)
+            DataType vzzzl_ = FitDNA?.Effective;
+            CqlDateTime vzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, vzzzl_);
+            DataType vzzzn_ = FitDNA?.Value;
+            IEnumerable<Coding> vzzzo_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(vzzzn_, "coding");
+            bool? vzzzp_(Coding @this)
             {
-                FhirString azzzzzzzx_ = @this?.DisplayElement;
-                bool? azzzzzzzy_ = context.Operators.Not((bool?)(azzzzzzzx_ is null));
+                FhirString wzzzj_ = @this?.DisplayElement;
+                bool? wzzzk_ = context.Operators.Not((bool?)(wzzzj_ is null));
 
-                return azzzzzzzy_;
+                return wzzzk_;
             };
-            IEnumerable<Coding> azzzzzzze_ = context.Operators.Where<Coding>(azzzzzzzc_, azzzzzzzd_);
-            FhirString azzzzzzzf_(Coding @this)
+            IEnumerable<Coding> vzzzq_ = context.Operators.Where<Coding>(vzzzo_, vzzzp_);
+            FhirString vzzzr_(Coding @this)
             {
-                FhirString azzzzzzzz_ = @this?.DisplayElement;
+                FhirString wzzzl_ = @this?.DisplayElement;
 
-                return azzzzzzzz_;
+                return wzzzl_;
             };
-            IEnumerable<FhirString> azzzzzzzg_ = context.Operators.Select<Coding, FhirString>(azzzzzzze_, azzzzzzzf_);
-            List<CodeableConcept> azzzzzzzh_ = FitDNA?.Category;
-            bool? azzzzzzzi_(CodeableConcept @this)
+            IEnumerable<FhirString> vzzzs_ = context.Operators.Select<Coding, FhirString>(vzzzq_, vzzzr_);
+            List<CodeableConcept> vzzzt_ = FitDNA?.Category;
+            bool? vzzzu_(CodeableConcept @this)
             {
-                List<Coding> bzzzzzzza_ = @this?.Coding;
-                bool? bzzzzzzzb_ = context.Operators.Not((bool?)(bzzzzzzza_ is null));
+                List<Coding> wzzzm_ = @this?.Coding;
+                bool? wzzzn_ = context.Operators.Not((bool?)(wzzzm_ is null));
 
-                return bzzzzzzzb_;
+                return wzzzn_;
             };
-            IEnumerable<CodeableConcept> azzzzzzzj_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)azzzzzzzh_, azzzzzzzi_);
-            List<Coding> azzzzzzzk_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> vzzzv_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)vzzzt_, vzzzu_);
+            List<Coding> vzzzw_(CodeableConcept @this)
             {
-                List<Coding> bzzzzzzzc_ = @this?.Coding;
+                List<Coding> wzzzo_ = @this?.Coding;
 
-                return bzzzzzzzc_;
+                return wzzzo_;
             };
-            IEnumerable<List<Coding>> azzzzzzzl_ = context.Operators.Select<CodeableConcept, List<Coding>>(azzzzzzzj_, azzzzzzzk_);
-            IEnumerable<Coding> azzzzzzzm_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)azzzzzzzl_);
-            bool? azzzzzzzn_(Coding @this)
+            IEnumerable<List<Coding>> vzzzx_ = context.Operators.Select<CodeableConcept, List<Coding>>(vzzzv_, vzzzw_);
+            IEnumerable<Coding> vzzzy_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)vzzzx_);
+            bool? vzzzz_(Coding @this)
             {
-                Code bzzzzzzzd_ = @this?.CodeElement;
-                bool? bzzzzzzze_ = context.Operators.Not((bool?)(bzzzzzzzd_ is null));
+                Code wzzzp_ = @this?.CodeElement;
+                bool? wzzzq_ = context.Operators.Not((bool?)(wzzzp_ is null));
 
-                return bzzzzzzze_;
+                return wzzzq_;
             };
-            IEnumerable<Coding> azzzzzzzo_ = context.Operators.Where<Coding>(azzzzzzzm_, azzzzzzzn_);
-            Code azzzzzzzp_(Coding @this)
+            IEnumerable<Coding> wzzza_ = context.Operators.Where<Coding>(vzzzy_, vzzzz_);
+            Code wzzzb_(Coding @this)
             {
-                Code bzzzzzzzf_ = @this?.CodeElement;
+                Code wzzzr_ = @this?.CodeElement;
 
-                return bzzzzzzzf_;
+                return wzzzr_;
             };
-            IEnumerable<Code> azzzzzzzq_ = context.Operators.Select<Coding, Code>(azzzzzzzo_, azzzzzzzp_);
-            bool? azzzzzzzr_(Code @this)
+            IEnumerable<Code> wzzzc_ = context.Operators.Select<Coding, Code>(wzzza_, wzzzb_);
+            bool? wzzzd_(Code @this)
             {
-                string bzzzzzzzg_ = @this?.Value;
-                bool? bzzzzzzzh_ = context.Operators.Not((bool?)(bzzzzzzzg_ is null));
+                string wzzzs_ = @this?.Value;
+                bool? wzzzt_ = context.Operators.Not((bool?)(wzzzs_ is null));
 
-                return bzzzzzzzh_;
+                return wzzzt_;
             };
-            IEnumerable<Code> azzzzzzzs_ = context.Operators.Where<Code>(azzzzzzzq_, azzzzzzzr_);
-            string azzzzzzzt_(Code @this)
+            IEnumerable<Code> wzzze_ = context.Operators.Where<Code>(wzzzc_, wzzzd_);
+            string wzzzf_(Code @this)
             {
-                string bzzzzzzzi_ = @this?.Value;
+                string wzzzu_ = @this?.Value;
 
-                return bzzzzzzzi_;
+                return wzzzu_;
             };
-            IEnumerable<string> azzzzzzzu_ = context.Operators.Select<Code, string>(azzzzzzzs_, azzzzzzzt_);
-            Code<ObservationStatus> azzzzzzzv_ = FitDNA?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? azzzzzzzw_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, azzzzzzza_, azzzzzzzg_, azzzzzzzu_, azzzzzzzv_);
+            IEnumerable<string> wzzzg_ = context.Operators.Select<Code, string>(wzzze_, wzzzf_);
+            Code<ObservationStatus> wzzzh_ = FitDNA?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? wzzzi_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, vzzzm_, vzzzs_, wzzzg_, wzzzh_);
 
-            return azzzzzzzw_;
+            return wzzzi_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> zzzzzzzj_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(zzzzzzzh_, zzzzzzzi_);
-        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> zzzzzzzk_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(zzzzzzzj_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> uzzzv_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(uzzzt_, uzzzu_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> uzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(uzzzv_);
 
-        return zzzzzzzk_;
+        return uzzzw_;
     }
 
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed(CqlContext context)
     {
-        CqlValueSet bzzzzzzzj_ = this.FIT_DNA(context);
-        IEnumerable<Observation> bzzzzzzzk_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, bzzzzzzzj_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? bzzzzzzzl_(Observation FitDNA)
+        CqlValueSet wzzzv_ = this.FIT_DNA(context);
+        IEnumerable<Observation> wzzzw_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, wzzzv_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? wzzzx_(Observation FitDNA)
         {
-            Code<ObservationStatus> bzzzzzzzn_ = FitDNA?.StatusElement;
-            string bzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzzzzzzn_);
-            string[] bzzzzzzzp_ = [
+            Code<ObservationStatus> wzzzz_ = FitDNA?.StatusElement;
+            string xzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, wzzzz_);
+            string[] xzzzb_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? bzzzzzzzq_ = context.Operators.In<string>(bzzzzzzzo_, bzzzzzzzp_ as IEnumerable<string>);
-            List<CodeableConcept> bzzzzzzzr_ = FitDNA?.Category;
-            bool? bzzzzzzzs_(CodeableConcept FitDNACategory)
+            bool? xzzzc_ = context.Operators.In<string>(xzzza_, xzzzb_ as IEnumerable<string>);
+            List<CodeableConcept> xzzzd_ = FitDNA?.Category;
+            bool? xzzze_(CodeableConcept FitDNACategory)
             {
-                List<Coding> czzzzzzzo_ = FitDNACategory?.Coding;
-                bool? czzzzzzzp_(Coding @this)
+                List<Coding> yzzza_ = FitDNACategory?.Coding;
+                bool? yzzzb_(Coding @this)
                 {
-                    Code czzzzzzzz_ = @this?.CodeElement;
-                    bool? dzzzzzzza_ = context.Operators.Not((bool?)(czzzzzzzz_ is null));
+                    Code yzzzl_ = @this?.CodeElement;
+                    bool? yzzzm_ = context.Operators.Not((bool?)(yzzzl_ is null));
 
-                    return dzzzzzzza_;
+                    return yzzzm_;
                 };
-                IEnumerable<Coding> czzzzzzzq_ = context.Operators.Where<Coding>((IEnumerable<Coding>)czzzzzzzo_, czzzzzzzp_);
-                Code czzzzzzzr_(Coding @this)
+                IEnumerable<Coding> yzzzc_ = context.Operators.Where<Coding>((IEnumerable<Coding>)yzzza_, yzzzb_);
+                Code yzzzd_(Coding @this)
                 {
-                    Code dzzzzzzzb_ = @this?.CodeElement;
+                    Code yzzzn_ = @this?.CodeElement;
 
-                    return dzzzzzzzb_;
+                    return yzzzn_;
                 };
-                IEnumerable<Code> czzzzzzzs_ = context.Operators.Select<Coding, Code>(czzzzzzzq_, czzzzzzzr_);
-                bool? czzzzzzzt_(Code @this)
+                IEnumerable<Code> yzzze_ = context.Operators.Select<Coding, Code>(yzzzc_, yzzzd_);
+                bool? yzzzf_(Code @this)
                 {
-                    string dzzzzzzzc_ = @this?.Value;
-                    bool? dzzzzzzzd_ = context.Operators.Not((bool?)(dzzzzzzzc_ is null));
+                    string yzzzo_ = @this?.Value;
+                    bool? yzzzp_ = context.Operators.Not((bool?)(yzzzo_ is null));
 
-                    return dzzzzzzzd_;
+                    return yzzzp_;
                 };
-                IEnumerable<Code> czzzzzzzu_ = context.Operators.Where<Code>(czzzzzzzs_, czzzzzzzt_);
-                string czzzzzzzv_(Code @this)
+                IEnumerable<Code> yzzzg_ = context.Operators.Where<Code>(yzzze_, yzzzf_);
+                string yzzzh_(Code @this)
                 {
-                    string dzzzzzzze_ = @this?.Value;
+                    string yzzzq_ = @this?.Value;
 
-                    return dzzzzzzze_;
+                    return yzzzq_;
                 };
-                IEnumerable<string> czzzzzzzw_ = context.Operators.Select<Code, string>(czzzzzzzu_, czzzzzzzv_);
-                string[] czzzzzzzx_ = [
+                IEnumerable<string> yzzzi_ = context.Operators.Select<Code, string>(yzzzg_, yzzzh_);
+                string[] yzzzj_ = [
                     "laboratory",
                 ];
-                bool? czzzzzzzy_ = context.Operators.Equivalent<string>(czzzzzzzw_, czzzzzzzx_ as IEnumerable<string>);
+                bool? yzzzk_ = context.Operators.Equivalent<string>(yzzzi_, yzzzj_ as IEnumerable<string>);
 
-                return czzzzzzzy_;
+                return yzzzk_;
             };
-            IEnumerable<CodeableConcept> bzzzzzzzt_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzzzzr_, bzzzzzzzs_);
-            bool? bzzzzzzzu_ = context.Operators.Exists<CodeableConcept>(bzzzzzzzt_);
-            bool? bzzzzzzzv_ = context.Operators.And(bzzzzzzzq_, bzzzzzzzu_);
-            DataType bzzzzzzzw_ = FitDNA?.Value;
-            bool? bzzzzzzzx_ = context.Operators.Not((bool?)(bzzzzzzzw_ is null));
-            bool? bzzzzzzzy_ = context.Operators.And(bzzzzzzzv_, bzzzzzzzx_);
-            DataType bzzzzzzzz_ = FitDNA?.Effective;
-            CqlDateTime czzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, bzzzzzzzz_);
-            CqlInterval<CqlDateTime> czzzzzzzb_ = this.Measurement_Period(context);
-            CqlDateTime czzzzzzzc_ = context.Operators.End(czzzzzzzb_);
-            CqlQuantity czzzzzzzd_ = context.Operators.Quantity(3m, "years");
-            CqlDateTime czzzzzzze_ = context.Operators.Subtract(czzzzzzzc_, czzzzzzzd_);
-            CqlDateTime czzzzzzzg_ = context.Operators.End(czzzzzzzb_);
-            CqlInterval<CqlDateTime> czzzzzzzh_ = context.Operators.Interval(czzzzzzze_, czzzzzzzg_, true, true);
-            bool? czzzzzzzi_ = context.Operators.In<CqlDateTime>(czzzzzzza_, czzzzzzzh_, default);
-            CqlDateTime czzzzzzzk_ = context.Operators.End(czzzzzzzb_);
-            bool? czzzzzzzl_ = context.Operators.Not((bool?)(czzzzzzzk_ is null));
-            bool? czzzzzzzm_ = context.Operators.And(czzzzzzzi_, czzzzzzzl_);
-            bool? czzzzzzzn_ = context.Operators.And(bzzzzzzzy_, czzzzzzzm_);
+            IEnumerable<CodeableConcept> xzzzf_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzd_, xzzze_);
+            bool? xzzzg_ = context.Operators.Exists<CodeableConcept>(xzzzf_);
+            bool? xzzzh_ = context.Operators.And(xzzzc_, xzzzg_);
+            DataType xzzzi_ = FitDNA?.Value;
+            bool? xzzzj_ = context.Operators.Not((bool?)(xzzzi_ is null));
+            bool? xzzzk_ = context.Operators.And(xzzzh_, xzzzj_);
+            DataType xzzzl_ = FitDNA?.Effective;
+            CqlDateTime xzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, xzzzl_);
+            CqlInterval<CqlDateTime> xzzzn_ = this.Measurement_Period(context);
+            CqlDateTime xzzzo_ = context.Operators.End(xzzzn_);
+            CqlQuantity xzzzp_ = context.Operators.Quantity(3m, "years");
+            CqlDateTime xzzzq_ = context.Operators.Subtract(xzzzo_, xzzzp_);
+            CqlDateTime xzzzs_ = context.Operators.End(xzzzn_);
+            CqlInterval<CqlDateTime> xzzzt_ = context.Operators.Interval(xzzzq_, xzzzs_, true, true);
+            bool? xzzzu_ = context.Operators.In<CqlDateTime>(xzzzm_, xzzzt_, default);
+            CqlDateTime xzzzw_ = context.Operators.End(xzzzn_);
+            bool? xzzzx_ = context.Operators.Not((bool?)(xzzzw_ is null));
+            bool? xzzzy_ = context.Operators.And(xzzzu_, xzzzx_);
+            bool? xzzzz_ = context.Operators.And(xzzzk_, xzzzy_);
 
-            return czzzzzzzn_;
+            return xzzzz_;
         };
-        IEnumerable<Observation> bzzzzzzzm_ = context.Operators.Where<Observation>(bzzzzzzzk_, bzzzzzzzl_);
+        IEnumerable<Observation> wzzzy_ = context.Operators.Where<Observation>(wzzzw_, wzzzx_);
 
-        return bzzzzzzzm_;
+        return wzzzy_;
     }
 
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet dzzzzzzzf_ = this.FIT_DNA(context);
-        IEnumerable<Observation> dzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, dzzzzzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? dzzzzzzzh_(Observation FitDNA)
+        CqlValueSet yzzzr_ = this.FIT_DNA(context);
+        IEnumerable<Observation> yzzzs_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, yzzzr_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? yzzzt_(Observation FitDNA)
         {
-            Code<ObservationStatus> dzzzzzzzj_ = FitDNA?.StatusElement;
-            string dzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, dzzzzzzzj_);
-            string[] dzzzzzzzl_ = [
+            Code<ObservationStatus> yzzzv_ = FitDNA?.StatusElement;
+            string yzzzw_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzv_);
+            string[] yzzzx_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? dzzzzzzzm_ = context.Operators.In<string>(dzzzzzzzk_, dzzzzzzzl_ as IEnumerable<string>);
-            List<CodeableConcept> dzzzzzzzn_ = FitDNA?.Category;
-            bool? dzzzzzzzo_(CodeableConcept FitDNACategory)
+            bool? yzzzy_ = context.Operators.In<string>(yzzzw_, yzzzx_ as IEnumerable<string>);
+            List<CodeableConcept> yzzzz_ = FitDNA?.Category;
+            bool? zzzza_(CodeableConcept FitDNACategory)
             {
-                List<Coding> ezzzzzzzk_ = FitDNACategory?.Coding;
-                bool? ezzzzzzzl_(Coding @this)
+                List<Coding> zzzzw_ = FitDNACategory?.Coding;
+                bool? zzzzx_(Coding @this)
                 {
-                    Code ezzzzzzzv_ = @this?.CodeElement;
-                    bool? ezzzzzzzw_ = context.Operators.Not((bool?)(ezzzzzzzv_ is null));
+                    Code azzzzh_ = @this?.CodeElement;
+                    bool? azzzzi_ = context.Operators.Not((bool?)(azzzzh_ is null));
 
-                    return ezzzzzzzw_;
+                    return azzzzi_;
                 };
-                IEnumerable<Coding> ezzzzzzzm_ = context.Operators.Where<Coding>((IEnumerable<Coding>)ezzzzzzzk_, ezzzzzzzl_);
-                Code ezzzzzzzn_(Coding @this)
+                IEnumerable<Coding> zzzzy_ = context.Operators.Where<Coding>((IEnumerable<Coding>)zzzzw_, zzzzx_);
+                Code zzzzz_(Coding @this)
                 {
-                    Code ezzzzzzzx_ = @this?.CodeElement;
+                    Code azzzzj_ = @this?.CodeElement;
 
-                    return ezzzzzzzx_;
+                    return azzzzj_;
                 };
-                IEnumerable<Code> ezzzzzzzo_ = context.Operators.Select<Coding, Code>(ezzzzzzzm_, ezzzzzzzn_);
-                bool? ezzzzzzzp_(Code @this)
+                IEnumerable<Code> azzzza_ = context.Operators.Select<Coding, Code>(zzzzy_, zzzzz_);
+                bool? azzzzb_(Code @this)
                 {
-                    string ezzzzzzzy_ = @this?.Value;
-                    bool? ezzzzzzzz_ = context.Operators.Not((bool?)(ezzzzzzzy_ is null));
+                    string azzzzk_ = @this?.Value;
+                    bool? azzzzl_ = context.Operators.Not((bool?)(azzzzk_ is null));
 
-                    return ezzzzzzzz_;
+                    return azzzzl_;
                 };
-                IEnumerable<Code> ezzzzzzzq_ = context.Operators.Where<Code>(ezzzzzzzo_, ezzzzzzzp_);
-                string ezzzzzzzr_(Code @this)
+                IEnumerable<Code> azzzzc_ = context.Operators.Where<Code>(azzzza_, azzzzb_);
+                string azzzzd_(Code @this)
                 {
-                    string fzzzzzzza_ = @this?.Value;
+                    string azzzzm_ = @this?.Value;
 
-                    return fzzzzzzza_;
+                    return azzzzm_;
                 };
-                IEnumerable<string> ezzzzzzzs_ = context.Operators.Select<Code, string>(ezzzzzzzq_, ezzzzzzzr_);
-                string[] ezzzzzzzt_ = [
+                IEnumerable<string> azzzze_ = context.Operators.Select<Code, string>(azzzzc_, azzzzd_);
+                string[] azzzzf_ = [
                     "laboratory",
                 ];
-                bool? ezzzzzzzu_ = context.Operators.Equivalent<string>(ezzzzzzzs_, ezzzzzzzt_ as IEnumerable<string>);
+                bool? azzzzg_ = context.Operators.Equivalent<string>(azzzze_, azzzzf_ as IEnumerable<string>);
 
-                return ezzzzzzzu_;
+                return azzzzg_;
             };
-            IEnumerable<CodeableConcept> dzzzzzzzp_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzzzzzn_, dzzzzzzzo_);
-            bool? dzzzzzzzq_ = context.Operators.Exists<CodeableConcept>(dzzzzzzzp_);
-            bool? dzzzzzzzr_ = context.Operators.And(dzzzzzzzm_, dzzzzzzzq_);
-            DataType dzzzzzzzs_ = FitDNA?.Value;
-            bool? dzzzzzzzt_ = context.Operators.Not((bool?)(dzzzzzzzs_ is null));
-            bool? dzzzzzzzu_ = context.Operators.And(dzzzzzzzr_, dzzzzzzzt_);
-            DataType dzzzzzzzv_ = FitDNA?.Effective;
-            CqlDateTime dzzzzzzzw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, dzzzzzzzv_);
-            CqlInterval<CqlDateTime> dzzzzzzzx_ = this.Measurement_Period(context);
-            CqlDateTime dzzzzzzzy_ = context.Operators.End(dzzzzzzzx_);
-            CqlQuantity dzzzzzzzz_ = context.Operators.Quantity(3m, "years");
-            CqlDateTime ezzzzzzza_ = context.Operators.Subtract(dzzzzzzzy_, dzzzzzzzz_);
-            CqlDateTime ezzzzzzzc_ = context.Operators.End(dzzzzzzzx_);
-            CqlInterval<CqlDateTime> ezzzzzzzd_ = context.Operators.Interval(ezzzzzzza_, ezzzzzzzc_, true, true);
-            bool? ezzzzzzze_ = context.Operators.In<CqlDateTime>(dzzzzzzzw_, ezzzzzzzd_, "day");
-            CqlDateTime ezzzzzzzg_ = context.Operators.End(dzzzzzzzx_);
-            bool? ezzzzzzzh_ = context.Operators.Not((bool?)(ezzzzzzzg_ is null));
-            bool? ezzzzzzzi_ = context.Operators.And(ezzzzzzze_, ezzzzzzzh_);
-            bool? ezzzzzzzj_ = context.Operators.And(dzzzzzzzu_, ezzzzzzzi_);
+            IEnumerable<CodeableConcept> zzzzb_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)yzzzz_, zzzza_);
+            bool? zzzzc_ = context.Operators.Exists<CodeableConcept>(zzzzb_);
+            bool? zzzzd_ = context.Operators.And(yzzzy_, zzzzc_);
+            DataType zzzze_ = FitDNA?.Value;
+            bool? zzzzf_ = context.Operators.Not((bool?)(zzzze_ is null));
+            bool? zzzzg_ = context.Operators.And(zzzzd_, zzzzf_);
+            DataType zzzzh_ = FitDNA?.Effective;
+            CqlDateTime zzzzi_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, zzzzh_);
+            CqlInterval<CqlDateTime> zzzzj_ = this.Measurement_Period(context);
+            CqlDateTime zzzzk_ = context.Operators.End(zzzzj_);
+            CqlQuantity zzzzl_ = context.Operators.Quantity(3m, "years");
+            CqlDateTime zzzzm_ = context.Operators.Subtract(zzzzk_, zzzzl_);
+            CqlDateTime zzzzo_ = context.Operators.End(zzzzj_);
+            CqlInterval<CqlDateTime> zzzzp_ = context.Operators.Interval(zzzzm_, zzzzo_, true, true);
+            bool? zzzzq_ = context.Operators.In<CqlDateTime>(zzzzi_, zzzzp_, "day");
+            CqlDateTime zzzzs_ = context.Operators.End(zzzzj_);
+            bool? zzzzt_ = context.Operators.Not((bool?)(zzzzs_ is null));
+            bool? zzzzu_ = context.Operators.And(zzzzq_, zzzzt_);
+            bool? zzzzv_ = context.Operators.And(zzzzg_, zzzzu_);
 
-            return ezzzzzzzj_;
+            return zzzzv_;
         };
-        IEnumerable<Observation> dzzzzzzzi_ = context.Operators.Where<Observation>(dzzzzzzzg_, dzzzzzzzh_);
+        IEnumerable<Observation> yzzzu_ = context.Operators.Where<Observation>(yzzzs_, yzzzt_);
 
-        return dzzzzzzzi_;
+        return yzzzu_;
     }
 
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet fzzzzzzzb_ = this.FIT_DNA(context);
-        IEnumerable<Observation> fzzzzzzzc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fzzzzzzzb_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? fzzzzzzzd_(Observation FitDNA)
+        CqlValueSet azzzzn_ = this.FIT_DNA(context);
+        IEnumerable<Observation> azzzzo_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, azzzzn_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? azzzzp_(Observation FitDNA)
         {
-            List<CodeableConcept> fzzzzzzzf_ = FitDNA?.Category;
-            bool? fzzzzzzzg_(CodeableConcept FitDNACategory)
+            List<CodeableConcept> azzzzr_ = FitDNA?.Category;
+            bool? azzzzs_(CodeableConcept FitDNACategory)
             {
-                List<Coding> gzzzzzzzb_ = FitDNACategory?.Coding;
-                bool? gzzzzzzzc_(Coding @this)
+                List<Coding> bzzzzn_ = FitDNACategory?.Coding;
+                bool? bzzzzo_(Coding @this)
                 {
-                    Code gzzzzzzzn_ = @this?.CodeElement;
-                    bool? gzzzzzzzo_ = context.Operators.Not((bool?)(gzzzzzzzn_ is null));
+                    Code bzzzzz_ = @this?.CodeElement;
+                    bool? czzzza_ = context.Operators.Not((bool?)(bzzzzz_ is null));
 
-                    return gzzzzzzzo_;
+                    return czzzza_;
                 };
-                IEnumerable<Coding> gzzzzzzzd_ = context.Operators.Where<Coding>((IEnumerable<Coding>)gzzzzzzzb_, gzzzzzzzc_);
-                Code gzzzzzzze_(Coding @this)
+                IEnumerable<Coding> bzzzzp_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bzzzzn_, bzzzzo_);
+                Code bzzzzq_(Coding @this)
                 {
-                    Code gzzzzzzzp_ = @this?.CodeElement;
+                    Code czzzzb_ = @this?.CodeElement;
 
-                    return gzzzzzzzp_;
+                    return czzzzb_;
                 };
-                IEnumerable<Code> gzzzzzzzf_ = context.Operators.Select<Coding, Code>(gzzzzzzzd_, gzzzzzzze_);
-                bool? gzzzzzzzg_(Code @this)
+                IEnumerable<Code> bzzzzr_ = context.Operators.Select<Coding, Code>(bzzzzp_, bzzzzq_);
+                bool? bzzzzs_(Code @this)
                 {
-                    string gzzzzzzzq_ = @this?.Value;
-                    bool? gzzzzzzzr_ = context.Operators.Not((bool?)(gzzzzzzzq_ is null));
+                    string czzzzc_ = @this?.Value;
+                    bool? czzzzd_ = context.Operators.Not((bool?)(czzzzc_ is null));
 
-                    return gzzzzzzzr_;
+                    return czzzzd_;
                 };
-                IEnumerable<Code> gzzzzzzzh_ = context.Operators.Where<Code>(gzzzzzzzf_, gzzzzzzzg_);
-                string gzzzzzzzi_(Code @this)
+                IEnumerable<Code> bzzzzt_ = context.Operators.Where<Code>(bzzzzr_, bzzzzs_);
+                string bzzzzu_(Code @this)
                 {
-                    string gzzzzzzzs_ = @this?.Value;
+                    string czzzze_ = @this?.Value;
 
-                    return gzzzzzzzs_;
+                    return czzzze_;
                 };
-                IEnumerable<string> gzzzzzzzj_ = context.Operators.Select<Code, string>(gzzzzzzzh_, gzzzzzzzi_);
-                string[] gzzzzzzzk_ = [
+                IEnumerable<string> bzzzzv_ = context.Operators.Select<Code, string>(bzzzzt_, bzzzzu_);
+                string[] bzzzzw_ = [
                     "laboratory",
                 ];
-                bool? gzzzzzzzl_ = context.Operators.Equivalent<string>(gzzzzzzzj_, gzzzzzzzk_ as IEnumerable<string>);
-                bool? gzzzzzzzm_ = context.Operators.Not(gzzzzzzzl_);
+                bool? bzzzzx_ = context.Operators.Equivalent<string>(bzzzzv_, bzzzzw_ as IEnumerable<string>);
+                bool? bzzzzy_ = context.Operators.Not(bzzzzx_);
 
-                return gzzzzzzzm_;
+                return bzzzzy_;
             };
-            IEnumerable<CodeableConcept> fzzzzzzzh_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzzzzf_, fzzzzzzzg_);
-            bool? fzzzzzzzi_ = context.Operators.Exists<CodeableConcept>(fzzzzzzzh_);
-            DataType fzzzzzzzj_ = FitDNA?.Value;
-            bool? fzzzzzzzk_ = context.Operators.Not((bool?)(fzzzzzzzj_ is null));
-            bool? fzzzzzzzl_ = context.Operators.And(fzzzzzzzi_, fzzzzzzzk_);
-            DataType fzzzzzzzm_ = FitDNA?.Effective;
-            CqlDateTime fzzzzzzzn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, fzzzzzzzm_);
-            CqlInterval<CqlDateTime> fzzzzzzzo_ = this.Measurement_Period(context);
-            CqlDateTime fzzzzzzzp_ = context.Operators.End(fzzzzzzzo_);
-            CqlQuantity fzzzzzzzq_ = context.Operators.Quantity(3m, "years");
-            CqlDateTime fzzzzzzzr_ = context.Operators.Subtract(fzzzzzzzp_, fzzzzzzzq_);
-            CqlDateTime fzzzzzzzt_ = context.Operators.End(fzzzzzzzo_);
-            CqlInterval<CqlDateTime> fzzzzzzzu_ = context.Operators.Interval(fzzzzzzzr_, fzzzzzzzt_, true, true);
-            bool? fzzzzzzzv_ = context.Operators.In<CqlDateTime>(fzzzzzzzn_, fzzzzzzzu_, "day");
-            CqlDateTime fzzzzzzzx_ = context.Operators.End(fzzzzzzzo_);
-            bool? fzzzzzzzy_ = context.Operators.Not((bool?)(fzzzzzzzx_ is null));
-            bool? fzzzzzzzz_ = context.Operators.And(fzzzzzzzv_, fzzzzzzzy_);
-            bool? gzzzzzzza_ = context.Operators.And(fzzzzzzzl_, fzzzzzzzz_);
+            IEnumerable<CodeableConcept> azzzzt_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)azzzzr_, azzzzs_);
+            bool? azzzzu_ = context.Operators.Exists<CodeableConcept>(azzzzt_);
+            DataType azzzzv_ = FitDNA?.Value;
+            bool? azzzzw_ = context.Operators.Not((bool?)(azzzzv_ is null));
+            bool? azzzzx_ = context.Operators.And(azzzzu_, azzzzw_);
+            DataType azzzzy_ = FitDNA?.Effective;
+            CqlDateTime azzzzz_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, azzzzy_);
+            CqlInterval<CqlDateTime> bzzzza_ = this.Measurement_Period(context);
+            CqlDateTime bzzzzb_ = context.Operators.End(bzzzza_);
+            CqlQuantity bzzzzc_ = context.Operators.Quantity(3m, "years");
+            CqlDateTime bzzzzd_ = context.Operators.Subtract(bzzzzb_, bzzzzc_);
+            CqlDateTime bzzzzf_ = context.Operators.End(bzzzza_);
+            CqlInterval<CqlDateTime> bzzzzg_ = context.Operators.Interval(bzzzzd_, bzzzzf_, true, true);
+            bool? bzzzzh_ = context.Operators.In<CqlDateTime>(azzzzz_, bzzzzg_, "day");
+            CqlDateTime bzzzzj_ = context.Operators.End(bzzzza_);
+            bool? bzzzzk_ = context.Operators.Not((bool?)(bzzzzj_ is null));
+            bool? bzzzzl_ = context.Operators.And(bzzzzh_, bzzzzk_);
+            bool? bzzzzm_ = context.Operators.And(azzzzx_, bzzzzl_);
 
-            return gzzzzzzza_;
+            return bzzzzm_;
         };
-        IEnumerable<Observation> fzzzzzzze_ = context.Operators.Where<Observation>(fzzzzzzzc_, fzzzzzzzd_);
+        IEnumerable<Observation> azzzzq_ = context.Operators.Where<Observation>(azzzzo_, azzzzp_);
 
-        return fzzzzzzze_;
+        return azzzzq_;
     }
 
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context)
     {
-        CqlValueSet gzzzzzzzt_ = this.FIT_DNA(context);
-        IEnumerable<Observation> gzzzzzzzu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, gzzzzzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? gzzzzzzzv_(Observation FitDNA)
+        CqlValueSet czzzzf_ = this.FIT_DNA(context);
+        IEnumerable<Observation> czzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, czzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? czzzzh_(Observation FitDNA)
         {
-            Code<ObservationStatus> gzzzzzzzx_ = FitDNA?.StatusElement;
-            string gzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToString(context, gzzzzzzzx_);
-            string[] gzzzzzzzz_ = [
+            Code<ObservationStatus> czzzzj_ = FitDNA?.StatusElement;
+            string czzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzj_);
+            string[] czzzzl_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? hzzzzzzza_ = context.Operators.In<string>(gzzzzzzzy_, gzzzzzzzz_ as IEnumerable<string>);
-            bool? hzzzzzzzb_ = context.Operators.Not(hzzzzzzza_);
-            DataType hzzzzzzzc_ = FitDNA?.Value;
-            bool? hzzzzzzzd_ = context.Operators.Not((bool?)(hzzzzzzzc_ is null));
-            bool? hzzzzzzze_ = context.Operators.And(hzzzzzzzb_, hzzzzzzzd_);
-            DataType hzzzzzzzf_ = FitDNA?.Effective;
-            CqlDateTime hzzzzzzzg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, hzzzzzzzf_);
-            CqlInterval<CqlDateTime> hzzzzzzzh_ = this.Measurement_Period(context);
-            CqlDateTime hzzzzzzzi_ = context.Operators.End(hzzzzzzzh_);
-            CqlQuantity hzzzzzzzj_ = context.Operators.Quantity(3m, "years");
-            CqlDateTime hzzzzzzzk_ = context.Operators.Subtract(hzzzzzzzi_, hzzzzzzzj_);
-            CqlDateTime hzzzzzzzm_ = context.Operators.End(hzzzzzzzh_);
-            CqlInterval<CqlDateTime> hzzzzzzzn_ = context.Operators.Interval(hzzzzzzzk_, hzzzzzzzm_, true, true);
-            bool? hzzzzzzzo_ = context.Operators.In<CqlDateTime>(hzzzzzzzg_, hzzzzzzzn_, "day");
-            CqlDateTime hzzzzzzzq_ = context.Operators.End(hzzzzzzzh_);
-            bool? hzzzzzzzr_ = context.Operators.Not((bool?)(hzzzzzzzq_ is null));
-            bool? hzzzzzzzs_ = context.Operators.And(hzzzzzzzo_, hzzzzzzzr_);
-            bool? hzzzzzzzt_ = context.Operators.And(hzzzzzzze_, hzzzzzzzs_);
+            bool? czzzzm_ = context.Operators.In<string>(czzzzk_, czzzzl_ as IEnumerable<string>);
+            bool? czzzzn_ = context.Operators.Not(czzzzm_);
+            DataType czzzzo_ = FitDNA?.Value;
+            bool? czzzzp_ = context.Operators.Not((bool?)(czzzzo_ is null));
+            bool? czzzzq_ = context.Operators.And(czzzzn_, czzzzp_);
+            DataType czzzzr_ = FitDNA?.Effective;
+            CqlDateTime czzzzs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, czzzzr_);
+            CqlInterval<CqlDateTime> czzzzt_ = this.Measurement_Period(context);
+            CqlDateTime czzzzu_ = context.Operators.End(czzzzt_);
+            CqlQuantity czzzzv_ = context.Operators.Quantity(3m, "years");
+            CqlDateTime czzzzw_ = context.Operators.Subtract(czzzzu_, czzzzv_);
+            CqlDateTime czzzzy_ = context.Operators.End(czzzzt_);
+            CqlInterval<CqlDateTime> czzzzz_ = context.Operators.Interval(czzzzw_, czzzzy_, true, true);
+            bool? dzzzza_ = context.Operators.In<CqlDateTime>(czzzzs_, czzzzz_, "day");
+            CqlDateTime dzzzzc_ = context.Operators.End(czzzzt_);
+            bool? dzzzzd_ = context.Operators.Not((bool?)(dzzzzc_ is null));
+            bool? dzzzze_ = context.Operators.And(dzzzza_, dzzzzd_);
+            bool? dzzzzf_ = context.Operators.And(czzzzq_, dzzzze_);
 
-            return hzzzzzzzt_;
+            return dzzzzf_;
         };
-        IEnumerable<Observation> gzzzzzzzw_ = context.Operators.Where<Observation>(gzzzzzzzu_, gzzzzzzzv_);
+        IEnumerable<Observation> czzzzi_ = context.Operators.Where<Observation>(czzzzg_, czzzzh_);
 
-        return gzzzzzzzw_;
+        return czzzzi_;
     }
 
 
     [CqlExpressionDefinition("CT Colonography Display Date")]
     public IEnumerable<CqlDateTime> CT_Colonography_Display_Date(CqlContext context)
     {
-        CqlValueSet hzzzzzzzu_ = this.CT_Colonography(context);
-        IEnumerable<Observation> hzzzzzzzv_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, hzzzzzzzu_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? hzzzzzzzw_(Observation Colonography)
+        CqlValueSet dzzzzg_ = this.CT_Colonography(context);
+        IEnumerable<Observation> dzzzzh_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, dzzzzg_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? dzzzzi_(Observation Colonography)
         {
-            DataType izzzzzzzb_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> izzzzzzzc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, izzzzzzzb_);
-            CqlDateTime izzzzzzzd_ = context.Operators.End(izzzzzzzc_);
-            CqlInterval<CqlDateTime> izzzzzzze_ = this.Measurement_Period(context);
-            CqlDateTime izzzzzzzf_ = context.Operators.End(izzzzzzze_);
-            CqlQuantity izzzzzzzg_ = context.Operators.Quantity(6m, "years");
-            CqlDateTime izzzzzzzh_ = context.Operators.Subtract(izzzzzzzf_, izzzzzzzg_);
-            CqlDateTime izzzzzzzj_ = context.Operators.End(izzzzzzze_);
-            CqlInterval<CqlDateTime> izzzzzzzk_ = context.Operators.Interval(izzzzzzzh_, izzzzzzzj_, true, true);
-            bool? izzzzzzzl_ = context.Operators.In<CqlDateTime>(izzzzzzzd_, izzzzzzzk_, default);
-            CqlDateTime izzzzzzzn_ = context.Operators.End(izzzzzzze_);
-            bool? izzzzzzzo_ = context.Operators.Not((bool?)(izzzzzzzn_ is null));
-            bool? izzzzzzzp_ = context.Operators.And(izzzzzzzl_, izzzzzzzo_);
+            DataType dzzzzn_ = Colonography?.Effective;
+            CqlInterval<CqlDateTime> dzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, dzzzzn_);
+            CqlDateTime dzzzzp_ = context.Operators.End(dzzzzo_);
+            CqlInterval<CqlDateTime> dzzzzq_ = this.Measurement_Period(context);
+            CqlDateTime dzzzzr_ = context.Operators.End(dzzzzq_);
+            CqlQuantity dzzzzs_ = context.Operators.Quantity(6m, "years");
+            CqlDateTime dzzzzt_ = context.Operators.Subtract(dzzzzr_, dzzzzs_);
+            CqlDateTime dzzzzv_ = context.Operators.End(dzzzzq_);
+            CqlInterval<CqlDateTime> dzzzzw_ = context.Operators.Interval(dzzzzt_, dzzzzv_, true, true);
+            bool? dzzzzx_ = context.Operators.In<CqlDateTime>(dzzzzp_, dzzzzw_, default);
+            CqlDateTime dzzzzz_ = context.Operators.End(dzzzzq_);
+            bool? ezzzza_ = context.Operators.Not((bool?)(dzzzzz_ is null));
+            bool? ezzzzb_ = context.Operators.And(dzzzzx_, ezzzza_);
 
-            return izzzzzzzp_;
+            return ezzzzb_;
         };
-        IEnumerable<Observation> hzzzzzzzx_ = context.Operators.Where<Observation>(hzzzzzzzv_, hzzzzzzzw_);
-        CqlDateTime hzzzzzzzy_(Observation Colonography)
+        IEnumerable<Observation> dzzzzj_ = context.Operators.Where<Observation>(dzzzzh_, dzzzzi_);
+        CqlDateTime dzzzzk_(Observation Colonography)
         {
-            DataType izzzzzzzq_ = Colonography?.Effective;
-            CqlDateTime izzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, izzzzzzzq_);
+            DataType ezzzzc_ = Colonography?.Effective;
+            CqlDateTime ezzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ezzzzc_);
 
-            return izzzzzzzr_;
+            return ezzzzd_;
         };
-        IEnumerable<CqlDateTime> hzzzzzzzz_ = context.Operators.Select<Observation, CqlDateTime>(hzzzzzzzx_, hzzzzzzzy_);
-        IEnumerable<CqlDateTime> izzzzzzza_ = context.Operators.Distinct<CqlDateTime>(hzzzzzzzz_);
+        IEnumerable<CqlDateTime> dzzzzl_ = context.Operators.Select<Observation, CqlDateTime>(dzzzzj_, dzzzzk_);
+        IEnumerable<CqlDateTime> dzzzzm_ = context.Operators.Distinct<CqlDateTime>(dzzzzl_);
 
-        return izzzzzzza_;
+        return dzzzzm_;
     }
 
 
     [CqlExpressionDefinition("CT Colonography Performed")]
     public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
     {
-        CqlValueSet izzzzzzzs_ = this.CT_Colonography(context);
-        IEnumerable<Observation> izzzzzzzt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, izzzzzzzs_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? izzzzzzzu_(Observation Colonography)
+        CqlValueSet ezzzze_ = this.CT_Colonography(context);
+        IEnumerable<Observation> ezzzzf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ezzzze_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? ezzzzg_(Observation Colonography)
         {
-            Code<ObservationStatus> izzzzzzzw_ = Colonography?.StatusElement;
-            string izzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, izzzzzzzw_);
-            string[] izzzzzzzy_ = [
+            Code<ObservationStatus> ezzzzi_ = Colonography?.StatusElement;
+            string ezzzzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ezzzzi_);
+            string[] ezzzzk_ = [
                 "final",
                 "amended",
                 "corrected",
                 "appended",
             ];
-            bool? izzzzzzzz_ = context.Operators.In<string>(izzzzzzzx_, izzzzzzzy_ as IEnumerable<string>);
-            DataType jzzzzzzza_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> jzzzzzzzb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzzzza_);
-            CqlDateTime jzzzzzzzc_ = context.Operators.End(jzzzzzzzb_);
-            CqlInterval<CqlDateTime> jzzzzzzzd_ = this.Measurement_Period(context);
-            CqlDateTime jzzzzzzze_ = context.Operators.End(jzzzzzzzd_);
-            CqlQuantity jzzzzzzzf_ = context.Operators.Quantity(5m, "years");
-            CqlDateTime jzzzzzzzg_ = context.Operators.Subtract(jzzzzzzze_, jzzzzzzzf_);
-            CqlDateTime jzzzzzzzi_ = context.Operators.End(jzzzzzzzd_);
-            CqlInterval<CqlDateTime> jzzzzzzzj_ = context.Operators.Interval(jzzzzzzzg_, jzzzzzzzi_, true, true);
-            bool? jzzzzzzzk_ = context.Operators.In<CqlDateTime>(jzzzzzzzc_, jzzzzzzzj_, default);
-            CqlDateTime jzzzzzzzm_ = context.Operators.End(jzzzzzzzd_);
-            bool? jzzzzzzzn_ = context.Operators.Not((bool?)(jzzzzzzzm_ is null));
-            bool? jzzzzzzzo_ = context.Operators.And(jzzzzzzzk_, jzzzzzzzn_);
-            bool? jzzzzzzzp_ = context.Operators.And(izzzzzzzz_, jzzzzzzzo_);
+            bool? ezzzzl_ = context.Operators.In<string>(ezzzzj_, ezzzzk_ as IEnumerable<string>);
+            DataType ezzzzm_ = Colonography?.Effective;
+            CqlInterval<CqlDateTime> ezzzzn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ezzzzm_);
+            CqlDateTime ezzzzo_ = context.Operators.End(ezzzzn_);
+            CqlInterval<CqlDateTime> ezzzzp_ = this.Measurement_Period(context);
+            CqlDateTime ezzzzq_ = context.Operators.End(ezzzzp_);
+            CqlQuantity ezzzzr_ = context.Operators.Quantity(5m, "years");
+            CqlDateTime ezzzzs_ = context.Operators.Subtract(ezzzzq_, ezzzzr_);
+            CqlDateTime ezzzzu_ = context.Operators.End(ezzzzp_);
+            CqlInterval<CqlDateTime> ezzzzv_ = context.Operators.Interval(ezzzzs_, ezzzzu_, true, true);
+            bool? ezzzzw_ = context.Operators.In<CqlDateTime>(ezzzzo_, ezzzzv_, default);
+            CqlDateTime ezzzzy_ = context.Operators.End(ezzzzp_);
+            bool? ezzzzz_ = context.Operators.Not((bool?)(ezzzzy_ is null));
+            bool? fzzzza_ = context.Operators.And(ezzzzw_, ezzzzz_);
+            bool? fzzzzb_ = context.Operators.And(ezzzzl_, fzzzza_);
 
-            return jzzzzzzzp_;
+            return fzzzzb_;
         };
-        IEnumerable<Observation> izzzzzzzv_ = context.Operators.Where<Observation>(izzzzzzzt_, izzzzzzzu_);
+        IEnumerable<Observation> ezzzzh_ = context.Operators.Where<Observation>(ezzzzf_, ezzzzg_);
 
-        return izzzzzzzv_;
+        return ezzzzh_;
     }
 
 
     [CqlExpressionDefinition("CT Colonography Performed without appropriate status")]
     public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status(CqlContext context)
     {
-        CqlValueSet jzzzzzzzq_ = this.CT_Colonography(context);
-        IEnumerable<Observation> jzzzzzzzr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, jzzzzzzzq_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? jzzzzzzzs_(Observation Colonography)
+        CqlValueSet fzzzzc_ = this.CT_Colonography(context);
+        IEnumerable<Observation> fzzzzd_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fzzzzc_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? fzzzze_(Observation Colonography)
         {
-            Code<ObservationStatus> jzzzzzzzu_ = Colonography?.StatusElement;
-            string jzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, jzzzzzzzu_);
-            string[] jzzzzzzzw_ = [
+            Code<ObservationStatus> fzzzzg_ = Colonography?.StatusElement;
+            string fzzzzh_ = FHIRHelpers_4_0_001.Instance.ToString(context, fzzzzg_);
+            string[] fzzzzi_ = [
                 "final",
                 "amended",
                 "corrected",
                 "appended",
             ];
-            bool? jzzzzzzzx_ = context.Operators.In<string>(jzzzzzzzv_, jzzzzzzzw_ as IEnumerable<string>);
-            bool? jzzzzzzzy_ = context.Operators.Not(jzzzzzzzx_);
-            DataType jzzzzzzzz_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> kzzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzzzzz_);
-            CqlDateTime kzzzzzzzb_ = context.Operators.End(kzzzzzzza_);
-            CqlInterval<CqlDateTime> kzzzzzzzc_ = this.Measurement_Period(context);
-            CqlDateTime kzzzzzzzd_ = context.Operators.End(kzzzzzzzc_);
-            CqlQuantity kzzzzzzze_ = context.Operators.Quantity(5m, "years");
-            CqlDateTime kzzzzzzzf_ = context.Operators.Subtract(kzzzzzzzd_, kzzzzzzze_);
-            CqlDateTime kzzzzzzzh_ = context.Operators.End(kzzzzzzzc_);
-            CqlInterval<CqlDateTime> kzzzzzzzi_ = context.Operators.Interval(kzzzzzzzf_, kzzzzzzzh_, true, true);
-            bool? kzzzzzzzj_ = context.Operators.In<CqlDateTime>(kzzzzzzzb_, kzzzzzzzi_, default);
-            CqlDateTime kzzzzzzzl_ = context.Operators.End(kzzzzzzzc_);
-            bool? kzzzzzzzm_ = context.Operators.Not((bool?)(kzzzzzzzl_ is null));
-            bool? kzzzzzzzn_ = context.Operators.And(kzzzzzzzj_, kzzzzzzzm_);
-            bool? kzzzzzzzo_ = context.Operators.And(jzzzzzzzy_, kzzzzzzzn_);
+            bool? fzzzzj_ = context.Operators.In<string>(fzzzzh_, fzzzzi_ as IEnumerable<string>);
+            bool? fzzzzk_ = context.Operators.Not(fzzzzj_);
+            DataType fzzzzl_ = Colonography?.Effective;
+            CqlInterval<CqlDateTime> fzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, fzzzzl_);
+            CqlDateTime fzzzzn_ = context.Operators.End(fzzzzm_);
+            CqlInterval<CqlDateTime> fzzzzo_ = this.Measurement_Period(context);
+            CqlDateTime fzzzzp_ = context.Operators.End(fzzzzo_);
+            CqlQuantity fzzzzq_ = context.Operators.Quantity(5m, "years");
+            CqlDateTime fzzzzr_ = context.Operators.Subtract(fzzzzp_, fzzzzq_);
+            CqlDateTime fzzzzt_ = context.Operators.End(fzzzzo_);
+            CqlInterval<CqlDateTime> fzzzzu_ = context.Operators.Interval(fzzzzr_, fzzzzt_, true, true);
+            bool? fzzzzv_ = context.Operators.In<CqlDateTime>(fzzzzn_, fzzzzu_, default);
+            CqlDateTime fzzzzx_ = context.Operators.End(fzzzzo_);
+            bool? fzzzzy_ = context.Operators.Not((bool?)(fzzzzx_ is null));
+            bool? fzzzzz_ = context.Operators.And(fzzzzv_, fzzzzy_);
+            bool? gzzzza_ = context.Operators.And(fzzzzk_, fzzzzz_);
 
-            return kzzzzzzzo_;
+            return gzzzza_;
         };
-        IEnumerable<Observation> jzzzzzzzt_ = context.Operators.Where<Observation>(jzzzzzzzr_, jzzzzzzzs_);
+        IEnumerable<Observation> fzzzzf_ = context.Operators.Where<Observation>(fzzzzd_, fzzzze_);
 
-        return jzzzzzzzt_;
+        return fzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Display Date")]
     public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date(CqlContext context)
     {
-        CqlValueSet kzzzzzzzp_ = this.Flexible_Sigmoidoscopy(context);
-        IEnumerable<Procedure> kzzzzzzzq_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, kzzzzzzzp_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? kzzzzzzzr_(Procedure FlexibleSigmoidoscopy)
+        CqlValueSet gzzzzb_ = this.Flexible_Sigmoidoscopy(context);
+        IEnumerable<Procedure> gzzzzc_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, gzzzzb_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? gzzzzd_(Procedure FlexibleSigmoidoscopy)
         {
-            DataType kzzzzzzzw_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> kzzzzzzzx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzw_);
-            CqlDateTime kzzzzzzzy_ = context.Operators.End(kzzzzzzzx_);
-            CqlInterval<CqlDateTime> kzzzzzzzz_ = this.Measurement_Period(context);
-            CqlDateTime lzzzzzzza_ = context.Operators.End(kzzzzzzzz_);
-            CqlQuantity lzzzzzzzb_ = context.Operators.Quantity(6m, "years");
-            CqlDateTime lzzzzzzzc_ = context.Operators.Subtract(lzzzzzzza_, lzzzzzzzb_);
-            CqlDateTime lzzzzzzze_ = context.Operators.End(kzzzzzzzz_);
-            CqlInterval<CqlDateTime> lzzzzzzzf_ = context.Operators.Interval(lzzzzzzzc_, lzzzzzzze_, true, true);
-            bool? lzzzzzzzg_ = context.Operators.In<CqlDateTime>(kzzzzzzzy_, lzzzzzzzf_, default);
-            CqlDateTime lzzzzzzzi_ = context.Operators.End(kzzzzzzzz_);
-            bool? lzzzzzzzj_ = context.Operators.Not((bool?)(lzzzzzzzi_ is null));
-            bool? lzzzzzzzk_ = context.Operators.And(lzzzzzzzg_, lzzzzzzzj_);
+            DataType gzzzzi_ = FlexibleSigmoidoscopy?.Performed;
+            CqlInterval<CqlDateTime> gzzzzj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, gzzzzi_);
+            CqlDateTime gzzzzk_ = context.Operators.End(gzzzzj_);
+            CqlInterval<CqlDateTime> gzzzzl_ = this.Measurement_Period(context);
+            CqlDateTime gzzzzm_ = context.Operators.End(gzzzzl_);
+            CqlQuantity gzzzzn_ = context.Operators.Quantity(6m, "years");
+            CqlDateTime gzzzzo_ = context.Operators.Subtract(gzzzzm_, gzzzzn_);
+            CqlDateTime gzzzzq_ = context.Operators.End(gzzzzl_);
+            CqlInterval<CqlDateTime> gzzzzr_ = context.Operators.Interval(gzzzzo_, gzzzzq_, true, true);
+            bool? gzzzzs_ = context.Operators.In<CqlDateTime>(gzzzzk_, gzzzzr_, default);
+            CqlDateTime gzzzzu_ = context.Operators.End(gzzzzl_);
+            bool? gzzzzv_ = context.Operators.Not((bool?)(gzzzzu_ is null));
+            bool? gzzzzw_ = context.Operators.And(gzzzzs_, gzzzzv_);
 
-            return lzzzzzzzk_;
+            return gzzzzw_;
         };
-        IEnumerable<Procedure> kzzzzzzzs_ = context.Operators.Where<Procedure>(kzzzzzzzq_, kzzzzzzzr_);
-        CqlDateTime kzzzzzzzt_(Procedure FlexibleSigmoidoscopy)
+        IEnumerable<Procedure> gzzzze_ = context.Operators.Where<Procedure>(gzzzzc_, gzzzzd_);
+        CqlDateTime gzzzzf_(Procedure FlexibleSigmoidoscopy)
         {
-            DataType lzzzzzzzl_ = FlexibleSigmoidoscopy?.Performed;
-            CqlDateTime lzzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, lzzzzzzzl_);
+            DataType gzzzzx_ = FlexibleSigmoidoscopy?.Performed;
+            CqlDateTime gzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, gzzzzx_);
 
-            return lzzzzzzzm_;
+            return gzzzzy_;
         };
-        IEnumerable<CqlDateTime> kzzzzzzzu_ = context.Operators.Select<Procedure, CqlDateTime>(kzzzzzzzs_, kzzzzzzzt_);
-        IEnumerable<CqlDateTime> kzzzzzzzv_ = context.Operators.Distinct<CqlDateTime>(kzzzzzzzu_);
+        IEnumerable<CqlDateTime> gzzzzg_ = context.Operators.Select<Procedure, CqlDateTime>(gzzzze_, gzzzzf_);
+        IEnumerable<CqlDateTime> gzzzzh_ = context.Operators.Distinct<CqlDateTime>(gzzzzg_);
 
-        return kzzzzzzzv_;
+        return gzzzzh_;
     }
 
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
     {
-        CqlValueSet lzzzzzzzn_ = this.Flexible_Sigmoidoscopy(context);
-        IEnumerable<Procedure> lzzzzzzzo_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, lzzzzzzzn_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? lzzzzzzzp_(Procedure FlexibleSigmoidoscopy)
+        CqlValueSet gzzzzz_ = this.Flexible_Sigmoidoscopy(context);
+        IEnumerable<Procedure> hzzzza_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, gzzzzz_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? hzzzzb_(Procedure FlexibleSigmoidoscopy)
         {
-            Code<EventStatus> lzzzzzzzr_ = FlexibleSigmoidoscopy?.StatusElement;
-            string lzzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToString(context, lzzzzzzzr_);
-            bool? lzzzzzzzt_ = context.Operators.Equal(lzzzzzzzs_, "completed");
-            DataType lzzzzzzzu_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> lzzzzzzzv_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, lzzzzzzzu_);
-            CqlDateTime lzzzzzzzw_ = context.Operators.End(lzzzzzzzv_);
-            CqlInterval<CqlDateTime> lzzzzzzzx_ = this.Measurement_Period(context);
-            CqlDateTime lzzzzzzzy_ = context.Operators.End(lzzzzzzzx_);
-            CqlQuantity lzzzzzzzz_ = context.Operators.Quantity(5m, "years");
-            CqlDateTime mzzzzzzza_ = context.Operators.Subtract(lzzzzzzzy_, lzzzzzzzz_);
-            CqlDateTime mzzzzzzzc_ = context.Operators.End(lzzzzzzzx_);
-            CqlInterval<CqlDateTime> mzzzzzzzd_ = context.Operators.Interval(mzzzzzzza_, mzzzzzzzc_, true, true);
-            bool? mzzzzzzze_ = context.Operators.In<CqlDateTime>(lzzzzzzzw_, mzzzzzzzd_, default);
-            CqlDateTime mzzzzzzzg_ = context.Operators.End(lzzzzzzzx_);
-            bool? mzzzzzzzh_ = context.Operators.Not((bool?)(mzzzzzzzg_ is null));
-            bool? mzzzzzzzi_ = context.Operators.And(mzzzzzzze_, mzzzzzzzh_);
-            bool? mzzzzzzzj_ = context.Operators.And(lzzzzzzzt_, mzzzzzzzi_);
+            Code<EventStatus> hzzzzd_ = FlexibleSigmoidoscopy?.StatusElement;
+            string hzzzze_ = FHIRHelpers_4_0_001.Instance.ToString(context, hzzzzd_);
+            bool? hzzzzf_ = context.Operators.Equal(hzzzze_, "completed");
+            DataType hzzzzg_ = FlexibleSigmoidoscopy?.Performed;
+            CqlInterval<CqlDateTime> hzzzzh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzg_);
+            CqlDateTime hzzzzi_ = context.Operators.End(hzzzzh_);
+            CqlInterval<CqlDateTime> hzzzzj_ = this.Measurement_Period(context);
+            CqlDateTime hzzzzk_ = context.Operators.End(hzzzzj_);
+            CqlQuantity hzzzzl_ = context.Operators.Quantity(5m, "years");
+            CqlDateTime hzzzzm_ = context.Operators.Subtract(hzzzzk_, hzzzzl_);
+            CqlDateTime hzzzzo_ = context.Operators.End(hzzzzj_);
+            CqlInterval<CqlDateTime> hzzzzp_ = context.Operators.Interval(hzzzzm_, hzzzzo_, true, true);
+            bool? hzzzzq_ = context.Operators.In<CqlDateTime>(hzzzzi_, hzzzzp_, default);
+            CqlDateTime hzzzzs_ = context.Operators.End(hzzzzj_);
+            bool? hzzzzt_ = context.Operators.Not((bool?)(hzzzzs_ is null));
+            bool? hzzzzu_ = context.Operators.And(hzzzzq_, hzzzzt_);
+            bool? hzzzzv_ = context.Operators.And(hzzzzf_, hzzzzu_);
 
-            return mzzzzzzzj_;
+            return hzzzzv_;
         };
-        IEnumerable<Procedure> lzzzzzzzq_ = context.Operators.Where<Procedure>(lzzzzzzzo_, lzzzzzzzp_);
+        IEnumerable<Procedure> hzzzzc_ = context.Operators.Where<Procedure>(hzzzza_, hzzzzb_);
 
-        return lzzzzzzzq_;
+        return hzzzzc_;
     }
 
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status(CqlContext context)
     {
-        CqlValueSet mzzzzzzzk_ = this.Flexible_Sigmoidoscopy(context);
-        IEnumerable<Procedure> mzzzzzzzl_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, mzzzzzzzk_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? mzzzzzzzm_(Procedure FlexibleSigmoidoscopy)
+        CqlValueSet hzzzzw_ = this.Flexible_Sigmoidoscopy(context);
+        IEnumerable<Procedure> hzzzzx_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, hzzzzw_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? hzzzzy_(Procedure FlexibleSigmoidoscopy)
         {
-            Code<EventStatus> mzzzzzzzo_ = FlexibleSigmoidoscopy?.StatusElement;
-            string mzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToString(context, mzzzzzzzo_);
-            bool? mzzzzzzzq_ = context.Operators.Equal(mzzzzzzzp_, "completed");
-            bool? mzzzzzzzr_ = context.Operators.Not(mzzzzzzzq_);
-            DataType mzzzzzzzs_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> mzzzzzzzt_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, mzzzzzzzs_);
-            CqlDateTime mzzzzzzzu_ = context.Operators.End(mzzzzzzzt_);
-            CqlInterval<CqlDateTime> mzzzzzzzv_ = this.Measurement_Period(context);
-            CqlDateTime mzzzzzzzw_ = context.Operators.End(mzzzzzzzv_);
-            CqlQuantity mzzzzzzzx_ = context.Operators.Quantity(5m, "years");
-            CqlDateTime mzzzzzzzy_ = context.Operators.Subtract(mzzzzzzzw_, mzzzzzzzx_);
-            CqlDateTime nzzzzzzza_ = context.Operators.End(mzzzzzzzv_);
-            CqlInterval<CqlDateTime> nzzzzzzzb_ = context.Operators.Interval(mzzzzzzzy_, nzzzzzzza_, true, true);
-            bool? nzzzzzzzc_ = context.Operators.In<CqlDateTime>(mzzzzzzzu_, nzzzzzzzb_, default);
-            CqlDateTime nzzzzzzze_ = context.Operators.End(mzzzzzzzv_);
-            bool? nzzzzzzzf_ = context.Operators.Not((bool?)(nzzzzzzze_ is null));
-            bool? nzzzzzzzg_ = context.Operators.And(nzzzzzzzc_, nzzzzzzzf_);
-            bool? nzzzzzzzh_ = context.Operators.And(mzzzzzzzr_, nzzzzzzzg_);
+            Code<EventStatus> izzzza_ = FlexibleSigmoidoscopy?.StatusElement;
+            string izzzzb_ = FHIRHelpers_4_0_001.Instance.ToString(context, izzzza_);
+            bool? izzzzc_ = context.Operators.Equal(izzzzb_, "completed");
+            bool? izzzzd_ = context.Operators.Not(izzzzc_);
+            DataType izzzze_ = FlexibleSigmoidoscopy?.Performed;
+            CqlInterval<CqlDateTime> izzzzf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, izzzze_);
+            CqlDateTime izzzzg_ = context.Operators.End(izzzzf_);
+            CqlInterval<CqlDateTime> izzzzh_ = this.Measurement_Period(context);
+            CqlDateTime izzzzi_ = context.Operators.End(izzzzh_);
+            CqlQuantity izzzzj_ = context.Operators.Quantity(5m, "years");
+            CqlDateTime izzzzk_ = context.Operators.Subtract(izzzzi_, izzzzj_);
+            CqlDateTime izzzzm_ = context.Operators.End(izzzzh_);
+            CqlInterval<CqlDateTime> izzzzn_ = context.Operators.Interval(izzzzk_, izzzzm_, true, true);
+            bool? izzzzo_ = context.Operators.In<CqlDateTime>(izzzzg_, izzzzn_, default);
+            CqlDateTime izzzzq_ = context.Operators.End(izzzzh_);
+            bool? izzzzr_ = context.Operators.Not((bool?)(izzzzq_ is null));
+            bool? izzzzs_ = context.Operators.And(izzzzo_, izzzzr_);
+            bool? izzzzt_ = context.Operators.And(izzzzd_, izzzzs_);
 
-            return nzzzzzzzh_;
+            return izzzzt_;
         };
-        IEnumerable<Procedure> mzzzzzzzn_ = context.Operators.Where<Procedure>(mzzzzzzzl_, mzzzzzzzm_);
+        IEnumerable<Procedure> hzzzzz_ = context.Operators.Where<Procedure>(hzzzzx_, hzzzzy_);
 
-        return mzzzzzzzn_;
+        return hzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Colonoscopy Display Date")]
     public IEnumerable<CqlDateTime> Colonoscopy_Display_Date(CqlContext context)
     {
-        CqlValueSet nzzzzzzzi_ = this.Colonoscopy(context);
-        IEnumerable<Procedure> nzzzzzzzj_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, nzzzzzzzi_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? nzzzzzzzk_(Procedure Colonoscopy)
+        CqlValueSet izzzzu_ = this.Colonoscopy(context);
+        IEnumerable<Procedure> izzzzv_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, izzzzu_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? izzzzw_(Procedure Colonoscopy)
         {
-            DataType nzzzzzzzp_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> nzzzzzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, nzzzzzzzp_);
-            CqlDateTime nzzzzzzzr_ = context.Operators.End(nzzzzzzzq_);
-            CqlInterval<CqlDateTime> nzzzzzzzs_ = this.Measurement_Period(context);
-            CqlDateTime nzzzzzzzt_ = context.Operators.End(nzzzzzzzs_);
-            CqlQuantity nzzzzzzzu_ = context.Operators.Quantity(11m, "years");
-            CqlDateTime nzzzzzzzv_ = context.Operators.Subtract(nzzzzzzzt_, nzzzzzzzu_);
-            CqlDateTime nzzzzzzzx_ = context.Operators.End(nzzzzzzzs_);
-            CqlInterval<CqlDateTime> nzzzzzzzy_ = context.Operators.Interval(nzzzzzzzv_, nzzzzzzzx_, true, true);
-            bool? nzzzzzzzz_ = context.Operators.In<CqlDateTime>(nzzzzzzzr_, nzzzzzzzy_, default);
-            CqlDateTime ozzzzzzzb_ = context.Operators.End(nzzzzzzzs_);
-            bool? ozzzzzzzc_ = context.Operators.Not((bool?)(ozzzzzzzb_ is null));
-            bool? ozzzzzzzd_ = context.Operators.And(nzzzzzzzz_, ozzzzzzzc_);
+            DataType jzzzzb_ = Colonoscopy?.Performed;
+            CqlInterval<CqlDateTime> jzzzzc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzb_);
+            CqlDateTime jzzzzd_ = context.Operators.End(jzzzzc_);
+            CqlInterval<CqlDateTime> jzzzze_ = this.Measurement_Period(context);
+            CqlDateTime jzzzzf_ = context.Operators.End(jzzzze_);
+            CqlQuantity jzzzzg_ = context.Operators.Quantity(11m, "years");
+            CqlDateTime jzzzzh_ = context.Operators.Subtract(jzzzzf_, jzzzzg_);
+            CqlDateTime jzzzzj_ = context.Operators.End(jzzzze_);
+            CqlInterval<CqlDateTime> jzzzzk_ = context.Operators.Interval(jzzzzh_, jzzzzj_, true, true);
+            bool? jzzzzl_ = context.Operators.In<CqlDateTime>(jzzzzd_, jzzzzk_, default);
+            CqlDateTime jzzzzn_ = context.Operators.End(jzzzze_);
+            bool? jzzzzo_ = context.Operators.Not((bool?)(jzzzzn_ is null));
+            bool? jzzzzp_ = context.Operators.And(jzzzzl_, jzzzzo_);
 
-            return ozzzzzzzd_;
+            return jzzzzp_;
         };
-        IEnumerable<Procedure> nzzzzzzzl_ = context.Operators.Where<Procedure>(nzzzzzzzj_, nzzzzzzzk_);
-        CqlDateTime nzzzzzzzm_(Procedure Colonoscopy)
+        IEnumerable<Procedure> izzzzx_ = context.Operators.Where<Procedure>(izzzzv_, izzzzw_);
+        CqlDateTime izzzzy_(Procedure Colonoscopy)
         {
-            DataType ozzzzzzze_ = Colonoscopy?.Performed;
-            CqlDateTime ozzzzzzzf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ozzzzzzze_);
+            DataType jzzzzq_ = Colonoscopy?.Performed;
+            CqlDateTime jzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, jzzzzq_);
 
-            return ozzzzzzzf_;
+            return jzzzzr_;
         };
-        IEnumerable<CqlDateTime> nzzzzzzzn_ = context.Operators.Select<Procedure, CqlDateTime>(nzzzzzzzl_, nzzzzzzzm_);
-        IEnumerable<CqlDateTime> nzzzzzzzo_ = context.Operators.Distinct<CqlDateTime>(nzzzzzzzn_);
+        IEnumerable<CqlDateTime> izzzzz_ = context.Operators.Select<Procedure, CqlDateTime>(izzzzx_, izzzzy_);
+        IEnumerable<CqlDateTime> jzzzza_ = context.Operators.Distinct<CqlDateTime>(izzzzz_);
 
-        return nzzzzzzzo_;
+        return jzzzza_;
     }
 
 
     [CqlExpressionDefinition("Colonoscopy Performed")]
     public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
     {
-        CqlValueSet ozzzzzzzg_ = this.Colonoscopy(context);
-        IEnumerable<Procedure> ozzzzzzzh_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ozzzzzzzg_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? ozzzzzzzi_(Procedure Colonoscopy)
+        CqlValueSet jzzzzs_ = this.Colonoscopy(context);
+        IEnumerable<Procedure> jzzzzt_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, jzzzzs_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? jzzzzu_(Procedure Colonoscopy)
         {
-            Code<EventStatus> ozzzzzzzk_ = Colonoscopy?.StatusElement;
-            string ozzzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToString(context, ozzzzzzzk_);
-            bool? ozzzzzzzm_ = context.Operators.Equal(ozzzzzzzl_, "completed");
-            DataType ozzzzzzzn_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> ozzzzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ozzzzzzzn_);
-            CqlDateTime ozzzzzzzp_ = context.Operators.End(ozzzzzzzo_);
-            CqlInterval<CqlDateTime> ozzzzzzzq_ = this.Measurement_Period(context);
-            CqlDateTime ozzzzzzzr_ = context.Operators.End(ozzzzzzzq_);
-            CqlQuantity ozzzzzzzs_ = context.Operators.Quantity(10m, "years");
-            CqlDateTime ozzzzzzzt_ = context.Operators.Subtract(ozzzzzzzr_, ozzzzzzzs_);
-            CqlDateTime ozzzzzzzv_ = context.Operators.End(ozzzzzzzq_);
-            CqlInterval<CqlDateTime> ozzzzzzzw_ = context.Operators.Interval(ozzzzzzzt_, ozzzzzzzv_, true, true);
-            bool? ozzzzzzzx_ = context.Operators.In<CqlDateTime>(ozzzzzzzp_, ozzzzzzzw_, default);
-            CqlDateTime ozzzzzzzz_ = context.Operators.End(ozzzzzzzq_);
-            bool? pzzzzzzza_ = context.Operators.Not((bool?)(ozzzzzzzz_ is null));
-            bool? pzzzzzzzb_ = context.Operators.And(ozzzzzzzx_, pzzzzzzza_);
-            bool? pzzzzzzzc_ = context.Operators.And(ozzzzzzzm_, pzzzzzzzb_);
+            Code<EventStatus> jzzzzw_ = Colonoscopy?.StatusElement;
+            string jzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, jzzzzw_);
+            bool? jzzzzy_ = context.Operators.Equal(jzzzzx_, "completed");
+            DataType jzzzzz_ = Colonoscopy?.Performed;
+            CqlInterval<CqlDateTime> kzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzz_);
+            CqlDateTime kzzzzb_ = context.Operators.End(kzzzza_);
+            CqlInterval<CqlDateTime> kzzzzc_ = this.Measurement_Period(context);
+            CqlDateTime kzzzzd_ = context.Operators.End(kzzzzc_);
+            CqlQuantity kzzzze_ = context.Operators.Quantity(10m, "years");
+            CqlDateTime kzzzzf_ = context.Operators.Subtract(kzzzzd_, kzzzze_);
+            CqlDateTime kzzzzh_ = context.Operators.End(kzzzzc_);
+            CqlInterval<CqlDateTime> kzzzzi_ = context.Operators.Interval(kzzzzf_, kzzzzh_, true, true);
+            bool? kzzzzj_ = context.Operators.In<CqlDateTime>(kzzzzb_, kzzzzi_, default);
+            CqlDateTime kzzzzl_ = context.Operators.End(kzzzzc_);
+            bool? kzzzzm_ = context.Operators.Not((bool?)(kzzzzl_ is null));
+            bool? kzzzzn_ = context.Operators.And(kzzzzj_, kzzzzm_);
+            bool? kzzzzo_ = context.Operators.And(jzzzzy_, kzzzzn_);
 
-            return pzzzzzzzc_;
+            return kzzzzo_;
         };
-        IEnumerable<Procedure> ozzzzzzzj_ = context.Operators.Where<Procedure>(ozzzzzzzh_, ozzzzzzzi_);
+        IEnumerable<Procedure> jzzzzv_ = context.Operators.Where<Procedure>(jzzzzt_, jzzzzu_);
 
-        return ozzzzzzzj_;
+        return jzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Colonoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status(CqlContext context)
     {
-        CqlValueSet pzzzzzzzd_ = this.Colonoscopy(context);
-        IEnumerable<Procedure> pzzzzzzze_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, pzzzzzzzd_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? pzzzzzzzf_(Procedure Colonoscopy)
+        CqlValueSet kzzzzp_ = this.Colonoscopy(context);
+        IEnumerable<Procedure> kzzzzq_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, kzzzzp_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? kzzzzr_(Procedure Colonoscopy)
         {
-            Code<EventStatus> pzzzzzzzh_ = Colonoscopy?.StatusElement;
-            string pzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzh_);
-            bool? pzzzzzzzj_ = context.Operators.Equal(pzzzzzzzi_, "completed");
-            bool? pzzzzzzzk_ = context.Operators.Not(pzzzzzzzj_);
-            DataType pzzzzzzzl_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> pzzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, pzzzzzzzl_);
-            CqlDateTime pzzzzzzzn_ = context.Operators.End(pzzzzzzzm_);
-            CqlInterval<CqlDateTime> pzzzzzzzo_ = this.Measurement_Period(context);
-            CqlDateTime pzzzzzzzp_ = context.Operators.End(pzzzzzzzo_);
-            CqlQuantity pzzzzzzzq_ = context.Operators.Quantity(10m, "years");
-            CqlDateTime pzzzzzzzr_ = context.Operators.Subtract(pzzzzzzzp_, pzzzzzzzq_);
-            CqlDateTime pzzzzzzzt_ = context.Operators.End(pzzzzzzzo_);
-            CqlInterval<CqlDateTime> pzzzzzzzu_ = context.Operators.Interval(pzzzzzzzr_, pzzzzzzzt_, true, true);
-            bool? pzzzzzzzv_ = context.Operators.In<CqlDateTime>(pzzzzzzzn_, pzzzzzzzu_, default);
-            CqlDateTime pzzzzzzzx_ = context.Operators.End(pzzzzzzzo_);
-            bool? pzzzzzzzy_ = context.Operators.Not((bool?)(pzzzzzzzx_ is null));
-            bool? pzzzzzzzz_ = context.Operators.And(pzzzzzzzv_, pzzzzzzzy_);
-            bool? qzzzzzzza_ = context.Operators.And(pzzzzzzzk_, pzzzzzzzz_);
+            Code<EventStatus> kzzzzt_ = Colonoscopy?.StatusElement;
+            string kzzzzu_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzt_);
+            bool? kzzzzv_ = context.Operators.Equal(kzzzzu_, "completed");
+            bool? kzzzzw_ = context.Operators.Not(kzzzzv_);
+            DataType kzzzzx_ = Colonoscopy?.Performed;
+            CqlInterval<CqlDateTime> kzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzx_);
+            CqlDateTime kzzzzz_ = context.Operators.End(kzzzzy_);
+            CqlInterval<CqlDateTime> lzzzza_ = this.Measurement_Period(context);
+            CqlDateTime lzzzzb_ = context.Operators.End(lzzzza_);
+            CqlQuantity lzzzzc_ = context.Operators.Quantity(10m, "years");
+            CqlDateTime lzzzzd_ = context.Operators.Subtract(lzzzzb_, lzzzzc_);
+            CqlDateTime lzzzzf_ = context.Operators.End(lzzzza_);
+            CqlInterval<CqlDateTime> lzzzzg_ = context.Operators.Interval(lzzzzd_, lzzzzf_, true, true);
+            bool? lzzzzh_ = context.Operators.In<CqlDateTime>(kzzzzz_, lzzzzg_, default);
+            CqlDateTime lzzzzj_ = context.Operators.End(lzzzza_);
+            bool? lzzzzk_ = context.Operators.Not((bool?)(lzzzzj_ is null));
+            bool? lzzzzl_ = context.Operators.And(lzzzzh_, lzzzzk_);
+            bool? lzzzzm_ = context.Operators.And(kzzzzw_, lzzzzl_);
 
-            return qzzzzzzza_;
+            return lzzzzm_;
         };
-        IEnumerable<Procedure> pzzzzzzzg_ = context.Operators.Where<Procedure>(pzzzzzzze_, pzzzzzzzf_);
+        IEnumerable<Procedure> kzzzzs_ = context.Operators.Where<Procedure>(kzzzzq_, kzzzzr_);
 
-        return pzzzzzzzg_;
+        return kzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
-        IEnumerable<Procedure> qzzzzzzzb_ = this.Colonoscopy_Performed(context);
-        bool? qzzzzzzzc_ = context.Operators.Exists<Procedure>(qzzzzzzzb_);
-        IEnumerable<Observation> qzzzzzzzd_ = this.Fecal_Occult_Blood_Test_Performed(context);
-        bool? qzzzzzzze_ = context.Operators.Exists<Observation>(qzzzzzzzd_);
-        bool? qzzzzzzzf_ = context.Operators.Or(qzzzzzzzc_, qzzzzzzze_);
-        IEnumerable<Procedure> qzzzzzzzg_ = this.Flexible_Sigmoidoscopy_Performed(context);
-        bool? qzzzzzzzh_ = context.Operators.Exists<Procedure>(qzzzzzzzg_);
-        bool? qzzzzzzzi_ = context.Operators.Or(qzzzzzzzf_, qzzzzzzzh_);
-        IEnumerable<Observation> qzzzzzzzj_ = this.Fecal_Immunochemical_Test_DNA_Performed(context);
-        bool? qzzzzzzzk_ = context.Operators.Exists<Observation>(qzzzzzzzj_);
-        bool? qzzzzzzzl_ = context.Operators.Or(qzzzzzzzi_, qzzzzzzzk_);
-        IEnumerable<Observation> qzzzzzzzm_ = this.CT_Colonography_Performed(context);
-        bool? qzzzzzzzn_ = context.Operators.Exists<Observation>(qzzzzzzzm_);
-        bool? qzzzzzzzo_ = context.Operators.Or(qzzzzzzzl_, qzzzzzzzn_);
+        IEnumerable<Procedure> lzzzzn_ = this.Colonoscopy_Performed(context);
+        bool? lzzzzo_ = context.Operators.Exists<Procedure>(lzzzzn_);
+        IEnumerable<Observation> lzzzzp_ = this.Fecal_Occult_Blood_Test_Performed(context);
+        bool? lzzzzq_ = context.Operators.Exists<Observation>(lzzzzp_);
+        bool? lzzzzr_ = context.Operators.Or(lzzzzo_, lzzzzq_);
+        IEnumerable<Procedure> lzzzzs_ = this.Flexible_Sigmoidoscopy_Performed(context);
+        bool? lzzzzt_ = context.Operators.Exists<Procedure>(lzzzzs_);
+        bool? lzzzzu_ = context.Operators.Or(lzzzzr_, lzzzzt_);
+        IEnumerable<Observation> lzzzzv_ = this.Fecal_Immunochemical_Test_DNA_Performed(context);
+        bool? lzzzzw_ = context.Operators.Exists<Observation>(lzzzzv_);
+        bool? lzzzzx_ = context.Operators.Or(lzzzzu_, lzzzzw_);
+        IEnumerable<Observation> lzzzzy_ = this.CT_Colonography_Performed(context);
+        bool? lzzzzz_ = context.Operators.Exists<Observation>(lzzzzy_);
+        bool? mzzzza_ = context.Operators.Or(lzzzzx_, lzzzzz_);
 
-        return qzzzzzzzo_;
+        return mzzzza_;
     }
 
 
     [CqlExpressionDefinition("Final Numerator Population")]
     public bool? Final_Numerator_Population(CqlContext context)
     {
-        bool? qzzzzzzzp_ = this.Numerator(context);
-        bool? qzzzzzzzq_ = this.Initial_Population(context);
-        bool? qzzzzzzzr_ = context.Operators.And(qzzzzzzzp_, qzzzzzzzq_);
-        bool? qzzzzzzzs_ = this.Denominator(context);
-        bool? qzzzzzzzt_ = context.Operators.And(qzzzzzzzr_, qzzzzzzzs_);
-        bool? qzzzzzzzu_ = this.Denominator_Exclusions(context);
-        bool? qzzzzzzzv_ = context.Operators.Not(qzzzzzzzu_);
-        bool? qzzzzzzzw_ = context.Operators.And(qzzzzzzzt_, qzzzzzzzv_);
+        bool? mzzzzb_ = this.Numerator(context);
+        bool? mzzzzc_ = this.Initial_Population(context);
+        bool? mzzzzd_ = context.Operators.And(mzzzzb_, mzzzzc_);
+        bool? mzzzze_ = this.Denominator(context);
+        bool? mzzzzf_ = context.Operators.And(mzzzzd_, mzzzze_);
+        bool? mzzzzg_ = this.Denominator_Exclusions(context);
+        bool? mzzzzh_ = context.Operators.Not(mzzzzg_);
+        bool? mzzzzi_ = context.Operators.And(mzzzzf_, mzzzzh_);
 
-        return qzzzzzzzw_;
+        return mzzzzi_;
     }
 
 

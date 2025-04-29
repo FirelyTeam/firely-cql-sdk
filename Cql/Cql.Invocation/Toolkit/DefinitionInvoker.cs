@@ -13,14 +13,28 @@ using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 namespace Hl7.Cql.Invocation.Toolkit;
 
 /// <summary>
-/// Abstract class representing a definition invoker.
+/// Represents an abstract base class for invoking CQL definitions within a library context.
 /// </summary>
-/// <param name="libraryInvoker">The library invoker that created this instance.</param>
-/// <param name="cqlDefinitionAttribute">The definition.</param>
-/// <param name="methodInfo">The method information for the definition.</param>
+/// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
+/// <param name="returnType">The return type of the CQL definition.</param>
+/// <param name="parameterTypes">The parameter types required by the CQL definition.</param>
+/// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
+/// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
+/// <remarks>
+/// This class provides the core functionality for invoking CQL definitions, including metadata
+/// such as the library identifier, definition name, parameter types, and return type. It also
+/// supports tagging definitions with attributes for categorization or filtering.
+/// </remarks>
+/// <example>
+/// Example usage:
+/// <code>
+/// var result = definitionInvoker.Invoke(cqlContext);
+/// </code>
+/// </example>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    MethodInfo methodInfo,
+    Type returnType,
+    Type[] parameterTypes,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -61,21 +75,21 @@ public abstract class DefinitionInvoker(
     public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
 
     /// <summary>
-    /// Gets the return type of the method.
+    /// Gets the parameter types of the method.
     /// </summary>
-    public Type ReturnType => MethodInfo.ReturnType;
+    public Type[] ParameterTypes { get; } = parameterTypes;
 
     /// <summary>
-    /// Gets the method information for the definition.
+    /// Gets the return type of the method.
     /// </summary>
-    protected MethodInfo MethodInfo { get; } = methodInfo;
+    public Type ReturnType => returnType;
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
     /// </summary>
     /// <param name="cqlContext">The CQL context.</param>
     /// <returns>The result of the invocation.</returns>
-    public abstract object? Invoke(CqlContext cqlContext);
+    public abstract object? Invoke(CqlContext cqlContext, params object?[] args);
 
     /// <inheritdoc />
     public override string ToString() =>

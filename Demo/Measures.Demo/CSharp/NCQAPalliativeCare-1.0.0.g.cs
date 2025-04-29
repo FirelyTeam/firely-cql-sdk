@@ -65,105 +65,105 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
     [CqlExpressionDefinition("Palliative Care Overlapping Period")]
     public bool? Palliative_Care_Overlapping_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
-        CqlValueSet rzzzzzzzzzzzzzq_ = this.Palliative_Care_Assessment(context);
-        IEnumerable<Observation> rzzzzzzzzzzzzzr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, rzzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? rzzzzzzzzzzzzzs_(Observation PalliativeAssessment)
+        CqlValueSet kzzzzzzc_ = this.Palliative_Care_Assessment(context);
+        IEnumerable<Observation> kzzzzzzd_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kzzzzzzc_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? kzzzzzze_(Observation PalliativeAssessment)
         {
-            DataType szzzzzzzzzzzzzr_ = PalliativeAssessment?.Effective;
-            CqlInterval<CqlDateTime> szzzzzzzzzzzzzs_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, szzzzzzzzzzzzzr_);
-            CqlDateTime szzzzzzzzzzzzzt_ = context.Operators.Start(szzzzzzzzzzzzzs_);
-            CqlDate szzzzzzzzzzzzzu_ = context.Operators.DateFrom(szzzzzzzzzzzzzt_);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, szzzzzzzzzzzzzr_);
-            CqlDateTime szzzzzzzzzzzzzx_ = context.Operators.End(szzzzzzzzzzzzzw_);
-            CqlDate szzzzzzzzzzzzzy_ = context.Operators.DateFrom(szzzzzzzzzzzzzx_);
-            CqlInterval<CqlDate> szzzzzzzzzzzzzz_ = context.Operators.Interval(szzzzzzzzzzzzzu_, szzzzzzzzzzzzzy_, true, true);
-            CqlDateTime tzzzzzzzzzzzzza_ = context.Operators.Start(Period);
-            CqlDate tzzzzzzzzzzzzzb_ = context.Operators.DateFrom(tzzzzzzzzzzzzza_);
-            CqlDateTime tzzzzzzzzzzzzzc_ = context.Operators.End(Period);
-            CqlDate tzzzzzzzzzzzzzd_ = context.Operators.DateFrom(tzzzzzzzzzzzzzc_);
-            CqlInterval<CqlDate> tzzzzzzzzzzzzze_ = context.Operators.Interval(tzzzzzzzzzzzzzb_, tzzzzzzzzzzzzzd_, true, true);
-            bool? tzzzzzzzzzzzzzf_ = context.Operators.Overlaps(szzzzzzzzzzzzzz_, tzzzzzzzzzzzzze_, default);
+            DataType lzzzzzzd_ = PalliativeAssessment?.Effective;
+            CqlInterval<CqlDateTime> lzzzzzze_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, lzzzzzzd_);
+            CqlDateTime lzzzzzzf_ = context.Operators.Start(lzzzzzze_);
+            CqlDate lzzzzzzg_ = context.Operators.DateFrom(lzzzzzzf_);
+            CqlInterval<CqlDateTime> lzzzzzzi_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, lzzzzzzd_);
+            CqlDateTime lzzzzzzj_ = context.Operators.End(lzzzzzzi_);
+            CqlDate lzzzzzzk_ = context.Operators.DateFrom(lzzzzzzj_);
+            CqlInterval<CqlDate> lzzzzzzl_ = context.Operators.Interval(lzzzzzzg_, lzzzzzzk_, true, true);
+            CqlDateTime lzzzzzzm_ = context.Operators.Start(Period);
+            CqlDate lzzzzzzn_ = context.Operators.DateFrom(lzzzzzzm_);
+            CqlDateTime lzzzzzzo_ = context.Operators.End(Period);
+            CqlDate lzzzzzzp_ = context.Operators.DateFrom(lzzzzzzo_);
+            CqlInterval<CqlDate> lzzzzzzq_ = context.Operators.Interval(lzzzzzzn_, lzzzzzzp_, true, true);
+            bool? lzzzzzzr_ = context.Operators.Overlaps(lzzzzzzl_, lzzzzzzq_, default);
 
-            return tzzzzzzzzzzzzzf_;
+            return lzzzzzzr_;
         };
-        IEnumerable<Observation> rzzzzzzzzzzzzzt_ = context.Operators.Where<Observation>(rzzzzzzzzzzzzzr_, rzzzzzzzzzzzzzs_);
-        bool? rzzzzzzzzzzzzzu_ = context.Operators.Exists<Observation>(rzzzzzzzzzzzzzt_);
-        CqlValueSet rzzzzzzzzzzzzzv_ = this.Palliative_Care_Encounter(context);
-        IEnumerable<Encounter> rzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, rzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> rzzzzzzzzzzzzzx_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, rzzzzzzzzzzzzzw_);
-        bool? rzzzzzzzzzzzzzy_(Encounter PalliativeEncounter)
+        IEnumerable<Observation> kzzzzzzf_ = context.Operators.Where<Observation>(kzzzzzzd_, kzzzzzze_);
+        bool? kzzzzzzg_ = context.Operators.Exists<Observation>(kzzzzzzf_);
+        CqlValueSet kzzzzzzh_ = this.Palliative_Care_Encounter(context);
+        IEnumerable<Encounter> kzzzzzzi_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kzzzzzzh_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> kzzzzzzj_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, kzzzzzzi_);
+        bool? kzzzzzzk_(Encounter PalliativeEncounter)
         {
-            Period tzzzzzzzzzzzzzg_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> tzzzzzzzzzzzzzh_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, tzzzzzzzzzzzzzg_ as object);
-            CqlDateTime tzzzzzzzzzzzzzi_ = context.Operators.Start(tzzzzzzzzzzzzzh_);
-            CqlDate tzzzzzzzzzzzzzj_ = context.Operators.DateFrom(tzzzzzzzzzzzzzi_);
-            CqlInterval<CqlDateTime> tzzzzzzzzzzzzzl_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, tzzzzzzzzzzzzzg_ as object);
-            CqlDateTime tzzzzzzzzzzzzzm_ = context.Operators.End(tzzzzzzzzzzzzzl_);
-            CqlDate tzzzzzzzzzzzzzn_ = context.Operators.DateFrom(tzzzzzzzzzzzzzm_);
-            CqlInterval<CqlDate> tzzzzzzzzzzzzzo_ = context.Operators.Interval(tzzzzzzzzzzzzzj_, tzzzzzzzzzzzzzn_, true, true);
-            CqlDateTime tzzzzzzzzzzzzzp_ = context.Operators.Start(Period);
-            CqlDate tzzzzzzzzzzzzzq_ = context.Operators.DateFrom(tzzzzzzzzzzzzzp_);
-            CqlDateTime tzzzzzzzzzzzzzr_ = context.Operators.End(Period);
-            CqlDate tzzzzzzzzzzzzzs_ = context.Operators.DateFrom(tzzzzzzzzzzzzzr_);
-            CqlInterval<CqlDate> tzzzzzzzzzzzzzt_ = context.Operators.Interval(tzzzzzzzzzzzzzq_, tzzzzzzzzzzzzzs_, true, true);
-            bool? tzzzzzzzzzzzzzu_ = context.Operators.Overlaps(tzzzzzzzzzzzzzo_, tzzzzzzzzzzzzzt_, default);
+            Period lzzzzzzs_ = PalliativeEncounter?.Period;
+            CqlInterval<CqlDateTime> lzzzzzzt_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, lzzzzzzs_ as object);
+            CqlDateTime lzzzzzzu_ = context.Operators.Start(lzzzzzzt_);
+            CqlDate lzzzzzzv_ = context.Operators.DateFrom(lzzzzzzu_);
+            CqlInterval<CqlDateTime> lzzzzzzx_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, lzzzzzzs_ as object);
+            CqlDateTime lzzzzzzy_ = context.Operators.End(lzzzzzzx_);
+            CqlDate lzzzzzzz_ = context.Operators.DateFrom(lzzzzzzy_);
+            CqlInterval<CqlDate> mzzzzzza_ = context.Operators.Interval(lzzzzzzv_, lzzzzzzz_, true, true);
+            CqlDateTime mzzzzzzb_ = context.Operators.Start(Period);
+            CqlDate mzzzzzzc_ = context.Operators.DateFrom(mzzzzzzb_);
+            CqlDateTime mzzzzzzd_ = context.Operators.End(Period);
+            CqlDate mzzzzzze_ = context.Operators.DateFrom(mzzzzzzd_);
+            CqlInterval<CqlDate> mzzzzzzf_ = context.Operators.Interval(mzzzzzzc_, mzzzzzze_, true, true);
+            bool? mzzzzzzg_ = context.Operators.Overlaps(mzzzzzza_, mzzzzzzf_, default);
 
-            return tzzzzzzzzzzzzzu_;
+            return mzzzzzzg_;
         };
-        IEnumerable<Encounter> rzzzzzzzzzzzzzz_ = context.Operators.Where<Encounter>(rzzzzzzzzzzzzzx_, rzzzzzzzzzzzzzy_);
-        bool? szzzzzzzzzzzzza_ = context.Operators.Exists<Encounter>(rzzzzzzzzzzzzzz_);
-        bool? szzzzzzzzzzzzzb_ = context.Operators.Or(rzzzzzzzzzzzzzu_, szzzzzzzzzzzzza_);
-        CqlValueSet szzzzzzzzzzzzzc_ = this.Palliative_Care_Intervention(context);
-        IEnumerable<Procedure> szzzzzzzzzzzzzd_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, szzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> szzzzzzzzzzzzze_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, szzzzzzzzzzzzzd_);
-        bool? szzzzzzzzzzzzzf_(Procedure PalliativeIntervention)
+        IEnumerable<Encounter> kzzzzzzl_ = context.Operators.Where<Encounter>(kzzzzzzj_, kzzzzzzk_);
+        bool? kzzzzzzm_ = context.Operators.Exists<Encounter>(kzzzzzzl_);
+        bool? kzzzzzzn_ = context.Operators.Or(kzzzzzzg_, kzzzzzzm_);
+        CqlValueSet kzzzzzzo_ = this.Palliative_Care_Intervention(context);
+        IEnumerable<Procedure> kzzzzzzp_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, kzzzzzzo_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        IEnumerable<Procedure> kzzzzzzq_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, kzzzzzzp_);
+        bool? kzzzzzzr_(Procedure PalliativeIntervention)
         {
-            DataType tzzzzzzzzzzzzzv_ = PalliativeIntervention?.Performed;
-            CqlInterval<CqlDateTime> tzzzzzzzzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, tzzzzzzzzzzzzzv_);
-            CqlDateTime tzzzzzzzzzzzzzx_ = context.Operators.Start(tzzzzzzzzzzzzzw_);
-            CqlDate tzzzzzzzzzzzzzy_ = context.Operators.DateFrom(tzzzzzzzzzzzzzx_);
-            CqlInterval<CqlDateTime> uzzzzzzzzzzzzza_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, tzzzzzzzzzzzzzv_);
-            CqlDateTime uzzzzzzzzzzzzzb_ = context.Operators.End(uzzzzzzzzzzzzza_);
-            CqlDate uzzzzzzzzzzzzzc_ = context.Operators.DateFrom(uzzzzzzzzzzzzzb_);
-            CqlInterval<CqlDate> uzzzzzzzzzzzzzd_ = context.Operators.Interval(tzzzzzzzzzzzzzy_, uzzzzzzzzzzzzzc_, true, true);
-            CqlDateTime uzzzzzzzzzzzzze_ = context.Operators.Start(Period);
-            CqlDate uzzzzzzzzzzzzzf_ = context.Operators.DateFrom(uzzzzzzzzzzzzze_);
-            CqlDateTime uzzzzzzzzzzzzzg_ = context.Operators.End(Period);
-            CqlDate uzzzzzzzzzzzzzh_ = context.Operators.DateFrom(uzzzzzzzzzzzzzg_);
-            CqlInterval<CqlDate> uzzzzzzzzzzzzzi_ = context.Operators.Interval(uzzzzzzzzzzzzzf_, uzzzzzzzzzzzzzh_, true, true);
-            bool? uzzzzzzzzzzzzzj_ = context.Operators.Overlaps(uzzzzzzzzzzzzzd_, uzzzzzzzzzzzzzi_, default);
+            DataType mzzzzzzh_ = PalliativeIntervention?.Performed;
+            CqlInterval<CqlDateTime> mzzzzzzi_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, mzzzzzzh_);
+            CqlDateTime mzzzzzzj_ = context.Operators.Start(mzzzzzzi_);
+            CqlDate mzzzzzzk_ = context.Operators.DateFrom(mzzzzzzj_);
+            CqlInterval<CqlDateTime> mzzzzzzm_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, mzzzzzzh_);
+            CqlDateTime mzzzzzzn_ = context.Operators.End(mzzzzzzm_);
+            CqlDate mzzzzzzo_ = context.Operators.DateFrom(mzzzzzzn_);
+            CqlInterval<CqlDate> mzzzzzzp_ = context.Operators.Interval(mzzzzzzk_, mzzzzzzo_, true, true);
+            CqlDateTime mzzzzzzq_ = context.Operators.Start(Period);
+            CqlDate mzzzzzzr_ = context.Operators.DateFrom(mzzzzzzq_);
+            CqlDateTime mzzzzzzs_ = context.Operators.End(Period);
+            CqlDate mzzzzzzt_ = context.Operators.DateFrom(mzzzzzzs_);
+            CqlInterval<CqlDate> mzzzzzzu_ = context.Operators.Interval(mzzzzzzr_, mzzzzzzt_, true, true);
+            bool? mzzzzzzv_ = context.Operators.Overlaps(mzzzzzzp_, mzzzzzzu_, default);
 
-            return uzzzzzzzzzzzzzj_;
+            return mzzzzzzv_;
         };
-        IEnumerable<Procedure> szzzzzzzzzzzzzg_ = context.Operators.Where<Procedure>(szzzzzzzzzzzzze_, szzzzzzzzzzzzzf_);
-        bool? szzzzzzzzzzzzzh_ = context.Operators.Exists<Procedure>(szzzzzzzzzzzzzg_);
-        bool? szzzzzzzzzzzzzi_ = context.Operators.Or(szzzzzzzzzzzzzb_, szzzzzzzzzzzzzh_);
-        CqlCode szzzzzzzzzzzzzj_ = this.Encounter_for_palliative_care(context);
-        IEnumerable<CqlCode> szzzzzzzzzzzzzk_ = context.Operators.ToList<CqlCode>(szzzzzzzzzzzzzj_);
-        IEnumerable<Condition> szzzzzzzzzzzzzl_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, szzzzzzzzzzzzzk_, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        IEnumerable<Condition> szzzzzzzzzzzzzm_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, szzzzzzzzzzzzzl_);
-        bool? szzzzzzzzzzzzzn_(Condition PalliativeDiagnosis)
+        IEnumerable<Procedure> kzzzzzzs_ = context.Operators.Where<Procedure>(kzzzzzzq_, kzzzzzzr_);
+        bool? kzzzzzzt_ = context.Operators.Exists<Procedure>(kzzzzzzs_);
+        bool? kzzzzzzu_ = context.Operators.Or(kzzzzzzn_, kzzzzzzt_);
+        CqlCode kzzzzzzv_ = this.Encounter_for_palliative_care(context);
+        IEnumerable<CqlCode> kzzzzzzw_ = context.Operators.ToList<CqlCode>(kzzzzzzv_);
+        IEnumerable<Condition> kzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, kzzzzzzw_, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        IEnumerable<Condition> kzzzzzzy_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, kzzzzzzx_);
+        bool? kzzzzzzz_(Condition PalliativeDiagnosis)
         {
-            CqlInterval<CqlDateTime> uzzzzzzzzzzzzzk_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, PalliativeDiagnosis);
-            CqlDateTime uzzzzzzzzzzzzzl_ = context.Operators.Start(uzzzzzzzzzzzzzk_);
-            CqlDate uzzzzzzzzzzzzzm_ = context.Operators.DateFrom(uzzzzzzzzzzzzzl_);
-            CqlDateTime uzzzzzzzzzzzzzo_ = context.Operators.End(uzzzzzzzzzzzzzk_);
-            CqlDate uzzzzzzzzzzzzzp_ = context.Operators.DateFrom(uzzzzzzzzzzzzzo_);
-            CqlInterval<CqlDate> uzzzzzzzzzzzzzq_ = context.Operators.Interval(uzzzzzzzzzzzzzm_, uzzzzzzzzzzzzzp_, true, true);
-            CqlDateTime uzzzzzzzzzzzzzr_ = context.Operators.Start(Period);
-            CqlDate uzzzzzzzzzzzzzs_ = context.Operators.DateFrom(uzzzzzzzzzzzzzr_);
-            CqlDateTime uzzzzzzzzzzzzzt_ = context.Operators.End(Period);
-            CqlDate uzzzzzzzzzzzzzu_ = context.Operators.DateFrom(uzzzzzzzzzzzzzt_);
-            CqlInterval<CqlDate> uzzzzzzzzzzzzzv_ = context.Operators.Interval(uzzzzzzzzzzzzzs_, uzzzzzzzzzzzzzu_, true, true);
-            bool? uzzzzzzzzzzzzzw_ = context.Operators.Overlaps(uzzzzzzzzzzzzzq_, uzzzzzzzzzzzzzv_, default);
+            CqlInterval<CqlDateTime> mzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, PalliativeDiagnosis);
+            CqlDateTime mzzzzzzx_ = context.Operators.Start(mzzzzzzw_);
+            CqlDate mzzzzzzy_ = context.Operators.DateFrom(mzzzzzzx_);
+            CqlDateTime nzzzzzza_ = context.Operators.End(mzzzzzzw_);
+            CqlDate nzzzzzzb_ = context.Operators.DateFrom(nzzzzzza_);
+            CqlInterval<CqlDate> nzzzzzzc_ = context.Operators.Interval(mzzzzzzy_, nzzzzzzb_, true, true);
+            CqlDateTime nzzzzzzd_ = context.Operators.Start(Period);
+            CqlDate nzzzzzze_ = context.Operators.DateFrom(nzzzzzzd_);
+            CqlDateTime nzzzzzzf_ = context.Operators.End(Period);
+            CqlDate nzzzzzzg_ = context.Operators.DateFrom(nzzzzzzf_);
+            CqlInterval<CqlDate> nzzzzzzh_ = context.Operators.Interval(nzzzzzze_, nzzzzzzg_, true, true);
+            bool? nzzzzzzi_ = context.Operators.Overlaps(nzzzzzzc_, nzzzzzzh_, default);
 
-            return uzzzzzzzzzzzzzw_;
+            return nzzzzzzi_;
         };
-        IEnumerable<Condition> szzzzzzzzzzzzzo_ = context.Operators.Where<Condition>(szzzzzzzzzzzzzm_, szzzzzzzzzzzzzn_);
-        bool? szzzzzzzzzzzzzp_ = context.Operators.Exists<Condition>(szzzzzzzzzzzzzo_);
-        bool? szzzzzzzzzzzzzq_ = context.Operators.Or(szzzzzzzzzzzzzi_, szzzzzzzzzzzzzp_);
+        IEnumerable<Condition> lzzzzzza_ = context.Operators.Where<Condition>(kzzzzzzy_, kzzzzzzz_);
+        bool? lzzzzzzb_ = context.Operators.Exists<Condition>(lzzzzzza_);
+        bool? lzzzzzzc_ = context.Operators.Or(kzzzzzzu_, lzzzzzzb_);
 
-        return szzzzzzzzzzzzzq_;
+        return lzzzzzzc_;
     }
 
 

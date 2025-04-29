@@ -14,6 +14,56 @@ using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
+/// <summary>
+/// Represents the signature of a definition, including its name and parameter types.
+/// </summary>
+/// <param name="name">The name of the definition.</param>
+/// <param name="parameterTypes">The types of the parameters for the definition.</param>
+public class DefinitionSignature(string name, params Type[] parameterTypes) : IEquatable<DefinitionSignature>
+{
+    public static bool operator ==(DefinitionSignature? left, DefinitionSignature? right) => Equals(left, right);
+
+    public static bool operator !=(DefinitionSignature? left, DefinitionSignature? right) => !Equals(left, right);
+
+    public string Name { get; } = name;
+    public Type[] ParameterTypes { get; } = parameterTypes;
+
+
+    bool IEquatable<DefinitionSignature>.Equals(DefinitionSignature? other)
+    {
+        if (other is null) return false;
+        if (other.GetType() != GetType()) return false;
+        return Equals(other);
+    }
+
+    protected bool Equals(DefinitionSignature other)
+    {
+        if (Name != other.Name) return false;
+        if (!ParameterTypes.SequenceEqual(other.ParameterTypes)) return false;
+        return true;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((DefinitionSignature)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        var hashCode = HashCode.Combine(Name, HashCode.Combine(ParameterTypes));
+        return hashCode;
+    }
+
+
+    /// <summary>
+    /// Implicitly converts a string to a <see cref="DefinitionSignature"/> instance.
+    /// </summary>
+    /// <param name="name">The string value to be converted into a <see cref="DefinitionSignature"/>.</param>
+    public static implicit operator DefinitionSignature(string name) => new(name);
+}
 
 /// <summary>
 /// Abstract base class for invoking CQL libraries.
@@ -53,7 +103,7 @@ public abstract class LibraryInvoker
     /// Gets the library invokers for the dependencies of the specified library invoker.
     /// </summary>
     /// <returns>An enumeration of <see cref="LibraryInvoker"/> instances representing the dependencies of the specified library invoker.</returns>
-    public IEnumerable<LibraryInvoker> GetDependencyLibraryInvokers()
+    public IEnumerable<LibraryInvoker> EnumerateLibraryInvokerDependencies()
     {
         var libraryInvokers = LibrarySetInvoker.LibraryInvokers;
         var logger = LibrarySetInvoker.CreateLogger<LibraryInvoker>();
@@ -68,7 +118,7 @@ public abstract class LibraryInvoker
     /// <summary>
     /// Gets the dictionary of definition invokers for the CQL library.
     /// </summary>
-    public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
+    public abstract IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     /// <summary>
     /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.
@@ -108,9 +158,9 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        if (LibraryInvoker_3_0.SupportsVersion(cqlToolVersion))
+        if (LibraryInstanceInvoker_3_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_3_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
+            if (LibraryInstanceInvoker_3_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
                 return true;
         }
 

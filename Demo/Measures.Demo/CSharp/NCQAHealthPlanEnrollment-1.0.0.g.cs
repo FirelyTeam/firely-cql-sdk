@@ -33,230 +33,230 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
     [CqlExpressionDefinition("CoverageIntervals")]
     public IEnumerable<CqlInterval<CqlDate>> CoverageIntervals(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
     {
-        CqlInterval<CqlDate> gzzzzzzzzzk_(Coverage C)
+        CqlInterval<CqlDate> dzzzzzzzzzzzw_(Coverage C)
         {
-            Period gzzzzzzzzzn_ = C?.Period;
-            CqlInterval<CqlDateTime> gzzzzzzzzzo_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, gzzzzzzzzzn_ as object);
-            CqlDateTime gzzzzzzzzzp_ = context.Operators.Start(gzzzzzzzzzo_);
-            CqlDate gzzzzzzzzzq_ = context.Operators.DateFrom(gzzzzzzzzzp_);
-            CqlInterval<CqlDateTime> gzzzzzzzzzs_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, gzzzzzzzzzn_ as object);
-            CqlDateTime gzzzzzzzzzt_ = context.Operators.End(gzzzzzzzzzs_);
-            CqlDate gzzzzzzzzzu_ = context.Operators.DateFrom(gzzzzzzzzzt_);
-            CqlInterval<CqlDate> gzzzzzzzzzv_ = context.Operators.Interval(gzzzzzzzzzq_, gzzzzzzzzzu_, true, true);
-            CqlDate gzzzzzzzzzw_ = context.Operators.Start(participationPeriod);
-            CqlDate gzzzzzzzzzx_ = context.Operators.End(participationPeriod);
-            CqlInterval<CqlDate> gzzzzzzzzzy_ = context.Operators.Interval(gzzzzzzzzzw_, gzzzzzzzzzx_, true, true);
-            CqlInterval<CqlDate> gzzzzzzzzzz_ = context.Operators.Intersect<CqlDate>(gzzzzzzzzzv_, gzzzzzzzzzy_);
+            Period dzzzzzzzzzzzz_ = C?.Period;
+            CqlInterval<CqlDateTime> ezzzzzzzzzzza_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, dzzzzzzzzzzzz_ as object);
+            CqlDateTime ezzzzzzzzzzzb_ = context.Operators.Start(ezzzzzzzzzzza_);
+            CqlDate ezzzzzzzzzzzc_ = context.Operators.DateFrom(ezzzzzzzzzzzb_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzzze_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, dzzzzzzzzzzzz_ as object);
+            CqlDateTime ezzzzzzzzzzzf_ = context.Operators.End(ezzzzzzzzzzze_);
+            CqlDate ezzzzzzzzzzzg_ = context.Operators.DateFrom(ezzzzzzzzzzzf_);
+            CqlInterval<CqlDate> ezzzzzzzzzzzh_ = context.Operators.Interval(ezzzzzzzzzzzc_, ezzzzzzzzzzzg_, true, true);
+            CqlDate ezzzzzzzzzzzi_ = context.Operators.Start(participationPeriod);
+            CqlDate ezzzzzzzzzzzj_ = context.Operators.End(participationPeriod);
+            CqlInterval<CqlDate> ezzzzzzzzzzzk_ = context.Operators.Interval(ezzzzzzzzzzzi_, ezzzzzzzzzzzj_, true, true);
+            CqlInterval<CqlDate> ezzzzzzzzzzzl_ = context.Operators.Intersect<CqlDate>(ezzzzzzzzzzzh_, ezzzzzzzzzzzk_);
 
-            return gzzzzzzzzzz_;
+            return ezzzzzzzzzzzl_;
         };
-        IEnumerable<CqlInterval<CqlDate>> gzzzzzzzzzl_ = context.Operators.Select<Coverage, CqlInterval<CqlDate>>(Coverage, gzzzzzzzzzk_);
-        IEnumerable<CqlInterval<CqlDate>> gzzzzzzzzzm_ = context.Operators.Distinct<CqlInterval<CqlDate>>(gzzzzzzzzzl_);
+        IEnumerable<CqlInterval<CqlDate>> dzzzzzzzzzzzx_ = context.Operators.Select<Coverage, CqlInterval<CqlDate>>(Coverage, dzzzzzzzzzzzw_);
+        IEnumerable<CqlInterval<CqlDate>> dzzzzzzzzzzzy_ = context.Operators.Distinct<CqlInterval<CqlDate>>(dzzzzzzzzzzzx_);
 
-        return gzzzzzzzzzm_;
+        return dzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("Collapsed Coverage Intervals")]
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
-        IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzza_ = NCQACQLBase_1_0_0.Instance.Collapse_Date_Interval_Workaround(context, Intervals);
+        IEnumerable<CqlInterval<CqlDate>> ezzzzzzzzzzzm_ = NCQACQLBase_1_0_0.Instance.Collapse_Date_Interval_Workaround(context, Intervals);
 
-        return hzzzzzzzzza_;
+        return ezzzzzzzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("Collapsed Coverage Adjacent Intervals")]
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Adjacent_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
-        IEnumerable<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>> hzzzzzzzzzb_ = context.Operators.CrossJoin<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(Intervals, Intervals);
-        (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? hzzzzzzzzzc_(ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>> _valueTuple)
+        IEnumerable<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>> ezzzzzzzzzzzn_ = context.Operators.CrossJoin<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(Intervals, Intervals);
+        (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? ezzzzzzzzzzzo_(ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>> _valueTuple)
         {
-            (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? hzzzzzzzzzj_ = (CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? ezzzzzzzzzzzv_ = (CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV, _valueTuple.Item1, _valueTuple.Item2);
 
-            return hzzzzzzzzzj_;
+            return ezzzzzzzzzzzv_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> hzzzzzzzzzd_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(hzzzzzzzzzb_, hzzzzzzzzzc_);
-        bool? hzzzzzzzzze_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv)
+        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> ezzzzzzzzzzzp_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(ezzzzzzzzzzzn_, ezzzzzzzzzzzo_);
+        bool? ezzzzzzzzzzzq_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv)
         {
-            CqlDate hzzzzzzzzzk_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
-            CqlDate hzzzzzzzzzl_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
-            CqlQuantity hzzzzzzzzzm_ = context.Operators.Quantity(1m, "day");
-            CqlDate hzzzzzzzzzn_ = context.Operators.Subtract(hzzzzzzzzzl_, hzzzzzzzzzm_);
-            CqlDate hzzzzzzzzzq_ = context.Operators.Add(hzzzzzzzzzl_, hzzzzzzzzzm_);
-            CqlInterval<CqlDate> hzzzzzzzzzr_ = context.Operators.Interval(hzzzzzzzzzn_, hzzzzzzzzzq_, true, true);
-            bool? hzzzzzzzzzs_ = context.Operators.In<CqlDate>(hzzzzzzzzzk_, hzzzzzzzzzr_, default);
-            bool? hzzzzzzzzzu_ = context.Operators.Not((bool?)(hzzzzzzzzzl_ is null));
-            bool? hzzzzzzzzzv_ = context.Operators.And(hzzzzzzzzzs_, hzzzzzzzzzu_);
+            CqlDate ezzzzzzzzzzzw_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
+            CqlDate ezzzzzzzzzzzx_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
+            CqlQuantity ezzzzzzzzzzzy_ = context.Operators.Quantity(1m, "day");
+            CqlDate ezzzzzzzzzzzz_ = context.Operators.Subtract(ezzzzzzzzzzzx_, ezzzzzzzzzzzy_);
+            CqlDate fzzzzzzzzzzzc_ = context.Operators.Add(ezzzzzzzzzzzx_, ezzzzzzzzzzzy_);
+            CqlInterval<CqlDate> fzzzzzzzzzzzd_ = context.Operators.Interval(ezzzzzzzzzzzz_, fzzzzzzzzzzzc_, true, true);
+            bool? fzzzzzzzzzzze_ = context.Operators.In<CqlDate>(ezzzzzzzzzzzw_, fzzzzzzzzzzzd_, default);
+            bool? fzzzzzzzzzzzg_ = context.Operators.Not((bool?)(ezzzzzzzzzzzx_ is null));
+            bool? fzzzzzzzzzzzh_ = context.Operators.And(fzzzzzzzzzzze_, fzzzzzzzzzzzg_);
 
-            return hzzzzzzzzzv_;
+            return fzzzzzzzzzzzh_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> hzzzzzzzzzf_ = context.Operators.Where<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(hzzzzzzzzzd_, hzzzzzzzzze_);
-        CqlInterval<CqlDate> hzzzzzzzzzg_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv)
+        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> ezzzzzzzzzzzr_ = context.Operators.Where<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(ezzzzzzzzzzzp_, ezzzzzzzzzzzq_);
+        CqlInterval<CqlDate> ezzzzzzzzzzzs_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv)
         {
-            CqlDate hzzzzzzzzzw_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
-            CqlDate hzzzzzzzzzx_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
-            CqlInterval<CqlDate> hzzzzzzzzzy_ = context.Operators.Interval(hzzzzzzzzzw_, hzzzzzzzzzx_, true, true);
+            CqlDate fzzzzzzzzzzzi_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
+            CqlDate fzzzzzzzzzzzj_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
+            CqlInterval<CqlDate> fzzzzzzzzzzzk_ = context.Operators.Interval(fzzzzzzzzzzzi_, fzzzzzzzzzzzj_, true, true);
 
-            return hzzzzzzzzzy_;
+            return fzzzzzzzzzzzk_;
         };
-        IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?, CqlInterval<CqlDate>>(hzzzzzzzzzf_, hzzzzzzzzzg_);
-        IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzi_ = context.Operators.Distinct<CqlInterval<CqlDate>>(hzzzzzzzzzh_);
+        IEnumerable<CqlInterval<CqlDate>> ezzzzzzzzzzzt_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?, CqlInterval<CqlDate>>(ezzzzzzzzzzzr_, ezzzzzzzzzzzs_);
+        IEnumerable<CqlInterval<CqlDate>> ezzzzzzzzzzzu_ = context.Operators.Distinct<CqlInterval<CqlDate>>(ezzzzzzzzzzzt_);
 
-        return hzzzzzzzzzi_;
+        return ezzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Collapsed Final Coverage Intervals")]
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Final_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedI, IEnumerable<CqlInterval<CqlDate>> adjacentI)
     {
-        IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzz_ = this.Collapsed_Coverage_Intervals(context, collapsedI);
-        IEnumerable<CqlInterval<CqlDate>> izzzzzzzzza_ = this.Collapsed_Coverage_Adjacent_Intervals(context, adjacentI);
-        IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzb_ = context.Operators.Union<CqlInterval<CqlDate>>(hzzzzzzzzzz_, izzzzzzzzza_);
-        IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzc_ = NCQACQLBase_1_0_0.Instance.Collapse_Date_Interval_Workaround(context, izzzzzzzzzb_);
+        IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzl_ = this.Collapsed_Coverage_Intervals(context, collapsedI);
+        IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzm_ = this.Collapsed_Coverage_Adjacent_Intervals(context, adjacentI);
+        IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzn_ = context.Operators.Union<CqlInterval<CqlDate>>(fzzzzzzzzzzzl_, fzzzzzzzzzzzm_);
+        IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzo_ = NCQACQLBase_1_0_0.Instance.Collapse_Date_Interval_Workaround(context, fzzzzzzzzzzzn_);
 
-        return izzzzzzzzzc_;
+        return fzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("All Coverage Info")]
     public IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> All_Coverage_Info(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
     {
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? izzzzzzzzzd_(Coverage C)
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? fzzzzzzzzzzzp_(Coverage C)
         {
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzg_ = this.CoverageIntervals(context, Coverage, participationPeriod);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzi_ = this.Collapsed_Coverage_Intervals(context, izzzzzzzzzg_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzk_ = this.Collapsed_Coverage_Intervals(context, izzzzzzzzzg_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzl_ = this.Collapsed_Coverage_Adjacent_Intervals(context, izzzzzzzzzk_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzn_ = this.Collapsed_Coverage_Intervals(context, izzzzzzzzzg_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzp_ = this.Collapsed_Coverage_Intervals(context, izzzzzzzzzg_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzq_ = this.Collapsed_Coverage_Adjacent_Intervals(context, izzzzzzzzzp_);
-            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzr_ = this.Collapsed_Final_Coverage_Intervals(context, izzzzzzzzzn_, izzzzzzzzzq_);
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? izzzzzzzzzs_ = (CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP, izzzzzzzzzg_, izzzzzzzzzi_, izzzzzzzzzl_, izzzzzzzzzr_);
+            IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzs_ = this.CoverageIntervals(context, Coverage, participationPeriod);
+            IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzu_ = this.Collapsed_Coverage_Intervals(context, fzzzzzzzzzzzs_);
+            IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzw_ = this.Collapsed_Coverage_Intervals(context, fzzzzzzzzzzzs_);
+            IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzx_ = this.Collapsed_Coverage_Adjacent_Intervals(context, fzzzzzzzzzzzw_);
+            IEnumerable<CqlInterval<CqlDate>> fzzzzzzzzzzzz_ = this.Collapsed_Coverage_Intervals(context, fzzzzzzzzzzzs_);
+            IEnumerable<CqlInterval<CqlDate>> gzzzzzzzzzzzb_ = this.Collapsed_Coverage_Intervals(context, fzzzzzzzzzzzs_);
+            IEnumerable<CqlInterval<CqlDate>> gzzzzzzzzzzzc_ = this.Collapsed_Coverage_Adjacent_Intervals(context, gzzzzzzzzzzzb_);
+            IEnumerable<CqlInterval<CqlDate>> gzzzzzzzzzzzd_ = this.Collapsed_Final_Coverage_Intervals(context, fzzzzzzzzzzzz_, gzzzzzzzzzzzc_);
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? gzzzzzzzzzzze_ = (CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP, fzzzzzzzzzzzs_, fzzzzzzzzzzzu_, fzzzzzzzzzzzx_, gzzzzzzzzzzzd_);
 
-            return izzzzzzzzzs_;
+            return gzzzzzzzzzzze_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> izzzzzzzzze_ = context.Operators.Select<Coverage, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(Coverage, izzzzzzzzzd_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> izzzzzzzzzf_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(izzzzzzzzze_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> fzzzzzzzzzzzq_ = context.Operators.Select<Coverage, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(Coverage, fzzzzzzzzzzzp_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> fzzzzzzzzzzzr_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(fzzzzzzzzzzzq_);
 
-        return izzzzzzzzzf_;
+        return fzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Health Plan Coverage Resources")]
     public IEnumerable<Coverage> Health_Plan_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
-        bool? izzzzzzzzzt_(Coverage C)
+        bool? gzzzzzzzzzzzf_(Coverage C)
         {
-            CodeableConcept izzzzzzzzzx_ = C?.Type;
-            List<Coding> izzzzzzzzzy_ = izzzzzzzzzx_?.Coding;
-            bool? izzzzzzzzzz_(Coding cTypeCoding)
+            CodeableConcept gzzzzzzzzzzzj_ = C?.Type;
+            List<Coding> gzzzzzzzzzzzk_ = gzzzzzzzzzzzj_?.Coding;
+            bool? gzzzzzzzzzzzl_(Coding cTypeCoding)
             {
-                CqlCode jzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
-                CqlCode jzzzzzzzzzd_ = NCQATerminology_1_0_0.Instance.managed_care_policy(context);
-                bool? jzzzzzzzzze_ = context.Operators.Equivalent(jzzzzzzzzzc_, jzzzzzzzzzd_);
-                CqlCode jzzzzzzzzzg_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
-                bool? jzzzzzzzzzh_ = context.Operators.Equivalent(jzzzzzzzzzc_, jzzzzzzzzzg_);
-                bool? jzzzzzzzzzi_ = context.Operators.Or(jzzzzzzzzze_, jzzzzzzzzzh_);
-                CqlCode jzzzzzzzzzk_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
-                bool? jzzzzzzzzzl_ = context.Operators.Equivalent(jzzzzzzzzzc_, jzzzzzzzzzk_);
-                bool? jzzzzzzzzzm_ = context.Operators.Or(jzzzzzzzzzi_, jzzzzzzzzzl_);
+                CqlCode gzzzzzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
+                CqlCode gzzzzzzzzzzzp_ = NCQATerminology_1_0_0.Instance.managed_care_policy(context);
+                bool? gzzzzzzzzzzzq_ = context.Operators.Equivalent(gzzzzzzzzzzzo_, gzzzzzzzzzzzp_);
+                CqlCode gzzzzzzzzzzzs_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
+                bool? gzzzzzzzzzzzt_ = context.Operators.Equivalent(gzzzzzzzzzzzo_, gzzzzzzzzzzzs_);
+                bool? gzzzzzzzzzzzu_ = context.Operators.Or(gzzzzzzzzzzzq_, gzzzzzzzzzzzt_);
+                CqlCode gzzzzzzzzzzzw_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
+                bool? gzzzzzzzzzzzx_ = context.Operators.Equivalent(gzzzzzzzzzzzo_, gzzzzzzzzzzzw_);
+                bool? gzzzzzzzzzzzy_ = context.Operators.Or(gzzzzzzzzzzzu_, gzzzzzzzzzzzx_);
 
-                return jzzzzzzzzzm_;
+                return gzzzzzzzzzzzy_;
             };
-            IEnumerable<Coding> jzzzzzzzzza_ = context.Operators.Where<Coding>((IEnumerable<Coding>)izzzzzzzzzy_, izzzzzzzzzz_);
-            bool? jzzzzzzzzzb_ = context.Operators.Exists<Coding>(jzzzzzzzzza_);
+            IEnumerable<Coding> gzzzzzzzzzzzm_ = context.Operators.Where<Coding>((IEnumerable<Coding>)gzzzzzzzzzzzk_, gzzzzzzzzzzzl_);
+            bool? gzzzzzzzzzzzn_ = context.Operators.Exists<Coding>(gzzzzzzzzzzzm_);
 
-            return jzzzzzzzzzb_;
+            return gzzzzzzzzzzzn_;
         };
-        IEnumerable<Coverage> izzzzzzzzzu_ = context.Operators.Where<Coverage>(Coverage, izzzzzzzzzt_);
-        bool? izzzzzzzzzv_(Coverage HPCoverageResource)
+        IEnumerable<Coverage> gzzzzzzzzzzzg_ = context.Operators.Where<Coverage>(Coverage, gzzzzzzzzzzzf_);
+        bool? gzzzzzzzzzzzh_(Coverage HPCoverageResource)
         {
-            bool? jzzzzzzzzzn_ = context.Operators.Not((bool?)(HPCoverageResource is null));
+            bool? gzzzzzzzzzzzz_ = context.Operators.Not((bool?)(HPCoverageResource is null));
 
-            return jzzzzzzzzzn_;
+            return gzzzzzzzzzzzz_;
         };
-        IEnumerable<Coverage> izzzzzzzzzw_ = context.Operators.Where<Coverage>(izzzzzzzzzu_, izzzzzzzzzv_);
+        IEnumerable<Coverage> gzzzzzzzzzzzi_ = context.Operators.Where<Coverage>(gzzzzzzzzzzzg_, gzzzzzzzzzzzh_);
 
-        return izzzzzzzzzw_;
+        return gzzzzzzzzzzzi_;
     }
 
 
     [CqlExpressionDefinition("Anchor Date Criteria")]
     public bool? Anchor_Date_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod)
     {
-        bool? jzzzzzzzzzo_()
+        bool? hzzzzzzzzzzza_()
         {
-            bool jzzzzzzzzzp_()
+            bool hzzzzzzzzzzzb_()
             {
-                bool? jzzzzzzzzzq_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default);
-                bool? jzzzzzzzzzr_ = context.Operators.Not(jzzzzzzzzzq_);
+                bool? hzzzzzzzzzzzc_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default);
+                bool? hzzzzzzzzzzzd_ = context.Operators.Not(hzzzzzzzzzzzc_);
 
-                return jzzzzzzzzzr_ ?? false;
+                return hzzzzzzzzzzzd_ ?? false;
             };
             if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default)) ?? false)
             {
-                IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> jzzzzzzzzzs_ = this.All_Coverage_Info(context, Coverage, participationPeriod);
-                bool? jzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+                IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> hzzzzzzzzzzze_ = this.All_Coverage_Info(context, Coverage, participationPeriod);
+                bool? hzzzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
                 {
-                    IEnumerable<CqlInterval<CqlDate>> kzzzzzzzzzb_ = @this?.CollapsedFinal;
-                    bool? kzzzzzzzzzc_ = context.Operators.Not((bool?)(kzzzzzzzzzb_ is null));
+                    IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzzzn_ = @this?.CollapsedFinal;
+                    bool? hzzzzzzzzzzzo_ = context.Operators.Not((bool?)(hzzzzzzzzzzzn_ is null));
 
-                    return kzzzzzzzzzc_;
+                    return hzzzzzzzzzzzo_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> jzzzzzzzzzu_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(jzzzzzzzzzs_, jzzzzzzzzzt_);
-                IEnumerable<CqlInterval<CqlDate>> jzzzzzzzzzv_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+                IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> hzzzzzzzzzzzg_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(hzzzzzzzzzzze_, hzzzzzzzzzzzf_);
+                IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzzzh_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
                 {
-                    IEnumerable<CqlInterval<CqlDate>> kzzzzzzzzzd_ = @this?.CollapsedFinal;
+                    IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzzzp_ = @this?.CollapsedFinal;
 
-                    return kzzzzzzzzzd_;
+                    return hzzzzzzzzzzzp_;
                 };
-                IEnumerable<IEnumerable<CqlInterval<CqlDate>>> jzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(jzzzzzzzzzu_, jzzzzzzzzzv_);
-                IEnumerable<CqlInterval<CqlDate>> jzzzzzzzzzx_ = context.Operators.Flatten<CqlInterval<CqlDate>>(jzzzzzzzzzw_);
-                bool? jzzzzzzzzzy_(CqlInterval<CqlDate> FinalInterval)
+                IEnumerable<IEnumerable<CqlInterval<CqlDate>>> hzzzzzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(hzzzzzzzzzzzg_, hzzzzzzzzzzzh_);
+                IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzzzj_ = context.Operators.Flatten<CqlInterval<CqlDate>>(hzzzzzzzzzzzi_);
+                bool? hzzzzzzzzzzzk_(CqlInterval<CqlDate> FinalInterval)
                 {
-                    bool? kzzzzzzzzze_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, default);
+                    bool? hzzzzzzzzzzzq_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, default);
 
-                    return kzzzzzzzzze_;
+                    return hzzzzzzzzzzzq_;
                 };
-                IEnumerable<CqlInterval<CqlDate>> jzzzzzzzzzz_ = context.Operators.Where<CqlInterval<CqlDate>>(jzzzzzzzzzx_, jzzzzzzzzzy_);
-                bool? kzzzzzzzzza_ = context.Operators.Exists<CqlInterval<CqlDate>>(jzzzzzzzzzz_);
+                IEnumerable<CqlInterval<CqlDate>> hzzzzzzzzzzzl_ = context.Operators.Where<CqlInterval<CqlDate>>(hzzzzzzzzzzzj_, hzzzzzzzzzzzk_);
+                bool? hzzzzzzzzzzzm_ = context.Operators.Exists<CqlInterval<CqlDate>>(hzzzzzzzzzzzl_);
 
-                return kzzzzzzzzza_;
+                return hzzzzzzzzzzzm_;
             }
-            else if (jzzzzzzzzzp_())
+            else if (hzzzzzzzzzzzb_())
             {
-                bool? kzzzzzzzzzf_(Coverage @this)
+                bool? hzzzzzzzzzzzr_(Coverage @this)
                 {
-                    Period kzzzzzzzzzm_ = @this?.Period;
-                    bool? kzzzzzzzzzn_ = context.Operators.Not((bool?)(kzzzzzzzzzm_ is null));
+                    Period hzzzzzzzzzzzy_ = @this?.Period;
+                    bool? hzzzzzzzzzzzz_ = context.Operators.Not((bool?)(hzzzzzzzzzzzy_ is null));
 
-                    return kzzzzzzzzzn_;
+                    return hzzzzzzzzzzzz_;
                 };
-                IEnumerable<Coverage> kzzzzzzzzzg_ = context.Operators.Where<Coverage>(Coverage, kzzzzzzzzzf_);
-                Period kzzzzzzzzzh_(Coverage @this)
+                IEnumerable<Coverage> hzzzzzzzzzzzs_ = context.Operators.Where<Coverage>(Coverage, hzzzzzzzzzzzr_);
+                Period hzzzzzzzzzzzt_(Coverage @this)
                 {
-                    Period kzzzzzzzzzo_ = @this?.Period;
+                    Period izzzzzzzzzzza_ = @this?.Period;
 
-                    return kzzzzzzzzzo_;
+                    return izzzzzzzzzzza_;
                 };
-                IEnumerable<Period> kzzzzzzzzzi_ = context.Operators.Select<Coverage, Period>(kzzzzzzzzzg_, kzzzzzzzzzh_);
-                bool? kzzzzzzzzzj_(Period Cperiod)
+                IEnumerable<Period> hzzzzzzzzzzzu_ = context.Operators.Select<Coverage, Period>(hzzzzzzzzzzzs_, hzzzzzzzzzzzt_);
+                bool? hzzzzzzzzzzzv_(Period Cperiod)
                 {
-                    CqlInterval<CqlDateTime> kzzzzzzzzzp_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, Cperiod as object);
-                    CqlDateTime kzzzzzzzzzq_ = context.Operators.Start(kzzzzzzzzzp_);
-                    CqlDate kzzzzzzzzzr_ = context.Operators.DateFrom(kzzzzzzzzzq_);
-                    CqlDateTime kzzzzzzzzzt_ = context.Operators.End(kzzzzzzzzzp_);
-                    CqlDate kzzzzzzzzzu_ = context.Operators.DateFrom(kzzzzzzzzzt_);
-                    CqlInterval<CqlDate> kzzzzzzzzzv_ = context.Operators.Interval(kzzzzzzzzzr_, kzzzzzzzzzu_, true, true);
-                    bool? kzzzzzzzzzw_ = context.Operators.In<CqlDate>(AnchorDate, kzzzzzzzzzv_, default);
+                    CqlInterval<CqlDateTime> izzzzzzzzzzzb_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, Cperiod as object);
+                    CqlDateTime izzzzzzzzzzzc_ = context.Operators.Start(izzzzzzzzzzzb_);
+                    CqlDate izzzzzzzzzzzd_ = context.Operators.DateFrom(izzzzzzzzzzzc_);
+                    CqlDateTime izzzzzzzzzzzf_ = context.Operators.End(izzzzzzzzzzzb_);
+                    CqlDate izzzzzzzzzzzg_ = context.Operators.DateFrom(izzzzzzzzzzzf_);
+                    CqlInterval<CqlDate> izzzzzzzzzzzh_ = context.Operators.Interval(izzzzzzzzzzzd_, izzzzzzzzzzzg_, true, true);
+                    bool? izzzzzzzzzzzi_ = context.Operators.In<CqlDate>(AnchorDate, izzzzzzzzzzzh_, default);
 
-                    return kzzzzzzzzzw_;
+                    return izzzzzzzzzzzi_;
                 };
-                IEnumerable<Period> kzzzzzzzzzk_ = context.Operators.Where<Period>(kzzzzzzzzzi_, kzzzzzzzzzj_);
-                bool? kzzzzzzzzzl_ = context.Operators.Exists<Period>(kzzzzzzzzzk_);
+                IEnumerable<Period> hzzzzzzzzzzzw_ = context.Operators.Where<Period>(hzzzzzzzzzzzu_, hzzzzzzzzzzzv_);
+                bool? hzzzzzzzzzzzx_ = context.Operators.Exists<Period>(hzzzzzzzzzzzw_);
 
-                return kzzzzzzzzzl_;
+                return hzzzzzzzzzzzx_;
             }
             else if (AnchorDate is null)
             {
@@ -268,208 +268,208 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             }
         };
 
-        return jzzzzzzzzzo_();
+        return hzzzzzzzzzzza_();
     }
 
 
     [CqlExpressionDefinition("Health Plan Enrollment Criteria")]
     public bool? Health_Plan_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
-        IEnumerable<Coverage> kzzzzzzzzzx_ = this.Health_Plan_Coverage_Resources(context, Coverage);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> kzzzzzzzzzy_ = this.All_Coverage_Info(context, kzzzzzzzzzx_, participationPeriod);
-        bool? kzzzzzzzzzz_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<Coverage> izzzzzzzzzzzj_ = this.Health_Plan_Coverage_Resources(context, Coverage);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> izzzzzzzzzzzk_ = this.All_Coverage_Info(context, izzzzzzzzzzzj_, participationPeriod);
+        bool? izzzzzzzzzzzl_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzk_ = @this?.CollapsedFinal;
-            bool? lzzzzzzzzzl_ = context.Operators.Not((bool?)(lzzzzzzzzzk_ is null));
+            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzzzw_ = @this?.CollapsedFinal;
+            bool? izzzzzzzzzzzx_ = context.Operators.Not((bool?)(izzzzzzzzzzzw_ is null));
 
-            return lzzzzzzzzzl_;
+            return izzzzzzzzzzzx_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> lzzzzzzzzza_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(kzzzzzzzzzy_, kzzzzzzzzzz_);
-        IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzb_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> izzzzzzzzzzzm_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(izzzzzzzzzzzk_, izzzzzzzzzzzl_);
+        IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzzzn_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzm_ = @this?.CollapsedFinal;
+            IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzzzy_ = @this?.CollapsedFinal;
 
-            return lzzzzzzzzzm_;
+            return izzzzzzzzzzzy_;
         };
-        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> lzzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(lzzzzzzzzza_, lzzzzzzzzzb_);
-        IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzd_ = context.Operators.Flatten<CqlInterval<CqlDate>>(lzzzzzzzzzc_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? lzzzzzzzzze_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, lzzzzzzzzzd_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] lzzzzzzzzzf_ = [
-            lzzzzzzzzze_,
+        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> izzzzzzzzzzzo_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(izzzzzzzzzzzm_, izzzzzzzzzzzn_);
+        IEnumerable<CqlInterval<CqlDate>> izzzzzzzzzzzp_ = context.Operators.Flatten<CqlInterval<CqlDate>>(izzzzzzzzzzzo_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? izzzzzzzzzzzq_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, izzzzzzzzzzzp_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] izzzzzzzzzzzr_ = [
+            izzzzzzzzzzzq_,
         ];
-        bool? lzzzzzzzzzg_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
+        bool? izzzzzzzzzzzs_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
         {
-            int? lzzzzzzzzzn_ = GapsInEnrollment?.Interval_Count;
-            bool? lzzzzzzzzzo_ = context.Operators.LessOrEqual(lzzzzzzzzzn_, 1);
-            int? lzzzzzzzzzp_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? lzzzzzzzzzq_ = context.Operators.LessOrEqual(lzzzzzzzzzp_, AllowedGapDays);
-            bool? lzzzzzzzzzr_ = context.Operators.And(lzzzzzzzzzo_, lzzzzzzzzzq_);
-            bool? lzzzzzzzzzs_ = this.Anchor_Date_Criteria(context, Coverage, AnchorDate, participationPeriod);
-            bool? lzzzzzzzzzt_ = context.Operators.And(lzzzzzzzzzr_, lzzzzzzzzzs_);
+            int? izzzzzzzzzzzz_ = GapsInEnrollment?.Interval_Count;
+            bool? jzzzzzzzzzzza_ = context.Operators.LessOrEqual(izzzzzzzzzzzz_, 1);
+            int? jzzzzzzzzzzzb_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+            bool? jzzzzzzzzzzzc_ = context.Operators.LessOrEqual(jzzzzzzzzzzzb_, AllowedGapDays);
+            bool? jzzzzzzzzzzzd_ = context.Operators.And(jzzzzzzzzzzza_, jzzzzzzzzzzzc_);
+            bool? jzzzzzzzzzzze_ = this.Anchor_Date_Criteria(context, Coverage, AnchorDate, participationPeriod);
+            bool? jzzzzzzzzzzzf_ = context.Operators.And(jzzzzzzzzzzzd_, jzzzzzzzzzzze_);
 
-            return lzzzzzzzzzt_;
+            return jzzzzzzzzzzzf_;
         };
-        IEnumerable<bool?> lzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)lzzzzzzzzzf_, lzzzzzzzzzg_);
-        IEnumerable<bool?> lzzzzzzzzzi_ = context.Operators.Distinct<bool?>(lzzzzzzzzzh_);
-        bool? lzzzzzzzzzj_ = context.Operators.SingletonFrom<bool?>(lzzzzzzzzzi_);
+        IEnumerable<bool?> izzzzzzzzzzzt_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)izzzzzzzzzzzr_, izzzzzzzzzzzs_);
+        IEnumerable<bool?> izzzzzzzzzzzu_ = context.Operators.Distinct<bool?>(izzzzzzzzzzzt_);
+        bool? izzzzzzzzzzzv_ = context.Operators.SingletonFrom<bool?>(izzzzzzzzzzzu_);
 
-        return lzzzzzzzzzj_;
+        return izzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Pharmacy Benefit Coverage Resources")]
     public IEnumerable<Coverage> Pharmacy_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
-        bool? lzzzzzzzzzu_(Coverage C)
+        bool? jzzzzzzzzzzzg_(Coverage C)
         {
-            CodeableConcept lzzzzzzzzzy_ = C?.Type;
-            List<Coding> lzzzzzzzzzz_ = lzzzzzzzzzy_?.Coding;
-            bool? mzzzzzzzzza_(Coding cTypeCoding)
+            CodeableConcept jzzzzzzzzzzzk_ = C?.Type;
+            List<Coding> jzzzzzzzzzzzl_ = jzzzzzzzzzzzk_?.Coding;
+            bool? jzzzzzzzzzzzm_(Coding cTypeCoding)
             {
-                CqlCode mzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
-                CqlCode mzzzzzzzzze_ = NCQATerminology_1_0_0.Instance.drug_policy(context);
-                bool? mzzzzzzzzzf_ = context.Operators.Equivalent(mzzzzzzzzzd_, mzzzzzzzzze_);
+                CqlCode jzzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
+                CqlCode jzzzzzzzzzzzq_ = NCQATerminology_1_0_0.Instance.drug_policy(context);
+                bool? jzzzzzzzzzzzr_ = context.Operators.Equivalent(jzzzzzzzzzzzp_, jzzzzzzzzzzzq_);
 
-                return mzzzzzzzzzf_;
+                return jzzzzzzzzzzzr_;
             };
-            IEnumerable<Coding> mzzzzzzzzzb_ = context.Operators.Where<Coding>((IEnumerable<Coding>)lzzzzzzzzzz_, mzzzzzzzzza_);
-            bool? mzzzzzzzzzc_ = context.Operators.Exists<Coding>(mzzzzzzzzzb_);
+            IEnumerable<Coding> jzzzzzzzzzzzn_ = context.Operators.Where<Coding>((IEnumerable<Coding>)jzzzzzzzzzzzl_, jzzzzzzzzzzzm_);
+            bool? jzzzzzzzzzzzo_ = context.Operators.Exists<Coding>(jzzzzzzzzzzzn_);
 
-            return mzzzzzzzzzc_;
+            return jzzzzzzzzzzzo_;
         };
-        IEnumerable<Coverage> lzzzzzzzzzv_ = context.Operators.Where<Coverage>(Coverage, lzzzzzzzzzu_);
-        bool? lzzzzzzzzzw_(Coverage pharmacyCoverageResource)
+        IEnumerable<Coverage> jzzzzzzzzzzzh_ = context.Operators.Where<Coverage>(Coverage, jzzzzzzzzzzzg_);
+        bool? jzzzzzzzzzzzi_(Coverage pharmacyCoverageResource)
         {
-            bool? mzzzzzzzzzg_ = context.Operators.Not((bool?)(pharmacyCoverageResource is null));
+            bool? jzzzzzzzzzzzs_ = context.Operators.Not((bool?)(pharmacyCoverageResource is null));
 
-            return mzzzzzzzzzg_;
+            return jzzzzzzzzzzzs_;
         };
-        IEnumerable<Coverage> lzzzzzzzzzx_ = context.Operators.Where<Coverage>(lzzzzzzzzzv_, lzzzzzzzzzw_);
+        IEnumerable<Coverage> jzzzzzzzzzzzj_ = context.Operators.Where<Coverage>(jzzzzzzzzzzzh_, jzzzzzzzzzzzi_);
 
-        return lzzzzzzzzzx_;
+        return jzzzzzzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Pharmacy Benefit Enrollment Criteria")]
     public bool? Pharmacy_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> PharmCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
-        IEnumerable<Coverage> mzzzzzzzzzh_ = this.Pharmacy_Benefit_Coverage_Resources(context, PharmCoverage);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> mzzzzzzzzzi_ = this.All_Coverage_Info(context, mzzzzzzzzzh_, participationPeriod);
-        bool? mzzzzzzzzzj_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<Coverage> jzzzzzzzzzzzt_ = this.Pharmacy_Benefit_Coverage_Resources(context, PharmCoverage);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> jzzzzzzzzzzzu_ = this.All_Coverage_Info(context, jzzzzzzzzzzzt_, participationPeriod);
+        bool? jzzzzzzzzzzzv_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzu_ = @this?.CollapsedFinal;
-            bool? mzzzzzzzzzv_ = context.Operators.Not((bool?)(mzzzzzzzzzu_ is null));
+            IEnumerable<CqlInterval<CqlDate>> kzzzzzzzzzzzg_ = @this?.CollapsedFinal;
+            bool? kzzzzzzzzzzzh_ = context.Operators.Not((bool?)(kzzzzzzzzzzzg_ is null));
 
-            return mzzzzzzzzzv_;
+            return kzzzzzzzzzzzh_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> mzzzzzzzzzk_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(mzzzzzzzzzi_, mzzzzzzzzzj_);
-        IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzl_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> jzzzzzzzzzzzw_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(jzzzzzzzzzzzu_, jzzzzzzzzzzzv_);
+        IEnumerable<CqlInterval<CqlDate>> jzzzzzzzzzzzx_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzw_ = @this?.CollapsedFinal;
+            IEnumerable<CqlInterval<CqlDate>> kzzzzzzzzzzzi_ = @this?.CollapsedFinal;
 
-            return mzzzzzzzzzw_;
+            return kzzzzzzzzzzzi_;
         };
-        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> mzzzzzzzzzm_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(mzzzzzzzzzk_, mzzzzzzzzzl_);
-        IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzn_ = context.Operators.Flatten<CqlInterval<CqlDate>>(mzzzzzzzzzm_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? mzzzzzzzzzo_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, mzzzzzzzzzn_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] mzzzzzzzzzp_ = [
-            mzzzzzzzzzo_,
+        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> jzzzzzzzzzzzy_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(jzzzzzzzzzzzw_, jzzzzzzzzzzzx_);
+        IEnumerable<CqlInterval<CqlDate>> jzzzzzzzzzzzz_ = context.Operators.Flatten<CqlInterval<CqlDate>>(jzzzzzzzzzzzy_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? kzzzzzzzzzzza_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, jzzzzzzzzzzzz_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] kzzzzzzzzzzzb_ = [
+            kzzzzzzzzzzza_,
         ];
-        bool? mzzzzzzzzzq_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
+        bool? kzzzzzzzzzzzc_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
         {
-            int? mzzzzzzzzzx_ = GapsInEnrollment?.Interval_Count;
-            bool? mzzzzzzzzzy_ = context.Operators.LessOrEqual(mzzzzzzzzzx_, 1);
-            int? mzzzzzzzzzz_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? nzzzzzzzzza_ = context.Operators.LessOrEqual(mzzzzzzzzzz_, AllowedGapDays);
-            bool? nzzzzzzzzzb_ = context.Operators.And(mzzzzzzzzzy_, nzzzzzzzzza_);
-            bool? nzzzzzzzzzc_ = this.Anchor_Date_Criteria(context, PharmCoverage, AnchorDate, participationPeriod);
-            bool? nzzzzzzzzzd_ = context.Operators.And(nzzzzzzzzzb_, nzzzzzzzzzc_);
+            int? kzzzzzzzzzzzj_ = GapsInEnrollment?.Interval_Count;
+            bool? kzzzzzzzzzzzk_ = context.Operators.LessOrEqual(kzzzzzzzzzzzj_, 1);
+            int? kzzzzzzzzzzzl_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+            bool? kzzzzzzzzzzzm_ = context.Operators.LessOrEqual(kzzzzzzzzzzzl_, AllowedGapDays);
+            bool? kzzzzzzzzzzzn_ = context.Operators.And(kzzzzzzzzzzzk_, kzzzzzzzzzzzm_);
+            bool? kzzzzzzzzzzzo_ = this.Anchor_Date_Criteria(context, PharmCoverage, AnchorDate, participationPeriod);
+            bool? kzzzzzzzzzzzp_ = context.Operators.And(kzzzzzzzzzzzn_, kzzzzzzzzzzzo_);
 
-            return nzzzzzzzzzd_;
+            return kzzzzzzzzzzzp_;
         };
-        IEnumerable<bool?> mzzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)mzzzzzzzzzp_, mzzzzzzzzzq_);
-        IEnumerable<bool?> mzzzzzzzzzs_ = context.Operators.Distinct<bool?>(mzzzzzzzzzr_);
-        bool? mzzzzzzzzzt_ = context.Operators.SingletonFrom<bool?>(mzzzzzzzzzs_);
+        IEnumerable<bool?> kzzzzzzzzzzzd_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)kzzzzzzzzzzzb_, kzzzzzzzzzzzc_);
+        IEnumerable<bool?> kzzzzzzzzzzze_ = context.Operators.Distinct<bool?>(kzzzzzzzzzzzd_);
+        bool? kzzzzzzzzzzzf_ = context.Operators.SingletonFrom<bool?>(kzzzzzzzzzzze_);
 
-        return mzzzzzzzzzt_;
+        return kzzzzzzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Mental Health Benefit Coverage Resources")]
     public IEnumerable<Coverage> Mental_Health_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
-        bool? nzzzzzzzzze_(Coverage C)
+        bool? kzzzzzzzzzzzq_(Coverage C)
         {
-            CodeableConcept nzzzzzzzzzi_ = C?.Type;
-            List<Coding> nzzzzzzzzzj_ = nzzzzzzzzzi_?.Coding;
-            bool? nzzzzzzzzzk_(Coding cTypeCoding)
+            CodeableConcept kzzzzzzzzzzzu_ = C?.Type;
+            List<Coding> kzzzzzzzzzzzv_ = kzzzzzzzzzzzu_?.Coding;
+            bool? kzzzzzzzzzzzw_(Coding cTypeCoding)
             {
-                CqlCode nzzzzzzzzzn_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
-                CqlCode nzzzzzzzzzo_ = NCQATerminology_1_0_0.Instance.mental_health_policy(context);
-                bool? nzzzzzzzzzp_ = context.Operators.Equivalent(nzzzzzzzzzn_, nzzzzzzzzzo_);
+                CqlCode kzzzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
+                CqlCode lzzzzzzzzzzza_ = NCQATerminology_1_0_0.Instance.mental_health_policy(context);
+                bool? lzzzzzzzzzzzb_ = context.Operators.Equivalent(kzzzzzzzzzzzz_, lzzzzzzzzzzza_);
 
-                return nzzzzzzzzzp_;
+                return lzzzzzzzzzzzb_;
             };
-            IEnumerable<Coding> nzzzzzzzzzl_ = context.Operators.Where<Coding>((IEnumerable<Coding>)nzzzzzzzzzj_, nzzzzzzzzzk_);
-            bool? nzzzzzzzzzm_ = context.Operators.Exists<Coding>(nzzzzzzzzzl_);
+            IEnumerable<Coding> kzzzzzzzzzzzx_ = context.Operators.Where<Coding>((IEnumerable<Coding>)kzzzzzzzzzzzv_, kzzzzzzzzzzzw_);
+            bool? kzzzzzzzzzzzy_ = context.Operators.Exists<Coding>(kzzzzzzzzzzzx_);
 
-            return nzzzzzzzzzm_;
+            return kzzzzzzzzzzzy_;
         };
-        IEnumerable<Coverage> nzzzzzzzzzf_ = context.Operators.Where<Coverage>(Coverage, nzzzzzzzzze_);
-        bool? nzzzzzzzzzg_(Coverage mentalHealthCoverageResource)
+        IEnumerable<Coverage> kzzzzzzzzzzzr_ = context.Operators.Where<Coverage>(Coverage, kzzzzzzzzzzzq_);
+        bool? kzzzzzzzzzzzs_(Coverage mentalHealthCoverageResource)
         {
-            bool? nzzzzzzzzzq_ = context.Operators.Not((bool?)(mentalHealthCoverageResource is null));
+            bool? lzzzzzzzzzzzc_ = context.Operators.Not((bool?)(mentalHealthCoverageResource is null));
 
-            return nzzzzzzzzzq_;
+            return lzzzzzzzzzzzc_;
         };
-        IEnumerable<Coverage> nzzzzzzzzzh_ = context.Operators.Where<Coverage>(nzzzzzzzzzf_, nzzzzzzzzzg_);
+        IEnumerable<Coverage> kzzzzzzzzzzzt_ = context.Operators.Where<Coverage>(kzzzzzzzzzzzr_, kzzzzzzzzzzzs_);
 
-        return nzzzzzzzzzh_;
+        return kzzzzzzzzzzzt_;
     }
 
 
     [CqlExpressionDefinition("Mental Health Benefit Enrollment Criteria")]
     public bool? Mental_Health_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> MHCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
-        IEnumerable<Coverage> nzzzzzzzzzr_ = this.Mental_Health_Benefit_Coverage_Resources(context, MHCoverage);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> nzzzzzzzzzs_ = this.All_Coverage_Info(context, nzzzzzzzzzr_, participationPeriod);
-        bool? nzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<Coverage> lzzzzzzzzzzzd_ = this.Mental_Health_Benefit_Coverage_Resources(context, MHCoverage);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> lzzzzzzzzzzze_ = this.All_Coverage_Info(context, lzzzzzzzzzzzd_, participationPeriod);
+        bool? lzzzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> ozzzzzzzzze_ = @this?.CollapsedFinal;
-            bool? ozzzzzzzzzf_ = context.Operators.Not((bool?)(ozzzzzzzzze_ is null));
+            IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzzzq_ = @this?.CollapsedFinal;
+            bool? lzzzzzzzzzzzr_ = context.Operators.Not((bool?)(lzzzzzzzzzzzq_ is null));
 
-            return ozzzzzzzzzf_;
+            return lzzzzzzzzzzzr_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> nzzzzzzzzzu_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(nzzzzzzzzzs_, nzzzzzzzzzt_);
-        IEnumerable<CqlInterval<CqlDate>> nzzzzzzzzzv_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> lzzzzzzzzzzzg_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?>(lzzzzzzzzzzze_, lzzzzzzzzzzzf_);
+        IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzzzh_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
         {
-            IEnumerable<CqlInterval<CqlDate>> ozzzzzzzzzg_ = @this?.CollapsedFinal;
+            IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzzzs_ = @this?.CollapsedFinal;
 
-            return ozzzzzzzzzg_;
+            return lzzzzzzzzzzzs_;
         };
-        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> nzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(nzzzzzzzzzu_, nzzzzzzzzzv_);
-        IEnumerable<CqlInterval<CqlDate>> nzzzzzzzzzx_ = context.Operators.Flatten<CqlInterval<CqlDate>>(nzzzzzzzzzw_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? nzzzzzzzzzy_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, nzzzzzzzzzx_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] nzzzzzzzzzz_ = [
-            nzzzzzzzzzy_,
+        IEnumerable<IEnumerable<CqlInterval<CqlDate>>> lzzzzzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(lzzzzzzzzzzzg_, lzzzzzzzzzzzh_);
+        IEnumerable<CqlInterval<CqlDate>> lzzzzzzzzzzzj_ = context.Operators.Flatten<CqlInterval<CqlDate>>(lzzzzzzzzzzzi_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? lzzzzzzzzzzzk_ = NCQACQLBase_1_0_0.Instance.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, lzzzzzzzzzzzj_);
+        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] lzzzzzzzzzzzl_ = [
+            lzzzzzzzzzzzk_,
         ];
-        bool? ozzzzzzzzza_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
+        bool? lzzzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment)
         {
-            int? ozzzzzzzzzh_ = GapsInEnrollment?.Interval_Count;
-            bool? ozzzzzzzzzi_ = context.Operators.LessOrEqual(ozzzzzzzzzh_, 1);
-            int? ozzzzzzzzzj_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? ozzzzzzzzzk_ = context.Operators.LessOrEqual(ozzzzzzzzzj_, AllowedGapDays);
-            bool? ozzzzzzzzzl_ = context.Operators.And(ozzzzzzzzzi_, ozzzzzzzzzk_);
-            bool? ozzzzzzzzzm_ = this.Anchor_Date_Criteria(context, MHCoverage, AnchorDate, participationPeriod);
-            bool? ozzzzzzzzzn_ = context.Operators.And(ozzzzzzzzzl_, ozzzzzzzzzm_);
+            int? lzzzzzzzzzzzt_ = GapsInEnrollment?.Interval_Count;
+            bool? lzzzzzzzzzzzu_ = context.Operators.LessOrEqual(lzzzzzzzzzzzt_, 1);
+            int? lzzzzzzzzzzzv_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+            bool? lzzzzzzzzzzzw_ = context.Operators.LessOrEqual(lzzzzzzzzzzzv_, AllowedGapDays);
+            bool? lzzzzzzzzzzzx_ = context.Operators.And(lzzzzzzzzzzzu_, lzzzzzzzzzzzw_);
+            bool? lzzzzzzzzzzzy_ = this.Anchor_Date_Criteria(context, MHCoverage, AnchorDate, participationPeriod);
+            bool? lzzzzzzzzzzzz_ = context.Operators.And(lzzzzzzzzzzzx_, lzzzzzzzzzzzy_);
 
-            return ozzzzzzzzzn_;
+            return lzzzzzzzzzzzz_;
         };
-        IEnumerable<bool?> ozzzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)nzzzzzzzzzz_, ozzzzzzzzza_);
-        IEnumerable<bool?> ozzzzzzzzzc_ = context.Operators.Distinct<bool?>(ozzzzzzzzzb_);
-        bool? ozzzzzzzzzd_ = context.Operators.SingletonFrom<bool?>(ozzzzzzzzzc_);
+        IEnumerable<bool?> lzzzzzzzzzzzn_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)lzzzzzzzzzzzl_, lzzzzzzzzzzzm_);
+        IEnumerable<bool?> lzzzzzzzzzzzo_ = context.Operators.Distinct<bool?>(lzzzzzzzzzzzn_);
+        bool? lzzzzzzzzzzzp_ = context.Operators.SingletonFrom<bool?>(lzzzzzzzzzzzo_);
 
-        return ozzzzzzzzzd_;
+        return lzzzzzzzzzzzp_;
     }
 
 

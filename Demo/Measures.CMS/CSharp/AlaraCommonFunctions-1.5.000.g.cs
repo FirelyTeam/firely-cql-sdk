@@ -125,184 +125,184 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> pzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient pzzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<Patient>(pzzzzzzzzzzzzzf_);
+        IEnumerable<Patient> dzzzzzzzzzzzzzzzzzv_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient dzzzzzzzzzzzzzzzzzw_ = context.Operators.SingletonFrom<Patient>(dzzzzzzzzzzzzzzzzzv_);
 
-        return pzzzzzzzzzzzzzg_;
+        return dzzzzzzzzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Global Noise Value")]
     public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
     {
-        List<Observation.ComponentComponent> pzzzzzzzzzzzzzh_ = Obs?.Component;
-        bool? pzzzzzzzzzzzzzi_(Observation.ComponentComponent C)
+        List<Observation.ComponentComponent> dzzzzzzzzzzzzzzzzzx_ = Obs?.Component;
+        bool? dzzzzzzzzzzzzzzzzzy_(Observation.ComponentComponent C)
         {
-            CodeableConcept pzzzzzzzzzzzzzo_ = C?.Code;
-            CqlConcept pzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pzzzzzzzzzzzzzo_);
-            CqlCode pzzzzzzzzzzzzzq_ = this.Calculated_CT_global_noise(context);
-            CqlConcept pzzzzzzzzzzzzzr_ = context.Operators.ConvertCodeToConcept(pzzzzzzzzzzzzzq_);
-            bool? pzzzzzzzzzzzzzs_ = context.Operators.Equivalent(pzzzzzzzzzzzzzp_, pzzzzzzzzzzzzzr_);
-            DataType pzzzzzzzzzzzzzt_ = C?.Value;
-            object pzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzt_);
-            string pzzzzzzzzzzzzzv_ = (pzzzzzzzzzzzzzu_ as CqlQuantity)?.unit;
-            bool? pzzzzzzzzzzzzzw_ = context.Operators.Equal(pzzzzzzzzzzzzzv_, "[hnsf'U]");
-            bool? pzzzzzzzzzzzzzx_ = context.Operators.And(pzzzzzzzzzzzzzs_, pzzzzzzzzzzzzzw_);
+            CodeableConcept ezzzzzzzzzzzzzzzzze_ = C?.Code;
+            CqlConcept ezzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzze_);
+            CqlCode ezzzzzzzzzzzzzzzzzg_ = this.Calculated_CT_global_noise(context);
+            CqlConcept ezzzzzzzzzzzzzzzzzh_ = context.Operators.ConvertCodeToConcept(ezzzzzzzzzzzzzzzzzg_);
+            bool? ezzzzzzzzzzzzzzzzzi_ = context.Operators.Equivalent(ezzzzzzzzzzzzzzzzzf_, ezzzzzzzzzzzzzzzzzh_);
+            DataType ezzzzzzzzzzzzzzzzzj_ = C?.Value;
+            object ezzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzj_);
+            string ezzzzzzzzzzzzzzzzzl_ = (ezzzzzzzzzzzzzzzzzk_ as CqlQuantity)?.unit;
+            bool? ezzzzzzzzzzzzzzzzzm_ = context.Operators.Equal(ezzzzzzzzzzzzzzzzzl_, "[hnsf'U]");
+            bool? ezzzzzzzzzzzzzzzzzn_ = context.Operators.And(ezzzzzzzzzzzzzzzzzi_, ezzzzzzzzzzzzzzzzzm_);
 
-            return pzzzzzzzzzzzzzx_;
+            return ezzzzzzzzzzzzzzzzzn_;
         };
-        IEnumerable<Observation.ComponentComponent> pzzzzzzzzzzzzzj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)pzzzzzzzzzzzzzh_, pzzzzzzzzzzzzzi_);
-        decimal? pzzzzzzzzzzzzzk_(Observation.ComponentComponent C)
+        IEnumerable<Observation.ComponentComponent> dzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)dzzzzzzzzzzzzzzzzzx_, dzzzzzzzzzzzzzzzzzy_);
+        decimal? ezzzzzzzzzzzzzzzzza_(Observation.ComponentComponent C)
         {
-            DataType pzzzzzzzzzzzzzy_ = C?.Value;
-            object pzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzy_);
-            decimal? qzzzzzzzzzzzzza_ = (pzzzzzzzzzzzzzz_ as CqlQuantity)?.value;
+            DataType ezzzzzzzzzzzzzzzzzo_ = C?.Value;
+            object ezzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzo_);
+            decimal? ezzzzzzzzzzzzzzzzzq_ = (ezzzzzzzzzzzzzzzzzp_ as CqlQuantity)?.value;
 
-            return qzzzzzzzzzzzzza_;
+            return ezzzzzzzzzzzzzzzzzq_;
         };
-        IEnumerable<decimal?> pzzzzzzzzzzzzzl_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(pzzzzzzzzzzzzzj_, pzzzzzzzzzzzzzk_);
-        IEnumerable<decimal?> pzzzzzzzzzzzzzm_ = context.Operators.Distinct<decimal?>(pzzzzzzzzzzzzzl_);
-        decimal? pzzzzzzzzzzzzzn_ = context.Operators.SingletonFrom<decimal?>(pzzzzzzzzzzzzzm_);
+        IEnumerable<decimal?> ezzzzzzzzzzzzzzzzzb_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(dzzzzzzzzzzzzzzzzzz_, ezzzzzzzzzzzzzzzzza_);
+        IEnumerable<decimal?> ezzzzzzzzzzzzzzzzzc_ = context.Operators.Distinct<decimal?>(ezzzzzzzzzzzzzzzzzb_);
+        decimal? ezzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<decimal?>(ezzzzzzzzzzzzzzzzzc_);
 
-        return pzzzzzzzzzzzzzn_;
+        return ezzzzzzzzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Size Adjusted Value")]
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
     {
-        List<Observation.ComponentComponent> qzzzzzzzzzzzzzb_ = Obs?.Component;
-        bool? qzzzzzzzzzzzzzc_(Observation.ComponentComponent C)
+        List<Observation.ComponentComponent> ezzzzzzzzzzzzzzzzzr_ = Obs?.Component;
+        bool? ezzzzzzzzzzzzzzzzzs_(Observation.ComponentComponent C)
         {
-            CodeableConcept qzzzzzzzzzzzzzi_ = C?.Code;
-            CqlConcept qzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, qzzzzzzzzzzzzzi_);
-            CqlCode qzzzzzzzzzzzzzk_ = this.Calculated_CT_size_adjusted_dose(context);
-            CqlConcept qzzzzzzzzzzzzzl_ = context.Operators.ConvertCodeToConcept(qzzzzzzzzzzzzzk_);
-            bool? qzzzzzzzzzzzzzm_ = context.Operators.Equivalent(qzzzzzzzzzzzzzj_, qzzzzzzzzzzzzzl_);
-            DataType qzzzzzzzzzzzzzn_ = C?.Value;
-            object qzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzn_);
-            string qzzzzzzzzzzzzzp_ = (qzzzzzzzzzzzzzo_ as CqlQuantity)?.unit;
-            bool? qzzzzzzzzzzzzzq_ = context.Operators.Equal(qzzzzzzzzzzzzzp_, "mGy.cm");
-            bool? qzzzzzzzzzzzzzr_ = context.Operators.And(qzzzzzzzzzzzzzm_, qzzzzzzzzzzzzzq_);
+            CodeableConcept ezzzzzzzzzzzzzzzzzy_ = C?.Code;
+            CqlConcept ezzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzzy_);
+            CqlCode fzzzzzzzzzzzzzzzzza_ = this.Calculated_CT_size_adjusted_dose(context);
+            CqlConcept fzzzzzzzzzzzzzzzzzb_ = context.Operators.ConvertCodeToConcept(fzzzzzzzzzzzzzzzzza_);
+            bool? fzzzzzzzzzzzzzzzzzc_ = context.Operators.Equivalent(ezzzzzzzzzzzzzzzzzz_, fzzzzzzzzzzzzzzzzzb_);
+            DataType fzzzzzzzzzzzzzzzzzd_ = C?.Value;
+            object fzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzd_);
+            string fzzzzzzzzzzzzzzzzzf_ = (fzzzzzzzzzzzzzzzzze_ as CqlQuantity)?.unit;
+            bool? fzzzzzzzzzzzzzzzzzg_ = context.Operators.Equal(fzzzzzzzzzzzzzzzzzf_, "mGy.cm");
+            bool? fzzzzzzzzzzzzzzzzzh_ = context.Operators.And(fzzzzzzzzzzzzzzzzzc_, fzzzzzzzzzzzzzzzzzg_);
 
-            return qzzzzzzzzzzzzzr_;
+            return fzzzzzzzzzzzzzzzzzh_;
         };
-        IEnumerable<Observation.ComponentComponent> qzzzzzzzzzzzzzd_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)qzzzzzzzzzzzzzb_, qzzzzzzzzzzzzzc_);
-        decimal? qzzzzzzzzzzzzze_(Observation.ComponentComponent C)
+        IEnumerable<Observation.ComponentComponent> ezzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ezzzzzzzzzzzzzzzzzr_, ezzzzzzzzzzzzzzzzzs_);
+        decimal? ezzzzzzzzzzzzzzzzzu_(Observation.ComponentComponent C)
         {
-            DataType qzzzzzzzzzzzzzs_ = C?.Value;
-            object qzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzs_);
-            decimal? qzzzzzzzzzzzzzu_ = (qzzzzzzzzzzzzzt_ as CqlQuantity)?.value;
+            DataType fzzzzzzzzzzzzzzzzzi_ = C?.Value;
+            object fzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzi_);
+            decimal? fzzzzzzzzzzzzzzzzzk_ = (fzzzzzzzzzzzzzzzzzj_ as CqlQuantity)?.value;
 
-            return qzzzzzzzzzzzzzu_;
+            return fzzzzzzzzzzzzzzzzzk_;
         };
-        IEnumerable<decimal?> qzzzzzzzzzzzzzf_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(qzzzzzzzzzzzzzd_, qzzzzzzzzzzzzze_);
-        IEnumerable<decimal?> qzzzzzzzzzzzzzg_ = context.Operators.Distinct<decimal?>(qzzzzzzzzzzzzzf_);
-        decimal? qzzzzzzzzzzzzzh_ = context.Operators.SingletonFrom<decimal?>(qzzzzzzzzzzzzzg_);
+        IEnumerable<decimal?> ezzzzzzzzzzzzzzzzzv_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(ezzzzzzzzzzzzzzzzzt_, ezzzzzzzzzzzzzzzzzu_);
+        IEnumerable<decimal?> ezzzzzzzzzzzzzzzzzw_ = context.Operators.Distinct<decimal?>(ezzzzzzzzzzzzzzzzzv_);
+        decimal? ezzzzzzzzzzzzzzzzzx_ = context.Operators.SingletonFrom<decimal?>(ezzzzzzzzzzzzzzzzzw_);
 
-        return qzzzzzzzzzzzzzh_;
+        return ezzzzzzzzzzzzzzzzzx_;
     }
 
 
     [CqlExpressionDefinition("Qualifies")]
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
     {
-        DataType qzzzzzzzzzzzzzv_ = Obs?.Value;
-        object qzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzv_);
-        CqlCode[] qzzzzzzzzzzzzzx_ = (qzzzzzzzzzzzzzw_ as CqlConcept)?.codes;
-        bool? qzzzzzzzzzzzzzy_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)qzzzzzzzzzzzzzx_, code);
-        decimal? qzzzzzzzzzzzzzz_ = this.Global_Noise_Value(context, Obs);
-        bool? rzzzzzzzzzzzzza_ = context.Operators.GreaterOrEqual(qzzzzzzzzzzzzzz_, noiseThreshold);
-        decimal? rzzzzzzzzzzzzzb_ = this.Size_Adjusted_Value(context, Obs);
-        bool? rzzzzzzzzzzzzzc_ = context.Operators.GreaterOrEqual(rzzzzzzzzzzzzzb_, sizeDoseThreshold);
-        bool? rzzzzzzzzzzzzzd_ = context.Operators.Or(rzzzzzzzzzzzzza_, rzzzzzzzzzzzzzc_);
-        bool? rzzzzzzzzzzzzze_ = context.Operators.And(qzzzzzzzzzzzzzy_, rzzzzzzzzzzzzzd_);
+        DataType fzzzzzzzzzzzzzzzzzl_ = Obs?.Value;
+        object fzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzl_);
+        CqlCode[] fzzzzzzzzzzzzzzzzzn_ = (fzzzzzzzzzzzzzzzzzm_ as CqlConcept)?.codes;
+        bool? fzzzzzzzzzzzzzzzzzo_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)fzzzzzzzzzzzzzzzzzn_, code);
+        decimal? fzzzzzzzzzzzzzzzzzp_ = this.Global_Noise_Value(context, Obs);
+        bool? fzzzzzzzzzzzzzzzzzq_ = context.Operators.GreaterOrEqual(fzzzzzzzzzzzzzzzzzp_, noiseThreshold);
+        decimal? fzzzzzzzzzzzzzzzzzr_ = this.Size_Adjusted_Value(context, Obs);
+        bool? fzzzzzzzzzzzzzzzzzs_ = context.Operators.GreaterOrEqual(fzzzzzzzzzzzzzzzzzr_, sizeDoseThreshold);
+        bool? fzzzzzzzzzzzzzzzzzt_ = context.Operators.Or(fzzzzzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzzzzzs_);
+        bool? fzzzzzzzzzzzzzzzzzu_ = context.Operators.And(fzzzzzzzzzzzzzzzzzo_, fzzzzzzzzzzzzzzzzzt_);
 
-        return rzzzzzzzzzzzzze_;
+        return fzzzzzzzzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("CT Scan Qualifies")]
     public bool? CT_Scan_Qualifies(CqlContext context, Observation Obs)
     {
-        CqlCode rzzzzzzzzzzzzzf_ = this.Abdomen_and_Pelvis_Low_Dose(context);
-        decimal? rzzzzzzzzzzzzzg_ = context.Operators.ConvertIntegerToDecimal(64);
-        decimal? rzzzzzzzzzzzzzh_ = context.Operators.ConvertIntegerToDecimal(598);
-        bool? rzzzzzzzzzzzzzi_ = this.Qualifies(context, Obs, rzzzzzzzzzzzzzf_, rzzzzzzzzzzzzzg_, rzzzzzzzzzzzzzh_);
-        CqlCode rzzzzzzzzzzzzzj_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
-        decimal? rzzzzzzzzzzzzzk_ = context.Operators.ConvertIntegerToDecimal(29);
-        decimal? rzzzzzzzzzzzzzl_ = context.Operators.ConvertIntegerToDecimal(644);
-        bool? rzzzzzzzzzzzzzm_ = this.Qualifies(context, Obs, rzzzzzzzzzzzzzj_, rzzzzzzzzzzzzzk_, rzzzzzzzzzzzzzl_);
-        bool? rzzzzzzzzzzzzzn_ = context.Operators.Or(rzzzzzzzzzzzzzi_, rzzzzzzzzzzzzzm_);
-        CqlCode rzzzzzzzzzzzzzo_ = this.Abdomen_and_Pelvis_High_Dose(context);
-        decimal? rzzzzzzzzzzzzzq_ = context.Operators.ConvertIntegerToDecimal(1260);
-        bool? rzzzzzzzzzzzzzr_ = this.Qualifies(context, Obs, rzzzzzzzzzzzzzo_, rzzzzzzzzzzzzzk_, rzzzzzzzzzzzzzq_);
-        bool? rzzzzzzzzzzzzzs_ = context.Operators.Or(rzzzzzzzzzzzzzn_, rzzzzzzzzzzzzzr_);
-        CqlCode rzzzzzzzzzzzzzt_ = this.Cardiac_Low_Dose(context);
-        decimal? rzzzzzzzzzzzzzu_ = context.Operators.ConvertIntegerToDecimal(55);
-        decimal? rzzzzzzzzzzzzzv_ = context.Operators.ConvertIntegerToDecimal(93);
-        bool? rzzzzzzzzzzzzzw_ = this.Qualifies(context, Obs, rzzzzzzzzzzzzzt_, rzzzzzzzzzzzzzu_, rzzzzzzzzzzzzzv_);
-        bool? rzzzzzzzzzzzzzx_ = context.Operators.Or(rzzzzzzzzzzzzzs_, rzzzzzzzzzzzzzw_);
-        CqlCode rzzzzzzzzzzzzzy_ = this.Cardiac_Routine_Dose(context);
-        decimal? rzzzzzzzzzzzzzz_ = context.Operators.ConvertIntegerToDecimal(32);
-        decimal? szzzzzzzzzzzzza_ = context.Operators.ConvertIntegerToDecimal(576);
-        bool? szzzzzzzzzzzzzb_ = this.Qualifies(context, Obs, rzzzzzzzzzzzzzy_, rzzzzzzzzzzzzzz_, szzzzzzzzzzzzza_);
-        bool? szzzzzzzzzzzzzc_ = context.Operators.Or(rzzzzzzzzzzzzzx_, szzzzzzzzzzzzzb_);
-        CqlCode szzzzzzzzzzzzzd_ = this.Chest_Low_Dose(context);
-        decimal? szzzzzzzzzzzzzf_ = context.Operators.ConvertIntegerToDecimal(377);
-        bool? szzzzzzzzzzzzzg_ = this.Qualifies(context, Obs, szzzzzzzzzzzzzd_, rzzzzzzzzzzzzzu_, szzzzzzzzzzzzzf_);
-        bool? szzzzzzzzzzzzzh_ = context.Operators.Or(szzzzzzzzzzzzzc_, szzzzzzzzzzzzzg_);
-        CqlCode szzzzzzzzzzzzzi_ = this.Chest_Routine_Dose(context);
-        decimal? szzzzzzzzzzzzzj_ = context.Operators.ConvertIntegerToDecimal(49);
-        bool? szzzzzzzzzzzzzl_ = this.Qualifies(context, Obs, szzzzzzzzzzzzzi_, szzzzzzzzzzzzzj_, szzzzzzzzzzzzzf_);
-        bool? szzzzzzzzzzzzzm_ = context.Operators.Or(szzzzzzzzzzzzzh_, szzzzzzzzzzzzzl_);
-        CqlCode szzzzzzzzzzzzzn_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
-        decimal? szzzzzzzzzzzzzp_ = context.Operators.ConvertIntegerToDecimal(1282);
-        bool? szzzzzzzzzzzzzq_ = this.Qualifies(context, Obs, szzzzzzzzzzzzzn_, szzzzzzzzzzzzzj_, szzzzzzzzzzzzzp_);
-        bool? szzzzzzzzzzzzzr_ = context.Operators.Or(szzzzzzzzzzzzzm_, szzzzzzzzzzzzzq_);
-        CqlCode szzzzzzzzzzzzzs_ = this.Head_Low_Dose(context);
-        decimal? szzzzzzzzzzzzzt_ = context.Operators.ConvertIntegerToDecimal(115);
-        decimal? szzzzzzzzzzzzzu_ = context.Operators.ConvertIntegerToDecimal(582);
-        bool? szzzzzzzzzzzzzv_ = this.Qualifies(context, Obs, szzzzzzzzzzzzzs_, szzzzzzzzzzzzzt_, szzzzzzzzzzzzzu_);
-        bool? szzzzzzzzzzzzzw_ = context.Operators.Or(szzzzzzzzzzzzzr_, szzzzzzzzzzzzzv_);
-        CqlCode szzzzzzzzzzzzzx_ = this.Head_Routine_Dose(context);
-        decimal? szzzzzzzzzzzzzz_ = context.Operators.ConvertIntegerToDecimal(1025);
-        bool? tzzzzzzzzzzzzza_ = this.Qualifies(context, Obs, szzzzzzzzzzzzzx_, szzzzzzzzzzzzzt_, szzzzzzzzzzzzzz_);
-        bool? tzzzzzzzzzzzzzb_ = context.Operators.Or(szzzzzzzzzzzzzw_, tzzzzzzzzzzzzza_);
-        CqlCode tzzzzzzzzzzzzzc_ = this.Head_High_Dose(context);
-        decimal? tzzzzzzzzzzzzze_ = context.Operators.ConvertIntegerToDecimal(1832);
-        bool? tzzzzzzzzzzzzzf_ = this.Qualifies(context, Obs, tzzzzzzzzzzzzzc_, szzzzzzzzzzzzzt_, tzzzzzzzzzzzzze_);
-        bool? tzzzzzzzzzzzzzg_ = context.Operators.Or(tzzzzzzzzzzzzzb_, tzzzzzzzzzzzzzf_);
-        CqlCode tzzzzzzzzzzzzzh_ = this.Extremity(context);
-        decimal? tzzzzzzzzzzzzzi_ = context.Operators.ConvertIntegerToDecimal(73);
-        decimal? tzzzzzzzzzzzzzj_ = context.Operators.ConvertIntegerToDecimal(320);
-        bool? tzzzzzzzzzzzzzk_ = this.Qualifies(context, Obs, tzzzzzzzzzzzzzh_, tzzzzzzzzzzzzzi_, tzzzzzzzzzzzzzj_);
-        bool? tzzzzzzzzzzzzzl_ = context.Operators.Or(tzzzzzzzzzzzzzg_, tzzzzzzzzzzzzzk_);
-        CqlCode tzzzzzzzzzzzzzm_ = this.Neck_or_Cervical_Spine(context);
-        decimal? tzzzzzzzzzzzzzn_ = context.Operators.ConvertIntegerToDecimal(25);
-        bool? tzzzzzzzzzzzzzp_ = this.Qualifies(context, Obs, tzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzn_, rzzzzzzzzzzzzzq_);
-        bool? tzzzzzzzzzzzzzq_ = context.Operators.Or(tzzzzzzzzzzzzzl_, tzzzzzzzzzzzzzp_);
-        CqlCode tzzzzzzzzzzzzzr_ = this.Thoracic_or_Lumbar_Spine(context);
-        bool? tzzzzzzzzzzzzzu_ = this.Qualifies(context, Obs, tzzzzzzzzzzzzzr_, tzzzzzzzzzzzzzn_, rzzzzzzzzzzzzzq_);
-        bool? tzzzzzzzzzzzzzv_ = context.Operators.Or(tzzzzzzzzzzzzzq_, tzzzzzzzzzzzzzu_);
-        CqlCode tzzzzzzzzzzzzzw_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
-        decimal? tzzzzzzzzzzzzzy_ = context.Operators.ConvertIntegerToDecimal(1637);
-        bool? tzzzzzzzzzzzzzz_ = this.Qualifies(context, Obs, tzzzzzzzzzzzzzw_, rzzzzzzzzzzzzzk_, tzzzzzzzzzzzzzy_);
-        bool? uzzzzzzzzzzzzza_ = context.Operators.Or(tzzzzzzzzzzzzzv_, tzzzzzzzzzzzzzz_);
-        CqlCode uzzzzzzzzzzzzzb_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
-        decimal? uzzzzzzzzzzzzzd_ = context.Operators.ConvertIntegerToDecimal(2520);
-        bool? uzzzzzzzzzzzzze_ = this.Qualifies(context, Obs, uzzzzzzzzzzzzzb_, tzzzzzzzzzzzzzn_, uzzzzzzzzzzzzzd_);
-        bool? uzzzzzzzzzzzzzf_ = context.Operators.Or(uzzzzzzzzzzzzza_, uzzzzzzzzzzzzze_);
-        CqlCode uzzzzzzzzzzzzzg_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
-        decimal? uzzzzzzzzzzzzzi_ = context.Operators.ConvertIntegerToDecimal(2285);
-        bool? uzzzzzzzzzzzzzj_ = this.Qualifies(context, Obs, uzzzzzzzzzzzzzg_, tzzzzzzzzzzzzzn_, uzzzzzzzzzzzzzi_);
-        bool? uzzzzzzzzzzzzzk_ = context.Operators.Or(uzzzzzzzzzzzzzf_, uzzzzzzzzzzzzzj_);
-        CqlCode uzzzzzzzzzzzzzl_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
-        decimal? uzzzzzzzzzzzzzn_ = context.Operators.ConvertIntegerToDecimal(3092);
-        bool? uzzzzzzzzzzzzzo_ = this.Qualifies(context, Obs, uzzzzzzzzzzzzzl_, tzzzzzzzzzzzzzn_, uzzzzzzzzzzzzzn_);
-        bool? uzzzzzzzzzzzzzp_ = context.Operators.Or(uzzzzzzzzzzzzzk_, uzzzzzzzzzzzzzo_);
+        CqlCode fzzzzzzzzzzzzzzzzzv_ = this.Abdomen_and_Pelvis_Low_Dose(context);
+        decimal? fzzzzzzzzzzzzzzzzzw_ = context.Operators.ConvertIntegerToDecimal(64);
+        decimal? fzzzzzzzzzzzzzzzzzx_ = context.Operators.ConvertIntegerToDecimal(598);
+        bool? fzzzzzzzzzzzzzzzzzy_ = this.Qualifies(context, Obs, fzzzzzzzzzzzzzzzzzv_, fzzzzzzzzzzzzzzzzzw_, fzzzzzzzzzzzzzzzzzx_);
+        CqlCode fzzzzzzzzzzzzzzzzzz_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzza_ = context.Operators.ConvertIntegerToDecimal(29);
+        decimal? gzzzzzzzzzzzzzzzzzb_ = context.Operators.ConvertIntegerToDecimal(644);
+        bool? gzzzzzzzzzzzzzzzzzc_ = this.Qualifies(context, Obs, fzzzzzzzzzzzzzzzzzz_, gzzzzzzzzzzzzzzzzza_, gzzzzzzzzzzzzzzzzzb_);
+        bool? gzzzzzzzzzzzzzzzzzd_ = context.Operators.Or(fzzzzzzzzzzzzzzzzzy_, gzzzzzzzzzzzzzzzzzc_);
+        CqlCode gzzzzzzzzzzzzzzzzze_ = this.Abdomen_and_Pelvis_High_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzzg_ = context.Operators.ConvertIntegerToDecimal(1260);
+        bool? gzzzzzzzzzzzzzzzzzh_ = this.Qualifies(context, Obs, gzzzzzzzzzzzzzzzzze_, gzzzzzzzzzzzzzzzzza_, gzzzzzzzzzzzzzzzzzg_);
+        bool? gzzzzzzzzzzzzzzzzzi_ = context.Operators.Or(gzzzzzzzzzzzzzzzzzd_, gzzzzzzzzzzzzzzzzzh_);
+        CqlCode gzzzzzzzzzzzzzzzzzj_ = this.Cardiac_Low_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzzk_ = context.Operators.ConvertIntegerToDecimal(55);
+        decimal? gzzzzzzzzzzzzzzzzzl_ = context.Operators.ConvertIntegerToDecimal(93);
+        bool? gzzzzzzzzzzzzzzzzzm_ = this.Qualifies(context, Obs, gzzzzzzzzzzzzzzzzzj_, gzzzzzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzzzzzl_);
+        bool? gzzzzzzzzzzzzzzzzzn_ = context.Operators.Or(gzzzzzzzzzzzzzzzzzi_, gzzzzzzzzzzzzzzzzzm_);
+        CqlCode gzzzzzzzzzzzzzzzzzo_ = this.Cardiac_Routine_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzzp_ = context.Operators.ConvertIntegerToDecimal(32);
+        decimal? gzzzzzzzzzzzzzzzzzq_ = context.Operators.ConvertIntegerToDecimal(576);
+        bool? gzzzzzzzzzzzzzzzzzr_ = this.Qualifies(context, Obs, gzzzzzzzzzzzzzzzzzo_, gzzzzzzzzzzzzzzzzzp_, gzzzzzzzzzzzzzzzzzq_);
+        bool? gzzzzzzzzzzzzzzzzzs_ = context.Operators.Or(gzzzzzzzzzzzzzzzzzn_, gzzzzzzzzzzzzzzzzzr_);
+        CqlCode gzzzzzzzzzzzzzzzzzt_ = this.Chest_Low_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzzv_ = context.Operators.ConvertIntegerToDecimal(377);
+        bool? gzzzzzzzzzzzzzzzzzw_ = this.Qualifies(context, Obs, gzzzzzzzzzzzzzzzzzt_, gzzzzzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzzzzzv_);
+        bool? gzzzzzzzzzzzzzzzzzx_ = context.Operators.Or(gzzzzzzzzzzzzzzzzzs_, gzzzzzzzzzzzzzzzzzw_);
+        CqlCode gzzzzzzzzzzzzzzzzzy_ = this.Chest_Routine_Dose(context);
+        decimal? gzzzzzzzzzzzzzzzzzz_ = context.Operators.ConvertIntegerToDecimal(49);
+        bool? hzzzzzzzzzzzzzzzzzb_ = this.Qualifies(context, Obs, gzzzzzzzzzzzzzzzzzy_, gzzzzzzzzzzzzzzzzzz_, gzzzzzzzzzzzzzzzzzv_);
+        bool? hzzzzzzzzzzzzzzzzzc_ = context.Operators.Or(gzzzzzzzzzzzzzzzzzx_, hzzzzzzzzzzzzzzzzzb_);
+        CqlCode hzzzzzzzzzzzzzzzzzd_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
+        decimal? hzzzzzzzzzzzzzzzzzf_ = context.Operators.ConvertIntegerToDecimal(1282);
+        bool? hzzzzzzzzzzzzzzzzzg_ = this.Qualifies(context, Obs, hzzzzzzzzzzzzzzzzzd_, gzzzzzzzzzzzzzzzzzz_, hzzzzzzzzzzzzzzzzzf_);
+        bool? hzzzzzzzzzzzzzzzzzh_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzc_, hzzzzzzzzzzzzzzzzzg_);
+        CqlCode hzzzzzzzzzzzzzzzzzi_ = this.Head_Low_Dose(context);
+        decimal? hzzzzzzzzzzzzzzzzzj_ = context.Operators.ConvertIntegerToDecimal(115);
+        decimal? hzzzzzzzzzzzzzzzzzk_ = context.Operators.ConvertIntegerToDecimal(582);
+        bool? hzzzzzzzzzzzzzzzzzl_ = this.Qualifies(context, Obs, hzzzzzzzzzzzzzzzzzi_, hzzzzzzzzzzzzzzzzzj_, hzzzzzzzzzzzzzzzzzk_);
+        bool? hzzzzzzzzzzzzzzzzzm_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzh_, hzzzzzzzzzzzzzzzzzl_);
+        CqlCode hzzzzzzzzzzzzzzzzzn_ = this.Head_Routine_Dose(context);
+        decimal? hzzzzzzzzzzzzzzzzzp_ = context.Operators.ConvertIntegerToDecimal(1025);
+        bool? hzzzzzzzzzzzzzzzzzq_ = this.Qualifies(context, Obs, hzzzzzzzzzzzzzzzzzn_, hzzzzzzzzzzzzzzzzzj_, hzzzzzzzzzzzzzzzzzp_);
+        bool? hzzzzzzzzzzzzzzzzzr_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzm_, hzzzzzzzzzzzzzzzzzq_);
+        CqlCode hzzzzzzzzzzzzzzzzzs_ = this.Head_High_Dose(context);
+        decimal? hzzzzzzzzzzzzzzzzzu_ = context.Operators.ConvertIntegerToDecimal(1832);
+        bool? hzzzzzzzzzzzzzzzzzv_ = this.Qualifies(context, Obs, hzzzzzzzzzzzzzzzzzs_, hzzzzzzzzzzzzzzzzzj_, hzzzzzzzzzzzzzzzzzu_);
+        bool? hzzzzzzzzzzzzzzzzzw_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzr_, hzzzzzzzzzzzzzzzzzv_);
+        CqlCode hzzzzzzzzzzzzzzzzzx_ = this.Extremity(context);
+        decimal? hzzzzzzzzzzzzzzzzzy_ = context.Operators.ConvertIntegerToDecimal(73);
+        decimal? hzzzzzzzzzzzzzzzzzz_ = context.Operators.ConvertIntegerToDecimal(320);
+        bool? izzzzzzzzzzzzzzzzza_ = this.Qualifies(context, Obs, hzzzzzzzzzzzzzzzzzx_, hzzzzzzzzzzzzzzzzzy_, hzzzzzzzzzzzzzzzzzz_);
+        bool? izzzzzzzzzzzzzzzzzb_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzw_, izzzzzzzzzzzzzzzzza_);
+        CqlCode izzzzzzzzzzzzzzzzzc_ = this.Neck_or_Cervical_Spine(context);
+        decimal? izzzzzzzzzzzzzzzzzd_ = context.Operators.ConvertIntegerToDecimal(25);
+        bool? izzzzzzzzzzzzzzzzzf_ = this.Qualifies(context, Obs, izzzzzzzzzzzzzzzzzc_, izzzzzzzzzzzzzzzzzd_, gzzzzzzzzzzzzzzzzzg_);
+        bool? izzzzzzzzzzzzzzzzzg_ = context.Operators.Or(izzzzzzzzzzzzzzzzzb_, izzzzzzzzzzzzzzzzzf_);
+        CqlCode izzzzzzzzzzzzzzzzzh_ = this.Thoracic_or_Lumbar_Spine(context);
+        bool? izzzzzzzzzzzzzzzzzk_ = this.Qualifies(context, Obs, izzzzzzzzzzzzzzzzzh_, izzzzzzzzzzzzzzzzzd_, gzzzzzzzzzzzzzzzzzg_);
+        bool? izzzzzzzzzzzzzzzzzl_ = context.Operators.Or(izzzzzzzzzzzzzzzzzg_, izzzzzzzzzzzzzzzzzk_);
+        CqlCode izzzzzzzzzzzzzzzzzm_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
+        decimal? izzzzzzzzzzzzzzzzzo_ = context.Operators.ConvertIntegerToDecimal(1637);
+        bool? izzzzzzzzzzzzzzzzzp_ = this.Qualifies(context, Obs, izzzzzzzzzzzzzzzzzm_, gzzzzzzzzzzzzzzzzza_, izzzzzzzzzzzzzzzzzo_);
+        bool? izzzzzzzzzzzzzzzzzq_ = context.Operators.Or(izzzzzzzzzzzzzzzzzl_, izzzzzzzzzzzzzzzzzp_);
+        CqlCode izzzzzzzzzzzzzzzzzr_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
+        decimal? izzzzzzzzzzzzzzzzzt_ = context.Operators.ConvertIntegerToDecimal(2520);
+        bool? izzzzzzzzzzzzzzzzzu_ = this.Qualifies(context, Obs, izzzzzzzzzzzzzzzzzr_, izzzzzzzzzzzzzzzzzd_, izzzzzzzzzzzzzzzzzt_);
+        bool? izzzzzzzzzzzzzzzzzv_ = context.Operators.Or(izzzzzzzzzzzzzzzzzq_, izzzzzzzzzzzzzzzzzu_);
+        CqlCode izzzzzzzzzzzzzzzzzw_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
+        decimal? izzzzzzzzzzzzzzzzzy_ = context.Operators.ConvertIntegerToDecimal(2285);
+        bool? izzzzzzzzzzzzzzzzzz_ = this.Qualifies(context, Obs, izzzzzzzzzzzzzzzzzw_, izzzzzzzzzzzzzzzzzd_, izzzzzzzzzzzzzzzzzy_);
+        bool? jzzzzzzzzzzzzzzzzza_ = context.Operators.Or(izzzzzzzzzzzzzzzzzv_, izzzzzzzzzzzzzzzzzz_);
+        CqlCode jzzzzzzzzzzzzzzzzzb_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
+        decimal? jzzzzzzzzzzzzzzzzzd_ = context.Operators.ConvertIntegerToDecimal(3092);
+        bool? jzzzzzzzzzzzzzzzzze_ = this.Qualifies(context, Obs, jzzzzzzzzzzzzzzzzzb_, izzzzzzzzzzzzzzzzzd_, jzzzzzzzzzzzzzzzzzd_);
+        bool? jzzzzzzzzzzzzzzzzzf_ = context.Operators.Or(jzzzzzzzzzzzzzzzzza_, jzzzzzzzzzzzzzzzzze_);
 
-        return uzzzzzzzzzzzzzp_;
+        return jzzzzzzzzzzzzzzzzzf_;
     }
 
 

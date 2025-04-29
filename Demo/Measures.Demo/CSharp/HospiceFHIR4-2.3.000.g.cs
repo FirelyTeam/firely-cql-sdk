@@ -65,9 +65,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object fzzzze_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
+        object zzo_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)fzzzze_;
+        return (CqlInterval<CqlDateTime>)zzo_;
     }
 
 
@@ -78,92 +78,92 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> fzzzzf_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient fzzzzg_ = context.Operators.SingletonFrom<Patient>(fzzzzf_);
+        IEnumerable<Patient> zzp_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient zzq_ = context.Operators.SingletonFrom<Patient>(zzp_);
 
-        return fzzzzg_;
+        return zzq_;
     }
 
 
     [CqlExpressionDefinition("Has Hospice")]
     public bool? Has_Hospice(CqlContext context)
     {
-        CqlValueSet fzzzzh_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> fzzzzi_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, fzzzzh_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        bool? fzzzzj_(Encounter DischargeHospice)
+        CqlValueSet zzr_ = this.Encounter_Inpatient(context);
+        IEnumerable<Encounter> zzs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzr_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        bool? zzt_(Encounter DischargeHospice)
         {
-            Code<Encounter.EncounterStatus> fzzzzy_ = DischargeHospice?.StatusElement;
-            string fzzzzz_ = FHIRHelpers_4_0_001.Instance.ToString(context, fzzzzy_);
-            bool? gzzzza_ = context.Operators.Equal(fzzzzz_, "finished");
-            Encounter.HospitalizationComponent gzzzzb_ = DischargeHospice?.Hospitalization;
-            CodeableConcept gzzzzc_ = gzzzzb_?.DischargeDisposition;
-            CqlConcept gzzzzd_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, gzzzzc_);
-            CqlCode gzzzze_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
-            CqlConcept gzzzzf_ = context.Operators.ConvertCodeToConcept(gzzzze_);
-            bool? gzzzzg_ = context.Operators.Equivalent(gzzzzd_, gzzzzf_);
-            CodeableConcept gzzzzi_ = gzzzzb_?.DischargeDisposition;
-            CqlConcept gzzzzj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, gzzzzi_);
-            CqlCode gzzzzk_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
-            CqlConcept gzzzzl_ = context.Operators.ConvertCodeToConcept(gzzzzk_);
-            bool? gzzzzm_ = context.Operators.Equivalent(gzzzzj_, gzzzzl_);
-            bool? gzzzzn_ = context.Operators.Or(gzzzzg_, gzzzzm_);
-            bool? gzzzzo_ = context.Operators.And(gzzzza_, gzzzzn_);
-            Period gzzzzp_ = DischargeHospice?.Period;
-            CqlInterval<CqlDateTime> gzzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, gzzzzp_ as object);
-            CqlDateTime gzzzzr_ = context.Operators.End(gzzzzq_);
-            CqlInterval<CqlDateTime> gzzzzs_ = this.Measurement_Period(context);
-            bool? gzzzzt_ = context.Operators.In<CqlDateTime>(gzzzzr_, gzzzzs_, default);
-            bool? gzzzzu_ = context.Operators.And(gzzzzo_, gzzzzt_);
+            Code<Encounter.EncounterStatus> azzi_ = DischargeHospice?.StatusElement;
+            string azzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, azzi_);
+            bool? azzk_ = context.Operators.Equal(azzj_, "finished");
+            Encounter.HospitalizationComponent azzl_ = DischargeHospice?.Hospitalization;
+            CodeableConcept azzm_ = azzl_?.DischargeDisposition;
+            CqlConcept azzn_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, azzm_);
+            CqlCode azzo_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
+            CqlConcept azzp_ = context.Operators.ConvertCodeToConcept(azzo_);
+            bool? azzq_ = context.Operators.Equivalent(azzn_, azzp_);
+            CodeableConcept azzs_ = azzl_?.DischargeDisposition;
+            CqlConcept azzt_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, azzs_);
+            CqlCode azzu_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
+            CqlConcept azzv_ = context.Operators.ConvertCodeToConcept(azzu_);
+            bool? azzw_ = context.Operators.Equivalent(azzt_, azzv_);
+            bool? azzx_ = context.Operators.Or(azzq_, azzw_);
+            bool? azzy_ = context.Operators.And(azzk_, azzx_);
+            Period azzz_ = DischargeHospice?.Period;
+            CqlInterval<CqlDateTime> bzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, azzz_ as object);
+            CqlDateTime bzzb_ = context.Operators.End(bzza_);
+            CqlInterval<CqlDateTime> bzzc_ = this.Measurement_Period(context);
+            bool? bzzd_ = context.Operators.In<CqlDateTime>(bzzb_, bzzc_, default);
+            bool? bzze_ = context.Operators.And(azzy_, bzzd_);
 
-            return gzzzzu_;
+            return bzze_;
         };
-        IEnumerable<Encounter> fzzzzk_ = context.Operators.Where<Encounter>(fzzzzi_, fzzzzj_);
-        bool? fzzzzl_ = context.Operators.Exists<Encounter>(fzzzzk_);
-        CqlValueSet fzzzzm_ = this.Hospice_care_ambulatory(context);
-        IEnumerable<ServiceRequest> fzzzzn_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, fzzzzm_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-        bool? fzzzzo_(ServiceRequest HospiceOrder)
+        IEnumerable<Encounter> zzu_ = context.Operators.Where<Encounter>(zzs_, zzt_);
+        bool? zzv_ = context.Operators.Exists<Encounter>(zzu_);
+        CqlValueSet zzw_ = this.Hospice_care_ambulatory(context);
+        IEnumerable<ServiceRequest> zzx_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, zzw_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+        bool? zzy_(ServiceRequest HospiceOrder)
         {
-            Code<RequestStatus> gzzzzv_ = HospiceOrder?.StatusElement;
-            string gzzzzw_ = FHIRHelpers_4_0_001.Instance.ToString(context, gzzzzv_);
-            string[] gzzzzx_ = [
+            Code<RequestStatus> bzzf_ = HospiceOrder?.StatusElement;
+            string bzzg_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzf_);
+            string[] bzzh_ = [
                 "active",
                 "completed",
             ];
-            bool? gzzzzy_ = context.Operators.In<string>(gzzzzw_, gzzzzx_ as IEnumerable<string>);
-            Code<RequestIntent> gzzzzz_ = HospiceOrder?.IntentElement;
-            string hzzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, gzzzzz_);
-            bool? hzzzzb_ = context.Operators.Equal(hzzzza_, "order");
-            bool? hzzzzc_ = context.Operators.And(gzzzzy_, hzzzzb_);
-            CqlInterval<CqlDateTime> hzzzzd_ = this.Measurement_Period(context);
-            FhirDateTime hzzzze_ = HospiceOrder?.AuthoredOnElement;
-            CqlInterval<CqlDateTime> hzzzzf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzze_ as object);
-            bool? hzzzzg_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(hzzzzd_, hzzzzf_, default);
-            bool? hzzzzh_ = context.Operators.And(hzzzzc_, hzzzzg_);
+            bool? bzzi_ = context.Operators.In<string>(bzzg_, bzzh_ as IEnumerable<string>);
+            Code<RequestIntent> bzzj_ = HospiceOrder?.IntentElement;
+            string bzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzj_);
+            bool? bzzl_ = context.Operators.Equal(bzzk_, "order");
+            bool? bzzm_ = context.Operators.And(bzzi_, bzzl_);
+            CqlInterval<CqlDateTime> bzzn_ = this.Measurement_Period(context);
+            FhirDateTime bzzo_ = HospiceOrder?.AuthoredOnElement;
+            CqlInterval<CqlDateTime> bzzp_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzo_ as object);
+            bool? bzzq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bzzn_, bzzp_, default);
+            bool? bzzr_ = context.Operators.And(bzzm_, bzzq_);
 
-            return hzzzzh_;
+            return bzzr_;
         };
-        IEnumerable<ServiceRequest> fzzzzp_ = context.Operators.Where<ServiceRequest>(fzzzzn_, fzzzzo_);
-        bool? fzzzzq_ = context.Operators.Exists<ServiceRequest>(fzzzzp_);
-        bool? fzzzzr_ = context.Operators.Or(fzzzzl_, fzzzzq_);
-        IEnumerable<Procedure> fzzzzt_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, fzzzzm_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        bool? fzzzzu_(Procedure HospicePerformed)
+        IEnumerable<ServiceRequest> zzz_ = context.Operators.Where<ServiceRequest>(zzx_, zzy_);
+        bool? azza_ = context.Operators.Exists<ServiceRequest>(zzz_);
+        bool? azzb_ = context.Operators.Or(zzv_, azza_);
+        IEnumerable<Procedure> azzd_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, zzw_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        bool? azze_(Procedure HospicePerformed)
         {
-            Code<EventStatus> hzzzzi_ = HospicePerformed?.StatusElement;
-            string hzzzzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, hzzzzi_);
-            bool? hzzzzk_ = context.Operators.Equal(hzzzzj_, "completed");
-            DataType hzzzzl_ = HospicePerformed?.Performed;
-            CqlInterval<CqlDateTime> hzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzl_);
-            CqlInterval<CqlDateTime> hzzzzn_ = this.Measurement_Period(context);
-            bool? hzzzzo_ = context.Operators.Overlaps(hzzzzm_, hzzzzn_, default);
-            bool? hzzzzp_ = context.Operators.And(hzzzzk_, hzzzzo_);
+            Code<EventStatus> bzzs_ = HospicePerformed?.StatusElement;
+            string bzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzs_);
+            bool? bzzu_ = context.Operators.Equal(bzzt_, "completed");
+            DataType bzzv_ = HospicePerformed?.Performed;
+            CqlInterval<CqlDateTime> bzzw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzv_);
+            CqlInterval<CqlDateTime> bzzx_ = this.Measurement_Period(context);
+            bool? bzzy_ = context.Operators.Overlaps(bzzw_, bzzx_, default);
+            bool? bzzz_ = context.Operators.And(bzzu_, bzzy_);
 
-            return hzzzzp_;
+            return bzzz_;
         };
-        IEnumerable<Procedure> fzzzzv_ = context.Operators.Where<Procedure>(fzzzzt_, fzzzzu_);
-        bool? fzzzzw_ = context.Operators.Exists<Procedure>(fzzzzv_);
-        bool? fzzzzx_ = context.Operators.Or(fzzzzr_, fzzzzw_);
+        IEnumerable<Procedure> azzf_ = context.Operators.Where<Procedure>(azzd_, azze_);
+        bool? azzg_ = context.Operators.Exists<Procedure>(azzf_);
+        bool? azzh_ = context.Operators.Or(azzb_, azzg_);
 
-        return fzzzzx_;
+        return azzh_;
     }
 
 

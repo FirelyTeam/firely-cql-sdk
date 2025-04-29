@@ -53,6 +53,13 @@ public static class LibrarySetInvokerExtensions
         string definitionName)
     {
         var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
+
+        var a = new DefinitionSignature("test");
+        var b = new DefinitionSignature("test");
+        Debug.Assert(a == b);
+        Debug.Assert(a.Equals(b));
+        Debug.Assert(a.GetHashCode() == b.GetHashCode());
+        
         var libraryDefinitionInvoker = libraryInvoker.Definitions[definitionName];
         var result = libraryDefinitionInvoker.Invoke(cqlContext);
         return result;

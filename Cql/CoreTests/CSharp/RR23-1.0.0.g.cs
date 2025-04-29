@@ -69,12 +69,12 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context)
     {
-        CqlDate hzzzzza_ = context.Operators.Date(2023, 1, 1);
-        CqlDate hzzzzzb_ = context.Operators.Date(2023, 12, 31);
-        CqlInterval<CqlDate> hzzzzzc_ = context.Operators.Interval(hzzzzza_, hzzzzzb_, true, true);
-        object hzzzzzd_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", hzzzzzc_);
+        CqlDate gzzzzzx_ = context.Operators.Date(2023, 1, 1);
+        CqlDate gzzzzzy_ = context.Operators.Date(2023, 12, 31);
+        CqlInterval<CqlDate> gzzzzzz_ = context.Operators.Interval(gzzzzzx_, gzzzzzy_, true, true);
+        object hzzzzza_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", gzzzzzz_);
 
-        return hzzzzzd_;
+        return hzzzzza_;
     }
 
 
@@ -85,10 +85,10 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> hzzzzze_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient hzzzzzf_ = context.Operators.SingletonFrom<Patient>(hzzzzze_);
+        IEnumerable<Patient> hzzzzzb_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient hzzzzzc_ = context.Operators.SingletonFrom<Patient>(hzzzzzb_);
 
-        return hzzzzzf_;
+        return hzzzzzc_;
     }
 
 
@@ -99,45 +99,45 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context)
     {
-        CqlValueSet hzzzzzg_ = this.Injury_due_to_falling_rock(context);
-        IEnumerable<Condition> hzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, hzzzzzg_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? hzzzzzi_(Condition C)
+        CqlValueSet hzzzzzd_ = this.Injury_due_to_falling_rock(context);
+        IEnumerable<Condition> hzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, hzzzzzd_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? hzzzzzf_(Condition C)
         {
-            DataType hzzzzzk_ = C?.Onset;
-            object hzzzzzl_ = context.Operators.LateBoundProperty<object>(hzzzzzk_, "value");
-            object hzzzzzm_ = this.Measurement_Period(context);
-            CqlDate hzzzzzn_ = ((CqlInterval<CqlDate>)hzzzzzm_)?.low;
+            DataType hzzzzzh_ = C?.Onset;
+            object hzzzzzi_ = context.Operators.LateBoundProperty<object>(hzzzzzh_, "value");
+            object hzzzzzj_ = this.Measurement_Period(context);
+            CqlDate hzzzzzk_ = ((CqlInterval<CqlDate>)hzzzzzj_)?.low;
+            CqlDateTime hzzzzzl_ = context.Operators.ConvertDateToDateTime(hzzzzzk_);
+            CqlDate hzzzzzn_ = ((CqlInterval<CqlDate>)hzzzzzj_)?.high;
             CqlDateTime hzzzzzo_ = context.Operators.ConvertDateToDateTime(hzzzzzn_);
-            CqlDate hzzzzzq_ = ((CqlInterval<CqlDate>)hzzzzzm_)?.high;
-            CqlDateTime hzzzzzr_ = context.Operators.ConvertDateToDateTime(hzzzzzq_);
-            bool? hzzzzzt_ = ((CqlInterval<CqlDate>)hzzzzzm_)?.lowClosed;
-            bool? hzzzzzv_ = ((CqlInterval<CqlDate>)hzzzzzm_)?.highClosed;
-            CqlInterval<CqlDateTime> hzzzzzw_ = context.Operators.Interval(hzzzzzo_, hzzzzzr_, hzzzzzt_, hzzzzzv_);
-            bool? hzzzzzx_ = context.Operators.In<CqlDateTime>(hzzzzzl_ as CqlDateTime, hzzzzzw_, default);
+            bool? hzzzzzq_ = ((CqlInterval<CqlDate>)hzzzzzj_)?.lowClosed;
+            bool? hzzzzzs_ = ((CqlInterval<CqlDate>)hzzzzzj_)?.highClosed;
+            CqlInterval<CqlDateTime> hzzzzzt_ = context.Operators.Interval(hzzzzzl_, hzzzzzo_, hzzzzzq_, hzzzzzs_);
+            bool? hzzzzzu_ = context.Operators.In<CqlDateTime>(hzzzzzi_ as CqlDateTime, hzzzzzt_, default);
 
-            return hzzzzzx_;
+            return hzzzzzu_;
         };
-        IEnumerable<Condition> hzzzzzj_ = context.Operators.Where<Condition>(hzzzzzh_, hzzzzzi_);
+        IEnumerable<Condition> hzzzzzg_ = context.Operators.Where<Condition>(hzzzzze_, hzzzzzf_);
 
-        return hzzzzzj_;
+        return hzzzzzg_;
     }
 
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context)
     {
-        IEnumerable<Condition> hzzzzzy_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-        object hzzzzzz_(Condition @this)
+        IEnumerable<Condition> hzzzzzv_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
+        object hzzzzzw_(Condition @this)
         {
-            DataType izzzzzc_ = @this?.Onset;
-            object izzzzzd_ = context.Operators.LateBoundProperty<object>(izzzzzc_, "value");
+            DataType hzzzzzz_ = @this?.Onset;
+            object izzzzza_ = context.Operators.LateBoundProperty<object>(hzzzzzz_, "value");
 
-            return izzzzzd_ as CqlDateTime;
+            return izzzzza_ as CqlDateTime;
         };
-        IEnumerable<Condition> izzzzza_ = context.Operators.SortBy<Condition>(hzzzzzy_, hzzzzzz_, System.ComponentModel.ListSortDirection.Ascending);
-        Condition izzzzzb_ = context.Operators.Last<Condition>(izzzzza_);
+        IEnumerable<Condition> hzzzzzx_ = context.Operators.SortBy<Condition>(hzzzzzv_, hzzzzzw_, System.ComponentModel.ListSortDirection.Ascending);
+        Condition hzzzzzy_ = context.Operators.Last<Condition>(hzzzzzx_);
 
-        return izzzzzb_;
+        return hzzzzzy_;
     }
 
 
@@ -148,46 +148,46 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
     public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context)
     {
-        IEnumerable<SupplyDelivery> izzzzze_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
-        bool? izzzzzf_(SupplyDelivery SD)
+        IEnumerable<SupplyDelivery> izzzzzb_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
+        bool? izzzzzc_(SupplyDelivery SD)
         {
-            SupplyDelivery.SuppliedItemComponent izzzzzh_ = SD?.SuppliedItem;
-            DataType izzzzzi_ = izzzzzh_?.Item;
-            CqlConcept izzzzzj_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, izzzzzi_ as CodeableConcept);
-            CqlCode izzzzzk_ = this.Tiny_Umbrella(context);
-            CqlConcept izzzzzl_ = context.Operators.ConvertCodeToConcept(izzzzzk_);
-            bool? izzzzzm_ = context.Operators.Equivalent(izzzzzj_, izzzzzl_);
-            Condition izzzzzn_ = this.Latest_injury_due_to_falling_rock(context);
-            Condition[] izzzzzo_ = [
-                izzzzzn_,
+            SupplyDelivery.SuppliedItemComponent izzzzze_ = SD?.SuppliedItem;
+            DataType izzzzzf_ = izzzzze_?.Item;
+            CqlConcept izzzzzg_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, izzzzzf_ as CodeableConcept);
+            CqlCode izzzzzh_ = this.Tiny_Umbrella(context);
+            CqlConcept izzzzzi_ = context.Operators.ConvertCodeToConcept(izzzzzh_);
+            bool? izzzzzj_ = context.Operators.Equivalent(izzzzzg_, izzzzzi_);
+            Condition izzzzzk_ = this.Latest_injury_due_to_falling_rock(context);
+            Condition[] izzzzzl_ = [
+                izzzzzk_,
             ];
-            bool? izzzzzp_(Condition C)
+            bool? izzzzzm_(Condition C)
             {
-                DataType izzzzzu_ = C?.Onset;
-                object izzzzzv_ = context.Operators.LateBoundProperty<object>(izzzzzu_, "value");
-                DataType izzzzzw_ = SD?.Occurrence;
-                CqlDateTime izzzzzx_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzw_, "value");
-                CqlQuantity izzzzzy_ = context.Operators.Quantity(7m, "days");
-                CqlDateTime izzzzzz_ = context.Operators.Subtract(izzzzzx_, izzzzzy_);
-                CqlDateTime jzzzzzb_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzw_, "value");
-                CqlInterval<CqlDateTime> jzzzzzc_ = context.Operators.Interval(izzzzzz_, jzzzzzb_, true, false);
-                bool? jzzzzzd_ = context.Operators.In<CqlDateTime>(izzzzzv_ as CqlDateTime, jzzzzzc_, default);
-                CqlDateTime jzzzzzf_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzw_, "value");
-                bool? jzzzzzg_ = context.Operators.Not((bool?)(jzzzzzf_ is null));
-                bool? jzzzzzh_ = context.Operators.And(jzzzzzd_, jzzzzzg_);
+                DataType izzzzzr_ = C?.Onset;
+                object izzzzzs_ = context.Operators.LateBoundProperty<object>(izzzzzr_, "value");
+                DataType izzzzzt_ = SD?.Occurrence;
+                CqlDateTime izzzzzu_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzt_, "value");
+                CqlQuantity izzzzzv_ = context.Operators.Quantity(7m, "days");
+                CqlDateTime izzzzzw_ = context.Operators.Subtract(izzzzzu_, izzzzzv_);
+                CqlDateTime izzzzzy_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzt_, "value");
+                CqlInterval<CqlDateTime> izzzzzz_ = context.Operators.Interval(izzzzzw_, izzzzzy_, true, false);
+                bool? jzzzzza_ = context.Operators.In<CqlDateTime>(izzzzzs_ as CqlDateTime, izzzzzz_, default);
+                CqlDateTime jzzzzzc_ = context.Operators.LateBoundProperty<CqlDateTime>(izzzzzt_, "value");
+                bool? jzzzzzd_ = context.Operators.Not((bool?)(jzzzzzc_ is null));
+                bool? jzzzzze_ = context.Operators.And(jzzzzza_, jzzzzzd_);
 
-                return jzzzzzh_;
+                return jzzzzze_;
             };
-            IEnumerable<Condition> izzzzzq_ = context.Operators.Where<Condition>((IEnumerable<Condition>)izzzzzo_, izzzzzp_);
-            Condition izzzzzr_ = context.Operators.SingletonFrom<Condition>(izzzzzq_);
-            bool? izzzzzs_ = context.Operators.Not((bool?)(izzzzzr_ is null));
-            bool? izzzzzt_ = context.Operators.And(izzzzzm_, izzzzzs_);
+            IEnumerable<Condition> izzzzzn_ = context.Operators.Where<Condition>((IEnumerable<Condition>)izzzzzl_, izzzzzm_);
+            Condition izzzzzo_ = context.Operators.SingletonFrom<Condition>(izzzzzn_);
+            bool? izzzzzp_ = context.Operators.Not((bool?)(izzzzzo_ is null));
+            bool? izzzzzq_ = context.Operators.And(izzzzzj_, izzzzzp_);
 
-            return izzzzzt_;
+            return izzzzzq_;
         };
-        IEnumerable<SupplyDelivery> izzzzzg_ = context.Operators.Where<SupplyDelivery>(izzzzze_, izzzzzf_);
+        IEnumerable<SupplyDelivery> izzzzzd_ = context.Operators.Where<SupplyDelivery>(izzzzzb_, izzzzzc_);
 
-        return izzzzzg_;
+        return izzzzzd_;
     }
 
 

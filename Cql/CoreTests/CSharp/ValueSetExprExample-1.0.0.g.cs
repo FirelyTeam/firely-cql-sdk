@@ -53,18 +53,18 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context)
     {
-        object jzzzzzu_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
+        object jzzzzzi_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
 
-        return (string)jzzzzzu_;
+        return (string)jzzzzzi_;
     }
 
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context)
     {
-        object jzzzzzv_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", null, null));
+        object jzzzzzj_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", null, null));
 
-        return (CqlCode)jzzzzzv_;
+        return (CqlCode)jzzzzzj_;
     }
 
 
@@ -75,33 +75,33 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context)
     {
-        CqlValueSet jzzzzzw_()
+        CqlValueSet jzzzzzk_()
         {
-            bool jzzzzzx_()
+            bool jzzzzzl_()
             {
-                string jzzzzzz_ = this.ChosenSubCategory(context);
-                bool? kzzzzza_ = context.Operators.Equal(jzzzzzz_, "1");
+                string jzzzzzn_ = this.ChosenSubCategory(context);
+                bool? jzzzzzo_ = context.Operators.Equal(jzzzzzn_, "1");
 
-                return kzzzzza_ ?? false;
+                return jzzzzzo_ ?? false;
             };
-            bool jzzzzzy_()
+            bool jzzzzzm_()
             {
-                string kzzzzzb_ = this.ChosenSubCategory(context);
-                bool? kzzzzzc_ = context.Operators.Equal(kzzzzzb_, "2");
+                string jzzzzzp_ = this.ChosenSubCategory(context);
+                bool? jzzzzzq_ = context.Operators.Equal(jzzzzzp_, "2");
 
-                return kzzzzzc_ ?? false;
+                return jzzzzzq_ ?? false;
             };
-            if (jzzzzzx_())
+            if (jzzzzzl_())
             {
-                CqlValueSet kzzzzzd_ = this.ValueSet_A_1(context);
+                CqlValueSet jzzzzzr_ = this.ValueSet_A_1(context);
 
-                return kzzzzzd_;
+                return jzzzzzr_;
             }
-            else if (jzzzzzy_())
+            else if (jzzzzzm_())
             {
-                CqlValueSet kzzzzze_ = this.ValueSet_A_2(context);
+                CqlValueSet jzzzzzs_ = this.ValueSet_A_2(context);
 
-                return kzzzzze_;
+                return jzzzzzs_;
             }
             else
             {
@@ -109,40 +109,40 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             }
         };
 
-        return jzzzzzw_();
+        return jzzzzzk_();
     }
 
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context)
     {
-        CqlValueSet kzzzzzf_()
+        CqlValueSet jzzzzzt_()
         {
-            bool kzzzzzg_()
+            bool jzzzzzu_()
             {
-                string kzzzzzi_ = this.ChosenSubCategory(context);
-                bool? kzzzzzj_ = context.Operators.Equal(kzzzzzi_, "1");
+                string jzzzzzw_ = this.ChosenSubCategory(context);
+                bool? jzzzzzx_ = context.Operators.Equal(jzzzzzw_, "1");
 
-                return kzzzzzj_ ?? false;
+                return jzzzzzx_ ?? false;
             };
-            bool kzzzzzh_()
+            bool jzzzzzv_()
             {
-                string kzzzzzk_ = this.ChosenSubCategory(context);
-                bool? kzzzzzl_ = context.Operators.Equal(kzzzzzk_, "2");
+                string jzzzzzy_ = this.ChosenSubCategory(context);
+                bool? jzzzzzz_ = context.Operators.Equal(jzzzzzy_, "2");
 
-                return kzzzzzl_ ?? false;
+                return jzzzzzz_ ?? false;
             };
-            if (kzzzzzg_())
+            if (jzzzzzu_())
             {
-                CqlValueSet kzzzzzm_ = this.ValueSet_B_1(context);
+                CqlValueSet kzzzzza_ = this.ValueSet_B_1(context);
 
-                return kzzzzzm_;
+                return kzzzzza_;
             }
-            else if (kzzzzzh_())
+            else if (jzzzzzv_())
             {
-                CqlValueSet kzzzzzn_ = this.ValueSet_B_2(context);
+                CqlValueSet kzzzzzb_ = this.ValueSet_B_2(context);
 
-                return kzzzzzn_;
+                return kzzzzzb_;
             }
             else
             {
@@ -150,36 +150,36 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             }
         };
 
-        return kzzzzzf_();
+        return jzzzzzt_();
     }
 
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context)
     {
-        string kzzzzzo_()
+        string kzzzzzc_()
         {
-            bool kzzzzzp_()
+            bool kzzzzzd_()
             {
-                CqlCode kzzzzzr_ = this.ChosenCode(context);
-                CqlValueSet kzzzzzs_ = this.ValueSetA(context);
-                bool? kzzzzzt_ = context.Operators.CodeInValueSet(kzzzzzr_, kzzzzzs_);
+                CqlCode kzzzzzf_ = this.ChosenCode(context);
+                CqlValueSet kzzzzzg_ = this.ValueSetA(context);
+                bool? kzzzzzh_ = context.Operators.CodeInValueSet(kzzzzzf_, kzzzzzg_);
 
-                return kzzzzzt_ ?? false;
+                return kzzzzzh_ ?? false;
             };
-            bool kzzzzzq_()
+            bool kzzzzze_()
             {
-                CqlCode kzzzzzu_ = this.ChosenCode(context);
-                CqlValueSet kzzzzzv_ = this.ValueSetB(context);
-                bool? kzzzzzw_ = context.Operators.CodeInValueSet(kzzzzzu_, kzzzzzv_);
+                CqlCode kzzzzzi_ = this.ChosenCode(context);
+                CqlValueSet kzzzzzj_ = this.ValueSetB(context);
+                bool? kzzzzzk_ = context.Operators.CodeInValueSet(kzzzzzi_, kzzzzzj_);
 
-                return kzzzzzw_ ?? false;
+                return kzzzzzk_ ?? false;
             };
-            if (kzzzzzp_())
+            if (kzzzzzd_())
             {
                 return "a";
             }
-            else if (kzzzzzq_())
+            else if (kzzzzze_())
             {
                 return "b";
             }
@@ -189,7 +189,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             }
         };
 
-        return kzzzzzo_();
+        return kzzzzzc_();
     }
 
 

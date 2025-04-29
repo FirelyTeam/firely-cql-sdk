@@ -53,9 +53,9 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object gzzzzzzzzzzzzzze_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
+        object nzzzzzzj_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)gzzzzzzzzzzzzzze_;
+        return (CqlInterval<CqlDateTime>)nzzzzzzj_;
     }
 
 
@@ -66,94 +66,94 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> gzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient gzzzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<Patient>(gzzzzzzzzzzzzzzf_);
+        IEnumerable<Patient> nzzzzzzk_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient nzzzzzzl_ = context.Operators.SingletonFrom<Patient>(nzzzzzzk_);
 
-        return gzzzzzzzzzzzzzzg_;
+        return nzzzzzzl_;
     }
 
 
     [CqlExpressionDefinition("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context)
     {
-        IEnumerable<Condition> gzzzzzzzzzzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? gzzzzzzzzzzzzzzi_(Condition c)
+        IEnumerable<Condition> nzzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? nzzzzzzn_(Condition c)
         {
-            CodeableConcept gzzzzzzzzzzzzzzk_ = c?.Code;
-            List<Coding> gzzzzzzzzzzzzzzl_ = gzzzzzzzzzzzzzzk_?.Coding;
-            bool? gzzzzzzzzzzzzzzm_(Coding coding)
+            CodeableConcept nzzzzzzp_ = c?.Code;
+            List<Coding> nzzzzzzq_ = nzzzzzzp_?.Coding;
+            bool? nzzzzzzr_(Coding coding)
             {
-                CqlCode gzzzzzzzzzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
-                CqlCode gzzzzzzzzzzzzzzv_ = this.Sucked_into_jet_engine(context);
-                bool? gzzzzzzzzzzzzzzw_ = context.Operators.Equivalent(gzzzzzzzzzzzzzzu_, gzzzzzzzzzzzzzzv_);
+                CqlCode nzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
+                CqlCode ozzzzzza_ = this.Sucked_into_jet_engine(context);
+                bool? ozzzzzzb_ = context.Operators.Equivalent(nzzzzzzz_, ozzzzzza_);
 
-                return gzzzzzzzzzzzzzzw_;
+                return ozzzzzzb_;
             };
-            IEnumerable<Coding> gzzzzzzzzzzzzzzn_ = context.Operators.Where<Coding>((IEnumerable<Coding>)gzzzzzzzzzzzzzzl_, gzzzzzzzzzzzzzzm_);
-            bool? gzzzzzzzzzzzzzzo_ = context.Operators.Exists<Coding>(gzzzzzzzzzzzzzzn_);
-            DataType gzzzzzzzzzzzzzzp_ = c?.Onset;
-            CqlDateTime gzzzzzzzzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, gzzzzzzzzzzzzzzp_ as FhirDateTime);
-            CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzr_ = this.Measurement_Period(context);
-            bool? gzzzzzzzzzzzzzzs_ = context.Operators.In<CqlDateTime>(gzzzzzzzzzzzzzzq_, gzzzzzzzzzzzzzzr_, default);
-            bool? gzzzzzzzzzzzzzzt_ = context.Operators.And(gzzzzzzzzzzzzzzo_, gzzzzzzzzzzzzzzs_);
+            IEnumerable<Coding> nzzzzzzs_ = context.Operators.Where<Coding>((IEnumerable<Coding>)nzzzzzzq_, nzzzzzzr_);
+            bool? nzzzzzzt_ = context.Operators.Exists<Coding>(nzzzzzzs_);
+            DataType nzzzzzzu_ = c?.Onset;
+            CqlDateTime nzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, nzzzzzzu_ as FhirDateTime);
+            CqlInterval<CqlDateTime> nzzzzzzw_ = this.Measurement_Period(context);
+            bool? nzzzzzzx_ = context.Operators.In<CqlDateTime>(nzzzzzzv_, nzzzzzzw_, default);
+            bool? nzzzzzzy_ = context.Operators.And(nzzzzzzt_, nzzzzzzx_);
 
-            return gzzzzzzzzzzzzzzt_;
+            return nzzzzzzy_;
         };
-        IEnumerable<Condition> gzzzzzzzzzzzzzzj_ = context.Operators.Where<Condition>(gzzzzzzzzzzzzzzh_, gzzzzzzzzzzzzzzi_);
+        IEnumerable<Condition> nzzzzzzo_ = context.Operators.Where<Condition>(nzzzzzzm_, nzzzzzzn_);
 
-        return gzzzzzzzzzzzzzzj_;
+        return nzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context)
     {
-        IEnumerable<Condition> gzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? gzzzzzzzzzzzzzzy_(Condition c)
+        IEnumerable<Condition> ozzzzzzc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? ozzzzzzd_(Condition c)
         {
-            CodeableConcept hzzzzzzzzzzzzzza_ = c?.Code;
-            List<Coding> hzzzzzzzzzzzzzzb_ = hzzzzzzzzzzzzzza_?.Coding;
-            bool? hzzzzzzzzzzzzzzc_(Coding coding)
+            CodeableConcept ozzzzzzf_ = c?.Code;
+            List<Coding> ozzzzzzg_ = ozzzzzzf_?.Coding;
+            bool? ozzzzzzh_(Coding coding)
             {
-                CqlCode hzzzzzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
-                CqlCode hzzzzzzzzzzzzzzl_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
-                bool? hzzzzzzzzzzzzzzm_ = context.Operators.Equivalent(hzzzzzzzzzzzzzzk_, hzzzzzzzzzzzzzzl_);
+                CqlCode ozzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
+                CqlCode ozzzzzzq_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
+                bool? ozzzzzzr_ = context.Operators.Equivalent(ozzzzzzp_, ozzzzzzq_);
 
-                return hzzzzzzzzzzzzzzm_;
+                return ozzzzzzr_;
             };
-            IEnumerable<Coding> hzzzzzzzzzzzzzzd_ = context.Operators.Where<Coding>((IEnumerable<Coding>)hzzzzzzzzzzzzzzb_, hzzzzzzzzzzzzzzc_);
-            bool? hzzzzzzzzzzzzzze_ = context.Operators.Exists<Coding>(hzzzzzzzzzzzzzzd_);
-            DataType hzzzzzzzzzzzzzzf_ = c?.Onset;
-            CqlDateTime hzzzzzzzzzzzzzzg_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, hzzzzzzzzzzzzzzf_ as FhirDateTime);
-            CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzh_ = this.Measurement_Period(context);
-            bool? hzzzzzzzzzzzzzzi_ = context.Operators.In<CqlDateTime>(hzzzzzzzzzzzzzzg_, hzzzzzzzzzzzzzzh_, default);
-            bool? hzzzzzzzzzzzzzzj_ = context.Operators.And(hzzzzzzzzzzzzzze_, hzzzzzzzzzzzzzzi_);
+            IEnumerable<Coding> ozzzzzzi_ = context.Operators.Where<Coding>((IEnumerable<Coding>)ozzzzzzg_, ozzzzzzh_);
+            bool? ozzzzzzj_ = context.Operators.Exists<Coding>(ozzzzzzi_);
+            DataType ozzzzzzk_ = c?.Onset;
+            CqlDateTime ozzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ozzzzzzk_ as FhirDateTime);
+            CqlInterval<CqlDateTime> ozzzzzzm_ = this.Measurement_Period(context);
+            bool? ozzzzzzn_ = context.Operators.In<CqlDateTime>(ozzzzzzl_, ozzzzzzm_, default);
+            bool? ozzzzzzo_ = context.Operators.And(ozzzzzzj_, ozzzzzzn_);
 
-            return hzzzzzzzzzzzzzzj_;
+            return ozzzzzzo_;
         };
-        IEnumerable<Condition> gzzzzzzzzzzzzzzz_ = context.Operators.Where<Condition>(gzzzzzzzzzzzzzzx_, gzzzzzzzzzzzzzzy_);
+        IEnumerable<Condition> ozzzzzze_ = context.Operators.Where<Condition>(ozzzzzzc_, ozzzzzzd_);
 
-        return gzzzzzzzzzzzzzzz_;
+        return ozzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Initial population")]
     public bool? Initial_population(CqlContext context)
     {
-        IEnumerable<Condition> hzzzzzzzzzzzzzzn_ = this.Jet_engine_conditions(context);
-        bool? hzzzzzzzzzzzzzzo_ = context.Operators.Exists<Condition>(hzzzzzzzzzzzzzzn_);
+        IEnumerable<Condition> ozzzzzzs_ = this.Jet_engine_conditions(context);
+        bool? ozzzzzzt_ = context.Operators.Exists<Condition>(ozzzzzzs_);
 
-        return hzzzzzzzzzzzzzzo_;
+        return ozzzzzzt_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
-        IEnumerable<Condition> hzzzzzzzzzzzzzzp_ = this.Subsequent_encounters(context);
-        bool? hzzzzzzzzzzzzzzq_ = context.Operators.Exists<Condition>(hzzzzzzzzzzzzzzp_);
+        IEnumerable<Condition> ozzzzzzu_ = this.Subsequent_encounters(context);
+        bool? ozzzzzzv_ = context.Operators.Exists<Condition>(ozzzzzzu_);
 
-        return hzzzzzzzzzzzzzzq_;
+        return ozzzzzzv_;
     }
 
 

@@ -76,6 +76,8 @@ public static class DefinitionInvokerExtensions
         if (includeDefinition is { } fn)
             definitionInvokers = definitionInvokers.Where(definitionInvoker => fn(definitionInvoker));
 
+        definitionInvokers = definitionInvokers.Where(definitionInvoker => definitionInvoker.ParameterTypes.Length == 0);
+
         // We need to enumerate twice, which isn't a problem in the case of collections.
         if (definitionInvokers is not IReadOnlyCollection<DefinitionInvoker> or ICollection<DefinitionInvoker>)
             definitionInvokers = definitionInvokers.ToList();

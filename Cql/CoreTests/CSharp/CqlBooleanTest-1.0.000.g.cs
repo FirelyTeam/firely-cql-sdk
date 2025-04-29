@@ -33,10 +33,10 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context)
     {
-        bool? gzzzzzw_ = context.Operators.Equal(1, 1);
-        bool? gzzzzzx_ = context.Operators.Equal(gzzzzzw_, true);
+        bool? gzzzzzv_ = context.Operators.Equal(1, 1);
+        bool? gzzzzzw_ = context.Operators.Equal(gzzzzzv_, true);
 
-        return gzzzzzx_;
+        return gzzzzzw_;
     }
 
 

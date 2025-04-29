@@ -61,54 +61,54 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> nzzh_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient nzzi_ = context.Operators.SingletonFrom<Patient>(nzzh_);
+        IEnumerable<Patient> czzzv_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient czzzw_ = context.Operators.SingletonFrom<Patient>(czzzv_);
 
-        return nzzi_;
+        return czzzw_;
     }
 
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
     {
-        CqlCode nzzj_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode> nzzk_ = context.Operators.ToList<CqlCode>(nzzj_);
-        IEnumerable<Observation> nzzl_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, nzzk_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? nzzm_(Observation O)
+        CqlCode czzzx_ = this.Tobacco_Smoking_Status(context);
+        IEnumerable<CqlCode> czzzy_ = context.Operators.ToList<CqlCode>(czzzx_);
+        IEnumerable<Observation> czzzz_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, czzzy_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? dzzza_(Observation O)
         {
-            Code<ObservationStatus> nzzo_ = O?.StatusElement;
-            string nzzp_ = FHIRHelpers_4_3_000.Instance.ToString(context, nzzo_);
-            string[] nzzq_ = [
+            Code<ObservationStatus> dzzzc_ = O?.StatusElement;
+            string dzzzd_ = FHIRHelpers_4_3_000.Instance.ToString(context, dzzzc_);
+            string[] dzzze_ = [
                 "final",
                 "amended",
             ];
-            bool? nzzr_ = context.Operators.In<string>(nzzp_, nzzq_ as IEnumerable<string>);
+            bool? dzzzf_ = context.Operators.In<string>(dzzzd_, dzzze_ as IEnumerable<string>);
 
-            return nzzr_;
+            return dzzzf_;
         };
-        IEnumerable<Observation> nzzn_ = context.Operators.Where<Observation>(nzzl_, nzzm_);
+        IEnumerable<Observation> dzzzb_ = context.Operators.Where<Observation>(czzzz_, dzzza_);
 
-        return nzzn_;
+        return dzzzb_;
     }
 
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
-        CqlValueSet nzzs_ = this.Lung_Cancer(context);
-        IEnumerable<Condition> nzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, nzzs_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? nzzu_(Condition C)
+        CqlValueSet dzzzg_ = this.Lung_Cancer(context);
+        IEnumerable<Condition> dzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, dzzzg_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? dzzzi_(Condition C)
         {
-            CodeableConcept nzzw_ = C?.ClinicalStatus;
-            CqlConcept nzzx_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, nzzw_);
-            CqlValueSet nzzy_ = this.Condition_Clinical_Status(context);
-            bool? nzzz_ = context.Operators.ConceptInValueSet(nzzx_, nzzy_);
+            CodeableConcept dzzzk_ = C?.ClinicalStatus;
+            CqlConcept dzzzl_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, dzzzk_);
+            CqlValueSet dzzzm_ = this.Condition_Clinical_Status(context);
+            bool? dzzzn_ = context.Operators.ConceptInValueSet(dzzzl_, dzzzm_);
 
-            return nzzz_;
+            return dzzzn_;
         };
-        IEnumerable<Condition> nzzv_ = context.Operators.Where<Condition>(nzzt_, nzzu_);
+        IEnumerable<Condition> dzzzj_ = context.Operators.Where<Condition>(dzzzh_, dzzzi_);
 
-        return nzzv_;
+        return dzzzj_;
     }
 
 

@@ -73,319 +73,319 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> yzzzzzm_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient yzzzzzn_ = context.Operators.SingletonFrom<Patient>(yzzzzzm_);
+        IEnumerable<Patient> xzzi_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient xzzj_ = context.Operators.SingletonFrom<Patient>(xzzi_);
 
-        return yzzzzzn_;
+        return xzzj_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        List<Extension> yzzzzzo_()
+        List<Extension> xzzk_()
         {
-            bool yzzzzzx_()
+            bool xzzt_()
             {
-                Patient yzzzzzy_ = this.Patient(context);
-                bool yzzzzzz_ = yzzzzzy_ is DomainResource;
+                Patient xzzu_ = this.Patient(context);
+                bool xzzv_ = xzzu_ is DomainResource;
 
-                return yzzzzzz_;
+                return xzzv_;
             };
-            if (yzzzzzx_())
+            if (xzzt_())
             {
-                Patient zzzzzza_ = this.Patient(context);
+                Patient xzzw_ = this.Patient(context);
 
-                return (zzzzzza_ as DomainResource).Extension;
+                return (xzzw_ as DomainResource).Extension;
             }
             else
             {
                 return default;
             }
         };
-        bool? yzzzzzp_(Extension @this)
+        bool? xzzl_(Extension @this)
         {
-            string zzzzzzb_ = @this?.Url;
-            FhirString zzzzzzc_ = context.Operators.Convert<FhirString>(zzzzzzb_);
-            string zzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToString(context, zzzzzzc_);
-            bool? zzzzzze_ = context.Operators.Equal(zzzzzzd_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            string xzzx_ = @this?.Url;
+            FhirString xzzy_ = context.Operators.Convert<FhirString>(xzzx_);
+            string xzzz_ = FHIRHelpers_4_4_000.Instance.ToString(context, xzzy_);
+            bool? yzza_ = context.Operators.Equal(xzzz_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
-            return zzzzzze_;
+            return yzza_;
         };
-        IEnumerable<Extension> yzzzzzq_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(yzzzzzo_()), yzzzzzp_);
-        Extension yzzzzzr_ = context.Operators.SingletonFrom<Extension>(yzzzzzq_);
-        Extension[] yzzzzzs_ = [
-            yzzzzzr_,
+        IEnumerable<Extension> xzzm_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(xzzk_()), xzzl_);
+        Extension xzzn_ = context.Operators.SingletonFrom<Extension>(xzzm_);
+        Extension[] xzzo_ = [
+            xzzn_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? yzzzzzt_(Extension E)
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? xzzp_(Extension E)
         {
-            bool? zzzzzzf_(Extension @this)
+            bool? yzzb_(Extension @this)
             {
-                string azzzzzza_ = @this?.Url;
-                FhirString azzzzzzb_ = context.Operators.Convert<FhirString>(azzzzzza_);
-                string azzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToString(context, azzzzzzb_);
-                bool? azzzzzzd_ = context.Operators.Equal(azzzzzzc_, "ombCategory");
+                string yzzw_ = @this?.Url;
+                FhirString yzzx_ = context.Operators.Convert<FhirString>(yzzw_);
+                string yzzy_ = FHIRHelpers_4_4_000.Instance.ToString(context, yzzx_);
+                bool? yzzz_ = context.Operators.Equal(yzzy_, "ombCategory");
 
-                return azzzzzzd_;
+                return yzzz_;
             };
-            IEnumerable<Extension> zzzzzzg_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+            IEnumerable<Extension> yzzc_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
                     ? (E as Element).Extension
-                    : default), zzzzzzf_);
-            object zzzzzzh_(Extension @this)
+                    : default), yzzb_);
+            object yzzd_(Extension @this)
             {
-                DataType azzzzzze_ = @this?.Value;
+                DataType zzza_ = @this?.Value;
 
-                return azzzzzze_;
+                return zzza_;
             };
-            IEnumerable<object> zzzzzzi_ = context.Operators.Select<Extension, object>(zzzzzzg_, zzzzzzh_);
-            object zzzzzzj_ = context.Operators.SingletonFrom<object>(zzzzzzi_);
-            CqlCode zzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToCode(context, zzzzzzj_ as Coding);
-            CqlCode[] zzzzzzl_ = [
-                zzzzzzk_,
+            IEnumerable<object> yzze_ = context.Operators.Select<Extension, object>(yzzc_, yzzd_);
+            object yzzf_ = context.Operators.SingletonFrom<object>(yzze_);
+            CqlCode yzzg_ = FHIRHelpers_4_4_000.Instance.ToCode(context, yzzf_ as Coding);
+            CqlCode[] yzzh_ = [
+                yzzg_,
             ];
-            bool? zzzzzzm_(Extension @this)
+            bool? yzzi_(Extension @this)
             {
-                string azzzzzzf_ = @this?.Url;
-                FhirString azzzzzzg_ = context.Operators.Convert<FhirString>(azzzzzzf_);
-                string azzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToString(context, azzzzzzg_);
-                bool? azzzzzzi_ = context.Operators.Equal(azzzzzzh_, "detailed");
+                string zzzb_ = @this?.Url;
+                FhirString zzzc_ = context.Operators.Convert<FhirString>(zzzb_);
+                string zzzd_ = FHIRHelpers_4_4_000.Instance.ToString(context, zzzc_);
+                bool? zzze_ = context.Operators.Equal(zzzd_, "detailed");
 
-                return azzzzzzi_;
+                return zzze_;
             };
-            IEnumerable<Extension> zzzzzzn_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+            IEnumerable<Extension> yzzj_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
                     ? (E as Element).Extension
-                    : default), zzzzzzm_);
-            object zzzzzzo_(Extension @this)
+                    : default), yzzi_);
+            object yzzk_(Extension @this)
             {
-                DataType azzzzzzj_ = @this?.Value;
+                DataType zzzf_ = @this?.Value;
 
-                return azzzzzzj_;
+                return zzzf_;
             };
-            IEnumerable<object> zzzzzzp_ = context.Operators.Select<Extension, object>(zzzzzzn_, zzzzzzo_);
-            CqlCode zzzzzzq_(object @this)
+            IEnumerable<object> yzzl_ = context.Operators.Select<Extension, object>(yzzj_, yzzk_);
+            CqlCode yzzm_(object @this)
             {
-                CqlCode azzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
+                CqlCode zzzg_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
 
-                return azzzzzzk_;
+                return zzzg_;
             };
-            IEnumerable<CqlCode> zzzzzzr_ = context.Operators.Select<object, CqlCode>(zzzzzzp_, zzzzzzq_);
-            IEnumerable<CqlCode> zzzzzzs_ = context.Operators.Union<CqlCode>(zzzzzzl_ as IEnumerable<CqlCode>, zzzzzzr_);
-            bool? zzzzzzt_(Extension @this)
+            IEnumerable<CqlCode> yzzn_ = context.Operators.Select<object, CqlCode>(yzzl_, yzzm_);
+            IEnumerable<CqlCode> yzzo_ = context.Operators.Union<CqlCode>(yzzh_ as IEnumerable<CqlCode>, yzzn_);
+            bool? yzzp_(Extension @this)
             {
-                string azzzzzzl_ = @this?.Url;
-                FhirString azzzzzzm_ = context.Operators.Convert<FhirString>(azzzzzzl_);
-                string azzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToString(context, azzzzzzm_);
-                bool? azzzzzzo_ = context.Operators.Equal(azzzzzzn_, "text");
+                string zzzh_ = @this?.Url;
+                FhirString zzzi_ = context.Operators.Convert<FhirString>(zzzh_);
+                string zzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, zzzi_);
+                bool? zzzk_ = context.Operators.Equal(zzzj_, "text");
 
-                return azzzzzzo_;
+                return zzzk_;
             };
-            IEnumerable<Extension> zzzzzzu_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+            IEnumerable<Extension> yzzq_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
                     ? (E as Element).Extension
-                    : default), zzzzzzt_);
-            DataType zzzzzzv_(Extension @this)
+                    : default), yzzp_);
+            DataType yzzr_(Extension @this)
             {
-                DataType azzzzzzp_ = @this?.Value;
+                DataType zzzl_ = @this?.Value;
 
-                return azzzzzzp_;
+                return zzzl_;
             };
-            IEnumerable<DataType> zzzzzzw_ = context.Operators.Select<Extension, DataType>(zzzzzzu_, zzzzzzv_);
-            DataType zzzzzzx_ = context.Operators.SingletonFrom<DataType>(zzzzzzw_);
-            string zzzzzzy_ = context.Operators.Convert<string>(zzzzzzx_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? zzzzzzz_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, zzzzzzs_, zzzzzzy_);
+            IEnumerable<DataType> yzzs_ = context.Operators.Select<Extension, DataType>(yzzq_, yzzr_);
+            DataType yzzt_ = context.Operators.SingletonFrom<DataType>(yzzs_);
+            string yzzu_ = context.Operators.Convert<string>(yzzt_);
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? yzzv_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, yzzo_, yzzu_);
 
-            return zzzzzzz_;
+            return yzzv_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> yzzzzzu_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)yzzzzzs_, yzzzzzt_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> yzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(yzzzzzu_);
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? yzzzzzw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(yzzzzzv_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> xzzq_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)xzzo_, xzzp_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> xzzr_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(xzzq_);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? xzzs_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(xzzr_);
 
-        return yzzzzzw_;
+        return xzzs_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        CqlValueSet azzzzzzq_ = this.Payer_Type(context);
-        IEnumerable<Coverage> azzzzzzr_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, azzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
-        (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? azzzzzzs_(Coverage Payer)
+        CqlValueSet zzzm_ = this.Payer_Type(context);
+        IEnumerable<Coverage> zzzn_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, zzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
+        (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? zzzo_(Coverage Payer)
         {
-            CodeableConcept azzzzzzv_ = Payer?.Type;
-            CqlConcept azzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, azzzzzzv_);
-            Period azzzzzzx_ = Payer?.Period;
-            CqlInterval<CqlDateTime> azzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azzzzzzx_);
-            (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? azzzzzzz_ = (CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ, azzzzzzw_, azzzzzzy_);
+            CodeableConcept zzzr_ = Payer?.Type;
+            CqlConcept zzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, zzzr_);
+            Period zzzt_ = Payer?.Period;
+            CqlInterval<CqlDateTime> zzzu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, zzzt_);
+            (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? zzzv_ = (CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ, zzzs_, zzzu_);
 
-            return azzzzzzz_;
+            return zzzv_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> azzzzzzt_ = context.Operators.Select<Coverage, (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(azzzzzzr_, azzzzzzs_);
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> azzzzzzu_ = context.Operators.Distinct<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(azzzzzzt_);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> zzzp_ = context.Operators.Select<Coverage, (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(zzzn_, zzzo_);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> zzzq_ = context.Operators.Distinct<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(zzzp_);
 
-        return azzzzzzu_;
+        return zzzq_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        List<Extension> bzzzzzza_()
+        List<Extension> zzzw_()
         {
-            bool bzzzzzzj_()
+            bool azzzf_()
             {
-                Patient bzzzzzzk_ = this.Patient(context);
-                bool bzzzzzzl_ = bzzzzzzk_ is DomainResource;
+                Patient azzzg_ = this.Patient(context);
+                bool azzzh_ = azzzg_ is DomainResource;
 
-                return bzzzzzzl_;
+                return azzzh_;
             };
-            if (bzzzzzzj_())
+            if (azzzf_())
             {
-                Patient bzzzzzzm_ = this.Patient(context);
+                Patient azzzi_ = this.Patient(context);
 
-                return (bzzzzzzm_ as DomainResource).Extension;
+                return (azzzi_ as DomainResource).Extension;
             }
             else
             {
                 return default;
             }
         };
-        bool? bzzzzzzb_(Extension @this)
+        bool? zzzx_(Extension @this)
         {
-            string bzzzzzzn_ = @this?.Url;
-            FhirString bzzzzzzo_ = context.Operators.Convert<FhirString>(bzzzzzzn_);
-            string bzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzzzzo_);
-            bool? bzzzzzzq_ = context.Operators.Equal(bzzzzzzp_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            string azzzj_ = @this?.Url;
+            FhirString azzzk_ = context.Operators.Convert<FhirString>(azzzj_);
+            string azzzl_ = FHIRHelpers_4_4_000.Instance.ToString(context, azzzk_);
+            bool? azzzm_ = context.Operators.Equal(azzzl_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
-            return bzzzzzzq_;
+            return azzzm_;
         };
-        IEnumerable<Extension> bzzzzzzc_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(bzzzzzza_()), bzzzzzzb_);
-        Extension bzzzzzzd_ = context.Operators.SingletonFrom<Extension>(bzzzzzzc_);
-        Extension[] bzzzzzze_ = [
-            bzzzzzzd_,
+        IEnumerable<Extension> zzzy_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(zzzw_()), zzzx_);
+        Extension zzzz_ = context.Operators.SingletonFrom<Extension>(zzzy_);
+        Extension[] azzza_ = [
+            zzzz_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? bzzzzzzf_(Extension R)
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? azzzb_(Extension R)
         {
-            bool? bzzzzzzr_(Extension @this)
+            bool? azzzn_(Extension @this)
             {
-                string czzzzzzl_ = @this?.Url;
-                FhirString czzzzzzm_ = context.Operators.Convert<FhirString>(czzzzzzl_);
-                string czzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToString(context, czzzzzzm_);
-                bool? czzzzzzo_ = context.Operators.Equal(czzzzzzn_, "ombCategory");
+                string bzzzh_ = @this?.Url;
+                FhirString bzzzi_ = context.Operators.Convert<FhirString>(bzzzh_);
+                string bzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzi_);
+                bool? bzzzk_ = context.Operators.Equal(bzzzj_, "ombCategory");
 
-                return czzzzzzo_;
+                return bzzzk_;
             };
-            IEnumerable<Extension> bzzzzzzs_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+            IEnumerable<Extension> azzzo_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
                     ? (R as Element).Extension
-                    : default), bzzzzzzr_);
-            object bzzzzzzt_(Extension @this)
+                    : default), azzzn_);
+            object azzzp_(Extension @this)
             {
-                DataType czzzzzzp_ = @this?.Value;
+                DataType bzzzl_ = @this?.Value;
 
-                return czzzzzzp_;
+                return bzzzl_;
             };
-            IEnumerable<object> bzzzzzzu_ = context.Operators.Select<Extension, object>(bzzzzzzs_, bzzzzzzt_);
-            CqlCode bzzzzzzv_(object @this)
+            IEnumerable<object> azzzq_ = context.Operators.Select<Extension, object>(azzzo_, azzzp_);
+            CqlCode azzzr_(object @this)
             {
-                CqlCode czzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
+                CqlCode bzzzm_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
 
-                return czzzzzzq_;
+                return bzzzm_;
             };
-            IEnumerable<CqlCode> bzzzzzzw_ = context.Operators.Select<object, CqlCode>(bzzzzzzu_, bzzzzzzv_);
-            bool? bzzzzzzx_(Extension @this)
+            IEnumerable<CqlCode> azzzs_ = context.Operators.Select<object, CqlCode>(azzzq_, azzzr_);
+            bool? azzzt_(Extension @this)
             {
-                string czzzzzzr_ = @this?.Url;
-                FhirString czzzzzzs_ = context.Operators.Convert<FhirString>(czzzzzzr_);
-                string czzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToString(context, czzzzzzs_);
-                bool? czzzzzzu_ = context.Operators.Equal(czzzzzzt_, "detailed");
+                string bzzzn_ = @this?.Url;
+                FhirString bzzzo_ = context.Operators.Convert<FhirString>(bzzzn_);
+                string bzzzp_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzo_);
+                bool? bzzzq_ = context.Operators.Equal(bzzzp_, "detailed");
 
-                return czzzzzzu_;
+                return bzzzq_;
             };
-            IEnumerable<Extension> bzzzzzzy_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+            IEnumerable<Extension> azzzu_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
                     ? (R as Element).Extension
-                    : default), bzzzzzzx_);
-            object bzzzzzzz_(Extension @this)
+                    : default), azzzt_);
+            object azzzv_(Extension @this)
             {
-                DataType czzzzzzv_ = @this?.Value;
+                DataType bzzzr_ = @this?.Value;
 
-                return czzzzzzv_;
+                return bzzzr_;
             };
-            IEnumerable<object> czzzzzza_ = context.Operators.Select<Extension, object>(bzzzzzzy_, bzzzzzzz_);
-            CqlCode czzzzzzb_(object @this)
+            IEnumerable<object> azzzw_ = context.Operators.Select<Extension, object>(azzzu_, azzzv_);
+            CqlCode azzzx_(object @this)
             {
-                CqlCode czzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
+                CqlCode bzzzs_ = FHIRHelpers_4_4_000.Instance.ToCode(context, @this as Coding);
 
-                return czzzzzzw_;
+                return bzzzs_;
             };
-            IEnumerable<CqlCode> czzzzzzc_ = context.Operators.Select<object, CqlCode>(czzzzzza_, czzzzzzb_);
-            IEnumerable<CqlCode> czzzzzzd_ = context.Operators.Union<CqlCode>(bzzzzzzw_, czzzzzzc_);
-            bool? czzzzzze_(Extension @this)
+            IEnumerable<CqlCode> azzzy_ = context.Operators.Select<object, CqlCode>(azzzw_, azzzx_);
+            IEnumerable<CqlCode> azzzz_ = context.Operators.Union<CqlCode>(azzzs_, azzzy_);
+            bool? bzzza_(Extension @this)
             {
-                string czzzzzzx_ = @this?.Url;
-                FhirString czzzzzzy_ = context.Operators.Convert<FhirString>(czzzzzzx_);
-                string czzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToString(context, czzzzzzy_);
-                bool? dzzzzzza_ = context.Operators.Equal(czzzzzzz_, "text");
+                string bzzzt_ = @this?.Url;
+                FhirString bzzzu_ = context.Operators.Convert<FhirString>(bzzzt_);
+                string bzzzv_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzu_);
+                bool? bzzzw_ = context.Operators.Equal(bzzzv_, "text");
 
-                return dzzzzzza_;
+                return bzzzw_;
             };
-            IEnumerable<Extension> czzzzzzf_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+            IEnumerable<Extension> bzzzb_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
                     ? (R as Element).Extension
-                    : default), czzzzzze_);
-            DataType czzzzzzg_(Extension @this)
+                    : default), bzzza_);
+            DataType bzzzc_(Extension @this)
             {
-                DataType dzzzzzzb_ = @this?.Value;
+                DataType bzzzx_ = @this?.Value;
 
-                return dzzzzzzb_;
+                return bzzzx_;
             };
-            IEnumerable<DataType> czzzzzzh_ = context.Operators.Select<Extension, DataType>(czzzzzzf_, czzzzzzg_);
-            DataType czzzzzzi_ = context.Operators.SingletonFrom<DataType>(czzzzzzh_);
-            string czzzzzzj_ = context.Operators.Convert<string>(czzzzzzi_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? czzzzzzk_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, czzzzzzd_, czzzzzzj_);
+            IEnumerable<DataType> bzzzd_ = context.Operators.Select<Extension, DataType>(bzzzb_, bzzzc_);
+            DataType bzzze_ = context.Operators.SingletonFrom<DataType>(bzzzd_);
+            string bzzzf_ = context.Operators.Convert<string>(bzzze_);
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? bzzzg_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, azzzz_, bzzzf_);
 
-            return czzzzzzk_;
+            return bzzzg_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> bzzzzzzg_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)bzzzzzze_, bzzzzzzf_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> bzzzzzzh_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(bzzzzzzg_);
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? bzzzzzzi_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(bzzzzzzh_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> azzzc_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)azzza_, azzzb_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> azzzd_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(azzzc_);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? azzze_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(azzzd_);
 
-        return bzzzzzzi_;
+        return azzze_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode dzzzzzzc_()
+        CqlCode bzzzy_()
         {
-            bool dzzzzzzd_()
+            bool bzzzz_()
             {
-                Patient dzzzzzzf_ = this.Patient(context);
-                Code<AdministrativeGender> dzzzzzzg_ = dzzzzzzf_?.GenderElement;
-                AdministrativeGender? dzzzzzzh_ = dzzzzzzg_?.Value;
-                string dzzzzzzi_ = context.Operators.Convert<string>(dzzzzzzh_);
-                bool? dzzzzzzj_ = context.Operators.Equal(dzzzzzzi_, "male");
+                Patient czzzb_ = this.Patient(context);
+                Code<AdministrativeGender> czzzc_ = czzzb_?.GenderElement;
+                AdministrativeGender? czzzd_ = czzzc_?.Value;
+                string czzze_ = context.Operators.Convert<string>(czzzd_);
+                bool? czzzf_ = context.Operators.Equal(czzze_, "male");
 
-                return dzzzzzzj_ ?? false;
+                return czzzf_ ?? false;
             };
-            bool dzzzzzze_()
+            bool czzza_()
             {
-                Patient dzzzzzzk_ = this.Patient(context);
-                Code<AdministrativeGender> dzzzzzzl_ = dzzzzzzk_?.GenderElement;
-                AdministrativeGender? dzzzzzzm_ = dzzzzzzl_?.Value;
-                string dzzzzzzn_ = context.Operators.Convert<string>(dzzzzzzm_);
-                bool? dzzzzzzo_ = context.Operators.Equal(dzzzzzzn_, "female");
+                Patient czzzg_ = this.Patient(context);
+                Code<AdministrativeGender> czzzh_ = czzzg_?.GenderElement;
+                AdministrativeGender? czzzi_ = czzzh_?.Value;
+                string czzzj_ = context.Operators.Convert<string>(czzzi_);
+                bool? czzzk_ = context.Operators.Equal(czzzj_, "female");
 
-                return dzzzzzzo_ ?? false;
+                return czzzk_ ?? false;
             };
-            if (dzzzzzzd_())
+            if (bzzzz_())
             {
-                CqlCode dzzzzzzp_ = this.M(context);
+                CqlCode czzzl_ = this.M(context);
 
-                return dzzzzzzp_;
+                return czzzl_;
             }
-            else if (dzzzzzze_())
+            else if (czzza_())
             {
-                CqlCode dzzzzzzq_ = this.F(context);
+                CqlCode czzzm_ = this.F(context);
 
-                return dzzzzzzq_;
+                return czzzm_;
             }
             else
             {
@@ -393,7 +393,7 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
             }
         };
 
-        return dzzzzzzc_();
+        return bzzzy_();
     }
 
 
