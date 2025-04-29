@@ -28,19 +28,21 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Expressions
 
-    [CqlDeclaration("Patient")]
+    [CqlExpressionDefinition(
+        definitionName: "Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient> kzzzzzzzzzzzzn_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient kzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<Patient>(kzzzzzzzzzzzzn_);
 
-        return b_;
+        return kzzzzzzzzzzzzo_;
     }
 
 
-    [CqlDeclaration("Initial population")]
+    [CqlExpressionDefinition(
+        definitionName: "Initial population")]
     [CqlTag("measure", "Measure Resource Example")]
     [CqlTag("year", "2024")]
     [CqlTag("domain", "Testing Measures")]
@@ -52,7 +54,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
-    [CqlDeclaration("Exclusion")]
+    [CqlExpressionDefinition(
+        definitionName: "Exclusion")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
@@ -60,35 +63,38 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         false;
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition(
+        definitionName: "Denominator")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? a_ = this.Initial_population(context);
-        bool? b_ = this.Exclusion(context);
-        bool? c_ = context.Operators.Not(b_);
-        bool? d_ = context.Operators.And(a_, c_);
+        bool? kzzzzzzzzzzzzp_ = this.Initial_population(context);
+        bool? kzzzzzzzzzzzzq_ = this.Exclusion(context);
+        bool? kzzzzzzzzzzzzr_ = context.Operators.Not(kzzzzzzzzzzzzq_);
+        bool? kzzzzzzzzzzzzs_ = context.Operators.And(kzzzzzzzzzzzzp_, kzzzzzzzzzzzzr_);
 
-        return d_;
+        return kzzzzzzzzzzzzs_;
     }
 
 
-    [CqlDeclaration("Numerator 1")]
+    [CqlExpressionDefinition(
+        definitionName: "Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
         true;
 
 
-    [CqlDeclaration("Numerator 2")]
+    [CqlExpressionDefinition(
+        definitionName: "Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
         false;
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

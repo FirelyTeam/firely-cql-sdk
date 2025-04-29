@@ -28,98 +28,124 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlValueSetDeclaration(
-        declarationName: "Annual Wellness Visit",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-    public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
+    #region ValueSet: Annual Wellness Visit
+    [CqlValueSetDefinition(
+        definitionName: "Annual Wellness Visit",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240",
+        valueSetVersion: null)]
+    public CqlValueSet Annual_Wellness_Visit(CqlContext context) => _Annual_Wellness_Visit;
 
+    private static readonly CqlValueSet _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Home Healthcare Services",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-    public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+    #region ValueSet: Home Healthcare Services
+    [CqlValueSetDefinition(
+        definitionName: "Home Healthcare Services",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016",
+        valueSetVersion: null)]
+    public CqlValueSet Home_Healthcare_Services(CqlContext context) => _Home_Healthcare_Services;
 
+    private static readonly CqlValueSet _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Office Visit",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+    #region ValueSet: Office Visit
+    [CqlValueSetDefinition(
+        definitionName: "Office Visit",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
+        valueSetVersion: null)]
+    public CqlValueSet Office_Visit(CqlContext context) => _Office_Visit;
 
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Preventive Care Services - Established Office Visit, 18 and Up",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+    #region ValueSet: Preventive Care Services - Established Office Visit, 18 and Up
+    [CqlValueSetDefinition(
+        definitionName: "Preventive Care Services - Established Office Visit, 18 and Up",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025",
+        valueSetVersion: null)]
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => _Preventive_Care_Services___Established_Office_Visit__18_and_Up;
 
+    private static readonly CqlValueSet _Preventive_Care_Services___Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Preventive Care Services-Initial Office Visit, 18 and Up",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+    #region ValueSet: Preventive Care Services-Initial Office Visit, 18 and Up
+    [CqlValueSetDefinition(
+        definitionName: "Preventive Care Services-Initial Office Visit, 18 and Up",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023",
+        valueSetVersion: null)]
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
 
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    #endregion
 
-    [CqlDeclaration("Measurement Period")]
+    #endregion ValueSets
+
+    #region Parameters
+
+    [CqlParameterDefinition(
+        definitionName: "Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
+        object gzzzq_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime>)gzzzq_;
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition(
+        definitionName: "Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient> gzzzr_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient gzzzs_ = context.Operators.SingletonFrom<Patient>(gzzzr_);
 
-        return b_;
+        return gzzzs_;
     }
 
 
-    [CqlDeclaration("Qualifying Encounters")]
+    [CqlExpressionDefinition(
+        definitionName: "Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
     {
-        CqlValueSet a_ = this.Office_Visit(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        CqlValueSet c_ = this.Annual_Wellness_Visit(context);
-        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-        CqlValueSet f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Home_Healthcare_Services(context);
-        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
-        bool? o_(Encounter ValidEncounter)
+        CqlValueSet gzzzt_ = this.Office_Visit(context);
+        IEnumerable<Encounter> gzzzu_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, gzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        CqlValueSet gzzzv_ = this.Annual_Wellness_Visit(context);
+        IEnumerable<Encounter> gzzzw_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, gzzzv_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> gzzzx_ = context.Operators.Union<Encounter>(gzzzu_, gzzzw_);
+        CqlValueSet gzzzy_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> gzzzz_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, gzzzy_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        CqlValueSet hzzza_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> hzzzb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, hzzza_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> hzzzc_ = context.Operators.Union<Encounter>(gzzzz_, hzzzb_);
+        IEnumerable<Encounter> hzzzd_ = context.Operators.Union<Encounter>(gzzzx_, hzzzc_);
+        CqlValueSet hzzze_ = this.Home_Healthcare_Services(context);
+        IEnumerable<Encounter> hzzzf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, hzzze_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> hzzzg_ = context.Operators.Union<Encounter>(hzzzd_, hzzzf_);
+        bool? hzzzh_(Encounter ValidEncounter)
         {
-            Code<Encounter.EncounterStatus> q_ = ValidEncounter?.StatusElement;
-            string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "finished");
-            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-            Period u_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, u_ as object);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
-            bool? x_ = context.Operators.And(s_, w_);
+            Code<Encounter.EncounterStatus> hzzzj_ = ValidEncounter?.StatusElement;
+            string hzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, hzzzj_);
+            bool? hzzzl_ = context.Operators.Equal(hzzzk_, "finished");
+            CqlInterval<CqlDateTime> hzzzm_ = this.Measurement_Period(context);
+            Period hzzzn_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime> hzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzn_ as object);
+            bool? hzzzp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(hzzzm_, hzzzo_, default);
+            bool? hzzzq_ = context.Operators.And(hzzzl_, hzzzp_);
 
-            return x_;
+            return hzzzq_;
         };
-        IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
+        IEnumerable<Encounter> hzzzi_ = context.Operators.Where<Encounter>(hzzzg_, hzzzh_);
 
-        return p_;
+        return hzzzi_;
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

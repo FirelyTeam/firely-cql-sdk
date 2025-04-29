@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
@@ -16,7 +15,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using DateTime = Hl7.Cql.Elm.DateTime;
+using System.Diagnostics;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -307,8 +306,6 @@ internal partial class LibrarySetCSharpCodeGenerator
     {
         private static readonly VariableNameGenerator VariableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
 
-        private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlDefinition.DefinitionName)!;
-
         public DefinitionWriter AddIndent(int addIndent = 1) =>
             this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
@@ -316,6 +313,58 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         public void WriteDefinition()
         {
+            var definitionName = CqlDefinition.DefinitionName;
+            string quotedDefinitionName = definitionName.QuoteString();
+            string methodName  = VariableNameGenerator.NormalizeIdentifier(definitionName)!;
+            string fieldName  = VariableNameGenerator.NormalizeIdentifier($"_{definitionName}")!;
+            switch (CqlDefinition)
+            {
+                case CqlValueSetDefinition vsd:
+                {
+                    string quotedValueSetId = vsd.ValueSetId.QuoteString();
+                    string quotedValueSetVersion = vsd.ValueSetVersion?.QuoteString() ?? "null";
+                    tw.WriteLines(
+                        $"""
+                         #region ValueSet: {definitionName}
+                         [CqlValueSetDefinition(
+                             definitionName: {quotedDefinitionName},
+                             valueSetId: {quotedValueSetId},
+                             valueSetVersion: {quotedValueSetVersion})]
+                         public CqlValueSet {methodName}(CqlContext context) => {fieldName};
+
+                         private static readonly CqlValueSet {fieldName} = new CqlValueSet({quotedValueSetId}, {quotedValueSetVersion});
+                         #endregion
+                         """);
+                    return;
+                }
+
+                case CqlCodeSystemDefinition csd:
+                    break;
+
+                case CqlParameterDefinition pd:
+                    break;
+
+                case CqlConceptDefinition cpd:
+                    break;
+
+                 case CqlCodeDefinition cd:
+                     var quotedCodeId = cd.CodeId.QuoteString();
+                     var quotedCodeSystem = cd.CodeSystem.QuoteString();
+                     tw.WriteLines(
+                         $"""
+                          #region Code: {definitionName}
+                          [CqlCodeDefinition(
+                              definitionName: {quotedDefinitionName},
+                              codeId: {quotedCodeId},
+                              codeSystem: {quotedCodeSystem})]
+                          public CqlCode {methodName }(CqlContext context) => {fieldName};
+
+                          private static readonly CqlCode {fieldName} = new CqlCode({quotedCodeId}, {quotedCodeSystem}, default, default);
+                          #endregion
+                          """);
+                     return;
+            }
+
             string libraryName = LibraryWriter.LibraryName;
             var lambda = CqlDefinition.Lambda;
             var isDefinition = lambda is { Parameters: [{ Type: { } p0Type }] } && p0Type == typeof(CqlContext);
@@ -341,13 +390,13 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(
                 transformedLambda,
-                MethodName,
+                methodName,
                 specifiers: "public");
 
             var definitionTypeName = CqlDefinition.GetType().Name;
             if (isDefinition)
             {
-                List<string> lines = [$"definitionName: {CqlDefinition.DefinitionName.QuoteString()}"];
+                List<string> lines = [$"definitionName: {definitionName.QuoteString()}"];
                 switch (CqlDefinition)
                 {
                     case CqlValueSetDefinition vsd:

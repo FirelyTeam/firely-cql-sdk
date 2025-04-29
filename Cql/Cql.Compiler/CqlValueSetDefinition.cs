@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler.Expressions;
 
 namespace Hl7.Cql.Compiler;
 

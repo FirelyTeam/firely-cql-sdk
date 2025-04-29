@@ -28,92 +28,119 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlValueSetDeclaration(
-        declarationName: "Lung Cancer",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
-    public CqlValueSet Lung_Cancer(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
+    #region ValueSet: Lung Cancer
+    [CqlValueSetDefinition(
+        definitionName: "Lung Cancer",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89",
+        valueSetVersion: null)]
+    public CqlValueSet Lung_Cancer(CqlContext context) => _Lung_Cancer;
 
+    private static readonly CqlValueSet _Lung_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Condition Clinical Status",
-        valueSetId: "http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
-    public CqlValueSet Condition_Clinical_Status(CqlContext context) =>
-        new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
+    #region ValueSet: Condition Clinical Status
+    [CqlValueSetDefinition(
+        definitionName: "Condition Clinical Status",
+        valueSetId: "http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical",
+        valueSetVersion: null)]
+    public CqlValueSet Condition_Clinical_Status(CqlContext context) => _Condition_Clinical_Status;
 
+    private static readonly CqlValueSet _Condition_Clinical_Status = new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", null);
+    #endregion
 
-    [CqlDeclaration("Tobacco Smoking Status")]
-    public CqlCode Tobacco_Smoking_Status(CqlContext context) =>
-        new CqlCode("72166-2", "http://loinc.org", default, default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("LOINC")]
+    #region Code: Tobacco Smoking Status
+    [CqlCodeDefinition(
+        definitionName: "Tobacco Smoking Status",
+        codeId: "72166-2",
+        codeSystem: "http://loinc.org")]
+    public CqlCode Tobacco_Smoking_Status(CqlContext context) => _Tobacco_Smoking_Status;
+
+    private static readonly CqlCode _Tobacco_Smoking_Status = new CqlCode("72166-2", "http://loinc.org", default, default);
+    #endregion
+
+    #endregion Codes
+
+    #region CodeSystems
+
+    [CqlCodeSystemDefinition(
+        definitionName: "LOINC")]
     public CqlCode[] LOINC(CqlContext context)
     {
-        CqlCode[] a_ = [
+        CqlCode[] bzx_ = [
             new CqlCode("72166-2", "http://loinc.org", default, default),
         ];
 
-        return a_;
+        return bzx_;
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion CodeSystems
+
+    #region Expressions
+
+    [CqlExpressionDefinition(
+        definitionName: "Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient> bzy_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient bzz_ = context.Operators.SingletonFrom<Patient>(bzy_);
 
-        return b_;
+        return bzz_;
     }
 
 
-    [CqlDeclaration("Smoking status observation")]
+    [CqlExpressionDefinition(
+        definitionName: "Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
     {
-        CqlCode a_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? d_(Observation O)
+        CqlCode cza_ = this.Tobacco_Smoking_Status(context);
+        IEnumerable<CqlCode> czb_ = context.Operators.ToList<CqlCode>(cza_);
+        IEnumerable<Observation> czc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, czb_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? czd_(Observation O)
         {
-            Code<ObservationStatus> f_ = O?.StatusElement;
-            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-            string[] h_ = [
+            Code<ObservationStatus> czf_ = O?.StatusElement;
+            string czg_ = FHIRHelpers_4_3_000.Instance.ToString(context, czf_);
+            string[] czh_ = [
                 "final",
                 "amended",
             ];
-            bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
+            bool? czi_ = context.Operators.In<string>(czg_, czh_ as IEnumerable<string>);
 
-            return i_;
+            return czi_;
         };
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation> cze_ = context.Operators.Where<Observation>(czc_, czd_);
 
-        return e_;
+        return cze_;
     }
 
 
-    [CqlDeclaration("Lung cancer diagnosis")]
+    [CqlExpressionDefinition(
+        definitionName: "Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
-        CqlValueSet a_ = this.Lung_Cancer(context);
-        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? c_(Condition C)
+        CqlValueSet czj_ = this.Lung_Cancer(context);
+        IEnumerable<Condition> czk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, czj_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? czl_(Condition C)
         {
-            CodeableConcept e_ = C?.ClinicalStatus;
-            CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
-            CqlValueSet g_ = this.Condition_Clinical_Status(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            CodeableConcept czn_ = C?.ClinicalStatus;
+            CqlConcept czo_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, czn_);
+            CqlValueSet czp_ = this.Condition_Clinical_Status(context);
+            bool? czq_ = context.Operators.ConceptInValueSet(czo_, czp_);
 
-            return h_;
+            return czq_;
         };
-        IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+        IEnumerable<Condition> czm_ = context.Operators.Where<Condition>(czk_, czl_);
 
-        return d_;
+        return czm_;
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

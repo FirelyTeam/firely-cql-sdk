@@ -28,78 +28,95 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlValueSetDeclaration(
-        declarationName: "Hospice Encounter",
-        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761")]
-    public CqlValueSet Hospice_Encounter(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761", default);
+    #region ValueSet: Hospice Encounter
+    [CqlValueSetDefinition(
+        definitionName: "Hospice Encounter",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761",
+        valueSetVersion: null)]
+    public CqlValueSet Hospice_Encounter(CqlContext context) => _Hospice_Encounter;
 
+    private static readonly CqlValueSet _Hospice_Encounter = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Hospice Intervention",
-        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762")]
-    public CqlValueSet Hospice_Intervention(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762", default);
+    #region ValueSet: Hospice Intervention
+    [CqlValueSetDefinition(
+        definitionName: "Hospice Intervention",
+        valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762",
+        valueSetVersion: null)]
+    public CqlValueSet Hospice_Intervention(CqlContext context) => _Hospice_Intervention;
 
+    private static readonly CqlValueSet _Hospice_Intervention = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762", null);
+    #endregion
 
-    [CqlDeclaration("Measurement Period")]
+    #endregion ValueSets
+
+    #region Parameters
+
+    [CqlParameterDefinition(
+        definitionName: "Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
+        object qzzzzzzzzzzq_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime>)qzzzzzzzzzzq_;
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition(
+        definitionName: "Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient> qzzzzzzzzzzr_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient qzzzzzzzzzzs_ = context.Operators.SingletonFrom<Patient>(qzzzzzzzzzzr_);
 
-        return b_;
+        return qzzzzzzzzzzs_;
     }
 
 
-    [CqlDeclaration("Hospice Intervention or Encounter")]
+    [CqlExpressionDefinition(
+        definitionName: "Hospice Intervention or Encounter")]
     public bool? Hospice_Intervention_or_Encounter(CqlContext context)
     {
-        CqlValueSet a_ = this.Hospice_Intervention(context);
-        IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, b_);
-        bool? d_(Procedure HospiceInt)
+        CqlValueSet qzzzzzzzzzzt_ = this.Hospice_Intervention(context);
+        IEnumerable<Procedure> qzzzzzzzzzzu_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, qzzzzzzzzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        IEnumerable<Procedure> qzzzzzzzzzzv_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, qzzzzzzzzzzu_);
+        bool? qzzzzzzzzzzw_(Procedure HospiceInt)
         {
-            DataType n_ = HospiceInt?.Performed;
-            CqlInterval<CqlDateTime> o_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, n_);
-            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-            bool? q_ = context.Operators.Overlaps(o_, p_, default);
+            DataType rzzzzzzzzzzg_ = HospiceInt?.Performed;
+            CqlInterval<CqlDateTime> rzzzzzzzzzzh_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, rzzzzzzzzzzg_);
+            CqlInterval<CqlDateTime> rzzzzzzzzzzi_ = this.Measurement_Period(context);
+            bool? rzzzzzzzzzzj_ = context.Operators.Overlaps(rzzzzzzzzzzh_, rzzzzzzzzzzi_, default);
 
-            return q_;
+            return rzzzzzzzzzzj_;
         };
-        IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
-        bool? f_ = context.Operators.Exists<Procedure>(e_);
-        CqlValueSet g_ = this.Hospice_Encounter(context);
-        IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> i_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, h_);
-        bool? j_(Encounter HospiceEnc)
+        IEnumerable<Procedure> qzzzzzzzzzzx_ = context.Operators.Where<Procedure>(qzzzzzzzzzzv_, qzzzzzzzzzzw_);
+        bool? qzzzzzzzzzzy_ = context.Operators.Exists<Procedure>(qzzzzzzzzzzx_);
+        CqlValueSet qzzzzzzzzzzz_ = this.Hospice_Encounter(context);
+        IEnumerable<Encounter> rzzzzzzzzzza_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qzzzzzzzzzzz_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter> rzzzzzzzzzzb_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, rzzzzzzzzzza_);
+        bool? rzzzzzzzzzzc_(Encounter HospiceEnc)
         {
-            Period r_ = HospiceEnc?.Period;
-            CqlInterval<CqlDateTime> s_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, r_ as object);
-            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-            bool? u_ = context.Operators.Overlaps(s_, t_, default);
+            Period rzzzzzzzzzzk_ = HospiceEnc?.Period;
+            CqlInterval<CqlDateTime> rzzzzzzzzzzl_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, rzzzzzzzzzzk_ as object);
+            CqlInterval<CqlDateTime> rzzzzzzzzzzm_ = this.Measurement_Period(context);
+            bool? rzzzzzzzzzzn_ = context.Operators.Overlaps(rzzzzzzzzzzl_, rzzzzzzzzzzm_, default);
 
-            return u_;
+            return rzzzzzzzzzzn_;
         };
-        IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
-        bool? m_ = context.Operators.Or(f_, l_);
+        IEnumerable<Encounter> rzzzzzzzzzzd_ = context.Operators.Where<Encounter>(rzzzzzzzzzzb_, rzzzzzzzzzzc_);
+        bool? rzzzzzzzzzze_ = context.Operators.Exists<Encounter>(rzzzzzzzzzzd_);
+        bool? rzzzzzzzzzzf_ = context.Operators.Or(qzzzzzzzzzzy_, rzzzzzzzzzze_);
 
-        return m_;
+        return rzzzzzzzzzzf_;
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

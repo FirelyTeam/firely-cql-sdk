@@ -6,6 +6,29 @@ internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int In
 
     public void WriteLine(string text = "") => WriteLine(0, text);
 
+    /// <summary>
+    /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent.
+    /// Leading tabs will be treated as indents.
+    /// </summary>
+    public void WriteLines(string multilineText = "")
+    {
+        foreach (var line in multilineText.Split(Environment.NewLine))
+        {
+            if (line.Length > 0)
+            {
+                int leadingTabs = line.TakeWhile(c => c == '\t').Count();
+                var strippedLeadingTabs = line[leadingTabs..];
+                if (strippedLeadingTabs.Length > 0)
+                {
+                    WriteLine(leadingTabs, strippedLeadingTabs);
+                    continue;
+                }
+            }
+
+            WriteLine();
+        }
+    }
+
     public IndentedTextWriter AddIndent(int addIndent = 1)
     {
         return this with { Indent = Indent + addIndent };

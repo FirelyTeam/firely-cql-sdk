@@ -28,535 +28,608 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlValueSetDeclaration(
-        declarationName: "Care Services in Long-Term Residential Facility",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
+    #region ValueSet: Care Services in Long-Term Residential Facility
+    [CqlValueSetDefinition(
+        definitionName: "Care Services in Long-Term Residential Facility",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014",
+        valueSetVersion: null)]
+    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => _Care_Services_in_Long_Term_Residential_Facility;
 
+    private static readonly CqlValueSet _Care_Services_in_Long_Term_Residential_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Cup to Disc Ratio",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333")]
-    public CqlValueSet Cup_to_Disc_Ratio(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", default);
+    #region ValueSet: Cup to Disc Ratio
+    [CqlValueSetDefinition(
+        definitionName: "Cup to Disc Ratio",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333",
+        valueSetVersion: null)]
+    public CqlValueSet Cup_to_Disc_Ratio(CqlContext context) => _Cup_to_Disc_Ratio;
 
+    private static readonly CqlValueSet _Cup_to_Disc_Ratio = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Face-to-Face Interaction",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-    public CqlValueSet Face_to_Face_Interaction(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
+    #region ValueSet: Face-to-Face Interaction
+    [CqlValueSetDefinition(
+        definitionName: "Face-to-Face Interaction",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048",
+        valueSetVersion: null)]
+    public CqlValueSet Face_to_Face_Interaction(CqlContext context) => _Face_to_Face_Interaction;
 
+    private static readonly CqlValueSet _Face_to_Face_Interaction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Medical Reason",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-    public CqlValueSet Medical_Reason(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
+    #region ValueSet: Medical Reason
+    [CqlValueSetDefinition(
+        definitionName: "Medical Reason",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007",
+        valueSetVersion: null)]
+    public CqlValueSet Medical_Reason(CqlContext context) => _Medical_Reason;
 
+    private static readonly CqlValueSet _Medical_Reason = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Nursing Facility Visit",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-    public CqlValueSet Nursing_Facility_Visit(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
+    #region ValueSet: Nursing Facility Visit
+    [CqlValueSetDefinition(
+        definitionName: "Nursing Facility Visit",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012",
+        valueSetVersion: null)]
+    public CqlValueSet Nursing_Facility_Visit(CqlContext context) => _Nursing_Facility_Visit;
 
+    private static readonly CqlValueSet _Nursing_Facility_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Office Visit",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+    #region ValueSet: Office Visit
+    [CqlValueSetDefinition(
+        definitionName: "Office Visit",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
+        valueSetVersion: null)]
+    public CqlValueSet Office_Visit(CqlContext context) => _Office_Visit;
 
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Ophthalmological Services",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-    public CqlValueSet Ophthalmological_Services(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
+    #region ValueSet: Ophthalmological Services
+    [CqlValueSetDefinition(
+        definitionName: "Ophthalmological Services",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285",
+        valueSetVersion: null)]
+    public CqlValueSet Ophthalmological_Services(CqlContext context) => _Ophthalmological_Services;
 
+    private static readonly CqlValueSet _Ophthalmological_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Optic Disc Exam for Structural Abnormalities",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334")]
-    public CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", default);
+    #region ValueSet: Optic Disc Exam for Structural Abnormalities
+    [CqlValueSetDefinition(
+        definitionName: "Optic Disc Exam for Structural Abnormalities",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334",
+        valueSetVersion: null)]
+    public CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities(CqlContext context) => _Optic_Disc_Exam_for_Structural_Abnormalities;
 
+    private static readonly CqlValueSet _Optic_Disc_Exam_for_Structural_Abnormalities = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Outpatient Consultation",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
+    #region ValueSet: Outpatient Consultation
+    [CqlValueSetDefinition(
+        definitionName: "Outpatient Consultation",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008",
+        valueSetVersion: null)]
+    public CqlValueSet Outpatient_Consultation(CqlContext context) => _Outpatient_Consultation;
 
+    private static readonly CqlValueSet _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+    #endregion
 
-    [CqlValueSetDeclaration(
-        declarationName: "Primary Open-Angle Glaucoma",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326")]
-    public CqlValueSet Primary_Open_Angle_Glaucoma(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", default);
+    #region ValueSet: Primary Open-Angle Glaucoma
+    [CqlValueSetDefinition(
+        definitionName: "Primary Open-Angle Glaucoma",
+        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326",
+        valueSetVersion: null)]
+    public CqlValueSet Primary_Open_Angle_Glaucoma(CqlContext context) => _Primary_Open_Angle_Glaucoma;
 
+    private static readonly CqlValueSet _Primary_Open_Angle_Glaucoma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", null);
+    #endregion
 
-    [CqlDeclaration("virtual")]
-    public CqlCode @virtual(CqlContext context) =>
-        new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("AMB")]
-    public CqlCode AMB(CqlContext context) =>
-        new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+    #region Code: virtual
+    [CqlCodeDefinition(
+        definitionName: "virtual",
+        codeId: "VR",
+        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode @virtual(CqlContext context) => _virtual;
 
+    private static readonly CqlCode _virtual = new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+    #endregion
 
-    [CqlDeclaration("ActCode")]
+    #region Code: AMB
+    [CqlCodeDefinition(
+        definitionName: "AMB",
+        codeId: "AMB",
+        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode AMB(CqlContext context) => _AMB;
+
+    private static readonly CqlCode _AMB = new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+    #endregion
+
+    #endregion Codes
+
+    #region CodeSystems
+
+    [CqlCodeSystemDefinition(
+        definitionName: "ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
-        CqlCode[] a_ = [
+        CqlCode[] zzzzzzzzzzl_ = [
             new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
             new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
         ];
 
-        return a_;
+        return zzzzzzzzzzl_;
     }
 
 
-    [CqlDeclaration("Measurement Period")]
+    #endregion CodeSystems
+
+    #region Parameters
+
+    [CqlParameterDefinition(
+        definitionName: "Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime b_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
-        object d_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", c_);
+        CqlDateTime zzzzzzzzzzm_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime zzzzzzzzzzn_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> zzzzzzzzzzo_ = context.Operators.Interval(zzzzzzzzzzm_, zzzzzzzzzzn_, true, true);
+        object zzzzzzzzzzp_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", zzzzzzzzzzo_);
 
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime>)zzzzzzzzzzp_;
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition(
+        definitionName: "Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient> zzzzzzzzzzq_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient zzzzzzzzzzr_ = context.Operators.SingletonFrom<Patient>(zzzzzzzzzzq_);
 
-        return b_;
+        return zzzzzzzzzzr_;
     }
 
 
-    [CqlDeclaration("SDE Ethnicity")]
+    [CqlExpressionDefinition(
+        definitionName: "SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? zzzzzzzzzzs_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return a_;
+        return zzzzzzzzzzs_;
     }
 
 
-    [CqlDeclaration("SDE Payer")]
+    [CqlExpressionDefinition(
+        definitionName: "SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> zzzzzzzzzzt_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return a_;
+        return zzzzzzzzzzt_;
     }
 
 
-    [CqlDeclaration("SDE Race")]
+    [CqlExpressionDefinition(
+        definitionName: "SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? zzzzzzzzzzu_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return a_;
+        return zzzzzzzzzzu_;
     }
 
 
-    [CqlDeclaration("SDE Sex")]
+    [CqlExpressionDefinition(
+        definitionName: "SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode zzzzzzzzzzv_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return a_;
+        return zzzzzzzzzzv_;
     }
 
 
-    [CqlDeclaration("Qualifying Encounter During Measurement Period")]
+    [CqlExpressionDefinition(
+        definitionName: "Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
     {
-        CqlValueSet a_ = this.Office_Visit(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet c_ = this.Ophthalmological_Services(context);
-        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-        CqlValueSet f_ = this.Outpatient_Consultation(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet h_ = this.Nursing_Facility_Visit(context);
-        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
-        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
-        bool? o_(Encounter QualifyingEncounter)
+        CqlValueSet zzzzzzzzzzw_ = this.Office_Visit(context);
+        IEnumerable<Encounter> zzzzzzzzzzx_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet zzzzzzzzzzy_ = this.Ophthalmological_Services(context);
+        IEnumerable<Encounter> zzzzzzzzzzz_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> azzzzzzzzzza_ = context.Operators.Union<Encounter>(zzzzzzzzzzx_, zzzzzzzzzzz_);
+        CqlValueSet azzzzzzzzzzb_ = this.Outpatient_Consultation(context);
+        IEnumerable<Encounter> azzzzzzzzzzc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, azzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet azzzzzzzzzzd_ = this.Nursing_Facility_Visit(context);
+        IEnumerable<Encounter> azzzzzzzzzze_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, azzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> azzzzzzzzzzf_ = context.Operators.Union<Encounter>(azzzzzzzzzzc_, azzzzzzzzzze_);
+        IEnumerable<Encounter> azzzzzzzzzzg_ = context.Operators.Union<Encounter>(azzzzzzzzzza_, azzzzzzzzzzf_);
+        CqlValueSet azzzzzzzzzzh_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
+        IEnumerable<Encounter> azzzzzzzzzzi_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, azzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> azzzzzzzzzzj_ = context.Operators.Union<Encounter>(azzzzzzzzzzg_, azzzzzzzzzzi_);
+        bool? azzzzzzzzzzk_(Encounter QualifyingEncounter)
         {
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            Period r_ = QualifyingEncounter?.Period;
-            CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, default);
-            Code<Encounter.EncounterStatus> u_ = QualifyingEncounter?.StatusElement;
-            Encounter.EncounterStatus? v_ = u_?.Value;
-            Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-            bool? x_ = context.Operators.Equal(w_, "finished");
-            bool? y_ = context.Operators.And(t_, x_);
-            Coding z_ = QualifyingEncounter?.Class;
-            CqlCode aa_ = FHIRHelpers_4_4_000.Instance.ToCode(context, z_);
-            CqlCode ab_ = this.@virtual(context);
-            bool? ac_ = context.Operators.Equivalent(aa_, ab_);
-            bool? ad_ = context.Operators.Not(ac_);
-            bool? ae_ = context.Operators.And(y_, ad_);
+            CqlInterval<CqlDateTime> azzzzzzzzzzm_ = this.Measurement_Period(context);
+            Period azzzzzzzzzzn_ = QualifyingEncounter?.Period;
+            CqlInterval<CqlDateTime> azzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azzzzzzzzzzn_);
+            bool? azzzzzzzzzzp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(azzzzzzzzzzm_, azzzzzzzzzzo_, default);
+            Code<Encounter.EncounterStatus> azzzzzzzzzzq_ = QualifyingEncounter?.StatusElement;
+            Encounter.EncounterStatus? azzzzzzzzzzr_ = azzzzzzzzzzq_?.Value;
+            Code<Encounter.EncounterStatus> azzzzzzzzzzs_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(azzzzzzzzzzr_);
+            bool? azzzzzzzzzzt_ = context.Operators.Equal(azzzzzzzzzzs_, "finished");
+            bool? azzzzzzzzzzu_ = context.Operators.And(azzzzzzzzzzp_, azzzzzzzzzzt_);
+            Coding azzzzzzzzzzv_ = QualifyingEncounter?.Class;
+            CqlCode azzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToCode(context, azzzzzzzzzzv_);
+            CqlCode azzzzzzzzzzx_ = this.@virtual(context);
+            bool? azzzzzzzzzzy_ = context.Operators.Equivalent(azzzzzzzzzzw_, azzzzzzzzzzx_);
+            bool? azzzzzzzzzzz_ = context.Operators.Not(azzzzzzzzzzy_);
+            bool? bzzzzzzzzzza_ = context.Operators.And(azzzzzzzzzzu_, azzzzzzzzzzz_);
 
-            return ae_;
+            return bzzzzzzzzzza_;
         };
-        IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
+        IEnumerable<Encounter> azzzzzzzzzzl_ = context.Operators.Where<Encounter>(azzzzzzzzzzj_, azzzzzzzzzzk_);
 
-        return p_;
+        return azzzzzzzzzzl_;
     }
 
 
-    [CqlDeclaration("Primary Open Angle Glaucoma Encounter")]
+    [CqlExpressionDefinition(
+        definitionName: "Primary Open Angle Glaucoma Encounter")]
     public IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
-        IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
+        IEnumerable<Encounter> bzzzzzzzzzzb_ = this.Qualifying_Encounter_During_Measurement_Period(context);
+        IEnumerable<Encounter> bzzzzzzzzzzc_(Encounter ValidQualifyingEncounter)
         {
-            CqlValueSet d_ = this.Primary_Open_Angle_Glaucoma(context);
-            IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            bool? f_(Condition PrimaryOpenAngleGlaucoma)
+            CqlValueSet bzzzzzzzzzze_ = this.Primary_Open_Angle_Glaucoma(context);
+            IEnumerable<Condition> bzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, bzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            bool? bzzzzzzzzzzg_(Condition PrimaryOpenAngleGlaucoma)
             {
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
-                Period k_ = ValidQualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.Overlaps(j_, l_, default);
-                bool? n_ = QICoreCommon_2_1_000.Instance.isActive(context, PrimaryOpenAngleGlaucoma);
-                bool? o_ = context.Operators.And(m_, n_);
-                CodeableConcept p_ = PrimaryOpenAngleGlaucoma?.VerificationStatus;
-                CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                CqlCode r_ = QICoreCommon_2_1_000.Instance.unconfirmed(context);
-                CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                bool? t_ = context.Operators.Equivalent(q_, s_);
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                CqlCode w_ = QICoreCommon_2_1_000.Instance.refuted(context);
-                CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-                bool? y_ = context.Operators.Equivalent(v_, x_);
-                bool? z_ = context.Operators.Or(t_, y_);
-                CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                CqlCode ac_ = QICoreCommon_2_1_000.Instance.entered_in_error(context);
-                CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
-                bool? ae_ = context.Operators.Equivalent(ab_, ad_);
-                bool? af_ = context.Operators.Or(z_, ae_);
-                bool? ag_ = context.Operators.Not(af_);
-                bool? ah_ = context.Operators.And(o_, ag_);
+                CqlInterval<CqlDateTime> bzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
+                Period bzzzzzzzzzzl_ = ValidQualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> bzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzzzzzzzzzzl_);
+                bool? bzzzzzzzzzzn_ = context.Operators.Overlaps(bzzzzzzzzzzk_, bzzzzzzzzzzm_, default);
+                bool? bzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.isActive(context, PrimaryOpenAngleGlaucoma);
+                bool? bzzzzzzzzzzp_ = context.Operators.And(bzzzzzzzzzzn_, bzzzzzzzzzzo_);
+                CodeableConcept bzzzzzzzzzzq_ = PrimaryOpenAngleGlaucoma?.VerificationStatus;
+                CqlConcept bzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzq_);
+                CqlCode bzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.unconfirmed(context);
+                CqlConcept bzzzzzzzzzzt_ = context.Operators.ConvertCodeToConcept(bzzzzzzzzzzs_);
+                bool? bzzzzzzzzzzu_ = context.Operators.Equivalent(bzzzzzzzzzzr_, bzzzzzzzzzzt_);
+                CqlConcept bzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzq_);
+                CqlCode bzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.refuted(context);
+                CqlConcept bzzzzzzzzzzy_ = context.Operators.ConvertCodeToConcept(bzzzzzzzzzzx_);
+                bool? bzzzzzzzzzzz_ = context.Operators.Equivalent(bzzzzzzzzzzw_, bzzzzzzzzzzy_);
+                bool? czzzzzzzzzza_ = context.Operators.Or(bzzzzzzzzzzu_, bzzzzzzzzzzz_);
+                CqlConcept czzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzq_);
+                CqlCode czzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.entered_in_error(context);
+                CqlConcept czzzzzzzzzze_ = context.Operators.ConvertCodeToConcept(czzzzzzzzzzd_);
+                bool? czzzzzzzzzzf_ = context.Operators.Equivalent(czzzzzzzzzzc_, czzzzzzzzzze_);
+                bool? czzzzzzzzzzg_ = context.Operators.Or(czzzzzzzzzza_, czzzzzzzzzzf_);
+                bool? czzzzzzzzzzh_ = context.Operators.Not(czzzzzzzzzzg_);
+                bool? czzzzzzzzzzi_ = context.Operators.And(bzzzzzzzzzzp_, czzzzzzzzzzh_);
 
-                return ah_;
+                return czzzzzzzzzzi_;
             };
-            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-            Encounter h_(Condition PrimaryOpenAngleGlaucoma) =>
+            IEnumerable<Condition> bzzzzzzzzzzh_ = context.Operators.Where<Condition>(bzzzzzzzzzzf_, bzzzzzzzzzzg_);
+            Encounter bzzzzzzzzzzi_(Condition PrimaryOpenAngleGlaucoma) =>
                 ValidQualifyingEncounter;
-            IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
+            IEnumerable<Encounter> bzzzzzzzzzzj_ = context.Operators.Select<Condition, Encounter>(bzzzzzzzzzzh_, bzzzzzzzzzzi_);
 
-            return i_;
+            return bzzzzzzzzzzj_;
         };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> bzzzzzzzzzzd_ = context.Operators.SelectMany<Encounter, Encounter>(bzzzzzzzzzzb_, bzzzzzzzzzzc_);
 
-        return c_;
+        return bzzzzzzzzzzd_;
     }
 
 
-    [CqlDeclaration("Initial Population")]
+    [CqlExpressionDefinition(
+        definitionName: "Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
-        Patient a_ = this.Patient(context);
-        Date b_ = a_?.BirthDateElement;
-        string c_ = b_?.Value;
-        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-        CqlDateTime f_ = context.Operators.Start(e_);
-        CqlDate g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
-        IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
-        bool? l_ = context.Operators.And(i_, k_);
+        Patient czzzzzzzzzzj_ = this.Patient(context);
+        Date czzzzzzzzzzk_ = czzzzzzzzzzj_?.BirthDateElement;
+        string czzzzzzzzzzl_ = czzzzzzzzzzk_?.Value;
+        CqlDate czzzzzzzzzzm_ = context.Operators.ConvertStringToDate(czzzzzzzzzzl_);
+        CqlInterval<CqlDateTime> czzzzzzzzzzn_ = this.Measurement_Period(context);
+        CqlDateTime czzzzzzzzzzo_ = context.Operators.Start(czzzzzzzzzzn_);
+        CqlDate czzzzzzzzzzp_ = context.Operators.DateFrom(czzzzzzzzzzo_);
+        int? czzzzzzzzzzq_ = context.Operators.CalculateAgeAt(czzzzzzzzzzm_, czzzzzzzzzzp_, "year");
+        bool? czzzzzzzzzzr_ = context.Operators.GreaterOrEqual(czzzzzzzzzzq_, 18);
+        IEnumerable<Encounter> czzzzzzzzzzs_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+        bool? czzzzzzzzzzt_ = context.Operators.Exists<Encounter>(czzzzzzzzzzs_);
+        bool? czzzzzzzzzzu_ = context.Operators.And(czzzzzzzzzzr_, czzzzzzzzzzt_);
 
-        return l_;
+        return czzzzzzzzzzu_;
     }
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition(
+        definitionName: "Denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        bool? czzzzzzzzzzv_ = this.Initial_Population(context);
 
-        return a_;
+        return czzzzzzzzzzv_;
     }
 
 
-    [CqlDeclaration("Medical Reason for Not Performing Cup to Disc Ratio")]
+    [CqlExpressionDefinition(
+        definitionName: "Medical Reason for Not Performing Cup to Disc Ratio")]
     public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(CqlContext context)
     {
-        CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
-        IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
-        IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
-        IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
+        CqlValueSet czzzzzzzzzzw_ = this.Cup_to_Disc_Ratio(context);
+        IEnumerable<Observation> czzzzzzzzzzx_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, czzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+        IEnumerable<Observation> czzzzzzzzzzz_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, czzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+        IEnumerable<Observation> dzzzzzzzzzza_ = context.Operators.Union<Observation>(czzzzzzzzzzx_, czzzzzzzzzzz_);
+        IEnumerable<Observation> dzzzzzzzzzzb_(Observation CupToDiscExamNotPerformed)
         {
-            IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-            bool? k_(Encounter EncounterWithPOAG)
+            IEnumerable<Encounter> dzzzzzzzzzzf_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+            bool? dzzzzzzzzzzg_(Encounter EncounterWithPOAG)
             {
-                Instant o_ = CupToDiscExamNotPerformed?.IssuedElement;
-                DateTimeOffset? p_ = o_?.Value;
-                CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                Period r_ = EncounterWithPOAG?.Period;
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
+                Instant dzzzzzzzzzzk_ = CupToDiscExamNotPerformed?.IssuedElement;
+                DateTimeOffset? dzzzzzzzzzzl_ = dzzzzzzzzzzk_?.Value;
+                CqlDateTime dzzzzzzzzzzm_ = context.Operators.Convert<CqlDateTime>(dzzzzzzzzzzl_);
+                Period dzzzzzzzzzzn_ = EncounterWithPOAG?.Period;
+                CqlInterval<CqlDateTime> dzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dzzzzzzzzzzn_);
+                bool? dzzzzzzzzzzp_ = context.Operators.In<CqlDateTime>(dzzzzzzzzzzm_, dzzzzzzzzzzo_, default);
 
-                return t_;
+                return dzzzzzzzzzzp_;
             };
-            IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-            Observation m_(Encounter EncounterWithPOAG) =>
+            IEnumerable<Encounter> dzzzzzzzzzzh_ = context.Operators.Where<Encounter>(dzzzzzzzzzzf_, dzzzzzzzzzzg_);
+            Observation dzzzzzzzzzzi_(Encounter EncounterWithPOAG) =>
                 CupToDiscExamNotPerformed;
-            IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+            IEnumerable<Observation> dzzzzzzzzzzj_ = context.Operators.Select<Encounter, Observation>(dzzzzzzzzzzh_, dzzzzzzzzzzi_);
 
-            return n_;
+            return dzzzzzzzzzzj_;
         };
-        IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
-        bool? h_(Observation CupToDiscExamNotPerformed)
+        IEnumerable<Observation> dzzzzzzzzzzc_ = context.Operators.SelectMany<Observation, Observation>(dzzzzzzzzzza_, dzzzzzzzzzzb_);
+        bool? dzzzzzzzzzzd_(Observation CupToDiscExamNotPerformed)
         {
-            bool? u_(Extension @this)
+            bool? dzzzzzzzzzzq_(Extension @this)
             {
-                string ac_ = @this?.Url;
-                FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-                string ae_ = FHIRHelpers_4_4_000.Instance.ToString(context, ad_);
-                bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                string dzzzzzzzzzzy_ = @this?.Url;
+                FhirString dzzzzzzzzzzz_ = context.Operators.Convert<FhirString>(dzzzzzzzzzzy_);
+                string ezzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToString(context, dzzzzzzzzzzz_);
+                bool? ezzzzzzzzzzb_ = context.Operators.Equal(ezzzzzzzzzza_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-                return af_;
+                return ezzzzzzzzzzb_;
             };
-            IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
+            IEnumerable<Extension> dzzzzzzzzzzr_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
                     ? (CupToDiscExamNotPerformed as DomainResource).Extension
-                    : default), u_);
-            object w_(Extension @this)
+                    : default), dzzzzzzzzzzq_);
+            object dzzzzzzzzzzs_(Extension @this)
             {
-                DataType ag_ = @this?.Value;
+                DataType ezzzzzzzzzzc_ = @this?.Value;
 
-                return ag_;
+                return ezzzzzzzzzzc_;
             };
-            IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
-            object y_ = context.Operators.SingletonFrom<object>(x_);
-            CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_ as CodeableConcept);
-            CqlValueSet aa_ = this.Medical_Reason(context);
-            bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+            IEnumerable<object> dzzzzzzzzzzt_ = context.Operators.Select<Extension, object>(dzzzzzzzzzzr_, dzzzzzzzzzzs_);
+            object dzzzzzzzzzzu_ = context.Operators.SingletonFrom<object>(dzzzzzzzzzzt_);
+            CqlConcept dzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzu_ as CodeableConcept);
+            CqlValueSet dzzzzzzzzzzw_ = this.Medical_Reason(context);
+            bool? dzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzv_, dzzzzzzzzzzw_);
 
-            return ab_;
+            return dzzzzzzzzzzx_;
         };
-        IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
+        IEnumerable<Observation> dzzzzzzzzzze_ = context.Operators.Where<Observation>(dzzzzzzzzzzc_, dzzzzzzzzzzd_);
 
-        return i_;
+        return dzzzzzzzzzze_;
     }
 
 
-    [CqlDeclaration("Medical Reason for Not Performing Optic Disc Exam")]
+    [CqlExpressionDefinition(
+        definitionName: "Medical Reason for Not Performing Optic Disc Exam")]
     public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam(CqlContext context)
     {
-        CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
-        IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
-        IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
-        IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
+        CqlValueSet ezzzzzzzzzzd_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
+        IEnumerable<Observation> ezzzzzzzzzze_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ezzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+        IEnumerable<Observation> ezzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ezzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+        IEnumerable<Observation> ezzzzzzzzzzh_ = context.Operators.Union<Observation>(ezzzzzzzzzze_, ezzzzzzzzzzg_);
+        IEnumerable<Observation> ezzzzzzzzzzi_(Observation OpticDiscExamNotPerformed)
         {
-            IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-            bool? k_(Encounter EncounterWithPOAG)
+            IEnumerable<Encounter> ezzzzzzzzzzm_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+            bool? ezzzzzzzzzzn_(Encounter EncounterWithPOAG)
             {
-                Instant o_ = OpticDiscExamNotPerformed?.IssuedElement;
-                DateTimeOffset? p_ = o_?.Value;
-                CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                Period r_ = EncounterWithPOAG?.Period;
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
+                Instant ezzzzzzzzzzr_ = OpticDiscExamNotPerformed?.IssuedElement;
+                DateTimeOffset? ezzzzzzzzzzs_ = ezzzzzzzzzzr_?.Value;
+                CqlDateTime ezzzzzzzzzzt_ = context.Operators.Convert<CqlDateTime>(ezzzzzzzzzzs_);
+                Period ezzzzzzzzzzu_ = EncounterWithPOAG?.Period;
+                CqlInterval<CqlDateTime> ezzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ezzzzzzzzzzu_);
+                bool? ezzzzzzzzzzw_ = context.Operators.In<CqlDateTime>(ezzzzzzzzzzt_, ezzzzzzzzzzv_, default);
 
-                return t_;
+                return ezzzzzzzzzzw_;
             };
-            IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-            Observation m_(Encounter EncounterWithPOAG) =>
+            IEnumerable<Encounter> ezzzzzzzzzzo_ = context.Operators.Where<Encounter>(ezzzzzzzzzzm_, ezzzzzzzzzzn_);
+            Observation ezzzzzzzzzzp_(Encounter EncounterWithPOAG) =>
                 OpticDiscExamNotPerformed;
-            IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
+            IEnumerable<Observation> ezzzzzzzzzzq_ = context.Operators.Select<Encounter, Observation>(ezzzzzzzzzzo_, ezzzzzzzzzzp_);
 
-            return n_;
+            return ezzzzzzzzzzq_;
         };
-        IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
-        bool? h_(Observation OpticDiscExamNotPerformed)
+        IEnumerable<Observation> ezzzzzzzzzzj_ = context.Operators.SelectMany<Observation, Observation>(ezzzzzzzzzzh_, ezzzzzzzzzzi_);
+        bool? ezzzzzzzzzzk_(Observation OpticDiscExamNotPerformed)
         {
-            bool? u_(Extension @this)
+            bool? ezzzzzzzzzzx_(Extension @this)
             {
-                string ac_ = @this?.Url;
-                FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-                string ae_ = FHIRHelpers_4_4_000.Instance.ToString(context, ad_);
-                bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                string fzzzzzzzzzzf_ = @this?.Url;
+                FhirString fzzzzzzzzzzg_ = context.Operators.Convert<FhirString>(fzzzzzzzzzzf_);
+                string fzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToString(context, fzzzzzzzzzzg_);
+                bool? fzzzzzzzzzzi_ = context.Operators.Equal(fzzzzzzzzzzh_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-                return af_;
+                return fzzzzzzzzzzi_;
             };
-            IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
+            IEnumerable<Extension> ezzzzzzzzzzy_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
                     ? (OpticDiscExamNotPerformed as DomainResource).Extension
-                    : default), u_);
-            object w_(Extension @this)
+                    : default), ezzzzzzzzzzx_);
+            object ezzzzzzzzzzz_(Extension @this)
             {
-                DataType ag_ = @this?.Value;
+                DataType fzzzzzzzzzzj_ = @this?.Value;
 
-                return ag_;
+                return fzzzzzzzzzzj_;
             };
-            IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
-            object y_ = context.Operators.SingletonFrom<object>(x_);
-            CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_ as CodeableConcept);
-            CqlValueSet aa_ = this.Medical_Reason(context);
-            bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+            IEnumerable<object> fzzzzzzzzzza_ = context.Operators.Select<Extension, object>(ezzzzzzzzzzy_, ezzzzzzzzzzz_);
+            object fzzzzzzzzzzb_ = context.Operators.SingletonFrom<object>(fzzzzzzzzzza_);
+            CqlConcept fzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzb_ as CodeableConcept);
+            CqlValueSet fzzzzzzzzzzd_ = this.Medical_Reason(context);
+            bool? fzzzzzzzzzze_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzc_, fzzzzzzzzzzd_);
 
-            return ab_;
+            return fzzzzzzzzzze_;
         };
-        IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
+        IEnumerable<Observation> ezzzzzzzzzzl_ = context.Operators.Where<Observation>(ezzzzzzzzzzj_, ezzzzzzzzzzk_);
 
-        return i_;
+        return ezzzzzzzzzzl_;
     }
 
 
-    [CqlDeclaration("Denominator Exceptions")]
+    [CqlExpressionDefinition(
+        definitionName: "Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
-        IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        bool? e_ = context.Operators.Or(b_, d_);
+        IEnumerable<Observation> fzzzzzzzzzzk_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
+        bool? fzzzzzzzzzzl_ = context.Operators.Exists<Observation>(fzzzzzzzzzzk_);
+        IEnumerable<Observation> fzzzzzzzzzzm_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
+        bool? fzzzzzzzzzzn_ = context.Operators.Exists<Observation>(fzzzzzzzzzzm_);
+        bool? fzzzzzzzzzzo_ = context.Operators.Or(fzzzzzzzzzzl_, fzzzzzzzzzzn_);
 
-        return e_;
+        return fzzzzzzzzzzo_;
     }
 
 
-    [CqlDeclaration("Cup to Disc Ratio Performed with Result")]
+    [CqlExpressionDefinition(
+        definitionName: "Cup to Disc Ratio Performed with Result")]
     public IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result(CqlContext context)
     {
-        CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> c_(Observation CupToDiscExamPerformed)
+        CqlValueSet fzzzzzzzzzzp_ = this.Cup_to_Disc_Ratio(context);
+        IEnumerable<Observation> fzzzzzzzzzzq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> fzzzzzzzzzzr_(Observation CupToDiscExamPerformed)
         {
-            IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-            bool? h_(Encounter EncounterWithPOAG)
+            IEnumerable<Encounter> fzzzzzzzzzzv_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+            bool? fzzzzzzzzzzw_(Encounter EncounterWithPOAG)
             {
-                Period l_ = EncounterWithPOAG?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                DataType n_ = CupToDiscExamPerformed?.Effective;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_);
-                bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
+                Period gzzzzzzzzzza_ = EncounterWithPOAG?.Period;
+                CqlInterval<CqlDateTime> gzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gzzzzzzzzzza_);
+                DataType gzzzzzzzzzzc_ = CupToDiscExamPerformed?.Effective;
+                object gzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzc_);
+                CqlInterval<CqlDateTime> gzzzzzzzzzze_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzd_);
+                bool? gzzzzzzzzzzf_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(gzzzzzzzzzzb_, gzzzzzzzzzze_, default);
 
-                return q_;
+                return gzzzzzzzzzzf_;
             };
-            IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            Observation j_(Encounter EncounterWithPOAG) =>
+            IEnumerable<Encounter> fzzzzzzzzzzx_ = context.Operators.Where<Encounter>(fzzzzzzzzzzv_, fzzzzzzzzzzw_);
+            Observation fzzzzzzzzzzy_(Encounter EncounterWithPOAG) =>
                 CupToDiscExamPerformed;
-            IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+            IEnumerable<Observation> fzzzzzzzzzzz_ = context.Operators.Select<Encounter, Observation>(fzzzzzzzzzzx_, fzzzzzzzzzzy_);
 
-            return k_;
+            return fzzzzzzzzzzz_;
         };
-        IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
-        bool? e_(Observation CupToDiscExamPerformed)
+        IEnumerable<Observation> fzzzzzzzzzzs_ = context.Operators.SelectMany<Observation, Observation>(fzzzzzzzzzzq_, fzzzzzzzzzzr_);
+        bool? fzzzzzzzzzzt_(Observation CupToDiscExamPerformed)
         {
-            DataType r_ = CupToDiscExamPerformed?.Value;
-            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            bool? t_ = context.Operators.Not((bool?)(s_ is null));
-            Code<ObservationStatus> u_ = CupToDiscExamPerformed?.StatusElement;
-            ObservationStatus? v_ = u_?.Value;
-            Code<ObservationStatus> w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
-            string x_ = context.Operators.Convert<string>(w_);
-            string[] y_ = [
+            DataType gzzzzzzzzzzg_ = CupToDiscExamPerformed?.Value;
+            object gzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzg_);
+            bool? gzzzzzzzzzzi_ = context.Operators.Not((bool?)(gzzzzzzzzzzh_ is null));
+            Code<ObservationStatus> gzzzzzzzzzzj_ = CupToDiscExamPerformed?.StatusElement;
+            ObservationStatus? gzzzzzzzzzzk_ = gzzzzzzzzzzj_?.Value;
+            Code<ObservationStatus> gzzzzzzzzzzl_ = context.Operators.Convert<Code<ObservationStatus>>(gzzzzzzzzzzk_);
+            string gzzzzzzzzzzm_ = context.Operators.Convert<string>(gzzzzzzzzzzl_);
+            string[] gzzzzzzzzzzn_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
-            bool? aa_ = context.Operators.And(t_, z_);
+            bool? gzzzzzzzzzzo_ = context.Operators.In<string>(gzzzzzzzzzzm_, gzzzzzzzzzzn_ as IEnumerable<string>);
+            bool? gzzzzzzzzzzp_ = context.Operators.And(gzzzzzzzzzzi_, gzzzzzzzzzzo_);
 
-            return aa_;
+            return gzzzzzzzzzzp_;
         };
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        IEnumerable<Observation> fzzzzzzzzzzu_ = context.Operators.Where<Observation>(fzzzzzzzzzzs_, fzzzzzzzzzzt_);
 
-        return f_;
+        return fzzzzzzzzzzu_;
     }
 
 
-    [CqlDeclaration("Optic Disc Exam Performed with Result")]
+    [CqlExpressionDefinition(
+        definitionName: "Optic Disc Exam Performed with Result")]
     public IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result(CqlContext context)
     {
-        CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> c_(Observation OpticDiscExamPerformed)
+        CqlValueSet gzzzzzzzzzzq_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
+        IEnumerable<Observation> gzzzzzzzzzzr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, gzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> gzzzzzzzzzzs_(Observation OpticDiscExamPerformed)
         {
-            IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-            bool? h_(Encounter EncounterWithPOAG)
+            IEnumerable<Encounter> gzzzzzzzzzzw_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+            bool? gzzzzzzzzzzx_(Encounter EncounterWithPOAG)
             {
-                Period l_ = EncounterWithPOAG?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                DataType n_ = OpticDiscExamPerformed?.Effective;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_);
-                bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
+                Period hzzzzzzzzzzb_ = EncounterWithPOAG?.Period;
+                CqlInterval<CqlDateTime> hzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, hzzzzzzzzzzb_);
+                DataType hzzzzzzzzzzd_ = OpticDiscExamPerformed?.Effective;
+                object hzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzd_);
+                CqlInterval<CqlDateTime> hzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.toInterval(context, hzzzzzzzzzze_);
+                bool? hzzzzzzzzzzg_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(hzzzzzzzzzzc_, hzzzzzzzzzzf_, default);
 
-                return q_;
+                return hzzzzzzzzzzg_;
             };
-            IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            Observation j_(Encounter EncounterWithPOAG) =>
+            IEnumerable<Encounter> gzzzzzzzzzzy_ = context.Operators.Where<Encounter>(gzzzzzzzzzzw_, gzzzzzzzzzzx_);
+            Observation gzzzzzzzzzzz_(Encounter EncounterWithPOAG) =>
                 OpticDiscExamPerformed;
-            IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
+            IEnumerable<Observation> hzzzzzzzzzza_ = context.Operators.Select<Encounter, Observation>(gzzzzzzzzzzy_, gzzzzzzzzzzz_);
 
-            return k_;
+            return hzzzzzzzzzza_;
         };
-        IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
-        bool? e_(Observation OpticDiscExamPerformed)
+        IEnumerable<Observation> gzzzzzzzzzzt_ = context.Operators.SelectMany<Observation, Observation>(gzzzzzzzzzzr_, gzzzzzzzzzzs_);
+        bool? gzzzzzzzzzzu_(Observation OpticDiscExamPerformed)
         {
-            DataType r_ = OpticDiscExamPerformed?.Value;
-            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            bool? t_ = context.Operators.Not((bool?)(s_ is null));
-            Code<ObservationStatus> u_ = OpticDiscExamPerformed?.StatusElement;
-            ObservationStatus? v_ = u_?.Value;
-            Code<ObservationStatus> w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
-            string x_ = context.Operators.Convert<string>(w_);
-            string[] y_ = [
+            DataType hzzzzzzzzzzh_ = OpticDiscExamPerformed?.Value;
+            object hzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzh_);
+            bool? hzzzzzzzzzzj_ = context.Operators.Not((bool?)(hzzzzzzzzzzi_ is null));
+            Code<ObservationStatus> hzzzzzzzzzzk_ = OpticDiscExamPerformed?.StatusElement;
+            ObservationStatus? hzzzzzzzzzzl_ = hzzzzzzzzzzk_?.Value;
+            Code<ObservationStatus> hzzzzzzzzzzm_ = context.Operators.Convert<Code<ObservationStatus>>(hzzzzzzzzzzl_);
+            string hzzzzzzzzzzn_ = context.Operators.Convert<string>(hzzzzzzzzzzm_);
+            string[] hzzzzzzzzzzo_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
-            bool? aa_ = context.Operators.And(t_, z_);
+            bool? hzzzzzzzzzzp_ = context.Operators.In<string>(hzzzzzzzzzzn_, hzzzzzzzzzzo_ as IEnumerable<string>);
+            bool? hzzzzzzzzzzq_ = context.Operators.And(hzzzzzzzzzzj_, hzzzzzzzzzzp_);
 
-            return aa_;
+            return hzzzzzzzzzzq_;
         };
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        IEnumerable<Observation> gzzzzzzzzzzv_ = context.Operators.Where<Observation>(gzzzzzzzzzzt_, gzzzzzzzzzzu_);
 
-        return f_;
+        return gzzzzzzzzzzv_;
     }
 
 
-    [CqlDeclaration("Numerator")]
+    [CqlExpressionDefinition(
+        definitionName: "Numerator")]
     public bool? Numerator(CqlContext context)
     {
-        IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Optic_Disc_Exam_Performed_with_Result(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        bool? e_ = context.Operators.And(b_, d_);
+        IEnumerable<Observation> hzzzzzzzzzzr_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
+        bool? hzzzzzzzzzzs_ = context.Operators.Exists<Observation>(hzzzzzzzzzzr_);
+        IEnumerable<Observation> hzzzzzzzzzzt_ = this.Optic_Disc_Exam_Performed_with_Result(context);
+        bool? hzzzzzzzzzzu_ = context.Operators.Exists<Observation>(hzzzzzzzzzzt_);
+        bool? hzzzzzzzzzzv_ = context.Operators.And(hzzzzzzzzzzs_, hzzzzzzzzzzu_);
 
-        return e_;
+        return hzzzzzzzzzzv_;
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }
