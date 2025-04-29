@@ -15,10 +15,10 @@ namespace Hl7.Cql.Compiler.Expressions;
 /// <seealso cref="CqlCodeDefinitionAttribute"/>
 internal class CqlCodeDefinition(
     LambdaExpression lambda,
-    string definitionName,
+    string name,
     string codeId,
     string codeSystem)
-    : CqlDefinition(lambda, definitionName) {
+    : CqlDefinition(lambda, name) {
     public string CodeId { get; } = codeId;
     public string CodeSystem { get; } = codeSystem;
 }

@@ -30,1315 +30,810 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     #region Codes
 
-    #region Code: Birthdate
-    [CqlCodeDefinition(
-        definitionName: "Birthdate",
-        codeId: "21112-8",
-        codeSystem: "http://loinc.org")]
-    public CqlCode Birthdate(CqlContext context) => _Birthdate;
-
+    [CqlCodeDefinition("Birthdate", codeId: "21112-8", codeSystem: "http://loinc.org")]
+    public CqlCode Birthdate(CqlContext _) => _Birthdate;
     private static readonly CqlCode _Birthdate = new CqlCode("21112-8", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: Dead
-    [CqlCodeDefinition(
-        definitionName: "Dead",
-        codeId: "419099009",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode Dead(CqlContext context) => _Dead;
-
+    [CqlCodeDefinition("Dead", codeId: "419099009", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Dead(CqlContext _) => _Dead;
     private static readonly CqlCode _Dead = new CqlCode("419099009", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: ER
-    [CqlCodeDefinition(
-        definitionName: "ER",
-        codeId: "ER",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode ER(CqlContext context) => _ER;
-
+    [CqlCodeDefinition("ER", codeId: "ER", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
+    public CqlCode ER(CqlContext _) => _ER;
     private static readonly CqlCode _ER = new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
-    #endregion
 
-    #region Code: ICU
-    [CqlCodeDefinition(
-        definitionName: "ICU",
-        codeId: "ICU",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode ICU(CqlContext context) => _ICU;
-
+    [CqlCodeDefinition("ICU", codeId: "ICU", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
+    public CqlCode ICU(CqlContext _) => _ICU;
     private static readonly CqlCode _ICU = new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
-    #endregion
 
-    #region Code: Billing
-    [CqlCodeDefinition(
-        definitionName: "Billing",
-        codeId: "billing",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode Billing(CqlContext context) => _Billing;
-
+    [CqlCodeDefinition("Billing", codeId: "billing", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode Billing(CqlContext _) => _Billing;
     private static readonly CqlCode _Billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: ambulatory
-    [CqlCodeDefinition(
-        definitionName: "ambulatory",
-        codeId: "AMB",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode ambulatory(CqlContext context) => _ambulatory;
-
+    [CqlCodeDefinition("ambulatory", codeId: "AMB", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode ambulatory(CqlContext _) => _ambulatory;
     private static readonly CqlCode _ambulatory = new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: emergency
-    [CqlCodeDefinition(
-        definitionName: "emergency",
-        codeId: "EMER",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode emergency(CqlContext context) => _emergency;
-
+    [CqlCodeDefinition("emergency", codeId: "EMER", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode emergency(CqlContext _) => _emergency;
     private static readonly CqlCode _emergency = new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: field
-    [CqlCodeDefinition(
-        definitionName: "field",
-        codeId: "FLD",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode field(CqlContext context) => _field;
-
+    [CqlCodeDefinition("field", codeId: "FLD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode field(CqlContext _) => _field;
     private static readonly CqlCode _field = new CqlCode("FLD", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: home health
-    [CqlCodeDefinition(
-        definitionName: "home health",
-        codeId: "HH",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode home_health(CqlContext context) => _home_health;
-
+    [CqlCodeDefinition("home health", codeId: "HH", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode home_health(CqlContext _) => _home_health;
     private static readonly CqlCode _home_health = new CqlCode("HH", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: inpatient encounter
-    [CqlCodeDefinition(
-        definitionName: "inpatient encounter",
-        codeId: "IMP",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode inpatient_encounter(CqlContext context) => _inpatient_encounter;
-
+    [CqlCodeDefinition("inpatient encounter", codeId: "IMP", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode inpatient_encounter(CqlContext _) => _inpatient_encounter;
     private static readonly CqlCode _inpatient_encounter = new CqlCode("IMP", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: inpatient acute
-    [CqlCodeDefinition(
-        definitionName: "inpatient acute",
-        codeId: "ACUTE",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode inpatient_acute(CqlContext context) => _inpatient_acute;
-
+    [CqlCodeDefinition("inpatient acute", codeId: "ACUTE", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode inpatient_acute(CqlContext _) => _inpatient_acute;
     private static readonly CqlCode _inpatient_acute = new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: inpatient non-acute
-    [CqlCodeDefinition(
-        definitionName: "inpatient non-acute",
-        codeId: "NONAC",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode inpatient_non_acute(CqlContext context) => _inpatient_non_acute;
-
+    [CqlCodeDefinition("inpatient non-acute", codeId: "NONAC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode inpatient_non_acute(CqlContext _) => _inpatient_non_acute;
     private static readonly CqlCode _inpatient_non_acute = new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: observation encounter
-    [CqlCodeDefinition(
-        definitionName: "observation encounter",
-        codeId: "OBSENC",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode observation_encounter(CqlContext context) => _observation_encounter;
-
+    [CqlCodeDefinition("observation encounter", codeId: "OBSENC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode observation_encounter(CqlContext _) => _observation_encounter;
     private static readonly CqlCode _observation_encounter = new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: pre-admission
-    [CqlCodeDefinition(
-        definitionName: "pre-admission",
-        codeId: "PRENC",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode pre_admission(CqlContext context) => _pre_admission;
-
+    [CqlCodeDefinition("pre-admission", codeId: "PRENC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode pre_admission(CqlContext _) => _pre_admission;
     private static readonly CqlCode _pre_admission = new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: short stay
-    [CqlCodeDefinition(
-        definitionName: "short stay",
-        codeId: "SS",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode short_stay(CqlContext context) => _short_stay;
-
+    [CqlCodeDefinition("short stay", codeId: "SS", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode short_stay(CqlContext _) => _short_stay;
     private static readonly CqlCode _short_stay = new CqlCode("SS", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: virtual
-    [CqlCodeDefinition(
-        definitionName: "virtual",
-        codeId: "VR",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode @virtual(CqlContext context) => _virtual;
-
+    [CqlCodeDefinition("virtual", codeId: "VR", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode @virtual(CqlContext _) => _virtual;
     private static readonly CqlCode _virtual = new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-    #endregion
 
-    #region Code: problem-list-item
-    [CqlCodeDefinition(
-        definitionName: "problem-list-item",
-        codeId: "problem-list-item",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode problem_list_item(CqlContext context) => _problem_list_item;
-
+    [CqlCodeDefinition("problem-list-item", codeId: "problem-list-item", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
+    public CqlCode problem_list_item(CqlContext _) => _problem_list_item;
     private static readonly CqlCode _problem_list_item = new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
-    #endregion
 
-    #region Code: encounter-diagnosis
-    [CqlCodeDefinition(
-        definitionName: "encounter-diagnosis",
-        codeId: "encounter-diagnosis",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode encounter_diagnosis(CqlContext context) => _encounter_diagnosis;
-
+    [CqlCodeDefinition("encounter-diagnosis", codeId: "encounter-diagnosis", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
+    public CqlCode encounter_diagnosis(CqlContext _) => _encounter_diagnosis;
     private static readonly CqlCode _encounter_diagnosis = new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
-    #endregion
 
-    #region Code: health-concern
-    [CqlCodeDefinition(
-        definitionName: "health-concern",
-        codeId: "health-concern",
-        codeSystem: "http://hl7.org/fhir/us/core/CodeSystem/condition-category")]
-    public CqlCode health_concern(CqlContext context) => _health_concern;
-
+    [CqlCodeDefinition("health-concern", codeId: "health-concern", codeSystem: "http://hl7.org/fhir/us/core/CodeSystem/condition-category")]
+    public CqlCode health_concern(CqlContext _) => _health_concern;
     private static readonly CqlCode _health_concern = new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", default, default);
-    #endregion
 
-    #region Code: active
-    [CqlCodeDefinition(
-        definitionName: "active",
-        codeId: "active",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode active(CqlContext context) => _active;
-
+    [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode active(CqlContext _) => _active;
     private static readonly CqlCode _active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: recurrence
-    [CqlCodeDefinition(
-        definitionName: "recurrence",
-        codeId: "recurrence",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode recurrence(CqlContext context) => _recurrence;
-
+    [CqlCodeDefinition("recurrence", codeId: "recurrence", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode recurrence(CqlContext _) => _recurrence;
     private static readonly CqlCode _recurrence = new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: relapse
-    [CqlCodeDefinition(
-        definitionName: "relapse",
-        codeId: "relapse",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode relapse(CqlContext context) => _relapse;
-
+    [CqlCodeDefinition("relapse", codeId: "relapse", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode relapse(CqlContext _) => _relapse;
     private static readonly CqlCode _relapse = new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: inactive
-    [CqlCodeDefinition(
-        definitionName: "inactive",
-        codeId: "inactive",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode inactive(CqlContext context) => _inactive;
-
+    [CqlCodeDefinition("inactive", codeId: "inactive", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode inactive(CqlContext _) => _inactive;
     private static readonly CqlCode _inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: remission
-    [CqlCodeDefinition(
-        definitionName: "remission",
-        codeId: "remission",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode remission(CqlContext context) => _remission;
-
+    [CqlCodeDefinition("remission", codeId: "remission", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode remission(CqlContext _) => _remission;
     private static readonly CqlCode _remission = new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: resolved
-    [CqlCodeDefinition(
-        definitionName: "resolved",
-        codeId: "resolved",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode resolved(CqlContext context) => _resolved;
-
+    [CqlCodeDefinition("resolved", codeId: "resolved", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode resolved(CqlContext _) => _resolved;
     private static readonly CqlCode _resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-    #endregion
 
-    #region Code: unconfirmed
-    [CqlCodeDefinition(
-        definitionName: "unconfirmed",
-        codeId: "unconfirmed",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode unconfirmed(CqlContext context) => _unconfirmed;
-
+    [CqlCodeDefinition("unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode unconfirmed(CqlContext _) => _unconfirmed;
     private static readonly CqlCode _unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: provisional
-    [CqlCodeDefinition(
-        definitionName: "provisional",
-        codeId: "provisional",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode provisional(CqlContext context) => _provisional;
-
+    [CqlCodeDefinition("provisional", codeId: "provisional", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode provisional(CqlContext _) => _provisional;
     private static readonly CqlCode _provisional = new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: differential
-    [CqlCodeDefinition(
-        definitionName: "differential",
-        codeId: "differential",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode differential(CqlContext context) => _differential;
-
+    [CqlCodeDefinition("differential", codeId: "differential", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode differential(CqlContext _) => _differential;
     private static readonly CqlCode _differential = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: confirmed
-    [CqlCodeDefinition(
-        definitionName: "confirmed",
-        codeId: "confirmed",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode confirmed(CqlContext context) => _confirmed;
-
+    [CqlCodeDefinition("confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode confirmed(CqlContext _) => _confirmed;
     private static readonly CqlCode _confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: refuted
-    [CqlCodeDefinition(
-        definitionName: "refuted",
-        codeId: "refuted",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode refuted(CqlContext context) => _refuted;
-
+    [CqlCodeDefinition("refuted", codeId: "refuted", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode refuted(CqlContext _) => _refuted;
     private static readonly CqlCode _refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: entered-in-error
-    [CqlCodeDefinition(
-        definitionName: "entered-in-error",
-        codeId: "entered-in-error",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode entered_in_error(CqlContext context) => _entered_in_error;
-
+    [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
     private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-    #endregion
 
-    #region Code: allergy-active
-    [CqlCodeDefinition(
-        definitionName: "allergy-active",
-        codeId: "active",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_active(CqlContext context) => _allergy_active;
-
+    [CqlCodeDefinition("allergy-active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
+    public CqlCode allergy_active(CqlContext _) => _allergy_active;
     private static readonly CqlCode _allergy_active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
-    #endregion
 
-    #region Code: allergy-inactive
-    [CqlCodeDefinition(
-        definitionName: "allergy-inactive",
-        codeId: "inactive",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_inactive(CqlContext context) => _allergy_inactive;
-
+    [CqlCodeDefinition("allergy-inactive", codeId: "inactive", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
+    public CqlCode allergy_inactive(CqlContext _) => _allergy_inactive;
     private static readonly CqlCode _allergy_inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
-    #endregion
 
-    #region Code: allergy-resolved
-    [CqlCodeDefinition(
-        definitionName: "allergy-resolved",
-        codeId: "resolved",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_resolved(CqlContext context) => _allergy_resolved;
-
+    [CqlCodeDefinition("allergy-resolved", codeId: "resolved", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
+    public CqlCode allergy_resolved(CqlContext _) => _allergy_resolved;
     private static readonly CqlCode _allergy_resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
-    #endregion
 
-    #region Code: allergy-unconfirmed
-    [CqlCodeDefinition(
-        definitionName: "allergy-unconfirmed",
-        codeId: "unconfirmed",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_unconfirmed(CqlContext context) => _allergy_unconfirmed;
-
+    [CqlCodeDefinition("allergy-unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
+    public CqlCode allergy_unconfirmed(CqlContext _) => _allergy_unconfirmed;
     private static readonly CqlCode _allergy_unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
-    #endregion
 
-    #region Code: allergy-confirmed
-    [CqlCodeDefinition(
-        definitionName: "allergy-confirmed",
-        codeId: "confirmed",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_confirmed(CqlContext context) => _allergy_confirmed;
-
+    [CqlCodeDefinition("allergy-confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
+    public CqlCode allergy_confirmed(CqlContext _) => _allergy_confirmed;
     private static readonly CqlCode _allergy_confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
-    #endregion
 
-    #region Code: allergy-refuted
-    [CqlCodeDefinition(
-        definitionName: "allergy-refuted",
-        codeId: "refuted",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_refuted(CqlContext context) => _allergy_refuted;
-
+    [CqlCodeDefinition("allergy-refuted", codeId: "refuted", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
+    public CqlCode allergy_refuted(CqlContext _) => _allergy_refuted;
     private static readonly CqlCode _allergy_refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
-    #endregion
 
-    #region Code: Inpatient
-    [CqlCodeDefinition(
-        definitionName: "Inpatient",
-        codeId: "inpatient",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
-    public CqlCode Inpatient(CqlContext context) => _Inpatient;
-
+    [CqlCodeDefinition("Inpatient", codeId: "inpatient", codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
+    public CqlCode Inpatient(CqlContext _) => _Inpatient;
     private static readonly CqlCode _Inpatient = new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-    #endregion
 
-    #region Code: Outpatient
-    [CqlCodeDefinition(
-        definitionName: "Outpatient",
-        codeId: "outpatient",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
-    public CqlCode Outpatient(CqlContext context) => _Outpatient;
-
+    [CqlCodeDefinition("Outpatient", codeId: "outpatient", codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
+    public CqlCode Outpatient(CqlContext _) => _Outpatient;
     private static readonly CqlCode _Outpatient = new CqlCode("outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-    #endregion
 
-    #region Code: Community
-    [CqlCodeDefinition(
-        definitionName: "Community",
-        codeId: "community",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
-    public CqlCode Community(CqlContext context) => _Community;
-
+    [CqlCodeDefinition("Community", codeId: "community", codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
+    public CqlCode Community(CqlContext _) => _Community;
     private static readonly CqlCode _Community = new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-    #endregion
 
-    #region Code: Discharge
-    [CqlCodeDefinition(
-        definitionName: "Discharge",
-        codeId: "discharge",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
-    public CqlCode Discharge(CqlContext context) => _Discharge;
-
+    [CqlCodeDefinition("Discharge", codeId: "discharge", codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
+    public CqlCode Discharge(CqlContext _) => _Discharge;
     private static readonly CqlCode _Discharge = new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-    #endregion
 
-    #region Code: AD
-    [CqlCodeDefinition(
-        definitionName: "AD",
-        codeId: "AD",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode AD(CqlContext context) => _AD;
-
+    [CqlCodeDefinition("AD", codeId: "AD", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode AD(CqlContext _) => _AD;
     private static readonly CqlCode _AD = new CqlCode("AD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: DD
-    [CqlCodeDefinition(
-        definitionName: "DD",
-        codeId: "DD",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode DD(CqlContext context) => _DD;
-
+    [CqlCodeDefinition("DD", codeId: "DD", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode DD(CqlContext _) => _DD;
     private static readonly CqlCode _DD = new CqlCode("DD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: CC
-    [CqlCodeDefinition(
-        definitionName: "CC",
-        codeId: "CC",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode CC(CqlContext context) => _CC;
-
+    [CqlCodeDefinition("CC", codeId: "CC", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode CC(CqlContext _) => _CC;
     private static readonly CqlCode _CC = new CqlCode("CC", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: CM
-    [CqlCodeDefinition(
-        definitionName: "CM",
-        codeId: "CM",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode CM(CqlContext context) => _CM;
-
+    [CqlCodeDefinition("CM", codeId: "CM", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode CM(CqlContext _) => _CM;
     private static readonly CqlCode _CM = new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: pre-op
-    [CqlCodeDefinition(
-        definitionName: "pre-op",
-        codeId: "pre-op",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode pre_op(CqlContext context) => _pre_op;
-
+    [CqlCodeDefinition("pre-op", codeId: "pre-op", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode pre_op(CqlContext _) => _pre_op;
     private static readonly CqlCode _pre_op = new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: post-op
-    [CqlCodeDefinition(
-        definitionName: "post-op",
-        codeId: "post-op",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode post_op(CqlContext context) => _post_op;
-
+    [CqlCodeDefinition("post-op", codeId: "post-op", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode post_op(CqlContext _) => _post_op;
     private static readonly CqlCode _post_op = new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: billing
-    [CqlCodeDefinition(
-        definitionName: "billing",
-        codeId: "billing",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode billing(CqlContext context) => _billing;
-
+    [CqlCodeDefinition("billing", codeId: "billing", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
+    public CqlCode billing(CqlContext _) => _billing;
     private static readonly CqlCode _billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-    #endregion
 
-    #region Code: social-history
-    [CqlCodeDefinition(
-        definitionName: "social-history",
-        codeId: "social-history",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode social_history(CqlContext context) => _social_history;
-
+    [CqlCodeDefinition("social-history", codeId: "social-history", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode social_history(CqlContext _) => _social_history;
     private static readonly CqlCode _social_history = new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: vital-signs
-    [CqlCodeDefinition(
-        definitionName: "vital-signs",
-        codeId: "vital-signs",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode vital_signs(CqlContext context) => _vital_signs;
-
+    [CqlCodeDefinition("vital-signs", codeId: "vital-signs", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode vital_signs(CqlContext _) => _vital_signs;
     private static readonly CqlCode _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: imaging
-    [CqlCodeDefinition(
-        definitionName: "imaging",
-        codeId: "imaging",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode imaging(CqlContext context) => _imaging;
-
+    [CqlCodeDefinition("imaging", codeId: "imaging", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode imaging(CqlContext _) => _imaging;
     private static readonly CqlCode _imaging = new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: laboratory
-    [CqlCodeDefinition(
-        definitionName: "laboratory",
-        codeId: "laboratory",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode laboratory(CqlContext context) => _laboratory;
-
+    [CqlCodeDefinition("laboratory", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode laboratory(CqlContext _) => _laboratory;
     private static readonly CqlCode _laboratory = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: procedure
-    [CqlCodeDefinition(
-        definitionName: "procedure",
-        codeId: "procedure",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode procedure(CqlContext context) => _procedure;
-
+    [CqlCodeDefinition("procedure", codeId: "procedure", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode procedure(CqlContext _) => _procedure;
     private static readonly CqlCode _procedure = new CqlCode("procedure", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: survey
-    [CqlCodeDefinition(
-        definitionName: "survey",
-        codeId: "survey",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode survey(CqlContext context) => _survey;
-
+    [CqlCodeDefinition("survey", codeId: "survey", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode survey(CqlContext _) => _survey;
     private static readonly CqlCode _survey = new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: exam
-    [CqlCodeDefinition(
-        definitionName: "exam",
-        codeId: "exam",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode exam(CqlContext context) => _exam;
-
+    [CqlCodeDefinition("exam", codeId: "exam", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode exam(CqlContext _) => _exam;
     private static readonly CqlCode _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: therapy
-    [CqlCodeDefinition(
-        definitionName: "therapy",
-        codeId: "therapy",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode therapy(CqlContext context) => _therapy;
-
+    [CqlCodeDefinition("therapy", codeId: "therapy", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode therapy(CqlContext _) => _therapy;
     private static readonly CqlCode _therapy = new CqlCode("therapy", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
-    #region Code: activity
-    [CqlCodeDefinition(
-        definitionName: "activity",
-        codeId: "activity",
-        codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode activity(CqlContext context) => _activity;
-
+    [CqlCodeDefinition("activity", codeId: "activity", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode activity(CqlContext _) => _activity;
     private static readonly CqlCode _activity = new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-    #endregion
 
     #endregion Codes
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition(
-        definitionName: "LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] wu_ = [
-            new CqlCode("21112-8", "http://loinc.org", default, default),
-        ];
+    [CqlCodeSystemDefinition("LOINC")]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC = new CqlCodeSystem();
 
-        return wu_;
-    }
+    [CqlCodeSystemDefinition("SNOMEDCT")]
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT = new CqlCodeSystem();
 
+    [CqlCodeSystemDefinition("ActCode")]
+    public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
+    private static readonly CqlCodeSystem _ActCode = new CqlCodeSystem();
 
-    [CqlCodeSystemDefinition(
-        definitionName: "SNOMEDCT")]
-    public CqlCode[] SNOMEDCT(CqlContext context)
-    {
-        CqlCode[] wv_ = [
-            new CqlCode("419099009", "http://snomed.info/sct", default, default),
-        ];
+    [CqlCodeSystemDefinition("RoleCode")]
+    public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
+    private static readonly CqlCodeSystem _RoleCode = new CqlCodeSystem();
 
-        return wv_;
-    }
+    [CqlCodeSystemDefinition("Diagnosis Role")]
+    public CqlCodeSystem Diagnosis_Role(CqlContext _) => _Diagnosis_Role;
+    private static readonly CqlCodeSystem _Diagnosis_Role = new CqlCodeSystem();
 
+    [CqlCodeSystemDefinition("RequestIntent")]
+    public CqlCodeSystem RequestIntent(CqlContext _) => _RequestIntent;
+    private static readonly CqlCodeSystem _RequestIntent = new CqlCodeSystem();
 
-    [CqlCodeSystemDefinition(
-        definitionName: "ActCode")]
-    public CqlCode[] ActCode(CqlContext context)
-    {
-        CqlCode[] ww_ = [
-            new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("FLD", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("HH", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("IMP", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("SS", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-            new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-        ];
+    [CqlCodeSystemDefinition("MedicationRequestCategory")]
+    public CqlCodeSystem MedicationRequestCategory(CqlContext _) => _MedicationRequestCategory;
+    private static readonly CqlCodeSystem _MedicationRequestCategory = new CqlCodeSystem();
 
-        return ww_;
-    }
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
+    public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
+    private static readonly CqlCodeSystem _ConditionClinicalStatusCodes = new CqlCodeSystem();
 
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
+    private static readonly CqlCodeSystem _ConditionVerificationStatusCodes = new CqlCodeSystem();
 
-    [CqlCodeSystemDefinition(
-        definitionName: "RoleCode")]
-    public CqlCode[] RoleCode(CqlContext context)
-    {
-        CqlCode[] wx_ = [
-            new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
-            new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
-        ];
+    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes")]
+    public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
+    private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes = new CqlCodeSystem();
 
-        return wx_;
-    }
+    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes")]
+    public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
+    private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes = new CqlCodeSystem();
 
+    [CqlCodeSystemDefinition("ObservationCategoryCodes")]
+    public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
+    private static readonly CqlCodeSystem _ObservationCategoryCodes = new CqlCodeSystem();
 
-    [CqlCodeSystemDefinition(
-        definitionName: "Diagnosis Role")]
-    public CqlCode[] Diagnosis_Role(CqlContext context)
-    {
-        CqlCode[] wy_ = [
-            new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("AD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("DD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("CC", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-            new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
-        ];
+    [CqlCodeSystemDefinition("USCoreObservationCategoryExtensionCodes")]
+    public CqlCodeSystem USCoreObservationCategoryExtensionCodes(CqlContext _) => _USCoreObservationCategoryExtensionCodes;
+    private static readonly CqlCodeSystem _USCoreObservationCategoryExtensionCodes = new CqlCodeSystem();
 
-        return wy_;
-    }
+    [CqlCodeSystemDefinition("ConditionCategory")]
+    public CqlCodeSystem ConditionCategory(CqlContext _) => _ConditionCategory;
+    private static readonly CqlCodeSystem _ConditionCategory = new CqlCodeSystem();
 
-
-    [CqlCodeSystemDefinition(
-        definitionName: "RequestIntent")]
-    public CqlCode[] RequestIntent(CqlContext context)
-    {
-        CqlCode[] wz_ = []
-;
-
-        return wz_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "MedicationRequestCategory")]
-    public CqlCode[] MedicationRequestCategory(CqlContext context)
-    {
-        CqlCode[] xa_ = [
-            new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
-            new CqlCode("outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
-            new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
-            new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
-        ];
-
-        return xa_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "ConditionClinicalStatusCodes")]
-    public CqlCode[] ConditionClinicalStatusCodes(CqlContext context)
-    {
-        CqlCode[] xb_ = [
-            new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-            new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-            new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-            new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-            new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-            new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-        ];
-
-        return xb_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "ConditionVerificationStatusCodes")]
-    public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
-    {
-        CqlCode[] xc_ = [
-            new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-            new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-            new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-            new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-            new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-            new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-        ];
-
-        return xc_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "AllergyIntoleranceClinicalStatusCodes")]
-    public CqlCode[] AllergyIntoleranceClinicalStatusCodes(CqlContext context)
-    {
-        CqlCode[] xd_ = [
-            new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
-            new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
-            new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
-        ];
-
-        return xd_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "AllergyIntoleranceVerificationStatusCodes")]
-    public CqlCode[] AllergyIntoleranceVerificationStatusCodes(CqlContext context)
-    {
-        CqlCode[] xe_ = [
-            new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
-            new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
-            new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
-        ];
-
-        return xe_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "ObservationCategoryCodes")]
-    public CqlCode[] ObservationCategoryCodes(CqlContext context)
-    {
-        CqlCode[] xf_ = [
-            new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("procedure", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("therapy", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-        ];
-
-        return xf_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "USCoreObservationCategoryExtensionCodes")]
-    public CqlCode[] USCoreObservationCategoryExtensionCodes(CqlContext context)
-    {
-        CqlCode[] xg_ = []
-;
-
-        return xg_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "ConditionCategory")]
-    public CqlCode[] ConditionCategory(CqlContext context)
-    {
-        CqlCode[] xh_ = [
-            new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default),
-            new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", default, default),
-        ];
-
-        return xh_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "USCoreConditionCategoryExtensionCodes")]
-    public CqlCode[] USCoreConditionCategoryExtensionCodes(CqlContext context)
-    {
-        CqlCode[] xi_ = [
-            new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", default, default),
-        ];
-
-        return xi_;
-    }
-
+    [CqlCodeSystemDefinition("USCoreConditionCategoryExtensionCodes")]
+    public CqlCodeSystem USCoreConditionCategoryExtensionCodes(CqlContext _) => _USCoreConditionCategoryExtensionCodes;
+    private static readonly CqlCodeSystem _USCoreConditionCategoryExtensionCodes = new CqlCodeSystem();
 
     #endregion CodeSystems
 
     #region Expressions
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> xj_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient xk_ = context.Operators.SingletonFrom<Patient>(xj_);
+        IEnumerable<Patient> kzd_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient kze_ = context.Operators.SingletonFrom<Patient>(kzd_);
 
-        return xk_;
+        return kze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isActive")]
     [CqlTag("description", "Returns true if the given condition has a clinical status of active, recurrence, or relapse")]
     public bool? isActive(CqlContext context, Condition condition)
     {
-        CodeableConcept xl_ = condition?.ClinicalStatus;
-        CqlConcept xm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, xl_);
-        CqlCode xn_ = this.active(context);
-        CqlConcept xo_ = context.Operators.ConvertCodeToConcept(xn_);
-        bool? xp_ = context.Operators.Equivalent(xm_, xo_);
-        CqlConcept xr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, xl_);
-        CqlCode xs_ = this.recurrence(context);
-        CqlConcept xt_ = context.Operators.ConvertCodeToConcept(xs_);
-        bool? xu_ = context.Operators.Equivalent(xr_, xt_);
-        bool? xv_ = context.Operators.Or(xp_, xu_);
-        CqlConcept xx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, xl_);
-        CqlCode xy_ = this.relapse(context);
-        CqlConcept xz_ = context.Operators.ConvertCodeToConcept(xy_);
-        bool? ya_ = context.Operators.Equivalent(xx_, xz_);
-        bool? yb_ = context.Operators.Or(xv_, ya_);
+        CodeableConcept kzf_ = condition?.ClinicalStatus;
+        CqlConcept kzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzf_);
+        CqlCode kzh_ = this.active(context);
+        CqlConcept kzi_ = context.Operators.ConvertCodeToConcept(kzh_);
+        bool? kzj_ = context.Operators.Equivalent(kzg_, kzi_);
+        CqlConcept kzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzf_);
+        CqlCode kzm_ = this.recurrence(context);
+        CqlConcept kzn_ = context.Operators.ConvertCodeToConcept(kzm_);
+        bool? kzo_ = context.Operators.Equivalent(kzl_, kzn_);
+        bool? kzp_ = context.Operators.Or(kzj_, kzo_);
+        CqlConcept kzr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzf_);
+        CqlCode kzs_ = this.relapse(context);
+        CqlConcept kzt_ = context.Operators.ConvertCodeToConcept(kzs_);
+        bool? kzu_ = context.Operators.Equivalent(kzr_, kzt_);
+        bool? kzv_ = context.Operators.Or(kzp_, kzu_);
 
-        return yb_;
+        return kzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given condition has the given category")]
     public bool? hasCategory(CqlContext context, Condition condition, CqlCode category)
     {
-        List<CodeableConcept> yc_ = condition?.Category;
-        CqlConcept yd_(CodeableConcept @this)
+        List<CodeableConcept> kzw_ = condition?.Category;
+        CqlConcept kzx_(CodeableConcept @this)
         {
-            CqlConcept yi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept lzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return yi_;
+            return lzc_;
         };
-        IEnumerable<CqlConcept> ye_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)yc_, yd_);
-        bool? yf_(CqlConcept C)
+        IEnumerable<CqlConcept> kzy_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)kzw_, kzx_);
+        bool? kzz_(CqlConcept C)
         {
-            CqlConcept yj_ = context.Operators.ConvertCodeToConcept(category);
-            bool? yk_ = context.Operators.Equivalent(C, yj_);
+            CqlConcept lzd_ = context.Operators.ConvertCodeToConcept(category);
+            bool? lze_ = context.Operators.Equivalent(C, lzd_);
 
-            return yk_;
+            return lze_;
         };
-        IEnumerable<CqlConcept> yg_ = context.Operators.Where<CqlConcept>(ye_, yf_);
-        bool? yh_ = context.Operators.Exists<CqlConcept>(yg_);
+        IEnumerable<CqlConcept> lza_ = context.Operators.Where<CqlConcept>(kzy_, kzz_);
+        bool? lzb_ = context.Operators.Exists<CqlConcept>(lza_);
 
-        return yh_;
+        return lzb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given observation has the given category")]
     public bool? hasCategory(CqlContext context, Observation observation, CqlCode category)
     {
-        List<CodeableConcept> yl_ = observation?.Category;
-        CqlConcept ym_(CodeableConcept @this)
+        List<CodeableConcept> lzf_ = observation?.Category;
+        CqlConcept lzg_(CodeableConcept @this)
         {
-            CqlConcept yr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept lzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return yr_;
+            return lzl_;
         };
-        IEnumerable<CqlConcept> yn_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)yl_, ym_);
-        bool? yo_(CqlConcept C)
+        IEnumerable<CqlConcept> lzh_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)lzf_, lzg_);
+        bool? lzi_(CqlConcept C)
         {
-            CqlConcept ys_ = context.Operators.ConvertCodeToConcept(category);
-            bool? yt_ = context.Operators.Equivalent(C, ys_);
+            CqlConcept lzm_ = context.Operators.ConvertCodeToConcept(category);
+            bool? lzn_ = context.Operators.Equivalent(C, lzm_);
 
-            return yt_;
+            return lzn_;
         };
-        IEnumerable<CqlConcept> yp_ = context.Operators.Where<CqlConcept>(yn_, yo_);
-        bool? yq_ = context.Operators.Exists<CqlConcept>(yp_);
+        IEnumerable<CqlConcept> lzj_ = context.Operators.Where<CqlConcept>(lzh_, lzi_);
+        bool? lzk_ = context.Operators.Exists<CqlConcept>(lzj_);
 
-        return yq_;
+        return lzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isProblemListItem")]
     [CqlTag("description", "Returns true if the given condition is a problem list item.")]
     public bool? isProblemListItem(CqlContext context, Condition condition)
     {
-        List<CodeableConcept> yu_ = condition?.Category;
-        CqlConcept yv_(CodeableConcept @this)
+        List<CodeableConcept> lzo_ = condition?.Category;
+        CqlConcept lzp_(CodeableConcept @this)
         {
-            CqlConcept za_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept lzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return za_;
+            return lzu_;
         };
-        IEnumerable<CqlConcept> yw_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)yu_, yv_);
-        bool? yx_(CqlConcept C)
+        IEnumerable<CqlConcept> lzq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)lzo_, lzp_);
+        bool? lzr_(CqlConcept C)
         {
-            CqlCode zb_ = this.problem_list_item(context);
-            CqlConcept zc_ = context.Operators.ConvertCodeToConcept(zb_);
-            bool? zd_ = context.Operators.Equivalent(C, zc_);
+            CqlCode lzv_ = this.problem_list_item(context);
+            CqlConcept lzw_ = context.Operators.ConvertCodeToConcept(lzv_);
+            bool? lzx_ = context.Operators.Equivalent(C, lzw_);
 
-            return zd_;
+            return lzx_;
         };
-        IEnumerable<CqlConcept> yy_ = context.Operators.Where<CqlConcept>(yw_, yx_);
-        bool? yz_ = context.Operators.Exists<CqlConcept>(yy_);
+        IEnumerable<CqlConcept> lzs_ = context.Operators.Where<CqlConcept>(lzq_, lzr_);
+        bool? lzt_ = context.Operators.Exists<CqlConcept>(lzs_);
 
-        return yz_;
+        return lzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isEncounterDiagnosis")]
     [CqlTag("description", "Returns true if the given condition is an encounter diagnosis")]
     public bool? isEncounterDiagnosis(CqlContext context, Condition condition)
     {
-        List<CodeableConcept> ze_ = condition?.Category;
-        CqlConcept zf_(CodeableConcept @this)
+        List<CodeableConcept> lzy_ = condition?.Category;
+        CqlConcept lzz_(CodeableConcept @this)
         {
-            CqlConcept zk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept mze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return zk_;
+            return mze_;
         };
-        IEnumerable<CqlConcept> zg_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ze_, zf_);
-        bool? zh_(CqlConcept C)
+        IEnumerable<CqlConcept> mza_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)lzy_, lzz_);
+        bool? mzb_(CqlConcept C)
         {
-            CqlCode zl_ = this.encounter_diagnosis(context);
-            CqlConcept zm_ = context.Operators.ConvertCodeToConcept(zl_);
-            bool? zn_ = context.Operators.Equivalent(C, zm_);
+            CqlCode mzf_ = this.encounter_diagnosis(context);
+            CqlConcept mzg_ = context.Operators.ConvertCodeToConcept(mzf_);
+            bool? mzh_ = context.Operators.Equivalent(C, mzg_);
 
-            return zn_;
+            return mzh_;
         };
-        IEnumerable<CqlConcept> zi_ = context.Operators.Where<CqlConcept>(zg_, zh_);
-        bool? zj_ = context.Operators.Exists<CqlConcept>(zi_);
+        IEnumerable<CqlConcept> mzc_ = context.Operators.Where<CqlConcept>(mza_, mzb_);
+        bool? mzd_ = context.Operators.Exists<CqlConcept>(mzc_);
 
-        return zj_;
+        return mzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isHealthConcern")]
     [CqlTag("description", "Returns true if the given condition is a health concern")]
     public bool? isHealthConcern(CqlContext context, Condition condition)
     {
-        List<CodeableConcept> zo_ = condition?.Category;
-        CqlConcept zp_(CodeableConcept @this)
+        List<CodeableConcept> mzi_ = condition?.Category;
+        CqlConcept mzj_(CodeableConcept @this)
         {
-            CqlConcept zu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept mzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return zu_;
+            return mzo_;
         };
-        IEnumerable<CqlConcept> zq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)zo_, zp_);
-        bool? zr_(CqlConcept C)
+        IEnumerable<CqlConcept> mzk_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)mzi_, mzj_);
+        bool? mzl_(CqlConcept C)
         {
-            CqlCode zv_ = this.health_concern(context);
-            CqlConcept zw_ = context.Operators.ConvertCodeToConcept(zv_);
-            bool? zx_ = context.Operators.Equivalent(C, zw_);
+            CqlCode mzp_ = this.health_concern(context);
+            CqlConcept mzq_ = context.Operators.ConvertCodeToConcept(mzp_);
+            bool? mzr_ = context.Operators.Equivalent(C, mzq_);
 
-            return zx_;
+            return mzr_;
         };
-        IEnumerable<CqlConcept> zs_ = context.Operators.Where<CqlConcept>(zq_, zr_);
-        bool? zt_ = context.Operators.Exists<CqlConcept>(zs_);
+        IEnumerable<CqlConcept> mzm_ = context.Operators.Where<CqlConcept>(mzk_, mzl_);
+        bool? mzn_ = context.Operators.Exists<CqlConcept>(mzm_);
 
-        return zt_;
+        return mzn_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isSocialHistory")]
     [CqlTag("description", "Returns true if the given observation is a social history observation")]
     public bool? isSocialHistory(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> zy_ = observation?.Category;
-        CqlConcept zz_(CodeableConcept @this)
+        List<CodeableConcept> mzs_ = observation?.Category;
+        CqlConcept mzt_(CodeableConcept @this)
         {
-            CqlConcept aze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept mzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return aze_;
+            return mzy_;
         };
-        IEnumerable<CqlConcept> aza_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)zy_, zz_);
-        bool? azb_(CqlConcept C)
+        IEnumerable<CqlConcept> mzu_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)mzs_, mzt_);
+        bool? mzv_(CqlConcept C)
         {
-            CqlCode azf_ = this.social_history(context);
-            CqlConcept azg_ = context.Operators.ConvertCodeToConcept(azf_);
-            bool? azh_ = context.Operators.Equivalent(C, azg_);
+            CqlCode mzz_ = this.social_history(context);
+            CqlConcept nza_ = context.Operators.ConvertCodeToConcept(mzz_);
+            bool? nzb_ = context.Operators.Equivalent(C, nza_);
 
-            return azh_;
+            return nzb_;
         };
-        IEnumerable<CqlConcept> azc_ = context.Operators.Where<CqlConcept>(aza_, azb_);
-        bool? azd_ = context.Operators.Exists<CqlConcept>(azc_);
+        IEnumerable<CqlConcept> mzw_ = context.Operators.Where<CqlConcept>(mzu_, mzv_);
+        bool? mzx_ = context.Operators.Exists<CqlConcept>(mzw_);
 
-        return azd_;
+        return mzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isVitalSign")]
     [CqlTag("description", "Returns true if the given observation is a vital sign")]
     public bool? isVitalSign(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> azi_ = observation?.Category;
-        CqlConcept azj_(CodeableConcept @this)
+        List<CodeableConcept> nzc_ = observation?.Category;
+        CqlConcept nzd_(CodeableConcept @this)
         {
-            CqlConcept azo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept nzi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return azo_;
+            return nzi_;
         };
-        IEnumerable<CqlConcept> azk_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)azi_, azj_);
-        bool? azl_(CqlConcept C)
+        IEnumerable<CqlConcept> nze_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)nzc_, nzd_);
+        bool? nzf_(CqlConcept C)
         {
-            CqlCode azp_ = this.vital_signs(context);
-            CqlConcept azq_ = context.Operators.ConvertCodeToConcept(azp_);
-            bool? azr_ = context.Operators.Equivalent(C, azq_);
+            CqlCode nzj_ = this.vital_signs(context);
+            CqlConcept nzk_ = context.Operators.ConvertCodeToConcept(nzj_);
+            bool? nzl_ = context.Operators.Equivalent(C, nzk_);
 
-            return azr_;
+            return nzl_;
         };
-        IEnumerable<CqlConcept> azm_ = context.Operators.Where<CqlConcept>(azk_, azl_);
-        bool? azn_ = context.Operators.Exists<CqlConcept>(azm_);
+        IEnumerable<CqlConcept> nzg_ = context.Operators.Where<CqlConcept>(nze_, nzf_);
+        bool? nzh_ = context.Operators.Exists<CqlConcept>(nzg_);
 
-        return azn_;
+        return nzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isImaging")]
     [CqlTag("description", "Returns true if the given observation is an imaging observation")]
     public bool? isImaging(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> azs_ = observation?.Category;
-        CqlConcept azt_(CodeableConcept @this)
+        List<CodeableConcept> nzm_ = observation?.Category;
+        CqlConcept nzn_(CodeableConcept @this)
         {
-            CqlConcept azy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept nzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return azy_;
+            return nzs_;
         };
-        IEnumerable<CqlConcept> azu_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)azs_, azt_);
-        bool? azv_(CqlConcept C)
+        IEnumerable<CqlConcept> nzo_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)nzm_, nzn_);
+        bool? nzp_(CqlConcept C)
         {
-            CqlCode azz_ = this.imaging(context);
-            CqlConcept bza_ = context.Operators.ConvertCodeToConcept(azz_);
-            bool? bzb_ = context.Operators.Equivalent(C, bza_);
+            CqlCode nzt_ = this.imaging(context);
+            CqlConcept nzu_ = context.Operators.ConvertCodeToConcept(nzt_);
+            bool? nzv_ = context.Operators.Equivalent(C, nzu_);
 
-            return bzb_;
+            return nzv_;
         };
-        IEnumerable<CqlConcept> azw_ = context.Operators.Where<CqlConcept>(azu_, azv_);
-        bool? azx_ = context.Operators.Exists<CqlConcept>(azw_);
+        IEnumerable<CqlConcept> nzq_ = context.Operators.Where<CqlConcept>(nzo_, nzp_);
+        bool? nzr_ = context.Operators.Exists<CqlConcept>(nzq_);
 
-        return azx_;
+        return nzr_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isLaboratory")]
     [CqlTag("description", "Returns true if the given observation is a laboratory observation")]
     public bool? isLaboratory(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> bzc_ = observation?.Category;
-        CqlConcept bzd_(CodeableConcept @this)
+        List<CodeableConcept> nzw_ = observation?.Category;
+        CqlConcept nzx_(CodeableConcept @this)
         {
-            CqlConcept bzi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept ozc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return bzi_;
+            return ozc_;
         };
-        IEnumerable<CqlConcept> bze_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bzc_, bzd_);
-        bool? bzf_(CqlConcept C)
+        IEnumerable<CqlConcept> nzy_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)nzw_, nzx_);
+        bool? nzz_(CqlConcept C)
         {
-            CqlCode bzj_ = this.laboratory(context);
-            CqlConcept bzk_ = context.Operators.ConvertCodeToConcept(bzj_);
-            bool? bzl_ = context.Operators.Equivalent(C, bzk_);
+            CqlCode ozd_ = this.laboratory(context);
+            CqlConcept oze_ = context.Operators.ConvertCodeToConcept(ozd_);
+            bool? ozf_ = context.Operators.Equivalent(C, oze_);
 
-            return bzl_;
+            return ozf_;
         };
-        IEnumerable<CqlConcept> bzg_ = context.Operators.Where<CqlConcept>(bze_, bzf_);
-        bool? bzh_ = context.Operators.Exists<CqlConcept>(bzg_);
+        IEnumerable<CqlConcept> oza_ = context.Operators.Where<CqlConcept>(nzy_, nzz_);
+        bool? ozb_ = context.Operators.Exists<CqlConcept>(oza_);
 
-        return bzh_;
+        return ozb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isProcedure")]
     [CqlTag("description", "REturns true if the given observation is a procedure observation")]
     public bool? isProcedure(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> bzm_ = observation?.Category;
-        CqlConcept bzn_(CodeableConcept @this)
+        List<CodeableConcept> ozg_ = observation?.Category;
+        CqlConcept ozh_(CodeableConcept @this)
         {
-            CqlConcept bzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept ozm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return bzs_;
+            return ozm_;
         };
-        IEnumerable<CqlConcept> bzo_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bzm_, bzn_);
-        bool? bzp_(CqlConcept C)
+        IEnumerable<CqlConcept> ozi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ozg_, ozh_);
+        bool? ozj_(CqlConcept C)
         {
-            CqlCode bzt_ = this.procedure(context);
-            CqlConcept bzu_ = context.Operators.ConvertCodeToConcept(bzt_);
-            bool? bzv_ = context.Operators.Equivalent(C, bzu_);
+            CqlCode ozn_ = this.procedure(context);
+            CqlConcept ozo_ = context.Operators.ConvertCodeToConcept(ozn_);
+            bool? ozp_ = context.Operators.Equivalent(C, ozo_);
 
-            return bzv_;
+            return ozp_;
         };
-        IEnumerable<CqlConcept> bzq_ = context.Operators.Where<CqlConcept>(bzo_, bzp_);
-        bool? bzr_ = context.Operators.Exists<CqlConcept>(bzq_);
+        IEnumerable<CqlConcept> ozk_ = context.Operators.Where<CqlConcept>(ozi_, ozj_);
+        bool? ozl_ = context.Operators.Exists<CqlConcept>(ozk_);
 
-        return bzr_;
+        return ozl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isSurvey")]
     [CqlTag("description", "Returns true if the given observation is a survey observation")]
     public bool? isSurvey(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> bzw_ = observation?.Category;
-        CqlConcept bzx_(CodeableConcept @this)
+        List<CodeableConcept> ozq_ = observation?.Category;
+        CqlConcept ozr_(CodeableConcept @this)
         {
-            CqlConcept czc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept ozw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return czc_;
+            return ozw_;
         };
-        IEnumerable<CqlConcept> bzy_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bzw_, bzx_);
-        bool? bzz_(CqlConcept C)
+        IEnumerable<CqlConcept> ozs_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ozq_, ozr_);
+        bool? ozt_(CqlConcept C)
         {
-            CqlCode czd_ = this.survey(context);
-            CqlConcept cze_ = context.Operators.ConvertCodeToConcept(czd_);
-            bool? czf_ = context.Operators.Equivalent(C, cze_);
+            CqlCode ozx_ = this.survey(context);
+            CqlConcept ozy_ = context.Operators.ConvertCodeToConcept(ozx_);
+            bool? ozz_ = context.Operators.Equivalent(C, ozy_);
 
-            return czf_;
+            return ozz_;
         };
-        IEnumerable<CqlConcept> cza_ = context.Operators.Where<CqlConcept>(bzy_, bzz_);
-        bool? czb_ = context.Operators.Exists<CqlConcept>(cza_);
+        IEnumerable<CqlConcept> ozu_ = context.Operators.Where<CqlConcept>(ozs_, ozt_);
+        bool? ozv_ = context.Operators.Exists<CqlConcept>(ozu_);
 
-        return czb_;
+        return ozv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isExam")]
     [CqlTag("description", "Returns true if the given observation is an exam observation")]
     public bool? isExam(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> czg_ = observation?.Category;
-        CqlConcept czh_(CodeableConcept @this)
+        List<CodeableConcept> pza_ = observation?.Category;
+        CqlConcept pzb_(CodeableConcept @this)
         {
-            CqlConcept czm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept pzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return czm_;
+            return pzg_;
         };
-        IEnumerable<CqlConcept> czi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)czg_, czh_);
-        bool? czj_(CqlConcept C)
+        IEnumerable<CqlConcept> pzc_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)pza_, pzb_);
+        bool? pzd_(CqlConcept C)
         {
-            CqlCode czn_ = this.exam(context);
-            CqlConcept czo_ = context.Operators.ConvertCodeToConcept(czn_);
-            bool? czp_ = context.Operators.Equivalent(C, czo_);
+            CqlCode pzh_ = this.exam(context);
+            CqlConcept pzi_ = context.Operators.ConvertCodeToConcept(pzh_);
+            bool? pzj_ = context.Operators.Equivalent(C, pzi_);
 
-            return czp_;
+            return pzj_;
         };
-        IEnumerable<CqlConcept> czk_ = context.Operators.Where<CqlConcept>(czi_, czj_);
-        bool? czl_ = context.Operators.Exists<CqlConcept>(czk_);
+        IEnumerable<CqlConcept> pze_ = context.Operators.Where<CqlConcept>(pzc_, pzd_);
+        bool? pzf_ = context.Operators.Exists<CqlConcept>(pze_);
 
-        return czl_;
+        return pzf_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isTherapy")]
     [CqlTag("description", "Returns true if the given observation is a therapy observation")]
     public bool? isTherapy(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> czq_ = observation?.Category;
-        CqlConcept czr_(CodeableConcept @this)
+        List<CodeableConcept> pzk_ = observation?.Category;
+        CqlConcept pzl_(CodeableConcept @this)
         {
-            CqlConcept czw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept pzq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return czw_;
+            return pzq_;
         };
-        IEnumerable<CqlConcept> czs_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)czq_, czr_);
-        bool? czt_(CqlConcept C)
+        IEnumerable<CqlConcept> pzm_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)pzk_, pzl_);
+        bool? pzn_(CqlConcept C)
         {
-            CqlCode czx_ = this.therapy(context);
-            CqlConcept czy_ = context.Operators.ConvertCodeToConcept(czx_);
-            bool? czz_ = context.Operators.Equivalent(C, czy_);
+            CqlCode pzr_ = this.therapy(context);
+            CqlConcept pzs_ = context.Operators.ConvertCodeToConcept(pzr_);
+            bool? pzt_ = context.Operators.Equivalent(C, pzs_);
 
-            return czz_;
+            return pzt_;
         };
-        IEnumerable<CqlConcept> czu_ = context.Operators.Where<CqlConcept>(czs_, czt_);
-        bool? czv_ = context.Operators.Exists<CqlConcept>(czu_);
+        IEnumerable<CqlConcept> pzo_ = context.Operators.Where<CqlConcept>(pzm_, pzn_);
+        bool? pzp_ = context.Operators.Exists<CqlConcept>(pzo_);
 
-        return czv_;
+        return pzp_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isActivity")]
     [CqlTag("description", "Returns true if the given observation is an activity observation")]
     public bool? isActivity(CqlContext context, Observation observation)
     {
-        List<CodeableConcept> dza_ = observation?.Category;
-        CqlConcept dzb_(CodeableConcept @this)
+        List<CodeableConcept> pzu_ = observation?.Category;
+        CqlConcept pzv_(CodeableConcept @this)
         {
-            CqlConcept dzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept qza_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return dzg_;
+            return qza_;
         };
-        IEnumerable<CqlConcept> dzc_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)dza_, dzb_);
-        bool? dzd_(CqlConcept C)
+        IEnumerable<CqlConcept> pzw_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)pzu_, pzv_);
+        bool? pzx_(CqlConcept C)
         {
-            CqlCode dzh_ = this.activity(context);
-            CqlConcept dzi_ = context.Operators.ConvertCodeToConcept(dzh_);
-            bool? dzj_ = context.Operators.Equivalent(C, dzi_);
+            CqlCode qzb_ = this.activity(context);
+            CqlConcept qzc_ = context.Operators.ConvertCodeToConcept(qzb_);
+            bool? qzd_ = context.Operators.Equivalent(C, qzc_);
 
-            return dzj_;
+            return qzd_;
         };
-        IEnumerable<CqlConcept> dze_ = context.Operators.Where<CqlConcept>(dzc_, dzd_);
-        bool? dzf_ = context.Operators.Exists<CqlConcept>(dze_);
+        IEnumerable<CqlConcept> pzy_ = context.Operators.Where<CqlConcept>(pzw_, pzx_);
+        bool? pzz_ = context.Operators.Exists<CqlConcept>(pzy_);
 
-        return dzf_;
+        return pzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isCommunity")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Community")]
     public bool? isCommunity(CqlContext context, MedicationRequest medicationRequest)
     {
-        List<CodeableConcept> dzk_ = medicationRequest?.Category;
-        CqlConcept dzl_(CodeableConcept @this)
+        List<CodeableConcept> qze_ = medicationRequest?.Category;
+        CqlConcept qzf_(CodeableConcept @this)
         {
-            CqlConcept dzq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept qzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return dzq_;
+            return qzk_;
         };
-        IEnumerable<CqlConcept> dzm_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)dzk_, dzl_);
-        bool? dzn_(CqlConcept C)
+        IEnumerable<CqlConcept> qzg_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)qze_, qzf_);
+        bool? qzh_(CqlConcept C)
         {
-            CqlCode dzr_ = this.Community(context);
-            CqlConcept dzs_ = context.Operators.ConvertCodeToConcept(dzr_);
-            bool? dzt_ = context.Operators.Equivalent(C, dzs_);
+            CqlCode qzl_ = this.Community(context);
+            CqlConcept qzm_ = context.Operators.ConvertCodeToConcept(qzl_);
+            bool? qzn_ = context.Operators.Equivalent(C, qzm_);
 
-            return dzt_;
+            return qzn_;
         };
-        IEnumerable<CqlConcept> dzo_ = context.Operators.Where<CqlConcept>(dzm_, dzn_);
-        bool? dzp_ = context.Operators.Exists<CqlConcept>(dzo_);
+        IEnumerable<CqlConcept> qzi_ = context.Operators.Where<CqlConcept>(qzg_, qzh_);
+        bool? qzj_ = context.Operators.Exists<CqlConcept>(qzi_);
 
-        return dzp_;
+        return qzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("isDischarge")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Discharge")]
     public bool? isDischarge(CqlContext context, MedicationRequest medicationRequest)
     {
-        List<CodeableConcept> dzu_ = medicationRequest?.Category;
-        CqlConcept dzv_(CodeableConcept @this)
+        List<CodeableConcept> qzo_ = medicationRequest?.Category;
+        CqlConcept qzp_(CodeableConcept @this)
         {
-            CqlConcept eza_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept qzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-            return eza_;
+            return qzu_;
         };
-        IEnumerable<CqlConcept> dzw_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)dzu_, dzv_);
-        bool? dzx_(CqlConcept C)
+        IEnumerable<CqlConcept> qzq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)qzo_, qzp_);
+        bool? qzr_(CqlConcept C)
         {
-            CqlCode ezb_ = this.Discharge(context);
-            CqlConcept ezc_ = context.Operators.ConvertCodeToConcept(ezb_);
-            bool? ezd_ = context.Operators.Equivalent(C, ezc_);
+            CqlCode qzv_ = this.Discharge(context);
+            CqlConcept qzw_ = context.Operators.ConvertCodeToConcept(qzv_);
+            bool? qzx_ = context.Operators.Equivalent(C, qzw_);
 
-            return ezd_;
+            return qzx_;
         };
-        IEnumerable<CqlConcept> dzy_ = context.Operators.Where<CqlConcept>(dzw_, dzx_);
-        bool? dzz_ = context.Operators.Exists<CqlConcept>(dzy_);
+        IEnumerable<CqlConcept> qzs_ = context.Operators.Where<CqlConcept>(qzq_, qzr_);
+        bool? qzt_ = context.Operators.Exists<CqlConcept>(qzs_);
 
-        return dzz_;
+        return qzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("doNotPerform")]
     [CqlTag("description", "Returns true if the given DeviceRequest is a negation (i.e. do not perform this order)")]
     public bool? doNotPerform(CqlContext context, DeviceRequest deviceRequest)
     {
-        bool? eze_(Extension E)
+        bool? qzy_(Extension E)
         {
-            string ezk_ = E?.Url;
-            FhirString ezl_ = context.Operators.Convert<FhirString>(ezk_);
-            string ezm_ = ezl_?.Value;
-            bool? ezn_ = context.Operators.Equal(ezm_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+            string rze_ = E?.Url;
+            FhirString rzf_ = context.Operators.Convert<FhirString>(rze_);
+            string rzg_ = rzf_?.Value;
+            bool? rzh_ = context.Operators.Equal(rzg_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
 
-            return ezn_;
+            return rzh_;
         };
-        IEnumerable<Extension> ezf_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
+        IEnumerable<Extension> qzz_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
                 ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
-                : default), eze_);
-        bool? ezg_(Extension E)
+                : default), qzy_);
+        bool? rza_(Extension E)
         {
-            DataType ezo_ = E?.Value;
-            object ezp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezo_);
+            DataType rzi_ = E?.Value;
+            object rzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzi_);
 
-            return ezp_ as bool?;
+            return rzj_ as bool?;
         };
-        IEnumerable<bool?> ezh_ = context.Operators.Select<Extension, bool?>(ezf_, ezg_);
-        IEnumerable<bool?> ezi_ = context.Operators.Distinct<bool?>(ezh_);
-        bool? ezj_ = context.Operators.SingletonFrom<bool?>(ezi_);
+        IEnumerable<bool?> rzb_ = context.Operators.Select<Extension, bool?>(qzz_, rza_);
+        IEnumerable<bool?> rzc_ = context.Operators.Distinct<bool?>(rzb_);
+        bool? rzd_ = context.Operators.SingletonFrom<bool?>(rzc_);
 
-        return ezj_;
+        return rzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToInterval")]
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types\nto an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible\nrepresentations for timing-valued elements in QICore, allowing this function to be used across any resource.\nThe input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>.\nThe intent of this function is to provide a clear and concise mechanism to treat single\nelements that have multiple possible representations as intervals so that logic doesn't have to account\nfor the variability. More complex calculations (such as medication request period or dispense period\ncalculation) need specific guidance and consideration. That guidance may make use of this function, but\nthe focus of this function is on single element calculations where the semantics are unambiguous.\nIf the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime.\nIf the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age,\nand the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later.\nIf the input is a DateTime Interval, the result is the input.\nIf the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result\nis a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending\nimmediately before one year later than the date the patient turned the age given as the end of the quantity interval.\nIf the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toInterval()` instead")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> ezq_()
+        CqlInterval<CqlDateTime> rzk_()
         {
             if (choice is CqlDateTime)
             {
-                CqlInterval<CqlDateTime> ezr_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> rzl_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
 
-                return ezr_;
+                return rzl_;
             }
             else if (choice is CqlInterval<CqlDateTime>)
             {
@@ -1346,119 +841,119 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else if (choice is CqlQuantity)
             {
-                Patient ezs_ = this.Patient(context);
-                Date ezt_ = ezs_?.BirthDateElement;
-                string ezu_ = ezt_?.Value;
-                CqlDate ezv_ = context.Operators.ConvertStringToDate(ezu_);
-                CqlDate ezw_ = context.Operators.Add(ezv_, choice as CqlQuantity);
-                Date ezy_ = ezs_?.BirthDateElement;
-                string ezz_ = ezy_?.Value;
-                CqlDate fza_ = context.Operators.ConvertStringToDate(ezz_);
-                CqlDate fzb_ = context.Operators.Add(fza_, choice as CqlQuantity);
-                CqlQuantity fzc_ = context.Operators.Quantity(1m, "year");
-                CqlDate fzd_ = context.Operators.Add(fzb_, fzc_);
-                CqlInterval<CqlDate> fze_ = context.Operators.Interval(ezw_, fzd_, true, false);
-                CqlDate fzf_ = fze_?.low;
-                CqlDateTime fzg_ = context.Operators.ConvertDateToDateTime(fzf_);
-                Date fzi_ = ezs_?.BirthDateElement;
-                string fzj_ = fzi_?.Value;
-                CqlDate fzk_ = context.Operators.ConvertStringToDate(fzj_);
-                CqlDate fzl_ = context.Operators.Add(fzk_, choice as CqlQuantity);
-                Date fzn_ = ezs_?.BirthDateElement;
-                string fzo_ = fzn_?.Value;
-                CqlDate fzp_ = context.Operators.ConvertStringToDate(fzo_);
-                CqlDate fzq_ = context.Operators.Add(fzp_, choice as CqlQuantity);
-                CqlDate fzs_ = context.Operators.Add(fzq_, fzc_);
-                CqlInterval<CqlDate> fzt_ = context.Operators.Interval(fzl_, fzs_, true, false);
-                CqlDate fzu_ = fzt_?.high;
-                CqlDateTime fzv_ = context.Operators.ConvertDateToDateTime(fzu_);
-                Date fzx_ = ezs_?.BirthDateElement;
-                string fzy_ = fzx_?.Value;
-                CqlDate fzz_ = context.Operators.ConvertStringToDate(fzy_);
-                CqlDate gza_ = context.Operators.Add(fzz_, choice as CqlQuantity);
-                Date gzc_ = ezs_?.BirthDateElement;
-                string gzd_ = gzc_?.Value;
-                CqlDate gze_ = context.Operators.ConvertStringToDate(gzd_);
-                CqlDate gzf_ = context.Operators.Add(gze_, choice as CqlQuantity);
-                CqlDate gzh_ = context.Operators.Add(gzf_, fzc_);
-                CqlInterval<CqlDate> gzi_ = context.Operators.Interval(gza_, gzh_, true, false);
-                bool? gzj_ = gzi_?.lowClosed;
-                Date gzl_ = ezs_?.BirthDateElement;
-                string gzm_ = gzl_?.Value;
-                CqlDate gzn_ = context.Operators.ConvertStringToDate(gzm_);
-                CqlDate gzo_ = context.Operators.Add(gzn_, choice as CqlQuantity);
-                Date gzq_ = ezs_?.BirthDateElement;
-                string gzr_ = gzq_?.Value;
-                CqlDate gzs_ = context.Operators.ConvertStringToDate(gzr_);
-                CqlDate gzt_ = context.Operators.Add(gzs_, choice as CqlQuantity);
-                CqlDate gzv_ = context.Operators.Add(gzt_, fzc_);
-                CqlInterval<CqlDate> gzw_ = context.Operators.Interval(gzo_, gzv_, true, false);
-                bool? gzx_ = gzw_?.highClosed;
-                CqlInterval<CqlDateTime> gzy_ = context.Operators.Interval(fzg_, fzv_, gzj_, gzx_);
+                Patient rzm_ = this.Patient(context);
+                Date rzn_ = rzm_?.BirthDateElement;
+                string rzo_ = rzn_?.Value;
+                CqlDate rzp_ = context.Operators.ConvertStringToDate(rzo_);
+                CqlDate rzq_ = context.Operators.Add(rzp_, choice as CqlQuantity);
+                Date rzs_ = rzm_?.BirthDateElement;
+                string rzt_ = rzs_?.Value;
+                CqlDate rzu_ = context.Operators.ConvertStringToDate(rzt_);
+                CqlDate rzv_ = context.Operators.Add(rzu_, choice as CqlQuantity);
+                CqlQuantity rzw_ = context.Operators.Quantity(1m, "year");
+                CqlDate rzx_ = context.Operators.Add(rzv_, rzw_);
+                CqlInterval<CqlDate> rzy_ = context.Operators.Interval(rzq_, rzx_, true, false);
+                CqlDate rzz_ = rzy_?.low;
+                CqlDateTime sza_ = context.Operators.ConvertDateToDateTime(rzz_);
+                Date szc_ = rzm_?.BirthDateElement;
+                string szd_ = szc_?.Value;
+                CqlDate sze_ = context.Operators.ConvertStringToDate(szd_);
+                CqlDate szf_ = context.Operators.Add(sze_, choice as CqlQuantity);
+                Date szh_ = rzm_?.BirthDateElement;
+                string szi_ = szh_?.Value;
+                CqlDate szj_ = context.Operators.ConvertStringToDate(szi_);
+                CqlDate szk_ = context.Operators.Add(szj_, choice as CqlQuantity);
+                CqlDate szm_ = context.Operators.Add(szk_, rzw_);
+                CqlInterval<CqlDate> szn_ = context.Operators.Interval(szf_, szm_, true, false);
+                CqlDate szo_ = szn_?.high;
+                CqlDateTime szp_ = context.Operators.ConvertDateToDateTime(szo_);
+                Date szr_ = rzm_?.BirthDateElement;
+                string szs_ = szr_?.Value;
+                CqlDate szt_ = context.Operators.ConvertStringToDate(szs_);
+                CqlDate szu_ = context.Operators.Add(szt_, choice as CqlQuantity);
+                Date szw_ = rzm_?.BirthDateElement;
+                string szx_ = szw_?.Value;
+                CqlDate szy_ = context.Operators.ConvertStringToDate(szx_);
+                CqlDate szz_ = context.Operators.Add(szy_, choice as CqlQuantity);
+                CqlDate tzb_ = context.Operators.Add(szz_, rzw_);
+                CqlInterval<CqlDate> tzc_ = context.Operators.Interval(szu_, tzb_, true, false);
+                bool? tzd_ = tzc_?.lowClosed;
+                Date tzf_ = rzm_?.BirthDateElement;
+                string tzg_ = tzf_?.Value;
+                CqlDate tzh_ = context.Operators.ConvertStringToDate(tzg_);
+                CqlDate tzi_ = context.Operators.Add(tzh_, choice as CqlQuantity);
+                Date tzk_ = rzm_?.BirthDateElement;
+                string tzl_ = tzk_?.Value;
+                CqlDate tzm_ = context.Operators.ConvertStringToDate(tzl_);
+                CqlDate tzn_ = context.Operators.Add(tzm_, choice as CqlQuantity);
+                CqlDate tzp_ = context.Operators.Add(tzn_, rzw_);
+                CqlInterval<CqlDate> tzq_ = context.Operators.Interval(tzi_, tzp_, true, false);
+                bool? tzr_ = tzq_?.highClosed;
+                CqlInterval<CqlDateTime> tzs_ = context.Operators.Interval(sza_, szp_, tzd_, tzr_);
 
-                return gzy_;
+                return tzs_;
             }
             else if (choice is CqlInterval<CqlQuantity>)
             {
-                Patient gzz_ = this.Patient(context);
-                Date hza_ = gzz_?.BirthDateElement;
-                string hzb_ = hza_?.Value;
-                CqlDate hzc_ = context.Operators.ConvertStringToDate(hzb_);
-                object hzd_ = context.Operators.LateBoundProperty<object>(choice, "low");
-                CqlDate hze_ = context.Operators.Add(hzc_, hzd_ as CqlQuantity);
-                Date hzg_ = gzz_?.BirthDateElement;
-                string hzh_ = hzg_?.Value;
-                CqlDate hzi_ = context.Operators.ConvertStringToDate(hzh_);
-                object hzj_ = context.Operators.LateBoundProperty<object>(choice, "high");
-                CqlDate hzk_ = context.Operators.Add(hzi_, hzj_ as CqlQuantity);
-                CqlQuantity hzl_ = context.Operators.Quantity(1m, "year");
-                CqlDate hzm_ = context.Operators.Add(hzk_, hzl_);
-                CqlInterval<CqlDate> hzn_ = context.Operators.Interval(hze_, hzm_, true, false);
-                CqlDate hzo_ = hzn_?.low;
-                CqlDateTime hzp_ = context.Operators.ConvertDateToDateTime(hzo_);
-                Date hzr_ = gzz_?.BirthDateElement;
-                string hzs_ = hzr_?.Value;
-                CqlDate hzt_ = context.Operators.ConvertStringToDate(hzs_);
-                CqlDate hzv_ = context.Operators.Add(hzt_, hzd_ as CqlQuantity);
-                Date hzx_ = gzz_?.BirthDateElement;
-                string hzy_ = hzx_?.Value;
-                CqlDate hzz_ = context.Operators.ConvertStringToDate(hzy_);
-                CqlDate izb_ = context.Operators.Add(hzz_, hzj_ as CqlQuantity);
-                CqlDate izd_ = context.Operators.Add(izb_, hzl_);
-                CqlInterval<CqlDate> ize_ = context.Operators.Interval(hzv_, izd_, true, false);
-                CqlDate izf_ = ize_?.high;
-                CqlDateTime izg_ = context.Operators.ConvertDateToDateTime(izf_);
-                Date izi_ = gzz_?.BirthDateElement;
-                string izj_ = izi_?.Value;
-                CqlDate izk_ = context.Operators.ConvertStringToDate(izj_);
-                CqlDate izm_ = context.Operators.Add(izk_, hzd_ as CqlQuantity);
-                Date izo_ = gzz_?.BirthDateElement;
-                string izp_ = izo_?.Value;
-                CqlDate izq_ = context.Operators.ConvertStringToDate(izp_);
-                CqlDate izs_ = context.Operators.Add(izq_, hzj_ as CqlQuantity);
-                CqlDate izu_ = context.Operators.Add(izs_, hzl_);
-                CqlInterval<CqlDate> izv_ = context.Operators.Interval(izm_, izu_, true, false);
-                bool? izw_ = izv_?.lowClosed;
-                Date izy_ = gzz_?.BirthDateElement;
-                string izz_ = izy_?.Value;
-                CqlDate jza_ = context.Operators.ConvertStringToDate(izz_);
-                CqlDate jzc_ = context.Operators.Add(jza_, hzd_ as CqlQuantity);
-                Date jze_ = gzz_?.BirthDateElement;
-                string jzf_ = jze_?.Value;
-                CqlDate jzg_ = context.Operators.ConvertStringToDate(jzf_);
-                CqlDate jzi_ = context.Operators.Add(jzg_, hzj_ as CqlQuantity);
-                CqlDate jzk_ = context.Operators.Add(jzi_, hzl_);
-                CqlInterval<CqlDate> jzl_ = context.Operators.Interval(jzc_, jzk_, true, false);
-                bool? jzm_ = jzl_?.highClosed;
-                CqlInterval<CqlDateTime> jzn_ = context.Operators.Interval(hzp_, izg_, izw_, jzm_);
+                Patient tzt_ = this.Patient(context);
+                Date tzu_ = tzt_?.BirthDateElement;
+                string tzv_ = tzu_?.Value;
+                CqlDate tzw_ = context.Operators.ConvertStringToDate(tzv_);
+                object tzx_ = context.Operators.LateBoundProperty<object>(choice, "low");
+                CqlDate tzy_ = context.Operators.Add(tzw_, tzx_ as CqlQuantity);
+                Date uza_ = tzt_?.BirthDateElement;
+                string uzb_ = uza_?.Value;
+                CqlDate uzc_ = context.Operators.ConvertStringToDate(uzb_);
+                object uzd_ = context.Operators.LateBoundProperty<object>(choice, "high");
+                CqlDate uze_ = context.Operators.Add(uzc_, uzd_ as CqlQuantity);
+                CqlQuantity uzf_ = context.Operators.Quantity(1m, "year");
+                CqlDate uzg_ = context.Operators.Add(uze_, uzf_);
+                CqlInterval<CqlDate> uzh_ = context.Operators.Interval(tzy_, uzg_, true, false);
+                CqlDate uzi_ = uzh_?.low;
+                CqlDateTime uzj_ = context.Operators.ConvertDateToDateTime(uzi_);
+                Date uzl_ = tzt_?.BirthDateElement;
+                string uzm_ = uzl_?.Value;
+                CqlDate uzn_ = context.Operators.ConvertStringToDate(uzm_);
+                CqlDate uzp_ = context.Operators.Add(uzn_, tzx_ as CqlQuantity);
+                Date uzr_ = tzt_?.BirthDateElement;
+                string uzs_ = uzr_?.Value;
+                CqlDate uzt_ = context.Operators.ConvertStringToDate(uzs_);
+                CqlDate uzv_ = context.Operators.Add(uzt_, uzd_ as CqlQuantity);
+                CqlDate uzx_ = context.Operators.Add(uzv_, uzf_);
+                CqlInterval<CqlDate> uzy_ = context.Operators.Interval(uzp_, uzx_, true, false);
+                CqlDate uzz_ = uzy_?.high;
+                CqlDateTime vza_ = context.Operators.ConvertDateToDateTime(uzz_);
+                Date vzc_ = tzt_?.BirthDateElement;
+                string vzd_ = vzc_?.Value;
+                CqlDate vze_ = context.Operators.ConvertStringToDate(vzd_);
+                CqlDate vzg_ = context.Operators.Add(vze_, tzx_ as CqlQuantity);
+                Date vzi_ = tzt_?.BirthDateElement;
+                string vzj_ = vzi_?.Value;
+                CqlDate vzk_ = context.Operators.ConvertStringToDate(vzj_);
+                CqlDate vzm_ = context.Operators.Add(vzk_, uzd_ as CqlQuantity);
+                CqlDate vzo_ = context.Operators.Add(vzm_, uzf_);
+                CqlInterval<CqlDate> vzp_ = context.Operators.Interval(vzg_, vzo_, true, false);
+                bool? vzq_ = vzp_?.lowClosed;
+                Date vzs_ = tzt_?.BirthDateElement;
+                string vzt_ = vzs_?.Value;
+                CqlDate vzu_ = context.Operators.ConvertStringToDate(vzt_);
+                CqlDate vzw_ = context.Operators.Add(vzu_, tzx_ as CqlQuantity);
+                Date vzy_ = tzt_?.BirthDateElement;
+                string vzz_ = vzy_?.Value;
+                CqlDate wza_ = context.Operators.ConvertStringToDate(vzz_);
+                CqlDate wzc_ = context.Operators.Add(wza_, uzd_ as CqlQuantity);
+                CqlDate wze_ = context.Operators.Add(wzc_, uzf_);
+                CqlInterval<CqlDate> wzf_ = context.Operators.Interval(vzw_, wze_, true, false);
+                bool? wzg_ = wzf_?.highClosed;
+                CqlInterval<CqlDateTime> wzh_ = context.Operators.Interval(uzj_, vza_, vzq_, wzg_);
 
-                return jzn_;
+                return wzh_;
             }
             else if (choice is Timing)
             {
-                object jzo_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+                object wzi_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
 
-                return jzo_ as CqlInterval<CqlDateTime>;
+                return wzi_ as CqlInterval<CqlDateTime>;
             }
             else
             {
@@ -1466,22 +961,22 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
         };
 
-        return ezq_();
+        return rzk_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("toInterval")]
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types\nto an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible\nrepresentations for timing-valued elements in QICore, allowing this function to be used across any resource.\nThe input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>.\nThe intent of this function is to provide a clear and concise mechanism to treat single\nelements that have multiple possible representations as intervals so that logic doesn't have to account\nfor the variability. More complex calculations (such as medication request period or dispense period\ncalculation) need specific guidance and consideration. That guidance may make use of this function, but\nthe focus of this function is on single element calculations where the semantics are unambiguous.\nIf the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime.\nIf the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age,\nand the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later.\nIf the input is a DateTime Interval, the result is the input.\nIf the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result\nis a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending\nimmediately before one year later than the date the patient turned the age given as the end of the quantity interval.\nIf the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> jzp_()
+        CqlInterval<CqlDateTime> wzj_()
         {
             if (choice is CqlDateTime)
             {
-                CqlInterval<CqlDateTime> jzq_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> wzk_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
 
-                return jzq_;
+                return wzk_;
             }
             else if (choice is CqlInterval<CqlDateTime>)
             {
@@ -1489,119 +984,119 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else if (choice is CqlQuantity)
             {
-                Patient jzr_ = this.Patient(context);
-                Date jzs_ = jzr_?.BirthDateElement;
-                string jzt_ = jzs_?.Value;
-                CqlDate jzu_ = context.Operators.ConvertStringToDate(jzt_);
-                CqlDate jzv_ = context.Operators.Add(jzu_, choice as CqlQuantity);
-                Date jzx_ = jzr_?.BirthDateElement;
-                string jzy_ = jzx_?.Value;
-                CqlDate jzz_ = context.Operators.ConvertStringToDate(jzy_);
-                CqlDate kza_ = context.Operators.Add(jzz_, choice as CqlQuantity);
-                CqlQuantity kzb_ = context.Operators.Quantity(1m, "year");
-                CqlDate kzc_ = context.Operators.Add(kza_, kzb_);
-                CqlInterval<CqlDate> kzd_ = context.Operators.Interval(jzv_, kzc_, true, false);
-                CqlDate kze_ = kzd_?.low;
-                CqlDateTime kzf_ = context.Operators.ConvertDateToDateTime(kze_);
-                Date kzh_ = jzr_?.BirthDateElement;
-                string kzi_ = kzh_?.Value;
-                CqlDate kzj_ = context.Operators.ConvertStringToDate(kzi_);
-                CqlDate kzk_ = context.Operators.Add(kzj_, choice as CqlQuantity);
-                Date kzm_ = jzr_?.BirthDateElement;
-                string kzn_ = kzm_?.Value;
-                CqlDate kzo_ = context.Operators.ConvertStringToDate(kzn_);
-                CqlDate kzp_ = context.Operators.Add(kzo_, choice as CqlQuantity);
-                CqlDate kzr_ = context.Operators.Add(kzp_, kzb_);
-                CqlInterval<CqlDate> kzs_ = context.Operators.Interval(kzk_, kzr_, true, false);
-                CqlDate kzt_ = kzs_?.high;
-                CqlDateTime kzu_ = context.Operators.ConvertDateToDateTime(kzt_);
-                Date kzw_ = jzr_?.BirthDateElement;
-                string kzx_ = kzw_?.Value;
-                CqlDate kzy_ = context.Operators.ConvertStringToDate(kzx_);
-                CqlDate kzz_ = context.Operators.Add(kzy_, choice as CqlQuantity);
-                Date lzb_ = jzr_?.BirthDateElement;
-                string lzc_ = lzb_?.Value;
-                CqlDate lzd_ = context.Operators.ConvertStringToDate(lzc_);
-                CqlDate lze_ = context.Operators.Add(lzd_, choice as CqlQuantity);
-                CqlDate lzg_ = context.Operators.Add(lze_, kzb_);
-                CqlInterval<CqlDate> lzh_ = context.Operators.Interval(kzz_, lzg_, true, false);
-                bool? lzi_ = lzh_?.lowClosed;
-                Date lzk_ = jzr_?.BirthDateElement;
-                string lzl_ = lzk_?.Value;
-                CqlDate lzm_ = context.Operators.ConvertStringToDate(lzl_);
-                CqlDate lzn_ = context.Operators.Add(lzm_, choice as CqlQuantity);
-                Date lzp_ = jzr_?.BirthDateElement;
-                string lzq_ = lzp_?.Value;
-                CqlDate lzr_ = context.Operators.ConvertStringToDate(lzq_);
-                CqlDate lzs_ = context.Operators.Add(lzr_, choice as CqlQuantity);
-                CqlDate lzu_ = context.Operators.Add(lzs_, kzb_);
-                CqlInterval<CqlDate> lzv_ = context.Operators.Interval(lzn_, lzu_, true, false);
-                bool? lzw_ = lzv_?.highClosed;
-                CqlInterval<CqlDateTime> lzx_ = context.Operators.Interval(kzf_, kzu_, lzi_, lzw_);
+                Patient wzl_ = this.Patient(context);
+                Date wzm_ = wzl_?.BirthDateElement;
+                string wzn_ = wzm_?.Value;
+                CqlDate wzo_ = context.Operators.ConvertStringToDate(wzn_);
+                CqlDate wzp_ = context.Operators.Add(wzo_, choice as CqlQuantity);
+                Date wzr_ = wzl_?.BirthDateElement;
+                string wzs_ = wzr_?.Value;
+                CqlDate wzt_ = context.Operators.ConvertStringToDate(wzs_);
+                CqlDate wzu_ = context.Operators.Add(wzt_, choice as CqlQuantity);
+                CqlQuantity wzv_ = context.Operators.Quantity(1m, "year");
+                CqlDate wzw_ = context.Operators.Add(wzu_, wzv_);
+                CqlInterval<CqlDate> wzx_ = context.Operators.Interval(wzp_, wzw_, true, false);
+                CqlDate wzy_ = wzx_?.low;
+                CqlDateTime wzz_ = context.Operators.ConvertDateToDateTime(wzy_);
+                Date xzb_ = wzl_?.BirthDateElement;
+                string xzc_ = xzb_?.Value;
+                CqlDate xzd_ = context.Operators.ConvertStringToDate(xzc_);
+                CqlDate xze_ = context.Operators.Add(xzd_, choice as CqlQuantity);
+                Date xzg_ = wzl_?.BirthDateElement;
+                string xzh_ = xzg_?.Value;
+                CqlDate xzi_ = context.Operators.ConvertStringToDate(xzh_);
+                CqlDate xzj_ = context.Operators.Add(xzi_, choice as CqlQuantity);
+                CqlDate xzl_ = context.Operators.Add(xzj_, wzv_);
+                CqlInterval<CqlDate> xzm_ = context.Operators.Interval(xze_, xzl_, true, false);
+                CqlDate xzn_ = xzm_?.high;
+                CqlDateTime xzo_ = context.Operators.ConvertDateToDateTime(xzn_);
+                Date xzq_ = wzl_?.BirthDateElement;
+                string xzr_ = xzq_?.Value;
+                CqlDate xzs_ = context.Operators.ConvertStringToDate(xzr_);
+                CqlDate xzt_ = context.Operators.Add(xzs_, choice as CqlQuantity);
+                Date xzv_ = wzl_?.BirthDateElement;
+                string xzw_ = xzv_?.Value;
+                CqlDate xzx_ = context.Operators.ConvertStringToDate(xzw_);
+                CqlDate xzy_ = context.Operators.Add(xzx_, choice as CqlQuantity);
+                CqlDate yza_ = context.Operators.Add(xzy_, wzv_);
+                CqlInterval<CqlDate> yzb_ = context.Operators.Interval(xzt_, yza_, true, false);
+                bool? yzc_ = yzb_?.lowClosed;
+                Date yze_ = wzl_?.BirthDateElement;
+                string yzf_ = yze_?.Value;
+                CqlDate yzg_ = context.Operators.ConvertStringToDate(yzf_);
+                CqlDate yzh_ = context.Operators.Add(yzg_, choice as CqlQuantity);
+                Date yzj_ = wzl_?.BirthDateElement;
+                string yzk_ = yzj_?.Value;
+                CqlDate yzl_ = context.Operators.ConvertStringToDate(yzk_);
+                CqlDate yzm_ = context.Operators.Add(yzl_, choice as CqlQuantity);
+                CqlDate yzo_ = context.Operators.Add(yzm_, wzv_);
+                CqlInterval<CqlDate> yzp_ = context.Operators.Interval(yzh_, yzo_, true, false);
+                bool? yzq_ = yzp_?.highClosed;
+                CqlInterval<CqlDateTime> yzr_ = context.Operators.Interval(wzz_, xzo_, yzc_, yzq_);
 
-                return lzx_;
+                return yzr_;
             }
             else if (choice is CqlInterval<CqlQuantity>)
             {
-                Patient lzy_ = this.Patient(context);
-                Date lzz_ = lzy_?.BirthDateElement;
-                string mza_ = lzz_?.Value;
-                CqlDate mzb_ = context.Operators.ConvertStringToDate(mza_);
-                object mzc_ = context.Operators.LateBoundProperty<object>(choice, "low");
-                CqlDate mzd_ = context.Operators.Add(mzb_, mzc_ as CqlQuantity);
-                Date mzf_ = lzy_?.BirthDateElement;
-                string mzg_ = mzf_?.Value;
-                CqlDate mzh_ = context.Operators.ConvertStringToDate(mzg_);
-                object mzi_ = context.Operators.LateBoundProperty<object>(choice, "high");
-                CqlDate mzj_ = context.Operators.Add(mzh_, mzi_ as CqlQuantity);
-                CqlQuantity mzk_ = context.Operators.Quantity(1m, "year");
-                CqlDate mzl_ = context.Operators.Add(mzj_, mzk_);
-                CqlInterval<CqlDate> mzm_ = context.Operators.Interval(mzd_, mzl_, true, false);
-                CqlDate mzn_ = mzm_?.low;
-                CqlDateTime mzo_ = context.Operators.ConvertDateToDateTime(mzn_);
-                Date mzq_ = lzy_?.BirthDateElement;
-                string mzr_ = mzq_?.Value;
-                CqlDate mzs_ = context.Operators.ConvertStringToDate(mzr_);
-                CqlDate mzu_ = context.Operators.Add(mzs_, mzc_ as CqlQuantity);
-                Date mzw_ = lzy_?.BirthDateElement;
-                string mzx_ = mzw_?.Value;
-                CqlDate mzy_ = context.Operators.ConvertStringToDate(mzx_);
-                CqlDate nza_ = context.Operators.Add(mzy_, mzi_ as CqlQuantity);
-                CqlDate nzc_ = context.Operators.Add(nza_, mzk_);
-                CqlInterval<CqlDate> nzd_ = context.Operators.Interval(mzu_, nzc_, true, false);
-                CqlDate nze_ = nzd_?.high;
-                CqlDateTime nzf_ = context.Operators.ConvertDateToDateTime(nze_);
-                Date nzh_ = lzy_?.BirthDateElement;
-                string nzi_ = nzh_?.Value;
-                CqlDate nzj_ = context.Operators.ConvertStringToDate(nzi_);
-                CqlDate nzl_ = context.Operators.Add(nzj_, mzc_ as CqlQuantity);
-                Date nzn_ = lzy_?.BirthDateElement;
-                string nzo_ = nzn_?.Value;
-                CqlDate nzp_ = context.Operators.ConvertStringToDate(nzo_);
-                CqlDate nzr_ = context.Operators.Add(nzp_, mzi_ as CqlQuantity);
-                CqlDate nzt_ = context.Operators.Add(nzr_, mzk_);
-                CqlInterval<CqlDate> nzu_ = context.Operators.Interval(nzl_, nzt_, true, false);
-                bool? nzv_ = nzu_?.lowClosed;
-                Date nzx_ = lzy_?.BirthDateElement;
-                string nzy_ = nzx_?.Value;
-                CqlDate nzz_ = context.Operators.ConvertStringToDate(nzy_);
-                CqlDate ozb_ = context.Operators.Add(nzz_, mzc_ as CqlQuantity);
-                Date ozd_ = lzy_?.BirthDateElement;
-                string oze_ = ozd_?.Value;
-                CqlDate ozf_ = context.Operators.ConvertStringToDate(oze_);
-                CqlDate ozh_ = context.Operators.Add(ozf_, mzi_ as CqlQuantity);
-                CqlDate ozj_ = context.Operators.Add(ozh_, mzk_);
-                CqlInterval<CqlDate> ozk_ = context.Operators.Interval(ozb_, ozj_, true, false);
-                bool? ozl_ = ozk_?.highClosed;
-                CqlInterval<CqlDateTime> ozm_ = context.Operators.Interval(mzo_, nzf_, nzv_, ozl_);
+                Patient yzs_ = this.Patient(context);
+                Date yzt_ = yzs_?.BirthDateElement;
+                string yzu_ = yzt_?.Value;
+                CqlDate yzv_ = context.Operators.ConvertStringToDate(yzu_);
+                object yzw_ = context.Operators.LateBoundProperty<object>(choice, "low");
+                CqlDate yzx_ = context.Operators.Add(yzv_, yzw_ as CqlQuantity);
+                Date yzz_ = yzs_?.BirthDateElement;
+                string zza_ = yzz_?.Value;
+                CqlDate zzb_ = context.Operators.ConvertStringToDate(zza_);
+                object zzc_ = context.Operators.LateBoundProperty<object>(choice, "high");
+                CqlDate zzd_ = context.Operators.Add(zzb_, zzc_ as CqlQuantity);
+                CqlQuantity zze_ = context.Operators.Quantity(1m, "year");
+                CqlDate zzf_ = context.Operators.Add(zzd_, zze_);
+                CqlInterval<CqlDate> zzg_ = context.Operators.Interval(yzx_, zzf_, true, false);
+                CqlDate zzh_ = zzg_?.low;
+                CqlDateTime zzi_ = context.Operators.ConvertDateToDateTime(zzh_);
+                Date zzk_ = yzs_?.BirthDateElement;
+                string zzl_ = zzk_?.Value;
+                CqlDate zzm_ = context.Operators.ConvertStringToDate(zzl_);
+                CqlDate zzo_ = context.Operators.Add(zzm_, yzw_ as CqlQuantity);
+                Date zzq_ = yzs_?.BirthDateElement;
+                string zzr_ = zzq_?.Value;
+                CqlDate zzs_ = context.Operators.ConvertStringToDate(zzr_);
+                CqlDate zzu_ = context.Operators.Add(zzs_, zzc_ as CqlQuantity);
+                CqlDate zzw_ = context.Operators.Add(zzu_, zze_);
+                CqlInterval<CqlDate> zzx_ = context.Operators.Interval(zzo_, zzw_, true, false);
+                CqlDate zzy_ = zzx_?.high;
+                CqlDateTime zzz_ = context.Operators.ConvertDateToDateTime(zzy_);
+                Date azzb_ = yzs_?.BirthDateElement;
+                string azzc_ = azzb_?.Value;
+                CqlDate azzd_ = context.Operators.ConvertStringToDate(azzc_);
+                CqlDate azzf_ = context.Operators.Add(azzd_, yzw_ as CqlQuantity);
+                Date azzh_ = yzs_?.BirthDateElement;
+                string azzi_ = azzh_?.Value;
+                CqlDate azzj_ = context.Operators.ConvertStringToDate(azzi_);
+                CqlDate azzl_ = context.Operators.Add(azzj_, zzc_ as CqlQuantity);
+                CqlDate azzn_ = context.Operators.Add(azzl_, zze_);
+                CqlInterval<CqlDate> azzo_ = context.Operators.Interval(azzf_, azzn_, true, false);
+                bool? azzp_ = azzo_?.lowClosed;
+                Date azzr_ = yzs_?.BirthDateElement;
+                string azzs_ = azzr_?.Value;
+                CqlDate azzt_ = context.Operators.ConvertStringToDate(azzs_);
+                CqlDate azzv_ = context.Operators.Add(azzt_, yzw_ as CqlQuantity);
+                Date azzx_ = yzs_?.BirthDateElement;
+                string azzy_ = azzx_?.Value;
+                CqlDate azzz_ = context.Operators.ConvertStringToDate(azzy_);
+                CqlDate bzzb_ = context.Operators.Add(azzz_, zzc_ as CqlQuantity);
+                CqlDate bzzd_ = context.Operators.Add(bzzb_, zze_);
+                CqlInterval<CqlDate> bzze_ = context.Operators.Interval(azzv_, bzzd_, true, false);
+                bool? bzzf_ = bzze_?.highClosed;
+                CqlInterval<CqlDateTime> bzzg_ = context.Operators.Interval(zzi_, zzz_, azzp_, bzzf_);
 
-                return ozm_;
+                return bzzg_;
             }
             else if (choice is Timing)
             {
-                object ozn_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+                object bzzh_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
 
-                return ozn_ as CqlInterval<CqlDateTime>;
+                return bzzh_ as CqlInterval<CqlDateTime>;
             }
             else
             {
@@ -1609,203 +1104,203 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
         };
 
-        return jzp_();
+        return wzj_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToAbatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `abatementInterval()` instead.")]
     public CqlInterval<CqlDateTime> ToAbatementInterval(CqlContext context, Condition condition)
     {
-        CqlInterval<CqlDateTime> ozo_()
+        CqlInterval<CqlDateTime> bzzi_()
         {
-            bool ozp_()
+            bool bzzj_()
             {
-                DataType ozt_ = condition?.Abatement;
-                object ozu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozt_);
-                bool ozv_ = ozu_ is CqlDateTime;
+                DataType bzzn_ = condition?.Abatement;
+                object bzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzn_);
+                bool bzzp_ = bzzo_ is CqlDateTime;
 
-                return ozv_;
+                return bzzp_;
             };
-            bool ozq_()
+            bool bzzk_()
             {
-                DataType ozw_ = condition?.Abatement;
-                object ozx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozw_);
-                bool ozy_ = ozx_ is CqlQuantity;
+                DataType bzzq_ = condition?.Abatement;
+                object bzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzq_);
+                bool bzzs_ = bzzr_ is CqlQuantity;
 
-                return ozy_;
+                return bzzs_;
             };
-            bool ozr_()
+            bool bzzl_()
             {
-                DataType ozz_ = condition?.Abatement;
-                object pza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozz_);
-                bool pzb_ = pza_ is CqlInterval<CqlQuantity>;
+                DataType bzzt_ = condition?.Abatement;
+                object bzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzt_);
+                bool bzzv_ = bzzu_ is CqlInterval<CqlQuantity>;
 
-                return pzb_;
+                return bzzv_;
             };
-            bool ozs_()
+            bool bzzm_()
             {
-                DataType pzc_ = condition?.Abatement;
-                object pzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzc_);
-                bool pze_ = pzd_ is CqlInterval<CqlDateTime>;
+                DataType bzzw_ = condition?.Abatement;
+                object bzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzw_);
+                bool bzzy_ = bzzx_ is CqlInterval<CqlDateTime>;
 
-                return pze_;
+                return bzzy_;
             };
-            if (ozp_())
+            if (bzzj_())
             {
-                DataType pzf_ = condition?.Abatement;
-                object pzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzf_);
-                object pzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzf_);
-                CqlInterval<CqlDateTime> pzj_ = context.Operators.Interval(pzg_ as CqlDateTime, pzi_ as CqlDateTime, true, true);
+                DataType bzzz_ = condition?.Abatement;
+                object czza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzz_);
+                object czzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzz_);
+                CqlInterval<CqlDateTime> czzd_ = context.Operators.Interval(czza_ as CqlDateTime, czzc_ as CqlDateTime, true, true);
 
-                return pzj_;
+                return czzd_;
             }
-            else if (ozq_())
+            else if (bzzk_())
             {
-                Patient pzk_ = this.Patient(context);
-                Date pzl_ = pzk_?.BirthDateElement;
-                string pzm_ = pzl_?.Value;
-                CqlDate pzn_ = context.Operators.ConvertStringToDate(pzm_);
-                DataType pzo_ = condition?.Abatement;
-                object pzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate pzq_ = context.Operators.Add(pzn_, pzp_ as CqlQuantity);
-                Date pzs_ = pzk_?.BirthDateElement;
-                string pzt_ = pzs_?.Value;
-                CqlDate pzu_ = context.Operators.ConvertStringToDate(pzt_);
-                object pzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate pzx_ = context.Operators.Add(pzu_, pzw_ as CqlQuantity);
-                CqlQuantity pzy_ = context.Operators.Quantity(1m, "year");
-                CqlDate pzz_ = context.Operators.Add(pzx_, pzy_);
-                CqlInterval<CqlDate> qza_ = context.Operators.Interval(pzq_, pzz_, true, false);
-                CqlDate qzb_ = qza_?.low;
-                CqlDateTime qzc_ = context.Operators.ConvertDateToDateTime(qzb_);
-                Date qze_ = pzk_?.BirthDateElement;
-                string qzf_ = qze_?.Value;
-                CqlDate qzg_ = context.Operators.ConvertStringToDate(qzf_);
-                object qzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate qzj_ = context.Operators.Add(qzg_, qzi_ as CqlQuantity);
-                Date qzl_ = pzk_?.BirthDateElement;
-                string qzm_ = qzl_?.Value;
-                CqlDate qzn_ = context.Operators.ConvertStringToDate(qzm_);
-                object qzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate qzq_ = context.Operators.Add(qzn_, qzp_ as CqlQuantity);
-                CqlDate qzs_ = context.Operators.Add(qzq_, pzy_);
-                CqlInterval<CqlDate> qzt_ = context.Operators.Interval(qzj_, qzs_, true, false);
-                CqlDate qzu_ = qzt_?.high;
-                CqlDateTime qzv_ = context.Operators.ConvertDateToDateTime(qzu_);
-                Date qzx_ = pzk_?.BirthDateElement;
-                string qzy_ = qzx_?.Value;
-                CqlDate qzz_ = context.Operators.ConvertStringToDate(qzy_);
-                object rzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate rzc_ = context.Operators.Add(qzz_, rzb_ as CqlQuantity);
-                Date rze_ = pzk_?.BirthDateElement;
-                string rzf_ = rze_?.Value;
-                CqlDate rzg_ = context.Operators.ConvertStringToDate(rzf_);
-                object rzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate rzj_ = context.Operators.Add(rzg_, rzi_ as CqlQuantity);
-                CqlDate rzl_ = context.Operators.Add(rzj_, pzy_);
-                CqlInterval<CqlDate> rzm_ = context.Operators.Interval(rzc_, rzl_, true, false);
-                bool? rzn_ = rzm_?.lowClosed;
-                Date rzp_ = pzk_?.BirthDateElement;
-                string rzq_ = rzp_?.Value;
-                CqlDate rzr_ = context.Operators.ConvertStringToDate(rzq_);
-                object rzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate rzu_ = context.Operators.Add(rzr_, rzt_ as CqlQuantity);
-                Date rzw_ = pzk_?.BirthDateElement;
-                string rzx_ = rzw_?.Value;
-                CqlDate rzy_ = context.Operators.ConvertStringToDate(rzx_);
-                object sza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzo_);
-                CqlDate szb_ = context.Operators.Add(rzy_, sza_ as CqlQuantity);
-                CqlDate szd_ = context.Operators.Add(szb_, pzy_);
-                CqlInterval<CqlDate> sze_ = context.Operators.Interval(rzu_, szd_, true, false);
-                bool? szf_ = sze_?.highClosed;
-                CqlInterval<CqlDateTime> szg_ = context.Operators.Interval(qzc_, qzv_, rzn_, szf_);
+                Patient czze_ = this.Patient(context);
+                Date czzf_ = czze_?.BirthDateElement;
+                string czzg_ = czzf_?.Value;
+                CqlDate czzh_ = context.Operators.ConvertStringToDate(czzg_);
+                DataType czzi_ = condition?.Abatement;
+                object czzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate czzk_ = context.Operators.Add(czzh_, czzj_ as CqlQuantity);
+                Date czzm_ = czze_?.BirthDateElement;
+                string czzn_ = czzm_?.Value;
+                CqlDate czzo_ = context.Operators.ConvertStringToDate(czzn_);
+                object czzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate czzr_ = context.Operators.Add(czzo_, czzq_ as CqlQuantity);
+                CqlQuantity czzs_ = context.Operators.Quantity(1m, "year");
+                CqlDate czzt_ = context.Operators.Add(czzr_, czzs_);
+                CqlInterval<CqlDate> czzu_ = context.Operators.Interval(czzk_, czzt_, true, false);
+                CqlDate czzv_ = czzu_?.low;
+                CqlDateTime czzw_ = context.Operators.ConvertDateToDateTime(czzv_);
+                Date czzy_ = czze_?.BirthDateElement;
+                string czzz_ = czzy_?.Value;
+                CqlDate dzza_ = context.Operators.ConvertStringToDate(czzz_);
+                object dzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate dzzd_ = context.Operators.Add(dzza_, dzzc_ as CqlQuantity);
+                Date dzzf_ = czze_?.BirthDateElement;
+                string dzzg_ = dzzf_?.Value;
+                CqlDate dzzh_ = context.Operators.ConvertStringToDate(dzzg_);
+                object dzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate dzzk_ = context.Operators.Add(dzzh_, dzzj_ as CqlQuantity);
+                CqlDate dzzm_ = context.Operators.Add(dzzk_, czzs_);
+                CqlInterval<CqlDate> dzzn_ = context.Operators.Interval(dzzd_, dzzm_, true, false);
+                CqlDate dzzo_ = dzzn_?.high;
+                CqlDateTime dzzp_ = context.Operators.ConvertDateToDateTime(dzzo_);
+                Date dzzr_ = czze_?.BirthDateElement;
+                string dzzs_ = dzzr_?.Value;
+                CqlDate dzzt_ = context.Operators.ConvertStringToDate(dzzs_);
+                object dzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate dzzw_ = context.Operators.Add(dzzt_, dzzv_ as CqlQuantity);
+                Date dzzy_ = czze_?.BirthDateElement;
+                string dzzz_ = dzzy_?.Value;
+                CqlDate ezza_ = context.Operators.ConvertStringToDate(dzzz_);
+                object ezzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate ezzd_ = context.Operators.Add(ezza_, ezzc_ as CqlQuantity);
+                CqlDate ezzf_ = context.Operators.Add(ezzd_, czzs_);
+                CqlInterval<CqlDate> ezzg_ = context.Operators.Interval(dzzw_, ezzf_, true, false);
+                bool? ezzh_ = ezzg_?.lowClosed;
+                Date ezzj_ = czze_?.BirthDateElement;
+                string ezzk_ = ezzj_?.Value;
+                CqlDate ezzl_ = context.Operators.ConvertStringToDate(ezzk_);
+                object ezzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate ezzo_ = context.Operators.Add(ezzl_, ezzn_ as CqlQuantity);
+                Date ezzq_ = czze_?.BirthDateElement;
+                string ezzr_ = ezzq_?.Value;
+                CqlDate ezzs_ = context.Operators.ConvertStringToDate(ezzr_);
+                object ezzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzi_);
+                CqlDate ezzv_ = context.Operators.Add(ezzs_, ezzu_ as CqlQuantity);
+                CqlDate ezzx_ = context.Operators.Add(ezzv_, czzs_);
+                CqlInterval<CqlDate> ezzy_ = context.Operators.Interval(ezzo_, ezzx_, true, false);
+                bool? ezzz_ = ezzy_?.highClosed;
+                CqlInterval<CqlDateTime> fzza_ = context.Operators.Interval(czzw_, dzzp_, ezzh_, ezzz_);
 
-                return szg_;
+                return fzza_;
             }
-            else if (ozr_())
+            else if (bzzl_())
             {
-                Patient szh_ = this.Patient(context);
-                Date szi_ = szh_?.BirthDateElement;
-                string szj_ = szi_?.Value;
-                CqlDate szk_ = context.Operators.ConvertStringToDate(szj_);
-                DataType szl_ = condition?.Abatement;
-                object szm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object szn_ = context.Operators.LateBoundProperty<object>(szm_, "low");
-                CqlDate szo_ = context.Operators.Add(szk_, szn_ as CqlQuantity);
-                Date szq_ = szh_?.BirthDateElement;
-                string szr_ = szq_?.Value;
-                CqlDate szs_ = context.Operators.ConvertStringToDate(szr_);
-                object szu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object szv_ = context.Operators.LateBoundProperty<object>(szu_, "high");
-                CqlDate szw_ = context.Operators.Add(szs_, szv_ as CqlQuantity);
-                CqlQuantity szx_ = context.Operators.Quantity(1m, "year");
-                CqlDate szy_ = context.Operators.Add(szw_, szx_);
-                CqlInterval<CqlDate> szz_ = context.Operators.Interval(szo_, szy_, true, false);
-                CqlDate tza_ = szz_?.low;
-                CqlDateTime tzb_ = context.Operators.ConvertDateToDateTime(tza_);
-                Date tzd_ = szh_?.BirthDateElement;
-                string tze_ = tzd_?.Value;
-                CqlDate tzf_ = context.Operators.ConvertStringToDate(tze_);
-                object tzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object tzi_ = context.Operators.LateBoundProperty<object>(tzh_, "low");
-                CqlDate tzj_ = context.Operators.Add(tzf_, tzi_ as CqlQuantity);
-                Date tzl_ = szh_?.BirthDateElement;
-                string tzm_ = tzl_?.Value;
-                CqlDate tzn_ = context.Operators.ConvertStringToDate(tzm_);
-                object tzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object tzq_ = context.Operators.LateBoundProperty<object>(tzp_, "high");
-                CqlDate tzr_ = context.Operators.Add(tzn_, tzq_ as CqlQuantity);
-                CqlDate tzt_ = context.Operators.Add(tzr_, szx_);
-                CqlInterval<CqlDate> tzu_ = context.Operators.Interval(tzj_, tzt_, true, false);
-                CqlDate tzv_ = tzu_?.high;
-                CqlDateTime tzw_ = context.Operators.ConvertDateToDateTime(tzv_);
-                Date tzy_ = szh_?.BirthDateElement;
-                string tzz_ = tzy_?.Value;
-                CqlDate uza_ = context.Operators.ConvertStringToDate(tzz_);
-                object uzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object uzd_ = context.Operators.LateBoundProperty<object>(uzc_, "low");
-                CqlDate uze_ = context.Operators.Add(uza_, uzd_ as CqlQuantity);
-                Date uzg_ = szh_?.BirthDateElement;
-                string uzh_ = uzg_?.Value;
-                CqlDate uzi_ = context.Operators.ConvertStringToDate(uzh_);
-                object uzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object uzl_ = context.Operators.LateBoundProperty<object>(uzk_, "high");
-                CqlDate uzm_ = context.Operators.Add(uzi_, uzl_ as CqlQuantity);
-                CqlDate uzo_ = context.Operators.Add(uzm_, szx_);
-                CqlInterval<CqlDate> uzp_ = context.Operators.Interval(uze_, uzo_, true, false);
-                bool? uzq_ = uzp_?.lowClosed;
-                Date uzs_ = szh_?.BirthDateElement;
-                string uzt_ = uzs_?.Value;
-                CqlDate uzu_ = context.Operators.ConvertStringToDate(uzt_);
-                object uzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object uzx_ = context.Operators.LateBoundProperty<object>(uzw_, "low");
-                CqlDate uzy_ = context.Operators.Add(uzu_, uzx_ as CqlQuantity);
-                Date vza_ = szh_?.BirthDateElement;
-                string vzb_ = vza_?.Value;
-                CqlDate vzc_ = context.Operators.ConvertStringToDate(vzb_);
-                object vze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szl_);
-                object vzf_ = context.Operators.LateBoundProperty<object>(vze_, "high");
-                CqlDate vzg_ = context.Operators.Add(vzc_, vzf_ as CqlQuantity);
-                CqlDate vzi_ = context.Operators.Add(vzg_, szx_);
-                CqlInterval<CqlDate> vzj_ = context.Operators.Interval(uzy_, vzi_, true, false);
-                bool? vzk_ = vzj_?.highClosed;
-                CqlInterval<CqlDateTime> vzl_ = context.Operators.Interval(tzb_, tzw_, uzq_, vzk_);
+                Patient fzzb_ = this.Patient(context);
+                Date fzzc_ = fzzb_?.BirthDateElement;
+                string fzzd_ = fzzc_?.Value;
+                CqlDate fzze_ = context.Operators.ConvertStringToDate(fzzd_);
+                DataType fzzf_ = condition?.Abatement;
+                object fzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object fzzh_ = context.Operators.LateBoundProperty<object>(fzzg_, "low");
+                CqlDate fzzi_ = context.Operators.Add(fzze_, fzzh_ as CqlQuantity);
+                Date fzzk_ = fzzb_?.BirthDateElement;
+                string fzzl_ = fzzk_?.Value;
+                CqlDate fzzm_ = context.Operators.ConvertStringToDate(fzzl_);
+                object fzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object fzzp_ = context.Operators.LateBoundProperty<object>(fzzo_, "high");
+                CqlDate fzzq_ = context.Operators.Add(fzzm_, fzzp_ as CqlQuantity);
+                CqlQuantity fzzr_ = context.Operators.Quantity(1m, "year");
+                CqlDate fzzs_ = context.Operators.Add(fzzq_, fzzr_);
+                CqlInterval<CqlDate> fzzt_ = context.Operators.Interval(fzzi_, fzzs_, true, false);
+                CqlDate fzzu_ = fzzt_?.low;
+                CqlDateTime fzzv_ = context.Operators.ConvertDateToDateTime(fzzu_);
+                Date fzzx_ = fzzb_?.BirthDateElement;
+                string fzzy_ = fzzx_?.Value;
+                CqlDate fzzz_ = context.Operators.ConvertStringToDate(fzzy_);
+                object gzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object gzzc_ = context.Operators.LateBoundProperty<object>(gzzb_, "low");
+                CqlDate gzzd_ = context.Operators.Add(fzzz_, gzzc_ as CqlQuantity);
+                Date gzzf_ = fzzb_?.BirthDateElement;
+                string gzzg_ = gzzf_?.Value;
+                CqlDate gzzh_ = context.Operators.ConvertStringToDate(gzzg_);
+                object gzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object gzzk_ = context.Operators.LateBoundProperty<object>(gzzj_, "high");
+                CqlDate gzzl_ = context.Operators.Add(gzzh_, gzzk_ as CqlQuantity);
+                CqlDate gzzn_ = context.Operators.Add(gzzl_, fzzr_);
+                CqlInterval<CqlDate> gzzo_ = context.Operators.Interval(gzzd_, gzzn_, true, false);
+                CqlDate gzzp_ = gzzo_?.high;
+                CqlDateTime gzzq_ = context.Operators.ConvertDateToDateTime(gzzp_);
+                Date gzzs_ = fzzb_?.BirthDateElement;
+                string gzzt_ = gzzs_?.Value;
+                CqlDate gzzu_ = context.Operators.ConvertStringToDate(gzzt_);
+                object gzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object gzzx_ = context.Operators.LateBoundProperty<object>(gzzw_, "low");
+                CqlDate gzzy_ = context.Operators.Add(gzzu_, gzzx_ as CqlQuantity);
+                Date hzza_ = fzzb_?.BirthDateElement;
+                string hzzb_ = hzza_?.Value;
+                CqlDate hzzc_ = context.Operators.ConvertStringToDate(hzzb_);
+                object hzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object hzzf_ = context.Operators.LateBoundProperty<object>(hzze_, "high");
+                CqlDate hzzg_ = context.Operators.Add(hzzc_, hzzf_ as CqlQuantity);
+                CqlDate hzzi_ = context.Operators.Add(hzzg_, fzzr_);
+                CqlInterval<CqlDate> hzzj_ = context.Operators.Interval(gzzy_, hzzi_, true, false);
+                bool? hzzk_ = hzzj_?.lowClosed;
+                Date hzzm_ = fzzb_?.BirthDateElement;
+                string hzzn_ = hzzm_?.Value;
+                CqlDate hzzo_ = context.Operators.ConvertStringToDate(hzzn_);
+                object hzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object hzzr_ = context.Operators.LateBoundProperty<object>(hzzq_, "low");
+                CqlDate hzzs_ = context.Operators.Add(hzzo_, hzzr_ as CqlQuantity);
+                Date hzzu_ = fzzb_?.BirthDateElement;
+                string hzzv_ = hzzu_?.Value;
+                CqlDate hzzw_ = context.Operators.ConvertStringToDate(hzzv_);
+                object hzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzf_);
+                object hzzz_ = context.Operators.LateBoundProperty<object>(hzzy_, "high");
+                CqlDate izza_ = context.Operators.Add(hzzw_, hzzz_ as CqlQuantity);
+                CqlDate izzc_ = context.Operators.Add(izza_, fzzr_);
+                CqlInterval<CqlDate> izzd_ = context.Operators.Interval(hzzs_, izzc_, true, false);
+                bool? izze_ = izzd_?.highClosed;
+                CqlInterval<CqlDateTime> izzf_ = context.Operators.Interval(fzzv_, gzzq_, hzzk_, izze_);
 
-                return vzl_;
+                return izzf_;
             }
-            else if (ozs_())
+            else if (bzzm_())
             {
-                DataType vzm_ = condition?.Abatement;
-                object vzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzm_);
-                object vzo_ = context.Operators.LateBoundProperty<object>(vzn_, "low");
-                object vzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzm_);
-                object vzr_ = context.Operators.LateBoundProperty<object>(vzq_, "high");
-                CqlInterval<CqlDateTime> vzs_ = context.Operators.Interval(vzo_ as CqlDateTime, vzr_ as CqlDateTime, true, false);
+                DataType izzg_ = condition?.Abatement;
+                object izzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzg_);
+                object izzi_ = context.Operators.LateBoundProperty<object>(izzh_, "low");
+                object izzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzg_);
+                object izzl_ = context.Operators.LateBoundProperty<object>(izzk_, "high");
+                CqlInterval<CqlDateTime> izzm_ = context.Operators.Interval(izzi_ as CqlDateTime, izzl_ as CqlDateTime, true, false);
 
-                return vzs_;
+                return izzm_;
             }
             else
             {
@@ -1813,202 +1308,202 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
         };
 
-        return ozo_();
+        return bzzi_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("abatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
     public CqlInterval<CqlDateTime> abatementInterval(CqlContext context, Condition condition)
     {
-        CqlInterval<CqlDateTime> vzt_()
+        CqlInterval<CqlDateTime> izzn_()
         {
-            bool vzu_()
+            bool izzo_()
             {
-                DataType vzy_ = condition?.Abatement;
-                object vzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzy_);
-                bool wza_ = vzz_ is CqlDateTime;
+                DataType izzs_ = condition?.Abatement;
+                object izzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzs_);
+                bool izzu_ = izzt_ is CqlDateTime;
 
-                return wza_;
+                return izzu_;
             };
-            bool vzv_()
+            bool izzp_()
             {
-                DataType wzb_ = condition?.Abatement;
-                object wzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzb_);
-                bool wzd_ = wzc_ is CqlQuantity;
+                DataType izzv_ = condition?.Abatement;
+                object izzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzv_);
+                bool izzx_ = izzw_ is CqlQuantity;
 
-                return wzd_;
+                return izzx_;
             };
-            bool vzw_()
+            bool izzq_()
             {
-                DataType wze_ = condition?.Abatement;
-                object wzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wze_);
-                bool wzg_ = wzf_ is CqlInterval<CqlQuantity>;
+                DataType izzy_ = condition?.Abatement;
+                object izzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzy_);
+                bool jzza_ = izzz_ is CqlInterval<CqlQuantity>;
 
-                return wzg_;
+                return jzza_;
             };
-            bool vzx_()
+            bool izzr_()
             {
-                DataType wzh_ = condition?.Abatement;
-                object wzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzh_);
-                bool wzj_ = wzi_ is CqlInterval<CqlDateTime>;
+                DataType jzzb_ = condition?.Abatement;
+                object jzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzb_);
+                bool jzzd_ = jzzc_ is CqlInterval<CqlDateTime>;
 
-                return wzj_;
+                return jzzd_;
             };
-            if (vzu_())
+            if (izzo_())
             {
-                DataType wzk_ = condition?.Abatement;
-                object wzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzk_);
-                object wzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzk_);
-                CqlInterval<CqlDateTime> wzo_ = context.Operators.Interval(wzl_ as CqlDateTime, wzn_ as CqlDateTime, true, true);
+                DataType jzze_ = condition?.Abatement;
+                object jzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzze_);
+                object jzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzze_);
+                CqlInterval<CqlDateTime> jzzi_ = context.Operators.Interval(jzzf_ as CqlDateTime, jzzh_ as CqlDateTime, true, true);
 
-                return wzo_;
+                return jzzi_;
             }
-            else if (vzv_())
+            else if (izzp_())
             {
-                Patient wzp_ = this.Patient(context);
-                Date wzq_ = wzp_?.BirthDateElement;
-                string wzr_ = wzq_?.Value;
-                CqlDate wzs_ = context.Operators.ConvertStringToDate(wzr_);
-                DataType wzt_ = condition?.Abatement;
-                object wzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate wzv_ = context.Operators.Add(wzs_, wzu_ as CqlQuantity);
-                Date wzx_ = wzp_?.BirthDateElement;
-                string wzy_ = wzx_?.Value;
-                CqlDate wzz_ = context.Operators.ConvertStringToDate(wzy_);
-                object xzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate xzc_ = context.Operators.Add(wzz_, xzb_ as CqlQuantity);
-                CqlQuantity xzd_ = context.Operators.Quantity(1m, "year");
-                CqlDate xze_ = context.Operators.Add(xzc_, xzd_);
-                CqlInterval<CqlDate> xzf_ = context.Operators.Interval(wzv_, xze_, true, false);
-                CqlDate xzg_ = xzf_?.low;
-                CqlDateTime xzh_ = context.Operators.ConvertDateToDateTime(xzg_);
-                Date xzj_ = wzp_?.BirthDateElement;
-                string xzk_ = xzj_?.Value;
-                CqlDate xzl_ = context.Operators.ConvertStringToDate(xzk_);
-                object xzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate xzo_ = context.Operators.Add(xzl_, xzn_ as CqlQuantity);
-                Date xzq_ = wzp_?.BirthDateElement;
-                string xzr_ = xzq_?.Value;
-                CqlDate xzs_ = context.Operators.ConvertStringToDate(xzr_);
-                object xzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate xzv_ = context.Operators.Add(xzs_, xzu_ as CqlQuantity);
-                CqlDate xzx_ = context.Operators.Add(xzv_, xzd_);
-                CqlInterval<CqlDate> xzy_ = context.Operators.Interval(xzo_, xzx_, true, false);
-                CqlDate xzz_ = xzy_?.high;
-                CqlDateTime yza_ = context.Operators.ConvertDateToDateTime(xzz_);
-                Date yzc_ = wzp_?.BirthDateElement;
-                string yzd_ = yzc_?.Value;
-                CqlDate yze_ = context.Operators.ConvertStringToDate(yzd_);
-                object yzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate yzh_ = context.Operators.Add(yze_, yzg_ as CqlQuantity);
-                Date yzj_ = wzp_?.BirthDateElement;
-                string yzk_ = yzj_?.Value;
-                CqlDate yzl_ = context.Operators.ConvertStringToDate(yzk_);
-                object yzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate yzo_ = context.Operators.Add(yzl_, yzn_ as CqlQuantity);
-                CqlDate yzq_ = context.Operators.Add(yzo_, xzd_);
-                CqlInterval<CqlDate> yzr_ = context.Operators.Interval(yzh_, yzq_, true, false);
-                bool? yzs_ = yzr_?.lowClosed;
-                Date yzu_ = wzp_?.BirthDateElement;
-                string yzv_ = yzu_?.Value;
-                CqlDate yzw_ = context.Operators.ConvertStringToDate(yzv_);
-                object yzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate yzz_ = context.Operators.Add(yzw_, yzy_ as CqlQuantity);
-                Date zzb_ = wzp_?.BirthDateElement;
-                string zzc_ = zzb_?.Value;
-                CqlDate zzd_ = context.Operators.ConvertStringToDate(zzc_);
-                object zzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzt_);
-                CqlDate zzg_ = context.Operators.Add(zzd_, zzf_ as CqlQuantity);
-                CqlDate zzi_ = context.Operators.Add(zzg_, xzd_);
-                CqlInterval<CqlDate> zzj_ = context.Operators.Interval(yzz_, zzi_, true, false);
-                bool? zzk_ = zzj_?.highClosed;
-                CqlInterval<CqlDateTime> zzl_ = context.Operators.Interval(xzh_, yza_, yzs_, zzk_);
+                Patient jzzj_ = this.Patient(context);
+                Date jzzk_ = jzzj_?.BirthDateElement;
+                string jzzl_ = jzzk_?.Value;
+                CqlDate jzzm_ = context.Operators.ConvertStringToDate(jzzl_);
+                DataType jzzn_ = condition?.Abatement;
+                object jzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate jzzp_ = context.Operators.Add(jzzm_, jzzo_ as CqlQuantity);
+                Date jzzr_ = jzzj_?.BirthDateElement;
+                string jzzs_ = jzzr_?.Value;
+                CqlDate jzzt_ = context.Operators.ConvertStringToDate(jzzs_);
+                object jzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate jzzw_ = context.Operators.Add(jzzt_, jzzv_ as CqlQuantity);
+                CqlQuantity jzzx_ = context.Operators.Quantity(1m, "year");
+                CqlDate jzzy_ = context.Operators.Add(jzzw_, jzzx_);
+                CqlInterval<CqlDate> jzzz_ = context.Operators.Interval(jzzp_, jzzy_, true, false);
+                CqlDate kzza_ = jzzz_?.low;
+                CqlDateTime kzzb_ = context.Operators.ConvertDateToDateTime(kzza_);
+                Date kzzd_ = jzzj_?.BirthDateElement;
+                string kzze_ = kzzd_?.Value;
+                CqlDate kzzf_ = context.Operators.ConvertStringToDate(kzze_);
+                object kzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate kzzi_ = context.Operators.Add(kzzf_, kzzh_ as CqlQuantity);
+                Date kzzk_ = jzzj_?.BirthDateElement;
+                string kzzl_ = kzzk_?.Value;
+                CqlDate kzzm_ = context.Operators.ConvertStringToDate(kzzl_);
+                object kzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate kzzp_ = context.Operators.Add(kzzm_, kzzo_ as CqlQuantity);
+                CqlDate kzzr_ = context.Operators.Add(kzzp_, jzzx_);
+                CqlInterval<CqlDate> kzzs_ = context.Operators.Interval(kzzi_, kzzr_, true, false);
+                CqlDate kzzt_ = kzzs_?.high;
+                CqlDateTime kzzu_ = context.Operators.ConvertDateToDateTime(kzzt_);
+                Date kzzw_ = jzzj_?.BirthDateElement;
+                string kzzx_ = kzzw_?.Value;
+                CqlDate kzzy_ = context.Operators.ConvertStringToDate(kzzx_);
+                object lzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate lzzb_ = context.Operators.Add(kzzy_, lzza_ as CqlQuantity);
+                Date lzzd_ = jzzj_?.BirthDateElement;
+                string lzze_ = lzzd_?.Value;
+                CqlDate lzzf_ = context.Operators.ConvertStringToDate(lzze_);
+                object lzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate lzzi_ = context.Operators.Add(lzzf_, lzzh_ as CqlQuantity);
+                CqlDate lzzk_ = context.Operators.Add(lzzi_, jzzx_);
+                CqlInterval<CqlDate> lzzl_ = context.Operators.Interval(lzzb_, lzzk_, true, false);
+                bool? lzzm_ = lzzl_?.lowClosed;
+                Date lzzo_ = jzzj_?.BirthDateElement;
+                string lzzp_ = lzzo_?.Value;
+                CqlDate lzzq_ = context.Operators.ConvertStringToDate(lzzp_);
+                object lzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate lzzt_ = context.Operators.Add(lzzq_, lzzs_ as CqlQuantity);
+                Date lzzv_ = jzzj_?.BirthDateElement;
+                string lzzw_ = lzzv_?.Value;
+                CqlDate lzzx_ = context.Operators.ConvertStringToDate(lzzw_);
+                object lzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzn_);
+                CqlDate mzza_ = context.Operators.Add(lzzx_, lzzz_ as CqlQuantity);
+                CqlDate mzzc_ = context.Operators.Add(mzza_, jzzx_);
+                CqlInterval<CqlDate> mzzd_ = context.Operators.Interval(lzzt_, mzzc_, true, false);
+                bool? mzze_ = mzzd_?.highClosed;
+                CqlInterval<CqlDateTime> mzzf_ = context.Operators.Interval(kzzb_, kzzu_, lzzm_, mzze_);
 
-                return zzl_;
+                return mzzf_;
             }
-            else if (vzw_())
+            else if (izzq_())
             {
-                Patient zzm_ = this.Patient(context);
-                Date zzn_ = zzm_?.BirthDateElement;
-                string zzo_ = zzn_?.Value;
-                CqlDate zzp_ = context.Operators.ConvertStringToDate(zzo_);
-                DataType zzq_ = condition?.Abatement;
-                object zzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object zzs_ = context.Operators.LateBoundProperty<object>(zzr_, "low");
-                CqlDate zzt_ = context.Operators.Add(zzp_, zzs_ as CqlQuantity);
-                Date zzv_ = zzm_?.BirthDateElement;
-                string zzw_ = zzv_?.Value;
-                CqlDate zzx_ = context.Operators.ConvertStringToDate(zzw_);
-                object zzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object azza_ = context.Operators.LateBoundProperty<object>(zzz_, "high");
-                CqlDate azzb_ = context.Operators.Add(zzx_, azza_ as CqlQuantity);
-                CqlQuantity azzc_ = context.Operators.Quantity(1m, "year");
-                CqlDate azzd_ = context.Operators.Add(azzb_, azzc_);
-                CqlInterval<CqlDate> azze_ = context.Operators.Interval(zzt_, azzd_, true, false);
-                CqlDate azzf_ = azze_?.low;
-                CqlDateTime azzg_ = context.Operators.ConvertDateToDateTime(azzf_);
-                Date azzi_ = zzm_?.BirthDateElement;
-                string azzj_ = azzi_?.Value;
-                CqlDate azzk_ = context.Operators.ConvertStringToDate(azzj_);
-                object azzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object azzn_ = context.Operators.LateBoundProperty<object>(azzm_, "low");
-                CqlDate azzo_ = context.Operators.Add(azzk_, azzn_ as CqlQuantity);
-                Date azzq_ = zzm_?.BirthDateElement;
-                string azzr_ = azzq_?.Value;
-                CqlDate azzs_ = context.Operators.ConvertStringToDate(azzr_);
-                object azzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object azzv_ = context.Operators.LateBoundProperty<object>(azzu_, "high");
-                CqlDate azzw_ = context.Operators.Add(azzs_, azzv_ as CqlQuantity);
-                CqlDate azzy_ = context.Operators.Add(azzw_, azzc_);
-                CqlInterval<CqlDate> azzz_ = context.Operators.Interval(azzo_, azzy_, true, false);
-                CqlDate bzza_ = azzz_?.high;
-                CqlDateTime bzzb_ = context.Operators.ConvertDateToDateTime(bzza_);
-                Date bzzd_ = zzm_?.BirthDateElement;
-                string bzze_ = bzzd_?.Value;
-                CqlDate bzzf_ = context.Operators.ConvertStringToDate(bzze_);
-                object bzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object bzzi_ = context.Operators.LateBoundProperty<object>(bzzh_, "low");
-                CqlDate bzzj_ = context.Operators.Add(bzzf_, bzzi_ as CqlQuantity);
-                Date bzzl_ = zzm_?.BirthDateElement;
-                string bzzm_ = bzzl_?.Value;
-                CqlDate bzzn_ = context.Operators.ConvertStringToDate(bzzm_);
-                object bzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object bzzq_ = context.Operators.LateBoundProperty<object>(bzzp_, "high");
-                CqlDate bzzr_ = context.Operators.Add(bzzn_, bzzq_ as CqlQuantity);
-                CqlDate bzzt_ = context.Operators.Add(bzzr_, azzc_);
-                CqlInterval<CqlDate> bzzu_ = context.Operators.Interval(bzzj_, bzzt_, true, false);
-                bool? bzzv_ = bzzu_?.lowClosed;
-                Date bzzx_ = zzm_?.BirthDateElement;
-                string bzzy_ = bzzx_?.Value;
-                CqlDate bzzz_ = context.Operators.ConvertStringToDate(bzzy_);
-                object czzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object czzc_ = context.Operators.LateBoundProperty<object>(czzb_, "low");
-                CqlDate czzd_ = context.Operators.Add(bzzz_, czzc_ as CqlQuantity);
-                Date czzf_ = zzm_?.BirthDateElement;
-                string czzg_ = czzf_?.Value;
-                CqlDate czzh_ = context.Operators.ConvertStringToDate(czzg_);
-                object czzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzq_);
-                object czzk_ = context.Operators.LateBoundProperty<object>(czzj_, "high");
-                CqlDate czzl_ = context.Operators.Add(czzh_, czzk_ as CqlQuantity);
-                CqlDate czzn_ = context.Operators.Add(czzl_, azzc_);
-                CqlInterval<CqlDate> czzo_ = context.Operators.Interval(czzd_, czzn_, true, false);
-                bool? czzp_ = czzo_?.highClosed;
-                CqlInterval<CqlDateTime> czzq_ = context.Operators.Interval(azzg_, bzzb_, bzzv_, czzp_);
+                Patient mzzg_ = this.Patient(context);
+                Date mzzh_ = mzzg_?.BirthDateElement;
+                string mzzi_ = mzzh_?.Value;
+                CqlDate mzzj_ = context.Operators.ConvertStringToDate(mzzi_);
+                DataType mzzk_ = condition?.Abatement;
+                object mzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object mzzm_ = context.Operators.LateBoundProperty<object>(mzzl_, "low");
+                CqlDate mzzn_ = context.Operators.Add(mzzj_, mzzm_ as CqlQuantity);
+                Date mzzp_ = mzzg_?.BirthDateElement;
+                string mzzq_ = mzzp_?.Value;
+                CqlDate mzzr_ = context.Operators.ConvertStringToDate(mzzq_);
+                object mzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object mzzu_ = context.Operators.LateBoundProperty<object>(mzzt_, "high");
+                CqlDate mzzv_ = context.Operators.Add(mzzr_, mzzu_ as CqlQuantity);
+                CqlQuantity mzzw_ = context.Operators.Quantity(1m, "year");
+                CqlDate mzzx_ = context.Operators.Add(mzzv_, mzzw_);
+                CqlInterval<CqlDate> mzzy_ = context.Operators.Interval(mzzn_, mzzx_, true, false);
+                CqlDate mzzz_ = mzzy_?.low;
+                CqlDateTime nzza_ = context.Operators.ConvertDateToDateTime(mzzz_);
+                Date nzzc_ = mzzg_?.BirthDateElement;
+                string nzzd_ = nzzc_?.Value;
+                CqlDate nzze_ = context.Operators.ConvertStringToDate(nzzd_);
+                object nzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object nzzh_ = context.Operators.LateBoundProperty<object>(nzzg_, "low");
+                CqlDate nzzi_ = context.Operators.Add(nzze_, nzzh_ as CqlQuantity);
+                Date nzzk_ = mzzg_?.BirthDateElement;
+                string nzzl_ = nzzk_?.Value;
+                CqlDate nzzm_ = context.Operators.ConvertStringToDate(nzzl_);
+                object nzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object nzzp_ = context.Operators.LateBoundProperty<object>(nzzo_, "high");
+                CqlDate nzzq_ = context.Operators.Add(nzzm_, nzzp_ as CqlQuantity);
+                CqlDate nzzs_ = context.Operators.Add(nzzq_, mzzw_);
+                CqlInterval<CqlDate> nzzt_ = context.Operators.Interval(nzzi_, nzzs_, true, false);
+                CqlDate nzzu_ = nzzt_?.high;
+                CqlDateTime nzzv_ = context.Operators.ConvertDateToDateTime(nzzu_);
+                Date nzzx_ = mzzg_?.BirthDateElement;
+                string nzzy_ = nzzx_?.Value;
+                CqlDate nzzz_ = context.Operators.ConvertStringToDate(nzzy_);
+                object ozzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object ozzc_ = context.Operators.LateBoundProperty<object>(ozzb_, "low");
+                CqlDate ozzd_ = context.Operators.Add(nzzz_, ozzc_ as CqlQuantity);
+                Date ozzf_ = mzzg_?.BirthDateElement;
+                string ozzg_ = ozzf_?.Value;
+                CqlDate ozzh_ = context.Operators.ConvertStringToDate(ozzg_);
+                object ozzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object ozzk_ = context.Operators.LateBoundProperty<object>(ozzj_, "high");
+                CqlDate ozzl_ = context.Operators.Add(ozzh_, ozzk_ as CqlQuantity);
+                CqlDate ozzn_ = context.Operators.Add(ozzl_, mzzw_);
+                CqlInterval<CqlDate> ozzo_ = context.Operators.Interval(ozzd_, ozzn_, true, false);
+                bool? ozzp_ = ozzo_?.lowClosed;
+                Date ozzr_ = mzzg_?.BirthDateElement;
+                string ozzs_ = ozzr_?.Value;
+                CqlDate ozzt_ = context.Operators.ConvertStringToDate(ozzs_);
+                object ozzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object ozzw_ = context.Operators.LateBoundProperty<object>(ozzv_, "low");
+                CqlDate ozzx_ = context.Operators.Add(ozzt_, ozzw_ as CqlQuantity);
+                Date ozzz_ = mzzg_?.BirthDateElement;
+                string pzza_ = ozzz_?.Value;
+                CqlDate pzzb_ = context.Operators.ConvertStringToDate(pzza_);
+                object pzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzk_);
+                object pzze_ = context.Operators.LateBoundProperty<object>(pzzd_, "high");
+                CqlDate pzzf_ = context.Operators.Add(pzzb_, pzze_ as CqlQuantity);
+                CqlDate pzzh_ = context.Operators.Add(pzzf_, mzzw_);
+                CqlInterval<CqlDate> pzzi_ = context.Operators.Interval(ozzx_, pzzh_, true, false);
+                bool? pzzj_ = pzzi_?.highClosed;
+                CqlInterval<CqlDateTime> pzzk_ = context.Operators.Interval(nzza_, nzzv_, ozzp_, pzzj_);
 
-                return czzq_;
+                return pzzk_;
             }
-            else if (vzx_())
+            else if (izzr_())
             {
-                DataType czzr_ = condition?.Abatement;
-                object czzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzr_);
-                object czzt_ = context.Operators.LateBoundProperty<object>(czzs_, "low");
-                object czzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzr_);
-                object czzw_ = context.Operators.LateBoundProperty<object>(czzv_, "high");
-                CqlInterval<CqlDateTime> czzx_ = context.Operators.Interval(czzt_ as CqlDateTime, czzw_ as CqlDateTime, true, false);
+                DataType pzzl_ = condition?.Abatement;
+                object pzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzl_);
+                object pzzn_ = context.Operators.LateBoundProperty<object>(pzzm_, "low");
+                object pzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzl_);
+                object pzzq_ = context.Operators.LateBoundProperty<object>(pzzp_, "high");
+                CqlInterval<CqlDateTime> pzzr_ = context.Operators.Interval(pzzn_ as CqlDateTime, pzzq_ as CqlDateTime, true, false);
 
-                return czzx_;
+                return pzzr_;
             }
             else
             {
@@ -2016,587 +1511,587 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
         };
 
-        return vzt_();
+        return izzn_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToPrevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     [CqlTag("deprecated", "This function is deprecated. Use the `prevalenceInterval()` fluent function instead")]
     public CqlInterval<CqlDateTime> ToPrevalenceInterval(CqlContext context, Condition condition)
     {
-        CqlInterval<CqlDateTime> czzy_()
+        CqlInterval<CqlDateTime> pzzs_()
         {
-            bool czzz_()
+            bool pzzt_()
             {
-                CodeableConcept dzza_ = condition?.ClinicalStatus;
-                CqlConcept dzzb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzza_);
-                CqlCode dzzc_ = this.active(context);
-                CqlConcept dzzd_ = context.Operators.ConvertCodeToConcept(dzzc_);
-                bool? dzze_ = context.Operators.Equivalent(dzzb_, dzzd_);
-                CqlConcept dzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzza_);
-                CqlCode dzzh_ = this.recurrence(context);
-                CqlConcept dzzi_ = context.Operators.ConvertCodeToConcept(dzzh_);
-                bool? dzzj_ = context.Operators.Equivalent(dzzg_, dzzi_);
-                bool? dzzk_ = context.Operators.Or(dzze_, dzzj_);
-                CqlConcept dzzm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzza_);
-                CqlCode dzzn_ = this.relapse(context);
-                CqlConcept dzzo_ = context.Operators.ConvertCodeToConcept(dzzn_);
-                bool? dzzp_ = context.Operators.Equivalent(dzzm_, dzzo_);
-                bool? dzzq_ = context.Operators.Or(dzzk_, dzzp_);
+                CodeableConcept pzzu_ = condition?.ClinicalStatus;
+                CqlConcept pzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pzzu_);
+                CqlCode pzzw_ = this.active(context);
+                CqlConcept pzzx_ = context.Operators.ConvertCodeToConcept(pzzw_);
+                bool? pzzy_ = context.Operators.Equivalent(pzzv_, pzzx_);
+                CqlConcept qzza_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pzzu_);
+                CqlCode qzzb_ = this.recurrence(context);
+                CqlConcept qzzc_ = context.Operators.ConvertCodeToConcept(qzzb_);
+                bool? qzzd_ = context.Operators.Equivalent(qzza_, qzzc_);
+                bool? qzze_ = context.Operators.Or(pzzy_, qzzd_);
+                CqlConcept qzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pzzu_);
+                CqlCode qzzh_ = this.relapse(context);
+                CqlConcept qzzi_ = context.Operators.ConvertCodeToConcept(qzzh_);
+                bool? qzzj_ = context.Operators.Equivalent(qzzg_, qzzi_);
+                bool? qzzk_ = context.Operators.Or(qzze_, qzzj_);
 
-                return dzzq_ ?? false;
+                return qzzk_ ?? false;
             };
-            if (czzz_())
+            if (pzzt_())
             {
-                DataType dzzr_ = condition?.Onset;
-                object dzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzr_);
-                CqlInterval<CqlDateTime> dzzt_ = this.ToInterval(context, dzzs_);
-                CqlDateTime dzzu_ = context.Operators.Start(dzzt_);
-                CqlInterval<CqlDateTime> dzzv_ = this.ToAbatementInterval(context, condition);
-                CqlDateTime dzzw_ = context.Operators.End(dzzv_);
-                CqlInterval<CqlDateTime> dzzx_ = context.Operators.Interval(dzzu_, dzzw_, true, true);
+                DataType qzzl_ = condition?.Onset;
+                object qzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzl_);
+                CqlInterval<CqlDateTime> qzzn_ = this.ToInterval(context, qzzm_);
+                CqlDateTime qzzo_ = context.Operators.Start(qzzn_);
+                CqlInterval<CqlDateTime> qzzp_ = this.ToAbatementInterval(context, condition);
+                CqlDateTime qzzq_ = context.Operators.End(qzzp_);
+                CqlInterval<CqlDateTime> qzzr_ = context.Operators.Interval(qzzo_, qzzq_, true, true);
 
-                return dzzx_;
+                return qzzr_;
             }
             else
             {
-                CqlInterval<CqlDateTime> dzzy_ = this.ToAbatementInterval(context, condition);
-                CqlDateTime dzzz_ = context.Operators.End(dzzy_);
-                CqlDateTime[] ezza_ = [
-                    dzzz_,
+                CqlInterval<CqlDateTime> qzzs_ = this.ToAbatementInterval(context, condition);
+                CqlDateTime qzzt_ = context.Operators.End(qzzs_);
+                CqlDateTime[] qzzu_ = [
+                    qzzt_,
                 ];
-                CqlInterval<CqlDateTime> ezzb_(CqlDateTime abatementDate)
+                CqlInterval<CqlDateTime> qzzv_(CqlDateTime abatementDate)
                 {
-                    CqlInterval<CqlDateTime> ezzf_()
+                    CqlInterval<CqlDateTime> qzzz_()
                     {
                         if (abatementDate is null)
                         {
-                            DataType ezzg_ = condition?.Onset;
-                            object ezzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzg_);
-                            CqlInterval<CqlDateTime> ezzi_ = this.ToInterval(context, ezzh_);
-                            CqlDateTime ezzj_ = context.Operators.Start(ezzi_);
-                            CqlInterval<CqlDateTime> ezzk_ = context.Operators.Interval(ezzj_, abatementDate, true, false);
+                            DataType rzza_ = condition?.Onset;
+                            object rzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzza_);
+                            CqlInterval<CqlDateTime> rzzc_ = this.ToInterval(context, rzzb_);
+                            CqlDateTime rzzd_ = context.Operators.Start(rzzc_);
+                            CqlInterval<CqlDateTime> rzze_ = context.Operators.Interval(rzzd_, abatementDate, true, false);
 
-                            return ezzk_;
+                            return rzze_;
                         }
                         else
                         {
-                            DataType ezzl_ = condition?.Onset;
-                            object ezzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzl_);
-                            CqlInterval<CqlDateTime> ezzn_ = this.ToInterval(context, ezzm_);
-                            CqlDateTime ezzo_ = context.Operators.Start(ezzn_);
-                            CqlInterval<CqlDateTime> ezzp_ = context.Operators.Interval(ezzo_, abatementDate, true, true);
+                            DataType rzzf_ = condition?.Onset;
+                            object rzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzf_);
+                            CqlInterval<CqlDateTime> rzzh_ = this.ToInterval(context, rzzg_);
+                            CqlDateTime rzzi_ = context.Operators.Start(rzzh_);
+                            CqlInterval<CqlDateTime> rzzj_ = context.Operators.Interval(rzzi_, abatementDate, true, true);
 
-                            return ezzp_;
+                            return rzzj_;
                         }
                     };
 
-                    return ezzf_();
+                    return qzzz_();
                 };
-                IEnumerable<CqlInterval<CqlDateTime>> ezzc_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ezza_, ezzb_);
-                IEnumerable<CqlInterval<CqlDateTime>> ezzd_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ezzc_);
-                CqlInterval<CqlDateTime> ezze_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ezzd_);
+                IEnumerable<CqlInterval<CqlDateTime>> qzzw_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)qzzu_, qzzv_);
+                IEnumerable<CqlInterval<CqlDateTime>> qzzx_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(qzzw_);
+                CqlInterval<CqlDateTime> qzzy_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(qzzx_);
 
-                return ezze_;
+                return qzzy_;
             }
         };
 
-        return czzy_();
+        return pzzs_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("prevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     public CqlInterval<CqlDateTime> prevalenceInterval(CqlContext context, Condition condition)
     {
-        CqlInterval<CqlDateTime> ezzq_()
+        CqlInterval<CqlDateTime> rzzk_()
         {
-            bool ezzr_()
+            bool rzzl_()
             {
-                CodeableConcept ezzs_ = condition?.ClinicalStatus;
-                CqlConcept ezzt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzs_);
-                CqlCode ezzu_ = this.active(context);
-                CqlConcept ezzv_ = context.Operators.ConvertCodeToConcept(ezzu_);
-                bool? ezzw_ = context.Operators.Equivalent(ezzt_, ezzv_);
-                CqlConcept ezzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzs_);
-                CqlCode ezzz_ = this.recurrence(context);
-                CqlConcept fzza_ = context.Operators.ConvertCodeToConcept(ezzz_);
-                bool? fzzb_ = context.Operators.Equivalent(ezzy_, fzza_);
-                bool? fzzc_ = context.Operators.Or(ezzw_, fzzb_);
-                CqlConcept fzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzs_);
-                CqlCode fzzf_ = this.relapse(context);
-                CqlConcept fzzg_ = context.Operators.ConvertCodeToConcept(fzzf_);
-                bool? fzzh_ = context.Operators.Equivalent(fzze_, fzzg_);
-                bool? fzzi_ = context.Operators.Or(fzzc_, fzzh_);
+                CodeableConcept rzzm_ = condition?.ClinicalStatus;
+                CqlConcept rzzn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzm_);
+                CqlCode rzzo_ = this.active(context);
+                CqlConcept rzzp_ = context.Operators.ConvertCodeToConcept(rzzo_);
+                bool? rzzq_ = context.Operators.Equivalent(rzzn_, rzzp_);
+                CqlConcept rzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzm_);
+                CqlCode rzzt_ = this.recurrence(context);
+                CqlConcept rzzu_ = context.Operators.ConvertCodeToConcept(rzzt_);
+                bool? rzzv_ = context.Operators.Equivalent(rzzs_, rzzu_);
+                bool? rzzw_ = context.Operators.Or(rzzq_, rzzv_);
+                CqlConcept rzzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzm_);
+                CqlCode rzzz_ = this.relapse(context);
+                CqlConcept szza_ = context.Operators.ConvertCodeToConcept(rzzz_);
+                bool? szzb_ = context.Operators.Equivalent(rzzy_, szza_);
+                bool? szzc_ = context.Operators.Or(rzzw_, szzb_);
 
-                return fzzi_ ?? false;
+                return szzc_ ?? false;
             };
-            if (ezzr_())
+            if (rzzl_())
             {
-                DataType fzzj_ = condition?.Onset;
-                object fzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzj_);
-                CqlInterval<CqlDateTime> fzzl_ = this.toInterval(context, fzzk_);
-                CqlDateTime fzzm_ = context.Operators.Start(fzzl_);
-                CqlInterval<CqlDateTime> fzzn_ = this.abatementInterval(context, condition);
-                CqlDateTime fzzo_ = context.Operators.End(fzzn_);
-                CqlInterval<CqlDateTime> fzzp_ = context.Operators.Interval(fzzm_, fzzo_, true, true);
+                DataType szzd_ = condition?.Onset;
+                object szze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzd_);
+                CqlInterval<CqlDateTime> szzf_ = this.toInterval(context, szze_);
+                CqlDateTime szzg_ = context.Operators.Start(szzf_);
+                CqlInterval<CqlDateTime> szzh_ = this.abatementInterval(context, condition);
+                CqlDateTime szzi_ = context.Operators.End(szzh_);
+                CqlInterval<CqlDateTime> szzj_ = context.Operators.Interval(szzg_, szzi_, true, true);
 
-                return fzzp_;
+                return szzj_;
             }
             else
             {
-                CqlInterval<CqlDateTime> fzzq_ = this.abatementInterval(context, condition);
-                CqlDateTime fzzr_ = context.Operators.End(fzzq_);
-                CqlDateTime[] fzzs_ = [
-                    fzzr_,
+                CqlInterval<CqlDateTime> szzk_ = this.abatementInterval(context, condition);
+                CqlDateTime szzl_ = context.Operators.End(szzk_);
+                CqlDateTime[] szzm_ = [
+                    szzl_,
                 ];
-                CqlInterval<CqlDateTime> fzzt_(CqlDateTime abatementDate)
+                CqlInterval<CqlDateTime> szzn_(CqlDateTime abatementDate)
                 {
-                    CqlInterval<CqlDateTime> fzzx_()
+                    CqlInterval<CqlDateTime> szzr_()
                     {
                         if (abatementDate is null)
                         {
-                            DataType fzzy_ = condition?.Onset;
-                            object fzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzy_);
-                            CqlInterval<CqlDateTime> gzza_ = this.toInterval(context, fzzz_);
-                            CqlDateTime gzzb_ = context.Operators.Start(gzza_);
-                            CqlInterval<CqlDateTime> gzzc_ = context.Operators.Interval(gzzb_, abatementDate, true, false);
+                            DataType szzs_ = condition?.Onset;
+                            object szzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzs_);
+                            CqlInterval<CqlDateTime> szzu_ = this.toInterval(context, szzt_);
+                            CqlDateTime szzv_ = context.Operators.Start(szzu_);
+                            CqlInterval<CqlDateTime> szzw_ = context.Operators.Interval(szzv_, abatementDate, true, false);
 
-                            return gzzc_;
+                            return szzw_;
                         }
                         else
                         {
-                            DataType gzzd_ = condition?.Onset;
-                            object gzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzd_);
-                            CqlInterval<CqlDateTime> gzzf_ = this.toInterval(context, gzze_);
-                            CqlDateTime gzzg_ = context.Operators.Start(gzzf_);
-                            CqlInterval<CqlDateTime> gzzh_ = context.Operators.Interval(gzzg_, abatementDate, true, true);
+                            DataType szzx_ = condition?.Onset;
+                            object szzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzx_);
+                            CqlInterval<CqlDateTime> szzz_ = this.toInterval(context, szzy_);
+                            CqlDateTime tzza_ = context.Operators.Start(szzz_);
+                            CqlInterval<CqlDateTime> tzzb_ = context.Operators.Interval(tzza_, abatementDate, true, true);
 
-                            return gzzh_;
+                            return tzzb_;
                         }
                     };
 
-                    return fzzx_();
+                    return szzr_();
                 };
-                IEnumerable<CqlInterval<CqlDateTime>> fzzu_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)fzzs_, fzzt_);
-                IEnumerable<CqlInterval<CqlDateTime>> fzzv_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(fzzu_);
-                CqlInterval<CqlDateTime> fzzw_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(fzzv_);
+                IEnumerable<CqlInterval<CqlDateTime>> szzo_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)szzm_, szzn_);
+                IEnumerable<CqlInterval<CqlDateTime>> szzp_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(szzo_);
+                CqlInterval<CqlDateTime> szzq_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(szzp_);
 
-                return fzzw_;
+                return szzq_;
             }
         };
 
-        return ezzq_();
+        return rzzk_();
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("GetId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getId()` instead")]
     public string GetId(CqlContext context, string uri)
     {
-        IEnumerable<string> gzzi_ = context.Operators.Split(uri, "/");
-        string gzzj_ = context.Operators.Last<string>(gzzi_);
+        IEnumerable<string> tzzc_ = context.Operators.Split(uri, "/");
+        string tzzd_ = context.Operators.Last<string>(tzzc_);
 
-        return gzzj_;
+        return tzzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("getId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     public string getId(CqlContext context, string uri)
     {
-        IEnumerable<string> gzzk_ = context.Operators.Split(uri, "/");
-        string gzzl_ = context.Operators.Last<string>(gzzk_);
+        IEnumerable<string> tzze_ = context.Operators.Split(uri, "/");
+        string tzzf_ = context.Operators.Last<string>(tzze_);
 
-        return gzzl_;
+        return tzzf_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("HasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified\n(i.e. the start of the interval is not null and not the minimum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Uee the fluent function `hasStart()` instead")]
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
-        CqlDateTime gzzm_ = context.Operators.Start(period);
-        CqlDateTime gzzo_ = context.Operators.MinValue<CqlDateTime>();
-        bool? gzzp_ = context.Operators.Equal(gzzm_, gzzo_);
-        bool? gzzq_ = context.Operators.Or((bool?)(gzzm_ is null), gzzp_);
-        bool? gzzr_ = context.Operators.Not(gzzq_);
+        CqlDateTime tzzg_ = context.Operators.Start(period);
+        CqlDateTime tzzi_ = context.Operators.MinValue<CqlDateTime>();
+        bool? tzzj_ = context.Operators.Equal(tzzg_, tzzi_);
+        bool? tzzk_ = context.Operators.Or((bool?)(tzzg_ is null), tzzj_);
+        bool? tzzl_ = context.Operators.Not(tzzk_);
 
-        return gzzr_;
+        return tzzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("hasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified\n(i.e. the start of the interval is not null and not the minimum DateTime value)")]
     public bool? hasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
-        CqlDateTime gzzs_ = context.Operators.Start(period);
-        CqlDateTime gzzu_ = context.Operators.MinValue<CqlDateTime>();
-        bool? gzzv_ = context.Operators.Equal(gzzs_, gzzu_);
-        bool? gzzw_ = context.Operators.Or((bool?)(gzzs_ is null), gzzv_);
-        bool? gzzx_ = context.Operators.Not(gzzw_);
+        CqlDateTime tzzm_ = context.Operators.Start(period);
+        CqlDateTime tzzo_ = context.Operators.MinValue<CqlDateTime>();
+        bool? tzzp_ = context.Operators.Equal(tzzm_, tzzo_);
+        bool? tzzq_ = context.Operators.Or((bool?)(tzzm_ is null), tzzp_);
+        bool? tzzr_ = context.Operators.Not(tzzq_);
 
-        return gzzx_;
+        return tzzr_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("HasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified\n(i.e. the end of the interval is not null and not the maximum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hasEnd()` instead")]
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
-        CqlDateTime gzzy_ = context.Operators.End(period);
-        CqlDateTime hzza_ = context.Operators.MaxValue<CqlDateTime>();
-        bool? hzzb_ = context.Operators.Equal(gzzy_, hzza_);
-        bool? hzzc_ = context.Operators.Or((bool?)(gzzy_ is null), hzzb_);
-        bool? hzzd_ = context.Operators.Not(hzzc_);
+        CqlDateTime tzzs_ = context.Operators.End(period);
+        CqlDateTime tzzu_ = context.Operators.MaxValue<CqlDateTime>();
+        bool? tzzv_ = context.Operators.Equal(tzzs_, tzzu_);
+        bool? tzzw_ = context.Operators.Or((bool?)(tzzs_ is null), tzzv_);
+        bool? tzzx_ = context.Operators.Not(tzzw_);
 
-        return hzzd_;
+        return tzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("hasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified\n(i.e. the end of the interval is not null and not the maximum DateTime value)")]
     public bool? hasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
-        CqlDateTime hzze_ = context.Operators.End(period);
-        CqlDateTime hzzg_ = context.Operators.MaxValue<CqlDateTime>();
-        bool? hzzh_ = context.Operators.Equal(hzze_, hzzg_);
-        bool? hzzi_ = context.Operators.Or((bool?)(hzze_ is null), hzzh_);
-        bool? hzzj_ = context.Operators.Not(hzzi_);
+        CqlDateTime tzzy_ = context.Operators.End(period);
+        CqlDateTime uzza_ = context.Operators.MaxValue<CqlDateTime>();
+        bool? uzzb_ = context.Operators.Equal(tzzy_, uzza_);
+        bool? uzzc_ = context.Operators.Or((bool?)(tzzy_ is null), uzzb_);
+        bool? uzzd_ = context.Operators.Not(uzzc_);
 
-        return hzzj_;
+        return uzzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("Latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified,\notherwise, returns the starting point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `latest()` instead")]
     public CqlDateTime Latest(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> hzzk_ = this.toInterval(context, choice);
-        CqlInterval<CqlDateTime>[] hzzl_ = [
-            hzzk_,
+        CqlInterval<CqlDateTime> uzze_ = this.toInterval(context, choice);
+        CqlInterval<CqlDateTime>[] uzzf_ = [
+            uzze_,
         ];
-        CqlDateTime hzzm_(CqlInterval<CqlDateTime> period)
+        CqlDateTime uzzg_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime hzzq_()
+            CqlDateTime uzzk_()
             {
                 if ((this.HasEnd(context, period)) ?? false)
                 {
-                    CqlDateTime hzzr_ = context.Operators.End(period);
+                    CqlDateTime uzzl_ = context.Operators.End(period);
 
-                    return hzzr_;
+                    return uzzl_;
                 }
                 else
                 {
-                    CqlDateTime hzzs_ = context.Operators.Start(period);
+                    CqlDateTime uzzm_ = context.Operators.Start(period);
 
-                    return hzzs_;
+                    return uzzm_;
                 }
             };
 
-            return hzzq_();
+            return uzzk_();
         };
-        IEnumerable<CqlDateTime> hzzn_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)hzzl_, hzzm_);
-        IEnumerable<CqlDateTime> hzzo_ = context.Operators.Distinct<CqlDateTime>(hzzn_);
-        CqlDateTime hzzp_ = context.Operators.SingletonFrom<CqlDateTime>(hzzo_);
+        IEnumerable<CqlDateTime> uzzh_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)uzzf_, uzzg_);
+        IEnumerable<CqlDateTime> uzzi_ = context.Operators.Distinct<CqlDateTime>(uzzh_);
+        CqlDateTime uzzj_ = context.Operators.SingletonFrom<CqlDateTime>(uzzi_);
 
-        return hzzp_;
+        return uzzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified,\notherwise, returns the starting point")]
     public CqlDateTime latest(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> hzzt_ = this.toInterval(context, choice);
-        CqlInterval<CqlDateTime>[] hzzu_ = [
-            hzzt_,
+        CqlInterval<CqlDateTime> uzzn_ = this.toInterval(context, choice);
+        CqlInterval<CqlDateTime>[] uzzo_ = [
+            uzzn_,
         ];
-        CqlDateTime hzzv_(CqlInterval<CqlDateTime> period)
+        CqlDateTime uzzp_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime hzzz_()
+            CqlDateTime uzzt_()
             {
                 if ((this.hasEnd(context, period)) ?? false)
                 {
-                    CqlDateTime izza_ = context.Operators.End(period);
+                    CqlDateTime uzzu_ = context.Operators.End(period);
 
-                    return izza_;
+                    return uzzu_;
                 }
                 else
                 {
-                    CqlDateTime izzb_ = context.Operators.Start(period);
+                    CqlDateTime uzzv_ = context.Operators.Start(period);
 
-                    return izzb_;
+                    return uzzv_;
                 }
             };
 
-            return hzzz_();
+            return uzzt_();
         };
-        IEnumerable<CqlDateTime> hzzw_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)hzzu_, hzzv_);
-        IEnumerable<CqlDateTime> hzzx_ = context.Operators.Distinct<CqlDateTime>(hzzw_);
-        CqlDateTime hzzy_ = context.Operators.SingletonFrom<CqlDateTime>(hzzx_);
+        IEnumerable<CqlDateTime> uzzq_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)uzzo_, uzzp_);
+        IEnumerable<CqlDateTime> uzzr_ = context.Operators.Distinct<CqlDateTime>(uzzq_);
+        CqlDateTime uzzs_ = context.Operators.SingletonFrom<CqlDateTime>(uzzr_);
 
-        return hzzy_;
+        return uzzs_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("Earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified,\notherwise, return the ending point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `earliest()` instead")]
     public CqlDateTime Earliest(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> izzc_ = this.toInterval(context, choice);
-        CqlInterval<CqlDateTime>[] izzd_ = [
-            izzc_,
+        CqlInterval<CqlDateTime> uzzw_ = this.toInterval(context, choice);
+        CqlInterval<CqlDateTime>[] uzzx_ = [
+            uzzw_,
         ];
-        CqlDateTime izze_(CqlInterval<CqlDateTime> period)
+        CqlDateTime uzzy_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime izzi_()
+            CqlDateTime vzzc_()
             {
                 if ((this.HasStart(context, period)) ?? false)
                 {
-                    CqlDateTime izzj_ = context.Operators.Start(period);
+                    CqlDateTime vzzd_ = context.Operators.Start(period);
 
-                    return izzj_;
+                    return vzzd_;
                 }
                 else
                 {
-                    CqlDateTime izzk_ = context.Operators.End(period);
+                    CqlDateTime vzze_ = context.Operators.End(period);
 
-                    return izzk_;
+                    return vzze_;
                 }
             };
 
-            return izzi_();
+            return vzzc_();
         };
-        IEnumerable<CqlDateTime> izzf_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)izzd_, izze_);
-        IEnumerable<CqlDateTime> izzg_ = context.Operators.Distinct<CqlDateTime>(izzf_);
-        CqlDateTime izzh_ = context.Operators.SingletonFrom<CqlDateTime>(izzg_);
+        IEnumerable<CqlDateTime> uzzz_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)uzzx_, uzzy_);
+        IEnumerable<CqlDateTime> vzza_ = context.Operators.Distinct<CqlDateTime>(uzzz_);
+        CqlDateTime vzzb_ = context.Operators.SingletonFrom<CqlDateTime>(vzza_);
 
-        return izzh_;
+        return vzzb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified,\notherwise, return the ending point")]
     public CqlDateTime earliest(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> izzl_ = this.toInterval(context, choice);
-        CqlInterval<CqlDateTime>[] izzm_ = [
-            izzl_,
+        CqlInterval<CqlDateTime> vzzf_ = this.toInterval(context, choice);
+        CqlInterval<CqlDateTime>[] vzzg_ = [
+            vzzf_,
         ];
-        CqlDateTime izzn_(CqlInterval<CqlDateTime> period)
+        CqlDateTime vzzh_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime izzr_()
+            CqlDateTime vzzl_()
             {
                 if ((this.hasStart(context, period)) ?? false)
                 {
-                    CqlDateTime izzs_ = context.Operators.Start(period);
+                    CqlDateTime vzzm_ = context.Operators.Start(period);
 
-                    return izzs_;
+                    return vzzm_;
                 }
                 else
                 {
-                    CqlDateTime izzt_ = context.Operators.End(period);
+                    CqlDateTime vzzn_ = context.Operators.End(period);
 
-                    return izzt_;
+                    return vzzn_;
                 }
             };
 
-            return izzr_();
+            return vzzl_();
         };
-        IEnumerable<CqlDateTime> izzo_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)izzm_, izzn_);
-        IEnumerable<CqlDateTime> izzp_ = context.Operators.Distinct<CqlDateTime>(izzo_);
-        CqlDateTime izzq_ = context.Operators.SingletonFrom<CqlDateTime>(izzp_);
+        IEnumerable<CqlDateTime> vzzi_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)vzzg_, vzzh_);
+        IEnumerable<CqlDateTime> vzzj_ = context.Operators.Distinct<CqlDateTime>(vzzi_);
+        CqlDateTime vzzk_ = context.Operators.SingletonFrom<CqlDateTime>(vzzj_);
 
-        return izzq_;
+        return vzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("Interval To Day Numbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for\nthe final day if it is less than 24 hours. This also includes the first 24 hour period.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toDayNumbers()` instead")]
     public IEnumerable<int?> Interval_To_Day_Numbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
-        CqlDateTime izzu_ = context.Operators.Start(Period);
-        CqlDateTime izzv_ = context.Operators.End(Period);
-        int? izzw_ = context.Operators.DurationBetween(izzu_, izzv_, "day");
-        CqlInterval<int?> izzx_ = context.Operators.Interval(1, izzw_, true, true);
-        CqlInterval<int?>[] izzy_ = [
-            izzx_,
+        CqlDateTime vzzo_ = context.Operators.Start(Period);
+        CqlDateTime vzzp_ = context.Operators.End(Period);
+        int? vzzq_ = context.Operators.DurationBetween(vzzo_, vzzp_, "day");
+        CqlInterval<int?> vzzr_ = context.Operators.Interval(1, vzzq_, true, true);
+        CqlInterval<int?>[] vzzs_ = [
+            vzzr_,
         ];
-        IEnumerable<CqlInterval<int?>> izzz_ = context.Operators.Expand(izzy_ as IEnumerable<CqlInterval<int?>>, default);
-        int? jzza_(CqlInterval<int?> DayNumber)
+        IEnumerable<CqlInterval<int?>> vzzt_ = context.Operators.Expand(vzzs_ as IEnumerable<CqlInterval<int?>>, default);
+        int? vzzu_(CqlInterval<int?> DayNumber)
         {
-            int? jzzd_ = context.Operators.End(DayNumber);
+            int? vzzx_ = context.Operators.End(DayNumber);
 
-            return jzzd_;
+            return vzzx_;
         };
-        IEnumerable<int?> jzzb_ = context.Operators.Select<CqlInterval<int?>, int?>(izzz_, jzza_);
-        IEnumerable<int?> jzzc_ = context.Operators.Distinct<int?>(jzzb_);
+        IEnumerable<int?> vzzv_ = context.Operators.Select<CqlInterval<int?>, int?>(vzzt_, vzzu_);
+        IEnumerable<int?> vzzw_ = context.Operators.Distinct<int?>(vzzv_);
 
-        return jzzc_;
+        return vzzw_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("toDayNumbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for\nthe final day if it is less than 24 hours. This also includes the first 24 hour period.")]
     public IEnumerable<int?> toDayNumbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
-        CqlDateTime jzze_ = context.Operators.Start(Period);
-        CqlDateTime jzzf_ = context.Operators.End(Period);
-        int? jzzg_ = context.Operators.DurationBetween(jzze_, jzzf_, "day");
-        CqlInterval<int?> jzzh_ = context.Operators.Interval(1, jzzg_, true, true);
-        CqlInterval<int?>[] jzzi_ = [
-            jzzh_,
+        CqlDateTime vzzy_ = context.Operators.Start(Period);
+        CqlDateTime vzzz_ = context.Operators.End(Period);
+        int? wzza_ = context.Operators.DurationBetween(vzzy_, vzzz_, "day");
+        CqlInterval<int?> wzzb_ = context.Operators.Interval(1, wzza_, true, true);
+        CqlInterval<int?>[] wzzc_ = [
+            wzzb_,
         ];
-        IEnumerable<CqlInterval<int?>> jzzj_ = context.Operators.Expand(jzzi_ as IEnumerable<CqlInterval<int?>>, default);
-        int? jzzk_(CqlInterval<int?> DayNumber)
+        IEnumerable<CqlInterval<int?>> wzzd_ = context.Operators.Expand(wzzc_ as IEnumerable<CqlInterval<int?>>, default);
+        int? wzze_(CqlInterval<int?> DayNumber)
         {
-            int? jzzn_ = context.Operators.End(DayNumber);
+            int? wzzh_ = context.Operators.End(DayNumber);
 
-            return jzzn_;
+            return wzzh_;
         };
-        IEnumerable<int?> jzzl_ = context.Operators.Select<CqlInterval<int?>, int?>(jzzj_, jzzk_);
-        IEnumerable<int?> jzzm_ = context.Operators.Distinct<int?>(jzzl_);
+        IEnumerable<int?> wzzf_ = context.Operators.Select<CqlInterval<int?>, int?>(wzzd_, wzze_);
+        IEnumerable<int?> wzzg_ = context.Operators.Distinct<int?>(wzzf_);
 
-        return jzzm_;
+        return wzzg_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("Days In Period")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is.\nNote that the result will include intervals that are closed at the beginning and open at the end")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `daysInPeriod()` instead")]
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
-        IEnumerable<int?> jzzo_ = this.Interval_To_Day_Numbers(context, Period);
-        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? jzzp_(int? DayIndex)
+        IEnumerable<int?> wzzi_ = this.Interval_To_Day_Numbers(context, Period);
+        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? wzzj_(int? DayIndex)
         {
-            CqlDateTime jzzs_ = context.Operators.Start(Period);
-            CqlQuantity jzzt_ = context.Operators.Quantity(24m, "hours");
-            int? jzzu_ = context.Operators.Subtract(DayIndex, 1);
-            CqlQuantity jzzv_ = context.Operators.ConvertIntegerToQuantity(jzzu_);
-            CqlQuantity jzzw_ = context.Operators.Multiply(jzzt_, jzzv_);
-            CqlDateTime jzzx_ = context.Operators.Add(jzzs_, jzzw_);
-            CqlDateTime jzzy_()
+            CqlDateTime wzzm_ = context.Operators.Start(Period);
+            CqlQuantity wzzn_ = context.Operators.Quantity(24m, "hours");
+            int? wzzo_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity wzzp_ = context.Operators.ConvertIntegerToQuantity(wzzo_);
+            CqlQuantity wzzq_ = context.Operators.Multiply(wzzn_, wzzp_);
+            CqlDateTime wzzr_ = context.Operators.Add(wzzm_, wzzq_);
+            CqlDateTime wzzs_()
             {
-                bool kzzb_()
+                bool wzzv_()
                 {
-                    CqlDateTime kzzc_ = context.Operators.Start(Period);
-                    CqlQuantity kzzd_ = context.Operators.Quantity(24m, "hours");
-                    int? kzze_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity kzzf_ = context.Operators.ConvertIntegerToQuantity(kzze_);
-                    CqlQuantity kzzg_ = context.Operators.Multiply(kzzd_, kzzf_);
-                    CqlDateTime kzzh_ = context.Operators.Add(kzzc_, kzzg_);
-                    CqlDateTime kzzi_ = context.Operators.End(Period);
-                    int? kzzj_ = context.Operators.DurationBetween(kzzh_, kzzi_, "hour");
-                    bool? kzzk_ = context.Operators.Less(kzzj_, 24);
+                    CqlDateTime wzzw_ = context.Operators.Start(Period);
+                    CqlQuantity wzzx_ = context.Operators.Quantity(24m, "hours");
+                    int? wzzy_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity wzzz_ = context.Operators.ConvertIntegerToQuantity(wzzy_);
+                    CqlQuantity xzza_ = context.Operators.Multiply(wzzx_, wzzz_);
+                    CqlDateTime xzzb_ = context.Operators.Add(wzzw_, xzza_);
+                    CqlDateTime xzzc_ = context.Operators.End(Period);
+                    int? xzzd_ = context.Operators.DurationBetween(xzzb_, xzzc_, "hour");
+                    bool? xzze_ = context.Operators.Less(xzzd_, 24);
 
-                    return kzzk_ ?? false;
+                    return xzze_ ?? false;
                 };
-                if (kzzb_())
+                if (wzzv_())
                 {
-                    CqlDateTime kzzl_ = context.Operators.Start(Period);
-                    CqlQuantity kzzm_ = context.Operators.Quantity(24m, "hours");
-                    int? kzzn_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity kzzo_ = context.Operators.ConvertIntegerToQuantity(kzzn_);
-                    CqlQuantity kzzp_ = context.Operators.Multiply(kzzm_, kzzo_);
-                    CqlDateTime kzzq_ = context.Operators.Add(kzzl_, kzzp_);
+                    CqlDateTime xzzf_ = context.Operators.Start(Period);
+                    CqlQuantity xzzg_ = context.Operators.Quantity(24m, "hours");
+                    int? xzzh_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity xzzi_ = context.Operators.ConvertIntegerToQuantity(xzzh_);
+                    CqlQuantity xzzj_ = context.Operators.Multiply(xzzg_, xzzi_);
+                    CqlDateTime xzzk_ = context.Operators.Add(xzzf_, xzzj_);
 
-                    return kzzq_;
+                    return xzzk_;
                 }
                 else
                 {
-                    CqlDateTime kzzr_ = context.Operators.Start(Period);
-                    CqlQuantity kzzs_ = context.Operators.Quantity(24m, "hours");
-                    CqlQuantity kzzt_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-                    CqlQuantity kzzu_ = context.Operators.Multiply(kzzs_, kzzt_);
-                    CqlDateTime kzzv_ = context.Operators.Add(kzzr_, kzzu_);
+                    CqlDateTime xzzl_ = context.Operators.Start(Period);
+                    CqlQuantity xzzm_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity xzzn_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+                    CqlQuantity xzzo_ = context.Operators.Multiply(xzzm_, xzzn_);
+                    CqlDateTime xzzp_ = context.Operators.Add(xzzl_, xzzo_);
 
-                    return kzzv_;
+                    return xzzp_;
                 }
             };
-            CqlInterval<CqlDateTime> jzzz_ = context.Operators.Interval(jzzx_, jzzy_(), true, false);
-            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? kzza_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, jzzz_);
+            CqlInterval<CqlDateTime> wzzt_ = context.Operators.Interval(wzzr_, wzzs_(), true, false);
+            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? wzzu_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, wzzt_);
 
-            return kzza_;
+            return wzzu_;
         };
-        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> jzzq_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(jzzo_, jzzp_);
-        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> jzzr_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(jzzq_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> wzzk_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(wzzi_, wzzj_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> wzzl_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(wzzk_);
 
-        return jzzr_;
+        return wzzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("daysInPeriod")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is.\nNote that the result will include intervals that are closed at the beginning and open at the end")]
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
-        IEnumerable<int?> kzzw_ = this.Interval_To_Day_Numbers(context, Period);
-        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? kzzx_(int? DayIndex)
+        IEnumerable<int?> xzzq_ = this.Interval_To_Day_Numbers(context, Period);
+        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? xzzr_(int? DayIndex)
         {
-            CqlDateTime lzza_ = context.Operators.Start(Period);
-            CqlQuantity lzzb_ = context.Operators.Quantity(24m, "hours");
-            int? lzzc_ = context.Operators.Subtract(DayIndex, 1);
-            CqlQuantity lzzd_ = context.Operators.ConvertIntegerToQuantity(lzzc_);
-            CqlQuantity lzze_ = context.Operators.Multiply(lzzb_, lzzd_);
-            CqlDateTime lzzf_ = context.Operators.Add(lzza_, lzze_);
-            CqlDateTime lzzg_()
+            CqlDateTime xzzu_ = context.Operators.Start(Period);
+            CqlQuantity xzzv_ = context.Operators.Quantity(24m, "hours");
+            int? xzzw_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity xzzx_ = context.Operators.ConvertIntegerToQuantity(xzzw_);
+            CqlQuantity xzzy_ = context.Operators.Multiply(xzzv_, xzzx_);
+            CqlDateTime xzzz_ = context.Operators.Add(xzzu_, xzzy_);
+            CqlDateTime yzza_()
             {
-                bool lzzj_()
+                bool yzzd_()
                 {
-                    CqlDateTime lzzk_ = context.Operators.Start(Period);
-                    CqlQuantity lzzl_ = context.Operators.Quantity(24m, "hours");
-                    int? lzzm_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity lzzn_ = context.Operators.ConvertIntegerToQuantity(lzzm_);
-                    CqlQuantity lzzo_ = context.Operators.Multiply(lzzl_, lzzn_);
-                    CqlDateTime lzzp_ = context.Operators.Add(lzzk_, lzzo_);
-                    CqlDateTime lzzq_ = context.Operators.End(Period);
-                    int? lzzr_ = context.Operators.DurationBetween(lzzp_, lzzq_, "hour");
-                    bool? lzzs_ = context.Operators.Less(lzzr_, 24);
+                    CqlDateTime yzze_ = context.Operators.Start(Period);
+                    CqlQuantity yzzf_ = context.Operators.Quantity(24m, "hours");
+                    int? yzzg_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity yzzh_ = context.Operators.ConvertIntegerToQuantity(yzzg_);
+                    CqlQuantity yzzi_ = context.Operators.Multiply(yzzf_, yzzh_);
+                    CqlDateTime yzzj_ = context.Operators.Add(yzze_, yzzi_);
+                    CqlDateTime yzzk_ = context.Operators.End(Period);
+                    int? yzzl_ = context.Operators.DurationBetween(yzzj_, yzzk_, "hour");
+                    bool? yzzm_ = context.Operators.Less(yzzl_, 24);
 
-                    return lzzs_ ?? false;
+                    return yzzm_ ?? false;
                 };
-                if (lzzj_())
+                if (yzzd_())
                 {
-                    CqlDateTime lzzt_ = context.Operators.Start(Period);
-                    CqlQuantity lzzu_ = context.Operators.Quantity(24m, "hours");
-                    int? lzzv_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity lzzw_ = context.Operators.ConvertIntegerToQuantity(lzzv_);
-                    CqlQuantity lzzx_ = context.Operators.Multiply(lzzu_, lzzw_);
-                    CqlDateTime lzzy_ = context.Operators.Add(lzzt_, lzzx_);
+                    CqlDateTime yzzn_ = context.Operators.Start(Period);
+                    CqlQuantity yzzo_ = context.Operators.Quantity(24m, "hours");
+                    int? yzzp_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity yzzq_ = context.Operators.ConvertIntegerToQuantity(yzzp_);
+                    CqlQuantity yzzr_ = context.Operators.Multiply(yzzo_, yzzq_);
+                    CqlDateTime yzzs_ = context.Operators.Add(yzzn_, yzzr_);
 
-                    return lzzy_;
+                    return yzzs_;
                 }
                 else
                 {
-                    CqlDateTime lzzz_ = context.Operators.Start(Period);
-                    CqlQuantity mzza_ = context.Operators.Quantity(24m, "hours");
-                    CqlQuantity mzzb_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-                    CqlQuantity mzzc_ = context.Operators.Multiply(mzza_, mzzb_);
-                    CqlDateTime mzzd_ = context.Operators.Add(lzzz_, mzzc_);
+                    CqlDateTime yzzt_ = context.Operators.Start(Period);
+                    CqlQuantity yzzu_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity yzzv_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+                    CqlQuantity yzzw_ = context.Operators.Multiply(yzzu_, yzzv_);
+                    CqlDateTime yzzx_ = context.Operators.Add(yzzt_, yzzw_);
 
-                    return mzzd_;
+                    return yzzx_;
                 }
             };
-            CqlInterval<CqlDateTime> lzzh_ = context.Operators.Interval(lzzf_, lzzg_(), true, false);
-            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? lzzi_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, lzzh_);
+            CqlInterval<CqlDateTime> yzzb_ = context.Operators.Interval(xzzz_, yzza_(), true, false);
+            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? yzzc_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, yzzb_);
 
-            return lzzi_;
+            return yzzc_;
         };
-        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> kzzy_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(kzzw_, kzzx_);
-        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> kzzz_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(kzzy_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> xzzs_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(xzzq_, xzzr_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> xzzt_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(xzzs_);
 
-        return kzzz_;
+        return xzzt_;
     }
 
 

@@ -15,5 +15,5 @@ namespace Hl7.Cql.Compiler.Expressions;
 /// <seealso cref="CqlFunctionDefinitionAttribute"/>
 internal class CqlFunctionDefinition(
     LambdaExpression lambda,
-    string definitionName,
-    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambda, definitionName, tags);
+    string name,
+    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambda, name, tags);

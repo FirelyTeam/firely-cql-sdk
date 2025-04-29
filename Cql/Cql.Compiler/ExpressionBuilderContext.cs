@@ -15,17 +15,18 @@ using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using System.Xml.Linq;
 
 namespace Hl7.Cql.Compiler;
 
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using Convert = System.Convert;
 using DateTime = Hl7.Cql.Elm.DateTime;
-using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 
 #region Context
@@ -351,21 +352,8 @@ partial class ExpressionBuilderContext(
     {
         if (string.IsNullOrWhiteSpace(valueSetRef.name))
             throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-        var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
 
-        //var type = TypeFor(valueSetRef)!;
-        // if (_typeResolver.IsListType(type))
-        // {
-        //     var elementType = _typeResolver.GetListElementType(type);
-        //     if (elementType != typeof(CqlCode))
-        //     {
-        //         throw this.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {type.ToCSharpString(Defaults.TypeCSharpFormat)}");
-        //     }
-        //
-        //     var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.ExpandValueSet))!;
-        //     var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, method, cqlValueSet);
-        //     return call;
-        // }
+        var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet));
         return cqlValueSet;
     }
 
@@ -449,7 +437,8 @@ partial class ExpressionBuilderContext(
             throw this.NewExpressionBuildingException("The code ref has no name.");
 
         var type = _typeResolver.ResolveType(codeRef.resultTypeName.Name) ?? throw this.NewExpressionBuildingException($"Unable to resolve type {codeRef.resultTypeName}");
-        return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type);
+        var definitionCallExpression = InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type);
+        return definitionCallExpression;
     }
 
     private Expression CodeSystemRef(CodeSystemRef codeSystemRef)
@@ -458,7 +447,8 @@ partial class ExpressionBuilderContext(
             throw this.NewExpressionBuildingException("The code system ref has no name.");
 
         var type = _typeResolver.CodeType.MakeArrayType();
-        return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type);
+        var definitionCallExpression = InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type);
+        return definitionCallExpression;
     }
 
     protected Expression ConceptRef(ConceptRef conceptRef)
@@ -1150,7 +1140,7 @@ partial class ExpressionBuilderContext(
         }
     }
 
-    protected Expression InvokeDefinitionThroughRuntimeContext(
+    private Expression InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
         CqlDefinition definition)
@@ -1167,14 +1157,13 @@ partial class ExpressionBuilderContext(
         throw this.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
     }
 
-    protected Expression InvokeDefinitionThroughRuntimeContext(
+    private DefinitionCallExpression InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
         Type definitionReturnType)
     {
         string libraryName = _libraryContext.GetLibraryVersionedIdentifierFromAlias(libraryAlias, throwError: false)
                              ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-
         var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
         return new DefinitionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, CqlExpressions.ParameterExpression, funcType);
     }

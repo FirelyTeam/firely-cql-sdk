@@ -30,174 +30,83 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
 
     #region ValueSets
 
-    #region ValueSet: Abnormal Presentation
-    [CqlValueSetDefinition(
-        definitionName: "Abnormal Presentation",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105",
-        valueSetVersion: null)]
-    public CqlValueSet Abnormal_Presentation(CqlContext context) => _Abnormal_Presentation;
-
+    [CqlValueSetDefinition("Abnormal Presentation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105", valueSetVersion: null)]
+    public CqlValueSet Abnormal_Presentation(CqlContext _) => _Abnormal_Presentation;
     private static readonly CqlValueSet _Abnormal_Presentation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105", null);
-    #endregion
 
-    #region ValueSet: Cesarean Birth
-    [CqlValueSetDefinition(
-        definitionName: "Cesarean Birth",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282",
-        valueSetVersion: null)]
-    public CqlValueSet Cesarean_Birth(CqlContext context) => _Cesarean_Birth;
-
+    [CqlValueSetDefinition("Cesarean Birth", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282", valueSetVersion: null)]
+    public CqlValueSet Cesarean_Birth(CqlContext _) => _Cesarean_Birth;
     private static readonly CqlValueSet _Cesarean_Birth = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282", null);
-    #endregion
 
-    #region ValueSet: Delivery of Singleton
-    [CqlValueSetDefinition(
-        definitionName: "Delivery of Singleton",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99",
-        valueSetVersion: null)]
-    public CqlValueSet Delivery_of_Singleton(CqlContext context) => _Delivery_of_Singleton;
-
+    [CqlValueSetDefinition("Delivery of Singleton", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99", valueSetVersion: null)]
+    public CqlValueSet Delivery_of_Singleton(CqlContext _) => _Delivery_of_Singleton;
     private static readonly CqlValueSet _Delivery_of_Singleton = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99", null);
-    #endregion
 
-    #region ValueSet: Delivery Procedures
-    [CqlValueSetDefinition(
-        definitionName: "Delivery Procedures",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59",
-        valueSetVersion: null)]
-    public CqlValueSet Delivery_Procedures(CqlContext context) => _Delivery_Procedures;
-
+    [CqlValueSetDefinition("Delivery Procedures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", valueSetVersion: null)]
+    public CqlValueSet Delivery_Procedures(CqlContext _) => _Delivery_Procedures;
     private static readonly CqlValueSet _Delivery_Procedures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", null);
-    #endregion
 
-    #region ValueSet: Encounter Inpatient
-    [CqlValueSetDefinition(
-        definitionName: "Encounter Inpatient",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307",
-        valueSetVersion: null)]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) => _Encounter_Inpatient;
-
+    [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
     private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
-    #endregion
 
-    #region ValueSet: Genital Herpes
-    [CqlValueSetDefinition(
-        definitionName: "Genital Herpes",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049",
-        valueSetVersion: null)]
-    public CqlValueSet Genital_Herpes(CqlContext context) => _Genital_Herpes;
-
+    [CqlValueSetDefinition("Genital Herpes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049", valueSetVersion: null)]
+    public CqlValueSet Genital_Herpes(CqlContext _) => _Genital_Herpes;
     private static readonly CqlValueSet _Genital_Herpes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049", null);
-    #endregion
 
-    #region ValueSet: Placenta Accreta Spectrum Previa or Vasa Previa
-    [CqlValueSetDefinition(
-        definitionName: "Placenta Accreta Spectrum Previa or Vasa Previa",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37",
-        valueSetVersion: null)]
-    public CqlValueSet Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(CqlContext context) => _Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa;
-
+    [CqlValueSetDefinition("Placenta Accreta Spectrum Previa or Vasa Previa", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37", valueSetVersion: null)]
+    public CqlValueSet Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(CqlContext _) => _Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa;
     private static readonly CqlValueSet _Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37", null);
-    #endregion
 
-    #region ValueSet: 37 to 42 Plus Weeks Gestation
-    [CqlValueSetDefinition(
-        definitionName: "37 to 42 Plus Weeks Gestation",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68",
-        valueSetVersion: null)]
-    public CqlValueSet _37_to_42_Plus_Weeks_Gestation(CqlContext context) => __37_to_42_Plus_Weeks_Gestation;
-
+    [CqlValueSetDefinition("37 to 42 Plus Weeks Gestation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68", valueSetVersion: null)]
+    public CqlValueSet _37_to_42_Plus_Weeks_Gestation(CqlContext _) => __37_to_42_Plus_Weeks_Gestation;
     private static readonly CqlValueSet __37_to_42_Plus_Weeks_Gestation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68", null);
-    #endregion
 
     #endregion ValueSets
 
     #region Codes
 
-    #region Code: [#] Births.preterm
-    [CqlCodeDefinition(
-        definitionName: "[#] Births.preterm",
-        codeId: "11637-6",
-        codeSystem: "http://loinc.org")]
-    public CqlCode ____Births_preterm(CqlContext context) => _____Births_preterm;
-
+    [CqlCodeDefinition("[#] Births.preterm", codeId: "11637-6", codeSystem: "http://loinc.org")]
+    public CqlCode ____Births_preterm(CqlContext _) => _____Births_preterm;
     private static readonly CqlCode _____Births_preterm = new CqlCode("11637-6", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: [#] Births.term
-    [CqlCodeDefinition(
-        definitionName: "[#] Births.term",
-        codeId: "11639-2",
-        codeSystem: "http://loinc.org")]
-    public CqlCode ____Births_term(CqlContext context) => _____Births_term;
-
+    [CqlCodeDefinition("[#] Births.term", codeId: "11639-2", codeSystem: "http://loinc.org")]
+    public CqlCode ____Births_term(CqlContext _) => _____Births_term;
     private static readonly CqlCode _____Births_term = new CqlCode("11639-2", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: [#] Parity
-    [CqlCodeDefinition(
-        definitionName: "[#] Parity",
-        codeId: "11977-6",
-        codeSystem: "http://loinc.org")]
-    public CqlCode ____Parity(CqlContext context) => _____Parity;
-
+    [CqlCodeDefinition("[#] Parity", codeId: "11977-6", codeSystem: "http://loinc.org")]
+    public CqlCode ____Parity(CqlContext _) => _____Parity;
     private static readonly CqlCode _____Parity = new CqlCode("11977-6", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: [#] Pregnancies
-    [CqlCodeDefinition(
-        definitionName: "[#] Pregnancies",
-        codeId: "11996-6",
-        codeSystem: "http://loinc.org")]
-    public CqlCode ____Pregnancies(CqlContext context) => _____Pregnancies;
-
+    [CqlCodeDefinition("[#] Pregnancies", codeId: "11996-6", codeSystem: "http://loinc.org")]
+    public CqlCode ____Pregnancies(CqlContext _) => _____Pregnancies;
     private static readonly CqlCode _____Pregnancies = new CqlCode("11996-6", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: Date and time of obstetric delivery
-    [CqlCodeDefinition(
-        definitionName: "Date and time of obstetric delivery",
-        codeId: "93857-1",
-        codeSystem: "http://loinc.org")]
-    public CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => _Date_and_time_of_obstetric_delivery;
-
+    [CqlCodeDefinition("Date and time of obstetric delivery", codeId: "93857-1", codeSystem: "http://loinc.org")]
+    public CqlCode Date_and_time_of_obstetric_delivery(CqlContext _) => _Date_and_time_of_obstetric_delivery;
     private static readonly CqlCode _Date_and_time_of_obstetric_delivery = new CqlCode("93857-1", "http://loinc.org", default, default);
-    #endregion
 
     #endregion Codes
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition(
-        definitionName: "LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = [
-            new CqlCode("11637-6", "http://loinc.org", default, default),
-            new CqlCode("11639-2", "http://loinc.org", default, default),
-            new CqlCode("11977-6", "http://loinc.org", default, default),
-            new CqlCode("11996-6", "http://loinc.org", default, default),
-            new CqlCode("93857-1", "http://loinc.org", default, default),
-        ];
-
-        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
-    }
-
+    [CqlCodeSystemDefinition("LOINC")]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC = new CqlCodeSystem();
 
     #endregion CodeSystems
 
     #region Parameters
 
-    [CqlParameterDefinition(
-        definitionName: "Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Interval(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, true, true);
-        object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+        CqlDateTime dzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime dzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> dzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Interval(dzzzzzzzzzzzzzzzzzzzzzzzzzzg_, dzzzzzzzzzzzzzzzzzzzzzzzzzzh_, true, true);
+        object dzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.ResolveParameter("CesareanBirthFHIR-0.2.000", "Measurement Period", dzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-        return (CqlInterval<CqlDateTime>)uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
+        return (CqlInterval<CqlDateTime>)dzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
     }
 
 
@@ -205,1832 +114,1812 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
 
     #region Expressions
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<Patient>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+        IEnumerable<Patient> dzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient dzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.SingletonFrom<Patient>(dzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Calculated Gestational Age Greater than or Equal to 37 Weeks")]
+    [CqlExpressionDefinition("Delivery Encounter with Calculated Gestational Age Greater than or Equal to 37 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
     {
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
-        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Encounter DeliveryEncounter)
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
+        bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Encounter DeliveryEncounter)
         {
-            int? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-            bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.GreaterOrEqual(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, 37);
+            int? dzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.GreaterOrEqual(dzzzzzzzzzzzzzzzzzzzzzzzzzzp_, 37);
 
-            return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
+            return dzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
         };
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Encounter>(dzzzzzzzzzzzzzzzzzzzzzzzzzzm_, dzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Estimated Gestational Age Greater than or Equal to 37 Weeks")]
+    [CqlExpressionDefinition("Delivery Encounter with Estimated Gestational Age Greater than or Equal to 37 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
     {
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
-        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_(Encounter DeliveryEncounter)
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
+        bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Encounter DeliveryEncounter)
         {
-            int? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-            CqlQuantity uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = PCMaternal_5_19_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-            CqlQuantity uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Quantity(37m, "weeks");
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.GreaterOrEqual(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.And((bool?)(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is null), vzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+            int? dzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
+            CqlQuantity dzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = PCMaternal_5_19_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
+            CqlQuantity dzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Quantity(37m, "weeks");
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.GreaterOrEqual(dzzzzzzzzzzzzzzzzzzzzzzzzzzv_, dzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And((bool?)(dzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is null), dzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-            return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+            return dzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
         };
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Where<Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Encounter>(dzzzzzzzzzzzzzzzzzzzzzzzzzzr_, dzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks Based on Coding")]
+    [CqlExpressionDefinition("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks Based on Coding")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding(CqlContext context)
     {
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
-        bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_(Encounter DeliveryEncounter)
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
+        bool? ezzzzzzzzzzzzzzzzzzzzzzzzzza_(Encounter DeliveryEncounter)
         {
-            int? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-            CqlQuantity vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = PCMaternal_5_19_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And((bool?)(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ is null), (bool?)(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is null));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Condition EncounterDiagnosis)
+            int? ezzzzzzzzzzzzzzzzzzzzzzzzzzc_ = PCMaternal_5_19_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
+            CqlQuantity ezzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PCMaternal_5_19_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And((bool?)(ezzzzzzzzzzzzzzzzzzzzzzzzzzc_ is null), (bool?)(ezzzzzzzzzzzzzzzzzzzzzzzzzzd_ is null));
+            IEnumerable<Condition> ezzzzzzzzzzzzzzzzzzzzzzzzzzf_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzg_(Condition EncounterDiagnosis)
             {
-                CodeableConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = EncounterDiagnosis?.Code;
-                CqlConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this._37_to_42_Plus_Weeks_Gestation(context);
-                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.ConceptInValueSet(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                CodeableConcept ezzzzzzzzzzzzzzzzzzzzzzzzzzk_ = EncounterDiagnosis?.Code;
+                CqlConcept ezzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                CqlValueSet ezzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this._37_to_42_Plus_Weeks_Gestation(context);
+                bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzzzzzzzzzzzzl_, ezzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+                return ezzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Where<Condition>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Exists<Condition>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            IEnumerable<Condition> ezzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Where<Condition>(ezzzzzzzzzzzzzzzzzzzzzzzzzzf_, ezzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Exists<Condition>(ezzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(ezzzzzzzzzzzzzzzzzzzzzzzzzze_, ezzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-            return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
+            return ezzzzzzzzzzzzzzzzzzzzzzzzzzj_;
         };
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Where<Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Encounter>(dzzzzzzzzzzzzzzzzzzzzzzzzzzz_, ezzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-        return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzb_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks")]
+    [CqlExpressionDefinition("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
     {
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Union<Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding(context);
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Union<Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Union<Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzo_, ezzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding(context);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Union<Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzq_, ezzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-        return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzs_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Encounter with Singleton Delivery")]
+    [CqlExpressionDefinition("Encounter with Singleton Delivery")]
     public IEnumerable<Encounter> Encounter_with_Singleton_Delivery(CqlContext context)
     {
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
-        bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Encounter DeliveryEncounter)
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzt_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
+        bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzu_(Encounter DeliveryEncounter)
         {
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Condition EncounterDiagnosis)
+            IEnumerable<Condition> ezzzzzzzzzzzzzzzzzzzzzzzzzzw_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzx_(Condition EncounterDiagnosis)
             {
-                CodeableConcept wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = EncounterDiagnosis?.Code;
-                CqlConcept wzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
-                CqlValueSet wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Delivery_of_Singleton(context);
-                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.ConceptInValueSet(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                CodeableConcept fzzzzzzzzzzzzzzzzzzzzzzzzzza_ = EncounterDiagnosis?.Code;
+                CqlConcept fzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Delivery_of_Singleton(context);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzzzzzzzzzzzzzzzzzb_, fzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-                return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
+                return fzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
             };
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Condition>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Exists<Condition>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            IEnumerable<Condition> ezzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Condition>(ezzzzzzzzzzzzzzzzzzzzzzzzzzw_, ezzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Exists<Condition>(ezzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
+            return ezzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzt_, ezzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-        return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("lastGravida")]
     public int? lastGravida(CqlContext context, Encounter TheEncounter)
     {
-        CqlCode wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.____Pregnancies(context);
-        IEnumerable<CqlCode> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.ToList<CqlCode>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
-        IEnumerable<Observation> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(Observation Gravida)
+        CqlCode fzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.____Pregnancies(context);
+        IEnumerable<CqlCode> fzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ToList<CqlCode>(fzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+        IEnumerable<Observation> fzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, fzzzzzzzzzzzzzzzzzzzzzzzzzzf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzh_(Observation Gravida)
         {
-            DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = Gravida?.Value;
-            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is null));
-            Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = Gravida?.StatusElement;
-            ObservationStatus? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Value;
-            Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<Code<ObservationStatus>>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
-            string wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-            string[] wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = [
+            DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = Gravida?.Value;
+            object fzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Not((bool?)(fzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is null));
+            Code<ObservationStatus> fzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = Gravida?.StatusElement;
+            ObservationStatus? fzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzr_?.Value;
+            Code<ObservationStatus> fzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Convert<Code<ObservationStatus>>(fzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+            string fzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            string[] fzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.In<string>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as IEnumerable<string>);
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-            object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
+            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.In<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzu_, fzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as IEnumerable<string>);
+            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            object fzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
             {
-                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_()
+                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = Gravida?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                    bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
+                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = Gravida?.Effective;
+                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
+                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
+                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = Gravida?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                    bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlInterval<CqlDateTime>;
+                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = Gravida?.Effective;
+                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlInterval<CqlDateTime>;
 
-                    return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
+                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzm_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = Gravida?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                    bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
+                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = Gravida?.Effective;
+                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
+                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                if (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_())
+                if (gzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = Gravida?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = Gravida?.Effective;
+                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
+                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                 }
-                else if (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
+                else if (gzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = Gravida?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = Gravida?.Effective;
+                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CqlInterval<CqlDateTime>) as object;
+                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_())
+                else if (gzzzzzzzzzzzzzzzzzzzzzzzzzzm_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = Gravida?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzza_ = Gravida?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CqlDateTime) as object;
+                    return (hzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = QICoreCommon_2_1_000.Instance.earliest(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_());
-            CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity xzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Quantity(42m, "weeks");
-            CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Subtract(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
-            CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Interval(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, true, false);
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.In<CqlDateTime>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, default);
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not((bool?)(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is null));
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            CqlDateTime fzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.earliest(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzy_());
+            CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
+            CqlQuantity gzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Quantity(42m, "weeks");
+            CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Subtract(gzzzzzzzzzzzzzzzzzzzzzzzzzza_, gzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Interval(gzzzzzzzzzzzzzzzzzzzzzzzzzzc_, gzzzzzzzzzzzzzzzzzzzzzzzzzza_, true, false);
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.In<CqlDateTime>(fzzzzzzzzzzzzzzzzzzzzzzzzzzz_, gzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Not((bool?)(gzzzzzzzzzzzzzzzzzzzzzzzzzza_ is null));
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(gzzzzzzzzzzzzzzzzzzzzzzzzzzf_, gzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzx_, gzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-            return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
+            return gzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
         };
-        IEnumerable<Observation> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Observation>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-        object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Observation @this)
+        IEnumerable<Observation> fzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Where<Observation>(fzzzzzzzzzzzzzzzzzzzzzzzzzzg_, fzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+        object fzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Observation @this)
         {
-            object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
+            object hzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
             {
-                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
+                bool hzzzzzzzzzzzzzzzzzzzzzzzzzze_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ is CqlDateTime;
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    bool hzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = hzzzzzzzzzzzzzzzzzzzzzzzzzzi_ is CqlDateTime;
 
-                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
+                    return hzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
+                bool hzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlInterval<CqlDateTime>;
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                    bool hzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = hzzzzzzzzzzzzzzzzzzzzzzzzzzl_ is CqlInterval<CqlDateTime>;
 
-                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
+                    return hzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
+                bool hzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    bool hzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = hzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlDateTime;
 
-                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
+                    return hzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
+                if (hzzzzzzzzzzzzzzzzzzzzzzzzzze_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
+                    return (hzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlDateTime) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
+                else if (hzzzzzzzzzzzzzzzzzzzzzzzzzzf_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlInterval<CqlDateTime>) as object;
+                    return (hzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
+                else if (hzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = @this?.Effective;
+                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as CqlDateTime) as object;
+                    return (hzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = QICoreCommon_2_1_000.Instance.earliest(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_());
+            CqlDateTime hzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.earliest(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzc_());
 
-            return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
+            return hzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
         };
-        IEnumerable<Observation> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.SortBy<Observation>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Last<Observation>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-        DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.Value;
-        object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+        IEnumerable<Observation> fzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.SortBy<Observation>(fzzzzzzzzzzzzzzzzzzzzzzzzzzi_, fzzzzzzzzzzzzzzzzzzzzzzzzzzj_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation fzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Last<Observation>(fzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+        DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzl_?.Value;
+        object fzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as int?;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as int?;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("lastParity")]
     public int? lastParity(CqlContext context, Encounter TheEncounter)
     {
-        CqlCode yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.____Parity(context);
-        IEnumerable<CqlCode> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.ToList<CqlCode>(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-        IEnumerable<Observation> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Observation Parity)
+        CqlCode hzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.____Parity(context);
+        IEnumerable<CqlCode> hzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ToList<CqlCode>(hzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+        IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, hzzzzzzzzzzzzzzzzzzzzzzzzzzx_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Observation Parity)
         {
-            object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
+            object izzzzzzzzzzzzzzzzzzzzzzzzzzg_()
             {
-                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
-                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                    bool jzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
 
-                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
+                    return jzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                 };
-                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlInterval<CqlDateTime>;
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool jzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlInterval<CqlDateTime>;
 
-                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                    return jzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzze_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is CqlDateTime;
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    bool jzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
 
-                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+                    return jzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_())
+                if (jzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ as CqlDateTime) as object;
+                    return (jzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
                 }
-                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
+                else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlInterval<CqlDateTime>) as object;
+                    return (jzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
+                else if (jzzzzzzzzzzzzzzzzzzzzzzzzzze_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = Parity?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = Parity?.Effective;
+                    object jzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
+                    return (jzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.earliest(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_());
-            CqlDateTime zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Quantity(42m, "weeks");
-            CqlDateTime zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Subtract(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-            CqlInterval<CqlDateTime> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Interval(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, true, false);
-            bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.In<CqlDateTime>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, default);
-            bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Not((bool?)(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ is null));
-            bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.And(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
-            Code<ObservationStatus> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = Parity?.StatusElement;
-            ObservationStatus? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Value;
-            Code<ObservationStatus> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<Code<ObservationStatus>>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
-            string zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<string>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-            string[] zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = [
+            CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.earliest(context, izzzzzzzzzzzzzzzzzzzzzzzzzzg_());
+            CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzi_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
+            CqlQuantity izzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Quantity(42m, "weeks");
+            CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Subtract(izzzzzzzzzzzzzzzzzzzzzzzzzzi_, izzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Interval(izzzzzzzzzzzzzzzzzzzzzzzzzzk_, izzzzzzzzzzzzzzzzzzzzzzzzzzi_, true, false);
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.In<CqlDateTime>(izzzzzzzzzzzzzzzzzzzzzzzzzzh_, izzzzzzzzzzzzzzzzzzzzzzzzzzm_, default);
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Not((bool?)(izzzzzzzzzzzzzzzzzzzzzzzzzzi_ is null));
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.And(izzzzzzzzzzzzzzzzzzzzzzzzzzn_, izzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            Code<ObservationStatus> izzzzzzzzzzzzzzzzzzzzzzzzzzr_ = Parity?.StatusElement;
+            ObservationStatus? izzzzzzzzzzzzzzzzzzzzzzzzzzs_ = izzzzzzzzzzzzzzzzzzzzzzzzzzr_?.Value;
+            Code<ObservationStatus> izzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Convert<Code<ObservationStatus>>(izzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+            string izzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<string>(izzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            string[] izzzzzzzzzzzzzzzzzzzzzzzzzzv_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.In<string>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as IEnumerable<string>);
-            bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.And(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-            DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = Parity?.Value;
-            object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
-            bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Not((bool?)(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ is null));
-            bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.In<string>(izzzzzzzzzzzzzzzzzzzzzzzzzzu_, izzzzzzzzzzzzzzzzzzzzzzzzzzv_ as IEnumerable<string>);
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.And(izzzzzzzzzzzzzzzzzzzzzzzzzzq_, izzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            DataType izzzzzzzzzzzzzzzzzzzzzzzzzzy_ = Parity?.Value;
+            object izzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Not((bool?)(izzzzzzzzzzzzzzzzzzzzzzzzzzz_ is null));
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.And(izzzzzzzzzzzzzzzzzzzzzzzzzzx_, jzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-            return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+            return jzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
         };
-        IEnumerable<Observation> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Where<Observation>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-        object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Observation @this)
+        IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Observation>(hzzzzzzzzzzzzzzzzzzzzzzzzzzy_, hzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        object izzzzzzzzzzzzzzzzzzzzzzzzzzb_(Observation @this)
         {
-            object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+            object jzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
             {
-                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                    bool kzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = kzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
 
-                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                 };
-                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlInterval<CqlDateTime>;
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                    bool kzzzzzzzzzzzzzzzzzzzzzzzzzze_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlInterval<CqlDateTime>;
 
-                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                 };
-                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
+                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
-                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                    bool kzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
 
-                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                 };
-                if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
+                if (jzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
+                    return (kzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
                 }
-                else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_())
+                else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzx_())
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CqlInterval<CqlDateTime>) as object;
+                    return (kzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
+                else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
                 {
-                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Effective;
-                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
+                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
+                    return (kzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.earliest(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_());
+            CqlDateTime jzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.earliest(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzu_());
 
-            return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
+            return jzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<Observation> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SortBy<Observation>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Last<Observation>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-        DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_?.Value;
-        object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+        IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SortBy<Observation>(izzzzzzzzzzzzzzzzzzzzzzzzzza_, izzzzzzzzzzzzzzzzzzzzzzzzzzb_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation izzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Last<Observation>(izzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+        DataType izzzzzzzzzzzzzzzzzzzzzzzzzze_ = izzzzzzzzzzzzzzzzzzzzzzzzzzd_?.Value;
+        object izzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-        return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as int?;
+        return izzzzzzzzzzzzzzzzzzzzzzzzzzf_ as int?;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("lastHistoryPretermBirth")]
     public int? lastHistoryPretermBirth(CqlContext context, Encounter TheEncounter)
     {
-        CqlCode bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.____Births_preterm(context);
-        IEnumerable<CqlCode> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.ToList<CqlCode>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
-        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Observation PretermBirth)
+        CqlCode kzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.____Births_preterm(context);
+        IEnumerable<CqlCode> kzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.ToList<CqlCode>(kzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+        IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, kzzzzzzzzzzzzzzzzzzzzzzzzzzp_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Observation PretermBirth)
         {
-            object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
+            object kzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
             {
-                bool czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
-                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ is CqlDateTime;
+                    DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = PretermBirth?.Effective;
+                    object lzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    bool lzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzy_ is CqlDateTime;
 
-                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
+                    return lzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
                 };
-                bool czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
+                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
-                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ is CqlInterval<CqlDateTime>;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PretermBirth?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                    bool mzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzb_ is CqlInterval<CqlDateTime>;
 
-                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
                 };
-                bool czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
+                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
-                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ is CqlDateTime;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PretermBirth?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    bool mzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = mzzzzzzzzzzzzzzzzzzzzzzzzzze_ is CqlDateTime;
 
-                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                 };
-                if (czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_())
+                if (lzzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = PretermBirth?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
+                    return (mzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlDateTime) as object;
                 }
-                else if (czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
+                else if (lzzzzzzzzzzzzzzzzzzzzzzzzzzv_())
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = PretermBirth?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CqlInterval<CqlDateTime>) as object;
+                    return (mzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
+                else if (lzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = PretermBirth?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = PretermBirth?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CqlDateTime) as object;
+                    return (mzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = QICoreCommon_2_1_000.Instance.earliest(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_());
-            CqlDateTime czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity czzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Quantity(42m, "weeks");
-            CqlDateTime czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Subtract(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
-            CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Interval(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, true, false);
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.In<CqlDateTime>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, default);
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not((bool?)(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is null));
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            Code<ObservationStatus> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = PretermBirth?.StatusElement;
-            ObservationStatus? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
-            Code<ObservationStatus> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<Code<ObservationStatus>>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-            string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<string>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
-            string[] czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = [
+            CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.earliest(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzy_());
+            CqlDateTime lzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
+            CqlQuantity lzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Quantity(42m, "weeks");
+            CqlDateTime lzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Subtract(lzzzzzzzzzzzzzzzzzzzzzzzzzza_, lzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Interval(lzzzzzzzzzzzzzzzzzzzzzzzzzzc_, lzzzzzzzzzzzzzzzzzzzzzzzzzza_, true, false);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.In<CqlDateTime>(kzzzzzzzzzzzzzzzzzzzzzzzzzzz_, lzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzzzzzzzzzzzzzzza_ is null));
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzf_, lzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            Code<ObservationStatus> lzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = PretermBirth?.StatusElement;
+            ObservationStatus? lzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzj_?.Value;
+            Code<ObservationStatus> lzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Convert<Code<ObservationStatus>>(lzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            string lzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Convert<string>(lzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            string[] lzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<string>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as IEnumerable<string>);
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
-            DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = PretermBirth?.Value;
-            object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Not((bool?)(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is null));
-            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.In<string>(lzzzzzzzzzzzzzzzzzzzzzzzzzzm_, lzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as IEnumerable<string>);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzi_, lzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+            DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = PretermBirth?.Value;
+            object lzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is null));
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzp_, lzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-            return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
+            return lzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
         };
-        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Observation>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
-        object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Observation @this)
+        IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzq_, kzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+        object kzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Observation @this)
         {
-            object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
+            object mzzzzzzzzzzzzzzzzzzzzzzzzzzm_()
             {
-                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = @this?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ is CqlDateTime;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = @this?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                    bool mzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is CqlDateTime;
 
-                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
                 };
-                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
+                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
                 {
-                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Effective;
-                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
-                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ is CqlInterval<CqlDateTime>;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = @this?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                    bool mzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzv_ is CqlInterval<CqlDateTime>;
 
-                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
                 };
-                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
+                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
                 {
-                    DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = @this?.Effective;
-                    object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
-                    bool ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ is CqlDateTime;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Effective;
+                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    bool mzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzy_ is CqlDateTime;
 
-                    return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
                 };
-                if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())
+                if (mzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                 {
-                    DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = @this?.Effective;
-                    object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzza_ = @this?.Effective;
+                    object nzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                    return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CqlDateTime) as object;
+                    return (nzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlDateTime) as object;
                 }
-                else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
+                else if (mzzzzzzzzzzzzzzzzzzzzzzzzzzp_())
                 {
-                    DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
-                    object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
+                    object nzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-                    return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CqlInterval<CqlDateTime>) as object;
+                    return (nzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_())
+                else if (mzzzzzzzzzzzzzzzzzzzzzzzzzzq_())
                 {
-                    DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Effective;
-                    object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzze_ = @this?.Effective;
+                    object nzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-                    return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as CqlDateTime) as object;
+                    return (nzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.earliest(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_());
+            CqlDateTime mzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = QICoreCommon_2_1_000.Instance.earliest(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzm_());
 
-            return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+            return mzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
         };
-        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.SortBy<Observation>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Last<Observation>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
-        DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_?.Value;
-        object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.SortBy<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzs_, kzzzzzzzzzzzzzzzzzzzzzzzzzzt_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation kzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Last<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+        DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzv_?.Value;
+        object kzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-        return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ as int?;
+        return kzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as int?;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("lastHistoryTermBirth")]
     public int? lastHistoryTermBirth(CqlContext context, Encounter TheEncounter)
     {
-        CqlCode ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = this.____Births_term(context);
-        IEnumerable<CqlCode> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.ToList<CqlCode>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-        IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Observation TermBirth)
+        CqlCode nzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.____Births_term(context);
+        IEnumerable<CqlCode> nzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.ToList<CqlCode>(nzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, nzzzzzzzzzzzzzzzzzzzzzzzzzzh_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Observation TermBirth)
         {
-            object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
+            object nzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
             {
-                bool fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
+                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzm_()
                 {
-                    DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = TermBirth?.Effective;
-                    object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
-                    bool fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ is CqlDateTime;
+                    DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzp_ = TermBirth?.Effective;
+                    object ozzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    bool ozzzzzzzzzzzzzzzzzzzzzzzzzzr_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlDateTime;
 
-                    return fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
+                    return ozzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                bool fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
+                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzn_()
                 {
-                    DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = TermBirth?.Effective;
-                    object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
-                    bool fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ is CqlInterval<CqlDateTime>;
+                    DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzs_ = TermBirth?.Effective;
+                    object ozzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                    bool ozzzzzzzzzzzzzzzzzzzzzzzzzzu_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzt_ is CqlInterval<CqlDateTime>;
 
-                    return fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
+                    return ozzzzzzzzzzzzzzzzzzzzzzzzzzu_;
                 };
-                bool fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                 {
-                    DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = TermBirth?.Effective;
-                    object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
-                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ is CqlDateTime;
+                    DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzv_ = TermBirth?.Effective;
+                    object ozzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    bool ozzzzzzzzzzzzzzzzzzzzzzzzzzx_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzw_ is CqlDateTime;
 
-                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
+                    return ozzzzzzzzzzzzzzzzzzzzzzzzzzx_;
                 };
-                if (fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_())
+                if (ozzzzzzzzzzzzzzzzzzzzzzzzzzm_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = TermBirth?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzy_ = TermBirth?.Effective;
+                    object ozzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CqlDateTime) as object;
+                    return (ozzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlDateTime) as object;
                 }
-                else if (fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_())
+                else if (ozzzzzzzzzzzzzzzzzzzzzzzzzzn_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = TermBirth?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzza_ = TermBirth?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CqlInterval<CqlDateTime>) as object;
+                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())
+                else if (ozzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = TermBirth?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = TermBirth?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
+                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.earliest(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_());
-            CqlDateTime ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Quantity(42m, "weeks");
-            CqlDateTime ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Subtract(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-            CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Interval(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, true, false);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<CqlDateTime>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ is null));
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-            Code<ObservationStatus> fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = TermBirth?.StatusElement;
-            ObservationStatus? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.Value;
-            Code<ObservationStatus> fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<Code<ObservationStatus>>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-            string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Convert<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
-            string[] fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = [
+            CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.earliest(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzq_());
+            CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TheEncounter);
+            CqlQuantity nzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Quantity(42m, "weeks");
+            CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Subtract(nzzzzzzzzzzzzzzzzzzzzzzzzzzs_, nzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Interval(nzzzzzzzzzzzzzzzzzzzzzzzzzzu_, nzzzzzzzzzzzzzzzzzzzzzzzzzzs_, true, false);
+            bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.In<CqlDateTime>(nzzzzzzzzzzzzzzzzzzzzzzzzzzr_, nzzzzzzzzzzzzzzzzzzzzzzzzzzw_, default);
+            bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Not((bool?)(nzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is null));
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.And(nzzzzzzzzzzzzzzzzzzzzzzzzzzx_, nzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            Code<ObservationStatus> ozzzzzzzzzzzzzzzzzzzzzzzzzzb_ = TermBirth?.StatusElement;
+            ObservationStatus? ozzzzzzzzzzzzzzzzzzzzzzzzzzc_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzb_?.Value;
+            Code<ObservationStatus> ozzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Convert<Code<ObservationStatus>>(ozzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+            string ozzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Convert<string>(ozzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            string[] ozzzzzzzzzzzzzzzzzzzzzzzzzzf_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.In<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as IEnumerable<string>);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-            DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = TermBirth?.Value;
-            object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Not((bool?)(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is null));
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.In<string>(ozzzzzzzzzzzzzzzzzzzzzzzzzze_, ozzzzzzzzzzzzzzzzzzzzzzzzzzf_ as IEnumerable<string>);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And(ozzzzzzzzzzzzzzzzzzzzzzzzzza_, ozzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzi_ = TermBirth?.Value;
+            object ozzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not((bool?)(ozzzzzzzzzzzzzzzzzzzzzzzzzzj_ is null));
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(ozzzzzzzzzzzzzzzzzzzzzzzzzzh_, ozzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-            return fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+            return ozzzzzzzzzzzzzzzzzzzzzzzzzzl_;
         };
-        IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Where<Observation>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-        object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_(Observation @this)
+        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Where<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzzzi_, nzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+        object nzzzzzzzzzzzzzzzzzzzzzzzzzzl_(Observation @this)
         {
-            object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
+            object pzzzzzzzzzzzzzzzzzzzzzzzzzze_()
             {
-                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
+                bool pzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlDateTime;
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool pzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+                    return pzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
+                bool pzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlInterval<CqlDateTime>;
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                    bool pzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlInterval<CqlDateTime>;
 
-                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
+                    return pzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
                 };
-                bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
+                bool pzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
-                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ is CqlDateTime;
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    bool pzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlDateTime;
 
-                    return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
+                    return pzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                if (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
+                if (pzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = @this?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
+                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                 }
-                else if (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
+                else if (pzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Effective;
-                    object gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                    return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as CqlInterval<CqlDateTime>) as object;
+                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
+                else if (pzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
                 {
-                    DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
-                    object hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
+                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
+                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.earliest(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_());
+            CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.earliest(context, pzzzzzzzzzzzzzzzzzzzzzzzzzze_());
 
-            return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
+            return pzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
         };
-        IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.SortBy<Observation>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Last<Observation>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
-        DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_?.Value;
-        object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.SortBy<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzzzk_, nzzzzzzzzzzzzzzzzzzzzzzzzzzl_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation nzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Last<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+        DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzn_?.Value;
+        object nzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ as int?;
+        return nzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as int?;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Singleton Delivery Encounters at 37 Plus Weeks Gravida 1 Parity 0, No Previous Births")]
+    [CqlExpressionDefinition("Singleton Delivery Encounters at 37 Plus Weeks Gravida 1 Parity 0, No Previous Births")]
     public IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(CqlContext context)
     {
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Encounter_with_Singleton_Delivery(context);
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Intersect<Encounter>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-        bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Encounter SingletonEncounterGE37Weeks)
+        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
+        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Encounter_with_Singleton_Delivery(context);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Intersect<Encounter>(pzzzzzzzzzzzzzzzzzzzzzzzzzzy_, pzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Encounter SingletonEncounterGE37Weeks)
         {
-            int? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.lastGravida(context, SingletonEncounterGE37Weeks);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, 1);
-            int? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.lastParity(context, SingletonEncounterGE37Weeks);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, 0);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-            int? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.lastHistoryPretermBirth(context, SingletonEncounterGE37Weeks);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, 0);
-            int? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.lastHistoryTermBirth(context, SingletonEncounterGE37Weeks);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, 0);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            int? qzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.lastGravida(context, SingletonEncounterGE37Weeks);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzd_, 1);
+            int? qzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.lastParity(context, SingletonEncounterGE37Weeks);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzf_, 0);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Or(qzzzzzzzzzzzzzzzzzzzzzzzzzze_, qzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            int? qzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.lastHistoryPretermBirth(context, SingletonEncounterGE37Weeks);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzi_, 0);
+            int? qzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.lastHistoryTermBirth(context, SingletonEncounterGE37Weeks);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzk_, 0);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(qzzzzzzzzzzzzzzzzzzzzzzzzzzj_, qzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Or(qzzzzzzzzzzzzzzzzzzzzzzzzzzh_, qzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-            return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
         };
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzza_, qzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-        return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Encounter with Abnormal Presentation")]
+    [CqlExpressionDefinition("Encounter with Abnormal Presentation")]
     public IEnumerable<Encounter> Encounter_with_Abnormal_Presentation(CqlContext context)
     {
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
-        bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Encounter ThirtysevenWeeksPlusEncounter)
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
+        bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter ThirtysevenWeeksPlusEncounter)
         {
-            object hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
+            object qzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
             {
-                bool izzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
+                bool rzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                 {
-                    CqlValueSet izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Observation AbnormalPresentation)
+                    CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzg_(Observation AbnormalPresentation)
                     {
-                        object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                        object rzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                         {
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
+                            bool rzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool szzzzzzzzzzzzzzzzzzzzzzzzzze_ = szzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return szzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
+                            bool szzzzzzzzzzzzzzzzzzzzzzzzzza_()
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
-                                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlInterval<CqlDateTime>;
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzh_ = szzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlInterval<CqlDateTime>;
 
-                                return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
+                                return szzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                             };
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
+                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                                bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzk_ = szzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
 
-                                return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                                return szzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                             };
-                            if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
+                            if (rzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzl_);
 
-                                return (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
+                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
                             }
-                            else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
+                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzza_())
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzn_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-                                return (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlInterval<CqlDateTime>) as object;
+                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
+                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.Effective;
-                                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AbnormalPresentation?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-                                return (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
+                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.earliest(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
-                        CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.SameOrBefore(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, default);
-                        Code<ObservationStatus> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_?.Value;
-                        Code<ObservationStatus> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<Code<ObservationStatus>>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                        string izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Convert<string>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
-                        string[] izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = [
+                        CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.earliest(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzo_());
+                        CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.SameOrBefore(rzzzzzzzzzzzzzzzzzzzzzzzzzzp_, rzzzzzzzzzzzzzzzzzzzzzzzzzzq_, default);
+                        Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? rzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.Value;
+                        Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<Code<ObservationStatus>>(rzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                        string rzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                        string[] rzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<string>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as IEnumerable<string>);
-                        bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.And(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.In<string>(rzzzzzzzzzzzzzzzzzzzzzzzzzzv_, rzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as IEnumerable<string>);
+                        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzzzzzzzr_, rzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-                        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                        return rzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                     };
-                    IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Where<Observation>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                    object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_(Observation @this)
+                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Where<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzf_, rzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                    object rzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Observation @this)
                     {
-                        object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
+                        object szzzzzzzzzzzzzzzzzzzzzzzzzzr_()
                         {
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
+                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzt_()
                             {
-                                DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                                bool kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
+                                object szzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzy_ = szzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
 
-                                return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                                return szzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                             };
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                             {
-                                DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                                bool kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlInterval<CqlDateTime>;
+                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
+                                object tzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = tzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlInterval<CqlDateTime>;
 
-                                return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+                                return tzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                             };
-                            bool jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
+                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzv_()
                             {
-                                DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
+                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool tzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return tzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
+                            if (szzzzzzzzzzzzzzzzzzzzzzzzzzt_())
                             {
-                                DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
+                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                                return (kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
+                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
                             }
-                            else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_())
+                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                             {
-                                DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Effective;
+                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
 
-                                return (kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlInterval<CqlDateTime>) as object;
+                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
+                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzv_())
                             {
-                                DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
-                                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
+                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                                return (kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
+                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.earliest(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_());
+                        CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.earliest(context, szzzzzzzzzzzzzzzzzzzzzzzzzzr_());
 
-                        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                        return szzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                     };
-                    IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.SortBy<Observation>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Last<Observation>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                    DataType izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_?.Effective;
-                    object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                    bool izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is CqlDateTime;
+                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.SortBy<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzh_, rzzzzzzzzzzzzzzzzzzzzzzzzzzi_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation rzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Last<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzk_?.Effective;
+                    object rzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    bool rzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
 
-                    return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+                    return rzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                bool izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
+                bool rzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    CqlValueSet kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Observation AbnormalPresentation)
+                    CqlValueSet tzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Observation AbnormalPresentation)
                     {
-                        object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
+                        object tzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
                         {
-                            bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
+                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = AbnormalPresentation?.Effective;
-                                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlDateTime;
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                                return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                             };
-                            bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
+                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AbnormalPresentation?.Effective;
-                                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlInterval<CqlDateTime>;
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlInterval<CqlDateTime>;
 
-                                return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
+                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
                             };
-                            bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
+                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.Effective;
-                                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
-                                bool lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ is CqlDateTime;
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlDateTime;
 
-                                return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
+                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                             };
-                            if (lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
+                            if (uzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = AbnormalPresentation?.Effective;
-                                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                                return (lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
+                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                             }
-                            else if (lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
+                            else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = AbnormalPresentation?.Effective;
-                                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                                return (lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as CqlInterval<CqlDateTime>) as object;
+                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
+                            else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
                             {
-                                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = AbnormalPresentation?.Effective;
+                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                                return (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
+                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.earliest(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_());
-                        CqlDateTime lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.SameOrBefore(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, default);
-                        Code<ObservationStatus> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_?.Value;
-                        Code<ObservationStatus> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Convert<Code<ObservationStatus>>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
-                        string lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Convert<string>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
-                        string[] lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = [
+                        CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = QICoreCommon_2_1_000.Instance.earliest(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzv_());
+                        CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.SameOrBefore(tzzzzzzzzzzzzzzzzzzzzzzzzzzw_, tzzzzzzzzzzzzzzzzzzzzzzzzzzx_, default);
+                        Code<ObservationStatus> tzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? uzzzzzzzzzzzzzzzzzzzzzzzzzza_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.Value;
+                        Code<ObservationStatus> uzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Convert<Code<ObservationStatus>>(uzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                        string uzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Convert<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                        string[] uzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.In<string>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as IEnumerable<string>);
-                        bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.In<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzc_, uzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as IEnumerable<string>);
+                        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.And(tzzzzzzzzzzzzzzzzzzzzzzzzzzy_, uzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-                        return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
+                        return uzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                     };
-                    IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Observation @this)
+                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Observation @this)
                     {
-                        object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
+                        object uzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
                         {
-                            bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
+                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
-                                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ is CqlDateTime;
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = vzzzzzzzzzzzzzzzzzzzzzzzzzze_ is CqlDateTime;
 
-                                return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
+                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                             };
-                            bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
+                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlInterval<CqlDateTime>;
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzh_ is CqlInterval<CqlDateTime>;
 
-                                return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
+                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
                             };
-                            bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
+                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                                bool mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlDateTime;
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                                return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                             };
-                            if (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
+                            if (vzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                                return (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
+                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
                             }
-                            else if (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
+                            else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                                return (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ as CqlInterval<CqlDateTime>) as object;
+                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_())
+                            else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                             {
-                                DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
-                                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
+                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                                return (mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
+                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = QICoreCommon_2_1_000.Instance.earliest(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_());
+                        CqlDateTime uzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.earliest(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzy_());
 
-                        return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
+                        return uzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
                     };
-                    IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.SortBy<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Last<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Effective;
-                    object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
-                    bool kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ is CqlInterval<CqlDateTime>;
+                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.SortBy<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzo_, tzzzzzzzzzzzzzzzzzzzzzzzzzzp_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation tzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Last<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzr_?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzt_ is CqlInterval<CqlDateTime>;
 
-                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
                 };
-                bool izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
+                bool rzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
                 {
-                    CqlValueSet mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Observation AbnormalPresentation)
+                    CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Observation AbnormalPresentation)
                     {
-                        object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
+                        object wzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                         {
-                            bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
+                            bool wzzzzzzzzzzzzzzzzzzzzzzzzzzn_()
                             {
-                                DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = AbnormalPresentation?.Effective;
-                                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                                bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
+                                DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = AbnormalPresentation?.Effective;
+                                object wzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                bool wzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
 
-                                return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                                return wzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                             };
-                            bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                            bool wzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                             {
-                                DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = AbnormalPresentation?.Effective;
-                                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                                bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlInterval<CqlDateTime>;
+                                DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = AbnormalPresentation?.Effective;
+                                object wzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                                bool wzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlInterval<CqlDateTime>;
 
-                                return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
+                                return wzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                             };
-                            bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
+                            bool wzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
                             {
-                                DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
+                                DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = AbnormalPresentation?.Effective;
+                                object wzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                bool wzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
 
-                                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                                return wzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                             };
-                            if (nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_())
+                            if (wzzzzzzzzzzzzzzzzzzzzzzzzzzn_())
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
 
-                                return (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CqlDateTime) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
                             }
-                            else if (nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())
+                            else if (wzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = AbnormalPresentation?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = AbnormalPresentation?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-                                return (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlInterval<CqlDateTime>) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
+                            else if (wzzzzzzzzzzzzzzzzzzzzzzzzzzp_())
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = AbnormalPresentation?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = AbnormalPresentation?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-                                return (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlDateTime) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = QICoreCommon_2_1_000.Instance.earliest(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_());
-                        CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.SameOrBefore(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, default);
-                        Code<ObservationStatus> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_?.Value;
-                        Code<ObservationStatus> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Convert<Code<ObservationStatus>>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-                        string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Convert<string>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                        string[] nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = [
+                        CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzc_());
+                        CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzze_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SameOrBefore(wzzzzzzzzzzzzzzzzzzzzzzzzzzd_, wzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
+                        Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? wzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzg_?.Value;
+                        Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<Code<ObservationStatus>>(wzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                        string wzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                        string[] wzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.In<string>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as IEnumerable<string>);
-                        bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.In<string>(wzzzzzzzzzzzzzzzzzzzzzzzzzzj_, wzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as IEnumerable<string>);
+                        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzf_, wzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
 
-                        return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
+                        return wzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                     };
-                    IEnumerable<Observation> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Observation>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
-                    object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Observation @this)
+                    IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Observation>(vzzzzzzzzzzzzzzzzzzzzzzzzzzt_, vzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Observation @this)
                     {
-                        object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
+                        object xzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
                         {
-                            bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
+                            bool xzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlDateTime;
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzl_ is CqlDateTime;
 
-                                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
+                                return xzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                             };
-                            bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
+                            bool xzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlInterval<CqlDateTime>;
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlInterval<CqlDateTime>;
 
-                                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
+                                return xzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                             };
-                            bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_()
+                            bool xzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                                bool ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
 
-                                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                                return xzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                             };
-                            if (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
+                            if (xzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-                                return (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
                             }
-                            else if (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
+                            else if (xzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
                             {
-                                DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = @this?.Effective;
-                                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
 
-                                return (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlInterval<CqlDateTime>) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_())
+                            else if (xzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
                             {
-                                DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = @this?.Effective;
-                                object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Effective;
+                                object xzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-                                return (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlDateTime) as object;
+                                return (xzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.earliest(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_());
+                        CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = QICoreCommon_2_1_000.Instance.earliest(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzf_());
 
-                        return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
+                        return xzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
                     };
-                    IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.SortBy<Observation>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Last<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
-                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_?.Effective;
-                    object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                    bool nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
+                    IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.SortBy<Observation>(vzzzzzzzzzzzzzzzzzzzzzzzzzzv_, vzzzzzzzzzzzzzzzzzzzzzzzzzzw_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation vzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Last<Observation>(vzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzy_?.Effective;
+                    object wzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                    bool wzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = wzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
 
-                    return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+                    return wzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                 };
-                if (izzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
+                if (rzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                 {
-                    CqlValueSet pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Observation AbnormalPresentation)
+                    CqlValueSet xzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> yzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, xzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Observation AbnormalPresentation)
                     {
-                        object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
+                        object yzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                         {
-                            bool pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
+                            bool yzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
                             {
-                                DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                                bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
+                                DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = AbnormalPresentation?.Effective;
+                                object yzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
 
-                                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                                return yzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                             };
-                            bool pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+                            bool yzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                                bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlInterval<CqlDateTime>;
+                                DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = AbnormalPresentation?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = zzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlInterval<CqlDateTime>;
 
-                                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+                                return zzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                             };
-                            bool pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
+                            bool yzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool zzzzzzzzzzzzzzzzzzzzzzzzzzze_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return zzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            if (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
+                            if (yzzzzzzzzzzzzzzzzzzzzzzzzzzt_())
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                                return (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
+                                return (zzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
                             }
-                            else if (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_())
+                            else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = AbnormalPresentation?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
 
-                                return (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlInterval<CqlDateTime>) as object;
+                                return (zzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
+                            else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzv_())
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = AbnormalPresentation?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = AbnormalPresentation?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                                return (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
+                                return (zzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.earliest(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_());
-                        CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.SameOrBefore(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, default);
-                        Code<ObservationStatus> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_?.Value;
-                        Code<ObservationStatus> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<Code<ObservationStatus>>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                        string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                        string[] pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = [
+                        CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.earliest(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzi_());
+                        CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.SameOrBefore(yzzzzzzzzzzzzzzzzzzzzzzzzzzj_, yzzzzzzzzzzzzzzzzzzzzzzzzzzk_, default);
+                        Code<ObservationStatus> yzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? yzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
+                        Code<ObservationStatus> yzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<Code<ObservationStatus>>(yzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                        string yzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<string>(yzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                        string[] yzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.In<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as IEnumerable<string>);
-                        bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                        bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<string>(yzzzzzzzzzzzzzzzzzzzzzzzzzzp_, yzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as IEnumerable<string>);
+                        bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(yzzzzzzzzzzzzzzzzzzzzzzzzzzl_, yzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-                        return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                        return yzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                     };
-                    IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
-                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_(Observation @this)
+                    IEnumerable<Observation> yzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Observation>(yzzzzzzzzzzzzzzzzzzzzzzzzzza_, yzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzd_(Observation @this)
                     {
-                        object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
+                        object zzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
                         {
-                            bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
+                            bool zzzzzzzzzzzzzzzzzzzzzzzzzzzn_()
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                                bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
 
-                                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                                return zzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                             };
-                            bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                            bool zzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
-                                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                                bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlInterval<CqlDateTime>;
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlInterval<CqlDateTime>;
 
-                                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
+                                return zzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                             };
-                            bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
+                            bool zzzzzzzzzzzzzzzzzzzzzzzzzzzp_()
                             {
-                                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
-                                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                                bool rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
+                                object zzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
 
-                                return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                                return zzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                             };
-                            if (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_())
+                            if (zzzzzzzzzzzzzzzzzzzzzzzzzzzn_())
                             {
-                                DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
-                                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
+                                object azzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
 
-                                return (rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CqlDateTime) as object;
+                                return (azzzzzzzzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
                             }
-                            else if (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())
+                            else if (zzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                             {
-                                DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = @this?.Effective;
-                                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                                DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = @this?.Effective;
+                                object azzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-                                return (rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlInterval<CqlDateTime>) as object;
+                                return (azzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
+                            else if (zzzzzzzzzzzzzzzzzzzzzzzzzzzp_())
                             {
-                                DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = @this?.Effective;
-                                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                                DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = @this?.Effective;
+                                object azzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-                                return (rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlDateTime) as object;
+                                return (azzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.earliest(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_());
+                        CqlDateTime zzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.earliest(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzl_());
 
-                        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
+                        return zzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                     };
-                    IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.SortBy<Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Last<Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
-                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_?.Effective;
-                    object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    IEnumerable<Observation> yzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SortBy<Observation>(yzzzzzzzzzzzzzzzzzzzzzzzzzzc_, yzzzzzzzzzzzzzzzzzzzzzzzzzzd_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation yzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Last<Observation>(yzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzf_?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                    return (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
+                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlDateTime) as object;
                 }
-                else if (izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_())
+                else if (rzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                 {
-                    CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(Observation AbnormalPresentation)
+                    CqlValueSet azzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> azzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, azzzzzzzzzzzzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzh_(Observation AbnormalPresentation)
                     {
-                        object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
+                        object azzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                         {
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
+                            bool azzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return bzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
+                            bool bzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
-                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlInterval<CqlDateTime>;
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlInterval<CqlDateTime>;
 
-                                return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
+                                return bzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                             };
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
+                            bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                                bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
 
-                                return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                                return bzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                             };
-                            if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
+                            if (azzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
 
-                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
+                                return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
                             }
-                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
+                            else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlInterval<CqlDateTime>) as object;
+                                return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
+                            else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.Effective;
-                                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AbnormalPresentation?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-                                return (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
+                                return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.earliest(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
-                        CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.SameOrBefore(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, default);
-                        Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_?.Value;
-                        Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<Code<ObservationStatus>>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                        string rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
-                        string[] rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = [
+                        CqlDateTime azzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.earliest(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzo_());
+                        CqlDateTime azzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.SameOrBefore(azzzzzzzzzzzzzzzzzzzzzzzzzzzp_, azzzzzzzzzzzzzzzzzzzzzzzzzzzq_, default);
+                        Code<ObservationStatus> azzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? azzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.Value;
+                        Code<ObservationStatus> azzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<Code<ObservationStatus>>(azzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                        string azzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(azzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                        string[] azzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<string>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as IEnumerable<string>);
-                        bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                        bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.In<string>(azzzzzzzzzzzzzzzzzzzzzzzzzzzv_, azzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as IEnumerable<string>);
+                        bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(azzzzzzzzzzzzzzzzzzzzzzzzzzzr_, azzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-                        return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                        return azzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                     };
-                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
-                    object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Observation @this)
+                    IEnumerable<Observation> azzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Where<Observation>(azzzzzzzzzzzzzzzzzzzzzzzzzzzg_, azzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Observation @this)
                     {
-                        object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
+                        object bzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
                         {
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
+                            bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
                             {
-                                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Effective;
+                                object bzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
 
-                                return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                                return bzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                             };
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+                            bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                             {
-                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlInterval<CqlDateTime>;
+                                DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
+                                object czzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                                bool czzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = czzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlInterval<CqlDateTime>;
 
-                                return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+                                return czzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                             };
-                            bool szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
+                            bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
                             {
-                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
+                                object czzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool czzzzzzzzzzzzzzzzzzzzzzzzzzze_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return czzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
+                            if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzt_())
                             {
-                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
+                                object czzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
+                                return (czzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
                             }
-                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_())
+                            else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                             {
-                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                                DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Effective;
+                                object czzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
 
-                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlInterval<CqlDateTime>) as object;
+                                return (czzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
+                            else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzv_())
                             {
-                                DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Effective;
-                                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                                DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
+                                object czzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                                return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
+                                return (czzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.earliest(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_());
+                        CqlDateTime bzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.earliest(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
 
-                        return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
+                        return bzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                     };
-                    IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.SortBy<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Last<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                    DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.Effective;
-                    object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    IEnumerable<Observation> azzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.SortBy<Observation>(azzzzzzzzzzzzzzzzzzzzzzzzzzzi_, azzzzzzzzzzzzzzzzzzzzzzzzzzzj_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation azzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Last<Observation>(azzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzl_?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                    return (rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlInterval<CqlDateTime>) as object;
+                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
+                else if (rzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
                 {
-                    CqlValueSet tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Abnormal_Presentation(context);
-                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-                    bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Observation AbnormalPresentation)
+                    CqlValueSet czzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, czzzzzzzzzzzzzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+                    bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Observation AbnormalPresentation)
                     {
-                        object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
+                        object czzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                         {
-                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
+                            bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzf_()
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
 
-                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                                return dzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                             };
-                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
+                            bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is CqlInterval<CqlDateTime>;
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlInterval<CqlDateTime>;
 
-                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+                                return dzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                             };
-                            bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
+                            bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is CqlDateTime;
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is CqlDateTime;
 
-                                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
+                                return dzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                             };
-                            if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
+                            if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzf_())
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlDateTime) as object;
+                                return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ as CqlDateTime) as object;
                             }
-                            else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
+                            else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlInterval<CqlDateTime>) as object;
+                                return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
+                            else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                             {
-                                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = AbnormalPresentation?.Effective;
-                                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                                DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = AbnormalPresentation?.Effective;
+                                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
 
-                                return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlDateTime) as object;
+                                return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.earliest(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_());
-                        CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
-                        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.SameOrBefore(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default);
-                        Code<ObservationStatus> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_?.Value;
-                        Code<ObservationStatus> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Convert<Code<ObservationStatus>>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-                        string uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Convert<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
-                        string[] uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = [
+                        CqlDateTime czzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.earliest(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzu_());
+                        CqlDateTime czzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, ThirtysevenWeeksPlusEncounter);
+                        bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.SameOrBefore(czzzzzzzzzzzzzzzzzzzzzzzzzzzv_, czzzzzzzzzzzzzzzzzzzzzzzzzzzw_, default);
+                        Code<ObservationStatus> czzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? czzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzy_?.Value;
+                        Code<ObservationStatus> dzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Convert<Code<ObservationStatus>>(czzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                        string dzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Convert<string>(dzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                        string[] dzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.In<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as IEnumerable<string>);
-                        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                        bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.In<string>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as IEnumerable<string>);
+                        bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And(czzzzzzzzzzzzzzzzzzzzzzzzzzzx_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-                        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                        return dzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                     };
-                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Observation @this)
+                    IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzm_, czzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    object czzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Observation @this)
                     {
-                        object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
+                        object dzzzzzzzzzzzzzzzzzzzzzzzzzzzx_()
                         {
-                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
+                            bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                                bool ezzzzzzzzzzzzzzzzzzzzzzzzzzze_ = ezzzzzzzzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
 
-                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
+                                return ezzzzzzzzzzzzzzzzzzzzzzzzzzze_;
                             };
-                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
+                            bool ezzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
-                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlInterval<CqlDateTime>;
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                                bool ezzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = ezzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlInterval<CqlDateTime>;
 
-                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
+                                return ezzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                             };
-                            bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
+                            bool ezzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                                bool ezzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = ezzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
 
-                                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                                return ezzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                             };
-                            if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
+                            if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
 
-                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
+                                return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
                             }
-                            else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
+                            else if (ezzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlInterval<CqlDateTime>) as object;
+                                return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CqlInterval<CqlDateTime>) as object;
                             }
-                            else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
+                            else if (ezzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                             {
-                                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Effective;
-                                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                                DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Effective;
+                                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-                                return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
+                                return (ezzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
                             }
                             else
                             {
                                 return null;
                             }
                         };
-                        CqlDateTime vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.earliest(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_());
+                        CqlDateTime dzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.earliest(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzx_());
 
-                        return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                        return dzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                     };
-                    IEnumerable<Observation> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.SortBy<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Last<Observation>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.SortBy<Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzo_, czzzzzzzzzzzzzzzzzzzzzzzzzzzp_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation czzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Last<Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzr_?.Effective;
+                    object czzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
+                    return (czzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.earliest(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_());
-            Period hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = ThirtysevenWeeksPlusEncounter?.Period;
-            CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.In<CqlDateTime>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, default);
-            IEnumerable<Condition> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, ThirtysevenWeeksPlusEncounter);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Condition EncounterDiagnosis)
+            CqlDateTime qzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.earliest(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
+            Period qzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = ThirtysevenWeeksPlusEncounter?.Period;
+            CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.In<CqlDateTime>(qzzzzzzzzzzzzzzzzzzzzzzzzzzs_, qzzzzzzzzzzzzzzzzzzzzzzzzzzu_, default);
+            IEnumerable<Condition> qzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, ThirtysevenWeeksPlusEncounter);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Condition EncounterDiagnosis)
             {
-                CodeableConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = EncounterDiagnosis?.Code;
-                CqlConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Abnormal_Presentation(context);
-                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                CodeableConcept ezzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = EncounterDiagnosis?.Code;
+                CqlConcept ezzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                CqlValueSet ezzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Abnormal_Presentation(context);
+                bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzzzzzzzzzzzzzs_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
+                return ezzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
             };
-            IEnumerable<Condition> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Condition>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Exists<Condition>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Or(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+            IEnumerable<Condition> qzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Condition>(qzzzzzzzzzzzzzzzzzzzzzzzzzzw_, qzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Exists<Condition>(qzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            bool? rzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Or(qzzzzzzzzzzzzzzzzzzzzzzzzzzv_, qzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
 
-            return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
+            return rzzzzzzzzzzzzzzzzzzzzzzzzzza_;
         };
-        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Encounter>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzzo_, qzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-        return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Encounter with Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
+    [CqlExpressionDefinition("Encounter with Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
     public IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
     {
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
-        bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Encounter ThirtysevenWeeksPlusEncounter)
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
+        bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Encounter ThirtysevenWeeksPlusEncounter)
         {
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, ThirtysevenWeeksPlusEncounter);
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Condition EncounterDiagnosis)
+            IEnumerable<Condition> ezzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, ThirtysevenWeeksPlusEncounter);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Condition EncounterDiagnosis)
             {
-                CodeableConcept wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = EncounterDiagnosis?.Code;
-                CqlConcept wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                CqlValueSet wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(context);
-                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.ConceptInValueSet(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
-                CqlConcept wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                CqlValueSet wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Genital_Herpes(context);
-                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Or(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                CodeableConcept fzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = EncounterDiagnosis?.Code;
+                CqlConcept fzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(context);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, fzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                CqlConcept fzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Genital_Herpes(context);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Or(fzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+                return fzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
             };
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Where<Condition>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Exists<Condition>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            IEnumerable<Condition> fzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Condition>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzy_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Exists<Condition>(fzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-            return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
+            return fzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
         };
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzv_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Abnormal Presentation, Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
+    [CqlExpressionDefinition("Delivery Encounter with Abnormal Presentation, Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Encounter_with_Abnormal_Presentation(context);
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Union<Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Encounter_with_Abnormal_Presentation(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Union<Encounter>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Denominator Exclusions")]
+    [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Initial Population")]
+    [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Delivery Encounter with Cesarean Birth")]
+    [CqlExpressionDefinition("Delivery Encounter with Cesarean Birth")]
     public IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_(Encounter ThirtysevenWeeksPlusEncounter)
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Encounter ThirtysevenWeeksPlusEncounter)
         {
-            CqlValueSet wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Cesarean_Birth(context);
-            IEnumerable<Procedure> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Procedure CSection)
+            CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Cesarean_Birth(context);
+            IEnumerable<Procedure> fzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, fzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+            bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Procedure CSection)
             {
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = PCMaternal_5_19_000.Instance.hospitalizationWithEDOBTriageObservation(context, ThirtysevenWeeksPlusEncounter);
-                DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = CSection?.Performed;
-                object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, default);
-                Code<EventStatus> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = CSection?.StatusElement;
-                EventStatus? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_?.Value;
-                string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "completed");
-                bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = PCMaternal_5_19_000.Instance.hospitalizationWithEDOBTriageObservation(context, ThirtysevenWeeksPlusEncounter);
+                DataType gzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = CSection?.Performed;
+                object gzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(gzzzzzzzzzzzzzzzzzzzzzzzzzzza_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, default);
+                Code<EventStatus> gzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = CSection?.StatusElement;
+                EventStatus? gzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzzf_?.Value;
+                string gzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Convert<string>(gzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Equal(gzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, "completed");
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(gzzzzzzzzzzzzzzzzzzzzzzzzzzze_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
+                return gzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
             };
-            IEnumerable<Procedure> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Procedure>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
-            Encounter xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Procedure CSection) =>
+            IEnumerable<Procedure> fzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Procedure>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            Encounter fzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Procedure CSection) =>
                 ThirtysevenWeeksPlusEncounter;
-            IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Procedure, Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Select<Procedure, Encounter>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
+            return fzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.SelectMany<Encounter, Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.SelectMany<Encounter, Encounter>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
+        return fzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
-        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.Delivery_Encounter_with_Cesarean_Birth(context);
+        IEnumerable<Encounter> gzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Delivery_Encounter_with_Cesarean_Birth(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? gzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> gzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? gzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode gzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Variable Calculated Gestational Age")]
+    [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = PCMaternal_5_19_000.Instance.Variable_Calculated_Gestational_Age(context);
+        IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> gzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = PCMaternal_5_19_000.Instance.Variable_Calculated_Gestational_Age(context);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
     }
 
 

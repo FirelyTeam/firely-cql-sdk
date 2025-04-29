@@ -13,11 +13,11 @@ namespace Hl7.Cql.Abstractions;
 /// </summary>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
 public class CqlCodeDefinitionAttribute(
-    string definitionName,
+    string name,
     string codeId,
     string? codeSystem = null,
     string? codeVersion = null,
-    string? codeDisplay = null) : CqlDefinitionAttribute(definitionName)
+    string? codeDisplay = null) : CqlDefinitionAttribute(name)
 {
     public string CodeId { get; } = codeId;
     public string? CodeSystem { get; } = codeSystem;

@@ -1,11 +1,12 @@
 ﻿namespace Hl7.Cql.Abstractions;
 
+/// <seealso cref="CqlDefinitionAttribute"/>
 internal abstract class CqlDefinition(
     LambdaExpression lambda,
-    string definitionName) : Expression
+    string name) : Expression
 {
     public new LambdaExpression Lambda { get; } = lambda;
-    public string DefinitionName { get; } = definitionName;
+    public string Name { get; } = name;
     public override Expression Reduce() => Lambda;
 
     public override bool CanReduce => true;

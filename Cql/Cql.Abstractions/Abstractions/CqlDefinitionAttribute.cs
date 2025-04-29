@@ -13,11 +13,11 @@ namespace Hl7.Cql.Abstractions
     /// Base attribute which declares that this method or property is translated from an ELM definition
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class CqlDefinitionAttribute(string definitionName) : Attribute
+    public class CqlDefinitionAttribute(string name) : Attribute
     {
         /// <summary>
         /// The name of the definition.
         /// </summary>
-        public string DefinitionName { get; } = definitionName;
+        public string Name { get; } = name;
     }
 }

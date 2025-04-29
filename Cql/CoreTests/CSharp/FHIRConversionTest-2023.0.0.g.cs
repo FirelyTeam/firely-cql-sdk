@@ -30,7305 +30,7305 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     #region Expressions
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AccountResource")]
     public Account AccountResource(CqlContext context, Account arg)
     {
-        Account[] vj_ = [
+        Account[] vh_ = [
             arg,
         ];
-        Account vk_(Account a)
+        Account vi_(Account a)
         {
-            List<Identifier> vo_ = a?.Identifier;
-            Code<Account.AccountStatus> vp_ = a?.StatusElement;
-            CodeableConcept vq_ = a?.Type;
-            FhirString vr_ = a?.NameElement;
-            List<ResourceReference> vs_ = a?.Subject;
-            Period vt_ = a?.ServicePeriod;
-            List<Account.CoverageComponent> vu_ = a?.Coverage;
-            ResourceReference vv_ = a?.Owner;
-            FhirString vw_ = a?.DescriptionElement;
-            List<Account.GuarantorComponent> vx_ = a?.Guarantor;
-            ResourceReference vy_ = a?.PartOf;
-            Account vz_ = new Account
+            List<Identifier> vm_ = a?.Identifier;
+            Code<Account.AccountStatus> vn_ = a?.StatusElement;
+            CodeableConcept vo_ = a?.Type;
+            FhirString vp_ = a?.NameElement;
+            List<ResourceReference> vq_ = a?.Subject;
+            Period vr_ = a?.ServicePeriod;
+            List<Account.CoverageComponent> vs_ = a?.Coverage;
+            ResourceReference vt_ = a?.Owner;
+            FhirString vu_ = a?.DescriptionElement;
+            List<Account.GuarantorComponent> vv_ = a?.Guarantor;
+            ResourceReference vw_ = a?.PartOf;
+            Account vx_ = new Account
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)vo_),
-                StatusElement = vp_,
-                Type = vq_,
-                NameElement = vr_,
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)vs_),
-                ServicePeriod = vt_,
-                Coverage = new List<Account.CoverageComponent>((IEnumerable<Account.CoverageComponent>)vu_),
-                Owner = vv_,
-                DescriptionElement = vw_,
-                Guarantor = new List<Account.GuarantorComponent>((IEnumerable<Account.GuarantorComponent>)vx_),
-                PartOf = vy_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)vm_),
+                StatusElement = vn_,
+                Type = vo_,
+                NameElement = vp_,
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)vq_),
+                ServicePeriod = vr_,
+                Coverage = new List<Account.CoverageComponent>((IEnumerable<Account.CoverageComponent>)vs_),
+                Owner = vt_,
+                DescriptionElement = vu_,
+                Guarantor = new List<Account.GuarantorComponent>((IEnumerable<Account.GuarantorComponent>)vv_),
+                PartOf = vw_,
             };
 
-            return vz_;
+            return vx_;
         };
-        IEnumerable<Account> vl_ = context.Operators.Select<Account, Account>((IEnumerable<Account>)vj_, vk_);
-        IEnumerable<Account> vm_ = context.Operators.Distinct<Account>(vl_);
-        Account vn_ = context.Operators.SingletonFrom<Account>(vm_);
+        IEnumerable<Account> vj_ = context.Operators.Select<Account, Account>((IEnumerable<Account>)vh_, vi_);
+        IEnumerable<Account> vk_ = context.Operators.Distinct<Account>(vj_);
+        Account vl_ = context.Operators.SingletonFrom<Account>(vk_);
 
-        return vn_;
+        return vl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ActivityDefinitionResource")]
     public ActivityDefinition ActivityDefinitionResource(CqlContext context, ActivityDefinition arg)
     {
-        ActivityDefinition[] wa_ = [
+        ActivityDefinition[] vy_ = [
             arg,
         ];
-        ActivityDefinition wb_(ActivityDefinition a)
+        ActivityDefinition vz_(ActivityDefinition a)
         {
-            FhirUri wf_ = a?.UrlElement;
-            List<Identifier> wg_ = a?.Identifier;
-            FhirString wh_ = a?.VersionElement;
-            FhirString wi_ = a?.NameElement;
-            FhirString wj_ = a?.TitleElement;
-            FhirString wk_ = a?.SubtitleElement;
-            Code<PublicationStatus> wl_ = a?.StatusElement;
-            FhirBoolean wm_ = a?.ExperimentalElement;
-            DataType wn_ = a?.Subject;
-            FhirDateTime wo_ = a?.DateElement;
-            FhirString wp_ = a?.PublisherElement;
-            List<ContactDetail> wq_ = a?.Contact;
-            Markdown wr_ = a?.DescriptionElement;
-            List<UsageContext> ws_ = a?.UseContext;
-            List<CodeableConcept> wt_ = a?.Jurisdiction;
-            Markdown wu_ = a?.PurposeElement;
-            FhirString wv_ = a?.UsageElement;
-            Markdown ww_ = a?.CopyrightElement;
-            Date wx_ = a?.ApprovalDateElement;
-            Date wy_ = a?.LastReviewDateElement;
-            Period wz_ = a?.EffectivePeriod;
-            List<CodeableConcept> xa_ = a?.Topic;
-            List<ContactDetail> xb_ = a?.Author;
-            List<ContactDetail> xc_ = a?.Editor;
-            List<ContactDetail> xd_ = a?.Reviewer;
-            List<ContactDetail> xe_ = a?.Endorser;
-            List<RelatedArtifact> xf_ = a?.RelatedArtifact;
-            List<Canonical> xg_ = a?.LibraryElement;
-            Code<ActivityDefinition.RequestResourceType> xh_ = a?.KindElement;
-            Canonical xi_ = a?.ProfileElement;
-            CodeableConcept xj_ = a?.Code;
-            Code<RequestIntent> xk_ = a?.IntentElement;
-            Code<RequestPriority> xl_ = a?.PriorityElement;
-            FhirBoolean xm_ = a?.DoNotPerformElement;
-            DataType xn_ = a?.Timing;
-            ResourceReference xo_ = a?.Location;
-            List<ActivityDefinition.ParticipantComponent> xp_ = a?.Participant;
-            DataType xq_ = a?.Product;
-            Quantity xr_ = a?.Quantity;
-            List<Dosage> xs_ = a?.Dosage;
-            List<CodeableConcept> xt_ = a?.BodySite;
-            List<ResourceReference> xu_ = a?.SpecimenRequirement;
-            List<ResourceReference> xv_ = a?.ObservationRequirement;
-            List<ResourceReference> xw_ = a?.ObservationResultRequirement;
-            Canonical xx_ = a?.TransformElement;
-            List<ActivityDefinition.DynamicValueComponent> xy_ = a?.DynamicValue;
-            ActivityDefinition xz_ = new ActivityDefinition
+            FhirUri wd_ = a?.UrlElement;
+            List<Identifier> we_ = a?.Identifier;
+            FhirString wf_ = a?.VersionElement;
+            FhirString wg_ = a?.NameElement;
+            FhirString wh_ = a?.TitleElement;
+            FhirString wi_ = a?.SubtitleElement;
+            Code<PublicationStatus> wj_ = a?.StatusElement;
+            FhirBoolean wk_ = a?.ExperimentalElement;
+            DataType wl_ = a?.Subject;
+            FhirDateTime wm_ = a?.DateElement;
+            FhirString wn_ = a?.PublisherElement;
+            List<ContactDetail> wo_ = a?.Contact;
+            Markdown wp_ = a?.DescriptionElement;
+            List<UsageContext> wq_ = a?.UseContext;
+            List<CodeableConcept> wr_ = a?.Jurisdiction;
+            Markdown ws_ = a?.PurposeElement;
+            FhirString wt_ = a?.UsageElement;
+            Markdown wu_ = a?.CopyrightElement;
+            Date wv_ = a?.ApprovalDateElement;
+            Date ww_ = a?.LastReviewDateElement;
+            Period wx_ = a?.EffectivePeriod;
+            List<CodeableConcept> wy_ = a?.Topic;
+            List<ContactDetail> wz_ = a?.Author;
+            List<ContactDetail> xa_ = a?.Editor;
+            List<ContactDetail> xb_ = a?.Reviewer;
+            List<ContactDetail> xc_ = a?.Endorser;
+            List<RelatedArtifact> xd_ = a?.RelatedArtifact;
+            List<Canonical> xe_ = a?.LibraryElement;
+            Code<ActivityDefinition.RequestResourceType> xf_ = a?.KindElement;
+            Canonical xg_ = a?.ProfileElement;
+            CodeableConcept xh_ = a?.Code;
+            Code<RequestIntent> xi_ = a?.IntentElement;
+            Code<RequestPriority> xj_ = a?.PriorityElement;
+            FhirBoolean xk_ = a?.DoNotPerformElement;
+            DataType xl_ = a?.Timing;
+            ResourceReference xm_ = a?.Location;
+            List<ActivityDefinition.ParticipantComponent> xn_ = a?.Participant;
+            DataType xo_ = a?.Product;
+            Quantity xp_ = a?.Quantity;
+            List<Dosage> xq_ = a?.Dosage;
+            List<CodeableConcept> xr_ = a?.BodySite;
+            List<ResourceReference> xs_ = a?.SpecimenRequirement;
+            List<ResourceReference> xt_ = a?.ObservationRequirement;
+            List<ResourceReference> xu_ = a?.ObservationResultRequirement;
+            Canonical xv_ = a?.TransformElement;
+            List<ActivityDefinition.DynamicValueComponent> xw_ = a?.DynamicValue;
+            ActivityDefinition xx_ = new ActivityDefinition
             {
-                UrlElement = wf_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)wg_),
-                VersionElement = wh_,
-                NameElement = wi_,
-                TitleElement = wj_,
-                SubtitleElement = wk_,
-                StatusElement = wl_,
-                ExperimentalElement = wm_,
-                Subject = (DataType)wn_,
-                DateElement = wo_,
-                PublisherElement = wp_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)wq_),
-                DescriptionElement = wr_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)ws_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wt_),
-                PurposeElement = wu_,
-                UsageElement = wv_,
-                CopyrightElement = ww_,
-                ApprovalDateElement = wx_,
-                LastReviewDateElement = wy_,
-                EffectivePeriod = wz_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xa_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)xb_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)xc_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)xd_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)xe_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)xf_),
-                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)xg_),
-                KindElement = xh_,
-                ProfileElement = xi_,
-                Code = xj_,
-                IntentElement = xk_,
-                PriorityElement = xl_,
-                DoNotPerformElement = xm_,
-                Timing = (DataType)xn_,
-                Location = xo_,
-                Participant = new List<ActivityDefinition.ParticipantComponent>((IEnumerable<ActivityDefinition.ParticipantComponent>)xp_),
-                Product = (DataType)xq_,
-                Quantity = xr_,
-                Dosage = new List<Dosage>((IEnumerable<Dosage>)xs_),
-                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xt_),
-                SpecimenRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xu_),
-                ObservationRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xv_),
-                ObservationResultRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xw_),
-                TransformElement = xx_,
-                DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<ActivityDefinition.DynamicValueComponent>)xy_),
+                UrlElement = wd_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)we_),
+                VersionElement = wf_,
+                NameElement = wg_,
+                TitleElement = wh_,
+                SubtitleElement = wi_,
+                StatusElement = wj_,
+                ExperimentalElement = wk_,
+                Subject = (DataType)wl_,
+                DateElement = wm_,
+                PublisherElement = wn_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)wo_),
+                DescriptionElement = wp_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)wq_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wr_),
+                PurposeElement = ws_,
+                UsageElement = wt_,
+                CopyrightElement = wu_,
+                ApprovalDateElement = wv_,
+                LastReviewDateElement = ww_,
+                EffectivePeriod = wx_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wy_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)wz_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)xa_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)xb_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)xc_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)xd_),
+                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)xe_),
+                KindElement = xf_,
+                ProfileElement = xg_,
+                Code = xh_,
+                IntentElement = xi_,
+                PriorityElement = xj_,
+                DoNotPerformElement = xk_,
+                Timing = (DataType)xl_,
+                Location = xm_,
+                Participant = new List<ActivityDefinition.ParticipantComponent>((IEnumerable<ActivityDefinition.ParticipantComponent>)xn_),
+                Product = (DataType)xo_,
+                Quantity = xp_,
+                Dosage = new List<Dosage>((IEnumerable<Dosage>)xq_),
+                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xr_),
+                SpecimenRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xs_),
+                ObservationRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xt_),
+                ObservationResultRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)xu_),
+                TransformElement = xv_,
+                DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<ActivityDefinition.DynamicValueComponent>)xw_),
             };
 
-            return xz_;
+            return xx_;
         };
-        IEnumerable<ActivityDefinition> wc_ = context.Operators.Select<ActivityDefinition, ActivityDefinition>((IEnumerable<ActivityDefinition>)wa_, wb_);
-        IEnumerable<ActivityDefinition> wd_ = context.Operators.Distinct<ActivityDefinition>(wc_);
-        ActivityDefinition we_ = context.Operators.SingletonFrom<ActivityDefinition>(wd_);
+        IEnumerable<ActivityDefinition> wa_ = context.Operators.Select<ActivityDefinition, ActivityDefinition>((IEnumerable<ActivityDefinition>)vy_, vz_);
+        IEnumerable<ActivityDefinition> wb_ = context.Operators.Distinct<ActivityDefinition>(wa_);
+        ActivityDefinition wc_ = context.Operators.SingletonFrom<ActivityDefinition>(wb_);
 
-        return we_;
+        return wc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AdverseEventResource")]
     public AdverseEvent AdverseEventResource(CqlContext context, AdverseEvent arg)
     {
-        AdverseEvent[] ya_ = [
+        AdverseEvent[] xy_ = [
             arg,
         ];
-        AdverseEvent yb_(AdverseEvent a)
+        AdverseEvent xz_(AdverseEvent a)
         {
-            Identifier yf_ = a?.Identifier;
-            Code<AdverseEvent.AdverseEventActuality> yg_ = a?.ActualityElement;
-            List<CodeableConcept> yh_ = a?.Category;
-            CodeableConcept yi_ = a?.Event;
-            ResourceReference yj_ = a?.Subject;
-            ResourceReference yk_ = a?.Encounter;
-            FhirDateTime yl_ = a?.DateElement;
-            FhirDateTime ym_ = a?.DetectedElement;
-            FhirDateTime yn_ = a?.RecordedDateElement;
-            List<ResourceReference> yo_ = a?.ResultingCondition;
-            ResourceReference yp_ = a?.Location;
-            CodeableConcept yq_ = a?.Seriousness;
-            CodeableConcept yr_ = a?.Severity;
-            CodeableConcept ys_ = a?.Outcome;
-            ResourceReference yt_ = a?.Recorder;
-            List<ResourceReference> yu_ = a?.Contributor;
-            List<AdverseEvent.SuspectEntityComponent> yv_ = a?.SuspectEntity;
-            List<ResourceReference> yw_ = a?.SubjectMedicalHistory;
-            List<ResourceReference> yx_ = a?.ReferenceDocument;
-            List<ResourceReference> yy_ = a?.Study;
-            AdverseEvent yz_ = new AdverseEvent
+            Identifier yd_ = a?.Identifier;
+            Code<AdverseEvent.AdverseEventActuality> ye_ = a?.ActualityElement;
+            List<CodeableConcept> yf_ = a?.Category;
+            CodeableConcept yg_ = a?.Event;
+            ResourceReference yh_ = a?.Subject;
+            ResourceReference yi_ = a?.Encounter;
+            FhirDateTime yj_ = a?.DateElement;
+            FhirDateTime yk_ = a?.DetectedElement;
+            FhirDateTime yl_ = a?.RecordedDateElement;
+            List<ResourceReference> ym_ = a?.ResultingCondition;
+            ResourceReference yn_ = a?.Location;
+            CodeableConcept yo_ = a?.Seriousness;
+            CodeableConcept yp_ = a?.Severity;
+            CodeableConcept yq_ = a?.Outcome;
+            ResourceReference yr_ = a?.Recorder;
+            List<ResourceReference> ys_ = a?.Contributor;
+            List<AdverseEvent.SuspectEntityComponent> yt_ = a?.SuspectEntity;
+            List<ResourceReference> yu_ = a?.SubjectMedicalHistory;
+            List<ResourceReference> yv_ = a?.ReferenceDocument;
+            List<ResourceReference> yw_ = a?.Study;
+            AdverseEvent yx_ = new AdverseEvent
             {
-                Identifier = yf_,
-                ActualityElement = yg_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yh_),
-                Event = yi_,
-                Subject = yj_,
-                Encounter = yk_,
-                DateElement = yl_,
-                DetectedElement = ym_,
-                RecordedDateElement = yn_,
-                ResultingCondition = new List<ResourceReference>((IEnumerable<ResourceReference>)yo_),
-                Location = yp_,
-                Seriousness = yq_,
-                Severity = yr_,
-                Outcome = ys_,
-                Recorder = yt_,
-                Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)yu_),
-                SuspectEntity = new List<AdverseEvent.SuspectEntityComponent>((IEnumerable<AdverseEvent.SuspectEntityComponent>)yv_),
-                SubjectMedicalHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)yw_),
-                ReferenceDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)yx_),
-                Study = new List<ResourceReference>((IEnumerable<ResourceReference>)yy_),
+                Identifier = yd_,
+                ActualityElement = ye_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yf_),
+                Event = yg_,
+                Subject = yh_,
+                Encounter = yi_,
+                DateElement = yj_,
+                DetectedElement = yk_,
+                RecordedDateElement = yl_,
+                ResultingCondition = new List<ResourceReference>((IEnumerable<ResourceReference>)ym_),
+                Location = yn_,
+                Seriousness = yo_,
+                Severity = yp_,
+                Outcome = yq_,
+                Recorder = yr_,
+                Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)ys_),
+                SuspectEntity = new List<AdverseEvent.SuspectEntityComponent>((IEnumerable<AdverseEvent.SuspectEntityComponent>)yt_),
+                SubjectMedicalHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)yu_),
+                ReferenceDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)yv_),
+                Study = new List<ResourceReference>((IEnumerable<ResourceReference>)yw_),
             };
 
-            return yz_;
+            return yx_;
         };
-        IEnumerable<AdverseEvent> yc_ = context.Operators.Select<AdverseEvent, AdverseEvent>((IEnumerable<AdverseEvent>)ya_, yb_);
-        IEnumerable<AdverseEvent> yd_ = context.Operators.Distinct<AdverseEvent>(yc_);
-        AdverseEvent ye_ = context.Operators.SingletonFrom<AdverseEvent>(yd_);
+        IEnumerable<AdverseEvent> ya_ = context.Operators.Select<AdverseEvent, AdverseEvent>((IEnumerable<AdverseEvent>)xy_, xz_);
+        IEnumerable<AdverseEvent> yb_ = context.Operators.Distinct<AdverseEvent>(ya_);
+        AdverseEvent yc_ = context.Operators.SingletonFrom<AdverseEvent>(yb_);
 
-        return ye_;
+        return yc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AllergyIntoleranceResource")]
     public AllergyIntolerance AllergyIntoleranceResource(CqlContext context, AllergyIntolerance arg)
     {
-        AllergyIntolerance[] za_ = [
+        AllergyIntolerance[] yy_ = [
             arg,
         ];
-        AllergyIntolerance zb_(AllergyIntolerance a)
+        AllergyIntolerance yz_(AllergyIntolerance a)
         {
-            List<Identifier> zf_ = a?.Identifier;
-            CodeableConcept zg_ = a?.ClinicalStatus;
-            CodeableConcept zh_ = a?.VerificationStatus;
-            Code<AllergyIntolerance.AllergyIntoleranceType> zi_ = a?.TypeElement;
-            List<Code<AllergyIntolerance.AllergyIntoleranceCategory>> zj_ = a?.CategoryElement;
-            Code<AllergyIntolerance.AllergyIntoleranceCriticality> zk_ = a?.CriticalityElement;
-            CodeableConcept zl_ = a?.Code;
-            ResourceReference zm_ = a?.Patient;
-            ResourceReference zn_ = a?.Encounter;
-            DataType zo_ = a?.Onset;
-            FhirDateTime zp_ = a?.RecordedDateElement;
-            ResourceReference zq_ = a?.Recorder;
-            ResourceReference zr_ = a?.Asserter;
-            FhirDateTime zs_ = a?.LastOccurrenceElement;
-            List<Annotation> zt_ = a?.Note;
-            List<AllergyIntolerance.ReactionComponent> zu_ = a?.Reaction;
-            AllergyIntolerance zv_ = new AllergyIntolerance
+            List<Identifier> zd_ = a?.Identifier;
+            CodeableConcept ze_ = a?.ClinicalStatus;
+            CodeableConcept zf_ = a?.VerificationStatus;
+            Code<AllergyIntolerance.AllergyIntoleranceType> zg_ = a?.TypeElement;
+            List<Code<AllergyIntolerance.AllergyIntoleranceCategory>> zh_ = a?.CategoryElement;
+            Code<AllergyIntolerance.AllergyIntoleranceCriticality> zi_ = a?.CriticalityElement;
+            CodeableConcept zj_ = a?.Code;
+            ResourceReference zk_ = a?.Patient;
+            ResourceReference zl_ = a?.Encounter;
+            DataType zm_ = a?.Onset;
+            FhirDateTime zn_ = a?.RecordedDateElement;
+            ResourceReference zo_ = a?.Recorder;
+            ResourceReference zp_ = a?.Asserter;
+            FhirDateTime zq_ = a?.LastOccurrenceElement;
+            List<Annotation> zr_ = a?.Note;
+            List<AllergyIntolerance.ReactionComponent> zs_ = a?.Reaction;
+            AllergyIntolerance zt_ = new AllergyIntolerance
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zf_),
-                ClinicalStatus = zg_,
-                VerificationStatus = zh_,
-                TypeElement = zi_,
-                CategoryElement = new List<Code<AllergyIntolerance.AllergyIntoleranceCategory>>((IEnumerable<Code<AllergyIntolerance.AllergyIntoleranceCategory>>)zj_),
-                CriticalityElement = zk_,
-                Code = zl_,
-                Patient = zm_,
-                Encounter = zn_,
-                Onset = (DataType)zo_,
-                RecordedDateElement = zp_,
-                Recorder = zq_,
-                Asserter = zr_,
-                LastOccurrenceElement = zs_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)zt_),
-                Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIntolerance.ReactionComponent>)zu_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zd_),
+                ClinicalStatus = ze_,
+                VerificationStatus = zf_,
+                TypeElement = zg_,
+                CategoryElement = new List<Code<AllergyIntolerance.AllergyIntoleranceCategory>>((IEnumerable<Code<AllergyIntolerance.AllergyIntoleranceCategory>>)zh_),
+                CriticalityElement = zi_,
+                Code = zj_,
+                Patient = zk_,
+                Encounter = zl_,
+                Onset = (DataType)zm_,
+                RecordedDateElement = zn_,
+                Recorder = zo_,
+                Asserter = zp_,
+                LastOccurrenceElement = zq_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)zr_),
+                Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIntolerance.ReactionComponent>)zs_),
             };
 
-            return zv_;
+            return zt_;
         };
-        IEnumerable<AllergyIntolerance> zc_ = context.Operators.Select<AllergyIntolerance, AllergyIntolerance>((IEnumerable<AllergyIntolerance>)za_, zb_);
-        IEnumerable<AllergyIntolerance> zd_ = context.Operators.Distinct<AllergyIntolerance>(zc_);
-        AllergyIntolerance ze_ = context.Operators.SingletonFrom<AllergyIntolerance>(zd_);
+        IEnumerable<AllergyIntolerance> za_ = context.Operators.Select<AllergyIntolerance, AllergyIntolerance>((IEnumerable<AllergyIntolerance>)yy_, yz_);
+        IEnumerable<AllergyIntolerance> zb_ = context.Operators.Distinct<AllergyIntolerance>(za_);
+        AllergyIntolerance zc_ = context.Operators.SingletonFrom<AllergyIntolerance>(zb_);
 
-        return ze_;
+        return zc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AppointmentResource")]
     public Appointment AppointmentResource(CqlContext context, Appointment arg)
     {
-        Appointment[] zw_ = [
+        Appointment[] zu_ = [
             arg,
         ];
-        Appointment zx_(Appointment a)
+        Appointment zv_(Appointment a)
         {
-            List<Identifier> azb_ = a?.Identifier;
-            Code<Appointment.AppointmentStatus> azc_ = a?.StatusElement;
-            CodeableConcept azd_ = a?.CancelationReason;
-            List<CodeableConcept> aze_ = a?.ServiceCategory;
-            List<CodeableConcept> azf_ = a?.ServiceType;
-            List<CodeableConcept> azg_ = a?.Specialty;
-            CodeableConcept azh_ = a?.AppointmentType;
-            List<CodeableConcept> azi_ = a?.ReasonCode;
-            List<ResourceReference> azj_ = a?.ReasonReference;
-            UnsignedInt azk_ = a?.PriorityElement;
-            Integer azl_ = context.Operators.Convert<Integer>(azk_);
-            UnsignedInt azm_ = context.Operators.Convert<UnsignedInt>(azl_);
-            FhirString azn_ = a?.DescriptionElement;
-            List<ResourceReference> azo_ = a?.SupportingInformation;
-            Instant azp_ = a?.StartElement;
-            Instant azq_ = a?.EndElement;
-            PositiveInt azr_ = a?.MinutesDurationElement;
-            Integer azs_ = context.Operators.Convert<Integer>(azr_);
-            PositiveInt azt_ = context.Operators.Convert<PositiveInt>(azs_);
-            List<ResourceReference> azu_ = a?.Slot;
-            FhirDateTime azv_ = a?.CreatedElement;
-            FhirString azw_ = a?.CommentElement;
-            FhirString azx_ = a?.PatientInstructionElement;
-            List<ResourceReference> azy_ = a?.BasedOn;
-            List<Appointment.ParticipantComponent> azz_ = a?.Participant;
-            List<Period> bza_ = a?.RequestedPeriod;
-            Appointment bzb_ = new Appointment
+            List<Identifier> zz_ = a?.Identifier;
+            Code<Appointment.AppointmentStatus> aza_ = a?.StatusElement;
+            CodeableConcept azb_ = a?.CancelationReason;
+            List<CodeableConcept> azc_ = a?.ServiceCategory;
+            List<CodeableConcept> azd_ = a?.ServiceType;
+            List<CodeableConcept> aze_ = a?.Specialty;
+            CodeableConcept azf_ = a?.AppointmentType;
+            List<CodeableConcept> azg_ = a?.ReasonCode;
+            List<ResourceReference> azh_ = a?.ReasonReference;
+            UnsignedInt azi_ = a?.PriorityElement;
+            Integer azj_ = context.Operators.Convert<Integer>(azi_);
+            UnsignedInt azk_ = context.Operators.Convert<UnsignedInt>(azj_);
+            FhirString azl_ = a?.DescriptionElement;
+            List<ResourceReference> azm_ = a?.SupportingInformation;
+            Instant azn_ = a?.StartElement;
+            Instant azo_ = a?.EndElement;
+            PositiveInt azp_ = a?.MinutesDurationElement;
+            Integer azq_ = context.Operators.Convert<Integer>(azp_);
+            PositiveInt azr_ = context.Operators.Convert<PositiveInt>(azq_);
+            List<ResourceReference> azs_ = a?.Slot;
+            FhirDateTime azt_ = a?.CreatedElement;
+            FhirString azu_ = a?.CommentElement;
+            FhirString azv_ = a?.PatientInstructionElement;
+            List<ResourceReference> azw_ = a?.BasedOn;
+            List<Appointment.ParticipantComponent> azx_ = a?.Participant;
+            List<Period> azy_ = a?.RequestedPeriod;
+            Appointment azz_ = new Appointment
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)azb_),
-                StatusElement = azc_,
-                CancelationReason = azd_,
-                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aze_),
-                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azf_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azg_),
-                AppointmentType = azh_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azi_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)azj_),
-                PriorityElement = azm_,
-                DescriptionElement = azn_,
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)azo_),
-                StartElement = azp_,
-                EndElement = azq_,
-                MinutesDurationElement = azt_,
-                Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)azu_),
-                CreatedElement = azv_,
-                CommentElement = azw_,
-                PatientInstructionElement = azx_,
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)azy_),
-                Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)azz_),
-                RequestedPeriod = new List<Period>((IEnumerable<Period>)bza_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zz_),
+                StatusElement = aza_,
+                CancelationReason = azb_,
+                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azc_),
+                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azd_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aze_),
+                AppointmentType = azf_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azg_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)azh_),
+                PriorityElement = azk_,
+                DescriptionElement = azl_,
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)azm_),
+                StartElement = azn_,
+                EndElement = azo_,
+                MinutesDurationElement = azr_,
+                Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)azs_),
+                CreatedElement = azt_,
+                CommentElement = azu_,
+                PatientInstructionElement = azv_,
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)azw_),
+                Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)azx_),
+                RequestedPeriod = new List<Period>((IEnumerable<Period>)azy_),
             };
 
-            return bzb_;
+            return azz_;
         };
-        IEnumerable<Appointment> zy_ = context.Operators.Select<Appointment, Appointment>((IEnumerable<Appointment>)zw_, zx_);
-        IEnumerable<Appointment> zz_ = context.Operators.Distinct<Appointment>(zy_);
-        Appointment aza_ = context.Operators.SingletonFrom<Appointment>(zz_);
+        IEnumerable<Appointment> zw_ = context.Operators.Select<Appointment, Appointment>((IEnumerable<Appointment>)zu_, zv_);
+        IEnumerable<Appointment> zx_ = context.Operators.Distinct<Appointment>(zw_);
+        Appointment zy_ = context.Operators.SingletonFrom<Appointment>(zx_);
 
-        return aza_;
+        return zy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AppointmentResponseResource")]
     public AppointmentResponse AppointmentResponseResource(CqlContext context, AppointmentResponse arg)
     {
-        AppointmentResponse[] bzc_ = [
+        AppointmentResponse[] bza_ = [
             arg,
         ];
-        AppointmentResponse bzd_(AppointmentResponse a)
+        AppointmentResponse bzb_(AppointmentResponse a)
         {
-            List<Identifier> bzh_ = a?.Identifier;
-            ResourceReference bzi_ = a?.Appointment;
-            Instant bzj_ = a?.StartElement;
-            Instant bzk_ = a?.EndElement;
-            List<CodeableConcept> bzl_ = a?.ParticipantType;
-            ResourceReference bzm_ = a?.Actor;
-            Code<ParticipationStatus> bzn_ = a?.ParticipantStatusElement;
-            FhirString bzo_ = a?.CommentElement;
-            AppointmentResponse bzp_ = new AppointmentResponse
+            List<Identifier> bzf_ = a?.Identifier;
+            ResourceReference bzg_ = a?.Appointment;
+            Instant bzh_ = a?.StartElement;
+            Instant bzi_ = a?.EndElement;
+            List<CodeableConcept> bzj_ = a?.ParticipantType;
+            ResourceReference bzk_ = a?.Actor;
+            Code<ParticipationStatus> bzl_ = a?.ParticipantStatusElement;
+            FhirString bzm_ = a?.CommentElement;
+            AppointmentResponse bzn_ = new AppointmentResponse
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)bzh_),
-                Appointment = bzi_,
-                StartElement = bzj_,
-                EndElement = bzk_,
-                ParticipantType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzl_),
-                Actor = bzm_,
-                ParticipantStatusElement = bzn_,
-                CommentElement = bzo_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)bzf_),
+                Appointment = bzg_,
+                StartElement = bzh_,
+                EndElement = bzi_,
+                ParticipantType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzj_),
+                Actor = bzk_,
+                ParticipantStatusElement = bzl_,
+                CommentElement = bzm_,
             };
 
-            return bzp_;
+            return bzn_;
         };
-        IEnumerable<AppointmentResponse> bze_ = context.Operators.Select<AppointmentResponse, AppointmentResponse>((IEnumerable<AppointmentResponse>)bzc_, bzd_);
-        IEnumerable<AppointmentResponse> bzf_ = context.Operators.Distinct<AppointmentResponse>(bze_);
-        AppointmentResponse bzg_ = context.Operators.SingletonFrom<AppointmentResponse>(bzf_);
+        IEnumerable<AppointmentResponse> bzc_ = context.Operators.Select<AppointmentResponse, AppointmentResponse>((IEnumerable<AppointmentResponse>)bza_, bzb_);
+        IEnumerable<AppointmentResponse> bzd_ = context.Operators.Distinct<AppointmentResponse>(bzc_);
+        AppointmentResponse bze_ = context.Operators.SingletonFrom<AppointmentResponse>(bzd_);
 
-        return bzg_;
+        return bze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("AuditEventResource")]
     public AuditEvent AuditEventResource(CqlContext context, AuditEvent arg)
     {
-        AuditEvent[] bzq_ = [
+        AuditEvent[] bzo_ = [
             arg,
         ];
-        AuditEvent bzr_(AuditEvent a)
+        AuditEvent bzp_(AuditEvent a)
         {
-            Coding bzv_ = a?.Type;
-            List<Coding> bzw_ = a?.Subtype;
-            Code<AuditEvent.AuditEventAction> bzx_ = a?.ActionElement;
-            Period bzy_ = a?.Period;
-            Instant bzz_ = a?.RecordedElement;
-            Code<AuditEvent.AuditEventOutcome> cza_ = a?.OutcomeElement;
-            FhirString czb_ = a?.OutcomeDescElement;
-            List<CodeableConcept> czc_ = a?.PurposeOfEvent;
-            List<AuditEvent.AgentComponent> czd_ = a?.Agent;
-            AuditEvent.SourceComponent cze_ = a?.Source;
-            List<AuditEvent.EntityComponent> czf_ = a?.Entity;
-            AuditEvent czg_ = new AuditEvent
+            Coding bzt_ = a?.Type;
+            List<Coding> bzu_ = a?.Subtype;
+            Code<AuditEvent.AuditEventAction> bzv_ = a?.ActionElement;
+            Period bzw_ = a?.Period;
+            Instant bzx_ = a?.RecordedElement;
+            Code<AuditEvent.AuditEventOutcome> bzy_ = a?.OutcomeElement;
+            FhirString bzz_ = a?.OutcomeDescElement;
+            List<CodeableConcept> cza_ = a?.PurposeOfEvent;
+            List<AuditEvent.AgentComponent> czb_ = a?.Agent;
+            AuditEvent.SourceComponent czc_ = a?.Source;
+            List<AuditEvent.EntityComponent> czd_ = a?.Entity;
+            AuditEvent cze_ = new AuditEvent
             {
-                Type = bzv_,
-                Subtype = new List<Coding>((IEnumerable<Coding>)bzw_),
-                ActionElement = bzx_,
-                Period = bzy_,
-                RecordedElement = bzz_,
-                OutcomeElement = cza_,
-                OutcomeDescElement = czb_,
-                PurposeOfEvent = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czc_),
-                Agent = new List<AuditEvent.AgentComponent>((IEnumerable<AuditEvent.AgentComponent>)czd_),
-                Source = cze_,
-                Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComponent>)czf_),
+                Type = bzt_,
+                Subtype = new List<Coding>((IEnumerable<Coding>)bzu_),
+                ActionElement = bzv_,
+                Period = bzw_,
+                RecordedElement = bzx_,
+                OutcomeElement = bzy_,
+                OutcomeDescElement = bzz_,
+                PurposeOfEvent = new List<CodeableConcept>((IEnumerable<CodeableConcept>)cza_),
+                Agent = new List<AuditEvent.AgentComponent>((IEnumerable<AuditEvent.AgentComponent>)czb_),
+                Source = czc_,
+                Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComponent>)czd_),
             };
 
-            return czg_;
+            return cze_;
         };
-        IEnumerable<AuditEvent> bzs_ = context.Operators.Select<AuditEvent, AuditEvent>((IEnumerable<AuditEvent>)bzq_, bzr_);
-        IEnumerable<AuditEvent> bzt_ = context.Operators.Distinct<AuditEvent>(bzs_);
-        AuditEvent bzu_ = context.Operators.SingletonFrom<AuditEvent>(bzt_);
+        IEnumerable<AuditEvent> bzq_ = context.Operators.Select<AuditEvent, AuditEvent>((IEnumerable<AuditEvent>)bzo_, bzp_);
+        IEnumerable<AuditEvent> bzr_ = context.Operators.Distinct<AuditEvent>(bzq_);
+        AuditEvent bzs_ = context.Operators.SingletonFrom<AuditEvent>(bzr_);
 
-        return bzu_;
+        return bzs_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("BasicResource")]
     public Basic BasicResource(CqlContext context, Basic arg)
     {
-        Basic[] czh_ = [
+        Basic[] czf_ = [
             arg,
         ];
-        Basic czi_(Basic a)
+        Basic czg_(Basic a)
         {
-            List<Identifier> czm_ = a?.Identifier;
-            CodeableConcept czn_ = a?.Code;
-            ResourceReference czo_ = a?.Subject;
-            Date czp_ = a?.CreatedElement;
-            ResourceReference czq_ = a?.Author;
-            Basic czr_ = new Basic
+            List<Identifier> czk_ = a?.Identifier;
+            CodeableConcept czl_ = a?.Code;
+            ResourceReference czm_ = a?.Subject;
+            Date czn_ = a?.CreatedElement;
+            ResourceReference czo_ = a?.Author;
+            Basic czp_ = new Basic
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czm_),
-                Code = czn_,
-                Subject = czo_,
-                CreatedElement = czp_,
-                Author = czq_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czk_),
+                Code = czl_,
+                Subject = czm_,
+                CreatedElement = czn_,
+                Author = czo_,
             };
 
-            return czr_;
+            return czp_;
         };
-        IEnumerable<Basic> czj_ = context.Operators.Select<Basic, Basic>((IEnumerable<Basic>)czh_, czi_);
-        IEnumerable<Basic> czk_ = context.Operators.Distinct<Basic>(czj_);
-        Basic czl_ = context.Operators.SingletonFrom<Basic>(czk_);
+        IEnumerable<Basic> czh_ = context.Operators.Select<Basic, Basic>((IEnumerable<Basic>)czf_, czg_);
+        IEnumerable<Basic> czi_ = context.Operators.Distinct<Basic>(czh_);
+        Basic czj_ = context.Operators.SingletonFrom<Basic>(czi_);
 
-        return czl_;
+        return czj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("BiologicallyDerivedProductResource")]
     public BiologicallyDerivedProduct BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct arg)
     {
-        BiologicallyDerivedProduct[] czs_ = [
+        BiologicallyDerivedProduct[] czq_ = [
             arg,
         ];
-        BiologicallyDerivedProduct czt_(BiologicallyDerivedProduct a)
+        BiologicallyDerivedProduct czr_(BiologicallyDerivedProduct a)
         {
-            List<Identifier> czx_ = a?.Identifier;
-            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> czy_ = a?.ProductCategoryElement;
-            CodeableConcept czz_ = a?.ProductCode;
-            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> dza_ = a?.StatusElement;
-            List<ResourceReference> dzb_ = a?.Request;
-            Integer dzc_ = a?.QuantityElement;
-            List<ResourceReference> dzd_ = a?.Parent;
-            BiologicallyDerivedProduct.CollectionComponent dze_ = a?.Collection;
-            List<BiologicallyDerivedProduct.ProcessingComponent> dzf_ = a?.Processing;
-            BiologicallyDerivedProduct.ManipulationComponent dzg_ = a?.Manipulation;
-            List<BiologicallyDerivedProduct.StorageComponent> dzh_ = a?.Storage;
-            BiologicallyDerivedProduct dzi_ = new BiologicallyDerivedProduct
+            List<Identifier> czv_ = a?.Identifier;
+            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> czw_ = a?.ProductCategoryElement;
+            CodeableConcept czx_ = a?.ProductCode;
+            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> czy_ = a?.StatusElement;
+            List<ResourceReference> czz_ = a?.Request;
+            Integer dza_ = a?.QuantityElement;
+            List<ResourceReference> dzb_ = a?.Parent;
+            BiologicallyDerivedProduct.CollectionComponent dzc_ = a?.Collection;
+            List<BiologicallyDerivedProduct.ProcessingComponent> dzd_ = a?.Processing;
+            BiologicallyDerivedProduct.ManipulationComponent dze_ = a?.Manipulation;
+            List<BiologicallyDerivedProduct.StorageComponent> dzf_ = a?.Storage;
+            BiologicallyDerivedProduct dzg_ = new BiologicallyDerivedProduct
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czx_),
-                ProductCategoryElement = czy_,
-                ProductCode = czz_,
-                StatusElement = dza_,
-                Request = new List<ResourceReference>((IEnumerable<ResourceReference>)dzb_),
-                QuantityElement = dzc_,
-                Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)dzd_),
-                Collection = dze_,
-                Processing = new List<BiologicallyDerivedProduct.ProcessingComponent>((IEnumerable<BiologicallyDerivedProduct.ProcessingComponent>)dzf_),
-                Manipulation = dzg_,
-                Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<BiologicallyDerivedProduct.StorageComponent>)dzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czv_),
+                ProductCategoryElement = czw_,
+                ProductCode = czx_,
+                StatusElement = czy_,
+                Request = new List<ResourceReference>((IEnumerable<ResourceReference>)czz_),
+                QuantityElement = dza_,
+                Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)dzb_),
+                Collection = dzc_,
+                Processing = new List<BiologicallyDerivedProduct.ProcessingComponent>((IEnumerable<BiologicallyDerivedProduct.ProcessingComponent>)dzd_),
+                Manipulation = dze_,
+                Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<BiologicallyDerivedProduct.StorageComponent>)dzf_),
             };
 
-            return dzi_;
+            return dzg_;
         };
-        IEnumerable<BiologicallyDerivedProduct> czu_ = context.Operators.Select<BiologicallyDerivedProduct, BiologicallyDerivedProduct>((IEnumerable<BiologicallyDerivedProduct>)czs_, czt_);
-        IEnumerable<BiologicallyDerivedProduct> czv_ = context.Operators.Distinct<BiologicallyDerivedProduct>(czu_);
-        BiologicallyDerivedProduct czw_ = context.Operators.SingletonFrom<BiologicallyDerivedProduct>(czv_);
+        IEnumerable<BiologicallyDerivedProduct> czs_ = context.Operators.Select<BiologicallyDerivedProduct, BiologicallyDerivedProduct>((IEnumerable<BiologicallyDerivedProduct>)czq_, czr_);
+        IEnumerable<BiologicallyDerivedProduct> czt_ = context.Operators.Distinct<BiologicallyDerivedProduct>(czs_);
+        BiologicallyDerivedProduct czu_ = context.Operators.SingletonFrom<BiologicallyDerivedProduct>(czt_);
 
-        return czw_;
+        return czu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("BodyStructureResource")]
     public BodyStructure BodyStructureResource(CqlContext context, BodyStructure arg)
     {
-        BodyStructure[] dzj_ = [
+        BodyStructure[] dzh_ = [
             arg,
         ];
-        BodyStructure dzk_(BodyStructure a)
+        BodyStructure dzi_(BodyStructure a)
         {
-            List<Identifier> dzo_ = a?.Identifier;
-            FhirBoolean dzp_ = a?.ActiveElement;
-            CodeableConcept dzq_ = a?.Morphology;
-            CodeableConcept dzr_ = a?.Location;
-            List<CodeableConcept> dzs_ = a?.LocationQualifier;
-            FhirString dzt_ = a?.DescriptionElement;
-            List<Attachment> dzu_ = a?.Image;
-            ResourceReference dzv_ = a?.Patient;
-            BodyStructure dzw_ = new BodyStructure
+            List<Identifier> dzm_ = a?.Identifier;
+            FhirBoolean dzn_ = a?.ActiveElement;
+            CodeableConcept dzo_ = a?.Morphology;
+            CodeableConcept dzp_ = a?.Location;
+            List<CodeableConcept> dzq_ = a?.LocationQualifier;
+            FhirString dzr_ = a?.DescriptionElement;
+            List<Attachment> dzs_ = a?.Image;
+            ResourceReference dzt_ = a?.Patient;
+            BodyStructure dzu_ = new BodyStructure
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzo_),
-                ActiveElement = dzp_,
-                Morphology = dzq_,
-                Location = dzr_,
-                LocationQualifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzs_),
-                DescriptionElement = dzt_,
-                Image = new List<Attachment>((IEnumerable<Attachment>)dzu_),
-                Patient = dzv_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzm_),
+                ActiveElement = dzn_,
+                Morphology = dzo_,
+                Location = dzp_,
+                LocationQualifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzq_),
+                DescriptionElement = dzr_,
+                Image = new List<Attachment>((IEnumerable<Attachment>)dzs_),
+                Patient = dzt_,
             };
 
-            return dzw_;
+            return dzu_;
         };
-        IEnumerable<BodyStructure> dzl_ = context.Operators.Select<BodyStructure, BodyStructure>((IEnumerable<BodyStructure>)dzj_, dzk_);
-        IEnumerable<BodyStructure> dzm_ = context.Operators.Distinct<BodyStructure>(dzl_);
-        BodyStructure dzn_ = context.Operators.SingletonFrom<BodyStructure>(dzm_);
+        IEnumerable<BodyStructure> dzj_ = context.Operators.Select<BodyStructure, BodyStructure>((IEnumerable<BodyStructure>)dzh_, dzi_);
+        IEnumerable<BodyStructure> dzk_ = context.Operators.Distinct<BodyStructure>(dzj_);
+        BodyStructure dzl_ = context.Operators.SingletonFrom<BodyStructure>(dzk_);
 
-        return dzn_;
+        return dzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CarePlanResource")]
     public CarePlan CarePlanResource(CqlContext context, CarePlan arg)
     {
-        CarePlan[] dzx_ = [
+        CarePlan[] dzv_ = [
             arg,
         ];
-        CarePlan dzy_(CarePlan a)
+        CarePlan dzw_(CarePlan a)
         {
-            List<Identifier> ezc_ = a?.Identifier;
-            List<Canonical> ezd_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> eze_ = a?.InstantiatesUriElement;
-            List<ResourceReference> ezf_ = a?.BasedOn;
-            List<ResourceReference> ezg_ = a?.Replaces;
-            List<ResourceReference> ezh_ = a?.PartOf;
-            Code<RequestStatus> ezi_ = a?.StatusElement;
-            Code<CarePlan.CarePlanIntent> ezj_ = a?.IntentElement;
-            List<CodeableConcept> ezk_ = a?.Category;
-            FhirString ezl_ = a?.TitleElement;
-            FhirString ezm_ = a?.DescriptionElement;
-            ResourceReference ezn_ = a?.Subject;
-            ResourceReference ezo_ = a?.Encounter;
-            Period ezp_ = a?.Period;
-            FhirDateTime ezq_ = a?.CreatedElement;
-            ResourceReference ezr_ = a?.Author;
-            List<ResourceReference> ezs_ = a?.Contributor;
-            List<ResourceReference> ezt_ = a?.CareTeam;
-            List<ResourceReference> ezu_ = a?.Addresses;
-            List<ResourceReference> ezv_ = a?.SupportingInfo;
-            List<ResourceReference> ezw_ = a?.Goal;
-            List<CarePlan.ActivityComponent> ezx_ = a?.Activity;
-            List<Annotation> ezy_ = a?.Note;
-            CarePlan ezz_ = new CarePlan
+            List<Identifier> eza_ = a?.Identifier;
+            List<Canonical> ezb_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> ezc_ = a?.InstantiatesUriElement;
+            List<ResourceReference> ezd_ = a?.BasedOn;
+            List<ResourceReference> eze_ = a?.Replaces;
+            List<ResourceReference> ezf_ = a?.PartOf;
+            Code<RequestStatus> ezg_ = a?.StatusElement;
+            Code<CarePlan.CarePlanIntent> ezh_ = a?.IntentElement;
+            List<CodeableConcept> ezi_ = a?.Category;
+            FhirString ezj_ = a?.TitleElement;
+            FhirString ezk_ = a?.DescriptionElement;
+            ResourceReference ezl_ = a?.Subject;
+            ResourceReference ezm_ = a?.Encounter;
+            Period ezn_ = a?.Period;
+            FhirDateTime ezo_ = a?.CreatedElement;
+            ResourceReference ezp_ = a?.Author;
+            List<ResourceReference> ezq_ = a?.Contributor;
+            List<ResourceReference> ezr_ = a?.CareTeam;
+            List<ResourceReference> ezs_ = a?.Addresses;
+            List<ResourceReference> ezt_ = a?.SupportingInfo;
+            List<ResourceReference> ezu_ = a?.Goal;
+            List<CarePlan.ActivityComponent> ezv_ = a?.Activity;
+            List<Annotation> ezw_ = a?.Note;
+            CarePlan ezx_ = new CarePlan
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezc_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)ezd_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)eze_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ezf_),
-                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)ezg_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)ezh_),
-                StatusElement = ezi_,
-                IntentElement = ezj_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezk_),
-                TitleElement = ezl_,
-                DescriptionElement = ezm_,
-                Subject = ezn_,
-                Encounter = ezo_,
-                Period = ezp_,
-                CreatedElement = ezq_,
-                Author = ezr_,
-                Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)ezs_),
-                CareTeam = new List<ResourceReference>((IEnumerable<ResourceReference>)ezt_),
-                Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)ezu_),
-                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)ezv_),
-                Goal = new List<ResourceReference>((IEnumerable<ResourceReference>)ezw_),
-                Activity = new List<CarePlan.ActivityComponent>((IEnumerable<CarePlan.ActivityComponent>)ezx_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)ezy_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)eza_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)ezb_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)ezc_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ezd_),
+                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)eze_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)ezf_),
+                StatusElement = ezg_,
+                IntentElement = ezh_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezi_),
+                TitleElement = ezj_,
+                DescriptionElement = ezk_,
+                Subject = ezl_,
+                Encounter = ezm_,
+                Period = ezn_,
+                CreatedElement = ezo_,
+                Author = ezp_,
+                Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)ezq_),
+                CareTeam = new List<ResourceReference>((IEnumerable<ResourceReference>)ezr_),
+                Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)ezs_),
+                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)ezt_),
+                Goal = new List<ResourceReference>((IEnumerable<ResourceReference>)ezu_),
+                Activity = new List<CarePlan.ActivityComponent>((IEnumerable<CarePlan.ActivityComponent>)ezv_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)ezw_),
             };
 
-            return ezz_;
+            return ezx_;
         };
-        IEnumerable<CarePlan> dzz_ = context.Operators.Select<CarePlan, CarePlan>((IEnumerable<CarePlan>)dzx_, dzy_);
-        IEnumerable<CarePlan> eza_ = context.Operators.Distinct<CarePlan>(dzz_);
-        CarePlan ezb_ = context.Operators.SingletonFrom<CarePlan>(eza_);
+        IEnumerable<CarePlan> dzx_ = context.Operators.Select<CarePlan, CarePlan>((IEnumerable<CarePlan>)dzv_, dzw_);
+        IEnumerable<CarePlan> dzy_ = context.Operators.Distinct<CarePlan>(dzx_);
+        CarePlan dzz_ = context.Operators.SingletonFrom<CarePlan>(dzy_);
 
-        return ezb_;
+        return dzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CareTeamResource")]
     public CareTeam CareTeamResource(CqlContext context, CareTeam arg)
     {
-        CareTeam[] fza_ = [
+        CareTeam[] ezy_ = [
             arg,
         ];
-        CareTeam fzb_(CareTeam a)
+        CareTeam ezz_(CareTeam a)
         {
-            List<Identifier> fzf_ = a?.Identifier;
-            Code<CareTeam.CareTeamStatus> fzg_ = a?.StatusElement;
-            List<CodeableConcept> fzh_ = a?.Category;
-            FhirString fzi_ = a?.NameElement;
-            ResourceReference fzj_ = a?.Subject;
-            ResourceReference fzk_ = a?.Encounter;
-            Period fzl_ = a?.Period;
-            List<CareTeam.ParticipantComponent> fzm_ = a?.Participant;
-            List<CodeableConcept> fzn_ = a?.ReasonCode;
-            List<ResourceReference> fzo_ = a?.ReasonReference;
-            List<ResourceReference> fzp_ = a?.ManagingOrganization;
-            List<ContactPoint> fzq_ = a?.Telecom;
-            List<Annotation> fzr_ = a?.Note;
-            CareTeam fzs_ = new CareTeam
+            List<Identifier> fzd_ = a?.Identifier;
+            Code<CareTeam.CareTeamStatus> fze_ = a?.StatusElement;
+            List<CodeableConcept> fzf_ = a?.Category;
+            FhirString fzg_ = a?.NameElement;
+            ResourceReference fzh_ = a?.Subject;
+            ResourceReference fzi_ = a?.Encounter;
+            Period fzj_ = a?.Period;
+            List<CareTeam.ParticipantComponent> fzk_ = a?.Participant;
+            List<CodeableConcept> fzl_ = a?.ReasonCode;
+            List<ResourceReference> fzm_ = a?.ReasonReference;
+            List<ResourceReference> fzn_ = a?.ManagingOrganization;
+            List<ContactPoint> fzo_ = a?.Telecom;
+            List<Annotation> fzp_ = a?.Note;
+            CareTeam fzq_ = new CareTeam
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzf_),
-                StatusElement = fzg_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzh_),
-                NameElement = fzi_,
-                Subject = fzj_,
-                Encounter = fzk_,
-                Period = fzl_,
-                Participant = new List<CareTeam.ParticipantComponent>((IEnumerable<CareTeam.ParticipantComponent>)fzm_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzn_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)fzo_),
-                ManagingOrganization = new List<ResourceReference>((IEnumerable<ResourceReference>)fzp_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)fzq_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)fzr_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzd_),
+                StatusElement = fze_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzf_),
+                NameElement = fzg_,
+                Subject = fzh_,
+                Encounter = fzi_,
+                Period = fzj_,
+                Participant = new List<CareTeam.ParticipantComponent>((IEnumerable<CareTeam.ParticipantComponent>)fzk_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzl_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)fzm_),
+                ManagingOrganization = new List<ResourceReference>((IEnumerable<ResourceReference>)fzn_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)fzo_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)fzp_),
             };
 
-            return fzs_;
+            return fzq_;
         };
-        IEnumerable<CareTeam> fzc_ = context.Operators.Select<CareTeam, CareTeam>((IEnumerable<CareTeam>)fza_, fzb_);
-        IEnumerable<CareTeam> fzd_ = context.Operators.Distinct<CareTeam>(fzc_);
-        CareTeam fze_ = context.Operators.SingletonFrom<CareTeam>(fzd_);
+        IEnumerable<CareTeam> fza_ = context.Operators.Select<CareTeam, CareTeam>((IEnumerable<CareTeam>)ezy_, ezz_);
+        IEnumerable<CareTeam> fzb_ = context.Operators.Distinct<CareTeam>(fza_);
+        CareTeam fzc_ = context.Operators.SingletonFrom<CareTeam>(fzb_);
 
-        return fze_;
+        return fzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CatalogEntryResource")]
     public CatalogEntry CatalogEntryResource(CqlContext context, CatalogEntry arg)
     {
-        CatalogEntry[] fzt_ = [
+        CatalogEntry[] fzr_ = [
             arg,
         ];
-        CatalogEntry fzu_(CatalogEntry a)
+        CatalogEntry fzs_(CatalogEntry a)
         {
-            List<Identifier> fzy_ = a?.Identifier;
-            CodeableConcept fzz_ = a?.Type;
-            FhirBoolean gza_ = a?.OrderableElement;
-            ResourceReference gzb_ = a?.ReferencedItem;
-            List<Identifier> gzc_ = a?.AdditionalIdentifier;
-            List<CodeableConcept> gzd_ = a?.Classification;
-            Code<PublicationStatus> gze_ = a?.StatusElement;
-            Period gzf_ = a?.ValidityPeriod;
-            FhirDateTime gzg_ = a?.ValidToElement;
-            FhirDateTime gzh_ = a?.LastUpdatedElement;
-            List<CodeableConcept> gzi_ = a?.AdditionalCharacteristic;
-            List<CodeableConcept> gzj_ = a?.AdditionalClassification;
-            List<CatalogEntry.RelatedEntryComponent> gzk_ = a?.RelatedEntry;
-            CatalogEntry gzl_ = new CatalogEntry
+            List<Identifier> fzw_ = a?.Identifier;
+            CodeableConcept fzx_ = a?.Type;
+            FhirBoolean fzy_ = a?.OrderableElement;
+            ResourceReference fzz_ = a?.ReferencedItem;
+            List<Identifier> gza_ = a?.AdditionalIdentifier;
+            List<CodeableConcept> gzb_ = a?.Classification;
+            Code<PublicationStatus> gzc_ = a?.StatusElement;
+            Period gzd_ = a?.ValidityPeriod;
+            FhirDateTime gze_ = a?.ValidToElement;
+            FhirDateTime gzf_ = a?.LastUpdatedElement;
+            List<CodeableConcept> gzg_ = a?.AdditionalCharacteristic;
+            List<CodeableConcept> gzh_ = a?.AdditionalClassification;
+            List<CatalogEntry.RelatedEntryComponent> gzi_ = a?.RelatedEntry;
+            CatalogEntry gzj_ = new CatalogEntry
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzy_),
-                Type = fzz_,
-                OrderableElement = gza_,
-                ReferencedItem = gzb_,
-                AdditionalIdentifier = new List<Identifier>((IEnumerable<Identifier>)gzc_),
-                Classification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzd_),
-                StatusElement = gze_,
-                ValidityPeriod = gzf_,
-                ValidToElement = gzg_,
-                LastUpdatedElement = gzh_,
-                AdditionalCharacteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzi_),
-                AdditionalClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzj_),
-                RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<CatalogEntry.RelatedEntryComponent>)gzk_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzw_),
+                Type = fzx_,
+                OrderableElement = fzy_,
+                ReferencedItem = fzz_,
+                AdditionalIdentifier = new List<Identifier>((IEnumerable<Identifier>)gza_),
+                Classification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzb_),
+                StatusElement = gzc_,
+                ValidityPeriod = gzd_,
+                ValidToElement = gze_,
+                LastUpdatedElement = gzf_,
+                AdditionalCharacteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzg_),
+                AdditionalClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzh_),
+                RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<CatalogEntry.RelatedEntryComponent>)gzi_),
             };
 
-            return gzl_;
+            return gzj_;
         };
-        IEnumerable<CatalogEntry> fzv_ = context.Operators.Select<CatalogEntry, CatalogEntry>((IEnumerable<CatalogEntry>)fzt_, fzu_);
-        IEnumerable<CatalogEntry> fzw_ = context.Operators.Distinct<CatalogEntry>(fzv_);
-        CatalogEntry fzx_ = context.Operators.SingletonFrom<CatalogEntry>(fzw_);
+        IEnumerable<CatalogEntry> fzt_ = context.Operators.Select<CatalogEntry, CatalogEntry>((IEnumerable<CatalogEntry>)fzr_, fzs_);
+        IEnumerable<CatalogEntry> fzu_ = context.Operators.Distinct<CatalogEntry>(fzt_);
+        CatalogEntry fzv_ = context.Operators.SingletonFrom<CatalogEntry>(fzu_);
 
-        return fzx_;
+        return fzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ChargeItemResource")]
     public ChargeItem ChargeItemResource(CqlContext context, ChargeItem arg)
     {
-        ChargeItem[] gzm_ = [
+        ChargeItem[] gzk_ = [
             arg,
         ];
-        ChargeItem gzn_(ChargeItem a)
+        ChargeItem gzl_(ChargeItem a)
         {
-            List<Identifier> gzr_ = a?.Identifier;
-            List<FhirUri> gzs_ = a?.DefinitionUriElement;
-            List<Canonical> gzt_ = a?.DefinitionCanonicalElement;
-            Code<ChargeItem.ChargeItemStatus> gzu_ = a?.StatusElement;
-            List<ResourceReference> gzv_ = a?.PartOf;
-            CodeableConcept gzw_ = a?.Code;
-            ResourceReference gzx_ = a?.Subject;
-            ResourceReference gzy_ = a?.Context;
-            DataType gzz_ = a?.Occurrence;
-            List<ChargeItem.PerformerComponent> hza_ = a?.Performer;
-            ResourceReference hzb_ = a?.PerformingOrganization;
-            ResourceReference hzc_ = a?.RequestingOrganization;
-            ResourceReference hzd_ = a?.CostCenter;
-            Quantity hze_ = a?.Quantity;
-            List<CodeableConcept> hzf_ = a?.Bodysite;
-            FhirDecimal hzg_ = a?.FactorOverrideElement;
-            Money hzh_ = a?.PriceOverride;
-            FhirString hzi_ = a?.OverrideReasonElement;
-            ResourceReference hzj_ = a?.Enterer;
-            FhirDateTime hzk_ = a?.EnteredDateElement;
-            List<CodeableConcept> hzl_ = a?.Reason;
-            List<ResourceReference> hzm_ = a?.Service;
-            DataType hzn_ = a?.Product;
-            List<ResourceReference> hzo_ = a?.Account;
-            List<Annotation> hzp_ = a?.Note;
-            List<ResourceReference> hzq_ = a?.SupportingInformation;
-            ChargeItem hzr_ = new ChargeItem
+            List<Identifier> gzp_ = a?.Identifier;
+            List<FhirUri> gzq_ = a?.DefinitionUriElement;
+            List<Canonical> gzr_ = a?.DefinitionCanonicalElement;
+            Code<ChargeItem.ChargeItemStatus> gzs_ = a?.StatusElement;
+            List<ResourceReference> gzt_ = a?.PartOf;
+            CodeableConcept gzu_ = a?.Code;
+            ResourceReference gzv_ = a?.Subject;
+            ResourceReference gzw_ = a?.Context;
+            DataType gzx_ = a?.Occurrence;
+            List<ChargeItem.PerformerComponent> gzy_ = a?.Performer;
+            ResourceReference gzz_ = a?.PerformingOrganization;
+            ResourceReference hza_ = a?.RequestingOrganization;
+            ResourceReference hzb_ = a?.CostCenter;
+            Quantity hzc_ = a?.Quantity;
+            List<CodeableConcept> hzd_ = a?.Bodysite;
+            FhirDecimal hze_ = a?.FactorOverrideElement;
+            Money hzf_ = a?.PriceOverride;
+            FhirString hzg_ = a?.OverrideReasonElement;
+            ResourceReference hzh_ = a?.Enterer;
+            FhirDateTime hzi_ = a?.EnteredDateElement;
+            List<CodeableConcept> hzj_ = a?.Reason;
+            List<ResourceReference> hzk_ = a?.Service;
+            DataType hzl_ = a?.Product;
+            List<ResourceReference> hzm_ = a?.Account;
+            List<Annotation> hzn_ = a?.Note;
+            List<ResourceReference> hzo_ = a?.SupportingInformation;
+            ChargeItem hzp_ = new ChargeItem
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzr_),
-                DefinitionUriElement = new List<FhirUri>((IEnumerable<FhirUri>)gzs_),
-                DefinitionCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)gzt_),
-                StatusElement = gzu_,
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)gzv_),
-                Code = gzw_,
-                Subject = gzx_,
-                Context = gzy_,
-                Occurrence = (DataType)gzz_,
-                Performer = new List<ChargeItem.PerformerComponent>((IEnumerable<ChargeItem.PerformerComponent>)hza_),
-                PerformingOrganization = hzb_,
-                RequestingOrganization = hzc_,
-                CostCenter = hzd_,
-                Quantity = hze_,
-                Bodysite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzf_),
-                FactorOverrideElement = hzg_,
-                PriceOverride = hzh_,
-                OverrideReasonElement = hzi_,
-                Enterer = hzj_,
-                EnteredDateElement = hzk_,
-                Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzl_),
-                Service = new List<ResourceReference>((IEnumerable<ResourceReference>)hzm_),
-                Product = (DataType)hzn_,
-                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)hzo_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)hzp_),
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)hzq_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzp_),
+                DefinitionUriElement = new List<FhirUri>((IEnumerable<FhirUri>)gzq_),
+                DefinitionCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)gzr_),
+                StatusElement = gzs_,
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)gzt_),
+                Code = gzu_,
+                Subject = gzv_,
+                Context = gzw_,
+                Occurrence = (DataType)gzx_,
+                Performer = new List<ChargeItem.PerformerComponent>((IEnumerable<ChargeItem.PerformerComponent>)gzy_),
+                PerformingOrganization = gzz_,
+                RequestingOrganization = hza_,
+                CostCenter = hzb_,
+                Quantity = hzc_,
+                Bodysite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzd_),
+                FactorOverrideElement = hze_,
+                PriceOverride = hzf_,
+                OverrideReasonElement = hzg_,
+                Enterer = hzh_,
+                EnteredDateElement = hzi_,
+                Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzj_),
+                Service = new List<ResourceReference>((IEnumerable<ResourceReference>)hzk_),
+                Product = (DataType)hzl_,
+                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)hzm_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)hzn_),
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)hzo_),
             };
 
-            return hzr_;
+            return hzp_;
         };
-        IEnumerable<ChargeItem> gzo_ = context.Operators.Select<ChargeItem, ChargeItem>((IEnumerable<ChargeItem>)gzm_, gzn_);
-        IEnumerable<ChargeItem> gzp_ = context.Operators.Distinct<ChargeItem>(gzo_);
-        ChargeItem gzq_ = context.Operators.SingletonFrom<ChargeItem>(gzp_);
+        IEnumerable<ChargeItem> gzm_ = context.Operators.Select<ChargeItem, ChargeItem>((IEnumerable<ChargeItem>)gzk_, gzl_);
+        IEnumerable<ChargeItem> gzn_ = context.Operators.Distinct<ChargeItem>(gzm_);
+        ChargeItem gzo_ = context.Operators.SingletonFrom<ChargeItem>(gzn_);
 
-        return gzq_;
+        return gzo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ChargeItemDefinitionResource")]
     public ChargeItemDefinition ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition arg)
     {
-        ChargeItemDefinition[] hzs_ = [
+        ChargeItemDefinition[] hzq_ = [
             arg,
         ];
-        ChargeItemDefinition hzt_(ChargeItemDefinition a)
+        ChargeItemDefinition hzr_(ChargeItemDefinition a)
         {
-            FhirUri hzx_ = a?.UrlElement;
-            List<Identifier> hzy_ = a?.Identifier;
-            FhirString hzz_ = a?.VersionElement;
-            FhirString iza_ = a?.TitleElement;
-            List<FhirUri> izb_ = a?.DerivedFromUriElement;
-            List<Canonical> izc_ = a?.PartOfElement;
-            List<Canonical> izd_ = a?.ReplacesElement;
-            Code<PublicationStatus> ize_ = a?.StatusElement;
-            FhirBoolean izf_ = a?.ExperimentalElement;
-            FhirDateTime izg_ = a?.DateElement;
-            FhirString izh_ = a?.PublisherElement;
-            List<ContactDetail> izi_ = a?.Contact;
-            Markdown izj_ = a?.DescriptionElement;
-            List<UsageContext> izk_ = a?.UseContext;
-            List<CodeableConcept> izl_ = a?.Jurisdiction;
-            Markdown izm_ = a?.CopyrightElement;
-            Date izn_ = a?.ApprovalDateElement;
-            Date izo_ = a?.LastReviewDateElement;
-            Period izp_ = a?.EffectivePeriod;
-            CodeableConcept izq_ = a?.Code;
-            List<ResourceReference> izr_ = a?.Instance;
-            List<ChargeItemDefinition.ApplicabilityComponent> izs_ = a?.Applicability;
-            List<ChargeItemDefinition.PropertyGroupComponent> izt_ = a?.PropertyGroup;
-            ChargeItemDefinition izu_ = new ChargeItemDefinition
+            FhirUri hzv_ = a?.UrlElement;
+            List<Identifier> hzw_ = a?.Identifier;
+            FhirString hzx_ = a?.VersionElement;
+            FhirString hzy_ = a?.TitleElement;
+            List<FhirUri> hzz_ = a?.DerivedFromUriElement;
+            List<Canonical> iza_ = a?.PartOfElement;
+            List<Canonical> izb_ = a?.ReplacesElement;
+            Code<PublicationStatus> izc_ = a?.StatusElement;
+            FhirBoolean izd_ = a?.ExperimentalElement;
+            FhirDateTime ize_ = a?.DateElement;
+            FhirString izf_ = a?.PublisherElement;
+            List<ContactDetail> izg_ = a?.Contact;
+            Markdown izh_ = a?.DescriptionElement;
+            List<UsageContext> izi_ = a?.UseContext;
+            List<CodeableConcept> izj_ = a?.Jurisdiction;
+            Markdown izk_ = a?.CopyrightElement;
+            Date izl_ = a?.ApprovalDateElement;
+            Date izm_ = a?.LastReviewDateElement;
+            Period izn_ = a?.EffectivePeriod;
+            CodeableConcept izo_ = a?.Code;
+            List<ResourceReference> izp_ = a?.Instance;
+            List<ChargeItemDefinition.ApplicabilityComponent> izq_ = a?.Applicability;
+            List<ChargeItemDefinition.PropertyGroupComponent> izr_ = a?.PropertyGroup;
+            ChargeItemDefinition izs_ = new ChargeItemDefinition
             {
-                UrlElement = hzx_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzy_),
-                VersionElement = hzz_,
-                TitleElement = iza_,
-                DerivedFromUriElement = new List<FhirUri>((IEnumerable<FhirUri>)izb_),
-                PartOfElement = new List<Canonical>((IEnumerable<Canonical>)izc_),
-                ReplacesElement = new List<Canonical>((IEnumerable<Canonical>)izd_),
-                StatusElement = ize_,
-                ExperimentalElement = izf_,
-                DateElement = izg_,
-                PublisherElement = izh_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)izi_),
-                DescriptionElement = izj_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)izk_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izl_),
-                CopyrightElement = izm_,
-                ApprovalDateElement = izn_,
-                LastReviewDateElement = izo_,
-                EffectivePeriod = izp_,
-                Code = izq_,
-                Instance = new List<ResourceReference>((IEnumerable<ResourceReference>)izr_),
-                Applicability = new List<ChargeItemDefinition.ApplicabilityComponent>((IEnumerable<ChargeItemDefinition.ApplicabilityComponent>)izs_),
-                PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerable<ChargeItemDefinition.PropertyGroupComponent>)izt_),
+                UrlElement = hzv_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzw_),
+                VersionElement = hzx_,
+                TitleElement = hzy_,
+                DerivedFromUriElement = new List<FhirUri>((IEnumerable<FhirUri>)hzz_),
+                PartOfElement = new List<Canonical>((IEnumerable<Canonical>)iza_),
+                ReplacesElement = new List<Canonical>((IEnumerable<Canonical>)izb_),
+                StatusElement = izc_,
+                ExperimentalElement = izd_,
+                DateElement = ize_,
+                PublisherElement = izf_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)izg_),
+                DescriptionElement = izh_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)izi_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izj_),
+                CopyrightElement = izk_,
+                ApprovalDateElement = izl_,
+                LastReviewDateElement = izm_,
+                EffectivePeriod = izn_,
+                Code = izo_,
+                Instance = new List<ResourceReference>((IEnumerable<ResourceReference>)izp_),
+                Applicability = new List<ChargeItemDefinition.ApplicabilityComponent>((IEnumerable<ChargeItemDefinition.ApplicabilityComponent>)izq_),
+                PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerable<ChargeItemDefinition.PropertyGroupComponent>)izr_),
             };
 
-            return izu_;
+            return izs_;
         };
-        IEnumerable<ChargeItemDefinition> hzu_ = context.Operators.Select<ChargeItemDefinition, ChargeItemDefinition>((IEnumerable<ChargeItemDefinition>)hzs_, hzt_);
-        IEnumerable<ChargeItemDefinition> hzv_ = context.Operators.Distinct<ChargeItemDefinition>(hzu_);
-        ChargeItemDefinition hzw_ = context.Operators.SingletonFrom<ChargeItemDefinition>(hzv_);
+        IEnumerable<ChargeItemDefinition> hzs_ = context.Operators.Select<ChargeItemDefinition, ChargeItemDefinition>((IEnumerable<ChargeItemDefinition>)hzq_, hzr_);
+        IEnumerable<ChargeItemDefinition> hzt_ = context.Operators.Distinct<ChargeItemDefinition>(hzs_);
+        ChargeItemDefinition hzu_ = context.Operators.SingletonFrom<ChargeItemDefinition>(hzt_);
 
-        return hzw_;
+        return hzu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ClaimResource")]
     public Claim ClaimResource(CqlContext context, Claim arg)
     {
-        Claim[] izv_ = [
+        Claim[] izt_ = [
             arg,
         ];
-        Claim izw_(Claim a)
+        Claim izu_(Claim a)
         {
-            List<Identifier> jza_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> jzb_ = a?.StatusElement;
-            CodeableConcept jzc_ = a?.Type;
-            CodeableConcept jzd_ = a?.SubType;
-            Code<ClaimUseCode> jze_ = a?.UseElement;
-            ResourceReference jzf_ = a?.Patient;
-            Period jzg_ = a?.BillablePeriod;
-            FhirDateTime jzh_ = a?.CreatedElement;
-            ResourceReference jzi_ = a?.Enterer;
-            ResourceReference jzj_ = a?.Insurer;
-            ResourceReference jzk_ = a?.Provider;
-            CodeableConcept jzl_ = a?.Priority;
-            CodeableConcept jzm_ = a?.FundsReserve;
-            List<Claim.RelatedClaimComponent> jzn_ = a?.Related;
-            ResourceReference jzo_ = a?.Prescription;
-            ResourceReference jzp_ = a?.OriginalPrescription;
-            Claim.PayeeComponent jzq_ = a?.Payee;
-            ResourceReference jzr_ = a?.Referral;
-            ResourceReference jzs_ = a?.Facility;
-            List<Claim.CareTeamComponent> jzt_ = a?.CareTeam;
-            List<Claim.SupportingInformationComponent> jzu_ = a?.SupportingInfo;
-            List<Claim.DiagnosisComponent> jzv_ = a?.Diagnosis;
-            List<Claim.ProcedureComponent> jzw_ = a?.Procedure;
-            List<Claim.InsuranceComponent> jzx_ = a?.Insurance;
-            Claim.AccidentComponent jzy_ = a?.Accident;
-            List<Claim.ItemComponent> jzz_ = a?.Item;
-            Money kza_ = a?.Total;
-            Claim kzb_ = new Claim
+            List<Identifier> izy_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> izz_ = a?.StatusElement;
+            CodeableConcept jza_ = a?.Type;
+            CodeableConcept jzb_ = a?.SubType;
+            Code<ClaimUseCode> jzc_ = a?.UseElement;
+            ResourceReference jzd_ = a?.Patient;
+            Period jze_ = a?.BillablePeriod;
+            FhirDateTime jzf_ = a?.CreatedElement;
+            ResourceReference jzg_ = a?.Enterer;
+            ResourceReference jzh_ = a?.Insurer;
+            ResourceReference jzi_ = a?.Provider;
+            CodeableConcept jzj_ = a?.Priority;
+            CodeableConcept jzk_ = a?.FundsReserve;
+            List<Claim.RelatedClaimComponent> jzl_ = a?.Related;
+            ResourceReference jzm_ = a?.Prescription;
+            ResourceReference jzn_ = a?.OriginalPrescription;
+            Claim.PayeeComponent jzo_ = a?.Payee;
+            ResourceReference jzp_ = a?.Referral;
+            ResourceReference jzq_ = a?.Facility;
+            List<Claim.CareTeamComponent> jzr_ = a?.CareTeam;
+            List<Claim.SupportingInformationComponent> jzs_ = a?.SupportingInfo;
+            List<Claim.DiagnosisComponent> jzt_ = a?.Diagnosis;
+            List<Claim.ProcedureComponent> jzu_ = a?.Procedure;
+            List<Claim.InsuranceComponent> jzv_ = a?.Insurance;
+            Claim.AccidentComponent jzw_ = a?.Accident;
+            List<Claim.ItemComponent> jzx_ = a?.Item;
+            Money jzy_ = a?.Total;
+            Claim jzz_ = new Claim
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)jza_),
-                StatusElement = jzb_,
-                Type = jzc_,
-                SubType = jzd_,
-                UseElement = jze_,
-                Patient = jzf_,
-                BillablePeriod = jzg_,
-                CreatedElement = jzh_,
-                Enterer = jzi_,
-                Insurer = jzj_,
-                Provider = jzk_,
-                Priority = jzl_,
-                FundsReserve = jzm_,
-                Related = new List<Claim.RelatedClaimComponent>((IEnumerable<Claim.RelatedClaimComponent>)jzn_),
-                Prescription = jzo_,
-                OriginalPrescription = jzp_,
-                Payee = jzq_,
-                Referral = jzr_,
-                Facility = jzs_,
-                CareTeam = new List<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)jzt_),
-                SupportingInfo = new List<Claim.SupportingInformationComponent>((IEnumerable<Claim.SupportingInformationComponent>)jzu_),
-                Diagnosis = new List<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)jzv_),
-                Procedure = new List<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)jzw_),
-                Insurance = new List<Claim.InsuranceComponent>((IEnumerable<Claim.InsuranceComponent>)jzx_),
-                Accident = jzy_,
-                Item = new List<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)jzz_),
-                Total = kza_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)izy_),
+                StatusElement = izz_,
+                Type = jza_,
+                SubType = jzb_,
+                UseElement = jzc_,
+                Patient = jzd_,
+                BillablePeriod = jze_,
+                CreatedElement = jzf_,
+                Enterer = jzg_,
+                Insurer = jzh_,
+                Provider = jzi_,
+                Priority = jzj_,
+                FundsReserve = jzk_,
+                Related = new List<Claim.RelatedClaimComponent>((IEnumerable<Claim.RelatedClaimComponent>)jzl_),
+                Prescription = jzm_,
+                OriginalPrescription = jzn_,
+                Payee = jzo_,
+                Referral = jzp_,
+                Facility = jzq_,
+                CareTeam = new List<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)jzr_),
+                SupportingInfo = new List<Claim.SupportingInformationComponent>((IEnumerable<Claim.SupportingInformationComponent>)jzs_),
+                Diagnosis = new List<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)jzt_),
+                Procedure = new List<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)jzu_),
+                Insurance = new List<Claim.InsuranceComponent>((IEnumerable<Claim.InsuranceComponent>)jzv_),
+                Accident = jzw_,
+                Item = new List<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)jzx_),
+                Total = jzy_,
             };
 
-            return kzb_;
+            return jzz_;
         };
-        IEnumerable<Claim> izx_ = context.Operators.Select<Claim, Claim>((IEnumerable<Claim>)izv_, izw_);
-        IEnumerable<Claim> izy_ = context.Operators.Distinct<Claim>(izx_);
-        Claim izz_ = context.Operators.SingletonFrom<Claim>(izy_);
+        IEnumerable<Claim> izv_ = context.Operators.Select<Claim, Claim>((IEnumerable<Claim>)izt_, izu_);
+        IEnumerable<Claim> izw_ = context.Operators.Distinct<Claim>(izv_);
+        Claim izx_ = context.Operators.SingletonFrom<Claim>(izw_);
 
-        return izz_;
+        return izx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ClaimResponseResource")]
     public ClaimResponse ClaimResponseResource(CqlContext context, ClaimResponse arg)
     {
-        ClaimResponse[] kzc_ = [
+        ClaimResponse[] kza_ = [
             arg,
         ];
-        ClaimResponse kzd_(ClaimResponse a)
+        ClaimResponse kzb_(ClaimResponse a)
         {
-            List<Identifier> kzh_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> kzi_ = a?.StatusElement;
-            CodeableConcept kzj_ = a?.Type;
-            CodeableConcept kzk_ = a?.SubType;
-            Code<ClaimUseCode> kzl_ = a?.UseElement;
-            ResourceReference kzm_ = a?.Patient;
-            FhirDateTime kzn_ = a?.CreatedElement;
-            ResourceReference kzo_ = a?.Insurer;
-            ResourceReference kzp_ = a?.Requestor;
-            ResourceReference kzq_ = a?.Request;
-            Code<ClaimProcessingCodes> kzr_ = a?.OutcomeElement;
-            FhirString kzs_ = a?.DispositionElement;
-            FhirString kzt_ = a?.PreAuthRefElement;
-            Period kzu_ = a?.PreAuthPeriod;
-            CodeableConcept kzv_ = a?.PayeeType;
-            List<ClaimResponse.ItemComponent> kzw_ = a?.Item;
-            List<ClaimResponse.AddedItemComponent> kzx_ = a?.AddItem;
-            List<ClaimResponse.AdjudicationComponent> kzy_ = a?.Adjudication;
-            List<ClaimResponse.TotalComponent> kzz_ = a?.Total;
-            ClaimResponse.PaymentComponent lza_ = a?.Payment;
-            CodeableConcept lzb_ = a?.FundsReserve;
-            CodeableConcept lzc_ = a?.FormCode;
-            Attachment lzd_ = a?.Form;
-            List<ClaimResponse.NoteComponent> lze_ = a?.ProcessNote;
-            List<ResourceReference> lzf_ = a?.CommunicationRequest;
-            List<ClaimResponse.InsuranceComponent> lzg_ = a?.Insurance;
-            List<ClaimResponse.ErrorComponent> lzh_ = a?.Error;
-            ClaimResponse lzi_ = new ClaimResponse
+            List<Identifier> kzf_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> kzg_ = a?.StatusElement;
+            CodeableConcept kzh_ = a?.Type;
+            CodeableConcept kzi_ = a?.SubType;
+            Code<ClaimUseCode> kzj_ = a?.UseElement;
+            ResourceReference kzk_ = a?.Patient;
+            FhirDateTime kzl_ = a?.CreatedElement;
+            ResourceReference kzm_ = a?.Insurer;
+            ResourceReference kzn_ = a?.Requestor;
+            ResourceReference kzo_ = a?.Request;
+            Code<ClaimProcessingCodes> kzp_ = a?.OutcomeElement;
+            FhirString kzq_ = a?.DispositionElement;
+            FhirString kzr_ = a?.PreAuthRefElement;
+            Period kzs_ = a?.PreAuthPeriod;
+            CodeableConcept kzt_ = a?.PayeeType;
+            List<ClaimResponse.ItemComponent> kzu_ = a?.Item;
+            List<ClaimResponse.AddedItemComponent> kzv_ = a?.AddItem;
+            List<ClaimResponse.AdjudicationComponent> kzw_ = a?.Adjudication;
+            List<ClaimResponse.TotalComponent> kzx_ = a?.Total;
+            ClaimResponse.PaymentComponent kzy_ = a?.Payment;
+            CodeableConcept kzz_ = a?.FundsReserve;
+            CodeableConcept lza_ = a?.FormCode;
+            Attachment lzb_ = a?.Form;
+            List<ClaimResponse.NoteComponent> lzc_ = a?.ProcessNote;
+            List<ResourceReference> lzd_ = a?.CommunicationRequest;
+            List<ClaimResponse.InsuranceComponent> lze_ = a?.Insurance;
+            List<ClaimResponse.ErrorComponent> lzf_ = a?.Error;
+            ClaimResponse lzg_ = new ClaimResponse
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzh_),
-                StatusElement = kzi_,
-                Type = kzj_,
-                SubType = kzk_,
-                UseElement = kzl_,
-                Patient = kzm_,
-                CreatedElement = kzn_,
-                Insurer = kzo_,
-                Requestor = kzp_,
-                Request = kzq_,
-                OutcomeElement = kzr_,
-                DispositionElement = kzs_,
-                PreAuthRefElement = kzt_,
-                PreAuthPeriod = kzu_,
-                PayeeType = kzv_,
-                Item = new List<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)kzw_),
-                AddItem = new List<ClaimResponse.AddedItemComponent>((IEnumerable<ClaimResponse.AddedItemComponent>)kzx_),
-                Adjudication = new List<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)kzy_),
-                Total = new List<ClaimResponse.TotalComponent>((IEnumerable<ClaimResponse.TotalComponent>)kzz_),
-                Payment = lza_,
-                FundsReserve = lzb_,
-                FormCode = lzc_,
-                Form = lzd_,
-                ProcessNote = new List<ClaimResponse.NoteComponent>((IEnumerable<ClaimResponse.NoteComponent>)lze_),
-                CommunicationRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)lzf_),
-                Insurance = new List<ClaimResponse.InsuranceComponent>((IEnumerable<ClaimResponse.InsuranceComponent>)lzg_),
-                Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorComponent>)lzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzf_),
+                StatusElement = kzg_,
+                Type = kzh_,
+                SubType = kzi_,
+                UseElement = kzj_,
+                Patient = kzk_,
+                CreatedElement = kzl_,
+                Insurer = kzm_,
+                Requestor = kzn_,
+                Request = kzo_,
+                OutcomeElement = kzp_,
+                DispositionElement = kzq_,
+                PreAuthRefElement = kzr_,
+                PreAuthPeriod = kzs_,
+                PayeeType = kzt_,
+                Item = new List<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)kzu_),
+                AddItem = new List<ClaimResponse.AddedItemComponent>((IEnumerable<ClaimResponse.AddedItemComponent>)kzv_),
+                Adjudication = new List<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)kzw_),
+                Total = new List<ClaimResponse.TotalComponent>((IEnumerable<ClaimResponse.TotalComponent>)kzx_),
+                Payment = kzy_,
+                FundsReserve = kzz_,
+                FormCode = lza_,
+                Form = lzb_,
+                ProcessNote = new List<ClaimResponse.NoteComponent>((IEnumerable<ClaimResponse.NoteComponent>)lzc_),
+                CommunicationRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)lzd_),
+                Insurance = new List<ClaimResponse.InsuranceComponent>((IEnumerable<ClaimResponse.InsuranceComponent>)lze_),
+                Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorComponent>)lzf_),
             };
 
-            return lzi_;
+            return lzg_;
         };
-        IEnumerable<ClaimResponse> kze_ = context.Operators.Select<ClaimResponse, ClaimResponse>((IEnumerable<ClaimResponse>)kzc_, kzd_);
-        IEnumerable<ClaimResponse> kzf_ = context.Operators.Distinct<ClaimResponse>(kze_);
-        ClaimResponse kzg_ = context.Operators.SingletonFrom<ClaimResponse>(kzf_);
+        IEnumerable<ClaimResponse> kzc_ = context.Operators.Select<ClaimResponse, ClaimResponse>((IEnumerable<ClaimResponse>)kza_, kzb_);
+        IEnumerable<ClaimResponse> kzd_ = context.Operators.Distinct<ClaimResponse>(kzc_);
+        ClaimResponse kze_ = context.Operators.SingletonFrom<ClaimResponse>(kzd_);
 
-        return kzg_;
+        return kze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ClinicalImpressionResource")]
     public ClinicalImpression ClinicalImpressionResource(CqlContext context, ClinicalImpression arg)
     {
-        ClinicalImpression[] lzj_ = [
+        ClinicalImpression[] lzh_ = [
             arg,
         ];
-        ClinicalImpression lzk_(ClinicalImpression a)
+        ClinicalImpression lzi_(ClinicalImpression a)
         {
-            List<Identifier> lzo_ = a?.Identifier;
-            Code<ClinicalImpression.ClinicalImpressionStatus> lzp_ = a?.StatusElement;
-            CodeableConcept lzq_ = a?.StatusReason;
-            CodeableConcept lzr_ = a?.Code;
-            FhirString lzs_ = a?.DescriptionElement;
-            ResourceReference lzt_ = a?.Subject;
-            ResourceReference lzu_ = a?.Encounter;
-            DataType lzv_ = a?.Effective;
-            FhirDateTime lzw_ = a?.DateElement;
-            ResourceReference lzx_ = a?.Assessor;
-            ResourceReference lzy_ = a?.Previous;
-            List<ResourceReference> lzz_ = a?.Problem;
-            List<ClinicalImpression.InvestigationComponent> mza_ = a?.Investigation;
-            List<FhirUri> mzb_ = a?.ProtocolElement;
-            FhirString mzc_ = a?.SummaryElement;
-            List<ClinicalImpression.FindingComponent> mzd_ = a?.Finding;
-            List<CodeableConcept> mze_ = a?.PrognosisCodeableConcept;
-            List<ResourceReference> mzf_ = a?.PrognosisReference;
-            List<ResourceReference> mzg_ = a?.SupportingInfo;
-            List<Annotation> mzh_ = a?.Note;
-            ClinicalImpression mzi_ = new ClinicalImpression
+            List<Identifier> lzm_ = a?.Identifier;
+            Code<ClinicalImpression.ClinicalImpressionStatus> lzn_ = a?.StatusElement;
+            CodeableConcept lzo_ = a?.StatusReason;
+            CodeableConcept lzp_ = a?.Code;
+            FhirString lzq_ = a?.DescriptionElement;
+            ResourceReference lzr_ = a?.Subject;
+            ResourceReference lzs_ = a?.Encounter;
+            DataType lzt_ = a?.Effective;
+            FhirDateTime lzu_ = a?.DateElement;
+            ResourceReference lzv_ = a?.Assessor;
+            ResourceReference lzw_ = a?.Previous;
+            List<ResourceReference> lzx_ = a?.Problem;
+            List<ClinicalImpression.InvestigationComponent> lzy_ = a?.Investigation;
+            List<FhirUri> lzz_ = a?.ProtocolElement;
+            FhirString mza_ = a?.SummaryElement;
+            List<ClinicalImpression.FindingComponent> mzb_ = a?.Finding;
+            List<CodeableConcept> mzc_ = a?.PrognosisCodeableConcept;
+            List<ResourceReference> mzd_ = a?.PrognosisReference;
+            List<ResourceReference> mze_ = a?.SupportingInfo;
+            List<Annotation> mzf_ = a?.Note;
+            ClinicalImpression mzg_ = new ClinicalImpression
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzo_),
-                StatusElement = lzp_,
-                StatusReason = lzq_,
-                Code = lzr_,
-                DescriptionElement = lzs_,
-                Subject = lzt_,
-                Encounter = lzu_,
-                Effective = (DataType)lzv_,
-                DateElement = lzw_,
-                Assessor = lzx_,
-                Previous = lzy_,
-                Problem = new List<ResourceReference>((IEnumerable<ResourceReference>)lzz_),
-                Investigation = new List<ClinicalImpression.InvestigationComponent>((IEnumerable<ClinicalImpression.InvestigationComponent>)mza_),
-                ProtocolElement = new List<FhirUri>((IEnumerable<FhirUri>)mzb_),
-                SummaryElement = mzc_,
-                Finding = new List<ClinicalImpression.FindingComponent>((IEnumerable<ClinicalImpression.FindingComponent>)mzd_),
-                PrognosisCodeableConcept = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mze_),
-                PrognosisReference = new List<ResourceReference>((IEnumerable<ResourceReference>)mzf_),
-                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)mzg_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)mzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzm_),
+                StatusElement = lzn_,
+                StatusReason = lzo_,
+                Code = lzp_,
+                DescriptionElement = lzq_,
+                Subject = lzr_,
+                Encounter = lzs_,
+                Effective = (DataType)lzt_,
+                DateElement = lzu_,
+                Assessor = lzv_,
+                Previous = lzw_,
+                Problem = new List<ResourceReference>((IEnumerable<ResourceReference>)lzx_),
+                Investigation = new List<ClinicalImpression.InvestigationComponent>((IEnumerable<ClinicalImpression.InvestigationComponent>)lzy_),
+                ProtocolElement = new List<FhirUri>((IEnumerable<FhirUri>)lzz_),
+                SummaryElement = mza_,
+                Finding = new List<ClinicalImpression.FindingComponent>((IEnumerable<ClinicalImpression.FindingComponent>)mzb_),
+                PrognosisCodeableConcept = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzc_),
+                PrognosisReference = new List<ResourceReference>((IEnumerable<ResourceReference>)mzd_),
+                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)mze_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)mzf_),
             };
 
-            return mzi_;
+            return mzg_;
         };
-        IEnumerable<ClinicalImpression> lzl_ = context.Operators.Select<ClinicalImpression, ClinicalImpression>((IEnumerable<ClinicalImpression>)lzj_, lzk_);
-        IEnumerable<ClinicalImpression> lzm_ = context.Operators.Distinct<ClinicalImpression>(lzl_);
-        ClinicalImpression lzn_ = context.Operators.SingletonFrom<ClinicalImpression>(lzm_);
+        IEnumerable<ClinicalImpression> lzj_ = context.Operators.Select<ClinicalImpression, ClinicalImpression>((IEnumerable<ClinicalImpression>)lzh_, lzi_);
+        IEnumerable<ClinicalImpression> lzk_ = context.Operators.Distinct<ClinicalImpression>(lzj_);
+        ClinicalImpression lzl_ = context.Operators.SingletonFrom<ClinicalImpression>(lzk_);
 
-        return lzn_;
+        return lzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CodeSystemResource")]
     public CodeSystem CodeSystemResource(CqlContext context, CodeSystem arg)
     {
-        CodeSystem[] mzj_ = [
+        CodeSystem[] mzh_ = [
             arg,
         ];
-        CodeSystem mzk_(CodeSystem a)
+        CodeSystem mzi_(CodeSystem a)
         {
-            FhirUri mzo_ = a?.UrlElement;
-            List<Identifier> mzp_ = a?.Identifier;
-            FhirString mzq_ = a?.VersionElement;
-            FhirString mzr_ = a?.NameElement;
-            FhirString mzs_ = a?.TitleElement;
-            Code<PublicationStatus> mzt_ = a?.StatusElement;
-            FhirBoolean mzu_ = a?.ExperimentalElement;
-            FhirDateTime mzv_ = a?.DateElement;
-            FhirString mzw_ = a?.PublisherElement;
-            List<ContactDetail> mzx_ = a?.Contact;
-            Markdown mzy_ = a?.DescriptionElement;
-            List<UsageContext> mzz_ = a?.UseContext;
-            List<CodeableConcept> nza_ = a?.Jurisdiction;
-            Markdown nzb_ = a?.PurposeElement;
-            Markdown nzc_ = a?.CopyrightElement;
-            FhirBoolean nzd_ = a?.CaseSensitiveElement;
-            Canonical nze_ = a?.ValueSetElement;
-            Code<CodeSystem.CodeSystemHierarchyMeaning> nzf_ = a?.HierarchyMeaningElement;
-            FhirBoolean nzg_ = a?.CompositionalElement;
-            FhirBoolean nzh_ = a?.VersionNeededElement;
-            Code<CodeSystemContentMode> nzi_ = a?.ContentElement;
-            Canonical nzj_ = a?.SupplementsElement;
-            UnsignedInt nzk_ = a?.CountElement;
-            Integer nzl_ = context.Operators.Convert<Integer>(nzk_);
-            UnsignedInt nzm_ = context.Operators.Convert<UnsignedInt>(nzl_);
-            List<CodeSystem.FilterComponent> nzn_ = a?.Filter;
-            List<CodeSystem.PropertyComponent> nzo_ = a?.Property;
-            List<CodeSystem.ConceptDefinitionComponent> nzp_ = a?.Concept;
-            CodeSystem nzq_ = new CodeSystem
+            FhirUri mzm_ = a?.UrlElement;
+            List<Identifier> mzn_ = a?.Identifier;
+            FhirString mzo_ = a?.VersionElement;
+            FhirString mzp_ = a?.NameElement;
+            FhirString mzq_ = a?.TitleElement;
+            Code<PublicationStatus> mzr_ = a?.StatusElement;
+            FhirBoolean mzs_ = a?.ExperimentalElement;
+            FhirDateTime mzt_ = a?.DateElement;
+            FhirString mzu_ = a?.PublisherElement;
+            List<ContactDetail> mzv_ = a?.Contact;
+            Markdown mzw_ = a?.DescriptionElement;
+            List<UsageContext> mzx_ = a?.UseContext;
+            List<CodeableConcept> mzy_ = a?.Jurisdiction;
+            Markdown mzz_ = a?.PurposeElement;
+            Markdown nza_ = a?.CopyrightElement;
+            FhirBoolean nzb_ = a?.CaseSensitiveElement;
+            Canonical nzc_ = a?.ValueSetElement;
+            Code<CodeSystem.CodeSystemHierarchyMeaning> nzd_ = a?.HierarchyMeaningElement;
+            FhirBoolean nze_ = a?.CompositionalElement;
+            FhirBoolean nzf_ = a?.VersionNeededElement;
+            Code<CodeSystemContentMode> nzg_ = a?.ContentElement;
+            Canonical nzh_ = a?.SupplementsElement;
+            UnsignedInt nzi_ = a?.CountElement;
+            Integer nzj_ = context.Operators.Convert<Integer>(nzi_);
+            UnsignedInt nzk_ = context.Operators.Convert<UnsignedInt>(nzj_);
+            List<CodeSystem.FilterComponent> nzl_ = a?.Filter;
+            List<CodeSystem.PropertyComponent> nzm_ = a?.Property;
+            List<CodeSystem.ConceptDefinitionComponent> nzn_ = a?.Concept;
+            CodeSystem nzo_ = new CodeSystem
             {
-                UrlElement = mzo_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzp_),
-                VersionElement = mzq_,
-                NameElement = mzr_,
-                TitleElement = mzs_,
-                StatusElement = mzt_,
-                ExperimentalElement = mzu_,
-                DateElement = mzv_,
-                PublisherElement = mzw_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)mzx_),
-                DescriptionElement = mzy_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)mzz_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nza_),
-                PurposeElement = nzb_,
-                CopyrightElement = nzc_,
-                CaseSensitiveElement = nzd_,
-                ValueSetElement = nze_,
-                HierarchyMeaningElement = nzf_,
-                CompositionalElement = nzg_,
-                VersionNeededElement = nzh_,
-                ContentElement = nzi_,
-                SupplementsElement = nzj_,
-                CountElement = nzm_,
-                Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)nzn_),
-                Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)nzo_),
-                Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)nzp_),
+                UrlElement = mzm_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzn_),
+                VersionElement = mzo_,
+                NameElement = mzp_,
+                TitleElement = mzq_,
+                StatusElement = mzr_,
+                ExperimentalElement = mzs_,
+                DateElement = mzt_,
+                PublisherElement = mzu_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)mzv_),
+                DescriptionElement = mzw_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)mzx_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzy_),
+                PurposeElement = mzz_,
+                CopyrightElement = nza_,
+                CaseSensitiveElement = nzb_,
+                ValueSetElement = nzc_,
+                HierarchyMeaningElement = nzd_,
+                CompositionalElement = nze_,
+                VersionNeededElement = nzf_,
+                ContentElement = nzg_,
+                SupplementsElement = nzh_,
+                CountElement = nzk_,
+                Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)nzl_),
+                Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)nzm_),
+                Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)nzn_),
             };
 
-            return nzq_;
+            return nzo_;
         };
-        IEnumerable<CodeSystem> mzl_ = context.Operators.Select<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)mzj_, mzk_);
-        IEnumerable<CodeSystem> mzm_ = context.Operators.Distinct<CodeSystem>(mzl_);
-        CodeSystem mzn_ = context.Operators.SingletonFrom<CodeSystem>(mzm_);
+        IEnumerable<CodeSystem> mzj_ = context.Operators.Select<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)mzh_, mzi_);
+        IEnumerable<CodeSystem> mzk_ = context.Operators.Distinct<CodeSystem>(mzj_);
+        CodeSystem mzl_ = context.Operators.SingletonFrom<CodeSystem>(mzk_);
 
-        return mzn_;
+        return mzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CommunicationResource")]
     public Communication CommunicationResource(CqlContext context, Communication arg)
     {
-        Communication[] nzr_ = [
+        Communication[] nzp_ = [
             arg,
         ];
-        Communication nzs_(Communication a)
+        Communication nzq_(Communication a)
         {
-            List<Identifier> nzw_ = a?.Identifier;
-            List<Canonical> nzx_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> nzy_ = a?.InstantiatesUriElement;
-            List<ResourceReference> nzz_ = a?.BasedOn;
-            List<ResourceReference> oza_ = a?.PartOf;
-            List<ResourceReference> ozb_ = a?.InResponseTo;
-            Code<EventStatus> ozc_ = a?.StatusElement;
-            CodeableConcept ozd_ = a?.StatusReason;
-            List<CodeableConcept> oze_ = a?.Category;
-            Code<RequestPriority> ozf_ = a?.PriorityElement;
-            List<CodeableConcept> ozg_ = a?.Medium;
-            ResourceReference ozh_ = a?.Subject;
-            CodeableConcept ozi_ = a?.Topic;
-            List<ResourceReference> ozj_ = a?.About;
-            ResourceReference ozk_ = a?.Encounter;
-            FhirDateTime ozl_ = a?.SentElement;
-            FhirDateTime ozm_ = a?.ReceivedElement;
-            List<ResourceReference> ozn_ = a?.Recipient;
-            ResourceReference ozo_ = a?.Sender;
-            List<CodeableConcept> ozp_ = a?.ReasonCode;
-            List<ResourceReference> ozq_ = a?.ReasonReference;
-            List<Communication.PayloadComponent> ozr_ = a?.Payload;
-            List<Annotation> ozs_ = a?.Note;
-            Communication ozt_ = new Communication
+            List<Identifier> nzu_ = a?.Identifier;
+            List<Canonical> nzv_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> nzw_ = a?.InstantiatesUriElement;
+            List<ResourceReference> nzx_ = a?.BasedOn;
+            List<ResourceReference> nzy_ = a?.PartOf;
+            List<ResourceReference> nzz_ = a?.InResponseTo;
+            Code<EventStatus> oza_ = a?.StatusElement;
+            CodeableConcept ozb_ = a?.StatusReason;
+            List<CodeableConcept> ozc_ = a?.Category;
+            Code<RequestPriority> ozd_ = a?.PriorityElement;
+            List<CodeableConcept> oze_ = a?.Medium;
+            ResourceReference ozf_ = a?.Subject;
+            CodeableConcept ozg_ = a?.Topic;
+            List<ResourceReference> ozh_ = a?.About;
+            ResourceReference ozi_ = a?.Encounter;
+            FhirDateTime ozj_ = a?.SentElement;
+            FhirDateTime ozk_ = a?.ReceivedElement;
+            List<ResourceReference> ozl_ = a?.Recipient;
+            ResourceReference ozm_ = a?.Sender;
+            List<CodeableConcept> ozn_ = a?.ReasonCode;
+            List<ResourceReference> ozo_ = a?.ReasonReference;
+            List<Communication.PayloadComponent> ozp_ = a?.Payload;
+            List<Annotation> ozq_ = a?.Note;
+            Communication ozr_ = new Communication
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)nzw_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)nzx_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)nzy_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)nzz_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)oza_),
-                InResponseTo = new List<ResourceReference>((IEnumerable<ResourceReference>)ozb_),
-                StatusElement = ozc_,
-                StatusReason = ozd_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)oze_),
-                PriorityElement = ozf_,
-                Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozg_),
-                Subject = ozh_,
-                Topic = ozi_,
-                About = new List<ResourceReference>((IEnumerable<ResourceReference>)ozj_),
-                Encounter = ozk_,
-                SentElement = ozl_,
-                ReceivedElement = ozm_,
-                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)ozn_),
-                Sender = ozo_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozp_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ozq_),
-                Payload = new List<Communication.PayloadComponent>((IEnumerable<Communication.PayloadComponent>)ozr_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)ozs_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)nzu_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)nzv_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)nzw_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)nzx_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)nzy_),
+                InResponseTo = new List<ResourceReference>((IEnumerable<ResourceReference>)nzz_),
+                StatusElement = oza_,
+                StatusReason = ozb_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozc_),
+                PriorityElement = ozd_,
+                Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)oze_),
+                Subject = ozf_,
+                Topic = ozg_,
+                About = new List<ResourceReference>((IEnumerable<ResourceReference>)ozh_),
+                Encounter = ozi_,
+                SentElement = ozj_,
+                ReceivedElement = ozk_,
+                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)ozl_),
+                Sender = ozm_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozn_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ozo_),
+                Payload = new List<Communication.PayloadComponent>((IEnumerable<Communication.PayloadComponent>)ozp_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)ozq_),
             };
 
-            return ozt_;
+            return ozr_;
         };
-        IEnumerable<Communication> nzt_ = context.Operators.Select<Communication, Communication>((IEnumerable<Communication>)nzr_, nzs_);
-        IEnumerable<Communication> nzu_ = context.Operators.Distinct<Communication>(nzt_);
-        Communication nzv_ = context.Operators.SingletonFrom<Communication>(nzu_);
+        IEnumerable<Communication> nzr_ = context.Operators.Select<Communication, Communication>((IEnumerable<Communication>)nzp_, nzq_);
+        IEnumerable<Communication> nzs_ = context.Operators.Distinct<Communication>(nzr_);
+        Communication nzt_ = context.Operators.SingletonFrom<Communication>(nzs_);
 
-        return nzv_;
+        return nzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CommunicationRequestResource")]
     public CommunicationRequest CommunicationRequestResource(CqlContext context, CommunicationRequest arg)
     {
-        CommunicationRequest[] ozu_ = [
+        CommunicationRequest[] ozs_ = [
             arg,
         ];
-        CommunicationRequest ozv_(CommunicationRequest a)
+        CommunicationRequest ozt_(CommunicationRequest a)
         {
-            List<Identifier> ozz_ = a?.Identifier;
-            List<ResourceReference> pza_ = a?.BasedOn;
-            List<ResourceReference> pzb_ = a?.Replaces;
-            Identifier pzc_ = a?.GroupIdentifier;
-            Code<RequestStatus> pzd_ = a?.StatusElement;
-            CodeableConcept pze_ = a?.StatusReason;
-            List<CodeableConcept> pzf_ = a?.Category;
-            Code<RequestPriority> pzg_ = a?.PriorityElement;
-            FhirBoolean pzh_ = a?.DoNotPerformElement;
-            List<CodeableConcept> pzi_ = a?.Medium;
-            ResourceReference pzj_ = a?.Subject;
-            List<ResourceReference> pzk_ = a?.About;
-            ResourceReference pzl_ = a?.Encounter;
-            List<CommunicationRequest.PayloadComponent> pzm_ = a?.Payload;
-            DataType pzn_ = a?.Occurrence;
-            FhirDateTime pzo_ = a?.AuthoredOnElement;
-            ResourceReference pzp_ = a?.Requester;
-            List<ResourceReference> pzq_ = a?.Recipient;
-            ResourceReference pzr_ = a?.Sender;
-            List<CodeableConcept> pzs_ = a?.ReasonCode;
-            List<ResourceReference> pzt_ = a?.ReasonReference;
-            List<Annotation> pzu_ = a?.Note;
-            CommunicationRequest pzv_ = new CommunicationRequest
+            List<Identifier> ozx_ = a?.Identifier;
+            List<ResourceReference> ozy_ = a?.BasedOn;
+            List<ResourceReference> ozz_ = a?.Replaces;
+            Identifier pza_ = a?.GroupIdentifier;
+            Code<RequestStatus> pzb_ = a?.StatusElement;
+            CodeableConcept pzc_ = a?.StatusReason;
+            List<CodeableConcept> pzd_ = a?.Category;
+            Code<RequestPriority> pze_ = a?.PriorityElement;
+            FhirBoolean pzf_ = a?.DoNotPerformElement;
+            List<CodeableConcept> pzg_ = a?.Medium;
+            ResourceReference pzh_ = a?.Subject;
+            List<ResourceReference> pzi_ = a?.About;
+            ResourceReference pzj_ = a?.Encounter;
+            List<CommunicationRequest.PayloadComponent> pzk_ = a?.Payload;
+            DataType pzl_ = a?.Occurrence;
+            FhirDateTime pzm_ = a?.AuthoredOnElement;
+            ResourceReference pzn_ = a?.Requester;
+            List<ResourceReference> pzo_ = a?.Recipient;
+            ResourceReference pzp_ = a?.Sender;
+            List<CodeableConcept> pzq_ = a?.ReasonCode;
+            List<ResourceReference> pzr_ = a?.ReasonReference;
+            List<Annotation> pzs_ = a?.Note;
+            CommunicationRequest pzt_ = new CommunicationRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozz_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)pza_),
-                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)pzb_),
-                GroupIdentifier = pzc_,
-                StatusElement = pzd_,
-                StatusReason = pze_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzf_),
-                PriorityElement = pzg_,
-                DoNotPerformElement = pzh_,
-                Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzi_),
-                Subject = pzj_,
-                About = new List<ResourceReference>((IEnumerable<ResourceReference>)pzk_),
-                Encounter = pzl_,
-                Payload = new List<CommunicationRequest.PayloadComponent>((IEnumerable<CommunicationRequest.PayloadComponent>)pzm_),
-                Occurrence = (DataType)pzn_,
-                AuthoredOnElement = pzo_,
-                Requester = pzp_,
-                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)pzq_),
-                Sender = pzr_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzs_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)pzt_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)pzu_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozx_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ozy_),
+                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)ozz_),
+                GroupIdentifier = pza_,
+                StatusElement = pzb_,
+                StatusReason = pzc_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzd_),
+                PriorityElement = pze_,
+                DoNotPerformElement = pzf_,
+                Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzg_),
+                Subject = pzh_,
+                About = new List<ResourceReference>((IEnumerable<ResourceReference>)pzi_),
+                Encounter = pzj_,
+                Payload = new List<CommunicationRequest.PayloadComponent>((IEnumerable<CommunicationRequest.PayloadComponent>)pzk_),
+                Occurrence = (DataType)pzl_,
+                AuthoredOnElement = pzm_,
+                Requester = pzn_,
+                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)pzo_),
+                Sender = pzp_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzq_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)pzr_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)pzs_),
             };
 
-            return pzv_;
+            return pzt_;
         };
-        IEnumerable<CommunicationRequest> ozw_ = context.Operators.Select<CommunicationRequest, CommunicationRequest>((IEnumerable<CommunicationRequest>)ozu_, ozv_);
-        IEnumerable<CommunicationRequest> ozx_ = context.Operators.Distinct<CommunicationRequest>(ozw_);
-        CommunicationRequest ozy_ = context.Operators.SingletonFrom<CommunicationRequest>(ozx_);
+        IEnumerable<CommunicationRequest> ozu_ = context.Operators.Select<CommunicationRequest, CommunicationRequest>((IEnumerable<CommunicationRequest>)ozs_, ozt_);
+        IEnumerable<CommunicationRequest> ozv_ = context.Operators.Distinct<CommunicationRequest>(ozu_);
+        CommunicationRequest ozw_ = context.Operators.SingletonFrom<CommunicationRequest>(ozv_);
 
-        return ozy_;
+        return ozw_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CompositionResource")]
     public Composition CompositionResource(CqlContext context, Composition arg)
     {
-        Composition[] pzw_ = [
+        Composition[] pzu_ = [
             arg,
         ];
-        Composition pzx_(Composition a)
+        Composition pzv_(Composition a)
         {
-            Identifier qzb_ = a?.Identifier;
-            Code<CompositionStatus> qzc_ = a?.StatusElement;
-            CodeableConcept qzd_ = a?.Type;
-            List<CodeableConcept> qze_ = a?.Category;
-            ResourceReference qzf_ = a?.Subject;
-            ResourceReference qzg_ = a?.Encounter;
-            FhirDateTime qzh_ = a?.DateElement;
-            List<ResourceReference> qzi_ = a?.Author;
-            FhirString qzj_ = a?.TitleElement;
-            Code<Composition.V3ConfidentialityClassification> qzk_ = a?.ConfidentialityElement;
-            List<Composition.AttesterComponent> qzl_ = a?.Attester;
-            ResourceReference qzm_ = a?.Custodian;
-            List<Composition.RelatesToComponent> qzn_ = a?.RelatesTo;
-            List<Composition.EventComponent> qzo_ = a?.Event;
-            List<Composition.SectionComponent> qzp_ = a?.Section;
-            Composition qzq_ = new Composition
+            Identifier pzz_ = a?.Identifier;
+            Code<CompositionStatus> qza_ = a?.StatusElement;
+            CodeableConcept qzb_ = a?.Type;
+            List<CodeableConcept> qzc_ = a?.Category;
+            ResourceReference qzd_ = a?.Subject;
+            ResourceReference qze_ = a?.Encounter;
+            FhirDateTime qzf_ = a?.DateElement;
+            List<ResourceReference> qzg_ = a?.Author;
+            FhirString qzh_ = a?.TitleElement;
+            Code<Composition.V3ConfidentialityClassification> qzi_ = a?.ConfidentialityElement;
+            List<Composition.AttesterComponent> qzj_ = a?.Attester;
+            ResourceReference qzk_ = a?.Custodian;
+            List<Composition.RelatesToComponent> qzl_ = a?.RelatesTo;
+            List<Composition.EventComponent> qzm_ = a?.Event;
+            List<Composition.SectionComponent> qzn_ = a?.Section;
+            Composition qzo_ = new Composition
             {
-                Identifier = qzb_,
-                StatusElement = qzc_,
-                Type = qzd_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qze_),
-                Subject = qzf_,
-                Encounter = qzg_,
-                DateElement = qzh_,
-                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)qzi_),
-                TitleElement = qzj_,
-                ConfidentialityElement = qzk_,
-                Attester = new List<Composition.AttesterComponent>((IEnumerable<Composition.AttesterComponent>)qzl_),
-                Custodian = qzm_,
-                RelatesTo = new List<Composition.RelatesToComponent>((IEnumerable<Composition.RelatesToComponent>)qzn_),
-                Event = new List<Composition.EventComponent>((IEnumerable<Composition.EventComponent>)qzo_),
-                Section = new List<Composition.SectionComponent>((IEnumerable<Composition.SectionComponent>)qzp_),
+                Identifier = pzz_,
+                StatusElement = qza_,
+                Type = qzb_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzc_),
+                Subject = qzd_,
+                Encounter = qze_,
+                DateElement = qzf_,
+                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)qzg_),
+                TitleElement = qzh_,
+                ConfidentialityElement = qzi_,
+                Attester = new List<Composition.AttesterComponent>((IEnumerable<Composition.AttesterComponent>)qzj_),
+                Custodian = qzk_,
+                RelatesTo = new List<Composition.RelatesToComponent>((IEnumerable<Composition.RelatesToComponent>)qzl_),
+                Event = new List<Composition.EventComponent>((IEnumerable<Composition.EventComponent>)qzm_),
+                Section = new List<Composition.SectionComponent>((IEnumerable<Composition.SectionComponent>)qzn_),
             };
 
-            return qzq_;
+            return qzo_;
         };
-        IEnumerable<Composition> pzy_ = context.Operators.Select<Composition, Composition>((IEnumerable<Composition>)pzw_, pzx_);
-        IEnumerable<Composition> pzz_ = context.Operators.Distinct<Composition>(pzy_);
-        Composition qza_ = context.Operators.SingletonFrom<Composition>(pzz_);
+        IEnumerable<Composition> pzw_ = context.Operators.Select<Composition, Composition>((IEnumerable<Composition>)pzu_, pzv_);
+        IEnumerable<Composition> pzx_ = context.Operators.Distinct<Composition>(pzw_);
+        Composition pzy_ = context.Operators.SingletonFrom<Composition>(pzx_);
 
-        return qza_;
+        return pzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ConceptMapResource")]
     public ConceptMap ConceptMapResource(CqlContext context, ConceptMap arg)
     {
-        ConceptMap[] qzr_ = [
+        ConceptMap[] qzp_ = [
             arg,
         ];
-        ConceptMap qzs_(ConceptMap a)
+        ConceptMap qzq_(ConceptMap a)
         {
-            FhirUri qzw_ = a?.UrlElement;
-            Identifier qzx_ = a?.Identifier;
-            FhirString qzy_ = a?.VersionElement;
-            FhirString qzz_ = a?.NameElement;
-            FhirString rza_ = a?.TitleElement;
-            Code<PublicationStatus> rzb_ = a?.StatusElement;
-            FhirBoolean rzc_ = a?.ExperimentalElement;
-            FhirDateTime rzd_ = a?.DateElement;
-            FhirString rze_ = a?.PublisherElement;
-            List<ContactDetail> rzf_ = a?.Contact;
-            Markdown rzg_ = a?.DescriptionElement;
-            List<UsageContext> rzh_ = a?.UseContext;
-            List<CodeableConcept> rzi_ = a?.Jurisdiction;
-            Markdown rzj_ = a?.PurposeElement;
-            Markdown rzk_ = a?.CopyrightElement;
-            DataType rzl_ = a?.Source;
-            DataType rzm_ = a?.Target;
-            List<ConceptMap.GroupComponent> rzn_ = a?.Group;
-            ConceptMap rzo_ = new ConceptMap
+            FhirUri qzu_ = a?.UrlElement;
+            Identifier qzv_ = a?.Identifier;
+            FhirString qzw_ = a?.VersionElement;
+            FhirString qzx_ = a?.NameElement;
+            FhirString qzy_ = a?.TitleElement;
+            Code<PublicationStatus> qzz_ = a?.StatusElement;
+            FhirBoolean rza_ = a?.ExperimentalElement;
+            FhirDateTime rzb_ = a?.DateElement;
+            FhirString rzc_ = a?.PublisherElement;
+            List<ContactDetail> rzd_ = a?.Contact;
+            Markdown rze_ = a?.DescriptionElement;
+            List<UsageContext> rzf_ = a?.UseContext;
+            List<CodeableConcept> rzg_ = a?.Jurisdiction;
+            Markdown rzh_ = a?.PurposeElement;
+            Markdown rzi_ = a?.CopyrightElement;
+            DataType rzj_ = a?.Source;
+            DataType rzk_ = a?.Target;
+            List<ConceptMap.GroupComponent> rzl_ = a?.Group;
+            ConceptMap rzm_ = new ConceptMap
             {
-                UrlElement = qzw_,
-                Identifier = qzx_,
-                VersionElement = qzy_,
-                NameElement = qzz_,
-                TitleElement = rza_,
-                StatusElement = rzb_,
-                ExperimentalElement = rzc_,
-                DateElement = rzd_,
-                PublisherElement = rze_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)rzf_),
-                DescriptionElement = rzg_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)rzh_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzi_),
-                PurposeElement = rzj_,
-                CopyrightElement = rzk_,
-                Source = (DataType)rzl_,
-                Target = (DataType)rzm_,
-                Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupComponent>)rzn_),
+                UrlElement = qzu_,
+                Identifier = qzv_,
+                VersionElement = qzw_,
+                NameElement = qzx_,
+                TitleElement = qzy_,
+                StatusElement = qzz_,
+                ExperimentalElement = rza_,
+                DateElement = rzb_,
+                PublisherElement = rzc_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)rzd_),
+                DescriptionElement = rze_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)rzf_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzg_),
+                PurposeElement = rzh_,
+                CopyrightElement = rzi_,
+                Source = (DataType)rzj_,
+                Target = (DataType)rzk_,
+                Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupComponent>)rzl_),
             };
 
-            return rzo_;
+            return rzm_;
         };
-        IEnumerable<ConceptMap> qzt_ = context.Operators.Select<ConceptMap, ConceptMap>((IEnumerable<ConceptMap>)qzr_, qzs_);
-        IEnumerable<ConceptMap> qzu_ = context.Operators.Distinct<ConceptMap>(qzt_);
-        ConceptMap qzv_ = context.Operators.SingletonFrom<ConceptMap>(qzu_);
+        IEnumerable<ConceptMap> qzr_ = context.Operators.Select<ConceptMap, ConceptMap>((IEnumerable<ConceptMap>)qzp_, qzq_);
+        IEnumerable<ConceptMap> qzs_ = context.Operators.Distinct<ConceptMap>(qzr_);
+        ConceptMap qzt_ = context.Operators.SingletonFrom<ConceptMap>(qzs_);
 
-        return qzv_;
+        return qzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ConditionResource")]
     public Condition ConditionResource(CqlContext context, Condition arg)
     {
-        Condition[] rzp_ = [
+        Condition[] rzn_ = [
             arg,
         ];
-        Condition rzq_(Condition a)
+        Condition rzo_(Condition a)
         {
-            List<Identifier> rzu_ = a?.Identifier;
-            CodeableConcept rzv_ = a?.ClinicalStatus;
-            CodeableConcept rzw_ = a?.VerificationStatus;
-            List<CodeableConcept> rzx_ = a?.Category;
-            CodeableConcept rzy_ = a?.Severity;
-            CodeableConcept rzz_ = a?.Code;
-            List<CodeableConcept> sza_ = a?.BodySite;
-            ResourceReference szb_ = a?.Subject;
-            ResourceReference szc_ = a?.Encounter;
-            DataType szd_ = a?.Onset;
-            DataType sze_ = a?.Abatement;
-            FhirDateTime szf_ = a?.RecordedDateElement;
-            ResourceReference szg_ = a?.Recorder;
-            ResourceReference szh_ = a?.Asserter;
-            List<Condition.StageComponent> szi_ = a?.Stage;
-            List<Condition.EvidenceComponent> szj_ = a?.Evidence;
-            List<Annotation> szk_ = a?.Note;
-            Condition szl_ = new Condition
+            List<Identifier> rzs_ = a?.Identifier;
+            CodeableConcept rzt_ = a?.ClinicalStatus;
+            CodeableConcept rzu_ = a?.VerificationStatus;
+            List<CodeableConcept> rzv_ = a?.Category;
+            CodeableConcept rzw_ = a?.Severity;
+            CodeableConcept rzx_ = a?.Code;
+            List<CodeableConcept> rzy_ = a?.BodySite;
+            ResourceReference rzz_ = a?.Subject;
+            ResourceReference sza_ = a?.Encounter;
+            DataType szb_ = a?.Onset;
+            DataType szc_ = a?.Abatement;
+            FhirDateTime szd_ = a?.RecordedDateElement;
+            ResourceReference sze_ = a?.Recorder;
+            ResourceReference szf_ = a?.Asserter;
+            List<Condition.StageComponent> szg_ = a?.Stage;
+            List<Condition.EvidenceComponent> szh_ = a?.Evidence;
+            List<Annotation> szi_ = a?.Note;
+            Condition szj_ = new Condition
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzu_),
-                ClinicalStatus = rzv_,
-                VerificationStatus = rzw_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzx_),
-                Severity = rzy_,
-                Code = rzz_,
-                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)sza_),
-                Subject = szb_,
-                Encounter = szc_,
-                Onset = (DataType)szd_,
-                Abatement = (DataType)sze_,
-                RecordedDateElement = szf_,
-                Recorder = szg_,
-                Asserter = szh_,
-                Stage = new List<Condition.StageComponent>((IEnumerable<Condition.StageComponent>)szi_),
-                Evidence = new List<Condition.EvidenceComponent>((IEnumerable<Condition.EvidenceComponent>)szj_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)szk_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzs_),
+                ClinicalStatus = rzt_,
+                VerificationStatus = rzu_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzv_),
+                Severity = rzw_,
+                Code = rzx_,
+                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzy_),
+                Subject = rzz_,
+                Encounter = sza_,
+                Onset = (DataType)szb_,
+                Abatement = (DataType)szc_,
+                RecordedDateElement = szd_,
+                Recorder = sze_,
+                Asserter = szf_,
+                Stage = new List<Condition.StageComponent>((IEnumerable<Condition.StageComponent>)szg_),
+                Evidence = new List<Condition.EvidenceComponent>((IEnumerable<Condition.EvidenceComponent>)szh_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)szi_),
             };
 
-            return szl_;
+            return szj_;
         };
-        IEnumerable<Condition> rzr_ = context.Operators.Select<Condition, Condition>((IEnumerable<Condition>)rzp_, rzq_);
-        IEnumerable<Condition> rzs_ = context.Operators.Distinct<Condition>(rzr_);
-        Condition rzt_ = context.Operators.SingletonFrom<Condition>(rzs_);
+        IEnumerable<Condition> rzp_ = context.Operators.Select<Condition, Condition>((IEnumerable<Condition>)rzn_, rzo_);
+        IEnumerable<Condition> rzq_ = context.Operators.Distinct<Condition>(rzp_);
+        Condition rzr_ = context.Operators.SingletonFrom<Condition>(rzq_);
 
-        return rzt_;
+        return rzr_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ConsentResource")]
     public Consent ConsentResource(CqlContext context, Consent arg)
     {
-        Consent[] szm_ = [
+        Consent[] szk_ = [
             arg,
         ];
-        Consent szn_(Consent a)
+        Consent szl_(Consent a)
         {
-            List<Identifier> szr_ = a?.Identifier;
-            Code<Consent.ConsentState> szs_ = a?.StatusElement;
-            CodeableConcept szt_ = a?.Scope;
-            List<CodeableConcept> szu_ = a?.Category;
-            ResourceReference szv_ = a?.Patient;
-            FhirDateTime szw_ = a?.DateTimeElement;
-            List<ResourceReference> szx_ = a?.Performer;
-            List<ResourceReference> szy_ = a?.Organization;
-            DataType szz_ = a?.Source;
-            List<Consent.PolicyComponent> tza_ = a?.Policy;
-            CodeableConcept tzb_ = a?.PolicyRule;
-            List<Consent.VerificationComponent> tzc_ = a?.Verification;
-            Consent.provisionComponent tzd_ = a?.Provision;
-            Consent tze_ = new Consent
+            List<Identifier> szp_ = a?.Identifier;
+            Code<Consent.ConsentState> szq_ = a?.StatusElement;
+            CodeableConcept szr_ = a?.Scope;
+            List<CodeableConcept> szs_ = a?.Category;
+            ResourceReference szt_ = a?.Patient;
+            FhirDateTime szu_ = a?.DateTimeElement;
+            List<ResourceReference> szv_ = a?.Performer;
+            List<ResourceReference> szw_ = a?.Organization;
+            DataType szx_ = a?.Source;
+            List<Consent.PolicyComponent> szy_ = a?.Policy;
+            CodeableConcept szz_ = a?.PolicyRule;
+            List<Consent.VerificationComponent> tza_ = a?.Verification;
+            Consent.provisionComponent tzb_ = a?.Provision;
+            Consent tzc_ = new Consent
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)szr_),
-                StatusElement = szs_,
-                Scope = szt_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szu_),
-                Patient = szv_,
-                DateTimeElement = szw_,
-                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)szx_),
-                Organization = new List<ResourceReference>((IEnumerable<ResourceReference>)szy_),
-                Source = (DataType)szz_,
-                Policy = new List<Consent.PolicyComponent>((IEnumerable<Consent.PolicyComponent>)tza_),
-                PolicyRule = tzb_,
-                Verification = new List<Consent.VerificationComponent>((IEnumerable<Consent.VerificationComponent>)tzc_),
-                Provision = tzd_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)szp_),
+                StatusElement = szq_,
+                Scope = szr_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szs_),
+                Patient = szt_,
+                DateTimeElement = szu_,
+                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)szv_),
+                Organization = new List<ResourceReference>((IEnumerable<ResourceReference>)szw_),
+                Source = (DataType)szx_,
+                Policy = new List<Consent.PolicyComponent>((IEnumerable<Consent.PolicyComponent>)szy_),
+                PolicyRule = szz_,
+                Verification = new List<Consent.VerificationComponent>((IEnumerable<Consent.VerificationComponent>)tza_),
+                Provision = tzb_,
             };
 
-            return tze_;
+            return tzc_;
         };
-        IEnumerable<Consent> szo_ = context.Operators.Select<Consent, Consent>((IEnumerable<Consent>)szm_, szn_);
-        IEnumerable<Consent> szp_ = context.Operators.Distinct<Consent>(szo_);
-        Consent szq_ = context.Operators.SingletonFrom<Consent>(szp_);
+        IEnumerable<Consent> szm_ = context.Operators.Select<Consent, Consent>((IEnumerable<Consent>)szk_, szl_);
+        IEnumerable<Consent> szn_ = context.Operators.Distinct<Consent>(szm_);
+        Consent szo_ = context.Operators.SingletonFrom<Consent>(szn_);
 
-        return szq_;
+        return szo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ContractResource")]
     public Contract ContractResource(CqlContext context, Contract arg)
     {
-        Contract[] tzf_ = [
+        Contract[] tzd_ = [
             arg,
         ];
-        Contract tzg_(Contract a)
+        Contract tze_(Contract a)
         {
-            List<Identifier> tzk_ = a?.Identifier;
-            FhirUri tzl_ = a?.UrlElement;
-            FhirString tzm_ = a?.VersionElement;
-            Code<Contract.ContractResourceStatusCodes> tzn_ = a?.StatusElement;
-            CodeableConcept tzo_ = a?.LegalState;
-            ResourceReference tzp_ = a?.InstantiatesCanonical;
-            FhirUri tzq_ = a?.InstantiatesUriElement;
-            CodeableConcept tzr_ = a?.ContentDerivative;
-            FhirDateTime tzs_ = a?.IssuedElement;
-            Period tzt_ = a?.Applies;
-            CodeableConcept tzu_ = a?.ExpirationType;
-            List<ResourceReference> tzv_ = a?.Subject;
-            List<ResourceReference> tzw_ = a?.Authority;
-            List<ResourceReference> tzx_ = a?.Domain;
-            List<ResourceReference> tzy_ = a?.Site;
-            FhirString tzz_ = a?.NameElement;
-            FhirString uza_ = a?.TitleElement;
-            FhirString uzb_ = a?.SubtitleElement;
-            List<FhirString> uzc_ = a?.AliasElement;
-            ResourceReference uzd_ = a?.Author;
-            CodeableConcept uze_ = a?.Scope;
-            DataType uzf_ = a?.Topic;
-            CodeableConcept uzg_ = a?.Type;
-            List<CodeableConcept> uzh_ = a?.SubType;
-            Contract.ContentDefinitionComponent uzi_ = a?.ContentDefinition;
-            List<Contract.TermComponent> uzj_ = a?.Term;
-            List<ResourceReference> uzk_ = a?.SupportingInfo;
-            List<ResourceReference> uzl_ = a?.RelevantHistory;
-            List<Contract.SignatoryComponent> uzm_ = a?.Signer;
-            List<Contract.FriendlyLanguageComponent> uzn_ = a?.Friendly;
-            List<Contract.LegalLanguageComponent> uzo_ = a?.Legal;
-            List<Contract.ComputableLanguageComponent> uzp_ = a?.Rule;
-            DataType uzq_ = a?.LegallyBinding;
-            Contract uzr_ = new Contract
+            List<Identifier> tzi_ = a?.Identifier;
+            FhirUri tzj_ = a?.UrlElement;
+            FhirString tzk_ = a?.VersionElement;
+            Code<Contract.ContractResourceStatusCodes> tzl_ = a?.StatusElement;
+            CodeableConcept tzm_ = a?.LegalState;
+            ResourceReference tzn_ = a?.InstantiatesCanonical;
+            FhirUri tzo_ = a?.InstantiatesUriElement;
+            CodeableConcept tzp_ = a?.ContentDerivative;
+            FhirDateTime tzq_ = a?.IssuedElement;
+            Period tzr_ = a?.Applies;
+            CodeableConcept tzs_ = a?.ExpirationType;
+            List<ResourceReference> tzt_ = a?.Subject;
+            List<ResourceReference> tzu_ = a?.Authority;
+            List<ResourceReference> tzv_ = a?.Domain;
+            List<ResourceReference> tzw_ = a?.Site;
+            FhirString tzx_ = a?.NameElement;
+            FhirString tzy_ = a?.TitleElement;
+            FhirString tzz_ = a?.SubtitleElement;
+            List<FhirString> uza_ = a?.AliasElement;
+            ResourceReference uzb_ = a?.Author;
+            CodeableConcept uzc_ = a?.Scope;
+            DataType uzd_ = a?.Topic;
+            CodeableConcept uze_ = a?.Type;
+            List<CodeableConcept> uzf_ = a?.SubType;
+            Contract.ContentDefinitionComponent uzg_ = a?.ContentDefinition;
+            List<Contract.TermComponent> uzh_ = a?.Term;
+            List<ResourceReference> uzi_ = a?.SupportingInfo;
+            List<ResourceReference> uzj_ = a?.RelevantHistory;
+            List<Contract.SignatoryComponent> uzk_ = a?.Signer;
+            List<Contract.FriendlyLanguageComponent> uzl_ = a?.Friendly;
+            List<Contract.LegalLanguageComponent> uzm_ = a?.Legal;
+            List<Contract.ComputableLanguageComponent> uzn_ = a?.Rule;
+            DataType uzo_ = a?.LegallyBinding;
+            Contract uzp_ = new Contract
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzk_),
-                UrlElement = tzl_,
-                VersionElement = tzm_,
-                StatusElement = tzn_,
-                LegalState = tzo_,
-                InstantiatesCanonical = tzp_,
-                InstantiatesUriElement = tzq_,
-                ContentDerivative = tzr_,
-                IssuedElement = tzs_,
-                Applies = tzt_,
-                ExpirationType = tzu_,
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)tzv_),
-                Authority = new List<ResourceReference>((IEnumerable<ResourceReference>)tzw_),
-                Domain = new List<ResourceReference>((IEnumerable<ResourceReference>)tzx_),
-                Site = new List<ResourceReference>((IEnumerable<ResourceReference>)tzy_),
-                NameElement = tzz_,
-                TitleElement = uza_,
-                SubtitleElement = uzb_,
-                AliasElement = new List<FhirString>((IEnumerable<FhirString>)uzc_),
-                Author = uzd_,
-                Scope = uze_,
-                Topic = (DataType)uzf_,
-                Type = uzg_,
-                SubType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzh_),
-                ContentDefinition = uzi_,
-                Term = new List<Contract.TermComponent>((IEnumerable<Contract.TermComponent>)uzj_),
-                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)uzk_),
-                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)uzl_),
-                Signer = new List<Contract.SignatoryComponent>((IEnumerable<Contract.SignatoryComponent>)uzm_),
-                Friendly = new List<Contract.FriendlyLanguageComponent>((IEnumerable<Contract.FriendlyLanguageComponent>)uzn_),
-                Legal = new List<Contract.LegalLanguageComponent>((IEnumerable<Contract.LegalLanguageComponent>)uzo_),
-                Rule = new List<Contract.ComputableLanguageComponent>((IEnumerable<Contract.ComputableLanguageComponent>)uzp_),
-                LegallyBinding = (DataType)uzq_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzi_),
+                UrlElement = tzj_,
+                VersionElement = tzk_,
+                StatusElement = tzl_,
+                LegalState = tzm_,
+                InstantiatesCanonical = tzn_,
+                InstantiatesUriElement = tzo_,
+                ContentDerivative = tzp_,
+                IssuedElement = tzq_,
+                Applies = tzr_,
+                ExpirationType = tzs_,
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)tzt_),
+                Authority = new List<ResourceReference>((IEnumerable<ResourceReference>)tzu_),
+                Domain = new List<ResourceReference>((IEnumerable<ResourceReference>)tzv_),
+                Site = new List<ResourceReference>((IEnumerable<ResourceReference>)tzw_),
+                NameElement = tzx_,
+                TitleElement = tzy_,
+                SubtitleElement = tzz_,
+                AliasElement = new List<FhirString>((IEnumerable<FhirString>)uza_),
+                Author = uzb_,
+                Scope = uzc_,
+                Topic = (DataType)uzd_,
+                Type = uze_,
+                SubType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzf_),
+                ContentDefinition = uzg_,
+                Term = new List<Contract.TermComponent>((IEnumerable<Contract.TermComponent>)uzh_),
+                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)uzi_),
+                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)uzj_),
+                Signer = new List<Contract.SignatoryComponent>((IEnumerable<Contract.SignatoryComponent>)uzk_),
+                Friendly = new List<Contract.FriendlyLanguageComponent>((IEnumerable<Contract.FriendlyLanguageComponent>)uzl_),
+                Legal = new List<Contract.LegalLanguageComponent>((IEnumerable<Contract.LegalLanguageComponent>)uzm_),
+                Rule = new List<Contract.ComputableLanguageComponent>((IEnumerable<Contract.ComputableLanguageComponent>)uzn_),
+                LegallyBinding = (DataType)uzo_,
             };
 
-            return uzr_;
+            return uzp_;
         };
-        IEnumerable<Contract> tzh_ = context.Operators.Select<Contract, Contract>((IEnumerable<Contract>)tzf_, tzg_);
-        IEnumerable<Contract> tzi_ = context.Operators.Distinct<Contract>(tzh_);
-        Contract tzj_ = context.Operators.SingletonFrom<Contract>(tzi_);
+        IEnumerable<Contract> tzf_ = context.Operators.Select<Contract, Contract>((IEnumerable<Contract>)tzd_, tze_);
+        IEnumerable<Contract> tzg_ = context.Operators.Distinct<Contract>(tzf_);
+        Contract tzh_ = context.Operators.SingletonFrom<Contract>(tzg_);
 
-        return tzj_;
+        return tzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CoverageResource")]
     public Coverage CoverageResource(CqlContext context, Coverage arg)
     {
-        Coverage[] uzs_ = [
+        Coverage[] uzq_ = [
             arg,
         ];
-        Coverage uzt_(Coverage a)
+        Coverage uzr_(Coverage a)
         {
-            List<Identifier> uzx_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> uzy_ = a?.StatusElement;
-            CodeableConcept uzz_ = a?.Type;
-            ResourceReference vza_ = a?.PolicyHolder;
-            ResourceReference vzb_ = a?.Subscriber;
-            FhirString vzc_ = a?.SubscriberIdElement;
-            ResourceReference vzd_ = a?.Beneficiary;
-            FhirString vze_ = a?.DependentElement;
-            CodeableConcept vzf_ = a?.Relationship;
-            Period vzg_ = a?.Period;
-            List<ResourceReference> vzh_ = a?.Payor;
-            List<Coverage.ClassComponent> vzi_ = a?.Class;
-            PositiveInt vzj_ = a?.OrderElement;
-            Integer vzk_ = context.Operators.Convert<Integer>(vzj_);
-            PositiveInt vzl_ = context.Operators.Convert<PositiveInt>(vzk_);
-            FhirString vzm_ = a?.NetworkElement;
-            List<Coverage.CostToBeneficiaryComponent> vzn_ = a?.CostToBeneficiary;
-            FhirBoolean vzo_ = a?.SubrogationElement;
-            List<ResourceReference> vzp_ = a?.Contract;
-            Coverage vzq_ = new Coverage
+            List<Identifier> uzv_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> uzw_ = a?.StatusElement;
+            CodeableConcept uzx_ = a?.Type;
+            ResourceReference uzy_ = a?.PolicyHolder;
+            ResourceReference uzz_ = a?.Subscriber;
+            FhirString vza_ = a?.SubscriberIdElement;
+            ResourceReference vzb_ = a?.Beneficiary;
+            FhirString vzc_ = a?.DependentElement;
+            CodeableConcept vzd_ = a?.Relationship;
+            Period vze_ = a?.Period;
+            List<ResourceReference> vzf_ = a?.Payor;
+            List<Coverage.ClassComponent> vzg_ = a?.Class;
+            PositiveInt vzh_ = a?.OrderElement;
+            Integer vzi_ = context.Operators.Convert<Integer>(vzh_);
+            PositiveInt vzj_ = context.Operators.Convert<PositiveInt>(vzi_);
+            FhirString vzk_ = a?.NetworkElement;
+            List<Coverage.CostToBeneficiaryComponent> vzl_ = a?.CostToBeneficiary;
+            FhirBoolean vzm_ = a?.SubrogationElement;
+            List<ResourceReference> vzn_ = a?.Contract;
+            Coverage vzo_ = new Coverage
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)uzx_),
-                StatusElement = uzy_,
-                Type = uzz_,
-                PolicyHolder = vza_,
-                Subscriber = vzb_,
-                SubscriberIdElement = vzc_,
-                Beneficiary = vzd_,
-                DependentElement = vze_,
-                Relationship = vzf_,
-                Period = vzg_,
-                Payor = new List<ResourceReference>((IEnumerable<ResourceReference>)vzh_),
-                Class = new List<Coverage.ClassComponent>((IEnumerable<Coverage.ClassComponent>)vzi_),
-                OrderElement = vzl_,
-                NetworkElement = vzm_,
-                CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)vzn_),
-                SubrogationElement = vzo_,
-                Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)vzp_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)uzv_),
+                StatusElement = uzw_,
+                Type = uzx_,
+                PolicyHolder = uzy_,
+                Subscriber = uzz_,
+                SubscriberIdElement = vza_,
+                Beneficiary = vzb_,
+                DependentElement = vzc_,
+                Relationship = vzd_,
+                Period = vze_,
+                Payor = new List<ResourceReference>((IEnumerable<ResourceReference>)vzf_),
+                Class = new List<Coverage.ClassComponent>((IEnumerable<Coverage.ClassComponent>)vzg_),
+                OrderElement = vzj_,
+                NetworkElement = vzk_,
+                CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)vzl_),
+                SubrogationElement = vzm_,
+                Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)vzn_),
             };
 
-            return vzq_;
+            return vzo_;
         };
-        IEnumerable<Coverage> uzu_ = context.Operators.Select<Coverage, Coverage>((IEnumerable<Coverage>)uzs_, uzt_);
-        IEnumerable<Coverage> uzv_ = context.Operators.Distinct<Coverage>(uzu_);
-        Coverage uzw_ = context.Operators.SingletonFrom<Coverage>(uzv_);
+        IEnumerable<Coverage> uzs_ = context.Operators.Select<Coverage, Coverage>((IEnumerable<Coverage>)uzq_, uzr_);
+        IEnumerable<Coverage> uzt_ = context.Operators.Distinct<Coverage>(uzs_);
+        Coverage uzu_ = context.Operators.SingletonFrom<Coverage>(uzt_);
 
-        return uzw_;
+        return uzu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CoverageEligibilityRequestResource")]
     public CoverageEligibilityRequest CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest arg)
     {
-        CoverageEligibilityRequest[] vzr_ = [
+        CoverageEligibilityRequest[] vzp_ = [
             arg,
         ];
-        CoverageEligibilityRequest vzs_(CoverageEligibilityRequest a)
+        CoverageEligibilityRequest vzq_(CoverageEligibilityRequest a)
         {
-            List<Identifier> vzw_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> vzx_ = a?.StatusElement;
-            CodeableConcept vzy_ = a?.Priority;
-            List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>> vzz_ = a?.PurposeElement;
-            ResourceReference wza_ = a?.Patient;
-            DataType wzb_ = a?.Serviced;
-            FhirDateTime wzc_ = a?.CreatedElement;
-            ResourceReference wzd_ = a?.Enterer;
-            ResourceReference wze_ = a?.Provider;
-            ResourceReference wzf_ = a?.Insurer;
-            ResourceReference wzg_ = a?.Facility;
-            List<CoverageEligibilityRequest.SupportingInformationComponent> wzh_ = a?.SupportingInfo;
-            List<CoverageEligibilityRequest.InsuranceComponent> wzi_ = a?.Insurance;
-            List<CoverageEligibilityRequest.DetailsComponent> wzj_ = a?.Item;
-            CoverageEligibilityRequest wzk_ = new CoverageEligibilityRequest
+            List<Identifier> vzu_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> vzv_ = a?.StatusElement;
+            CodeableConcept vzw_ = a?.Priority;
+            List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>> vzx_ = a?.PurposeElement;
+            ResourceReference vzy_ = a?.Patient;
+            DataType vzz_ = a?.Serviced;
+            FhirDateTime wza_ = a?.CreatedElement;
+            ResourceReference wzb_ = a?.Enterer;
+            ResourceReference wzc_ = a?.Provider;
+            ResourceReference wzd_ = a?.Insurer;
+            ResourceReference wze_ = a?.Facility;
+            List<CoverageEligibilityRequest.SupportingInformationComponent> wzf_ = a?.SupportingInfo;
+            List<CoverageEligibilityRequest.InsuranceComponent> wzg_ = a?.Insurance;
+            List<CoverageEligibilityRequest.DetailsComponent> wzh_ = a?.Item;
+            CoverageEligibilityRequest wzi_ = new CoverageEligibilityRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzw_),
-                StatusElement = vzx_,
-                Priority = vzy_,
-                PurposeElement = new List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>((IEnumerable<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>)vzz_),
-                Patient = wza_,
-                Serviced = (DataType)wzb_,
-                CreatedElement = wzc_,
-                Enterer = wzd_,
-                Provider = wze_,
-                Insurer = wzf_,
-                Facility = wzg_,
-                SupportingInfo = new List<CoverageEligibilityRequest.SupportingInformationComponent>((IEnumerable<CoverageEligibilityRequest.SupportingInformationComponent>)wzh_),
-                Insurance = new List<CoverageEligibilityRequest.InsuranceComponent>((IEnumerable<CoverageEligibilityRequest.InsuranceComponent>)wzi_),
-                Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<CoverageEligibilityRequest.DetailsComponent>)wzj_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzu_),
+                StatusElement = vzv_,
+                Priority = vzw_,
+                PurposeElement = new List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>((IEnumerable<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>)vzx_),
+                Patient = vzy_,
+                Serviced = (DataType)vzz_,
+                CreatedElement = wza_,
+                Enterer = wzb_,
+                Provider = wzc_,
+                Insurer = wzd_,
+                Facility = wze_,
+                SupportingInfo = new List<CoverageEligibilityRequest.SupportingInformationComponent>((IEnumerable<CoverageEligibilityRequest.SupportingInformationComponent>)wzf_),
+                Insurance = new List<CoverageEligibilityRequest.InsuranceComponent>((IEnumerable<CoverageEligibilityRequest.InsuranceComponent>)wzg_),
+                Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<CoverageEligibilityRequest.DetailsComponent>)wzh_),
             };
 
-            return wzk_;
+            return wzi_;
         };
-        IEnumerable<CoverageEligibilityRequest> vzt_ = context.Operators.Select<CoverageEligibilityRequest, CoverageEligibilityRequest>((IEnumerable<CoverageEligibilityRequest>)vzr_, vzs_);
-        IEnumerable<CoverageEligibilityRequest> vzu_ = context.Operators.Distinct<CoverageEligibilityRequest>(vzt_);
-        CoverageEligibilityRequest vzv_ = context.Operators.SingletonFrom<CoverageEligibilityRequest>(vzu_);
+        IEnumerable<CoverageEligibilityRequest> vzr_ = context.Operators.Select<CoverageEligibilityRequest, CoverageEligibilityRequest>((IEnumerable<CoverageEligibilityRequest>)vzp_, vzq_);
+        IEnumerable<CoverageEligibilityRequest> vzs_ = context.Operators.Distinct<CoverageEligibilityRequest>(vzr_);
+        CoverageEligibilityRequest vzt_ = context.Operators.SingletonFrom<CoverageEligibilityRequest>(vzs_);
 
-        return vzv_;
+        return vzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("CoverageEligibilityResponseResource")]
     public CoverageEligibilityResponse CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse arg)
     {
-        CoverageEligibilityResponse[] wzl_ = [
+        CoverageEligibilityResponse[] wzj_ = [
             arg,
         ];
-        CoverageEligibilityResponse wzm_(CoverageEligibilityResponse a)
+        CoverageEligibilityResponse wzk_(CoverageEligibilityResponse a)
         {
-            List<Identifier> wzq_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> wzr_ = a?.StatusElement;
-            List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>> wzs_ = a?.PurposeElement;
-            ResourceReference wzt_ = a?.Patient;
-            DataType wzu_ = a?.Serviced;
-            FhirDateTime wzv_ = a?.CreatedElement;
-            ResourceReference wzw_ = a?.Requestor;
-            ResourceReference wzx_ = a?.Request;
-            Code<ClaimProcessingCodes> wzy_ = a?.OutcomeElement;
-            FhirString wzz_ = a?.DispositionElement;
-            ResourceReference xza_ = a?.Insurer;
-            List<CoverageEligibilityResponse.InsuranceComponent> xzb_ = a?.Insurance;
-            FhirString xzc_ = a?.PreAuthRefElement;
-            CodeableConcept xzd_ = a?.Form;
-            List<CoverageEligibilityResponse.ErrorsComponent> xze_ = a?.Error;
-            CoverageEligibilityResponse xzf_ = new CoverageEligibilityResponse
+            List<Identifier> wzo_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> wzp_ = a?.StatusElement;
+            List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>> wzq_ = a?.PurposeElement;
+            ResourceReference wzr_ = a?.Patient;
+            DataType wzs_ = a?.Serviced;
+            FhirDateTime wzt_ = a?.CreatedElement;
+            ResourceReference wzu_ = a?.Requestor;
+            ResourceReference wzv_ = a?.Request;
+            Code<ClaimProcessingCodes> wzw_ = a?.OutcomeElement;
+            FhirString wzx_ = a?.DispositionElement;
+            ResourceReference wzy_ = a?.Insurer;
+            List<CoverageEligibilityResponse.InsuranceComponent> wzz_ = a?.Insurance;
+            FhirString xza_ = a?.PreAuthRefElement;
+            CodeableConcept xzb_ = a?.Form;
+            List<CoverageEligibilityResponse.ErrorsComponent> xzc_ = a?.Error;
+            CoverageEligibilityResponse xzd_ = new CoverageEligibilityResponse
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzq_),
-                StatusElement = wzr_,
-                PurposeElement = new List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>((IEnumerable<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>)wzs_),
-                Patient = wzt_,
-                Serviced = (DataType)wzu_,
-                CreatedElement = wzv_,
-                Requestor = wzw_,
-                Request = wzx_,
-                OutcomeElement = wzy_,
-                DispositionElement = wzz_,
-                Insurer = xza_,
-                Insurance = new List<CoverageEligibilityResponse.InsuranceComponent>((IEnumerable<CoverageEligibilityResponse.InsuranceComponent>)xzb_),
-                PreAuthRefElement = xzc_,
-                Form = xzd_,
-                Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<CoverageEligibilityResponse.ErrorsComponent>)xze_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzo_),
+                StatusElement = wzp_,
+                PurposeElement = new List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>((IEnumerable<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>)wzq_),
+                Patient = wzr_,
+                Serviced = (DataType)wzs_,
+                CreatedElement = wzt_,
+                Requestor = wzu_,
+                Request = wzv_,
+                OutcomeElement = wzw_,
+                DispositionElement = wzx_,
+                Insurer = wzy_,
+                Insurance = new List<CoverageEligibilityResponse.InsuranceComponent>((IEnumerable<CoverageEligibilityResponse.InsuranceComponent>)wzz_),
+                PreAuthRefElement = xza_,
+                Form = xzb_,
+                Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<CoverageEligibilityResponse.ErrorsComponent>)xzc_),
             };
 
-            return xzf_;
+            return xzd_;
         };
-        IEnumerable<CoverageEligibilityResponse> wzn_ = context.Operators.Select<CoverageEligibilityResponse, CoverageEligibilityResponse>((IEnumerable<CoverageEligibilityResponse>)wzl_, wzm_);
-        IEnumerable<CoverageEligibilityResponse> wzo_ = context.Operators.Distinct<CoverageEligibilityResponse>(wzn_);
-        CoverageEligibilityResponse wzp_ = context.Operators.SingletonFrom<CoverageEligibilityResponse>(wzo_);
+        IEnumerable<CoverageEligibilityResponse> wzl_ = context.Operators.Select<CoverageEligibilityResponse, CoverageEligibilityResponse>((IEnumerable<CoverageEligibilityResponse>)wzj_, wzk_);
+        IEnumerable<CoverageEligibilityResponse> wzm_ = context.Operators.Distinct<CoverageEligibilityResponse>(wzl_);
+        CoverageEligibilityResponse wzn_ = context.Operators.SingletonFrom<CoverageEligibilityResponse>(wzm_);
 
-        return wzp_;
+        return wzn_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DetectedIssueResource")]
     public DetectedIssue DetectedIssueResource(CqlContext context, DetectedIssue arg)
     {
-        DetectedIssue[] xzg_ = [
+        DetectedIssue[] xze_ = [
             arg,
         ];
-        DetectedIssue xzh_(DetectedIssue a)
+        DetectedIssue xzf_(DetectedIssue a)
         {
-            List<Identifier> xzl_ = a?.Identifier;
-            Code<ObservationStatus> xzm_ = a?.StatusElement;
-            CodeableConcept xzn_ = a?.Code;
-            Code<DetectedIssue.DetectedIssueSeverity> xzo_ = a?.SeverityElement;
-            ResourceReference xzp_ = a?.Patient;
-            DataType xzq_ = a?.Identified;
-            ResourceReference xzr_ = a?.Author;
-            List<ResourceReference> xzs_ = a?.Implicated;
-            List<DetectedIssue.EvidenceComponent> xzt_ = a?.Evidence;
-            FhirString xzu_ = a?.DetailElement;
-            FhirUri xzv_ = a?.ReferenceElement;
-            List<DetectedIssue.MitigationComponent> xzw_ = a?.Mitigation;
-            DetectedIssue xzx_ = new DetectedIssue
+            List<Identifier> xzj_ = a?.Identifier;
+            Code<ObservationStatus> xzk_ = a?.StatusElement;
+            CodeableConcept xzl_ = a?.Code;
+            Code<DetectedIssue.DetectedIssueSeverity> xzm_ = a?.SeverityElement;
+            ResourceReference xzn_ = a?.Patient;
+            DataType xzo_ = a?.Identified;
+            ResourceReference xzp_ = a?.Author;
+            List<ResourceReference> xzq_ = a?.Implicated;
+            List<DetectedIssue.EvidenceComponent> xzr_ = a?.Evidence;
+            FhirString xzs_ = a?.DetailElement;
+            FhirUri xzt_ = a?.ReferenceElement;
+            List<DetectedIssue.MitigationComponent> xzu_ = a?.Mitigation;
+            DetectedIssue xzv_ = new DetectedIssue
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzl_),
-                StatusElement = xzm_,
-                Code = xzn_,
-                SeverityElement = xzo_,
-                Patient = xzp_,
-                Identified = (DataType)xzq_,
-                Author = xzr_,
-                Implicated = new List<ResourceReference>((IEnumerable<ResourceReference>)xzs_),
-                Evidence = new List<DetectedIssue.EvidenceComponent>((IEnumerable<DetectedIssue.EvidenceComponent>)xzt_),
-                DetailElement = xzu_,
-                ReferenceElement = xzv_,
-                Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIssue.MitigationComponent>)xzw_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzj_),
+                StatusElement = xzk_,
+                Code = xzl_,
+                SeverityElement = xzm_,
+                Patient = xzn_,
+                Identified = (DataType)xzo_,
+                Author = xzp_,
+                Implicated = new List<ResourceReference>((IEnumerable<ResourceReference>)xzq_),
+                Evidence = new List<DetectedIssue.EvidenceComponent>((IEnumerable<DetectedIssue.EvidenceComponent>)xzr_),
+                DetailElement = xzs_,
+                ReferenceElement = xzt_,
+                Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIssue.MitigationComponent>)xzu_),
             };
 
-            return xzx_;
+            return xzv_;
         };
-        IEnumerable<DetectedIssue> xzi_ = context.Operators.Select<DetectedIssue, DetectedIssue>((IEnumerable<DetectedIssue>)xzg_, xzh_);
-        IEnumerable<DetectedIssue> xzj_ = context.Operators.Distinct<DetectedIssue>(xzi_);
-        DetectedIssue xzk_ = context.Operators.SingletonFrom<DetectedIssue>(xzj_);
+        IEnumerable<DetectedIssue> xzg_ = context.Operators.Select<DetectedIssue, DetectedIssue>((IEnumerable<DetectedIssue>)xze_, xzf_);
+        IEnumerable<DetectedIssue> xzh_ = context.Operators.Distinct<DetectedIssue>(xzg_);
+        DetectedIssue xzi_ = context.Operators.SingletonFrom<DetectedIssue>(xzh_);
 
-        return xzk_;
+        return xzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DeviceResource")]
     public Device DeviceResource(CqlContext context, Device arg)
     {
-        Device[] xzy_ = [
+        Device[] xzw_ = [
             arg,
         ];
-        Device xzz_(Device a)
+        Device xzx_(Device a)
         {
-            List<Identifier> yzd_ = a?.Identifier;
-            ResourceReference yze_ = a?.Definition;
-            List<Device.UdiCarrierComponent> yzf_ = a?.UdiCarrier;
-            Code<Device.FHIRDeviceStatus> yzg_ = a?.StatusElement;
-            List<CodeableConcept> yzh_ = a?.StatusReason;
-            FhirString yzi_ = a?.DistinctIdentifierElement;
-            FhirString yzj_ = a?.ManufacturerElement;
-            FhirDateTime yzk_ = a?.ManufactureDateElement;
-            FhirDateTime yzl_ = a?.ExpirationDateElement;
-            FhirString yzm_ = a?.LotNumberElement;
-            FhirString yzn_ = a?.SerialNumberElement;
-            List<Device.DeviceNameComponent> yzo_ = a?.DeviceName;
-            FhirString yzp_ = a?.ModelNumberElement;
-            FhirString yzq_ = a?.PartNumberElement;
-            CodeableConcept yzr_ = a?.Type;
-            List<Device.SpecializationComponent> yzs_ = a?.Specialization;
-            List<Device.VersionComponent> yzt_ = a?.Version;
-            List<Device.PropertyComponent> yzu_ = a?.Property;
-            ResourceReference yzv_ = a?.Patient;
-            ResourceReference yzw_ = a?.Owner;
-            List<ContactPoint> yzx_ = a?.Contact;
-            ResourceReference yzy_ = a?.Location;
-            FhirUri yzz_ = a?.UrlElement;
-            List<Annotation> zza_ = a?.Note;
-            List<CodeableConcept> zzb_ = a?.Safety;
-            ResourceReference zzc_ = a?.Parent;
-            Device zzd_ = new Device
+            List<Identifier> yzb_ = a?.Identifier;
+            ResourceReference yzc_ = a?.Definition;
+            List<Device.UdiCarrierComponent> yzd_ = a?.UdiCarrier;
+            Code<Device.FHIRDeviceStatus> yze_ = a?.StatusElement;
+            List<CodeableConcept> yzf_ = a?.StatusReason;
+            FhirString yzg_ = a?.DistinctIdentifierElement;
+            FhirString yzh_ = a?.ManufacturerElement;
+            FhirDateTime yzi_ = a?.ManufactureDateElement;
+            FhirDateTime yzj_ = a?.ExpirationDateElement;
+            FhirString yzk_ = a?.LotNumberElement;
+            FhirString yzl_ = a?.SerialNumberElement;
+            List<Device.DeviceNameComponent> yzm_ = a?.DeviceName;
+            FhirString yzn_ = a?.ModelNumberElement;
+            FhirString yzo_ = a?.PartNumberElement;
+            CodeableConcept yzp_ = a?.Type;
+            List<Device.SpecializationComponent> yzq_ = a?.Specialization;
+            List<Device.VersionComponent> yzr_ = a?.Version;
+            List<Device.PropertyComponent> yzs_ = a?.Property;
+            ResourceReference yzt_ = a?.Patient;
+            ResourceReference yzu_ = a?.Owner;
+            List<ContactPoint> yzv_ = a?.Contact;
+            ResourceReference yzw_ = a?.Location;
+            FhirUri yzx_ = a?.UrlElement;
+            List<Annotation> yzy_ = a?.Note;
+            List<CodeableConcept> yzz_ = a?.Safety;
+            ResourceReference zza_ = a?.Parent;
+            Device zzb_ = new Device
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzd_),
-                Definition = yze_,
-                UdiCarrier = new List<Device.UdiCarrierComponent>((IEnumerable<Device.UdiCarrierComponent>)yzf_),
-                StatusElement = yzg_,
-                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yzh_),
-                DistinctIdentifierElement = yzi_,
-                ManufacturerElement = yzj_,
-                ManufactureDateElement = yzk_,
-                ExpirationDateElement = yzl_,
-                LotNumberElement = yzm_,
-                SerialNumberElement = yzn_,
-                DeviceName = new List<Device.DeviceNameComponent>((IEnumerable<Device.DeviceNameComponent>)yzo_),
-                ModelNumberElement = yzp_,
-                PartNumberElement = yzq_,
-                Type = yzr_,
-                Specialization = new List<Device.SpecializationComponent>((IEnumerable<Device.SpecializationComponent>)yzs_),
-                Version = new List<Device.VersionComponent>((IEnumerable<Device.VersionComponent>)yzt_),
-                Property = new List<Device.PropertyComponent>((IEnumerable<Device.PropertyComponent>)yzu_),
-                Patient = yzv_,
-                Owner = yzw_,
-                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)yzx_),
-                Location = yzy_,
-                UrlElement = yzz_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)zza_),
-                Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzb_),
-                Parent = zzc_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzb_),
+                Definition = yzc_,
+                UdiCarrier = new List<Device.UdiCarrierComponent>((IEnumerable<Device.UdiCarrierComponent>)yzd_),
+                StatusElement = yze_,
+                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yzf_),
+                DistinctIdentifierElement = yzg_,
+                ManufacturerElement = yzh_,
+                ManufactureDateElement = yzi_,
+                ExpirationDateElement = yzj_,
+                LotNumberElement = yzk_,
+                SerialNumberElement = yzl_,
+                DeviceName = new List<Device.DeviceNameComponent>((IEnumerable<Device.DeviceNameComponent>)yzm_),
+                ModelNumberElement = yzn_,
+                PartNumberElement = yzo_,
+                Type = yzp_,
+                Specialization = new List<Device.SpecializationComponent>((IEnumerable<Device.SpecializationComponent>)yzq_),
+                Version = new List<Device.VersionComponent>((IEnumerable<Device.VersionComponent>)yzr_),
+                Property = new List<Device.PropertyComponent>((IEnumerable<Device.PropertyComponent>)yzs_),
+                Patient = yzt_,
+                Owner = yzu_,
+                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)yzv_),
+                Location = yzw_,
+                UrlElement = yzx_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)yzy_),
+                Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yzz_),
+                Parent = zza_,
             };
 
-            return zzd_;
+            return zzb_;
         };
-        IEnumerable<Device> yza_ = context.Operators.Select<Device, Device>((IEnumerable<Device>)xzy_, xzz_);
-        IEnumerable<Device> yzb_ = context.Operators.Distinct<Device>(yza_);
-        Device yzc_ = context.Operators.SingletonFrom<Device>(yzb_);
+        IEnumerable<Device> xzy_ = context.Operators.Select<Device, Device>((IEnumerable<Device>)xzw_, xzx_);
+        IEnumerable<Device> xzz_ = context.Operators.Distinct<Device>(xzy_);
+        Device yza_ = context.Operators.SingletonFrom<Device>(xzz_);
 
-        return yzc_;
+        return yza_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DeviceDefinitionResource")]
     public DeviceDefinition DeviceDefinitionResource(CqlContext context, DeviceDefinition arg)
     {
-        DeviceDefinition[] zze_ = [
+        DeviceDefinition[] zzc_ = [
             arg,
         ];
-        DeviceDefinition zzf_(DeviceDefinition a)
+        DeviceDefinition zzd_(DeviceDefinition a)
         {
-            List<Identifier> zzj_ = a?.Identifier;
-            List<DeviceDefinition.UdiDeviceIdentifierComponent> zzk_ = a?.UdiDeviceIdentifier;
-            DataType zzl_ = a?.Manufacturer;
-            List<DeviceDefinition.DeviceNameComponent> zzm_ = a?.DeviceName;
-            FhirString zzn_ = a?.ModelNumberElement;
-            CodeableConcept zzo_ = a?.Type;
-            List<DeviceDefinition.SpecializationComponent> zzp_ = a?.Specialization;
-            List<FhirString> zzq_ = a?.VersionElement;
-            List<CodeableConcept> zzr_ = a?.Safety;
-            List<ProductShelfLife> zzs_ = a?.ShelfLifeStorage;
-            ProdCharacteristic zzt_ = a?.PhysicalCharacteristics;
-            List<CodeableConcept> zzu_ = a?.LanguageCode;
-            List<DeviceDefinition.CapabilityComponent> zzv_ = a?.Capability;
-            List<DeviceDefinition.PropertyComponent> zzw_ = a?.Property;
-            ResourceReference zzx_ = a?.Owner;
-            List<ContactPoint> zzy_ = a?.Contact;
-            FhirUri zzz_ = a?.UrlElement;
-            FhirUri azza_ = a?.OnlineInformationElement;
-            List<Annotation> azzb_ = a?.Note;
-            Quantity azzc_ = a?.Quantity;
-            ResourceReference azzd_ = a?.ParentDevice;
-            List<DeviceDefinition.MaterialComponent> azze_ = a?.Material;
-            DeviceDefinition azzf_ = new DeviceDefinition
+            List<Identifier> zzh_ = a?.Identifier;
+            List<DeviceDefinition.UdiDeviceIdentifierComponent> zzi_ = a?.UdiDeviceIdentifier;
+            DataType zzj_ = a?.Manufacturer;
+            List<DeviceDefinition.DeviceNameComponent> zzk_ = a?.DeviceName;
+            FhirString zzl_ = a?.ModelNumberElement;
+            CodeableConcept zzm_ = a?.Type;
+            List<DeviceDefinition.SpecializationComponent> zzn_ = a?.Specialization;
+            List<FhirString> zzo_ = a?.VersionElement;
+            List<CodeableConcept> zzp_ = a?.Safety;
+            List<ProductShelfLife> zzq_ = a?.ShelfLifeStorage;
+            ProdCharacteristic zzr_ = a?.PhysicalCharacteristics;
+            List<CodeableConcept> zzs_ = a?.LanguageCode;
+            List<DeviceDefinition.CapabilityComponent> zzt_ = a?.Capability;
+            List<DeviceDefinition.PropertyComponent> zzu_ = a?.Property;
+            ResourceReference zzv_ = a?.Owner;
+            List<ContactPoint> zzw_ = a?.Contact;
+            FhirUri zzx_ = a?.UrlElement;
+            FhirUri zzy_ = a?.OnlineInformationElement;
+            List<Annotation> zzz_ = a?.Note;
+            Quantity azza_ = a?.Quantity;
+            ResourceReference azzb_ = a?.ParentDevice;
+            List<DeviceDefinition.MaterialComponent> azzc_ = a?.Material;
+            DeviceDefinition azzd_ = new DeviceDefinition
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzj_),
-                UdiDeviceIdentifier = new List<DeviceDefinition.UdiDeviceIdentifierComponent>((IEnumerable<DeviceDefinition.UdiDeviceIdentifierComponent>)zzk_),
-                Manufacturer = (DataType)zzl_,
-                DeviceName = new List<DeviceDefinition.DeviceNameComponent>((IEnumerable<DeviceDefinition.DeviceNameComponent>)zzm_),
-                ModelNumberElement = zzn_,
-                Type = zzo_,
-                Specialization = new List<DeviceDefinition.SpecializationComponent>((IEnumerable<DeviceDefinition.SpecializationComponent>)zzp_),
-                VersionElement = new List<FhirString>((IEnumerable<FhirString>)zzq_),
-                Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzr_),
-                ShelfLifeStorage = new List<ProductShelfLife>((IEnumerable<ProductShelfLife>)zzs_),
-                PhysicalCharacteristics = zzt_,
-                LanguageCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzu_),
-                Capability = new List<DeviceDefinition.CapabilityComponent>((IEnumerable<DeviceDefinition.CapabilityComponent>)zzv_),
-                Property = new List<DeviceDefinition.PropertyComponent>((IEnumerable<DeviceDefinition.PropertyComponent>)zzw_),
-                Owner = zzx_,
-                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)zzy_),
-                UrlElement = zzz_,
-                OnlineInformationElement = azza_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)azzb_),
-                Quantity = azzc_,
-                ParentDevice = azzd_,
-                Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefinition.MaterialComponent>)azze_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzh_),
+                UdiDeviceIdentifier = new List<DeviceDefinition.UdiDeviceIdentifierComponent>((IEnumerable<DeviceDefinition.UdiDeviceIdentifierComponent>)zzi_),
+                Manufacturer = (DataType)zzj_,
+                DeviceName = new List<DeviceDefinition.DeviceNameComponent>((IEnumerable<DeviceDefinition.DeviceNameComponent>)zzk_),
+                ModelNumberElement = zzl_,
+                Type = zzm_,
+                Specialization = new List<DeviceDefinition.SpecializationComponent>((IEnumerable<DeviceDefinition.SpecializationComponent>)zzn_),
+                VersionElement = new List<FhirString>((IEnumerable<FhirString>)zzo_),
+                Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzp_),
+                ShelfLifeStorage = new List<ProductShelfLife>((IEnumerable<ProductShelfLife>)zzq_),
+                PhysicalCharacteristics = zzr_,
+                LanguageCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzs_),
+                Capability = new List<DeviceDefinition.CapabilityComponent>((IEnumerable<DeviceDefinition.CapabilityComponent>)zzt_),
+                Property = new List<DeviceDefinition.PropertyComponent>((IEnumerable<DeviceDefinition.PropertyComponent>)zzu_),
+                Owner = zzv_,
+                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)zzw_),
+                UrlElement = zzx_,
+                OnlineInformationElement = zzy_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)zzz_),
+                Quantity = azza_,
+                ParentDevice = azzb_,
+                Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefinition.MaterialComponent>)azzc_),
             };
 
-            return azzf_;
+            return azzd_;
         };
-        IEnumerable<DeviceDefinition> zzg_ = context.Operators.Select<DeviceDefinition, DeviceDefinition>((IEnumerable<DeviceDefinition>)zze_, zzf_);
-        IEnumerable<DeviceDefinition> zzh_ = context.Operators.Distinct<DeviceDefinition>(zzg_);
-        DeviceDefinition zzi_ = context.Operators.SingletonFrom<DeviceDefinition>(zzh_);
+        IEnumerable<DeviceDefinition> zze_ = context.Operators.Select<DeviceDefinition, DeviceDefinition>((IEnumerable<DeviceDefinition>)zzc_, zzd_);
+        IEnumerable<DeviceDefinition> zzf_ = context.Operators.Distinct<DeviceDefinition>(zze_);
+        DeviceDefinition zzg_ = context.Operators.SingletonFrom<DeviceDefinition>(zzf_);
 
-        return zzi_;
+        return zzg_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DeviceMetricResource")]
     public DeviceMetric DeviceMetricResource(CqlContext context, DeviceMetric arg)
     {
-        DeviceMetric[] azzg_ = [
+        DeviceMetric[] azze_ = [
             arg,
         ];
-        DeviceMetric azzh_(DeviceMetric a)
+        DeviceMetric azzf_(DeviceMetric a)
         {
-            List<Identifier> azzl_ = a?.Identifier;
-            CodeableConcept azzm_ = a?.Type;
-            CodeableConcept azzn_ = a?.Unit;
-            ResourceReference azzo_ = a?.Source;
-            ResourceReference azzp_ = a?.Parent;
-            Code<DeviceMetric.DeviceMetricOperationalStatus> azzq_ = a?.OperationalStatusElement;
-            Code<DeviceMetric.DeviceMetricColor> azzr_ = a?.ColorElement;
-            Code<DeviceMetric.DeviceMetricCategory> azzs_ = a?.CategoryElement;
-            Timing azzt_ = a?.MeasurementPeriod;
-            List<DeviceMetric.CalibrationComponent> azzu_ = a?.Calibration;
-            DeviceMetric azzv_ = new DeviceMetric
+            List<Identifier> azzj_ = a?.Identifier;
+            CodeableConcept azzk_ = a?.Type;
+            CodeableConcept azzl_ = a?.Unit;
+            ResourceReference azzm_ = a?.Source;
+            ResourceReference azzn_ = a?.Parent;
+            Code<DeviceMetric.DeviceMetricOperationalStatus> azzo_ = a?.OperationalStatusElement;
+            Code<DeviceMetric.DeviceMetricColor> azzp_ = a?.ColorElement;
+            Code<DeviceMetric.DeviceMetricCategory> azzq_ = a?.CategoryElement;
+            Timing azzr_ = a?.MeasurementPeriod;
+            List<DeviceMetric.CalibrationComponent> azzs_ = a?.Calibration;
+            DeviceMetric azzt_ = new DeviceMetric
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzl_),
-                Type = azzm_,
-                Unit = azzn_,
-                Source = azzo_,
-                Parent = azzp_,
-                OperationalStatusElement = azzq_,
-                ColorElement = azzr_,
-                CategoryElement = azzs_,
-                MeasurementPeriod = azzt_,
-                Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMetric.CalibrationComponent>)azzu_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzj_),
+                Type = azzk_,
+                Unit = azzl_,
+                Source = azzm_,
+                Parent = azzn_,
+                OperationalStatusElement = azzo_,
+                ColorElement = azzp_,
+                CategoryElement = azzq_,
+                MeasurementPeriod = azzr_,
+                Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMetric.CalibrationComponent>)azzs_),
             };
 
-            return azzv_;
+            return azzt_;
         };
-        IEnumerable<DeviceMetric> azzi_ = context.Operators.Select<DeviceMetric, DeviceMetric>((IEnumerable<DeviceMetric>)azzg_, azzh_);
-        IEnumerable<DeviceMetric> azzj_ = context.Operators.Distinct<DeviceMetric>(azzi_);
-        DeviceMetric azzk_ = context.Operators.SingletonFrom<DeviceMetric>(azzj_);
+        IEnumerable<DeviceMetric> azzg_ = context.Operators.Select<DeviceMetric, DeviceMetric>((IEnumerable<DeviceMetric>)azze_, azzf_);
+        IEnumerable<DeviceMetric> azzh_ = context.Operators.Distinct<DeviceMetric>(azzg_);
+        DeviceMetric azzi_ = context.Operators.SingletonFrom<DeviceMetric>(azzh_);
 
-        return azzk_;
+        return azzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DeviceRequestResource")]
     public DeviceRequest DeviceRequestResource(CqlContext context, DeviceRequest arg)
     {
-        DeviceRequest[] azzw_ = [
+        DeviceRequest[] azzu_ = [
             arg,
         ];
-        DeviceRequest azzx_(DeviceRequest a)
+        DeviceRequest azzv_(DeviceRequest a)
         {
-            List<Identifier> bzzb_ = a?.Identifier;
-            List<Canonical> bzzc_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> bzzd_ = a?.InstantiatesUriElement;
-            List<ResourceReference> bzze_ = a?.BasedOn;
-            List<ResourceReference> bzzf_ = a?.PriorRequest;
-            Identifier bzzg_ = a?.GroupIdentifier;
-            Code<RequestStatus> bzzh_ = a?.StatusElement;
-            Code<RequestIntent> bzzi_ = a?.IntentElement;
-            Code<RequestPriority> bzzj_ = a?.PriorityElement;
-            DataType bzzk_ = a?.Code;
-            List<DeviceRequest.ParameterComponent> bzzl_ = a?.Parameter;
-            ResourceReference bzzm_ = a?.Subject;
-            ResourceReference bzzn_ = a?.Encounter;
-            DataType bzzo_ = a?.Occurrence;
-            FhirDateTime bzzp_ = a?.AuthoredOnElement;
-            ResourceReference bzzq_ = a?.Requester;
-            CodeableConcept bzzr_ = a?.PerformerType;
-            ResourceReference bzzs_ = a?.Performer;
-            List<CodeableConcept> bzzt_ = a?.ReasonCode;
-            List<ResourceReference> bzzu_ = a?.ReasonReference;
-            List<ResourceReference> bzzv_ = a?.Insurance;
-            List<ResourceReference> bzzw_ = a?.SupportingInfo;
-            List<Annotation> bzzx_ = a?.Note;
-            List<ResourceReference> bzzy_ = a?.RelevantHistory;
-            DeviceRequest bzzz_ = new DeviceRequest
+            List<Identifier> azzz_ = a?.Identifier;
+            List<Canonical> bzza_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> bzzb_ = a?.InstantiatesUriElement;
+            List<ResourceReference> bzzc_ = a?.BasedOn;
+            List<ResourceReference> bzzd_ = a?.PriorRequest;
+            Identifier bzze_ = a?.GroupIdentifier;
+            Code<RequestStatus> bzzf_ = a?.StatusElement;
+            Code<RequestIntent> bzzg_ = a?.IntentElement;
+            Code<RequestPriority> bzzh_ = a?.PriorityElement;
+            DataType bzzi_ = a?.Code;
+            List<DeviceRequest.ParameterComponent> bzzj_ = a?.Parameter;
+            ResourceReference bzzk_ = a?.Subject;
+            ResourceReference bzzl_ = a?.Encounter;
+            DataType bzzm_ = a?.Occurrence;
+            FhirDateTime bzzn_ = a?.AuthoredOnElement;
+            ResourceReference bzzo_ = a?.Requester;
+            CodeableConcept bzzp_ = a?.PerformerType;
+            ResourceReference bzzq_ = a?.Performer;
+            List<CodeableConcept> bzzr_ = a?.ReasonCode;
+            List<ResourceReference> bzzs_ = a?.ReasonReference;
+            List<ResourceReference> bzzt_ = a?.Insurance;
+            List<ResourceReference> bzzu_ = a?.SupportingInfo;
+            List<Annotation> bzzv_ = a?.Note;
+            List<ResourceReference> bzzw_ = a?.RelevantHistory;
+            DeviceRequest bzzx_ = new DeviceRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)bzzb_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)bzzc_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)bzzd_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)bzze_),
-                PriorRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzf_),
-                GroupIdentifier = bzzg_,
-                StatusElement = bzzh_,
-                IntentElement = bzzi_,
-                PriorityElement = bzzj_,
-                Code = (DataType)bzzk_,
-                Parameter = new List<DeviceRequest.ParameterComponent>((IEnumerable<DeviceRequest.ParameterComponent>)bzzl_),
-                Subject = bzzm_,
-                Encounter = bzzn_,
-                Occurrence = (DataType)bzzo_,
-                AuthoredOnElement = bzzp_,
-                Requester = bzzq_,
-                PerformerType = bzzr_,
-                Performer = bzzs_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzt_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzu_),
-                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzv_),
-                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzw_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)bzzx_),
-                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzy_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzz_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)bzza_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)bzzb_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzc_),
+                PriorRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzd_),
+                GroupIdentifier = bzze_,
+                StatusElement = bzzf_,
+                IntentElement = bzzg_,
+                PriorityElement = bzzh_,
+                Code = (DataType)bzzi_,
+                Parameter = new List<DeviceRequest.ParameterComponent>((IEnumerable<DeviceRequest.ParameterComponent>)bzzj_),
+                Subject = bzzk_,
+                Encounter = bzzl_,
+                Occurrence = (DataType)bzzm_,
+                AuthoredOnElement = bzzn_,
+                Requester = bzzo_,
+                PerformerType = bzzp_,
+                Performer = bzzq_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzr_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzs_),
+                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzt_),
+                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzu_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)bzzv_),
+                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzw_),
             };
 
-            return bzzz_;
+            return bzzx_;
         };
-        IEnumerable<DeviceRequest> azzy_ = context.Operators.Select<DeviceRequest, DeviceRequest>((IEnumerable<DeviceRequest>)azzw_, azzx_);
-        IEnumerable<DeviceRequest> azzz_ = context.Operators.Distinct<DeviceRequest>(azzy_);
-        DeviceRequest bzza_ = context.Operators.SingletonFrom<DeviceRequest>(azzz_);
+        IEnumerable<DeviceRequest> azzw_ = context.Operators.Select<DeviceRequest, DeviceRequest>((IEnumerable<DeviceRequest>)azzu_, azzv_);
+        IEnumerable<DeviceRequest> azzx_ = context.Operators.Distinct<DeviceRequest>(azzw_);
+        DeviceRequest azzy_ = context.Operators.SingletonFrom<DeviceRequest>(azzx_);
 
-        return bzza_;
+        return azzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DeviceUseStatementResource")]
     public DeviceUseStatement DeviceUseStatementResource(CqlContext context, DeviceUseStatement arg)
     {
-        DeviceUseStatement[] czza_ = [
+        DeviceUseStatement[] bzzy_ = [
             arg,
         ];
-        DeviceUseStatement czzb_(DeviceUseStatement a)
+        DeviceUseStatement bzzz_(DeviceUseStatement a)
         {
-            List<Identifier> czzf_ = a?.Identifier;
-            List<ResourceReference> czzg_ = a?.BasedOn;
-            Code<DeviceUseStatement.DeviceUseStatementStatus> czzh_ = a?.StatusElement;
-            ResourceReference czzi_ = a?.Subject;
-            List<ResourceReference> czzj_ = a?.DerivedFrom;
-            DataType czzk_ = a?.Timing;
-            FhirDateTime czzl_ = a?.RecordedOnElement;
-            ResourceReference czzm_ = a?.Source;
-            ResourceReference czzn_ = a?.Device;
-            List<CodeableConcept> czzo_ = a?.ReasonCode;
-            List<ResourceReference> czzp_ = a?.ReasonReference;
-            CodeableConcept czzq_ = a?.BodySite;
-            List<Annotation> czzr_ = a?.Note;
-            DeviceUseStatement czzs_ = new DeviceUseStatement
+            List<Identifier> czzd_ = a?.Identifier;
+            List<ResourceReference> czze_ = a?.BasedOn;
+            Code<DeviceUseStatement.DeviceUseStatementStatus> czzf_ = a?.StatusElement;
+            ResourceReference czzg_ = a?.Subject;
+            List<ResourceReference> czzh_ = a?.DerivedFrom;
+            DataType czzi_ = a?.Timing;
+            FhirDateTime czzj_ = a?.RecordedOnElement;
+            ResourceReference czzk_ = a?.Source;
+            ResourceReference czzl_ = a?.Device;
+            List<CodeableConcept> czzm_ = a?.ReasonCode;
+            List<ResourceReference> czzn_ = a?.ReasonReference;
+            CodeableConcept czzo_ = a?.BodySite;
+            List<Annotation> czzp_ = a?.Note;
+            DeviceUseStatement czzq_ = new DeviceUseStatement
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzf_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)czzg_),
-                StatusElement = czzh_,
-                Subject = czzi_,
-                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)czzj_),
-                Timing = (DataType)czzk_,
-                RecordedOnElement = czzl_,
-                Source = czzm_,
-                Device = czzn_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzo_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)czzp_),
-                BodySite = czzq_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)czzr_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzd_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)czze_),
+                StatusElement = czzf_,
+                Subject = czzg_,
+                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)czzh_),
+                Timing = (DataType)czzi_,
+                RecordedOnElement = czzj_,
+                Source = czzk_,
+                Device = czzl_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzm_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)czzn_),
+                BodySite = czzo_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)czzp_),
             };
 
-            return czzs_;
+            return czzq_;
         };
-        IEnumerable<DeviceUseStatement> czzc_ = context.Operators.Select<DeviceUseStatement, DeviceUseStatement>((IEnumerable<DeviceUseStatement>)czza_, czzb_);
-        IEnumerable<DeviceUseStatement> czzd_ = context.Operators.Distinct<DeviceUseStatement>(czzc_);
-        DeviceUseStatement czze_ = context.Operators.SingletonFrom<DeviceUseStatement>(czzd_);
+        IEnumerable<DeviceUseStatement> czza_ = context.Operators.Select<DeviceUseStatement, DeviceUseStatement>((IEnumerable<DeviceUseStatement>)bzzy_, bzzz_);
+        IEnumerable<DeviceUseStatement> czzb_ = context.Operators.Distinct<DeviceUseStatement>(czza_);
+        DeviceUseStatement czzc_ = context.Operators.SingletonFrom<DeviceUseStatement>(czzb_);
 
-        return czze_;
+        return czzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DiagnosticReportResource")]
     public DiagnosticReport DiagnosticReportResource(CqlContext context, DiagnosticReport arg)
     {
-        DiagnosticReport[] czzt_ = [
+        DiagnosticReport[] czzr_ = [
             arg,
         ];
-        DiagnosticReport czzu_(DiagnosticReport a)
+        DiagnosticReport czzs_(DiagnosticReport a)
         {
-            List<Identifier> czzy_ = a?.Identifier;
-            List<ResourceReference> czzz_ = a?.BasedOn;
-            Code<DiagnosticReport.DiagnosticReportStatus> dzza_ = a?.StatusElement;
-            List<CodeableConcept> dzzb_ = a?.Category;
-            CodeableConcept dzzc_ = a?.Code;
-            ResourceReference dzzd_ = a?.Subject;
-            ResourceReference dzze_ = a?.Encounter;
-            DataType dzzf_ = a?.Effective;
-            Instant dzzg_ = a?.IssuedElement;
-            List<ResourceReference> dzzh_ = a?.Performer;
-            List<ResourceReference> dzzi_ = a?.ResultsInterpreter;
-            List<ResourceReference> dzzj_ = a?.Specimen;
-            List<ResourceReference> dzzk_ = a?.Result;
-            List<ResourceReference> dzzl_ = a?.ImagingStudy;
-            List<DiagnosticReport.MediaComponent> dzzm_ = a?.Media;
-            FhirString dzzn_ = a?.ConclusionElement;
-            List<CodeableConcept> dzzo_ = a?.ConclusionCode;
-            List<Attachment> dzzp_ = a?.PresentedForm;
-            DiagnosticReport dzzq_ = new DiagnosticReport
+            List<Identifier> czzw_ = a?.Identifier;
+            List<ResourceReference> czzx_ = a?.BasedOn;
+            Code<DiagnosticReport.DiagnosticReportStatus> czzy_ = a?.StatusElement;
+            List<CodeableConcept> czzz_ = a?.Category;
+            CodeableConcept dzza_ = a?.Code;
+            ResourceReference dzzb_ = a?.Subject;
+            ResourceReference dzzc_ = a?.Encounter;
+            DataType dzzd_ = a?.Effective;
+            Instant dzze_ = a?.IssuedElement;
+            List<ResourceReference> dzzf_ = a?.Performer;
+            List<ResourceReference> dzzg_ = a?.ResultsInterpreter;
+            List<ResourceReference> dzzh_ = a?.Specimen;
+            List<ResourceReference> dzzi_ = a?.Result;
+            List<ResourceReference> dzzj_ = a?.ImagingStudy;
+            List<DiagnosticReport.MediaComponent> dzzk_ = a?.Media;
+            FhirString dzzl_ = a?.ConclusionElement;
+            List<CodeableConcept> dzzm_ = a?.ConclusionCode;
+            List<Attachment> dzzn_ = a?.PresentedForm;
+            DiagnosticReport dzzo_ = new DiagnosticReport
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzy_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)czzz_),
-                StatusElement = dzza_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzb_),
-                Code = dzzc_,
-                Subject = dzzd_,
-                Encounter = dzze_,
-                Effective = (DataType)dzzf_,
-                IssuedElement = dzzg_,
-                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzh_),
-                ResultsInterpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzi_),
-                Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzj_),
-                Result = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzk_),
-                ImagingStudy = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzl_),
-                Media = new List<DiagnosticReport.MediaComponent>((IEnumerable<DiagnosticReport.MediaComponent>)dzzm_),
-                ConclusionElement = dzzn_,
-                ConclusionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzo_),
-                PresentedForm = new List<Attachment>((IEnumerable<Attachment>)dzzp_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzw_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)czzx_),
+                StatusElement = czzy_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzz_),
+                Code = dzza_,
+                Subject = dzzb_,
+                Encounter = dzzc_,
+                Effective = (DataType)dzzd_,
+                IssuedElement = dzze_,
+                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzf_),
+                ResultsInterpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzg_),
+                Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzh_),
+                Result = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzi_),
+                ImagingStudy = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzj_),
+                Media = new List<DiagnosticReport.MediaComponent>((IEnumerable<DiagnosticReport.MediaComponent>)dzzk_),
+                ConclusionElement = dzzl_,
+                ConclusionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzm_),
+                PresentedForm = new List<Attachment>((IEnumerable<Attachment>)dzzn_),
             };
 
-            return dzzq_;
+            return dzzo_;
         };
-        IEnumerable<DiagnosticReport> czzv_ = context.Operators.Select<DiagnosticReport, DiagnosticReport>((IEnumerable<DiagnosticReport>)czzt_, czzu_);
-        IEnumerable<DiagnosticReport> czzw_ = context.Operators.Distinct<DiagnosticReport>(czzv_);
-        DiagnosticReport czzx_ = context.Operators.SingletonFrom<DiagnosticReport>(czzw_);
+        IEnumerable<DiagnosticReport> czzt_ = context.Operators.Select<DiagnosticReport, DiagnosticReport>((IEnumerable<DiagnosticReport>)czzr_, czzs_);
+        IEnumerable<DiagnosticReport> czzu_ = context.Operators.Distinct<DiagnosticReport>(czzt_);
+        DiagnosticReport czzv_ = context.Operators.SingletonFrom<DiagnosticReport>(czzu_);
 
-        return czzx_;
+        return czzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DocumentManifestResource")]
     public DocumentManifest DocumentManifestResource(CqlContext context, DocumentManifest arg)
     {
-        DocumentManifest[] dzzr_ = [
+        DocumentManifest[] dzzp_ = [
             arg,
         ];
-        DocumentManifest dzzs_(DocumentManifest a)
+        DocumentManifest dzzq_(DocumentManifest a)
         {
-            Identifier dzzw_ = a?.MasterIdentifier;
-            List<Identifier> dzzx_ = a?.Identifier;
-            Code<DocumentReferenceStatus> dzzy_ = a?.StatusElement;
-            CodeableConcept dzzz_ = a?.Type;
-            ResourceReference ezza_ = a?.Subject;
-            FhirDateTime ezzb_ = a?.CreatedElement;
-            List<ResourceReference> ezzc_ = a?.Author;
-            List<ResourceReference> ezzd_ = a?.Recipient;
-            FhirUri ezze_ = a?.SourceElement;
-            FhirString ezzf_ = a?.DescriptionElement;
-            List<ResourceReference> ezzg_ = a?.Content;
-            List<DocumentManifest.RelatedComponent> ezzh_ = a?.Related;
-            DocumentManifest ezzi_ = new DocumentManifest
+            Identifier dzzu_ = a?.MasterIdentifier;
+            List<Identifier> dzzv_ = a?.Identifier;
+            Code<DocumentReferenceStatus> dzzw_ = a?.StatusElement;
+            CodeableConcept dzzx_ = a?.Type;
+            ResourceReference dzzy_ = a?.Subject;
+            FhirDateTime dzzz_ = a?.CreatedElement;
+            List<ResourceReference> ezza_ = a?.Author;
+            List<ResourceReference> ezzb_ = a?.Recipient;
+            FhirUri ezzc_ = a?.SourceElement;
+            FhirString ezzd_ = a?.DescriptionElement;
+            List<ResourceReference> ezze_ = a?.Content;
+            List<DocumentManifest.RelatedComponent> ezzf_ = a?.Related;
+            DocumentManifest ezzg_ = new DocumentManifest
             {
-                MasterIdentifier = dzzw_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzx_),
-                StatusElement = dzzy_,
-                Type = dzzz_,
-                Subject = ezza_,
-                CreatedElement = ezzb_,
-                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzc_),
-                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzd_),
-                SourceElement = ezze_,
-                DescriptionElement = ezzf_,
-                Content = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzg_),
-                Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManifest.RelatedComponent>)ezzh_),
+                MasterIdentifier = dzzu_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzv_),
+                StatusElement = dzzw_,
+                Type = dzzx_,
+                Subject = dzzy_,
+                CreatedElement = dzzz_,
+                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)ezza_),
+                Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzb_),
+                SourceElement = ezzc_,
+                DescriptionElement = ezzd_,
+                Content = new List<ResourceReference>((IEnumerable<ResourceReference>)ezze_),
+                Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManifest.RelatedComponent>)ezzf_),
             };
 
-            return ezzi_;
+            return ezzg_;
         };
-        IEnumerable<DocumentManifest> dzzt_ = context.Operators.Select<DocumentManifest, DocumentManifest>((IEnumerable<DocumentManifest>)dzzr_, dzzs_);
-        IEnumerable<DocumentManifest> dzzu_ = context.Operators.Distinct<DocumentManifest>(dzzt_);
-        DocumentManifest dzzv_ = context.Operators.SingletonFrom<DocumentManifest>(dzzu_);
+        IEnumerable<DocumentManifest> dzzr_ = context.Operators.Select<DocumentManifest, DocumentManifest>((IEnumerable<DocumentManifest>)dzzp_, dzzq_);
+        IEnumerable<DocumentManifest> dzzs_ = context.Operators.Distinct<DocumentManifest>(dzzr_);
+        DocumentManifest dzzt_ = context.Operators.SingletonFrom<DocumentManifest>(dzzs_);
 
-        return dzzv_;
+        return dzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("DocumentReferenceResource")]
     public DocumentReference DocumentReferenceResource(CqlContext context, DocumentReference arg)
     {
-        DocumentReference[] ezzj_ = [
+        DocumentReference[] ezzh_ = [
             arg,
         ];
-        DocumentReference ezzk_(DocumentReference a)
+        DocumentReference ezzi_(DocumentReference a)
         {
-            Identifier ezzo_ = a?.MasterIdentifier;
-            List<Identifier> ezzp_ = a?.Identifier;
-            Code<DocumentReferenceStatus> ezzq_ = a?.StatusElement;
-            Code<CompositionStatus> ezzr_ = a?.DocStatusElement;
-            CodeableConcept ezzs_ = a?.Type;
-            List<CodeableConcept> ezzt_ = a?.Category;
-            ResourceReference ezzu_ = a?.Subject;
-            Instant ezzv_ = a?.DateElement;
-            List<ResourceReference> ezzw_ = a?.Author;
-            ResourceReference ezzx_ = a?.Authenticator;
-            ResourceReference ezzy_ = a?.Custodian;
-            List<DocumentReference.RelatesToComponent> ezzz_ = a?.RelatesTo;
-            FhirString fzza_ = a?.DescriptionElement;
-            List<CodeableConcept> fzzb_ = a?.SecurityLabel;
-            List<DocumentReference.ContentComponent> fzzc_ = a?.Content;
-            DocumentReference.ContextComponent fzzd_ = a?.Context;
-            DocumentReference fzze_ = new DocumentReference
+            Identifier ezzm_ = a?.MasterIdentifier;
+            List<Identifier> ezzn_ = a?.Identifier;
+            Code<DocumentReferenceStatus> ezzo_ = a?.StatusElement;
+            Code<CompositionStatus> ezzp_ = a?.DocStatusElement;
+            CodeableConcept ezzq_ = a?.Type;
+            List<CodeableConcept> ezzr_ = a?.Category;
+            ResourceReference ezzs_ = a?.Subject;
+            Instant ezzt_ = a?.DateElement;
+            List<ResourceReference> ezzu_ = a?.Author;
+            ResourceReference ezzv_ = a?.Authenticator;
+            ResourceReference ezzw_ = a?.Custodian;
+            List<DocumentReference.RelatesToComponent> ezzx_ = a?.RelatesTo;
+            FhirString ezzy_ = a?.DescriptionElement;
+            List<CodeableConcept> ezzz_ = a?.SecurityLabel;
+            List<DocumentReference.ContentComponent> fzza_ = a?.Content;
+            DocumentReference.ContextComponent fzzb_ = a?.Context;
+            DocumentReference fzzc_ = new DocumentReference
             {
-                MasterIdentifier = ezzo_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzp_),
-                StatusElement = ezzq_,
-                DocStatusElement = ezzr_,
-                Type = ezzs_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzt_),
-                Subject = ezzu_,
-                DateElement = ezzv_,
-                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzw_),
-                Authenticator = ezzx_,
-                Custodian = ezzy_,
-                RelatesTo = new List<DocumentReference.RelatesToComponent>((IEnumerable<DocumentReference.RelatesToComponent>)ezzz_),
-                DescriptionElement = fzza_,
-                SecurityLabel = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzb_),
-                Content = new List<DocumentReference.ContentComponent>((IEnumerable<DocumentReference.ContentComponent>)fzzc_),
-                Context = fzzd_,
+                MasterIdentifier = ezzm_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzn_),
+                StatusElement = ezzo_,
+                DocStatusElement = ezzp_,
+                Type = ezzq_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzr_),
+                Subject = ezzs_,
+                DateElement = ezzt_,
+                Author = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzu_),
+                Authenticator = ezzv_,
+                Custodian = ezzw_,
+                RelatesTo = new List<DocumentReference.RelatesToComponent>((IEnumerable<DocumentReference.RelatesToComponent>)ezzx_),
+                DescriptionElement = ezzy_,
+                SecurityLabel = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzz_),
+                Content = new List<DocumentReference.ContentComponent>((IEnumerable<DocumentReference.ContentComponent>)fzza_),
+                Context = fzzb_,
             };
 
-            return fzze_;
+            return fzzc_;
         };
-        IEnumerable<DocumentReference> ezzl_ = context.Operators.Select<DocumentReference, DocumentReference>((IEnumerable<DocumentReference>)ezzj_, ezzk_);
-        IEnumerable<DocumentReference> ezzm_ = context.Operators.Distinct<DocumentReference>(ezzl_);
-        DocumentReference ezzn_ = context.Operators.SingletonFrom<DocumentReference>(ezzm_);
+        IEnumerable<DocumentReference> ezzj_ = context.Operators.Select<DocumentReference, DocumentReference>((IEnumerable<DocumentReference>)ezzh_, ezzi_);
+        IEnumerable<DocumentReference> ezzk_ = context.Operators.Distinct<DocumentReference>(ezzj_);
+        DocumentReference ezzl_ = context.Operators.SingletonFrom<DocumentReference>(ezzk_);
 
-        return ezzn_;
+        return ezzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EffectEvidenceSynthesisResource")]
     public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis arg)
     {
-        EffectEvidenceSynthesis[] fzzf_ = [
+        EffectEvidenceSynthesis[] fzzd_ = [
             arg,
         ];
-        EffectEvidenceSynthesis fzzg_(EffectEvidenceSynthesis a)
+        EffectEvidenceSynthesis fzze_(EffectEvidenceSynthesis a)
         {
-            FhirUri fzzk_ = a?.UrlElement;
-            List<Identifier> fzzl_ = a?.Identifier;
-            FhirString fzzm_ = a?.VersionElement;
-            FhirString fzzn_ = a?.NameElement;
-            FhirString fzzo_ = a?.TitleElement;
-            Code<PublicationStatus> fzzp_ = a?.StatusElement;
-            FhirDateTime fzzq_ = a?.DateElement;
-            FhirString fzzr_ = a?.PublisherElement;
-            List<ContactDetail> fzzs_ = a?.Contact;
-            Markdown fzzt_ = a?.DescriptionElement;
-            List<Annotation> fzzu_ = a?.Note;
-            List<UsageContext> fzzv_ = a?.UseContext;
-            List<CodeableConcept> fzzw_ = a?.Jurisdiction;
-            Markdown fzzx_ = a?.CopyrightElement;
-            Date fzzy_ = a?.ApprovalDateElement;
-            Date fzzz_ = a?.LastReviewDateElement;
-            Period gzza_ = a?.EffectivePeriod;
-            List<CodeableConcept> gzzb_ = a?.Topic;
-            List<ContactDetail> gzzc_ = a?.Author;
-            List<ContactDetail> gzzd_ = a?.Editor;
-            List<ContactDetail> gzze_ = a?.Reviewer;
-            List<ContactDetail> gzzf_ = a?.Endorser;
-            List<RelatedArtifact> gzzg_ = a?.RelatedArtifact;
-            CodeableConcept gzzh_ = a?.SynthesisType;
-            CodeableConcept gzzi_ = a?.StudyType;
-            ResourceReference gzzj_ = a?.Population;
-            ResourceReference gzzk_ = a?.Exposure;
-            ResourceReference gzzl_ = a?.ExposureAlternative;
-            ResourceReference gzzm_ = a?.Outcome;
-            EffectEvidenceSynthesis.SampleSizeComponent gzzn_ = a?.SampleSize;
-            List<EffectEvidenceSynthesis.ResultsByExposureComponent> gzzo_ = a?.ResultsByExposure;
-            List<EffectEvidenceSynthesis.EffectEstimateComponent> gzzp_ = a?.EffectEstimate;
-            List<EffectEvidenceSynthesis.CertaintyComponent> gzzq_ = a?.Certainty;
-            EffectEvidenceSynthesis gzzr_ = new EffectEvidenceSynthesis
+            FhirUri fzzi_ = a?.UrlElement;
+            List<Identifier> fzzj_ = a?.Identifier;
+            FhirString fzzk_ = a?.VersionElement;
+            FhirString fzzl_ = a?.NameElement;
+            FhirString fzzm_ = a?.TitleElement;
+            Code<PublicationStatus> fzzn_ = a?.StatusElement;
+            FhirDateTime fzzo_ = a?.DateElement;
+            FhirString fzzp_ = a?.PublisherElement;
+            List<ContactDetail> fzzq_ = a?.Contact;
+            Markdown fzzr_ = a?.DescriptionElement;
+            List<Annotation> fzzs_ = a?.Note;
+            List<UsageContext> fzzt_ = a?.UseContext;
+            List<CodeableConcept> fzzu_ = a?.Jurisdiction;
+            Markdown fzzv_ = a?.CopyrightElement;
+            Date fzzw_ = a?.ApprovalDateElement;
+            Date fzzx_ = a?.LastReviewDateElement;
+            Period fzzy_ = a?.EffectivePeriod;
+            List<CodeableConcept> fzzz_ = a?.Topic;
+            List<ContactDetail> gzza_ = a?.Author;
+            List<ContactDetail> gzzb_ = a?.Editor;
+            List<ContactDetail> gzzc_ = a?.Reviewer;
+            List<ContactDetail> gzzd_ = a?.Endorser;
+            List<RelatedArtifact> gzze_ = a?.RelatedArtifact;
+            CodeableConcept gzzf_ = a?.SynthesisType;
+            CodeableConcept gzzg_ = a?.StudyType;
+            ResourceReference gzzh_ = a?.Population;
+            ResourceReference gzzi_ = a?.Exposure;
+            ResourceReference gzzj_ = a?.ExposureAlternative;
+            ResourceReference gzzk_ = a?.Outcome;
+            EffectEvidenceSynthesis.SampleSizeComponent gzzl_ = a?.SampleSize;
+            List<EffectEvidenceSynthesis.ResultsByExposureComponent> gzzm_ = a?.ResultsByExposure;
+            List<EffectEvidenceSynthesis.EffectEstimateComponent> gzzn_ = a?.EffectEstimate;
+            List<EffectEvidenceSynthesis.CertaintyComponent> gzzo_ = a?.Certainty;
+            EffectEvidenceSynthesis gzzp_ = new EffectEvidenceSynthesis
             {
-                UrlElement = fzzk_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzl_),
-                VersionElement = fzzm_,
-                NameElement = fzzn_,
-                TitleElement = fzzo_,
-                StatusElement = fzzp_,
-                DateElement = fzzq_,
-                PublisherElement = fzzr_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)fzzs_),
-                DescriptionElement = fzzt_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)fzzu_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)fzzv_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzw_),
-                CopyrightElement = fzzx_,
-                ApprovalDateElement = fzzy_,
-                LastReviewDateElement = fzzz_,
-                EffectivePeriod = gzza_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzb_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzc_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzd_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)gzze_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzf_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)gzzg_),
-                SynthesisType = gzzh_,
-                StudyType = gzzi_,
-                Population = gzzj_,
-                Exposure = gzzk_,
-                ExposureAlternative = gzzl_,
-                Outcome = gzzm_,
-                SampleSize = gzzn_,
-                ResultsByExposure = new List<EffectEvidenceSynthesis.ResultsByExposureComponent>((IEnumerable<EffectEvidenceSynthesis.ResultsByExposureComponent>)gzzo_),
-                EffectEstimate = new List<EffectEvidenceSynthesis.EffectEstimateComponent>((IEnumerable<EffectEvidenceSynthesis.EffectEstimateComponent>)gzzp_),
-                Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<EffectEvidenceSynthesis.CertaintyComponent>)gzzq_),
+                UrlElement = fzzi_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzj_),
+                VersionElement = fzzk_,
+                NameElement = fzzl_,
+                TitleElement = fzzm_,
+                StatusElement = fzzn_,
+                DateElement = fzzo_,
+                PublisherElement = fzzp_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)fzzq_),
+                DescriptionElement = fzzr_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)fzzs_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)fzzt_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzu_),
+                CopyrightElement = fzzv_,
+                ApprovalDateElement = fzzw_,
+                LastReviewDateElement = fzzx_,
+                EffectivePeriod = fzzy_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzz_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)gzza_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzb_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzc_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)gzzd_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)gzze_),
+                SynthesisType = gzzf_,
+                StudyType = gzzg_,
+                Population = gzzh_,
+                Exposure = gzzi_,
+                ExposureAlternative = gzzj_,
+                Outcome = gzzk_,
+                SampleSize = gzzl_,
+                ResultsByExposure = new List<EffectEvidenceSynthesis.ResultsByExposureComponent>((IEnumerable<EffectEvidenceSynthesis.ResultsByExposureComponent>)gzzm_),
+                EffectEstimate = new List<EffectEvidenceSynthesis.EffectEstimateComponent>((IEnumerable<EffectEvidenceSynthesis.EffectEstimateComponent>)gzzn_),
+                Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<EffectEvidenceSynthesis.CertaintyComponent>)gzzo_),
             };
 
-            return gzzr_;
+            return gzzp_;
         };
-        IEnumerable<EffectEvidenceSynthesis> fzzh_ = context.Operators.Select<EffectEvidenceSynthesis, EffectEvidenceSynthesis>((IEnumerable<EffectEvidenceSynthesis>)fzzf_, fzzg_);
-        IEnumerable<EffectEvidenceSynthesis> fzzi_ = context.Operators.Distinct<EffectEvidenceSynthesis>(fzzh_);
-        EffectEvidenceSynthesis fzzj_ = context.Operators.SingletonFrom<EffectEvidenceSynthesis>(fzzi_);
+        IEnumerable<EffectEvidenceSynthesis> fzzf_ = context.Operators.Select<EffectEvidenceSynthesis, EffectEvidenceSynthesis>((IEnumerable<EffectEvidenceSynthesis>)fzzd_, fzze_);
+        IEnumerable<EffectEvidenceSynthesis> fzzg_ = context.Operators.Distinct<EffectEvidenceSynthesis>(fzzf_);
+        EffectEvidenceSynthesis fzzh_ = context.Operators.SingletonFrom<EffectEvidenceSynthesis>(fzzg_);
 
-        return fzzj_;
+        return fzzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EncounterResource")]
     public Encounter EncounterResource(CqlContext context, Encounter arg)
     {
-        Encounter[] gzzs_ = [
+        Encounter[] gzzq_ = [
             arg,
         ];
-        Encounter gzzt_(Encounter a)
+        Encounter gzzr_(Encounter a)
         {
-            List<Identifier> gzzx_ = a?.Identifier;
-            Code<Encounter.EncounterStatus> gzzy_ = a?.StatusElement;
-            List<Encounter.StatusHistoryComponent> gzzz_ = a?.StatusHistory;
-            Coding hzza_ = a?.Class;
-            List<Encounter.ClassHistoryComponent> hzzb_ = a?.ClassHistory;
-            List<CodeableConcept> hzzc_ = a?.Type;
-            CodeableConcept hzzd_ = a?.ServiceType;
-            CodeableConcept hzze_ = a?.Priority;
-            ResourceReference hzzf_ = a?.Subject;
-            List<ResourceReference> hzzg_ = a?.EpisodeOfCare;
-            List<ResourceReference> hzzh_ = a?.BasedOn;
-            List<Encounter.ParticipantComponent> hzzi_ = a?.Participant;
-            List<ResourceReference> hzzj_ = a?.Appointment;
-            Period hzzk_ = a?.Period;
-            Duration hzzl_ = a?.Length;
-            List<CodeableConcept> hzzm_ = a?.ReasonCode;
-            List<ResourceReference> hzzn_ = a?.ReasonReference;
-            List<Encounter.DiagnosisComponent> hzzo_ = a?.Diagnosis;
-            List<ResourceReference> hzzp_ = a?.Account;
-            Encounter.HospitalizationComponent hzzq_ = a?.Hospitalization;
-            List<Encounter.LocationComponent> hzzr_ = a?.Location;
-            ResourceReference hzzs_ = a?.ServiceProvider;
-            ResourceReference hzzt_ = a?.PartOf;
-            Encounter hzzu_ = new Encounter
+            List<Identifier> gzzv_ = a?.Identifier;
+            Code<Encounter.EncounterStatus> gzzw_ = a?.StatusElement;
+            List<Encounter.StatusHistoryComponent> gzzx_ = a?.StatusHistory;
+            Coding gzzy_ = a?.Class;
+            List<Encounter.ClassHistoryComponent> gzzz_ = a?.ClassHistory;
+            List<CodeableConcept> hzza_ = a?.Type;
+            CodeableConcept hzzb_ = a?.ServiceType;
+            CodeableConcept hzzc_ = a?.Priority;
+            ResourceReference hzzd_ = a?.Subject;
+            List<ResourceReference> hzze_ = a?.EpisodeOfCare;
+            List<ResourceReference> hzzf_ = a?.BasedOn;
+            List<Encounter.ParticipantComponent> hzzg_ = a?.Participant;
+            List<ResourceReference> hzzh_ = a?.Appointment;
+            Period hzzi_ = a?.Period;
+            Duration hzzj_ = a?.Length;
+            List<CodeableConcept> hzzk_ = a?.ReasonCode;
+            List<ResourceReference> hzzl_ = a?.ReasonReference;
+            List<Encounter.DiagnosisComponent> hzzm_ = a?.Diagnosis;
+            List<ResourceReference> hzzn_ = a?.Account;
+            Encounter.HospitalizationComponent hzzo_ = a?.Hospitalization;
+            List<Encounter.LocationComponent> hzzp_ = a?.Location;
+            ResourceReference hzzq_ = a?.ServiceProvider;
+            ResourceReference hzzr_ = a?.PartOf;
+            Encounter hzzs_ = new Encounter
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzx_),
-                StatusElement = gzzy_,
-                StatusHistory = new List<Encounter.StatusHistoryComponent>((IEnumerable<Encounter.StatusHistoryComponent>)gzzz_),
-                Class = hzza_,
-                ClassHistory = new List<Encounter.ClassHistoryComponent>((IEnumerable<Encounter.ClassHistoryComponent>)hzzb_),
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzzc_),
-                ServiceType = hzzd_,
-                Priority = hzze_,
-                Subject = hzzf_,
-                EpisodeOfCare = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzg_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzh_),
-                Participant = new List<Encounter.ParticipantComponent>((IEnumerable<Encounter.ParticipantComponent>)hzzi_),
-                Appointment = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzj_),
-                Period = hzzk_,
-                Length = hzzl_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzzm_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzn_),
-                Diagnosis = new List<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)hzzo_),
-                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzp_),
-                Hospitalization = hzzq_,
-                Location = new List<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)hzzr_),
-                ServiceProvider = hzzs_,
-                PartOf = hzzt_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzv_),
+                StatusElement = gzzw_,
+                StatusHistory = new List<Encounter.StatusHistoryComponent>((IEnumerable<Encounter.StatusHistoryComponent>)gzzx_),
+                Class = gzzy_,
+                ClassHistory = new List<Encounter.ClassHistoryComponent>((IEnumerable<Encounter.ClassHistoryComponent>)gzzz_),
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzza_),
+                ServiceType = hzzb_,
+                Priority = hzzc_,
+                Subject = hzzd_,
+                EpisodeOfCare = new List<ResourceReference>((IEnumerable<ResourceReference>)hzze_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzf_),
+                Participant = new List<Encounter.ParticipantComponent>((IEnumerable<Encounter.ParticipantComponent>)hzzg_),
+                Appointment = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzh_),
+                Period = hzzi_,
+                Length = hzzj_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzzk_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzl_),
+                Diagnosis = new List<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)hzzm_),
+                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzn_),
+                Hospitalization = hzzo_,
+                Location = new List<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)hzzp_),
+                ServiceProvider = hzzq_,
+                PartOf = hzzr_,
             };
 
-            return hzzu_;
+            return hzzs_;
         };
-        IEnumerable<Encounter> gzzu_ = context.Operators.Select<Encounter, Encounter>((IEnumerable<Encounter>)gzzs_, gzzt_);
-        IEnumerable<Encounter> gzzv_ = context.Operators.Distinct<Encounter>(gzzu_);
-        Encounter gzzw_ = context.Operators.SingletonFrom<Encounter>(gzzv_);
+        IEnumerable<Encounter> gzzs_ = context.Operators.Select<Encounter, Encounter>((IEnumerable<Encounter>)gzzq_, gzzr_);
+        IEnumerable<Encounter> gzzt_ = context.Operators.Distinct<Encounter>(gzzs_);
+        Encounter gzzu_ = context.Operators.SingletonFrom<Encounter>(gzzt_);
 
-        return gzzw_;
+        return gzzu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EndpointResource")]
     public Endpoint EndpointResource(CqlContext context, Endpoint arg)
     {
-        Endpoint[] hzzv_ = [
+        Endpoint[] hzzt_ = [
             arg,
         ];
-        Endpoint hzzw_(Endpoint a)
+        Endpoint hzzu_(Endpoint a)
         {
-            List<Identifier> izza_ = a?.Identifier;
-            Code<Endpoint.EndpointStatus> izzb_ = a?.StatusElement;
-            Coding izzc_ = a?.ConnectionType;
-            FhirString izzd_ = a?.NameElement;
-            ResourceReference izze_ = a?.ManagingOrganization;
-            List<ContactPoint> izzf_ = a?.Contact;
-            Period izzg_ = a?.Period;
-            List<CodeableConcept> izzh_ = a?.PayloadType;
-            List<Code> izzi_ = a?.PayloadMimeTypeElement;
-            FhirUrl izzj_ = a?.AddressElement;
-            List<FhirString> izzk_ = a?.HeaderElement;
-            Endpoint izzl_ = new Endpoint
+            List<Identifier> hzzy_ = a?.Identifier;
+            Code<Endpoint.EndpointStatus> hzzz_ = a?.StatusElement;
+            Coding izza_ = a?.ConnectionType;
+            FhirString izzb_ = a?.NameElement;
+            ResourceReference izzc_ = a?.ManagingOrganization;
+            List<ContactPoint> izzd_ = a?.Contact;
+            Period izze_ = a?.Period;
+            List<CodeableConcept> izzf_ = a?.PayloadType;
+            List<Code> izzg_ = a?.PayloadMimeTypeElement;
+            FhirUrl izzh_ = a?.AddressElement;
+            List<FhirString> izzi_ = a?.HeaderElement;
+            Endpoint izzj_ = new Endpoint
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)izza_),
-                StatusElement = izzb_,
-                ConnectionType = izzc_,
-                NameElement = izzd_,
-                ManagingOrganization = izze_,
-                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)izzf_),
-                Period = izzg_,
-                PayloadType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzh_),
-                PayloadMimeTypeElement = new List<Code>((IEnumerable<Code>)izzi_),
-                AddressElement = izzj_,
-                HeaderElement = new List<FhirString>((IEnumerable<FhirString>)izzk_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzzy_),
+                StatusElement = hzzz_,
+                ConnectionType = izza_,
+                NameElement = izzb_,
+                ManagingOrganization = izzc_,
+                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)izzd_),
+                Period = izze_,
+                PayloadType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzf_),
+                PayloadMimeTypeElement = new List<Code>((IEnumerable<Code>)izzg_),
+                AddressElement = izzh_,
+                HeaderElement = new List<FhirString>((IEnumerable<FhirString>)izzi_),
             };
 
-            return izzl_;
+            return izzj_;
         };
-        IEnumerable<Endpoint> hzzx_ = context.Operators.Select<Endpoint, Endpoint>((IEnumerable<Endpoint>)hzzv_, hzzw_);
-        IEnumerable<Endpoint> hzzy_ = context.Operators.Distinct<Endpoint>(hzzx_);
-        Endpoint hzzz_ = context.Operators.SingletonFrom<Endpoint>(hzzy_);
+        IEnumerable<Endpoint> hzzv_ = context.Operators.Select<Endpoint, Endpoint>((IEnumerable<Endpoint>)hzzt_, hzzu_);
+        IEnumerable<Endpoint> hzzw_ = context.Operators.Distinct<Endpoint>(hzzv_);
+        Endpoint hzzx_ = context.Operators.SingletonFrom<Endpoint>(hzzw_);
 
-        return hzzz_;
+        return hzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EnrollmentRequestResource")]
     public EnrollmentRequest EnrollmentRequestResource(CqlContext context, EnrollmentRequest arg)
     {
-        EnrollmentRequest[] izzm_ = [
+        EnrollmentRequest[] izzk_ = [
             arg,
         ];
-        EnrollmentRequest izzn_(EnrollmentRequest a)
+        EnrollmentRequest izzl_(EnrollmentRequest a)
         {
-            List<Identifier> izzr_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> izzs_ = a?.StatusElement;
-            FhirDateTime izzt_ = a?.CreatedElement;
-            ResourceReference izzu_ = a?.Insurer;
-            ResourceReference izzv_ = a?.Provider;
-            ResourceReference izzw_ = a?.Candidate;
-            ResourceReference izzx_ = a?.Coverage;
-            EnrollmentRequest izzy_ = new EnrollmentRequest
+            List<Identifier> izzp_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> izzq_ = a?.StatusElement;
+            FhirDateTime izzr_ = a?.CreatedElement;
+            ResourceReference izzs_ = a?.Insurer;
+            ResourceReference izzt_ = a?.Provider;
+            ResourceReference izzu_ = a?.Candidate;
+            ResourceReference izzv_ = a?.Coverage;
+            EnrollmentRequest izzw_ = new EnrollmentRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)izzr_),
-                StatusElement = izzs_,
-                CreatedElement = izzt_,
-                Insurer = izzu_,
-                Provider = izzv_,
-                Candidate = izzw_,
-                Coverage = izzx_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)izzp_),
+                StatusElement = izzq_,
+                CreatedElement = izzr_,
+                Insurer = izzs_,
+                Provider = izzt_,
+                Candidate = izzu_,
+                Coverage = izzv_,
             };
 
-            return izzy_;
+            return izzw_;
         };
-        IEnumerable<EnrollmentRequest> izzo_ = context.Operators.Select<EnrollmentRequest, EnrollmentRequest>((IEnumerable<EnrollmentRequest>)izzm_, izzn_);
-        IEnumerable<EnrollmentRequest> izzp_ = context.Operators.Distinct<EnrollmentRequest>(izzo_);
-        EnrollmentRequest izzq_ = context.Operators.SingletonFrom<EnrollmentRequest>(izzp_);
+        IEnumerable<EnrollmentRequest> izzm_ = context.Operators.Select<EnrollmentRequest, EnrollmentRequest>((IEnumerable<EnrollmentRequest>)izzk_, izzl_);
+        IEnumerable<EnrollmentRequest> izzn_ = context.Operators.Distinct<EnrollmentRequest>(izzm_);
+        EnrollmentRequest izzo_ = context.Operators.SingletonFrom<EnrollmentRequest>(izzn_);
 
-        return izzq_;
+        return izzo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EnrollmentResponseResource")]
     public EnrollmentResponse EnrollmentResponseResource(CqlContext context, EnrollmentResponse arg)
     {
-        EnrollmentResponse[] izzz_ = [
+        EnrollmentResponse[] izzx_ = [
             arg,
         ];
-        EnrollmentResponse jzza_(EnrollmentResponse a)
+        EnrollmentResponse izzy_(EnrollmentResponse a)
         {
-            List<Identifier> jzze_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> jzzf_ = a?.StatusElement;
-            ResourceReference jzzg_ = a?.Request;
-            Code<ClaimProcessingCodes> jzzh_ = a?.OutcomeElement;
-            FhirString jzzi_ = a?.DispositionElement;
-            FhirDateTime jzzj_ = a?.CreatedElement;
-            ResourceReference jzzk_ = a?.Organization;
-            ResourceReference jzzl_ = a?.RequestProvider;
-            EnrollmentResponse jzzm_ = new EnrollmentResponse
+            List<Identifier> jzzc_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> jzzd_ = a?.StatusElement;
+            ResourceReference jzze_ = a?.Request;
+            Code<ClaimProcessingCodes> jzzf_ = a?.OutcomeElement;
+            FhirString jzzg_ = a?.DispositionElement;
+            FhirDateTime jzzh_ = a?.CreatedElement;
+            ResourceReference jzzi_ = a?.Organization;
+            ResourceReference jzzj_ = a?.RequestProvider;
+            EnrollmentResponse jzzk_ = new EnrollmentResponse
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzze_),
-                StatusElement = jzzf_,
-                Request = jzzg_,
-                OutcomeElement = jzzh_,
-                DispositionElement = jzzi_,
-                CreatedElement = jzzj_,
-                Organization = jzzk_,
-                RequestProvider = jzzl_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzc_),
+                StatusElement = jzzd_,
+                Request = jzze_,
+                OutcomeElement = jzzf_,
+                DispositionElement = jzzg_,
+                CreatedElement = jzzh_,
+                Organization = jzzi_,
+                RequestProvider = jzzj_,
             };
 
-            return jzzm_;
+            return jzzk_;
         };
-        IEnumerable<EnrollmentResponse> jzzb_ = context.Operators.Select<EnrollmentResponse, EnrollmentResponse>((IEnumerable<EnrollmentResponse>)izzz_, jzza_);
-        IEnumerable<EnrollmentResponse> jzzc_ = context.Operators.Distinct<EnrollmentResponse>(jzzb_);
-        EnrollmentResponse jzzd_ = context.Operators.SingletonFrom<EnrollmentResponse>(jzzc_);
+        IEnumerable<EnrollmentResponse> izzz_ = context.Operators.Select<EnrollmentResponse, EnrollmentResponse>((IEnumerable<EnrollmentResponse>)izzx_, izzy_);
+        IEnumerable<EnrollmentResponse> jzza_ = context.Operators.Distinct<EnrollmentResponse>(izzz_);
+        EnrollmentResponse jzzb_ = context.Operators.SingletonFrom<EnrollmentResponse>(jzza_);
 
-        return jzzd_;
+        return jzzb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EpisodeOfCareResource")]
     public EpisodeOfCare EpisodeOfCareResource(CqlContext context, EpisodeOfCare arg)
     {
-        EpisodeOfCare[] jzzn_ = [
+        EpisodeOfCare[] jzzl_ = [
             arg,
         ];
-        EpisodeOfCare jzzo_(EpisodeOfCare a)
+        EpisodeOfCare jzzm_(EpisodeOfCare a)
         {
-            List<Identifier> jzzs_ = a?.Identifier;
-            Code<EpisodeOfCare.EpisodeOfCareStatus> jzzt_ = a?.StatusElement;
-            List<EpisodeOfCare.StatusHistoryComponent> jzzu_ = a?.StatusHistory;
-            List<CodeableConcept> jzzv_ = a?.Type;
-            List<EpisodeOfCare.DiagnosisComponent> jzzw_ = a?.Diagnosis;
-            ResourceReference jzzx_ = a?.Patient;
-            ResourceReference jzzy_ = a?.ManagingOrganization;
-            Period jzzz_ = a?.Period;
-            List<ResourceReference> kzza_ = a?.ReferralRequest;
-            ResourceReference kzzb_ = a?.CareManager;
-            List<ResourceReference> kzzc_ = a?.Team;
-            List<ResourceReference> kzzd_ = a?.Account;
-            EpisodeOfCare kzze_ = new EpisodeOfCare
+            List<Identifier> jzzq_ = a?.Identifier;
+            Code<EpisodeOfCare.EpisodeOfCareStatus> jzzr_ = a?.StatusElement;
+            List<EpisodeOfCare.StatusHistoryComponent> jzzs_ = a?.StatusHistory;
+            List<CodeableConcept> jzzt_ = a?.Type;
+            List<EpisodeOfCare.DiagnosisComponent> jzzu_ = a?.Diagnosis;
+            ResourceReference jzzv_ = a?.Patient;
+            ResourceReference jzzw_ = a?.ManagingOrganization;
+            Period jzzx_ = a?.Period;
+            List<ResourceReference> jzzy_ = a?.ReferralRequest;
+            ResourceReference jzzz_ = a?.CareManager;
+            List<ResourceReference> kzza_ = a?.Team;
+            List<ResourceReference> kzzb_ = a?.Account;
+            EpisodeOfCare kzzc_ = new EpisodeOfCare
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzs_),
-                StatusElement = jzzt_,
-                StatusHistory = new List<EpisodeOfCare.StatusHistoryComponent>((IEnumerable<EpisodeOfCare.StatusHistoryComponent>)jzzu_),
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzv_),
-                Diagnosis = new List<EpisodeOfCare.DiagnosisComponent>((IEnumerable<EpisodeOfCare.DiagnosisComponent>)jzzw_),
-                Patient = jzzx_,
-                ManagingOrganization = jzzy_,
-                Period = jzzz_,
-                ReferralRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)kzza_),
-                CareManager = kzzb_,
-                Team = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzc_),
-                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzd_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzq_),
+                StatusElement = jzzr_,
+                StatusHistory = new List<EpisodeOfCare.StatusHistoryComponent>((IEnumerable<EpisodeOfCare.StatusHistoryComponent>)jzzs_),
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzt_),
+                Diagnosis = new List<EpisodeOfCare.DiagnosisComponent>((IEnumerable<EpisodeOfCare.DiagnosisComponent>)jzzu_),
+                Patient = jzzv_,
+                ManagingOrganization = jzzw_,
+                Period = jzzx_,
+                ReferralRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)jzzy_),
+                CareManager = jzzz_,
+                Team = new List<ResourceReference>((IEnumerable<ResourceReference>)kzza_),
+                Account = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzb_),
             };
 
-            return kzze_;
+            return kzzc_;
         };
-        IEnumerable<EpisodeOfCare> jzzp_ = context.Operators.Select<EpisodeOfCare, EpisodeOfCare>((IEnumerable<EpisodeOfCare>)jzzn_, jzzo_);
-        IEnumerable<EpisodeOfCare> jzzq_ = context.Operators.Distinct<EpisodeOfCare>(jzzp_);
-        EpisodeOfCare jzzr_ = context.Operators.SingletonFrom<EpisodeOfCare>(jzzq_);
+        IEnumerable<EpisodeOfCare> jzzn_ = context.Operators.Select<EpisodeOfCare, EpisodeOfCare>((IEnumerable<EpisodeOfCare>)jzzl_, jzzm_);
+        IEnumerable<EpisodeOfCare> jzzo_ = context.Operators.Distinct<EpisodeOfCare>(jzzn_);
+        EpisodeOfCare jzzp_ = context.Operators.SingletonFrom<EpisodeOfCare>(jzzo_);
 
-        return jzzr_;
+        return jzzp_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EventDefinitionResource")]
     public EventDefinition EventDefinitionResource(CqlContext context, EventDefinition arg)
     {
-        EventDefinition[] kzzf_ = [
+        EventDefinition[] kzzd_ = [
             arg,
         ];
-        EventDefinition kzzg_(EventDefinition a)
+        EventDefinition kzze_(EventDefinition a)
         {
-            FhirUri kzzk_ = a?.UrlElement;
-            List<Identifier> kzzl_ = a?.Identifier;
-            FhirString kzzm_ = a?.VersionElement;
-            FhirString kzzn_ = a?.NameElement;
-            FhirString kzzo_ = a?.TitleElement;
-            FhirString kzzp_ = a?.SubtitleElement;
-            Code<PublicationStatus> kzzq_ = a?.StatusElement;
-            FhirBoolean kzzr_ = a?.ExperimentalElement;
-            DataType kzzs_ = a?.Subject;
-            FhirDateTime kzzt_ = a?.DateElement;
-            FhirString kzzu_ = a?.PublisherElement;
-            List<ContactDetail> kzzv_ = a?.Contact;
-            Markdown kzzw_ = a?.DescriptionElement;
-            List<UsageContext> kzzx_ = a?.UseContext;
-            List<CodeableConcept> kzzy_ = a?.Jurisdiction;
-            Markdown kzzz_ = a?.PurposeElement;
-            FhirString lzza_ = a?.UsageElement;
-            Markdown lzzb_ = a?.CopyrightElement;
-            Date lzzc_ = a?.ApprovalDateElement;
-            Date lzzd_ = a?.LastReviewDateElement;
-            Period lzze_ = a?.EffectivePeriod;
-            List<CodeableConcept> lzzf_ = a?.Topic;
-            List<ContactDetail> lzzg_ = a?.Author;
-            List<ContactDetail> lzzh_ = a?.Editor;
-            List<ContactDetail> lzzi_ = a?.Reviewer;
-            List<ContactDetail> lzzj_ = a?.Endorser;
-            List<RelatedArtifact> lzzk_ = a?.RelatedArtifact;
-            List<TriggerDefinition> lzzl_ = a?.Trigger;
-            EventDefinition lzzm_ = new EventDefinition
+            FhirUri kzzi_ = a?.UrlElement;
+            List<Identifier> kzzj_ = a?.Identifier;
+            FhirString kzzk_ = a?.VersionElement;
+            FhirString kzzl_ = a?.NameElement;
+            FhirString kzzm_ = a?.TitleElement;
+            FhirString kzzn_ = a?.SubtitleElement;
+            Code<PublicationStatus> kzzo_ = a?.StatusElement;
+            FhirBoolean kzzp_ = a?.ExperimentalElement;
+            DataType kzzq_ = a?.Subject;
+            FhirDateTime kzzr_ = a?.DateElement;
+            FhirString kzzs_ = a?.PublisherElement;
+            List<ContactDetail> kzzt_ = a?.Contact;
+            Markdown kzzu_ = a?.DescriptionElement;
+            List<UsageContext> kzzv_ = a?.UseContext;
+            List<CodeableConcept> kzzw_ = a?.Jurisdiction;
+            Markdown kzzx_ = a?.PurposeElement;
+            FhirString kzzy_ = a?.UsageElement;
+            Markdown kzzz_ = a?.CopyrightElement;
+            Date lzza_ = a?.ApprovalDateElement;
+            Date lzzb_ = a?.LastReviewDateElement;
+            Period lzzc_ = a?.EffectivePeriod;
+            List<CodeableConcept> lzzd_ = a?.Topic;
+            List<ContactDetail> lzze_ = a?.Author;
+            List<ContactDetail> lzzf_ = a?.Editor;
+            List<ContactDetail> lzzg_ = a?.Reviewer;
+            List<ContactDetail> lzzh_ = a?.Endorser;
+            List<RelatedArtifact> lzzi_ = a?.RelatedArtifact;
+            List<TriggerDefinition> lzzj_ = a?.Trigger;
+            EventDefinition lzzk_ = new EventDefinition
             {
-                UrlElement = kzzk_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzl_),
-                VersionElement = kzzm_,
-                NameElement = kzzn_,
-                TitleElement = kzzo_,
-                SubtitleElement = kzzp_,
-                StatusElement = kzzq_,
-                ExperimentalElement = kzzr_,
-                Subject = (DataType)kzzs_,
-                DateElement = kzzt_,
-                PublisherElement = kzzu_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzv_),
-                DescriptionElement = kzzw_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)kzzx_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzy_),
-                PurposeElement = kzzz_,
-                UsageElement = lzza_,
-                CopyrightElement = lzzb_,
-                ApprovalDateElement = lzzc_,
-                LastReviewDateElement = lzzd_,
-                EffectivePeriod = lzze_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzf_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzg_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzh_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzi_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzj_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)lzzk_),
-                Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)lzzl_),
+                UrlElement = kzzi_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzj_),
+                VersionElement = kzzk_,
+                NameElement = kzzl_,
+                TitleElement = kzzm_,
+                SubtitleElement = kzzn_,
+                StatusElement = kzzo_,
+                ExperimentalElement = kzzp_,
+                Subject = (DataType)kzzq_,
+                DateElement = kzzr_,
+                PublisherElement = kzzs_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzt_),
+                DescriptionElement = kzzu_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)kzzv_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzw_),
+                PurposeElement = kzzx_,
+                UsageElement = kzzy_,
+                CopyrightElement = kzzz_,
+                ApprovalDateElement = lzza_,
+                LastReviewDateElement = lzzb_,
+                EffectivePeriod = lzzc_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzd_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)lzze_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzf_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzg_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)lzzh_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)lzzi_),
+                Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)lzzj_),
             };
 
-            return lzzm_;
+            return lzzk_;
         };
-        IEnumerable<EventDefinition> kzzh_ = context.Operators.Select<EventDefinition, EventDefinition>((IEnumerable<EventDefinition>)kzzf_, kzzg_);
-        IEnumerable<EventDefinition> kzzi_ = context.Operators.Distinct<EventDefinition>(kzzh_);
-        EventDefinition kzzj_ = context.Operators.SingletonFrom<EventDefinition>(kzzi_);
+        IEnumerable<EventDefinition> kzzf_ = context.Operators.Select<EventDefinition, EventDefinition>((IEnumerable<EventDefinition>)kzzd_, kzze_);
+        IEnumerable<EventDefinition> kzzg_ = context.Operators.Distinct<EventDefinition>(kzzf_);
+        EventDefinition kzzh_ = context.Operators.SingletonFrom<EventDefinition>(kzzg_);
 
-        return kzzj_;
+        return kzzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EvidenceResource")]
     public Evidence EvidenceResource(CqlContext context, Evidence arg)
     {
-        Evidence[] lzzn_ = [
+        Evidence[] lzzl_ = [
             arg,
         ];
-        Evidence lzzo_(Evidence a)
+        Evidence lzzm_(Evidence a)
         {
-            FhirUri lzzs_ = a?.UrlElement;
-            List<Identifier> lzzt_ = a?.Identifier;
-            FhirString lzzu_ = a?.VersionElement;
-            FhirString lzzv_ = a?.NameElement;
-            FhirString lzzw_ = a?.TitleElement;
-            FhirString lzzx_ = a?.ShortTitleElement;
-            FhirString lzzy_ = a?.SubtitleElement;
-            Code<PublicationStatus> lzzz_ = a?.StatusElement;
-            FhirDateTime mzza_ = a?.DateElement;
-            FhirString mzzb_ = a?.PublisherElement;
-            List<ContactDetail> mzzc_ = a?.Contact;
-            Markdown mzzd_ = a?.DescriptionElement;
-            List<Annotation> mzze_ = a?.Note;
-            List<UsageContext> mzzf_ = a?.UseContext;
-            List<CodeableConcept> mzzg_ = a?.Jurisdiction;
-            Markdown mzzh_ = a?.CopyrightElement;
-            Date mzzi_ = a?.ApprovalDateElement;
-            Date mzzj_ = a?.LastReviewDateElement;
-            Period mzzk_ = a?.EffectivePeriod;
-            List<CodeableConcept> mzzl_ = a?.Topic;
-            List<ContactDetail> mzzm_ = a?.Author;
-            List<ContactDetail> mzzn_ = a?.Editor;
-            List<ContactDetail> mzzo_ = a?.Reviewer;
-            List<ContactDetail> mzzp_ = a?.Endorser;
-            List<RelatedArtifact> mzzq_ = a?.RelatedArtifact;
-            ResourceReference mzzr_ = a?.ExposureBackground;
-            List<ResourceReference> mzzs_ = a?.ExposureVariant;
-            List<ResourceReference> mzzt_ = a?.Outcome;
-            Evidence mzzu_ = new Evidence
+            FhirUri lzzq_ = a?.UrlElement;
+            List<Identifier> lzzr_ = a?.Identifier;
+            FhirString lzzs_ = a?.VersionElement;
+            FhirString lzzt_ = a?.NameElement;
+            FhirString lzzu_ = a?.TitleElement;
+            FhirString lzzv_ = a?.ShortTitleElement;
+            FhirString lzzw_ = a?.SubtitleElement;
+            Code<PublicationStatus> lzzx_ = a?.StatusElement;
+            FhirDateTime lzzy_ = a?.DateElement;
+            FhirString lzzz_ = a?.PublisherElement;
+            List<ContactDetail> mzza_ = a?.Contact;
+            Markdown mzzb_ = a?.DescriptionElement;
+            List<Annotation> mzzc_ = a?.Note;
+            List<UsageContext> mzzd_ = a?.UseContext;
+            List<CodeableConcept> mzze_ = a?.Jurisdiction;
+            Markdown mzzf_ = a?.CopyrightElement;
+            Date mzzg_ = a?.ApprovalDateElement;
+            Date mzzh_ = a?.LastReviewDateElement;
+            Period mzzi_ = a?.EffectivePeriod;
+            List<CodeableConcept> mzzj_ = a?.Topic;
+            List<ContactDetail> mzzk_ = a?.Author;
+            List<ContactDetail> mzzl_ = a?.Editor;
+            List<ContactDetail> mzzm_ = a?.Reviewer;
+            List<ContactDetail> mzzn_ = a?.Endorser;
+            List<RelatedArtifact> mzzo_ = a?.RelatedArtifact;
+            ResourceReference mzzp_ = a?.ExposureBackground;
+            List<ResourceReference> mzzq_ = a?.ExposureVariant;
+            List<ResourceReference> mzzr_ = a?.Outcome;
+            Evidence mzzs_ = new Evidence
             {
-                UrlElement = lzzs_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzt_),
-                VersionElement = lzzu_,
-                NameElement = lzzv_,
-                TitleElement = lzzw_,
-                ShortTitleElement = lzzx_,
-                SubtitleElement = lzzy_,
-                StatusElement = lzzz_,
-                DateElement = mzza_,
-                PublisherElement = mzzb_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzc_),
-                DescriptionElement = mzzd_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)mzze_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)mzzf_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzg_),
-                CopyrightElement = mzzh_,
-                ApprovalDateElement = mzzi_,
-                LastReviewDateElement = mzzj_,
-                EffectivePeriod = mzzk_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzl_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzm_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzn_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzo_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzp_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)mzzq_),
-                ExposureBackground = mzzr_,
-                ExposureVariant = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzs_),
-                Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzt_),
+                UrlElement = lzzq_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzr_),
+                VersionElement = lzzs_,
+                NameElement = lzzt_,
+                TitleElement = lzzu_,
+                ShortTitleElement = lzzv_,
+                SubtitleElement = lzzw_,
+                StatusElement = lzzx_,
+                DateElement = lzzy_,
+                PublisherElement = lzzz_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)mzza_),
+                DescriptionElement = mzzb_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)mzzc_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)mzzd_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzze_),
+                CopyrightElement = mzzf_,
+                ApprovalDateElement = mzzg_,
+                LastReviewDateElement = mzzh_,
+                EffectivePeriod = mzzi_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzj_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzk_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzl_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzm_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)mzzn_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)mzzo_),
+                ExposureBackground = mzzp_,
+                ExposureVariant = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzq_),
+                Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzr_),
             };
 
-            return mzzu_;
+            return mzzs_;
         };
-        IEnumerable<Evidence> lzzp_ = context.Operators.Select<Evidence, Evidence>((IEnumerable<Evidence>)lzzn_, lzzo_);
-        IEnumerable<Evidence> lzzq_ = context.Operators.Distinct<Evidence>(lzzp_);
-        Evidence lzzr_ = context.Operators.SingletonFrom<Evidence>(lzzq_);
+        IEnumerable<Evidence> lzzn_ = context.Operators.Select<Evidence, Evidence>((IEnumerable<Evidence>)lzzl_, lzzm_);
+        IEnumerable<Evidence> lzzo_ = context.Operators.Distinct<Evidence>(lzzn_);
+        Evidence lzzp_ = context.Operators.SingletonFrom<Evidence>(lzzo_);
 
-        return lzzr_;
+        return lzzp_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("EvidenceVariableResource")]
     public EvidenceVariable EvidenceVariableResource(CqlContext context, EvidenceVariable arg)
     {
-        EvidenceVariable[] mzzv_ = [
+        EvidenceVariable[] mzzt_ = [
             arg,
         ];
-        EvidenceVariable mzzw_(EvidenceVariable a)
+        EvidenceVariable mzzu_(EvidenceVariable a)
         {
-            FhirUri nzza_ = a?.UrlElement;
-            List<Identifier> nzzb_ = a?.Identifier;
-            FhirString nzzc_ = a?.VersionElement;
-            FhirString nzzd_ = a?.NameElement;
-            FhirString nzze_ = a?.TitleElement;
-            FhirString nzzf_ = a?.ShortTitleElement;
-            FhirString nzzg_ = a?.SubtitleElement;
-            Code<PublicationStatus> nzzh_ = a?.StatusElement;
-            FhirDateTime nzzi_ = a?.DateElement;
-            FhirString nzzj_ = a?.PublisherElement;
-            List<ContactDetail> nzzk_ = a?.Contact;
-            Markdown nzzl_ = a?.DescriptionElement;
-            List<Annotation> nzzm_ = a?.Note;
-            List<UsageContext> nzzn_ = a?.UseContext;
-            List<CodeableConcept> nzzo_ = a?.Jurisdiction;
-            Markdown nzzp_ = a?.CopyrightElement;
-            Date nzzq_ = a?.ApprovalDateElement;
-            Date nzzr_ = a?.LastReviewDateElement;
-            Period nzzs_ = a?.EffectivePeriod;
-            List<CodeableConcept> nzzt_ = a?.Topic;
-            List<ContactDetail> nzzu_ = a?.Author;
-            List<ContactDetail> nzzv_ = a?.Editor;
-            List<ContactDetail> nzzw_ = a?.Reviewer;
-            List<ContactDetail> nzzx_ = a?.Endorser;
-            List<RelatedArtifact> nzzy_ = a?.RelatedArtifact;
-            Code<VariableTypeCode> nzzz_ = a?.TypeElement;
-            List<EvidenceVariable.CharacteristicComponent> ozza_ = a?.Characteristic;
-            EvidenceVariable ozzb_ = new EvidenceVariable
+            FhirUri mzzy_ = a?.UrlElement;
+            List<Identifier> mzzz_ = a?.Identifier;
+            FhirString nzza_ = a?.VersionElement;
+            FhirString nzzb_ = a?.NameElement;
+            FhirString nzzc_ = a?.TitleElement;
+            FhirString nzzd_ = a?.ShortTitleElement;
+            FhirString nzze_ = a?.SubtitleElement;
+            Code<PublicationStatus> nzzf_ = a?.StatusElement;
+            FhirDateTime nzzg_ = a?.DateElement;
+            FhirString nzzh_ = a?.PublisherElement;
+            List<ContactDetail> nzzi_ = a?.Contact;
+            Markdown nzzj_ = a?.DescriptionElement;
+            List<Annotation> nzzk_ = a?.Note;
+            List<UsageContext> nzzl_ = a?.UseContext;
+            List<CodeableConcept> nzzm_ = a?.Jurisdiction;
+            Markdown nzzn_ = a?.CopyrightElement;
+            Date nzzo_ = a?.ApprovalDateElement;
+            Date nzzp_ = a?.LastReviewDateElement;
+            Period nzzq_ = a?.EffectivePeriod;
+            List<CodeableConcept> nzzr_ = a?.Topic;
+            List<ContactDetail> nzzs_ = a?.Author;
+            List<ContactDetail> nzzt_ = a?.Editor;
+            List<ContactDetail> nzzu_ = a?.Reviewer;
+            List<ContactDetail> nzzv_ = a?.Endorser;
+            List<RelatedArtifact> nzzw_ = a?.RelatedArtifact;
+            Code<VariableTypeCode> nzzx_ = a?.TypeElement;
+            List<EvidenceVariable.CharacteristicComponent> nzzy_ = a?.Characteristic;
+            EvidenceVariable nzzz_ = new EvidenceVariable
             {
-                UrlElement = nzza_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)nzzb_),
-                VersionElement = nzzc_,
-                NameElement = nzzd_,
-                TitleElement = nzze_,
-                ShortTitleElement = nzzf_,
-                SubtitleElement = nzzg_,
-                StatusElement = nzzh_,
-                DateElement = nzzi_,
-                PublisherElement = nzzj_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzk_),
-                DescriptionElement = nzzl_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)nzzm_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)nzzn_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzo_),
-                CopyrightElement = nzzp_,
-                ApprovalDateElement = nzzq_,
-                LastReviewDateElement = nzzr_,
-                EffectivePeriod = nzzs_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzt_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzu_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzv_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzw_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzx_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)nzzy_),
-                TypeElement = nzzz_,
-                Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable<EvidenceVariable.CharacteristicComponent>)ozza_),
+                UrlElement = mzzy_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzzz_),
+                VersionElement = nzza_,
+                NameElement = nzzb_,
+                TitleElement = nzzc_,
+                ShortTitleElement = nzzd_,
+                SubtitleElement = nzze_,
+                StatusElement = nzzf_,
+                DateElement = nzzg_,
+                PublisherElement = nzzh_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzi_),
+                DescriptionElement = nzzj_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)nzzk_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)nzzl_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzm_),
+                CopyrightElement = nzzn_,
+                ApprovalDateElement = nzzo_,
+                LastReviewDateElement = nzzp_,
+                EffectivePeriod = nzzq_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzr_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzs_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzt_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzu_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzv_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)nzzw_),
+                TypeElement = nzzx_,
+                Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable<EvidenceVariable.CharacteristicComponent>)nzzy_),
             };
 
-            return ozzb_;
+            return nzzz_;
         };
-        IEnumerable<EvidenceVariable> mzzx_ = context.Operators.Select<EvidenceVariable, EvidenceVariable>((IEnumerable<EvidenceVariable>)mzzv_, mzzw_);
-        IEnumerable<EvidenceVariable> mzzy_ = context.Operators.Distinct<EvidenceVariable>(mzzx_);
-        EvidenceVariable mzzz_ = context.Operators.SingletonFrom<EvidenceVariable>(mzzy_);
+        IEnumerable<EvidenceVariable> mzzv_ = context.Operators.Select<EvidenceVariable, EvidenceVariable>((IEnumerable<EvidenceVariable>)mzzt_, mzzu_);
+        IEnumerable<EvidenceVariable> mzzw_ = context.Operators.Distinct<EvidenceVariable>(mzzv_);
+        EvidenceVariable mzzx_ = context.Operators.SingletonFrom<EvidenceVariable>(mzzw_);
 
-        return mzzz_;
+        return mzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ExplanationOfBenefitResource")]
     public ExplanationOfBenefit ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit arg)
     {
-        ExplanationOfBenefit[] ozzc_ = [
+        ExplanationOfBenefit[] ozza_ = [
             arg,
         ];
-        ExplanationOfBenefit ozzd_(ExplanationOfBenefit a)
+        ExplanationOfBenefit ozzb_(ExplanationOfBenefit a)
         {
-            List<Identifier> ozzh_ = a?.Identifier;
-            Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> ozzi_ = a?.StatusElement;
-            CodeableConcept ozzj_ = a?.Type;
-            CodeableConcept ozzk_ = a?.SubType;
-            Code<ClaimUseCode> ozzl_ = a?.UseElement;
-            ResourceReference ozzm_ = a?.Patient;
-            Period ozzn_ = a?.BillablePeriod;
-            FhirDateTime ozzo_ = a?.CreatedElement;
-            ResourceReference ozzp_ = a?.Enterer;
-            ResourceReference ozzq_ = a?.Insurer;
-            ResourceReference ozzr_ = a?.Provider;
-            CodeableConcept ozzs_ = a?.Priority;
-            CodeableConcept ozzt_ = a?.FundsReserveRequested;
-            CodeableConcept ozzu_ = a?.FundsReserve;
-            List<ExplanationOfBenefit.RelatedClaimComponent> ozzv_ = a?.Related;
-            ResourceReference ozzw_ = a?.Prescription;
-            ResourceReference ozzx_ = a?.OriginalPrescription;
-            ExplanationOfBenefit.PayeeComponent ozzy_ = a?.Payee;
-            ResourceReference ozzz_ = a?.Referral;
-            ResourceReference pzza_ = a?.Facility;
-            ResourceReference pzzb_ = a?.Claim;
-            ResourceReference pzzc_ = a?.ClaimResponse;
-            Code<ClaimProcessingCodes> pzzd_ = a?.OutcomeElement;
-            FhirString pzze_ = a?.DispositionElement;
-            List<FhirString> pzzf_ = a?.PreAuthRefElement;
-            List<Period> pzzg_ = a?.PreAuthRefPeriod;
-            List<ExplanationOfBenefit.CareTeamComponent> pzzh_ = a?.CareTeam;
-            List<ExplanationOfBenefit.SupportingInformationComponent> pzzi_ = a?.SupportingInfo;
-            List<ExplanationOfBenefit.DiagnosisComponent> pzzj_ = a?.Diagnosis;
-            List<ExplanationOfBenefit.ProcedureComponent> pzzk_ = a?.Procedure;
-            PositiveInt pzzl_ = a?.PrecedenceElement;
-            Integer pzzm_ = context.Operators.Convert<Integer>(pzzl_);
-            PositiveInt pzzn_ = context.Operators.Convert<PositiveInt>(pzzm_);
-            List<ExplanationOfBenefit.InsuranceComponent> pzzo_ = a?.Insurance;
-            ExplanationOfBenefit.AccidentComponent pzzp_ = a?.Accident;
-            List<ExplanationOfBenefit.ItemComponent> pzzq_ = a?.Item;
-            List<ExplanationOfBenefit.AddedItemComponent> pzzr_ = a?.AddItem;
-            List<ExplanationOfBenefit.AdjudicationComponent> pzzs_ = a?.Adjudication;
-            List<ExplanationOfBenefit.TotalComponent> pzzt_ = a?.Total;
-            ExplanationOfBenefit.PaymentComponent pzzu_ = a?.Payment;
-            CodeableConcept pzzv_ = a?.FormCode;
-            Attachment pzzw_ = a?.Form;
-            List<ExplanationOfBenefit.NoteComponent> pzzx_ = a?.ProcessNote;
-            Period pzzy_ = a?.BenefitPeriod;
-            List<ExplanationOfBenefit.BenefitBalanceComponent> pzzz_ = a?.BenefitBalance;
-            ExplanationOfBenefit qzza_ = new ExplanationOfBenefit
+            List<Identifier> ozzf_ = a?.Identifier;
+            Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> ozzg_ = a?.StatusElement;
+            CodeableConcept ozzh_ = a?.Type;
+            CodeableConcept ozzi_ = a?.SubType;
+            Code<ClaimUseCode> ozzj_ = a?.UseElement;
+            ResourceReference ozzk_ = a?.Patient;
+            Period ozzl_ = a?.BillablePeriod;
+            FhirDateTime ozzm_ = a?.CreatedElement;
+            ResourceReference ozzn_ = a?.Enterer;
+            ResourceReference ozzo_ = a?.Insurer;
+            ResourceReference ozzp_ = a?.Provider;
+            CodeableConcept ozzq_ = a?.Priority;
+            CodeableConcept ozzr_ = a?.FundsReserveRequested;
+            CodeableConcept ozzs_ = a?.FundsReserve;
+            List<ExplanationOfBenefit.RelatedClaimComponent> ozzt_ = a?.Related;
+            ResourceReference ozzu_ = a?.Prescription;
+            ResourceReference ozzv_ = a?.OriginalPrescription;
+            ExplanationOfBenefit.PayeeComponent ozzw_ = a?.Payee;
+            ResourceReference ozzx_ = a?.Referral;
+            ResourceReference ozzy_ = a?.Facility;
+            ResourceReference ozzz_ = a?.Claim;
+            ResourceReference pzza_ = a?.ClaimResponse;
+            Code<ClaimProcessingCodes> pzzb_ = a?.OutcomeElement;
+            FhirString pzzc_ = a?.DispositionElement;
+            List<FhirString> pzzd_ = a?.PreAuthRefElement;
+            List<Period> pzze_ = a?.PreAuthRefPeriod;
+            List<ExplanationOfBenefit.CareTeamComponent> pzzf_ = a?.CareTeam;
+            List<ExplanationOfBenefit.SupportingInformationComponent> pzzg_ = a?.SupportingInfo;
+            List<ExplanationOfBenefit.DiagnosisComponent> pzzh_ = a?.Diagnosis;
+            List<ExplanationOfBenefit.ProcedureComponent> pzzi_ = a?.Procedure;
+            PositiveInt pzzj_ = a?.PrecedenceElement;
+            Integer pzzk_ = context.Operators.Convert<Integer>(pzzj_);
+            PositiveInt pzzl_ = context.Operators.Convert<PositiveInt>(pzzk_);
+            List<ExplanationOfBenefit.InsuranceComponent> pzzm_ = a?.Insurance;
+            ExplanationOfBenefit.AccidentComponent pzzn_ = a?.Accident;
+            List<ExplanationOfBenefit.ItemComponent> pzzo_ = a?.Item;
+            List<ExplanationOfBenefit.AddedItemComponent> pzzp_ = a?.AddItem;
+            List<ExplanationOfBenefit.AdjudicationComponent> pzzq_ = a?.Adjudication;
+            List<ExplanationOfBenefit.TotalComponent> pzzr_ = a?.Total;
+            ExplanationOfBenefit.PaymentComponent pzzs_ = a?.Payment;
+            CodeableConcept pzzt_ = a?.FormCode;
+            Attachment pzzu_ = a?.Form;
+            List<ExplanationOfBenefit.NoteComponent> pzzv_ = a?.ProcessNote;
+            Period pzzw_ = a?.BenefitPeriod;
+            List<ExplanationOfBenefit.BenefitBalanceComponent> pzzx_ = a?.BenefitBalance;
+            ExplanationOfBenefit pzzy_ = new ExplanationOfBenefit
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozzh_),
-                StatusElement = ozzi_,
-                Type = ozzj_,
-                SubType = ozzk_,
-                UseElement = ozzl_,
-                Patient = ozzm_,
-                BillablePeriod = ozzn_,
-                CreatedElement = ozzo_,
-                Enterer = ozzp_,
-                Insurer = ozzq_,
-                Provider = ozzr_,
-                Priority = ozzs_,
-                FundsReserveRequested = ozzt_,
-                FundsReserve = ozzu_,
-                Related = new List<ExplanationOfBenefit.RelatedClaimComponent>((IEnumerable<ExplanationOfBenefit.RelatedClaimComponent>)ozzv_),
-                Prescription = ozzw_,
-                OriginalPrescription = ozzx_,
-                Payee = ozzy_,
-                Referral = ozzz_,
-                Facility = pzza_,
-                Claim = pzzb_,
-                ClaimResponse = pzzc_,
-                OutcomeElement = pzzd_,
-                DispositionElement = pzze_,
-                PreAuthRefElement = new List<FhirString>((IEnumerable<FhirString>)pzzf_),
-                PreAuthRefPeriod = new List<Period>((IEnumerable<Period>)pzzg_),
-                CareTeam = new List<ExplanationOfBenefit.CareTeamComponent>((IEnumerable<ExplanationOfBenefit.CareTeamComponent>)pzzh_),
-                SupportingInfo = new List<ExplanationOfBenefit.SupportingInformationComponent>((IEnumerable<ExplanationOfBenefit.SupportingInformationComponent>)pzzi_),
-                Diagnosis = new List<ExplanationOfBenefit.DiagnosisComponent>((IEnumerable<ExplanationOfBenefit.DiagnosisComponent>)pzzj_),
-                Procedure = new List<ExplanationOfBenefit.ProcedureComponent>((IEnumerable<ExplanationOfBenefit.ProcedureComponent>)pzzk_),
-                PrecedenceElement = pzzn_,
-                Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)pzzo_),
-                Accident = pzzp_,
-                Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)pzzq_),
-                AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)pzzr_),
-                Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)pzzs_),
-                Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)pzzt_),
-                Payment = pzzu_,
-                FormCode = pzzv_,
-                Form = pzzw_,
-                ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)pzzx_),
-                BenefitPeriod = pzzy_,
-                BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)pzzz_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozzf_),
+                StatusElement = ozzg_,
+                Type = ozzh_,
+                SubType = ozzi_,
+                UseElement = ozzj_,
+                Patient = ozzk_,
+                BillablePeriod = ozzl_,
+                CreatedElement = ozzm_,
+                Enterer = ozzn_,
+                Insurer = ozzo_,
+                Provider = ozzp_,
+                Priority = ozzq_,
+                FundsReserveRequested = ozzr_,
+                FundsReserve = ozzs_,
+                Related = new List<ExplanationOfBenefit.RelatedClaimComponent>((IEnumerable<ExplanationOfBenefit.RelatedClaimComponent>)ozzt_),
+                Prescription = ozzu_,
+                OriginalPrescription = ozzv_,
+                Payee = ozzw_,
+                Referral = ozzx_,
+                Facility = ozzy_,
+                Claim = ozzz_,
+                ClaimResponse = pzza_,
+                OutcomeElement = pzzb_,
+                DispositionElement = pzzc_,
+                PreAuthRefElement = new List<FhirString>((IEnumerable<FhirString>)pzzd_),
+                PreAuthRefPeriod = new List<Period>((IEnumerable<Period>)pzze_),
+                CareTeam = new List<ExplanationOfBenefit.CareTeamComponent>((IEnumerable<ExplanationOfBenefit.CareTeamComponent>)pzzf_),
+                SupportingInfo = new List<ExplanationOfBenefit.SupportingInformationComponent>((IEnumerable<ExplanationOfBenefit.SupportingInformationComponent>)pzzg_),
+                Diagnosis = new List<ExplanationOfBenefit.DiagnosisComponent>((IEnumerable<ExplanationOfBenefit.DiagnosisComponent>)pzzh_),
+                Procedure = new List<ExplanationOfBenefit.ProcedureComponent>((IEnumerable<ExplanationOfBenefit.ProcedureComponent>)pzzi_),
+                PrecedenceElement = pzzl_,
+                Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)pzzm_),
+                Accident = pzzn_,
+                Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)pzzo_),
+                AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)pzzp_),
+                Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)pzzq_),
+                Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)pzzr_),
+                Payment = pzzs_,
+                FormCode = pzzt_,
+                Form = pzzu_,
+                ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)pzzv_),
+                BenefitPeriod = pzzw_,
+                BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)pzzx_),
             };
 
-            return qzza_;
+            return pzzy_;
         };
-        IEnumerable<ExplanationOfBenefit> ozze_ = context.Operators.Select<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)ozzc_, ozzd_);
-        IEnumerable<ExplanationOfBenefit> ozzf_ = context.Operators.Distinct<ExplanationOfBenefit>(ozze_);
-        ExplanationOfBenefit ozzg_ = context.Operators.SingletonFrom<ExplanationOfBenefit>(ozzf_);
+        IEnumerable<ExplanationOfBenefit> ozzc_ = context.Operators.Select<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)ozza_, ozzb_);
+        IEnumerable<ExplanationOfBenefit> ozzd_ = context.Operators.Distinct<ExplanationOfBenefit>(ozzc_);
+        ExplanationOfBenefit ozze_ = context.Operators.SingletonFrom<ExplanationOfBenefit>(ozzd_);
 
-        return ozzg_;
+        return ozze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("FamilyMemberHistoryResource")]
     public FamilyMemberHistory FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory arg)
     {
-        FamilyMemberHistory[] qzzb_ = [
+        FamilyMemberHistory[] pzzz_ = [
             arg,
         ];
-        FamilyMemberHistory qzzc_(FamilyMemberHistory a)
+        FamilyMemberHistory qzza_(FamilyMemberHistory a)
         {
-            List<Identifier> qzzg_ = a?.Identifier;
-            List<Canonical> qzzh_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> qzzi_ = a?.InstantiatesUriElement;
-            Code<FamilyMemberHistory.FamilyHistoryStatus> qzzj_ = a?.StatusElement;
-            CodeableConcept qzzk_ = a?.DataAbsentReason;
-            ResourceReference qzzl_ = a?.Patient;
-            FhirDateTime qzzm_ = a?.DateElement;
-            FhirString qzzn_ = a?.NameElement;
-            CodeableConcept qzzo_ = a?.Relationship;
-            CodeableConcept qzzp_ = a?.Sex;
-            DataType qzzq_ = a?.Born;
-            DataType qzzr_ = a?.Age;
-            FhirBoolean qzzs_ = a?.EstimatedAgeElement;
-            DataType qzzt_ = a?.Deceased;
-            List<CodeableConcept> qzzu_ = a?.ReasonCode;
-            List<ResourceReference> qzzv_ = a?.ReasonReference;
-            List<Annotation> qzzw_ = a?.Note;
-            List<FamilyMemberHistory.ConditionComponent> qzzx_ = a?.Condition;
-            FamilyMemberHistory qzzy_ = new FamilyMemberHistory
+            List<Identifier> qzze_ = a?.Identifier;
+            List<Canonical> qzzf_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> qzzg_ = a?.InstantiatesUriElement;
+            Code<FamilyMemberHistory.FamilyHistoryStatus> qzzh_ = a?.StatusElement;
+            CodeableConcept qzzi_ = a?.DataAbsentReason;
+            ResourceReference qzzj_ = a?.Patient;
+            FhirDateTime qzzk_ = a?.DateElement;
+            FhirString qzzl_ = a?.NameElement;
+            CodeableConcept qzzm_ = a?.Relationship;
+            CodeableConcept qzzn_ = a?.Sex;
+            DataType qzzo_ = a?.Born;
+            DataType qzzp_ = a?.Age;
+            FhirBoolean qzzq_ = a?.EstimatedAgeElement;
+            DataType qzzr_ = a?.Deceased;
+            List<CodeableConcept> qzzs_ = a?.ReasonCode;
+            List<ResourceReference> qzzt_ = a?.ReasonReference;
+            List<Annotation> qzzu_ = a?.Note;
+            List<FamilyMemberHistory.ConditionComponent> qzzv_ = a?.Condition;
+            FamilyMemberHistory qzzw_ = new FamilyMemberHistory
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)qzzg_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)qzzh_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)qzzi_),
-                StatusElement = qzzj_,
-                DataAbsentReason = qzzk_,
-                Patient = qzzl_,
-                DateElement = qzzm_,
-                NameElement = qzzn_,
-                Relationship = qzzo_,
-                Sex = qzzp_,
-                Born = (DataType)qzzq_,
-                Age = (DataType)qzzr_,
-                EstimatedAgeElement = qzzs_,
-                Deceased = (DataType)qzzt_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzu_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzv_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)qzzw_),
-                Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<FamilyMemberHistory.ConditionComponent>)qzzx_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)qzze_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)qzzf_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)qzzg_),
+                StatusElement = qzzh_,
+                DataAbsentReason = qzzi_,
+                Patient = qzzj_,
+                DateElement = qzzk_,
+                NameElement = qzzl_,
+                Relationship = qzzm_,
+                Sex = qzzn_,
+                Born = (DataType)qzzo_,
+                Age = (DataType)qzzp_,
+                EstimatedAgeElement = qzzq_,
+                Deceased = (DataType)qzzr_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzs_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzt_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)qzzu_),
+                Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<FamilyMemberHistory.ConditionComponent>)qzzv_),
             };
 
-            return qzzy_;
+            return qzzw_;
         };
-        IEnumerable<FamilyMemberHistory> qzzd_ = context.Operators.Select<FamilyMemberHistory, FamilyMemberHistory>((IEnumerable<FamilyMemberHistory>)qzzb_, qzzc_);
-        IEnumerable<FamilyMemberHistory> qzze_ = context.Operators.Distinct<FamilyMemberHistory>(qzzd_);
-        FamilyMemberHistory qzzf_ = context.Operators.SingletonFrom<FamilyMemberHistory>(qzze_);
+        IEnumerable<FamilyMemberHistory> qzzb_ = context.Operators.Select<FamilyMemberHistory, FamilyMemberHistory>((IEnumerable<FamilyMemberHistory>)pzzz_, qzza_);
+        IEnumerable<FamilyMemberHistory> qzzc_ = context.Operators.Distinct<FamilyMemberHistory>(qzzb_);
+        FamilyMemberHistory qzzd_ = context.Operators.SingletonFrom<FamilyMemberHistory>(qzzc_);
 
-        return qzzf_;
+        return qzzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("FlagResource")]
     public Flag FlagResource(CqlContext context, Flag arg)
     {
-        Flag[] qzzz_ = [
+        Flag[] qzzx_ = [
             arg,
         ];
-        Flag rzza_(Flag a)
+        Flag qzzy_(Flag a)
         {
-            List<Identifier> rzze_ = a?.Identifier;
-            Code<Flag.FlagStatus> rzzf_ = a?.StatusElement;
-            List<CodeableConcept> rzzg_ = a?.Category;
-            CodeableConcept rzzh_ = a?.Code;
-            ResourceReference rzzi_ = a?.Subject;
-            Period rzzj_ = a?.Period;
-            ResourceReference rzzk_ = a?.Encounter;
-            ResourceReference rzzl_ = a?.Author;
-            Flag rzzm_ = new Flag
+            List<Identifier> rzzc_ = a?.Identifier;
+            Code<Flag.FlagStatus> rzzd_ = a?.StatusElement;
+            List<CodeableConcept> rzze_ = a?.Category;
+            CodeableConcept rzzf_ = a?.Code;
+            ResourceReference rzzg_ = a?.Subject;
+            Period rzzh_ = a?.Period;
+            ResourceReference rzzi_ = a?.Encounter;
+            ResourceReference rzzj_ = a?.Author;
+            Flag rzzk_ = new Flag
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzze_),
-                StatusElement = rzzf_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzg_),
-                Code = rzzh_,
-                Subject = rzzi_,
-                Period = rzzj_,
-                Encounter = rzzk_,
-                Author = rzzl_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzc_),
+                StatusElement = rzzd_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzze_),
+                Code = rzzf_,
+                Subject = rzzg_,
+                Period = rzzh_,
+                Encounter = rzzi_,
+                Author = rzzj_,
             };
 
-            return rzzm_;
+            return rzzk_;
         };
-        IEnumerable<Flag> rzzb_ = context.Operators.Select<Flag, Flag>((IEnumerable<Flag>)qzzz_, rzza_);
-        IEnumerable<Flag> rzzc_ = context.Operators.Distinct<Flag>(rzzb_);
-        Flag rzzd_ = context.Operators.SingletonFrom<Flag>(rzzc_);
+        IEnumerable<Flag> qzzz_ = context.Operators.Select<Flag, Flag>((IEnumerable<Flag>)qzzx_, qzzy_);
+        IEnumerable<Flag> rzza_ = context.Operators.Distinct<Flag>(qzzz_);
+        Flag rzzb_ = context.Operators.SingletonFrom<Flag>(rzza_);
 
-        return rzzd_;
+        return rzzb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("GoalResource")]
     public Goal GoalResource(CqlContext context, Goal arg)
     {
-        Goal[] rzzn_ = [
+        Goal[] rzzl_ = [
             arg,
         ];
-        Goal rzzo_(Goal a)
+        Goal rzzm_(Goal a)
         {
-            List<Identifier> rzzs_ = a?.Identifier;
-            Code<Goal.GoalLifecycleStatus> rzzt_ = a?.LifecycleStatusElement;
-            CodeableConcept rzzu_ = a?.AchievementStatus;
-            List<CodeableConcept> rzzv_ = a?.Category;
-            CodeableConcept rzzw_ = a?.Priority;
-            CodeableConcept rzzx_ = a?.Description;
-            ResourceReference rzzy_ = a?.Subject;
-            DataType rzzz_ = a?.Start;
-            List<Goal.TargetComponent> szza_ = a?.Target;
-            Date szzb_ = a?.StatusDateElement;
-            FhirString szzc_ = a?.StatusReasonElement;
-            ResourceReference szzd_ = a?.ExpressedBy;
-            List<ResourceReference> szze_ = a?.Addresses;
-            List<Annotation> szzf_ = a?.Note;
-            List<CodeableConcept> szzg_ = a?.OutcomeCode;
-            List<ResourceReference> szzh_ = a?.OutcomeReference;
-            Goal szzi_ = new Goal
+            List<Identifier> rzzq_ = a?.Identifier;
+            Code<Goal.GoalLifecycleStatus> rzzr_ = a?.LifecycleStatusElement;
+            CodeableConcept rzzs_ = a?.AchievementStatus;
+            List<CodeableConcept> rzzt_ = a?.Category;
+            CodeableConcept rzzu_ = a?.Priority;
+            CodeableConcept rzzv_ = a?.Description;
+            ResourceReference rzzw_ = a?.Subject;
+            DataType rzzx_ = a?.Start;
+            List<Goal.TargetComponent> rzzy_ = a?.Target;
+            Date rzzz_ = a?.StatusDateElement;
+            FhirString szza_ = a?.StatusReasonElement;
+            ResourceReference szzb_ = a?.ExpressedBy;
+            List<ResourceReference> szzc_ = a?.Addresses;
+            List<Annotation> szzd_ = a?.Note;
+            List<CodeableConcept> szze_ = a?.OutcomeCode;
+            List<ResourceReference> szzf_ = a?.OutcomeReference;
+            Goal szzg_ = new Goal
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzs_),
-                LifecycleStatusElement = rzzt_,
-                AchievementStatus = rzzu_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzv_),
-                Priority = rzzw_,
-                Description = rzzx_,
-                Subject = rzzy_,
-                Start = (DataType)rzzz_,
-                Target = new List<Goal.TargetComponent>((IEnumerable<Goal.TargetComponent>)szza_),
-                StatusDateElement = szzb_,
-                StatusReasonElement = szzc_,
-                ExpressedBy = szzd_,
-                Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)szze_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)szzf_),
-                OutcomeCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzg_),
-                OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)szzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzq_),
+                LifecycleStatusElement = rzzr_,
+                AchievementStatus = rzzs_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzt_),
+                Priority = rzzu_,
+                Description = rzzv_,
+                Subject = rzzw_,
+                Start = (DataType)rzzx_,
+                Target = new List<Goal.TargetComponent>((IEnumerable<Goal.TargetComponent>)rzzy_),
+                StatusDateElement = rzzz_,
+                StatusReasonElement = szza_,
+                ExpressedBy = szzb_,
+                Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)szzc_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)szzd_),
+                OutcomeCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szze_),
+                OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)szzf_),
             };
 
-            return szzi_;
+            return szzg_;
         };
-        IEnumerable<Goal> rzzp_ = context.Operators.Select<Goal, Goal>((IEnumerable<Goal>)rzzn_, rzzo_);
-        IEnumerable<Goal> rzzq_ = context.Operators.Distinct<Goal>(rzzp_);
-        Goal rzzr_ = context.Operators.SingletonFrom<Goal>(rzzq_);
+        IEnumerable<Goal> rzzn_ = context.Operators.Select<Goal, Goal>((IEnumerable<Goal>)rzzl_, rzzm_);
+        IEnumerable<Goal> rzzo_ = context.Operators.Distinct<Goal>(rzzn_);
+        Goal rzzp_ = context.Operators.SingletonFrom<Goal>(rzzo_);
 
-        return rzzr_;
+        return rzzp_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("GroupResource")]
     public Group GroupResource(CqlContext context, Group arg)
     {
-        Group[] szzj_ = [
+        Group[] szzh_ = [
             arg,
         ];
-        Group szzk_(Group a)
+        Group szzi_(Group a)
         {
-            List<Identifier> szzo_ = a?.Identifier;
-            FhirBoolean szzp_ = a?.ActiveElement;
-            Code<Group.GroupType> szzq_ = a?.TypeElement;
-            FhirBoolean szzr_ = a?.ActualElement;
-            CodeableConcept szzs_ = a?.Code;
-            FhirString szzt_ = a?.NameElement;
-            UnsignedInt szzu_ = a?.QuantityElement;
-            Integer szzv_ = context.Operators.Convert<Integer>(szzu_);
-            UnsignedInt szzw_ = context.Operators.Convert<UnsignedInt>(szzv_);
-            ResourceReference szzx_ = a?.ManagingEntity;
-            List<Group.CharacteristicComponent> szzy_ = a?.Characteristic;
-            List<Group.MemberComponent> szzz_ = a?.Member;
-            Group tzza_ = new Group
+            List<Identifier> szzm_ = a?.Identifier;
+            FhirBoolean szzn_ = a?.ActiveElement;
+            Code<Group.GroupType> szzo_ = a?.TypeElement;
+            FhirBoolean szzp_ = a?.ActualElement;
+            CodeableConcept szzq_ = a?.Code;
+            FhirString szzr_ = a?.NameElement;
+            UnsignedInt szzs_ = a?.QuantityElement;
+            Integer szzt_ = context.Operators.Convert<Integer>(szzs_);
+            UnsignedInt szzu_ = context.Operators.Convert<UnsignedInt>(szzt_);
+            ResourceReference szzv_ = a?.ManagingEntity;
+            List<Group.CharacteristicComponent> szzw_ = a?.Characteristic;
+            List<Group.MemberComponent> szzx_ = a?.Member;
+            Group szzy_ = new Group
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)szzo_),
-                ActiveElement = szzp_,
-                TypeElement = szzq_,
-                ActualElement = szzr_,
-                Code = szzs_,
-                NameElement = szzt_,
-                QuantityElement = szzw_,
-                ManagingEntity = szzx_,
-                Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)szzy_),
-                Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)szzz_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)szzm_),
+                ActiveElement = szzn_,
+                TypeElement = szzo_,
+                ActualElement = szzp_,
+                Code = szzq_,
+                NameElement = szzr_,
+                QuantityElement = szzu_,
+                ManagingEntity = szzv_,
+                Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)szzw_),
+                Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)szzx_),
             };
 
-            return tzza_;
+            return szzy_;
         };
-        IEnumerable<Group> szzl_ = context.Operators.Select<Group, Group>((IEnumerable<Group>)szzj_, szzk_);
-        IEnumerable<Group> szzm_ = context.Operators.Distinct<Group>(szzl_);
-        Group szzn_ = context.Operators.SingletonFrom<Group>(szzm_);
+        IEnumerable<Group> szzj_ = context.Operators.Select<Group, Group>((IEnumerable<Group>)szzh_, szzi_);
+        IEnumerable<Group> szzk_ = context.Operators.Distinct<Group>(szzj_);
+        Group szzl_ = context.Operators.SingletonFrom<Group>(szzk_);
 
-        return szzn_;
+        return szzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("GuidanceResponseResource")]
     public GuidanceResponse GuidanceResponseResource(CqlContext context, GuidanceResponse arg)
     {
-        GuidanceResponse[] tzzb_ = [
+        GuidanceResponse[] szzz_ = [
             arg,
         ];
-        GuidanceResponse tzzc_(GuidanceResponse a)
+        GuidanceResponse tzza_(GuidanceResponse a)
         {
-            Identifier tzzg_ = a?.RequestIdentifier;
-            List<Identifier> tzzh_ = a?.Identifier;
-            DataType tzzi_ = a?.Module;
-            Code<GuidanceResponse.GuidanceResponseStatus> tzzj_ = a?.StatusElement;
-            ResourceReference tzzk_ = a?.Subject;
-            ResourceReference tzzl_ = a?.Encounter;
-            FhirDateTime tzzm_ = a?.OccurrenceDateTimeElement;
-            ResourceReference tzzn_ = a?.Performer;
-            List<CodeableConcept> tzzo_ = a?.ReasonCode;
-            List<ResourceReference> tzzp_ = a?.ReasonReference;
-            List<Annotation> tzzq_ = a?.Note;
-            List<ResourceReference> tzzr_ = a?.EvaluationMessage;
-            ResourceReference tzzs_ = a?.OutputParameters;
-            ResourceReference tzzt_ = a?.Result;
-            List<DataRequirement> tzzu_ = a?.DataRequirement;
-            GuidanceResponse tzzv_ = new GuidanceResponse
+            Identifier tzze_ = a?.RequestIdentifier;
+            List<Identifier> tzzf_ = a?.Identifier;
+            DataType tzzg_ = a?.Module;
+            Code<GuidanceResponse.GuidanceResponseStatus> tzzh_ = a?.StatusElement;
+            ResourceReference tzzi_ = a?.Subject;
+            ResourceReference tzzj_ = a?.Encounter;
+            FhirDateTime tzzk_ = a?.OccurrenceDateTimeElement;
+            ResourceReference tzzl_ = a?.Performer;
+            List<CodeableConcept> tzzm_ = a?.ReasonCode;
+            List<ResourceReference> tzzn_ = a?.ReasonReference;
+            List<Annotation> tzzo_ = a?.Note;
+            List<ResourceReference> tzzp_ = a?.EvaluationMessage;
+            ResourceReference tzzq_ = a?.OutputParameters;
+            ResourceReference tzzr_ = a?.Result;
+            List<DataRequirement> tzzs_ = a?.DataRequirement;
+            GuidanceResponse tzzt_ = new GuidanceResponse
             {
-                RequestIdentifier = tzzg_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzh_),
-                Module = (DataType)tzzi_,
-                StatusElement = tzzj_,
-                Subject = tzzk_,
-                Encounter = tzzl_,
-                OccurrenceDateTimeElement = tzzm_,
-                Performer = tzzn_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzo_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzp_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)tzzq_),
-                EvaluationMessage = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzr_),
-                OutputParameters = tzzs_,
-                Result = tzzt_,
-                DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)tzzu_),
+                RequestIdentifier = tzze_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzf_),
+                Module = (DataType)tzzg_,
+                StatusElement = tzzh_,
+                Subject = tzzi_,
+                Encounter = tzzj_,
+                OccurrenceDateTimeElement = tzzk_,
+                Performer = tzzl_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzm_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzn_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)tzzo_),
+                EvaluationMessage = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzp_),
+                OutputParameters = tzzq_,
+                Result = tzzr_,
+                DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)tzzs_),
             };
 
-            return tzzv_;
+            return tzzt_;
         };
-        IEnumerable<GuidanceResponse> tzzd_ = context.Operators.Select<GuidanceResponse, GuidanceResponse>((IEnumerable<GuidanceResponse>)tzzb_, tzzc_);
-        IEnumerable<GuidanceResponse> tzze_ = context.Operators.Distinct<GuidanceResponse>(tzzd_);
-        GuidanceResponse tzzf_ = context.Operators.SingletonFrom<GuidanceResponse>(tzze_);
+        IEnumerable<GuidanceResponse> tzzb_ = context.Operators.Select<GuidanceResponse, GuidanceResponse>((IEnumerable<GuidanceResponse>)szzz_, tzza_);
+        IEnumerable<GuidanceResponse> tzzc_ = context.Operators.Distinct<GuidanceResponse>(tzzb_);
+        GuidanceResponse tzzd_ = context.Operators.SingletonFrom<GuidanceResponse>(tzzc_);
 
-        return tzzf_;
+        return tzzd_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("HealthcareServiceResource")]
     public HealthcareService HealthcareServiceResource(CqlContext context, HealthcareService arg)
     {
-        HealthcareService[] tzzw_ = [
+        HealthcareService[] tzzu_ = [
             arg,
         ];
-        HealthcareService tzzx_(HealthcareService a)
+        HealthcareService tzzv_(HealthcareService a)
         {
-            List<Identifier> uzzb_ = a?.Identifier;
-            FhirBoolean uzzc_ = a?.ActiveElement;
-            ResourceReference uzzd_ = a?.ProvidedBy;
-            List<CodeableConcept> uzze_ = a?.Category;
-            List<CodeableConcept> uzzf_ = a?.Type;
-            List<CodeableConcept> uzzg_ = a?.Specialty;
-            List<ResourceReference> uzzh_ = a?.Location;
-            FhirString uzzi_ = a?.NameElement;
-            FhirString uzzj_ = a?.CommentElement;
-            Markdown uzzk_ = a?.ExtraDetailsElement;
-            Attachment uzzl_ = a?.Photo;
-            List<ContactPoint> uzzm_ = a?.Telecom;
-            List<ResourceReference> uzzn_ = a?.CoverageArea;
-            List<CodeableConcept> uzzo_ = a?.ServiceProvisionCode;
-            List<HealthcareService.EligibilityComponent> uzzp_ = a?.Eligibility;
-            List<CodeableConcept> uzzq_ = a?.Program;
-            List<CodeableConcept> uzzr_ = a?.Characteristic;
-            List<CodeableConcept> uzzs_ = a?.Communication;
-            List<CodeableConcept> uzzt_ = a?.ReferralMethod;
-            FhirBoolean uzzu_ = a?.AppointmentRequiredElement;
-            List<HealthcareService.AvailableTimeComponent> uzzv_ = a?.AvailableTime;
-            List<HealthcareService.NotAvailableComponent> uzzw_ = a?.NotAvailable;
-            FhirString uzzx_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> uzzy_ = a?.Endpoint;
-            HealthcareService uzzz_ = new HealthcareService
+            List<Identifier> tzzz_ = a?.Identifier;
+            FhirBoolean uzza_ = a?.ActiveElement;
+            ResourceReference uzzb_ = a?.ProvidedBy;
+            List<CodeableConcept> uzzc_ = a?.Category;
+            List<CodeableConcept> uzzd_ = a?.Type;
+            List<CodeableConcept> uzze_ = a?.Specialty;
+            List<ResourceReference> uzzf_ = a?.Location;
+            FhirString uzzg_ = a?.NameElement;
+            FhirString uzzh_ = a?.CommentElement;
+            Markdown uzzi_ = a?.ExtraDetailsElement;
+            Attachment uzzj_ = a?.Photo;
+            List<ContactPoint> uzzk_ = a?.Telecom;
+            List<ResourceReference> uzzl_ = a?.CoverageArea;
+            List<CodeableConcept> uzzm_ = a?.ServiceProvisionCode;
+            List<HealthcareService.EligibilityComponent> uzzn_ = a?.Eligibility;
+            List<CodeableConcept> uzzo_ = a?.Program;
+            List<CodeableConcept> uzzp_ = a?.Characteristic;
+            List<CodeableConcept> uzzq_ = a?.Communication;
+            List<CodeableConcept> uzzr_ = a?.ReferralMethod;
+            FhirBoolean uzzs_ = a?.AppointmentRequiredElement;
+            List<HealthcareService.AvailableTimeComponent> uzzt_ = a?.AvailableTime;
+            List<HealthcareService.NotAvailableComponent> uzzu_ = a?.NotAvailable;
+            FhirString uzzv_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference> uzzw_ = a?.Endpoint;
+            HealthcareService uzzx_ = new HealthcareService
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)uzzb_),
-                ActiveElement = uzzc_,
-                ProvidedBy = uzzd_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzze_),
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzf_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzg_),
-                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzh_),
-                NameElement = uzzi_,
-                CommentElement = uzzj_,
-                ExtraDetailsElement = uzzk_,
-                Photo = uzzl_,
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)uzzm_),
-                CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzn_),
-                ServiceProvisionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzo_),
-                Eligibility = new List<HealthcareService.EligibilityComponent>((IEnumerable<HealthcareService.EligibilityComponent>)uzzp_),
-                Program = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzq_),
-                Characteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzr_),
-                Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzs_),
-                ReferralMethod = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzt_),
-                AppointmentRequiredElement = uzzu_,
-                AvailableTime = new List<HealthcareService.AvailableTimeComponent>((IEnumerable<HealthcareService.AvailableTimeComponent>)uzzv_),
-                NotAvailable = new List<HealthcareService.NotAvailableComponent>((IEnumerable<HealthcareService.NotAvailableComponent>)uzzw_),
-                AvailabilityExceptionsElement = uzzx_,
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzy_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzz_),
+                ActiveElement = uzza_,
+                ProvidedBy = uzzb_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzc_),
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzd_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzze_),
+                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzf_),
+                NameElement = uzzg_,
+                CommentElement = uzzh_,
+                ExtraDetailsElement = uzzi_,
+                Photo = uzzj_,
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)uzzk_),
+                CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzl_),
+                ServiceProvisionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzm_),
+                Eligibility = new List<HealthcareService.EligibilityComponent>((IEnumerable<HealthcareService.EligibilityComponent>)uzzn_),
+                Program = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzo_),
+                Characteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzp_),
+                Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzq_),
+                ReferralMethod = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzr_),
+                AppointmentRequiredElement = uzzs_,
+                AvailableTime = new List<HealthcareService.AvailableTimeComponent>((IEnumerable<HealthcareService.AvailableTimeComponent>)uzzt_),
+                NotAvailable = new List<HealthcareService.NotAvailableComponent>((IEnumerable<HealthcareService.NotAvailableComponent>)uzzu_),
+                AvailabilityExceptionsElement = uzzv_,
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzw_),
             };
 
-            return uzzz_;
+            return uzzx_;
         };
-        IEnumerable<HealthcareService> tzzy_ = context.Operators.Select<HealthcareService, HealthcareService>((IEnumerable<HealthcareService>)tzzw_, tzzx_);
-        IEnumerable<HealthcareService> tzzz_ = context.Operators.Distinct<HealthcareService>(tzzy_);
-        HealthcareService uzza_ = context.Operators.SingletonFrom<HealthcareService>(tzzz_);
+        IEnumerable<HealthcareService> tzzw_ = context.Operators.Select<HealthcareService, HealthcareService>((IEnumerable<HealthcareService>)tzzu_, tzzv_);
+        IEnumerable<HealthcareService> tzzx_ = context.Operators.Distinct<HealthcareService>(tzzw_);
+        HealthcareService tzzy_ = context.Operators.SingletonFrom<HealthcareService>(tzzx_);
 
-        return uzza_;
+        return tzzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ImagingStudyResource")]
     public ImagingStudy ImagingStudyResource(CqlContext context, ImagingStudy arg)
     {
-        ImagingStudy[] vzza_ = [
+        ImagingStudy[] uzzy_ = [
             arg,
         ];
-        ImagingStudy vzzb_(ImagingStudy a)
+        ImagingStudy uzzz_(ImagingStudy a)
         {
-            List<Identifier> vzzf_ = a?.Identifier;
-            Code<ImagingStudy.ImagingStudyStatus> vzzg_ = a?.StatusElement;
-            List<Coding> vzzh_ = a?.Modality;
-            ResourceReference vzzi_ = a?.Subject;
-            ResourceReference vzzj_ = a?.Encounter;
-            FhirDateTime vzzk_ = a?.StartedElement;
-            List<ResourceReference> vzzl_ = a?.BasedOn;
-            ResourceReference vzzm_ = a?.Referrer;
-            List<ResourceReference> vzzn_ = a?.Interpreter;
-            List<ResourceReference> vzzo_ = a?.Endpoint;
-            UnsignedInt vzzp_ = a?.NumberOfSeriesElement;
-            Integer vzzq_ = context.Operators.Convert<Integer>(vzzp_);
-            UnsignedInt vzzr_ = context.Operators.Convert<UnsignedInt>(vzzq_);
-            UnsignedInt vzzs_ = a?.NumberOfInstancesElement;
-            Integer vzzt_ = context.Operators.Convert<Integer>(vzzs_);
-            UnsignedInt vzzu_ = context.Operators.Convert<UnsignedInt>(vzzt_);
-            ResourceReference vzzv_ = a?.ProcedureReference;
-            List<CodeableConcept> vzzw_ = a?.ProcedureCode;
-            ResourceReference vzzx_ = a?.Location;
-            List<CodeableConcept> vzzy_ = a?.ReasonCode;
-            List<ResourceReference> vzzz_ = a?.ReasonReference;
-            List<Annotation> wzza_ = a?.Note;
-            FhirString wzzb_ = a?.DescriptionElement;
-            List<ImagingStudy.SeriesComponent> wzzc_ = a?.Series;
-            ImagingStudy wzzd_ = new ImagingStudy
+            List<Identifier> vzzd_ = a?.Identifier;
+            Code<ImagingStudy.ImagingStudyStatus> vzze_ = a?.StatusElement;
+            List<Coding> vzzf_ = a?.Modality;
+            ResourceReference vzzg_ = a?.Subject;
+            ResourceReference vzzh_ = a?.Encounter;
+            FhirDateTime vzzi_ = a?.StartedElement;
+            List<ResourceReference> vzzj_ = a?.BasedOn;
+            ResourceReference vzzk_ = a?.Referrer;
+            List<ResourceReference> vzzl_ = a?.Interpreter;
+            List<ResourceReference> vzzm_ = a?.Endpoint;
+            UnsignedInt vzzn_ = a?.NumberOfSeriesElement;
+            Integer vzzo_ = context.Operators.Convert<Integer>(vzzn_);
+            UnsignedInt vzzp_ = context.Operators.Convert<UnsignedInt>(vzzo_);
+            UnsignedInt vzzq_ = a?.NumberOfInstancesElement;
+            Integer vzzr_ = context.Operators.Convert<Integer>(vzzq_);
+            UnsignedInt vzzs_ = context.Operators.Convert<UnsignedInt>(vzzr_);
+            ResourceReference vzzt_ = a?.ProcedureReference;
+            List<CodeableConcept> vzzu_ = a?.ProcedureCode;
+            ResourceReference vzzv_ = a?.Location;
+            List<CodeableConcept> vzzw_ = a?.ReasonCode;
+            List<ResourceReference> vzzx_ = a?.ReasonReference;
+            List<Annotation> vzzy_ = a?.Note;
+            FhirString vzzz_ = a?.DescriptionElement;
+            List<ImagingStudy.SeriesComponent> wzza_ = a?.Series;
+            ImagingStudy wzzb_ = new ImagingStudy
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzf_),
-                StatusElement = vzzg_,
-                Modality = new List<Coding>((IEnumerable<Coding>)vzzh_),
-                Subject = vzzi_,
-                Encounter = vzzj_,
-                StartedElement = vzzk_,
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzl_),
-                Referrer = vzzm_,
-                Interpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzn_),
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzo_),
-                NumberOfSeriesElement = vzzr_,
-                NumberOfInstancesElement = vzzu_,
-                ProcedureReference = vzzv_,
-                ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzw_),
-                Location = vzzx_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzy_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzz_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)wzza_),
-                DescriptionElement = wzzb_,
-                Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)wzzc_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzd_),
+                StatusElement = vzze_,
+                Modality = new List<Coding>((IEnumerable<Coding>)vzzf_),
+                Subject = vzzg_,
+                Encounter = vzzh_,
+                StartedElement = vzzi_,
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzj_),
+                Referrer = vzzk_,
+                Interpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzl_),
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzm_),
+                NumberOfSeriesElement = vzzp_,
+                NumberOfInstancesElement = vzzs_,
+                ProcedureReference = vzzt_,
+                ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzu_),
+                Location = vzzv_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzw_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)vzzx_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)vzzy_),
+                DescriptionElement = vzzz_,
+                Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)wzza_),
             };
 
-            return wzzd_;
+            return wzzb_;
         };
-        IEnumerable<ImagingStudy> vzzc_ = context.Operators.Select<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)vzza_, vzzb_);
-        IEnumerable<ImagingStudy> vzzd_ = context.Operators.Distinct<ImagingStudy>(vzzc_);
-        ImagingStudy vzze_ = context.Operators.SingletonFrom<ImagingStudy>(vzzd_);
+        IEnumerable<ImagingStudy> vzza_ = context.Operators.Select<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)uzzy_, uzzz_);
+        IEnumerable<ImagingStudy> vzzb_ = context.Operators.Distinct<ImagingStudy>(vzza_);
+        ImagingStudy vzzc_ = context.Operators.SingletonFrom<ImagingStudy>(vzzb_);
 
-        return vzze_;
+        return vzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ImmunizationResource")]
     public Immunization ImmunizationResource(CqlContext context, Immunization arg)
     {
-        Immunization[] wzze_ = [
+        Immunization[] wzzc_ = [
             arg,
         ];
-        Immunization wzzf_(Immunization a)
+        Immunization wzzd_(Immunization a)
         {
-            List<Identifier> wzzj_ = a?.Identifier;
-            Code<Immunization.ImmunizationStatusCodes> wzzk_ = a?.StatusElement;
-            CodeableConcept wzzl_ = a?.StatusReason;
-            CodeableConcept wzzm_ = a?.VaccineCode;
-            ResourceReference wzzn_ = a?.Patient;
-            ResourceReference wzzo_ = a?.Encounter;
-            DataType wzzp_ = a?.Occurrence;
-            FhirDateTime wzzq_ = a?.RecordedElement;
-            FhirBoolean wzzr_ = a?.PrimarySourceElement;
-            CodeableConcept wzzs_ = a?.ReportOrigin;
-            ResourceReference wzzt_ = a?.Location;
-            ResourceReference wzzu_ = a?.Manufacturer;
-            FhirString wzzv_ = a?.LotNumberElement;
-            Date wzzw_ = a?.ExpirationDateElement;
-            CodeableConcept wzzx_ = a?.Site;
-            CodeableConcept wzzy_ = a?.Route;
-            Quantity wzzz_ = a?.DoseQuantity;
-            List<Immunization.PerformerComponent> xzza_ = a?.Performer;
-            List<Annotation> xzzb_ = a?.Note;
-            List<CodeableConcept> xzzc_ = a?.ReasonCode;
-            List<ResourceReference> xzzd_ = a?.ReasonReference;
-            FhirBoolean xzze_ = a?.IsSubpotentElement;
-            List<CodeableConcept> xzzf_ = a?.SubpotentReason;
-            List<Immunization.EducationComponent> xzzg_ = a?.Education;
-            List<CodeableConcept> xzzh_ = a?.ProgramEligibility;
-            CodeableConcept xzzi_ = a?.FundingSource;
-            List<Immunization.ReactionComponent> xzzj_ = a?.Reaction;
-            List<Immunization.ProtocolAppliedComponent> xzzk_ = a?.ProtocolApplied;
-            Immunization xzzl_ = new Immunization
+            List<Identifier> wzzh_ = a?.Identifier;
+            Code<Immunization.ImmunizationStatusCodes> wzzi_ = a?.StatusElement;
+            CodeableConcept wzzj_ = a?.StatusReason;
+            CodeableConcept wzzk_ = a?.VaccineCode;
+            ResourceReference wzzl_ = a?.Patient;
+            ResourceReference wzzm_ = a?.Encounter;
+            DataType wzzn_ = a?.Occurrence;
+            FhirDateTime wzzo_ = a?.RecordedElement;
+            FhirBoolean wzzp_ = a?.PrimarySourceElement;
+            CodeableConcept wzzq_ = a?.ReportOrigin;
+            ResourceReference wzzr_ = a?.Location;
+            ResourceReference wzzs_ = a?.Manufacturer;
+            FhirString wzzt_ = a?.LotNumberElement;
+            Date wzzu_ = a?.ExpirationDateElement;
+            CodeableConcept wzzv_ = a?.Site;
+            CodeableConcept wzzw_ = a?.Route;
+            Quantity wzzx_ = a?.DoseQuantity;
+            List<Immunization.PerformerComponent> wzzy_ = a?.Performer;
+            List<Annotation> wzzz_ = a?.Note;
+            List<CodeableConcept> xzza_ = a?.ReasonCode;
+            List<ResourceReference> xzzb_ = a?.ReasonReference;
+            FhirBoolean xzzc_ = a?.IsSubpotentElement;
+            List<CodeableConcept> xzzd_ = a?.SubpotentReason;
+            List<Immunization.EducationComponent> xzze_ = a?.Education;
+            List<CodeableConcept> xzzf_ = a?.ProgramEligibility;
+            CodeableConcept xzzg_ = a?.FundingSource;
+            List<Immunization.ReactionComponent> xzzh_ = a?.Reaction;
+            List<Immunization.ProtocolAppliedComponent> xzzi_ = a?.ProtocolApplied;
+            Immunization xzzj_ = new Immunization
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzj_),
-                StatusElement = wzzk_,
-                StatusReason = wzzl_,
-                VaccineCode = wzzm_,
-                Patient = wzzn_,
-                Encounter = wzzo_,
-                Occurrence = (DataType)wzzp_,
-                RecordedElement = wzzq_,
-                PrimarySourceElement = wzzr_,
-                ReportOrigin = wzzs_,
-                Location = wzzt_,
-                Manufacturer = wzzu_,
-                LotNumberElement = wzzv_,
-                ExpirationDateElement = wzzw_,
-                Site = wzzx_,
-                Route = wzzy_,
-                DoseQuantity = wzzz_,
-                Performer = new List<Immunization.PerformerComponent>((IEnumerable<Immunization.PerformerComponent>)xzza_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)xzzb_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzc_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzd_),
-                IsSubpotentElement = xzze_,
-                SubpotentReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzf_),
-                Education = new List<Immunization.EducationComponent>((IEnumerable<Immunization.EducationComponent>)xzzg_),
-                ProgramEligibility = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzh_),
-                FundingSource = xzzi_,
-                Reaction = new List<Immunization.ReactionComponent>((IEnumerable<Immunization.ReactionComponent>)xzzj_),
-                ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<Immunization.ProtocolAppliedComponent>)xzzk_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzh_),
+                StatusElement = wzzi_,
+                StatusReason = wzzj_,
+                VaccineCode = wzzk_,
+                Patient = wzzl_,
+                Encounter = wzzm_,
+                Occurrence = (DataType)wzzn_,
+                RecordedElement = wzzo_,
+                PrimarySourceElement = wzzp_,
+                ReportOrigin = wzzq_,
+                Location = wzzr_,
+                Manufacturer = wzzs_,
+                LotNumberElement = wzzt_,
+                ExpirationDateElement = wzzu_,
+                Site = wzzv_,
+                Route = wzzw_,
+                DoseQuantity = wzzx_,
+                Performer = new List<Immunization.PerformerComponent>((IEnumerable<Immunization.PerformerComponent>)wzzy_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)wzzz_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzza_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzb_),
+                IsSubpotentElement = xzzc_,
+                SubpotentReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzd_),
+                Education = new List<Immunization.EducationComponent>((IEnumerable<Immunization.EducationComponent>)xzze_),
+                ProgramEligibility = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzf_),
+                FundingSource = xzzg_,
+                Reaction = new List<Immunization.ReactionComponent>((IEnumerable<Immunization.ReactionComponent>)xzzh_),
+                ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<Immunization.ProtocolAppliedComponent>)xzzi_),
             };
 
-            return xzzl_;
+            return xzzj_;
         };
-        IEnumerable<Immunization> wzzg_ = context.Operators.Select<Immunization, Immunization>((IEnumerable<Immunization>)wzze_, wzzf_);
-        IEnumerable<Immunization> wzzh_ = context.Operators.Distinct<Immunization>(wzzg_);
-        Immunization wzzi_ = context.Operators.SingletonFrom<Immunization>(wzzh_);
+        IEnumerable<Immunization> wzze_ = context.Operators.Select<Immunization, Immunization>((IEnumerable<Immunization>)wzzc_, wzzd_);
+        IEnumerable<Immunization> wzzf_ = context.Operators.Distinct<Immunization>(wzze_);
+        Immunization wzzg_ = context.Operators.SingletonFrom<Immunization>(wzzf_);
 
-        return wzzi_;
+        return wzzg_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ImmunizationEvaluationResource")]
     public ImmunizationEvaluation ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation arg)
     {
-        ImmunizationEvaluation[] xzzm_ = [
+        ImmunizationEvaluation[] xzzk_ = [
             arg,
         ];
-        ImmunizationEvaluation xzzn_(ImmunizationEvaluation a)
+        ImmunizationEvaluation xzzl_(ImmunizationEvaluation a)
         {
-            List<Identifier> xzzr_ = a?.Identifier;
-            Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> xzzs_ = a?.StatusElement;
-            ResourceReference xzzt_ = a?.Patient;
-            FhirDateTime xzzu_ = a?.DateElement;
-            ResourceReference xzzv_ = a?.Authority;
-            CodeableConcept xzzw_ = a?.TargetDisease;
-            ResourceReference xzzx_ = a?.ImmunizationEvent;
-            CodeableConcept xzzy_ = a?.DoseStatus;
-            List<CodeableConcept> xzzz_ = a?.DoseStatusReason;
-            FhirString yzza_ = a?.DescriptionElement;
-            FhirString yzzb_ = a?.SeriesElement;
-            DataType yzzc_ = a?.DoseNumber;
-            DataType yzzd_ = a?.SeriesDoses;
-            ImmunizationEvaluation yzze_ = new ImmunizationEvaluation
+            List<Identifier> xzzp_ = a?.Identifier;
+            Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> xzzq_ = a?.StatusElement;
+            ResourceReference xzzr_ = a?.Patient;
+            FhirDateTime xzzs_ = a?.DateElement;
+            ResourceReference xzzt_ = a?.Authority;
+            CodeableConcept xzzu_ = a?.TargetDisease;
+            ResourceReference xzzv_ = a?.ImmunizationEvent;
+            CodeableConcept xzzw_ = a?.DoseStatus;
+            List<CodeableConcept> xzzx_ = a?.DoseStatusReason;
+            FhirString xzzy_ = a?.DescriptionElement;
+            FhirString xzzz_ = a?.SeriesElement;
+            DataType yzza_ = a?.DoseNumber;
+            DataType yzzb_ = a?.SeriesDoses;
+            ImmunizationEvaluation yzzc_ = new ImmunizationEvaluation
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzzr_),
-                StatusElement = xzzs_,
-                Patient = xzzt_,
-                DateElement = xzzu_,
-                Authority = xzzv_,
-                TargetDisease = xzzw_,
-                ImmunizationEvent = xzzx_,
-                DoseStatus = xzzy_,
-                DoseStatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzz_),
-                DescriptionElement = yzza_,
-                SeriesElement = yzzb_,
-                DoseNumber = (DataType)yzzc_,
-                SeriesDoses = (DataType)yzzd_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzzp_),
+                StatusElement = xzzq_,
+                Patient = xzzr_,
+                DateElement = xzzs_,
+                Authority = xzzt_,
+                TargetDisease = xzzu_,
+                ImmunizationEvent = xzzv_,
+                DoseStatus = xzzw_,
+                DoseStatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzx_),
+                DescriptionElement = xzzy_,
+                SeriesElement = xzzz_,
+                DoseNumber = (DataType)yzza_,
+                SeriesDoses = (DataType)yzzb_,
             };
 
-            return yzze_;
+            return yzzc_;
         };
-        IEnumerable<ImmunizationEvaluation> xzzo_ = context.Operators.Select<ImmunizationEvaluation, ImmunizationEvaluation>((IEnumerable<ImmunizationEvaluation>)xzzm_, xzzn_);
-        IEnumerable<ImmunizationEvaluation> xzzp_ = context.Operators.Distinct<ImmunizationEvaluation>(xzzo_);
-        ImmunizationEvaluation xzzq_ = context.Operators.SingletonFrom<ImmunizationEvaluation>(xzzp_);
+        IEnumerable<ImmunizationEvaluation> xzzm_ = context.Operators.Select<ImmunizationEvaluation, ImmunizationEvaluation>((IEnumerable<ImmunizationEvaluation>)xzzk_, xzzl_);
+        IEnumerable<ImmunizationEvaluation> xzzn_ = context.Operators.Distinct<ImmunizationEvaluation>(xzzm_);
+        ImmunizationEvaluation xzzo_ = context.Operators.SingletonFrom<ImmunizationEvaluation>(xzzn_);
 
-        return xzzq_;
+        return xzzo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ImmunizationRecommendationResource")]
     public ImmunizationRecommendation ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation arg)
     {
-        ImmunizationRecommendation[] yzzf_ = [
+        ImmunizationRecommendation[] yzzd_ = [
             arg,
         ];
-        ImmunizationRecommendation yzzg_(ImmunizationRecommendation a)
+        ImmunizationRecommendation yzze_(ImmunizationRecommendation a)
         {
-            List<Identifier> yzzk_ = a?.Identifier;
-            ResourceReference yzzl_ = a?.Patient;
-            FhirDateTime yzzm_ = a?.DateElement;
-            ResourceReference yzzn_ = a?.Authority;
-            List<ImmunizationRecommendation.RecommendationComponent> yzzo_ = a?.Recommendation;
-            ImmunizationRecommendation yzzp_ = new ImmunizationRecommendation
+            List<Identifier> yzzi_ = a?.Identifier;
+            ResourceReference yzzj_ = a?.Patient;
+            FhirDateTime yzzk_ = a?.DateElement;
+            ResourceReference yzzl_ = a?.Authority;
+            List<ImmunizationRecommendation.RecommendationComponent> yzzm_ = a?.Recommendation;
+            ImmunizationRecommendation yzzn_ = new ImmunizationRecommendation
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzk_),
-                Patient = yzzl_,
-                DateElement = yzzm_,
-                Authority = yzzn_,
-                Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((IEnumerable<ImmunizationRecommendation.RecommendationComponent>)yzzo_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzi_),
+                Patient = yzzj_,
+                DateElement = yzzk_,
+                Authority = yzzl_,
+                Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((IEnumerable<ImmunizationRecommendation.RecommendationComponent>)yzzm_),
             };
 
-            return yzzp_;
+            return yzzn_;
         };
-        IEnumerable<ImmunizationRecommendation> yzzh_ = context.Operators.Select<ImmunizationRecommendation, ImmunizationRecommendation>((IEnumerable<ImmunizationRecommendation>)yzzf_, yzzg_);
-        IEnumerable<ImmunizationRecommendation> yzzi_ = context.Operators.Distinct<ImmunizationRecommendation>(yzzh_);
-        ImmunizationRecommendation yzzj_ = context.Operators.SingletonFrom<ImmunizationRecommendation>(yzzi_);
+        IEnumerable<ImmunizationRecommendation> yzzf_ = context.Operators.Select<ImmunizationRecommendation, ImmunizationRecommendation>((IEnumerable<ImmunizationRecommendation>)yzzd_, yzze_);
+        IEnumerable<ImmunizationRecommendation> yzzg_ = context.Operators.Distinct<ImmunizationRecommendation>(yzzf_);
+        ImmunizationRecommendation yzzh_ = context.Operators.SingletonFrom<ImmunizationRecommendation>(yzzg_);
 
-        return yzzj_;
+        return yzzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("InsurancePlanResource")]
     public InsurancePlan InsurancePlanResource(CqlContext context, InsurancePlan arg)
     {
-        InsurancePlan[] yzzq_ = [
+        InsurancePlan[] yzzo_ = [
             arg,
         ];
-        InsurancePlan yzzr_(InsurancePlan a)
+        InsurancePlan yzzp_(InsurancePlan a)
         {
-            List<Identifier> yzzv_ = a?.Identifier;
-            Code<PublicationStatus> yzzw_ = a?.StatusElement;
-            List<CodeableConcept> yzzx_ = a?.Type;
-            FhirString yzzy_ = a?.NameElement;
-            List<FhirString> yzzz_ = a?.AliasElement;
-            Period zzza_ = a?.Period;
-            ResourceReference zzzb_ = a?.OwnedBy;
-            ResourceReference zzzc_ = a?.AdministeredBy;
-            List<ResourceReference> zzzd_ = a?.CoverageArea;
-            List<InsurancePlan.ContactComponent> zzze_ = a?.Contact;
-            List<ResourceReference> zzzf_ = a?.Endpoint;
-            List<ResourceReference> zzzg_ = a?.Network;
-            List<InsurancePlan.CoverageComponent> zzzh_ = a?.Coverage;
-            List<InsurancePlan.PlanComponent> zzzi_ = a?.Plan;
-            InsurancePlan zzzj_ = new InsurancePlan
+            List<Identifier> yzzt_ = a?.Identifier;
+            Code<PublicationStatus> yzzu_ = a?.StatusElement;
+            List<CodeableConcept> yzzv_ = a?.Type;
+            FhirString yzzw_ = a?.NameElement;
+            List<FhirString> yzzx_ = a?.AliasElement;
+            Period yzzy_ = a?.Period;
+            ResourceReference yzzz_ = a?.OwnedBy;
+            ResourceReference zzza_ = a?.AdministeredBy;
+            List<ResourceReference> zzzb_ = a?.CoverageArea;
+            List<InsurancePlan.ContactComponent> zzzc_ = a?.Contact;
+            List<ResourceReference> zzzd_ = a?.Endpoint;
+            List<ResourceReference> zzze_ = a?.Network;
+            List<InsurancePlan.CoverageComponent> zzzf_ = a?.Coverage;
+            List<InsurancePlan.PlanComponent> zzzg_ = a?.Plan;
+            InsurancePlan zzzh_ = new InsurancePlan
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzv_),
-                StatusElement = yzzw_,
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yzzx_),
-                NameElement = yzzy_,
-                AliasElement = new List<FhirString>((IEnumerable<FhirString>)yzzz_),
-                Period = zzza_,
-                OwnedBy = zzzb_,
-                AdministeredBy = zzzc_,
-                CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzd_),
-                Contact = new List<InsurancePlan.ContactComponent>((IEnumerable<InsurancePlan.ContactComponent>)zzze_),
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzf_),
-                Network = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzg_),
-                Coverage = new List<InsurancePlan.CoverageComponent>((IEnumerable<InsurancePlan.CoverageComponent>)zzzh_),
-                Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComponent>)zzzi_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzt_),
+                StatusElement = yzzu_,
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)yzzv_),
+                NameElement = yzzw_,
+                AliasElement = new List<FhirString>((IEnumerable<FhirString>)yzzx_),
+                Period = yzzy_,
+                OwnedBy = yzzz_,
+                AdministeredBy = zzza_,
+                CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzb_),
+                Contact = new List<InsurancePlan.ContactComponent>((IEnumerable<InsurancePlan.ContactComponent>)zzzc_),
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzd_),
+                Network = new List<ResourceReference>((IEnumerable<ResourceReference>)zzze_),
+                Coverage = new List<InsurancePlan.CoverageComponent>((IEnumerable<InsurancePlan.CoverageComponent>)zzzf_),
+                Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComponent>)zzzg_),
             };
 
-            return zzzj_;
+            return zzzh_;
         };
-        IEnumerable<InsurancePlan> yzzs_ = context.Operators.Select<InsurancePlan, InsurancePlan>((IEnumerable<InsurancePlan>)yzzq_, yzzr_);
-        IEnumerable<InsurancePlan> yzzt_ = context.Operators.Distinct<InsurancePlan>(yzzs_);
-        InsurancePlan yzzu_ = context.Operators.SingletonFrom<InsurancePlan>(yzzt_);
+        IEnumerable<InsurancePlan> yzzq_ = context.Operators.Select<InsurancePlan, InsurancePlan>((IEnumerable<InsurancePlan>)yzzo_, yzzp_);
+        IEnumerable<InsurancePlan> yzzr_ = context.Operators.Distinct<InsurancePlan>(yzzq_);
+        InsurancePlan yzzs_ = context.Operators.SingletonFrom<InsurancePlan>(yzzr_);
 
-        return yzzu_;
+        return yzzs_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("InvoiceResource")]
     public Invoice InvoiceResource(CqlContext context, Invoice arg)
     {
-        Invoice[] zzzk_ = [
+        Invoice[] zzzi_ = [
             arg,
         ];
-        Invoice zzzl_(Invoice a)
+        Invoice zzzj_(Invoice a)
         {
-            List<Identifier> zzzp_ = a?.Identifier;
-            Code<Invoice.InvoiceStatus> zzzq_ = a?.StatusElement;
-            FhirString zzzr_ = a?.CancelledReasonElement;
-            CodeableConcept zzzs_ = a?.Type;
-            ResourceReference zzzt_ = a?.Subject;
-            ResourceReference zzzu_ = a?.Recipient;
-            FhirDateTime zzzv_ = a?.DateElement;
-            List<Invoice.ParticipantComponent> zzzw_ = a?.Participant;
-            ResourceReference zzzx_ = a?.Issuer;
-            ResourceReference zzzy_ = a?.Account;
-            List<Invoice.LineItemComponent> zzzz_ = a?.LineItem;
-            List<Invoice.PriceComponentComponent> azzza_ = a?.TotalPriceComponent;
-            Money azzzb_ = a?.TotalNet;
-            Money azzzc_ = a?.TotalGross;
-            Markdown azzzd_ = a?.PaymentTermsElement;
-            List<Annotation> azzze_ = a?.Note;
-            Invoice azzzf_ = new Invoice
+            List<Identifier> zzzn_ = a?.Identifier;
+            Code<Invoice.InvoiceStatus> zzzo_ = a?.StatusElement;
+            FhirString zzzp_ = a?.CancelledReasonElement;
+            CodeableConcept zzzq_ = a?.Type;
+            ResourceReference zzzr_ = a?.Subject;
+            ResourceReference zzzs_ = a?.Recipient;
+            FhirDateTime zzzt_ = a?.DateElement;
+            List<Invoice.ParticipantComponent> zzzu_ = a?.Participant;
+            ResourceReference zzzv_ = a?.Issuer;
+            ResourceReference zzzw_ = a?.Account;
+            List<Invoice.LineItemComponent> zzzx_ = a?.LineItem;
+            List<Invoice.PriceComponentComponent> zzzy_ = a?.TotalPriceComponent;
+            Money zzzz_ = a?.TotalNet;
+            Money azzza_ = a?.TotalGross;
+            Markdown azzzb_ = a?.PaymentTermsElement;
+            List<Annotation> azzzc_ = a?.Note;
+            Invoice azzzd_ = new Invoice
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzp_),
-                StatusElement = zzzq_,
-                CancelledReasonElement = zzzr_,
-                Type = zzzs_,
-                Subject = zzzt_,
-                Recipient = zzzu_,
-                DateElement = zzzv_,
-                Participant = new List<Invoice.ParticipantComponent>((IEnumerable<Invoice.ParticipantComponent>)zzzw_),
-                Issuer = zzzx_,
-                Account = zzzy_,
-                LineItem = new List<Invoice.LineItemComponent>((IEnumerable<Invoice.LineItemComponent>)zzzz_),
-                TotalPriceComponent = new List<Invoice.PriceComponentComponent>((IEnumerable<Invoice.PriceComponentComponent>)azzza_),
-                TotalNet = azzzb_,
-                TotalGross = azzzc_,
-                PaymentTermsElement = azzzd_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)azzze_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzn_),
+                StatusElement = zzzo_,
+                CancelledReasonElement = zzzp_,
+                Type = zzzq_,
+                Subject = zzzr_,
+                Recipient = zzzs_,
+                DateElement = zzzt_,
+                Participant = new List<Invoice.ParticipantComponent>((IEnumerable<Invoice.ParticipantComponent>)zzzu_),
+                Issuer = zzzv_,
+                Account = zzzw_,
+                LineItem = new List<Invoice.LineItemComponent>((IEnumerable<Invoice.LineItemComponent>)zzzx_),
+                TotalPriceComponent = new List<Invoice.PriceComponentComponent>((IEnumerable<Invoice.PriceComponentComponent>)zzzy_),
+                TotalNet = zzzz_,
+                TotalGross = azzza_,
+                PaymentTermsElement = azzzb_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)azzzc_),
             };
 
-            return azzzf_;
+            return azzzd_;
         };
-        IEnumerable<Invoice> zzzm_ = context.Operators.Select<Invoice, Invoice>((IEnumerable<Invoice>)zzzk_, zzzl_);
-        IEnumerable<Invoice> zzzn_ = context.Operators.Distinct<Invoice>(zzzm_);
-        Invoice zzzo_ = context.Operators.SingletonFrom<Invoice>(zzzn_);
+        IEnumerable<Invoice> zzzk_ = context.Operators.Select<Invoice, Invoice>((IEnumerable<Invoice>)zzzi_, zzzj_);
+        IEnumerable<Invoice> zzzl_ = context.Operators.Distinct<Invoice>(zzzk_);
+        Invoice zzzm_ = context.Operators.SingletonFrom<Invoice>(zzzl_);
 
-        return zzzo_;
+        return zzzm_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("LibraryResource")]
     public Library LibraryResource(CqlContext context, Library arg)
     {
-        Library[] azzzg_ = [
+        Library[] azzze_ = [
             arg,
         ];
-        Library azzzh_(Library a)
+        Library azzzf_(Library a)
         {
-            FhirUri azzzl_ = a?.UrlElement;
-            List<Identifier> azzzm_ = a?.Identifier;
-            FhirString azzzn_ = a?.VersionElement;
-            FhirString azzzo_ = a?.NameElement;
-            FhirString azzzp_ = a?.TitleElement;
-            FhirString azzzq_ = a?.SubtitleElement;
-            Code<PublicationStatus> azzzr_ = a?.StatusElement;
-            FhirBoolean azzzs_ = a?.ExperimentalElement;
-            CodeableConcept azzzt_ = a?.Type;
-            DataType azzzu_ = a?.Subject;
-            FhirDateTime azzzv_ = a?.DateElement;
-            FhirString azzzw_ = a?.PublisherElement;
-            List<ContactDetail> azzzx_ = a?.Contact;
-            Markdown azzzy_ = a?.DescriptionElement;
-            List<UsageContext> azzzz_ = a?.UseContext;
-            List<CodeableConcept> bzzza_ = a?.Jurisdiction;
-            Markdown bzzzb_ = a?.PurposeElement;
-            FhirString bzzzc_ = a?.UsageElement;
-            Markdown bzzzd_ = a?.CopyrightElement;
-            Date bzzze_ = a?.ApprovalDateElement;
-            Date bzzzf_ = a?.LastReviewDateElement;
-            Period bzzzg_ = a?.EffectivePeriod;
-            List<CodeableConcept> bzzzh_ = a?.Topic;
-            List<ContactDetail> bzzzi_ = a?.Author;
-            List<ContactDetail> bzzzj_ = a?.Editor;
-            List<ContactDetail> bzzzk_ = a?.Reviewer;
-            List<ContactDetail> bzzzl_ = a?.Endorser;
-            List<RelatedArtifact> bzzzm_ = a?.RelatedArtifact;
-            List<ParameterDefinition> bzzzn_ = a?.Parameter;
-            List<DataRequirement> bzzzo_ = a?.DataRequirement;
-            List<Attachment> bzzzp_ = a?.Content;
-            Library bzzzq_ = new Library
+            FhirUri azzzj_ = a?.UrlElement;
+            List<Identifier> azzzk_ = a?.Identifier;
+            FhirString azzzl_ = a?.VersionElement;
+            FhirString azzzm_ = a?.NameElement;
+            FhirString azzzn_ = a?.TitleElement;
+            FhirString azzzo_ = a?.SubtitleElement;
+            Code<PublicationStatus> azzzp_ = a?.StatusElement;
+            FhirBoolean azzzq_ = a?.ExperimentalElement;
+            CodeableConcept azzzr_ = a?.Type;
+            DataType azzzs_ = a?.Subject;
+            FhirDateTime azzzt_ = a?.DateElement;
+            FhirString azzzu_ = a?.PublisherElement;
+            List<ContactDetail> azzzv_ = a?.Contact;
+            Markdown azzzw_ = a?.DescriptionElement;
+            List<UsageContext> azzzx_ = a?.UseContext;
+            List<CodeableConcept> azzzy_ = a?.Jurisdiction;
+            Markdown azzzz_ = a?.PurposeElement;
+            FhirString bzzza_ = a?.UsageElement;
+            Markdown bzzzb_ = a?.CopyrightElement;
+            Date bzzzc_ = a?.ApprovalDateElement;
+            Date bzzzd_ = a?.LastReviewDateElement;
+            Period bzzze_ = a?.EffectivePeriod;
+            List<CodeableConcept> bzzzf_ = a?.Topic;
+            List<ContactDetail> bzzzg_ = a?.Author;
+            List<ContactDetail> bzzzh_ = a?.Editor;
+            List<ContactDetail> bzzzi_ = a?.Reviewer;
+            List<ContactDetail> bzzzj_ = a?.Endorser;
+            List<RelatedArtifact> bzzzk_ = a?.RelatedArtifact;
+            List<ParameterDefinition> bzzzl_ = a?.Parameter;
+            List<DataRequirement> bzzzm_ = a?.DataRequirement;
+            List<Attachment> bzzzn_ = a?.Content;
+            Library bzzzo_ = new Library
             {
-                UrlElement = azzzl_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzm_),
-                VersionElement = azzzn_,
-                NameElement = azzzo_,
-                TitleElement = azzzp_,
-                SubtitleElement = azzzq_,
-                StatusElement = azzzr_,
-                ExperimentalElement = azzzs_,
-                Type = azzzt_,
-                Subject = (DataType)azzzu_,
-                DateElement = azzzv_,
-                PublisherElement = azzzw_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)azzzx_),
-                DescriptionElement = azzzy_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)azzzz_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzza_),
-                PurposeElement = bzzzb_,
-                UsageElement = bzzzc_,
-                CopyrightElement = bzzzd_,
-                ApprovalDateElement = bzzze_,
-                LastReviewDateElement = bzzzf_,
-                EffectivePeriod = bzzzg_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzh_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzi_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzj_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzk_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzl_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)bzzzm_),
-                Parameter = new List<ParameterDefinition>((IEnumerable<ParameterDefinition>)bzzzn_),
-                DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)bzzzo_),
-                Content = new List<Attachment>((IEnumerable<Attachment>)bzzzp_),
+                UrlElement = azzzj_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzk_),
+                VersionElement = azzzl_,
+                NameElement = azzzm_,
+                TitleElement = azzzn_,
+                SubtitleElement = azzzo_,
+                StatusElement = azzzp_,
+                ExperimentalElement = azzzq_,
+                Type = azzzr_,
+                Subject = (DataType)azzzs_,
+                DateElement = azzzt_,
+                PublisherElement = azzzu_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)azzzv_),
+                DescriptionElement = azzzw_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)azzzx_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azzzy_),
+                PurposeElement = azzzz_,
+                UsageElement = bzzza_,
+                CopyrightElement = bzzzb_,
+                ApprovalDateElement = bzzzc_,
+                LastReviewDateElement = bzzzd_,
+                EffectivePeriod = bzzze_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzf_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzg_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzh_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzi_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzj_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)bzzzk_),
+                Parameter = new List<ParameterDefinition>((IEnumerable<ParameterDefinition>)bzzzl_),
+                DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)bzzzm_),
+                Content = new List<Attachment>((IEnumerable<Attachment>)bzzzn_),
             };
 
-            return bzzzq_;
+            return bzzzo_;
         };
-        IEnumerable<Library> azzzi_ = context.Operators.Select<Library, Library>((IEnumerable<Library>)azzzg_, azzzh_);
-        IEnumerable<Library> azzzj_ = context.Operators.Distinct<Library>(azzzi_);
-        Library azzzk_ = context.Operators.SingletonFrom<Library>(azzzj_);
+        IEnumerable<Library> azzzg_ = context.Operators.Select<Library, Library>((IEnumerable<Library>)azzze_, azzzf_);
+        IEnumerable<Library> azzzh_ = context.Operators.Distinct<Library>(azzzg_);
+        Library azzzi_ = context.Operators.SingletonFrom<Library>(azzzh_);
 
-        return azzzk_;
+        return azzzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("LinkageResource")]
     public Linkage LinkageResource(CqlContext context, Linkage arg)
     {
-        Linkage[] bzzzr_ = [
+        Linkage[] bzzzp_ = [
             arg,
         ];
-        Linkage bzzzs_(Linkage a)
+        Linkage bzzzq_(Linkage a)
         {
-            FhirBoolean bzzzw_ = a?.ActiveElement;
-            ResourceReference bzzzx_ = a?.Author;
-            List<Linkage.ItemComponent> bzzzy_ = a?.Item;
-            Linkage bzzzz_ = new Linkage
+            FhirBoolean bzzzu_ = a?.ActiveElement;
+            ResourceReference bzzzv_ = a?.Author;
+            List<Linkage.ItemComponent> bzzzw_ = a?.Item;
+            Linkage bzzzx_ = new Linkage
             {
-                ActiveElement = bzzzw_,
-                Author = bzzzx_,
-                Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)bzzzy_),
+                ActiveElement = bzzzu_,
+                Author = bzzzv_,
+                Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)bzzzw_),
             };
 
-            return bzzzz_;
+            return bzzzx_;
         };
-        IEnumerable<Linkage> bzzzt_ = context.Operators.Select<Linkage, Linkage>((IEnumerable<Linkage>)bzzzr_, bzzzs_);
-        IEnumerable<Linkage> bzzzu_ = context.Operators.Distinct<Linkage>(bzzzt_);
-        Linkage bzzzv_ = context.Operators.SingletonFrom<Linkage>(bzzzu_);
+        IEnumerable<Linkage> bzzzr_ = context.Operators.Select<Linkage, Linkage>((IEnumerable<Linkage>)bzzzp_, bzzzq_);
+        IEnumerable<Linkage> bzzzs_ = context.Operators.Distinct<Linkage>(bzzzr_);
+        Linkage bzzzt_ = context.Operators.SingletonFrom<Linkage>(bzzzs_);
 
-        return bzzzv_;
+        return bzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("LocationResource")]
     public Location LocationResource(CqlContext context, Location arg)
     {
-        Location[] czzza_ = [
+        Location[] bzzzy_ = [
             arg,
         ];
-        Location czzzb_(Location a)
+        Location bzzzz_(Location a)
         {
-            List<Identifier> czzzf_ = a?.Identifier;
-            Code<Location.LocationStatus> czzzg_ = a?.StatusElement;
-            Coding czzzh_ = a?.OperationalStatus;
-            FhirString czzzi_ = a?.NameElement;
-            List<FhirString> czzzj_ = a?.AliasElement;
-            FhirString czzzk_ = a?.DescriptionElement;
-            Code<Location.LocationMode> czzzl_ = a?.ModeElement;
-            List<CodeableConcept> czzzm_ = a?.Type;
-            List<ContactPoint> czzzn_ = a?.Telecom;
-            Address czzzo_ = a?.Address;
-            CodeableConcept czzzp_ = a?.PhysicalType;
-            Location.PositionComponent czzzq_ = a?.Position;
-            ResourceReference czzzr_ = a?.ManagingOrganization;
-            ResourceReference czzzs_ = a?.PartOf;
-            List<Location.HoursOfOperationComponent> czzzt_ = a?.HoursOfOperation;
-            FhirString czzzu_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> czzzv_ = a?.Endpoint;
-            Location czzzw_ = new Location
+            List<Identifier> czzzd_ = a?.Identifier;
+            Code<Location.LocationStatus> czzze_ = a?.StatusElement;
+            Coding czzzf_ = a?.OperationalStatus;
+            FhirString czzzg_ = a?.NameElement;
+            List<FhirString> czzzh_ = a?.AliasElement;
+            FhirString czzzi_ = a?.DescriptionElement;
+            Code<Location.LocationMode> czzzj_ = a?.ModeElement;
+            List<CodeableConcept> czzzk_ = a?.Type;
+            List<ContactPoint> czzzl_ = a?.Telecom;
+            Address czzzm_ = a?.Address;
+            CodeableConcept czzzn_ = a?.PhysicalType;
+            Location.PositionComponent czzzo_ = a?.Position;
+            ResourceReference czzzp_ = a?.ManagingOrganization;
+            ResourceReference czzzq_ = a?.PartOf;
+            List<Location.HoursOfOperationComponent> czzzr_ = a?.HoursOfOperation;
+            FhirString czzzs_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference> czzzt_ = a?.Endpoint;
+            Location czzzu_ = new Location
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzzf_),
-                StatusElement = czzzg_,
-                OperationalStatus = czzzh_,
-                NameElement = czzzi_,
-                AliasElement = new List<FhirString>((IEnumerable<FhirString>)czzzj_),
-                DescriptionElement = czzzk_,
-                ModeElement = czzzl_,
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzm_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)czzzn_),
-                Address = czzzo_,
-                PhysicalType = czzzp_,
-                Position = czzzq_,
-                ManagingOrganization = czzzr_,
-                PartOf = czzzs_,
-                HoursOfOperation = new List<Location.HoursOfOperationComponent>((IEnumerable<Location.HoursOfOperationComponent>)czzzt_),
-                AvailabilityExceptionsElement = czzzu_,
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzv_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzzd_),
+                StatusElement = czzze_,
+                OperationalStatus = czzzf_,
+                NameElement = czzzg_,
+                AliasElement = new List<FhirString>((IEnumerable<FhirString>)czzzh_),
+                DescriptionElement = czzzi_,
+                ModeElement = czzzj_,
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzk_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)czzzl_),
+                Address = czzzm_,
+                PhysicalType = czzzn_,
+                Position = czzzo_,
+                ManagingOrganization = czzzp_,
+                PartOf = czzzq_,
+                HoursOfOperation = new List<Location.HoursOfOperationComponent>((IEnumerable<Location.HoursOfOperationComponent>)czzzr_),
+                AvailabilityExceptionsElement = czzzs_,
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzt_),
             };
 
-            return czzzw_;
+            return czzzu_;
         };
-        IEnumerable<Location> czzzc_ = context.Operators.Select<Location, Location>((IEnumerable<Location>)czzza_, czzzb_);
-        IEnumerable<Location> czzzd_ = context.Operators.Distinct<Location>(czzzc_);
-        Location czzze_ = context.Operators.SingletonFrom<Location>(czzzd_);
+        IEnumerable<Location> czzza_ = context.Operators.Select<Location, Location>((IEnumerable<Location>)bzzzy_, bzzzz_);
+        IEnumerable<Location> czzzb_ = context.Operators.Distinct<Location>(czzza_);
+        Location czzzc_ = context.Operators.SingletonFrom<Location>(czzzb_);
 
-        return czzze_;
+        return czzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MeasureResource")]
     public Measure MeasureResource(CqlContext context, Measure arg)
     {
-        Measure[] czzzx_ = [
+        Measure[] czzzv_ = [
             arg,
         ];
-        Measure czzzy_(Measure a)
+        Measure czzzw_(Measure a)
         {
-            FhirUri dzzzc_ = a?.UrlElement;
-            List<Identifier> dzzzd_ = a?.Identifier;
-            FhirString dzzze_ = a?.VersionElement;
-            FhirString dzzzf_ = a?.NameElement;
-            FhirString dzzzg_ = a?.TitleElement;
-            FhirString dzzzh_ = a?.SubtitleElement;
-            Code<PublicationStatus> dzzzi_ = a?.StatusElement;
-            FhirBoolean dzzzj_ = a?.ExperimentalElement;
-            DataType dzzzk_ = a?.Subject;
-            FhirDateTime dzzzl_ = a?.DateElement;
-            FhirString dzzzm_ = a?.PublisherElement;
-            List<ContactDetail> dzzzn_ = a?.Contact;
-            Markdown dzzzo_ = a?.DescriptionElement;
-            List<UsageContext> dzzzp_ = a?.UseContext;
-            List<CodeableConcept> dzzzq_ = a?.Jurisdiction;
-            Markdown dzzzr_ = a?.PurposeElement;
-            FhirString dzzzs_ = a?.UsageElement;
-            Markdown dzzzt_ = a?.CopyrightElement;
-            Date dzzzu_ = a?.ApprovalDateElement;
-            Date dzzzv_ = a?.LastReviewDateElement;
-            Period dzzzw_ = a?.EffectivePeriod;
-            List<CodeableConcept> dzzzx_ = a?.Topic;
-            List<ContactDetail> dzzzy_ = a?.Author;
-            List<ContactDetail> dzzzz_ = a?.Editor;
-            List<ContactDetail> ezzza_ = a?.Reviewer;
-            List<ContactDetail> ezzzb_ = a?.Endorser;
-            List<RelatedArtifact> ezzzc_ = a?.RelatedArtifact;
-            List<Canonical> ezzzd_ = a?.LibraryElement;
-            Markdown ezzze_ = a?.DisclaimerElement;
-            CodeableConcept ezzzf_ = a?.Scoring;
-            CodeableConcept ezzzg_ = a?.CompositeScoring;
-            List<CodeableConcept> ezzzh_ = a?.Type;
-            FhirString ezzzi_ = a?.RiskAdjustmentElement;
-            FhirString ezzzj_ = a?.RateAggregationElement;
-            Markdown ezzzk_ = a?.RationaleElement;
-            Markdown ezzzl_ = a?.ClinicalRecommendationStatementElement;
-            CodeableConcept ezzzm_ = a?.ImprovementNotation;
-            List<Markdown> ezzzn_ = a?.DefinitionElement;
-            Markdown ezzzo_ = a?.GuidanceElement;
-            List<Measure.GroupComponent> ezzzp_ = a?.Group;
-            List<Measure.SupplementalDataComponent> ezzzq_ = a?.SupplementalData;
-            Measure ezzzr_ = new Measure
+            FhirUri dzzza_ = a?.UrlElement;
+            List<Identifier> dzzzb_ = a?.Identifier;
+            FhirString dzzzc_ = a?.VersionElement;
+            FhirString dzzzd_ = a?.NameElement;
+            FhirString dzzze_ = a?.TitleElement;
+            FhirString dzzzf_ = a?.SubtitleElement;
+            Code<PublicationStatus> dzzzg_ = a?.StatusElement;
+            FhirBoolean dzzzh_ = a?.ExperimentalElement;
+            DataType dzzzi_ = a?.Subject;
+            FhirDateTime dzzzj_ = a?.DateElement;
+            FhirString dzzzk_ = a?.PublisherElement;
+            List<ContactDetail> dzzzl_ = a?.Contact;
+            Markdown dzzzm_ = a?.DescriptionElement;
+            List<UsageContext> dzzzn_ = a?.UseContext;
+            List<CodeableConcept> dzzzo_ = a?.Jurisdiction;
+            Markdown dzzzp_ = a?.PurposeElement;
+            FhirString dzzzq_ = a?.UsageElement;
+            Markdown dzzzr_ = a?.CopyrightElement;
+            Date dzzzs_ = a?.ApprovalDateElement;
+            Date dzzzt_ = a?.LastReviewDateElement;
+            Period dzzzu_ = a?.EffectivePeriod;
+            List<CodeableConcept> dzzzv_ = a?.Topic;
+            List<ContactDetail> dzzzw_ = a?.Author;
+            List<ContactDetail> dzzzx_ = a?.Editor;
+            List<ContactDetail> dzzzy_ = a?.Reviewer;
+            List<ContactDetail> dzzzz_ = a?.Endorser;
+            List<RelatedArtifact> ezzza_ = a?.RelatedArtifact;
+            List<Canonical> ezzzb_ = a?.LibraryElement;
+            Markdown ezzzc_ = a?.DisclaimerElement;
+            CodeableConcept ezzzd_ = a?.Scoring;
+            CodeableConcept ezzze_ = a?.CompositeScoring;
+            List<CodeableConcept> ezzzf_ = a?.Type;
+            FhirString ezzzg_ = a?.RiskAdjustmentElement;
+            FhirString ezzzh_ = a?.RateAggregationElement;
+            Markdown ezzzi_ = a?.RationaleElement;
+            Markdown ezzzj_ = a?.ClinicalRecommendationStatementElement;
+            CodeableConcept ezzzk_ = a?.ImprovementNotation;
+            List<Markdown> ezzzl_ = a?.DefinitionElement;
+            Markdown ezzzm_ = a?.GuidanceElement;
+            List<Measure.GroupComponent> ezzzn_ = a?.Group;
+            List<Measure.SupplementalDataComponent> ezzzo_ = a?.SupplementalData;
+            Measure ezzzp_ = new Measure
             {
-                UrlElement = dzzzc_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzzd_),
-                VersionElement = dzzze_,
-                NameElement = dzzzf_,
-                TitleElement = dzzzg_,
-                SubtitleElement = dzzzh_,
-                StatusElement = dzzzi_,
-                ExperimentalElement = dzzzj_,
-                Subject = (DataType)dzzzk_,
-                DateElement = dzzzl_,
-                PublisherElement = dzzzm_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzn_),
-                DescriptionElement = dzzzo_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)dzzzp_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzq_),
-                PurposeElement = dzzzr_,
-                UsageElement = dzzzs_,
-                CopyrightElement = dzzzt_,
-                ApprovalDateElement = dzzzu_,
-                LastReviewDateElement = dzzzv_,
-                EffectivePeriod = dzzzw_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzx_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzy_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzz_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ezzza_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ezzzb_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ezzzc_),
-                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ezzzd_),
-                DisclaimerElement = ezzze_,
-                Scoring = ezzzf_,
-                CompositeScoring = ezzzg_,
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzh_),
-                RiskAdjustmentElement = ezzzi_,
-                RateAggregationElement = ezzzj_,
-                RationaleElement = ezzzk_,
-                ClinicalRecommendationStatementElement = ezzzl_,
-                ImprovementNotation = ezzzm_,
-                DefinitionElement = new List<Markdown>((IEnumerable<Markdown>)ezzzn_),
-                GuidanceElement = ezzzo_,
-                Group = new List<Measure.GroupComponent>((IEnumerable<Measure.GroupComponent>)ezzzp_),
-                SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Measure.SupplementalDataComponent>)ezzzq_),
+                UrlElement = dzzza_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzzb_),
+                VersionElement = dzzzc_,
+                NameElement = dzzzd_,
+                TitleElement = dzzze_,
+                SubtitleElement = dzzzf_,
+                StatusElement = dzzzg_,
+                ExperimentalElement = dzzzh_,
+                Subject = (DataType)dzzzi_,
+                DateElement = dzzzj_,
+                PublisherElement = dzzzk_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzl_),
+                DescriptionElement = dzzzm_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)dzzzn_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzo_),
+                PurposeElement = dzzzp_,
+                UsageElement = dzzzq_,
+                CopyrightElement = dzzzr_,
+                ApprovalDateElement = dzzzs_,
+                LastReviewDateElement = dzzzt_,
+                EffectivePeriod = dzzzu_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzv_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzw_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzx_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzy_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzz_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ezzza_),
+                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ezzzb_),
+                DisclaimerElement = ezzzc_,
+                Scoring = ezzzd_,
+                CompositeScoring = ezzze_,
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzf_),
+                RiskAdjustmentElement = ezzzg_,
+                RateAggregationElement = ezzzh_,
+                RationaleElement = ezzzi_,
+                ClinicalRecommendationStatementElement = ezzzj_,
+                ImprovementNotation = ezzzk_,
+                DefinitionElement = new List<Markdown>((IEnumerable<Markdown>)ezzzl_),
+                GuidanceElement = ezzzm_,
+                Group = new List<Measure.GroupComponent>((IEnumerable<Measure.GroupComponent>)ezzzn_),
+                SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Measure.SupplementalDataComponent>)ezzzo_),
             };
 
-            return ezzzr_;
+            return ezzzp_;
         };
-        IEnumerable<Measure> czzzz_ = context.Operators.Select<Measure, Measure>((IEnumerable<Measure>)czzzx_, czzzy_);
-        IEnumerable<Measure> dzzza_ = context.Operators.Distinct<Measure>(czzzz_);
-        Measure dzzzb_ = context.Operators.SingletonFrom<Measure>(dzzza_);
+        IEnumerable<Measure> czzzx_ = context.Operators.Select<Measure, Measure>((IEnumerable<Measure>)czzzv_, czzzw_);
+        IEnumerable<Measure> czzzy_ = context.Operators.Distinct<Measure>(czzzx_);
+        Measure czzzz_ = context.Operators.SingletonFrom<Measure>(czzzy_);
 
-        return dzzzb_;
+        return czzzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MeasureReportResource")]
     public MeasureReport MeasureReportResource(CqlContext context, MeasureReport arg)
     {
-        MeasureReport[] ezzzs_ = [
+        MeasureReport[] ezzzq_ = [
             arg,
         ];
-        MeasureReport ezzzt_(MeasureReport a)
+        MeasureReport ezzzr_(MeasureReport a)
         {
-            List<Identifier> ezzzx_ = a?.Identifier;
-            Code<MeasureReport.MeasureReportStatus> ezzzy_ = a?.StatusElement;
-            Code<MeasureReport.MeasureReportType> ezzzz_ = a?.TypeElement;
-            Canonical fzzza_ = a?.MeasureElement;
-            ResourceReference fzzzb_ = a?.Subject;
-            FhirDateTime fzzzc_ = a?.DateElement;
-            ResourceReference fzzzd_ = a?.Reporter;
-            Period fzzze_ = a?.Period;
-            CodeableConcept fzzzf_ = a?.ImprovementNotation;
-            List<MeasureReport.GroupComponent> fzzzg_ = a?.Group;
-            List<ResourceReference> fzzzh_ = a?.EvaluatedResource;
-            MeasureReport fzzzi_ = new MeasureReport
+            List<Identifier> ezzzv_ = a?.Identifier;
+            Code<MeasureReport.MeasureReportStatus> ezzzw_ = a?.StatusElement;
+            Code<MeasureReport.MeasureReportType> ezzzx_ = a?.TypeElement;
+            Canonical ezzzy_ = a?.MeasureElement;
+            ResourceReference ezzzz_ = a?.Subject;
+            FhirDateTime fzzza_ = a?.DateElement;
+            ResourceReference fzzzb_ = a?.Reporter;
+            Period fzzzc_ = a?.Period;
+            CodeableConcept fzzzd_ = a?.ImprovementNotation;
+            List<MeasureReport.GroupComponent> fzzze_ = a?.Group;
+            List<ResourceReference> fzzzf_ = a?.EvaluatedResource;
+            MeasureReport fzzzg_ = new MeasureReport
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzzx_),
-                StatusElement = ezzzy_,
-                TypeElement = ezzzz_,
-                MeasureElement = fzzza_,
-                Subject = fzzzb_,
-                DateElement = fzzzc_,
-                Reporter = fzzzd_,
-                Period = fzzze_,
-                ImprovementNotation = fzzzf_,
-                Group = new List<MeasureReport.GroupComponent>((IEnumerable<MeasureReport.GroupComponent>)fzzzg_),
-                EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzzv_),
+                StatusElement = ezzzw_,
+                TypeElement = ezzzx_,
+                MeasureElement = ezzzy_,
+                Subject = ezzzz_,
+                DateElement = fzzza_,
+                Reporter = fzzzb_,
+                Period = fzzzc_,
+                ImprovementNotation = fzzzd_,
+                Group = new List<MeasureReport.GroupComponent>((IEnumerable<MeasureReport.GroupComponent>)fzzze_),
+                EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzf_),
             };
 
-            return fzzzi_;
+            return fzzzg_;
         };
-        IEnumerable<MeasureReport> ezzzu_ = context.Operators.Select<MeasureReport, MeasureReport>((IEnumerable<MeasureReport>)ezzzs_, ezzzt_);
-        IEnumerable<MeasureReport> ezzzv_ = context.Operators.Distinct<MeasureReport>(ezzzu_);
-        MeasureReport ezzzw_ = context.Operators.SingletonFrom<MeasureReport>(ezzzv_);
+        IEnumerable<MeasureReport> ezzzs_ = context.Operators.Select<MeasureReport, MeasureReport>((IEnumerable<MeasureReport>)ezzzq_, ezzzr_);
+        IEnumerable<MeasureReport> ezzzt_ = context.Operators.Distinct<MeasureReport>(ezzzs_);
+        MeasureReport ezzzu_ = context.Operators.SingletonFrom<MeasureReport>(ezzzt_);
 
-        return ezzzw_;
+        return ezzzu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationResource")]
     public Medication MedicationResource(CqlContext context, Medication arg)
     {
-        Medication[] fzzzj_ = [
+        Medication[] fzzzh_ = [
             arg,
         ];
-        Medication fzzzk_(Medication a)
+        Medication fzzzi_(Medication a)
         {
-            List<Identifier> fzzzo_ = a?.Identifier;
-            CodeableConcept fzzzp_ = a?.Code;
-            Code<Medication.MedicationStatusCodes> fzzzq_ = a?.StatusElement;
-            ResourceReference fzzzr_ = a?.Manufacturer;
-            CodeableConcept fzzzs_ = a?.Form;
-            Ratio fzzzt_ = a?.Amount;
-            List<Medication.IngredientComponent> fzzzu_ = a?.Ingredient;
-            Medication.BatchComponent fzzzv_ = a?.Batch;
-            Medication fzzzw_ = new Medication
+            List<Identifier> fzzzm_ = a?.Identifier;
+            CodeableConcept fzzzn_ = a?.Code;
+            Code<Medication.MedicationStatusCodes> fzzzo_ = a?.StatusElement;
+            ResourceReference fzzzp_ = a?.Manufacturer;
+            CodeableConcept fzzzq_ = a?.Form;
+            Ratio fzzzr_ = a?.Amount;
+            List<Medication.IngredientComponent> fzzzs_ = a?.Ingredient;
+            Medication.BatchComponent fzzzt_ = a?.Batch;
+            Medication fzzzu_ = new Medication
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzzo_),
-                Code = fzzzp_,
-                StatusElement = fzzzq_,
-                Manufacturer = fzzzr_,
-                Form = fzzzs_,
-                Amount = fzzzt_,
-                Ingredient = new List<Medication.IngredientComponent>((IEnumerable<Medication.IngredientComponent>)fzzzu_),
-                Batch = fzzzv_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzzm_),
+                Code = fzzzn_,
+                StatusElement = fzzzo_,
+                Manufacturer = fzzzp_,
+                Form = fzzzq_,
+                Amount = fzzzr_,
+                Ingredient = new List<Medication.IngredientComponent>((IEnumerable<Medication.IngredientComponent>)fzzzs_),
+                Batch = fzzzt_,
             };
 
-            return fzzzw_;
+            return fzzzu_;
         };
-        IEnumerable<Medication> fzzzl_ = context.Operators.Select<Medication, Medication>((IEnumerable<Medication>)fzzzj_, fzzzk_);
-        IEnumerable<Medication> fzzzm_ = context.Operators.Distinct<Medication>(fzzzl_);
-        Medication fzzzn_ = context.Operators.SingletonFrom<Medication>(fzzzm_);
+        IEnumerable<Medication> fzzzj_ = context.Operators.Select<Medication, Medication>((IEnumerable<Medication>)fzzzh_, fzzzi_);
+        IEnumerable<Medication> fzzzk_ = context.Operators.Distinct<Medication>(fzzzj_);
+        Medication fzzzl_ = context.Operators.SingletonFrom<Medication>(fzzzk_);
 
-        return fzzzn_;
+        return fzzzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationAdministrationResource")]
     public MedicationAdministration MedicationAdministrationResource(CqlContext context, MedicationAdministration arg)
     {
-        MedicationAdministration[] fzzzx_ = [
+        MedicationAdministration[] fzzzv_ = [
             arg,
         ];
-        MedicationAdministration fzzzy_(MedicationAdministration a)
+        MedicationAdministration fzzzw_(MedicationAdministration a)
         {
-            List<Identifier> gzzzc_ = a?.Identifier;
-            List<FhirUri> gzzzd_ = a?.InstantiatesElement;
-            List<ResourceReference> gzzze_ = a?.PartOf;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> gzzzf_ = a?.StatusElement;
-            List<CodeableConcept> gzzzg_ = a?.StatusReason;
-            CodeableConcept gzzzh_ = a?.Category;
-            DataType gzzzi_ = a?.Medication;
-            ResourceReference gzzzj_ = a?.Subject;
-            ResourceReference gzzzk_ = a?.Context;
-            List<ResourceReference> gzzzl_ = a?.SupportingInformation;
-            DataType gzzzm_ = a?.Effective;
-            List<MedicationAdministration.PerformerComponent> gzzzn_ = a?.Performer;
-            List<CodeableConcept> gzzzo_ = a?.ReasonCode;
-            List<ResourceReference> gzzzp_ = a?.ReasonReference;
-            ResourceReference gzzzq_ = a?.Request;
-            List<ResourceReference> gzzzr_ = a?.Device;
-            List<Annotation> gzzzs_ = a?.Note;
-            MedicationAdministration.DosageComponent gzzzt_ = a?.Dosage;
-            List<ResourceReference> gzzzu_ = a?.EventHistory;
-            MedicationAdministration gzzzv_ = new MedicationAdministration
+            List<Identifier> gzzza_ = a?.Identifier;
+            List<FhirUri> gzzzb_ = a?.InstantiatesElement;
+            List<ResourceReference> gzzzc_ = a?.PartOf;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> gzzzd_ = a?.StatusElement;
+            List<CodeableConcept> gzzze_ = a?.StatusReason;
+            CodeableConcept gzzzf_ = a?.Category;
+            DataType gzzzg_ = a?.Medication;
+            ResourceReference gzzzh_ = a?.Subject;
+            ResourceReference gzzzi_ = a?.Context;
+            List<ResourceReference> gzzzj_ = a?.SupportingInformation;
+            DataType gzzzk_ = a?.Effective;
+            List<MedicationAdministration.PerformerComponent> gzzzl_ = a?.Performer;
+            List<CodeableConcept> gzzzm_ = a?.ReasonCode;
+            List<ResourceReference> gzzzn_ = a?.ReasonReference;
+            ResourceReference gzzzo_ = a?.Request;
+            List<ResourceReference> gzzzp_ = a?.Device;
+            List<Annotation> gzzzq_ = a?.Note;
+            MedicationAdministration.DosageComponent gzzzr_ = a?.Dosage;
+            List<ResourceReference> gzzzs_ = a?.EventHistory;
+            MedicationAdministration gzzzt_ = new MedicationAdministration
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzc_),
-                InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)gzzzd_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzze_),
-                StatusElement = gzzzf_,
-                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzzg_),
-                Category = gzzzh_,
-                Medication = (DataType)gzzzi_,
-                Subject = gzzzj_,
-                Context = gzzzk_,
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzl_),
-                Effective = (DataType)gzzzm_,
-                Performer = new List<MedicationAdministration.PerformerComponent>((IEnumerable<MedicationAdministration.PerformerComponent>)gzzzn_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzzo_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzp_),
-                Request = gzzzq_,
-                Device = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzr_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)gzzzs_),
-                Dosage = gzzzt_,
-                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzu_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzza_),
+                InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)gzzzb_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzc_),
+                StatusElement = gzzzd_,
+                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzze_),
+                Category = gzzzf_,
+                Medication = (DataType)gzzzg_,
+                Subject = gzzzh_,
+                Context = gzzzi_,
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzj_),
+                Effective = (DataType)gzzzk_,
+                Performer = new List<MedicationAdministration.PerformerComponent>((IEnumerable<MedicationAdministration.PerformerComponent>)gzzzl_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzzm_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzn_),
+                Request = gzzzo_,
+                Device = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzp_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)gzzzq_),
+                Dosage = gzzzr_,
+                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzs_),
             };
 
-            return gzzzv_;
+            return gzzzt_;
         };
-        IEnumerable<MedicationAdministration> fzzzz_ = context.Operators.Select<MedicationAdministration, MedicationAdministration>((IEnumerable<MedicationAdministration>)fzzzx_, fzzzy_);
-        IEnumerable<MedicationAdministration> gzzza_ = context.Operators.Distinct<MedicationAdministration>(fzzzz_);
-        MedicationAdministration gzzzb_ = context.Operators.SingletonFrom<MedicationAdministration>(gzzza_);
+        IEnumerable<MedicationAdministration> fzzzx_ = context.Operators.Select<MedicationAdministration, MedicationAdministration>((IEnumerable<MedicationAdministration>)fzzzv_, fzzzw_);
+        IEnumerable<MedicationAdministration> fzzzy_ = context.Operators.Distinct<MedicationAdministration>(fzzzx_);
+        MedicationAdministration fzzzz_ = context.Operators.SingletonFrom<MedicationAdministration>(fzzzy_);
 
-        return gzzzb_;
+        return fzzzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationDispenseResource")]
     public MedicationDispense MedicationDispenseResource(CqlContext context, MedicationDispense arg)
     {
-        MedicationDispense[] gzzzw_ = [
+        MedicationDispense[] gzzzu_ = [
             arg,
         ];
-        MedicationDispense gzzzx_(MedicationDispense a)
+        MedicationDispense gzzzv_(MedicationDispense a)
         {
-            List<Identifier> hzzzb_ = a?.Identifier;
-            List<ResourceReference> hzzzc_ = a?.PartOf;
-            Code<MedicationDispense.MedicationDispenseStatusCodes> hzzzd_ = a?.StatusElement;
-            DataType hzzze_ = a?.StatusReason;
-            CodeableConcept hzzzf_ = a?.Category;
-            DataType hzzzg_ = a?.Medication;
-            ResourceReference hzzzh_ = a?.Subject;
-            ResourceReference hzzzi_ = a?.Context;
-            List<ResourceReference> hzzzj_ = a?.SupportingInformation;
-            List<MedicationDispense.PerformerComponent> hzzzk_ = a?.Performer;
-            ResourceReference hzzzl_ = a?.Location;
-            List<ResourceReference> hzzzm_ = a?.AuthorizingPrescription;
-            CodeableConcept hzzzn_ = a?.Type;
-            Quantity hzzzo_ = a?.Quantity;
-            Quantity hzzzp_ = a?.DaysSupply;
-            FhirDateTime hzzzq_ = a?.WhenPreparedElement;
-            FhirDateTime hzzzr_ = a?.WhenHandedOverElement;
-            ResourceReference hzzzs_ = a?.Destination;
-            List<ResourceReference> hzzzt_ = a?.Receiver;
-            List<Annotation> hzzzu_ = a?.Note;
-            List<Dosage> hzzzv_ = a?.DosageInstruction;
-            MedicationDispense.SubstitutionComponent hzzzw_ = a?.Substitution;
-            List<ResourceReference> hzzzx_ = a?.DetectedIssue;
-            List<ResourceReference> hzzzy_ = a?.EventHistory;
-            MedicationDispense hzzzz_ = new MedicationDispense
+            List<Identifier> gzzzz_ = a?.Identifier;
+            List<ResourceReference> hzzza_ = a?.PartOf;
+            Code<MedicationDispense.MedicationDispenseStatusCodes> hzzzb_ = a?.StatusElement;
+            DataType hzzzc_ = a?.StatusReason;
+            CodeableConcept hzzzd_ = a?.Category;
+            DataType hzzze_ = a?.Medication;
+            ResourceReference hzzzf_ = a?.Subject;
+            ResourceReference hzzzg_ = a?.Context;
+            List<ResourceReference> hzzzh_ = a?.SupportingInformation;
+            List<MedicationDispense.PerformerComponent> hzzzi_ = a?.Performer;
+            ResourceReference hzzzj_ = a?.Location;
+            List<ResourceReference> hzzzk_ = a?.AuthorizingPrescription;
+            CodeableConcept hzzzl_ = a?.Type;
+            Quantity hzzzm_ = a?.Quantity;
+            Quantity hzzzn_ = a?.DaysSupply;
+            FhirDateTime hzzzo_ = a?.WhenPreparedElement;
+            FhirDateTime hzzzp_ = a?.WhenHandedOverElement;
+            ResourceReference hzzzq_ = a?.Destination;
+            List<ResourceReference> hzzzr_ = a?.Receiver;
+            List<Annotation> hzzzs_ = a?.Note;
+            List<Dosage> hzzzt_ = a?.DosageInstruction;
+            MedicationDispense.SubstitutionComponent hzzzu_ = a?.Substitution;
+            List<ResourceReference> hzzzv_ = a?.DetectedIssue;
+            List<ResourceReference> hzzzw_ = a?.EventHistory;
+            MedicationDispense hzzzx_ = new MedicationDispense
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzzzb_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzc_),
-                StatusElement = hzzzd_,
-                StatusReason = (DataType)hzzze_,
-                Category = hzzzf_,
-                Medication = (DataType)hzzzg_,
-                Subject = hzzzh_,
-                Context = hzzzi_,
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzj_),
-                Performer = new List<MedicationDispense.PerformerComponent>((IEnumerable<MedicationDispense.PerformerComponent>)hzzzk_),
-                Location = hzzzl_,
-                AuthorizingPrescription = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzm_),
-                Type = hzzzn_,
-                Quantity = hzzzo_,
-                DaysSupply = hzzzp_,
-                WhenPreparedElement = hzzzq_,
-                WhenHandedOverElement = hzzzr_,
-                Destination = hzzzs_,
-                Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzt_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)hzzzu_),
-                DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)hzzzv_),
-                Substitution = hzzzw_,
-                DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzx_),
-                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzy_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzz_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzza_),
+                StatusElement = hzzzb_,
+                StatusReason = (DataType)hzzzc_,
+                Category = hzzzd_,
+                Medication = (DataType)hzzze_,
+                Subject = hzzzf_,
+                Context = hzzzg_,
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzh_),
+                Performer = new List<MedicationDispense.PerformerComponent>((IEnumerable<MedicationDispense.PerformerComponent>)hzzzi_),
+                Location = hzzzj_,
+                AuthorizingPrescription = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzk_),
+                Type = hzzzl_,
+                Quantity = hzzzm_,
+                DaysSupply = hzzzn_,
+                WhenPreparedElement = hzzzo_,
+                WhenHandedOverElement = hzzzp_,
+                Destination = hzzzq_,
+                Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzr_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)hzzzs_),
+                DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)hzzzt_),
+                Substitution = hzzzu_,
+                DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzv_),
+                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzw_),
             };
 
-            return hzzzz_;
+            return hzzzx_;
         };
-        IEnumerable<MedicationDispense> gzzzy_ = context.Operators.Select<MedicationDispense, MedicationDispense>((IEnumerable<MedicationDispense>)gzzzw_, gzzzx_);
-        IEnumerable<MedicationDispense> gzzzz_ = context.Operators.Distinct<MedicationDispense>(gzzzy_);
-        MedicationDispense hzzza_ = context.Operators.SingletonFrom<MedicationDispense>(gzzzz_);
+        IEnumerable<MedicationDispense> gzzzw_ = context.Operators.Select<MedicationDispense, MedicationDispense>((IEnumerable<MedicationDispense>)gzzzu_, gzzzv_);
+        IEnumerable<MedicationDispense> gzzzx_ = context.Operators.Distinct<MedicationDispense>(gzzzw_);
+        MedicationDispense gzzzy_ = context.Operators.SingletonFrom<MedicationDispense>(gzzzx_);
 
-        return hzzza_;
+        return gzzzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationKnowledgeResource")]
     public MedicationKnowledge MedicationKnowledgeResource(CqlContext context, MedicationKnowledge arg)
     {
-        MedicationKnowledge[] izzza_ = [
+        MedicationKnowledge[] hzzzy_ = [
             arg,
         ];
-        MedicationKnowledge izzzb_(MedicationKnowledge a)
+        MedicationKnowledge hzzzz_(MedicationKnowledge a)
         {
-            CodeableConcept izzzf_ = a?.Code;
-            Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> izzzg_ = a?.StatusElement;
-            ResourceReference izzzh_ = a?.Manufacturer;
-            CodeableConcept izzzi_ = a?.DoseForm;
-            Quantity izzzj_ = a?.Amount;
-            List<FhirString> izzzk_ = a?.SynonymElement;
-            List<MedicationKnowledge.RelatedMedicationKnowledgeComponent> izzzl_ = a?.RelatedMedicationKnowledge;
-            List<ResourceReference> izzzm_ = a?.AssociatedMedication;
-            List<CodeableConcept> izzzn_ = a?.ProductType;
-            List<MedicationKnowledge.MonographComponent> izzzo_ = a?.Monograph;
-            List<MedicationKnowledge.IngredientComponent> izzzp_ = a?.Ingredient;
-            Markdown izzzq_ = a?.PreparationInstructionElement;
-            List<CodeableConcept> izzzr_ = a?.IntendedRoute;
-            List<MedicationKnowledge.CostComponent> izzzs_ = a?.Cost;
-            List<MedicationKnowledge.MonitoringProgramComponent> izzzt_ = a?.MonitoringProgram;
-            List<MedicationKnowledge.AdministrationGuidelinesComponent> izzzu_ = a?.AdministrationGuidelines;
-            List<MedicationKnowledge.MedicineClassificationComponent> izzzv_ = a?.MedicineClassification;
-            MedicationKnowledge.PackagingComponent izzzw_ = a?.Packaging;
-            List<MedicationKnowledge.DrugCharacteristicComponent> izzzx_ = a?.DrugCharacteristic;
-            List<ResourceReference> izzzy_ = a?.Contraindication;
-            List<MedicationKnowledge.RegulatoryComponent> izzzz_ = a?.Regulatory;
-            List<MedicationKnowledge.KineticsComponent> jzzza_ = a?.Kinetics;
-            MedicationKnowledge jzzzb_ = new MedicationKnowledge
+            CodeableConcept izzzd_ = a?.Code;
+            Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> izzze_ = a?.StatusElement;
+            ResourceReference izzzf_ = a?.Manufacturer;
+            CodeableConcept izzzg_ = a?.DoseForm;
+            Quantity izzzh_ = a?.Amount;
+            List<FhirString> izzzi_ = a?.SynonymElement;
+            List<MedicationKnowledge.RelatedMedicationKnowledgeComponent> izzzj_ = a?.RelatedMedicationKnowledge;
+            List<ResourceReference> izzzk_ = a?.AssociatedMedication;
+            List<CodeableConcept> izzzl_ = a?.ProductType;
+            List<MedicationKnowledge.MonographComponent> izzzm_ = a?.Monograph;
+            List<MedicationKnowledge.IngredientComponent> izzzn_ = a?.Ingredient;
+            Markdown izzzo_ = a?.PreparationInstructionElement;
+            List<CodeableConcept> izzzp_ = a?.IntendedRoute;
+            List<MedicationKnowledge.CostComponent> izzzq_ = a?.Cost;
+            List<MedicationKnowledge.MonitoringProgramComponent> izzzr_ = a?.MonitoringProgram;
+            List<MedicationKnowledge.AdministrationGuidelinesComponent> izzzs_ = a?.AdministrationGuidelines;
+            List<MedicationKnowledge.MedicineClassificationComponent> izzzt_ = a?.MedicineClassification;
+            MedicationKnowledge.PackagingComponent izzzu_ = a?.Packaging;
+            List<MedicationKnowledge.DrugCharacteristicComponent> izzzv_ = a?.DrugCharacteristic;
+            List<ResourceReference> izzzw_ = a?.Contraindication;
+            List<MedicationKnowledge.RegulatoryComponent> izzzx_ = a?.Regulatory;
+            List<MedicationKnowledge.KineticsComponent> izzzy_ = a?.Kinetics;
+            MedicationKnowledge izzzz_ = new MedicationKnowledge
             {
-                Code = izzzf_,
-                StatusElement = izzzg_,
-                Manufacturer = izzzh_,
-                DoseForm = izzzi_,
-                Amount = izzzj_,
-                SynonymElement = new List<FhirString>((IEnumerable<FhirString>)izzzk_),
-                RelatedMedicationKnowledge = new List<MedicationKnowledge.RelatedMedicationKnowledgeComponent>((IEnumerable<MedicationKnowledge.RelatedMedicationKnowledgeComponent>)izzzl_),
-                AssociatedMedication = new List<ResourceReference>((IEnumerable<ResourceReference>)izzzm_),
-                ProductType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzn_),
-                Monograph = new List<MedicationKnowledge.MonographComponent>((IEnumerable<MedicationKnowledge.MonographComponent>)izzzo_),
-                Ingredient = new List<MedicationKnowledge.IngredientComponent>((IEnumerable<MedicationKnowledge.IngredientComponent>)izzzp_),
-                PreparationInstructionElement = izzzq_,
-                IntendedRoute = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzr_),
-                Cost = new List<MedicationKnowledge.CostComponent>((IEnumerable<MedicationKnowledge.CostComponent>)izzzs_),
-                MonitoringProgram = new List<MedicationKnowledge.MonitoringProgramComponent>((IEnumerable<MedicationKnowledge.MonitoringProgramComponent>)izzzt_),
-                AdministrationGuidelines = new List<MedicationKnowledge.AdministrationGuidelinesComponent>((IEnumerable<MedicationKnowledge.AdministrationGuidelinesComponent>)izzzu_),
-                MedicineClassification = new List<MedicationKnowledge.MedicineClassificationComponent>((IEnumerable<MedicationKnowledge.MedicineClassificationComponent>)izzzv_),
-                Packaging = izzzw_,
-                DrugCharacteristic = new List<MedicationKnowledge.DrugCharacteristicComponent>((IEnumerable<MedicationKnowledge.DrugCharacteristicComponent>)izzzx_),
-                Contraindication = new List<ResourceReference>((IEnumerable<ResourceReference>)izzzy_),
-                Regulatory = new List<MedicationKnowledge.RegulatoryComponent>((IEnumerable<MedicationKnowledge.RegulatoryComponent>)izzzz_),
-                Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<MedicationKnowledge.KineticsComponent>)jzzza_),
+                Code = izzzd_,
+                StatusElement = izzze_,
+                Manufacturer = izzzf_,
+                DoseForm = izzzg_,
+                Amount = izzzh_,
+                SynonymElement = new List<FhirString>((IEnumerable<FhirString>)izzzi_),
+                RelatedMedicationKnowledge = new List<MedicationKnowledge.RelatedMedicationKnowledgeComponent>((IEnumerable<MedicationKnowledge.RelatedMedicationKnowledgeComponent>)izzzj_),
+                AssociatedMedication = new List<ResourceReference>((IEnumerable<ResourceReference>)izzzk_),
+                ProductType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzl_),
+                Monograph = new List<MedicationKnowledge.MonographComponent>((IEnumerable<MedicationKnowledge.MonographComponent>)izzzm_),
+                Ingredient = new List<MedicationKnowledge.IngredientComponent>((IEnumerable<MedicationKnowledge.IngredientComponent>)izzzn_),
+                PreparationInstructionElement = izzzo_,
+                IntendedRoute = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzp_),
+                Cost = new List<MedicationKnowledge.CostComponent>((IEnumerable<MedicationKnowledge.CostComponent>)izzzq_),
+                MonitoringProgram = new List<MedicationKnowledge.MonitoringProgramComponent>((IEnumerable<MedicationKnowledge.MonitoringProgramComponent>)izzzr_),
+                AdministrationGuidelines = new List<MedicationKnowledge.AdministrationGuidelinesComponent>((IEnumerable<MedicationKnowledge.AdministrationGuidelinesComponent>)izzzs_),
+                MedicineClassification = new List<MedicationKnowledge.MedicineClassificationComponent>((IEnumerable<MedicationKnowledge.MedicineClassificationComponent>)izzzt_),
+                Packaging = izzzu_,
+                DrugCharacteristic = new List<MedicationKnowledge.DrugCharacteristicComponent>((IEnumerable<MedicationKnowledge.DrugCharacteristicComponent>)izzzv_),
+                Contraindication = new List<ResourceReference>((IEnumerable<ResourceReference>)izzzw_),
+                Regulatory = new List<MedicationKnowledge.RegulatoryComponent>((IEnumerable<MedicationKnowledge.RegulatoryComponent>)izzzx_),
+                Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<MedicationKnowledge.KineticsComponent>)izzzy_),
             };
 
-            return jzzzb_;
+            return izzzz_;
         };
-        IEnumerable<MedicationKnowledge> izzzc_ = context.Operators.Select<MedicationKnowledge, MedicationKnowledge>((IEnumerable<MedicationKnowledge>)izzza_, izzzb_);
-        IEnumerable<MedicationKnowledge> izzzd_ = context.Operators.Distinct<MedicationKnowledge>(izzzc_);
-        MedicationKnowledge izzze_ = context.Operators.SingletonFrom<MedicationKnowledge>(izzzd_);
+        IEnumerable<MedicationKnowledge> izzza_ = context.Operators.Select<MedicationKnowledge, MedicationKnowledge>((IEnumerable<MedicationKnowledge>)hzzzy_, hzzzz_);
+        IEnumerable<MedicationKnowledge> izzzb_ = context.Operators.Distinct<MedicationKnowledge>(izzza_);
+        MedicationKnowledge izzzc_ = context.Operators.SingletonFrom<MedicationKnowledge>(izzzb_);
 
-        return izzze_;
+        return izzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationRequestResource")]
     public MedicationRequest MedicationRequestResource(CqlContext context, MedicationRequest arg)
     {
-        MedicationRequest[] jzzzc_ = [
+        MedicationRequest[] jzzza_ = [
             arg,
         ];
-        MedicationRequest jzzzd_(MedicationRequest a)
+        MedicationRequest jzzzb_(MedicationRequest a)
         {
-            List<Identifier> jzzzh_ = a?.Identifier;
-            Code<MedicationRequest.MedicationrequestStatus> jzzzi_ = a?.StatusElement;
-            CodeableConcept jzzzj_ = a?.StatusReason;
-            Code<MedicationRequest.MedicationRequestIntent> jzzzk_ = a?.IntentElement;
-            List<CodeableConcept> jzzzl_ = a?.Category;
-            Code<RequestPriority> jzzzm_ = a?.PriorityElement;
-            FhirBoolean jzzzn_ = a?.DoNotPerformElement;
-            DataType jzzzo_ = a?.Reported;
-            DataType jzzzp_ = a?.Medication;
-            ResourceReference jzzzq_ = a?.Subject;
-            ResourceReference jzzzr_ = a?.Encounter;
-            List<ResourceReference> jzzzs_ = a?.SupportingInformation;
-            FhirDateTime jzzzt_ = a?.AuthoredOnElement;
-            ResourceReference jzzzu_ = a?.Requester;
-            ResourceReference jzzzv_ = a?.Performer;
-            CodeableConcept jzzzw_ = a?.PerformerType;
-            ResourceReference jzzzx_ = a?.Recorder;
-            List<CodeableConcept> jzzzy_ = a?.ReasonCode;
-            List<ResourceReference> jzzzz_ = a?.ReasonReference;
-            List<Canonical> kzzza_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> kzzzb_ = a?.InstantiatesUriElement;
-            List<ResourceReference> kzzzc_ = a?.BasedOn;
-            Identifier kzzzd_ = a?.GroupIdentifier;
-            CodeableConcept kzzze_ = a?.CourseOfTherapyType;
-            List<ResourceReference> kzzzf_ = a?.Insurance;
-            List<Annotation> kzzzg_ = a?.Note;
-            List<Dosage> kzzzh_ = a?.DosageInstruction;
-            MedicationRequest.DispenseRequestComponent kzzzi_ = a?.DispenseRequest;
-            MedicationRequest.SubstitutionComponent kzzzj_ = a?.Substitution;
-            ResourceReference kzzzk_ = a?.PriorPrescription;
-            List<ResourceReference> kzzzl_ = a?.DetectedIssue;
-            List<ResourceReference> kzzzm_ = a?.EventHistory;
-            MedicationRequest kzzzn_ = new MedicationRequest
+            List<Identifier> jzzzf_ = a?.Identifier;
+            Code<MedicationRequest.MedicationrequestStatus> jzzzg_ = a?.StatusElement;
+            CodeableConcept jzzzh_ = a?.StatusReason;
+            Code<MedicationRequest.MedicationRequestIntent> jzzzi_ = a?.IntentElement;
+            List<CodeableConcept> jzzzj_ = a?.Category;
+            Code<RequestPriority> jzzzk_ = a?.PriorityElement;
+            FhirBoolean jzzzl_ = a?.DoNotPerformElement;
+            DataType jzzzm_ = a?.Reported;
+            DataType jzzzn_ = a?.Medication;
+            ResourceReference jzzzo_ = a?.Subject;
+            ResourceReference jzzzp_ = a?.Encounter;
+            List<ResourceReference> jzzzq_ = a?.SupportingInformation;
+            FhirDateTime jzzzr_ = a?.AuthoredOnElement;
+            ResourceReference jzzzs_ = a?.Requester;
+            ResourceReference jzzzt_ = a?.Performer;
+            CodeableConcept jzzzu_ = a?.PerformerType;
+            ResourceReference jzzzv_ = a?.Recorder;
+            List<CodeableConcept> jzzzw_ = a?.ReasonCode;
+            List<ResourceReference> jzzzx_ = a?.ReasonReference;
+            List<Canonical> jzzzy_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> jzzzz_ = a?.InstantiatesUriElement;
+            List<ResourceReference> kzzza_ = a?.BasedOn;
+            Identifier kzzzb_ = a?.GroupIdentifier;
+            CodeableConcept kzzzc_ = a?.CourseOfTherapyType;
+            List<ResourceReference> kzzzd_ = a?.Insurance;
+            List<Annotation> kzzze_ = a?.Note;
+            List<Dosage> kzzzf_ = a?.DosageInstruction;
+            MedicationRequest.DispenseRequestComponent kzzzg_ = a?.DispenseRequest;
+            MedicationRequest.SubstitutionComponent kzzzh_ = a?.Substitution;
+            ResourceReference kzzzi_ = a?.PriorPrescription;
+            List<ResourceReference> kzzzj_ = a?.DetectedIssue;
+            List<ResourceReference> kzzzk_ = a?.EventHistory;
+            MedicationRequest kzzzl_ = new MedicationRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzzh_),
-                StatusElement = jzzzi_,
-                StatusReason = jzzzj_,
-                IntentElement = jzzzk_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzl_),
-                PriorityElement = jzzzm_,
-                DoNotPerformElement = jzzzn_,
-                Reported = (DataType)jzzzo_,
-                Medication = (DataType)jzzzp_,
-                Subject = jzzzq_,
-                Encounter = jzzzr_,
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)jzzzs_),
-                AuthoredOnElement = jzzzt_,
-                Requester = jzzzu_,
-                Performer = jzzzv_,
-                PerformerType = jzzzw_,
-                Recorder = jzzzx_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzy_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)jzzzz_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)kzzza_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)kzzzb_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzc_),
-                GroupIdentifier = kzzzd_,
-                CourseOfTherapyType = kzzze_,
-                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzf_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)kzzzg_),
-                DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)kzzzh_),
-                DispenseRequest = kzzzi_,
-                Substitution = kzzzj_,
-                PriorPrescription = kzzzk_,
-                DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzl_),
-                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzm_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzzf_),
+                StatusElement = jzzzg_,
+                StatusReason = jzzzh_,
+                IntentElement = jzzzi_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzj_),
+                PriorityElement = jzzzk_,
+                DoNotPerformElement = jzzzl_,
+                Reported = (DataType)jzzzm_,
+                Medication = (DataType)jzzzn_,
+                Subject = jzzzo_,
+                Encounter = jzzzp_,
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)jzzzq_),
+                AuthoredOnElement = jzzzr_,
+                Requester = jzzzs_,
+                Performer = jzzzt_,
+                PerformerType = jzzzu_,
+                Recorder = jzzzv_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzw_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)jzzzx_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)jzzzy_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)jzzzz_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzza_),
+                GroupIdentifier = kzzzb_,
+                CourseOfTherapyType = kzzzc_,
+                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzd_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)kzzze_),
+                DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)kzzzf_),
+                DispenseRequest = kzzzg_,
+                Substitution = kzzzh_,
+                PriorPrescription = kzzzi_,
+                DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzj_),
+                EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzk_),
             };
 
-            return kzzzn_;
+            return kzzzl_;
         };
-        IEnumerable<MedicationRequest> jzzze_ = context.Operators.Select<MedicationRequest, MedicationRequest>((IEnumerable<MedicationRequest>)jzzzc_, jzzzd_);
-        IEnumerable<MedicationRequest> jzzzf_ = context.Operators.Distinct<MedicationRequest>(jzzze_);
-        MedicationRequest jzzzg_ = context.Operators.SingletonFrom<MedicationRequest>(jzzzf_);
+        IEnumerable<MedicationRequest> jzzzc_ = context.Operators.Select<MedicationRequest, MedicationRequest>((IEnumerable<MedicationRequest>)jzzza_, jzzzb_);
+        IEnumerable<MedicationRequest> jzzzd_ = context.Operators.Distinct<MedicationRequest>(jzzzc_);
+        MedicationRequest jzzze_ = context.Operators.SingletonFrom<MedicationRequest>(jzzzd_);
 
-        return jzzzg_;
+        return jzzze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicationStatementResource")]
     public MedicationStatement MedicationStatementResource(CqlContext context, MedicationStatement arg)
     {
-        MedicationStatement[] kzzzo_ = [
+        MedicationStatement[] kzzzm_ = [
             arg,
         ];
-        MedicationStatement kzzzp_(MedicationStatement a)
+        MedicationStatement kzzzn_(MedicationStatement a)
         {
-            List<Identifier> kzzzt_ = a?.Identifier;
-            List<ResourceReference> kzzzu_ = a?.BasedOn;
-            List<ResourceReference> kzzzv_ = a?.PartOf;
-            Code<MedicationStatement.MedicationStatusCodes> kzzzw_ = a?.StatusElement;
-            List<CodeableConcept> kzzzx_ = a?.StatusReason;
-            CodeableConcept kzzzy_ = a?.Category;
-            DataType kzzzz_ = a?.Medication;
-            ResourceReference lzzza_ = a?.Subject;
-            ResourceReference lzzzb_ = a?.Context;
-            DataType lzzzc_ = a?.Effective;
-            FhirDateTime lzzzd_ = a?.DateAssertedElement;
-            ResourceReference lzzze_ = a?.InformationSource;
-            List<ResourceReference> lzzzf_ = a?.DerivedFrom;
-            List<CodeableConcept> lzzzg_ = a?.ReasonCode;
-            List<ResourceReference> lzzzh_ = a?.ReasonReference;
-            List<Annotation> lzzzi_ = a?.Note;
-            List<Dosage> lzzzj_ = a?.Dosage;
-            MedicationStatement lzzzk_ = new MedicationStatement
+            List<Identifier> kzzzr_ = a?.Identifier;
+            List<ResourceReference> kzzzs_ = a?.BasedOn;
+            List<ResourceReference> kzzzt_ = a?.PartOf;
+            Code<MedicationStatement.MedicationStatusCodes> kzzzu_ = a?.StatusElement;
+            List<CodeableConcept> kzzzv_ = a?.StatusReason;
+            CodeableConcept kzzzw_ = a?.Category;
+            DataType kzzzx_ = a?.Medication;
+            ResourceReference kzzzy_ = a?.Subject;
+            ResourceReference kzzzz_ = a?.Context;
+            DataType lzzza_ = a?.Effective;
+            FhirDateTime lzzzb_ = a?.DateAssertedElement;
+            ResourceReference lzzzc_ = a?.InformationSource;
+            List<ResourceReference> lzzzd_ = a?.DerivedFrom;
+            List<CodeableConcept> lzzze_ = a?.ReasonCode;
+            List<ResourceReference> lzzzf_ = a?.ReasonReference;
+            List<Annotation> lzzzg_ = a?.Note;
+            List<Dosage> lzzzh_ = a?.Dosage;
+            MedicationStatement lzzzi_ = new MedicationStatement
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzzt_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzu_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzv_),
-                StatusElement = kzzzw_,
-                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzx_),
-                Category = kzzzy_,
-                Medication = (DataType)kzzzz_,
-                Subject = lzzza_,
-                Context = lzzzb_,
-                Effective = (DataType)lzzzc_,
-                DateAssertedElement = lzzzd_,
-                InformationSource = lzzze_,
-                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzf_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzzg_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzh_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)lzzzi_),
-                Dosage = new List<Dosage>((IEnumerable<Dosage>)lzzzj_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzzr_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzs_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzt_),
+                StatusElement = kzzzu_,
+                StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzv_),
+                Category = kzzzw_,
+                Medication = (DataType)kzzzx_,
+                Subject = kzzzy_,
+                Context = kzzzz_,
+                Effective = (DataType)lzzza_,
+                DateAssertedElement = lzzzb_,
+                InformationSource = lzzzc_,
+                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzd_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzze_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzf_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)lzzzg_),
+                Dosage = new List<Dosage>((IEnumerable<Dosage>)lzzzh_),
             };
 
-            return lzzzk_;
+            return lzzzi_;
         };
-        IEnumerable<MedicationStatement> kzzzq_ = context.Operators.Select<MedicationStatement, MedicationStatement>((IEnumerable<MedicationStatement>)kzzzo_, kzzzp_);
-        IEnumerable<MedicationStatement> kzzzr_ = context.Operators.Distinct<MedicationStatement>(kzzzq_);
-        MedicationStatement kzzzs_ = context.Operators.SingletonFrom<MedicationStatement>(kzzzr_);
+        IEnumerable<MedicationStatement> kzzzo_ = context.Operators.Select<MedicationStatement, MedicationStatement>((IEnumerable<MedicationStatement>)kzzzm_, kzzzn_);
+        IEnumerable<MedicationStatement> kzzzp_ = context.Operators.Distinct<MedicationStatement>(kzzzo_);
+        MedicationStatement kzzzq_ = context.Operators.SingletonFrom<MedicationStatement>(kzzzp_);
 
-        return kzzzs_;
+        return kzzzq_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductResource")]
     public MedicinalProduct MedicinalProductResource(CqlContext context, MedicinalProduct arg)
     {
-        MedicinalProduct[] lzzzl_ = [
+        MedicinalProduct[] lzzzj_ = [
             arg,
         ];
-        MedicinalProduct lzzzm_(MedicinalProduct a)
+        MedicinalProduct lzzzk_(MedicinalProduct a)
         {
-            List<Identifier> lzzzq_ = a?.Identifier;
-            CodeableConcept lzzzr_ = a?.Type;
-            Coding lzzzs_ = a?.Domain;
-            CodeableConcept lzzzt_ = a?.CombinedPharmaceuticalDoseForm;
-            CodeableConcept lzzzu_ = a?.LegalStatusOfSupply;
-            CodeableConcept lzzzv_ = a?.AdditionalMonitoringIndicator;
-            List<FhirString> lzzzw_ = a?.SpecialMeasuresElement;
-            CodeableConcept lzzzx_ = a?.PaediatricUseIndicator;
-            List<CodeableConcept> lzzzy_ = a?.ProductClassification;
-            List<MarketingStatus> lzzzz_ = a?.MarketingStatus;
-            List<ResourceReference> mzzza_ = a?.PharmaceuticalProduct;
-            List<ResourceReference> mzzzb_ = a?.PackagedMedicinalProduct;
-            List<ResourceReference> mzzzc_ = a?.AttachedDocument;
-            List<ResourceReference> mzzzd_ = a?.MasterFile;
-            List<ResourceReference> mzzze_ = a?.Contact;
-            List<ResourceReference> mzzzf_ = a?.ClinicalTrial;
-            List<MedicinalProduct.NameComponent> mzzzg_ = a?.Name;
-            List<Identifier> mzzzh_ = a?.CrossReference;
-            List<MedicinalProduct.ManufacturingBusinessOperationComponent> mzzzi_ = a?.ManufacturingBusinessOperation;
-            List<MedicinalProduct.SpecialDesignationComponent> mzzzj_ = a?.SpecialDesignation;
-            MedicinalProduct mzzzk_ = new MedicinalProduct
+            List<Identifier> lzzzo_ = a?.Identifier;
+            CodeableConcept lzzzp_ = a?.Type;
+            Coding lzzzq_ = a?.Domain;
+            CodeableConcept lzzzr_ = a?.CombinedPharmaceuticalDoseForm;
+            CodeableConcept lzzzs_ = a?.LegalStatusOfSupply;
+            CodeableConcept lzzzt_ = a?.AdditionalMonitoringIndicator;
+            List<FhirString> lzzzu_ = a?.SpecialMeasuresElement;
+            CodeableConcept lzzzv_ = a?.PaediatricUseIndicator;
+            List<CodeableConcept> lzzzw_ = a?.ProductClassification;
+            List<MarketingStatus> lzzzx_ = a?.MarketingStatus;
+            List<ResourceReference> lzzzy_ = a?.PharmaceuticalProduct;
+            List<ResourceReference> lzzzz_ = a?.PackagedMedicinalProduct;
+            List<ResourceReference> mzzza_ = a?.AttachedDocument;
+            List<ResourceReference> mzzzb_ = a?.MasterFile;
+            List<ResourceReference> mzzzc_ = a?.Contact;
+            List<ResourceReference> mzzzd_ = a?.ClinicalTrial;
+            List<MedicinalProduct.NameComponent> mzzze_ = a?.Name;
+            List<Identifier> mzzzf_ = a?.CrossReference;
+            List<MedicinalProduct.ManufacturingBusinessOperationComponent> mzzzg_ = a?.ManufacturingBusinessOperation;
+            List<MedicinalProduct.SpecialDesignationComponent> mzzzh_ = a?.SpecialDesignation;
+            MedicinalProduct mzzzi_ = new MedicinalProduct
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzzq_),
-                Type = lzzzr_,
-                Domain = lzzzs_,
-                CombinedPharmaceuticalDoseForm = lzzzt_,
-                LegalStatusOfSupply = lzzzu_,
-                AdditionalMonitoringIndicator = lzzzv_,
-                SpecialMeasuresElement = new List<FhirString>((IEnumerable<FhirString>)lzzzw_),
-                PaediatricUseIndicator = lzzzx_,
-                ProductClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzzy_),
-                MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)lzzzz_),
-                PharmaceuticalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzza_),
-                PackagedMedicinalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzb_),
-                AttachedDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzc_),
-                MasterFile = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzd_),
-                Contact = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzze_),
-                ClinicalTrial = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzf_),
-                Name = new List<MedicinalProduct.NameComponent>((IEnumerable<MedicinalProduct.NameComponent>)mzzzg_),
-                CrossReference = new List<Identifier>((IEnumerable<Identifier>)mzzzh_),
-                ManufacturingBusinessOperation = new List<MedicinalProduct.ManufacturingBusinessOperationComponent>((IEnumerable<MedicinalProduct.ManufacturingBusinessOperationComponent>)mzzzi_),
-                SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEnumerable<MedicinalProduct.SpecialDesignationComponent>)mzzzj_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzzo_),
+                Type = lzzzp_,
+                Domain = lzzzq_,
+                CombinedPharmaceuticalDoseForm = lzzzr_,
+                LegalStatusOfSupply = lzzzs_,
+                AdditionalMonitoringIndicator = lzzzt_,
+                SpecialMeasuresElement = new List<FhirString>((IEnumerable<FhirString>)lzzzu_),
+                PaediatricUseIndicator = lzzzv_,
+                ProductClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzzw_),
+                MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)lzzzx_),
+                PharmaceuticalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzy_),
+                PackagedMedicinalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzz_),
+                AttachedDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzza_),
+                MasterFile = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzb_),
+                Contact = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzc_),
+                ClinicalTrial = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzd_),
+                Name = new List<MedicinalProduct.NameComponent>((IEnumerable<MedicinalProduct.NameComponent>)mzzze_),
+                CrossReference = new List<Identifier>((IEnumerable<Identifier>)mzzzf_),
+                ManufacturingBusinessOperation = new List<MedicinalProduct.ManufacturingBusinessOperationComponent>((IEnumerable<MedicinalProduct.ManufacturingBusinessOperationComponent>)mzzzg_),
+                SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEnumerable<MedicinalProduct.SpecialDesignationComponent>)mzzzh_),
             };
 
-            return mzzzk_;
+            return mzzzi_;
         };
-        IEnumerable<MedicinalProduct> lzzzn_ = context.Operators.Select<MedicinalProduct, MedicinalProduct>((IEnumerable<MedicinalProduct>)lzzzl_, lzzzm_);
-        IEnumerable<MedicinalProduct> lzzzo_ = context.Operators.Distinct<MedicinalProduct>(lzzzn_);
-        MedicinalProduct lzzzp_ = context.Operators.SingletonFrom<MedicinalProduct>(lzzzo_);
+        IEnumerable<MedicinalProduct> lzzzl_ = context.Operators.Select<MedicinalProduct, MedicinalProduct>((IEnumerable<MedicinalProduct>)lzzzj_, lzzzk_);
+        IEnumerable<MedicinalProduct> lzzzm_ = context.Operators.Distinct<MedicinalProduct>(lzzzl_);
+        MedicinalProduct lzzzn_ = context.Operators.SingletonFrom<MedicinalProduct>(lzzzm_);
 
-        return lzzzp_;
+        return lzzzn_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductAuthorizationResource")]
     public MedicinalProductAuthorization MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization arg)
     {
-        MedicinalProductAuthorization[] mzzzl_ = [
+        MedicinalProductAuthorization[] mzzzj_ = [
             arg,
         ];
-        MedicinalProductAuthorization mzzzm_(MedicinalProductAuthorization a)
+        MedicinalProductAuthorization mzzzk_(MedicinalProductAuthorization a)
         {
-            List<Identifier> mzzzq_ = a?.Identifier;
-            ResourceReference mzzzr_ = a?.Subject;
-            List<CodeableConcept> mzzzs_ = a?.Country;
-            List<CodeableConcept> mzzzt_ = a?.Jurisdiction;
-            CodeableConcept mzzzu_ = a?.Status;
-            FhirDateTime mzzzv_ = a?.StatusDateElement;
-            FhirDateTime mzzzw_ = a?.RestoreDateElement;
-            Period mzzzx_ = a?.ValidityPeriod;
-            Period mzzzy_ = a?.DataExclusivityPeriod;
-            FhirDateTime mzzzz_ = a?.DateOfFirstAuthorizationElement;
-            FhirDateTime nzzza_ = a?.InternationalBirthDateElement;
-            CodeableConcept nzzzb_ = a?.LegalBasis;
-            List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent> nzzzc_ = a?.JurisdictionalAuthorization;
-            ResourceReference nzzzd_ = a?.Holder;
-            ResourceReference nzzze_ = a?.Regulator;
-            MedicinalProductAuthorization.ProcedureComponent nzzzf_ = a?.Procedure;
-            MedicinalProductAuthorization nzzzg_ = new MedicinalProductAuthorization
+            List<Identifier> mzzzo_ = a?.Identifier;
+            ResourceReference mzzzp_ = a?.Subject;
+            List<CodeableConcept> mzzzq_ = a?.Country;
+            List<CodeableConcept> mzzzr_ = a?.Jurisdiction;
+            CodeableConcept mzzzs_ = a?.Status;
+            FhirDateTime mzzzt_ = a?.StatusDateElement;
+            FhirDateTime mzzzu_ = a?.RestoreDateElement;
+            Period mzzzv_ = a?.ValidityPeriod;
+            Period mzzzw_ = a?.DataExclusivityPeriod;
+            FhirDateTime mzzzx_ = a?.DateOfFirstAuthorizationElement;
+            FhirDateTime mzzzy_ = a?.InternationalBirthDateElement;
+            CodeableConcept mzzzz_ = a?.LegalBasis;
+            List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent> nzzza_ = a?.JurisdictionalAuthorization;
+            ResourceReference nzzzb_ = a?.Holder;
+            ResourceReference nzzzc_ = a?.Regulator;
+            MedicinalProductAuthorization.ProcedureComponent nzzzd_ = a?.Procedure;
+            MedicinalProductAuthorization nzzze_ = new MedicinalProductAuthorization
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzzzq_),
-                Subject = mzzzr_,
-                Country = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzs_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzt_),
-                Status = mzzzu_,
-                StatusDateElement = mzzzv_,
-                RestoreDateElement = mzzzw_,
-                ValidityPeriod = mzzzx_,
-                DataExclusivityPeriod = mzzzy_,
-                DateOfFirstAuthorizationElement = mzzzz_,
-                InternationalBirthDateElement = nzzza_,
-                LegalBasis = nzzzb_,
-                JurisdictionalAuthorization = new List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>((IEnumerable<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>)nzzzc_),
-                Holder = nzzzd_,
-                Regulator = nzzze_,
-                Procedure = nzzzf_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzzzo_),
+                Subject = mzzzp_,
+                Country = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzq_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzr_),
+                Status = mzzzs_,
+                StatusDateElement = mzzzt_,
+                RestoreDateElement = mzzzu_,
+                ValidityPeriod = mzzzv_,
+                DataExclusivityPeriod = mzzzw_,
+                DateOfFirstAuthorizationElement = mzzzx_,
+                InternationalBirthDateElement = mzzzy_,
+                LegalBasis = mzzzz_,
+                JurisdictionalAuthorization = new List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>((IEnumerable<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>)nzzza_),
+                Holder = nzzzb_,
+                Regulator = nzzzc_,
+                Procedure = nzzzd_,
             };
 
-            return nzzzg_;
+            return nzzze_;
         };
-        IEnumerable<MedicinalProductAuthorization> mzzzn_ = context.Operators.Select<MedicinalProductAuthorization, MedicinalProductAuthorization>((IEnumerable<MedicinalProductAuthorization>)mzzzl_, mzzzm_);
-        IEnumerable<MedicinalProductAuthorization> mzzzo_ = context.Operators.Distinct<MedicinalProductAuthorization>(mzzzn_);
-        MedicinalProductAuthorization mzzzp_ = context.Operators.SingletonFrom<MedicinalProductAuthorization>(mzzzo_);
+        IEnumerable<MedicinalProductAuthorization> mzzzl_ = context.Operators.Select<MedicinalProductAuthorization, MedicinalProductAuthorization>((IEnumerable<MedicinalProductAuthorization>)mzzzj_, mzzzk_);
+        IEnumerable<MedicinalProductAuthorization> mzzzm_ = context.Operators.Distinct<MedicinalProductAuthorization>(mzzzl_);
+        MedicinalProductAuthorization mzzzn_ = context.Operators.SingletonFrom<MedicinalProductAuthorization>(mzzzm_);
 
-        return mzzzp_;
+        return mzzzn_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductContraindicationResource")]
     public MedicinalProductContraindication MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication arg)
     {
-        MedicinalProductContraindication[] nzzzh_ = [
+        MedicinalProductContraindication[] nzzzf_ = [
             arg,
         ];
-        MedicinalProductContraindication nzzzi_(MedicinalProductContraindication a)
+        MedicinalProductContraindication nzzzg_(MedicinalProductContraindication a)
         {
-            List<ResourceReference> nzzzm_ = a?.Subject;
-            CodeableConcept nzzzn_ = a?.Disease;
-            CodeableConcept nzzzo_ = a?.DiseaseStatus;
-            List<CodeableConcept> nzzzp_ = a?.Comorbidity;
-            List<ResourceReference> nzzzq_ = a?.TherapeuticIndication;
-            List<MedicinalProductContraindication.OtherTherapyComponent> nzzzr_ = a?.OtherTherapy;
-            List<Population> nzzzs_ = a?.Population;
-            MedicinalProductContraindication nzzzt_ = new MedicinalProductContraindication
+            List<ResourceReference> nzzzk_ = a?.Subject;
+            CodeableConcept nzzzl_ = a?.Disease;
+            CodeableConcept nzzzm_ = a?.DiseaseStatus;
+            List<CodeableConcept> nzzzn_ = a?.Comorbidity;
+            List<ResourceReference> nzzzo_ = a?.TherapeuticIndication;
+            List<MedicinalProductContraindication.OtherTherapyComponent> nzzzp_ = a?.OtherTherapy;
+            List<Population> nzzzq_ = a?.Population;
+            MedicinalProductContraindication nzzzr_ = new MedicinalProductContraindication
             {
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)nzzzm_),
-                Disease = nzzzn_,
-                DiseaseStatus = nzzzo_,
-                Comorbidity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzp_),
-                TherapeuticIndication = new List<ResourceReference>((IEnumerable<ResourceReference>)nzzzq_),
-                OtherTherapy = new List<MedicinalProductContraindication.OtherTherapyComponent>((IEnumerable<MedicinalProductContraindication.OtherTherapyComponent>)nzzzr_),
-                Population = new List<Population>((IEnumerable<Population>)nzzzs_),
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)nzzzk_),
+                Disease = nzzzl_,
+                DiseaseStatus = nzzzm_,
+                Comorbidity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzn_),
+                TherapeuticIndication = new List<ResourceReference>((IEnumerable<ResourceReference>)nzzzo_),
+                OtherTherapy = new List<MedicinalProductContraindication.OtherTherapyComponent>((IEnumerable<MedicinalProductContraindication.OtherTherapyComponent>)nzzzp_),
+                Population = new List<Population>((IEnumerable<Population>)nzzzq_),
             };
 
-            return nzzzt_;
+            return nzzzr_;
         };
-        IEnumerable<MedicinalProductContraindication> nzzzj_ = context.Operators.Select<MedicinalProductContraindication, MedicinalProductContraindication>((IEnumerable<MedicinalProductContraindication>)nzzzh_, nzzzi_);
-        IEnumerable<MedicinalProductContraindication> nzzzk_ = context.Operators.Distinct<MedicinalProductContraindication>(nzzzj_);
-        MedicinalProductContraindication nzzzl_ = context.Operators.SingletonFrom<MedicinalProductContraindication>(nzzzk_);
+        IEnumerable<MedicinalProductContraindication> nzzzh_ = context.Operators.Select<MedicinalProductContraindication, MedicinalProductContraindication>((IEnumerable<MedicinalProductContraindication>)nzzzf_, nzzzg_);
+        IEnumerable<MedicinalProductContraindication> nzzzi_ = context.Operators.Distinct<MedicinalProductContraindication>(nzzzh_);
+        MedicinalProductContraindication nzzzj_ = context.Operators.SingletonFrom<MedicinalProductContraindication>(nzzzi_);
 
-        return nzzzl_;
+        return nzzzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductIngredientResource")]
     public MedicinalProductIngredient MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient arg)
     {
-        MedicinalProductIngredient[] nzzzu_ = [
+        MedicinalProductIngredient[] nzzzs_ = [
             arg,
         ];
-        MedicinalProductIngredient nzzzv_(MedicinalProductIngredient a)
+        MedicinalProductIngredient nzzzt_(MedicinalProductIngredient a)
         {
-            Identifier nzzzz_ = a?.Identifier;
-            CodeableConcept ozzza_ = a?.Role;
-            FhirBoolean ozzzb_ = a?.AllergenicIndicatorElement;
-            List<ResourceReference> ozzzc_ = a?.Manufacturer;
-            List<MedicinalProductIngredient.SpecifiedSubstanceComponent> ozzzd_ = a?.SpecifiedSubstance;
-            MedicinalProductIngredient.SubstanceComponent ozzze_ = a?.Substance;
-            MedicinalProductIngredient ozzzf_ = new MedicinalProductIngredient
+            Identifier nzzzx_ = a?.Identifier;
+            CodeableConcept nzzzy_ = a?.Role;
+            FhirBoolean nzzzz_ = a?.AllergenicIndicatorElement;
+            List<ResourceReference> ozzza_ = a?.Manufacturer;
+            List<MedicinalProductIngredient.SpecifiedSubstanceComponent> ozzzb_ = a?.SpecifiedSubstance;
+            MedicinalProductIngredient.SubstanceComponent ozzzc_ = a?.Substance;
+            MedicinalProductIngredient ozzzd_ = new MedicinalProductIngredient
             {
-                Identifier = nzzzz_,
-                Role = ozzza_,
-                AllergenicIndicatorElement = ozzzb_,
-                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzc_),
-                SpecifiedSubstance = new List<MedicinalProductIngredient.SpecifiedSubstanceComponent>((IEnumerable<MedicinalProductIngredient.SpecifiedSubstanceComponent>)ozzzd_),
-                Substance = ozzze_,
+                Identifier = nzzzx_,
+                Role = nzzzy_,
+                AllergenicIndicatorElement = nzzzz_,
+                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzza_),
+                SpecifiedSubstance = new List<MedicinalProductIngredient.SpecifiedSubstanceComponent>((IEnumerable<MedicinalProductIngredient.SpecifiedSubstanceComponent>)ozzzb_),
+                Substance = ozzzc_,
             };
 
-            return ozzzf_;
+            return ozzzd_;
         };
-        IEnumerable<MedicinalProductIngredient> nzzzw_ = context.Operators.Select<MedicinalProductIngredient, MedicinalProductIngredient>((IEnumerable<MedicinalProductIngredient>)nzzzu_, nzzzv_);
-        IEnumerable<MedicinalProductIngredient> nzzzx_ = context.Operators.Distinct<MedicinalProductIngredient>(nzzzw_);
-        MedicinalProductIngredient nzzzy_ = context.Operators.SingletonFrom<MedicinalProductIngredient>(nzzzx_);
+        IEnumerable<MedicinalProductIngredient> nzzzu_ = context.Operators.Select<MedicinalProductIngredient, MedicinalProductIngredient>((IEnumerable<MedicinalProductIngredient>)nzzzs_, nzzzt_);
+        IEnumerable<MedicinalProductIngredient> nzzzv_ = context.Operators.Distinct<MedicinalProductIngredient>(nzzzu_);
+        MedicinalProductIngredient nzzzw_ = context.Operators.SingletonFrom<MedicinalProductIngredient>(nzzzv_);
 
-        return nzzzy_;
+        return nzzzw_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductInteractionResource")]
     public MedicinalProductInteraction MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction arg)
     {
-        MedicinalProductInteraction[] ozzzg_ = [
+        MedicinalProductInteraction[] ozzze_ = [
             arg,
         ];
-        MedicinalProductInteraction ozzzh_(MedicinalProductInteraction a)
+        MedicinalProductInteraction ozzzf_(MedicinalProductInteraction a)
         {
-            List<ResourceReference> ozzzl_ = a?.Subject;
-            FhirString ozzzm_ = a?.DescriptionElement;
-            List<MedicinalProductInteraction.InteractantComponent> ozzzn_ = a?.Interactant;
-            CodeableConcept ozzzo_ = a?.Type;
-            CodeableConcept ozzzp_ = a?.Effect;
-            CodeableConcept ozzzq_ = a?.Incidence;
-            CodeableConcept ozzzr_ = a?.Management;
-            MedicinalProductInteraction ozzzs_ = new MedicinalProductInteraction
+            List<ResourceReference> ozzzj_ = a?.Subject;
+            FhirString ozzzk_ = a?.DescriptionElement;
+            List<MedicinalProductInteraction.InteractantComponent> ozzzl_ = a?.Interactant;
+            CodeableConcept ozzzm_ = a?.Type;
+            CodeableConcept ozzzn_ = a?.Effect;
+            CodeableConcept ozzzo_ = a?.Incidence;
+            CodeableConcept ozzzp_ = a?.Management;
+            MedicinalProductInteraction ozzzq_ = new MedicinalProductInteraction
             {
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzl_),
-                DescriptionElement = ozzzm_,
-                Interactant = new List<MedicinalProductInteraction.InteractantComponent>((IEnumerable<MedicinalProductInteraction.InteractantComponent>)ozzzn_),
-                Type = ozzzo_,
-                Effect = ozzzp_,
-                Incidence = ozzzq_,
-                Management = ozzzr_,
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzj_),
+                DescriptionElement = ozzzk_,
+                Interactant = new List<MedicinalProductInteraction.InteractantComponent>((IEnumerable<MedicinalProductInteraction.InteractantComponent>)ozzzl_),
+                Type = ozzzm_,
+                Effect = ozzzn_,
+                Incidence = ozzzo_,
+                Management = ozzzp_,
             };
 
-            return ozzzs_;
+            return ozzzq_;
         };
-        IEnumerable<MedicinalProductInteraction> ozzzi_ = context.Operators.Select<MedicinalProductInteraction, MedicinalProductInteraction>((IEnumerable<MedicinalProductInteraction>)ozzzg_, ozzzh_);
-        IEnumerable<MedicinalProductInteraction> ozzzj_ = context.Operators.Distinct<MedicinalProductInteraction>(ozzzi_);
-        MedicinalProductInteraction ozzzk_ = context.Operators.SingletonFrom<MedicinalProductInteraction>(ozzzj_);
+        IEnumerable<MedicinalProductInteraction> ozzzg_ = context.Operators.Select<MedicinalProductInteraction, MedicinalProductInteraction>((IEnumerable<MedicinalProductInteraction>)ozzze_, ozzzf_);
+        IEnumerable<MedicinalProductInteraction> ozzzh_ = context.Operators.Distinct<MedicinalProductInteraction>(ozzzg_);
+        MedicinalProductInteraction ozzzi_ = context.Operators.SingletonFrom<MedicinalProductInteraction>(ozzzh_);
 
-        return ozzzk_;
+        return ozzzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductManufacturedResource")]
     public MedicinalProductManufactured MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured arg)
     {
-        MedicinalProductManufactured[] ozzzt_ = [
+        MedicinalProductManufactured[] ozzzr_ = [
             arg,
         ];
-        MedicinalProductManufactured ozzzu_(MedicinalProductManufactured a)
+        MedicinalProductManufactured ozzzs_(MedicinalProductManufactured a)
         {
-            CodeableConcept ozzzy_ = a?.ManufacturedDoseForm;
-            CodeableConcept ozzzz_ = a?.UnitOfPresentation;
-            Quantity pzzza_ = a?.Quantity;
-            List<ResourceReference> pzzzb_ = a?.Manufacturer;
-            List<ResourceReference> pzzzc_ = a?.Ingredient;
-            ProdCharacteristic pzzzd_ = a?.PhysicalCharacteristics;
-            List<CodeableConcept> pzzze_ = a?.OtherCharacteristics;
-            MedicinalProductManufactured pzzzf_ = new MedicinalProductManufactured
+            CodeableConcept ozzzw_ = a?.ManufacturedDoseForm;
+            CodeableConcept ozzzx_ = a?.UnitOfPresentation;
+            Quantity ozzzy_ = a?.Quantity;
+            List<ResourceReference> ozzzz_ = a?.Manufacturer;
+            List<ResourceReference> pzzza_ = a?.Ingredient;
+            ProdCharacteristic pzzzb_ = a?.PhysicalCharacteristics;
+            List<CodeableConcept> pzzzc_ = a?.OtherCharacteristics;
+            MedicinalProductManufactured pzzzd_ = new MedicinalProductManufactured
             {
-                ManufacturedDoseForm = ozzzy_,
-                UnitOfPresentation = ozzzz_,
-                Quantity = pzzza_,
-                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzb_),
-                Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzc_),
-                PhysicalCharacteristics = pzzzd_,
-                OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzze_),
+                ManufacturedDoseForm = ozzzw_,
+                UnitOfPresentation = ozzzx_,
+                Quantity = ozzzy_,
+                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzz_),
+                Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzza_),
+                PhysicalCharacteristics = pzzzb_,
+                OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzc_),
             };
 
-            return pzzzf_;
+            return pzzzd_;
         };
-        IEnumerable<MedicinalProductManufactured> ozzzv_ = context.Operators.Select<MedicinalProductManufactured, MedicinalProductManufactured>((IEnumerable<MedicinalProductManufactured>)ozzzt_, ozzzu_);
-        IEnumerable<MedicinalProductManufactured> ozzzw_ = context.Operators.Distinct<MedicinalProductManufactured>(ozzzv_);
-        MedicinalProductManufactured ozzzx_ = context.Operators.SingletonFrom<MedicinalProductManufactured>(ozzzw_);
+        IEnumerable<MedicinalProductManufactured> ozzzt_ = context.Operators.Select<MedicinalProductManufactured, MedicinalProductManufactured>((IEnumerable<MedicinalProductManufactured>)ozzzr_, ozzzs_);
+        IEnumerable<MedicinalProductManufactured> ozzzu_ = context.Operators.Distinct<MedicinalProductManufactured>(ozzzt_);
+        MedicinalProductManufactured ozzzv_ = context.Operators.SingletonFrom<MedicinalProductManufactured>(ozzzu_);
 
-        return ozzzx_;
+        return ozzzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductPackagedResource")]
     public MedicinalProductPackaged MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged arg)
     {
-        MedicinalProductPackaged[] pzzzg_ = [
+        MedicinalProductPackaged[] pzzze_ = [
             arg,
         ];
-        MedicinalProductPackaged pzzzh_(MedicinalProductPackaged a)
+        MedicinalProductPackaged pzzzf_(MedicinalProductPackaged a)
         {
-            List<Identifier> pzzzl_ = a?.Identifier;
-            List<ResourceReference> pzzzm_ = a?.Subject;
-            FhirString pzzzn_ = a?.DescriptionElement;
-            CodeableConcept pzzzo_ = a?.LegalStatusOfSupply;
-            List<MarketingStatus> pzzzp_ = a?.MarketingStatus;
-            ResourceReference pzzzq_ = a?.MarketingAuthorization;
-            List<ResourceReference> pzzzr_ = a?.Manufacturer;
-            List<MedicinalProductPackaged.BatchIdentifierComponent> pzzzs_ = a?.BatchIdentifier;
-            List<MedicinalProductPackaged.PackageItemComponent> pzzzt_ = a?.PackageItem;
-            MedicinalProductPackaged pzzzu_ = new MedicinalProductPackaged
+            List<Identifier> pzzzj_ = a?.Identifier;
+            List<ResourceReference> pzzzk_ = a?.Subject;
+            FhirString pzzzl_ = a?.DescriptionElement;
+            CodeableConcept pzzzm_ = a?.LegalStatusOfSupply;
+            List<MarketingStatus> pzzzn_ = a?.MarketingStatus;
+            ResourceReference pzzzo_ = a?.MarketingAuthorization;
+            List<ResourceReference> pzzzp_ = a?.Manufacturer;
+            List<MedicinalProductPackaged.BatchIdentifierComponent> pzzzq_ = a?.BatchIdentifier;
+            List<MedicinalProductPackaged.PackageItemComponent> pzzzr_ = a?.PackageItem;
+            MedicinalProductPackaged pzzzs_ = new MedicinalProductPackaged
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)pzzzl_),
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzm_),
-                DescriptionElement = pzzzn_,
-                LegalStatusOfSupply = pzzzo_,
-                MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)pzzzp_),
-                MarketingAuthorization = pzzzq_,
-                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzr_),
-                BatchIdentifier = new List<MedicinalProductPackaged.BatchIdentifierComponent>((IEnumerable<MedicinalProductPackaged.BatchIdentifierComponent>)pzzzs_),
-                PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerable<MedicinalProductPackaged.PackageItemComponent>)pzzzt_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)pzzzj_),
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzk_),
+                DescriptionElement = pzzzl_,
+                LegalStatusOfSupply = pzzzm_,
+                MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)pzzzn_),
+                MarketingAuthorization = pzzzo_,
+                Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzp_),
+                BatchIdentifier = new List<MedicinalProductPackaged.BatchIdentifierComponent>((IEnumerable<MedicinalProductPackaged.BatchIdentifierComponent>)pzzzq_),
+                PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerable<MedicinalProductPackaged.PackageItemComponent>)pzzzr_),
             };
 
-            return pzzzu_;
+            return pzzzs_;
         };
-        IEnumerable<MedicinalProductPackaged> pzzzi_ = context.Operators.Select<MedicinalProductPackaged, MedicinalProductPackaged>((IEnumerable<MedicinalProductPackaged>)pzzzg_, pzzzh_);
-        IEnumerable<MedicinalProductPackaged> pzzzj_ = context.Operators.Distinct<MedicinalProductPackaged>(pzzzi_);
-        MedicinalProductPackaged pzzzk_ = context.Operators.SingletonFrom<MedicinalProductPackaged>(pzzzj_);
+        IEnumerable<MedicinalProductPackaged> pzzzg_ = context.Operators.Select<MedicinalProductPackaged, MedicinalProductPackaged>((IEnumerable<MedicinalProductPackaged>)pzzze_, pzzzf_);
+        IEnumerable<MedicinalProductPackaged> pzzzh_ = context.Operators.Distinct<MedicinalProductPackaged>(pzzzg_);
+        MedicinalProductPackaged pzzzi_ = context.Operators.SingletonFrom<MedicinalProductPackaged>(pzzzh_);
 
-        return pzzzk_;
+        return pzzzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductPharmaceuticalResource")]
     public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical arg)
     {
-        MedicinalProductPharmaceutical[] pzzzv_ = [
+        MedicinalProductPharmaceutical[] pzzzt_ = [
             arg,
         ];
-        MedicinalProductPharmaceutical pzzzw_(MedicinalProductPharmaceutical a)
+        MedicinalProductPharmaceutical pzzzu_(MedicinalProductPharmaceutical a)
         {
-            List<Identifier> qzzza_ = a?.Identifier;
-            CodeableConcept qzzzb_ = a?.AdministrableDoseForm;
-            CodeableConcept qzzzc_ = a?.UnitOfPresentation;
-            List<ResourceReference> qzzzd_ = a?.Ingredient;
-            List<ResourceReference> qzzze_ = a?.Device;
-            List<MedicinalProductPharmaceutical.CharacteristicsComponent> qzzzf_ = a?.Characteristics;
-            List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent> qzzzg_ = a?.RouteOfAdministration;
-            MedicinalProductPharmaceutical qzzzh_ = new MedicinalProductPharmaceutical
+            List<Identifier> pzzzy_ = a?.Identifier;
+            CodeableConcept pzzzz_ = a?.AdministrableDoseForm;
+            CodeableConcept qzzza_ = a?.UnitOfPresentation;
+            List<ResourceReference> qzzzb_ = a?.Ingredient;
+            List<ResourceReference> qzzzc_ = a?.Device;
+            List<MedicinalProductPharmaceutical.CharacteristicsComponent> qzzzd_ = a?.Characteristics;
+            List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent> qzzze_ = a?.RouteOfAdministration;
+            MedicinalProductPharmaceutical qzzzf_ = new MedicinalProductPharmaceutical
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)qzzza_),
-                AdministrableDoseForm = qzzzb_,
-                UnitOfPresentation = qzzzc_,
-                Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzd_),
-                Device = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzze_),
-                Characteristics = new List<MedicinalProductPharmaceutical.CharacteristicsComponent>((IEnumerable<MedicinalProductPharmaceutical.CharacteristicsComponent>)qzzzf_),
-                RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>((IEnumerable<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>)qzzzg_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)pzzzy_),
+                AdministrableDoseForm = pzzzz_,
+                UnitOfPresentation = qzzza_,
+                Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzb_),
+                Device = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzc_),
+                Characteristics = new List<MedicinalProductPharmaceutical.CharacteristicsComponent>((IEnumerable<MedicinalProductPharmaceutical.CharacteristicsComponent>)qzzzd_),
+                RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>((IEnumerable<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>)qzzze_),
             };
 
-            return qzzzh_;
+            return qzzzf_;
         };
-        IEnumerable<MedicinalProductPharmaceutical> pzzzx_ = context.Operators.Select<MedicinalProductPharmaceutical, MedicinalProductPharmaceutical>((IEnumerable<MedicinalProductPharmaceutical>)pzzzv_, pzzzw_);
-        IEnumerable<MedicinalProductPharmaceutical> pzzzy_ = context.Operators.Distinct<MedicinalProductPharmaceutical>(pzzzx_);
-        MedicinalProductPharmaceutical pzzzz_ = context.Operators.SingletonFrom<MedicinalProductPharmaceutical>(pzzzy_);
+        IEnumerable<MedicinalProductPharmaceutical> pzzzv_ = context.Operators.Select<MedicinalProductPharmaceutical, MedicinalProductPharmaceutical>((IEnumerable<MedicinalProductPharmaceutical>)pzzzt_, pzzzu_);
+        IEnumerable<MedicinalProductPharmaceutical> pzzzw_ = context.Operators.Distinct<MedicinalProductPharmaceutical>(pzzzv_);
+        MedicinalProductPharmaceutical pzzzx_ = context.Operators.SingletonFrom<MedicinalProductPharmaceutical>(pzzzw_);
 
-        return pzzzz_;
+        return pzzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MedicinalProductUndesirableEffectResource")]
     public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect arg)
     {
-        MedicinalProductUndesirableEffect[] qzzzi_ = [
+        MedicinalProductUndesirableEffect[] qzzzg_ = [
             arg,
         ];
-        MedicinalProductUndesirableEffect qzzzj_(MedicinalProductUndesirableEffect a)
+        MedicinalProductUndesirableEffect qzzzh_(MedicinalProductUndesirableEffect a)
         {
-            List<ResourceReference> qzzzn_ = a?.Subject;
-            CodeableConcept qzzzo_ = a?.SymptomConditionEffect;
-            CodeableConcept qzzzp_ = a?.Classification;
-            CodeableConcept qzzzq_ = a?.FrequencyOfOccurrence;
-            List<Population> qzzzr_ = a?.Population;
-            MedicinalProductUndesirableEffect qzzzs_ = new MedicinalProductUndesirableEffect
+            List<ResourceReference> qzzzl_ = a?.Subject;
+            CodeableConcept qzzzm_ = a?.SymptomConditionEffect;
+            CodeableConcept qzzzn_ = a?.Classification;
+            CodeableConcept qzzzo_ = a?.FrequencyOfOccurrence;
+            List<Population> qzzzp_ = a?.Population;
+            MedicinalProductUndesirableEffect qzzzq_ = new MedicinalProductUndesirableEffect
             {
-                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzn_),
-                SymptomConditionEffect = qzzzo_,
-                Classification = qzzzp_,
-                FrequencyOfOccurrence = qzzzq_,
-                Population = new List<Population>((IEnumerable<Population>)qzzzr_),
+                Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzl_),
+                SymptomConditionEffect = qzzzm_,
+                Classification = qzzzn_,
+                FrequencyOfOccurrence = qzzzo_,
+                Population = new List<Population>((IEnumerable<Population>)qzzzp_),
             };
 
-            return qzzzs_;
+            return qzzzq_;
         };
-        IEnumerable<MedicinalProductUndesirableEffect> qzzzk_ = context.Operators.Select<MedicinalProductUndesirableEffect, MedicinalProductUndesirableEffect>((IEnumerable<MedicinalProductUndesirableEffect>)qzzzi_, qzzzj_);
-        IEnumerable<MedicinalProductUndesirableEffect> qzzzl_ = context.Operators.Distinct<MedicinalProductUndesirableEffect>(qzzzk_);
-        MedicinalProductUndesirableEffect qzzzm_ = context.Operators.SingletonFrom<MedicinalProductUndesirableEffect>(qzzzl_);
+        IEnumerable<MedicinalProductUndesirableEffect> qzzzi_ = context.Operators.Select<MedicinalProductUndesirableEffect, MedicinalProductUndesirableEffect>((IEnumerable<MedicinalProductUndesirableEffect>)qzzzg_, qzzzh_);
+        IEnumerable<MedicinalProductUndesirableEffect> qzzzj_ = context.Operators.Distinct<MedicinalProductUndesirableEffect>(qzzzi_);
+        MedicinalProductUndesirableEffect qzzzk_ = context.Operators.SingletonFrom<MedicinalProductUndesirableEffect>(qzzzj_);
 
-        return qzzzm_;
+        return qzzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MessageHeaderResource")]
     public MessageHeader MessageHeaderResource(CqlContext context, MessageHeader arg)
     {
-        MessageHeader[] qzzzt_ = [
+        MessageHeader[] qzzzr_ = [
             arg,
         ];
-        MessageHeader qzzzu_(MessageHeader a)
+        MessageHeader qzzzs_(MessageHeader a)
         {
-            DataType qzzzy_ = a?.Event;
-            List<MessageHeader.MessageDestinationComponent> qzzzz_ = a?.Destination;
-            ResourceReference rzzza_ = a?.Sender;
-            ResourceReference rzzzb_ = a?.Enterer;
-            ResourceReference rzzzc_ = a?.Author;
-            MessageHeader.MessageSourceComponent rzzzd_ = a?.Source;
-            ResourceReference rzzze_ = a?.Responsible;
-            CodeableConcept rzzzf_ = a?.Reason;
-            MessageHeader.ResponseComponent rzzzg_ = a?.Response;
-            List<ResourceReference> rzzzh_ = a?.Focus;
-            Canonical rzzzi_ = a?.DefinitionElement;
-            MessageHeader rzzzj_ = new MessageHeader
+            DataType qzzzw_ = a?.Event;
+            List<MessageHeader.MessageDestinationComponent> qzzzx_ = a?.Destination;
+            ResourceReference qzzzy_ = a?.Sender;
+            ResourceReference qzzzz_ = a?.Enterer;
+            ResourceReference rzzza_ = a?.Author;
+            MessageHeader.MessageSourceComponent rzzzb_ = a?.Source;
+            ResourceReference rzzzc_ = a?.Responsible;
+            CodeableConcept rzzzd_ = a?.Reason;
+            MessageHeader.ResponseComponent rzzze_ = a?.Response;
+            List<ResourceReference> rzzzf_ = a?.Focus;
+            Canonical rzzzg_ = a?.DefinitionElement;
+            MessageHeader rzzzh_ = new MessageHeader
             {
-                Event = (DataType)qzzzy_,
-                Destination = new List<MessageHeader.MessageDestinationComponent>((IEnumerable<MessageHeader.MessageDestinationComponent>)qzzzz_),
-                Sender = rzzza_,
-                Enterer = rzzzb_,
-                Author = rzzzc_,
-                Source = rzzzd_,
-                Responsible = rzzze_,
-                Reason = rzzzf_,
-                Response = rzzzg_,
-                Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzh_),
-                DefinitionElement = rzzzi_,
+                Event = (DataType)qzzzw_,
+                Destination = new List<MessageHeader.MessageDestinationComponent>((IEnumerable<MessageHeader.MessageDestinationComponent>)qzzzx_),
+                Sender = qzzzy_,
+                Enterer = qzzzz_,
+                Author = rzzza_,
+                Source = rzzzb_,
+                Responsible = rzzzc_,
+                Reason = rzzzd_,
+                Response = rzzze_,
+                Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzf_),
+                DefinitionElement = rzzzg_,
             };
 
-            return rzzzj_;
+            return rzzzh_;
         };
-        IEnumerable<MessageHeader> qzzzv_ = context.Operators.Select<MessageHeader, MessageHeader>((IEnumerable<MessageHeader>)qzzzt_, qzzzu_);
-        IEnumerable<MessageHeader> qzzzw_ = context.Operators.Distinct<MessageHeader>(qzzzv_);
-        MessageHeader qzzzx_ = context.Operators.SingletonFrom<MessageHeader>(qzzzw_);
+        IEnumerable<MessageHeader> qzzzt_ = context.Operators.Select<MessageHeader, MessageHeader>((IEnumerable<MessageHeader>)qzzzr_, qzzzs_);
+        IEnumerable<MessageHeader> qzzzu_ = context.Operators.Distinct<MessageHeader>(qzzzt_);
+        MessageHeader qzzzv_ = context.Operators.SingletonFrom<MessageHeader>(qzzzu_);
 
-        return qzzzx_;
+        return qzzzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("MolecularSequenceResource")]
     public MolecularSequence MolecularSequenceResource(CqlContext context, MolecularSequence arg)
     {
-        MolecularSequence[] rzzzk_ = [
+        MolecularSequence[] rzzzi_ = [
             arg,
         ];
-        MolecularSequence rzzzl_(MolecularSequence a)
+        MolecularSequence rzzzj_(MolecularSequence a)
         {
-            List<Identifier> rzzzp_ = a?.Identifier;
-            Code<MolecularSequence.SequenceType> rzzzq_ = a?.TypeElement;
-            Integer rzzzr_ = a?.CoordinateSystemElement;
-            ResourceReference rzzzs_ = a?.Patient;
-            ResourceReference rzzzt_ = a?.Specimen;
-            ResourceReference rzzzu_ = a?.Device;
-            ResourceReference rzzzv_ = a?.Performer;
-            Quantity rzzzw_ = a?.Quantity;
-            MolecularSequence.ReferenceSeqComponent rzzzx_ = a?.ReferenceSeq;
-            List<MolecularSequence.VariantComponent> rzzzy_ = a?.Variant;
-            FhirString rzzzz_ = a?.ObservedSeqElement;
-            List<MolecularSequence.QualityComponent> szzza_ = a?.Quality;
-            Integer szzzb_ = a?.ReadCoverageElement;
-            List<MolecularSequence.RepositoryComponent> szzzc_ = a?.Repository;
-            List<ResourceReference> szzzd_ = a?.Pointer;
-            List<MolecularSequence.StructureVariantComponent> szzze_ = a?.StructureVariant;
-            MolecularSequence szzzf_ = new MolecularSequence
+            List<Identifier> rzzzn_ = a?.Identifier;
+            Code<MolecularSequence.SequenceType> rzzzo_ = a?.TypeElement;
+            Integer rzzzp_ = a?.CoordinateSystemElement;
+            ResourceReference rzzzq_ = a?.Patient;
+            ResourceReference rzzzr_ = a?.Specimen;
+            ResourceReference rzzzs_ = a?.Device;
+            ResourceReference rzzzt_ = a?.Performer;
+            Quantity rzzzu_ = a?.Quantity;
+            MolecularSequence.ReferenceSeqComponent rzzzv_ = a?.ReferenceSeq;
+            List<MolecularSequence.VariantComponent> rzzzw_ = a?.Variant;
+            FhirString rzzzx_ = a?.ObservedSeqElement;
+            List<MolecularSequence.QualityComponent> rzzzy_ = a?.Quality;
+            Integer rzzzz_ = a?.ReadCoverageElement;
+            List<MolecularSequence.RepositoryComponent> szzza_ = a?.Repository;
+            List<ResourceReference> szzzb_ = a?.Pointer;
+            List<MolecularSequence.StructureVariantComponent> szzzc_ = a?.StructureVariant;
+            MolecularSequence szzzd_ = new MolecularSequence
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzzp_),
-                TypeElement = rzzzq_,
-                CoordinateSystemElement = rzzzr_,
-                Patient = rzzzs_,
-                Specimen = rzzzt_,
-                Device = rzzzu_,
-                Performer = rzzzv_,
-                Quantity = rzzzw_,
-                ReferenceSeq = rzzzx_,
-                Variant = new List<MolecularSequence.VariantComponent>((IEnumerable<MolecularSequence.VariantComponent>)rzzzy_),
-                ObservedSeqElement = rzzzz_,
-                Quality = new List<MolecularSequence.QualityComponent>((IEnumerable<MolecularSequence.QualityComponent>)szzza_),
-                ReadCoverageElement = szzzb_,
-                Repository = new List<MolecularSequence.RepositoryComponent>((IEnumerable<MolecularSequence.RepositoryComponent>)szzzc_),
-                Pointer = new List<ResourceReference>((IEnumerable<ResourceReference>)szzzd_),
-                StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnumerable<MolecularSequence.StructureVariantComponent>)szzze_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzzn_),
+                TypeElement = rzzzo_,
+                CoordinateSystemElement = rzzzp_,
+                Patient = rzzzq_,
+                Specimen = rzzzr_,
+                Device = rzzzs_,
+                Performer = rzzzt_,
+                Quantity = rzzzu_,
+                ReferenceSeq = rzzzv_,
+                Variant = new List<MolecularSequence.VariantComponent>((IEnumerable<MolecularSequence.VariantComponent>)rzzzw_),
+                ObservedSeqElement = rzzzx_,
+                Quality = new List<MolecularSequence.QualityComponent>((IEnumerable<MolecularSequence.QualityComponent>)rzzzy_),
+                ReadCoverageElement = rzzzz_,
+                Repository = new List<MolecularSequence.RepositoryComponent>((IEnumerable<MolecularSequence.RepositoryComponent>)szzza_),
+                Pointer = new List<ResourceReference>((IEnumerable<ResourceReference>)szzzb_),
+                StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnumerable<MolecularSequence.StructureVariantComponent>)szzzc_),
             };
 
-            return szzzf_;
+            return szzzd_;
         };
-        IEnumerable<MolecularSequence> rzzzm_ = context.Operators.Select<MolecularSequence, MolecularSequence>((IEnumerable<MolecularSequence>)rzzzk_, rzzzl_);
-        IEnumerable<MolecularSequence> rzzzn_ = context.Operators.Distinct<MolecularSequence>(rzzzm_);
-        MolecularSequence rzzzo_ = context.Operators.SingletonFrom<MolecularSequence>(rzzzn_);
+        IEnumerable<MolecularSequence> rzzzk_ = context.Operators.Select<MolecularSequence, MolecularSequence>((IEnumerable<MolecularSequence>)rzzzi_, rzzzj_);
+        IEnumerable<MolecularSequence> rzzzl_ = context.Operators.Distinct<MolecularSequence>(rzzzk_);
+        MolecularSequence rzzzm_ = context.Operators.SingletonFrom<MolecularSequence>(rzzzl_);
 
-        return rzzzo_;
+        return rzzzm_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("NamingSystemResource")]
     public NamingSystem NamingSystemResource(CqlContext context, NamingSystem arg)
     {
-        NamingSystem[] szzzg_ = [
+        NamingSystem[] szzze_ = [
             arg,
         ];
-        NamingSystem szzzh_(NamingSystem a)
+        NamingSystem szzzf_(NamingSystem a)
         {
-            FhirString szzzl_ = a?.NameElement;
-            Code<PublicationStatus> szzzm_ = a?.StatusElement;
-            Code<NamingSystem.NamingSystemType> szzzn_ = a?.KindElement;
-            FhirDateTime szzzo_ = a?.DateElement;
-            FhirString szzzp_ = a?.PublisherElement;
-            List<ContactDetail> szzzq_ = a?.Contact;
-            FhirString szzzr_ = a?.ResponsibleElement;
-            CodeableConcept szzzs_ = a?.Type;
-            Markdown szzzt_ = a?.DescriptionElement;
-            List<UsageContext> szzzu_ = a?.UseContext;
-            List<CodeableConcept> szzzv_ = a?.Jurisdiction;
-            FhirString szzzw_ = a?.UsageElement;
-            List<NamingSystem.UniqueIdComponent> szzzx_ = a?.UniqueId;
-            NamingSystem szzzy_ = new NamingSystem
+            FhirString szzzj_ = a?.NameElement;
+            Code<PublicationStatus> szzzk_ = a?.StatusElement;
+            Code<NamingSystem.NamingSystemType> szzzl_ = a?.KindElement;
+            FhirDateTime szzzm_ = a?.DateElement;
+            FhirString szzzn_ = a?.PublisherElement;
+            List<ContactDetail> szzzo_ = a?.Contact;
+            FhirString szzzp_ = a?.ResponsibleElement;
+            CodeableConcept szzzq_ = a?.Type;
+            Markdown szzzr_ = a?.DescriptionElement;
+            List<UsageContext> szzzs_ = a?.UseContext;
+            List<CodeableConcept> szzzt_ = a?.Jurisdiction;
+            FhirString szzzu_ = a?.UsageElement;
+            List<NamingSystem.UniqueIdComponent> szzzv_ = a?.UniqueId;
+            NamingSystem szzzw_ = new NamingSystem
             {
-                NameElement = szzzl_,
-                StatusElement = szzzm_,
-                KindElement = szzzn_,
-                DateElement = szzzo_,
-                PublisherElement = szzzp_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)szzzq_),
-                ResponsibleElement = szzzr_,
-                Type = szzzs_,
-                DescriptionElement = szzzt_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)szzzu_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzv_),
-                UsageElement = szzzw_,
-                UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.UniqueIdComponent>)szzzx_),
+                NameElement = szzzj_,
+                StatusElement = szzzk_,
+                KindElement = szzzl_,
+                DateElement = szzzm_,
+                PublisherElement = szzzn_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)szzzo_),
+                ResponsibleElement = szzzp_,
+                Type = szzzq_,
+                DescriptionElement = szzzr_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)szzzs_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzt_),
+                UsageElement = szzzu_,
+                UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.UniqueIdComponent>)szzzv_),
             };
 
-            return szzzy_;
+            return szzzw_;
         };
-        IEnumerable<NamingSystem> szzzi_ = context.Operators.Select<NamingSystem, NamingSystem>((IEnumerable<NamingSystem>)szzzg_, szzzh_);
-        IEnumerable<NamingSystem> szzzj_ = context.Operators.Distinct<NamingSystem>(szzzi_);
-        NamingSystem szzzk_ = context.Operators.SingletonFrom<NamingSystem>(szzzj_);
+        IEnumerable<NamingSystem> szzzg_ = context.Operators.Select<NamingSystem, NamingSystem>((IEnumerable<NamingSystem>)szzze_, szzzf_);
+        IEnumerable<NamingSystem> szzzh_ = context.Operators.Distinct<NamingSystem>(szzzg_);
+        NamingSystem szzzi_ = context.Operators.SingletonFrom<NamingSystem>(szzzh_);
 
-        return szzzk_;
+        return szzzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("NutritionOrderResource")]
     public NutritionOrder NutritionOrderResource(CqlContext context, NutritionOrder arg)
     {
-        NutritionOrder[] szzzz_ = [
+        NutritionOrder[] szzzx_ = [
             arg,
         ];
-        NutritionOrder tzzza_(NutritionOrder a)
+        NutritionOrder szzzy_(NutritionOrder a)
         {
-            List<Identifier> tzzze_ = a?.Identifier;
-            List<Canonical> tzzzf_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> tzzzg_ = a?.InstantiatesUriElement;
-            List<FhirUri> tzzzh_ = a?.InstantiatesElement;
-            Code<RequestStatus> tzzzi_ = a?.StatusElement;
-            Code<RequestIntent> tzzzj_ = a?.IntentElement;
-            ResourceReference tzzzk_ = a?.Patient;
-            ResourceReference tzzzl_ = a?.Encounter;
-            FhirDateTime tzzzm_ = a?.DateTimeElement;
-            ResourceReference tzzzn_ = a?.Orderer;
-            List<ResourceReference> tzzzo_ = a?.AllergyIntolerance;
-            List<CodeableConcept> tzzzp_ = a?.FoodPreferenceModifier;
-            List<CodeableConcept> tzzzq_ = a?.ExcludeFoodModifier;
-            NutritionOrder.OralDietComponent tzzzr_ = a?.OralDiet;
-            List<NutritionOrder.SupplementComponent> tzzzs_ = a?.Supplement;
-            NutritionOrder.EnteralFormulaComponent tzzzt_ = a?.EnteralFormula;
-            List<Annotation> tzzzu_ = a?.Note;
-            NutritionOrder tzzzv_ = new NutritionOrder
+            List<Identifier> tzzzc_ = a?.Identifier;
+            List<Canonical> tzzzd_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> tzzze_ = a?.InstantiatesUriElement;
+            List<FhirUri> tzzzf_ = a?.InstantiatesElement;
+            Code<RequestStatus> tzzzg_ = a?.StatusElement;
+            Code<RequestIntent> tzzzh_ = a?.IntentElement;
+            ResourceReference tzzzi_ = a?.Patient;
+            ResourceReference tzzzj_ = a?.Encounter;
+            FhirDateTime tzzzk_ = a?.DateTimeElement;
+            ResourceReference tzzzl_ = a?.Orderer;
+            List<ResourceReference> tzzzm_ = a?.AllergyIntolerance;
+            List<CodeableConcept> tzzzn_ = a?.FoodPreferenceModifier;
+            List<CodeableConcept> tzzzo_ = a?.ExcludeFoodModifier;
+            NutritionOrder.OralDietComponent tzzzp_ = a?.OralDiet;
+            List<NutritionOrder.SupplementComponent> tzzzq_ = a?.Supplement;
+            NutritionOrder.EnteralFormulaComponent tzzzr_ = a?.EnteralFormula;
+            List<Annotation> tzzzs_ = a?.Note;
+            NutritionOrder tzzzt_ = new NutritionOrder
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzze_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)tzzzf_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)tzzzg_),
-                InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)tzzzh_),
-                StatusElement = tzzzi_,
-                IntentElement = tzzzj_,
-                Patient = tzzzk_,
-                Encounter = tzzzl_,
-                DateTimeElement = tzzzm_,
-                Orderer = tzzzn_,
-                AllergyIntolerance = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzzo_),
-                FoodPreferenceModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzzp_),
-                ExcludeFoodModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzzq_),
-                OralDiet = tzzzr_,
-                Supplement = new List<NutritionOrder.SupplementComponent>((IEnumerable<NutritionOrder.SupplementComponent>)tzzzs_),
-                EnteralFormula = tzzzt_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)tzzzu_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzzc_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)tzzzd_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)tzzze_),
+                InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)tzzzf_),
+                StatusElement = tzzzg_,
+                IntentElement = tzzzh_,
+                Patient = tzzzi_,
+                Encounter = tzzzj_,
+                DateTimeElement = tzzzk_,
+                Orderer = tzzzl_,
+                AllergyIntolerance = new List<ResourceReference>((IEnumerable<ResourceReference>)tzzzm_),
+                FoodPreferenceModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzzn_),
+                ExcludeFoodModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)tzzzo_),
+                OralDiet = tzzzp_,
+                Supplement = new List<NutritionOrder.SupplementComponent>((IEnumerable<NutritionOrder.SupplementComponent>)tzzzq_),
+                EnteralFormula = tzzzr_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)tzzzs_),
             };
 
-            return tzzzv_;
+            return tzzzt_;
         };
-        IEnumerable<NutritionOrder> tzzzb_ = context.Operators.Select<NutritionOrder, NutritionOrder>((IEnumerable<NutritionOrder>)szzzz_, tzzza_);
-        IEnumerable<NutritionOrder> tzzzc_ = context.Operators.Distinct<NutritionOrder>(tzzzb_);
-        NutritionOrder tzzzd_ = context.Operators.SingletonFrom<NutritionOrder>(tzzzc_);
+        IEnumerable<NutritionOrder> szzzz_ = context.Operators.Select<NutritionOrder, NutritionOrder>((IEnumerable<NutritionOrder>)szzzx_, szzzy_);
+        IEnumerable<NutritionOrder> tzzza_ = context.Operators.Distinct<NutritionOrder>(szzzz_);
+        NutritionOrder tzzzb_ = context.Operators.SingletonFrom<NutritionOrder>(tzzza_);
 
-        return tzzzd_;
+        return tzzzb_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ObservationResource")]
     public Observation ObservationResource(CqlContext context, Observation arg)
     {
-        Observation[] tzzzw_ = [
+        Observation[] tzzzu_ = [
             arg,
         ];
-        Observation tzzzx_(Observation a)
+        Observation tzzzv_(Observation a)
         {
-            List<Identifier> uzzzb_ = a?.Identifier;
-            List<ResourceReference> uzzzc_ = a?.BasedOn;
-            List<ResourceReference> uzzzd_ = a?.PartOf;
-            Code<ObservationStatus> uzzze_ = a?.StatusElement;
-            List<CodeableConcept> uzzzf_ = a?.Category;
-            CodeableConcept uzzzg_ = a?.Code;
-            ResourceReference uzzzh_ = a?.Subject;
-            List<ResourceReference> uzzzi_ = a?.Focus;
-            ResourceReference uzzzj_ = a?.Encounter;
-            DataType uzzzk_ = a?.Effective;
-            Instant uzzzl_ = a?.IssuedElement;
-            List<ResourceReference> uzzzm_ = a?.Performer;
-            DataType uzzzn_ = a?.Value;
-            CodeableConcept uzzzo_ = a?.DataAbsentReason;
-            List<CodeableConcept> uzzzp_ = a?.Interpretation;
-            List<Annotation> uzzzq_ = a?.Note;
-            CodeableConcept uzzzr_ = a?.BodySite;
-            CodeableConcept uzzzs_ = a?.Method;
-            ResourceReference uzzzt_ = a?.Specimen;
-            ResourceReference uzzzu_ = a?.Device;
-            List<Observation.ReferenceRangeComponent> uzzzv_ = a?.ReferenceRange;
-            List<ResourceReference> uzzzw_ = a?.HasMember;
-            List<ResourceReference> uzzzx_ = a?.DerivedFrom;
-            List<Observation.ComponentComponent> uzzzy_ = a?.Component;
-            Observation uzzzz_ = new Observation
+            List<Identifier> tzzzz_ = a?.Identifier;
+            List<ResourceReference> uzzza_ = a?.BasedOn;
+            List<ResourceReference> uzzzb_ = a?.PartOf;
+            Code<ObservationStatus> uzzzc_ = a?.StatusElement;
+            List<CodeableConcept> uzzzd_ = a?.Category;
+            CodeableConcept uzzze_ = a?.Code;
+            ResourceReference uzzzf_ = a?.Subject;
+            List<ResourceReference> uzzzg_ = a?.Focus;
+            ResourceReference uzzzh_ = a?.Encounter;
+            DataType uzzzi_ = a?.Effective;
+            Instant uzzzj_ = a?.IssuedElement;
+            List<ResourceReference> uzzzk_ = a?.Performer;
+            DataType uzzzl_ = a?.Value;
+            CodeableConcept uzzzm_ = a?.DataAbsentReason;
+            List<CodeableConcept> uzzzn_ = a?.Interpretation;
+            List<Annotation> uzzzo_ = a?.Note;
+            CodeableConcept uzzzp_ = a?.BodySite;
+            CodeableConcept uzzzq_ = a?.Method;
+            ResourceReference uzzzr_ = a?.Specimen;
+            ResourceReference uzzzs_ = a?.Device;
+            List<Observation.ReferenceRangeComponent> uzzzt_ = a?.ReferenceRange;
+            List<ResourceReference> uzzzu_ = a?.HasMember;
+            List<ResourceReference> uzzzv_ = a?.DerivedFrom;
+            List<Observation.ComponentComponent> uzzzw_ = a?.Component;
+            Observation uzzzx_ = new Observation
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)uzzzb_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzc_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzd_),
-                StatusElement = uzzze_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzf_),
-                Code = uzzzg_,
-                Subject = uzzzh_,
-                Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzi_),
-                Encounter = uzzzj_,
-                Effective = (DataType)uzzzk_,
-                IssuedElement = uzzzl_,
-                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzm_),
-                Value = (DataType)uzzzn_,
-                DataAbsentReason = uzzzo_,
-                Interpretation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzp_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)uzzzq_),
-                BodySite = uzzzr_,
-                Method = uzzzs_,
-                Specimen = uzzzt_,
-                Device = uzzzu_,
-                ReferenceRange = new List<Observation.ReferenceRangeComponent>((IEnumerable<Observation.ReferenceRangeComponent>)uzzzv_),
-                HasMember = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzw_),
-                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzx_),
-                Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)uzzzy_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzzz_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzza_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzb_),
+                StatusElement = uzzzc_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzd_),
+                Code = uzzze_,
+                Subject = uzzzf_,
+                Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzg_),
+                Encounter = uzzzh_,
+                Effective = (DataType)uzzzi_,
+                IssuedElement = uzzzj_,
+                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzk_),
+                Value = (DataType)uzzzl_,
+                DataAbsentReason = uzzzm_,
+                Interpretation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzn_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)uzzzo_),
+                BodySite = uzzzp_,
+                Method = uzzzq_,
+                Specimen = uzzzr_,
+                Device = uzzzs_,
+                ReferenceRange = new List<Observation.ReferenceRangeComponent>((IEnumerable<Observation.ReferenceRangeComponent>)uzzzt_),
+                HasMember = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzu_),
+                DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)uzzzv_),
+                Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)uzzzw_),
             };
 
-            return uzzzz_;
+            return uzzzx_;
         };
-        IEnumerable<Observation> tzzzy_ = context.Operators.Select<Observation, Observation>((IEnumerable<Observation>)tzzzw_, tzzzx_);
-        IEnumerable<Observation> tzzzz_ = context.Operators.Distinct<Observation>(tzzzy_);
-        Observation uzzza_ = context.Operators.SingletonFrom<Observation>(tzzzz_);
+        IEnumerable<Observation> tzzzw_ = context.Operators.Select<Observation, Observation>((IEnumerable<Observation>)tzzzu_, tzzzv_);
+        IEnumerable<Observation> tzzzx_ = context.Operators.Distinct<Observation>(tzzzw_);
+        Observation tzzzy_ = context.Operators.SingletonFrom<Observation>(tzzzx_);
 
-        return uzzza_;
+        return tzzzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ObservationDefinitionResource")]
     public ObservationDefinition ObservationDefinitionResource(CqlContext context, ObservationDefinition arg)
     {
-        ObservationDefinition[] vzzza_ = [
+        ObservationDefinition[] uzzzy_ = [
             arg,
         ];
-        ObservationDefinition vzzzb_(ObservationDefinition a)
+        ObservationDefinition uzzzz_(ObservationDefinition a)
         {
-            List<CodeableConcept> vzzzf_ = a?.Category;
-            CodeableConcept vzzzg_ = a?.Code;
-            List<Identifier> vzzzh_ = a?.Identifier;
-            List<Code<ObservationDefinition.ObservationDataType>> vzzzi_ = a?.PermittedDataTypeElement;
-            FhirBoolean vzzzj_ = a?.MultipleResultsAllowedElement;
-            CodeableConcept vzzzk_ = a?.Method;
-            FhirString vzzzl_ = a?.PreferredReportNameElement;
-            ObservationDefinition.QuantitativeDetailsComponent vzzzm_ = a?.QuantitativeDetails;
-            List<ObservationDefinition.QualifiedIntervalComponent> vzzzn_ = a?.QualifiedInterval;
-            ResourceReference vzzzo_ = a?.ValidCodedValueSet;
-            ResourceReference vzzzp_ = a?.NormalCodedValueSet;
-            ResourceReference vzzzq_ = a?.AbnormalCodedValueSet;
-            ResourceReference vzzzr_ = a?.CriticalCodedValueSet;
-            ObservationDefinition vzzzs_ = new ObservationDefinition
+            List<CodeableConcept> vzzzd_ = a?.Category;
+            CodeableConcept vzzze_ = a?.Code;
+            List<Identifier> vzzzf_ = a?.Identifier;
+            List<Code<ObservationDefinition.ObservationDataType>> vzzzg_ = a?.PermittedDataTypeElement;
+            FhirBoolean vzzzh_ = a?.MultipleResultsAllowedElement;
+            CodeableConcept vzzzi_ = a?.Method;
+            FhirString vzzzj_ = a?.PreferredReportNameElement;
+            ObservationDefinition.QuantitativeDetailsComponent vzzzk_ = a?.QuantitativeDetails;
+            List<ObservationDefinition.QualifiedIntervalComponent> vzzzl_ = a?.QualifiedInterval;
+            ResourceReference vzzzm_ = a?.ValidCodedValueSet;
+            ResourceReference vzzzn_ = a?.NormalCodedValueSet;
+            ResourceReference vzzzo_ = a?.AbnormalCodedValueSet;
+            ResourceReference vzzzp_ = a?.CriticalCodedValueSet;
+            ObservationDefinition vzzzq_ = new ObservationDefinition
             {
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzzf_),
-                Code = vzzzg_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzzh_),
-                PermittedDataTypeElement = new List<Code<ObservationDefinition.ObservationDataType>>((IEnumerable<Code<ObservationDefinition.ObservationDataType>>)vzzzi_),
-                MultipleResultsAllowedElement = vzzzj_,
-                Method = vzzzk_,
-                PreferredReportNameElement = vzzzl_,
-                QuantitativeDetails = vzzzm_,
-                QualifiedInterval = new List<ObservationDefinition.QualifiedIntervalComponent>((IEnumerable<ObservationDefinition.QualifiedIntervalComponent>)vzzzn_),
-                ValidCodedValueSet = vzzzo_,
-                NormalCodedValueSet = vzzzp_,
-                AbnormalCodedValueSet = vzzzq_,
-                CriticalCodedValueSet = vzzzr_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzzd_),
+                Code = vzzze_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzzf_),
+                PermittedDataTypeElement = new List<Code<ObservationDefinition.ObservationDataType>>((IEnumerable<Code<ObservationDefinition.ObservationDataType>>)vzzzg_),
+                MultipleResultsAllowedElement = vzzzh_,
+                Method = vzzzi_,
+                PreferredReportNameElement = vzzzj_,
+                QuantitativeDetails = vzzzk_,
+                QualifiedInterval = new List<ObservationDefinition.QualifiedIntervalComponent>((IEnumerable<ObservationDefinition.QualifiedIntervalComponent>)vzzzl_),
+                ValidCodedValueSet = vzzzm_,
+                NormalCodedValueSet = vzzzn_,
+                AbnormalCodedValueSet = vzzzo_,
+                CriticalCodedValueSet = vzzzp_,
             };
 
-            return vzzzs_;
+            return vzzzq_;
         };
-        IEnumerable<ObservationDefinition> vzzzc_ = context.Operators.Select<ObservationDefinition, ObservationDefinition>((IEnumerable<ObservationDefinition>)vzzza_, vzzzb_);
-        IEnumerable<ObservationDefinition> vzzzd_ = context.Operators.Distinct<ObservationDefinition>(vzzzc_);
-        ObservationDefinition vzzze_ = context.Operators.SingletonFrom<ObservationDefinition>(vzzzd_);
+        IEnumerable<ObservationDefinition> vzzza_ = context.Operators.Select<ObservationDefinition, ObservationDefinition>((IEnumerable<ObservationDefinition>)uzzzy_, uzzzz_);
+        IEnumerable<ObservationDefinition> vzzzb_ = context.Operators.Distinct<ObservationDefinition>(vzzza_);
+        ObservationDefinition vzzzc_ = context.Operators.SingletonFrom<ObservationDefinition>(vzzzb_);
 
-        return vzzze_;
+        return vzzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("OperationOutcomeResource")]
     public OperationOutcome OperationOutcomeResource(CqlContext context, OperationOutcome arg)
     {
-        OperationOutcome[] vzzzt_ = [
+        OperationOutcome[] vzzzr_ = [
             arg,
         ];
-        OperationOutcome vzzzu_(OperationOutcome a)
+        OperationOutcome vzzzs_(OperationOutcome a)
         {
-            List<OperationOutcome.IssueComponent> vzzzy_ = a?.Issue;
-            OperationOutcome vzzzz_ = new OperationOutcome
+            List<OperationOutcome.IssueComponent> vzzzw_ = a?.Issue;
+            OperationOutcome vzzzx_ = new OperationOutcome
             {
-                Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)vzzzy_),
+                Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)vzzzw_),
             };
 
-            return vzzzz_;
+            return vzzzx_;
         };
-        IEnumerable<OperationOutcome> vzzzv_ = context.Operators.Select<OperationOutcome, OperationOutcome>((IEnumerable<OperationOutcome>)vzzzt_, vzzzu_);
-        IEnumerable<OperationOutcome> vzzzw_ = context.Operators.Distinct<OperationOutcome>(vzzzv_);
-        OperationOutcome vzzzx_ = context.Operators.SingletonFrom<OperationOutcome>(vzzzw_);
+        IEnumerable<OperationOutcome> vzzzt_ = context.Operators.Select<OperationOutcome, OperationOutcome>((IEnumerable<OperationOutcome>)vzzzr_, vzzzs_);
+        IEnumerable<OperationOutcome> vzzzu_ = context.Operators.Distinct<OperationOutcome>(vzzzt_);
+        OperationOutcome vzzzv_ = context.Operators.SingletonFrom<OperationOutcome>(vzzzu_);
 
-        return vzzzx_;
+        return vzzzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("OrganizationResource")]
     public Organization OrganizationResource(CqlContext context, Organization arg)
     {
-        Organization[] wzzza_ = [
+        Organization[] vzzzy_ = [
             arg,
         ];
-        Organization wzzzb_(Organization a)
+        Organization vzzzz_(Organization a)
         {
-            List<Identifier> wzzzf_ = a?.Identifier;
-            FhirBoolean wzzzg_ = a?.ActiveElement;
-            List<CodeableConcept> wzzzh_ = a?.Type;
-            FhirString wzzzi_ = a?.NameElement;
-            List<FhirString> wzzzj_ = a?.AliasElement;
-            List<ContactPoint> wzzzk_ = a?.Telecom;
-            List<Address> wzzzl_ = a?.Address;
-            ResourceReference wzzzm_ = a?.PartOf;
-            List<Organization.ContactComponent> wzzzn_ = a?.Contact;
-            List<ResourceReference> wzzzo_ = a?.Endpoint;
-            Organization wzzzp_ = new Organization
+            List<Identifier> wzzzd_ = a?.Identifier;
+            FhirBoolean wzzze_ = a?.ActiveElement;
+            List<CodeableConcept> wzzzf_ = a?.Type;
+            FhirString wzzzg_ = a?.NameElement;
+            List<FhirString> wzzzh_ = a?.AliasElement;
+            List<ContactPoint> wzzzi_ = a?.Telecom;
+            List<Address> wzzzj_ = a?.Address;
+            ResourceReference wzzzk_ = a?.PartOf;
+            List<Organization.ContactComponent> wzzzl_ = a?.Contact;
+            List<ResourceReference> wzzzm_ = a?.Endpoint;
+            Organization wzzzn_ = new Organization
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzzf_),
-                ActiveElement = wzzzg_,
-                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzh_),
-                NameElement = wzzzi_,
-                AliasElement = new List<FhirString>((IEnumerable<FhirString>)wzzzj_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)wzzzk_),
-                Address = new List<Address>((IEnumerable<Address>)wzzzl_),
-                PartOf = wzzzm_,
-                Contact = new List<Organization.ContactComponent>((IEnumerable<Organization.ContactComponent>)wzzzn_),
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)wzzzo_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzzd_),
+                ActiveElement = wzzze_,
+                Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzf_),
+                NameElement = wzzzg_,
+                AliasElement = new List<FhirString>((IEnumerable<FhirString>)wzzzh_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)wzzzi_),
+                Address = new List<Address>((IEnumerable<Address>)wzzzj_),
+                PartOf = wzzzk_,
+                Contact = new List<Organization.ContactComponent>((IEnumerable<Organization.ContactComponent>)wzzzl_),
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)wzzzm_),
             };
 
-            return wzzzp_;
+            return wzzzn_;
         };
-        IEnumerable<Organization> wzzzc_ = context.Operators.Select<Organization, Organization>((IEnumerable<Organization>)wzzza_, wzzzb_);
-        IEnumerable<Organization> wzzzd_ = context.Operators.Distinct<Organization>(wzzzc_);
-        Organization wzzze_ = context.Operators.SingletonFrom<Organization>(wzzzd_);
+        IEnumerable<Organization> wzzza_ = context.Operators.Select<Organization, Organization>((IEnumerable<Organization>)vzzzy_, vzzzz_);
+        IEnumerable<Organization> wzzzb_ = context.Operators.Distinct<Organization>(wzzza_);
+        Organization wzzzc_ = context.Operators.SingletonFrom<Organization>(wzzzb_);
 
-        return wzzze_;
+        return wzzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("OrganizationAffiliationResource")]
     public OrganizationAffiliation OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation arg)
     {
-        OrganizationAffiliation[] wzzzq_ = [
+        OrganizationAffiliation[] wzzzo_ = [
             arg,
         ];
-        OrganizationAffiliation wzzzr_(OrganizationAffiliation a)
+        OrganizationAffiliation wzzzp_(OrganizationAffiliation a)
         {
-            List<Identifier> wzzzv_ = a?.Identifier;
-            FhirBoolean wzzzw_ = a?.ActiveElement;
-            Period wzzzx_ = a?.Period;
-            ResourceReference wzzzy_ = a?.Organization;
-            ResourceReference wzzzz_ = a?.ParticipatingOrganization;
-            List<ResourceReference> xzzza_ = a?.Network;
-            List<CodeableConcept> xzzzb_ = a?.Code;
-            List<CodeableConcept> xzzzc_ = a?.Specialty;
-            List<ResourceReference> xzzzd_ = a?.Location;
-            List<ResourceReference> xzzze_ = a?.HealthcareService;
-            List<ContactPoint> xzzzf_ = a?.Telecom;
-            List<ResourceReference> xzzzg_ = a?.Endpoint;
-            OrganizationAffiliation xzzzh_ = new OrganizationAffiliation
+            List<Identifier> wzzzt_ = a?.Identifier;
+            FhirBoolean wzzzu_ = a?.ActiveElement;
+            Period wzzzv_ = a?.Period;
+            ResourceReference wzzzw_ = a?.Organization;
+            ResourceReference wzzzx_ = a?.ParticipatingOrganization;
+            List<ResourceReference> wzzzy_ = a?.Network;
+            List<CodeableConcept> wzzzz_ = a?.Code;
+            List<CodeableConcept> xzzza_ = a?.Specialty;
+            List<ResourceReference> xzzzb_ = a?.Location;
+            List<ResourceReference> xzzzc_ = a?.HealthcareService;
+            List<ContactPoint> xzzzd_ = a?.Telecom;
+            List<ResourceReference> xzzze_ = a?.Endpoint;
+            OrganizationAffiliation xzzzf_ = new OrganizationAffiliation
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzzv_),
-                ActiveElement = wzzzw_,
-                Period = wzzzx_,
-                Organization = wzzzy_,
-                ParticipatingOrganization = wzzzz_,
-                Network = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzza_),
-                Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzb_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzc_),
-                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzzd_),
-                HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzze_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)xzzzf_),
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzzg_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)wzzzt_),
+                ActiveElement = wzzzu_,
+                Period = wzzzv_,
+                Organization = wzzzw_,
+                ParticipatingOrganization = wzzzx_,
+                Network = new List<ResourceReference>((IEnumerable<ResourceReference>)wzzzy_),
+                Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzz_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzza_),
+                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzzb_),
+                HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzzc_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)xzzzd_),
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzze_),
             };
 
-            return xzzzh_;
+            return xzzzf_;
         };
-        IEnumerable<OrganizationAffiliation> wzzzs_ = context.Operators.Select<OrganizationAffiliation, OrganizationAffiliation>((IEnumerable<OrganizationAffiliation>)wzzzq_, wzzzr_);
-        IEnumerable<OrganizationAffiliation> wzzzt_ = context.Operators.Distinct<OrganizationAffiliation>(wzzzs_);
-        OrganizationAffiliation wzzzu_ = context.Operators.SingletonFrom<OrganizationAffiliation>(wzzzt_);
+        IEnumerable<OrganizationAffiliation> wzzzq_ = context.Operators.Select<OrganizationAffiliation, OrganizationAffiliation>((IEnumerable<OrganizationAffiliation>)wzzzo_, wzzzp_);
+        IEnumerable<OrganizationAffiliation> wzzzr_ = context.Operators.Distinct<OrganizationAffiliation>(wzzzq_);
+        OrganizationAffiliation wzzzs_ = context.Operators.SingletonFrom<OrganizationAffiliation>(wzzzr_);
 
-        return wzzzu_;
+        return wzzzs_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PatientResource")]
     public Patient PatientResource(CqlContext context, Patient arg)
     {
-        Patient[] xzzzi_ = [
+        Patient[] xzzzg_ = [
             arg,
         ];
-        Patient xzzzj_(Patient a)
+        Patient xzzzh_(Patient a)
         {
-            List<Identifier> xzzzn_ = a?.Identifier;
-            FhirBoolean xzzzo_ = a?.ActiveElement;
-            List<HumanName> xzzzp_ = a?.Name;
-            List<ContactPoint> xzzzq_ = a?.Telecom;
-            Code<AdministrativeGender> xzzzr_ = a?.GenderElement;
-            Date xzzzs_ = a?.BirthDateElement;
-            DataType xzzzt_ = a?.Deceased;
-            List<Address> xzzzu_ = a?.Address;
-            CodeableConcept xzzzv_ = a?.MaritalStatus;
-            DataType xzzzw_ = a?.MultipleBirth;
-            List<Attachment> xzzzx_ = a?.Photo;
-            List<Patient.ContactComponent> xzzzy_ = a?.Contact;
-            List<Patient.CommunicationComponent> xzzzz_ = a?.Communication;
-            List<ResourceReference> yzzza_ = a?.GeneralPractitioner;
-            ResourceReference yzzzb_ = a?.ManagingOrganization;
-            List<Patient.LinkComponent> yzzzc_ = a?.Link;
-            Patient yzzzd_ = new Patient
+            List<Identifier> xzzzl_ = a?.Identifier;
+            FhirBoolean xzzzm_ = a?.ActiveElement;
+            List<HumanName> xzzzn_ = a?.Name;
+            List<ContactPoint> xzzzo_ = a?.Telecom;
+            Code<AdministrativeGender> xzzzp_ = a?.GenderElement;
+            Date xzzzq_ = a?.BirthDateElement;
+            DataType xzzzr_ = a?.Deceased;
+            List<Address> xzzzs_ = a?.Address;
+            CodeableConcept xzzzt_ = a?.MaritalStatus;
+            DataType xzzzu_ = a?.MultipleBirth;
+            List<Attachment> xzzzv_ = a?.Photo;
+            List<Patient.ContactComponent> xzzzw_ = a?.Contact;
+            List<Patient.CommunicationComponent> xzzzx_ = a?.Communication;
+            List<ResourceReference> xzzzy_ = a?.GeneralPractitioner;
+            ResourceReference xzzzz_ = a?.ManagingOrganization;
+            List<Patient.LinkComponent> yzzza_ = a?.Link;
+            Patient yzzzb_ = new Patient
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzzzn_),
-                ActiveElement = xzzzo_,
-                Name = new List<HumanName>((IEnumerable<HumanName>)xzzzp_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)xzzzq_),
-                GenderElement = xzzzr_,
-                BirthDateElement = xzzzs_,
-                Deceased = (DataType)xzzzt_,
-                Address = new List<Address>((IEnumerable<Address>)xzzzu_),
-                MaritalStatus = xzzzv_,
-                MultipleBirth = (DataType)xzzzw_,
-                Photo = new List<Attachment>((IEnumerable<Attachment>)xzzzx_),
-                Contact = new List<Patient.ContactComponent>((IEnumerable<Patient.ContactComponent>)xzzzy_),
-                Communication = new List<Patient.CommunicationComponent>((IEnumerable<Patient.CommunicationComponent>)xzzzz_),
-                GeneralPractitioner = new List<ResourceReference>((IEnumerable<ResourceReference>)yzzza_),
-                ManagingOrganization = yzzzb_,
-                Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)yzzzc_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)xzzzl_),
+                ActiveElement = xzzzm_,
+                Name = new List<HumanName>((IEnumerable<HumanName>)xzzzn_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)xzzzo_),
+                GenderElement = xzzzp_,
+                BirthDateElement = xzzzq_,
+                Deceased = (DataType)xzzzr_,
+                Address = new List<Address>((IEnumerable<Address>)xzzzs_),
+                MaritalStatus = xzzzt_,
+                MultipleBirth = (DataType)xzzzu_,
+                Photo = new List<Attachment>((IEnumerable<Attachment>)xzzzv_),
+                Contact = new List<Patient.ContactComponent>((IEnumerable<Patient.ContactComponent>)xzzzw_),
+                Communication = new List<Patient.CommunicationComponent>((IEnumerable<Patient.CommunicationComponent>)xzzzx_),
+                GeneralPractitioner = new List<ResourceReference>((IEnumerable<ResourceReference>)xzzzy_),
+                ManagingOrganization = xzzzz_,
+                Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)yzzza_),
             };
 
-            return yzzzd_;
+            return yzzzb_;
         };
-        IEnumerable<Patient> xzzzk_ = context.Operators.Select<Patient, Patient>((IEnumerable<Patient>)xzzzi_, xzzzj_);
-        IEnumerable<Patient> xzzzl_ = context.Operators.Distinct<Patient>(xzzzk_);
-        Patient xzzzm_ = context.Operators.SingletonFrom<Patient>(xzzzl_);
+        IEnumerable<Patient> xzzzi_ = context.Operators.Select<Patient, Patient>((IEnumerable<Patient>)xzzzg_, xzzzh_);
+        IEnumerable<Patient> xzzzj_ = context.Operators.Distinct<Patient>(xzzzi_);
+        Patient xzzzk_ = context.Operators.SingletonFrom<Patient>(xzzzj_);
 
-        return xzzzm_;
+        return xzzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PaymentNoticeResource")]
     public PaymentNotice PaymentNoticeResource(CqlContext context, PaymentNotice arg)
     {
-        PaymentNotice[] yzzze_ = [
+        PaymentNotice[] yzzzc_ = [
             arg,
         ];
-        PaymentNotice yzzzf_(PaymentNotice a)
+        PaymentNotice yzzzd_(PaymentNotice a)
         {
-            List<Identifier> yzzzj_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> yzzzk_ = a?.StatusElement;
-            ResourceReference yzzzl_ = a?.Request;
-            ResourceReference yzzzm_ = a?.Response;
-            FhirDateTime yzzzn_ = a?.CreatedElement;
-            ResourceReference yzzzo_ = a?.Provider;
-            ResourceReference yzzzp_ = a?.Payment;
-            Date yzzzq_ = a?.PaymentDateElement;
-            ResourceReference yzzzr_ = a?.Payee;
-            ResourceReference yzzzs_ = a?.Recipient;
-            Money yzzzt_ = a?.Amount;
-            CodeableConcept yzzzu_ = a?.PaymentStatus;
-            PaymentNotice yzzzv_ = new PaymentNotice
+            List<Identifier> yzzzh_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> yzzzi_ = a?.StatusElement;
+            ResourceReference yzzzj_ = a?.Request;
+            ResourceReference yzzzk_ = a?.Response;
+            FhirDateTime yzzzl_ = a?.CreatedElement;
+            ResourceReference yzzzm_ = a?.Provider;
+            ResourceReference yzzzn_ = a?.Payment;
+            Date yzzzo_ = a?.PaymentDateElement;
+            ResourceReference yzzzp_ = a?.Payee;
+            ResourceReference yzzzq_ = a?.Recipient;
+            Money yzzzr_ = a?.Amount;
+            CodeableConcept yzzzs_ = a?.PaymentStatus;
+            PaymentNotice yzzzt_ = new PaymentNotice
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzzj_),
-                StatusElement = yzzzk_,
-                Request = yzzzl_,
-                Response = yzzzm_,
-                CreatedElement = yzzzn_,
-                Provider = yzzzo_,
-                Payment = yzzzp_,
-                PaymentDateElement = yzzzq_,
-                Payee = yzzzr_,
-                Recipient = yzzzs_,
-                Amount = yzzzt_,
-                PaymentStatus = yzzzu_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzzh_),
+                StatusElement = yzzzi_,
+                Request = yzzzj_,
+                Response = yzzzk_,
+                CreatedElement = yzzzl_,
+                Provider = yzzzm_,
+                Payment = yzzzn_,
+                PaymentDateElement = yzzzo_,
+                Payee = yzzzp_,
+                Recipient = yzzzq_,
+                Amount = yzzzr_,
+                PaymentStatus = yzzzs_,
             };
 
-            return yzzzv_;
+            return yzzzt_;
         };
-        IEnumerable<PaymentNotice> yzzzg_ = context.Operators.Select<PaymentNotice, PaymentNotice>((IEnumerable<PaymentNotice>)yzzze_, yzzzf_);
-        IEnumerable<PaymentNotice> yzzzh_ = context.Operators.Distinct<PaymentNotice>(yzzzg_);
-        PaymentNotice yzzzi_ = context.Operators.SingletonFrom<PaymentNotice>(yzzzh_);
+        IEnumerable<PaymentNotice> yzzze_ = context.Operators.Select<PaymentNotice, PaymentNotice>((IEnumerable<PaymentNotice>)yzzzc_, yzzzd_);
+        IEnumerable<PaymentNotice> yzzzf_ = context.Operators.Distinct<PaymentNotice>(yzzze_);
+        PaymentNotice yzzzg_ = context.Operators.SingletonFrom<PaymentNotice>(yzzzf_);
 
-        return yzzzi_;
+        return yzzzg_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PaymentReconciliationResource")]
     public PaymentReconciliation PaymentReconciliationResource(CqlContext context, PaymentReconciliation arg)
     {
-        PaymentReconciliation[] yzzzw_ = [
+        PaymentReconciliation[] yzzzu_ = [
             arg,
         ];
-        PaymentReconciliation yzzzx_(PaymentReconciliation a)
+        PaymentReconciliation yzzzv_(PaymentReconciliation a)
         {
-            List<Identifier> zzzzb_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> zzzzc_ = a?.StatusElement;
-            Period zzzzd_ = a?.Period;
-            FhirDateTime zzzze_ = a?.CreatedElement;
-            ResourceReference zzzzf_ = a?.PaymentIssuer;
-            ResourceReference zzzzg_ = a?.Request;
-            ResourceReference zzzzh_ = a?.Requestor;
-            Code<ClaimProcessingCodes> zzzzi_ = a?.OutcomeElement;
-            FhirString zzzzj_ = a?.DispositionElement;
-            Date zzzzk_ = a?.PaymentDateElement;
-            Money zzzzl_ = a?.PaymentAmount;
-            Identifier zzzzm_ = a?.PaymentIdentifier;
-            List<PaymentReconciliation.DetailsComponent> zzzzn_ = a?.Detail;
-            CodeableConcept zzzzo_ = a?.FormCode;
-            List<PaymentReconciliation.NotesComponent> zzzzp_ = a?.ProcessNote;
-            PaymentReconciliation zzzzq_ = new PaymentReconciliation
+            List<Identifier> yzzzz_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> zzzza_ = a?.StatusElement;
+            Period zzzzb_ = a?.Period;
+            FhirDateTime zzzzc_ = a?.CreatedElement;
+            ResourceReference zzzzd_ = a?.PaymentIssuer;
+            ResourceReference zzzze_ = a?.Request;
+            ResourceReference zzzzf_ = a?.Requestor;
+            Code<ClaimProcessingCodes> zzzzg_ = a?.OutcomeElement;
+            FhirString zzzzh_ = a?.DispositionElement;
+            Date zzzzi_ = a?.PaymentDateElement;
+            Money zzzzj_ = a?.PaymentAmount;
+            Identifier zzzzk_ = a?.PaymentIdentifier;
+            List<PaymentReconciliation.DetailsComponent> zzzzl_ = a?.Detail;
+            CodeableConcept zzzzm_ = a?.FormCode;
+            List<PaymentReconciliation.NotesComponent> zzzzn_ = a?.ProcessNote;
+            PaymentReconciliation zzzzo_ = new PaymentReconciliation
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzzb_),
-                StatusElement = zzzzc_,
-                Period = zzzzd_,
-                CreatedElement = zzzze_,
-                PaymentIssuer = zzzzf_,
-                Request = zzzzg_,
-                Requestor = zzzzh_,
-                OutcomeElement = zzzzi_,
-                DispositionElement = zzzzj_,
-                PaymentDateElement = zzzzk_,
-                PaymentAmount = zzzzl_,
-                PaymentIdentifier = zzzzm_,
-                Detail = new List<PaymentReconciliation.DetailsComponent>((IEnumerable<PaymentReconciliation.DetailsComponent>)zzzzn_),
-                FormCode = zzzzo_,
-                ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<PaymentReconciliation.NotesComponent>)zzzzp_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzzz_),
+                StatusElement = zzzza_,
+                Period = zzzzb_,
+                CreatedElement = zzzzc_,
+                PaymentIssuer = zzzzd_,
+                Request = zzzze_,
+                Requestor = zzzzf_,
+                OutcomeElement = zzzzg_,
+                DispositionElement = zzzzh_,
+                PaymentDateElement = zzzzi_,
+                PaymentAmount = zzzzj_,
+                PaymentIdentifier = zzzzk_,
+                Detail = new List<PaymentReconciliation.DetailsComponent>((IEnumerable<PaymentReconciliation.DetailsComponent>)zzzzl_),
+                FormCode = zzzzm_,
+                ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<PaymentReconciliation.NotesComponent>)zzzzn_),
             };
 
-            return zzzzq_;
+            return zzzzo_;
         };
-        IEnumerable<PaymentReconciliation> yzzzy_ = context.Operators.Select<PaymentReconciliation, PaymentReconciliation>((IEnumerable<PaymentReconciliation>)yzzzw_, yzzzx_);
-        IEnumerable<PaymentReconciliation> yzzzz_ = context.Operators.Distinct<PaymentReconciliation>(yzzzy_);
-        PaymentReconciliation zzzza_ = context.Operators.SingletonFrom<PaymentReconciliation>(yzzzz_);
+        IEnumerable<PaymentReconciliation> yzzzw_ = context.Operators.Select<PaymentReconciliation, PaymentReconciliation>((IEnumerable<PaymentReconciliation>)yzzzu_, yzzzv_);
+        IEnumerable<PaymentReconciliation> yzzzx_ = context.Operators.Distinct<PaymentReconciliation>(yzzzw_);
+        PaymentReconciliation yzzzy_ = context.Operators.SingletonFrom<PaymentReconciliation>(yzzzx_);
 
-        return zzzza_;
+        return yzzzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PersonResource")]
     public Person PersonResource(CqlContext context, Person arg)
     {
-        Person[] zzzzr_ = [
+        Person[] zzzzp_ = [
             arg,
         ];
-        Person zzzzs_(Person a)
+        Person zzzzq_(Person a)
         {
-            List<Identifier> zzzzw_ = a?.Identifier;
-            List<HumanName> zzzzx_ = a?.Name;
-            List<ContactPoint> zzzzy_ = a?.Telecom;
-            Code<AdministrativeGender> zzzzz_ = a?.GenderElement;
-            Date azzzza_ = a?.BirthDateElement;
-            List<Address> azzzzb_ = a?.Address;
-            Attachment azzzzc_ = a?.Photo;
-            ResourceReference azzzzd_ = a?.ManagingOrganization;
-            FhirBoolean azzzze_ = a?.ActiveElement;
-            List<Person.LinkComponent> azzzzf_ = a?.Link;
-            Person azzzzg_ = new Person
+            List<Identifier> zzzzu_ = a?.Identifier;
+            List<HumanName> zzzzv_ = a?.Name;
+            List<ContactPoint> zzzzw_ = a?.Telecom;
+            Code<AdministrativeGender> zzzzx_ = a?.GenderElement;
+            Date zzzzy_ = a?.BirthDateElement;
+            List<Address> zzzzz_ = a?.Address;
+            Attachment azzzza_ = a?.Photo;
+            ResourceReference azzzzb_ = a?.ManagingOrganization;
+            FhirBoolean azzzzc_ = a?.ActiveElement;
+            List<Person.LinkComponent> azzzzd_ = a?.Link;
+            Person azzzze_ = new Person
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzzw_),
-                Name = new List<HumanName>((IEnumerable<HumanName>)zzzzx_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)zzzzy_),
-                GenderElement = zzzzz_,
-                BirthDateElement = azzzza_,
-                Address = new List<Address>((IEnumerable<Address>)azzzzb_),
-                Photo = azzzzc_,
-                ManagingOrganization = azzzzd_,
-                ActiveElement = azzzze_,
-                Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)azzzzf_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzzu_),
+                Name = new List<HumanName>((IEnumerable<HumanName>)zzzzv_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)zzzzw_),
+                GenderElement = zzzzx_,
+                BirthDateElement = zzzzy_,
+                Address = new List<Address>((IEnumerable<Address>)zzzzz_),
+                Photo = azzzza_,
+                ManagingOrganization = azzzzb_,
+                ActiveElement = azzzzc_,
+                Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)azzzzd_),
             };
 
-            return azzzzg_;
+            return azzzze_;
         };
-        IEnumerable<Person> zzzzt_ = context.Operators.Select<Person, Person>((IEnumerable<Person>)zzzzr_, zzzzs_);
-        IEnumerable<Person> zzzzu_ = context.Operators.Distinct<Person>(zzzzt_);
-        Person zzzzv_ = context.Operators.SingletonFrom<Person>(zzzzu_);
+        IEnumerable<Person> zzzzr_ = context.Operators.Select<Person, Person>((IEnumerable<Person>)zzzzp_, zzzzq_);
+        IEnumerable<Person> zzzzs_ = context.Operators.Distinct<Person>(zzzzr_);
+        Person zzzzt_ = context.Operators.SingletonFrom<Person>(zzzzs_);
 
-        return zzzzv_;
+        return zzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PlanDefinitionResource")]
     public PlanDefinition PlanDefinitionResource(CqlContext context, PlanDefinition arg)
     {
-        PlanDefinition[] azzzzh_ = [
+        PlanDefinition[] azzzzf_ = [
             arg,
         ];
-        PlanDefinition azzzzi_(PlanDefinition a)
+        PlanDefinition azzzzg_(PlanDefinition a)
         {
-            FhirUri azzzzm_ = a?.UrlElement;
-            List<Identifier> azzzzn_ = a?.Identifier;
-            FhirString azzzzo_ = a?.VersionElement;
-            FhirString azzzzp_ = a?.NameElement;
-            FhirString azzzzq_ = a?.TitleElement;
-            FhirString azzzzr_ = a?.SubtitleElement;
-            CodeableConcept azzzzs_ = a?.Type;
-            Code<PublicationStatus> azzzzt_ = a?.StatusElement;
-            FhirBoolean azzzzu_ = a?.ExperimentalElement;
-            DataType azzzzv_ = a?.Subject;
-            FhirDateTime azzzzw_ = a?.DateElement;
-            FhirString azzzzx_ = a?.PublisherElement;
-            List<ContactDetail> azzzzy_ = a?.Contact;
-            Markdown azzzzz_ = a?.DescriptionElement;
-            List<UsageContext> bzzzza_ = a?.UseContext;
-            List<CodeableConcept> bzzzzb_ = a?.Jurisdiction;
-            Markdown bzzzzc_ = a?.PurposeElement;
-            FhirString bzzzzd_ = a?.UsageElement;
-            Markdown bzzzze_ = a?.CopyrightElement;
-            Date bzzzzf_ = a?.ApprovalDateElement;
-            Date bzzzzg_ = a?.LastReviewDateElement;
-            Period bzzzzh_ = a?.EffectivePeriod;
-            List<CodeableConcept> bzzzzi_ = a?.Topic;
-            List<ContactDetail> bzzzzj_ = a?.Author;
-            List<ContactDetail> bzzzzk_ = a?.Editor;
-            List<ContactDetail> bzzzzl_ = a?.Reviewer;
-            List<ContactDetail> bzzzzm_ = a?.Endorser;
-            List<RelatedArtifact> bzzzzn_ = a?.RelatedArtifact;
-            List<Canonical> bzzzzo_ = a?.LibraryElement;
-            List<PlanDefinition.GoalComponent> bzzzzp_ = a?.Goal;
-            List<PlanDefinition.ActionComponent> bzzzzq_ = a?.Action;
-            PlanDefinition bzzzzr_ = new PlanDefinition
+            FhirUri azzzzk_ = a?.UrlElement;
+            List<Identifier> azzzzl_ = a?.Identifier;
+            FhirString azzzzm_ = a?.VersionElement;
+            FhirString azzzzn_ = a?.NameElement;
+            FhirString azzzzo_ = a?.TitleElement;
+            FhirString azzzzp_ = a?.SubtitleElement;
+            CodeableConcept azzzzq_ = a?.Type;
+            Code<PublicationStatus> azzzzr_ = a?.StatusElement;
+            FhirBoolean azzzzs_ = a?.ExperimentalElement;
+            DataType azzzzt_ = a?.Subject;
+            FhirDateTime azzzzu_ = a?.DateElement;
+            FhirString azzzzv_ = a?.PublisherElement;
+            List<ContactDetail> azzzzw_ = a?.Contact;
+            Markdown azzzzx_ = a?.DescriptionElement;
+            List<UsageContext> azzzzy_ = a?.UseContext;
+            List<CodeableConcept> azzzzz_ = a?.Jurisdiction;
+            Markdown bzzzza_ = a?.PurposeElement;
+            FhirString bzzzzb_ = a?.UsageElement;
+            Markdown bzzzzc_ = a?.CopyrightElement;
+            Date bzzzzd_ = a?.ApprovalDateElement;
+            Date bzzzze_ = a?.LastReviewDateElement;
+            Period bzzzzf_ = a?.EffectivePeriod;
+            List<CodeableConcept> bzzzzg_ = a?.Topic;
+            List<ContactDetail> bzzzzh_ = a?.Author;
+            List<ContactDetail> bzzzzi_ = a?.Editor;
+            List<ContactDetail> bzzzzj_ = a?.Reviewer;
+            List<ContactDetail> bzzzzk_ = a?.Endorser;
+            List<RelatedArtifact> bzzzzl_ = a?.RelatedArtifact;
+            List<Canonical> bzzzzm_ = a?.LibraryElement;
+            List<PlanDefinition.GoalComponent> bzzzzn_ = a?.Goal;
+            List<PlanDefinition.ActionComponent> bzzzzo_ = a?.Action;
+            PlanDefinition bzzzzp_ = new PlanDefinition
             {
-                UrlElement = azzzzm_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzzn_),
-                VersionElement = azzzzo_,
-                NameElement = azzzzp_,
-                TitleElement = azzzzq_,
-                SubtitleElement = azzzzr_,
-                Type = azzzzs_,
-                StatusElement = azzzzt_,
-                ExperimentalElement = azzzzu_,
-                Subject = (DataType)azzzzv_,
-                DateElement = azzzzw_,
-                PublisherElement = azzzzx_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)azzzzy_),
-                DescriptionElement = azzzzz_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)bzzzza_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzb_),
-                PurposeElement = bzzzzc_,
-                UsageElement = bzzzzd_,
-                CopyrightElement = bzzzze_,
-                ApprovalDateElement = bzzzzf_,
-                LastReviewDateElement = bzzzzg_,
-                EffectivePeriod = bzzzzh_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzi_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzj_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzk_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzl_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzm_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)bzzzzn_),
-                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)bzzzzo_),
-                Goal = new List<PlanDefinition.GoalComponent>((IEnumerable<PlanDefinition.GoalComponent>)bzzzzp_),
-                Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.ActionComponent>)bzzzzq_),
+                UrlElement = azzzzk_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzzl_),
+                VersionElement = azzzzm_,
+                NameElement = azzzzn_,
+                TitleElement = azzzzo_,
+                SubtitleElement = azzzzp_,
+                Type = azzzzq_,
+                StatusElement = azzzzr_,
+                ExperimentalElement = azzzzs_,
+                Subject = (DataType)azzzzt_,
+                DateElement = azzzzu_,
+                PublisherElement = azzzzv_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)azzzzw_),
+                DescriptionElement = azzzzx_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)azzzzy_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azzzzz_),
+                PurposeElement = bzzzza_,
+                UsageElement = bzzzzb_,
+                CopyrightElement = bzzzzc_,
+                ApprovalDateElement = bzzzzd_,
+                LastReviewDateElement = bzzzze_,
+                EffectivePeriod = bzzzzf_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzg_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzh_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzi_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzj_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)bzzzzk_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)bzzzzl_),
+                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)bzzzzm_),
+                Goal = new List<PlanDefinition.GoalComponent>((IEnumerable<PlanDefinition.GoalComponent>)bzzzzn_),
+                Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.ActionComponent>)bzzzzo_),
             };
 
-            return bzzzzr_;
+            return bzzzzp_;
         };
-        IEnumerable<PlanDefinition> azzzzj_ = context.Operators.Select<PlanDefinition, PlanDefinition>((IEnumerable<PlanDefinition>)azzzzh_, azzzzi_);
-        IEnumerable<PlanDefinition> azzzzk_ = context.Operators.Distinct<PlanDefinition>(azzzzj_);
-        PlanDefinition azzzzl_ = context.Operators.SingletonFrom<PlanDefinition>(azzzzk_);
+        IEnumerable<PlanDefinition> azzzzh_ = context.Operators.Select<PlanDefinition, PlanDefinition>((IEnumerable<PlanDefinition>)azzzzf_, azzzzg_);
+        IEnumerable<PlanDefinition> azzzzi_ = context.Operators.Distinct<PlanDefinition>(azzzzh_);
+        PlanDefinition azzzzj_ = context.Operators.SingletonFrom<PlanDefinition>(azzzzi_);
 
-        return azzzzl_;
+        return azzzzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PractitionerResource")]
     public Practitioner PractitionerResource(CqlContext context, Practitioner arg)
     {
-        Practitioner[] bzzzzs_ = [
+        Practitioner[] bzzzzq_ = [
             arg,
         ];
-        Practitioner bzzzzt_(Practitioner a)
+        Practitioner bzzzzr_(Practitioner a)
         {
-            List<Identifier> bzzzzx_ = a?.Identifier;
-            FhirBoolean bzzzzy_ = a?.ActiveElement;
-            List<HumanName> bzzzzz_ = a?.Name;
-            List<ContactPoint> czzzza_ = a?.Telecom;
-            List<Address> czzzzb_ = a?.Address;
-            Code<AdministrativeGender> czzzzc_ = a?.GenderElement;
-            Date czzzzd_ = a?.BirthDateElement;
-            List<Attachment> czzzze_ = a?.Photo;
-            List<Practitioner.QualificationComponent> czzzzf_ = a?.Qualification;
-            List<CodeableConcept> czzzzg_ = a?.Communication;
-            Practitioner czzzzh_ = new Practitioner
+            List<Identifier> bzzzzv_ = a?.Identifier;
+            FhirBoolean bzzzzw_ = a?.ActiveElement;
+            List<HumanName> bzzzzx_ = a?.Name;
+            List<ContactPoint> bzzzzy_ = a?.Telecom;
+            List<Address> bzzzzz_ = a?.Address;
+            Code<AdministrativeGender> czzzza_ = a?.GenderElement;
+            Date czzzzb_ = a?.BirthDateElement;
+            List<Attachment> czzzzc_ = a?.Photo;
+            List<Practitioner.QualificationComponent> czzzzd_ = a?.Qualification;
+            List<CodeableConcept> czzzze_ = a?.Communication;
+            Practitioner czzzzf_ = new Practitioner
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)bzzzzx_),
-                ActiveElement = bzzzzy_,
-                Name = new List<HumanName>((IEnumerable<HumanName>)bzzzzz_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)czzzza_),
-                Address = new List<Address>((IEnumerable<Address>)czzzzb_),
-                GenderElement = czzzzc_,
-                BirthDateElement = czzzzd_,
-                Photo = new List<Attachment>((IEnumerable<Attachment>)czzzze_),
-                Qualification = new List<Practitioner.QualificationComponent>((IEnumerable<Practitioner.QualificationComponent>)czzzzf_),
-                Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzg_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)bzzzzv_),
+                ActiveElement = bzzzzw_,
+                Name = new List<HumanName>((IEnumerable<HumanName>)bzzzzx_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)bzzzzy_),
+                Address = new List<Address>((IEnumerable<Address>)bzzzzz_),
+                GenderElement = czzzza_,
+                BirthDateElement = czzzzb_,
+                Photo = new List<Attachment>((IEnumerable<Attachment>)czzzzc_),
+                Qualification = new List<Practitioner.QualificationComponent>((IEnumerable<Practitioner.QualificationComponent>)czzzzd_),
+                Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzze_),
             };
 
-            return czzzzh_;
+            return czzzzf_;
         };
-        IEnumerable<Practitioner> bzzzzu_ = context.Operators.Select<Practitioner, Practitioner>((IEnumerable<Practitioner>)bzzzzs_, bzzzzt_);
-        IEnumerable<Practitioner> bzzzzv_ = context.Operators.Distinct<Practitioner>(bzzzzu_);
-        Practitioner bzzzzw_ = context.Operators.SingletonFrom<Practitioner>(bzzzzv_);
+        IEnumerable<Practitioner> bzzzzs_ = context.Operators.Select<Practitioner, Practitioner>((IEnumerable<Practitioner>)bzzzzq_, bzzzzr_);
+        IEnumerable<Practitioner> bzzzzt_ = context.Operators.Distinct<Practitioner>(bzzzzs_);
+        Practitioner bzzzzu_ = context.Operators.SingletonFrom<Practitioner>(bzzzzt_);
 
-        return bzzzzw_;
+        return bzzzzu_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("PractitionerRoleResource")]
     public PractitionerRole PractitionerRoleResource(CqlContext context, PractitionerRole arg)
     {
-        PractitionerRole[] czzzzi_ = [
+        PractitionerRole[] czzzzg_ = [
             arg,
         ];
-        PractitionerRole czzzzj_(PractitionerRole a)
+        PractitionerRole czzzzh_(PractitionerRole a)
         {
-            List<Identifier> czzzzn_ = a?.Identifier;
-            FhirBoolean czzzzo_ = a?.ActiveElement;
-            Period czzzzp_ = a?.Period;
-            ResourceReference czzzzq_ = a?.Practitioner;
-            ResourceReference czzzzr_ = a?.Organization;
-            List<CodeableConcept> czzzzs_ = a?.Code;
-            List<CodeableConcept> czzzzt_ = a?.Specialty;
-            List<ResourceReference> czzzzu_ = a?.Location;
-            List<ResourceReference> czzzzv_ = a?.HealthcareService;
-            List<ContactPoint> czzzzw_ = a?.Telecom;
-            List<PractitionerRole.AvailableTimeComponent> czzzzx_ = a?.AvailableTime;
-            List<PractitionerRole.NotAvailableComponent> czzzzy_ = a?.NotAvailable;
-            FhirString czzzzz_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> dzzzza_ = a?.Endpoint;
-            PractitionerRole dzzzzb_ = new PractitionerRole
+            List<Identifier> czzzzl_ = a?.Identifier;
+            FhirBoolean czzzzm_ = a?.ActiveElement;
+            Period czzzzn_ = a?.Period;
+            ResourceReference czzzzo_ = a?.Practitioner;
+            ResourceReference czzzzp_ = a?.Organization;
+            List<CodeableConcept> czzzzq_ = a?.Code;
+            List<CodeableConcept> czzzzr_ = a?.Specialty;
+            List<ResourceReference> czzzzs_ = a?.Location;
+            List<ResourceReference> czzzzt_ = a?.HealthcareService;
+            List<ContactPoint> czzzzu_ = a?.Telecom;
+            List<PractitionerRole.AvailableTimeComponent> czzzzv_ = a?.AvailableTime;
+            List<PractitionerRole.NotAvailableComponent> czzzzw_ = a?.NotAvailable;
+            FhirString czzzzx_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference> czzzzy_ = a?.Endpoint;
+            PractitionerRole czzzzz_ = new PractitionerRole
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzzzn_),
-                ActiveElement = czzzzo_,
-                Period = czzzzp_,
-                Practitioner = czzzzq_,
-                Organization = czzzzr_,
-                Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzs_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzt_),
-                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzzu_),
-                HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzzv_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)czzzzw_),
-                AvailableTime = new List<PractitionerRole.AvailableTimeComponent>((IEnumerable<PractitionerRole.AvailableTimeComponent>)czzzzx_),
-                NotAvailable = new List<PractitionerRole.NotAvailableComponent>((IEnumerable<PractitionerRole.NotAvailableComponent>)czzzzy_),
-                AvailabilityExceptionsElement = czzzzz_,
-                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzza_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)czzzzl_),
+                ActiveElement = czzzzm_,
+                Period = czzzzn_,
+                Practitioner = czzzzo_,
+                Organization = czzzzp_,
+                Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzq_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzr_),
+                Location = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzzs_),
+                HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzzt_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)czzzzu_),
+                AvailableTime = new List<PractitionerRole.AvailableTimeComponent>((IEnumerable<PractitionerRole.AvailableTimeComponent>)czzzzv_),
+                NotAvailable = new List<PractitionerRole.NotAvailableComponent>((IEnumerable<PractitionerRole.NotAvailableComponent>)czzzzw_),
+                AvailabilityExceptionsElement = czzzzx_,
+                Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)czzzzy_),
             };
 
-            return dzzzzb_;
+            return czzzzz_;
         };
-        IEnumerable<PractitionerRole> czzzzk_ = context.Operators.Select<PractitionerRole, PractitionerRole>((IEnumerable<PractitionerRole>)czzzzi_, czzzzj_);
-        IEnumerable<PractitionerRole> czzzzl_ = context.Operators.Distinct<PractitionerRole>(czzzzk_);
-        PractitionerRole czzzzm_ = context.Operators.SingletonFrom<PractitionerRole>(czzzzl_);
+        IEnumerable<PractitionerRole> czzzzi_ = context.Operators.Select<PractitionerRole, PractitionerRole>((IEnumerable<PractitionerRole>)czzzzg_, czzzzh_);
+        IEnumerable<PractitionerRole> czzzzj_ = context.Operators.Distinct<PractitionerRole>(czzzzi_);
+        PractitionerRole czzzzk_ = context.Operators.SingletonFrom<PractitionerRole>(czzzzj_);
 
-        return czzzzm_;
+        return czzzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ProcedureResource")]
     public Procedure ProcedureResource(CqlContext context, Procedure arg)
     {
-        Procedure[] dzzzzc_ = [
+        Procedure[] dzzzza_ = [
             arg,
         ];
-        Procedure dzzzzd_(Procedure a)
+        Procedure dzzzzb_(Procedure a)
         {
-            List<Identifier> dzzzzh_ = a?.Identifier;
-            List<Canonical> dzzzzi_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> dzzzzj_ = a?.InstantiatesUriElement;
-            List<ResourceReference> dzzzzk_ = a?.BasedOn;
-            List<ResourceReference> dzzzzl_ = a?.PartOf;
-            Code<EventStatus> dzzzzm_ = a?.StatusElement;
-            CodeableConcept dzzzzn_ = a?.StatusReason;
-            CodeableConcept dzzzzo_ = a?.Category;
-            CodeableConcept dzzzzp_ = a?.Code;
-            ResourceReference dzzzzq_ = a?.Subject;
-            ResourceReference dzzzzr_ = a?.Encounter;
-            DataType dzzzzs_ = a?.Performed;
-            ResourceReference dzzzzt_ = a?.Recorder;
-            ResourceReference dzzzzu_ = a?.Asserter;
-            List<Procedure.PerformerComponent> dzzzzv_ = a?.Performer;
-            ResourceReference dzzzzw_ = a?.Location;
-            List<CodeableConcept> dzzzzx_ = a?.ReasonCode;
-            List<ResourceReference> dzzzzy_ = a?.ReasonReference;
-            List<CodeableConcept> dzzzzz_ = a?.BodySite;
-            CodeableConcept ezzzza_ = a?.Outcome;
-            List<ResourceReference> ezzzzb_ = a?.Report;
-            List<CodeableConcept> ezzzzc_ = a?.Complication;
-            List<ResourceReference> ezzzzd_ = a?.ComplicationDetail;
-            List<CodeableConcept> ezzzze_ = a?.FollowUp;
-            List<Annotation> ezzzzf_ = a?.Note;
-            List<Procedure.FocalDeviceComponent> ezzzzg_ = a?.FocalDevice;
-            List<ResourceReference> ezzzzh_ = a?.UsedReference;
-            List<CodeableConcept> ezzzzi_ = a?.UsedCode;
-            Procedure ezzzzj_ = new Procedure
+            List<Identifier> dzzzzf_ = a?.Identifier;
+            List<Canonical> dzzzzg_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> dzzzzh_ = a?.InstantiatesUriElement;
+            List<ResourceReference> dzzzzi_ = a?.BasedOn;
+            List<ResourceReference> dzzzzj_ = a?.PartOf;
+            Code<EventStatus> dzzzzk_ = a?.StatusElement;
+            CodeableConcept dzzzzl_ = a?.StatusReason;
+            CodeableConcept dzzzzm_ = a?.Category;
+            CodeableConcept dzzzzn_ = a?.Code;
+            ResourceReference dzzzzo_ = a?.Subject;
+            ResourceReference dzzzzp_ = a?.Encounter;
+            DataType dzzzzq_ = a?.Performed;
+            ResourceReference dzzzzr_ = a?.Recorder;
+            ResourceReference dzzzzs_ = a?.Asserter;
+            List<Procedure.PerformerComponent> dzzzzt_ = a?.Performer;
+            ResourceReference dzzzzu_ = a?.Location;
+            List<CodeableConcept> dzzzzv_ = a?.ReasonCode;
+            List<ResourceReference> dzzzzw_ = a?.ReasonReference;
+            List<CodeableConcept> dzzzzx_ = a?.BodySite;
+            CodeableConcept dzzzzy_ = a?.Outcome;
+            List<ResourceReference> dzzzzz_ = a?.Report;
+            List<CodeableConcept> ezzzza_ = a?.Complication;
+            List<ResourceReference> ezzzzb_ = a?.ComplicationDetail;
+            List<CodeableConcept> ezzzzc_ = a?.FollowUp;
+            List<Annotation> ezzzzd_ = a?.Note;
+            List<Procedure.FocalDeviceComponent> ezzzze_ = a?.FocalDevice;
+            List<ResourceReference> ezzzzf_ = a?.UsedReference;
+            List<CodeableConcept> ezzzzg_ = a?.UsedCode;
+            Procedure ezzzzh_ = new Procedure
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzzzh_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)dzzzzi_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)dzzzzj_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzk_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzl_),
-                StatusElement = dzzzzm_,
-                StatusReason = dzzzzn_,
-                Category = dzzzzo_,
-                Code = dzzzzp_,
-                Subject = dzzzzq_,
-                Encounter = dzzzzr_,
-                Performed = (DataType)dzzzzs_,
-                Recorder = dzzzzt_,
-                Asserter = dzzzzu_,
-                Performer = new List<Procedure.PerformerComponent>((IEnumerable<Procedure.PerformerComponent>)dzzzzv_),
-                Location = dzzzzw_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzzx_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzy_),
-                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzzz_),
-                Outcome = ezzzza_,
-                Report = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzb_),
-                Complication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzc_),
-                ComplicationDetail = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzd_),
-                FollowUp = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzze_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)ezzzzf_),
-                FocalDevice = new List<Procedure.FocalDeviceComponent>((IEnumerable<Procedure.FocalDeviceComponent>)ezzzzg_),
-                UsedReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzh_),
-                UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzi_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)dzzzzf_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)dzzzzg_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)dzzzzh_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzi_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzj_),
+                StatusElement = dzzzzk_,
+                StatusReason = dzzzzl_,
+                Category = dzzzzm_,
+                Code = dzzzzn_,
+                Subject = dzzzzo_,
+                Encounter = dzzzzp_,
+                Performed = (DataType)dzzzzq_,
+                Recorder = dzzzzr_,
+                Asserter = dzzzzs_,
+                Performer = new List<Procedure.PerformerComponent>((IEnumerable<Procedure.PerformerComponent>)dzzzzt_),
+                Location = dzzzzu_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzzv_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzw_),
+                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)dzzzzx_),
+                Outcome = dzzzzy_,
+                Report = new List<ResourceReference>((IEnumerable<ResourceReference>)dzzzzz_),
+                Complication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzza_),
+                ComplicationDetail = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzb_),
+                FollowUp = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzc_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)ezzzzd_),
+                FocalDevice = new List<Procedure.FocalDeviceComponent>((IEnumerable<Procedure.FocalDeviceComponent>)ezzzze_),
+                UsedReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzf_),
+                UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzg_),
             };
 
-            return ezzzzj_;
+            return ezzzzh_;
         };
-        IEnumerable<Procedure> dzzzze_ = context.Operators.Select<Procedure, Procedure>((IEnumerable<Procedure>)dzzzzc_, dzzzzd_);
-        IEnumerable<Procedure> dzzzzf_ = context.Operators.Distinct<Procedure>(dzzzze_);
-        Procedure dzzzzg_ = context.Operators.SingletonFrom<Procedure>(dzzzzf_);
+        IEnumerable<Procedure> dzzzzc_ = context.Operators.Select<Procedure, Procedure>((IEnumerable<Procedure>)dzzzza_, dzzzzb_);
+        IEnumerable<Procedure> dzzzzd_ = context.Operators.Distinct<Procedure>(dzzzzc_);
+        Procedure dzzzze_ = context.Operators.SingletonFrom<Procedure>(dzzzzd_);
 
-        return dzzzzg_;
+        return dzzzze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ProvenanceResource")]
     public Provenance ProvenanceResource(CqlContext context, Provenance arg)
     {
-        Provenance[] ezzzzk_ = [
+        Provenance[] ezzzzi_ = [
             arg,
         ];
-        Provenance ezzzzl_(Provenance a)
+        Provenance ezzzzj_(Provenance a)
         {
-            List<ResourceReference> ezzzzp_ = a?.Target;
-            DataType ezzzzq_ = a?.Occurred;
-            Instant ezzzzr_ = a?.RecordedElement;
-            List<FhirUri> ezzzzs_ = a?.PolicyElement;
-            ResourceReference ezzzzt_ = a?.Location;
-            List<CodeableConcept> ezzzzu_ = a?.Reason;
-            CodeableConcept ezzzzv_ = a?.Activity;
-            List<Provenance.AgentComponent> ezzzzw_ = a?.Agent;
-            List<Provenance.EntityComponent> ezzzzx_ = a?.Entity;
-            List<Signature> ezzzzy_ = a?.Signature;
-            Provenance ezzzzz_ = new Provenance
+            List<ResourceReference> ezzzzn_ = a?.Target;
+            DataType ezzzzo_ = a?.Occurred;
+            Instant ezzzzp_ = a?.RecordedElement;
+            List<FhirUri> ezzzzq_ = a?.PolicyElement;
+            ResourceReference ezzzzr_ = a?.Location;
+            List<CodeableConcept> ezzzzs_ = a?.Reason;
+            CodeableConcept ezzzzt_ = a?.Activity;
+            List<Provenance.AgentComponent> ezzzzu_ = a?.Agent;
+            List<Provenance.EntityComponent> ezzzzv_ = a?.Entity;
+            List<Signature> ezzzzw_ = a?.Signature;
+            Provenance ezzzzx_ = new Provenance
             {
-                Target = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzp_),
-                Occurred = (DataType)ezzzzq_,
-                RecordedElement = ezzzzr_,
-                PolicyElement = new List<FhirUri>((IEnumerable<FhirUri>)ezzzzs_),
-                Location = ezzzzt_,
-                Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzu_),
-                Activity = ezzzzv_,
-                Agent = new List<Provenance.AgentComponent>((IEnumerable<Provenance.AgentComponent>)ezzzzw_),
-                Entity = new List<Provenance.EntityComponent>((IEnumerable<Provenance.EntityComponent>)ezzzzx_),
-                Signature = new List<Signature>((IEnumerable<Signature>)ezzzzy_),
+                Target = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzn_),
+                Occurred = (DataType)ezzzzo_,
+                RecordedElement = ezzzzp_,
+                PolicyElement = new List<FhirUri>((IEnumerable<FhirUri>)ezzzzq_),
+                Location = ezzzzr_,
+                Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzs_),
+                Activity = ezzzzt_,
+                Agent = new List<Provenance.AgentComponent>((IEnumerable<Provenance.AgentComponent>)ezzzzu_),
+                Entity = new List<Provenance.EntityComponent>((IEnumerable<Provenance.EntityComponent>)ezzzzv_),
+                Signature = new List<Signature>((IEnumerable<Signature>)ezzzzw_),
             };
 
-            return ezzzzz_;
+            return ezzzzx_;
         };
-        IEnumerable<Provenance> ezzzzm_ = context.Operators.Select<Provenance, Provenance>((IEnumerable<Provenance>)ezzzzk_, ezzzzl_);
-        IEnumerable<Provenance> ezzzzn_ = context.Operators.Distinct<Provenance>(ezzzzm_);
-        Provenance ezzzzo_ = context.Operators.SingletonFrom<Provenance>(ezzzzn_);
+        IEnumerable<Provenance> ezzzzk_ = context.Operators.Select<Provenance, Provenance>((IEnumerable<Provenance>)ezzzzi_, ezzzzj_);
+        IEnumerable<Provenance> ezzzzl_ = context.Operators.Distinct<Provenance>(ezzzzk_);
+        Provenance ezzzzm_ = context.Operators.SingletonFrom<Provenance>(ezzzzl_);
 
-        return ezzzzo_;
+        return ezzzzm_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("QuestionnaireResponseResource")]
     public QuestionnaireResponse QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse arg)
     {
-        QuestionnaireResponse[] fzzzza_ = [
+        QuestionnaireResponse[] ezzzzy_ = [
             arg,
         ];
-        QuestionnaireResponse fzzzzb_(QuestionnaireResponse a)
+        QuestionnaireResponse ezzzzz_(QuestionnaireResponse a)
         {
-            Identifier fzzzzf_ = a?.Identifier;
-            List<ResourceReference> fzzzzg_ = a?.BasedOn;
-            List<ResourceReference> fzzzzh_ = a?.PartOf;
-            Canonical fzzzzi_ = a?.QuestionnaireElement;
-            Code<QuestionnaireResponse.QuestionnaireResponseStatus> fzzzzj_ = a?.StatusElement;
-            ResourceReference fzzzzk_ = a?.Subject;
-            ResourceReference fzzzzl_ = a?.Encounter;
-            FhirDateTime fzzzzm_ = a?.AuthoredElement;
-            ResourceReference fzzzzn_ = a?.Author;
-            ResourceReference fzzzzo_ = a?.Source;
-            List<QuestionnaireResponse.ItemComponent> fzzzzp_ = a?.Item;
-            QuestionnaireResponse fzzzzq_ = new QuestionnaireResponse
+            Identifier fzzzzd_ = a?.Identifier;
+            List<ResourceReference> fzzzze_ = a?.BasedOn;
+            List<ResourceReference> fzzzzf_ = a?.PartOf;
+            Canonical fzzzzg_ = a?.QuestionnaireElement;
+            Code<QuestionnaireResponse.QuestionnaireResponseStatus> fzzzzh_ = a?.StatusElement;
+            ResourceReference fzzzzi_ = a?.Subject;
+            ResourceReference fzzzzj_ = a?.Encounter;
+            FhirDateTime fzzzzk_ = a?.AuthoredElement;
+            ResourceReference fzzzzl_ = a?.Author;
+            ResourceReference fzzzzm_ = a?.Source;
+            List<QuestionnaireResponse.ItemComponent> fzzzzn_ = a?.Item;
+            QuestionnaireResponse fzzzzo_ = new QuestionnaireResponse
             {
-                Identifier = fzzzzf_,
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzzg_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzzh_),
-                QuestionnaireElement = fzzzzi_,
-                StatusElement = fzzzzj_,
-                Subject = fzzzzk_,
-                Encounter = fzzzzl_,
-                AuthoredElement = fzzzzm_,
-                Author = fzzzzn_,
-                Source = fzzzzo_,
-                Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireResponse.ItemComponent>)fzzzzp_),
+                Identifier = fzzzzd_,
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzze_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzzf_),
+                QuestionnaireElement = fzzzzg_,
+                StatusElement = fzzzzh_,
+                Subject = fzzzzi_,
+                Encounter = fzzzzj_,
+                AuthoredElement = fzzzzk_,
+                Author = fzzzzl_,
+                Source = fzzzzm_,
+                Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireResponse.ItemComponent>)fzzzzn_),
             };
 
-            return fzzzzq_;
+            return fzzzzo_;
         };
-        IEnumerable<QuestionnaireResponse> fzzzzc_ = context.Operators.Select<QuestionnaireResponse, QuestionnaireResponse>((IEnumerable<QuestionnaireResponse>)fzzzza_, fzzzzb_);
-        IEnumerable<QuestionnaireResponse> fzzzzd_ = context.Operators.Distinct<QuestionnaireResponse>(fzzzzc_);
-        QuestionnaireResponse fzzzze_ = context.Operators.SingletonFrom<QuestionnaireResponse>(fzzzzd_);
+        IEnumerable<QuestionnaireResponse> fzzzza_ = context.Operators.Select<QuestionnaireResponse, QuestionnaireResponse>((IEnumerable<QuestionnaireResponse>)ezzzzy_, ezzzzz_);
+        IEnumerable<QuestionnaireResponse> fzzzzb_ = context.Operators.Distinct<QuestionnaireResponse>(fzzzza_);
+        QuestionnaireResponse fzzzzc_ = context.Operators.SingletonFrom<QuestionnaireResponse>(fzzzzb_);
 
-        return fzzzze_;
+        return fzzzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("RelatedPersonResource")]
     public RelatedPerson RelatedPersonResource(CqlContext context, RelatedPerson arg)
     {
-        RelatedPerson[] fzzzzr_ = [
+        RelatedPerson[] fzzzzp_ = [
             arg,
         ];
-        RelatedPerson fzzzzs_(RelatedPerson a)
+        RelatedPerson fzzzzq_(RelatedPerson a)
         {
-            List<Identifier> fzzzzw_ = a?.Identifier;
-            FhirBoolean fzzzzx_ = a?.ActiveElement;
-            ResourceReference fzzzzy_ = a?.Patient;
-            List<CodeableConcept> fzzzzz_ = a?.Relationship;
-            List<HumanName> gzzzza_ = a?.Name;
-            List<ContactPoint> gzzzzb_ = a?.Telecom;
-            Code<AdministrativeGender> gzzzzc_ = a?.GenderElement;
-            Date gzzzzd_ = a?.BirthDateElement;
-            List<Address> gzzzze_ = a?.Address;
-            List<Attachment> gzzzzf_ = a?.Photo;
-            Period gzzzzg_ = a?.Period;
-            List<RelatedPerson.CommunicationComponent> gzzzzh_ = a?.Communication;
-            RelatedPerson gzzzzi_ = new RelatedPerson
+            List<Identifier> fzzzzu_ = a?.Identifier;
+            FhirBoolean fzzzzv_ = a?.ActiveElement;
+            ResourceReference fzzzzw_ = a?.Patient;
+            List<CodeableConcept> fzzzzx_ = a?.Relationship;
+            List<HumanName> fzzzzy_ = a?.Name;
+            List<ContactPoint> fzzzzz_ = a?.Telecom;
+            Code<AdministrativeGender> gzzzza_ = a?.GenderElement;
+            Date gzzzzb_ = a?.BirthDateElement;
+            List<Address> gzzzzc_ = a?.Address;
+            List<Attachment> gzzzzd_ = a?.Photo;
+            Period gzzzze_ = a?.Period;
+            List<RelatedPerson.CommunicationComponent> gzzzzf_ = a?.Communication;
+            RelatedPerson gzzzzg_ = new RelatedPerson
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzzzw_),
-                ActiveElement = fzzzzx_,
-                Patient = fzzzzy_,
-                Relationship = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzz_),
-                Name = new List<HumanName>((IEnumerable<HumanName>)gzzzza_),
-                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)gzzzzb_),
-                GenderElement = gzzzzc_,
-                BirthDateElement = gzzzzd_,
-                Address = new List<Address>((IEnumerable<Address>)gzzzze_),
-                Photo = new List<Attachment>((IEnumerable<Attachment>)gzzzzf_),
-                Period = gzzzzg_,
-                Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<RelatedPerson.CommunicationComponent>)gzzzzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)fzzzzu_),
+                ActiveElement = fzzzzv_,
+                Patient = fzzzzw_,
+                Relationship = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzx_),
+                Name = new List<HumanName>((IEnumerable<HumanName>)fzzzzy_),
+                Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)fzzzzz_),
+                GenderElement = gzzzza_,
+                BirthDateElement = gzzzzb_,
+                Address = new List<Address>((IEnumerable<Address>)gzzzzc_),
+                Photo = new List<Attachment>((IEnumerable<Attachment>)gzzzzd_),
+                Period = gzzzze_,
+                Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<RelatedPerson.CommunicationComponent>)gzzzzf_),
             };
 
-            return gzzzzi_;
+            return gzzzzg_;
         };
-        IEnumerable<RelatedPerson> fzzzzt_ = context.Operators.Select<RelatedPerson, RelatedPerson>((IEnumerable<RelatedPerson>)fzzzzr_, fzzzzs_);
-        IEnumerable<RelatedPerson> fzzzzu_ = context.Operators.Distinct<RelatedPerson>(fzzzzt_);
-        RelatedPerson fzzzzv_ = context.Operators.SingletonFrom<RelatedPerson>(fzzzzu_);
+        IEnumerable<RelatedPerson> fzzzzr_ = context.Operators.Select<RelatedPerson, RelatedPerson>((IEnumerable<RelatedPerson>)fzzzzp_, fzzzzq_);
+        IEnumerable<RelatedPerson> fzzzzs_ = context.Operators.Distinct<RelatedPerson>(fzzzzr_);
+        RelatedPerson fzzzzt_ = context.Operators.SingletonFrom<RelatedPerson>(fzzzzs_);
 
-        return fzzzzv_;
+        return fzzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("RequestGroupResource")]
     public RequestGroup RequestGroupResource(CqlContext context, RequestGroup arg)
     {
-        RequestGroup[] gzzzzj_ = [
+        RequestGroup[] gzzzzh_ = [
             arg,
         ];
-        RequestGroup gzzzzk_(RequestGroup a)
+        RequestGroup gzzzzi_(RequestGroup a)
         {
-            List<Identifier> gzzzzo_ = a?.Identifier;
-            List<Canonical> gzzzzp_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> gzzzzq_ = a?.InstantiatesUriElement;
-            List<ResourceReference> gzzzzr_ = a?.BasedOn;
-            List<ResourceReference> gzzzzs_ = a?.Replaces;
-            Identifier gzzzzt_ = a?.GroupIdentifier;
-            Code<RequestStatus> gzzzzu_ = a?.StatusElement;
-            Code<RequestIntent> gzzzzv_ = a?.IntentElement;
-            Code<RequestPriority> gzzzzw_ = a?.PriorityElement;
-            CodeableConcept gzzzzx_ = a?.Code;
-            ResourceReference gzzzzy_ = a?.Subject;
-            ResourceReference gzzzzz_ = a?.Encounter;
-            FhirDateTime hzzzza_ = a?.AuthoredOnElement;
-            ResourceReference hzzzzb_ = a?.Author;
-            List<CodeableConcept> hzzzzc_ = a?.ReasonCode;
-            List<ResourceReference> hzzzzd_ = a?.ReasonReference;
-            List<Annotation> hzzzze_ = a?.Note;
-            List<RequestGroup.ActionComponent> hzzzzf_ = a?.Action;
-            RequestGroup hzzzzg_ = new RequestGroup
+            List<Identifier> gzzzzm_ = a?.Identifier;
+            List<Canonical> gzzzzn_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> gzzzzo_ = a?.InstantiatesUriElement;
+            List<ResourceReference> gzzzzp_ = a?.BasedOn;
+            List<ResourceReference> gzzzzq_ = a?.Replaces;
+            Identifier gzzzzr_ = a?.GroupIdentifier;
+            Code<RequestStatus> gzzzzs_ = a?.StatusElement;
+            Code<RequestIntent> gzzzzt_ = a?.IntentElement;
+            Code<RequestPriority> gzzzzu_ = a?.PriorityElement;
+            CodeableConcept gzzzzv_ = a?.Code;
+            ResourceReference gzzzzw_ = a?.Subject;
+            ResourceReference gzzzzx_ = a?.Encounter;
+            FhirDateTime gzzzzy_ = a?.AuthoredOnElement;
+            ResourceReference gzzzzz_ = a?.Author;
+            List<CodeableConcept> hzzzza_ = a?.ReasonCode;
+            List<ResourceReference> hzzzzb_ = a?.ReasonReference;
+            List<Annotation> hzzzzc_ = a?.Note;
+            List<RequestGroup.ActionComponent> hzzzzd_ = a?.Action;
+            RequestGroup hzzzze_ = new RequestGroup
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzzo_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)gzzzzp_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)gzzzzq_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzzr_),
-                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzzs_),
-                GroupIdentifier = gzzzzt_,
-                StatusElement = gzzzzu_,
-                IntentElement = gzzzzv_,
-                PriorityElement = gzzzzw_,
-                Code = gzzzzx_,
-                Subject = gzzzzy_,
-                Encounter = gzzzzz_,
-                AuthoredOnElement = hzzzza_,
-                Author = hzzzzb_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzzzzc_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzzd_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)hzzzze_),
-                Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.ActionComponent>)hzzzzf_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzzm_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)gzzzzn_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)gzzzzo_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzzp_),
+                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)gzzzzq_),
+                GroupIdentifier = gzzzzr_,
+                StatusElement = gzzzzs_,
+                IntentElement = gzzzzt_,
+                PriorityElement = gzzzzu_,
+                Code = gzzzzv_,
+                Subject = gzzzzw_,
+                Encounter = gzzzzx_,
+                AuthoredOnElement = gzzzzy_,
+                Author = gzzzzz_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)hzzzza_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)hzzzzb_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)hzzzzc_),
+                Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.ActionComponent>)hzzzzd_),
             };
 
-            return hzzzzg_;
+            return hzzzze_;
         };
-        IEnumerable<RequestGroup> gzzzzl_ = context.Operators.Select<RequestGroup, RequestGroup>((IEnumerable<RequestGroup>)gzzzzj_, gzzzzk_);
-        IEnumerable<RequestGroup> gzzzzm_ = context.Operators.Distinct<RequestGroup>(gzzzzl_);
-        RequestGroup gzzzzn_ = context.Operators.SingletonFrom<RequestGroup>(gzzzzm_);
+        IEnumerable<RequestGroup> gzzzzj_ = context.Operators.Select<RequestGroup, RequestGroup>((IEnumerable<RequestGroup>)gzzzzh_, gzzzzi_);
+        IEnumerable<RequestGroup> gzzzzk_ = context.Operators.Distinct<RequestGroup>(gzzzzj_);
+        RequestGroup gzzzzl_ = context.Operators.SingletonFrom<RequestGroup>(gzzzzk_);
 
-        return gzzzzn_;
+        return gzzzzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ResearchDefinitionResource")]
     public ResearchDefinition ResearchDefinitionResource(CqlContext context, ResearchDefinition arg)
     {
-        ResearchDefinition[] hzzzzh_ = [
+        ResearchDefinition[] hzzzzf_ = [
             arg,
         ];
-        ResearchDefinition hzzzzi_(ResearchDefinition a)
+        ResearchDefinition hzzzzg_(ResearchDefinition a)
         {
-            FhirUri hzzzzm_ = a?.UrlElement;
-            List<Identifier> hzzzzn_ = a?.Identifier;
-            FhirString hzzzzo_ = a?.VersionElement;
-            FhirString hzzzzp_ = a?.NameElement;
-            FhirString hzzzzq_ = a?.TitleElement;
-            FhirString hzzzzr_ = a?.ShortTitleElement;
-            FhirString hzzzzs_ = a?.SubtitleElement;
-            Code<PublicationStatus> hzzzzt_ = a?.StatusElement;
-            FhirBoolean hzzzzu_ = a?.ExperimentalElement;
-            DataType hzzzzv_ = a?.Subject;
-            FhirDateTime hzzzzw_ = a?.DateElement;
-            FhirString hzzzzx_ = a?.PublisherElement;
-            List<ContactDetail> hzzzzy_ = a?.Contact;
-            Markdown hzzzzz_ = a?.DescriptionElement;
-            List<FhirString> izzzza_ = a?.CommentElement;
-            List<UsageContext> izzzzb_ = a?.UseContext;
-            List<CodeableConcept> izzzzc_ = a?.Jurisdiction;
-            Markdown izzzzd_ = a?.PurposeElement;
-            FhirString izzzze_ = a?.UsageElement;
-            Markdown izzzzf_ = a?.CopyrightElement;
-            Date izzzzg_ = a?.ApprovalDateElement;
-            Date izzzzh_ = a?.LastReviewDateElement;
-            Period izzzzi_ = a?.EffectivePeriod;
-            List<CodeableConcept> izzzzj_ = a?.Topic;
-            List<ContactDetail> izzzzk_ = a?.Author;
-            List<ContactDetail> izzzzl_ = a?.Editor;
-            List<ContactDetail> izzzzm_ = a?.Reviewer;
-            List<ContactDetail> izzzzn_ = a?.Endorser;
-            List<RelatedArtifact> izzzzo_ = a?.RelatedArtifact;
-            List<Canonical> izzzzp_ = a?.LibraryElement;
-            ResourceReference izzzzq_ = a?.Population;
-            ResourceReference izzzzr_ = a?.Exposure;
-            ResourceReference izzzzs_ = a?.ExposureAlternative;
-            ResourceReference izzzzt_ = a?.Outcome;
-            ResearchDefinition izzzzu_ = new ResearchDefinition
+            FhirUri hzzzzk_ = a?.UrlElement;
+            List<Identifier> hzzzzl_ = a?.Identifier;
+            FhirString hzzzzm_ = a?.VersionElement;
+            FhirString hzzzzn_ = a?.NameElement;
+            FhirString hzzzzo_ = a?.TitleElement;
+            FhirString hzzzzp_ = a?.ShortTitleElement;
+            FhirString hzzzzq_ = a?.SubtitleElement;
+            Code<PublicationStatus> hzzzzr_ = a?.StatusElement;
+            FhirBoolean hzzzzs_ = a?.ExperimentalElement;
+            DataType hzzzzt_ = a?.Subject;
+            FhirDateTime hzzzzu_ = a?.DateElement;
+            FhirString hzzzzv_ = a?.PublisherElement;
+            List<ContactDetail> hzzzzw_ = a?.Contact;
+            Markdown hzzzzx_ = a?.DescriptionElement;
+            List<FhirString> hzzzzy_ = a?.CommentElement;
+            List<UsageContext> hzzzzz_ = a?.UseContext;
+            List<CodeableConcept> izzzza_ = a?.Jurisdiction;
+            Markdown izzzzb_ = a?.PurposeElement;
+            FhirString izzzzc_ = a?.UsageElement;
+            Markdown izzzzd_ = a?.CopyrightElement;
+            Date izzzze_ = a?.ApprovalDateElement;
+            Date izzzzf_ = a?.LastReviewDateElement;
+            Period izzzzg_ = a?.EffectivePeriod;
+            List<CodeableConcept> izzzzh_ = a?.Topic;
+            List<ContactDetail> izzzzi_ = a?.Author;
+            List<ContactDetail> izzzzj_ = a?.Editor;
+            List<ContactDetail> izzzzk_ = a?.Reviewer;
+            List<ContactDetail> izzzzl_ = a?.Endorser;
+            List<RelatedArtifact> izzzzm_ = a?.RelatedArtifact;
+            List<Canonical> izzzzn_ = a?.LibraryElement;
+            ResourceReference izzzzo_ = a?.Population;
+            ResourceReference izzzzp_ = a?.Exposure;
+            ResourceReference izzzzq_ = a?.ExposureAlternative;
+            ResourceReference izzzzr_ = a?.Outcome;
+            ResearchDefinition izzzzs_ = new ResearchDefinition
             {
-                UrlElement = hzzzzm_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzzzzn_),
-                VersionElement = hzzzzo_,
-                NameElement = hzzzzp_,
-                TitleElement = hzzzzq_,
-                ShortTitleElement = hzzzzr_,
-                SubtitleElement = hzzzzs_,
-                StatusElement = hzzzzt_,
-                ExperimentalElement = hzzzzu_,
-                Subject = (DataType)hzzzzv_,
-                DateElement = hzzzzw_,
-                PublisherElement = hzzzzx_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)hzzzzy_),
-                DescriptionElement = hzzzzz_,
-                CommentElement = new List<FhirString>((IEnumerable<FhirString>)izzzza_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)izzzzb_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzzc_),
-                PurposeElement = izzzzd_,
-                UsageElement = izzzze_,
-                CopyrightElement = izzzzf_,
-                ApprovalDateElement = izzzzg_,
-                LastReviewDateElement = izzzzh_,
-                EffectivePeriod = izzzzi_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzzj_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzk_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzl_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzm_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzn_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)izzzzo_),
-                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)izzzzp_),
-                Population = izzzzq_,
-                Exposure = izzzzr_,
-                ExposureAlternative = izzzzs_,
-                Outcome = izzzzt_,
+                UrlElement = hzzzzk_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)hzzzzl_),
+                VersionElement = hzzzzm_,
+                NameElement = hzzzzn_,
+                TitleElement = hzzzzo_,
+                ShortTitleElement = hzzzzp_,
+                SubtitleElement = hzzzzq_,
+                StatusElement = hzzzzr_,
+                ExperimentalElement = hzzzzs_,
+                Subject = (DataType)hzzzzt_,
+                DateElement = hzzzzu_,
+                PublisherElement = hzzzzv_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)hzzzzw_),
+                DescriptionElement = hzzzzx_,
+                CommentElement = new List<FhirString>((IEnumerable<FhirString>)hzzzzy_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)hzzzzz_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzza_),
+                PurposeElement = izzzzb_,
+                UsageElement = izzzzc_,
+                CopyrightElement = izzzzd_,
+                ApprovalDateElement = izzzze_,
+                LastReviewDateElement = izzzzf_,
+                EffectivePeriod = izzzzg_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)izzzzh_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzi_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzj_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzk_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)izzzzl_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)izzzzm_),
+                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)izzzzn_),
+                Population = izzzzo_,
+                Exposure = izzzzp_,
+                ExposureAlternative = izzzzq_,
+                Outcome = izzzzr_,
             };
 
-            return izzzzu_;
+            return izzzzs_;
         };
-        IEnumerable<ResearchDefinition> hzzzzj_ = context.Operators.Select<ResearchDefinition, ResearchDefinition>((IEnumerable<ResearchDefinition>)hzzzzh_, hzzzzi_);
-        IEnumerable<ResearchDefinition> hzzzzk_ = context.Operators.Distinct<ResearchDefinition>(hzzzzj_);
-        ResearchDefinition hzzzzl_ = context.Operators.SingletonFrom<ResearchDefinition>(hzzzzk_);
+        IEnumerable<ResearchDefinition> hzzzzh_ = context.Operators.Select<ResearchDefinition, ResearchDefinition>((IEnumerable<ResearchDefinition>)hzzzzf_, hzzzzg_);
+        IEnumerable<ResearchDefinition> hzzzzi_ = context.Operators.Distinct<ResearchDefinition>(hzzzzh_);
+        ResearchDefinition hzzzzj_ = context.Operators.SingletonFrom<ResearchDefinition>(hzzzzi_);
 
-        return hzzzzl_;
+        return hzzzzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ResearchElementDefinitionResource")]
     public ResearchElementDefinition ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition arg)
     {
-        ResearchElementDefinition[] izzzzv_ = [
+        ResearchElementDefinition[] izzzzt_ = [
             arg,
         ];
-        ResearchElementDefinition izzzzw_(ResearchElementDefinition a)
+        ResearchElementDefinition izzzzu_(ResearchElementDefinition a)
         {
-            FhirUri jzzzza_ = a?.UrlElement;
-            List<Identifier> jzzzzb_ = a?.Identifier;
-            FhirString jzzzzc_ = a?.VersionElement;
-            FhirString jzzzzd_ = a?.NameElement;
-            FhirString jzzzze_ = a?.TitleElement;
-            FhirString jzzzzf_ = a?.ShortTitleElement;
-            FhirString jzzzzg_ = a?.SubtitleElement;
-            Code<PublicationStatus> jzzzzh_ = a?.StatusElement;
-            FhirBoolean jzzzzi_ = a?.ExperimentalElement;
-            DataType jzzzzj_ = a?.Subject;
-            FhirDateTime jzzzzk_ = a?.DateElement;
-            FhirString jzzzzl_ = a?.PublisherElement;
-            List<ContactDetail> jzzzzm_ = a?.Contact;
-            Markdown jzzzzn_ = a?.DescriptionElement;
-            List<FhirString> jzzzzo_ = a?.CommentElement;
-            List<UsageContext> jzzzzp_ = a?.UseContext;
-            List<CodeableConcept> jzzzzq_ = a?.Jurisdiction;
-            Markdown jzzzzr_ = a?.PurposeElement;
-            FhirString jzzzzs_ = a?.UsageElement;
-            Markdown jzzzzt_ = a?.CopyrightElement;
-            Date jzzzzu_ = a?.ApprovalDateElement;
-            Date jzzzzv_ = a?.LastReviewDateElement;
-            Period jzzzzw_ = a?.EffectivePeriod;
-            List<CodeableConcept> jzzzzx_ = a?.Topic;
-            List<ContactDetail> jzzzzy_ = a?.Author;
-            List<ContactDetail> jzzzzz_ = a?.Editor;
-            List<ContactDetail> kzzzza_ = a?.Reviewer;
-            List<ContactDetail> kzzzzb_ = a?.Endorser;
-            List<RelatedArtifact> kzzzzc_ = a?.RelatedArtifact;
-            List<Canonical> kzzzzd_ = a?.LibraryElement;
-            Code<ResearchElementDefinition.ResearchElementType> kzzzze_ = a?.TypeElement;
-            Code<VariableTypeCode> kzzzzf_ = a?.VariableTypeElement;
-            List<ResearchElementDefinition.CharacteristicComponent> kzzzzg_ = a?.Characteristic;
-            ResearchElementDefinition kzzzzh_ = new ResearchElementDefinition
+            FhirUri izzzzy_ = a?.UrlElement;
+            List<Identifier> izzzzz_ = a?.Identifier;
+            FhirString jzzzza_ = a?.VersionElement;
+            FhirString jzzzzb_ = a?.NameElement;
+            FhirString jzzzzc_ = a?.TitleElement;
+            FhirString jzzzzd_ = a?.ShortTitleElement;
+            FhirString jzzzze_ = a?.SubtitleElement;
+            Code<PublicationStatus> jzzzzf_ = a?.StatusElement;
+            FhirBoolean jzzzzg_ = a?.ExperimentalElement;
+            DataType jzzzzh_ = a?.Subject;
+            FhirDateTime jzzzzi_ = a?.DateElement;
+            FhirString jzzzzj_ = a?.PublisherElement;
+            List<ContactDetail> jzzzzk_ = a?.Contact;
+            Markdown jzzzzl_ = a?.DescriptionElement;
+            List<FhirString> jzzzzm_ = a?.CommentElement;
+            List<UsageContext> jzzzzn_ = a?.UseContext;
+            List<CodeableConcept> jzzzzo_ = a?.Jurisdiction;
+            Markdown jzzzzp_ = a?.PurposeElement;
+            FhirString jzzzzq_ = a?.UsageElement;
+            Markdown jzzzzr_ = a?.CopyrightElement;
+            Date jzzzzs_ = a?.ApprovalDateElement;
+            Date jzzzzt_ = a?.LastReviewDateElement;
+            Period jzzzzu_ = a?.EffectivePeriod;
+            List<CodeableConcept> jzzzzv_ = a?.Topic;
+            List<ContactDetail> jzzzzw_ = a?.Author;
+            List<ContactDetail> jzzzzx_ = a?.Editor;
+            List<ContactDetail> jzzzzy_ = a?.Reviewer;
+            List<ContactDetail> jzzzzz_ = a?.Endorser;
+            List<RelatedArtifact> kzzzza_ = a?.RelatedArtifact;
+            List<Canonical> kzzzzb_ = a?.LibraryElement;
+            Code<ResearchElementDefinition.ResearchElementType> kzzzzc_ = a?.TypeElement;
+            Code<VariableTypeCode> kzzzzd_ = a?.VariableTypeElement;
+            List<ResearchElementDefinition.CharacteristicComponent> kzzzze_ = a?.Characteristic;
+            ResearchElementDefinition kzzzzf_ = new ResearchElementDefinition
             {
-                UrlElement = jzzzza_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)jzzzzb_),
-                VersionElement = jzzzzc_,
-                NameElement = jzzzzd_,
-                TitleElement = jzzzze_,
-                ShortTitleElement = jzzzzf_,
-                SubtitleElement = jzzzzg_,
-                StatusElement = jzzzzh_,
-                ExperimentalElement = jzzzzi_,
-                Subject = (DataType)jzzzzj_,
-                DateElement = jzzzzk_,
-                PublisherElement = jzzzzl_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzm_),
-                DescriptionElement = jzzzzn_,
-                CommentElement = new List<FhirString>((IEnumerable<FhirString>)jzzzzo_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)jzzzzp_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzzq_),
-                PurposeElement = jzzzzr_,
-                UsageElement = jzzzzs_,
-                CopyrightElement = jzzzzt_,
-                ApprovalDateElement = jzzzzu_,
-                LastReviewDateElement = jzzzzv_,
-                EffectivePeriod = jzzzzw_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzzx_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzy_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzz_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzzza_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzzzb_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)kzzzzc_),
-                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)kzzzzd_),
-                TypeElement = kzzzze_,
-                VariableTypeElement = kzzzzf_,
-                Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IEnumerable<ResearchElementDefinition.CharacteristicComponent>)kzzzzg_),
+                UrlElement = izzzzy_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)izzzzz_),
+                VersionElement = jzzzza_,
+                NameElement = jzzzzb_,
+                TitleElement = jzzzzc_,
+                ShortTitleElement = jzzzzd_,
+                SubtitleElement = jzzzze_,
+                StatusElement = jzzzzf_,
+                ExperimentalElement = jzzzzg_,
+                Subject = (DataType)jzzzzh_,
+                DateElement = jzzzzi_,
+                PublisherElement = jzzzzj_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzk_),
+                DescriptionElement = jzzzzl_,
+                CommentElement = new List<FhirString>((IEnumerable<FhirString>)jzzzzm_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)jzzzzn_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzzo_),
+                PurposeElement = jzzzzp_,
+                UsageElement = jzzzzq_,
+                CopyrightElement = jzzzzr_,
+                ApprovalDateElement = jzzzzs_,
+                LastReviewDateElement = jzzzzt_,
+                EffectivePeriod = jzzzzu_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)jzzzzv_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzw_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzx_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzy_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)jzzzzz_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)kzzzza_),
+                LibraryElement = new List<Canonical>((IEnumerable<Canonical>)kzzzzb_),
+                TypeElement = kzzzzc_,
+                VariableTypeElement = kzzzzd_,
+                Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IEnumerable<ResearchElementDefinition.CharacteristicComponent>)kzzzze_),
             };
 
-            return kzzzzh_;
+            return kzzzzf_;
         };
-        IEnumerable<ResearchElementDefinition> izzzzx_ = context.Operators.Select<ResearchElementDefinition, ResearchElementDefinition>((IEnumerable<ResearchElementDefinition>)izzzzv_, izzzzw_);
-        IEnumerable<ResearchElementDefinition> izzzzy_ = context.Operators.Distinct<ResearchElementDefinition>(izzzzx_);
-        ResearchElementDefinition izzzzz_ = context.Operators.SingletonFrom<ResearchElementDefinition>(izzzzy_);
+        IEnumerable<ResearchElementDefinition> izzzzv_ = context.Operators.Select<ResearchElementDefinition, ResearchElementDefinition>((IEnumerable<ResearchElementDefinition>)izzzzt_, izzzzu_);
+        IEnumerable<ResearchElementDefinition> izzzzw_ = context.Operators.Distinct<ResearchElementDefinition>(izzzzv_);
+        ResearchElementDefinition izzzzx_ = context.Operators.SingletonFrom<ResearchElementDefinition>(izzzzw_);
 
-        return izzzzz_;
+        return izzzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ResearchStudyResource")]
     public ResearchStudy ResearchStudyResource(CqlContext context, ResearchStudy arg)
     {
-        ResearchStudy[] kzzzzi_ = [
+        ResearchStudy[] kzzzzg_ = [
             arg,
         ];
-        ResearchStudy kzzzzj_(ResearchStudy a)
+        ResearchStudy kzzzzh_(ResearchStudy a)
         {
-            List<Identifier> kzzzzn_ = a?.Identifier;
-            FhirString kzzzzo_ = a?.TitleElement;
-            List<ResourceReference> kzzzzp_ = a?.Protocol;
-            List<ResourceReference> kzzzzq_ = a?.PartOf;
-            Code<ResearchStudy.ResearchStudyStatus> kzzzzr_ = a?.StatusElement;
-            CodeableConcept kzzzzs_ = a?.PrimaryPurposeType;
-            CodeableConcept kzzzzt_ = a?.Phase;
-            List<CodeableConcept> kzzzzu_ = a?.Category;
-            List<CodeableConcept> kzzzzv_ = a?.Focus;
-            List<CodeableConcept> kzzzzw_ = a?.Condition;
-            List<ContactDetail> kzzzzx_ = a?.Contact;
-            List<RelatedArtifact> kzzzzy_ = a?.RelatedArtifact;
-            List<CodeableConcept> kzzzzz_ = a?.Keyword;
-            List<CodeableConcept> lzzzza_ = a?.Location;
-            Markdown lzzzzb_ = a?.DescriptionElement;
-            List<ResourceReference> lzzzzc_ = a?.Enrollment;
-            Period lzzzzd_ = a?.Period;
-            ResourceReference lzzzze_ = a?.Sponsor;
-            ResourceReference lzzzzf_ = a?.PrincipalInvestigator;
-            List<ResourceReference> lzzzzg_ = a?.Site;
-            CodeableConcept lzzzzh_ = a?.ReasonStopped;
-            List<Annotation> lzzzzi_ = a?.Note;
-            List<ResearchStudy.ArmComponent> lzzzzj_ = a?.Arm;
-            List<ResearchStudy.ObjectiveComponent> lzzzzk_ = a?.Objective;
-            ResearchStudy lzzzzl_ = new ResearchStudy
+            List<Identifier> kzzzzl_ = a?.Identifier;
+            FhirString kzzzzm_ = a?.TitleElement;
+            List<ResourceReference> kzzzzn_ = a?.Protocol;
+            List<ResourceReference> kzzzzo_ = a?.PartOf;
+            Code<ResearchStudy.ResearchStudyStatus> kzzzzp_ = a?.StatusElement;
+            CodeableConcept kzzzzq_ = a?.PrimaryPurposeType;
+            CodeableConcept kzzzzr_ = a?.Phase;
+            List<CodeableConcept> kzzzzs_ = a?.Category;
+            List<CodeableConcept> kzzzzt_ = a?.Focus;
+            List<CodeableConcept> kzzzzu_ = a?.Condition;
+            List<ContactDetail> kzzzzv_ = a?.Contact;
+            List<RelatedArtifact> kzzzzw_ = a?.RelatedArtifact;
+            List<CodeableConcept> kzzzzx_ = a?.Keyword;
+            List<CodeableConcept> kzzzzy_ = a?.Location;
+            Markdown kzzzzz_ = a?.DescriptionElement;
+            List<ResourceReference> lzzzza_ = a?.Enrollment;
+            Period lzzzzb_ = a?.Period;
+            ResourceReference lzzzzc_ = a?.Sponsor;
+            ResourceReference lzzzzd_ = a?.PrincipalInvestigator;
+            List<ResourceReference> lzzzze_ = a?.Site;
+            CodeableConcept lzzzzf_ = a?.ReasonStopped;
+            List<Annotation> lzzzzg_ = a?.Note;
+            List<ResearchStudy.ArmComponent> lzzzzh_ = a?.Arm;
+            List<ResearchStudy.ObjectiveComponent> lzzzzi_ = a?.Objective;
+            ResearchStudy lzzzzj_ = new ResearchStudy
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzzzn_),
-                TitleElement = kzzzzo_,
-                Protocol = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzzp_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzzq_),
-                StatusElement = kzzzzr_,
-                PrimaryPurposeType = kzzzzs_,
-                Phase = kzzzzt_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzu_),
-                Focus = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzv_),
-                Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzw_),
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzzzx_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)kzzzzy_),
-                Keyword = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzz_),
-                Location = new List<CodeableConcept>((IEnumerable<CodeableConcept>)lzzzza_),
-                DescriptionElement = lzzzzb_,
-                Enrollment = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzzc_),
-                Period = lzzzzd_,
-                Sponsor = lzzzze_,
-                PrincipalInvestigator = lzzzzf_,
-                Site = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzzg_),
-                ReasonStopped = lzzzzh_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)lzzzzi_),
-                Arm = new List<ResearchStudy.ArmComponent>((IEnumerable<ResearchStudy.ArmComponent>)lzzzzj_),
-                Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStudy.ObjectiveComponent>)lzzzzk_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)kzzzzl_),
+                TitleElement = kzzzzm_,
+                Protocol = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzzn_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)kzzzzo_),
+                StatusElement = kzzzzp_,
+                PrimaryPurposeType = kzzzzq_,
+                Phase = kzzzzr_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzs_),
+                Focus = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzt_),
+                Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzu_),
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)kzzzzv_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)kzzzzw_),
+                Keyword = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzx_),
+                Location = new List<CodeableConcept>((IEnumerable<CodeableConcept>)kzzzzy_),
+                DescriptionElement = kzzzzz_,
+                Enrollment = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzza_),
+                Period = lzzzzb_,
+                Sponsor = lzzzzc_,
+                PrincipalInvestigator = lzzzzd_,
+                Site = new List<ResourceReference>((IEnumerable<ResourceReference>)lzzzze_),
+                ReasonStopped = lzzzzf_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)lzzzzg_),
+                Arm = new List<ResearchStudy.ArmComponent>((IEnumerable<ResearchStudy.ArmComponent>)lzzzzh_),
+                Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStudy.ObjectiveComponent>)lzzzzi_),
             };
 
-            return lzzzzl_;
+            return lzzzzj_;
         };
-        IEnumerable<ResearchStudy> kzzzzk_ = context.Operators.Select<ResearchStudy, ResearchStudy>((IEnumerable<ResearchStudy>)kzzzzi_, kzzzzj_);
-        IEnumerable<ResearchStudy> kzzzzl_ = context.Operators.Distinct<ResearchStudy>(kzzzzk_);
-        ResearchStudy kzzzzm_ = context.Operators.SingletonFrom<ResearchStudy>(kzzzzl_);
+        IEnumerable<ResearchStudy> kzzzzi_ = context.Operators.Select<ResearchStudy, ResearchStudy>((IEnumerable<ResearchStudy>)kzzzzg_, kzzzzh_);
+        IEnumerable<ResearchStudy> kzzzzj_ = context.Operators.Distinct<ResearchStudy>(kzzzzi_);
+        ResearchStudy kzzzzk_ = context.Operators.SingletonFrom<ResearchStudy>(kzzzzj_);
 
-        return kzzzzm_;
+        return kzzzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ResearchSubjectResource")]
     public ResearchSubject ResearchSubjectResource(CqlContext context, ResearchSubject arg)
     {
-        ResearchSubject[] lzzzzm_ = [
+        ResearchSubject[] lzzzzk_ = [
             arg,
         ];
-        ResearchSubject lzzzzn_(ResearchSubject a)
+        ResearchSubject lzzzzl_(ResearchSubject a)
         {
-            List<Identifier> lzzzzr_ = a?.Identifier;
-            Code<ResearchSubject.ResearchSubjectStatus> lzzzzs_ = a?.StatusElement;
-            Period lzzzzt_ = a?.Period;
-            ResourceReference lzzzzu_ = a?.Study;
-            ResourceReference lzzzzv_ = a?.Individual;
-            FhirString lzzzzw_ = a?.AssignedArmElement;
-            FhirString lzzzzx_ = a?.ActualArmElement;
-            ResourceReference lzzzzy_ = a?.Consent;
-            ResearchSubject lzzzzz_ = new ResearchSubject
+            List<Identifier> lzzzzp_ = a?.Identifier;
+            Code<ResearchSubject.ResearchSubjectStatus> lzzzzq_ = a?.StatusElement;
+            Period lzzzzr_ = a?.Period;
+            ResourceReference lzzzzs_ = a?.Study;
+            ResourceReference lzzzzt_ = a?.Individual;
+            FhirString lzzzzu_ = a?.AssignedArmElement;
+            FhirString lzzzzv_ = a?.ActualArmElement;
+            ResourceReference lzzzzw_ = a?.Consent;
+            ResearchSubject lzzzzx_ = new ResearchSubject
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzzzr_),
-                StatusElement = lzzzzs_,
-                Period = lzzzzt_,
-                Study = lzzzzu_,
-                Individual = lzzzzv_,
-                AssignedArmElement = lzzzzw_,
-                ActualArmElement = lzzzzx_,
-                Consent = lzzzzy_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)lzzzzp_),
+                StatusElement = lzzzzq_,
+                Period = lzzzzr_,
+                Study = lzzzzs_,
+                Individual = lzzzzt_,
+                AssignedArmElement = lzzzzu_,
+                ActualArmElement = lzzzzv_,
+                Consent = lzzzzw_,
             };
 
-            return lzzzzz_;
+            return lzzzzx_;
         };
-        IEnumerable<ResearchSubject> lzzzzo_ = context.Operators.Select<ResearchSubject, ResearchSubject>((IEnumerable<ResearchSubject>)lzzzzm_, lzzzzn_);
-        IEnumerable<ResearchSubject> lzzzzp_ = context.Operators.Distinct<ResearchSubject>(lzzzzo_);
-        ResearchSubject lzzzzq_ = context.Operators.SingletonFrom<ResearchSubject>(lzzzzp_);
+        IEnumerable<ResearchSubject> lzzzzm_ = context.Operators.Select<ResearchSubject, ResearchSubject>((IEnumerable<ResearchSubject>)lzzzzk_, lzzzzl_);
+        IEnumerable<ResearchSubject> lzzzzn_ = context.Operators.Distinct<ResearchSubject>(lzzzzm_);
+        ResearchSubject lzzzzo_ = context.Operators.SingletonFrom<ResearchSubject>(lzzzzn_);
 
-        return lzzzzq_;
+        return lzzzzo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("RiskAssessmentResource")]
     public RiskAssessment RiskAssessmentResource(CqlContext context, RiskAssessment arg)
     {
-        RiskAssessment[] mzzzza_ = [
+        RiskAssessment[] lzzzzy_ = [
             arg,
         ];
-        RiskAssessment mzzzzb_(RiskAssessment a)
+        RiskAssessment lzzzzz_(RiskAssessment a)
         {
-            List<Identifier> mzzzzf_ = a?.Identifier;
-            ResourceReference mzzzzg_ = a?.BasedOn;
-            ResourceReference mzzzzh_ = a?.Parent;
-            Code<ObservationStatus> mzzzzi_ = a?.StatusElement;
-            CodeableConcept mzzzzj_ = a?.Method;
-            CodeableConcept mzzzzk_ = a?.Code;
-            ResourceReference mzzzzl_ = a?.Subject;
-            ResourceReference mzzzzm_ = a?.Encounter;
-            DataType mzzzzn_ = a?.Occurrence;
-            ResourceReference mzzzzo_ = a?.Condition;
-            ResourceReference mzzzzp_ = a?.Performer;
-            List<CodeableConcept> mzzzzq_ = a?.ReasonCode;
-            List<ResourceReference> mzzzzr_ = a?.ReasonReference;
-            List<ResourceReference> mzzzzs_ = a?.Basis;
-            List<RiskAssessment.PredictionComponent> mzzzzt_ = a?.Prediction;
-            FhirString mzzzzu_ = a?.MitigationElement;
-            List<Annotation> mzzzzv_ = a?.Note;
-            RiskAssessment mzzzzw_ = new RiskAssessment
+            List<Identifier> mzzzzd_ = a?.Identifier;
+            ResourceReference mzzzze_ = a?.BasedOn;
+            ResourceReference mzzzzf_ = a?.Parent;
+            Code<ObservationStatus> mzzzzg_ = a?.StatusElement;
+            CodeableConcept mzzzzh_ = a?.Method;
+            CodeableConcept mzzzzi_ = a?.Code;
+            ResourceReference mzzzzj_ = a?.Subject;
+            ResourceReference mzzzzk_ = a?.Encounter;
+            DataType mzzzzl_ = a?.Occurrence;
+            ResourceReference mzzzzm_ = a?.Condition;
+            ResourceReference mzzzzn_ = a?.Performer;
+            List<CodeableConcept> mzzzzo_ = a?.ReasonCode;
+            List<ResourceReference> mzzzzp_ = a?.ReasonReference;
+            List<ResourceReference> mzzzzq_ = a?.Basis;
+            List<RiskAssessment.PredictionComponent> mzzzzr_ = a?.Prediction;
+            FhirString mzzzzs_ = a?.MitigationElement;
+            List<Annotation> mzzzzt_ = a?.Note;
+            RiskAssessment mzzzzu_ = new RiskAssessment
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzzzzf_),
-                BasedOn = mzzzzg_,
-                Parent = mzzzzh_,
-                StatusElement = mzzzzi_,
-                Method = mzzzzj_,
-                Code = mzzzzk_,
-                Subject = mzzzzl_,
-                Encounter = mzzzzm_,
-                Occurrence = (DataType)mzzzzn_,
-                Condition = mzzzzo_,
-                Performer = mzzzzp_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzzq_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzzr_),
-                Basis = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzzs_),
-                Prediction = new List<RiskAssessment.PredictionComponent>((IEnumerable<RiskAssessment.PredictionComponent>)mzzzzt_),
-                MitigationElement = mzzzzu_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)mzzzzv_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)mzzzzd_),
+                BasedOn = mzzzze_,
+                Parent = mzzzzf_,
+                StatusElement = mzzzzg_,
+                Method = mzzzzh_,
+                Code = mzzzzi_,
+                Subject = mzzzzj_,
+                Encounter = mzzzzk_,
+                Occurrence = (DataType)mzzzzl_,
+                Condition = mzzzzm_,
+                Performer = mzzzzn_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)mzzzzo_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzzp_),
+                Basis = new List<ResourceReference>((IEnumerable<ResourceReference>)mzzzzq_),
+                Prediction = new List<RiskAssessment.PredictionComponent>((IEnumerable<RiskAssessment.PredictionComponent>)mzzzzr_),
+                MitigationElement = mzzzzs_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)mzzzzt_),
             };
 
-            return mzzzzw_;
+            return mzzzzu_;
         };
-        IEnumerable<RiskAssessment> mzzzzc_ = context.Operators.Select<RiskAssessment, RiskAssessment>((IEnumerable<RiskAssessment>)mzzzza_, mzzzzb_);
-        IEnumerable<RiskAssessment> mzzzzd_ = context.Operators.Distinct<RiskAssessment>(mzzzzc_);
-        RiskAssessment mzzzze_ = context.Operators.SingletonFrom<RiskAssessment>(mzzzzd_);
+        IEnumerable<RiskAssessment> mzzzza_ = context.Operators.Select<RiskAssessment, RiskAssessment>((IEnumerable<RiskAssessment>)lzzzzy_, lzzzzz_);
+        IEnumerable<RiskAssessment> mzzzzb_ = context.Operators.Distinct<RiskAssessment>(mzzzza_);
+        RiskAssessment mzzzzc_ = context.Operators.SingletonFrom<RiskAssessment>(mzzzzb_);
 
-        return mzzzze_;
+        return mzzzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("RiskEvidenceSynthesisResource")]
     public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis arg)
     {
-        RiskEvidenceSynthesis[] mzzzzx_ = [
+        RiskEvidenceSynthesis[] mzzzzv_ = [
             arg,
         ];
-        RiskEvidenceSynthesis mzzzzy_(RiskEvidenceSynthesis a)
+        RiskEvidenceSynthesis mzzzzw_(RiskEvidenceSynthesis a)
         {
-            FhirUri nzzzzc_ = a?.UrlElement;
-            List<Identifier> nzzzzd_ = a?.Identifier;
-            FhirString nzzzze_ = a?.VersionElement;
-            FhirString nzzzzf_ = a?.NameElement;
-            FhirString nzzzzg_ = a?.TitleElement;
-            Code<PublicationStatus> nzzzzh_ = a?.StatusElement;
-            FhirDateTime nzzzzi_ = a?.DateElement;
-            FhirString nzzzzj_ = a?.PublisherElement;
-            List<ContactDetail> nzzzzk_ = a?.Contact;
-            Markdown nzzzzl_ = a?.DescriptionElement;
-            List<Annotation> nzzzzm_ = a?.Note;
-            List<UsageContext> nzzzzn_ = a?.UseContext;
-            List<CodeableConcept> nzzzzo_ = a?.Jurisdiction;
-            Markdown nzzzzp_ = a?.CopyrightElement;
-            Date nzzzzq_ = a?.ApprovalDateElement;
-            Date nzzzzr_ = a?.LastReviewDateElement;
-            Period nzzzzs_ = a?.EffectivePeriod;
-            List<CodeableConcept> nzzzzt_ = a?.Topic;
-            List<ContactDetail> nzzzzu_ = a?.Author;
-            List<ContactDetail> nzzzzv_ = a?.Editor;
-            List<ContactDetail> nzzzzw_ = a?.Reviewer;
-            List<ContactDetail> nzzzzx_ = a?.Endorser;
-            List<RelatedArtifact> nzzzzy_ = a?.RelatedArtifact;
-            CodeableConcept nzzzzz_ = a?.SynthesisType;
-            CodeableConcept ozzzza_ = a?.StudyType;
-            ResourceReference ozzzzb_ = a?.Population;
-            ResourceReference ozzzzc_ = a?.Exposure;
-            ResourceReference ozzzzd_ = a?.Outcome;
-            RiskEvidenceSynthesis.SampleSizeComponent ozzzze_ = a?.SampleSize;
-            RiskEvidenceSynthesis.RiskEstimateComponent ozzzzf_ = a?.RiskEstimate;
-            List<RiskEvidenceSynthesis.CertaintyComponent> ozzzzg_ = a?.Certainty;
-            RiskEvidenceSynthesis ozzzzh_ = new RiskEvidenceSynthesis
+            FhirUri nzzzza_ = a?.UrlElement;
+            List<Identifier> nzzzzb_ = a?.Identifier;
+            FhirString nzzzzc_ = a?.VersionElement;
+            FhirString nzzzzd_ = a?.NameElement;
+            FhirString nzzzze_ = a?.TitleElement;
+            Code<PublicationStatus> nzzzzf_ = a?.StatusElement;
+            FhirDateTime nzzzzg_ = a?.DateElement;
+            FhirString nzzzzh_ = a?.PublisherElement;
+            List<ContactDetail> nzzzzi_ = a?.Contact;
+            Markdown nzzzzj_ = a?.DescriptionElement;
+            List<Annotation> nzzzzk_ = a?.Note;
+            List<UsageContext> nzzzzl_ = a?.UseContext;
+            List<CodeableConcept> nzzzzm_ = a?.Jurisdiction;
+            Markdown nzzzzn_ = a?.CopyrightElement;
+            Date nzzzzo_ = a?.ApprovalDateElement;
+            Date nzzzzp_ = a?.LastReviewDateElement;
+            Period nzzzzq_ = a?.EffectivePeriod;
+            List<CodeableConcept> nzzzzr_ = a?.Topic;
+            List<ContactDetail> nzzzzs_ = a?.Author;
+            List<ContactDetail> nzzzzt_ = a?.Editor;
+            List<ContactDetail> nzzzzu_ = a?.Reviewer;
+            List<ContactDetail> nzzzzv_ = a?.Endorser;
+            List<RelatedArtifact> nzzzzw_ = a?.RelatedArtifact;
+            CodeableConcept nzzzzx_ = a?.SynthesisType;
+            CodeableConcept nzzzzy_ = a?.StudyType;
+            ResourceReference nzzzzz_ = a?.Population;
+            ResourceReference ozzzza_ = a?.Exposure;
+            ResourceReference ozzzzb_ = a?.Outcome;
+            RiskEvidenceSynthesis.SampleSizeComponent ozzzzc_ = a?.SampleSize;
+            RiskEvidenceSynthesis.RiskEstimateComponent ozzzzd_ = a?.RiskEstimate;
+            List<RiskEvidenceSynthesis.CertaintyComponent> ozzzze_ = a?.Certainty;
+            RiskEvidenceSynthesis ozzzzf_ = new RiskEvidenceSynthesis
             {
-                UrlElement = nzzzzc_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)nzzzzd_),
-                VersionElement = nzzzze_,
-                NameElement = nzzzzf_,
-                TitleElement = nzzzzg_,
-                StatusElement = nzzzzh_,
-                DateElement = nzzzzi_,
-                PublisherElement = nzzzzj_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzk_),
-                DescriptionElement = nzzzzl_,
-                Note = new List<Annotation>((IEnumerable<Annotation>)nzzzzm_),
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)nzzzzn_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzzo_),
-                CopyrightElement = nzzzzp_,
-                ApprovalDateElement = nzzzzq_,
-                LastReviewDateElement = nzzzzr_,
-                EffectivePeriod = nzzzzs_,
-                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzzt_),
-                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzu_),
-                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzv_),
-                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzw_),
-                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzx_),
-                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)nzzzzy_),
-                SynthesisType = nzzzzz_,
-                StudyType = ozzzza_,
-                Population = ozzzzb_,
-                Exposure = ozzzzc_,
-                Outcome = ozzzzd_,
-                SampleSize = ozzzze_,
-                RiskEstimate = ozzzzf_,
-                Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<RiskEvidenceSynthesis.CertaintyComponent>)ozzzzg_),
+                UrlElement = nzzzza_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)nzzzzb_),
+                VersionElement = nzzzzc_,
+                NameElement = nzzzzd_,
+                TitleElement = nzzzze_,
+                StatusElement = nzzzzf_,
+                DateElement = nzzzzg_,
+                PublisherElement = nzzzzh_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzi_),
+                DescriptionElement = nzzzzj_,
+                Note = new List<Annotation>((IEnumerable<Annotation>)nzzzzk_),
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)nzzzzl_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzzm_),
+                CopyrightElement = nzzzzn_,
+                ApprovalDateElement = nzzzzo_,
+                LastReviewDateElement = nzzzzp_,
+                EffectivePeriod = nzzzzq_,
+                Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)nzzzzr_),
+                Author = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzs_),
+                Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzt_),
+                Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzu_),
+                Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)nzzzzv_),
+                RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)nzzzzw_),
+                SynthesisType = nzzzzx_,
+                StudyType = nzzzzy_,
+                Population = nzzzzz_,
+                Exposure = ozzzza_,
+                Outcome = ozzzzb_,
+                SampleSize = ozzzzc_,
+                RiskEstimate = ozzzzd_,
+                Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<RiskEvidenceSynthesis.CertaintyComponent>)ozzzze_),
             };
 
-            return ozzzzh_;
+            return ozzzzf_;
         };
-        IEnumerable<RiskEvidenceSynthesis> mzzzzz_ = context.Operators.Select<RiskEvidenceSynthesis, RiskEvidenceSynthesis>((IEnumerable<RiskEvidenceSynthesis>)mzzzzx_, mzzzzy_);
-        IEnumerable<RiskEvidenceSynthesis> nzzzza_ = context.Operators.Distinct<RiskEvidenceSynthesis>(mzzzzz_);
-        RiskEvidenceSynthesis nzzzzb_ = context.Operators.SingletonFrom<RiskEvidenceSynthesis>(nzzzza_);
+        IEnumerable<RiskEvidenceSynthesis> mzzzzx_ = context.Operators.Select<RiskEvidenceSynthesis, RiskEvidenceSynthesis>((IEnumerable<RiskEvidenceSynthesis>)mzzzzv_, mzzzzw_);
+        IEnumerable<RiskEvidenceSynthesis> mzzzzy_ = context.Operators.Distinct<RiskEvidenceSynthesis>(mzzzzx_);
+        RiskEvidenceSynthesis mzzzzz_ = context.Operators.SingletonFrom<RiskEvidenceSynthesis>(mzzzzy_);
 
-        return nzzzzb_;
+        return mzzzzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ScheduleResource")]
     public Schedule ScheduleResource(CqlContext context, Schedule arg)
     {
-        Schedule[] ozzzzi_ = [
+        Schedule[] ozzzzg_ = [
             arg,
         ];
-        Schedule ozzzzj_(Schedule a)
+        Schedule ozzzzh_(Schedule a)
         {
-            List<Identifier> ozzzzn_ = a?.Identifier;
-            FhirBoolean ozzzzo_ = a?.ActiveElement;
-            List<CodeableConcept> ozzzzp_ = a?.ServiceCategory;
-            List<CodeableConcept> ozzzzq_ = a?.ServiceType;
-            List<CodeableConcept> ozzzzr_ = a?.Specialty;
-            List<ResourceReference> ozzzzs_ = a?.Actor;
-            Period ozzzzt_ = a?.PlanningHorizon;
-            FhirString ozzzzu_ = a?.CommentElement;
-            Schedule ozzzzv_ = new Schedule
+            List<Identifier> ozzzzl_ = a?.Identifier;
+            FhirBoolean ozzzzm_ = a?.ActiveElement;
+            List<CodeableConcept> ozzzzn_ = a?.ServiceCategory;
+            List<CodeableConcept> ozzzzo_ = a?.ServiceType;
+            List<CodeableConcept> ozzzzp_ = a?.Specialty;
+            List<ResourceReference> ozzzzq_ = a?.Actor;
+            Period ozzzzr_ = a?.PlanningHorizon;
+            FhirString ozzzzs_ = a?.CommentElement;
+            Schedule ozzzzt_ = new Schedule
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozzzzn_),
-                ActiveElement = ozzzzo_,
-                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzp_),
-                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzq_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzr_),
-                Actor = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzzs_),
-                PlanningHorizon = ozzzzt_,
-                CommentElement = ozzzzu_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozzzzl_),
+                ActiveElement = ozzzzm_,
+                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzn_),
+                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzo_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ozzzzp_),
+                Actor = new List<ResourceReference>((IEnumerable<ResourceReference>)ozzzzq_),
+                PlanningHorizon = ozzzzr_,
+                CommentElement = ozzzzs_,
             };
 
-            return ozzzzv_;
+            return ozzzzt_;
         };
-        IEnumerable<Schedule> ozzzzk_ = context.Operators.Select<Schedule, Schedule>((IEnumerable<Schedule>)ozzzzi_, ozzzzj_);
-        IEnumerable<Schedule> ozzzzl_ = context.Operators.Distinct<Schedule>(ozzzzk_);
-        Schedule ozzzzm_ = context.Operators.SingletonFrom<Schedule>(ozzzzl_);
+        IEnumerable<Schedule> ozzzzi_ = context.Operators.Select<Schedule, Schedule>((IEnumerable<Schedule>)ozzzzg_, ozzzzh_);
+        IEnumerable<Schedule> ozzzzj_ = context.Operators.Distinct<Schedule>(ozzzzi_);
+        Schedule ozzzzk_ = context.Operators.SingletonFrom<Schedule>(ozzzzj_);
 
-        return ozzzzm_;
+        return ozzzzk_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ServiceRequestResource")]
     public ServiceRequest ServiceRequestResource(CqlContext context, ServiceRequest arg)
     {
-        ServiceRequest[] ozzzzw_ = [
+        ServiceRequest[] ozzzzu_ = [
             arg,
         ];
-        ServiceRequest ozzzzx_(ServiceRequest a)
+        ServiceRequest ozzzzv_(ServiceRequest a)
         {
-            List<Identifier> pzzzzb_ = a?.Identifier;
-            List<Canonical> pzzzzc_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> pzzzzd_ = a?.InstantiatesUriElement;
-            List<ResourceReference> pzzzze_ = a?.BasedOn;
-            List<ResourceReference> pzzzzf_ = a?.Replaces;
-            Identifier pzzzzg_ = a?.Requisition;
-            Code<RequestStatus> pzzzzh_ = a?.StatusElement;
-            Code<RequestIntent> pzzzzi_ = a?.IntentElement;
-            List<CodeableConcept> pzzzzj_ = a?.Category;
-            Code<RequestPriority> pzzzzk_ = a?.PriorityElement;
-            FhirBoolean pzzzzl_ = a?.DoNotPerformElement;
-            CodeableConcept pzzzzm_ = a?.Code;
-            List<CodeableConcept> pzzzzn_ = a?.OrderDetail;
-            DataType pzzzzo_ = a?.Quantity;
-            ResourceReference pzzzzp_ = a?.Subject;
-            ResourceReference pzzzzq_ = a?.Encounter;
-            DataType pzzzzr_ = a?.Occurrence;
-            DataType pzzzzs_ = a?.AsNeeded;
-            FhirDateTime pzzzzt_ = a?.AuthoredOnElement;
-            ResourceReference pzzzzu_ = a?.Requester;
-            CodeableConcept pzzzzv_ = a?.PerformerType;
-            List<ResourceReference> pzzzzw_ = a?.Performer;
-            List<CodeableConcept> pzzzzx_ = a?.LocationCode;
-            List<ResourceReference> pzzzzy_ = a?.LocationReference;
-            List<CodeableConcept> pzzzzz_ = a?.ReasonCode;
-            List<ResourceReference> qzzzza_ = a?.ReasonReference;
-            List<ResourceReference> qzzzzb_ = a?.Insurance;
-            List<ResourceReference> qzzzzc_ = a?.SupportingInfo;
-            List<ResourceReference> qzzzzd_ = a?.Specimen;
-            List<CodeableConcept> qzzzze_ = a?.BodySite;
-            List<Annotation> qzzzzf_ = a?.Note;
-            FhirString qzzzzg_ = a?.PatientInstructionElement;
-            List<ResourceReference> qzzzzh_ = a?.RelevantHistory;
-            ServiceRequest qzzzzi_ = new ServiceRequest
+            List<Identifier> ozzzzz_ = a?.Identifier;
+            List<Canonical> pzzzza_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri> pzzzzb_ = a?.InstantiatesUriElement;
+            List<ResourceReference> pzzzzc_ = a?.BasedOn;
+            List<ResourceReference> pzzzzd_ = a?.Replaces;
+            Identifier pzzzze_ = a?.Requisition;
+            Code<RequestStatus> pzzzzf_ = a?.StatusElement;
+            Code<RequestIntent> pzzzzg_ = a?.IntentElement;
+            List<CodeableConcept> pzzzzh_ = a?.Category;
+            Code<RequestPriority> pzzzzi_ = a?.PriorityElement;
+            FhirBoolean pzzzzj_ = a?.DoNotPerformElement;
+            CodeableConcept pzzzzk_ = a?.Code;
+            List<CodeableConcept> pzzzzl_ = a?.OrderDetail;
+            DataType pzzzzm_ = a?.Quantity;
+            ResourceReference pzzzzn_ = a?.Subject;
+            ResourceReference pzzzzo_ = a?.Encounter;
+            DataType pzzzzp_ = a?.Occurrence;
+            DataType pzzzzq_ = a?.AsNeeded;
+            FhirDateTime pzzzzr_ = a?.AuthoredOnElement;
+            ResourceReference pzzzzs_ = a?.Requester;
+            CodeableConcept pzzzzt_ = a?.PerformerType;
+            List<ResourceReference> pzzzzu_ = a?.Performer;
+            List<CodeableConcept> pzzzzv_ = a?.LocationCode;
+            List<ResourceReference> pzzzzw_ = a?.LocationReference;
+            List<CodeableConcept> pzzzzx_ = a?.ReasonCode;
+            List<ResourceReference> pzzzzy_ = a?.ReasonReference;
+            List<ResourceReference> pzzzzz_ = a?.Insurance;
+            List<ResourceReference> qzzzza_ = a?.SupportingInfo;
+            List<ResourceReference> qzzzzb_ = a?.Specimen;
+            List<CodeableConcept> qzzzzc_ = a?.BodySite;
+            List<Annotation> qzzzzd_ = a?.Note;
+            FhirString qzzzze_ = a?.PatientInstructionElement;
+            List<ResourceReference> qzzzzf_ = a?.RelevantHistory;
+            ServiceRequest qzzzzg_ = new ServiceRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)pzzzzb_),
-                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)pzzzzc_),
-                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)pzzzzd_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzze_),
-                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzf_),
-                Requisition = pzzzzg_,
-                StatusElement = pzzzzh_,
-                IntentElement = pzzzzi_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzj_),
-                PriorityElement = pzzzzk_,
-                DoNotPerformElement = pzzzzl_,
-                Code = pzzzzm_,
-                OrderDetail = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzn_),
-                Quantity = (DataType)pzzzzo_,
-                Subject = pzzzzp_,
-                Encounter = pzzzzq_,
-                Occurrence = (DataType)pzzzzr_,
-                AsNeeded = (DataType)pzzzzs_,
-                AuthoredOnElement = pzzzzt_,
-                Requester = pzzzzu_,
-                PerformerType = pzzzzv_,
-                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzw_),
-                LocationCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzx_),
-                LocationReference = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzy_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzz_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzza_),
-                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzb_),
-                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzc_),
-                Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzd_),
-                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzze_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)qzzzzf_),
-                PatientInstructionElement = qzzzzg_,
-                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzh_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ozzzzz_),
+                InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)pzzzza_),
+                InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)pzzzzb_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzc_),
+                Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzd_),
+                Requisition = pzzzze_,
+                StatusElement = pzzzzf_,
+                IntentElement = pzzzzg_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzh_),
+                PriorityElement = pzzzzi_,
+                DoNotPerformElement = pzzzzj_,
+                Code = pzzzzk_,
+                OrderDetail = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzl_),
+                Quantity = (DataType)pzzzzm_,
+                Subject = pzzzzn_,
+                Encounter = pzzzzo_,
+                Occurrence = (DataType)pzzzzp_,
+                AsNeeded = (DataType)pzzzzq_,
+                AuthoredOnElement = pzzzzr_,
+                Requester = pzzzzs_,
+                PerformerType = pzzzzt_,
+                Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzu_),
+                LocationCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzv_),
+                LocationReference = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzw_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)pzzzzx_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzy_),
+                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)pzzzzz_),
+                SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzza_),
+                Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzb_),
+                BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzc_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)qzzzzd_),
+                PatientInstructionElement = qzzzze_,
+                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)qzzzzf_),
             };
 
-            return qzzzzi_;
+            return qzzzzg_;
         };
-        IEnumerable<ServiceRequest> ozzzzy_ = context.Operators.Select<ServiceRequest, ServiceRequest>((IEnumerable<ServiceRequest>)ozzzzw_, ozzzzx_);
-        IEnumerable<ServiceRequest> ozzzzz_ = context.Operators.Distinct<ServiceRequest>(ozzzzy_);
-        ServiceRequest pzzzza_ = context.Operators.SingletonFrom<ServiceRequest>(ozzzzz_);
+        IEnumerable<ServiceRequest> ozzzzw_ = context.Operators.Select<ServiceRequest, ServiceRequest>((IEnumerable<ServiceRequest>)ozzzzu_, ozzzzv_);
+        IEnumerable<ServiceRequest> ozzzzx_ = context.Operators.Distinct<ServiceRequest>(ozzzzw_);
+        ServiceRequest ozzzzy_ = context.Operators.SingletonFrom<ServiceRequest>(ozzzzx_);
 
-        return pzzzza_;
+        return ozzzzy_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SlotResource")]
     public Slot SlotResource(CqlContext context, Slot arg)
     {
-        Slot[] qzzzzj_ = [
+        Slot[] qzzzzh_ = [
             arg,
         ];
-        Slot qzzzzk_(Slot a)
+        Slot qzzzzi_(Slot a)
         {
-            List<Identifier> qzzzzo_ = a?.Identifier;
-            List<CodeableConcept> qzzzzp_ = a?.ServiceCategory;
-            List<CodeableConcept> qzzzzq_ = a?.ServiceType;
-            List<CodeableConcept> qzzzzr_ = a?.Specialty;
-            CodeableConcept qzzzzs_ = a?.AppointmentType;
-            ResourceReference qzzzzt_ = a?.Schedule;
-            Code<Slot.SlotStatus> qzzzzu_ = a?.StatusElement;
-            Instant qzzzzv_ = a?.StartElement;
-            Instant qzzzzw_ = a?.EndElement;
-            FhirBoolean qzzzzx_ = a?.OverbookedElement;
-            FhirString qzzzzy_ = a?.CommentElement;
-            Slot qzzzzz_ = new Slot
+            List<Identifier> qzzzzm_ = a?.Identifier;
+            List<CodeableConcept> qzzzzn_ = a?.ServiceCategory;
+            List<CodeableConcept> qzzzzo_ = a?.ServiceType;
+            List<CodeableConcept> qzzzzp_ = a?.Specialty;
+            CodeableConcept qzzzzq_ = a?.AppointmentType;
+            ResourceReference qzzzzr_ = a?.Schedule;
+            Code<Slot.SlotStatus> qzzzzs_ = a?.StatusElement;
+            Instant qzzzzt_ = a?.StartElement;
+            Instant qzzzzu_ = a?.EndElement;
+            FhirBoolean qzzzzv_ = a?.OverbookedElement;
+            FhirString qzzzzw_ = a?.CommentElement;
+            Slot qzzzzx_ = new Slot
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)qzzzzo_),
-                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzp_),
-                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzq_),
-                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzr_),
-                AppointmentType = qzzzzs_,
-                Schedule = qzzzzt_,
-                StatusElement = qzzzzu_,
-                StartElement = qzzzzv_,
-                EndElement = qzzzzw_,
-                OverbookedElement = qzzzzx_,
-                CommentElement = qzzzzy_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)qzzzzm_),
+                ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzn_),
+                ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzo_),
+                Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)qzzzzp_),
+                AppointmentType = qzzzzq_,
+                Schedule = qzzzzr_,
+                StatusElement = qzzzzs_,
+                StartElement = qzzzzt_,
+                EndElement = qzzzzu_,
+                OverbookedElement = qzzzzv_,
+                CommentElement = qzzzzw_,
             };
 
-            return qzzzzz_;
+            return qzzzzx_;
         };
-        IEnumerable<Slot> qzzzzl_ = context.Operators.Select<Slot, Slot>((IEnumerable<Slot>)qzzzzj_, qzzzzk_);
-        IEnumerable<Slot> qzzzzm_ = context.Operators.Distinct<Slot>(qzzzzl_);
-        Slot qzzzzn_ = context.Operators.SingletonFrom<Slot>(qzzzzm_);
+        IEnumerable<Slot> qzzzzj_ = context.Operators.Select<Slot, Slot>((IEnumerable<Slot>)qzzzzh_, qzzzzi_);
+        IEnumerable<Slot> qzzzzk_ = context.Operators.Distinct<Slot>(qzzzzj_);
+        Slot qzzzzl_ = context.Operators.SingletonFrom<Slot>(qzzzzk_);
 
-        return qzzzzn_;
+        return qzzzzl_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SpecimenResource")]
     public Specimen SpecimenResource(CqlContext context, Specimen arg)
     {
-        Specimen[] rzzzza_ = [
+        Specimen[] qzzzzy_ = [
             arg,
         ];
-        Specimen rzzzzb_(Specimen a)
+        Specimen qzzzzz_(Specimen a)
         {
-            List<Identifier> rzzzzf_ = a?.Identifier;
-            Identifier rzzzzg_ = a?.AccessionIdentifier;
-            Code<Specimen.SpecimenStatus> rzzzzh_ = a?.StatusElement;
-            CodeableConcept rzzzzi_ = a?.Type;
-            ResourceReference rzzzzj_ = a?.Subject;
-            FhirDateTime rzzzzk_ = a?.ReceivedTimeElement;
-            List<ResourceReference> rzzzzl_ = a?.Parent;
-            List<ResourceReference> rzzzzm_ = a?.Request;
-            Specimen.CollectionComponent rzzzzn_ = a?.Collection;
-            List<Specimen.ProcessingComponent> rzzzzo_ = a?.Processing;
-            List<Specimen.ContainerComponent> rzzzzp_ = a?.Container;
-            List<CodeableConcept> rzzzzq_ = a?.Condition;
-            List<Annotation> rzzzzr_ = a?.Note;
-            Specimen rzzzzs_ = new Specimen
+            List<Identifier> rzzzzd_ = a?.Identifier;
+            Identifier rzzzze_ = a?.AccessionIdentifier;
+            Code<Specimen.SpecimenStatus> rzzzzf_ = a?.StatusElement;
+            CodeableConcept rzzzzg_ = a?.Type;
+            ResourceReference rzzzzh_ = a?.Subject;
+            FhirDateTime rzzzzi_ = a?.ReceivedTimeElement;
+            List<ResourceReference> rzzzzj_ = a?.Parent;
+            List<ResourceReference> rzzzzk_ = a?.Request;
+            Specimen.CollectionComponent rzzzzl_ = a?.Collection;
+            List<Specimen.ProcessingComponent> rzzzzm_ = a?.Processing;
+            List<Specimen.ContainerComponent> rzzzzn_ = a?.Container;
+            List<CodeableConcept> rzzzzo_ = a?.Condition;
+            List<Annotation> rzzzzp_ = a?.Note;
+            Specimen rzzzzq_ = new Specimen
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzzzf_),
-                AccessionIdentifier = rzzzzg_,
-                StatusElement = rzzzzh_,
-                Type = rzzzzi_,
-                Subject = rzzzzj_,
-                ReceivedTimeElement = rzzzzk_,
-                Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzzl_),
-                Request = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzzm_),
-                Collection = rzzzzn_,
-                Processing = new List<Specimen.ProcessingComponent>((IEnumerable<Specimen.ProcessingComponent>)rzzzzo_),
-                Container = new List<Specimen.ContainerComponent>((IEnumerable<Specimen.ContainerComponent>)rzzzzp_),
-                Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzzzq_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)rzzzzr_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)rzzzzd_),
+                AccessionIdentifier = rzzzze_,
+                StatusElement = rzzzzf_,
+                Type = rzzzzg_,
+                Subject = rzzzzh_,
+                ReceivedTimeElement = rzzzzi_,
+                Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzzj_),
+                Request = new List<ResourceReference>((IEnumerable<ResourceReference>)rzzzzk_),
+                Collection = rzzzzl_,
+                Processing = new List<Specimen.ProcessingComponent>((IEnumerable<Specimen.ProcessingComponent>)rzzzzm_),
+                Container = new List<Specimen.ContainerComponent>((IEnumerable<Specimen.ContainerComponent>)rzzzzn_),
+                Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzzzo_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)rzzzzp_),
             };
 
-            return rzzzzs_;
+            return rzzzzq_;
         };
-        IEnumerable<Specimen> rzzzzc_ = context.Operators.Select<Specimen, Specimen>((IEnumerable<Specimen>)rzzzza_, rzzzzb_);
-        IEnumerable<Specimen> rzzzzd_ = context.Operators.Distinct<Specimen>(rzzzzc_);
-        Specimen rzzzze_ = context.Operators.SingletonFrom<Specimen>(rzzzzd_);
+        IEnumerable<Specimen> rzzzza_ = context.Operators.Select<Specimen, Specimen>((IEnumerable<Specimen>)qzzzzy_, qzzzzz_);
+        IEnumerable<Specimen> rzzzzb_ = context.Operators.Distinct<Specimen>(rzzzza_);
+        Specimen rzzzzc_ = context.Operators.SingletonFrom<Specimen>(rzzzzb_);
 
-        return rzzzze_;
+        return rzzzzc_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SpecimenDefinitionResource")]
     public SpecimenDefinition SpecimenDefinitionResource(CqlContext context, SpecimenDefinition arg)
     {
-        SpecimenDefinition[] rzzzzt_ = [
+        SpecimenDefinition[] rzzzzr_ = [
             arg,
         ];
-        SpecimenDefinition rzzzzu_(SpecimenDefinition a)
+        SpecimenDefinition rzzzzs_(SpecimenDefinition a)
         {
-            Identifier rzzzzy_ = a?.Identifier;
-            CodeableConcept rzzzzz_ = a?.TypeCollected;
-            List<CodeableConcept> szzzza_ = a?.PatientPreparation;
-            FhirString szzzzb_ = a?.TimeAspectElement;
-            List<CodeableConcept> szzzzc_ = a?.Collection;
-            List<SpecimenDefinition.TypeTestedComponent> szzzzd_ = a?.TypeTested;
-            SpecimenDefinition szzzze_ = new SpecimenDefinition
+            Identifier rzzzzw_ = a?.Identifier;
+            CodeableConcept rzzzzx_ = a?.TypeCollected;
+            List<CodeableConcept> rzzzzy_ = a?.PatientPreparation;
+            FhirString rzzzzz_ = a?.TimeAspectElement;
+            List<CodeableConcept> szzzza_ = a?.Collection;
+            List<SpecimenDefinition.TypeTestedComponent> szzzzb_ = a?.TypeTested;
+            SpecimenDefinition szzzzc_ = new SpecimenDefinition
             {
-                Identifier = rzzzzy_,
-                TypeCollected = rzzzzz_,
-                PatientPreparation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzza_),
-                TimeAspectElement = szzzzb_,
-                Collection = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzzc_),
-                TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<SpecimenDefinition.TypeTestedComponent>)szzzzd_),
+                Identifier = rzzzzw_,
+                TypeCollected = rzzzzx_,
+                PatientPreparation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)rzzzzy_),
+                TimeAspectElement = rzzzzz_,
+                Collection = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzza_),
+                TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<SpecimenDefinition.TypeTestedComponent>)szzzzb_),
             };
 
-            return szzzze_;
+            return szzzzc_;
         };
-        IEnumerable<SpecimenDefinition> rzzzzv_ = context.Operators.Select<SpecimenDefinition, SpecimenDefinition>((IEnumerable<SpecimenDefinition>)rzzzzt_, rzzzzu_);
-        IEnumerable<SpecimenDefinition> rzzzzw_ = context.Operators.Distinct<SpecimenDefinition>(rzzzzv_);
-        SpecimenDefinition rzzzzx_ = context.Operators.SingletonFrom<SpecimenDefinition>(rzzzzw_);
+        IEnumerable<SpecimenDefinition> rzzzzt_ = context.Operators.Select<SpecimenDefinition, SpecimenDefinition>((IEnumerable<SpecimenDefinition>)rzzzzr_, rzzzzs_);
+        IEnumerable<SpecimenDefinition> rzzzzu_ = context.Operators.Distinct<SpecimenDefinition>(rzzzzt_);
+        SpecimenDefinition rzzzzv_ = context.Operators.SingletonFrom<SpecimenDefinition>(rzzzzu_);
 
-        return rzzzzx_;
+        return rzzzzv_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("StructureDefinitionResource")]
     public StructureDefinition StructureDefinitionResource(CqlContext context, StructureDefinition arg)
     {
-        StructureDefinition[] szzzzf_ = [
+        StructureDefinition[] szzzzd_ = [
             arg,
         ];
-        StructureDefinition szzzzg_(StructureDefinition a)
+        StructureDefinition szzzze_(StructureDefinition a)
         {
-            FhirUri szzzzk_ = a?.UrlElement;
-            List<Identifier> szzzzl_ = a?.Identifier;
-            FhirString szzzzm_ = a?.VersionElement;
-            FhirString szzzzn_ = a?.NameElement;
-            FhirString szzzzo_ = a?.TitleElement;
-            Code<PublicationStatus> szzzzp_ = a?.StatusElement;
-            FhirBoolean szzzzq_ = a?.ExperimentalElement;
-            FhirDateTime szzzzr_ = a?.DateElement;
-            FhirString szzzzs_ = a?.PublisherElement;
-            List<ContactDetail> szzzzt_ = a?.Contact;
-            Markdown szzzzu_ = a?.DescriptionElement;
-            List<UsageContext> szzzzv_ = a?.UseContext;
-            List<CodeableConcept> szzzzw_ = a?.Jurisdiction;
-            Markdown szzzzx_ = a?.PurposeElement;
-            Markdown szzzzy_ = a?.CopyrightElement;
-            List<Coding> szzzzz_ = a?.Keyword;
-            Code<FHIRVersion> tzzzza_ = a?.FhirVersionElement;
-            List<StructureDefinition.MappingComponent> tzzzzb_ = a?.Mapping;
-            Code<StructureDefinition.StructureDefinitionKind> tzzzzc_ = a?.KindElement;
-            FhirBoolean tzzzzd_ = a?.AbstractElement;
-            List<StructureDefinition.ContextComponent> tzzzze_ = a?.Context;
-            List<FhirString> tzzzzf_ = a?.ContextInvariantElement;
-            FhirUri tzzzzg_ = a?.TypeElement;
-            Canonical tzzzzh_ = a?.BaseDefinitionElement;
-            Code<StructureDefinition.TypeDerivationRule> tzzzzi_ = a?.DerivationElement;
-            StructureDefinition.SnapshotComponent tzzzzj_ = a?.Snapshot;
-            StructureDefinition.DifferentialComponent tzzzzk_ = a?.Differential;
-            StructureDefinition tzzzzl_ = new StructureDefinition
+            FhirUri szzzzi_ = a?.UrlElement;
+            List<Identifier> szzzzj_ = a?.Identifier;
+            FhirString szzzzk_ = a?.VersionElement;
+            FhirString szzzzl_ = a?.NameElement;
+            FhirString szzzzm_ = a?.TitleElement;
+            Code<PublicationStatus> szzzzn_ = a?.StatusElement;
+            FhirBoolean szzzzo_ = a?.ExperimentalElement;
+            FhirDateTime szzzzp_ = a?.DateElement;
+            FhirString szzzzq_ = a?.PublisherElement;
+            List<ContactDetail> szzzzr_ = a?.Contact;
+            Markdown szzzzs_ = a?.DescriptionElement;
+            List<UsageContext> szzzzt_ = a?.UseContext;
+            List<CodeableConcept> szzzzu_ = a?.Jurisdiction;
+            Markdown szzzzv_ = a?.PurposeElement;
+            Markdown szzzzw_ = a?.CopyrightElement;
+            List<Coding> szzzzx_ = a?.Keyword;
+            Code<FHIRVersion> szzzzy_ = a?.FhirVersionElement;
+            List<StructureDefinition.MappingComponent> szzzzz_ = a?.Mapping;
+            Code<StructureDefinition.StructureDefinitionKind> tzzzza_ = a?.KindElement;
+            FhirBoolean tzzzzb_ = a?.AbstractElement;
+            List<StructureDefinition.ContextComponent> tzzzzc_ = a?.Context;
+            List<FhirString> tzzzzd_ = a?.ContextInvariantElement;
+            FhirUri tzzzze_ = a?.TypeElement;
+            Canonical tzzzzf_ = a?.BaseDefinitionElement;
+            Code<StructureDefinition.TypeDerivationRule> tzzzzg_ = a?.DerivationElement;
+            StructureDefinition.SnapshotComponent tzzzzh_ = a?.Snapshot;
+            StructureDefinition.DifferentialComponent tzzzzi_ = a?.Differential;
+            StructureDefinition tzzzzj_ = new StructureDefinition
             {
-                UrlElement = szzzzk_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)szzzzl_),
-                VersionElement = szzzzm_,
-                NameElement = szzzzn_,
-                TitleElement = szzzzo_,
-                StatusElement = szzzzp_,
-                ExperimentalElement = szzzzq_,
-                DateElement = szzzzr_,
-                PublisherElement = szzzzs_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)szzzzt_),
-                DescriptionElement = szzzzu_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)szzzzv_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzzw_),
-                PurposeElement = szzzzx_,
-                CopyrightElement = szzzzy_,
-                Keyword = new List<Coding>((IEnumerable<Coding>)szzzzz_),
-                FhirVersionElement = tzzzza_,
-                Mapping = new List<StructureDefinition.MappingComponent>((IEnumerable<StructureDefinition.MappingComponent>)tzzzzb_),
-                KindElement = tzzzzc_,
-                AbstractElement = tzzzzd_,
-                Context = new List<StructureDefinition.ContextComponent>((IEnumerable<StructureDefinition.ContextComponent>)tzzzze_),
-                ContextInvariantElement = new List<FhirString>((IEnumerable<FhirString>)tzzzzf_),
-                TypeElement = tzzzzg_,
-                BaseDefinitionElement = tzzzzh_,
-                DerivationElement = tzzzzi_,
-                Snapshot = tzzzzj_,
-                Differential = tzzzzk_,
+                UrlElement = szzzzi_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)szzzzj_),
+                VersionElement = szzzzk_,
+                NameElement = szzzzl_,
+                TitleElement = szzzzm_,
+                StatusElement = szzzzn_,
+                ExperimentalElement = szzzzo_,
+                DateElement = szzzzp_,
+                PublisherElement = szzzzq_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)szzzzr_),
+                DescriptionElement = szzzzs_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)szzzzt_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)szzzzu_),
+                PurposeElement = szzzzv_,
+                CopyrightElement = szzzzw_,
+                Keyword = new List<Coding>((IEnumerable<Coding>)szzzzx_),
+                FhirVersionElement = szzzzy_,
+                Mapping = new List<StructureDefinition.MappingComponent>((IEnumerable<StructureDefinition.MappingComponent>)szzzzz_),
+                KindElement = tzzzza_,
+                AbstractElement = tzzzzb_,
+                Context = new List<StructureDefinition.ContextComponent>((IEnumerable<StructureDefinition.ContextComponent>)tzzzzc_),
+                ContextInvariantElement = new List<FhirString>((IEnumerable<FhirString>)tzzzzd_),
+                TypeElement = tzzzze_,
+                BaseDefinitionElement = tzzzzf_,
+                DerivationElement = tzzzzg_,
+                Snapshot = tzzzzh_,
+                Differential = tzzzzi_,
             };
 
-            return tzzzzl_;
+            return tzzzzj_;
         };
-        IEnumerable<StructureDefinition> szzzzh_ = context.Operators.Select<StructureDefinition, StructureDefinition>((IEnumerable<StructureDefinition>)szzzzf_, szzzzg_);
-        IEnumerable<StructureDefinition> szzzzi_ = context.Operators.Distinct<StructureDefinition>(szzzzh_);
-        StructureDefinition szzzzj_ = context.Operators.SingletonFrom<StructureDefinition>(szzzzi_);
+        IEnumerable<StructureDefinition> szzzzf_ = context.Operators.Select<StructureDefinition, StructureDefinition>((IEnumerable<StructureDefinition>)szzzzd_, szzzze_);
+        IEnumerable<StructureDefinition> szzzzg_ = context.Operators.Distinct<StructureDefinition>(szzzzf_);
+        StructureDefinition szzzzh_ = context.Operators.SingletonFrom<StructureDefinition>(szzzzg_);
 
-        return szzzzj_;
+        return szzzzh_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("StructureMapResource")]
     public StructureMap StructureMapResource(CqlContext context, StructureMap arg)
     {
-        StructureMap[] tzzzzm_ = [
+        StructureMap[] tzzzzk_ = [
             arg,
         ];
-        StructureMap tzzzzn_(StructureMap a)
+        StructureMap tzzzzl_(StructureMap a)
         {
-            FhirUri tzzzzr_ = a?.UrlElement;
-            List<Identifier> tzzzzs_ = a?.Identifier;
-            FhirString tzzzzt_ = a?.VersionElement;
-            FhirString tzzzzu_ = a?.NameElement;
-            FhirString tzzzzv_ = a?.TitleElement;
-            Code<PublicationStatus> tzzzzw_ = a?.StatusElement;
-            FhirBoolean tzzzzx_ = a?.ExperimentalElement;
-            FhirDateTime tzzzzy_ = a?.DateElement;
-            FhirString tzzzzz_ = a?.PublisherElement;
-            List<ContactDetail> uzzzza_ = a?.Contact;
-            Markdown uzzzzb_ = a?.DescriptionElement;
-            List<UsageContext> uzzzzc_ = a?.UseContext;
-            List<CodeableConcept> uzzzzd_ = a?.Jurisdiction;
-            Markdown uzzzze_ = a?.PurposeElement;
-            Markdown uzzzzf_ = a?.CopyrightElement;
-            List<StructureMap.StructureComponent> uzzzzg_ = a?.Structure;
-            List<Canonical> uzzzzh_ = a?.ImportElement;
-            List<StructureMap.GroupComponent> uzzzzi_ = a?.Group;
-            StructureMap uzzzzj_ = new StructureMap
+            FhirUri tzzzzp_ = a?.UrlElement;
+            List<Identifier> tzzzzq_ = a?.Identifier;
+            FhirString tzzzzr_ = a?.VersionElement;
+            FhirString tzzzzs_ = a?.NameElement;
+            FhirString tzzzzt_ = a?.TitleElement;
+            Code<PublicationStatus> tzzzzu_ = a?.StatusElement;
+            FhirBoolean tzzzzv_ = a?.ExperimentalElement;
+            FhirDateTime tzzzzw_ = a?.DateElement;
+            FhirString tzzzzx_ = a?.PublisherElement;
+            List<ContactDetail> tzzzzy_ = a?.Contact;
+            Markdown tzzzzz_ = a?.DescriptionElement;
+            List<UsageContext> uzzzza_ = a?.UseContext;
+            List<CodeableConcept> uzzzzb_ = a?.Jurisdiction;
+            Markdown uzzzzc_ = a?.PurposeElement;
+            Markdown uzzzzd_ = a?.CopyrightElement;
+            List<StructureMap.StructureComponent> uzzzze_ = a?.Structure;
+            List<Canonical> uzzzzf_ = a?.ImportElement;
+            List<StructureMap.GroupComponent> uzzzzg_ = a?.Group;
+            StructureMap uzzzzh_ = new StructureMap
             {
-                UrlElement = tzzzzr_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzzzs_),
-                VersionElement = tzzzzt_,
-                NameElement = tzzzzu_,
-                TitleElement = tzzzzv_,
-                StatusElement = tzzzzw_,
-                ExperimentalElement = tzzzzx_,
-                DateElement = tzzzzy_,
-                PublisherElement = tzzzzz_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)uzzzza_),
-                DescriptionElement = uzzzzb_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)uzzzzc_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzzd_),
-                PurposeElement = uzzzze_,
-                CopyrightElement = uzzzzf_,
-                Structure = new List<StructureMap.StructureComponent>((IEnumerable<StructureMap.StructureComponent>)uzzzzg_),
-                ImportElement = new List<Canonical>((IEnumerable<Canonical>)uzzzzh_),
-                Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupComponent>)uzzzzi_),
+                UrlElement = tzzzzp_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)tzzzzq_),
+                VersionElement = tzzzzr_,
+                NameElement = tzzzzs_,
+                TitleElement = tzzzzt_,
+                StatusElement = tzzzzu_,
+                ExperimentalElement = tzzzzv_,
+                DateElement = tzzzzw_,
+                PublisherElement = tzzzzx_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)tzzzzy_),
+                DescriptionElement = tzzzzz_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)uzzzza_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)uzzzzb_),
+                PurposeElement = uzzzzc_,
+                CopyrightElement = uzzzzd_,
+                Structure = new List<StructureMap.StructureComponent>((IEnumerable<StructureMap.StructureComponent>)uzzzze_),
+                ImportElement = new List<Canonical>((IEnumerable<Canonical>)uzzzzf_),
+                Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupComponent>)uzzzzg_),
             };
 
-            return uzzzzj_;
+            return uzzzzh_;
         };
-        IEnumerable<StructureMap> tzzzzo_ = context.Operators.Select<StructureMap, StructureMap>((IEnumerable<StructureMap>)tzzzzm_, tzzzzn_);
-        IEnumerable<StructureMap> tzzzzp_ = context.Operators.Distinct<StructureMap>(tzzzzo_);
-        StructureMap tzzzzq_ = context.Operators.SingletonFrom<StructureMap>(tzzzzp_);
+        IEnumerable<StructureMap> tzzzzm_ = context.Operators.Select<StructureMap, StructureMap>((IEnumerable<StructureMap>)tzzzzk_, tzzzzl_);
+        IEnumerable<StructureMap> tzzzzn_ = context.Operators.Distinct<StructureMap>(tzzzzm_);
+        StructureMap tzzzzo_ = context.Operators.SingletonFrom<StructureMap>(tzzzzn_);
 
-        return tzzzzq_;
+        return tzzzzo_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubscriptionResource")]
     public Subscription SubscriptionResource(CqlContext context, Subscription arg)
     {
-        Subscription[] uzzzzk_ = [
+        Subscription[] uzzzzi_ = [
             arg,
         ];
-        Subscription uzzzzl_(Subscription a)
+        Subscription uzzzzj_(Subscription a)
         {
-            Code<Subscription.SubscriptionStatus> uzzzzp_ = a?.StatusElement;
-            List<ContactPoint> uzzzzq_ = a?.Contact;
-            Instant uzzzzr_ = a?.EndElement;
-            FhirString uzzzzs_ = a?.ReasonElement;
-            FhirString uzzzzt_ = a?.CriteriaElement;
-            FhirString uzzzzu_ = a?.ErrorElement;
-            Subscription.ChannelComponent uzzzzv_ = a?.Channel;
-            Subscription uzzzzw_ = new Subscription
+            Code<Subscription.SubscriptionStatus> uzzzzn_ = a?.StatusElement;
+            List<ContactPoint> uzzzzo_ = a?.Contact;
+            Instant uzzzzp_ = a?.EndElement;
+            FhirString uzzzzq_ = a?.ReasonElement;
+            FhirString uzzzzr_ = a?.CriteriaElement;
+            FhirString uzzzzs_ = a?.ErrorElement;
+            Subscription.ChannelComponent uzzzzt_ = a?.Channel;
+            Subscription uzzzzu_ = new Subscription
             {
-                StatusElement = uzzzzp_,
-                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)uzzzzq_),
-                EndElement = uzzzzr_,
-                ReasonElement = uzzzzs_,
-                CriteriaElement = uzzzzt_,
-                ErrorElement = uzzzzu_,
-                Channel = uzzzzv_,
+                StatusElement = uzzzzn_,
+                Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)uzzzzo_),
+                EndElement = uzzzzp_,
+                ReasonElement = uzzzzq_,
+                CriteriaElement = uzzzzr_,
+                ErrorElement = uzzzzs_,
+                Channel = uzzzzt_,
             };
 
-            return uzzzzw_;
+            return uzzzzu_;
         };
-        IEnumerable<Subscription> uzzzzm_ = context.Operators.Select<Subscription, Subscription>((IEnumerable<Subscription>)uzzzzk_, uzzzzl_);
-        IEnumerable<Subscription> uzzzzn_ = context.Operators.Distinct<Subscription>(uzzzzm_);
-        Subscription uzzzzo_ = context.Operators.SingletonFrom<Subscription>(uzzzzn_);
+        IEnumerable<Subscription> uzzzzk_ = context.Operators.Select<Subscription, Subscription>((IEnumerable<Subscription>)uzzzzi_, uzzzzj_);
+        IEnumerable<Subscription> uzzzzl_ = context.Operators.Distinct<Subscription>(uzzzzk_);
+        Subscription uzzzzm_ = context.Operators.SingletonFrom<Subscription>(uzzzzl_);
 
-        return uzzzzo_;
+        return uzzzzm_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceResource")]
     public Substance SubstanceResource(CqlContext context, Substance arg)
     {
-        Substance[] uzzzzx_ = [
+        Substance[] uzzzzv_ = [
             arg,
         ];
-        Substance uzzzzy_(Substance a)
+        Substance uzzzzw_(Substance a)
         {
-            List<Identifier> vzzzzc_ = a?.Identifier;
-            Code<Substance.FHIRSubstanceStatus> vzzzzd_ = a?.StatusElement;
-            List<CodeableConcept> vzzzze_ = a?.Category;
-            CodeableConcept vzzzzf_ = a?.Code;
-            FhirString vzzzzg_ = a?.DescriptionElement;
-            List<Substance.InstanceComponent> vzzzzh_ = a?.Instance;
-            List<Substance.IngredientComponent> vzzzzi_ = a?.Ingredient;
-            Substance vzzzzj_ = new Substance
+            List<Identifier> vzzzza_ = a?.Identifier;
+            Code<Substance.FHIRSubstanceStatus> vzzzzb_ = a?.StatusElement;
+            List<CodeableConcept> vzzzzc_ = a?.Category;
+            CodeableConcept vzzzzd_ = a?.Code;
+            FhirString vzzzze_ = a?.DescriptionElement;
+            List<Substance.InstanceComponent> vzzzzf_ = a?.Instance;
+            List<Substance.IngredientComponent> vzzzzg_ = a?.Ingredient;
+            Substance vzzzzh_ = new Substance
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzzzc_),
-                StatusElement = vzzzzd_,
-                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzzze_),
-                Code = vzzzzf_,
-                DescriptionElement = vzzzzg_,
-                Instance = new List<Substance.InstanceComponent>((IEnumerable<Substance.InstanceComponent>)vzzzzh_),
-                Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.IngredientComponent>)vzzzzi_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)vzzzza_),
+                StatusElement = vzzzzb_,
+                Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)vzzzzc_),
+                Code = vzzzzd_,
+                DescriptionElement = vzzzze_,
+                Instance = new List<Substance.InstanceComponent>((IEnumerable<Substance.InstanceComponent>)vzzzzf_),
+                Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.IngredientComponent>)vzzzzg_),
             };
 
-            return vzzzzj_;
+            return vzzzzh_;
         };
-        IEnumerable<Substance> uzzzzz_ = context.Operators.Select<Substance, Substance>((IEnumerable<Substance>)uzzzzx_, uzzzzy_);
-        IEnumerable<Substance> vzzzza_ = context.Operators.Distinct<Substance>(uzzzzz_);
-        Substance vzzzzb_ = context.Operators.SingletonFrom<Substance>(vzzzza_);
+        IEnumerable<Substance> uzzzzx_ = context.Operators.Select<Substance, Substance>((IEnumerable<Substance>)uzzzzv_, uzzzzw_);
+        IEnumerable<Substance> uzzzzy_ = context.Operators.Distinct<Substance>(uzzzzx_);
+        Substance uzzzzz_ = context.Operators.SingletonFrom<Substance>(uzzzzy_);
 
-        return vzzzzb_;
+        return uzzzzz_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceNucleicAcidResource")]
     public SubstanceNucleicAcid SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid arg)
     {
-        SubstanceNucleicAcid[] vzzzzk_ = [
+        SubstanceNucleicAcid[] vzzzzi_ = [
             arg,
         ];
-        SubstanceNucleicAcid vzzzzl_(SubstanceNucleicAcid a)
+        SubstanceNucleicAcid vzzzzj_(SubstanceNucleicAcid a)
         {
-            CodeableConcept vzzzzp_ = a?.SequenceType;
-            Integer vzzzzq_ = a?.NumberOfSubunitsElement;
-            FhirString vzzzzr_ = a?.AreaOfHybridisationElement;
-            CodeableConcept vzzzzs_ = a?.OligoNucleotideType;
-            List<SubstanceNucleicAcid.SubunitComponent> vzzzzt_ = a?.Subunit;
-            SubstanceNucleicAcid vzzzzu_ = new SubstanceNucleicAcid
+            CodeableConcept vzzzzn_ = a?.SequenceType;
+            Integer vzzzzo_ = a?.NumberOfSubunitsElement;
+            FhirString vzzzzp_ = a?.AreaOfHybridisationElement;
+            CodeableConcept vzzzzq_ = a?.OligoNucleotideType;
+            List<SubstanceNucleicAcid.SubunitComponent> vzzzzr_ = a?.Subunit;
+            SubstanceNucleicAcid vzzzzs_ = new SubstanceNucleicAcid
             {
-                SequenceType = vzzzzp_,
-                NumberOfSubunitsElement = vzzzzq_,
-                AreaOfHybridisationElement = vzzzzr_,
-                OligoNucleotideType = vzzzzs_,
-                Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<SubstanceNucleicAcid.SubunitComponent>)vzzzzt_),
+                SequenceType = vzzzzn_,
+                NumberOfSubunitsElement = vzzzzo_,
+                AreaOfHybridisationElement = vzzzzp_,
+                OligoNucleotideType = vzzzzq_,
+                Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<SubstanceNucleicAcid.SubunitComponent>)vzzzzr_),
             };
 
-            return vzzzzu_;
+            return vzzzzs_;
         };
-        IEnumerable<SubstanceNucleicAcid> vzzzzm_ = context.Operators.Select<SubstanceNucleicAcid, SubstanceNucleicAcid>((IEnumerable<SubstanceNucleicAcid>)vzzzzk_, vzzzzl_);
-        IEnumerable<SubstanceNucleicAcid> vzzzzn_ = context.Operators.Distinct<SubstanceNucleicAcid>(vzzzzm_);
-        SubstanceNucleicAcid vzzzzo_ = context.Operators.SingletonFrom<SubstanceNucleicAcid>(vzzzzn_);
+        IEnumerable<SubstanceNucleicAcid> vzzzzk_ = context.Operators.Select<SubstanceNucleicAcid, SubstanceNucleicAcid>((IEnumerable<SubstanceNucleicAcid>)vzzzzi_, vzzzzj_);
+        IEnumerable<SubstanceNucleicAcid> vzzzzl_ = context.Operators.Distinct<SubstanceNucleicAcid>(vzzzzk_);
+        SubstanceNucleicAcid vzzzzm_ = context.Operators.SingletonFrom<SubstanceNucleicAcid>(vzzzzl_);
 
-        return vzzzzo_;
+        return vzzzzm_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstancePolymerResource")]
     public SubstancePolymer SubstancePolymerResource(CqlContext context, SubstancePolymer arg)
     {
-        SubstancePolymer[] vzzzzv_ = [
+        SubstancePolymer[] vzzzzt_ = [
             arg,
         ];
-        SubstancePolymer vzzzzw_(SubstancePolymer a)
+        SubstancePolymer vzzzzu_(SubstancePolymer a)
         {
-            CodeableConcept wzzzza_ = a?.Class;
-            CodeableConcept wzzzzb_ = a?.Geometry;
-            List<CodeableConcept> wzzzzc_ = a?.CopolymerConnectivity;
-            List<FhirString> wzzzzd_ = a?.ModificationElement;
-            List<SubstancePolymer.MonomerSetComponent> wzzzze_ = a?.MonomerSet;
-            List<SubstancePolymer.RepeatComponent> wzzzzf_ = a?.Repeat;
-            SubstancePolymer wzzzzg_ = new SubstancePolymer
+            CodeableConcept vzzzzy_ = a?.Class;
+            CodeableConcept vzzzzz_ = a?.Geometry;
+            List<CodeableConcept> wzzzza_ = a?.CopolymerConnectivity;
+            List<FhirString> wzzzzb_ = a?.ModificationElement;
+            List<SubstancePolymer.MonomerSetComponent> wzzzzc_ = a?.MonomerSet;
+            List<SubstancePolymer.RepeatComponent> wzzzzd_ = a?.Repeat;
+            SubstancePolymer wzzzze_ = new SubstancePolymer
             {
-                Class = wzzzza_,
-                Geometry = wzzzzb_,
-                CopolymerConnectivity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzzc_),
-                ModificationElement = new List<FhirString>((IEnumerable<FhirString>)wzzzzd_),
-                MonomerSet = new List<SubstancePolymer.MonomerSetComponent>((IEnumerable<SubstancePolymer.MonomerSetComponent>)wzzzze_),
-                Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolymer.RepeatComponent>)wzzzzf_),
+                Class = vzzzzy_,
+                Geometry = vzzzzz_,
+                CopolymerConnectivity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)wzzzza_),
+                ModificationElement = new List<FhirString>((IEnumerable<FhirString>)wzzzzb_),
+                MonomerSet = new List<SubstancePolymer.MonomerSetComponent>((IEnumerable<SubstancePolymer.MonomerSetComponent>)wzzzzc_),
+                Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolymer.RepeatComponent>)wzzzzd_),
             };
 
-            return wzzzzg_;
+            return wzzzze_;
         };
-        IEnumerable<SubstancePolymer> vzzzzx_ = context.Operators.Select<SubstancePolymer, SubstancePolymer>((IEnumerable<SubstancePolymer>)vzzzzv_, vzzzzw_);
-        IEnumerable<SubstancePolymer> vzzzzy_ = context.Operators.Distinct<SubstancePolymer>(vzzzzx_);
-        SubstancePolymer vzzzzz_ = context.Operators.SingletonFrom<SubstancePolymer>(vzzzzy_);
+        IEnumerable<SubstancePolymer> vzzzzv_ = context.Operators.Select<SubstancePolymer, SubstancePolymer>((IEnumerable<SubstancePolymer>)vzzzzt_, vzzzzu_);
+        IEnumerable<SubstancePolymer> vzzzzw_ = context.Operators.Distinct<SubstancePolymer>(vzzzzv_);
+        SubstancePolymer vzzzzx_ = context.Operators.SingletonFrom<SubstancePolymer>(vzzzzw_);
 
-        return vzzzzz_;
+        return vzzzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceProteinResource")]
     public SubstanceProtein SubstanceProteinResource(CqlContext context, SubstanceProtein arg)
     {
-        SubstanceProtein[] wzzzzh_ = [
+        SubstanceProtein[] wzzzzf_ = [
             arg,
         ];
-        SubstanceProtein wzzzzi_(SubstanceProtein a)
+        SubstanceProtein wzzzzg_(SubstanceProtein a)
         {
-            CodeableConcept wzzzzm_ = a?.SequenceType;
-            Integer wzzzzn_ = a?.NumberOfSubunitsElement;
-            List<FhirString> wzzzzo_ = a?.DisulfideLinkageElement;
-            List<SubstanceProtein.SubunitComponent> wzzzzp_ = a?.Subunit;
-            SubstanceProtein wzzzzq_ = new SubstanceProtein
+            CodeableConcept wzzzzk_ = a?.SequenceType;
+            Integer wzzzzl_ = a?.NumberOfSubunitsElement;
+            List<FhirString> wzzzzm_ = a?.DisulfideLinkageElement;
+            List<SubstanceProtein.SubunitComponent> wzzzzn_ = a?.Subunit;
+            SubstanceProtein wzzzzo_ = new SubstanceProtein
             {
-                SequenceType = wzzzzm_,
-                NumberOfSubunitsElement = wzzzzn_,
-                DisulfideLinkageElement = new List<FhirString>((IEnumerable<FhirString>)wzzzzo_),
-                Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProtein.SubunitComponent>)wzzzzp_),
+                SequenceType = wzzzzk_,
+                NumberOfSubunitsElement = wzzzzl_,
+                DisulfideLinkageElement = new List<FhirString>((IEnumerable<FhirString>)wzzzzm_),
+                Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProtein.SubunitComponent>)wzzzzn_),
             };
 
-            return wzzzzq_;
+            return wzzzzo_;
         };
-        IEnumerable<SubstanceProtein> wzzzzj_ = context.Operators.Select<SubstanceProtein, SubstanceProtein>((IEnumerable<SubstanceProtein>)wzzzzh_, wzzzzi_);
-        IEnumerable<SubstanceProtein> wzzzzk_ = context.Operators.Distinct<SubstanceProtein>(wzzzzj_);
-        SubstanceProtein wzzzzl_ = context.Operators.SingletonFrom<SubstanceProtein>(wzzzzk_);
+        IEnumerable<SubstanceProtein> wzzzzh_ = context.Operators.Select<SubstanceProtein, SubstanceProtein>((IEnumerable<SubstanceProtein>)wzzzzf_, wzzzzg_);
+        IEnumerable<SubstanceProtein> wzzzzi_ = context.Operators.Distinct<SubstanceProtein>(wzzzzh_);
+        SubstanceProtein wzzzzj_ = context.Operators.SingletonFrom<SubstanceProtein>(wzzzzi_);
 
-        return wzzzzl_;
+        return wzzzzj_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceReferenceInformationResource")]
     public SubstanceReferenceInformation SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation arg)
     {
-        SubstanceReferenceInformation[] wzzzzr_ = [
+        SubstanceReferenceInformation[] wzzzzp_ = [
             arg,
         ];
-        SubstanceReferenceInformation wzzzzs_(SubstanceReferenceInformation a)
+        SubstanceReferenceInformation wzzzzq_(SubstanceReferenceInformation a)
         {
-            FhirString wzzzzw_ = a?.CommentElement;
-            List<SubstanceReferenceInformation.GeneComponent> wzzzzx_ = a?.Gene;
-            List<SubstanceReferenceInformation.GeneElementComponent> wzzzzy_ = a?.GeneElement;
-            List<SubstanceReferenceInformation.ClassificationComponent> wzzzzz_ = a?.Classification;
-            List<SubstanceReferenceInformation.TargetComponent> xzzzza_ = a?.Target;
-            SubstanceReferenceInformation xzzzzb_ = new SubstanceReferenceInformation
+            FhirString wzzzzu_ = a?.CommentElement;
+            List<SubstanceReferenceInformation.GeneComponent> wzzzzv_ = a?.Gene;
+            List<SubstanceReferenceInformation.GeneElementComponent> wzzzzw_ = a?.GeneElement;
+            List<SubstanceReferenceInformation.ClassificationComponent> wzzzzx_ = a?.Classification;
+            List<SubstanceReferenceInformation.TargetComponent> wzzzzy_ = a?.Target;
+            SubstanceReferenceInformation wzzzzz_ = new SubstanceReferenceInformation
             {
-                CommentElement = wzzzzw_,
-                Gene = new List<SubstanceReferenceInformation.GeneComponent>((IEnumerable<SubstanceReferenceInformation.GeneComponent>)wzzzzx_),
-                GeneElement = new List<SubstanceReferenceInformation.GeneElementComponent>((IEnumerable<SubstanceReferenceInformation.GeneElementComponent>)wzzzzy_),
-                Classification = new List<SubstanceReferenceInformation.ClassificationComponent>((IEnumerable<SubstanceReferenceInformation.ClassificationComponent>)wzzzzz_),
-                Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<SubstanceReferenceInformation.TargetComponent>)xzzzza_),
+                CommentElement = wzzzzu_,
+                Gene = new List<SubstanceReferenceInformation.GeneComponent>((IEnumerable<SubstanceReferenceInformation.GeneComponent>)wzzzzv_),
+                GeneElement = new List<SubstanceReferenceInformation.GeneElementComponent>((IEnumerable<SubstanceReferenceInformation.GeneElementComponent>)wzzzzw_),
+                Classification = new List<SubstanceReferenceInformation.ClassificationComponent>((IEnumerable<SubstanceReferenceInformation.ClassificationComponent>)wzzzzx_),
+                Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<SubstanceReferenceInformation.TargetComponent>)wzzzzy_),
             };
 
-            return xzzzzb_;
+            return wzzzzz_;
         };
-        IEnumerable<SubstanceReferenceInformation> wzzzzt_ = context.Operators.Select<SubstanceReferenceInformation, SubstanceReferenceInformation>((IEnumerable<SubstanceReferenceInformation>)wzzzzr_, wzzzzs_);
-        IEnumerable<SubstanceReferenceInformation> wzzzzu_ = context.Operators.Distinct<SubstanceReferenceInformation>(wzzzzt_);
-        SubstanceReferenceInformation wzzzzv_ = context.Operators.SingletonFrom<SubstanceReferenceInformation>(wzzzzu_);
+        IEnumerable<SubstanceReferenceInformation> wzzzzr_ = context.Operators.Select<SubstanceReferenceInformation, SubstanceReferenceInformation>((IEnumerable<SubstanceReferenceInformation>)wzzzzp_, wzzzzq_);
+        IEnumerable<SubstanceReferenceInformation> wzzzzs_ = context.Operators.Distinct<SubstanceReferenceInformation>(wzzzzr_);
+        SubstanceReferenceInformation wzzzzt_ = context.Operators.SingletonFrom<SubstanceReferenceInformation>(wzzzzs_);
 
-        return wzzzzv_;
+        return wzzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceSourceMaterialResource")]
     public SubstanceSourceMaterial SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial arg)
     {
-        SubstanceSourceMaterial[] xzzzzc_ = [
+        SubstanceSourceMaterial[] xzzzza_ = [
             arg,
         ];
-        SubstanceSourceMaterial xzzzzd_(SubstanceSourceMaterial a)
+        SubstanceSourceMaterial xzzzzb_(SubstanceSourceMaterial a)
         {
-            CodeableConcept xzzzzh_ = a?.SourceMaterialClass;
-            CodeableConcept xzzzzi_ = a?.SourceMaterialType;
-            CodeableConcept xzzzzj_ = a?.SourceMaterialState;
-            Identifier xzzzzk_ = a?.OrganismId;
-            FhirString xzzzzl_ = a?.OrganismNameElement;
-            List<Identifier> xzzzzm_ = a?.ParentSubstanceId;
-            List<FhirString> xzzzzn_ = a?.ParentSubstanceNameElement;
-            List<CodeableConcept> xzzzzo_ = a?.CountryOfOrigin;
-            List<FhirString> xzzzzp_ = a?.GeographicalLocationElement;
-            CodeableConcept xzzzzq_ = a?.DevelopmentStage;
-            List<SubstanceSourceMaterial.FractionDescriptionComponent> xzzzzr_ = a?.FractionDescription;
-            SubstanceSourceMaterial.OrganismComponent xzzzzs_ = a?.Organism;
-            List<SubstanceSourceMaterial.PartDescriptionComponent> xzzzzt_ = a?.PartDescription;
-            SubstanceSourceMaterial xzzzzu_ = new SubstanceSourceMaterial
+            CodeableConcept xzzzzf_ = a?.SourceMaterialClass;
+            CodeableConcept xzzzzg_ = a?.SourceMaterialType;
+            CodeableConcept xzzzzh_ = a?.SourceMaterialState;
+            Identifier xzzzzi_ = a?.OrganismId;
+            FhirString xzzzzj_ = a?.OrganismNameElement;
+            List<Identifier> xzzzzk_ = a?.ParentSubstanceId;
+            List<FhirString> xzzzzl_ = a?.ParentSubstanceNameElement;
+            List<CodeableConcept> xzzzzm_ = a?.CountryOfOrigin;
+            List<FhirString> xzzzzn_ = a?.GeographicalLocationElement;
+            CodeableConcept xzzzzo_ = a?.DevelopmentStage;
+            List<SubstanceSourceMaterial.FractionDescriptionComponent> xzzzzp_ = a?.FractionDescription;
+            SubstanceSourceMaterial.OrganismComponent xzzzzq_ = a?.Organism;
+            List<SubstanceSourceMaterial.PartDescriptionComponent> xzzzzr_ = a?.PartDescription;
+            SubstanceSourceMaterial xzzzzs_ = new SubstanceSourceMaterial
             {
-                SourceMaterialClass = xzzzzh_,
-                SourceMaterialType = xzzzzi_,
-                SourceMaterialState = xzzzzj_,
-                OrganismId = xzzzzk_,
-                OrganismNameElement = xzzzzl_,
-                ParentSubstanceId = new List<Identifier>((IEnumerable<Identifier>)xzzzzm_),
-                ParentSubstanceNameElement = new List<FhirString>((IEnumerable<FhirString>)xzzzzn_),
-                CountryOfOrigin = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzzo_),
-                GeographicalLocationElement = new List<FhirString>((IEnumerable<FhirString>)xzzzzp_),
-                DevelopmentStage = xzzzzq_,
-                FractionDescription = new List<SubstanceSourceMaterial.FractionDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.FractionDescriptionComponent>)xzzzzr_),
-                Organism = xzzzzs_,
-                PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.PartDescriptionComponent>)xzzzzt_),
+                SourceMaterialClass = xzzzzf_,
+                SourceMaterialType = xzzzzg_,
+                SourceMaterialState = xzzzzh_,
+                OrganismId = xzzzzi_,
+                OrganismNameElement = xzzzzj_,
+                ParentSubstanceId = new List<Identifier>((IEnumerable<Identifier>)xzzzzk_),
+                ParentSubstanceNameElement = new List<FhirString>((IEnumerable<FhirString>)xzzzzl_),
+                CountryOfOrigin = new List<CodeableConcept>((IEnumerable<CodeableConcept>)xzzzzm_),
+                GeographicalLocationElement = new List<FhirString>((IEnumerable<FhirString>)xzzzzn_),
+                DevelopmentStage = xzzzzo_,
+                FractionDescription = new List<SubstanceSourceMaterial.FractionDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.FractionDescriptionComponent>)xzzzzp_),
+                Organism = xzzzzq_,
+                PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.PartDescriptionComponent>)xzzzzr_),
             };
 
-            return xzzzzu_;
+            return xzzzzs_;
         };
-        IEnumerable<SubstanceSourceMaterial> xzzzze_ = context.Operators.Select<SubstanceSourceMaterial, SubstanceSourceMaterial>((IEnumerable<SubstanceSourceMaterial>)xzzzzc_, xzzzzd_);
-        IEnumerable<SubstanceSourceMaterial> xzzzzf_ = context.Operators.Distinct<SubstanceSourceMaterial>(xzzzze_);
-        SubstanceSourceMaterial xzzzzg_ = context.Operators.SingletonFrom<SubstanceSourceMaterial>(xzzzzf_);
+        IEnumerable<SubstanceSourceMaterial> xzzzzc_ = context.Operators.Select<SubstanceSourceMaterial, SubstanceSourceMaterial>((IEnumerable<SubstanceSourceMaterial>)xzzzza_, xzzzzb_);
+        IEnumerable<SubstanceSourceMaterial> xzzzzd_ = context.Operators.Distinct<SubstanceSourceMaterial>(xzzzzc_);
+        SubstanceSourceMaterial xzzzze_ = context.Operators.SingletonFrom<SubstanceSourceMaterial>(xzzzzd_);
 
-        return xzzzzg_;
+        return xzzzze_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SubstanceSpecificationResource")]
     public SubstanceSpecification SubstanceSpecificationResource(CqlContext context, SubstanceSpecification arg)
     {
-        SubstanceSpecification[] xzzzzv_ = [
+        SubstanceSpecification[] xzzzzt_ = [
             arg,
         ];
-        SubstanceSpecification xzzzzw_(SubstanceSpecification a)
+        SubstanceSpecification xzzzzu_(SubstanceSpecification a)
         {
-            Identifier yzzzza_ = a?.Identifier;
-            CodeableConcept yzzzzb_ = a?.Type;
-            CodeableConcept yzzzzc_ = a?.Status;
-            CodeableConcept yzzzzd_ = a?.Domain;
-            FhirString yzzzze_ = a?.DescriptionElement;
-            List<ResourceReference> yzzzzf_ = a?.Source;
-            FhirString yzzzzg_ = a?.CommentElement;
-            List<SubstanceSpecification.MoietyComponent> yzzzzh_ = a?.Moiety;
-            List<SubstanceSpecification.PropertyComponent> yzzzzi_ = a?.Property;
-            ResourceReference yzzzzj_ = a?.ReferenceInformation;
-            SubstanceSpecification.StructureComponent yzzzzk_ = a?.Structure;
-            List<SubstanceSpecification.CodeComponent> yzzzzl_ = a?.Code;
-            List<SubstanceSpecification.NameComponent> yzzzzm_ = a?.Name;
-            List<SubstanceSpecification.MolecularWeightComponent> yzzzzn_ = a?.MolecularWeight;
-            List<SubstanceSpecification.RelationshipComponent> yzzzzo_ = a?.Relationship;
-            ResourceReference yzzzzp_ = a?.NucleicAcid;
-            ResourceReference yzzzzq_ = a?.Polymer;
-            ResourceReference yzzzzr_ = a?.Protein;
-            ResourceReference yzzzzs_ = a?.SourceMaterial;
-            SubstanceSpecification yzzzzt_ = new SubstanceSpecification
+            Identifier xzzzzy_ = a?.Identifier;
+            CodeableConcept xzzzzz_ = a?.Type;
+            CodeableConcept yzzzza_ = a?.Status;
+            CodeableConcept yzzzzb_ = a?.Domain;
+            FhirString yzzzzc_ = a?.DescriptionElement;
+            List<ResourceReference> yzzzzd_ = a?.Source;
+            FhirString yzzzze_ = a?.CommentElement;
+            List<SubstanceSpecification.MoietyComponent> yzzzzf_ = a?.Moiety;
+            List<SubstanceSpecification.PropertyComponent> yzzzzg_ = a?.Property;
+            ResourceReference yzzzzh_ = a?.ReferenceInformation;
+            SubstanceSpecification.StructureComponent yzzzzi_ = a?.Structure;
+            List<SubstanceSpecification.CodeComponent> yzzzzj_ = a?.Code;
+            List<SubstanceSpecification.NameComponent> yzzzzk_ = a?.Name;
+            List<SubstanceSpecification.MolecularWeightComponent> yzzzzl_ = a?.MolecularWeight;
+            List<SubstanceSpecification.RelationshipComponent> yzzzzm_ = a?.Relationship;
+            ResourceReference yzzzzn_ = a?.NucleicAcid;
+            ResourceReference yzzzzo_ = a?.Polymer;
+            ResourceReference yzzzzp_ = a?.Protein;
+            ResourceReference yzzzzq_ = a?.SourceMaterial;
+            SubstanceSpecification yzzzzr_ = new SubstanceSpecification
             {
-                Identifier = yzzzza_,
-                Type = yzzzzb_,
-                Status = yzzzzc_,
-                Domain = yzzzzd_,
-                DescriptionElement = yzzzze_,
-                Source = new List<ResourceReference>((IEnumerable<ResourceReference>)yzzzzf_),
-                CommentElement = yzzzzg_,
-                Moiety = new List<SubstanceSpecification.MoietyComponent>((IEnumerable<SubstanceSpecification.MoietyComponent>)yzzzzh_),
-                Property = new List<SubstanceSpecification.PropertyComponent>((IEnumerable<SubstanceSpecification.PropertyComponent>)yzzzzi_),
-                ReferenceInformation = yzzzzj_,
-                Structure = yzzzzk_,
-                Code = new List<SubstanceSpecification.CodeComponent>((IEnumerable<SubstanceSpecification.CodeComponent>)yzzzzl_),
-                Name = new List<SubstanceSpecification.NameComponent>((IEnumerable<SubstanceSpecification.NameComponent>)yzzzzm_),
-                MolecularWeight = new List<SubstanceSpecification.MolecularWeightComponent>((IEnumerable<SubstanceSpecification.MolecularWeightComponent>)yzzzzn_),
-                Relationship = new List<SubstanceSpecification.RelationshipComponent>((IEnumerable<SubstanceSpecification.RelationshipComponent>)yzzzzo_),
-                NucleicAcid = yzzzzp_,
-                Polymer = yzzzzq_,
-                Protein = yzzzzr_,
-                SourceMaterial = yzzzzs_,
+                Identifier = xzzzzy_,
+                Type = xzzzzz_,
+                Status = yzzzza_,
+                Domain = yzzzzb_,
+                DescriptionElement = yzzzzc_,
+                Source = new List<ResourceReference>((IEnumerable<ResourceReference>)yzzzzd_),
+                CommentElement = yzzzze_,
+                Moiety = new List<SubstanceSpecification.MoietyComponent>((IEnumerable<SubstanceSpecification.MoietyComponent>)yzzzzf_),
+                Property = new List<SubstanceSpecification.PropertyComponent>((IEnumerable<SubstanceSpecification.PropertyComponent>)yzzzzg_),
+                ReferenceInformation = yzzzzh_,
+                Structure = yzzzzi_,
+                Code = new List<SubstanceSpecification.CodeComponent>((IEnumerable<SubstanceSpecification.CodeComponent>)yzzzzj_),
+                Name = new List<SubstanceSpecification.NameComponent>((IEnumerable<SubstanceSpecification.NameComponent>)yzzzzk_),
+                MolecularWeight = new List<SubstanceSpecification.MolecularWeightComponent>((IEnumerable<SubstanceSpecification.MolecularWeightComponent>)yzzzzl_),
+                Relationship = new List<SubstanceSpecification.RelationshipComponent>((IEnumerable<SubstanceSpecification.RelationshipComponent>)yzzzzm_),
+                NucleicAcid = yzzzzn_,
+                Polymer = yzzzzo_,
+                Protein = yzzzzp_,
+                SourceMaterial = yzzzzq_,
             };
 
-            return yzzzzt_;
+            return yzzzzr_;
         };
-        IEnumerable<SubstanceSpecification> xzzzzx_ = context.Operators.Select<SubstanceSpecification, SubstanceSpecification>((IEnumerable<SubstanceSpecification>)xzzzzv_, xzzzzw_);
-        IEnumerable<SubstanceSpecification> xzzzzy_ = context.Operators.Distinct<SubstanceSpecification>(xzzzzx_);
-        SubstanceSpecification xzzzzz_ = context.Operators.SingletonFrom<SubstanceSpecification>(xzzzzy_);
+        IEnumerable<SubstanceSpecification> xzzzzv_ = context.Operators.Select<SubstanceSpecification, SubstanceSpecification>((IEnumerable<SubstanceSpecification>)xzzzzt_, xzzzzu_);
+        IEnumerable<SubstanceSpecification> xzzzzw_ = context.Operators.Distinct<SubstanceSpecification>(xzzzzv_);
+        SubstanceSpecification xzzzzx_ = context.Operators.SingletonFrom<SubstanceSpecification>(xzzzzw_);
 
-        return xzzzzz_;
+        return xzzzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SupplyDeliveryResource")]
     public SupplyDelivery SupplyDeliveryResource(CqlContext context, SupplyDelivery arg)
     {
-        SupplyDelivery[] yzzzzu_ = [
+        SupplyDelivery[] yzzzzs_ = [
             arg,
         ];
-        SupplyDelivery yzzzzv_(SupplyDelivery a)
+        SupplyDelivery yzzzzt_(SupplyDelivery a)
         {
-            List<Identifier> yzzzzz_ = a?.Identifier;
-            List<ResourceReference> zzzzza_ = a?.BasedOn;
-            List<ResourceReference> zzzzzb_ = a?.PartOf;
-            Code<SupplyDelivery.SupplyDeliveryStatus> zzzzzc_ = a?.StatusElement;
-            ResourceReference zzzzzd_ = a?.Patient;
-            CodeableConcept zzzzze_ = a?.Type;
-            SupplyDelivery.SuppliedItemComponent zzzzzf_ = a?.SuppliedItem;
-            DataType zzzzzg_ = a?.Occurrence;
-            ResourceReference zzzzzh_ = a?.Supplier;
-            ResourceReference zzzzzi_ = a?.Destination;
-            List<ResourceReference> zzzzzj_ = a?.Receiver;
-            SupplyDelivery zzzzzk_ = new SupplyDelivery
+            List<Identifier> yzzzzx_ = a?.Identifier;
+            List<ResourceReference> yzzzzy_ = a?.BasedOn;
+            List<ResourceReference> yzzzzz_ = a?.PartOf;
+            Code<SupplyDelivery.SupplyDeliveryStatus> zzzzza_ = a?.StatusElement;
+            ResourceReference zzzzzb_ = a?.Patient;
+            CodeableConcept zzzzzc_ = a?.Type;
+            SupplyDelivery.SuppliedItemComponent zzzzzd_ = a?.SuppliedItem;
+            DataType zzzzze_ = a?.Occurrence;
+            ResourceReference zzzzzf_ = a?.Supplier;
+            ResourceReference zzzzzg_ = a?.Destination;
+            List<ResourceReference> zzzzzh_ = a?.Receiver;
+            SupplyDelivery zzzzzi_ = new SupplyDelivery
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzzzz_),
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzzza_),
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzzzb_),
-                StatusElement = zzzzzc_,
-                Patient = zzzzzd_,
-                Type = zzzzze_,
-                SuppliedItem = zzzzzf_,
-                Occurrence = (DataType)zzzzzg_,
-                Supplier = zzzzzh_,
-                Destination = zzzzzi_,
-                Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzzzj_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)yzzzzx_),
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)yzzzzy_),
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)yzzzzz_),
+                StatusElement = zzzzza_,
+                Patient = zzzzzb_,
+                Type = zzzzzc_,
+                SuppliedItem = zzzzzd_,
+                Occurrence = (DataType)zzzzze_,
+                Supplier = zzzzzf_,
+                Destination = zzzzzg_,
+                Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzzzh_),
             };
 
-            return zzzzzk_;
+            return zzzzzi_;
         };
-        IEnumerable<SupplyDelivery> yzzzzw_ = context.Operators.Select<SupplyDelivery, SupplyDelivery>((IEnumerable<SupplyDelivery>)yzzzzu_, yzzzzv_);
-        IEnumerable<SupplyDelivery> yzzzzx_ = context.Operators.Distinct<SupplyDelivery>(yzzzzw_);
-        SupplyDelivery yzzzzy_ = context.Operators.SingletonFrom<SupplyDelivery>(yzzzzx_);
+        IEnumerable<SupplyDelivery> yzzzzu_ = context.Operators.Select<SupplyDelivery, SupplyDelivery>((IEnumerable<SupplyDelivery>)yzzzzs_, yzzzzt_);
+        IEnumerable<SupplyDelivery> yzzzzv_ = context.Operators.Distinct<SupplyDelivery>(yzzzzu_);
+        SupplyDelivery yzzzzw_ = context.Operators.SingletonFrom<SupplyDelivery>(yzzzzv_);
 
-        return yzzzzy_;
+        return yzzzzw_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("SupplyRequestResource")]
     public SupplyRequest SupplyRequestResource(CqlContext context, SupplyRequest arg)
     {
-        SupplyRequest[] zzzzzl_ = [
+        SupplyRequest[] zzzzzj_ = [
             arg,
         ];
-        SupplyRequest zzzzzm_(SupplyRequest a)
+        SupplyRequest zzzzzk_(SupplyRequest a)
         {
-            List<Identifier> zzzzzq_ = a?.Identifier;
-            Code<SupplyRequest.SupplyRequestStatus> zzzzzr_ = a?.StatusElement;
-            CodeableConcept zzzzzs_ = a?.Category;
-            Code<RequestPriority> zzzzzt_ = a?.PriorityElement;
-            DataType zzzzzu_ = a?.Item;
-            Quantity zzzzzv_ = a?.Quantity;
-            List<SupplyRequest.ParameterComponent> zzzzzw_ = a?.Parameter;
-            DataType zzzzzx_ = a?.Occurrence;
-            FhirDateTime zzzzzy_ = a?.AuthoredOnElement;
-            ResourceReference zzzzzz_ = a?.Requester;
-            List<ResourceReference> azzzzza_ = a?.Supplier;
-            List<CodeableConcept> azzzzzb_ = a?.ReasonCode;
-            List<ResourceReference> azzzzzc_ = a?.ReasonReference;
-            ResourceReference azzzzzd_ = a?.DeliverFrom;
-            ResourceReference azzzzze_ = a?.DeliverTo;
-            SupplyRequest azzzzzf_ = new SupplyRequest
+            List<Identifier> zzzzzo_ = a?.Identifier;
+            Code<SupplyRequest.SupplyRequestStatus> zzzzzp_ = a?.StatusElement;
+            CodeableConcept zzzzzq_ = a?.Category;
+            Code<RequestPriority> zzzzzr_ = a?.PriorityElement;
+            DataType zzzzzs_ = a?.Item;
+            Quantity zzzzzt_ = a?.Quantity;
+            List<SupplyRequest.ParameterComponent> zzzzzu_ = a?.Parameter;
+            DataType zzzzzv_ = a?.Occurrence;
+            FhirDateTime zzzzzw_ = a?.AuthoredOnElement;
+            ResourceReference zzzzzx_ = a?.Requester;
+            List<ResourceReference> zzzzzy_ = a?.Supplier;
+            List<CodeableConcept> zzzzzz_ = a?.ReasonCode;
+            List<ResourceReference> azzzzza_ = a?.ReasonReference;
+            ResourceReference azzzzzb_ = a?.DeliverFrom;
+            ResourceReference azzzzzc_ = a?.DeliverTo;
+            SupplyRequest azzzzzd_ = new SupplyRequest
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzzzq_),
-                StatusElement = zzzzzr_,
-                Category = zzzzzs_,
-                PriorityElement = zzzzzt_,
-                Item = (DataType)zzzzzu_,
-                Quantity = zzzzzv_,
-                Parameter = new List<SupplyRequest.ParameterComponent>((IEnumerable<SupplyRequest.ParameterComponent>)zzzzzw_),
-                Occurrence = (DataType)zzzzzx_,
-                AuthoredOnElement = zzzzzy_,
-                Requester = zzzzzz_,
-                Supplier = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzza_),
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)azzzzzb_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzzc_),
-                DeliverFrom = azzzzzd_,
-                DeliverTo = azzzzze_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)zzzzzo_),
+                StatusElement = zzzzzp_,
+                Category = zzzzzq_,
+                PriorityElement = zzzzzr_,
+                Item = (DataType)zzzzzs_,
+                Quantity = zzzzzt_,
+                Parameter = new List<SupplyRequest.ParameterComponent>((IEnumerable<SupplyRequest.ParameterComponent>)zzzzzu_),
+                Occurrence = (DataType)zzzzzv_,
+                AuthoredOnElement = zzzzzw_,
+                Requester = zzzzzx_,
+                Supplier = new List<ResourceReference>((IEnumerable<ResourceReference>)zzzzzy_),
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)zzzzzz_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzza_),
+                DeliverFrom = azzzzzb_,
+                DeliverTo = azzzzzc_,
             };
 
-            return azzzzzf_;
+            return azzzzzd_;
         };
-        IEnumerable<SupplyRequest> zzzzzn_ = context.Operators.Select<SupplyRequest, SupplyRequest>((IEnumerable<SupplyRequest>)zzzzzl_, zzzzzm_);
-        IEnumerable<SupplyRequest> zzzzzo_ = context.Operators.Distinct<SupplyRequest>(zzzzzn_);
-        SupplyRequest zzzzzp_ = context.Operators.SingletonFrom<SupplyRequest>(zzzzzo_);
+        IEnumerable<SupplyRequest> zzzzzl_ = context.Operators.Select<SupplyRequest, SupplyRequest>((IEnumerable<SupplyRequest>)zzzzzj_, zzzzzk_);
+        IEnumerable<SupplyRequest> zzzzzm_ = context.Operators.Distinct<SupplyRequest>(zzzzzl_);
+        SupplyRequest zzzzzn_ = context.Operators.SingletonFrom<SupplyRequest>(zzzzzm_);
 
-        return zzzzzp_;
+        return zzzzzn_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("TaskResource")]
     public Task TaskResource(CqlContext context, Task arg)
     {
-        Task[] azzzzzg_ = [
+        Task[] azzzzze_ = [
             arg,
         ];
-        Task azzzzzh_(Task a)
+        Task azzzzzf_(Task a)
         {
-            List<Identifier> azzzzzl_ = a?.Identifier;
-            Canonical azzzzzm_ = a?.InstantiatesCanonicalElement;
-            FhirUri azzzzzn_ = a?.InstantiatesUriElement;
-            List<ResourceReference> azzzzzo_ = a?.BasedOn;
-            Identifier azzzzzp_ = a?.GroupIdentifier;
-            List<ResourceReference> azzzzzq_ = a?.PartOf;
-            Code<Task.TaskStatus> azzzzzr_ = a?.StatusElement;
-            CodeableConcept azzzzzs_ = a?.StatusReason;
-            CodeableConcept azzzzzt_ = a?.BusinessStatus;
-            Code<Task.TaskIntent> azzzzzu_ = a?.IntentElement;
-            Code<RequestPriority> azzzzzv_ = a?.PriorityElement;
-            CodeableConcept azzzzzw_ = a?.Code;
-            FhirString azzzzzx_ = a?.DescriptionElement;
-            ResourceReference azzzzzy_ = a?.Focus;
-            ResourceReference azzzzzz_ = a?.For;
-            ResourceReference bzzzzza_ = a?.Encounter;
-            Period bzzzzzb_ = a?.ExecutionPeriod;
-            FhirDateTime bzzzzzc_ = a?.AuthoredOnElement;
-            FhirDateTime bzzzzzd_ = a?.LastModifiedElement;
-            ResourceReference bzzzzze_ = a?.Requester;
-            List<CodeableConcept> bzzzzzf_ = a?.PerformerType;
-            ResourceReference bzzzzzg_ = a?.Owner;
-            ResourceReference bzzzzzh_ = a?.Location;
-            CodeableConcept bzzzzzi_ = a?.ReasonCode;
-            ResourceReference bzzzzzj_ = a?.ReasonReference;
-            List<ResourceReference> bzzzzzk_ = a?.Insurance;
-            List<Annotation> bzzzzzl_ = a?.Note;
-            List<ResourceReference> bzzzzzm_ = a?.RelevantHistory;
-            Task.RestrictionComponent bzzzzzn_ = a?.Restriction;
-            List<Task.ParameterComponent> bzzzzzo_ = a?.Input;
-            List<Task.OutputComponent> bzzzzzp_ = a?.Output;
-            Task bzzzzzq_ = new Task
+            List<Identifier> azzzzzj_ = a?.Identifier;
+            Canonical azzzzzk_ = a?.InstantiatesCanonicalElement;
+            FhirUri azzzzzl_ = a?.InstantiatesUriElement;
+            List<ResourceReference> azzzzzm_ = a?.BasedOn;
+            Identifier azzzzzn_ = a?.GroupIdentifier;
+            List<ResourceReference> azzzzzo_ = a?.PartOf;
+            Code<Task.TaskStatus> azzzzzp_ = a?.StatusElement;
+            CodeableConcept azzzzzq_ = a?.StatusReason;
+            CodeableConcept azzzzzr_ = a?.BusinessStatus;
+            Code<Task.TaskIntent> azzzzzs_ = a?.IntentElement;
+            Code<RequestPriority> azzzzzt_ = a?.PriorityElement;
+            CodeableConcept azzzzzu_ = a?.Code;
+            FhirString azzzzzv_ = a?.DescriptionElement;
+            ResourceReference azzzzzw_ = a?.Focus;
+            ResourceReference azzzzzx_ = a?.For;
+            ResourceReference azzzzzy_ = a?.Encounter;
+            Period azzzzzz_ = a?.ExecutionPeriod;
+            FhirDateTime bzzzzza_ = a?.AuthoredOnElement;
+            FhirDateTime bzzzzzb_ = a?.LastModifiedElement;
+            ResourceReference bzzzzzc_ = a?.Requester;
+            List<CodeableConcept> bzzzzzd_ = a?.PerformerType;
+            ResourceReference bzzzzze_ = a?.Owner;
+            ResourceReference bzzzzzf_ = a?.Location;
+            CodeableConcept bzzzzzg_ = a?.ReasonCode;
+            ResourceReference bzzzzzh_ = a?.ReasonReference;
+            List<ResourceReference> bzzzzzi_ = a?.Insurance;
+            List<Annotation> bzzzzzj_ = a?.Note;
+            List<ResourceReference> bzzzzzk_ = a?.RelevantHistory;
+            Task.RestrictionComponent bzzzzzl_ = a?.Restriction;
+            List<Task.ParameterComponent> bzzzzzm_ = a?.Input;
+            List<Task.OutputComponent> bzzzzzn_ = a?.Output;
+            Task bzzzzzo_ = new Task
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzzzl_),
-                InstantiatesCanonicalElement = azzzzzm_,
-                InstantiatesUriElement = azzzzzn_,
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzzo_),
-                GroupIdentifier = azzzzzp_,
-                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzzq_),
-                StatusElement = azzzzzr_,
-                StatusReason = azzzzzs_,
-                BusinessStatus = azzzzzt_,
-                IntentElement = azzzzzu_,
-                PriorityElement = azzzzzv_,
-                Code = azzzzzw_,
-                DescriptionElement = azzzzzx_,
-                Focus = azzzzzy_,
-                For = azzzzzz_,
-                Encounter = bzzzzza_,
-                ExecutionPeriod = bzzzzzb_,
-                AuthoredOnElement = bzzzzzc_,
-                LastModifiedElement = bzzzzzd_,
-                Requester = bzzzzze_,
-                PerformerType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzzf_),
-                Owner = bzzzzzg_,
-                Location = bzzzzzh_,
-                ReasonCode = bzzzzzi_,
-                ReasonReference = bzzzzzj_,
-                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzzzzk_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)bzzzzzl_),
-                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzzzzm_),
-                Restriction = bzzzzzn_,
-                Input = new List<Task.ParameterComponent>((IEnumerable<Task.ParameterComponent>)bzzzzzo_),
-                Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)bzzzzzp_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)azzzzzj_),
+                InstantiatesCanonicalElement = azzzzzk_,
+                InstantiatesUriElement = azzzzzl_,
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzzm_),
+                GroupIdentifier = azzzzzn_,
+                PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)azzzzzo_),
+                StatusElement = azzzzzp_,
+                StatusReason = azzzzzq_,
+                BusinessStatus = azzzzzr_,
+                IntentElement = azzzzzs_,
+                PriorityElement = azzzzzt_,
+                Code = azzzzzu_,
+                DescriptionElement = azzzzzv_,
+                Focus = azzzzzw_,
+                For = azzzzzx_,
+                Encounter = azzzzzy_,
+                ExecutionPeriod = azzzzzz_,
+                AuthoredOnElement = bzzzzza_,
+                LastModifiedElement = bzzzzzb_,
+                Requester = bzzzzzc_,
+                PerformerType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)bzzzzzd_),
+                Owner = bzzzzze_,
+                Location = bzzzzzf_,
+                ReasonCode = bzzzzzg_,
+                ReasonReference = bzzzzzh_,
+                Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzzzzi_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)bzzzzzj_),
+                RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)bzzzzzk_),
+                Restriction = bzzzzzl_,
+                Input = new List<Task.ParameterComponent>((IEnumerable<Task.ParameterComponent>)bzzzzzm_),
+                Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)bzzzzzn_),
             };
 
-            return bzzzzzq_;
+            return bzzzzzo_;
         };
-        IEnumerable<Task> azzzzzi_ = context.Operators.Select<Task, Task>((IEnumerable<Task>)azzzzzg_, azzzzzh_);
-        IEnumerable<Task> azzzzzj_ = context.Operators.Distinct<Task>(azzzzzi_);
-        Task azzzzzk_ = context.Operators.SingletonFrom<Task>(azzzzzj_);
+        IEnumerable<Task> azzzzzg_ = context.Operators.Select<Task, Task>((IEnumerable<Task>)azzzzze_, azzzzzf_);
+        IEnumerable<Task> azzzzzh_ = context.Operators.Distinct<Task>(azzzzzg_);
+        Task azzzzzi_ = context.Operators.SingletonFrom<Task>(azzzzzh_);
 
-        return azzzzzk_;
+        return azzzzzi_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("TerminologyCapabilitiesResource")]
     public TerminologyCapabilities TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities arg)
     {
-        TerminologyCapabilities[] bzzzzzr_ = [
+        TerminologyCapabilities[] bzzzzzp_ = [
             arg,
         ];
-        TerminologyCapabilities bzzzzzs_(TerminologyCapabilities a)
+        TerminologyCapabilities bzzzzzq_(TerminologyCapabilities a)
         {
-            FhirUri bzzzzzw_ = a?.UrlElement;
-            FhirString bzzzzzx_ = a?.VersionElement;
-            FhirString bzzzzzy_ = a?.NameElement;
-            FhirString bzzzzzz_ = a?.TitleElement;
-            Code<PublicationStatus> czzzzza_ = a?.StatusElement;
-            FhirBoolean czzzzzb_ = a?.ExperimentalElement;
-            FhirDateTime czzzzzc_ = a?.DateElement;
-            FhirString czzzzzd_ = a?.PublisherElement;
-            List<ContactDetail> czzzzze_ = a?.Contact;
-            Markdown czzzzzf_ = a?.DescriptionElement;
-            List<UsageContext> czzzzzg_ = a?.UseContext;
-            List<CodeableConcept> czzzzzh_ = a?.Jurisdiction;
-            Markdown czzzzzi_ = a?.PurposeElement;
-            Markdown czzzzzj_ = a?.CopyrightElement;
-            Code<CapabilityStatementKind> czzzzzk_ = a?.KindElement;
-            TerminologyCapabilities.SoftwareComponent czzzzzl_ = a?.Software;
-            TerminologyCapabilities.ImplementationComponent czzzzzm_ = a?.Implementation;
-            FhirBoolean czzzzzn_ = a?.LockedDateElement;
-            List<TerminologyCapabilities.CodeSystemComponent> czzzzzo_ = a?.CodeSystem;
-            TerminologyCapabilities.ExpansionComponent czzzzzp_ = a?.Expansion;
-            Code<TerminologyCapabilities.CodeSearchSupport> czzzzzq_ = a?.CodeSearchElement;
-            TerminologyCapabilities.ValidateCodeComponent czzzzzr_ = a?.ValidateCode;
-            TerminologyCapabilities.TranslationComponent czzzzzs_ = a?.Translation;
-            TerminologyCapabilities.ClosureComponent czzzzzt_ = a?.Closure;
-            TerminologyCapabilities czzzzzu_ = new TerminologyCapabilities
+            FhirUri bzzzzzu_ = a?.UrlElement;
+            FhirString bzzzzzv_ = a?.VersionElement;
+            FhirString bzzzzzw_ = a?.NameElement;
+            FhirString bzzzzzx_ = a?.TitleElement;
+            Code<PublicationStatus> bzzzzzy_ = a?.StatusElement;
+            FhirBoolean bzzzzzz_ = a?.ExperimentalElement;
+            FhirDateTime czzzzza_ = a?.DateElement;
+            FhirString czzzzzb_ = a?.PublisherElement;
+            List<ContactDetail> czzzzzc_ = a?.Contact;
+            Markdown czzzzzd_ = a?.DescriptionElement;
+            List<UsageContext> czzzzze_ = a?.UseContext;
+            List<CodeableConcept> czzzzzf_ = a?.Jurisdiction;
+            Markdown czzzzzg_ = a?.PurposeElement;
+            Markdown czzzzzh_ = a?.CopyrightElement;
+            Code<CapabilityStatementKind> czzzzzi_ = a?.KindElement;
+            TerminologyCapabilities.SoftwareComponent czzzzzj_ = a?.Software;
+            TerminologyCapabilities.ImplementationComponent czzzzzk_ = a?.Implementation;
+            FhirBoolean czzzzzl_ = a?.LockedDateElement;
+            List<TerminologyCapabilities.CodeSystemComponent> czzzzzm_ = a?.CodeSystem;
+            TerminologyCapabilities.ExpansionComponent czzzzzn_ = a?.Expansion;
+            Code<TerminologyCapabilities.CodeSearchSupport> czzzzzo_ = a?.CodeSearchElement;
+            TerminologyCapabilities.ValidateCodeComponent czzzzzp_ = a?.ValidateCode;
+            TerminologyCapabilities.TranslationComponent czzzzzq_ = a?.Translation;
+            TerminologyCapabilities.ClosureComponent czzzzzr_ = a?.Closure;
+            TerminologyCapabilities czzzzzs_ = new TerminologyCapabilities
             {
-                UrlElement = bzzzzzw_,
-                VersionElement = bzzzzzx_,
-                NameElement = bzzzzzy_,
-                TitleElement = bzzzzzz_,
-                StatusElement = czzzzza_,
-                ExperimentalElement = czzzzzb_,
-                DateElement = czzzzzc_,
-                PublisherElement = czzzzzd_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)czzzzze_),
-                DescriptionElement = czzzzzf_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)czzzzzg_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzzh_),
-                PurposeElement = czzzzzi_,
-                CopyrightElement = czzzzzj_,
-                KindElement = czzzzzk_,
-                Software = czzzzzl_,
-                Implementation = czzzzzm_,
-                LockedDateElement = czzzzzn_,
-                CodeSystem = new List<TerminologyCapabilities.CodeSystemComponent>((IEnumerable<TerminologyCapabilities.CodeSystemComponent>)czzzzzo_),
-                Expansion = czzzzzp_,
-                CodeSearchElement = czzzzzq_,
-                ValidateCode = czzzzzr_,
-                Translation = czzzzzs_,
-                Closure = czzzzzt_,
+                UrlElement = bzzzzzu_,
+                VersionElement = bzzzzzv_,
+                NameElement = bzzzzzw_,
+                TitleElement = bzzzzzx_,
+                StatusElement = bzzzzzy_,
+                ExperimentalElement = bzzzzzz_,
+                DateElement = czzzzza_,
+                PublisherElement = czzzzzb_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)czzzzzc_),
+                DescriptionElement = czzzzzd_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)czzzzze_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)czzzzzf_),
+                PurposeElement = czzzzzg_,
+                CopyrightElement = czzzzzh_,
+                KindElement = czzzzzi_,
+                Software = czzzzzj_,
+                Implementation = czzzzzk_,
+                LockedDateElement = czzzzzl_,
+                CodeSystem = new List<TerminologyCapabilities.CodeSystemComponent>((IEnumerable<TerminologyCapabilities.CodeSystemComponent>)czzzzzm_),
+                Expansion = czzzzzn_,
+                CodeSearchElement = czzzzzo_,
+                ValidateCode = czzzzzp_,
+                Translation = czzzzzq_,
+                Closure = czzzzzr_,
             };
 
-            return czzzzzu_;
+            return czzzzzs_;
         };
-        IEnumerable<TerminologyCapabilities> bzzzzzt_ = context.Operators.Select<TerminologyCapabilities, TerminologyCapabilities>((IEnumerable<TerminologyCapabilities>)bzzzzzr_, bzzzzzs_);
-        IEnumerable<TerminologyCapabilities> bzzzzzu_ = context.Operators.Distinct<TerminologyCapabilities>(bzzzzzt_);
-        TerminologyCapabilities bzzzzzv_ = context.Operators.SingletonFrom<TerminologyCapabilities>(bzzzzzu_);
+        IEnumerable<TerminologyCapabilities> bzzzzzr_ = context.Operators.Select<TerminologyCapabilities, TerminologyCapabilities>((IEnumerable<TerminologyCapabilities>)bzzzzzp_, bzzzzzq_);
+        IEnumerable<TerminologyCapabilities> bzzzzzs_ = context.Operators.Distinct<TerminologyCapabilities>(bzzzzzr_);
+        TerminologyCapabilities bzzzzzt_ = context.Operators.SingletonFrom<TerminologyCapabilities>(bzzzzzs_);
 
-        return bzzzzzv_;
+        return bzzzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("TestReportResource")]
     public TestReport TestReportResource(CqlContext context, TestReport arg)
     {
-        TestReport[] czzzzzv_ = [
+        TestReport[] czzzzzt_ = [
             arg,
         ];
-        TestReport czzzzzw_(TestReport a)
+        TestReport czzzzzu_(TestReport a)
         {
-            Identifier dzzzzza_ = a?.Identifier;
-            FhirString dzzzzzb_ = a?.NameElement;
-            Code<TestReport.TestReportStatus> dzzzzzc_ = a?.StatusElement;
-            ResourceReference dzzzzzd_ = a?.TestScript;
-            Code<TestReport.TestReportResult> dzzzzze_ = a?.ResultElement;
-            FhirDecimal dzzzzzf_ = a?.ScoreElement;
-            FhirString dzzzzzg_ = a?.TesterElement;
-            FhirDateTime dzzzzzh_ = a?.IssuedElement;
-            List<TestReport.ParticipantComponent> dzzzzzi_ = a?.Participant;
-            TestReport.SetupComponent dzzzzzj_ = a?.Setup;
-            List<TestReport.TestComponent> dzzzzzk_ = a?.Test;
-            TestReport.TeardownComponent dzzzzzl_ = a?.Teardown;
-            TestReport dzzzzzm_ = new TestReport
+            Identifier czzzzzy_ = a?.Identifier;
+            FhirString czzzzzz_ = a?.NameElement;
+            Code<TestReport.TestReportStatus> dzzzzza_ = a?.StatusElement;
+            ResourceReference dzzzzzb_ = a?.TestScript;
+            Code<TestReport.TestReportResult> dzzzzzc_ = a?.ResultElement;
+            FhirDecimal dzzzzzd_ = a?.ScoreElement;
+            FhirString dzzzzze_ = a?.TesterElement;
+            FhirDateTime dzzzzzf_ = a?.IssuedElement;
+            List<TestReport.ParticipantComponent> dzzzzzg_ = a?.Participant;
+            TestReport.SetupComponent dzzzzzh_ = a?.Setup;
+            List<TestReport.TestComponent> dzzzzzi_ = a?.Test;
+            TestReport.TeardownComponent dzzzzzj_ = a?.Teardown;
+            TestReport dzzzzzk_ = new TestReport
             {
-                Identifier = dzzzzza_,
-                NameElement = dzzzzzb_,
-                StatusElement = dzzzzzc_,
-                TestScript = dzzzzzd_,
-                ResultElement = dzzzzze_,
-                ScoreElement = dzzzzzf_,
-                TesterElement = dzzzzzg_,
-                IssuedElement = dzzzzzh_,
-                Participant = new List<TestReport.ParticipantComponent>((IEnumerable<TestReport.ParticipantComponent>)dzzzzzi_),
-                Setup = dzzzzzj_,
-                Test = new List<TestReport.TestComponent>((IEnumerable<TestReport.TestComponent>)dzzzzzk_),
-                Teardown = dzzzzzl_,
+                Identifier = czzzzzy_,
+                NameElement = czzzzzz_,
+                StatusElement = dzzzzza_,
+                TestScript = dzzzzzb_,
+                ResultElement = dzzzzzc_,
+                ScoreElement = dzzzzzd_,
+                TesterElement = dzzzzze_,
+                IssuedElement = dzzzzzf_,
+                Participant = new List<TestReport.ParticipantComponent>((IEnumerable<TestReport.ParticipantComponent>)dzzzzzg_),
+                Setup = dzzzzzh_,
+                Test = new List<TestReport.TestComponent>((IEnumerable<TestReport.TestComponent>)dzzzzzi_),
+                Teardown = dzzzzzj_,
             };
 
-            return dzzzzzm_;
+            return dzzzzzk_;
         };
-        IEnumerable<TestReport> czzzzzx_ = context.Operators.Select<TestReport, TestReport>((IEnumerable<TestReport>)czzzzzv_, czzzzzw_);
-        IEnumerable<TestReport> czzzzzy_ = context.Operators.Distinct<TestReport>(czzzzzx_);
-        TestReport czzzzzz_ = context.Operators.SingletonFrom<TestReport>(czzzzzy_);
+        IEnumerable<TestReport> czzzzzv_ = context.Operators.Select<TestReport, TestReport>((IEnumerable<TestReport>)czzzzzt_, czzzzzu_);
+        IEnumerable<TestReport> czzzzzw_ = context.Operators.Distinct<TestReport>(czzzzzv_);
+        TestReport czzzzzx_ = context.Operators.SingletonFrom<TestReport>(czzzzzw_);
 
-        return czzzzzz_;
+        return czzzzzx_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("TestScriptResource")]
     public TestScript TestScriptResource(CqlContext context, TestScript arg)
     {
-        TestScript[] dzzzzzn_ = [
+        TestScript[] dzzzzzl_ = [
             arg,
         ];
-        TestScript dzzzzzo_(TestScript a)
+        TestScript dzzzzzm_(TestScript a)
         {
-            FhirUri dzzzzzs_ = a?.UrlElement;
-            Identifier dzzzzzt_ = a?.Identifier;
-            FhirString dzzzzzu_ = a?.VersionElement;
-            FhirString dzzzzzv_ = a?.NameElement;
-            FhirString dzzzzzw_ = a?.TitleElement;
-            Code<PublicationStatus> dzzzzzx_ = a?.StatusElement;
-            FhirBoolean dzzzzzy_ = a?.ExperimentalElement;
-            FhirDateTime dzzzzzz_ = a?.DateElement;
-            FhirString ezzzzza_ = a?.PublisherElement;
-            List<ContactDetail> ezzzzzb_ = a?.Contact;
-            Markdown ezzzzzc_ = a?.DescriptionElement;
-            List<UsageContext> ezzzzzd_ = a?.UseContext;
-            List<CodeableConcept> ezzzzze_ = a?.Jurisdiction;
-            Markdown ezzzzzf_ = a?.PurposeElement;
-            Markdown ezzzzzg_ = a?.CopyrightElement;
-            List<TestScript.OriginComponent> ezzzzzh_ = a?.Origin;
-            List<TestScript.DestinationComponent> ezzzzzi_ = a?.Destination;
-            TestScript.MetadataComponent ezzzzzj_ = a?.Metadata;
-            List<TestScript.FixtureComponent> ezzzzzk_ = a?.Fixture;
-            List<ResourceReference> ezzzzzl_ = a?.Profile;
-            List<TestScript.VariableComponent> ezzzzzm_ = a?.Variable;
-            TestScript.SetupComponent ezzzzzn_ = a?.Setup;
-            List<TestScript.TestComponent> ezzzzzo_ = a?.Test;
-            TestScript.TeardownComponent ezzzzzp_ = a?.Teardown;
-            TestScript ezzzzzq_ = new TestScript
+            FhirUri dzzzzzq_ = a?.UrlElement;
+            Identifier dzzzzzr_ = a?.Identifier;
+            FhirString dzzzzzs_ = a?.VersionElement;
+            FhirString dzzzzzt_ = a?.NameElement;
+            FhirString dzzzzzu_ = a?.TitleElement;
+            Code<PublicationStatus> dzzzzzv_ = a?.StatusElement;
+            FhirBoolean dzzzzzw_ = a?.ExperimentalElement;
+            FhirDateTime dzzzzzx_ = a?.DateElement;
+            FhirString dzzzzzy_ = a?.PublisherElement;
+            List<ContactDetail> dzzzzzz_ = a?.Contact;
+            Markdown ezzzzza_ = a?.DescriptionElement;
+            List<UsageContext> ezzzzzb_ = a?.UseContext;
+            List<CodeableConcept> ezzzzzc_ = a?.Jurisdiction;
+            Markdown ezzzzzd_ = a?.PurposeElement;
+            Markdown ezzzzze_ = a?.CopyrightElement;
+            List<TestScript.OriginComponent> ezzzzzf_ = a?.Origin;
+            List<TestScript.DestinationComponent> ezzzzzg_ = a?.Destination;
+            TestScript.MetadataComponent ezzzzzh_ = a?.Metadata;
+            List<TestScript.FixtureComponent> ezzzzzi_ = a?.Fixture;
+            List<ResourceReference> ezzzzzj_ = a?.Profile;
+            List<TestScript.VariableComponent> ezzzzzk_ = a?.Variable;
+            TestScript.SetupComponent ezzzzzl_ = a?.Setup;
+            List<TestScript.TestComponent> ezzzzzm_ = a?.Test;
+            TestScript.TeardownComponent ezzzzzn_ = a?.Teardown;
+            TestScript ezzzzzo_ = new TestScript
             {
-                UrlElement = dzzzzzs_,
-                Identifier = dzzzzzt_,
-                VersionElement = dzzzzzu_,
-                NameElement = dzzzzzv_,
-                TitleElement = dzzzzzw_,
-                StatusElement = dzzzzzx_,
-                ExperimentalElement = dzzzzzy_,
-                DateElement = dzzzzzz_,
-                PublisherElement = ezzzzza_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)ezzzzzb_),
-                DescriptionElement = ezzzzzc_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)ezzzzzd_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzze_),
-                PurposeElement = ezzzzzf_,
-                CopyrightElement = ezzzzzg_,
-                Origin = new List<TestScript.OriginComponent>((IEnumerable<TestScript.OriginComponent>)ezzzzzh_),
-                Destination = new List<TestScript.DestinationComponent>((IEnumerable<TestScript.DestinationComponent>)ezzzzzi_),
-                Metadata = ezzzzzj_,
-                Fixture = new List<TestScript.FixtureComponent>((IEnumerable<TestScript.FixtureComponent>)ezzzzzk_),
-                Profile = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzzl_),
-                Variable = new List<TestScript.VariableComponent>((IEnumerable<TestScript.VariableComponent>)ezzzzzm_),
-                Setup = ezzzzzn_,
-                Test = new List<TestScript.TestComponent>((IEnumerable<TestScript.TestComponent>)ezzzzzo_),
-                Teardown = ezzzzzp_,
+                UrlElement = dzzzzzq_,
+                Identifier = dzzzzzr_,
+                VersionElement = dzzzzzs_,
+                NameElement = dzzzzzt_,
+                TitleElement = dzzzzzu_,
+                StatusElement = dzzzzzv_,
+                ExperimentalElement = dzzzzzw_,
+                DateElement = dzzzzzx_,
+                PublisherElement = dzzzzzy_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)dzzzzzz_),
+                DescriptionElement = ezzzzza_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)ezzzzzb_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ezzzzzc_),
+                PurposeElement = ezzzzzd_,
+                CopyrightElement = ezzzzze_,
+                Origin = new List<TestScript.OriginComponent>((IEnumerable<TestScript.OriginComponent>)ezzzzzf_),
+                Destination = new List<TestScript.DestinationComponent>((IEnumerable<TestScript.DestinationComponent>)ezzzzzg_),
+                Metadata = ezzzzzh_,
+                Fixture = new List<TestScript.FixtureComponent>((IEnumerable<TestScript.FixtureComponent>)ezzzzzi_),
+                Profile = new List<ResourceReference>((IEnumerable<ResourceReference>)ezzzzzj_),
+                Variable = new List<TestScript.VariableComponent>((IEnumerable<TestScript.VariableComponent>)ezzzzzk_),
+                Setup = ezzzzzl_,
+                Test = new List<TestScript.TestComponent>((IEnumerable<TestScript.TestComponent>)ezzzzzm_),
+                Teardown = ezzzzzn_,
             };
 
-            return ezzzzzq_;
+            return ezzzzzo_;
         };
-        IEnumerable<TestScript> dzzzzzp_ = context.Operators.Select<TestScript, TestScript>((IEnumerable<TestScript>)dzzzzzn_, dzzzzzo_);
-        IEnumerable<TestScript> dzzzzzq_ = context.Operators.Distinct<TestScript>(dzzzzzp_);
-        TestScript dzzzzzr_ = context.Operators.SingletonFrom<TestScript>(dzzzzzq_);
+        IEnumerable<TestScript> dzzzzzn_ = context.Operators.Select<TestScript, TestScript>((IEnumerable<TestScript>)dzzzzzl_, dzzzzzm_);
+        IEnumerable<TestScript> dzzzzzo_ = context.Operators.Distinct<TestScript>(dzzzzzn_);
+        TestScript dzzzzzp_ = context.Operators.SingletonFrom<TestScript>(dzzzzzo_);
 
-        return dzzzzzr_;
+        return dzzzzzp_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ValueSetResource")]
     public ValueSet ValueSetResource(CqlContext context, ValueSet arg)
     {
-        ValueSet[] ezzzzzr_ = [
+        ValueSet[] ezzzzzp_ = [
             arg,
         ];
-        ValueSet ezzzzzs_(ValueSet a)
+        ValueSet ezzzzzq_(ValueSet a)
         {
-            FhirUri ezzzzzw_ = a?.UrlElement;
-            List<Identifier> ezzzzzx_ = a?.Identifier;
-            FhirString ezzzzzy_ = a?.VersionElement;
-            FhirString ezzzzzz_ = a?.NameElement;
-            FhirString fzzzzza_ = a?.TitleElement;
-            Code<PublicationStatus> fzzzzzb_ = a?.StatusElement;
-            FhirBoolean fzzzzzc_ = a?.ExperimentalElement;
-            FhirDateTime fzzzzzd_ = a?.DateElement;
-            FhirString fzzzzze_ = a?.PublisherElement;
-            List<ContactDetail> fzzzzzf_ = a?.Contact;
-            Markdown fzzzzzg_ = a?.DescriptionElement;
-            List<UsageContext> fzzzzzh_ = a?.UseContext;
-            List<CodeableConcept> fzzzzzi_ = a?.Jurisdiction;
-            FhirBoolean fzzzzzj_ = a?.ImmutableElement;
-            Markdown fzzzzzk_ = a?.PurposeElement;
-            Markdown fzzzzzl_ = a?.CopyrightElement;
-            ValueSet.ComposeComponent fzzzzzm_ = a?.Compose;
-            ValueSet.ExpansionComponent fzzzzzn_ = a?.Expansion;
-            ValueSet fzzzzzo_ = new ValueSet
+            FhirUri ezzzzzu_ = a?.UrlElement;
+            List<Identifier> ezzzzzv_ = a?.Identifier;
+            FhirString ezzzzzw_ = a?.VersionElement;
+            FhirString ezzzzzx_ = a?.NameElement;
+            FhirString ezzzzzy_ = a?.TitleElement;
+            Code<PublicationStatus> ezzzzzz_ = a?.StatusElement;
+            FhirBoolean fzzzzza_ = a?.ExperimentalElement;
+            FhirDateTime fzzzzzb_ = a?.DateElement;
+            FhirString fzzzzzc_ = a?.PublisherElement;
+            List<ContactDetail> fzzzzzd_ = a?.Contact;
+            Markdown fzzzzze_ = a?.DescriptionElement;
+            List<UsageContext> fzzzzzf_ = a?.UseContext;
+            List<CodeableConcept> fzzzzzg_ = a?.Jurisdiction;
+            FhirBoolean fzzzzzh_ = a?.ImmutableElement;
+            Markdown fzzzzzi_ = a?.PurposeElement;
+            Markdown fzzzzzj_ = a?.CopyrightElement;
+            ValueSet.ComposeComponent fzzzzzk_ = a?.Compose;
+            ValueSet.ExpansionComponent fzzzzzl_ = a?.Expansion;
+            ValueSet fzzzzzm_ = new ValueSet
             {
-                UrlElement = ezzzzzw_,
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzzzzx_),
-                VersionElement = ezzzzzy_,
-                NameElement = ezzzzzz_,
-                TitleElement = fzzzzza_,
-                StatusElement = fzzzzzb_,
-                ExperimentalElement = fzzzzzc_,
-                DateElement = fzzzzzd_,
-                PublisherElement = fzzzzze_,
-                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)fzzzzzf_),
-                DescriptionElement = fzzzzzg_,
-                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)fzzzzzh_),
-                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzzi_),
-                ImmutableElement = fzzzzzj_,
-                PurposeElement = fzzzzzk_,
-                CopyrightElement = fzzzzzl_,
-                Compose = fzzzzzm_,
-                Expansion = fzzzzzn_,
+                UrlElement = ezzzzzu_,
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)ezzzzzv_),
+                VersionElement = ezzzzzw_,
+                NameElement = ezzzzzx_,
+                TitleElement = ezzzzzy_,
+                StatusElement = ezzzzzz_,
+                ExperimentalElement = fzzzzza_,
+                DateElement = fzzzzzb_,
+                PublisherElement = fzzzzzc_,
+                Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)fzzzzzd_),
+                DescriptionElement = fzzzzze_,
+                UseContext = new List<UsageContext>((IEnumerable<UsageContext>)fzzzzzf_),
+                Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzzg_),
+                ImmutableElement = fzzzzzh_,
+                PurposeElement = fzzzzzi_,
+                CopyrightElement = fzzzzzj_,
+                Compose = fzzzzzk_,
+                Expansion = fzzzzzl_,
             };
 
-            return fzzzzzo_;
+            return fzzzzzm_;
         };
-        IEnumerable<ValueSet> ezzzzzt_ = context.Operators.Select<ValueSet, ValueSet>((IEnumerable<ValueSet>)ezzzzzr_, ezzzzzs_);
-        IEnumerable<ValueSet> ezzzzzu_ = context.Operators.Distinct<ValueSet>(ezzzzzt_);
-        ValueSet ezzzzzv_ = context.Operators.SingletonFrom<ValueSet>(ezzzzzu_);
+        IEnumerable<ValueSet> ezzzzzr_ = context.Operators.Select<ValueSet, ValueSet>((IEnumerable<ValueSet>)ezzzzzp_, ezzzzzq_);
+        IEnumerable<ValueSet> ezzzzzs_ = context.Operators.Distinct<ValueSet>(ezzzzzr_);
+        ValueSet ezzzzzt_ = context.Operators.SingletonFrom<ValueSet>(ezzzzzs_);
 
-        return ezzzzzv_;
+        return ezzzzzt_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("VerificationResultResource")]
     public VerificationResult VerificationResultResource(CqlContext context, VerificationResult arg)
     {
-        VerificationResult[] fzzzzzp_ = [
+        VerificationResult[] fzzzzzn_ = [
             arg,
         ];
-        VerificationResult fzzzzzq_(VerificationResult a)
+        VerificationResult fzzzzzo_(VerificationResult a)
         {
-            List<ResourceReference> fzzzzzu_ = a?.Target;
-            List<FhirString> fzzzzzv_ = a?.TargetLocationElement;
-            CodeableConcept fzzzzzw_ = a?.Need;
-            Code<VerificationResult.StatusCode> fzzzzzx_ = a?.StatusElement;
-            FhirDateTime fzzzzzy_ = a?.StatusDateElement;
-            CodeableConcept fzzzzzz_ = a?.ValidationType;
-            List<CodeableConcept> gzzzzza_ = a?.ValidationProcess;
-            Timing gzzzzzb_ = a?.Frequency;
-            FhirDateTime gzzzzzc_ = a?.LastPerformedElement;
-            Date gzzzzzd_ = a?.NextScheduledElement;
-            CodeableConcept gzzzzze_ = a?.FailureAction;
-            List<VerificationResult.PrimarySourceComponent> gzzzzzf_ = a?.PrimarySource;
-            VerificationResult.AttestationComponent gzzzzzg_ = a?.Attestation;
-            List<VerificationResult.ValidatorComponent> gzzzzzh_ = a?.Validator;
-            VerificationResult gzzzzzi_ = new VerificationResult
+            List<ResourceReference> fzzzzzs_ = a?.Target;
+            List<FhirString> fzzzzzt_ = a?.TargetLocationElement;
+            CodeableConcept fzzzzzu_ = a?.Need;
+            Code<VerificationResult.StatusCode> fzzzzzv_ = a?.StatusElement;
+            FhirDateTime fzzzzzw_ = a?.StatusDateElement;
+            CodeableConcept fzzzzzx_ = a?.ValidationType;
+            List<CodeableConcept> fzzzzzy_ = a?.ValidationProcess;
+            Timing fzzzzzz_ = a?.Frequency;
+            FhirDateTime gzzzzza_ = a?.LastPerformedElement;
+            Date gzzzzzb_ = a?.NextScheduledElement;
+            CodeableConcept gzzzzzc_ = a?.FailureAction;
+            List<VerificationResult.PrimarySourceComponent> gzzzzzd_ = a?.PrimarySource;
+            VerificationResult.AttestationComponent gzzzzze_ = a?.Attestation;
+            List<VerificationResult.ValidatorComponent> gzzzzzf_ = a?.Validator;
+            VerificationResult gzzzzzg_ = new VerificationResult
             {
-                Target = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzzzu_),
-                TargetLocationElement = new List<FhirString>((IEnumerable<FhirString>)fzzzzzv_),
-                Need = fzzzzzw_,
-                StatusElement = fzzzzzx_,
-                StatusDateElement = fzzzzzy_,
-                ValidationType = fzzzzzz_,
-                ValidationProcess = new List<CodeableConcept>((IEnumerable<CodeableConcept>)gzzzzza_),
-                Frequency = gzzzzzb_,
-                LastPerformedElement = gzzzzzc_,
-                NextScheduledElement = gzzzzzd_,
-                FailureAction = gzzzzze_,
-                PrimarySource = new List<VerificationResult.PrimarySourceComponent>((IEnumerable<VerificationResult.PrimarySourceComponent>)gzzzzzf_),
-                Attestation = gzzzzzg_,
-                Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<VerificationResult.ValidatorComponent>)gzzzzzh_),
+                Target = new List<ResourceReference>((IEnumerable<ResourceReference>)fzzzzzs_),
+                TargetLocationElement = new List<FhirString>((IEnumerable<FhirString>)fzzzzzt_),
+                Need = fzzzzzu_,
+                StatusElement = fzzzzzv_,
+                StatusDateElement = fzzzzzw_,
+                ValidationType = fzzzzzx_,
+                ValidationProcess = new List<CodeableConcept>((IEnumerable<CodeableConcept>)fzzzzzy_),
+                Frequency = fzzzzzz_,
+                LastPerformedElement = gzzzzza_,
+                NextScheduledElement = gzzzzzb_,
+                FailureAction = gzzzzzc_,
+                PrimarySource = new List<VerificationResult.PrimarySourceComponent>((IEnumerable<VerificationResult.PrimarySourceComponent>)gzzzzzd_),
+                Attestation = gzzzzze_,
+                Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<VerificationResult.ValidatorComponent>)gzzzzzf_),
             };
 
-            return gzzzzzi_;
+            return gzzzzzg_;
         };
-        IEnumerable<VerificationResult> fzzzzzr_ = context.Operators.Select<VerificationResult, VerificationResult>((IEnumerable<VerificationResult>)fzzzzzp_, fzzzzzq_);
-        IEnumerable<VerificationResult> fzzzzzs_ = context.Operators.Distinct<VerificationResult>(fzzzzzr_);
-        VerificationResult fzzzzzt_ = context.Operators.SingletonFrom<VerificationResult>(fzzzzzs_);
+        IEnumerable<VerificationResult> fzzzzzp_ = context.Operators.Select<VerificationResult, VerificationResult>((IEnumerable<VerificationResult>)fzzzzzn_, fzzzzzo_);
+        IEnumerable<VerificationResult> fzzzzzq_ = context.Operators.Distinct<VerificationResult>(fzzzzzp_);
+        VerificationResult fzzzzzr_ = context.Operators.SingletonFrom<VerificationResult>(fzzzzzq_);
 
-        return fzzzzzt_;
+        return fzzzzzr_;
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("VisionPrescriptionResource")]
     public VisionPrescription VisionPrescriptionResource(CqlContext context, VisionPrescription arg)
     {
-        VisionPrescription[] gzzzzzj_ = [
+        VisionPrescription[] gzzzzzh_ = [
             arg,
         ];
-        VisionPrescription gzzzzzk_(VisionPrescription a)
+        VisionPrescription gzzzzzi_(VisionPrescription a)
         {
-            List<Identifier> gzzzzzo_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> gzzzzzp_ = a?.StatusElement;
-            FhirDateTime gzzzzzq_ = a?.CreatedElement;
-            ResourceReference gzzzzzr_ = a?.Patient;
-            ResourceReference gzzzzzs_ = a?.Encounter;
-            FhirDateTime gzzzzzt_ = a?.DateWrittenElement;
-            ResourceReference gzzzzzu_ = a?.Prescriber;
-            List<VisionPrescription.LensSpecificationComponent> gzzzzzv_ = a?.LensSpecification;
-            VisionPrescription gzzzzzw_ = new VisionPrescription
+            List<Identifier> gzzzzzm_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes> gzzzzzn_ = a?.StatusElement;
+            FhirDateTime gzzzzzo_ = a?.CreatedElement;
+            ResourceReference gzzzzzp_ = a?.Patient;
+            ResourceReference gzzzzzq_ = a?.Encounter;
+            FhirDateTime gzzzzzr_ = a?.DateWrittenElement;
+            ResourceReference gzzzzzs_ = a?.Prescriber;
+            List<VisionPrescription.LensSpecificationComponent> gzzzzzt_ = a?.LensSpecification;
+            VisionPrescription gzzzzzu_ = new VisionPrescription
             {
-                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzzzo_),
-                StatusElement = gzzzzzp_,
-                CreatedElement = gzzzzzq_,
-                Patient = gzzzzzr_,
-                Encounter = gzzzzzs_,
-                DateWrittenElement = gzzzzzt_,
-                Prescriber = gzzzzzu_,
-                LensSpecification = new List<VisionPrescription.LensSpecificationComponent>((IEnumerable<VisionPrescription.LensSpecificationComponent>)gzzzzzv_),
+                Identifier = new List<Identifier>((IEnumerable<Identifier>)gzzzzzm_),
+                StatusElement = gzzzzzn_,
+                CreatedElement = gzzzzzo_,
+                Patient = gzzzzzp_,
+                Encounter = gzzzzzq_,
+                DateWrittenElement = gzzzzzr_,
+                Prescriber = gzzzzzs_,
+                LensSpecification = new List<VisionPrescription.LensSpecificationComponent>((IEnumerable<VisionPrescription.LensSpecificationComponent>)gzzzzzt_),
             };
 
-            return gzzzzzw_;
+            return gzzzzzu_;
         };
-        IEnumerable<VisionPrescription> gzzzzzl_ = context.Operators.Select<VisionPrescription, VisionPrescription>((IEnumerable<VisionPrescription>)gzzzzzj_, gzzzzzk_);
-        IEnumerable<VisionPrescription> gzzzzzm_ = context.Operators.Distinct<VisionPrescription>(gzzzzzl_);
-        VisionPrescription gzzzzzn_ = context.Operators.SingletonFrom<VisionPrescription>(gzzzzzm_);
+        IEnumerable<VisionPrescription> gzzzzzj_ = context.Operators.Select<VisionPrescription, VisionPrescription>((IEnumerable<VisionPrescription>)gzzzzzh_, gzzzzzi_);
+        IEnumerable<VisionPrescription> gzzzzzk_ = context.Operators.Distinct<VisionPrescription>(gzzzzzj_);
+        VisionPrescription gzzzzzl_ = context.Operators.SingletonFrom<VisionPrescription>(gzzzzzk_);
 
-        return gzzzzzn_;
+        return gzzzzzl_;
     }
 
 

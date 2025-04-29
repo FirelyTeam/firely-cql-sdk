@@ -16,9 +16,9 @@ namespace Hl7.Cql.Compiler.Expressions;
 internal class CqlExpressionDefinition
 (
     LambdaExpression lambda,
-    string definitionName,
+    string name,
     (string tagName, string[] tagValues)[] tags)
-    : CqlDefinition(lambda, definitionName)
+    : CqlDefinition(lambda, name)
 {
     public (string Name, string[] Values)[] Tags { get; } = tags;
 }

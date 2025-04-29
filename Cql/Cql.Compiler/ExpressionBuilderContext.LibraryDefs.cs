@@ -260,11 +260,9 @@ partial class ExpressionBuilderContext
                     throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}",
                                                               null);
 
-                Expression? defaultValue = null;
-                if (parameter.@default != null)
-                    defaultValue = TranslateArg(parameter.@default).NewTypeAsExpression<object>();
-                else defaultValue = NullExpression.Object;
-
+                var defaultValue = parameter.@default != null
+                                       ? TranslateArg(parameter.@default).NewTypeAsExpression<object>()
+                                       : NullExpression.Object;
                 var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryVersionedIdentifier, parameter.name, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;

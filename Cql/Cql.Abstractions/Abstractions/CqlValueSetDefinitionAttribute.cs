@@ -13,9 +13,9 @@ namespace Hl7.Cql.Abstractions;
 /// </summary>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
 public class CqlValueSetDefinitionAttribute(
-    string definitionName,
+    string name,
     string valueSetId,
-    string? valueSetVersion = null) : CqlDefinitionAttribute(definitionName)
+    string? valueSetVersion = null) : CqlDefinitionAttribute(name)
 {
     /// <summary>
     /// The canonical URI of the code.

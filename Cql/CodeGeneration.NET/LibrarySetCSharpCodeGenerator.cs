@@ -313,10 +313,12 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         public void WriteDefinition()
         {
-            var definitionName = CqlDefinition.DefinitionName;
-            string quotedDefinitionName = definitionName.QuoteString();
-            string methodName  = VariableNameGenerator.NormalizeIdentifier(definitionName)!;
-            string fieldName  = VariableNameGenerator.NormalizeIdentifier($"_{definitionName}")!;
+            var name = CqlDefinition.Name;
+            string quotedName = name.QuoteString();
+            string methodName  = VariableNameGenerator.NormalizeIdentifier(name)!;
+            string fieldName  = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
+            var definitionAttributeTypeName = CqlDefinition.GetType().Name;
+
             switch (CqlDefinition)
             {
                 case CqlValueSetDefinition vsd:
@@ -324,54 +326,54 @@ internal partial class LibrarySetCSharpCodeGenerator
                     string quotedValueSetId = vsd.ValueSetId.QuoteString();
                     string quotedValueSetVersion = vsd.ValueSetVersion?.QuoteString() ?? "null";
                     tw.WriteLines(
-                        $"""
-                         #region ValueSet: {definitionName}
-                         [CqlValueSetDefinition(
-                             definitionName: {quotedDefinitionName},
-                             valueSetId: {quotedValueSetId},
-                             valueSetVersion: {quotedValueSetVersion})]
-                         public CqlValueSet {methodName}(CqlContext context) => {fieldName};
-
-                         private static readonly CqlValueSet {fieldName} = new CqlValueSet({quotedValueSetId}, {quotedValueSetVersion});
-                         #endregion
-                         """);
+                        $$"""
+                          [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
+                          public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
+                          """);
                     return;
                 }
 
-                case CqlCodeSystemDefinition csd:
+                case CqlCodeSystemDefinition:
+                    tw.WriteLines(
+                        $$"""
+                         [CqlCodeSystemDefinition({{quotedName}})]
+                         public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
+                         private static readonly CqlCodeSystem {{fieldName}} = new CqlCodeSystem();
+                         """);
+                    return;
+
+                case CqlCodeDefinition cd:
+                    var quotedCodeId = cd.CodeId.QuoteString();
+                    var quotedCodeSystem = cd.CodeSystem.QuoteString();
+                    tw.WriteLines(
+                        $$"""
+                         [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
+                         public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
+                         private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}}, default, default);
+                         """);
+                    return;
+
+                case CqlExpressionDefinition ed:
+                    tw.WriteLines(
+                        $"""
+                         [{definitionAttributeTypeName}({quotedName})]
+                         """);
+                    foreach (var tag in ed.Tags)
+                        foreach (var tagValue in tag.Values)
+                            tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
                     break;
 
-                case CqlParameterDefinition pd:
+                default:
+                    tw.WriteLines(
+                        $"""
+                         [{definitionAttributeTypeName}({quotedName})]
+                         """);
                     break;
-
-                case CqlConceptDefinition cpd:
-                    break;
-
-                 case CqlCodeDefinition cd:
-                     var quotedCodeId = cd.CodeId.QuoteString();
-                     var quotedCodeSystem = cd.CodeSystem.QuoteString();
-                     tw.WriteLines(
-                         $"""
-                          #region Code: {definitionName}
-                          [CqlCodeDefinition(
-                              definitionName: {quotedDefinitionName},
-                              codeId: {quotedCodeId},
-                              codeSystem: {quotedCodeSystem})]
-                          public CqlCode {methodName }(CqlContext context) => {fieldName};
-
-                          private static readonly CqlCode {fieldName} = new CqlCode({quotedCodeId}, {quotedCodeSystem}, default, default);
-                          #endregion
-                          """);
-                     return;
             }
 
-            string libraryName = LibraryWriter.LibraryName;
-            var lambda = CqlDefinition.Lambda;
-            var isDefinition = lambda is { Parameters: [{ Type: { } p0Type }] } && p0Type == typeof(CqlContext);
-            TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
-
             var visitedBody = Transform(
-                lambda.Body,
+                CqlDefinition.Lambda.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(VariableNameGenerator),
@@ -379,102 +381,16 @@ internal partial class LibrarySetCSharpCodeGenerator
             );
 
             // Skip CqlContext
-            var parameters = lambda.Parameters.Skip(1);
-            var transformedLambda = Expression.Lambda(visitedBody, parameters);
-
             var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
-                tupleMetadataBuilder,
-                libraryName,
+                LibraryWriter.LibrarySetWriter.TupleMetadataBuilder,
+                LibraryWriter.LibraryName,
                 LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
                 tw.Indent);
 
-            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(
-                transformedLambda,
-                methodName,
-                specifiers: "public");
-
-            var definitionTypeName = CqlDefinition.GetType().Name;
-            if (isDefinition)
-            {
-                List<string> lines = [$"definitionName: {definitionName.QuoteString()}"];
-                switch (CqlDefinition)
-                {
-                    case CqlValueSetDefinition vsd:
-                        //if (System.DateTime.Now.Second >= 0) return;
-                        if (vsd.ValueSetId is {} vsid)
-                            lines.Add($"valueSetId: {vsid.QuoteString()}");
-                        if (vsd.ValueSetVersion is {} vsv)
-                            lines.Add($"valueSetVersion: {vsv.QuoteString()}");
-                        break;
-
-                    case CqlCodeSystemDefinition csd:
-                        //if (System.DateTime.Now.Second >= 0) return;
-                        // if (csd.Codes.Length > 0)
-                        // {
-                        //     var indent = new string(' ', TextWriterExtensions.SpacesPerIndentLevel);
-                        //     for (var i = 0; i < csd.Codes.Length; i++)
-                        //     {
-                        //         bool isFirst = i == 0;
-                        //         bool isLast = i == csd.Codes.Length - 1;
-                        //         var c = csd.Codes[i];
-                        //         switch (isFirst, isLast)
-                        //         {
-                        //             case (false, false):
-                        //                 lines.Add($"{indent}({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})");
-                        //                 break;
-                        //             case (true, true):
-                        //                 lines.Add($"codes: [({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})]");
-                        //                 break;
-                        //             case (true, false):
-                        //                 lines.Add($"codes: [({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()})");
-                        //                 break;
-                        //             case (false, true):
-                        //                 lines.Add($"{indent}({c.codeId.QuoteString()}, {c.codeSystem.QuoteString()}))]");
-                        //                 break;
-                        //         }
-                        //     }}
-                        break;
-
-                    case CqlParameterDefinition pd:
-                        break;
-
-                    case CqlConceptDefinition cpd:
-                        break;
-
-                    case CqlCodeDefinition cd:
-                        //if (System.DateTime.Now.Second >= 0) return;
-                        if (cd.CodeId is {} cid)
-                            lines.Add($"codeId: {cid.QuoteString()}");
-                        if (cd.CodeSystem is {} cs)
-                            lines.Add($"codeSystem: {cs.QuoteString()}");
-                        break;
-                }
-
-                for (int i = 0; i < lines.Count-1; i++)
-                    lines[i] = $"{lines[i]},";
-                lines[^1] = $"{lines[^1]})]";
-
-                tw.WriteLine($"[{definitionTypeName}(");
-                var tw1 = tw.AddIndent();
-                for (int i = 0; i < lines.Count; i++)
-                    tw1.WriteLine($"{lines[i]}");
-            }
-            else
-            {
-                tw.WriteLine($"// NOT A DEFINITION {definitionTypeName}//");
-            }
-
-            if (CqlDefinition is CqlExpressionDefinition {} ed)
-                WriteTags(ed);
-
-            tw.WriteLine(definition);
-        }
-
-        private void WriteTags(CqlExpressionDefinition ed)
-        {
-            foreach (var tag in ed.Tags)
-                foreach (var tagValue in tag.Values)
-                    tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
+            var parameters = CqlDefinition.Lambda.Parameters.Skip(1);
+            var transformedLambda = Expression.Lambda(visitedBody, parameters);
+            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public");
+            tw.WriteLine(definitionWithBody);
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

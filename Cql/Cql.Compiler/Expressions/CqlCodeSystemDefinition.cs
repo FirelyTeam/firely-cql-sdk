@@ -15,9 +15,9 @@ namespace Hl7.Cql.Compiler.Expressions;
 /// <seealso cref="CqlCodeSystemDefinitionAttribute"/>
 internal class CqlCodeSystemDefinition(
     LambdaExpression lambda,
-    string definitionName,
+    string name,
     (string codeId, string codeSystem)[] codes)
-    : CqlDefinition(lambda, definitionName)
+    : CqlDefinition(lambda, name)
 {
     public (string codeId, string codeSystem)[] Codes { get; } = codes;
 }

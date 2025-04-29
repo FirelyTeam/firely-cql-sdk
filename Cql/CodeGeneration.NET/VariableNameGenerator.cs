@@ -110,7 +110,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (span.Length > 0 && span[0] == '$')
                 span = span[1..];
 
-            Span<char> buffer = stackalloc char[span.Length];
+            Span<char> buffer = stackalloc char[span.Length+2];
             int bufferIndex = 0;
 
             foreach (var c in span)

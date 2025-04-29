@@ -30,7 +30,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #region Expressions
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToInterval")]
     [CqlTag("description", "Converts the given [Period](https://hl7.org/fhir/datatypes.html#Period)\nvalue to a CQL DateTime Interval")]
     [CqlTag("comment", "If the start value of the given period is unspecified, the starting\nboundary of the resulting interval will be open (meaning the start of the interval\nis unknown, as opposed to interpreted as the beginning of time).")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
@@ -67,7 +67,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Interval of Quantity.")]
     [CqlTag("comment", "If the given quantity has a comparator, it is used to construct an interval based on the value of the comparator. If the comparator\nis less than, the resulting interval will start with a null closed boundary and end with an open boundary on the quantity. If the comparator\nis less than or equal, the resulting interval will start with a null closed boundary and end with a closed boundary on the quantity. If the \ncomparator is greater or equal, the resulting interval will start with a closed boundary on the quantity and end with a closed null boundary.\nIf the comparator is greatter than, the resulting interval will start with an open boundary on the quantity and end with a closed null boundary.\nIf no comparator is specified, the resulting interval will start and end with a closed boundary on the quantity.")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Quantity quantity)
@@ -163,7 +163,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Range](https://hl7.org/fhir/datatypes.html#Range) value to a CQL Interval of Quantity")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Range range)
     {
@@ -189,7 +189,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToCalendarUnit")]
     [CqlTag("description", "Converts a UCUM definite duration unit to a CQL calendar duration\nunit using conversions specified in the [quantities](https://cql.hl7.org/02-authorsguide.html#quantities) \ntopic of the CQL specification.")]
     [CqlTag("comment", "Note that for durations above days (or weeks), the conversion is understood to be approximate")]
     public string ToCalendarUnit(CqlContext context, string unit)
@@ -238,7 +238,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToQuantity")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) \nvalue to a CQL Quantity")]
     [CqlTag("comment", "If the given quantity has a comparator specified, a runtime error is raised. If the given quantity\nhas a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units (i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`)\nan error is raised. For UCUM to calendar units, the `ToCalendarUnit` function is used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
@@ -315,7 +315,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToQuantityIgnoringComparator")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Quantity, ignoring\nthe comparator element. This function should only be used when an application is justified in ignoring the comparator value (i.e. the\ncontext is looking for boundary).")]
     [CqlTag("comment", "If the given quantity has a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units \n(i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`) an error is raised. For UCUM to calendar units, the `ToCalendarUnit` function \nis used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
@@ -379,7 +379,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToRatio")]
     [CqlTag("description", "Converts the given FHIR [Ratio](https://hl7.org/fhir/datatypes.html#Ratio) value to a CQL Ratio.")]
     public CqlRatio ToRatio(CqlContext context, Ratio ratio)
     {
@@ -404,7 +404,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToCode")]
     [CqlTag("description", "Converts the given FHIR [Coding](https://hl7.org/fhir/datatypes.html#Coding) value to a CQL Code.")]
     public CqlCode ToCode(CqlContext context, Coding coding)
     {
@@ -433,7 +433,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToConcept")]
     [CqlTag("description", "Converts the given FHIR [CodeableConcept](https://hl7.org/fhir/datatypes.html#CodeableConcept) value to a CQL Concept.")]
     public CqlConcept ToConcept(CqlContext context, CodeableConcept concept)
     {
@@ -465,7 +465,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToValueSet")]
     [CqlTag("description", "Converts the given value (assumed to be a URI) to a CQL [ValueSet](https://cql.hl7.org/09-b-cqlreference.html#valueset)")]
     public CqlValueSet ToValueSet(CqlContext context, string uri)
     {
@@ -490,7 +490,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("reference")]
     [CqlTag("description", "Constructs a FHIR [Reference](https://hl7.org/fhir/datatypes.html#Reference) from the given reference (assumed to be a FHIR resource URL)")]
     public ResourceReference reference(CqlContext context, string reference)
     {
@@ -523,7 +523,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #region Functions
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("reference")]
     public ResourceReference reference(CqlContext context, Resource resource) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
 
@@ -532,7 +532,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #region Expressions
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToValue")]
     [CqlTag("description", "Converts the given value to a CQL value using the appropriate accessor or conversion function.")]
     [CqlTag("comment", "TODO: document conversion")]
     public object ToValue(CqlContext context, object value)
@@ -731,132 +731,132 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #region Functions
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, string reference) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, ResourceReference reference) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, Element element, string url) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, DomainResource resource, string url) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, BackboneElement element, string url) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, DomainResource resource, string url) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("hasValue")]
     public bool? hasValue(CqlContext context, Element element) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("getValue")]
     public object getValue(CqlContext context, Element element) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("ofType")]
     public IEnumerable<object> ofType(CqlContext context, string identifier) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("is")]
     public bool? @is(CqlContext context, string identifier) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("as")]
     public object @as(CqlContext context, string identifier) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("elementDefinition")]
     public ElementDefinition elementDefinition(CqlContext context, Element element) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("slice")]
     public IEnumerable<Element> slice(CqlContext context, Element element, string url, string name) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource, string modifier) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element, string modifier) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("conformsTo")]
     public bool? conformsTo(CqlContext context, Resource resource, string structure) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Code code, string valueSet) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Coding coding, string valueSet) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, CodeableConcept concept, string valueSet) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, Coding coding, Coding subsumedCoding) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, CodeableConcept concept, CodeableConcept subsumedConcept) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, Coding coding, Coding subsumingCoding) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, CodeableConcept concept, CodeableConcept subsumingConcept) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
-    // NOT A DEFINITION CqlFunctionDefinition//
+    [CqlFunctionDefinition("htmlChecks")]
     public bool? htmlChecks(CqlContext context, Element element) =>
         throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
 
@@ -865,7 +865,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #region Expressions
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Account.AccountStatus> value)
     {
         Account.AccountStatus? fw_ = value?.Value;
@@ -875,7 +875,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionCardinalityBehavior> value)
     {
         ActionCardinalityBehavior? fy_ = value?.Value;
@@ -885,7 +885,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionConditionKind> value)
     {
         ActionConditionKind? ga_ = value?.Value;
@@ -895,7 +895,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionGroupingBehavior> value)
     {
         ActionGroupingBehavior? gc_ = value?.Value;
@@ -905,7 +905,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionParticipantType> value)
     {
         ActionParticipantType? ge_ = value?.Value;
@@ -915,7 +915,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionPrecheckBehavior> value)
     {
         ActionPrecheckBehavior? gg_ = value?.Value;
@@ -925,7 +925,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionRelationshipType> value)
     {
         ActionRelationshipType? gi_ = value?.Value;
@@ -935,7 +935,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionRequiredBehavior> value)
     {
         ActionRequiredBehavior? gk_ = value?.Value;
@@ -945,7 +945,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionSelectionBehavior> value)
     {
         ActionSelectionBehavior? gm_ = value?.Value;
@@ -955,7 +955,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActivityDefinition.RequestResourceType> value)
     {
         ActivityDefinition.RequestResourceType? go_ = value?.Value;
@@ -965,7 +965,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Address.AddressType> value)
     {
         Address.AddressType? gq_ = value?.Value;
@@ -975,7 +975,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Address.AddressUse> value)
     {
         Address.AddressUse? gs_ = value?.Value;
@@ -985,7 +985,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AdministrativeGender> value)
     {
         AdministrativeGender? gu_ = value?.Value;
@@ -995,7 +995,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AdverseEvent.AdverseEventActuality> value)
     {
         AdverseEvent.AdverseEventActuality? gw_ = value?.Value;
@@ -1005,7 +1005,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.AggregationMode> value)
     {
         ElementDefinition.AggregationMode? gy_ = value?.Value;
@@ -1015,7 +1015,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCategory> value)
     {
         AllergyIntolerance.AllergyIntoleranceCategory? ha_ = value?.Value;
@@ -1025,7 +1025,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCriticality> value)
     {
         AllergyIntolerance.AllergyIntoleranceCriticality? hc_ = value?.Value;
@@ -1035,7 +1035,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceSeverity> value)
     {
         AllergyIntolerance.AllergyIntoleranceSeverity? he_ = value?.Value;
@@ -1045,7 +1045,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceType> value)
     {
         AllergyIntolerance.AllergyIntoleranceType? hg_ = value?.Value;
@@ -1055,7 +1055,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Appointment.AppointmentStatus> value)
     {
         Appointment.AppointmentStatus? hi_ = value?.Value;
@@ -1065,7 +1065,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionDirectionType> value)
     {
         TestScript.AssertionDirectionType? hk_ = value?.Value;
@@ -1075,7 +1075,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionOperatorType> value)
     {
         TestScript.AssertionOperatorType? hm_ = value?.Value;
@@ -1085,7 +1085,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionResponseTypes> value)
     {
         TestScript.AssertionResponseTypes? ho_ = value?.Value;
@@ -1095,7 +1095,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventAction> value)
     {
         AuditEvent.AuditEventAction? hq_ = value?.Value;
@@ -1105,7 +1105,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventAgentNetworkType> value)
     {
         AuditEvent.AuditEventAgentNetworkType? hs_ = value?.Value;
@@ -1115,7 +1115,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventOutcome> value)
     {
         AuditEvent.AuditEventOutcome? hu_ = value?.Value;
@@ -1125,7 +1125,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BindingStrength> value)
     {
         BindingStrength? hw_ = value?.Value;
@@ -1135,7 +1135,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value)
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? hy_ = value?.Value;
@@ -1145,7 +1145,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value)
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? ia_ = value?.Value;
@@ -1155,7 +1155,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value)
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? ic_ = value?.Value;
@@ -1165,7 +1165,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.BundleType> value)
     {
         Bundle.BundleType? ie_ = value?.Value;
@@ -1175,7 +1175,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatementKind> value)
     {
         CapabilityStatementKind? ig_ = value?.Value;
@@ -1185,7 +1185,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanActivityKind> value)
     {
         CarePlan.CarePlanActivityKind? ii_ = value?.Value;
@@ -1195,7 +1195,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanActivityStatus> value)
     {
         CarePlan.CarePlanActivityStatus? ik_ = value?.Value;
@@ -1205,7 +1205,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanIntent> value)
     {
         CarePlan.CarePlanIntent? im_ = value?.Value;
@@ -1215,7 +1215,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestStatus> value)
     {
         RequestStatus? io_ = value?.Value;
@@ -1225,7 +1225,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CareTeam.CareTeamStatus> value)
     {
         CareTeam.CareTeamStatus? iq_ = value?.Value;
@@ -1235,7 +1235,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CatalogEntry.CatalogEntryRelationType> value)
     {
         CatalogEntry.CatalogEntryRelationType? is_ = value?.Value;
@@ -1245,7 +1245,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<InvoicePriceComponentType> value)
     {
         InvoicePriceComponentType? iu_ = value?.Value;
@@ -1255,7 +1255,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ChargeItem.ChargeItemStatus> value)
     {
         ChargeItem.ChargeItemStatus? iw_ = value?.Value;
@@ -1265,7 +1265,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FinancialResourceStatusCodes> value)
     {
         FinancialResourceStatusCodes? iy_ = value?.Value;
@@ -1275,7 +1275,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClinicalImpression.ClinicalImpressionStatus> value)
     {
         ClinicalImpression.ClinicalImpressionStatus? ja_ = value?.Value;
@@ -1285,7 +1285,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TerminologyCapabilities.CodeSearchSupport> value)
     {
         TerminologyCapabilities.CodeSearchSupport? jc_ = value?.Value;
@@ -1295,7 +1295,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystemContentMode> value)
     {
         CodeSystemContentMode? je_ = value?.Value;
@@ -1305,7 +1305,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystem.CodeSystemHierarchyMeaning> value)
     {
         CodeSystem.CodeSystemHierarchyMeaning? jg_ = value?.Value;
@@ -1315,7 +1315,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestPriority> value)
     {
         RequestPriority? ji_ = value?.Value;
@@ -1325,7 +1325,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EventStatus> value)
     {
         EventStatus? jk_ = value?.Value;
@@ -1335,7 +1335,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CompartmentType> value)
     {
         CompartmentType? jm_ = value?.Value;
@@ -1345,7 +1345,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Composition.CompositionAttestationMode> value)
     {
         Composition.CompositionAttestationMode? jo_ = value?.Value;
@@ -1355,7 +1355,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CompositionStatus> value)
     {
         CompositionStatus? jq_ = value?.Value;
@@ -1365,7 +1365,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConceptMapEquivalence> value)
     {
         ConceptMapEquivalence? js_ = value?.Value;
@@ -1375,7 +1375,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConceptMap.ConceptMapGroupUnmappedMode> value)
     {
         ConceptMap.ConceptMapGroupUnmappedMode? ju_ = value?.Value;
@@ -1385,7 +1385,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ConditionalDeleteStatus> value)
     {
         CapabilityStatement.ConditionalDeleteStatus? jw_ = value?.Value;
@@ -1395,7 +1395,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ConditionalReadStatus> value)
     {
         CapabilityStatement.ConditionalReadStatus? jy_ = value?.Value;
@@ -1405,7 +1405,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentDataMeaning> value)
     {
         Consent.ConsentDataMeaning? ka_ = value?.Value;
@@ -1415,7 +1415,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentProvisionType> value)
     {
         Consent.ConsentProvisionType? kc_ = value?.Value;
@@ -1425,7 +1425,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentState> value)
     {
         Consent.ConsentState? ke_ = value?.Value;
@@ -1435,7 +1435,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConstraintSeverity> value)
     {
         ConstraintSeverity? kg_ = value?.Value;
@@ -1445,7 +1445,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ContactPoint.ContactPointSystem> value)
     {
         ContactPoint.ContactPointSystem? ki_ = value?.Value;
@@ -1455,7 +1455,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ContactPoint.ContactPointUse> value)
     {
         ContactPoint.ContactPointUse? kk_ = value?.Value;
@@ -1465,7 +1465,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contract.ContractResourcePublicationStatusCodes> value)
     {
         Contract.ContractResourcePublicationStatusCodes? km_ = value?.Value;
@@ -1475,7 +1475,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contract.ContractResourceStatusCodes> value)
     {
         Contract.ContractResourceStatusCodes? ko_ = value?.Value;
@@ -1485,7 +1485,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contributor.ContributorType> value)
     {
         Contributor.ContributorType? kq_ = value?.Value;
@@ -1495,7 +1495,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Money.Currencies> value)
     {
         Money.Currencies? ks_ = value?.Value;
@@ -1505,7 +1505,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DaysOfWeek> value)
     {
         DaysOfWeek? ku_ = value?.Value;
@@ -1515,7 +1515,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DetectedIssue.DetectedIssueSeverity> value)
     {
         DetectedIssue.DetectedIssueSeverity? kw_ = value?.Value;
@@ -1525,7 +1525,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationStatus> value)
     {
         ObservationStatus? ky_ = value?.Value;
@@ -1535,7 +1535,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationState> value)
     {
         DeviceMetric.DeviceMetricCalibrationState? la_ = value?.Value;
@@ -1545,7 +1545,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationType> value)
     {
         DeviceMetric.DeviceMetricCalibrationType? lc_ = value?.Value;
@@ -1555,7 +1555,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCategory> value)
     {
         DeviceMetric.DeviceMetricCategory? le_ = value?.Value;
@@ -1565,7 +1565,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricColor> value)
     {
         DeviceMetric.DeviceMetricColor? lg_ = value?.Value;
@@ -1575,7 +1575,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricOperationalStatus> value)
     {
         DeviceMetric.DeviceMetricOperationalStatus? li_ = value?.Value;
@@ -1585,7 +1585,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceNameType> value)
     {
         DeviceNameType? lk_ = value?.Value;
@@ -1595,7 +1595,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceUseStatement.DeviceUseStatementStatus> value)
     {
         DeviceUseStatement.DeviceUseStatementStatus? lm_ = value?.Value;
@@ -1605,7 +1605,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DiagnosticReport.DiagnosticReportStatus> value)
     {
         DiagnosticReport.DiagnosticReportStatus? lo_ = value?.Value;
@@ -1615,7 +1615,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.DiscriminatorType> value)
     {
         ElementDefinition.DiscriminatorType? lq_ = value?.Value;
@@ -1625,7 +1625,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Composition.V3ConfidentialityClassification> value)
     {
         Composition.V3ConfidentialityClassification? ls_ = value?.Value;
@@ -1635,7 +1635,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.DocumentMode> value)
     {
         CapabilityStatement.DocumentMode? lu_ = value?.Value;
@@ -1645,7 +1645,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DocumentReferenceStatus> value)
     {
         DocumentReferenceStatus? lw_ = value?.Value;
@@ -1655,7 +1655,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DocumentRelationshipType> value)
     {
         DocumentRelationshipType? ly_ = value?.Value;
@@ -1665,7 +1665,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value)
     {
         CoverageEligibilityRequest.EligibilityRequestPurpose? ma_ = value?.Value;
@@ -1675,7 +1675,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value)
     {
         CoverageEligibilityResponse.EligibilityResponsePurpose? mc_ = value?.Value;
@@ -1685,7 +1685,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.EnableWhenBehavior> value)
     {
         Questionnaire.EnableWhenBehavior? me_ = value?.Value;
@@ -1695,7 +1695,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Encounter.EncounterLocationStatus> value)
     {
         Encounter.EncounterLocationStatus? mg_ = value?.Value;
@@ -1705,7 +1705,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Encounter.EncounterStatus> value)
     {
         Encounter.EncounterStatus? mi_ = value?.Value;
@@ -1715,7 +1715,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Endpoint.EndpointStatus> value)
     {
         Endpoint.EndpointStatus? mk_ = value?.Value;
@@ -1725,7 +1725,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EpisodeOfCare.EpisodeOfCareStatus> value)
     {
         EpisodeOfCare.EpisodeOfCareStatus? mm_ = value?.Value;
@@ -1735,7 +1735,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.EventCapabilityMode> value)
     {
         CapabilityStatement.EventCapabilityMode? mo_ = value?.Value;
@@ -1745,7 +1745,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Timing.EventTiming> value)
     {
         Timing.EventTiming? mq_ = value?.Value;
@@ -1755,7 +1755,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VariableTypeCode> value)
     {
         VariableTypeCode? ms_ = value?.Value;
@@ -1765,7 +1765,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ExampleScenario.ExampleScenarioActorType> value)
     {
         ExampleScenario.ExampleScenarioActorType? mu_ = value?.Value;
@@ -1775,7 +1775,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value)
     {
         ExplanationOfBenefit.ExplanationOfBenefitStatus? mw_ = value?.Value;
@@ -1785,7 +1785,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EffectEvidenceSynthesis.ExposureStateCode> value)
     {
         EffectEvidenceSynthesis.ExposureStateCode? my_ = value?.Value;
@@ -1795,7 +1795,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.ExtensionContextType> value)
     {
         StructureDefinition.ExtensionContextType? na_ = value?.Value;
@@ -1805,7 +1805,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRAllTypes> value)
     {
         FHIRAllTypes? nc_ = value?.Value;
@@ -1815,7 +1815,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRDefinedType> value)
     {
         FHIRDefinedType? ne_ = value?.Value;
@@ -1825,7 +1825,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Device.FHIRDeviceStatus> value)
     {
         Device.FHIRDeviceStatus? ng_ = value?.Value;
@@ -1835,7 +1835,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResourceType> value)
     {
         ResourceType? ni_ = value?.Value;
@@ -1845,7 +1845,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Substance.FHIRSubstanceStatus> value)
     {
         Substance.FHIRSubstanceStatus? nk_ = value?.Value;
@@ -1855,7 +1855,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRVersion> value)
     {
         FHIRVersion? nm_ = value?.Value;
@@ -1865,7 +1865,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FamilyMemberHistory.FamilyHistoryStatus> value)
     {
         FamilyMemberHistory.FamilyHistoryStatus? no_ = value?.Value;
@@ -1875,7 +1875,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FilterOperator> value)
     {
         FilterOperator? nq_ = value?.Value;
@@ -1885,7 +1885,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Flag.FlagStatus> value)
     {
         Flag.FlagStatus? ns_ = value?.Value;
@@ -1895,7 +1895,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Goal.GoalLifecycleStatus> value)
     {
         Goal.GoalLifecycleStatus? nu_ = value?.Value;
@@ -1905,7 +1905,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentRule> value)
     {
         GraphDefinition.GraphCompartmentRule? nw_ = value?.Value;
@@ -1915,7 +1915,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentUse> value)
     {
         GraphDefinition.GraphCompartmentUse? ny_ = value?.Value;
@@ -1925,7 +1925,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GroupMeasureCode> value)
     {
         GroupMeasureCode? oa_ = value?.Value;
@@ -1935,7 +1935,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Group.GroupType> value)
     {
         Group.GroupType? oc_ = value?.Value;
@@ -1945,7 +1945,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GuidanceResponse.GuidanceResponseStatus> value)
     {
         GuidanceResponse.GuidanceResponseStatus? oe_ = value?.Value;
@@ -1955,7 +1955,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.GuidePageGeneration> value)
     {
         ImplementationGuide.GuidePageGeneration? og_ = value?.Value;
@@ -1965,7 +1965,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.GuideParameterCode> value)
     {
         ImplementationGuide.GuideParameterCode? oi_ = value?.Value;
@@ -1975,7 +1975,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.HTTPVerb> value)
     {
         Bundle.HTTPVerb? ok_ = value?.Value;
@@ -1985,7 +1985,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Identifier.IdentifierUse> value)
     {
         Identifier.IdentifierUse? om_ = value?.Value;
@@ -1995,7 +1995,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Person.IdentityAssuranceLevel> value)
     {
         Person.IdentityAssuranceLevel? oo_ = value?.Value;
@@ -2005,7 +2005,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImagingStudy.ImagingStudyStatus> value)
     {
         ImagingStudy.ImagingStudyStatus? oq_ = value?.Value;
@@ -2015,7 +2015,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value)
     {
         ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? os_ = value?.Value;
@@ -2025,7 +2025,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Immunization.ImmunizationStatusCodes> value)
     {
         Immunization.ImmunizationStatusCodes? ou_ = value?.Value;
@@ -2035,7 +2035,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Invoice.InvoiceStatus> value)
     {
         Invoice.InvoiceStatus? ow_ = value?.Value;
@@ -2045,7 +2045,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationOutcome.IssueSeverity> value)
     {
         OperationOutcome.IssueSeverity? oy_ = value?.Value;
@@ -2055,7 +2055,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationOutcome.IssueType> value)
     {
         OperationOutcome.IssueType? pa_ = value?.Value;
@@ -2065,7 +2065,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Patient.LinkType> value)
     {
         Patient.LinkType? pc_ = value?.Value;
@@ -2075,7 +2075,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Linkage.LinkageType> value)
     {
         Linkage.LinkageType? pe_ = value?.Value;
@@ -2085,7 +2085,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ListMode> value)
     {
         ListMode? pg_ = value?.Value;
@@ -2095,7 +2095,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<List.ListStatus> value)
     {
         List.ListStatus? pi_ = value?.Value;
@@ -2105,7 +2105,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Location.LocationMode> value)
     {
         Location.LocationMode? pk_ = value?.Value;
@@ -2115,7 +2115,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Location.LocationStatus> value)
     {
         Location.LocationStatus? pm_ = value?.Value;
@@ -2125,7 +2125,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MeasureReport.MeasureReportStatus> value)
     {
         MeasureReport.MeasureReportStatus? po_ = value?.Value;
@@ -2135,7 +2135,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MeasureReport.MeasureReportType> value)
     {
         MeasureReport.MeasureReportType? pq_ = value?.Value;
@@ -2145,7 +2145,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationAdministration.MedicationAdministrationStatusCodes> value)
     {
         MedicationAdministration.MedicationAdministrationStatusCodes? ps_ = value?.Value;
@@ -2155,7 +2155,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationDispense.MedicationDispenseStatusCodes> value)
     {
         MedicationDispense.MedicationDispenseStatusCodes? pu_ = value?.Value;
@@ -2165,7 +2165,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value)
     {
         MedicationKnowledge.MedicationKnowledgeStatusCodes? pw_ = value?.Value;
@@ -2175,7 +2175,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationRequest.MedicationRequestIntent> value)
     {
         MedicationRequest.MedicationRequestIntent? py_ = value?.Value;
@@ -2185,7 +2185,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationRequest.MedicationrequestStatus> value)
     {
         MedicationRequest.MedicationrequestStatus? qa_ = value?.Value;
@@ -2195,7 +2195,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationStatement.MedicationStatusCodes> value)
     {
         MedicationStatement.MedicationStatusCodes? qc_ = value?.Value;
@@ -2205,7 +2205,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Medication.MedicationStatusCodes> value)
     {
         Medication.MedicationStatusCodes? qe_ = value?.Value;
@@ -2215,7 +2215,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageDefinition.MessageSignificanceCategory> value)
     {
         MessageDefinition.MessageSignificanceCategory? qg_ = value?.Value;
@@ -2225,7 +2225,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageheaderResponseRequest> value)
     {
         MessageheaderResponseRequest? qi_ = value?.Value;
@@ -2235,7 +2235,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code value)
     {
         string qk_ = value?.Value;
@@ -2244,7 +2244,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<HumanName.NameUse> value)
     {
         HumanName.NameUse? ql_ = value?.Value;
@@ -2254,7 +2254,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NamingSystem.NamingSystemIdentifierType> value)
     {
         NamingSystem.NamingSystemIdentifierType? qn_ = value?.Value;
@@ -2264,7 +2264,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NamingSystem.NamingSystemType> value)
     {
         NamingSystem.NamingSystemType? qp_ = value?.Value;
@@ -2274,7 +2274,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Narrative.NarrativeStatus> value)
     {
         Narrative.NarrativeStatus? qr_ = value?.Value;
@@ -2284,7 +2284,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NoteType> value)
     {
         NoteType? qt_ = value?.Value;
@@ -2294,7 +2294,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestIntent> value)
     {
         RequestIntent? qv_ = value?.Value;
@@ -2304,7 +2304,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationDefinition.ObservationDataType> value)
     {
         ObservationDefinition.ObservationDataType? qx_ = value?.Value;
@@ -2314,7 +2314,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationDefinition.ObservationRangeCategory> value)
     {
         ObservationDefinition.ObservationRangeCategory? qz_ = value?.Value;
@@ -2324,7 +2324,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationDefinition.OperationKind> value)
     {
         OperationDefinition.OperationKind? rb_ = value?.Value;
@@ -2334,7 +2334,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationParameterUse> value)
     {
         OperationParameterUse? rd_ = value?.Value;
@@ -2344,7 +2344,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.OrientationType> value)
     {
         MolecularSequence.OrientationType? rf_ = value?.Value;
@@ -2354,7 +2354,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Appointment.ParticipantRequired> value)
     {
         Appointment.ParticipantRequired? rh_ = value?.Value;
@@ -2364,7 +2364,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ParticipationStatus> value)
     {
         ParticipationStatus? rj_ = value?.Value;
@@ -2374,7 +2374,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.PropertyRepresentation> value)
     {
         ElementDefinition.PropertyRepresentation? rl_ = value?.Value;
@@ -2384,7 +2384,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystem.PropertyType> value)
     {
         CodeSystem.PropertyType? rn_ = value?.Value;
@@ -2394,7 +2394,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Provenance.ProvenanceEntityRole> value)
     {
         Provenance.ProvenanceEntityRole? rp_ = value?.Value;
@@ -2404,7 +2404,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<PublicationStatus> value)
     {
         PublicationStatus? rr_ = value?.Value;
@@ -2414,7 +2414,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.QualityType> value)
     {
         MolecularSequence.QualityType? rt_ = value?.Value;
@@ -2424,7 +2424,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Quantity.QuantityComparator> value)
     {
         Quantity.QuantityComparator? rv_ = value?.Value;
@@ -2434,7 +2434,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemOperator> value)
     {
         Questionnaire.QuestionnaireItemOperator? rx_ = value?.Value;
@@ -2444,7 +2444,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemType> value)
     {
         Questionnaire.QuestionnaireItemType? rz_ = value?.Value;
@@ -2454,7 +2454,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<QuestionnaireResponse.QuestionnaireResponseStatus> value)
     {
         QuestionnaireResponse.QuestionnaireResponseStatus? sb_ = value?.Value;
@@ -2464,7 +2464,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ReferenceHandlingPolicy> value)
     {
         CapabilityStatement.ReferenceHandlingPolicy? sd_ = value?.Value;
@@ -2474,7 +2474,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.ReferenceVersionRules> value)
     {
         ElementDefinition.ReferenceVersionRules? sf_ = value?.Value;
@@ -2484,7 +2484,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RelatedArtifact.RelatedArtifactType> value)
     {
         RelatedArtifact.RelatedArtifactType? sh_ = value?.Value;
@@ -2494,7 +2494,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClaimProcessingCodes> value)
     {
         ClaimProcessingCodes? sj_ = value?.Value;
@@ -2504,7 +2504,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.RepositoryType> value)
     {
         MolecularSequence.RepositoryType? sl_ = value?.Value;
@@ -2514,7 +2514,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchElementDefinition.ResearchElementType> value)
     {
         ResearchElementDefinition.ResearchElementType? sn_ = value?.Value;
@@ -2524,7 +2524,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchStudy.ResearchStudyStatus> value)
     {
         ResearchStudy.ResearchStudyStatus? sp_ = value?.Value;
@@ -2534,7 +2534,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchSubject.ResearchSubjectStatus> value)
     {
         ResearchSubject.ResearchSubjectStatus? sr_ = value?.Value;
@@ -2544,7 +2544,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ResourceVersionPolicy> value)
     {
         CapabilityStatement.ResourceVersionPolicy? st_ = value?.Value;
@@ -2554,7 +2554,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageHeader.ResponseType> value)
     {
         MessageHeader.ResponseType? sv_ = value?.Value;
@@ -2564,7 +2564,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.RestfulCapabilityMode> value)
     {
         CapabilityStatement.RestfulCapabilityMode? sx_ = value?.Value;
@@ -2574,7 +2574,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.SPDXLicense> value)
     {
         ImplementationGuide.SPDXLicense? sz_ = value?.Value;
@@ -2584,7 +2584,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.SearchComparator> value)
     {
         SearchParameter.SearchComparator? tb_ = value?.Value;
@@ -2594,7 +2594,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.SearchEntryMode> value)
     {
         Bundle.SearchEntryMode? td_ = value?.Value;
@@ -2604,7 +2604,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.SearchModifierCode> value)
     {
         SearchParameter.SearchModifierCode? tf_ = value?.Value;
@@ -2614,7 +2614,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParamType> value)
     {
         SearchParamType? th_ = value?.Value;
@@ -2624,7 +2624,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.SequenceType> value)
     {
         MolecularSequence.SequenceType? tj_ = value?.Value;
@@ -2634,7 +2634,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.SlicingRules> value)
     {
         ElementDefinition.SlicingRules? tl_ = value?.Value;
@@ -2644,7 +2644,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Slot.SlotStatus> value)
     {
         Slot.SlotStatus? tn_ = value?.Value;
@@ -2654,7 +2654,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DataRequirement.SortDirection> value)
     {
         DataRequirement.SortDirection? tp_ = value?.Value;
@@ -2664,7 +2664,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SpecimenDefinition.SpecimenContainedPreference> value)
     {
         SpecimenDefinition.SpecimenContainedPreference? tr_ = value?.Value;
@@ -2674,7 +2674,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Specimen.SpecimenStatus> value)
     {
         Specimen.SpecimenStatus? tt_ = value?.Value;
@@ -2684,7 +2684,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VerificationResult.StatusCode> value)
     {
         VerificationResult.StatusCode? tv_ = value?.Value;
@@ -2694,7 +2694,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.StrandType> value)
     {
         MolecularSequence.StrandType? tx_ = value?.Value;
@@ -2704,7 +2704,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.StructureDefinitionKind> value)
     {
         StructureDefinition.StructureDefinitionKind? tz_ = value?.Value;
@@ -2714,7 +2714,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapContextType> value)
     {
         StructureMap.StructureMapContextType? ub_ = value?.Value;
@@ -2724,7 +2724,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapGroupTypeMode> value)
     {
         StructureMap.StructureMapGroupTypeMode? ud_ = value?.Value;
@@ -2734,7 +2734,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapInputMode> value)
     {
         StructureMap.StructureMapInputMode? uf_ = value?.Value;
@@ -2744,7 +2744,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapModelMode> value)
     {
         StructureMap.StructureMapModelMode? uh_ = value?.Value;
@@ -2754,7 +2754,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapSourceListMode> value)
     {
         StructureMap.StructureMapSourceListMode? uj_ = value?.Value;
@@ -2764,7 +2764,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapTargetListMode> value)
     {
         StructureMap.StructureMapTargetListMode? ul_ = value?.Value;
@@ -2774,7 +2774,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapTransform> value)
     {
         StructureMap.StructureMapTransform? un_ = value?.Value;
@@ -2784,7 +2784,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Subscription.SubscriptionChannelType> value)
     {
         Subscription.SubscriptionChannelType? up_ = value?.Value;
@@ -2794,7 +2794,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Subscription.SubscriptionStatus> value)
     {
         Subscription.SubscriptionStatus? ur_ = value?.Value;
@@ -2804,7 +2804,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SupplyDelivery.SupplyDeliveryStatus> value)
     {
         SupplyDelivery.SupplyDeliveryStatus? ut_ = value?.Value;
@@ -2814,7 +2814,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SupplyRequest.SupplyRequestStatus> value)
     {
         SupplyRequest.SupplyRequestStatus? uv_ = value?.Value;
@@ -2824,7 +2824,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.SystemRestfulInteraction> value)
     {
         CapabilityStatement.SystemRestfulInteraction? ux_ = value?.Value;
@@ -2834,7 +2834,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Task.TaskIntent> value)
     {
         Task.TaskIntent? uz_ = value?.Value;
@@ -2844,7 +2844,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Task.TaskStatus> value)
     {
         Task.TaskStatus? vb_ = value?.Value;
@@ -2854,7 +2854,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportActionResult> value)
     {
         TestReport.TestReportActionResult? vd_ = value?.Value;
@@ -2864,7 +2864,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportParticipantType> value)
     {
         TestReport.TestReportParticipantType? vf_ = value?.Value;
@@ -2874,7 +2874,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportResult> value)
     {
         TestReport.TestReportResult? vh_ = value?.Value;
@@ -2884,7 +2884,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportStatus> value)
     {
         TestReport.TestReportStatus? vj_ = value?.Value;
@@ -2894,7 +2894,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.TestScriptRequestMethodCode> value)
     {
         TestScript.TestScriptRequestMethodCode? vl_ = value?.Value;
@@ -2904,7 +2904,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TriggerDefinition.TriggerType> value)
     {
         TriggerDefinition.TriggerType? vn_ = value?.Value;
@@ -2914,7 +2914,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.TypeDerivationRule> value)
     {
         StructureDefinition.TypeDerivationRule? vp_ = value?.Value;
@@ -2924,7 +2924,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.TypeRestfulInteraction> value)
     {
         CapabilityStatement.TypeRestfulInteraction? vr_ = value?.Value;
@@ -2934,7 +2934,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Device.UDIEntryType> value)
     {
         Device.UDIEntryType? vt_ = value?.Value;
@@ -2944,7 +2944,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Timing.UnitsOfTime> value)
     {
         Timing.UnitsOfTime? vv_ = value?.Value;
@@ -2954,7 +2954,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClaimUseCode> value)
     {
         ClaimUseCode? vx_ = value?.Value;
@@ -2964,7 +2964,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VisionPrescription.VisionBase> value)
     {
         VisionPrescription.VisionBase? vz_ = value?.Value;
@@ -2974,7 +2974,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VisionPrescription.VisionEyes> value)
     {
         VisionPrescription.VisionEyes? wb_ = value?.Value;
@@ -2984,7 +2984,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.XPathUsageType> value)
     {
         SearchParameter.XPathUsageType? wd_ = value?.Value;
@@ -2994,7 +2994,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Base64Binary value)
     {
         byte[] wf_ = value?.Value;
@@ -3004,7 +3004,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, FhirString value)
     {
         string wh_ = value?.Value;
@@ -3013,7 +3013,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, FhirUri value)
     {
         string wi_ = value?.Value;
@@ -3022,7 +3022,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, XHtml value)
     {
         string wj_ = value?.Value;
@@ -3031,7 +3031,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToBoolean")]
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {
         bool? wk_ = value?.Value;
@@ -3040,7 +3040,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToDate")]
     public CqlDate ToDate(CqlContext context, Date value)
     {
         string wl_ = value?.Value;
@@ -3050,7 +3050,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToDateTime")]
     public CqlDateTime ToDateTime(CqlContext context, FhirDateTime value)
     {
         CqlDateTime wn_ = context.Operators.Convert<CqlDateTime>(value);
@@ -3059,7 +3059,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToDateTime")]
     public CqlDateTime ToDateTime(CqlContext context, Instant value)
     {
         DateTimeOffset? wo_ = value?.Value;
@@ -3069,7 +3069,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToDecimal")]
     public decimal? ToDecimal(CqlContext context, FhirDecimal value)
     {
         decimal? wq_ = value?.Value;
@@ -3078,7 +3078,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToInteger")]
     public int? ToInteger(CqlContext context, Integer value)
     {
         int? wr_ = value?.Value;
@@ -3087,7 +3087,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     }
 
 
-    // NOT A DEFINITION CqlExpressionDefinition//
+    [CqlExpressionDefinition("ToTime")]
     public CqlTime ToTime(CqlContext context, Time value)
     {
         string ws_ = value?.Value;

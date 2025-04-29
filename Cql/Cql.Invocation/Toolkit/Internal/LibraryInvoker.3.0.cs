@@ -46,7 +46,7 @@ internal sealed class LibraryInvoker_3_0 : LibraryInvokerOnInstance
                                  .SelectToArray(m => new LibraryMethodInfo(m));
         Definitions = libraryMethodInfos
                       .SelectWhereNotNull(o =>
-                                              o.CqlDeclarationAttribute?.DefinitionName is { } declarationName
+                                              o.CqlDeclarationAttribute?.Name is { } declarationName
                                               && o.Method.GetParameters() is [{ } p0]
                                               && p0.ParameterType == typeof(CqlContext)
                                                   ? (DefinitionInvoker)new DefinitionInvoker_3_0(

@@ -15,5 +15,5 @@ namespace Hl7.Cql.Compiler.Expressions;
 /// <seealso cref="CqlConceptDefinitionAttribute"/>
 internal class CqlConceptDefinition(
     LambdaExpression lambda,
-    string definitionName)
-    : CqlDefinition(lambda, definitionName);
+    string name)
+    : CqlDefinition(lambda, name);

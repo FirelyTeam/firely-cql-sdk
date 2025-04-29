@@ -30,198 +30,91 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
     #region ValueSets
 
-    #region ValueSet: Bone Scan
-    [CqlValueSetDefinition(
-        definitionName: "Bone Scan",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320",
-        valueSetVersion: null)]
-    public CqlValueSet Bone_Scan(CqlContext context) => _Bone_Scan;
-
+    [CqlValueSetDefinition("Bone Scan", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320", valueSetVersion: null)]
+    public CqlValueSet Bone_Scan(CqlContext _) => _Bone_Scan;
     private static readonly CqlValueSet _Bone_Scan = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320", null);
-    #endregion
 
-    #region ValueSet: Pain Warranting Further Investigation for Prostate Cancer
-    [CqlValueSetDefinition(
-        definitionName: "Pain Warranting Further Investigation for Prostate Cancer",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451",
-        valueSetVersion: null)]
-    public CqlValueSet Pain_Warranting_Further_Investigation_for_Prostate_Cancer(CqlContext context) => _Pain_Warranting_Further_Investigation_for_Prostate_Cancer;
-
+    [CqlValueSetDefinition("Pain Warranting Further Investigation for Prostate Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451", valueSetVersion: null)]
+    public CqlValueSet Pain_Warranting_Further_Investigation_for_Prostate_Cancer(CqlContext _) => _Pain_Warranting_Further_Investigation_for_Prostate_Cancer;
     private static readonly CqlValueSet _Pain_Warranting_Further_Investigation_for_Prostate_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451", null);
-    #endregion
 
-    #region ValueSet: Prostate Cancer
-    [CqlValueSetDefinition(
-        definitionName: "Prostate Cancer",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319",
-        valueSetVersion: null)]
-    public CqlValueSet Prostate_Cancer(CqlContext context) => _Prostate_Cancer;
-
+    [CqlValueSetDefinition("Prostate Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", valueSetVersion: null)]
+    public CqlValueSet Prostate_Cancer(CqlContext _) => _Prostate_Cancer;
     private static readonly CqlValueSet _Prostate_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", null);
-    #endregion
 
-    #region ValueSet: Prostate Cancer Treatment
-    [CqlValueSetDefinition(
-        definitionName: "Prostate Cancer Treatment",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398",
-        valueSetVersion: null)]
-    public CqlValueSet Prostate_Cancer_Treatment(CqlContext context) => _Prostate_Cancer_Treatment;
-
+    [CqlValueSetDefinition("Prostate Cancer Treatment", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398", valueSetVersion: null)]
+    public CqlValueSet Prostate_Cancer_Treatment(CqlContext _) => _Prostate_Cancer_Treatment;
     private static readonly CqlValueSet _Prostate_Cancer_Treatment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398", null);
-    #endregion
 
-    #region ValueSet: Prostate Specific Antigen Test
-    [CqlValueSetDefinition(
-        definitionName: "Prostate Specific Antigen Test",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401",
-        valueSetVersion: null)]
-    public CqlValueSet Prostate_Specific_Antigen_Test(CqlContext context) => _Prostate_Specific_Antigen_Test;
-
+    [CqlValueSetDefinition("Prostate Specific Antigen Test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401", valueSetVersion: null)]
+    public CqlValueSet Prostate_Specific_Antigen_Test(CqlContext _) => _Prostate_Specific_Antigen_Test;
     private static readonly CqlValueSet _Prostate_Specific_Antigen_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401", null);
-    #endregion
 
-    #region ValueSet: Salvage Therapy
-    [CqlValueSetDefinition(
-        definitionName: "Salvage Therapy",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399",
-        valueSetVersion: null)]
-    public CqlValueSet Salvage_Therapy(CqlContext context) => _Salvage_Therapy;
-
+    [CqlValueSetDefinition("Salvage Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399", valueSetVersion: null)]
+    public CqlValueSet Salvage_Therapy(CqlContext _) => _Salvage_Therapy;
     private static readonly CqlValueSet _Salvage_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399", null);
-    #endregion
 
     #endregion ValueSets
 
     #region Codes
 
-    #region Code: Gleason score in Specimen Qualitative
-    [CqlCodeDefinition(
-        definitionName: "Gleason score in Specimen Qualitative",
-        codeId: "35266-6",
-        codeSystem: "http://loinc.org")]
-    public CqlCode Gleason_score_in_Specimen_Qualitative(CqlContext context) => _Gleason_score_in_Specimen_Qualitative;
-
+    [CqlCodeDefinition("Gleason score in Specimen Qualitative", codeId: "35266-6", codeSystem: "http://loinc.org")]
+    public CqlCode Gleason_score_in_Specimen_Qualitative(CqlContext _) => _Gleason_score_in_Specimen_Qualitative;
     private static readonly CqlCode _Gleason_score_in_Specimen_Qualitative = new CqlCode("35266-6", "http://loinc.org", default, default);
-    #endregion
 
-    #region Code: Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)
-    [CqlCodeDefinition(
-        definitionName: "Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)",
-        codeId: "433351000124101",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(CqlContext context) => _Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_;
-
+    [CqlCodeDefinition("Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)", codeId: "433351000124101", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(CqlContext _) => _Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_;
     private static readonly CqlCode _Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_ = new CqlCode("433351000124101", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)
-    [CqlCodeDefinition(
-        definitionName: "Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)",
-        codeId: "433361000124104",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext context) => _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_;
-
+    [CqlCodeDefinition("Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)", codeId: "433361000124104", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext _) => _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_;
     private static readonly CqlCode _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_ = new CqlCode("433361000124104", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: Procedure reason record (record artifact)
-    [CqlCodeDefinition(
-        definitionName: "Procedure reason record (record artifact)",
-        codeId: "433611000124109",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode Procedure_reason_record__record_artifact_(CqlContext context) => _Procedure_reason_record__record_artifact_;
-
+    [CqlCodeDefinition("Procedure reason record (record artifact)", codeId: "433611000124109", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Procedure_reason_record__record_artifact_(CqlContext _) => _Procedure_reason_record__record_artifact_;
     private static readonly CqlCode _Procedure_reason_record__record_artifact_ = new CqlCode("433611000124109", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)
-    [CqlCodeDefinition(
-        definitionName: "T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)",
-        codeId: "369833007",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(CqlContext context) => _T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_;
-
+    [CqlCodeDefinition("T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)", codeId: "369833007", codeSystem: "http://snomed.info/sct")]
+    public CqlCode T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(CqlContext _) => _T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_;
     private static readonly CqlCode _T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_ = new CqlCode("369833007", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)
-    [CqlCodeDefinition(
-        definitionName: "T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)",
-        codeId: "369834001",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(CqlContext context) => _T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_;
-
+    [CqlCodeDefinition("T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)", codeId: "369834001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(CqlContext _) => _T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_;
     private static readonly CqlCode _T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_ = new CqlCode("369834001", "http://snomed.info/sct", default, default);
-    #endregion
 
-    #region Code: Tumor staging (tumor staging)
-    [CqlCodeDefinition(
-        definitionName: "Tumor staging (tumor staging)",
-        codeId: "254292007",
-        codeSystem: "http://snomed.info/sct")]
-    public CqlCode Tumor_staging__tumor_staging_(CqlContext context) => _Tumor_staging__tumor_staging_;
-
+    [CqlCodeDefinition("Tumor staging (tumor staging)", codeId: "254292007", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Tumor_staging__tumor_staging_(CqlContext _) => _Tumor_staging__tumor_staging_;
     private static readonly CqlCode _Tumor_staging__tumor_staging_ = new CqlCode("254292007", "http://snomed.info/sct", default, default);
-    #endregion
 
     #endregion Codes
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition(
-        definitionName: "LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] ezzzzzzzzzzzzzzzzzzzzzzzzv_ = [
-            new CqlCode("35266-6", "http://loinc.org", default, default),
-        ];
+    [CqlCodeSystemDefinition("LOINC")]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC = new CqlCodeSystem();
 
-        return ezzzzzzzzzzzzzzzzzzzzzzzzv_;
-    }
+    [CqlCodeSystemDefinition("SNOMEDCT")]
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT = new CqlCodeSystem();
 
-
-    [CqlCodeSystemDefinition(
-        definitionName: "SNOMEDCT")]
-    public CqlCode[] SNOMEDCT(CqlContext context)
-    {
-        CqlCode[] ezzzzzzzzzzzzzzzzzzzzzzzzw_ = [
-            new CqlCode("433351000124101", "http://snomed.info/sct", default, default),
-            new CqlCode("433361000124104", "http://snomed.info/sct", default, default),
-            new CqlCode("433611000124109", "http://snomed.info/sct", default, default),
-            new CqlCode("369833007", "http://snomed.info/sct", default, default),
-            new CqlCode("369834001", "http://snomed.info/sct", default, default),
-            new CqlCode("254292007", "http://snomed.info/sct", default, default),
-        ];
-
-        return ezzzzzzzzzzzzzzzzzzzzzzzzw_;
-    }
-
-
-    [CqlCodeSystemDefinition(
-        definitionName: "UCUM")]
-    public CqlCode[] UCUM(CqlContext context)
-    {
-        CqlCode[] ezzzzzzzzzzzzzzzzzzzzzzzzx_ = []
-;
-
-        return ezzzzzzzzzzzzzzzzzzzzzzzzx_;
-    }
-
+    [CqlCodeSystemDefinition("UCUM")]
+    public CqlCodeSystem UCUM(CqlContext _) => _UCUM;
+    private static readonly CqlCodeSystem _UCUM = new CqlCodeSystem();
 
     #endregion CodeSystems
 
     #region Parameters
 
-    [CqlParameterDefinition(
-        definitionName: "Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime ezzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime ezzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Interval(ezzzzzzzzzzzzzzzzzzzzzzzzy_, ezzzzzzzzzzzzzzzzzzzzzzzzz_, true, true);
-        object fzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.ResolveParameter("ProstateCaAvoidanceBoneScanOveruseFHIR-0.3.000", "Measurement Period", fzzzzzzzzzzzzzzzzzzzzzzzza_);
+        CqlDateTime zzzzzzzzzzzzzzzzzzu_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime zzzzzzzzzzzzzzzzzzv_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> zzzzzzzzzzzzzzzzzzw_ = context.Operators.Interval(zzzzzzzzzzzzzzzzzzu_, zzzzzzzzzzzzzzzzzzv_, true, true);
+        object zzzzzzzzzzzzzzzzzzx_ = context.ResolveParameter("ProstateCaAvoidanceBoneScanOveruseFHIR-0.3.000", "Measurement Period", zzzzzzzzzzzzzzzzzzw_);
 
-        return (CqlInterval<CqlDateTime>)fzzzzzzzzzzzzzzzzzzzzzzzzb_;
+        return (CqlInterval<CqlDateTime>)zzzzzzzzzzzzzzzzzzx_;
     }
 
 
@@ -229,587 +122,569 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
     #region Expressions
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> fzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient fzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<Patient>(fzzzzzzzzzzzzzzzzzzzzzzzzc_);
+        IEnumerable<Patient> zzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient zzzzzzzzzzzzzzzzzzz_ = context.Operators.SingletonFrom<Patient>(zzzzzzzzzzzzzzzzzzy_);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzd_;
+        return zzzzzzzzzzzzzzzzzzz_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? fzzzzzzzzzzzzzzzzzzzzzzzze_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? azzzzzzzzzzzzzzzzzza_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzze_;
+        return azzzzzzzzzzzzzzzzzza_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> fzzzzzzzzzzzzzzzzzzzzzzzzf_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> azzzzzzzzzzzzzzzzzzb_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzf_;
+        return azzzzzzzzzzzzzzzzzzb_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? fzzzzzzzzzzzzzzzzzzzzzzzzg_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? azzzzzzzzzzzzzzzzzzc_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzg_;
+        return azzzzzzzzzzzzzzzzzzc_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode fzzzzzzzzzzzzzzzzzzzzzzzzh_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode azzzzzzzzzzzzzzzzzzd_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzh_;
+        return azzzzzzzzzzzzzzzzzzd_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Prostate Cancer Diagnosis")]
+    [CqlExpressionDefinition("Prostate Cancer Diagnosis")]
     public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context)
     {
-        CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Prostate_Cancer(context);
-        IEnumerable<Condition> fzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, fzzzzzzzzzzzzzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        bool? fzzzzzzzzzzzzzzzzzzzzzzzzk_(Condition ProstateCancer)
+        CqlValueSet azzzzzzzzzzzzzzzzzze_ = this.Prostate_Cancer(context);
+        IEnumerable<Condition> azzzzzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, azzzzzzzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        bool? azzzzzzzzzzzzzzzzzzg_(Condition ProstateCancer)
         {
-            CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
-            CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.Measurement_Period(context);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Overlaps(fzzzzzzzzzzzzzzzzzzzzzzzzm_, fzzzzzzzzzzzzzzzzzzzzzzzzn_, "day");
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancer);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancer);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Or(fzzzzzzzzzzzzzzzzzzzzzzzzp_, fzzzzzzzzzzzzzzzzzzzzzzzzq_);
-            bool? fzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzo_, fzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
+            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzzzzj_ = this.Measurement_Period(context);
+            bool? azzzzzzzzzzzzzzzzzzk_ = context.Operators.Overlaps(azzzzzzzzzzzzzzzzzzi_, azzzzzzzzzzzzzzzzzzj_, "day");
+            bool? azzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancer);
+            bool? azzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancer);
+            bool? azzzzzzzzzzzzzzzzzzn_ = context.Operators.Or(azzzzzzzzzzzzzzzzzzl_, azzzzzzzzzzzzzzzzzzm_);
+            bool? azzzzzzzzzzzzzzzzzzo_ = context.Operators.And(azzzzzzzzzzzzzzzzzzk_, azzzzzzzzzzzzzzzzzzn_);
 
-            return fzzzzzzzzzzzzzzzzzzzzzzzzs_;
+            return azzzzzzzzzzzzzzzzzzo_;
         };
-        IEnumerable<Condition> fzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Condition>(fzzzzzzzzzzzzzzzzzzzzzzzzj_, fzzzzzzzzzzzzzzzzzzzzzzzzk_);
+        IEnumerable<Condition> azzzzzzzzzzzzzzzzzzh_ = context.Operators.Where<Condition>(azzzzzzzzzzzzzzzzzzf_, azzzzzzzzzzzzzzzzzzg_);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzl_;
+        return azzzzzzzzzzzzzzzzzzh_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Initial Population")]
+    [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
-        IEnumerable<Condition> fzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Prostate_Cancer_Diagnosis(context);
-        bool? fzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Exists<Condition>(fzzzzzzzzzzzzzzzzzzzzzzzzt_);
+        IEnumerable<Condition> azzzzzzzzzzzzzzzzzzp_ = this.Prostate_Cancer_Diagnosis(context);
+        bool? azzzzzzzzzzzzzzzzzzq_ = context.Operators.Exists<Condition>(azzzzzzzzzzzzzzzzzzp_);
 
-        return fzzzzzzzzzzzzzzzzzzzzzzzzu_;
+        return azzzzzzzzzzzzzzzzzzq_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "First Prostate Cancer Treatment during day of Measurement Period")]
+    [CqlExpressionDefinition("First Prostate Cancer Treatment during day of Measurement Period")]
     public Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context)
     {
-        CqlValueSet fzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Prostate_Cancer_Treatment(context);
-        IEnumerable<Procedure> fzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, fzzzzzzzzzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        bool? fzzzzzzzzzzzzzzzzzzzzzzzzx_(Procedure ProstateCancerTreatment)
+        CqlValueSet azzzzzzzzzzzzzzzzzzr_ = this.Prostate_Cancer_Treatment(context);
+        IEnumerable<Procedure> azzzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, azzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        bool? azzzzzzzzzzzzzzzzzzt_(Procedure ProstateCancerTreatment)
         {
-            DataType gzzzzzzzzzzzzzzzzzzzzzzzzc_ = ProstateCancerTreatment?.Performed;
-            object gzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzc_);
-            CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzze_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.End(gzzzzzzzzzzzzzzzzzzzzzzzze_);
-            CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Measurement_Period(context);
-            bool? gzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.In<CqlDateTime>(gzzzzzzzzzzzzzzzzzzzzzzzzf_, gzzzzzzzzzzzzzzzzzzzzzzzzg_, "day");
-            Code<EventStatus> gzzzzzzzzzzzzzzzzzzzzzzzzi_ = ProstateCancerTreatment?.StatusElement;
-            EventStatus? gzzzzzzzzzzzzzzzzzzzzzzzzj_ = gzzzzzzzzzzzzzzzzzzzzzzzzi_?.Value;
-            string gzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(gzzzzzzzzzzzzzzzzzzzzzzzzj_);
-            bool? gzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(gzzzzzzzzzzzzzzzzzzzzzzzzk_, "completed");
-            bool? gzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(gzzzzzzzzzzzzzzzzzzzzzzzzh_, gzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            DataType azzzzzzzzzzzzzzzzzzy_ = ProstateCancerTreatment?.Performed;
+            object azzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzy_);
+            CqlInterval<CqlDateTime> bzzzzzzzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.toInterval(context, azzzzzzzzzzzzzzzzzzz_);
+            CqlDateTime bzzzzzzzzzzzzzzzzzzb_ = context.Operators.End(bzzzzzzzzzzzzzzzzzza_);
+            CqlInterval<CqlDateTime> bzzzzzzzzzzzzzzzzzzc_ = this.Measurement_Period(context);
+            bool? bzzzzzzzzzzzzzzzzzzd_ = context.Operators.In<CqlDateTime>(bzzzzzzzzzzzzzzzzzzb_, bzzzzzzzzzzzzzzzzzzc_, "day");
+            Code<EventStatus> bzzzzzzzzzzzzzzzzzze_ = ProstateCancerTreatment?.StatusElement;
+            EventStatus? bzzzzzzzzzzzzzzzzzzf_ = bzzzzzzzzzzzzzzzzzze_?.Value;
+            string bzzzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<string>(bzzzzzzzzzzzzzzzzzzf_);
+            bool? bzzzzzzzzzzzzzzzzzzh_ = context.Operators.Equal(bzzzzzzzzzzzzzzzzzzg_, "completed");
+            bool? bzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(bzzzzzzzzzzzzzzzzzzd_, bzzzzzzzzzzzzzzzzzzh_);
 
-            return gzzzzzzzzzzzzzzzzzzzzzzzzm_;
+            return bzzzzzzzzzzzzzzzzzzi_;
         };
-        IEnumerable<Procedure> fzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Procedure>(fzzzzzzzzzzzzzzzzzzzzzzzzw_, fzzzzzzzzzzzzzzzzzzzzzzzzx_);
-        object fzzzzzzzzzzzzzzzzzzzzzzzzz_(Procedure @this)
+        IEnumerable<Procedure> azzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<Procedure>(azzzzzzzzzzzzzzzzzzs_, azzzzzzzzzzzzzzzzzzt_);
+        object azzzzzzzzzzzzzzzzzzv_(Procedure @this)
         {
-            DataType gzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Performed;
-            object gzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzzzzzzzn_);
-            CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzzzzzzzzzzzzzzzo_);
-            CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Start(gzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            DataType bzzzzzzzzzzzzzzzzzzj_ = @this?.Performed;
+            object bzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzj_);
+            CqlInterval<CqlDateTime> bzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, bzzzzzzzzzzzzzzzzzzk_);
+            CqlDateTime bzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(bzzzzzzzzzzzzzzzzzzl_);
 
-            return gzzzzzzzzzzzzzzzzzzzzzzzzq_;
+            return bzzzzzzzzzzzzzzzzzzm_;
         };
-        IEnumerable<Procedure> gzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.SortBy<Procedure>(fzzzzzzzzzzzzzzzzzzzzzzzzy_, fzzzzzzzzzzzzzzzzzzzzzzzzz_, System.ComponentModel.ListSortDirection.Ascending);
-        Procedure gzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.First<Procedure>(gzzzzzzzzzzzzzzzzzzzzzzzza_);
+        IEnumerable<Procedure> azzzzzzzzzzzzzzzzzzw_ = context.Operators.SortBy<Procedure>(azzzzzzzzzzzzzzzzzzu_, azzzzzzzzzzzzzzzzzzv_, System.ComponentModel.ListSortDirection.Ascending);
+        Procedure azzzzzzzzzzzzzzzzzzx_ = context.Operators.First<Procedure>(azzzzzzzzzzzzzzzzzzw_);
 
-        return gzzzzzzzzzzzzzzzzzzzzzzzzb_;
+        return azzzzzzzzzzzzzzzzzzx_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a")]
+    [CqlExpressionDefinition("Most Recent Prostate Cancer Staging Tumor Size T1a to T2a")]
     public Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(CqlContext context)
     {
-        CqlCode gzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Tumor_staging__tumor_staging_(context);
-        IEnumerable<CqlCode> gzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.ToList<CqlCode>(gzzzzzzzzzzzzzzzzzzzzzzzzr_);
-        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, gzzzzzzzzzzzzzzzzzzzzzzzzs_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzzzzzzzu_(Observation ProstateCancerStaging)
+        CqlCode bzzzzzzzzzzzzzzzzzzn_ = this.Tumor_staging__tumor_staging_(context);
+        IEnumerable<CqlCode> bzzzzzzzzzzzzzzzzzzo_ = context.Operators.ToList<CqlCode>(bzzzzzzzzzzzzzzzzzzn_);
+        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, bzzzzzzzzzzzzzzzzzzo_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzq_(Observation ProstateCancerStaging)
         {
-            Procedure hzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
-            Procedure[] hzzzzzzzzzzzzzzzzzzzzzzzze_ = [
-                hzzzzzzzzzzzzzzzzzzzzzzzzd_,
+            Procedure bzzzzzzzzzzzzzzzzzzz_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+            Procedure[] czzzzzzzzzzzzzzzzzza_ = [
+                bzzzzzzzzzzzzzzzzzzz_,
             ];
-            bool? hzzzzzzzzzzzzzzzzzzzzzzzzf_(Procedure FirstProstateCancerTreatment)
+            bool? czzzzzzzzzzzzzzzzzzb_(Procedure FirstProstateCancerTreatment)
             {
-                DataType hzzzzzzzzzzzzzzzzzzzzzzzzj_ = ProstateCancerStaging?.Effective;
-                object hzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, hzzzzzzzzzzzzzzzzzzzzzzzzk_);
-                CqlDateTime hzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(hzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                DataType hzzzzzzzzzzzzzzzzzzzzzzzzn_ = FirstProstateCancerTreatment?.Performed;
-                object hzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.toInterval(context, hzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                CqlDateTime hzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Start(hzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                bool? hzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Before(hzzzzzzzzzzzzzzzzzzzzzzzzm_, hzzzzzzzzzzzzzzzzzzzzzzzzq_, default);
-                Code<ObservationStatus> hzzzzzzzzzzzzzzzzzzzzzzzzs_ = ProstateCancerStaging?.StatusElement;
-                ObservationStatus? hzzzzzzzzzzzzzzzzzzzzzzzzt_ = hzzzzzzzzzzzzzzzzzzzzzzzzs_?.Value;
-                Code<ObservationStatus> hzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<Code<ObservationStatus>>(hzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                string hzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(hzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                string[] hzzzzzzzzzzzzzzzzzzzzzzzzw_ = [
+                DataType czzzzzzzzzzzzzzzzzzf_ = ProstateCancerStaging?.Effective;
+                object czzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzf_);
+                CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.toInterval(context, czzzzzzzzzzzzzzzzzzg_);
+                CqlDateTime czzzzzzzzzzzzzzzzzzi_ = context.Operators.Start(czzzzzzzzzzzzzzzzzzh_);
+                DataType czzzzzzzzzzzzzzzzzzj_ = FirstProstateCancerTreatment?.Performed;
+                object czzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzj_);
+                CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, czzzzzzzzzzzzzzzzzzk_);
+                CqlDateTime czzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(czzzzzzzzzzzzzzzzzzl_);
+                bool? czzzzzzzzzzzzzzzzzzn_ = context.Operators.Before(czzzzzzzzzzzzzzzzzzi_, czzzzzzzzzzzzzzzzzzm_, default);
+                Code<ObservationStatus> czzzzzzzzzzzzzzzzzzo_ = ProstateCancerStaging?.StatusElement;
+                ObservationStatus? czzzzzzzzzzzzzzzzzzp_ = czzzzzzzzzzzzzzzzzzo_?.Value;
+                Code<ObservationStatus> czzzzzzzzzzzzzzzzzzq_ = context.Operators.Convert<Code<ObservationStatus>>(czzzzzzzzzzzzzzzzzzp_);
+                string czzzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<string>(czzzzzzzzzzzzzzzzzzq_);
+                string[] czzzzzzzzzzzzzzzzzzs_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? hzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.In<string>(hzzzzzzzzzzzzzzzzzzzzzzzzv_, hzzzzzzzzzzzzzzzzzzzzzzzzw_ as IEnumerable<string>);
-                bool? hzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzzzzzzzr_, hzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                bool? czzzzzzzzzzzzzzzzzzt_ = context.Operators.In<string>(czzzzzzzzzzzzzzzzzzr_, czzzzzzzzzzzzzzzzzzs_ as IEnumerable<string>);
+                bool? czzzzzzzzzzzzzzzzzzu_ = context.Operators.And(czzzzzzzzzzzzzzzzzzn_, czzzzzzzzzzzzzzzzzzt_);
 
-                return hzzzzzzzzzzzzzzzzzzzzzzzzy_;
+                return czzzzzzzzzzzzzzzzzzu_;
             };
-            IEnumerable<Procedure> hzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)hzzzzzzzzzzzzzzzzzzzzzzzze_, hzzzzzzzzzzzzzzzzzzzzzzzzf_);
-            Observation hzzzzzzzzzzzzzzzzzzzzzzzzh_(Procedure FirstProstateCancerTreatment) =>
+            IEnumerable<Procedure> czzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)czzzzzzzzzzzzzzzzzza_, czzzzzzzzzzzzzzzzzzb_);
+            Observation czzzzzzzzzzzzzzzzzzd_(Procedure FirstProstateCancerTreatment) =>
                 ProstateCancerStaging;
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Procedure, Observation>(hzzzzzzzzzzzzzzzzzzzzzzzzg_, hzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            IEnumerable<Observation> czzzzzzzzzzzzzzzzzze_ = context.Operators.Select<Procedure, Observation>(czzzzzzzzzzzzzzzzzzc_, czzzzzzzzzzzzzzzzzzd_);
 
-            return hzzzzzzzzzzzzzzzzzzzzzzzzi_;
+            return czzzzzzzzzzzzzzzzzze_;
         };
-        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.SelectMany<Observation, Observation>(gzzzzzzzzzzzzzzzzzzzzzzzzt_, gzzzzzzzzzzzzzzzzzzzzzzzzu_);
-        object gzzzzzzzzzzzzzzzzzzzzzzzzw_(Observation @this)
+        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzr_ = context.Operators.SelectMany<Observation, Observation>(bzzzzzzzzzzzzzzzzzzp_, bzzzzzzzzzzzzzzzzzzq_);
+        object bzzzzzzzzzzzzzzzzzzs_(Observation @this)
         {
-            DataType hzzzzzzzzzzzzzzzzzzzzzzzzz_ = @this?.Effective;
-            object izzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzzzzzzzz_);
-            CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.toInterval(context, izzzzzzzzzzzzzzzzzzzzzzzza_);
-            CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Start(izzzzzzzzzzzzzzzzzzzzzzzzb_);
+            DataType czzzzzzzzzzzzzzzzzzv_ = @this?.Effective;
+            object czzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzv_);
+            CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.toInterval(context, czzzzzzzzzzzzzzzzzzw_);
+            CqlDateTime czzzzzzzzzzzzzzzzzzy_ = context.Operators.Start(czzzzzzzzzzzzzzzzzzx_);
 
-            return izzzzzzzzzzzzzzzzzzzzzzzzc_;
+            return czzzzzzzzzzzzzzzzzzy_;
         };
-        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.SortBy<Observation>(gzzzzzzzzzzzzzzzzzzzzzzzzv_, gzzzzzzzzzzzzzzzzzzzzzzzzw_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation gzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Last<Observation>(gzzzzzzzzzzzzzzzzzzzzzzzzx_);
-        Observation[] gzzzzzzzzzzzzzzzzzzzzzzzzz_ = [
-            gzzzzzzzzzzzzzzzzzzzzzzzzy_,
+        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzt_ = context.Operators.SortBy<Observation>(bzzzzzzzzzzzzzzzzzzr_, bzzzzzzzzzzzzzzzzzzs_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation bzzzzzzzzzzzzzzzzzzu_ = context.Operators.Last<Observation>(bzzzzzzzzzzzzzzzzzzt_);
+        Observation[] bzzzzzzzzzzzzzzzzzzv_ = [
+            bzzzzzzzzzzzzzzzzzzu_,
         ];
-        bool? hzzzzzzzzzzzzzzzzzzzzzzzza_(Observation LastProstateCancerStaging)
+        bool? bzzzzzzzzzzzzzzzzzzw_(Observation LastProstateCancerStaging)
         {
-            DataType izzzzzzzzzzzzzzzzzzzzzzzzd_ = LastProstateCancerStaging?.Value;
-            object izzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlCode izzzzzzzzzzzzzzzzzzzzzzzzf_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(context);
-            CqlConcept izzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.ConvertCodeToConcept(izzzzzzzzzzzzzzzzzzzzzzzzf_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Equivalent(izzzzzzzzzzzzzzzzzzzzzzzze_ as CqlConcept, izzzzzzzzzzzzzzzzzzzzzzzzg_);
-            object izzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlCode izzzzzzzzzzzzzzzzzzzzzzzzk_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(context);
-            CqlConcept izzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.ConvertCodeToConcept(izzzzzzzzzzzzzzzzzzzzzzzzk_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Equivalent(izzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlConcept, izzzzzzzzzzzzzzzzzzzzzzzzl_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Or(izzzzzzzzzzzzzzzzzzzzzzzzh_, izzzzzzzzzzzzzzzzzzzzzzzzm_);
-            object izzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlCode izzzzzzzzzzzzzzzzzzzzzzzzq_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(context);
-            CqlConcept izzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.ConvertCodeToConcept(izzzzzzzzzzzzzzzzzzzzzzzzq_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Equivalent(izzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlConcept, izzzzzzzzzzzzzzzzzzzzzzzzr_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Or(izzzzzzzzzzzzzzzzzzzzzzzzn_, izzzzzzzzzzzzzzzzzzzzzzzzs_);
-            object izzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlCode izzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(context);
-            CqlConcept izzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConvertCodeToConcept(izzzzzzzzzzzzzzzzzzzzzzzzw_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Equivalent(izzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlConcept, izzzzzzzzzzzzzzzzzzzzzzzzx_);
-            bool? izzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Or(izzzzzzzzzzzzzzzzzzzzzzzzt_, izzzzzzzzzzzzzzzzzzzzzzzzy_);
+            DataType czzzzzzzzzzzzzzzzzzz_ = LastProstateCancerStaging?.Value;
+            object dzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzz_);
+            CqlCode dzzzzzzzzzzzzzzzzzzb_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(context);
+            CqlConcept dzzzzzzzzzzzzzzzzzzc_ = context.Operators.ConvertCodeToConcept(dzzzzzzzzzzzzzzzzzzb_);
+            bool? dzzzzzzzzzzzzzzzzzzd_ = context.Operators.Equivalent(dzzzzzzzzzzzzzzzzzza_ as CqlConcept, dzzzzzzzzzzzzzzzzzzc_);
+            object dzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzz_);
+            CqlCode dzzzzzzzzzzzzzzzzzzg_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(context);
+            CqlConcept dzzzzzzzzzzzzzzzzzzh_ = context.Operators.ConvertCodeToConcept(dzzzzzzzzzzzzzzzzzzg_);
+            bool? dzzzzzzzzzzzzzzzzzzi_ = context.Operators.Equivalent(dzzzzzzzzzzzzzzzzzzf_ as CqlConcept, dzzzzzzzzzzzzzzzzzzh_);
+            bool? dzzzzzzzzzzzzzzzzzzj_ = context.Operators.Or(dzzzzzzzzzzzzzzzzzzd_, dzzzzzzzzzzzzzzzzzzi_);
+            object dzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzz_);
+            CqlCode dzzzzzzzzzzzzzzzzzzm_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(context);
+            CqlConcept dzzzzzzzzzzzzzzzzzzn_ = context.Operators.ConvertCodeToConcept(dzzzzzzzzzzzzzzzzzzm_);
+            bool? dzzzzzzzzzzzzzzzzzzo_ = context.Operators.Equivalent(dzzzzzzzzzzzzzzzzzzl_ as CqlConcept, dzzzzzzzzzzzzzzzzzzn_);
+            bool? dzzzzzzzzzzzzzzzzzzp_ = context.Operators.Or(dzzzzzzzzzzzzzzzzzzj_, dzzzzzzzzzzzzzzzzzzo_);
+            object dzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzz_);
+            CqlCode dzzzzzzzzzzzzzzzzzzs_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(context);
+            CqlConcept dzzzzzzzzzzzzzzzzzzt_ = context.Operators.ConvertCodeToConcept(dzzzzzzzzzzzzzzzzzzs_);
+            bool? dzzzzzzzzzzzzzzzzzzu_ = context.Operators.Equivalent(dzzzzzzzzzzzzzzzzzzr_ as CqlConcept, dzzzzzzzzzzzzzzzzzzt_);
+            bool? dzzzzzzzzzzzzzzzzzzv_ = context.Operators.Or(dzzzzzzzzzzzzzzzzzzp_, dzzzzzzzzzzzzzzzzzzu_);
 
-            return izzzzzzzzzzzzzzzzzzzzzzzzz_;
+            return dzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Observation>((IEnumerable<Observation>)gzzzzzzzzzzzzzzzzzzzzzzzzz_, hzzzzzzzzzzzzzzzzzzzzzzzza_);
-        Observation hzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SingletonFrom<Observation>(hzzzzzzzzzzzzzzzzzzzzzzzzb_);
+        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Observation>((IEnumerable<Observation>)bzzzzzzzzzzzzzzzzzzv_, bzzzzzzzzzzzzzzzzzzw_);
+        Observation bzzzzzzzzzzzzzzzzzzy_ = context.Operators.SingletonFrom<Observation>(bzzzzzzzzzzzzzzzzzzx_);
 
-        return hzzzzzzzzzzzzzzzzzzzzzzzzc_;
+        return bzzzzzzzzzzzzzzzzzzy_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Most Recent PSA Test Result is Low")]
+    [CqlExpressionDefinition("Most Recent PSA Test Result is Low")]
     public bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context)
     {
-        CqlValueSet jzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Prostate_Specific_Antigen_Test(context);
-        IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, jzzzzzzzzzzzzzzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzc_(Observation PSATest)
+        CqlValueSet dzzzzzzzzzzzzzzzzzzw_ = this.Prostate_Specific_Antigen_Test(context);
+        IEnumerable<Observation> dzzzzzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, dzzzzzzzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> dzzzzzzzzzzzzzzzzzzy_(Observation PSATest)
         {
-            Observation jzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
-            Observation[] jzzzzzzzzzzzzzzzzzzzzzzzzn_ = [
-                jzzzzzzzzzzzzzzzzzzzzzzzzm_,
+            Observation ezzzzzzzzzzzzzzzzzzi_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
+            Observation[] ezzzzzzzzzzzzzzzzzzj_ = [
+                ezzzzzzzzzzzzzzzzzzi_,
             ];
-            bool? jzzzzzzzzzzzzzzzzzzzzzzzzo_(Observation MostRecentProstateCancerStaging)
+            bool? ezzzzzzzzzzzzzzzzzzk_(Observation MostRecentProstateCancerStaging)
             {
-                CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzzzzzzzzzzs_()
+                CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzzzzo_()
                 {
-                    bool kzzzzzzzzzzzzzzzzzzzzzzzze_()
+                    bool fzzzzzzzzzzzzzzzzzza_()
                     {
-                        DataType kzzzzzzzzzzzzzzzzzzzzzzzzf_ = PSATest?.Effective;
-                        object kzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                        CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.toInterval(context, kzzzzzzzzzzzzzzzzzzzzzzzzg_);
-                        CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                        DataType fzzzzzzzzzzzzzzzzzzb_ = PSATest?.Effective;
+                        object fzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzb_);
+                        CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.toInterval(context, fzzzzzzzzzzzzzzzzzzc_);
+                        CqlDateTime fzzzzzzzzzzzzzzzzzze_ = context.Operators.Start(fzzzzzzzzzzzzzzzzzzd_);
 
-                        return kzzzzzzzzzzzzzzzzzzzzzzzzi_ is null;
+                        return fzzzzzzzzzzzzzzzzzze_ is null;
                     };
-                    if (kzzzzzzzzzzzzzzzzzzzzzzzze_())
+                    if (fzzzzzzzzzzzzzzzzzza_())
                     {
                         return default;
                     }
                     else
                     {
-                        DataType kzzzzzzzzzzzzzzzzzzzzzzzzj_ = PSATest?.Effective;
-                        object kzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                        CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, kzzzzzzzzzzzzzzzzzzzzzzzzk_);
-                        CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzzzzzzzl_);
-                        object kzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                        CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.toInterval(context, kzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                        CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                        CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Interval(kzzzzzzzzzzzzzzzzzzzzzzzzm_, kzzzzzzzzzzzzzzzzzzzzzzzzq_, true, true);
+                        DataType fzzzzzzzzzzzzzzzzzzf_ = PSATest?.Effective;
+                        object fzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzf_);
+                        CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.toInterval(context, fzzzzzzzzzzzzzzzzzzg_);
+                        CqlDateTime fzzzzzzzzzzzzzzzzzzi_ = context.Operators.Start(fzzzzzzzzzzzzzzzzzzh_);
+                        object fzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzf_);
+                        CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, fzzzzzzzzzzzzzzzzzzk_);
+                        CqlDateTime fzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(fzzzzzzzzzzzzzzzzzzl_);
+                        CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzn_ = context.Operators.Interval(fzzzzzzzzzzzzzzzzzzi_, fzzzzzzzzzzzzzzzzzzm_, true, true);
 
-                        return kzzzzzzzzzzzzzzzzzzzzzzzzr_;
+                        return fzzzzzzzzzzzzzzzzzzn_;
                     }
                 };
-                DataType jzzzzzzzzzzzzzzzzzzzzzzzzt_ = MostRecentProstateCancerStaging?.Effective;
-                object jzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, jzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                bool? jzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Before(jzzzzzzzzzzzzzzzzzzzzzzzzs_(), jzzzzzzzzzzzzzzzzzzzzzzzzv_, default);
-                Code<ObservationStatus> jzzzzzzzzzzzzzzzzzzzzzzzzx_ = PSATest?.StatusElement;
-                ObservationStatus? jzzzzzzzzzzzzzzzzzzzzzzzzy_ = jzzzzzzzzzzzzzzzzzzzzzzzzx_?.Value;
-                Code<ObservationStatus> jzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<Code<ObservationStatus>>(jzzzzzzzzzzzzzzzzzzzzzzzzy_);
-                string kzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Convert<string>(jzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                string[] kzzzzzzzzzzzzzzzzzzzzzzzzb_ = [
+                DataType ezzzzzzzzzzzzzzzzzzp_ = MostRecentProstateCancerStaging?.Effective;
+                object ezzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzzzzzzzzzzp_);
+                CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.toInterval(context, ezzzzzzzzzzzzzzzzzzq_);
+                bool? ezzzzzzzzzzzzzzzzzzs_ = context.Operators.Before(ezzzzzzzzzzzzzzzzzzo_(), ezzzzzzzzzzzzzzzzzzr_, default);
+                Code<ObservationStatus> ezzzzzzzzzzzzzzzzzzt_ = PSATest?.StatusElement;
+                ObservationStatus? ezzzzzzzzzzzzzzzzzzu_ = ezzzzzzzzzzzzzzzzzzt_?.Value;
+                Code<ObservationStatus> ezzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<Code<ObservationStatus>>(ezzzzzzzzzzzzzzzzzzu_);
+                string ezzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<string>(ezzzzzzzzzzzzzzzzzzv_);
+                string[] ezzzzzzzzzzzzzzzzzzx_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? kzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.In<string>(kzzzzzzzzzzzzzzzzzzzzzzzza_, kzzzzzzzzzzzzzzzzzzzzzzzzb_ as IEnumerable<string>);
-                bool? kzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.And(jzzzzzzzzzzzzzzzzzzzzzzzzw_, kzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                bool? ezzzzzzzzzzzzzzzzzzy_ = context.Operators.In<string>(ezzzzzzzzzzzzzzzzzzw_, ezzzzzzzzzzzzzzzzzzx_ as IEnumerable<string>);
+                bool? ezzzzzzzzzzzzzzzzzzz_ = context.Operators.And(ezzzzzzzzzzzzzzzzzzs_, ezzzzzzzzzzzzzzzzzzy_);
 
-                return kzzzzzzzzzzzzzzzzzzzzzzzzd_;
+                return ezzzzzzzzzzzzzzzzzzz_;
             };
-            IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Where<Observation>((IEnumerable<Observation>)jzzzzzzzzzzzzzzzzzzzzzzzzn_, jzzzzzzzzzzzzzzzzzzzzzzzzo_);
-            Observation jzzzzzzzzzzzzzzzzzzzzzzzzq_(Observation MostRecentProstateCancerStaging) =>
+            IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Observation>((IEnumerable<Observation>)ezzzzzzzzzzzzzzzzzzj_, ezzzzzzzzzzzzzzzzzzk_);
+            Observation ezzzzzzzzzzzzzzzzzzm_(Observation MostRecentProstateCancerStaging) =>
                 PSATest;
-            IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Select<Observation, Observation>(jzzzzzzzzzzzzzzzzzzzzzzzzp_, jzzzzzzzzzzzzzzzzzzzzzzzzq_);
+            IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzn_ = context.Operators.Select<Observation, Observation>(ezzzzzzzzzzzzzzzzzzl_, ezzzzzzzzzzzzzzzzzzm_);
 
-            return jzzzzzzzzzzzzzzzzzzzzzzzzr_;
+            return ezzzzzzzzzzzzzzzzzzn_;
         };
-        IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.SelectMany<Observation, Observation>(jzzzzzzzzzzzzzzzzzzzzzzzzb_, jzzzzzzzzzzzzzzzzzzzzzzzzc_);
-        object jzzzzzzzzzzzzzzzzzzzzzzzze_(Observation @this)
+        IEnumerable<Observation> dzzzzzzzzzzzzzzzzzzz_ = context.Operators.SelectMany<Observation, Observation>(dzzzzzzzzzzzzzzzzzzx_, dzzzzzzzzzzzzzzzzzzy_);
+        object ezzzzzzzzzzzzzzzzzza_(Observation @this)
         {
-            DataType kzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Effective;
-            object kzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzs_);
-            CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.toInterval(context, kzzzzzzzzzzzzzzzzzzzzzzzzt_);
-            CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzzzzzzzu_);
+            DataType fzzzzzzzzzzzzzzzzzzo_ = @this?.Effective;
+            object fzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzo_);
+            CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.toInterval(context, fzzzzzzzzzzzzzzzzzzp_);
+            CqlDateTime fzzzzzzzzzzzzzzzzzzr_ = context.Operators.Start(fzzzzzzzzzzzzzzzzzzq_);
 
-            return kzzzzzzzzzzzzzzzzzzzzzzzzv_;
+            return fzzzzzzzzzzzzzzzzzzr_;
         };
-        IEnumerable<Observation> jzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SortBy<Observation>(jzzzzzzzzzzzzzzzzzzzzzzzzd_, jzzzzzzzzzzzzzzzzzzzzzzzze_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation jzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Last<Observation>(jzzzzzzzzzzzzzzzzzzzzzzzzf_);
-        Observation[] jzzzzzzzzzzzzzzzzzzzzzzzzh_ = [
-            jzzzzzzzzzzzzzzzzzzzzzzzzg_,
+        IEnumerable<Observation> ezzzzzzzzzzzzzzzzzzb_ = context.Operators.SortBy<Observation>(dzzzzzzzzzzzzzzzzzzz_, ezzzzzzzzzzzzzzzzzza_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation ezzzzzzzzzzzzzzzzzzc_ = context.Operators.Last<Observation>(ezzzzzzzzzzzzzzzzzzb_);
+        Observation[] ezzzzzzzzzzzzzzzzzzd_ = [
+            ezzzzzzzzzzzzzzzzzzc_,
         ];
-        bool? jzzzzzzzzzzzzzzzzzzzzzzzzi_(Observation LastPSATest)
+        bool? ezzzzzzzzzzzzzzzzzze_(Observation LastPSATest)
         {
-            DataType kzzzzzzzzzzzzzzzzzzzzzzzzw_ = LastPSATest?.Value;
-            object kzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzzzzzzzw_);
-            CqlQuantity kzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Quantity(10m, "ng/mL");
-            bool? kzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Less(kzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlQuantity, kzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            DataType fzzzzzzzzzzzzzzzzzzs_ = LastPSATest?.Value;
+            object fzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzs_);
+            CqlQuantity fzzzzzzzzzzzzzzzzzzu_ = context.Operators.Quantity(10m, "ng/mL");
+            bool? fzzzzzzzzzzzzzzzzzzv_ = context.Operators.Less(fzzzzzzzzzzzzzzzzzzt_ as CqlQuantity, fzzzzzzzzzzzzzzzzzzu_);
 
-            return kzzzzzzzzzzzzzzzzzzzzzzzzz_;
+            return fzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<bool?> jzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)jzzzzzzzzzzzzzzzzzzzzzzzzh_, jzzzzzzzzzzzzzzzzzzzzzzzzi_);
-        IEnumerable<bool?> jzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Distinct<bool?>(jzzzzzzzzzzzzzzzzzzzzzzzzj_);
-        bool? jzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.SingletonFrom<bool?>(jzzzzzzzzzzzzzzzzzzzzzzzzk_);
+        IEnumerable<bool?> ezzzzzzzzzzzzzzzzzzf_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)ezzzzzzzzzzzzzzzzzzd_, ezzzzzzzzzzzzzzzzzze_);
+        IEnumerable<bool?> ezzzzzzzzzzzzzzzzzzg_ = context.Operators.Distinct<bool?>(ezzzzzzzzzzzzzzzzzzf_);
+        bool? ezzzzzzzzzzzzzzzzzzh_ = context.Operators.SingletonFrom<bool?>(ezzzzzzzzzzzzzzzzzzg_);
 
-        return jzzzzzzzzzzzzzzzzzzzzzzzzl_;
+        return ezzzzzzzzzzzzzzzzzzh_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Most Recent Gleason Score is Low")]
+    [CqlExpressionDefinition("Most Recent Gleason Score is Low")]
     public bool? Most_Recent_Gleason_Score_is_Low(CqlContext context)
     {
-        CqlCode lzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Gleason_score_in_Specimen_Qualitative(context);
-        IEnumerable<CqlCode> lzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ToList<CqlCode>(lzzzzzzzzzzzzzzzzzzzzzzzza_);
-        IEnumerable<Observation> lzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, lzzzzzzzzzzzzzzzzzzzzzzzzb_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> lzzzzzzzzzzzzzzzzzzzzzzzzd_(Observation GleasonScore)
+        CqlCode fzzzzzzzzzzzzzzzzzzw_ = this.Gleason_score_in_Specimen_Qualitative(context);
+        IEnumerable<CqlCode> fzzzzzzzzzzzzzzzzzzx_ = context.Operators.ToList<CqlCode>(fzzzzzzzzzzzzzzzzzzw_);
+        IEnumerable<Observation> fzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, fzzzzzzzzzzzzzzzzzzx_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> fzzzzzzzzzzzzzzzzzzz_(Observation GleasonScore)
         {
-            Procedure lzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
-            Procedure[] lzzzzzzzzzzzzzzzzzzzzzzzzo_ = [
-                lzzzzzzzzzzzzzzzzzzzzzzzzn_,
+            Procedure gzzzzzzzzzzzzzzzzzzj_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+            Procedure[] gzzzzzzzzzzzzzzzzzzk_ = [
+                gzzzzzzzzzzzzzzzzzzj_,
             ];
-            bool? lzzzzzzzzzzzzzzzzzzzzzzzzp_(Procedure FirstProstateCancerTreatment)
+            bool? gzzzzzzzzzzzzzzzzzzl_(Procedure FirstProstateCancerTreatment)
             {
-                DataType lzzzzzzzzzzzzzzzzzzzzzzzzt_ = GleasonScore?.Effective;
-                object lzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, lzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                CqlDateTime lzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Start(lzzzzzzzzzzzzzzzzzzzzzzzzv_);
-                DataType lzzzzzzzzzzzzzzzzzzzzzzzzx_ = FirstProstateCancerTreatment?.Performed;
-                object lzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzx_);
-                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.toInterval(context, lzzzzzzzzzzzzzzzzzzzzzzzzy_);
-                CqlDateTime mzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Start(lzzzzzzzzzzzzzzzzzzzzzzzzz_);
-                bool? mzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Before(lzzzzzzzzzzzzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzzzzzzzzzzzza_, default);
-                Code<ObservationStatus> mzzzzzzzzzzzzzzzzzzzzzzzzc_ = GleasonScore?.StatusElement;
-                ObservationStatus? mzzzzzzzzzzzzzzzzzzzzzzzzd_ = mzzzzzzzzzzzzzzzzzzzzzzzzc_?.Value;
-                Code<ObservationStatus> mzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Convert<Code<ObservationStatus>>(mzzzzzzzzzzzzzzzzzzzzzzzzd_);
-                string mzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Convert<string>(mzzzzzzzzzzzzzzzzzzzzzzzze_);
-                string[] mzzzzzzzzzzzzzzzzzzzzzzzzg_ = [
+                DataType gzzzzzzzzzzzzzzzzzzp_ = GleasonScore?.Effective;
+                object gzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzp_);
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzzzzzzzzzq_);
+                CqlDateTime gzzzzzzzzzzzzzzzzzzs_ = context.Operators.Start(gzzzzzzzzzzzzzzzzzzr_);
+                DataType gzzzzzzzzzzzzzzzzzzt_ = FirstProstateCancerTreatment?.Performed;
+                object gzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gzzzzzzzzzzzzzzzzzzt_);
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, gzzzzzzzzzzzzzzzzzzu_);
+                CqlDateTime gzzzzzzzzzzzzzzzzzzw_ = context.Operators.Start(gzzzzzzzzzzzzzzzzzzv_);
+                bool? gzzzzzzzzzzzzzzzzzzx_ = context.Operators.Before(gzzzzzzzzzzzzzzzzzzs_, gzzzzzzzzzzzzzzzzzzw_, default);
+                Code<ObservationStatus> gzzzzzzzzzzzzzzzzzzy_ = GleasonScore?.StatusElement;
+                ObservationStatus? gzzzzzzzzzzzzzzzzzzz_ = gzzzzzzzzzzzzzzzzzzy_?.Value;
+                Code<ObservationStatus> hzzzzzzzzzzzzzzzzzza_ = context.Operators.Convert<Code<ObservationStatus>>(gzzzzzzzzzzzzzzzzzzz_);
+                string hzzzzzzzzzzzzzzzzzzb_ = context.Operators.Convert<string>(hzzzzzzzzzzzzzzzzzza_);
+                string[] hzzzzzzzzzzzzzzzzzzc_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? mzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.In<string>(mzzzzzzzzzzzzzzzzzzzzzzzzf_, mzzzzzzzzzzzzzzzzzzzzzzzzg_ as IEnumerable<string>);
-                bool? mzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzb_, mzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                bool? hzzzzzzzzzzzzzzzzzzd_ = context.Operators.In<string>(hzzzzzzzzzzzzzzzzzzb_, hzzzzzzzzzzzzzzzzzzc_ as IEnumerable<string>);
+                bool? hzzzzzzzzzzzzzzzzzze_ = context.Operators.And(gzzzzzzzzzzzzzzzzzzx_, hzzzzzzzzzzzzzzzzzzd_);
 
-                return mzzzzzzzzzzzzzzzzzzzzzzzzi_;
+                return hzzzzzzzzzzzzzzzzzze_;
             };
-            IEnumerable<Procedure> lzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)lzzzzzzzzzzzzzzzzzzzzzzzzo_, lzzzzzzzzzzzzzzzzzzzzzzzzp_);
-            Observation lzzzzzzzzzzzzzzzzzzzzzzzzr_(Procedure FirstProstateCancerTreatment) =>
+            IEnumerable<Procedure> gzzzzzzzzzzzzzzzzzzm_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)gzzzzzzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzzzzzzl_);
+            Observation gzzzzzzzzzzzzzzzzzzn_(Procedure FirstProstateCancerTreatment) =>
                 GleasonScore;
-            IEnumerable<Observation> lzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Select<Procedure, Observation>(lzzzzzzzzzzzzzzzzzzzzzzzzq_, lzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzo_ = context.Operators.Select<Procedure, Observation>(gzzzzzzzzzzzzzzzzzzm_, gzzzzzzzzzzzzzzzzzzn_);
 
-            return lzzzzzzzzzzzzzzzzzzzzzzzzs_;
+            return gzzzzzzzzzzzzzzzzzzo_;
         };
-        IEnumerable<Observation> lzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SelectMany<Observation, Observation>(lzzzzzzzzzzzzzzzzzzzzzzzzc_, lzzzzzzzzzzzzzzzzzzzzzzzzd_);
-        object lzzzzzzzzzzzzzzzzzzzzzzzzf_(Observation @this)
+        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzza_ = context.Operators.SelectMany<Observation, Observation>(fzzzzzzzzzzzzzzzzzzy_, fzzzzzzzzzzzzzzzzzzz_);
+        object gzzzzzzzzzzzzzzzzzzb_(Observation @this)
         {
-            DataType mzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Effective;
-            object mzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzj_);
-            CqlInterval<CqlDateTime> mzzzzzzzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, mzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            CqlDateTime mzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(mzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            DataType hzzzzzzzzzzzzzzzzzzf_ = @this?.Effective;
+            object hzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzf_);
+            CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.toInterval(context, hzzzzzzzzzzzzzzzzzzg_);
+            CqlDateTime hzzzzzzzzzzzzzzzzzzi_ = context.Operators.Start(hzzzzzzzzzzzzzzzzzzh_);
 
-            return mzzzzzzzzzzzzzzzzzzzzzzzzm_;
+            return hzzzzzzzzzzzzzzzzzzi_;
         };
-        IEnumerable<Observation> lzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SortBy<Observation>(lzzzzzzzzzzzzzzzzzzzzzzzze_, lzzzzzzzzzzzzzzzzzzzzzzzzf_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation lzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Last<Observation>(lzzzzzzzzzzzzzzzzzzzzzzzzg_);
-        Observation[] lzzzzzzzzzzzzzzzzzzzzzzzzi_ = [
-            lzzzzzzzzzzzzzzzzzzzzzzzzh_,
+        IEnumerable<Observation> gzzzzzzzzzzzzzzzzzzc_ = context.Operators.SortBy<Observation>(gzzzzzzzzzzzzzzzzzza_, gzzzzzzzzzzzzzzzzzzb_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation gzzzzzzzzzzzzzzzzzzd_ = context.Operators.Last<Observation>(gzzzzzzzzzzzzzzzzzzc_);
+        Observation[] gzzzzzzzzzzzzzzzzzze_ = [
+            gzzzzzzzzzzzzzzzzzzd_,
         ];
-        bool? lzzzzzzzzzzzzzzzzzzzzzzzzj_(Observation LastGleasonScore)
+        bool? gzzzzzzzzzzzzzzzzzzf_(Observation LastGleasonScore)
         {
-            DataType mzzzzzzzzzzzzzzzzzzzzzzzzn_ = LastGleasonScore?.Value;
-            object mzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzzzzzzzzzzn_);
-            bool? mzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.LessOrEqual(mzzzzzzzzzzzzzzzzzzzzzzzzo_ as int?, 6);
+            DataType hzzzzzzzzzzzzzzzzzzj_ = LastGleasonScore?.Value;
+            object hzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzzzj_);
+            bool? hzzzzzzzzzzzzzzzzzzl_ = context.Operators.LessOrEqual(hzzzzzzzzzzzzzzzzzzk_ as int?, 6);
 
-            return mzzzzzzzzzzzzzzzzzzzzzzzzp_;
+            return hzzzzzzzzzzzzzzzzzzl_;
         };
-        IEnumerable<bool?> lzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)lzzzzzzzzzzzzzzzzzzzzzzzzi_, lzzzzzzzzzzzzzzzzzzzzzzzzj_);
-        IEnumerable<bool?> lzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Distinct<bool?>(lzzzzzzzzzzzzzzzzzzzzzzzzk_);
-        bool? lzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.SingletonFrom<bool?>(lzzzzzzzzzzzzzzzzzzzzzzzzl_);
+        IEnumerable<bool?> gzzzzzzzzzzzzzzzzzzg_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)gzzzzzzzzzzzzzzzzzze_, gzzzzzzzzzzzzzzzzzzf_);
+        IEnumerable<bool?> gzzzzzzzzzzzzzzzzzzh_ = context.Operators.Distinct<bool?>(gzzzzzzzzzzzzzzzzzzg_);
+        bool? gzzzzzzzzzzzzzzzzzzi_ = context.Operators.SingletonFrom<bool?>(gzzzzzzzzzzzzzzzzzzh_);
 
-        return lzzzzzzzzzzzzzzzzzzzzzzzzm_;
+        return gzzzzzzzzzzzzzzzzzzi_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context)
     {
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzq_ = this.Initial_Population(context);
-        Procedure mzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Not((bool?)(mzzzzzzzzzzzzzzzzzzzzzzzzr_ is null));
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzq_, mzzzzzzzzzzzzzzzzzzzzzzzzs_);
-        Observation mzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Not((bool?)(mzzzzzzzzzzzzzzzzzzzzzzzzu_ is null));
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzt_, mzzzzzzzzzzzzzzzzzzzzzzzzv_);
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Most_Recent_PSA_Test_Result_is_Low(context);
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzzzzzzzzzzzzx_);
-        bool? mzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Most_Recent_Gleason_Score_is_Low(context);
-        bool? nzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzy_, mzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        bool? hzzzzzzzzzzzzzzzzzzm_ = this.Initial_Population(context);
+        Procedure hzzzzzzzzzzzzzzzzzzn_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+        bool? hzzzzzzzzzzzzzzzzzzo_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzzzzzzzn_ is null));
+        bool? hzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzm_, hzzzzzzzzzzzzzzzzzzo_);
+        Observation hzzzzzzzzzzzzzzzzzzq_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
+        bool? hzzzzzzzzzzzzzzzzzzr_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzzzzzzzq_ is null));
+        bool? hzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzp_, hzzzzzzzzzzzzzzzzzzr_);
+        bool? hzzzzzzzzzzzzzzzzzzt_ = this.Most_Recent_PSA_Test_Result_is_Low(context);
+        bool? hzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzs_, hzzzzzzzzzzzzzzzzzzt_);
+        bool? hzzzzzzzzzzzzzzzzzzv_ = this.Most_Recent_Gleason_Score_is_Low(context);
+        bool? hzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzu_, hzzzzzzzzzzzzzzzzzzv_);
 
-        return nzzzzzzzzzzzzzzzzzzzzzzzza_;
+        return hzzzzzzzzzzzzzzzzzzw_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Bone Scan Study Performed")]
+    [CqlExpressionDefinition("Bone Scan Study Performed")]
     public IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context)
     {
-        CqlValueSet nzzzzzzzzzzzzzzzzzzzzzzzzb_ = this.Bone_Scan(context);
-        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, nzzzzzzzzzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzd_(Observation BoneScan)
+        CqlValueSet hzzzzzzzzzzzzzzzzzzx_ = this.Bone_Scan(context);
+        IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, hzzzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzz_(Observation BoneScan)
         {
-            IEnumerable<Condition> nzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Prostate_Cancer_Diagnosis(context);
-            bool? nzzzzzzzzzzzzzzzzzzzzzzzzi_(Condition ActiveProstateCancer)
+            IEnumerable<Condition> izzzzzzzzzzzzzzzzzzd_ = this.Prostate_Cancer_Diagnosis(context);
+            bool? izzzzzzzzzzzzzzzzzze_(Condition ActiveProstateCancer)
             {
-                DataType nzzzzzzzzzzzzzzzzzzzzzzzzm_ = BoneScan?.Effective;
-                object nzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.toInterval(context, nzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(nzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
-                CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Start(nzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                bool? nzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.After(nzzzzzzzzzzzzzzzzzzzzzzzzp_, nzzzzzzzzzzzzzzzzzzzzzzzzr_, default);
+                DataType izzzzzzzzzzzzzzzzzzi_ = BoneScan?.Effective;
+                object izzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzi_);
+                CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.toInterval(context, izzzzzzzzzzzzzzzzzzj_);
+                CqlDateTime izzzzzzzzzzzzzzzzzzl_ = context.Operators.Start(izzzzzzzzzzzzzzzzzzk_);
+                CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlDateTime izzzzzzzzzzzzzzzzzzn_ = context.Operators.Start(izzzzzzzzzzzzzzzzzzm_);
+                bool? izzzzzzzzzzzzzzzzzzo_ = context.Operators.After(izzzzzzzzzzzzzzzzzzl_, izzzzzzzzzzzzzzzzzzn_, default);
 
-                return nzzzzzzzzzzzzzzzzzzzzzzzzs_;
+                return izzzzzzzzzzzzzzzzzzo_;
             };
-            IEnumerable<Condition> nzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Condition>(nzzzzzzzzzzzzzzzzzzzzzzzzh_, nzzzzzzzzzzzzzzzzzzzzzzzzi_);
-            Observation nzzzzzzzzzzzzzzzzzzzzzzzzk_(Condition ActiveProstateCancer) =>
+            IEnumerable<Condition> izzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Condition>(izzzzzzzzzzzzzzzzzzd_, izzzzzzzzzzzzzzzzzze_);
+            Observation izzzzzzzzzzzzzzzzzzg_(Condition ActiveProstateCancer) =>
                 BoneScan;
-            IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Select<Condition, Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzj_, nzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            IEnumerable<Observation> izzzzzzzzzzzzzzzzzzh_ = context.Operators.Select<Condition, Observation>(izzzzzzzzzzzzzzzzzzf_, izzzzzzzzzzzzzzzzzzg_);
 
-            return nzzzzzzzzzzzzzzzzzzzzzzzzl_;
+            return izzzzzzzzzzzzzzzzzzh_;
         };
-        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SelectMany<Observation, Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzc_, nzzzzzzzzzzzzzzzzzzzzzzzzd_);
-        bool? nzzzzzzzzzzzzzzzzzzzzzzzzf_(Observation BoneScan)
+        IEnumerable<Observation> izzzzzzzzzzzzzzzzzza_ = context.Operators.SelectMany<Observation, Observation>(hzzzzzzzzzzzzzzzzzzy_, hzzzzzzzzzzzzzzzzzzz_);
+        bool? izzzzzzzzzzzzzzzzzzb_(Observation BoneScan)
         {
-            DataType nzzzzzzzzzzzzzzzzzzzzzzzzt_ = BoneScan?.Effective;
-            object nzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzzzzzzzzzzt_);
-            CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, nzzzzzzzzzzzzzzzzzzzzzzzzu_);
-            CqlDateTime nzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.End(nzzzzzzzzzzzzzzzzzzzzzzzzv_);
-            CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Measurement_Period(context);
-            bool? nzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.In<CqlDateTime>(nzzzzzzzzzzzzzzzzzzzzzzzzw_, nzzzzzzzzzzzzzzzzzzzzzzzzx_, "day");
+            DataType izzzzzzzzzzzzzzzzzzp_ = BoneScan?.Effective;
+            object izzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzp_);
+            CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.toInterval(context, izzzzzzzzzzzzzzzzzzq_);
+            CqlDateTime izzzzzzzzzzzzzzzzzzs_ = context.Operators.End(izzzzzzzzzzzzzzzzzzr_);
+            CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzt_ = this.Measurement_Period(context);
+            bool? izzzzzzzzzzzzzzzzzzu_ = context.Operators.In<CqlDateTime>(izzzzzzzzzzzzzzzzzzs_, izzzzzzzzzzzzzzzzzzt_, "day");
 
-            return nzzzzzzzzzzzzzzzzzzzzzzzzy_;
+            return izzzzzzzzzzzzzzzzzzu_;
         };
-        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzze_, nzzzzzzzzzzzzzzzzzzzzzzzzf_);
+        IEnumerable<Observation> izzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Observation>(izzzzzzzzzzzzzzzzzza_, izzzzzzzzzzzzzzzzzzb_);
 
-        return nzzzzzzzzzzzzzzzzzzzzzzzzg_;
+        return izzzzzzzzzzzzzzzzzzc_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
-        IEnumerable<Observation> nzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Bone_Scan_Study_Performed(context);
-        bool? ozzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Exists<Observation>(nzzzzzzzzzzzzzzzzzzzzzzzzz_);
-        bool? ozzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Not(ozzzzzzzzzzzzzzzzzzzzzzzza_);
+        IEnumerable<Observation> izzzzzzzzzzzzzzzzzzv_ = this.Bone_Scan_Study_Performed(context);
+        bool? izzzzzzzzzzzzzzzzzzw_ = context.Operators.Exists<Observation>(izzzzzzzzzzzzzzzzzzv_);
+        bool? izzzzzzzzzzzzzzzzzzx_ = context.Operators.Not(izzzzzzzzzzzzzzzzzzw_);
 
-        return ozzzzzzzzzzzzzzzzzzzzzzzzb_;
+        return izzzzzzzzzzzzzzzzzzx_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Has Diagnosis of Pain related to Prostate Cancer")]
+    [CqlExpressionDefinition("Has Diagnosis of Pain related to Prostate Cancer")]
     public bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context)
     {
-        CqlValueSet ozzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
-        IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzze_(Condition ProstateCancerPain)
+        CqlValueSet izzzzzzzzzzzzzzzzzzy_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
+        IEnumerable<Condition> izzzzzzzzzzzzzzzzzzz_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, izzzzzzzzzzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        IEnumerable<Condition> jzzzzzzzzzzzzzzzzzza_(Condition ProstateCancerPain)
         {
-            IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Prostate_Cancer_Diagnosis(context);
-            bool? ozzzzzzzzzzzzzzzzzzzzzzzzi_(Condition ActiveProstateCancer)
+            IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzd_ = this.Prostate_Cancer_Diagnosis(context);
+            bool? jzzzzzzzzzzzzzzzzzze_(Condition ActiveProstateCancer)
             {
-                CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancerPain);
-                CqlDateTime ozzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Start(ozzzzzzzzzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
-                CqlDateTime ozzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(ozzzzzzzzzzzzzzzzzzzzzzzzo_);
-                bool? ozzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.After(ozzzzzzzzzzzzzzzzzzzzzzzzn_, ozzzzzzzzzzzzzzzzzzzzzzzzp_, default);
-                bool? ozzzzzzzzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancerPain);
-                bool? ozzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancerPain);
-                bool? ozzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Or(ozzzzzzzzzzzzzzzzzzzzzzzzr_, ozzzzzzzzzzzzzzzzzzzzzzzzs_);
-                bool? ozzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(ozzzzzzzzzzzzzzzzzzzzzzzzq_, ozzzzzzzzzzzzzzzzzzzzzzzzt_);
+                CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancerPain);
+                CqlDateTime jzzzzzzzzzzzzzzzzzzj_ = context.Operators.Start(jzzzzzzzzzzzzzzzzzzi_);
+                CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlDateTime jzzzzzzzzzzzzzzzzzzl_ = context.Operators.Start(jzzzzzzzzzzzzzzzzzzk_);
+                bool? jzzzzzzzzzzzzzzzzzzm_ = context.Operators.After(jzzzzzzzzzzzzzzzzzzj_, jzzzzzzzzzzzzzzzzzzl_, default);
+                bool? jzzzzzzzzzzzzzzzzzzn_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancerPain);
+                bool? jzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancerPain);
+                bool? jzzzzzzzzzzzzzzzzzzp_ = context.Operators.Or(jzzzzzzzzzzzzzzzzzzn_, jzzzzzzzzzzzzzzzzzzo_);
+                bool? jzzzzzzzzzzzzzzzzzzq_ = context.Operators.And(jzzzzzzzzzzzzzzzzzzm_, jzzzzzzzzzzzzzzzzzzp_);
 
-                return ozzzzzzzzzzzzzzzzzzzzzzzzu_;
+                return jzzzzzzzzzzzzzzzzzzq_;
             };
-            IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Condition>(ozzzzzzzzzzzzzzzzzzzzzzzzh_, ozzzzzzzzzzzzzzzzzzzzzzzzi_);
-            Condition ozzzzzzzzzzzzzzzzzzzzzzzzk_(Condition ActiveProstateCancer) =>
+            IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Condition>(jzzzzzzzzzzzzzzzzzzd_, jzzzzzzzzzzzzzzzzzze_);
+            Condition jzzzzzzzzzzzzzzzzzzg_(Condition ActiveProstateCancer) =>
                 ProstateCancerPain;
-            IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Select<Condition, Condition>(ozzzzzzzzzzzzzzzzzzzzzzzzj_, ozzzzzzzzzzzzzzzzzzzzzzzzk_);
+            IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzh_ = context.Operators.Select<Condition, Condition>(jzzzzzzzzzzzzzzzzzzf_, jzzzzzzzzzzzzzzzzzzg_);
 
-            return ozzzzzzzzzzzzzzzzzzzzzzzzl_;
+            return jzzzzzzzzzzzzzzzzzzh_;
         };
-        IEnumerable<Condition> ozzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SelectMany<Condition, Condition>(ozzzzzzzzzzzzzzzzzzzzzzzzd_, ozzzzzzzzzzzzzzzzzzzzzzzze_);
-        bool? ozzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Exists<Condition>(ozzzzzzzzzzzzzzzzzzzzzzzzf_);
+        IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzb_ = context.Operators.SelectMany<Condition, Condition>(izzzzzzzzzzzzzzzzzzz_, jzzzzzzzzzzzzzzzzzza_);
+        bool? jzzzzzzzzzzzzzzzzzzc_ = context.Operators.Exists<Condition>(jzzzzzzzzzzzzzzzzzzb_);
 
-        return ozzzzzzzzzzzzzzzzzzzzzzzzg_;
+        return jzzzzzzzzzzzzzzzzzzc_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Has Salvage Therapy Performed after Prostate Cancer Diagnosis")]
+    [CqlExpressionDefinition("Has Salvage Therapy Performed after Prostate Cancer Diagnosis")]
     public bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context)
     {
-        CqlValueSet ozzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Salvage_Therapy(context);
-        IEnumerable<Procedure> ozzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> ozzzzzzzzzzzzzzzzzzzzzzzzx_(Procedure SalvageTherapy)
+        CqlValueSet jzzzzzzzzzzzzzzzzzzr_ = this.Salvage_Therapy(context);
+        IEnumerable<Procedure> jzzzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, jzzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> jzzzzzzzzzzzzzzzzzzt_(Procedure SalvageTherapy)
         {
-            IEnumerable<Condition> pzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Prostate_Cancer_Diagnosis(context);
-            bool? pzzzzzzzzzzzzzzzzzzzzzzzzb_(Condition ActiveProstateCancer)
+            IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzw_ = this.Prostate_Cancer_Diagnosis(context);
+            bool? jzzzzzzzzzzzzzzzzzzx_(Condition ActiveProstateCancer)
             {
-                DataType pzzzzzzzzzzzzzzzzzzzzzzzzf_ = SalvageTherapy?.Performed;
-                object pzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzf_);
-                CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.toInterval(context, pzzzzzzzzzzzzzzzzzzzzzzzzg_);
-                CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Start(pzzzzzzzzzzzzzzzzzzzzzzzzh_);
-                CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
-                CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Start(pzzzzzzzzzzzzzzzzzzzzzzzzj_);
-                bool? pzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.After(pzzzzzzzzzzzzzzzzzzzzzzzzi_, pzzzzzzzzzzzzzzzzzzzzzzzzk_, default);
-                Code<EventStatus> pzzzzzzzzzzzzzzzzzzzzzzzzm_ = SalvageTherapy?.StatusElement;
-                EventStatus? pzzzzzzzzzzzzzzzzzzzzzzzzn_ = pzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
-                string pzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzzzzzzzzzn_);
-                bool? pzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzo_, "completed");
-                bool? pzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzl_, pzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                DataType kzzzzzzzzzzzzzzzzzzb_ = SalvageTherapy?.Performed;
+                object kzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzb_);
+                CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.toInterval(context, kzzzzzzzzzzzzzzzzzzc_);
+                CqlDateTime kzzzzzzzzzzzzzzzzzze_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzd_);
+                CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlDateTime kzzzzzzzzzzzzzzzzzzg_ = context.Operators.Start(kzzzzzzzzzzzzzzzzzzf_);
+                bool? kzzzzzzzzzzzzzzzzzzh_ = context.Operators.After(kzzzzzzzzzzzzzzzzzze_, kzzzzzzzzzzzzzzzzzzg_, default);
+                Code<EventStatus> kzzzzzzzzzzzzzzzzzzi_ = SalvageTherapy?.StatusElement;
+                EventStatus? kzzzzzzzzzzzzzzzzzzj_ = kzzzzzzzzzzzzzzzzzzi_?.Value;
+                string kzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(kzzzzzzzzzzzzzzzzzzj_);
+                bool? kzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(kzzzzzzzzzzzzzzzzzzk_, "completed");
+                bool? kzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(kzzzzzzzzzzzzzzzzzzh_, kzzzzzzzzzzzzzzzzzzl_);
 
-                return pzzzzzzzzzzzzzzzzzzzzzzzzq_;
+                return kzzzzzzzzzzzzzzzzzzm_;
             };
-            IEnumerable<Condition> pzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Condition>(pzzzzzzzzzzzzzzzzzzzzzzzza_, pzzzzzzzzzzzzzzzzzzzzzzzzb_);
-            Procedure pzzzzzzzzzzzzzzzzzzzzzzzzd_(Condition ActiveProstateCancer) =>
+            IEnumerable<Condition> jzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Condition>(jzzzzzzzzzzzzzzzzzzw_, jzzzzzzzzzzzzzzzzzzx_);
+            Procedure jzzzzzzzzzzzzzzzzzzz_(Condition ActiveProstateCancer) =>
                 SalvageTherapy;
-            IEnumerable<Procedure> pzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Select<Condition, Procedure>(pzzzzzzzzzzzzzzzzzzzzzzzzc_, pzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            IEnumerable<Procedure> kzzzzzzzzzzzzzzzzzza_ = context.Operators.Select<Condition, Procedure>(jzzzzzzzzzzzzzzzzzzy_, jzzzzzzzzzzzzzzzzzzz_);
 
-            return pzzzzzzzzzzzzzzzzzzzzzzzze_;
+            return kzzzzzzzzzzzzzzzzzza_;
         };
-        IEnumerable<Procedure> ozzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.SelectMany<Procedure, Procedure>(ozzzzzzzzzzzzzzzzzzzzzzzzw_, ozzzzzzzzzzzzzzzzzzzzzzzzx_);
-        bool? ozzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Exists<Procedure>(ozzzzzzzzzzzzzzzzzzzzzzzzy_);
+        IEnumerable<Procedure> jzzzzzzzzzzzzzzzzzzu_ = context.Operators.SelectMany<Procedure, Procedure>(jzzzzzzzzzzzzzzzzzzs_, jzzzzzzzzzzzzzzzzzzt_);
+        bool? jzzzzzzzzzzzzzzzzzzv_ = context.Operators.Exists<Procedure>(jzzzzzzzzzzzzzzzzzzu_);
 
-        return ozzzzzzzzzzzzzzzzzzzzzzzzz_;
+        return jzzzzzzzzzzzzzzzzzzv_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Has Bone Scan Study Performed with Documented Reason")]
+    [CqlExpressionDefinition("Has Bone Scan Study Performed with Documented Reason")]
     public bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context)
     {
-        IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Bone_Scan_Study_Performed(context);
-        bool? pzzzzzzzzzzzzzzzzzzzzzzzzs_(Observation BoneScanAfterDiagnosis)
+        IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzn_ = this.Bone_Scan_Study_Performed(context);
+        bool? kzzzzzzzzzzzzzzzzzzo_(Observation BoneScanAfterDiagnosis)
         {
-            DataType pzzzzzzzzzzzzzzzzzzzzzzzzv_ = BoneScanAfterDiagnosis?.Value;
-            object pzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzv_);
-            CqlCode pzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Procedure_reason_record__record_artifact_(context);
-            CqlConcept pzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.ConvertCodeToConcept(pzzzzzzzzzzzzzzzzzzzzzzzzx_);
-            bool? pzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Equivalent(pzzzzzzzzzzzzzzzzzzzzzzzzw_ as CqlConcept, pzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            DataType kzzzzzzzzzzzzzzzzzzr_ = BoneScanAfterDiagnosis?.Value;
+            object kzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzzzzr_);
+            CqlCode kzzzzzzzzzzzzzzzzzzt_ = this.Procedure_reason_record__record_artifact_(context);
+            CqlConcept kzzzzzzzzzzzzzzzzzzu_ = context.Operators.ConvertCodeToConcept(kzzzzzzzzzzzzzzzzzzt_);
+            bool? kzzzzzzzzzzzzzzzzzzv_ = context.Operators.Equivalent(kzzzzzzzzzzzzzzzzzzs_ as CqlConcept, kzzzzzzzzzzzzzzzzzzu_);
 
-            return pzzzzzzzzzzzzzzzzzzzzzzzzz_;
+            return kzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzr_, pzzzzzzzzzzzzzzzzzzzzzzzzs_);
-        bool? pzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Exists<Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzt_);
+        IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzp_ = context.Operators.Where<Observation>(kzzzzzzzzzzzzzzzzzzn_, kzzzzzzzzzzzzzzzzzzo_);
+        bool? kzzzzzzzzzzzzzzzzzzq_ = context.Operators.Exists<Observation>(kzzzzzzzzzzzzzzzzzzp_);
 
-        return pzzzzzzzzzzzzzzzzzzzzzzzzu_;
+        return kzzzzzzzzzzzzzzzzzzq_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Denominator Exceptions")]
+    [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
-        bool? qzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
-        bool? qzzzzzzzzzzzzzzzzzzzzzzzzb_ = this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context);
-        bool? qzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Or(qzzzzzzzzzzzzzzzzzzzzzzzza_, qzzzzzzzzzzzzzzzzzzzzzzzzb_);
-        bool? qzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context);
-        bool? qzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Or(qzzzzzzzzzzzzzzzzzzzzzzzzc_, qzzzzzzzzzzzzzzzzzzzzzzzzd_);
+        bool? kzzzzzzzzzzzzzzzzzzw_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
+        bool? kzzzzzzzzzzzzzzzzzzx_ = this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context);
+        bool? kzzzzzzzzzzzzzzzzzzy_ = context.Operators.Or(kzzzzzzzzzzzzzzzzzzw_, kzzzzzzzzzzzzzzzzzzx_);
+        bool? kzzzzzzzzzzzzzzzzzzz_ = this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context);
+        bool? lzzzzzzzzzzzzzzzzzza_ = context.Operators.Or(kzzzzzzzzzzzzzzzzzzy_, kzzzzzzzzzzzzzzzzzzz_);
 
-        return qzzzzzzzzzzzzzzzzzzzzzzzze_;
+        return lzzzzzzzzzzzzzzzzzza_;
     }
 
 

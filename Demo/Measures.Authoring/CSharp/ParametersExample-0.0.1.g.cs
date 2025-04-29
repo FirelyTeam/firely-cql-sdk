@@ -30,27 +30,20 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region ValueSets
 
-    #region ValueSet: Marital Status
-    [CqlValueSetDefinition(
-        definitionName: "Marital Status",
-        valueSetId: "http://hl7.org/fhir/ValueSet/marital-status",
-        valueSetVersion: null)]
-    public CqlValueSet Marital_Status(CqlContext context) => _Marital_Status;
-
+    [CqlValueSetDefinition("Marital Status", valueSetId: "http://hl7.org/fhir/ValueSet/marital-status", valueSetVersion: null)]
+    public CqlValueSet Marital_Status(CqlContext _) => _Marital_Status;
     private static readonly CqlValueSet _Marital_Status = new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", null);
-    #endregion
 
     #endregion ValueSets
 
     #region Parameters
 
-    [CqlParameterDefinition(
-        definitionName: "AgeThreshold")]
+    [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
     {
-        object szh_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
+        object vzza_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
 
-        return (int?)szh_;
+        return (int?)vzza_;
     }
 
 
@@ -58,96 +51,90 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region Expressions
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> szi_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient szj_ = context.Operators.SingletonFrom<Patient>(szi_);
+        IEnumerable<Patient> vzzb_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient vzzc_ = context.Operators.SingletonFrom<Patient>(vzzb_);
 
-        return szj_;
+        return vzzc_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "CurrentDate")]
+    [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
-        CqlDate szk_ = context.Operators.Today();
+        CqlDate vzzd_ = context.Operators.Today();
 
-        return szk_;
+        return vzzd_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient Filter")]
+    [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context)
     {
-        Patient szl_ = this.Patient(context);
-        Patient[] szm_ = [
-            szl_,
+        Patient vzze_ = this.Patient(context);
+        Patient[] vzzf_ = [
+            vzze_,
         ];
-        bool? szn_(Patient P)
+        bool? vzzg_(Patient P)
         {
-            Code<AdministrativeGender> szq_ = P?.GenderElement;
-            string szr_ = FHIRHelpers_4_3_000.Instance.ToString(context, szq_);
-            bool? szs_ = context.Operators.Equal(szr_, "male");
-            FhirBoolean szt_ = P?.ActiveElement;
-            bool? szu_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, szt_);
-            bool? szv_ = context.Operators.IsTrue(szu_);
-            bool? szw_ = context.Operators.And(szs_, szv_);
-            DataType szx_ = P?.Deceased;
-            bool? szy_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, szx_ as FhirBoolean);
-            bool? szz_ = context.Operators.Not(szy_);
-            bool? tza_ = context.Operators.And(szw_, szz_);
-            CodeableConcept tzb_ = P?.MaritalStatus;
-            CqlConcept tzc_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, tzb_);
-            CqlValueSet tzd_ = this.Marital_Status(context);
-            bool? tze_ = context.Operators.ConceptInValueSet(tzc_, tzd_);
-            bool? tzf_ = context.Operators.And(tza_, tze_);
+            Code<AdministrativeGender> vzzj_ = P?.GenderElement;
+            string vzzk_ = FHIRHelpers_4_3_000.Instance.ToString(context, vzzj_);
+            bool? vzzl_ = context.Operators.Equal(vzzk_, "male");
+            FhirBoolean vzzm_ = P?.ActiveElement;
+            bool? vzzn_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, vzzm_);
+            bool? vzzo_ = context.Operators.IsTrue(vzzn_);
+            bool? vzzp_ = context.Operators.And(vzzl_, vzzo_);
+            DataType vzzq_ = P?.Deceased;
+            bool? vzzr_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, vzzq_ as FhirBoolean);
+            bool? vzzs_ = context.Operators.Not(vzzr_);
+            bool? vzzt_ = context.Operators.And(vzzp_, vzzs_);
+            CodeableConcept vzzu_ = P?.MaritalStatus;
+            CqlConcept vzzv_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, vzzu_);
+            CqlValueSet vzzw_ = this.Marital_Status(context);
+            bool? vzzx_ = context.Operators.ConceptInValueSet(vzzv_, vzzw_);
+            bool? vzzy_ = context.Operators.And(vzzt_, vzzx_);
 
-            return tzf_;
+            return vzzy_;
         };
-        IEnumerable<Patient> szo_ = context.Operators.Where<Patient>((IEnumerable<Patient>)szm_, szn_);
-        Patient szp_ = context.Operators.SingletonFrom<Patient>(szo_);
+        IEnumerable<Patient> vzzh_ = context.Operators.Where<Patient>((IEnumerable<Patient>)vzzf_, vzzg_);
+        Patient vzzi_ = context.Operators.SingletonFrom<Patient>(vzzh_);
 
-        return szp_;
+        return vzzi_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient Birthdate")]
+    [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
-        Patient tzg_ = this.Patient_Filter(context);
-        Date tzh_ = tzg_?.BirthDateElement;
+        Patient vzzz_ = this.Patient_Filter(context);
+        Date wzza_ = vzzz_?.BirthDateElement;
 
-        return tzh_;
+        return wzza_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient Age in Years")]
+    [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context)
     {
-        Date tzi_ = this.Patient_Birthdate(context);
-        CqlDate tzj_ = FHIRHelpers_4_3_000.Instance.ToDate(context, tzi_);
-        CqlDate tzk_ = this.CurrentDate(context);
-        int? tzl_ = context.Operators.DurationBetween(tzj_, tzk_, "year");
+        Date wzzb_ = this.Patient_Birthdate(context);
+        CqlDate wzzc_ = FHIRHelpers_4_3_000.Instance.ToDate(context, wzzb_);
+        CqlDate wzzd_ = this.CurrentDate(context);
+        int? wzze_ = context.Operators.DurationBetween(wzzc_, wzzd_, "year");
 
-        return tzl_;
+        return wzze_;
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient Older Than AgeThreshold")]
+    [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
-        int? tzm_ = this.Patient_Age_in_Years(context);
-        int? tzn_ = this.AgeThreshold(context);
-        bool? tzo_ = context.Operators.Greater(tzm_, tzn_);
+        int? wzzf_ = this.Patient_Age_in_Years(context);
+        int? wzzg_ = this.AgeThreshold(context);
+        bool? wzzh_ = context.Operators.Greater(wzzf_, wzzg_);
 
-        return tzo_;
+        return wzzh_;
     }
 
 

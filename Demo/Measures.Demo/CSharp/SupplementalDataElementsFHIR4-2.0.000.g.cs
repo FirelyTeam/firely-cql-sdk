@@ -30,52 +30,27 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     #region ValueSets
 
-    #region ValueSet: Ethnicity
-    [CqlValueSetDefinition(
-        definitionName: "Ethnicity",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837",
-        valueSetVersion: null)]
-    public CqlValueSet Ethnicity(CqlContext context) => _Ethnicity;
-
+    [CqlValueSetDefinition("Ethnicity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", valueSetVersion: null)]
+    public CqlValueSet Ethnicity(CqlContext _) => _Ethnicity;
     private static readonly CqlValueSet _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
-    #endregion
 
-    #region ValueSet: ONC Administrative Sex
-    [CqlValueSetDefinition(
-        definitionName: "ONC Administrative Sex",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1",
-        valueSetVersion: null)]
-    public CqlValueSet ONC_Administrative_Sex(CqlContext context) => _ONC_Administrative_Sex;
-
+    [CqlValueSetDefinition("ONC Administrative Sex", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", valueSetVersion: null)]
+    public CqlValueSet ONC_Administrative_Sex(CqlContext _) => _ONC_Administrative_Sex;
     private static readonly CqlValueSet _ONC_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
-    #endregion
 
-    #region ValueSet: Payer
-    [CqlValueSetDefinition(
-        definitionName: "Payer",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591",
-        valueSetVersion: null)]
-    public CqlValueSet Payer(CqlContext context) => _Payer;
-
+    [CqlValueSetDefinition("Payer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", valueSetVersion: null)]
+    public CqlValueSet Payer(CqlContext _) => _Payer;
     private static readonly CqlValueSet _Payer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
-    #endregion
 
-    #region ValueSet: Race
-    [CqlValueSetDefinition(
-        definitionName: "Race",
-        valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836",
-        valueSetVersion: null)]
-    public CqlValueSet Race(CqlContext context) => _Race;
-
+    [CqlValueSetDefinition("Race", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", valueSetVersion: null)]
+    public CqlValueSet Race(CqlContext _) => _Race;
     private static readonly CqlValueSet _Race = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
-    #endregion
 
     #endregion ValueSets
 
     #region Expressions
 
-    [CqlExpressionDefinition(
-        definitionName: "Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> ro_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -85,8 +60,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
         IEnumerable<Extension> rq_()
@@ -155,8 +129,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
         CqlValueSet sv_ = this.Payer(context);
@@ -176,8 +149,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
         IEnumerable<Extension> td_()
@@ -246,8 +218,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition(
-        definitionName: "SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
         CqlCode ui_()
