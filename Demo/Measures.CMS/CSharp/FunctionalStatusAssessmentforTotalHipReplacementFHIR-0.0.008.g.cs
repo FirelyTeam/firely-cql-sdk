@@ -184,7 +184,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Dead__finding_,
           _Discharge_to_healthcare_facility_for_hospice_care__procedure_,
-          _Discharge_to_home_for_hospice_care__procedure_,
+          _Discharge_to_healthcare_facility_for_hospice_care__procedure_,
           _Severe_cognitive_impairment__finding_,
           _Yes__qualifier_value_]);
 

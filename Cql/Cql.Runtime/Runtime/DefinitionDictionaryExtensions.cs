@@ -45,31 +45,5 @@ namespace Hl7.Cql.Runtime
 
             return delegates;
         }
-
-        /// <summary>
-        /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/> with <paramref name="parameters"/>.
-        /// </summary>
-        /// <typeparam name="T">The expected return type of the delegate.</typeparam>
-        /// <param name="delegates">The delegates containing this definition.</param>
-        /// <param name="libraryName">The library containing this definition.</param>
-        /// <param name="define">The name of the definition.</param>
-        /// <param name="rtx">The runtime context to use for the execution.</param>
-        /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
-        /// <returns></returns>
-        public static T? Invoke<T>(
-            this DelegateDefinitionDictionary delegates,
-            string libraryName,
-            string define,
-            CqlContext rtx,
-            params object[] parameters)
-        {
-            var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
-            var @delegate = delegates[libraryName, define, parameterTypes];
-            var combined = new object[parameters.Length + 1];
-            combined[0] = rtx;
-            Array.Copy(parameters, 0, combined, 1, parameters.Length);
-            var result = (T?)@delegate.DynamicInvoke(combined);
-            return result;
-        }
     }
 }

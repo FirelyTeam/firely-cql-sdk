@@ -1,10 +1,15 @@
-﻿using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
+﻿#nullable enable
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests
@@ -12,29 +17,30 @@ namespace CoreTests
     [TestClass]
     public class QueriesTest
     {
-       [ClassInitialize]
+        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var serviceProvider = ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
-            using var servicesScope = serviceProvider.CreateScope();
+            _librarySetInvoker = new ElmToolkit()
+                                 .AddElmFiles((FileInfo[])[
+                                     new(@"Input\ELM\Test\QueriesTest-1.0.0.json"),
+                                     new(@"Input\ELM\Test\Aggregates-1.0.0.json")])
+                                 .CreateLibrarySetInvoker();
 
-            var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
-            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var libraryExpressionBuilderScoped = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
-            var definitions = libraryExpressionBuilderScoped.ProcessLibrary(elmPackage);
-            QueriesDefinitions = definitions.CompileAll();
+            QueriesDefinitions = _librarySetInvoker.LibraryInvokers[(CqlVersionedLibraryIdentifier)"QueriesTest-1.0.0"]!;
+            AggregatesDefinitions = _librarySetInvoker.LibraryInvokers[(CqlVersionedLibraryIdentifier)"Aggregates-1.0.0"]!;
+
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion", [new CqlCode("code", "system")]);
-
-
-            elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
-            elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            libraryExpressionBuilderScoped.ProcessLibrary(elmPackage, libraryDefinitions: definitions);
-            AggregatesDefinitions = definitions.CompileAll();
         }
 
-        private static DefinitionDictionary<Delegate> QueriesDefinitions;
-        private static DefinitionDictionary<Delegate> AggregatesDefinitions;
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            _librarySetInvoker?.Dispose();
+        }
+
+        private static LibraryInvoker QueriesDefinitions;
+        private static LibraryInvoker AggregatesDefinitions;
 
         private const string QueriesLibrary = "QueriesTest-1.0.0";
         private const string AggregatesLibrary = "Aggregates-1.0.0";
@@ -49,10 +55,11 @@ namespace CoreTests
 
         ];
 
+        private static LibrarySetInvoker _librarySetInvoker;
+
         private CqlContext GetNewContext(Bundle bundle) => FhirCqlContext.ForBundle(
             bundle: bundle,
-            valueSets: ValueSets,
-            delegates: QueriesDefinitions);
+            valueSets: ValueSets);
 
 
         [TestMethod]
@@ -425,5 +432,34 @@ namespace CoreTests
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "Multisource query", ctx);
             Assert.AreEqual(12, result);
         }
+    }
+
+    internal static class LibraryInvokerX
+    {
+        /// <summary>
+        /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/> with <paramref name="parameters"/>.
+        /// </summary>
+        /// <typeparam name="T">The expected return type of the delegate.</typeparam>
+        /// <param name="libraryInvoker">The delegates containing this definition.</param>
+        /// <param name="libraryName">The library containing this definition.</param>
+        /// <param name="define">The name of the definition.</param>
+        /// <param name="rtx">The runtime context to use for the execution.</param>
+        /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
+        /// <returns></returns>
+        public static T? Invoke<T>(
+            this LibraryInvoker libraryInvoker,
+            string libraryName,
+            string define,
+            CqlContext rtx,
+            params object[] parameters)
+        {
+            var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
+            var definitionSignature = new DefinitionSignature(define, parameterTypes);
+            var definition = libraryInvoker.Definitions[definitionSignature];
+            var resultObj = definition.Invoke(rtx, parameters);
+            var result = (T?)resultObj;
+            return result;
+        }
+
     }
 }

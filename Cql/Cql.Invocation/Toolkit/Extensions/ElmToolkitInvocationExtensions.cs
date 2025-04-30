@@ -25,7 +25,10 @@ public static class ElmToolkitInvocationExtensions
         this ElmToolkit elmToolkit)
     {
         var assemblyBinaries =
-            elmToolkit.GetElmToAssemblyResults().Select(t => t.GetAssemblyBinary());
+            elmToolkit
+                .CompileToAssemblies()
+                .GetElmToAssemblyResults()
+                .Select(t => t.GetAssemblyBinary());
 
         var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.BatchProcessExceptionContinuation)
             .AddAssemblyBinaries(assemblyBinaries);
@@ -45,4 +48,13 @@ public static class ElmToolkitInvocationExtensions
             .CompileToAssemblies()
             .CreateInvocationToolkit()
             .CreateLibrarySetInvoker(name);
+
+    public static void UseLibrarySetInvoker(
+        this ElmToolkit elmToolkit,
+        Action<LibrarySetInvoker> useLibrarySetInvoker,
+        string librarySetName = "") =>
+        elmToolkit
+            .CreateInvocationToolkit()
+            .UseLibrarySetInvoker(useLibrarySetInvoker, librarySetName);
+
 }

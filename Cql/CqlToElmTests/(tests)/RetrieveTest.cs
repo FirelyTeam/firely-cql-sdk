@@ -1,6 +1,5 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Fhir.Model;
 using Task = System.Threading.Tasks.Task;
 

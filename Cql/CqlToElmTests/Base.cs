@@ -5,11 +5,9 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Model;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

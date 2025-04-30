@@ -308,7 +308,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
           _CM,
           _pre_op,
           _post_op,
-          _billing]);
+          _Billing]);
 
     [CqlCodeSystemDefinition("RequestIntent")]
     public CqlCodeSystem RequestIntent(CqlContext _) => _RequestIntent;

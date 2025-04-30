@@ -13,6 +13,15 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 /// </summary>
 public static partial class InvocationToolkitExtensions
 {
+    public static void UseLibrarySetInvoker(
+        this InvocationToolkit invocationToolkit,
+        Action<LibrarySetInvoker> useLibrarySetInvoker,
+        string librarySetName = "")
+    {
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(librarySetName);
+        useLibrarySetInvoker(librarySetInvoker);
+    }
+
     private static ILogger CreateLogger(this InvocationToolkit invocationToolkit)
     {
         return invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));

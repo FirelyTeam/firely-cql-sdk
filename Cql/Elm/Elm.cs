@@ -34,6 +34,9 @@ internal static class IGetVersionedIdentifierExtensions
             _                              => null
         };
 
+    public static CqlVersionedLibraryIdentifier GetVersionedLibraryIdentifier(this IGetVersionedIdentifier getVersionedIdentifier) =>
+        CqlVersionedLibraryIdentifier.Parse(getVersionedIdentifier.GetVersionedIdentifier()!);
+
     public static CqlVersionedLibraryIdentifier ToCqlVersionedLibraryIdentifier(this VersionedIdentifier identifier)
     {
         // We have to check for nulls because the generated ELM code does not emit nullability annotations.

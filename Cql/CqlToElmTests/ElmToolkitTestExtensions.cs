@@ -2,12 +2,13 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Invocation.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 using Expression = Hl7.Cql.Elm.Expression;
 
-internal static class ElmToolkitExtensions
+internal static class ElmToolkitTestExtensions
 {
     public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
         elmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
@@ -28,6 +29,15 @@ internal static class ElmToolkitExtensions
     }
 
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
+
+    internal static void UseLibrarySetInvoker(
+        this ElmToolkit elmToolkit,
+        Library library,
+        Action<LibrarySetInvoker> useLibrarySetInvoker,
+        string name = "") =>
+        elmToolkit
+            .AddElmLibraries(library)
+            .UseLibrarySetInvoker(useLibrarySetInvoker, name);
 
     internal static CqlDefinitionDictionary ProcessLibrary(
         this ElmToolkit elmToolkit,

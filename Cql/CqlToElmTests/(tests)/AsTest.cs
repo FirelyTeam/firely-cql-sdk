@@ -1,6 +1,8 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Quantity = Hl7.Fhir.Model.Quantity;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -11,42 +13,47 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_As_Decimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library AsTest version '1.0.0'
+                                                         library AsTest version '1.0.0'
 
-                define private Integer_As_Decimal: 1 as System.Decimal
-                """, "Expression of type*");
-
+                                                         define private Integer_As_Decimal: 1 as System.Decimal
+                                                         """, "Expression of type*");
         }
 
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library AsTest version '1.0.0'
+                                                         library AsTest version '1.0.0'
 
-                valueset "vs": 'http://xyz.com'
+                                                         valueset "vs": 'http://xyz.com'
 
-                define private ValueSet_As_Vocabulary: "vs" as System.Vocabulary
-                """);
+                                                         define private ValueSet_As_Vocabulary: "vs" as System.Vocabulary
+                                                         """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(As));
-            {
-                var @as = (As)library.statements[0].expression;
-                Assert.IsNotNull(@as.operand);
-                Assert.IsInstanceOfType(@as.operand, typeof(ValueSetRef));
-                Assert.IsInstanceOfType(@as.asTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
-                Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
 
-                var delegates = CreateElmToolkit().ProcessLibrary(library).CompileAll();
-                var dg = delegates["AsTest-1.0.0", "ValueSet_As_Vocabulary"];
-                var ctx = FhirCqlContext.ForBundle(delegates: delegates);
-                var result = dg.DynamicInvoke(ctx);
-                Assert.IsNotNull(result);
-            }
+            var @as = (As)library.statements[0].expression;
+            Assert.IsNotNull(@as.operand);
+            Assert.IsInstanceOfType(@as.operand, typeof(ValueSetRef));
+            Assert.IsInstanceOfType(@as.asTypeSpecifier, typeof(NamedTypeSpecifier));
+            var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
+            Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
+
+            CreateElmToolkit()
+                .UseLibrarySetInvoker(
+                    library,
+                    lsi =>
+                    {
+                        var ctx = FhirCqlContext.ForBundle();
+                        var result = lsi.InvokeLibraryDefinition(
+                            ctx,
+                            (CqlVersionedLibraryIdentifier)"AsTest-1.0.0",
+                            "ValueSet_As_Vocabulary");
+                        Assert.AreEqual(new CqlValueSet("http://xyz.com"), result);
+                    });
         }
 
 
@@ -54,10 +61,10 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Null_As_Decimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library AsTest version '1.0.0'
+                                                         library AsTest version '1.0.0'
 
-                define private Null_As_Decimal: null as System.Decimal
-                """);
+                                                         define private Null_As_Decimal: null as System.Decimal
+                                                         """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -78,7 +85,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        private static As AssertAsTypes(Library library, string literalTypeName, string resultTypeName)
+        private static As AssertAsTypes(
+            Library library,
+            string literalTypeName,
+            string resultTypeName)
         {
             var @as = (As)library.statements[0].expression;
             Assert.IsNotNull(@as.operand);
@@ -128,20 +138,27 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FhirId_As_FhirString()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
-                library AsTest version '1.0.0'
+                                                     library AsTest version '1.0.0'
 
-                using FHIR version '4.0.1'
+                                                     using FHIR version '4.0.1'
 
-                define private function f(id FHIR.id): id as FHIR.string
-                """);
+                                                     define private function f(id FHIR.id): id as FHIR.string
+                                                     """);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
-            var lambdas = CreateElmToolkit().ProcessLibrary(lib);
-            var delegates = lambdas.CompileAll();
-            var dg = delegates[lib.GetVersionedIdentifier(), "f", typeof(Hl7.Fhir.Model.Id)];
-            var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx, new Hl7.Fhir.Model.Id("id"));
-            var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
-            fs.Value.Should().Be("id");
+            CreateElmToolkit()
+                .UseLibrarySetInvoker(
+                    lib,
+                    lsi =>
+                    {
+                        var ctx = FhirCqlContext.ForBundle();
+                        var result = lsi.InvokeLibraryDefinition(
+                            ctx,
+                            lib.GetVersionedLibraryIdentifier(),
+                            new("f", typeof(Hl7.Fhir.Model.Id)),
+                            new Hl7.Fhir.Model.Id("id"));
+                        var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
+                        fs.Value.Should().Be("id");
+                    });
         }
 
         [TestMethod]
@@ -149,17 +166,28 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
             var lib = CreateCqlToolkit().MakeLibrary("""
-                library AsTest version '1.0.0'
+                                                     library AsTest version '1.0.0'
 
-                using FHIR version '4.0.1'
+                                                     using FHIR version '4.0.1'
 
-
-                context Patient
-
-                define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
-                    choice as FHIR.Range
-                """);
-            _ = CreateElmToolkit().ProcessLibrary(lib);
+                                                     define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
+                                                         choice as FHIR.Range
+                                                     """);
+            CreateElmToolkit()
+                .UseLibrarySetInvoker(
+                    lib,
+                    lsi =>
+                    {
+                        var ctx = FhirCqlContext.ForBundle();
+                        var range = new Hl7.Fhir.Model.Range(new Quantity(1m, "m"), new Quantity(2m, "m"));
+                        var result = lsi.InvokeLibraryDefinition(
+                            ctx,
+                            lib.GetVersionedLibraryIdentifier(),
+                            new("f", typeof(object)),
+                            range);
+                        result.Should().BeOfType<Hl7.Fhir.Model.Range>()
+                              .And.Subject.Should().Be(range);
+                    });
         }
     }
 }

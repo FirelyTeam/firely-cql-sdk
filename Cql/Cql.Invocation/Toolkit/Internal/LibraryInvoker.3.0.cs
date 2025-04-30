@@ -91,17 +91,16 @@ file sealed class DefinitionInvoker_3_0
         return (true, definitionInvoker);
     }
 
-    public override object? Invoke(CqlContext cqlContext, params object?[] args) =>
-        methodInfo.Invoke(
+    public override object? Invoke(CqlContext cqlContext, params object?[] args)
+    {
+        object?[] methodArgs = args is { Length: > 0 }
+                             ? [cqlContext, ..args]
+                             : [cqlContext];
+        return methodInfo.Invoke(
             library,
             BindingFlags.DoNotWrapExceptions,
             null,
-            CalcArgs(cqlContext),
+            methodArgs,
             CultureInfo.InvariantCulture);
-
-    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    private static object?[] CalcArgs(CqlContext cqlContext, params object?[] args) =>
-        args is { Length: > 0 }
-            ? [cqlContext, ..args]
-            : [cqlContext];
+    }
 }

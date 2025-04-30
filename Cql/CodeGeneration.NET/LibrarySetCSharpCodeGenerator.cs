@@ -17,7 +17,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System.Diagnostics;
 using System.Threading;
-using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 

@@ -12,6 +12,8 @@ global using System.Reflection;
 global using System.Text;
 global using System.Xml.Serialization;
 global using FluentAssertions;
+global using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+global using Hl7.Cql.Invocation.Toolkit.Extensions;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
