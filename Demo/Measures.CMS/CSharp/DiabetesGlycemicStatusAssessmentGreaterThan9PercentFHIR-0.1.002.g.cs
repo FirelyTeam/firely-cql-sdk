@@ -473,8 +473,8 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
-        [typeof(CqlQuantity), typeof(Observation)],
-        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
+      [typeof(CqlQuantity), typeof(Observation)],
+      ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
 
     #endregion CqlTupleMetadata Properties
 

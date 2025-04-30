@@ -657,8 +657,8 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
+      [typeof(Observation), typeof(Encounter)],
+      ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
 
     #endregion CqlTupleMetadata Properties
 

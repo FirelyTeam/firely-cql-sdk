@@ -1298,12 +1298,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
-        [typeof(CqlDate)],
-        ["startDate"]);
+      [typeof(CqlDate)],
+      ["startDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["period", "periodStart"]);
+      [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+      ["period", "periodStart"]);
 
     #endregion CqlTupleMetadata Properties
 

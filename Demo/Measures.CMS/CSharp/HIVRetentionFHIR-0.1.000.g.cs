@@ -682,8 +682,8 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+      [typeof(IEnumerable<CqlCode>), typeof(string)],
+      ["codes", "display"]);
 
     #endregion CqlTupleMetadata Properties
 

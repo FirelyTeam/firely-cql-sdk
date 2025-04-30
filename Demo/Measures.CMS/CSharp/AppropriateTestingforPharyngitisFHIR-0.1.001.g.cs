@@ -601,12 +601,12 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_001 : ILibrary, IS
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+      [typeof(Encounter), typeof(Condition)],
+      ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+      [typeof(Observation), typeof(Encounter)],
+      ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
 
     #endregion CqlTupleMetadata Properties
 

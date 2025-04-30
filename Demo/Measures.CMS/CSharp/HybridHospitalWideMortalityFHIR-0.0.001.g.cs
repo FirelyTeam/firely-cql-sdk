@@ -2374,40 +2374,40 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstPlateletResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstPlateletResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHeartRateResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHematocritResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstOxygenSatResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstCreatinineResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstCreatinineResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstBicarbonateResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstTemperatureResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSodiumResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstSodiumResult", "Timing"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -2644,24 +2644,24 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstRespRateResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstRespRateResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHeartRateResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstOxygenSatResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstTemperatureResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstResult", "Timing"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -1084,12 +1084,12 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
-        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
-        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
+      [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
+      ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new(
-        [typeof(CqlDateTime), typeof(int?)],
-        ["effectiveDatetime", "valueInteger"]);
+      [typeof(CqlDateTime), typeof(int?)],
+      ["effectiveDatetime", "valueInteger"]);
 
     #endregion CqlTupleMetadata Properties
 

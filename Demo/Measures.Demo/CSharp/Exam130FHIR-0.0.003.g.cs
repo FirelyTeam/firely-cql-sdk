@@ -1526,8 +1526,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new(
-        [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
-        ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
+      [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
+      ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 
     #endregion CqlTupleMetadata Properties
 

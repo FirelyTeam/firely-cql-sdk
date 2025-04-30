@@ -378,12 +378,12 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
+      [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+      ["code", "period"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+      [typeof(IEnumerable<CqlCode>), typeof(string)],
+      ["codes", "display"]);
 
     #endregion CqlTupleMetadata Properties
 

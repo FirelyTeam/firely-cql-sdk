@@ -45,14 +45,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             if (intervals is null)
             {
                 CqlInterval<CqlDate>[] e_ = []
-;
+    ;
 
                 return e_ as IEnumerable<CqlInterval<CqlDate>>;
             }
             else if (b_())
             {
                 CqlInterval<CqlDate>[] f_ = []
-;
+    ;
 
                 return f_ as IEnumerable<CqlInterval<CqlDate>>;
             }
@@ -120,14 +120,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             if (intervals is null)
             {
                 CqlInterval<CqlDateTime>[] e_ = []
-;
+    ;
 
                 return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
             else if (b_())
             {
                 CqlInterval<CqlDateTime>[] f_ = []
-;
+    ;
 
                 return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
@@ -195,14 +195,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             if (intervals is null)
             {
                 CqlInterval<CqlDate>[] e_ = []
-;
+    ;
 
                 return e_ as IEnumerable<CqlInterval<CqlDate>>;
             }
             else if (b_())
             {
                 CqlInterval<CqlDate>[] f_ = []
-;
+    ;
 
                 return f_ as IEnumerable<CqlInterval<CqlDate>>;
             }
@@ -249,14 +249,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             if (intervals is null)
             {
                 CqlInterval<CqlDateTime>[] e_ = []
-;
+    ;
 
                 return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
             else if (b_())
             {
                 CqlInterval<CqlDateTime>[] f_ = []
-;
+    ;
 
                 return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
@@ -417,7 +417,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 if (ax_())
                 {
                     CqlInterval<CqlDate>[] bb_ = []
-;
+    ;
 
                     return bb_ as IEnumerable<CqlInterval<CqlDate>>;
                 }
@@ -558,7 +558,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 if (ax_())
                 {
                     CqlInterval<CqlDateTime>[] bb_ = []
-;
+    ;
 
                     return bb_ as IEnumerable<CqlInterval<CqlDateTime>>;
                 }
@@ -1409,64 +1409,64 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["frontgaps", "endgap"]);
+      [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+      ["frontgaps", "endgap"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["interval", "days"]);
+      [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+      ["interval", "days"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Gap_Intervals"]);
+      [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+      ["Gap_Intervals"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["Covering_Intervals"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+      ["Covering_Intervals"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["sortedCoverings"]);
+      [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+      ["sortedCoverings"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
-        ["interval", "startOfInterval"]);
+      [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
+      ["interval", "startOfInterval"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["sortedCoverings"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+      ["sortedCoverings"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
-        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
-        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
+      [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+      ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["frontgaps", "endgap"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+      ["frontgaps", "endgap"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["interval", "startOfInterval"]);
+      [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+      ["interval", "startOfInterval"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["Gap_Intervals"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+      ["Gap_Intervals"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Covering_Intervals"]);
+      [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+      ["Covering_Intervals"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+      [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+      ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
-        [typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["interval", "days"]);
+      [typeof(CqlInterval<CqlDate>), typeof(int?)],
+      ["interval", "days"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
+      ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
 
     #endregion CqlTupleMetadata Properties
 

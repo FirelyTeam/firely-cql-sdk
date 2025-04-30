@@ -2126,12 +2126,12 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(
-        [typeof(Encounter), typeof(CqlConcept)],
-        ["encounter", "condition"]);
+      [typeof(Encounter), typeof(CqlConcept)],
+      ["encounter", "condition"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD = new(
-        [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
-        ["encounterId", "condition", "rank", "POA"]);
+      [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
+      ["encounterId", "condition", "rank", "POA"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -489,8 +489,8 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
+      [typeof(CqlDate)],
+      ["AntidepressantDate"]);
 
     #endregion CqlTupleMetadata Properties
 

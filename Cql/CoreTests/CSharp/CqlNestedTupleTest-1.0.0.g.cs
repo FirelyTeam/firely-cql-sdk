@@ -45,12 +45,12 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-        ["status", "result"]);
+      [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+      ["status", "result"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-        [typeof(string), typeof(string)],
-        ["result1", "result2"]);
+      [typeof(string), typeof(string)],
+      ["result1", "result2"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -1110,24 +1110,24 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
+      [typeof(Encounter), typeof(Condition)],
+      ["QualifyingEncounter", "MalnutritionDiagnosis"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "NutritionAssessment"]);
+      [typeof(Encounter), typeof(Observation)],
+      ["QualifyingEncounter", "NutritionAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "HospitalDietitianReferral"]);
+      [typeof(Encounter), typeof(Procedure)],
+      ["QualifyingEncounter", "HospitalDietitianReferral"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "NutritionCarePlan"]);
+      [typeof(Encounter), typeof(Procedure)],
+      ["QualifyingEncounter", "NutritionCarePlan"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
+      [typeof(Encounter), typeof(Observation)],
+      ["QualifyingEncounter", "MalnutritionRiskScreening"]);
 
     #endregion CqlTupleMetadata Properties
 

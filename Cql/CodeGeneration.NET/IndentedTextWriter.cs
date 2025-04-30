@@ -2,15 +2,17 @@
 
 internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int Indent = 0) : IAddIndentMutable<IndentedTextWriter>
 {
-    public void WriteLine(int addIndent, string text = "") => TextWriter.WriteLine(Indent + addIndent, text);
-
-    public void WriteLine(string text = "") => WriteLine(0, text);
-
     /// <summary>
     /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public void WriteLines(string multilineText = "")
+    public void WriteLine(string text = "") => WriteLine(0, text);
+
+    /// <summary>
+    /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent plus an additional indent from <paramref name="addIndent"/>.
+    /// Leading tabs will be treated as indents.
+    /// </summary>
+    public void WriteLine(int addIndent, string multilineText = "")
     {
         foreach (var line in multilineText.Split(Environment.NewLine))
         {
@@ -20,12 +22,12 @@ internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int In
                 var strippedLeadingTabs = line[leadingTabs..];
                 if (strippedLeadingTabs.Length > 0)
                 {
-                    WriteLine(leadingTabs, strippedLeadingTabs);
+                    TextWriter.WriteLine(Indent + leadingTabs + addIndent, strippedLeadingTabs);
                     continue;
                 }
             }
 
-            WriteLine();
+            TextWriter.WriteLine();
         }
     }
 

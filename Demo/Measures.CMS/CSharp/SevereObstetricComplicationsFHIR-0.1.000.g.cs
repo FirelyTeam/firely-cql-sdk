@@ -1725,7 +1725,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             object[] n_ = [
                 TwentyWeeksPlusEncounter,
-m_ ?? default(int),
+    m_ ?? default(int),
             ];
 
             return n_ as IEnumerable<object>;
@@ -2526,36 +2526,36 @@ m_ ?? default(int),
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
-        ["id", "procedures"]);
+      [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
+      ["id", "procedures"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHematocritResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWBCResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstWBCResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
-        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSBPResult", "Timing"]);
+      [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
+      ["EncounterId", "FirstSBPResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
-        [typeof(Procedure), typeof(string)],
-        ["code", "SOCProcedureCategory"]);
+      [typeof(Procedure), typeof(string)],
+      ["code", "SOCProcedureCategory"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
-        [typeof(CqlConcept), typeof(string)],
-        ["code", "SOCDxCategory"]);
+      [typeof(CqlConcept), typeof(string)],
+      ["code", "SOCDxCategory"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHRResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHRResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
-        ["id", "complications"]);
+      [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
+      ["id", "complications"]);
 
     #endregion CqlTupleMetadata Properties
 

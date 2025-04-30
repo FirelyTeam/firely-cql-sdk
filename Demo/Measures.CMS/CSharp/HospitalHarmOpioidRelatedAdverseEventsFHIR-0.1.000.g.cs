@@ -426,8 +426,8 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY = new(
-        [typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)],
-        ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
+      [typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)],
+      ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
 
     #endregion CqlTupleMetadata Properties
 

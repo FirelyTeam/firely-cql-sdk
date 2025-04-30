@@ -478,12 +478,12 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
-        ["Coverage1", "Coverage2"]);
+      [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
+      ["Coverage1", "Coverage2"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
+      [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+      ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
 
     #endregion CqlTupleMetadata Properties
 

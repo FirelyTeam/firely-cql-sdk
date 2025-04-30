@@ -552,8 +552,8 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
+      [typeof(Encounter), typeof(Condition)],
+      ["QualifyingEncounters", "URI"]);
 
     #endregion CqlTupleMetadata Properties
 

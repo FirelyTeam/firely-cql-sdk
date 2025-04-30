@@ -1010,8 +1010,8 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
+      [typeof(string), typeof(int?)],
+      ["EncounterID", "CalculatedCGA"]);
 
     #endregion CqlTupleMetadata Properties
 

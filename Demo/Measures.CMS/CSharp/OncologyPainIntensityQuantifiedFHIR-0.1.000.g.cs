@@ -479,8 +479,8 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_GEQGUKVdHYQAZdGbSEBAPcHZR = new(
-        [typeof(Encounter), typeof(Procedure), typeof(Procedure), typeof(Condition)],
-        ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "Cancer"]);
+      [typeof(Encounter), typeof(Procedure), typeof(Procedure), typeof(Condition)],
+      ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "Cancer"]);
 
     #endregion CqlTupleMetadata Properties
 

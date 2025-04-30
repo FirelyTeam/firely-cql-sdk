@@ -1165,8 +1165,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
             bool? g_(Observation @this)
             {
                 string m_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
                 bool? n_ = context.Operators.Not((bool?)(m_ is null));
 
                 return n_;
@@ -1175,8 +1175,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
             string i_(Observation @this)
             {
                 string o_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
 
                 return o_;
             };
@@ -1378,14 +1378,14 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
             bool b_()
             {
                 string c_ = (QualifyingEncounter is Resource
-    ? (QualifyingEncounter as Resource).IdElement
-    : default)?.Value;
+        ? (QualifyingEncounter as Resource).IdElement
+        : default)?.Value;
                 IEnumerable<Encounter> d_ = this.Denominator_Exclusions(context);
                 bool? e_(Encounter @this)
                 {
                     string j_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
 
                     return k_;
@@ -1394,8 +1394,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
                 string g_(Encounter @this)
                 {
                     string l_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
 
                     return l_;
                 };
@@ -1461,14 +1461,14 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
             bool b_()
             {
                 string c_ = (QualifyingEncounter is Resource
-    ? (QualifyingEncounter as Resource).IdElement
-    : default)?.Value;
+        ? (QualifyingEncounter as Resource).IdElement
+        : default)?.Value;
                 IEnumerable<Encounter> d_ = this.Denominator_Exclusions(context);
                 bool? e_(Encounter @this)
                 {
                     string j_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
 
                     return k_;
@@ -1477,8 +1477,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
                 string g_(Encounter @this)
                 {
                     string l_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
 
                     return l_;
                 };
@@ -1548,44 +1548,44 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
-        ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
+      [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
+      ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BBNOZJWbNFIIMKUYJNdXQYNTL = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
+      [typeof(Encounter), typeof(Observation), typeof(Observation)],
+      ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BRDBXSUhdQiXBCfMGdSacWIG = new(
-        [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
-        ["Hospitalization", "HypoglycemicMed"]);
+      [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
+      ["Hospitalization", "HypoglycemicMed"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CLZgggJGDQVFHPIfbiSZOiXTH = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseTest"]);
+      [typeof(Encounter), typeof(Observation)],
+      ["InpatientHospitalization", "GlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FhADCCAGbeXAiadgccRECiPBd = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
-        ["encounter", "relevantPeriod", "relevantDays"]);
+      [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
+      ["encounter", "relevantPeriod", "relevantDays"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
-        ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
+      [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
+      ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
-        ["encounter", "relevantPeriod", "eligibleEventDays"]);
+      [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
+      ["encounter", "relevantPeriod", "eligibleEventDays"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
-        ["encounter", "hospitalizationPeriod"]);
+      [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
+      ["encounter", "hospitalizationPeriod"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HRTAKZQhNDEfbiSbFGHLQTdcR = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
-        ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
+      [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
+      ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_SMNhCfXhAdRgSFYJNGOMBShE = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayNumber", "dayPeriod"]);
+      [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+      ["dayNumber", "dayPeriod"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -599,12 +599,12 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
-        ["LTCPeriod1", "LTCPeriod2"]);
+      [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+      ["LTCPeriod1", "LTCPeriod2"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+      [typeof(Encounter), typeof(Encounter)],
+      ["OutpatientEncounter1", "OutpatientEncounter2"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -861,8 +861,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
             bool? g_(Observation @this)
             {
                 string m_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
                 bool? n_ = context.Operators.Not((bool?)(m_ is null));
 
                 return n_;
@@ -871,8 +871,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
             string i_(Observation @this)
             {
                 string o_ = (@this is Resource
-    ? (@this as Resource).IdElement
-    : default)?.Value;
+        ? (@this as Resource).IdElement
+        : default)?.Value;
 
                 return o_;
             };
@@ -1021,16 +1021,16 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
+      [typeof(Encounter), typeof(Observation), typeof(Observation)],
+      ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new(
-        [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
+      [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
+      ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicEvent"]);
+      [typeof(Encounter), typeof(Observation)],
+      ["QualifyingEncounter", "HypoglycemicEvent"]);
 
     #endregion CqlTupleMetadata Properties
 

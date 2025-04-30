@@ -2172,8 +2172,8 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+      [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+      ["dayIndex", "dayPeriod"]);
 
     #endregion CqlTupleMetadata Properties
 

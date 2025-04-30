@@ -1551,16 +1551,16 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
-        [typeof(Observation), typeof(Observation)],
-        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+      [typeof(Observation), typeof(Observation)],
+      ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+      [typeof(Observation), typeof(Observation)],
+      ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
+      [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+      ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
 
     #endregion CqlTupleMetadata Properties
 
