@@ -12,4 +12,4 @@ namespace Hl7.Cql.Abstractions;
 /// Declares that this method or property is translated from an ELM code system definition.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-public class CqlCodeSystemDefinitionAttribute(string name) : CqlDefinitionAttribute(name);
+public sealed class CqlCodeSystemDefinitionAttribute(string name) : CqlDefinitionAttribute(name);

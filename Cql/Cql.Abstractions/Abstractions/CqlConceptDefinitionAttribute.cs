@@ -12,4 +12,4 @@ namespace Hl7.Cql.Abstractions;
 /// Declares that this method or property is translated from an ELM concept definition.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-public class CqlConceptDefinitionAttribute(string name) : CqlDefinitionAttribute(name);
+public sealed class CqlConceptDefinitionAttribute(string name) : CqlDefinitionAttribute(name);
