@@ -17,8 +17,8 @@ internal class CqlExpressionDefinition
 (
     LambdaExpression lambda,
     string name,
-    (string tagName, string[] tagValues)[] tags)
+    (string tagName, string[] tagValues)[]? tags = null)
     : CqlDefinition(lambda, name)
 {
-    public (string Name, string[] Values)[] Tags { get; } = tags;
+    public (string Name, string[] Values)[] Tags { get; } = tags ?? [];
 }

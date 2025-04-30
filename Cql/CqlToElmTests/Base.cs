@@ -58,8 +58,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
                     .CreateLibrarySetInvoker();
 
-            var result = librarySetInvoker
-                .GetLibraryDefinitionResult(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
+            var result = librarySetInvoker.InvokeLibraryDefinition(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
             return result;
         }
 
