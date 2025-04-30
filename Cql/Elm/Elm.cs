@@ -78,6 +78,8 @@ partial class Library : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
+    [JsonIgnore]
+    [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
@@ -104,6 +106,8 @@ partial class IncludeDef : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
+    [JsonIgnore]
+    [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
@@ -141,6 +145,8 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
 
     /// <inheritdoc />
+    [JsonIgnore]
+    [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get

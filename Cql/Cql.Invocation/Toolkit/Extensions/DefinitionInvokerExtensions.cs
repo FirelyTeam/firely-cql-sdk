@@ -18,8 +18,9 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class DefinitionInvokerExtensions
 {
     /// <summary>
-    /// Enumerates library definitions invocations.
+    /// Enumerates library expression invocations.
     /// </summary>
+    ///
     /// <param name="definitionInvokers">The definition invokers to get results from.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
     /// <param name="definitionInvocationExceptionCallback">
