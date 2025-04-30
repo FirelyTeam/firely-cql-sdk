@@ -65,9 +65,9 @@ public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<A
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object zzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.ResolveParameter("AdultOutpatientEncounters-4.11.000", "Measurement Period", null);
+        object rzzzzzzzzzzzzzzzzzzzzzw_ = context.ResolveParameter("AdultOutpatientEncounters-4.11.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)zzzzzzzzzzzzzzzzzzzzzzzzzc_;
+        return (CqlInterval<CqlDateTime>)rzzzzzzzzzzzzzzzzzzzzzw_;
     }
 
 
@@ -78,50 +78,50 @@ public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<A
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> zzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient zzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SingletonFrom<Patient>(zzzzzzzzzzzzzzzzzzzzzzzzzd_);
+        IEnumerable<Patient> rzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient rzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.SingletonFrom<Patient>(rzzzzzzzzzzzzzzzzzzzzzx_);
 
-        return zzzzzzzzzzzzzzzzzzzzzzzzze_;
+        return rzzzzzzzzzzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
     {
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Office_Visit(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Annual_Wellness_Visit(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzg_, zzzzzzzzzzzzzzzzzzzzzzzzzi_);
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzl_, zzzzzzzzzzzzzzzzzzzzzzzzzn_);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzj_, zzzzzzzzzzzzzzzzzzzzzzzzzo_);
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzq_ = this.Home_Healthcare_Services(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Virtual_Encounter(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzr_, zzzzzzzzzzzzzzzzzzzzzzzzzt_);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzp_, zzzzzzzzzzzzzzzzzzzzzzzzzu_);
-        CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Union<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzv_, zzzzzzzzzzzzzzzzzzzzzzzzzx_);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzz_ = Status_1_8_000.Instance.isEncounterPerformed(context, zzzzzzzzzzzzzzzzzzzzzzzzzy_);
-        bool? azzzzzzzzzzzzzzzzzzzzzzzzza_(Encounter ValidEncounter)
+        CqlValueSet rzzzzzzzzzzzzzzzzzzzzzz_ = this.Office_Visit(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzzb_ = this.Annual_Wellness_Visit(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzza_, szzzzzzzzzzzzzzzzzzzzzc_);
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzze_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzzg_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzzf_, szzzzzzzzzzzzzzzzzzzzzh_);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzzd_, szzzzzzzzzzzzzzzzzzzzzi_);
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzzk_ = this.Home_Healthcare_Services(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzzm_ = this.Virtual_Encounter(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzzl_, szzzzzzzzzzzzzzzzzzzzzn_);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzzj_, szzzzzzzzzzzzzzzzzzzzzo_);
+        CqlValueSet szzzzzzzzzzzzzzzzzzzzzq_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Union<Encounter>(szzzzzzzzzzzzzzzzzzzzzp_, szzzzzzzzzzzzzzzzzzzzzr_);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzt_ = Status_1_8_000.Instance.isEncounterPerformed(context, szzzzzzzzzzzzzzzzzzzzzs_);
+        bool? szzzzzzzzzzzzzzzzzzzzzu_(Encounter ValidEncounter)
         {
-            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Measurement_Period(context);
-            Period azzzzzzzzzzzzzzzzzzzzzzzzzd_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azzzzzzzzzzzzzzzzzzzzzzzzzd_);
-            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.toInterval(context, azzzzzzzzzzzzzzzzzzzzzzzzze_ as object);
-            bool? azzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(azzzzzzzzzzzzzzzzzzzzzzzzzc_, azzzzzzzzzzzzzzzzzzzzzzzzzf_, "day");
+            CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzzzzzzzw_ = this.Measurement_Period(context);
+            Period szzzzzzzzzzzzzzzzzzzzzx_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, szzzzzzzzzzzzzzzzzzzzzx_);
+            CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.toInterval(context, szzzzzzzzzzzzzzzzzzzzzy_ as object);
+            bool? tzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(szzzzzzzzzzzzzzzzzzzzzw_, szzzzzzzzzzzzzzzzzzzzzz_, "day");
 
-            return azzzzzzzzzzzzzzzzzzzzzzzzzg_;
+            return tzzzzzzzzzzzzzzzzzzzzza_;
         };
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzz_, azzzzzzzzzzzzzzzzzzzzzzzzza_);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Encounter>(szzzzzzzzzzzzzzzzzzzzzt_, szzzzzzzzzzzzzzzzzzzzzu_);
 
-        return azzzzzzzzzzzzzzzzzzzzzzzzzb_;
+        return szzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 

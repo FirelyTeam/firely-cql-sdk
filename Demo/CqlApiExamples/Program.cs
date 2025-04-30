@@ -31,12 +31,12 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        // AddDuplicates(loggerFactory);
-        // Add3And2Example(loggerFactory);
-        // InvokeCqlExample(loggerFactory);
-        //InvokeCqlFromExamplesFolder(loggerFactory);
-        //PackageFromExamplesFolder(loggerFactory);
-        //
+        AddDuplicates(loggerFactory);
+        Add3And2Example(loggerFactory);
+        InvokeCqlExample(loggerFactory);
+        InvokeCqlFromExamplesFolder(loggerFactory);
+        PackageFromExamplesFolder(loggerFactory);
+        return;
 
         //string[] exampleSetNames = ["Tests"];
         string[] exampleSetNames = ["RR23"];
@@ -46,7 +46,8 @@ internal static class Program
         {
             Directories dirs = Directories.Create(exampleSetName);
             //PackageCqlToFhirExample(loggerFactory, dirs);
-            PackageElmToFhirExample(loggerFactory, dirs); dirs = dirs with { FhirInDirectory = dirs.FhirOutDirectory };
+            PackageElmToFhirExample(loggerFactory, dirs);
+            dirs = dirs with { FhirInDirectory = dirs.FhirOutDirectory };
             InvokeResourceExample(loggerFactory, dirs);
         }
     }
@@ -232,14 +233,8 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
 
-        Func<DefinitionInvoker, bool>? includeDefinition = definition => !IsAnyTypeOf(definition.ReturnType, typeof(ValueSet), typeof(Code), typeof(CodeSystem));
-        var results = (IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)>)librarySetInvoker
-                                                                                                    .EnumerateDefinitions()
-                                                                                                    .EnumerateResults(cqlContext, includeDefinition, null);
-
         static bool IsAnyTypeOf(Type target, params Type[] types) =>
             types.Any(type => type.IsAssignableFrom(target));
-
 
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
@@ -411,11 +406,11 @@ file static class Extensions
         IEnumerable<(DefinitionInvoker definitionInvoker, object? result)> definitions =
             cqlContext is null
                 ? librarySetInvoker
-                  .EnumerateDefinitions()
+                  .SelectExpressions()
                   .Select(definitionInvoker => (definitionInvoker, default(object)))
                 : librarySetInvoker
-                  .EnumerateDefinitions()
-                  .EnumerateResults(cqlContext, null, null);
+                  .SelectExpressions()
+                  .SelectResults(cqlContext, null);
 
         foreach (var groupedByLibrary in
                  definitions.GroupBy(o => o.definitionInvoker.LibraryIdentifier))
@@ -424,16 +419,16 @@ file static class Extensions
             sb.AppendLine($"  - LibraryName: {libraryIdentifier}");
             foreach (var (index, (definitionInvoker, result)) in groupedByLibrary
                                                                  .OrderBy(t =>
-                                                                     t.definitionInvoker.CqlDefinitionAttribute switch
-                                                                     {
-                                                                         CqlFunctionDefinitionAttribute   => 10,
-                                                                         CqlExpressionDefinitionAttribute => 8,
-                                                                         CqlConceptDefinitionAttribute    => 6,
-                                                                         CqlCodeDefinitionAttribute       => 4,
-                                                                         CqlCodeSystemDefinitionAttribute => 2,
-                                                                         CqlValueSetDefinitionAttribute   => 0,
-                                                                         _                                => 20,
-                                                                     })
+                                                                              t.definitionInvoker.CqlDefinitionAttribute switch
+                                                                              {
+                                                                                  CqlFunctionDefinitionAttribute   => 10,
+                                                                                  CqlExpressionDefinitionAttribute => 8,
+                                                                                  CqlConceptDefinitionAttribute    => 6,
+                                                                                  CqlCodeDefinitionAttribute       => 4,
+                                                                                  CqlCodeSystemDefinitionAttribute => 2,
+                                                                                  CqlValueSetDefinitionAttribute   => 0,
+                                                                                  _                                => 20,
+                                                                              })
                                                                  .GroupBy(def => def.definitionInvoker.CqlDefinitionAttribute.GetType().Name)
                                                                  .SelectMany(g => g.Indexed())
                      //.Indexed()
@@ -468,6 +463,7 @@ file static class Extensions
                                 sb.AppendLine($"        Tags:");
                             sb.AppendLine($"          - {tagName}: {string.Join(", ", tagValues)}");
                         }
+
                         break;
                 }
             }

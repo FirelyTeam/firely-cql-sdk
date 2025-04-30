@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
@@ -61,7 +62,7 @@ internal sealed class LibraryInstanceInvoker_3_0 : LibraryInstanceInvoker
         && cqlToolVersion < new Version(4, 0, 0, 0);
 }
 
-file class DefinitionInvoker_3_0
+file sealed class DefinitionInvoker_3_0
 (
     ILibrary library,
     LibraryInvoker libraryInvoker,
@@ -95,6 +96,12 @@ file class DefinitionInvoker_3_0
             library,
             BindingFlags.DoNotWrapExceptions,
             null,
-            args.Length == 0 ? [cqlContext] : [cqlContext, .. args],
+            CalcArgs(cqlContext),
             CultureInfo.InvariantCulture);
+
+    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
+    private static object?[] CalcArgs(CqlContext cqlContext, params object?[] args) =>
+        args is { Length: > 0 }
+            ? [cqlContext, ..args]
+            : [cqlContext];
 }

@@ -61,12 +61,12 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime nzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime nzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Interval(nzzzzzzzzzzzzzzzzzzzzr_, nzzzzzzzzzzzzzzzzzzzzs_, true, true);
-        object nzzzzzzzzzzzzzzzzzzzzu_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.1.000", "Measurement Period", nzzzzzzzzzzzzzzzzzzzzt_);
+        CqlDateTime ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Interval(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, true, true);
+        object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.1.000", "Measurement Period", ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-        return (CqlInterval<CqlDateTime>)nzzzzzzzzzzzzzzzzzzzzu_;
+        return (CqlInterval<CqlDateTime>)ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
     }
 
 
@@ -77,942 +77,942 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> nzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient nzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.SingletonFrom<Patient>(nzzzzzzzzzzzzzzzzzzzzv_);
+        IEnumerable<Patient> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.SingletonFrom<Patient>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-        return nzzzzzzzzzzzzzzzzzzzzw_;
+        return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
     {
-        CqlValueSet nzzzzzzzzzzzzzzzzzzzzx_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, nzzzzzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? nzzzzzzzzzzzzzzzzzzzzz_(Encounter InpatientEncounter)
+        CqlValueSet pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Encounter_Inpatient(context);
+        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Encounter InpatientEncounter)
         {
-            Patient ozzzzzzzzzzzzzzzzzzzzb_ = this.Patient(context);
-            Date ozzzzzzzzzzzzzzzzzzzzc_ = ozzzzzzzzzzzzzzzzzzzzb_?.BirthDateElement;
-            string ozzzzzzzzzzzzzzzzzzzzd_ = ozzzzzzzzzzzzzzzzzzzzc_?.Value;
-            CqlDate ozzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConvertStringToDate(ozzzzzzzzzzzzzzzzzzzzd_);
-            Period ozzzzzzzzzzzzzzzzzzzzf_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ozzzzzzzzzzzzzzzzzzzzf_);
-            CqlDateTime ozzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Start(ozzzzzzzzzzzzzzzzzzzzg_);
-            CqlDate ozzzzzzzzzzzzzzzzzzzzi_ = context.Operators.DateFrom(ozzzzzzzzzzzzzzzzzzzzh_);
-            int? ozzzzzzzzzzzzzzzzzzzzj_ = context.Operators.CalculateAgeAt(ozzzzzzzzzzzzzzzzzzzze_, ozzzzzzzzzzzzzzzzzzzzi_, "year");
-            bool? ozzzzzzzzzzzzzzzzzzzzk_ = context.Operators.GreaterOrEqual(ozzzzzzzzzzzzzzzzzzzzj_, 18);
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ozzzzzzzzzzzzzzzzzzzzf_);
-            CqlDateTime ozzzzzzzzzzzzzzzzzzzzn_ = context.Operators.End(ozzzzzzzzzzzzzzzzzzzzm_);
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzzzzzo_ = this.Measurement_Period(context);
-            bool? ozzzzzzzzzzzzzzzzzzzzp_ = context.Operators.In<CqlDateTime>(ozzzzzzzzzzzzzzzzzzzzn_, ozzzzzzzzzzzzzzzzzzzzo_, "day");
-            bool? ozzzzzzzzzzzzzzzzzzzzq_ = context.Operators.And(ozzzzzzzzzzzzzzzzzzzzk_, ozzzzzzzzzzzzzzzzzzzzp_);
-            Code<Encounter.EncounterStatus> ozzzzzzzzzzzzzzzzzzzzr_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? ozzzzzzzzzzzzzzzzzzzzs_ = ozzzzzzzzzzzzzzzzzzzzr_?.Value;
-            Code<Encounter.EncounterStatus> ozzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ozzzzzzzzzzzzzzzzzzzzs_);
-            bool? ozzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Equal(ozzzzzzzzzzzzzzzzzzzzt_, "finished");
-            bool? ozzzzzzzzzzzzzzzzzzzzv_ = context.Operators.And(ozzzzzzzzzzzzzzzzzzzzq_, ozzzzzzzzzzzzzzzzzzzzu_);
+            Patient pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Patient(context);
+            Date pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.BirthDateElement;
+            string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_?.Value;
+            CqlDate pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.ConvertStringToDate(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            Period pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = InpatientEncounter?.Period;
+            CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Start(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            CqlDate pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.DateFrom(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            int? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.CalculateAgeAt(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, "year");
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.GreaterOrEqual(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, 18);
+            CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            CqlDateTime pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.End(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Measurement_Period(context);
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.In<CqlDateTime>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, "day");
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+            Code<Encounter.EncounterStatus> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = InpatientEncounter?.StatusElement;
+            Encounter.EncounterStatus? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Value;
+            Code<Encounter.EncounterStatus> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, "finished");
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-            return ozzzzzzzzzzzzzzzzzzzzv_;
+            return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
         };
-        IEnumerable<Encounter> ozzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Encounter>(nzzzzzzzzzzzzzzzzzzzzy_, nzzzzzzzzzzzzzzzzzzzzz_);
+        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Where<Encounter>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-        return ozzzzzzzzzzzzzzzzzzzza_;
+        return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Hypoglycemic Medication Administration")]
     public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
     {
-        CqlValueSet ozzzzzzzzzzzzzzzzzzzzw_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-        IEnumerable<MedicationAdministration> ozzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> ozzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> pzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Union<MedicationAdministration>(ozzzzzzzzzzzzzzzzzzzzx_, ozzzzzzzzzzzzzzzzzzzzz_);
-        bool? pzzzzzzzzzzzzzzzzzzzzb_(MedicationAdministration HypoMedication)
+        CqlValueSet pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+        IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Union<MedicationAdministration>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+        bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(MedicationAdministration HypoMedication)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> pzzzzzzzzzzzzzzzzzzzzd_ = HypoMedication?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? pzzzzzzzzzzzzzzzzzzzze_ = pzzzzzzzzzzzzzzzzzzzzd_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> pzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(pzzzzzzzzzzzzzzzzzzzze_);
-            bool? pzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzf_, "completed");
-            MedicationAdministration.MedicationAdministrationStatusCodes? pzzzzzzzzzzzzzzzzzzzzi_ = pzzzzzzzzzzzzzzzzzzzzd_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> pzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(pzzzzzzzzzzzzzzzzzzzzi_);
-            bool? pzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzj_, "not-done");
-            bool? pzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Not(pzzzzzzzzzzzzzzzzzzzzk_);
-            bool? pzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzg_, pzzzzzzzzzzzzzzzzzzzzl_);
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = HypoMedication?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, "completed");
+            MedicationAdministration.MedicationAdministrationStatusCodes? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Equal(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, "not-done");
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Not(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-            return pzzzzzzzzzzzzzzzzzzzzm_;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
         };
-        IEnumerable<MedicationAdministration> pzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<MedicationAdministration>(pzzzzzzzzzzzzzzzzzzzza_, pzzzzzzzzzzzzzzzzzzzzb_);
+        IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<MedicationAdministration>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-        return pzzzzzzzzzzzzzzzzzzzzc_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Encounter with Hypoglycemic Medication Administration")]
     public IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context)
     {
-        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzn_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzo_(Encounter InpatientHospitalization)
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Encounter InpatientHospitalization)
         {
-            IEnumerable<MedicationAdministration> pzzzzzzzzzzzzzzzzzzzzq_ = this.Hypoglycemic_Medication_Administration(context);
-            bool? pzzzzzzzzzzzzzzzzzzzzr_(MedicationAdministration HypoglycemicMedication)
+            IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Hypoglycemic_Medication_Administration(context);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(MedicationAdministration HypoglycemicMedication)
             {
-                DataType pzzzzzzzzzzzzzzzzzzzzv_ = HypoglycemicMedication?.Effective;
-                object pzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzv_);
-                CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.ToInterval(context, pzzzzzzzzzzzzzzzzzzzzw_);
-                CqlDateTime pzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Start(pzzzzzzzzzzzzzzzzzzzzx_);
-                CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzzzzzz_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientHospitalization);
-                bool? qzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<CqlDateTime>(pzzzzzzzzzzzzzzzzzzzzy_, pzzzzzzzzzzzzzzzzzzzzz_, default);
+                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = HypoglycemicMedication?.Effective;
+                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                CqlInterval<CqlDateTime> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.ToInterval(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Start(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlInterval<CqlDateTime> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientHospitalization);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.In<CqlDateTime>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, default);
 
-                return qzzzzzzzzzzzzzzzzzzzza_;
+                return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
             };
-            IEnumerable<MedicationAdministration> pzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<MedicationAdministration>(pzzzzzzzzzzzzzzzzzzzzq_, pzzzzzzzzzzzzzzzzzzzzr_);
-            Encounter pzzzzzzzzzzzzzzzzzzzzt_(MedicationAdministration HypoglycemicMedication) =>
+            IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<MedicationAdministration>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+            Encounter qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(MedicationAdministration HypoglycemicMedication) =>
                 InpatientHospitalization;
-            IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Select<MedicationAdministration, Encounter>(pzzzzzzzzzzzzzzzzzzzzs_, pzzzzzzzzzzzzzzzzzzzzt_);
+            IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Select<MedicationAdministration, Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-            return pzzzzzzzzzzzzzzzzzzzzu_;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
         };
-        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.SelectMany<Encounter, Encounter>(pzzzzzzzzzzzzzzzzzzzzn_, pzzzzzzzzzzzzzzzzzzzzo_);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.SelectMany<Encounter, Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-        return pzzzzzzzzzzzzzzzzzzzzp_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzb_ = this.Encounter_with_Hypoglycemic_Medication_Administration(context);
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Encounter_with_Hypoglycemic_Medication_Administration(context);
 
-        return qzzzzzzzzzzzzzzzzzzzzb_;
+        return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzc_ = this.Initial_Population(context);
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Initial_Population(context);
 
-        return qzzzzzzzzzzzzzzzzzzzzc_;
+        return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Glucose Test with Result Less Than 40")]
     public IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40(CqlContext context)
     {
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzd_ = this.Denominator(context);
-        IEnumerable<MedicationAdministration> qzzzzzzzzzzzzzzzzzzzze_ = this.Hypoglycemic_Medication_Administration(context);
-        CqlValueSet qzzzzzzzzzzzzzzzzzzzzf_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
-        IEnumerable<Observation> qzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<ValueTuple<Encounter, MedicationAdministration, Observation>> qzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(qzzzzzzzzzzzzzzzzzzzzd_, qzzzzzzzzzzzzzzzzzzzze_, qzzzzzzzzzzzzzzzzzzzzg_);
-        (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? qzzzzzzzzzzzzzzzzzzzzi_(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Denominator(context);
+        IEnumerable<MedicationAdministration> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Hypoglycemic_Medication_Administration(context);
+        CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
+        IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<ValueTuple<Encounter, MedicationAdministration, Observation>> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+        (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? qzzzzzzzzzzzzzzzzzzzzp_ = (CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = (CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return qzzzzzzzzzzzzzzzzzzzzp_;
+            return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> qzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Select<ValueTuple<Encounter, MedicationAdministration, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(qzzzzzzzzzzzzzzzzzzzzh_, qzzzzzzzzzzzzzzzzzzzzi_);
-        bool? qzzzzzzzzzzzzzzzzzzzzk_((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho)
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Select<ValueTuple<Encounter, MedicationAdministration, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho)
         {
-            object qzzzzzzzzzzzzzzzzzzzzq_()
+            object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
             {
-                bool rzzzzzzzzzzzzzzzzzzzzx_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzza_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzza_);
-                    bool szzzzzzzzzzzzzzzzzzzzc_ = szzzzzzzzzzzzzzzzzzzzb_ is CqlDateTime;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ is CqlDateTime;
 
-                    return szzzzzzzzzzzzzzzzzzzzc_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                 };
-                bool rzzzzzzzzzzzzzzzzzzzzy_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzd_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzd_);
-                    bool szzzzzzzzzzzzzzzzzzzzf_ = szzzzzzzzzzzzzzzzzzzze_ is CqlInterval<CqlDateTime>;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ is CqlInterval<CqlDateTime>;
 
-                    return szzzzzzzzzzzzzzzzzzzzf_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
                 };
-                bool rzzzzzzzzzzzzzzzzzzzzz_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzg_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzg_);
-                    bool szzzzzzzzzzzzzzzzzzzzi_ = szzzzzzzzzzzzzzzzzzzzh_ is CqlDateTime;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                    return szzzzzzzzzzzzzzzzzzzzi_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                if (rzzzzzzzzzzzzzzzzzzzzx_())
+                if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzj_);
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                    return (szzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
+                    return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
                 }
-                else if (rzzzzzzzzzzzzzzzzzzzzy_())
+                else if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzl_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzl_);
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                    return (szzzzzzzzzzzzzzzzzzzzm_ as CqlInterval<CqlDateTime>) as object;
+                    return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (rzzzzzzzzzzzzzzzzzzzzz_())
+                else if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzn_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzn_);
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                    return (szzzzzzzzzzzzzzzzzzzzo_ as CqlDateTime) as object;
+                    return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime qzzzzzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.Earliest(context, qzzzzzzzzzzzzzzzzzzzzq_());
-            CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzs_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_btymmdgachdragrhofgxbxgho?.QualifyingEncounter);
-            bool? qzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.In<CqlDateTime>(qzzzzzzzzzzzzzzzzzzzzr_, qzzzzzzzzzzzzzzzzzzzzs_, default);
-            Code<ObservationStatus> qzzzzzzzzzzzzzzzzzzzzu_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.StatusElement;
-            ObservationStatus? qzzzzzzzzzzzzzzzzzzzzv_ = qzzzzzzzzzzzzzzzzzzzzu_?.Value;
-            Code<ObservationStatus> qzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<Code<ObservationStatus>>(qzzzzzzzzzzzzzzzzzzzzv_);
-            string qzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<string>(qzzzzzzzzzzzzzzzzzzzzw_);
-            string[] qzzzzzzzzzzzzzzzzzzzzy_ = [
+            CqlDateTime rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.Earliest(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_());
+            CqlInterval<CqlDateTime> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_btymmdgachdragrhofgxbxgho?.QualifyingEncounter);
+            bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.In<CqlDateTime>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, default);
+            Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.StatusElement;
+            ObservationStatus? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_?.Value;
+            Code<ObservationStatus> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<Code<ObservationStatus>>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            string[] szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? qzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.In<string>(qzzzzzzzzzzzzzzzzzzzzx_, qzzzzzzzzzzzzzzzzzzzzy_ as IEnumerable<string>);
-            bool? rzzzzzzzzzzzzzzzzzzzza_ = context.Operators.And(qzzzzzzzzzzzzzzzzzzzzt_, qzzzzzzzzzzzzzzzzzzzzz_);
-            DataType rzzzzzzzzzzzzzzzzzzzzb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Value;
-            object rzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzb_);
-            CqlQuantity rzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Quantity(40m, "mg/dL");
-            bool? rzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Less(rzzzzzzzzzzzzzzzzzzzzc_ as CqlQuantity, rzzzzzzzzzzzzzzzzzzzzd_);
-            bool? rzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzza_, rzzzzzzzzzzzzzzzzzzzze_);
-            DataType rzzzzzzzzzzzzzzzzzzzzg_ = tuple_btymmdgachdragrhofgxbxgho?.HypoglycemicMedication?.Effective;
-            object rzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzzzzzzg_);
-            CqlInterval<CqlDateTime> rzzzzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.ToInterval(context, rzzzzzzzzzzzzzzzzzzzzh_);
-            CqlDateTime rzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Start(rzzzzzzzzzzzzzzzzzzzzi_);
-            object rzzzzzzzzzzzzzzzzzzzzk_()
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.In<string>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as IEnumerable<string>);
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+            DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Value;
+            object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+            CqlQuantity szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Quantity(40m, "mg/dL");
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Less(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlQuantity, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = tuple_btymmdgachdragrhofgxbxgho?.HypoglycemicMedication?.Effective;
+            object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.ToInterval(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Start(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_()
             {
-                bool szzzzzzzzzzzzzzzzzzzzp_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzs_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzs_);
-                    bool szzzzzzzzzzzzzzzzzzzzu_ = szzzzzzzzzzzzzzzzzzzzt_ is CqlDateTime;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ is CqlDateTime;
 
-                    return szzzzzzzzzzzzzzzzzzzzu_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
                 };
-                bool szzzzzzzzzzzzzzzzzzzzq_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzv_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzv_);
-                    bool szzzzzzzzzzzzzzzzzzzzx_ = szzzzzzzzzzzzzzzzzzzzw_ is CqlInterval<CqlDateTime>;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                    bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ is CqlInterval<CqlDateTime>;
 
-                    return szzzzzzzzzzzzzzzzzzzzx_;
+                    return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
                 };
-                bool szzzzzzzzzzzzzzzzzzzzr_()
+                bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                 {
-                    DataType szzzzzzzzzzzzzzzzzzzzy_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object szzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzy_);
-                    bool tzzzzzzzzzzzzzzzzzzzza_ = szzzzzzzzzzzzzzzzzzzzz_ is CqlDateTime;
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ is CqlDateTime;
 
-                    return tzzzzzzzzzzzzzzzzzzzza_;
+                    return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
                 };
-                if (szzzzzzzzzzzzzzzzzzzzp_())
+                if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzb_);
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzc_ as CqlDateTime) as object;
+                    return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlDateTime) as object;
                 }
-                else if (szzzzzzzzzzzzzzzzzzzzq_())
+                else if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzd_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzze_ as CqlInterval<CqlDateTime>) as object;
+                    return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (szzzzzzzzzzzzzzzzzzzzr_())
+                else if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzf_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzf_);
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
+                    return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime rzzzzzzzzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.Earliest(context, rzzzzzzzzzzzzzzzzzzzzk_());
-            CqlQuantity rzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Quantity(24m, "hours");
-            CqlDateTime rzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Subtract(rzzzzzzzzzzzzzzzzzzzzl_, rzzzzzzzzzzzzzzzzzzzzm_);
-            object rzzzzzzzzzzzzzzzzzzzzo_()
+            CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.Earliest(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_());
+            CqlQuantity szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Quantity(24m, "hours");
+            CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Subtract(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
             {
-                bool tzzzzzzzzzzzzzzzzzzzzh_()
+                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzk_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzk_);
-                    bool tzzzzzzzzzzzzzzzzzzzzm_ = tzzzzzzzzzzzzzzzzzzzzl_ is CqlDateTime;
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlDateTime;
 
-                    return tzzzzzzzzzzzzzzzzzzzzm_;
+                    return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                bool tzzzzzzzzzzzzzzzzzzzzi_()
+                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzn_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzn_);
-                    bool tzzzzzzzzzzzzzzzzzzzzp_ = tzzzzzzzzzzzzzzzzzzzzo_ is CqlInterval<CqlDateTime>;
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlInterval<CqlDateTime>;
 
-                    return tzzzzzzzzzzzzzzzzzzzzp_;
+                    return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                bool tzzzzzzzzzzzzzzzzzzzzj_()
+                bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_()
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzq_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzq_);
-                    bool tzzzzzzzzzzzzzzzzzzzzs_ = tzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    bool uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
 
-                    return tzzzzzzzzzzzzzzzzzzzzs_;
+                    return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                if (tzzzzzzzzzzzzzzzzzzzzh_())
+                if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzt_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
+                    return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                 }
-                else if (tzzzzzzzzzzzzzzzzzzzzi_())
+                else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzv_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzw_ as CqlInterval<CqlDateTime>) as object;
+                    return (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (tzzzzzzzzzzzzzzzzzzzzj_())
+                else if (uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_())
                 {
-                    DataType tzzzzzzzzzzzzzzzzzzzzx_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object tzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, tzzzzzzzzzzzzzzzzzzzzx_);
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                    return (tzzzzzzzzzzzzzzzzzzzzy_ as CqlDateTime) as object;
+                    return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime rzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.Earliest(context, rzzzzzzzzzzzzzzzzzzzzo_());
-            CqlInterval<CqlDateTime> rzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Interval(rzzzzzzzzzzzzzzzzzzzzn_, rzzzzzzzzzzzzzzzzzzzzp_, true, true);
-            bool? rzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<CqlDateTime>(rzzzzzzzzzzzzzzzzzzzzj_, rzzzzzzzzzzzzzzzzzzzzq_, default);
-            object rzzzzzzzzzzzzzzzzzzzzs_()
+            CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.Earliest(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
+            CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Interval(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, true, true);
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.In<CqlDateTime>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, default);
+            object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
             {
-                bool tzzzzzzzzzzzzzzzzzzzzz_()
+                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzc_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzc_);
-                    bool uzzzzzzzzzzzzzzzzzzzze_ = uzzzzzzzzzzzzzzzzzzzzd_ is CqlDateTime;
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                    bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is CqlDateTime;
 
-                    return uzzzzzzzzzzzzzzzzzzzze_;
+                    return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
                 };
-                bool uzzzzzzzzzzzzzzzzzzzza_()
+                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzf_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzf_);
-                    bool uzzzzzzzzzzzzzzzzzzzzh_ = uzzzzzzzzzzzzzzzzzzzzg_ is CqlInterval<CqlDateTime>;
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is CqlInterval<CqlDateTime>;
 
-                    return uzzzzzzzzzzzzzzzzzzzzh_;
+                    return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                bool uzzzzzzzzzzzzzzzzzzzzb_()
+                bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_()
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzi_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzi_);
-                    bool uzzzzzzzzzzzzzzzzzzzzk_ = uzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    bool vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
 
-                    return uzzzzzzzzzzzzzzzzzzzzk_;
+                    return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                if (tzzzzzzzzzzzzzzzzzzzzz_())
+                if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzl_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzl_);
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                    return (uzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
+                    return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
                 }
-                else if (uzzzzzzzzzzzzzzzzzzzza_())
+                else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzn_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzn_);
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                    return (uzzzzzzzzzzzzzzzzzzzzo_ as CqlInterval<CqlDateTime>) as object;
+                    return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (uzzzzzzzzzzzzzzzzzzzzb_())
+                else if (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_())
                 {
-                    DataType uzzzzzzzzzzzzzzzzzzzzp_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-                    object uzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzp_);
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+                    object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (uzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
+                    return (vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime rzzzzzzzzzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.Earliest(context, rzzzzzzzzzzzzzzzzzzzzs_());
-            bool? rzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Not((bool?)(rzzzzzzzzzzzzzzzzzzzzt_ is null));
-            bool? rzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzr_, rzzzzzzzzzzzzzzzzzzzzu_);
-            bool? rzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzf_, rzzzzzzzzzzzzzzzzzzzzv_);
+            CqlDateTime szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = QICoreCommon_2_1_000.Instance.Earliest(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_());
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Not((bool?)(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ is null));
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return rzzzzzzzzzzzzzzzzzzzzw_;
+            return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> qzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(qzzzzzzzzzzzzzzzzzzzzj_, qzzzzzzzzzzzzzzzzzzzzk_);
-        Observation qzzzzzzzzzzzzzzzzzzzzm_((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho) =>
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+        Observation rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho) =>
             tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest;
-        IEnumerable<Observation> qzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?, Observation>(qzzzzzzzzzzzzzzzzzzzzl_, qzzzzzzzzzzzzzzzzzzzzm_);
-        IEnumerable<Observation> qzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Distinct<Observation>(qzzzzzzzzzzzzzzzzzzzzn_);
+        IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?, Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+        IEnumerable<Observation> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Distinct<Observation>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-        return qzzzzzzzzzzzzzzzzzzzzo_;
+        return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Low Glucose Test Followed By Glucose Test Result Greater Than 80")]
     public IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(CqlContext context)
     {
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzr_ = this.Denominator(context);
-        IEnumerable<Observation> uzzzzzzzzzzzzzzzzzzzzs_ = this.Glucose_Test_with_Result_Less_Than_40(context);
-        CqlValueSet uzzzzzzzzzzzzzzzzzzzzt_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
-        IEnumerable<Observation> uzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<ValueTuple<Encounter, Observation, Observation>> uzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(uzzzzzzzzzzzzzzzzzzzzr_, uzzzzzzzzzzzzzzzzzzzzs_, uzzzzzzzzzzzzzzzzzzzzu_);
-        (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? uzzzzzzzzzzzzzzzzzzzzw_(ValueTuple<Encounter, Observation, Observation> _valueTuple)
+        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Denominator(context);
+        IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Glucose_Test_with_Result_Less_Than_40(context);
+        CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
+        IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<ValueTuple<Encounter, Observation, Observation>> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+        (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(ValueTuple<Encounter, Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? vzzzzzzzzzzzzzzzzzzzzd_ = (CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = (CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return vzzzzzzzzzzzzzzzzzzzzd_;
+            return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> uzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Select<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(uzzzzzzzzzzzzzzzzzzzzv_, uzzzzzzzzzzzzzzzzzzzzw_);
-        bool? uzzzzzzzzzzzzzzzzzzzzy_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd)
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Select<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd)
         {
-            object vzzzzzzzzzzzzzzzzzzzze_()
+            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
             {
-                bool wzzzzzzzzzzzzzzzzzzzzv_()
+                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_()
                 {
-                    DataType wzzzzzzzzzzzzzzzzzzzzy_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object wzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzy_);
-                    bool xzzzzzzzzzzzzzzzzzzzza_ = wzzzzzzzzzzzzzzzzzzzzz_ is CqlDateTime;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzza_;
+                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
                 };
-                bool wzzzzzzzzzzzzzzzzzzzzw_()
+                bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzb_);
-                    bool xzzzzzzzzzzzzzzzzzzzzd_ = xzzzzzzzzzzzzzzzzzzzzc_ is CqlInterval<CqlDateTime>;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ is CqlInterval<CqlDateTime>;
 
-                    return xzzzzzzzzzzzzzzzzzzzzd_;
+                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
                 };
-                bool wzzzzzzzzzzzzzzzzzzzzx_()
+                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzze_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzze_);
-                    bool xzzzzzzzzzzzzzzzzzzzzg_ = xzzzzzzzzzzzzzzzzzzzzf_ is CqlDateTime;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzzg_;
+                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
                 };
-                if (wzzzzzzzzzzzzzzzzzzzzv_())
+                if (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_())
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzh_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzh_);
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-                    return (xzzzzzzzzzzzzzzzzzzzzi_ as CqlDateTime) as object;
+                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CqlDateTime) as object;
                 }
-                else if (wzzzzzzzzzzzzzzzzzzzzw_())
+                else if (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzj_);
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                    return (xzzzzzzzzzzzzzzzzzzzzk_ as CqlInterval<CqlDateTime>) as object;
+                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (wzzzzzzzzzzzzzzzzzzzzx_())
+                else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzl_);
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                    return (xzzzzzzzzzzzzzzzzzzzzm_ as CqlDateTime) as object;
+                    return (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzze_());
-            object vzzzzzzzzzzzzzzzzzzzzg_()
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.Earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_());
+            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
             {
-                bool xzzzzzzzzzzzzzzzzzzzzn_()
+                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzq_);
-                    bool xzzzzzzzzzzzzzzzzzzzzs_ = xzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzzs_;
+                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                bool xzzzzzzzzzzzzzzzzzzzzo_()
+                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzt_);
-                    bool xzzzzzzzzzzzzzzzzzzzzv_ = xzzzzzzzzzzzzzzzzzzzzu_ is CqlInterval<CqlDateTime>;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                    bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is CqlInterval<CqlDateTime>;
 
-                    return xzzzzzzzzzzzzzzzzzzzzv_;
+                    return yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                 };
-                bool xzzzzzzzzzzzzzzzzzzzzp_()
+                bool yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object xzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzw_);
-                    bool xzzzzzzzzzzzzzzzzzzzzy_ = xzzzzzzzzzzzzzzzzzzzzx_ is CqlDateTime;
+                    DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                    bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is CqlDateTime;
 
-                    return xzzzzzzzzzzzzzzzzzzzzy_;
+                    return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                 };
-                if (xzzzzzzzzzzzzzzzzzzzzn_())
+                if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_())
                 {
-                    DataType xzzzzzzzzzzzzzzzzzzzzz_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzz_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzza_ as CqlDateTime) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CqlDateTime) as object;
                 }
-                else if (xzzzzzzzzzzzzzzzzzzzzo_())
+                else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzb_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzc_ as CqlInterval<CqlDateTime>) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (xzzzzzzzzzzzzzzzzzzzzp_())
+                else if (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzze_ as CqlDateTime) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzh_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzzg_());
-            object vzzzzzzzzzzzzzzzzzzzzi_()
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.Earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_());
+            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
             {
-                bool yzzzzzzzzzzzzzzzzzzzzf_()
+                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzi_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzi_);
-                    bool yzzzzzzzzzzzzzzzzzzzzk_ = yzzzzzzzzzzzzzzzzzzzzj_ is CqlDateTime;
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is CqlDateTime;
 
-                    return yzzzzzzzzzzzzzzzzzzzzk_;
+                    return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzg_()
+                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzl_);
-                    bool yzzzzzzzzzzzzzzzzzzzzn_ = yzzzzzzzzzzzzzzzzzzzzm_ is CqlInterval<CqlDateTime>;
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                    bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is CqlInterval<CqlDateTime>;
 
-                    return yzzzzzzzzzzzzzzzzzzzzn_;
+                    return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzh_()
+                bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzo_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzo_);
-                    bool yzzzzzzzzzzzzzzzzzzzzq_ = yzzzzzzzzzzzzzzzzzzzzp_ is CqlDateTime;
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                    bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is CqlDateTime;
 
-                    return yzzzzzzzzzzzzzzzzzzzzq_;
+                    return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
                 };
-                if (yzzzzzzzzzzzzzzzzzzzzf_())
+                if (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzr_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzs_ as CqlDateTime) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlDateTime) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzg_())
+                else if (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzu_ as CqlInterval<CqlDateTime>) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzh_())
+                else if (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
                 {
-                    DataType yzzzzzzzzzzzzzzzzzzzzv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object yzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-                    return (yzzzzzzzzzzzzzzzzzzzzw_ as CqlDateTime) as object;
+                    return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzzi_());
-            CqlQuantity vzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Quantity(5m, "minutes");
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Add(vzzzzzzzzzzzzzzzzzzzzj_, vzzzzzzzzzzzzzzzzzzzzk_);
-            CqlInterval<CqlDateTime> vzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Interval(vzzzzzzzzzzzzzzzzzzzzh_, vzzzzzzzzzzzzzzzzzzzzl_, false, true);
-            bool? vzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.In<CqlDateTime>(vzzzzzzzzzzzzzzzzzzzzf_, vzzzzzzzzzzzzzzzzzzzzm_, default);
-            object vzzzzzzzzzzzzzzzzzzzzo_()
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.Earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_());
+            CqlQuantity wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Quantity(5m, "minutes");
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Add(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+            CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Interval(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, false, true);
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.In<CqlDateTime>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, default);
+            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
             {
-                bool yzzzzzzzzzzzzzzzzzzzzx_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzza_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzza_);
-                    bool zzzzzzzzzzzzzzzzzzzzzc_ = zzzzzzzzzzzzzzzzzzzzzb_ is CqlDateTime;
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ is CqlDateTime;
 
-                    return zzzzzzzzzzzzzzzzzzzzzc_;
+                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzy_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzd_);
-                    bool zzzzzzzzzzzzzzzzzzzzzf_ = zzzzzzzzzzzzzzzzzzzzze_ is CqlInterval<CqlDateTime>;
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ is CqlInterval<CqlDateTime>;
 
-                    return zzzzzzzzzzzzzzzzzzzzzf_;
+                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
                 };
-                bool yzzzzzzzzzzzzzzzzzzzzz_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzg_);
-                    bool zzzzzzzzzzzzzzzzzzzzzi_ = zzzzzzzzzzzzzzzzzzzzzh_ is CqlDateTime;
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                    return zzzzzzzzzzzzzzzzzzzzzi_;
+                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                if (yzzzzzzzzzzzzzzzzzzzzx_())
+                if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_())
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzj_);
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                    return (zzzzzzzzzzzzzzzzzzzzzk_ as CqlDateTime) as object;
+                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ as CqlDateTime) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzy_())
+                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_())
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzl_);
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                    return (zzzzzzzzzzzzzzzzzzzzzm_ as CqlInterval<CqlDateTime>) as object;
+                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (yzzzzzzzzzzzzzzzzzzzzz_())
+                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzn_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzn_);
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                    return (zzzzzzzzzzzzzzzzzzzzzo_ as CqlDateTime) as object;
+                    return (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzzo_());
-            bool? vzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Not((bool?)(vzzzzzzzzzzzzzzzzzzzzp_ is null));
-            bool? vzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzn_, vzzzzzzzzzzzzzzzzzzzzq_);
-            object vzzzzzzzzzzzzzzzzzzzzs_()
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.Earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_());
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ is null));
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            object wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_()
             {
-                bool zzzzzzzzzzzzzzzzzzzzzp_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzs_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzs_);
-                    bool zzzzzzzzzzzzzzzzzzzzzu_ = zzzzzzzzzzzzzzzzzzzzzt_ is CqlDateTime;
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                    bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ is CqlDateTime;
 
-                    return zzzzzzzzzzzzzzzzzzzzzu_;
+                    return azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
                 };
-                bool zzzzzzzzzzzzzzzzzzzzzq_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzv_);
-                    bool zzzzzzzzzzzzzzzzzzzzzx_ = zzzzzzzzzzzzzzzzzzzzzw_ is CqlInterval<CqlDateTime>;
+                    DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ is CqlInterval<CqlDateTime>;
 
-                    return zzzzzzzzzzzzzzzzzzzzzx_;
+                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
                 };
-                bool zzzzzzzzzzzzzzzzzzzzzr_()
+                bool azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_()
                 {
-                    DataType zzzzzzzzzzzzzzzzzzzzzy_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object zzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzzzzzzy_);
-                    bool azzzzzzzzzzzzzzzzzzzzza_ = zzzzzzzzzzzzzzzzzzzzzz_ is CqlDateTime;
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ is CqlDateTime;
 
-                    return azzzzzzzzzzzzzzzzzzzzza_;
+                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
                 };
-                if (zzzzzzzzzzzzzzzzzzzzzp_())
+                if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzb_);
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzc_ as CqlDateTime) as object;
+                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CqlDateTime) as object;
                 }
-                else if (zzzzzzzzzzzzzzzzzzzzzq_())
+                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzd_);
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzze_ as CqlInterval<CqlDateTime>) as object;
+                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (zzzzzzzzzzzzzzzzzzzzzr_())
+                else if (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzf_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzf_);
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzg_ as CqlDateTime) as object;
+                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzzs_());
-            CqlInterval<CqlDateTime> vzzzzzzzzzzzzzzzzzzzzu_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_clljqcgdejtdiiewkzyjpwapd?.QualifyingEncounter);
-            bool? vzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.In<CqlDateTime>(vzzzzzzzzzzzzzzzzzzzzt_, vzzzzzzzzzzzzzzzzzzzzu_, default);
-            bool? vzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzr_, vzzzzzzzzzzzzzzzzzzzzv_);
-            object vzzzzzzzzzzzzzzzzzzzzx_()
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = QICoreCommon_2_1_000.Instance.Earliest(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_());
+            CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_clljqcgdejtdiiewkzyjpwapd?.QualifyingEncounter);
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.In<CqlDateTime>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, default);
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_()
             {
-                bool azzzzzzzzzzzzzzzzzzzzzh_()
+                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzk_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzk_);
-                    bool azzzzzzzzzzzzzzzzzzzzzm_ = azzzzzzzzzzzzzzzzzzzzzl_ is CqlDateTime;
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is CqlDateTime;
 
-                    return azzzzzzzzzzzzzzzzzzzzzm_;
+                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                bool azzzzzzzzzzzzzzzzzzzzzi_()
+                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzn_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzn_);
-                    bool azzzzzzzzzzzzzzzzzzzzzp_ = azzzzzzzzzzzzzzzzzzzzzo_ is CqlInterval<CqlDateTime>;
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ is CqlInterval<CqlDateTime>;
 
-                    return azzzzzzzzzzzzzzzzzzzzzp_;
+                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                bool azzzzzzzzzzzzzzzzzzzzzj_()
+                bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_()
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzq_);
-                    bool azzzzzzzzzzzzzzzzzzzzzs_ = azzzzzzzzzzzzzzzzzzzzzr_ is CqlDateTime;
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ is CqlDateTime;
 
-                    return azzzzzzzzzzzzzzzzzzzzzs_;
+                    return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                if (azzzzzzzzzzzzzzzzzzzzzh_())
+                if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
+                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                 }
-                else if (azzzzzzzzzzzzzzzzzzzzzi_())
+                else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzv_);
+                    DataType bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzw_ as CqlInterval<CqlDateTime>) as object;
+                    return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (azzzzzzzzzzzzzzzzzzzzzj_())
+                else if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_())
                 {
-                    DataType azzzzzzzzzzzzzzzzzzzzzx_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-                    object azzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzx_);
+                    DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+                    object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                    return (azzzzzzzzzzzzzzzzzzzzzy_ as CqlDateTime) as object;
+                    return (czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime vzzzzzzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.Earliest(context, vzzzzzzzzzzzzzzzzzzzzx_());
-            bool? wzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<CqlDateTime>(vzzzzzzzzzzzzzzzzzzzzy_, vzzzzzzzzzzzzzzzzzzzzu_, default);
-            bool? wzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzw_, wzzzzzzzzzzzzzzzzzzzza_);
-            Id wzzzzzzzzzzzzzzzzzzzzc_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.IdElement;
-            string wzzzzzzzzzzzzzzzzzzzzd_ = wzzzzzzzzzzzzzzzzzzzzc_?.Value;
-            Id wzzzzzzzzzzzzzzzzzzzze_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.IdElement;
-            string wzzzzzzzzzzzzzzzzzzzzf_ = wzzzzzzzzzzzzzzzzzzzze_?.Value;
-            bool? wzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Equivalent(wzzzzzzzzzzzzzzzzzzzzd_, wzzzzzzzzzzzzzzzzzzzzf_);
-            bool? wzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Not(wzzzzzzzzzzzzzzzzzzzzg_);
-            bool? wzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzb_, wzzzzzzzzzzzzzzzzzzzzh_);
-            Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.StatusElement;
-            ObservationStatus? wzzzzzzzzzzzzzzzzzzzzk_ = wzzzzzzzzzzzzzzzzzzzzj_?.Value;
-            Code<ObservationStatus> wzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Convert<Code<ObservationStatus>>(wzzzzzzzzzzzzzzzzzzzzk_);
-            string wzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzzzzzzl_);
-            string[] wzzzzzzzzzzzzzzzzzzzzn_ = [
+            CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.Earliest(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_());
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.In<CqlDateTime>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, default);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            Id xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.IdElement;
+            string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_?.Value;
+            Id xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.IdElement;
+            string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_?.Value;
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Equivalent(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            Code<ObservationStatus> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.StatusElement;
+            ObservationStatus? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
+            Code<ObservationStatus> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<Code<ObservationStatus>>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+            string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+            string[] xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? wzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.In<string>(wzzzzzzzzzzzzzzzzzzzzm_, wzzzzzzzzzzzzzzzzzzzzn_ as IEnumerable<string>);
-            bool? wzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzi_, wzzzzzzzzzzzzzzzzzzzzo_);
-            DataType wzzzzzzzzzzzzzzzzzzzzq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Value;
-            object wzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzzzzzq_);
-            CqlQuantity wzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Quantity(80m, "mg/dL");
-            bool? wzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Greater(wzzzzzzzzzzzzzzzzzzzzr_ as CqlQuantity, wzzzzzzzzzzzzzzzzzzzzs_);
-            bool? wzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzp_, wzzzzzzzzzzzzzzzzzzzzt_);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as IEnumerable<string>);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            DataType xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Value;
+            object xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            CqlQuantity xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Quantity(80m, "mg/dL");
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Greater(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlQuantity, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-            return wzzzzzzzzzzzzzzzzzzzzu_;
+            return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> uzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(uzzzzzzzzzzzzzzzzzzzzx_, uzzzzzzzzzzzzzzzzzzzzy_);
-        Observation vzzzzzzzzzzzzzzzzzzzza_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd) =>
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+        Observation wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd) =>
             tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest;
-        IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?, Observation>(uzzzzzzzzzzzzzzzzzzzzz_, vzzzzzzzzzzzzzzzzzzzza_);
-        IEnumerable<Observation> vzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Distinct<Observation>(vzzzzzzzzzzzzzzzzzzzzb_);
+        IEnumerable<Observation> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?, Observation>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+        IEnumerable<Observation> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Distinct<Observation>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-        return vzzzzzzzzzzzzzzzzzzzzc_;
+        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Severe Hypoglycemic Harm Event")]
     public IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event(CqlContext context)
     {
-        IEnumerable<Observation> azzzzzzzzzzzzzzzzzzzzzz_ = this.Glucose_Test_with_Result_Less_Than_40(context);
-        bool? bzzzzzzzzzzzzzzzzzzzzza_(Observation LowGlucoseTest)
+        IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Glucose_Test_with_Result_Less_Than_40(context);
+        bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_(Observation LowGlucoseTest)
         {
-            Id bzzzzzzzzzzzzzzzzzzzzzc_ = LowGlucoseTest?.IdElement;
-            string bzzzzzzzzzzzzzzzzzzzzzd_ = bzzzzzzzzzzzzzzzzzzzzzc_?.Value;
-            IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzze_ = this.Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(context);
-            bool? bzzzzzzzzzzzzzzzzzzzzzf_(Observation @this)
+            Id czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = LowGlucoseTest?.IdElement;
+            string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_?.Value;
+            IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(context);
+            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Observation @this)
             {
-                string bzzzzzzzzzzzzzzzzzzzzzl_ = (@this is Resource
+                string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = (@this is Resource
     ? (@this as Resource).IdElement
     : default)?.Value;
-                bool? bzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Not((bool?)(bzzzzzzzzzzzzzzzzzzzzzl_ is null));
+                bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Not((bool?)(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ is null));
 
-                return bzzzzzzzzzzzzzzzzzzzzzm_;
+                return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
             };
-            IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Observation>(bzzzzzzzzzzzzzzzzzzzzze_, bzzzzzzzzzzzzzzzzzzzzzf_);
-            string bzzzzzzzzzzzzzzzzzzzzzh_(Observation @this)
+            IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(Observation @this)
             {
-                string bzzzzzzzzzzzzzzzzzzzzzn_ = (@this is Resource
+                string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = (@this is Resource
     ? (@this as Resource).IdElement
     : default)?.Value;
 
-                return bzzzzzzzzzzzzzzzzzzzzzn_;
+                return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
             };
-            IEnumerable<string> bzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Observation, string>(bzzzzzzzzzzzzzzzzzzzzzg_, bzzzzzzzzzzzzzzzzzzzzzh_);
-            bool? bzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.In<string>(bzzzzzzzzzzzzzzzzzzzzzd_, bzzzzzzzzzzzzzzzzzzzzzi_);
-            bool? bzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not(bzzzzzzzzzzzzzzzzzzzzzj_);
+            IEnumerable<string> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Select<Observation, string>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.In<string>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Not(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-            return bzzzzzzzzzzzzzzzzzzzzzk_;
+            return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
         };
-        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Observation>(azzzzzzzzzzzzzzzzzzzzzz_, bzzzzzzzzzzzzzzzzzzzzza_);
+        IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Where<Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-        return bzzzzzzzzzzzzzzzzzzzzzb_;
+        return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Encounter with Severe Hypoglycemic Harm Event")]
     public IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event(CqlContext context)
     {
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzzzzzzo_ = this.Denominator(context);
-        IEnumerable<Observation> bzzzzzzzzzzzzzzzzzzzzzp_ = this.Severe_Hypoglycemic_Harm_Event(context);
-        IEnumerable<ValueTuple<Encounter, Observation>> bzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.CrossJoin<Encounter, Observation>(bzzzzzzzzzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzzzzzzzzzp_);
-        (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? bzzzzzzzzzzzzzzzzzzzzzr_(ValueTuple<Encounter, Observation> _valueTuple)
+        IEnumerable<Encounter> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Denominator(context);
+        IEnumerable<Observation> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Severe_Hypoglycemic_Harm_Event(context);
+        IEnumerable<ValueTuple<Encounter, Observation>> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.CrossJoin<Encounter, Observation>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+        (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(ValueTuple<Encounter, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? bzzzzzzzzzzzzzzzzzzzzzy_ = (CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = (CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD, _valueTuple.Item1, _valueTuple.Item2);
 
-            return bzzzzzzzzzzzzzzzzzzzzzy_;
+            return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> bzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(bzzzzzzzzzzzzzzzzzzzzzq_, bzzzzzzzzzzzzzzzzzzzzzr_);
-        bool? bzzzzzzzzzzzzzzzzzzzzzt_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr)
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+        bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr)
         {
-            object bzzzzzzzzzzzzzzzzzzzzzz_()
+            object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
             {
-                bool czzzzzzzzzzzzzzzzzzzzzd_()
+                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzg_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzg_);
-                    bool czzzzzzzzzzzzzzzzzzzzzi_ = czzzzzzzzzzzzzzzzzzzzzh_ is CqlDateTime;
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ is CqlDateTime;
 
-                    return czzzzzzzzzzzzzzzzzzzzzi_;
+                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                bool czzzzzzzzzzzzzzzzzzzzze_()
+                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzj_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzj_);
-                    bool czzzzzzzzzzzzzzzzzzzzzl_ = czzzzzzzzzzzzzzzzzzzzzk_ is CqlInterval<CqlDateTime>;
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ is CqlInterval<CqlDateTime>;
 
-                    return czzzzzzzzzzzzzzzzzzzzzl_;
+                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
                 };
-                bool czzzzzzzzzzzzzzzzzzzzzf_()
+                bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_()
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzm_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzm_);
-                    bool czzzzzzzzzzzzzzzzzzzzzo_ = czzzzzzzzzzzzzzzzzzzzzn_ is CqlDateTime;
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    bool dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is CqlDateTime;
 
-                    return czzzzzzzzzzzzzzzzzzzzzo_;
+                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                if (czzzzzzzzzzzzzzzzzzzzzd_())
+                if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_())
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzp_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzp_);
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-                    return (czzzzzzzzzzzzzzzzzzzzzq_ as CqlDateTime) as object;
+                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ as CqlDateTime) as object;
                 }
-                else if (czzzzzzzzzzzzzzzzzzzzze_())
+                else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzr_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzr_);
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                    return (czzzzzzzzzzzzzzzzzzzzzs_ as CqlInterval<CqlDateTime>) as object;
+                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CqlInterval<CqlDateTime>) as object;
                 }
-                else if (czzzzzzzzzzzzzzzzzzzzzf_())
+                else if (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_())
                 {
-                    DataType czzzzzzzzzzzzzzzzzzzzzt_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-                    object czzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzzzzzzt_);
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+                    object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-                    return (czzzzzzzzzzzzzzzzzzzzzu_ as CqlDateTime) as object;
+                    return (dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ as CqlDateTime) as object;
                 }
                 else
                 {
                     return null;
                 }
             };
-            CqlDateTime czzzzzzzzzzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.Earliest(context, bzzzzzzzzzzzzzzzzzzzzzz_());
-            CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzzzzzzb_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_hfnempjqliopfnrmypnydhffr?.QualifyingEncounter);
-            bool? czzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.In<CqlDateTime>(czzzzzzzzzzzzzzzzzzzzza_, czzzzzzzzzzzzzzzzzzzzzb_, default);
+            CqlDateTime dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.Earliest(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_());
+            CqlInterval<CqlDateTime> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, tuple_hfnempjqliopfnrmypnydhffr?.QualifyingEncounter);
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.In<CqlDateTime>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
 
-            return czzzzzzzzzzzzzzzzzzzzzc_;
+            return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> bzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(bzzzzzzzzzzzzzzzzzzzzzs_, bzzzzzzzzzzzzzzzzzzzzzt_);
-        Encounter bzzzzzzzzzzzzzzzzzzzzzv_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr) =>
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+        Encounter czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr) =>
             tuple_hfnempjqliopfnrmypnydhffr?.QualifyingEncounter;
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?, Encounter>(bzzzzzzzzzzzzzzzzzzzzzu_, bzzzzzzzzzzzzzzzzzzzzzv_);
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Distinct<Encounter>(bzzzzzzzzzzzzzzzzzzzzzw_);
+        IEnumerable<Encounter> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?, Encounter>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Distinct<Encounter>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
 
-        return bzzzzzzzzzzzzzzzzzzzzzx_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzzzzzzzv_ = this.Encounter_with_Severe_Hypoglycemic_Harm_Event(context);
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = this.Encounter_with_Severe_Hypoglycemic_Harm_Event(context);
 
-        return czzzzzzzzzzzzzzzzzzzzzv_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? czzzzzzzzzzzzzzzzzzzzzw_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return czzzzzzzzzzzzzzzzzzzzzw_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> czzzzzzzzzzzzzzzzzzzzzx_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return czzzzzzzzzzzzzzzzzzzzzx_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? czzzzzzzzzzzzzzzzzzzzzy_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return czzzzzzzzzzzzzzzzzzzzzy_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode czzzzzzzzzzzzzzzzzzzzzz_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return czzzzzzzzzzzzzzzzzzzzzz_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
     }
 
 

@@ -88,7 +88,8 @@ public abstract class DefinitionInvoker(
     /// Invokes the definition with the given CQL context.
     /// </summary>
     /// <param name="cqlContext">The CQL context.</param>
-    /// <returns>The result of the invocation.</returns>
+    /// <param name="args">Any additional arguments for the invocation.</param>
+    /// <returns>The result of the invocation (typically when calling a function definition).</returns>
     public abstract object? Invoke(CqlContext cqlContext, params object?[] args);
 
     /// <inheritdoc />

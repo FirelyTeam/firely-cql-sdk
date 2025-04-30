@@ -7,7 +7,6 @@
  */
 
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
@@ -19,24 +18,10 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class DefinitionInvokerExtensions
 {
     /// <summary>
-    /// Filters a collection of <see cref="DefinitionInvoker"/> objects to include only those with a
-    /// <see cref="CqlDefinitionAttribute"/> of type <see cref="CqlExpressionDefinitionAttribute"/>.
-    /// </summary>
-    /// <param name="definitionInvokers">The collection of <see cref="DefinitionInvoker"/> objects to filter.</param>
-    /// <returns>
-    /// An <see cref="IEnumerable{T}"/> containing the <see cref="DefinitionInvoker"/> objects that have
-    /// a <see cref="CqlDefinitionAttribute"/> of type <see cref="CqlExpressionDefinitionAttribute"/>.
-    /// </returns>
-    public static IEnumerable<DefinitionInvoker> WhereExpressionsDefinitions(
-        this IEnumerable<DefinitionInvoker> definitionInvokers) =>
-        definitionInvokers.Where(definitionInvoker => definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlExpressionDefinitionAttribute));
-
-    /// <summary>
-    /// Enumerates the results of library definitions.
+    /// Enumerates library definitions invocations.
     /// </summary>
     /// <param name="definitionInvokers">The definition invokers to get results from.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
-    /// <param name="includeDefinition">The selector for the definition</param>
     /// <param name="definitionInvocationExceptionCallback">
     /// <para>
     /// An optional callback right after an exception is caught, and before it rethrown or ignored,
@@ -64,18 +49,15 @@ public static class DefinitionInvokerExtensions
     /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
     /// </para>
     /// </remarks>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateResults(
+    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? invocationResult)> SelectResults(
         this IEnumerable<DefinitionInvoker> definitionInvokers,
         CqlContext cqlContext,
-        Func<DefinitionInvoker, bool>? includeDefinition = null,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
         if (definitionInvokers.TryGetNonEnumeratedCount(out int count) && count == 0)
             return [];
 
-        if (includeDefinition is { } fn)
-            definitionInvokers = definitionInvokers.Where(definitionInvoker => fn(definitionInvoker));
-
+        // We can only invoke definitions with no additional parameters besides the CqlContext.
         definitionInvokers = definitionInvokers.Where(definitionInvoker => definitionInvoker.ParameterTypes.Length == 0);
 
         // We need to enumerate twice, which isn't a problem in the case of collections.

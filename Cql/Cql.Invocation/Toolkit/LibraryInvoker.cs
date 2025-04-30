@@ -15,57 +15,6 @@ using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 namespace Hl7.Cql.Invocation.Toolkit;
 
 /// <summary>
-/// Represents the signature of a definition, including its name and parameter types.
-/// </summary>
-/// <param name="name">The name of the definition.</param>
-/// <param name="parameterTypes">The types of the parameters for the definition.</param>
-public class DefinitionSignature(string name, params Type[] parameterTypes) : IEquatable<DefinitionSignature>
-{
-    public static bool operator ==(DefinitionSignature? left, DefinitionSignature? right) => Equals(left, right);
-
-    public static bool operator !=(DefinitionSignature? left, DefinitionSignature? right) => !Equals(left, right);
-
-    public string Name { get; } = name;
-    public Type[] ParameterTypes { get; } = parameterTypes;
-
-
-    bool IEquatable<DefinitionSignature>.Equals(DefinitionSignature? other)
-    {
-        if (other is null) return false;
-        if (other.GetType() != GetType()) return false;
-        return Equals(other);
-    }
-
-    protected bool Equals(DefinitionSignature other)
-    {
-        if (Name != other.Name) return false;
-        if (!ParameterTypes.SequenceEqual(other.ParameterTypes)) return false;
-        return true;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
-        return Equals((DefinitionSignature)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        var hashCode = HashCode.Combine(Name, HashCode.Combine(ParameterTypes));
-        return hashCode;
-    }
-
-
-    /// <summary>
-    /// Implicitly converts a string to a <see cref="DefinitionSignature"/> instance.
-    /// </summary>
-    /// <param name="name">The string value to be converted into a <see cref="DefinitionSignature"/>.</param>
-    public static implicit operator DefinitionSignature(string name) => new(name);
-}
-
-/// <summary>
 /// Abstract base class for invoking CQL libraries.
 /// </summary>
 public abstract class LibraryInvoker
@@ -127,7 +76,7 @@ public abstract class LibraryInvoker
     /// <param name="libraryType">The type of the library.</param>
     /// <param name="libraryInvoker">When this method returns, contains the created <see cref="LibraryInvoker"/> instance, if the creation succeeded; otherwise, <see langword="null"/>.</param>
     /// <returns><see langword="true"/> if the creation succeeded; otherwise, <see langword="false"/>.</returns>
-    public static bool TryCreateFromType(
+    internal static bool TryCreateFromType(
         LibrarySetInvoker librarySetInvoker,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)

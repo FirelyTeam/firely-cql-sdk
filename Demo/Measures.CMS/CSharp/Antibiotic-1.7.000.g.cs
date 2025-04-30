@@ -33,9 +33,9 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object wzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.ResolveParameter("Antibiotic-1.7.000", "Measurement Period", null);
+        object azzzzzzzzzzx_ = context.ResolveParameter("Antibiotic-1.7.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)wzzzzzzzzzzzzzzzzzzzzzzzzc_;
+        return (CqlInterval<CqlDateTime>)azzzzzzzzzzx_;
     }
 
 
@@ -46,134 +46,134 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> wzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient wzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SingletonFrom<Patient>(wzzzzzzzzzzzzzzzzzzzzzzzzd_);
+        IEnumerable<Patient> azzzzzzzzzzy_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient azzzzzzzzzzz_ = context.Operators.SingletonFrom<Patient>(azzzzzzzzzzy_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzze_;
+        return azzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Has Comorbid Condition History")]
     public IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzf_(Encounter eDate)
+        IEnumerable<Encounter> bzzzzzzzzzza_(Encounter eDate)
         {
-            bool? wzzzzzzzzzzzzzzzzzzzzzzzzk_(Condition comcondition)
+            bool? bzzzzzzzzzzf_(Condition comcondition)
             {
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, comcondition);
-                CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(wzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                CqlDate wzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.DateFrom(wzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                Period wzzzzzzzzzzzzzzzzzzzzzzzzr_ = eDate?.Period;
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.toInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzs_ as object);
-                CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Start(wzzzzzzzzzzzzzzzzzzzzzzzzt_);
-                CqlDate wzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.DateFrom(wzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                CqlQuantity wzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Quantity(1m, "year");
-                CqlDate wzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Subtract(wzzzzzzzzzzzzzzzzzzzzzzzzv_, wzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.toInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzz_ as object);
-                CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Start(xzzzzzzzzzzzzzzzzzzzzzzzza_);
-                CqlDate xzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.DateFrom(xzzzzzzzzzzzzzzzzzzzzzzzzb_);
-                CqlInterval<CqlDate> xzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Interval(wzzzzzzzzzzzzzzzzzzzzzzzzx_, xzzzzzzzzzzzzzzzzzzzzzzzzc_, true, true);
-                bool? xzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.In<CqlDate>(wzzzzzzzzzzzzzzzzzzzzzzzzq_, xzzzzzzzzzzzzzzzzzzzzzzzzd_, default);
+                CqlInterval<CqlDateTime> bzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, comcondition);
+                CqlDateTime bzzzzzzzzzzk_ = context.Operators.Start(bzzzzzzzzzzj_);
+                CqlDate bzzzzzzzzzzl_ = context.Operators.DateFrom(bzzzzzzzzzzk_);
+                Period bzzzzzzzzzzm_ = eDate?.Period;
+                CqlInterval<CqlDateTime> bzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzzzzzzzzzzm_);
+                CqlInterval<CqlDateTime> bzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.toInterval(context, bzzzzzzzzzzn_ as object);
+                CqlDateTime bzzzzzzzzzzp_ = context.Operators.Start(bzzzzzzzzzzo_);
+                CqlDate bzzzzzzzzzzq_ = context.Operators.DateFrom(bzzzzzzzzzzp_);
+                CqlQuantity bzzzzzzzzzzr_ = context.Operators.Quantity(1m, "year");
+                CqlDate bzzzzzzzzzzs_ = context.Operators.Subtract(bzzzzzzzzzzq_, bzzzzzzzzzzr_);
+                CqlInterval<CqlDateTime> bzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzzzzzzzzzzm_);
+                CqlInterval<CqlDateTime> bzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, bzzzzzzzzzzu_ as object);
+                CqlDateTime bzzzzzzzzzzw_ = context.Operators.Start(bzzzzzzzzzzv_);
+                CqlDate bzzzzzzzzzzx_ = context.Operators.DateFrom(bzzzzzzzzzzw_);
+                CqlInterval<CqlDate> bzzzzzzzzzzy_ = context.Operators.Interval(bzzzzzzzzzzs_, bzzzzzzzzzzx_, true, true);
+                bool? bzzzzzzzzzzz_ = context.Operators.In<CqlDate>(bzzzzzzzzzzl_, bzzzzzzzzzzy_, default);
 
-                return xzzzzzzzzzzzzzzzzzzzzzzzze_;
+                return bzzzzzzzzzzz_;
             };
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Condition>(comorbidConditions, wzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            Encounter wzzzzzzzzzzzzzzzzzzzzzzzzm_(Condition comcondition) =>
+            IEnumerable<Condition> bzzzzzzzzzzg_ = context.Operators.Where<Condition>(comorbidConditions, bzzzzzzzzzzf_);
+            Encounter bzzzzzzzzzzh_(Condition comcondition) =>
                 eDate;
-            IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Select<Condition, Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzl_, wzzzzzzzzzzzzzzzzzzzzzzzzm_);
+            IEnumerable<Encounter> bzzzzzzzzzzi_ = context.Operators.Select<Condition, Encounter>(bzzzzzzzzzzg_, bzzzzzzzzzzh_);
 
-            return wzzzzzzzzzzzzzzzzzzzzzzzzn_;
+            return bzzzzzzzzzzi_;
         };
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, wzzzzzzzzzzzzzzzzzzzzzzzzf_);
-        Encounter wzzzzzzzzzzzzzzzzzzzzzzzzh_(Encounter eDate) =>
+        IEnumerable<Encounter> bzzzzzzzzzzb_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, bzzzzzzzzzza_);
+        Encounter bzzzzzzzzzzc_(Encounter eDate) =>
             eDate;
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Encounter, Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzg_, wzzzzzzzzzzzzzzzzzzzzzzzzh_);
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Distinct<Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzi_);
+        IEnumerable<Encounter> bzzzzzzzzzzd_ = context.Operators.Select<Encounter, Encounter>(bzzzzzzzzzzb_, bzzzzzzzzzzc_);
+        IEnumerable<Encounter> bzzzzzzzzzze_ = context.Operators.Distinct<Encounter>(bzzzzzzzzzzd_);
 
-        return wzzzzzzzzzzzzzzzzzzzzzzzzj_;
+        return bzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Has Competing Diagnosis History")]
     public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
     {
-        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzf_(Encounter eDate)
+        IEnumerable<Encounter> czzzzzzzzzza_(Encounter eDate)
         {
-            bool? xzzzzzzzzzzzzzzzzzzzzzzzzk_(Condition competcondition)
+            bool? czzzzzzzzzzf_(Condition competcondition)
             {
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, competcondition);
-                CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(xzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                Period xzzzzzzzzzzzzzzzzzzzzzzzzq_ = eDate?.Period;
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Start(xzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Start(xzzzzzzzzzzzzzzzzzzzzzzzzu_);
-                CqlQuantity xzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime xzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Add(xzzzzzzzzzzzzzzzzzzzzzzzzv_, xzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Interval(xzzzzzzzzzzzzzzzzzzzzzzzzs_, xzzzzzzzzzzzzzzzzzzzzzzzzx_, true, true);
-                bool? xzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.In<CqlDateTime>(xzzzzzzzzzzzzzzzzzzzzzzzzp_, xzzzzzzzzzzzzzzzzzzzzzzzzy_, "day");
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xzzzzzzzzzzzzzzzzzzzzzzzzq_);
-                CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Start(yzzzzzzzzzzzzzzzzzzzzzzzzb_);
-                bool? yzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Not((bool?)(yzzzzzzzzzzzzzzzzzzzzzzzzc_ is null));
-                bool? yzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzz_, yzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlInterval<CqlDateTime> czzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, competcondition);
+                CqlDateTime czzzzzzzzzzk_ = context.Operators.Start(czzzzzzzzzzj_);
+                Period czzzzzzzzzzl_ = eDate?.Period;
+                CqlInterval<CqlDateTime> czzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, czzzzzzzzzzl_);
+                CqlDateTime czzzzzzzzzzn_ = context.Operators.Start(czzzzzzzzzzm_);
+                CqlInterval<CqlDateTime> czzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, czzzzzzzzzzl_);
+                CqlDateTime czzzzzzzzzzq_ = context.Operators.Start(czzzzzzzzzzp_);
+                CqlQuantity czzzzzzzzzzr_ = context.Operators.Quantity(3m, "days");
+                CqlDateTime czzzzzzzzzzs_ = context.Operators.Add(czzzzzzzzzzq_, czzzzzzzzzzr_);
+                CqlInterval<CqlDateTime> czzzzzzzzzzt_ = context.Operators.Interval(czzzzzzzzzzn_, czzzzzzzzzzs_, true, true);
+                bool? czzzzzzzzzzu_ = context.Operators.In<CqlDateTime>(czzzzzzzzzzk_, czzzzzzzzzzt_, "day");
+                CqlInterval<CqlDateTime> czzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, czzzzzzzzzzl_);
+                CqlDateTime czzzzzzzzzzx_ = context.Operators.Start(czzzzzzzzzzw_);
+                bool? czzzzzzzzzzy_ = context.Operators.Not((bool?)(czzzzzzzzzzx_ is null));
+                bool? czzzzzzzzzzz_ = context.Operators.And(czzzzzzzzzzu_, czzzzzzzzzzy_);
 
-                return yzzzzzzzzzzzzzzzzzzzzzzzze_;
+                return czzzzzzzzzzz_;
             };
-            IEnumerable<Condition> xzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Condition>(competingConditions, xzzzzzzzzzzzzzzzzzzzzzzzzk_);
-            Encounter xzzzzzzzzzzzzzzzzzzzzzzzzm_(Condition competcondition) =>
+            IEnumerable<Condition> czzzzzzzzzzg_ = context.Operators.Where<Condition>(competingConditions, czzzzzzzzzzf_);
+            Encounter czzzzzzzzzzh_(Condition competcondition) =>
                 eDate;
-            IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Select<Condition, Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzl_, xzzzzzzzzzzzzzzzzzzzzzzzzm_);
+            IEnumerable<Encounter> czzzzzzzzzzi_ = context.Operators.Select<Condition, Encounter>(czzzzzzzzzzg_, czzzzzzzzzzh_);
 
-            return xzzzzzzzzzzzzzzzzzzzzzzzzn_;
+            return czzzzzzzzzzi_;
         };
-        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, xzzzzzzzzzzzzzzzzzzzzzzzzf_);
-        Encounter xzzzzzzzzzzzzzzzzzzzzzzzzh_(Encounter eDate) =>
+        IEnumerable<Encounter> czzzzzzzzzzb_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, czzzzzzzzzza_);
+        Encounter czzzzzzzzzzc_(Encounter eDate) =>
             eDate;
-        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Encounter, Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzg_, xzzzzzzzzzzzzzzzzzzzzzzzzh_);
-        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Distinct<Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzi_);
+        IEnumerable<Encounter> czzzzzzzzzzd_ = context.Operators.Select<Encounter, Encounter>(czzzzzzzzzzb_, czzzzzzzzzzc_);
+        IEnumerable<Encounter> czzzzzzzzzze_ = context.Operators.Distinct<Encounter>(czzzzzzzzzzd_);
 
-        return xzzzzzzzzzzzzzzzzzzzzzzzzj_;
+        return czzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Has Antibiotic Medication History")]
     public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
     {
-        IEnumerable<Encounter> yzzzzzzzzzzzzzzzzzzzzzzzzf_(Encounter DateOfEpisode)
+        IEnumerable<Encounter> dzzzzzzzzzza_(Encounter DateOfEpisode)
         {
-            bool? yzzzzzzzzzzzzzzzzzzzzzzzzh_(MedicationRequest ActiveMedication)
+            bool? dzzzzzzzzzzc_(MedicationRequest ActiveMedication)
             {
-                CqlInterval<CqlDate> yzzzzzzzzzzzzzzzzzzzzzzzzl_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ActiveMedication);
-                Period yzzzzzzzzzzzzzzzzzzzzzzzzm_ = DateOfEpisode?.Period;
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, yzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.toInterval(context, yzzzzzzzzzzzzzzzzzzzzzzzzn_ as object);
-                CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(yzzzzzzzzzzzzzzzzzzzzzzzzo_);
-                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.DateFrom(yzzzzzzzzzzzzzzzzzzzzzzzzp_);
-                CqlQuantity yzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Quantity(30m, "days");
-                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Subtract(yzzzzzzzzzzzzzzzzzzzzzzzzq_, yzzzzzzzzzzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, yzzzzzzzzzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, yzzzzzzzzzzzzzzzzzzzzzzzzu_ as object);
-                CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Start(yzzzzzzzzzzzzzzzzzzzzzzzzv_);
-                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.DateFrom(yzzzzzzzzzzzzzzzzzzzzzzzzw_);
-                CqlQuantity yzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Quantity(1m, "day");
-                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Subtract(yzzzzzzzzzzzzzzzzzzzzzzzzx_, yzzzzzzzzzzzzzzzzzzzzzzzzy_);
-                CqlInterval<CqlDate> zzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Interval(yzzzzzzzzzzzzzzzzzzzzzzzzs_, yzzzzzzzzzzzzzzzzzzzzzzzzz_, true, true);
-                bool? zzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Overlaps(yzzzzzzzzzzzzzzzzzzzzzzzzl_, zzzzzzzzzzzzzzzzzzzzzzzzza_, "day");
+                CqlInterval<CqlDate> dzzzzzzzzzzg_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ActiveMedication);
+                Period dzzzzzzzzzzh_ = DateOfEpisode?.Period;
+                CqlInterval<CqlDateTime> dzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dzzzzzzzzzzh_);
+                CqlInterval<CqlDateTime> dzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.toInterval(context, dzzzzzzzzzzi_ as object);
+                CqlDateTime dzzzzzzzzzzk_ = context.Operators.Start(dzzzzzzzzzzj_);
+                CqlDate dzzzzzzzzzzl_ = context.Operators.DateFrom(dzzzzzzzzzzk_);
+                CqlQuantity dzzzzzzzzzzm_ = context.Operators.Quantity(30m, "days");
+                CqlDate dzzzzzzzzzzn_ = context.Operators.Subtract(dzzzzzzzzzzl_, dzzzzzzzzzzm_);
+                CqlInterval<CqlDateTime> dzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dzzzzzzzzzzh_);
+                CqlInterval<CqlDateTime> dzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.toInterval(context, dzzzzzzzzzzp_ as object);
+                CqlDateTime dzzzzzzzzzzr_ = context.Operators.Start(dzzzzzzzzzzq_);
+                CqlDate dzzzzzzzzzzs_ = context.Operators.DateFrom(dzzzzzzzzzzr_);
+                CqlQuantity dzzzzzzzzzzt_ = context.Operators.Quantity(1m, "day");
+                CqlDate dzzzzzzzzzzu_ = context.Operators.Subtract(dzzzzzzzzzzs_, dzzzzzzzzzzt_);
+                CqlInterval<CqlDate> dzzzzzzzzzzv_ = context.Operators.Interval(dzzzzzzzzzzn_, dzzzzzzzzzzu_, true, true);
+                bool? dzzzzzzzzzzw_ = context.Operators.Overlaps(dzzzzzzzzzzg_, dzzzzzzzzzzv_, "day");
 
-                return zzzzzzzzzzzzzzzzzzzzzzzzzb_;
+                return dzzzzzzzzzzw_;
             };
-            IEnumerable<MedicationRequest> yzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Where<MedicationRequest>(antibioticMedications, yzzzzzzzzzzzzzzzzzzzzzzzzh_);
-            Encounter yzzzzzzzzzzzzzzzzzzzzzzzzj_(MedicationRequest ActiveMedication) =>
+            IEnumerable<MedicationRequest> dzzzzzzzzzzd_ = context.Operators.Where<MedicationRequest>(antibioticMedications, dzzzzzzzzzzc_);
+            Encounter dzzzzzzzzzze_(MedicationRequest ActiveMedication) =>
                 DateOfEpisode;
-            IEnumerable<Encounter> yzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Select<MedicationRequest, Encounter>(yzzzzzzzzzzzzzzzzzzzzzzzzi_, yzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            IEnumerable<Encounter> dzzzzzzzzzzf_ = context.Operators.Select<MedicationRequest, Encounter>(dzzzzzzzzzzd_, dzzzzzzzzzze_);
 
-            return yzzzzzzzzzzzzzzzzzzzzzzzzk_;
+            return dzzzzzzzzzzf_;
         };
-        IEnumerable<Encounter> yzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, yzzzzzzzzzzzzzzzzzzzzzzzzf_);
+        IEnumerable<Encounter> dzzzzzzzzzzb_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, dzzzzzzzzzza_);
 
-        return yzzzzzzzzzzzzzzzzzzzzzzzzg_;
+        return dzzzzzzzzzzb_;
     }
 
 

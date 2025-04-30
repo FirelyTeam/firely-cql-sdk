@@ -16,12 +16,25 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibraryInvokerExtensions
 {
     /// <summary>
-    /// Enumerates the definitions in the library.
+    /// Enumerates the expressions in the library.
     /// </summary>
     /// <param name="libraryInvoker">The library invoker.</param>
-    public static IEnumerable<DefinitionInvoker> EnumerateDefinitionInvokers(
+    public static IEnumerable<DefinitionInvoker> SelectExpressions(
         this LibraryInvoker libraryInvoker) =>
         libraryInvoker
             .Definitions.Values
-            .Where(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlExpressionDefinitionAttribute);
+            .Where(definitionInvoker =>
+                       definitionInvoker.ParameterTypes.Length == 0
+                       && definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlExpressionDefinitionAttribute));
+
+    /// <summary>
+    /// Enumerates the functions in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<DefinitionInvoker> SelectFunctions(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .Where(definitionInvoker =>
+                       definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
 }
