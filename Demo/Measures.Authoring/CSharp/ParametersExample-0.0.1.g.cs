@@ -41,9 +41,9 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
     {
-        object bzzzn_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
+        object uzzy_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
 
-        return (int?)bzzzn_;
+        return (int?)uzzy_;
     }
 
 
@@ -54,87 +54,87 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> bzzzo_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient bzzzp_ = context.Operators.SingletonFrom<Patient>(bzzzo_);
+        IEnumerable<Patient> uzzz_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient vzza_ = context.Operators.SingletonFrom<Patient>(uzzz_);
 
-        return bzzzp_;
+        return vzza_;
     }
 
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
-        CqlDate bzzzq_ = context.Operators.Today();
+        CqlDate vzzb_ = context.Operators.Today();
 
-        return bzzzq_;
+        return vzzb_;
     }
 
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context)
     {
-        Patient bzzzr_ = this.Patient(context);
-        Patient[] bzzzs_ = [
-            bzzzr_,
+        Patient vzzc_ = this.Patient(context);
+        Patient[] vzzd_ = [
+            vzzc_,
         ];
-        bool? bzzzt_(Patient P)
+        bool? vzze_(Patient P)
         {
-            Code<AdministrativeGender> bzzzw_ = P?.GenderElement;
-            string bzzzx_ = FHIRHelpers_4_3_000.Instance.ToString(context, bzzzw_);
-            bool? bzzzy_ = context.Operators.Equal(bzzzx_, "male");
-            FhirBoolean bzzzz_ = P?.ActiveElement;
-            bool? czzza_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, bzzzz_);
-            bool? czzzb_ = context.Operators.IsTrue(czzza_);
-            bool? czzzc_ = context.Operators.And(bzzzy_, czzzb_);
-            DataType czzzd_ = P?.Deceased;
-            bool? czzze_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, czzzd_ as FhirBoolean);
-            bool? czzzf_ = context.Operators.Not(czzze_);
-            bool? czzzg_ = context.Operators.And(czzzc_, czzzf_);
-            CodeableConcept czzzh_ = P?.MaritalStatus;
-            CqlConcept czzzi_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, czzzh_);
-            CqlValueSet czzzj_ = this.Marital_Status(context);
-            bool? czzzk_ = context.Operators.ConceptInValueSet(czzzi_, czzzj_);
-            bool? czzzl_ = context.Operators.And(czzzg_, czzzk_);
+            Code<AdministrativeGender> vzzh_ = P?.GenderElement;
+            string vzzi_ = FHIRHelpers_4_3_000.Instance.ToString(context, vzzh_);
+            bool? vzzj_ = context.Operators.Equal(vzzi_, "male");
+            FhirBoolean vzzk_ = P?.ActiveElement;
+            bool? vzzl_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, vzzk_);
+            bool? vzzm_ = context.Operators.IsTrue(vzzl_);
+            bool? vzzn_ = context.Operators.And(vzzj_, vzzm_);
+            DataType vzzo_ = P?.Deceased;
+            bool? vzzp_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, vzzo_ as FhirBoolean);
+            bool? vzzq_ = context.Operators.Not(vzzp_);
+            bool? vzzr_ = context.Operators.And(vzzn_, vzzq_);
+            CodeableConcept vzzs_ = P?.MaritalStatus;
+            CqlConcept vzzt_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, vzzs_);
+            CqlValueSet vzzu_ = this.Marital_Status(context);
+            bool? vzzv_ = context.Operators.ConceptInValueSet(vzzt_, vzzu_);
+            bool? vzzw_ = context.Operators.And(vzzr_, vzzv_);
 
-            return czzzl_;
+            return vzzw_;
         };
-        IEnumerable<Patient> bzzzu_ = context.Operators.Where<Patient>((IEnumerable<Patient>)bzzzs_, bzzzt_);
-        Patient bzzzv_ = context.Operators.SingletonFrom<Patient>(bzzzu_);
+        IEnumerable<Patient> vzzf_ = context.Operators.Where<Patient>((IEnumerable<Patient>)vzzd_, vzze_);
+        Patient vzzg_ = context.Operators.SingletonFrom<Patient>(vzzf_);
 
-        return bzzzv_;
+        return vzzg_;
     }
 
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
-        Patient czzzm_ = this.Patient_Filter(context);
-        Date czzzn_ = czzzm_?.BirthDateElement;
+        Patient vzzx_ = this.Patient_Filter(context);
+        Date vzzy_ = vzzx_?.BirthDateElement;
 
-        return czzzn_;
+        return vzzy_;
     }
 
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context)
     {
-        Date czzzo_ = this.Patient_Birthdate(context);
-        CqlDate czzzp_ = FHIRHelpers_4_3_000.Instance.ToDate(context, czzzo_);
-        CqlDate czzzq_ = this.CurrentDate(context);
-        int? czzzr_ = context.Operators.DurationBetween(czzzp_, czzzq_, "year");
+        Date vzzz_ = this.Patient_Birthdate(context);
+        CqlDate wzza_ = FHIRHelpers_4_3_000.Instance.ToDate(context, vzzz_);
+        CqlDate wzzb_ = this.CurrentDate(context);
+        int? wzzc_ = context.Operators.DurationBetween(wzza_, wzzb_, "year");
 
-        return czzzr_;
+        return wzzc_;
     }
 
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
-        int? czzzs_ = this.Patient_Age_in_Years(context);
-        int? czzzt_ = this.AgeThreshold(context);
-        bool? czzzu_ = context.Operators.Greater(czzzs_, czzzt_);
+        int? wzzd_ = this.Patient_Age_in_Years(context);
+        int? wzze_ = this.AgeThreshold(context);
+        bool? wzzf_ = context.Operators.Greater(wzzd_, wzze_);
 
-        return czzzu_;
+        return wzzf_;
     }
 
 

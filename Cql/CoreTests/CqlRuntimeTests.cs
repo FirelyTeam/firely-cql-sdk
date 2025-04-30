@@ -54,7 +54,7 @@ namespace CoreTests
             Type[] claimSig = [typeof(Claim)];
 
             dd.Add(lib, def, drSig, nameof(DomainResource));
-            Assert.IsFalse(dd.ContainsKey(lib, def, claimSig));
+            Assert.IsFalse(dd.ContainsDefinition(lib, def, claimSig));
             dd.Add(lib, def, claimSig, nameof(Claim));
 
             dd.TryGetDefinitionsForLibrary(lib, out var defs);
@@ -77,7 +77,7 @@ namespace CoreTests
             Type[] claimSig = [typeof(Claim)];
 
             dd.Add(lib, def, drSig, nameof(DomainResource));
-            Assert.IsFalse(dd.ContainsKey(lib, def, claimSig));
+            Assert.IsFalse(dd.ContainsDefinition(lib, def, claimSig));
             Assert.IsTrue(dd.TryGetValue(lib, def, claimSig, out var match));
             Assert.AreEqual(nameof(DomainResource), match);
         }

@@ -7,6 +7,8 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -35,6 +37,29 @@ public static class LibraryInvokerExtensions
         this LibraryInvoker libraryInvoker) =>
         libraryInvoker
             .Definitions.Values
-            .Where(definitionInvoker =>
-                       definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
+            .Where(definitionInvoker => definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
+
+    /// <summary>
+    /// Enumerates the value sets in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<(DefinitionInvoker definition, CqlValueSet valueSet)> SelectValueSets(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlValueSetDefinitionAttribute attr
+                ? (true, (definitionInvoker, new CqlValueSet(attr.ValueSetId, attr.ValueSetVersion)))
+                : default);
+
+    /// <summary>
+    /// Enumerates the codes in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<(DefinitionInvoker definition, CqlCode code)> SelectCodes(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlCodeDefinitionAttribute attr
+                ? (true, (definitionInvoker, new CqlCode(attr.CodeId, attr.CodeSystem, attr.CodeVersion, attr.CodeDisplay)))
+                : default);
 }

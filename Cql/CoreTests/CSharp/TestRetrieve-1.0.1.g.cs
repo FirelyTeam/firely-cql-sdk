@@ -80,7 +80,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlCodeDefinition("Encounter for palliative care", codeId: "Z51.5", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
     public CqlCode Encounter_for_palliative_care(CqlContext _) => _Encounter_for_palliative_care;
-    private static readonly CqlCode _Encounter_for_palliative_care = new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
+    private static readonly CqlCode _Encounter_for_palliative_care = new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm");
 
     #endregion Codes
 
@@ -88,7 +88,9 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlCodeSystemDefinition("ICD-10")]
     public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
-    private static readonly CqlCodeSystem _ICD_10 = new CqlCodeSystem();
+    private static readonly CqlCodeSystem _ICD_10 =
+      new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null,
+          _Encounter_for_palliative_care);
 
     #endregion CodeSystems
 

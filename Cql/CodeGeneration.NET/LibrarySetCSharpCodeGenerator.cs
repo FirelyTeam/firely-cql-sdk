@@ -16,6 +16,8 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System.Diagnostics;
+using System.Threading;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -224,18 +226,35 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
         }
 
+        private CqlDefinition[]? definitions;
+
+        public CqlDefinition[] Definitions =>
+            LazyInitializer.EnsureInitialized(
+                ref definitions,
+                () => LibrarySetWriter
+                      .Definitions
+                      .SelectDefinitionsByLibraryName(LibraryName)
+                      .Select(t => t.definition)
+                      .ToArray());
+
+        private CqlCodeDefinition[]? codeDefinitions;
+
+        public CqlCodeDefinition[] CodeDefinitions =>
+            LazyInitializer.EnsureInitialized(
+                ref codeDefinitions,
+                () => Definitions
+                      .OfType<CqlCodeDefinition>()
+                      .ToArray());
+
         private void WriteMethods()
         {
-            var definitions = LibrarySetWriter.Definitions;
-            var libraryName = LibraryName;
             string lastDefinitionType = "";
 
             // Assumption: definitions are already sorted by definition type
-            foreach ((_, _, CqlDefinition definition) in
-                     definitions.EnumerateExpressionsByLibraryName(libraryName))
+            foreach (var definition in Definitions)
             {
                 // Assumption: type name will be Cql....Definition
-                Debug.Assert(definition.GetType().Name is {} name && name.StartsWith("Cql") && name.EndsWith("Definition"));
+                Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
                 string definitionType = definition.GetType().Name["Cql".Length..^"Definition".Length];
 
                 if (lastDefinitionType != definitionType)
@@ -300,7 +319,8 @@ internal partial class LibrarySetCSharpCodeGenerator
         }
     }
 
-    private record DefinitionWriter(
+    private record DefinitionWriter
+    (
         LibraryWriter LibraryWriter,
         CqlDefinition CqlDefinition) : IAddIndentMutable<DefinitionWriter>
     {
@@ -315,8 +335,8 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var name = CqlDefinition.Name;
             string quotedName = name.QuoteString();
-            string methodName  = VariableNameGenerator.NormalizeIdentifier(name)!;
-            string fieldName  = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
+            string methodName = VariableNameGenerator.NormalizeIdentifier(name)!;
+            string fieldName = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
             var definitionAttributeTypeName = CqlDefinition.GetType().Name;
 
             switch (CqlDefinition)
@@ -324,7 +344,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 case CqlValueSetDefinition vsd:
                 {
                     string quotedValueSetId = vsd.ValueSetId.QuoteString();
-                    string quotedValueSetVersion = vsd.ValueSetVersion?.QuoteString() ?? "null";
+                    string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
                     tw.WriteLines(
                         $$"""
                           [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
@@ -334,24 +354,41 @@ internal partial class LibrarySetCSharpCodeGenerator
                     return;
                 }
 
-                case CqlCodeSystemDefinition:
+                case CqlCodeSystemDefinition csd:
+                {
+                    string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
+                    string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
+                    string arrayOfCodes = string.Concat(
+                        csd.CodeSystem.codes.Select(code =>
+                        {
+                            var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
+                            var codeField = cqlCodeDefinition is not null
+                                       ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                       : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
+                            return $"""
+                                    ,
+                                          {codeField}
+                                    """;
+                        }));
                     tw.WriteLines(
                         $$"""
-                         [CqlCodeSystemDefinition({{quotedName}})]
-                         public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
-                         private static readonly CqlCodeSystem {{fieldName}} = new CqlCodeSystem();
-                         """);
+                          [CqlCodeSystemDefinition({{quotedName}})]
+                          public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlCodeSystem {{fieldName}} =
+                            new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}{{arrayOfCodes}});
+                          """);
                     return;
+                }
 
                 case CqlCodeDefinition cd:
-                    var quotedCodeId = cd.CodeId.QuoteString();
-                    var quotedCodeSystem = cd.CodeSystem.QuoteString();
+                    var quotedCodeId = cd.Code.code!.QuoteString();
+                    var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
                     tw.WriteLines(
                         $$"""
-                         [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
-                         public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
-                         private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}}, default, default);
-                         """);
+                          [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
+                          public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}});
+                          """);
                     return;
 
                 case CqlExpressionDefinition ed:

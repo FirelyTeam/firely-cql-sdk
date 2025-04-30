@@ -33,157 +33,157 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> rzzzzzw_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient rzzzzzx_ = context.Operators.SingletonFrom<Patient>(rzzzzzw_);
+        IEnumerable<Patient> pzzzm_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient pzzzn_ = context.Operators.SingletonFrom<Patient>(pzzzm_);
 
-        return rzzzzzx_;
+        return pzzzn_;
     }
 
 
     [CqlExpressionDefinition("Active Allergy")]
     public IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
     {
-        bool? rzzzzzy_(AllergyIntolerance A)
+        bool? pzzzo_(AllergyIntolerance A)
         {
-            CodeableConcept szzzzza_ = A?.ClinicalStatus;
-            CqlConcept szzzzzb_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, szzzzza_);
-            CqlCode szzzzzc_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
-            CqlConcept szzzzzd_ = context.Operators.ConvertCodeToConcept(szzzzzc_);
-            bool? szzzzze_ = context.Operators.Equal(szzzzzb_, szzzzzd_);
+            CodeableConcept pzzzq_ = A?.ClinicalStatus;
+            CqlConcept pzzzr_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, pzzzq_);
+            CqlCode pzzzs_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
+            CqlConcept pzzzt_ = context.Operators.ConvertCodeToConcept(pzzzs_);
+            bool? pzzzu_ = context.Operators.Equal(pzzzr_, pzzzt_);
 
-            return szzzzze_;
+            return pzzzu_;
         };
-        IEnumerable<AllergyIntolerance> rzzzzzz_ = context.Operators.Where<AllergyIntolerance>(Allergy, rzzzzzy_);
+        IEnumerable<AllergyIntolerance> pzzzp_ = context.Operators.Where<AllergyIntolerance>(Allergy, pzzzo_);
 
-        return rzzzzzz_;
+        return pzzzp_;
     }
 
 
     [CqlExpressionDefinition("Active Condition")]
     public IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
     {
-        bool? szzzzzf_(Condition C)
+        bool? pzzzv_(Condition C)
         {
-            CodeableConcept szzzzzh_ = C?.ClinicalStatus;
-            CqlConcept szzzzzi_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, szzzzzh_);
-            CqlCode szzzzzj_ = NCQATerminology_1_0_0.Instance.active(context);
-            CqlConcept szzzzzk_ = context.Operators.ConvertCodeToConcept(szzzzzj_);
-            bool? szzzzzl_ = context.Operators.Equal(szzzzzi_, szzzzzk_);
+            CodeableConcept pzzzx_ = C?.ClinicalStatus;
+            CqlConcept pzzzy_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, pzzzx_);
+            CqlCode pzzzz_ = NCQATerminology_1_0_0.Instance.active(context);
+            CqlConcept qzzza_ = context.Operators.ConvertCodeToConcept(pzzzz_);
+            bool? qzzzb_ = context.Operators.Equal(pzzzy_, qzzza_);
 
-            return szzzzzl_;
+            return qzzzb_;
         };
-        IEnumerable<Condition> szzzzzg_ = context.Operators.Where<Condition>(Condition, szzzzzf_);
+        IEnumerable<Condition> pzzzw_ = context.Operators.Where<Condition>(Condition, pzzzv_);
 
-        return szzzzzg_;
+        return pzzzw_;
     }
 
 
     [CqlExpressionDefinition("Finished Encounter")]
     public IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
     {
-        bool? szzzzzm_(Encounter E)
+        bool? qzzzc_(Encounter E)
         {
-            Code<Encounter.EncounterStatus> szzzzzo_ = E?.StatusElement;
-            string szzzzzp_ = FHIRHelpers_4_0_001.Instance.ToString(context, szzzzzo_);
-            bool? szzzzzq_ = context.Operators.Equal(szzzzzp_, "finished");
+            Code<Encounter.EncounterStatus> qzzze_ = E?.StatusElement;
+            string qzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzze_);
+            bool? qzzzg_ = context.Operators.Equal(qzzzf_, "finished");
 
-            return szzzzzq_;
+            return qzzzg_;
         };
-        IEnumerable<Encounter> szzzzzn_ = context.Operators.Where<Encounter>(Enc, szzzzzm_);
+        IEnumerable<Encounter> qzzzd_ = context.Operators.Where<Encounter>(Enc, qzzzc_);
 
-        return szzzzzn_;
+        return qzzzd_;
     }
 
 
     [CqlExpressionDefinition("Completed Immunization")]
     public IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
     {
-        bool? szzzzzr_(Immunization I)
+        bool? qzzzh_(Immunization I)
         {
-            Code<Immunization.ImmunizationStatusCodes> szzzzzt_ = I?.StatusElement;
-            string szzzzzu_ = FHIRHelpers_4_0_001.Instance.ToString(context, szzzzzt_);
-            bool? szzzzzv_ = context.Operators.Equal(szzzzzu_, "completed");
+            Code<Immunization.ImmunizationStatusCodes> qzzzj_ = I?.StatusElement;
+            string qzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzj_);
+            bool? qzzzl_ = context.Operators.Equal(qzzzk_, "completed");
 
-            return szzzzzv_;
+            return qzzzl_;
         };
-        IEnumerable<Immunization> szzzzzs_ = context.Operators.Where<Immunization>(Immunization, szzzzzr_);
+        IEnumerable<Immunization> qzzzi_ = context.Operators.Where<Immunization>(Immunization, qzzzh_);
 
-        return szzzzzs_;
+        return qzzzi_;
     }
 
 
     [CqlExpressionDefinition("Dispensed Medication")]
     public IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
-        bool? szzzzzw_(MedicationDispense M)
+        bool? qzzzm_(MedicationDispense M)
         {
-            Code<MedicationDispense.MedicationDispenseStatusCodes> szzzzzy_ = M?.StatusElement;
-            string szzzzzz_ = FHIRHelpers_4_0_001.Instance.ToString(context, szzzzzy_);
-            bool? tzzzzza_ = context.Operators.Equal(szzzzzz_, "completed");
+            Code<MedicationDispense.MedicationDispenseStatusCodes> qzzzo_ = M?.StatusElement;
+            string qzzzp_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzo_);
+            bool? qzzzq_ = context.Operators.Equal(qzzzp_, "completed");
 
-            return tzzzzza_;
+            return qzzzq_;
         };
-        IEnumerable<MedicationDispense> szzzzzx_ = context.Operators.Where<MedicationDispense>(Med, szzzzzw_);
+        IEnumerable<MedicationDispense> qzzzn_ = context.Operators.Where<MedicationDispense>(Med, qzzzm_);
 
-        return szzzzzx_;
+        return qzzzn_;
     }
 
 
     [CqlExpressionDefinition("Active Medication")]
     public IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
     {
-        bool? tzzzzzb_(MedicationRequest M)
+        bool? qzzzr_(MedicationRequest M)
         {
-            Code<MedicationRequest.MedicationrequestStatus> tzzzzzd_ = M?.StatusElement;
-            string tzzzzze_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzd_);
-            string[] tzzzzzf_ = [
+            Code<MedicationRequest.MedicationrequestStatus> qzzzt_ = M?.StatusElement;
+            string qzzzu_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzt_);
+            string[] qzzzv_ = [
                 "completed",
             ];
-            bool? tzzzzzg_ = context.Operators.In<string>(tzzzzze_, tzzzzzf_ as IEnumerable<string>);
+            bool? qzzzw_ = context.Operators.In<string>(qzzzu_, qzzzv_ as IEnumerable<string>);
 
-            return tzzzzzg_;
+            return qzzzw_;
         };
-        IEnumerable<MedicationRequest> tzzzzzc_ = context.Operators.Where<MedicationRequest>(Med, tzzzzzb_);
+        IEnumerable<MedicationRequest> qzzzs_ = context.Operators.Where<MedicationRequest>(Med, qzzzr_);
 
-        return tzzzzzc_;
+        return qzzzs_;
     }
 
 
     [CqlExpressionDefinition("Completed Procedure")]
     public IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
     {
-        bool? tzzzzzh_(Procedure P)
+        bool? qzzzx_(Procedure P)
         {
-            Code<EventStatus> tzzzzzj_ = P?.StatusElement;
-            string tzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzj_);
-            bool? tzzzzzl_ = context.Operators.Equal(tzzzzzk_, "completed");
+            Code<EventStatus> qzzzz_ = P?.StatusElement;
+            string rzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzz_);
+            bool? rzzzb_ = context.Operators.Equal(rzzza_, "completed");
 
-            return tzzzzzl_;
+            return rzzzb_;
         };
-        IEnumerable<Procedure> tzzzzzi_ = context.Operators.Where<Procedure>(Proc, tzzzzzh_);
+        IEnumerable<Procedure> qzzzy_ = context.Operators.Where<Procedure>(Proc, qzzzx_);
 
-        return tzzzzzi_;
+        return qzzzy_;
     }
 
 
     [CqlExpressionDefinition("Completed or Ongoing Procedure")]
     public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
     {
-        bool? tzzzzzm_(Procedure P)
+        bool? rzzzc_(Procedure P)
         {
-            Code<EventStatus> tzzzzzo_ = P?.StatusElement;
-            string tzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzo_);
-            string[] tzzzzzq_ = [
+            Code<EventStatus> rzzze_ = P?.StatusElement;
+            string rzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, rzzze_);
+            string[] rzzzg_ = [
                 "completed",
                 "in-progress",
             ];
-            bool? tzzzzzr_ = context.Operators.In<string>(tzzzzzp_, tzzzzzq_ as IEnumerable<string>);
+            bool? rzzzh_ = context.Operators.In<string>(rzzzf_, rzzzg_ as IEnumerable<string>);
 
-            return tzzzzzr_;
+            return rzzzh_;
         };
-        IEnumerable<Procedure> tzzzzzn_ = context.Operators.Where<Procedure>(Proc, tzzzzzm_);
+        IEnumerable<Procedure> rzzzd_ = context.Operators.Where<Procedure>(Proc, rzzzc_);
 
-        return tzzzzzn_;
+        return rzzzd_;
     }
 
 

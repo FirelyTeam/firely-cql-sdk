@@ -8,17 +8,15 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler.Expressions;
 
 /// <seealso cref="CodeDef"/>
 /// <seealso cref="CqlCodeDefinitionAttribute"/>
 internal class CqlCodeDefinition(
-    LambdaExpression lambda,
     string name,
-    string codeId,
-    string codeSystem)
-    : CqlDefinition(lambda, name) {
-    public string CodeId { get; } = codeId;
-    public string CodeSystem { get; } = codeSystem;
+    CqlCode code)
+    : CqlDefinition(null!, name) {
+    public CqlCode Code { get; } = code;
 }

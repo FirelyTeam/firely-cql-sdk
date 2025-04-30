@@ -49,10 +49,52 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyCollection<CqlVersionedLibraryIdentifier> DependencyLibraryIdentifiers { get; }
 
     /// <summary>
-    /// Gets the library invokers for the dependencies of the specified library invoker.
+    /// Selects the dependency libraries for the current library.
     /// </summary>
-    /// <returns>An enumeration of <see cref="LibraryInvoker"/> instances representing the dependencies of the specified library invoker.</returns>
-    public IEnumerable<LibraryInvoker> EnumerateLibraryInvokerDependencies()
+    /// <param name="includeSelf">
+    /// A boolean value indicating whether the current library should be included in the result.
+    /// If <c>true</c>, the current library is included; otherwise, it is excluded.
+    /// </param>
+    /// <param name="recursive">
+    /// A boolean value indicating whether the selection should include dependencies recursively.
+    /// If <c>true</c>, all transitive dependencies are included; otherwise, only direct dependencies are included.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="LibraryInvoker"/> representing the selected dependency libraries.
+    /// </returns>
+    public IEnumerable<LibraryInvoker> SelectDependencyLibraries(
+        bool includeSelf = false,
+        bool recursive = false)
+    {
+        var visited = new HashSet<LibraryInvoker>();
+        var stack = new Stack<LibraryInvoker>();
+
+        if (includeSelf)
+            stack.Push(this);
+        else
+            foreach (var dependency in SelectDirectDependencyLibraries())
+                stack.Push(dependency);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            if (visited.Add(current))
+            {
+                yield return current;
+
+                if (recursive)
+                {
+                    foreach (var dependency in current.SelectDirectDependencyLibraries())
+                    {
+                        if (!visited.Contains(dependency))
+                            stack.Push(dependency);
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerable<LibraryInvoker> SelectDirectDependencyLibraries()
     {
         var libraryInvokers = LibrarySetInvoker.LibraryInvokers;
         var logger = LibrarySetInvoker.CreateLogger<LibraryInvoker>();
@@ -60,8 +102,8 @@ public abstract class LibraryInvoker
             .TrySelect(
                 depId => libraryInvokers[depId],
                 s => s
-                    .SetContinuation(LibrarySetInvoker.BatchProcessExceptionContinuation)
-                    .AddLoggerExceptionHandler(logger, (depId, logMessage) => logMessage("No library invoker was found for {lib}", depId)));
+                     .SetContinuation(LibrarySetInvoker.BatchProcessExceptionContinuation)
+                     .AddLoggerExceptionHandler(logger, (depId, logMessage) => logMessage("No library invoker was found for {lib}", depId)));
     }
 
     /// <summary>

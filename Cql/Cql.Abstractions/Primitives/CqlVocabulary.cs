@@ -11,35 +11,10 @@ namespace Hl7.Cql.Primitives
     /// <summary>
     /// Implements the System Vocabulary type.
     /// </summary>
+    /// <param name="id">The canonical URL of the instance.</param>
+    /// <param name="id">The version of the instance.</param>
+    /// <param name="version"></param>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#vocabulary"/>
     [CqlPrimitiveType(CqlPrimitiveType.Vocabulary)]
-    public abstract class CqlVocabulary
-    {
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        protected CqlVocabulary()
-        {
-        }
-
-        /// <summary>
-        /// Constructs a new CqlVocabulary instance
-        /// </summary>
-        protected CqlVocabulary(string? id, string? version)
-        {
-            this.id = id;
-            this.version = version;
-        }
-
-        /// <summary>
-        /// The canonical URL of the value set.
-        /// </summary>
-        public string? id { get; init; }
-        /// <summary>
-        /// The version of the value set.
-        /// </summary>
-        public string? version { get; init; }
-
-
-    }
+    public abstract record CqlVocabulary(string? id, string? version);
 }

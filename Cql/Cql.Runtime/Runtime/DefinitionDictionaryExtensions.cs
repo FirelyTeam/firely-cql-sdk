@@ -30,7 +30,7 @@ namespace Hl7.Cql.Runtime
         {
             var delegates = new DelegateDefinitionDictionary();
 
-            foreach (var (libraryName, definitionName, signature, expression) in cqlDefinitionDictionary.EnumerateExpressions())
+            foreach (var (libraryName, definitionName, signature, expression) in cqlDefinitionDictionary.SelectDefinitions())
             {
                 Expression expr = expression;
                 if (visitors != null)

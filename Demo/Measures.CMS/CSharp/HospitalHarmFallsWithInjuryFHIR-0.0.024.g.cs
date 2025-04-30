@@ -148,7 +148,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
     [CqlCodeDefinition("Body mass index (BMI) [Ratio]", codeId: "39156-5", codeSystem: "http://loinc.org")]
     public CqlCode Body_mass_index__BMI___Ratio_(CqlContext _) => _Body_mass_index__BMI___Ratio_;
-    private static readonly CqlCode _Body_mass_index__BMI___Ratio_ = new CqlCode("39156-5", "http://loinc.org", default, default);
+    private static readonly CqlCode _Body_mass_index__BMI___Ratio_ = new CqlCode("39156-5", "http://loinc.org");
 
     #endregion Codes
 
@@ -156,7 +156,9 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
     [CqlCodeSystemDefinition("LOINC")]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem _LOINC = new CqlCodeSystem();
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null,
+          _Body_mass_index__BMI___Ratio_);
 
     #endregion CodeSystems
 
@@ -165,12 +167,12 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime azzzzzzzzzzzzzzzf_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime azzzzzzzzzzzzzzzg_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzh_ = context.Operators.Interval(azzzzzzzzzzzzzzzf_, azzzzzzzzzzzzzzzg_, true, false);
-        object azzzzzzzzzzzzzzzi_ = context.ResolveParameter("HospitalHarmFallsWithInjuryFHIR-0.0.024", "Measurement Period", azzzzzzzzzzzzzzzh_);
+        CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Interval(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, true, false);
+        object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.ResolveParameter("HospitalHarmFallsWithInjuryFHIR-0.0.024", "Measurement Period", izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-        return (CqlInterval<CqlDateTime>)azzzzzzzzzzzzzzzi_;
+        return (CqlInterval<CqlDateTime>)izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
     }
 
 
@@ -181,1941 +183,1941 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> azzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient azzzzzzzzzzzzzzzk_ = context.Operators.SingletonFrom<Patient>(azzzzzzzzzzzzzzzj_);
+        IEnumerable<Patient> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.SingletonFrom<Patient>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-        return azzzzzzzzzzzzzzzk_;
+        return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzl_ = CQMCommon_2_2_000.Instance.Inpatient_Encounter(context);
-        bool? azzzzzzzzzzzzzzzm_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = CQMCommon_2_2_000.Instance.Inpatient_Encounter(context);
+        bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Encounter InpatientEncounter)
         {
-            Patient azzzzzzzzzzzzzzzo_ = this.Patient(context);
-            Date azzzzzzzzzzzzzzzp_ = azzzzzzzzzzzzzzzo_?.BirthDateElement;
-            string azzzzzzzzzzzzzzzq_ = azzzzzzzzzzzzzzzp_?.Value;
-            CqlDate azzzzzzzzzzzzzzzr_ = context.Operators.ConvertStringToDate(azzzzzzzzzzzzzzzq_);
-            Period azzzzzzzzzzzzzzzs_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> azzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azzzzzzzzzzzzzzzs_);
-            CqlDateTime azzzzzzzzzzzzzzzu_ = context.Operators.Start(azzzzzzzzzzzzzzzt_);
-            CqlDate azzzzzzzzzzzzzzzv_ = context.Operators.DateFrom(azzzzzzzzzzzzzzzu_);
-            int? azzzzzzzzzzzzzzzw_ = context.Operators.CalculateAgeAt(azzzzzzzzzzzzzzzr_, azzzzzzzzzzzzzzzv_, "year");
-            bool? azzzzzzzzzzzzzzzx_ = context.Operators.GreaterOrEqual(azzzzzzzzzzzzzzzw_, 18);
+            Patient izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Patient(context);
+            Date jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.BirthDateElement;
+            string jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_?.Value;
+            CqlDate jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.ConvertStringToDate(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            Period jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = InpatientEncounter?.Period;
+            CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+            CqlDateTime jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Start(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+            CqlDate jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.DateFrom(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+            int? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.CalculateAgeAt(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, "year");
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.GreaterOrEqual(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, 18);
 
-            return azzzzzzzzzzzzzzzx_;
+            return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
         };
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzn_ = context.Operators.Where<Encounter>(azzzzzzzzzzzzzzzl_, azzzzzzzzzzzzzzzm_);
+        IEnumerable<Encounter> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Encounter>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-        return azzzzzzzzzzzzzzzn_;
+        return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzy_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = this.Qualifying_Encounter(context);
 
-        return azzzzzzzzzzzzzzzy_;
+        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzz_ = this.Initial_Population(context);
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Initial_Population(context);
 
-        return azzzzzzzzzzzzzzzz_;
+        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
     }
 
 
     [CqlExpressionDefinition("Encounter with a Fall Not Present on Admission")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Not_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzza_ = this.Qualifying_Encounter(context);
-        bool? bzzzzzzzzzzzzzzzb_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Qualifying_Encounter(context);
+        bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzd_ = InpatientEncounter?.Diagnosis;
-            bool? bzzzzzzzzzzzzzzze_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = InpatientEncounter?.Diagnosis;
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference bzzzzzzzzzzzzzzzh_ = Dx?.Condition;
-                Condition bzzzzzzzzzzzzzzzi_ = CQMCommon_2_2_000.Instance.GetCondition(context, bzzzzzzzzzzzzzzzh_);
-                CodeableConcept bzzzzzzzzzzzzzzzj_ = bzzzzzzzzzzzzzzzi_?.Code;
-                CqlConcept bzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzzzzzzj_);
-                CqlValueSet bzzzzzzzzzzzzzzzl_ = this.Inpatient_Falls(context);
-                bool? bzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(bzzzzzzzzzzzzzzzk_, bzzzzzzzzzzzzzzzl_);
-                bool? bzzzzzzzzzzzzzzzn_(Extension @this)
+                ResourceReference jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = Dx?.Condition;
+                Condition jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = CQMCommon_2_2_000.Instance.GetCondition(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                CodeableConcept jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Code;
+                CqlConcept jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CqlValueSet jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Inpatient_Falls(context);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Extension @this)
                 {
-                    string bzzzzzzzzzzzzzzzw_ = @this?.Url;
-                    FhirString bzzzzzzzzzzzzzzzx_ = context.Operators.Convert<FhirString>(bzzzzzzzzzzzzzzzw_);
-                    string bzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzzzzzzzzzzzzzx_);
-                    bool? bzzzzzzzzzzzzzzzz_ = context.Operators.Equal(bzzzzzzzzzzzzzzzy_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Url;
+                    FhirString kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<FhirString>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    string kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return bzzzzzzzzzzzzzzzz_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Extension> bzzzzzzzzzzzzzzzo_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), bzzzzzzzzzzzzzzzn_);
-                object bzzzzzzzzzzzzzzzp_(Extension @this)
+                        : default), jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Extension @this)
                 {
-                    DataType czzzzzzzzzzzzzzza_ = @this?.Value;
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Value;
 
-                    return czzzzzzzzzzzzzzza_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<object> bzzzzzzzzzzzzzzzq_ = context.Operators.Select<Extension, object>(bzzzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzzzp_);
-                object bzzzzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<object>(bzzzzzzzzzzzzzzzq_);
-                CqlConcept bzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzzzzzzr_ as CodeableConcept);
-                CqlValueSet bzzzzzzzzzzzzzzzt_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                bool? bzzzzzzzzzzzzzzzu_ = context.Operators.ConceptInValueSet(bzzzzzzzzzzzzzzzs_, bzzzzzzzzzzzzzzzt_);
-                bool? bzzzzzzzzzzzzzzzv_ = context.Operators.And(bzzzzzzzzzzzzzzzm_, bzzzzzzzzzzzzzzzu_);
+                IEnumerable<object> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Select<Extension, object>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SingletonFrom<object>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlConcept kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CodeableConcept);
+                CqlValueSet kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                return bzzzzzzzzzzzzzzzv_;
+                return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)bzzzzzzzzzzzzzzzd_, bzzzzzzzzzzzzzzze_);
-            bool? bzzzzzzzzzzzzzzzg_ = context.Operators.Exists<Encounter.DiagnosisComponent>(bzzzzzzzzzzzzzzzf_);
+            IEnumerable<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Exists<Encounter.DiagnosisComponent>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-            return bzzzzzzzzzzzzzzzg_;
+            return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
         };
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzc_ = context.Operators.Where<Encounter>(bzzzzzzzzzzzzzzza_, bzzzzzzzzzzzzzzzb_);
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Where<Encounter>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return bzzzzzzzzzzzzzzzc_;
+        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("Encounter with a Fall Event")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Event(CqlContext context)
     {
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzb_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzc_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Encounter InpatientEncounter)
         {
-            CqlValueSet czzzzzzzzzzzzzzze_ = this.Inpatient_Falls(context);
-            IEnumerable<AdverseEvent> czzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<AdverseEvent>(new RetrieveParameters(default, czzzzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-adverseevent"));
-            bool? czzzzzzzzzzzzzzzg_(AdverseEvent FallsDocumentation)
+            CqlValueSet kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Inpatient_Falls(context);
+            IEnumerable<AdverseEvent> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<AdverseEvent>(new RetrieveParameters(default, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-adverseevent"));
+            bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(AdverseEvent FallsDocumentation)
             {
-                FhirDateTime czzzzzzzzzzzzzzzk_ = FallsDocumentation?.DateElement;
-                CqlDateTime czzzzzzzzzzzzzzzl_ = context.Operators.Convert<CqlDateTime>(czzzzzzzzzzzzzzzk_);
-                FhirDateTime czzzzzzzzzzzzzzzm_ = FallsDocumentation?.RecordedDateElement;
-                CqlDateTime czzzzzzzzzzzzzzzn_ = context.Operators.Convert<CqlDateTime>(czzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzo_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                bool? czzzzzzzzzzzzzzzp_ = context.Operators.In<CqlDateTime>(czzzzzzzzzzzzzzzl_ ?? czzzzzzzzzzzzzzzn_, czzzzzzzzzzzzzzzo_, default);
+                FhirDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FallsDocumentation?.DateElement;
+                CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Convert<CqlDateTime>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                FhirDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FallsDocumentation?.RecordedDateElement;
+                CqlDateTime kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Convert<CqlDateTime>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.In<CqlDateTime>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ ?? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default);
 
-                return czzzzzzzzzzzzzzzp_;
+                return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
             };
-            IEnumerable<AdverseEvent> czzzzzzzzzzzzzzzh_ = context.Operators.Where<AdverseEvent>(czzzzzzzzzzzzzzzf_, czzzzzzzzzzzzzzzg_);
-            Encounter czzzzzzzzzzzzzzzi_(AdverseEvent FallsDocumentation) =>
+            IEnumerable<AdverseEvent> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<AdverseEvent>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            Encounter kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(AdverseEvent FallsDocumentation) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> czzzzzzzzzzzzzzzj_ = context.Operators.Select<AdverseEvent, Encounter>(czzzzzzzzzzzzzzzh_, czzzzzzzzzzzzzzzi_);
+            IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Select<AdverseEvent, Encounter>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-            return czzzzzzzzzzzzzzzj_;
+            return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
         };
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzd_ = context.Operators.SelectMany<Encounter, Encounter>(czzzzzzzzzzzzzzzb_, czzzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.SelectMany<Encounter, Encounter>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-        return czzzzzzzzzzzzzzzd_;
+        return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Encounter where a Fall Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_Occurred(CqlContext context)
     {
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzq_ = this.Encounter_with_a_Fall_Not_Present_on_Admission(context);
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzr_ = this.Encounter_with_a_Fall_Event(context);
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzs_ = context.Operators.Union<Encounter>(czzzzzzzzzzzzzzzq_, czzzzzzzzzzzzzzzr_);
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = this.Encounter_with_a_Fall_Not_Present_on_Admission(context);
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Encounter_with_a_Fall_Event(context);
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Union<Encounter>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
 
-        return czzzzzzzzzzzzzzzs_;
+        return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Encounter where a Fall and Major Injury Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_and_Major_Injury_Occurred(CqlContext context)
     {
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzt_ = this.Encounter_where_a_Fall_Occurred(context);
-        bool? czzzzzzzzzzzzzzzu_(Encounter FallOccurred)
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Encounter_where_a_Fall_Occurred(context);
+        bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_(Encounter FallOccurred)
         {
-            List<Encounter.DiagnosisComponent> czzzzzzzzzzzzzzzw_ = FallOccurred?.Diagnosis;
-            bool? czzzzzzzzzzzzzzzx_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FallOccurred?.Diagnosis;
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference dzzzzzzzzzzzzzzza_ = Dx?.Condition;
-                Condition dzzzzzzzzzzzzzzzb_ = CQMCommon_2_2_000.Instance.GetCondition(context, dzzzzzzzzzzzzzzza_);
-                CodeableConcept dzzzzzzzzzzzzzzzc_ = dzzzzzzzzzzzzzzzb_?.Code;
-                CqlConcept dzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzc_);
-                CqlValueSet dzzzzzzzzzzzzzzze_ = this.Major_Injuries(context);
-                bool? dzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzd_, dzzzzzzzzzzzzzzze_);
-                bool? dzzzzzzzzzzzzzzzg_(Extension @this)
+                ResourceReference lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = Dx?.Condition;
+                Condition lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = CQMCommon_2_2_000.Instance.GetCondition(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                CodeableConcept lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Code;
+                CqlConcept lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                CqlValueSet lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Major_Injuries(context);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.ConceptInValueSet(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Extension @this)
                 {
-                    string dzzzzzzzzzzzzzzzw_ = @this?.Url;
-                    FhirString dzzzzzzzzzzzzzzzx_ = context.Operators.Convert<FhirString>(dzzzzzzzzzzzzzzzw_);
-                    string dzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToString(context, dzzzzzzzzzzzzzzzx_);
-                    bool? dzzzzzzzzzzzzzzzz_ = context.Operators.Equal(dzzzzzzzzzzzzzzzy_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Url;
+                    FhirString mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<FhirString>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return dzzzzzzzzzzzzzzzz_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Extension> dzzzzzzzzzzzzzzzh_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), dzzzzzzzzzzzzzzzg_);
-                object dzzzzzzzzzzzzzzzi_(Extension @this)
+                        : default), lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Extension @this)
                 {
-                    DataType ezzzzzzzzzzzzzzza_ = @this?.Value;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Value;
 
-                    return ezzzzzzzzzzzzzzza_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<object> dzzzzzzzzzzzzzzzj_ = context.Operators.Select<Extension, object>(dzzzzzzzzzzzzzzzh_, dzzzzzzzzzzzzzzzi_);
-                object dzzzzzzzzzzzzzzzk_ = context.Operators.SingletonFrom<object>(dzzzzzzzzzzzzzzzj_);
-                CqlConcept dzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzk_ as CodeableConcept);
-                CqlValueSet dzzzzzzzzzzzzzzzm_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                bool? dzzzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzl_, dzzzzzzzzzzzzzzzm_);
-                bool? dzzzzzzzzzzzzzzzo_(Extension @this)
+                IEnumerable<object> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Select<Extension, object>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.SingletonFrom<object>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CqlConcept lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ as CodeableConcept);
+                CqlValueSet lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.ConceptInValueSet(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Extension @this)
                 {
-                    string ezzzzzzzzzzzzzzzb_ = @this?.Url;
-                    FhirString ezzzzzzzzzzzzzzzc_ = context.Operators.Convert<FhirString>(ezzzzzzzzzzzzzzzb_);
-                    string ezzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToString(context, ezzzzzzzzzzzzzzzc_);
-                    bool? ezzzzzzzzzzzzzzze_ = context.Operators.Equal(ezzzzzzzzzzzzzzzd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Url;
+                    FhirString mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Convert<FhirString>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToString(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Equal(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return ezzzzzzzzzzzzzzze_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                IEnumerable<Extension> dzzzzzzzzzzzzzzzp_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), dzzzzzzzzzzzzzzzo_);
-                object dzzzzzzzzzzzzzzzq_(Extension @this)
+                        : default), lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Extension @this)
                 {
-                    DataType ezzzzzzzzzzzzzzzf_ = @this?.Value;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Value;
 
-                    return ezzzzzzzzzzzzzzzf_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                 };
-                IEnumerable<object> dzzzzzzzzzzzzzzzr_ = context.Operators.Select<Extension, object>(dzzzzzzzzzzzzzzzp_, dzzzzzzzzzzzzzzzq_);
-                object dzzzzzzzzzzzzzzzs_ = context.Operators.SingletonFrom<object>(dzzzzzzzzzzzzzzzr_);
-                CqlConcept dzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzs_ as CodeableConcept);
-                bool? dzzzzzzzzzzzzzzzu_ = context.Operators.Or(dzzzzzzzzzzzzzzzn_, (bool?)(dzzzzzzzzzzzzzzzt_ is null));
-                bool? dzzzzzzzzzzzzzzzv_ = context.Operators.And(dzzzzzzzzzzzzzzzf_, dzzzzzzzzzzzzzzzu_);
+                IEnumerable<object> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Extension, object>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<object>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlConcept mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CodeableConcept);
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Or(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, (bool?)(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ is null));
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                return dzzzzzzzzzzzzzzzv_;
+                return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> czzzzzzzzzzzzzzzy_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)czzzzzzzzzzzzzzzw_, czzzzzzzzzzzzzzzx_);
-            bool? czzzzzzzzzzzzzzzz_ = context.Operators.Exists<Encounter.DiagnosisComponent>(czzzzzzzzzzzzzzzy_);
+            IEnumerable<Encounter.DiagnosisComponent> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Exists<Encounter.DiagnosisComponent>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-            return czzzzzzzzzzzzzzzz_;
+            return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
         };
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzv_ = context.Operators.Where<Encounter>(czzzzzzzzzzzzzzzt_, czzzzzzzzzzzzzzzu_);
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Encounter>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-        return czzzzzzzzzzzzzzzv_;
+        return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
     }
 
 
     [CqlExpressionDefinition("Encounter with a Fall Present on Admission")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzg_ = this.Qualifying_Encounter(context);
-        bool? ezzzzzzzzzzzzzzzh_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Qualifying_Encounter(context);
+        bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> ezzzzzzzzzzzzzzzj_ = InpatientEncounter?.Diagnosis;
-            bool? ezzzzzzzzzzzzzzzk_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = InpatientEncounter?.Diagnosis;
+            bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference ezzzzzzzzzzzzzzzn_ = Dx?.Condition;
-                Condition ezzzzzzzzzzzzzzzo_ = CQMCommon_2_2_000.Instance.GetCondition(context, ezzzzzzzzzzzzzzzn_);
-                CodeableConcept ezzzzzzzzzzzzzzzp_ = ezzzzzzzzzzzzzzzo_?.Code;
-                CqlConcept ezzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzp_);
-                CqlValueSet ezzzzzzzzzzzzzzzr_ = this.Inpatient_Falls(context);
-                bool? ezzzzzzzzzzzzzzzs_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzq_, ezzzzzzzzzzzzzzzr_);
-                bool? ezzzzzzzzzzzzzzzt_(Extension @this)
+                ResourceReference mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = Dx?.Condition;
+                Condition mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CQMCommon_2_2_000.Instance.GetCondition(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                CodeableConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.Code;
+                CqlConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlValueSet nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Inpatient_Falls(context);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.ConceptInValueSet(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Extension @this)
                 {
-                    string fzzzzzzzzzzzzzzzc_ = @this?.Url;
-                    FhirString fzzzzzzzzzzzzzzzd_ = context.Operators.Convert<FhirString>(fzzzzzzzzzzzzzzzc_);
-                    string fzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToString(context, fzzzzzzzzzzzzzzzd_);
-                    bool? fzzzzzzzzzzzzzzzf_ = context.Operators.Equal(fzzzzzzzzzzzzzzze_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Url;
+                    FhirString nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<FhirString>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                    string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToString(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                    bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Equal(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return fzzzzzzzzzzzzzzzf_;
+                    return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                 };
-                IEnumerable<Extension> ezzzzzzzzzzzzzzzu_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), ezzzzzzzzzzzzzzzt_);
-                object ezzzzzzzzzzzzzzzv_(Extension @this)
+                        : default), nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_(Extension @this)
                 {
-                    DataType fzzzzzzzzzzzzzzzg_ = @this?.Value;
+                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = @this?.Value;
 
-                    return fzzzzzzzzzzzzzzzg_;
+                    return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                IEnumerable<object> ezzzzzzzzzzzzzzzw_ = context.Operators.Select<Extension, object>(ezzzzzzzzzzzzzzzu_, ezzzzzzzzzzzzzzzv_);
-                object ezzzzzzzzzzzzzzzx_ = context.Operators.SingletonFrom<object>(ezzzzzzzzzzzzzzzw_);
-                CqlConcept ezzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzx_ as CodeableConcept);
-                CqlValueSet ezzzzzzzzzzzzzzzz_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? fzzzzzzzzzzzzzzza_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzy_, ezzzzzzzzzzzzzzzz_);
-                bool? fzzzzzzzzzzzzzzzb_ = context.Operators.And(ezzzzzzzzzzzzzzzs_, fzzzzzzzzzzzzzzza_);
+                IEnumerable<object> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Select<Extension, object>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.SingletonFrom<object>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                CqlConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ as CodeableConcept);
+                CqlValueSet nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.ConceptInValueSet(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.And(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
 
-                return fzzzzzzzzzzzzzzzb_;
+                return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> ezzzzzzzzzzzzzzzl_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)ezzzzzzzzzzzzzzzj_, ezzzzzzzzzzzzzzzk_);
-            bool? ezzzzzzzzzzzzzzzm_ = context.Operators.Exists<Encounter.DiagnosisComponent>(ezzzzzzzzzzzzzzzl_);
+            IEnumerable<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+            bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Exists<Encounter.DiagnosisComponent>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-            return ezzzzzzzzzzzzzzzm_;
+            return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
         };
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzi_ = context.Operators.Where<Encounter>(ezzzzzzzzzzzzzzzg_, ezzzzzzzzzzzzzzzh_);
+        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Encounter>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-        return ezzzzzzzzzzzzzzzi_;
+        return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable All Encounter Diagnoses with Rank and POA Indication")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context)
     {
-        IEnumerable<Encounter> fzzzzzzzzzzzzzzzh_ = this.Qualifying_Encounter(context);
-        (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? fzzzzzzzzzzzzzzzi_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Qualifying_Encounter(context);
+        (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Encounter InpatientEncounter)
         {
-            Id fzzzzzzzzzzzzzzzl_ = InpatientEncounter?.IdElement;
-            string fzzzzzzzzzzzzzzzm_ = fzzzzzzzzzzzzzzzl_?.Value;
-            List<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzn_ = InpatientEncounter?.Diagnosis;
-            bool? fzzzzzzzzzzzzzzzo_(Encounter.DiagnosisComponent @this)
+            Id nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = InpatientEncounter?.IdElement;
+            string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_?.Value;
+            List<Encounter.DiagnosisComponent> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = InpatientEncounter?.Diagnosis;
+            bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Encounter.DiagnosisComponent @this)
             {
-                ResourceReference gzzzzzzzzzzzzzzzb_ = @this?.Condition;
-                bool? gzzzzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(gzzzzzzzzzzzzzzzb_ is null));
+                ResourceReference ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Condition;
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Not((bool?)(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ is null));
 
-                return gzzzzzzzzzzzzzzzc_;
+                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzp_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)fzzzzzzzzzzzzzzzn_, fzzzzzzzzzzzzzzzo_);
-            ResourceReference fzzzzzzzzzzzzzzzq_(Encounter.DiagnosisComponent @this)
+            IEnumerable<Encounter.DiagnosisComponent> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            ResourceReference ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Encounter.DiagnosisComponent @this)
             {
-                ResourceReference gzzzzzzzzzzzzzzzd_ = @this?.Condition;
+                ResourceReference ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Condition;
 
-                return gzzzzzzzzzzzzzzzd_;
+                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
             };
-            IEnumerable<ResourceReference> fzzzzzzzzzzzzzzzr_ = context.Operators.Select<Encounter.DiagnosisComponent, ResourceReference>(fzzzzzzzzzzzzzzzp_, fzzzzzzzzzzzzzzzq_);
-            bool? fzzzzzzzzzzzzzzzt_(Encounter.DiagnosisComponent @this)
+            IEnumerable<ResourceReference> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Encounter.DiagnosisComponent, ResourceReference>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Encounter.DiagnosisComponent @this)
             {
-                PositiveInt gzzzzzzzzzzzzzzze_ = @this?.RankElement;
-                int? gzzzzzzzzzzzzzzzf_ = gzzzzzzzzzzzzzzze_?.Value;
-                bool? gzzzzzzzzzzzzzzzg_ = context.Operators.Not((bool?)(gzzzzzzzzzzzzzzzf_ is null));
+                PositiveInt ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.RankElement;
+                int? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_?.Value;
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Not((bool?)(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ is null));
 
-                return gzzzzzzzzzzzzzzzg_;
+                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzu_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)fzzzzzzzzzzzzzzzn_, fzzzzzzzzzzzzzzzt_);
-            int? fzzzzzzzzzzzzzzzv_(Encounter.DiagnosisComponent @this)
+            IEnumerable<Encounter.DiagnosisComponent> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+            int? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_(Encounter.DiagnosisComponent @this)
             {
-                PositiveInt gzzzzzzzzzzzzzzzh_ = @this?.RankElement;
-                int? gzzzzzzzzzzzzzzzi_ = gzzzzzzzzzzzzzzzh_?.Value;
+                PositiveInt ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.RankElement;
+                int? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.Value;
 
-                return gzzzzzzzzzzzzzzzi_;
+                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
             };
-            IEnumerable<int?> fzzzzzzzzzzzzzzzw_ = context.Operators.Select<Encounter.DiagnosisComponent, int?>(fzzzzzzzzzzzzzzzu_, fzzzzzzzzzzzzzzzv_);
-            bool? fzzzzzzzzzzzzzzzy_(Encounter.DiagnosisComponent Dx)
+            IEnumerable<int?> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Select<Encounter.DiagnosisComponent, int?>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Encounter.DiagnosisComponent Dx)
             {
-                bool? gzzzzzzzzzzzzzzzj_(Extension @this)
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Extension @this)
                 {
-                    string gzzzzzzzzzzzzzzzr_ = @this?.Url;
-                    FhirString gzzzzzzzzzzzzzzzs_ = context.Operators.Convert<FhirString>(gzzzzzzzzzzzzzzzr_);
-                    string gzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToString(context, gzzzzzzzzzzzzzzzs_);
-                    bool? gzzzzzzzzzzzzzzzu_ = context.Operators.Equal(gzzzzzzzzzzzzzzzt_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = @this?.Url;
+                    FhirString pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Convert<FhirString>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                    string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToString(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                    bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return gzzzzzzzzzzzzzzzu_;
+                    return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                 };
-                IEnumerable<Extension> gzzzzzzzzzzzzzzzk_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), gzzzzzzzzzzzzzzzj_);
-                object gzzzzzzzzzzzzzzzl_(Extension @this)
+                        : default), ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Extension @this)
                 {
-                    DataType gzzzzzzzzzzzzzzzv_ = @this?.Value;
+                    DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = @this?.Value;
 
-                    return gzzzzzzzzzzzzzzzv_;
+                    return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
                 };
-                IEnumerable<object> gzzzzzzzzzzzzzzzm_ = context.Operators.Select<Extension, object>(gzzzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzzzl_);
-                object gzzzzzzzzzzzzzzzn_ = context.Operators.SingletonFrom<object>(gzzzzzzzzzzzzzzzm_);
-                CqlConcept gzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gzzzzzzzzzzzzzzzn_ as CodeableConcept);
-                CqlValueSet gzzzzzzzzzzzzzzzp_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? gzzzzzzzzzzzzzzzq_ = context.Operators.ConceptInValueSet(gzzzzzzzzzzzzzzzo_, gzzzzzzzzzzzzzzzp_);
+                IEnumerable<object> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Select<Extension, object>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.SingletonFrom<object>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                CqlConcept ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ as CodeableConcept);
+                CqlValueSet pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-                return gzzzzzzzzzzzzzzzq_;
+                return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzz_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)fzzzzzzzzzzzzzzzn_, fzzzzzzzzzzzzzzzy_);
-            (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? gzzzzzzzzzzzzzzza_ = (CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD, fzzzzzzzzzzzzzzzm_, fzzzzzzzzzzzzzzzr_, fzzzzzzzzzzzzzzzw_, fzzzzzzzzzzzzzzzz_);
+            IEnumerable<Encounter.DiagnosisComponent> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = (CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-            return gzzzzzzzzzzzzzzza_;
+            return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
         };
-        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> fzzzzzzzzzzzzzzzj_ = context.Operators.Select<Encounter, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(fzzzzzzzzzzzzzzzh_, fzzzzzzzzzzzzzzzi_);
-        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> fzzzzzzzzzzzzzzzk_ = context.Operators.Distinct<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(fzzzzzzzzzzzzzzzj_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Select<Encounter, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-        return fzzzzzzzzzzzzzzzk_;
+        return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable All Encounter Principal Diagnoses")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> Risk_Variable_All_Encounter_Principal_Diagnoses(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzw_ = this.Qualifying_Encounter(context);
-        (CqlTupleMetadata, Encounter encounter, CqlConcept condition)? gzzzzzzzzzzzzzzzx_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Qualifying_Encounter(context);
+        (CqlTupleMetadata, Encounter encounter, CqlConcept condition)? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Encounter InpatientEncounter)
         {
-            Condition hzzzzzzzzzzzzzzza_ = CQMCommon_2_2_000.Instance.PrincipalDiagnosis(context, InpatientEncounter);
-            CodeableConcept hzzzzzzzzzzzzzzzb_ = hzzzzzzzzzzzzzzza_?.Code;
-            CqlConcept hzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hzzzzzzzzzzzzzzzb_);
-            (CqlTupleMetadata, Encounter encounter, CqlConcept condition)? hzzzzzzzzzzzzzzzd_ = (CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF, InpatientEncounter, hzzzzzzzzzzzzzzzc_);
+            Condition pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = CQMCommon_2_2_000.Instance.PrincipalDiagnosis(context, InpatientEncounter);
+            CodeableConcept pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_?.Code;
+            CqlConcept pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+            (CqlTupleMetadata, Encounter encounter, CqlConcept condition)? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = (CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF, InpatientEncounter, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-            return hzzzzzzzzzzzzzzzd_;
+            return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
         };
-        IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> gzzzzzzzzzzzzzzzy_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlConcept condition)?>(gzzzzzzzzzzzzzzzw_, gzzzzzzzzzzzzzzzx_);
-        IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> gzzzzzzzzzzzzzzzz_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?>(gzzzzzzzzzzzzzzzy_);
+        IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlConcept condition)?>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+        IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-        return gzzzzzzzzzzzzzzzz_;
+        return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Body Mass Index (BMI)")]
     public IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI_(CqlContext context)
     {
-        CqlCode hzzzzzzzzzzzzzzze_ = this.Body_mass_index__BMI___Ratio_(context);
-        IEnumerable<CqlCode> hzzzzzzzzzzzzzzzf_ = context.Operators.ToList<CqlCode>(hzzzzzzzzzzzzzzze_);
-        IEnumerable<Observation> hzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, hzzzzzzzzzzzzzzzf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> hzzzzzzzzzzzzzzzh_(Observation BMI)
+        CqlCode pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Body_mass_index__BMI___Ratio_(context);
+        IEnumerable<CqlCode> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.ToList<CqlCode>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+        IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Observation BMI)
         {
-            IEnumerable<Encounter> hzzzzzzzzzzzzzzzm_ = this.Qualifying_Encounter(context);
-            bool? hzzzzzzzzzzzzzzzn_(Encounter InpatientEncounter)
+            IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Qualifying_Encounter(context);
+            bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Encounter InpatientEncounter)
             {
-                DataType hzzzzzzzzzzzzzzzr_ = BMI?.Effective;
-                object hzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.ToInterval(context, hzzzzzzzzzzzzzzzs_);
-                CqlDateTime hzzzzzzzzzzzzzzzu_ = context.Operators.Start(hzzzzzzzzzzzzzzzt_);
-                CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzv_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                bool? hzzzzzzzzzzzzzzzw_ = context.Operators.In<CqlDateTime>(hzzzzzzzzzzzzzzzu_, hzzzzzzzzzzzzzzzv_, default);
-                DataType hzzzzzzzzzzzzzzzx_ = BMI?.Value;
-                object hzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzx_);
-                bool? hzzzzzzzzzzzzzzzz_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzzzzy_ is null));
-                bool? izzzzzzzzzzzzzzza_ = context.Operators.And(hzzzzzzzzzzzzzzzw_, hzzzzzzzzzzzzzzzz_);
-                Code<ObservationStatus> izzzzzzzzzzzzzzzb_ = BMI?.StatusElement;
-                ObservationStatus? izzzzzzzzzzzzzzzc_ = izzzzzzzzzzzzzzzb_?.Value;
-                Code<ObservationStatus> izzzzzzzzzzzzzzzd_ = context.Operators.Convert<Code<ObservationStatus>>(izzzzzzzzzzzzzzzc_);
-                string izzzzzzzzzzzzzzze_ = context.Operators.Convert<string>(izzzzzzzzzzzzzzzd_);
-                string[] izzzzzzzzzzzzzzzf_ = [
+                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = BMI?.Effective;
+                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = QICoreCommon_2_1_000.Instance.ToInterval(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlDateTime qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Start(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.In<CqlDateTime>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, default);
+                DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = BMI?.Value;
+                object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Not((bool?)(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ is null));
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                Code<ObservationStatus> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = BMI?.StatusElement;
+                ObservationStatus? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
+                Code<ObservationStatus> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<Code<ObservationStatus>>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                string qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<string>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                string[] qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? izzzzzzzzzzzzzzzg_ = context.Operators.In<string>(izzzzzzzzzzzzzzze_, izzzzzzzzzzzzzzzf_ as IEnumerable<string>);
-                bool? izzzzzzzzzzzzzzzh_ = context.Operators.And(izzzzzzzzzzzzzzza_, izzzzzzzzzzzzzzzg_);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<string>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ as IEnumerable<string>);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.And(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-                return izzzzzzzzzzzzzzzh_;
+                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
             };
-            IEnumerable<Encounter> hzzzzzzzzzzzzzzzo_ = context.Operators.Where<Encounter>(hzzzzzzzzzzzzzzzm_, hzzzzzzzzzzzzzzzn_);
-            Observation hzzzzzzzzzzzzzzzp_(Encounter InpatientEncounter) =>
+            IEnumerable<Encounter> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Encounter>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            Observation qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Encounter InpatientEncounter) =>
                 BMI;
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzq_ = context.Operators.Select<Encounter, Observation>(hzzzzzzzzzzzzzzzo_, hzzzzzzzzzzzzzzzp_);
+            IEnumerable<Observation> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Select<Encounter, Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-            return hzzzzzzzzzzzzzzzq_;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
         };
-        IEnumerable<Observation> hzzzzzzzzzzzzzzzi_ = context.Operators.SelectMany<Observation, Observation>(hzzzzzzzzzzzzzzzg_, hzzzzzzzzzzzzzzzh_);
-        CqlQuantity hzzzzzzzzzzzzzzzj_(Observation BMI)
+        IEnumerable<Observation> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.SelectMany<Observation, Observation>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+        CqlQuantity pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Observation BMI)
         {
-            DataType izzzzzzzzzzzzzzzi_ = BMI?.Value;
-            object izzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzi_);
+            DataType qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = BMI?.Value;
+            object qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-            return izzzzzzzzzzzzzzzj_ as CqlQuantity;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ as CqlQuantity;
         };
-        IEnumerable<CqlQuantity> hzzzzzzzzzzzzzzzk_ = context.Operators.Select<Observation, CqlQuantity>(hzzzzzzzzzzzzzzzi_, hzzzzzzzzzzzzzzzj_);
-        IEnumerable<CqlQuantity> hzzzzzzzzzzzzzzzl_ = context.Operators.Distinct<CqlQuantity>(hzzzzzzzzzzzzzzzk_);
+        IEnumerable<CqlQuantity> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Select<Observation, CqlQuantity>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+        IEnumerable<CqlQuantity> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Distinct<CqlQuantity>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
 
-        return hzzzzzzzzzzzzzzzl_;
+        return pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Abnormal Weight Loss or Malnutrition Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> izzzzzzzzzzzzzzzk_ = this.Qualifying_Encounter(context);
-        bool? izzzzzzzzzzzzzzzl_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Qualifying_Encounter(context);
+        bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzn_ = InpatientEncounter?.Diagnosis;
-            bool? izzzzzzzzzzzzzzzo_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = InpatientEncounter?.Diagnosis;
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference izzzzzzzzzzzzzzzr_ = Dx?.Condition;
-                Condition izzzzzzzzzzzzzzzs_ = CQMCommon_2_2_000.Instance.GetCondition(context, izzzzzzzzzzzzzzzr_);
-                CodeableConcept izzzzzzzzzzzzzzzt_ = izzzzzzzzzzzzzzzs_?.Code;
-                CqlConcept izzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, izzzzzzzzzzzzzzzt_);
-                CqlValueSet izzzzzzzzzzzzzzzv_ = this.Abnormal_Weight_Loss_and_Malnutrition(context);
-                bool? izzzzzzzzzzzzzzzw_ = context.Operators.ConceptInValueSet(izzzzzzzzzzzzzzzu_, izzzzzzzzzzzzzzzv_);
-                bool? izzzzzzzzzzzzzzzx_(Extension @this)
+                ResourceReference rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = Dx?.Condition;
+                Condition rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = CQMCommon_2_2_000.Instance.GetCondition(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CodeableConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_?.Code;
+                CqlConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Abnormal_Weight_Loss_and_Malnutrition(context);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.ConceptInValueSet(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Extension @this)
                 {
-                    string jzzzzzzzzzzzzzzzg_ = @this?.Url;
-                    FhirString jzzzzzzzzzzzzzzzh_ = context.Operators.Convert<FhirString>(jzzzzzzzzzzzzzzzg_);
-                    string jzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToString(context, jzzzzzzzzzzzzzzzh_);
-                    bool? jzzzzzzzzzzzzzzzj_ = context.Operators.Equal(jzzzzzzzzzzzzzzzi_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = @this?.Url;
+                    FhirString rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Convert<FhirString>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                    string rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToString(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                    bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Equal(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return jzzzzzzzzzzzzzzzj_;
+                    return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
                 };
-                IEnumerable<Extension> izzzzzzzzzzzzzzzy_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), izzzzzzzzzzzzzzzx_);
-                object izzzzzzzzzzzzzzzz_(Extension @this)
+                        : default), rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(Extension @this)
                 {
-                    DataType jzzzzzzzzzzzzzzzk_ = @this?.Value;
+                    DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = @this?.Value;
 
-                    return jzzzzzzzzzzzzzzzk_;
+                    return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                IEnumerable<object> jzzzzzzzzzzzzzzza_ = context.Operators.Select<Extension, object>(izzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzz_);
-                object jzzzzzzzzzzzzzzzb_ = context.Operators.SingletonFrom<object>(jzzzzzzzzzzzzzzza_);
-                CqlConcept jzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzb_ as CodeableConcept);
-                CqlValueSet jzzzzzzzzzzzzzzzd_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? jzzzzzzzzzzzzzzze_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzzzc_, jzzzzzzzzzzzzzzzd_);
-                bool? jzzzzzzzzzzzzzzzf_ = context.Operators.And(izzzzzzzzzzzzzzzw_, jzzzzzzzzzzzzzzze_);
+                IEnumerable<object> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Select<Extension, object>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.SingletonFrom<object>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                CqlConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ as CodeableConcept);
+                CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.ConceptInValueSet(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-                return jzzzzzzzzzzzzzzzf_;
+                return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzp_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)izzzzzzzzzzzzzzzn_, izzzzzzzzzzzzzzzo_);
-            bool? izzzzzzzzzzzzzzzq_ = context.Operators.Exists<Encounter.DiagnosisComponent>(izzzzzzzzzzzzzzzp_);
+            IEnumerable<Encounter.DiagnosisComponent> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Exists<Encounter.DiagnosisComponent>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-            return izzzzzzzzzzzzzzzq_;
+            return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
         };
-        IEnumerable<Encounter> izzzzzzzzzzzzzzzm_ = context.Operators.Where<Encounter>(izzzzzzzzzzzzzzzk_, izzzzzzzzzzzzzzzl_);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-        return izzzzzzzzzzzzzzzm_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Anticoagulant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> jzzzzzzzzzzzzzzzl_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> jzzzzzzzzzzzzzzzm_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Encounter InpatientEncounter)
         {
-            CqlValueSet jzzzzzzzzzzzzzzzo_ = this.Anticoagulants_for_All_Indications(context);
-            IEnumerable<MedicationRequest> jzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, jzzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> jzzzzzzzzzzzzzzzr_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, jzzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> jzzzzzzzzzzzzzzzs_ = context.Operators.Union<MedicationRequest>(jzzzzzzzzzzzzzzzp_, jzzzzzzzzzzzzzzzr_);
-            bool? jzzzzzzzzzzzzzzzt_(MedicationRequest Anticoagulants)
+            CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Anticoagulants_for_All_Indications(context);
+            IEnumerable<MedicationRequest> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Union<MedicationRequest>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(MedicationRequest Anticoagulants)
             {
-                Code<MedicationRequest.MedicationrequestStatus> jzzzzzzzzzzzzzzzx_ = Anticoagulants?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? jzzzzzzzzzzzzzzzy_ = jzzzzzzzzzzzzzzzx_?.Value;
-                string jzzzzzzzzzzzzzzzz_ = context.Operators.Convert<string>(jzzzzzzzzzzzzzzzy_);
-                bool? kzzzzzzzzzzzzzzza_ = context.Operators.Equal(jzzzzzzzzzzzzzzzz_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> kzzzzzzzzzzzzzzzb_ = Anticoagulants?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? kzzzzzzzzzzzzzzzc_ = kzzzzzzzzzzzzzzzb_?.Value;
-                string kzzzzzzzzzzzzzzzd_ = context.Operators.Convert<string>(kzzzzzzzzzzzzzzzc_);
-                bool? kzzzzzzzzzzzzzzze_ = context.Operators.Equal(kzzzzzzzzzzzzzzzd_, "order");
-                MedicationRequest.MedicationRequestIntent? kzzzzzzzzzzzzzzzg_ = kzzzzzzzzzzzzzzzb_?.Value;
-                string kzzzzzzzzzzzzzzzh_ = context.Operators.Convert<string>(kzzzzzzzzzzzzzzzg_);
-                bool? kzzzzzzzzzzzzzzzi_ = context.Operators.Equal(kzzzzzzzzzzzzzzzh_, "plan");
-                DataType kzzzzzzzzzzzzzzzj_ = Anticoagulants?.Reported;
-                object kzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kzzzzzzzzzzzzzzzj_);
-                object kzzzzzzzzzzzzzzzl_ = context.Operators.LateBoundProperty<object>(kzzzzzzzzzzzzzzzk_, "reference");
-                string kzzzzzzzzzzzzzzzm_ = context.Operators.LateBoundProperty<string>(kzzzzzzzzzzzzzzzl_, "value");
-                string kzzzzzzzzzzzzzzzn_ = QICoreCommon_2_1_000.Instance.getId(context, kzzzzzzzzzzzzzzzm_);
-                Id kzzzzzzzzzzzzzzzo_()
+                Code<MedicationRequest.MedicationrequestStatus> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = Anticoagulants?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_?.Value;
+                string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = Anticoagulants?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
+                string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Convert<string>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Equal(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, "order");
+                MedicationRequest.MedicationRequestIntent? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_?.Value;
+                string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Convert<string>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Equal(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, "plan");
+                DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = Anticoagulants?.Reported;
+                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.LateBoundProperty<object>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, "reference");
+                string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.LateBoundProperty<string>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, "value");
+                string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.getId(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                Id szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                 {
-                    bool lzzzzzzzzzzzzzzzl_()
+                    bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_()
                     {
-                        Patient lzzzzzzzzzzzzzzzm_ = this.Patient(context);
-                        bool lzzzzzzzzzzzzzzzn_ = lzzzzzzzzzzzzzzzm_ is Resource;
+                        Patient tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Patient(context);
+                        bool tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ is Resource;
 
-                        return lzzzzzzzzzzzzzzzn_;
+                        return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
                     };
-                    if (lzzzzzzzzzzzzzzzl_())
+                    if (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_())
                     {
-                        Patient lzzzzzzzzzzzzzzzo_ = this.Patient(context);
+                        Patient tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Patient(context);
 
-                        return (lzzzzzzzzzzzzzzzo_ as Resource).IdElement;
+                        return (tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string kzzzzzzzzzzzzzzzp_ = (kzzzzzzzzzzzzzzzo_())?.Value;
-                bool? kzzzzzzzzzzzzzzzq_ = context.Operators.Equal(kzzzzzzzzzzzzzzzn_, kzzzzzzzzzzzzzzzp_);
-                bool? kzzzzzzzzzzzzzzzr_ = context.Operators.And(kzzzzzzzzzzzzzzzi_, kzzzzzzzzzzzzzzzq_);
-                bool? kzzzzzzzzzzzzzzzs_ = context.Operators.Or(kzzzzzzzzzzzzzzze_, kzzzzzzzzzzzzzzzr_);
-                bool? kzzzzzzzzzzzzzzzt_ = context.Operators.And(kzzzzzzzzzzzzzzza_, kzzzzzzzzzzzzzzzs_);
-                bool? kzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.isCommunity(context, Anticoagulants);
-                bool? kzzzzzzzzzzzzzzzv_ = context.Operators.And(kzzzzzzzzzzzzzzzt_, kzzzzzzzzzzzzzzzu_);
-                CqlInterval<CqlDate> kzzzzzzzzzzzzzzzw_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, Anticoagulants);
-                CqlDate kzzzzzzzzzzzzzzzx_ = kzzzzzzzzzzzzzzzw_?.low;
-                CqlDateTime kzzzzzzzzzzzzzzzy_ = context.Operators.ConvertDateToDateTime(kzzzzzzzzzzzzzzzx_);
-                CqlDate lzzzzzzzzzzzzzzza_ = kzzzzzzzzzzzzzzzw_?.high;
-                CqlDateTime lzzzzzzzzzzzzzzzb_ = context.Operators.ConvertDateToDateTime(lzzzzzzzzzzzzzzza_);
-                bool? lzzzzzzzzzzzzzzzd_ = kzzzzzzzzzzzzzzzw_?.lowClosed;
-                bool? lzzzzzzzzzzzzzzzf_ = kzzzzzzzzzzzzzzzw_?.highClosed;
-                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzg_ = context.Operators.Interval(kzzzzzzzzzzzzzzzy_, lzzzzzzzzzzzzzzzb_, lzzzzzzzzzzzzzzzd_, lzzzzzzzzzzzzzzzf_);
-                Period lzzzzzzzzzzzzzzzh_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, lzzzzzzzzzzzzzzzh_);
-                bool? lzzzzzzzzzzzzzzzj_ = context.Operators.OverlapsBefore(lzzzzzzzzzzzzzzzg_, lzzzzzzzzzzzzzzzi_, default);
-                bool? lzzzzzzzzzzzzzzzk_ = context.Operators.And(kzzzzzzzzzzzzzzzv_, lzzzzzzzzzzzzzzzj_);
+                string tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = (szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())?.Value;
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Equal(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Or(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.isCommunity(context, Anticoagulants);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                CqlInterval<CqlDate> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, Anticoagulants);
+                CqlDate tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_?.low;
+                CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.ConvertDateToDateTime(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                CqlDate tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_?.high;
+                CqlDateTime tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.ConvertDateToDateTime(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_?.lowClosed;
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_?.highClosed;
+                CqlInterval<CqlDateTime> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Interval(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                Period tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.OverlapsBefore(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, default);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.And(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-                return lzzzzzzzzzzzzzzzk_;
+                return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
             };
-            IEnumerable<MedicationRequest> jzzzzzzzzzzzzzzzu_ = context.Operators.Where<MedicationRequest>(jzzzzzzzzzzzzzzzs_, jzzzzzzzzzzzzzzzt_);
-            Encounter jzzzzzzzzzzzzzzzv_(MedicationRequest Anticoagulants) =>
+            IEnumerable<MedicationRequest> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Where<MedicationRequest>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+            Encounter szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_(MedicationRequest Anticoagulants) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> jzzzzzzzzzzzzzzzw_ = context.Operators.Select<MedicationRequest, Encounter>(jzzzzzzzzzzzzzzzu_, jzzzzzzzzzzzzzzzv_);
+            IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Select<MedicationRequest, Encounter>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-            return jzzzzzzzzzzzzzzzw_;
+            return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
         };
-        IEnumerable<Encounter> jzzzzzzzzzzzzzzzn_ = context.Operators.SelectMany<Encounter, Encounter>(jzzzzzzzzzzzzzzzl_, jzzzzzzzzzzzzzzzm_);
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.SelectMany<Encounter, Encounter>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-        return jzzzzzzzzzzzzzzzn_;
+        return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Anticoagulant Administration During Encounter")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> lzzzzzzzzzzzzzzzp_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> lzzzzzzzzzzzzzzzq_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Encounter InpatientEncounter)
         {
-            CqlValueSet lzzzzzzzzzzzzzzzs_ = this.Anticoagulants_for_All_Indications(context);
-            IEnumerable<MedicationAdministration> lzzzzzzzzzzzzzzzt_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, lzzzzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-            IEnumerable<MedicationAdministration> lzzzzzzzzzzzzzzzv_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, lzzzzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-            IEnumerable<MedicationAdministration> lzzzzzzzzzzzzzzzw_ = context.Operators.Union<MedicationAdministration>(lzzzzzzzzzzzzzzzt_, lzzzzzzzzzzzzzzzv_);
-            bool? lzzzzzzzzzzzzzzzx_(MedicationAdministration Anticoagulants)
+            CqlValueSet uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Anticoagulants_for_All_Indications(context);
+            IEnumerable<MedicationAdministration> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Union<MedicationAdministration>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+            bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(MedicationAdministration Anticoagulants)
             {
-                DataType mzzzzzzzzzzzzzzzb_ = Anticoagulants?.Effective;
-                object mzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzzzb_);
-                CqlInterval<CqlDateTime> mzzzzzzzzzzzzzzzd_ = QICoreCommon_2_1_000.Instance.ToInterval(context, mzzzzzzzzzzzzzzzc_);
-                CqlDateTime mzzzzzzzzzzzzzzze_ = context.Operators.Start(mzzzzzzzzzzzzzzzd_);
-                CqlInterval<CqlDateTime> mzzzzzzzzzzzzzzzf_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                bool? mzzzzzzzzzzzzzzzg_ = context.Operators.In<CqlDateTime>(mzzzzzzzzzzzzzzze_, mzzzzzzzzzzzzzzzf_, default);
-                Code<MedicationAdministration.MedicationAdministrationStatusCodes> mzzzzzzzzzzzzzzzh_ = Anticoagulants?.StatusElement;
-                MedicationAdministration.MedicationAdministrationStatusCodes? mzzzzzzzzzzzzzzzi_ = mzzzzzzzzzzzzzzzh_?.Value;
-                Code<MedicationAdministration.MedicationAdministrationStatusCodes> mzzzzzzzzzzzzzzzj_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(mzzzzzzzzzzzzzzzi_);
-                string mzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(mzzzzzzzzzzzzzzzj_);
-                string[] mzzzzzzzzzzzzzzzl_ = [
+                DataType uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = Anticoagulants?.Effective;
+                object uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                CqlInterval<CqlDateTime> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.ToInterval(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                CqlDateTime uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Start(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                CqlInterval<CqlDateTime> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.In<CqlDateTime>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, default);
+                Code<MedicationAdministration.MedicationAdministrationStatusCodes> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = Anticoagulants?.StatusElement;
+                MedicationAdministration.MedicationAdministrationStatusCodes? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.Value;
+                Code<MedicationAdministration.MedicationAdministrationStatusCodes> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                string uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                string[] uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = [
                     "in-progress",
                     "completed",
                 ];
-                bool? mzzzzzzzzzzzzzzzm_ = context.Operators.In<string>(mzzzzzzzzzzzzzzzk_, mzzzzzzzzzzzzzzzl_ as IEnumerable<string>);
-                bool? mzzzzzzzzzzzzzzzn_ = context.Operators.And(mzzzzzzzzzzzzzzzg_, mzzzzzzzzzzzzzzzm_);
+                bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.In<string>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ as IEnumerable<string>);
+                bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-                return mzzzzzzzzzzzzzzzn_;
+                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
             };
-            IEnumerable<MedicationAdministration> lzzzzzzzzzzzzzzzy_ = context.Operators.Where<MedicationAdministration>(lzzzzzzzzzzzzzzzw_, lzzzzzzzzzzzzzzzx_);
-            Encounter lzzzzzzzzzzzzzzzz_(MedicationAdministration Anticoagulants) =>
+            IEnumerable<MedicationAdministration> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Where<MedicationAdministration>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+            Encounter uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(MedicationAdministration Anticoagulants) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> mzzzzzzzzzzzzzzza_ = context.Operators.Select<MedicationAdministration, Encounter>(lzzzzzzzzzzzzzzzy_, lzzzzzzzzzzzzzzzz_);
+            IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Select<MedicationAdministration, Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
 
-            return mzzzzzzzzzzzzzzza_;
+            return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
         };
-        IEnumerable<Encounter> lzzzzzzzzzzzzzzzr_ = context.Operators.SelectMany<Encounter, Encounter>(lzzzzzzzzzzzzzzzp_, lzzzzzzzzzzzzzzzq_);
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SelectMany<Encounter, Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-        return lzzzzzzzzzzzzzzzr_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Antidepressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzo_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzp_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Encounter InpatientEncounter)
         {
-            CqlValueSet mzzzzzzzzzzzzzzzr_ = this.Antidepressants(context);
-            IEnumerable<MedicationRequest> mzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, mzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> mzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, mzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> mzzzzzzzzzzzzzzzv_ = context.Operators.Union<MedicationRequest>(mzzzzzzzzzzzzzzzs_, mzzzzzzzzzzzzzzzu_);
-            bool? mzzzzzzzzzzzzzzzw_(MedicationRequest AntidepressantMed)
+            CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Antidepressants(context);
+            IEnumerable<MedicationRequest> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Union<MedicationRequest>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+            bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_(MedicationRequest AntidepressantMed)
             {
-                Code<MedicationRequest.MedicationrequestStatus> nzzzzzzzzzzzzzzza_ = AntidepressantMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? nzzzzzzzzzzzzzzzb_ = nzzzzzzzzzzzzzzza_?.Value;
-                string nzzzzzzzzzzzzzzzc_ = context.Operators.Convert<string>(nzzzzzzzzzzzzzzzb_);
-                bool? nzzzzzzzzzzzzzzzd_ = context.Operators.Equal(nzzzzzzzzzzzzzzzc_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> nzzzzzzzzzzzzzzze_ = AntidepressantMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? nzzzzzzzzzzzzzzzf_ = nzzzzzzzzzzzzzzze_?.Value;
-                string nzzzzzzzzzzzzzzzg_ = context.Operators.Convert<string>(nzzzzzzzzzzzzzzzf_);
-                bool? nzzzzzzzzzzzzzzzh_ = context.Operators.Equal(nzzzzzzzzzzzzzzzg_, "order");
-                MedicationRequest.MedicationRequestIntent? nzzzzzzzzzzzzzzzj_ = nzzzzzzzzzzzzzzze_?.Value;
-                string nzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(nzzzzzzzzzzzzzzzj_);
-                bool? nzzzzzzzzzzzzzzzl_ = context.Operators.Equal(nzzzzzzzzzzzzzzzk_, "plan");
-                DataType nzzzzzzzzzzzzzzzm_ = AntidepressantMed?.Reported;
-                object nzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nzzzzzzzzzzzzzzzm_);
-                object nzzzzzzzzzzzzzzzo_ = context.Operators.LateBoundProperty<object>(nzzzzzzzzzzzzzzzn_, "reference");
-                string nzzzzzzzzzzzzzzzp_ = context.Operators.LateBoundProperty<string>(nzzzzzzzzzzzzzzzo_, "value");
-                string nzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.getId(context, nzzzzzzzzzzzzzzzp_);
-                Id nzzzzzzzzzzzzzzzr_()
+                Code<MedicationRequest.MedicationrequestStatus> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = AntidepressantMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_?.Value;
+                string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Convert<string>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Equal(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = AntidepressantMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_?.Value;
+                string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<string>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Equal(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, "order");
+                MedicationRequest.MedicationRequestIntent? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_?.Value;
+                string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Equal(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, "plan");
+                DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = AntidepressantMed?.Reported;
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.LateBoundProperty<object>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, "reference");
+                string wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.LateBoundProperty<string>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, "value");
+                string wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.getId(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                Id wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_()
                 {
-                    bool ozzzzzzzzzzzzzzzo_()
+                    bool wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_()
                     {
-                        Patient ozzzzzzzzzzzzzzzp_ = this.Patient(context);
-                        bool ozzzzzzzzzzzzzzzq_ = ozzzzzzzzzzzzzzzp_ is Resource;
+                        Patient xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Patient(context);
+                        bool xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ is Resource;
 
-                        return ozzzzzzzzzzzzzzzq_;
+                        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                     };
-                    if (ozzzzzzzzzzzzzzzo_())
+                    if (wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_())
                     {
-                        Patient ozzzzzzzzzzzzzzzr_ = this.Patient(context);
+                        Patient xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Patient(context);
 
-                        return (ozzzzzzzzzzzzzzzr_ as Resource).IdElement;
+                        return (xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string nzzzzzzzzzzzzzzzs_ = (nzzzzzzzzzzzzzzzr_())?.Value;
-                bool? nzzzzzzzzzzzzzzzt_ = context.Operators.Equal(nzzzzzzzzzzzzzzzq_, nzzzzzzzzzzzzzzzs_);
-                bool? nzzzzzzzzzzzzzzzu_ = context.Operators.And(nzzzzzzzzzzzzzzzl_, nzzzzzzzzzzzzzzzt_);
-                bool? nzzzzzzzzzzzzzzzv_ = context.Operators.Or(nzzzzzzzzzzzzzzzh_, nzzzzzzzzzzzzzzzu_);
-                bool? nzzzzzzzzzzzzzzzw_ = context.Operators.And(nzzzzzzzzzzzzzzzd_, nzzzzzzzzzzzzzzzv_);
-                bool? nzzzzzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.isCommunity(context, AntidepressantMed);
-                bool? nzzzzzzzzzzzzzzzy_ = context.Operators.And(nzzzzzzzzzzzzzzzw_, nzzzzzzzzzzzzzzzx_);
-                CqlInterval<CqlDate> nzzzzzzzzzzzzzzzz_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, AntidepressantMed);
-                CqlDate ozzzzzzzzzzzzzzza_ = nzzzzzzzzzzzzzzzz_?.low;
-                CqlDateTime ozzzzzzzzzzzzzzzb_ = context.Operators.ConvertDateToDateTime(ozzzzzzzzzzzzzzza_);
-                CqlDate ozzzzzzzzzzzzzzzd_ = nzzzzzzzzzzzzzzzz_?.high;
-                CqlDateTime ozzzzzzzzzzzzzzze_ = context.Operators.ConvertDateToDateTime(ozzzzzzzzzzzzzzzd_);
-                bool? ozzzzzzzzzzzzzzzg_ = nzzzzzzzzzzzzzzzz_?.lowClosed;
-                bool? ozzzzzzzzzzzzzzzi_ = nzzzzzzzzzzzzzzzz_?.highClosed;
-                CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzj_ = context.Operators.Interval(ozzzzzzzzzzzzzzzb_, ozzzzzzzzzzzzzzze_, ozzzzzzzzzzzzzzzg_, ozzzzzzzzzzzzzzzi_);
-                Period ozzzzzzzzzzzzzzzk_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ozzzzzzzzzzzzzzzk_);
-                bool? ozzzzzzzzzzzzzzzm_ = context.Operators.OverlapsBefore(ozzzzzzzzzzzzzzzj_, ozzzzzzzzzzzzzzzl_, default);
-                bool? ozzzzzzzzzzzzzzzn_ = context.Operators.And(nzzzzzzzzzzzzzzzy_, ozzzzzzzzzzzzzzzm_);
+                string wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = (wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_())?.Value;
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Equal(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Or(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.isCommunity(context, AntidepressantMed);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                CqlInterval<CqlDate> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, AntidepressantMed);
+                CqlDate wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_?.low;
+                CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.ConvertDateToDateTime(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                CqlDate wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_?.high;
+                CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.ConvertDateToDateTime(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_?.lowClosed;
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_?.highClosed;
+                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Interval(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                Period wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.OverlapsBefore(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, default);
+                bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-                return ozzzzzzzzzzzzzzzn_;
+                return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
             };
-            IEnumerable<MedicationRequest> mzzzzzzzzzzzzzzzx_ = context.Operators.Where<MedicationRequest>(mzzzzzzzzzzzzzzzv_, mzzzzzzzzzzzzzzzw_);
-            Encounter mzzzzzzzzzzzzzzzy_(MedicationRequest AntidepressantMed) =>
+            IEnumerable<MedicationRequest> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Where<MedicationRequest>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+            Encounter vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_(MedicationRequest AntidepressantMed) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> mzzzzzzzzzzzzzzzz_ = context.Operators.Select<MedicationRequest, Encounter>(mzzzzzzzzzzzzzzzx_, mzzzzzzzzzzzzzzzy_);
+            IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Select<MedicationRequest, Encounter>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-            return mzzzzzzzzzzzzzzzz_;
+            return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
         };
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzq_ = context.Operators.SelectMany<Encounter, Encounter>(mzzzzzzzzzzzzzzzo_, mzzzzzzzzzzzzzzzp_);
+        IEnumerable<Encounter> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.SelectMany<Encounter, Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
 
-        return mzzzzzzzzzzzzzzzq_;
+        return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Antihypertensive Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> ozzzzzzzzzzzzzzzs_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> ozzzzzzzzzzzzzzzt_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Encounter InpatientEncounter)
         {
-            CqlValueSet ozzzzzzzzzzzzzzzv_ = this.Antihypertensives(context);
-            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzz_ = context.Operators.Union<MedicationRequest>(ozzzzzzzzzzzzzzzw_, ozzzzzzzzzzzzzzzy_);
-            bool? pzzzzzzzzzzzzzzza_(MedicationRequest BPMed)
+            CqlValueSet xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Antihypertensives(context);
+            IEnumerable<MedicationRequest> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Union<MedicationRequest>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+            bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_(MedicationRequest BPMed)
             {
-                Code<MedicationRequest.MedicationrequestStatus> pzzzzzzzzzzzzzzze_ = BPMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? pzzzzzzzzzzzzzzzf_ = pzzzzzzzzzzzzzzze_?.Value;
-                string pzzzzzzzzzzzzzzzg_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzf_);
-                bool? pzzzzzzzzzzzzzzzh_ = context.Operators.Equal(pzzzzzzzzzzzzzzzg_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> pzzzzzzzzzzzzzzzi_ = BPMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? pzzzzzzzzzzzzzzzj_ = pzzzzzzzzzzzzzzzi_?.Value;
-                string pzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzj_);
-                bool? pzzzzzzzzzzzzzzzl_ = context.Operators.Equal(pzzzzzzzzzzzzzzzk_, "order");
-                MedicationRequest.MedicationRequestIntent? pzzzzzzzzzzzzzzzn_ = pzzzzzzzzzzzzzzzi_?.Value;
-                string pzzzzzzzzzzzzzzzo_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzn_);
-                bool? pzzzzzzzzzzzzzzzp_ = context.Operators.Equal(pzzzzzzzzzzzzzzzo_, "plan");
-                DataType pzzzzzzzzzzzzzzzq_ = BPMed?.Reported;
-                object pzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzq_);
-                object pzzzzzzzzzzzzzzzs_ = context.Operators.LateBoundProperty<object>(pzzzzzzzzzzzzzzzr_, "reference");
-                string pzzzzzzzzzzzzzzzt_ = context.Operators.LateBoundProperty<string>(pzzzzzzzzzzzzzzzs_, "value");
-                string pzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.getId(context, pzzzzzzzzzzzzzzzt_);
-                Id pzzzzzzzzzzzzzzzv_()
+                Code<MedicationRequest.MedicationrequestStatus> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = BPMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_?.Value;
+                string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Equal(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = BPMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Value;
+                string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                bool? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Equal(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, "order");
+                MedicationRequest.MedicationRequestIntent? xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Value;
+                string xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<string>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Equal(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, "plan");
+                DataType yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = BPMed?.Reported;
+                object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                object yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, "reference");
+                string yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.LateBoundProperty<string>(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, "value");
+                string yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.getId(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                Id yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_()
                 {
-                    bool qzzzzzzzzzzzzzzzs_()
+                    bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_()
                     {
-                        Patient qzzzzzzzzzzzzzzzt_ = this.Patient(context);
-                        bool qzzzzzzzzzzzzzzzu_ = qzzzzzzzzzzzzzzzt_ is Resource;
+                        Patient zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Patient(context);
+                        bool zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ is Resource;
 
-                        return qzzzzzzzzzzzzzzzu_;
+                        return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
                     };
-                    if (qzzzzzzzzzzzzzzzs_())
+                    if (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_())
                     {
-                        Patient qzzzzzzzzzzzzzzzv_ = this.Patient(context);
+                        Patient zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Patient(context);
 
-                        return (qzzzzzzzzzzzzzzzv_ as Resource).IdElement;
+                        return (zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string pzzzzzzzzzzzzzzzw_ = (pzzzzzzzzzzzzzzzv_())?.Value;
-                bool? pzzzzzzzzzzzzzzzx_ = context.Operators.Equal(pzzzzzzzzzzzzzzzu_, pzzzzzzzzzzzzzzzw_);
-                bool? pzzzzzzzzzzzzzzzy_ = context.Operators.And(pzzzzzzzzzzzzzzzp_, pzzzzzzzzzzzzzzzx_);
-                bool? pzzzzzzzzzzzzzzzz_ = context.Operators.Or(pzzzzzzzzzzzzzzzl_, pzzzzzzzzzzzzzzzy_);
-                bool? qzzzzzzzzzzzzzzza_ = context.Operators.And(pzzzzzzzzzzzzzzzh_, pzzzzzzzzzzzzzzzz_);
-                bool? qzzzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.isCommunity(context, BPMed);
-                bool? qzzzzzzzzzzzzzzzc_ = context.Operators.And(qzzzzzzzzzzzzzzza_, qzzzzzzzzzzzzzzzb_);
-                CqlInterval<CqlDate> qzzzzzzzzzzzzzzzd_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, BPMed);
-                CqlDate qzzzzzzzzzzzzzzze_ = qzzzzzzzzzzzzzzzd_?.low;
-                CqlDateTime qzzzzzzzzzzzzzzzf_ = context.Operators.ConvertDateToDateTime(qzzzzzzzzzzzzzzze_);
-                CqlDate qzzzzzzzzzzzzzzzh_ = qzzzzzzzzzzzzzzzd_?.high;
-                CqlDateTime qzzzzzzzzzzzzzzzi_ = context.Operators.ConvertDateToDateTime(qzzzzzzzzzzzzzzzh_);
-                bool? qzzzzzzzzzzzzzzzk_ = qzzzzzzzzzzzzzzzd_?.lowClosed;
-                bool? qzzzzzzzzzzzzzzzm_ = qzzzzzzzzzzzzzzzd_?.highClosed;
-                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzn_ = context.Operators.Interval(qzzzzzzzzzzzzzzzf_, qzzzzzzzzzzzzzzzi_, qzzzzzzzzzzzzzzzk_, qzzzzzzzzzzzzzzzm_);
-                Period qzzzzzzzzzzzzzzzo_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, qzzzzzzzzzzzzzzzo_);
-                bool? qzzzzzzzzzzzzzzzq_ = context.Operators.OverlapsBefore(qzzzzzzzzzzzzzzzn_, qzzzzzzzzzzzzzzzp_, default);
-                bool? qzzzzzzzzzzzzzzzr_ = context.Operators.And(qzzzzzzzzzzzzzzzc_, qzzzzzzzzzzzzzzzq_);
+                string yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = (yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_())?.Value;
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Equal(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Or(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.And(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.isCommunity(context, BPMed);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                CqlInterval<CqlDate> yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, BPMed);
+                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.low;
+                CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.ConvertDateToDateTime(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                CqlDate yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.high;
+                CqlDateTime yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.ConvertDateToDateTime(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.lowClosed;
+                bool? yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_?.highClosed;
+                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Interval(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                Period yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.OverlapsBefore(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, default);
+                bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.And(yzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-                return qzzzzzzzzzzzzzzzr_;
+                return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
             };
-            IEnumerable<MedicationRequest> pzzzzzzzzzzzzzzzb_ = context.Operators.Where<MedicationRequest>(ozzzzzzzzzzzzzzzz_, pzzzzzzzzzzzzzzza_);
-            Encounter pzzzzzzzzzzzzzzzc_(MedicationRequest BPMed) =>
+            IEnumerable<MedicationRequest> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Where<MedicationRequest>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+            Encounter xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_(MedicationRequest BPMed) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> pzzzzzzzzzzzzzzzd_ = context.Operators.Select<MedicationRequest, Encounter>(pzzzzzzzzzzzzzzzb_, pzzzzzzzzzzzzzzzc_);
+            IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Select<MedicationRequest, Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-            return pzzzzzzzzzzzzzzzd_;
+            return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
         };
-        IEnumerable<Encounter> ozzzzzzzzzzzzzzzu_ = context.Operators.SelectMany<Encounter, Encounter>(ozzzzzzzzzzzzzzzs_, ozzzzzzzzzzzzzzzt_);
+        IEnumerable<Encounter> xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SelectMany<Encounter, Encounter>(xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
 
-        return ozzzzzzzzzzzzzzzu_;
+        return xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with CNS Depressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzw_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzx_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Encounter InpatientEncounter)
         {
-            CqlValueSet qzzzzzzzzzzzzzzzz_ = this.Central_Nervous_System_Depressants(context);
-            IEnumerable<MedicationRequest> rzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> rzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> rzzzzzzzzzzzzzzzd_ = context.Operators.Union<MedicationRequest>(rzzzzzzzzzzzzzzza_, rzzzzzzzzzzzzzzzc_);
-            bool? rzzzzzzzzzzzzzzze_(MedicationRequest CNSMed)
+            CqlValueSet zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Central_Nervous_System_Depressants(context);
+            IEnumerable<MedicationRequest> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Union<MedicationRequest>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+            bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(MedicationRequest CNSMed)
             {
-                Code<MedicationRequest.MedicationrequestStatus> rzzzzzzzzzzzzzzzi_ = CNSMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? rzzzzzzzzzzzzzzzj_ = rzzzzzzzzzzzzzzzi_?.Value;
-                string rzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzj_);
-                bool? rzzzzzzzzzzzzzzzl_ = context.Operators.Equal(rzzzzzzzzzzzzzzzk_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> rzzzzzzzzzzzzzzzm_ = CNSMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? rzzzzzzzzzzzzzzzn_ = rzzzzzzzzzzzzzzzm_?.Value;
-                string rzzzzzzzzzzzzzzzo_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzn_);
-                bool? rzzzzzzzzzzzzzzzp_ = context.Operators.Equal(rzzzzzzzzzzzzzzzo_, "order");
-                MedicationRequest.MedicationRequestIntent? rzzzzzzzzzzzzzzzr_ = rzzzzzzzzzzzzzzzm_?.Value;
-                string rzzzzzzzzzzzzzzzs_ = context.Operators.Convert<string>(rzzzzzzzzzzzzzzzr_);
-                bool? rzzzzzzzzzzzzzzzt_ = context.Operators.Equal(rzzzzzzzzzzzzzzzs_, "plan");
-                DataType rzzzzzzzzzzzzzzzu_ = CNSMed?.Reported;
-                object rzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzzzzzu_);
-                object rzzzzzzzzzzzzzzzw_ = context.Operators.LateBoundProperty<object>(rzzzzzzzzzzzzzzzv_, "reference");
-                string rzzzzzzzzzzzzzzzx_ = context.Operators.LateBoundProperty<string>(rzzzzzzzzzzzzzzzw_, "value");
-                string rzzzzzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.getId(context, rzzzzzzzzzzzzzzzx_);
-                Id rzzzzzzzzzzzzzzzz_()
+                Code<MedicationRequest.MedicationrequestStatus> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = CNSMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Value;
+                string zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                bool? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Equal(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = CNSMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_?.Value;
+                string zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<string>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Equal(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, "order");
+                MedicationRequest.MedicationRequestIntent? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_?.Value;
+                string azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Convert<string>(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Equal(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, "plan");
+                DataType azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = CNSMed?.Reported;
+                object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                object azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.LateBoundProperty<object>(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, "reference");
+                string azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.LateBoundProperty<string>(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, "value");
+                string azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = QICoreCommon_2_1_000.Instance.getId(context, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                Id azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_()
                 {
-                    bool szzzzzzzzzzzzzzzw_()
+                    bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_()
                     {
-                        Patient szzzzzzzzzzzzzzzx_ = this.Patient(context);
-                        bool szzzzzzzzzzzzzzzy_ = szzzzzzzzzzzzzzzx_ is Resource;
+                        Patient bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Patient(context);
+                        bool bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ is Resource;
 
-                        return szzzzzzzzzzzzzzzy_;
+                        return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
                     };
-                    if (szzzzzzzzzzzzzzzw_())
+                    if (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_())
                     {
-                        Patient szzzzzzzzzzzzzzzz_ = this.Patient(context);
+                        Patient bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Patient(context);
 
-                        return (szzzzzzzzzzzzzzzz_ as Resource).IdElement;
+                        return (bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string szzzzzzzzzzzzzzza_ = (rzzzzzzzzzzzzzzzz_())?.Value;
-                bool? szzzzzzzzzzzzzzzb_ = context.Operators.Equal(rzzzzzzzzzzzzzzzy_, szzzzzzzzzzzzzzza_);
-                bool? szzzzzzzzzzzzzzzc_ = context.Operators.And(rzzzzzzzzzzzzzzzt_, szzzzzzzzzzzzzzzb_);
-                bool? szzzzzzzzzzzzzzzd_ = context.Operators.Or(rzzzzzzzzzzzzzzzp_, szzzzzzzzzzzzzzzc_);
-                bool? szzzzzzzzzzzzzzze_ = context.Operators.And(rzzzzzzzzzzzzzzzl_, szzzzzzzzzzzzzzzd_);
-                bool? szzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.isCommunity(context, CNSMed);
-                bool? szzzzzzzzzzzzzzzg_ = context.Operators.And(szzzzzzzzzzzzzzze_, szzzzzzzzzzzzzzzf_);
-                CqlInterval<CqlDate> szzzzzzzzzzzzzzzh_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, CNSMed);
-                CqlDate szzzzzzzzzzzzzzzi_ = szzzzzzzzzzzzzzzh_?.low;
-                CqlDateTime szzzzzzzzzzzzzzzj_ = context.Operators.ConvertDateToDateTime(szzzzzzzzzzzzzzzi_);
-                CqlDate szzzzzzzzzzzzzzzl_ = szzzzzzzzzzzzzzzh_?.high;
-                CqlDateTime szzzzzzzzzzzzzzzm_ = context.Operators.ConvertDateToDateTime(szzzzzzzzzzzzzzzl_);
-                bool? szzzzzzzzzzzzzzzo_ = szzzzzzzzzzzzzzzh_?.lowClosed;
-                bool? szzzzzzzzzzzzzzzq_ = szzzzzzzzzzzzzzzh_?.highClosed;
-                CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzr_ = context.Operators.Interval(szzzzzzzzzzzzzzzj_, szzzzzzzzzzzzzzzm_, szzzzzzzzzzzzzzzo_, szzzzzzzzzzzzzzzq_);
-                Period szzzzzzzzzzzzzzzs_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> szzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, szzzzzzzzzzzzzzzs_);
-                bool? szzzzzzzzzzzzzzzu_ = context.Operators.OverlapsBefore(szzzzzzzzzzzzzzzr_, szzzzzzzzzzzzzzzt_, default);
-                bool? szzzzzzzzzzzzzzzv_ = context.Operators.And(szzzzzzzzzzzzzzzg_, szzzzzzzzzzzzzzzu_);
+                string azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = (azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_())?.Value;
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Equal(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Or(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.isCommunity(context, CNSMed);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.And(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                CqlInterval<CqlDate> azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, CNSMed);
+                CqlDate azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.low;
+                CqlDateTime azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.ConvertDateToDateTime(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                CqlDate azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.high;
+                CqlDateTime azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConvertDateToDateTime(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                bool? azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.lowClosed;
+                bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_?.highClosed;
+                CqlInterval<CqlDateTime> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Interval(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                Period bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.OverlapsBefore(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
+                bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                return szzzzzzzzzzzzzzzv_;
+                return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
             };
-            IEnumerable<MedicationRequest> rzzzzzzzzzzzzzzzf_ = context.Operators.Where<MedicationRequest>(rzzzzzzzzzzzzzzzd_, rzzzzzzzzzzzzzzze_);
-            Encounter rzzzzzzzzzzzzzzzg_(MedicationRequest CNSMed) =>
+            IEnumerable<MedicationRequest> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<MedicationRequest>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            Encounter zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(MedicationRequest CNSMed) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> rzzzzzzzzzzzzzzzh_ = context.Operators.Select<MedicationRequest, Encounter>(rzzzzzzzzzzzzzzzf_, rzzzzzzzzzzzzzzzg_);
+            IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Select<MedicationRequest, Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-            return rzzzzzzzzzzzzzzzh_;
+            return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
         };
-        IEnumerable<Encounter> qzzzzzzzzzzzzzzzy_ = context.Operators.SelectMany<Encounter, Encounter>(qzzzzzzzzzzzzzzzw_, qzzzzzzzzzzzzzzzx_);
+        IEnumerable<Encounter> zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.SelectMany<Encounter, Encounter>(zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-        return qzzzzzzzzzzzzzzzy_;
+        return zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Coagulation Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> tzzzzzzzzzzzzzzza_ = this.Qualifying_Encounter(context);
-        bool? tzzzzzzzzzzzzzzzb_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Qualifying_Encounter(context);
+        bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> tzzzzzzzzzzzzzzzd_ = InpatientEncounter?.Diagnosis;
-            bool? tzzzzzzzzzzzzzzze_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = InpatientEncounter?.Diagnosis;
+            bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference tzzzzzzzzzzzzzzzh_ = Dx?.Condition;
-                Condition tzzzzzzzzzzzzzzzi_ = CQMCommon_2_2_000.Instance.GetCondition(context, tzzzzzzzzzzzzzzzh_);
-                CodeableConcept tzzzzzzzzzzzzzzzj_ = tzzzzzzzzzzzzzzzi_?.Code;
-                CqlConcept tzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, tzzzzzzzzzzzzzzzj_);
-                CqlValueSet tzzzzzzzzzzzzzzzl_ = this.Coagulation_Disorders(context);
-                bool? tzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(tzzzzzzzzzzzzzzzk_, tzzzzzzzzzzzzzzzl_);
-                bool? tzzzzzzzzzzzzzzzn_(Extension @this)
+                ResourceReference bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = Dx?.Condition;
+                Condition bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = CQMCommon_2_2_000.Instance.GetCondition(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                CodeableConcept bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Code;
+                CqlConcept bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CqlValueSet bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Coagulation_Disorders(context);
+                bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Extension @this)
                 {
-                    string tzzzzzzzzzzzzzzzw_ = @this?.Url;
-                    FhirString tzzzzzzzzzzzzzzzx_ = context.Operators.Convert<FhirString>(tzzzzzzzzzzzzzzzw_);
-                    string tzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToString(context, tzzzzzzzzzzzzzzzx_);
-                    bool? tzzzzzzzzzzzzzzzz_ = context.Operators.Equal(tzzzzzzzzzzzzzzzy_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Url;
+                    FhirString czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<FhirString>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    string czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return tzzzzzzzzzzzzzzzz_;
+                    return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Extension> tzzzzzzzzzzzzzzzo_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), tzzzzzzzzzzzzzzzn_);
-                object tzzzzzzzzzzzzzzzp_(Extension @this)
+                        : default), bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Extension @this)
                 {
-                    DataType uzzzzzzzzzzzzzzza_ = @this?.Value;
+                    DataType czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Value;
 
-                    return uzzzzzzzzzzzzzzza_;
+                    return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<object> tzzzzzzzzzzzzzzzq_ = context.Operators.Select<Extension, object>(tzzzzzzzzzzzzzzzo_, tzzzzzzzzzzzzzzzp_);
-                object tzzzzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<object>(tzzzzzzzzzzzzzzzq_);
-                CqlConcept tzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, tzzzzzzzzzzzzzzzr_ as CodeableConcept);
-                CqlValueSet tzzzzzzzzzzzzzzzt_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? tzzzzzzzzzzzzzzzu_ = context.Operators.ConceptInValueSet(tzzzzzzzzzzzzzzzs_, tzzzzzzzzzzzzzzzt_);
-                bool? tzzzzzzzzzzzzzzzv_ = context.Operators.And(tzzzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzzzu_);
+                IEnumerable<object> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Select<Extension, object>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                object czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SingletonFrom<object>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlConcept czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CodeableConcept);
+                CqlValueSet czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                return tzzzzzzzzzzzzzzzv_;
+                return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> tzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)tzzzzzzzzzzzzzzzd_, tzzzzzzzzzzzzzzze_);
-            bool? tzzzzzzzzzzzzzzzg_ = context.Operators.Exists<Encounter.DiagnosisComponent>(tzzzzzzzzzzzzzzzf_);
+            IEnumerable<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            bool? bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Exists<Encounter.DiagnosisComponent>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-            return tzzzzzzzzzzzzzzzg_;
+            return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
         };
-        IEnumerable<Encounter> tzzzzzzzzzzzzzzzc_ = context.Operators.Where<Encounter>(tzzzzzzzzzzzzzzza_, tzzzzzzzzzzzzzzzb_);
+        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Where<Encounter>(bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return tzzzzzzzzzzzzzzzc_;
+        return bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Delirium, Dementia or Other Psychosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Delirium__Dementia_or_Other_Psychosis_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzb_ = this.Qualifying_Encounter(context);
-        bool? uzzzzzzzzzzzzzzzc_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Qualifying_Encounter(context);
+        bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> uzzzzzzzzzzzzzzze_ = InpatientEncounter?.Diagnosis;
-            bool? uzzzzzzzzzzzzzzzf_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = InpatientEncounter?.Diagnosis;
+            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference uzzzzzzzzzzzzzzzi_ = Dx?.Condition;
-                Condition uzzzzzzzzzzzzzzzj_ = CQMCommon_2_2_000.Instance.GetCondition(context, uzzzzzzzzzzzzzzzi_);
-                CodeableConcept uzzzzzzzzzzzzzzzk_ = uzzzzzzzzzzzzzzzj_?.Code;
-                CqlConcept uzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, uzzzzzzzzzzzzzzzk_);
-                CqlValueSet uzzzzzzzzzzzzzzzm_ = this.Delirium__Dementia__and_Other_Psychoses(context);
-                bool? uzzzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(uzzzzzzzzzzzzzzzl_, uzzzzzzzzzzzzzzzm_);
-                bool? uzzzzzzzzzzzzzzzo_(Extension @this)
+                ResourceReference czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = Dx?.Condition;
+                Condition czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = CQMCommon_2_2_000.Instance.GetCondition(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                CodeableConcept czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Code;
+                CqlConcept czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                CqlValueSet czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Delirium__Dementia__and_Other_Psychoses(context);
+                bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.ConceptInValueSet(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Extension @this)
                 {
-                    string uzzzzzzzzzzzzzzzx_ = @this?.Url;
-                    FhirString uzzzzzzzzzzzzzzzy_ = context.Operators.Convert<FhirString>(uzzzzzzzzzzzzzzzx_);
-                    string uzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToString(context, uzzzzzzzzzzzzzzzy_);
-                    bool? vzzzzzzzzzzzzzzza_ = context.Operators.Equal(uzzzzzzzzzzzzzzzz_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Url;
+                    FhirString dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Convert<FhirString>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    string dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToString(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return vzzzzzzzzzzzzzzza_;
+                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<Extension> uzzzzzzzzzzzzzzzp_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), uzzzzzzzzzzzzzzzo_);
-                object uzzzzzzzzzzzzzzzq_(Extension @this)
+                        : default), czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Extension @this)
                 {
-                    DataType vzzzzzzzzzzzzzzzb_ = @this?.Value;
+                    DataType dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Value;
 
-                    return vzzzzzzzzzzzzzzzb_;
+                    return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                 };
-                IEnumerable<object> uzzzzzzzzzzzzzzzr_ = context.Operators.Select<Extension, object>(uzzzzzzzzzzzzzzzp_, uzzzzzzzzzzzzzzzq_);
-                object uzzzzzzzzzzzzzzzs_ = context.Operators.SingletonFrom<object>(uzzzzzzzzzzzzzzzr_);
-                CqlConcept uzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, uzzzzzzzzzzzzzzzs_ as CodeableConcept);
-                CqlValueSet uzzzzzzzzzzzzzzzu_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? uzzzzzzzzzzzzzzzv_ = context.Operators.ConceptInValueSet(uzzzzzzzzzzzzzzzt_, uzzzzzzzzzzzzzzzu_);
-                bool? uzzzzzzzzzzzzzzzw_ = context.Operators.And(uzzzzzzzzzzzzzzzn_, uzzzzzzzzzzzzzzzv_);
+                IEnumerable<object> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Extension, object>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                object dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<object>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlConcept dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CodeableConcept);
+                CqlValueSet dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                return uzzzzzzzzzzzzzzzw_;
+                return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> uzzzzzzzzzzzzzzzg_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)uzzzzzzzzzzzzzzze_, uzzzzzzzzzzzzzzzf_);
-            bool? uzzzzzzzzzzzzzzzh_ = context.Operators.Exists<Encounter.DiagnosisComponent>(uzzzzzzzzzzzzzzzg_);
+            IEnumerable<Encounter.DiagnosisComponent> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+            bool? czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Exists<Encounter.DiagnosisComponent>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-            return uzzzzzzzzzzzzzzzh_;
+            return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
         };
-        IEnumerable<Encounter> uzzzzzzzzzzzzzzzd_ = context.Operators.Where<Encounter>(uzzzzzzzzzzzzzzzb_, uzzzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Encounter>(czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-        return uzzzzzzzzzzzzzzzd_;
+        return czzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Depression Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Depression_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzzc_ = this.Qualifying_Encounter(context);
-        bool? vzzzzzzzzzzzzzzzd_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.Qualifying_Encounter(context);
+        bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> vzzzzzzzzzzzzzzzf_ = InpatientEncounter?.Diagnosis;
-            bool? vzzzzzzzzzzzzzzzg_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = InpatientEncounter?.Diagnosis;
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference vzzzzzzzzzzzzzzzj_ = Dx?.Condition;
-                Condition vzzzzzzzzzzzzzzzk_ = CQMCommon_2_2_000.Instance.GetCondition(context, vzzzzzzzzzzzzzzzj_);
-                CodeableConcept vzzzzzzzzzzzzzzzl_ = vzzzzzzzzzzzzzzzk_?.Code;
-                CqlConcept vzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzl_);
-                CqlValueSet vzzzzzzzzzzzzzzzn_ = this.Depression(context);
-                bool? vzzzzzzzzzzzzzzzo_ = context.Operators.ConceptInValueSet(vzzzzzzzzzzzzzzzm_, vzzzzzzzzzzzzzzzn_);
-                bool? vzzzzzzzzzzzzzzzp_(Extension @this)
+                ResourceReference dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = Dx?.Condition;
+                Condition dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = CQMCommon_2_2_000.Instance.GetCondition(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CodeableConcept dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_?.Code;
+                CqlConcept dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                CqlValueSet dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = this.Depression(context);
+                bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Extension @this)
                 {
-                    string vzzzzzzzzzzzzzzzy_ = @this?.Url;
-                    FhirString vzzzzzzzzzzzzzzzz_ = context.Operators.Convert<FhirString>(vzzzzzzzzzzzzzzzy_);
-                    string wzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToString(context, vzzzzzzzzzzzzzzzz_);
-                    bool? wzzzzzzzzzzzzzzzb_ = context.Operators.Equal(wzzzzzzzzzzzzzzza_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Url;
+                    FhirString ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<FhirString>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    string ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToString(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                    bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Equal(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return wzzzzzzzzzzzzzzzb_;
+                    return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                 };
-                IEnumerable<Extension> vzzzzzzzzzzzzzzzq_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), vzzzzzzzzzzzzzzzp_);
-                object vzzzzzzzzzzzzzzzr_(Extension @this)
+                        : default), ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Extension @this)
                 {
-                    DataType wzzzzzzzzzzzzzzzc_ = @this?.Value;
+                    DataType ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Value;
 
-                    return wzzzzzzzzzzzzzzzc_;
+                    return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                IEnumerable<object> vzzzzzzzzzzzzzzzs_ = context.Operators.Select<Extension, object>(vzzzzzzzzzzzzzzzq_, vzzzzzzzzzzzzzzzr_);
-                object vzzzzzzzzzzzzzzzt_ = context.Operators.SingletonFrom<object>(vzzzzzzzzzzzzzzzs_);
-                CqlConcept vzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzt_ as CodeableConcept);
-                CqlValueSet vzzzzzzzzzzzzzzzv_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? vzzzzzzzzzzzzzzzw_ = context.Operators.ConceptInValueSet(vzzzzzzzzzzzzzzzu_, vzzzzzzzzzzzzzzzv_);
-                bool? vzzzzzzzzzzzzzzzx_ = context.Operators.And(vzzzzzzzzzzzzzzzo_, vzzzzzzzzzzzzzzzw_);
+                IEnumerable<object> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Select<Extension, object>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                object ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SingletonFrom<object>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlConcept ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CodeableConcept);
+                CqlValueSet ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
 
-                return vzzzzzzzzzzzzzzzx_;
+                return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> vzzzzzzzzzzzzzzzh_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)vzzzzzzzzzzzzzzzf_, vzzzzzzzzzzzzzzzg_);
-            bool? vzzzzzzzzzzzzzzzi_ = context.Operators.Exists<Encounter.DiagnosisComponent>(vzzzzzzzzzzzzzzzh_);
+            IEnumerable<Encounter.DiagnosisComponent> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            bool? dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Exists<Encounter.DiagnosisComponent>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-            return vzzzzzzzzzzzzzzzi_;
+            return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
         };
-        IEnumerable<Encounter> vzzzzzzzzzzzzzzze_ = context.Operators.Where<Encounter>(vzzzzzzzzzzzzzzzc_, vzzzzzzzzzzzzzzzd_);
+        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Where<Encounter>(dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-        return vzzzzzzzzzzzzzzze_;
+        return dzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Diuretic Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Diuretic_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzd_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzze_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter InpatientEncounter)
         {
-            CqlValueSet wzzzzzzzzzzzzzzzg_ = this.Diuretics(context);
-            IEnumerable<MedicationRequest> wzzzzzzzzzzzzzzzh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> wzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> wzzzzzzzzzzzzzzzk_ = context.Operators.Union<MedicationRequest>(wzzzzzzzzzzzzzzzh_, wzzzzzzzzzzzzzzzj_);
-            bool? wzzzzzzzzzzzzzzzl_(MedicationRequest DiureticMed)
+            CqlValueSet ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Diuretics(context);
+            IEnumerable<MedicationRequest> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Union<MedicationRequest>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+            bool? ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(MedicationRequest DiureticMed)
             {
-                Code<MedicationRequest.MedicationrequestStatus> wzzzzzzzzzzzzzzzp_ = DiureticMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? wzzzzzzzzzzzzzzzq_ = wzzzzzzzzzzzzzzzp_?.Value;
-                string wzzzzzzzzzzzzzzzr_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzq_);
-                bool? wzzzzzzzzzzzzzzzs_ = context.Operators.Equal(wzzzzzzzzzzzzzzzr_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> wzzzzzzzzzzzzzzzt_ = DiureticMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? wzzzzzzzzzzzzzzzu_ = wzzzzzzzzzzzzzzzt_?.Value;
-                string wzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzu_);
-                bool? wzzzzzzzzzzzzzzzw_ = context.Operators.Equal(wzzzzzzzzzzzzzzzv_, "order");
-                MedicationRequest.MedicationRequestIntent? wzzzzzzzzzzzzzzzy_ = wzzzzzzzzzzzzzzzt_?.Value;
-                string wzzzzzzzzzzzzzzzz_ = context.Operators.Convert<string>(wzzzzzzzzzzzzzzzy_);
-                bool? xzzzzzzzzzzzzzzza_ = context.Operators.Equal(wzzzzzzzzzzzzzzzz_, "plan");
-                DataType xzzzzzzzzzzzzzzzb_ = DiureticMed?.Reported;
-                object xzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzb_);
-                object xzzzzzzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(xzzzzzzzzzzzzzzzc_, "reference");
-                string xzzzzzzzzzzzzzzze_ = context.Operators.LateBoundProperty<string>(xzzzzzzzzzzzzzzzd_, "value");
-                string xzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.getId(context, xzzzzzzzzzzzzzzze_);
-                Id xzzzzzzzzzzzzzzzg_()
+                Code<MedicationRequest.MedicationrequestStatus> fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = DiureticMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_?.Value;
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Convert<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Equal(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = DiureticMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.Value;
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Equal(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, "order");
+                MedicationRequest.MedicationRequestIntent? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.Value;
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "plan");
+                DataType fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = DiureticMed?.Reported;
+                object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                object fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.LateBoundProperty<object>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, "reference");
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.LateBoundProperty<string>(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, "value");
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.getId(context, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                Id fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
                 {
-                    bool yzzzzzzzzzzzzzzzd_()
+                    bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                     {
-                        Patient yzzzzzzzzzzzzzzze_ = this.Patient(context);
-                        bool yzzzzzzzzzzzzzzzf_ = yzzzzzzzzzzzzzzze_ is Resource;
+                        Patient gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Patient(context);
+                        bool gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is Resource;
 
-                        return yzzzzzzzzzzzzzzzf_;
+                        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                     };
-                    if (yzzzzzzzzzzzzzzzd_())
+                    if (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                     {
-                        Patient yzzzzzzzzzzzzzzzg_ = this.Patient(context);
+                        Patient gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Patient(context);
 
-                        return (yzzzzzzzzzzzzzzzg_ as Resource).IdElement;
+                        return (gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string xzzzzzzzzzzzzzzzh_ = (xzzzzzzzzzzzzzzzg_())?.Value;
-                bool? xzzzzzzzzzzzzzzzi_ = context.Operators.Equal(xzzzzzzzzzzzzzzzf_, xzzzzzzzzzzzzzzzh_);
-                bool? xzzzzzzzzzzzzzzzj_ = context.Operators.And(xzzzzzzzzzzzzzzza_, xzzzzzzzzzzzzzzzi_);
-                bool? xzzzzzzzzzzzzzzzk_ = context.Operators.Or(wzzzzzzzzzzzzzzzw_, xzzzzzzzzzzzzzzzj_);
-                bool? xzzzzzzzzzzzzzzzl_ = context.Operators.And(wzzzzzzzzzzzzzzzs_, xzzzzzzzzzzzzzzzk_);
-                bool? xzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.isCommunity(context, DiureticMed);
-                bool? xzzzzzzzzzzzzzzzn_ = context.Operators.And(xzzzzzzzzzzzzzzzl_, xzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDate> xzzzzzzzzzzzzzzzo_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, DiureticMed);
-                CqlDate xzzzzzzzzzzzzzzzp_ = xzzzzzzzzzzzzzzzo_?.low;
-                CqlDateTime xzzzzzzzzzzzzzzzq_ = context.Operators.ConvertDateToDateTime(xzzzzzzzzzzzzzzzp_);
-                CqlDate xzzzzzzzzzzzzzzzs_ = xzzzzzzzzzzzzzzzo_?.high;
-                CqlDateTime xzzzzzzzzzzzzzzzt_ = context.Operators.ConvertDateToDateTime(xzzzzzzzzzzzzzzzs_);
-                bool? xzzzzzzzzzzzzzzzv_ = xzzzzzzzzzzzzzzzo_?.lowClosed;
-                bool? xzzzzzzzzzzzzzzzx_ = xzzzzzzzzzzzzzzzo_?.highClosed;
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzy_ = context.Operators.Interval(xzzzzzzzzzzzzzzzq_, xzzzzzzzzzzzzzzzt_, xzzzzzzzzzzzzzzzv_, xzzzzzzzzzzzzzzzx_);
-                Period xzzzzzzzzzzzzzzzz_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xzzzzzzzzzzzzzzzz_);
-                bool? yzzzzzzzzzzzzzzzb_ = context.Operators.OverlapsBefore(xzzzzzzzzzzzzzzzy_, yzzzzzzzzzzzzzzza_, default);
-                bool? yzzzzzzzzzzzzzzzc_ = context.Operators.And(xzzzzzzzzzzzzzzzn_, yzzzzzzzzzzzzzzzb_);
+                string fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = (fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())?.Value;
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Equal(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Or(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.isCommunity(context, DiureticMed);
+                bool? fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                CqlInterval<CqlDate> fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, DiureticMed);
+                CqlDate gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.low;
+                CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ConvertDateToDateTime(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlDate gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.high;
+                CqlDateTime gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConvertDateToDateTime(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.lowClosed;
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.highClosed;
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Interval(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                Period gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.OverlapsBefore(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, default);
+                bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(fzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return yzzzzzzzzzzzzzzzc_;
+                return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<MedicationRequest> wzzzzzzzzzzzzzzzm_ = context.Operators.Where<MedicationRequest>(wzzzzzzzzzzzzzzzk_, wzzzzzzzzzzzzzzzl_);
-            Encounter wzzzzzzzzzzzzzzzn_(MedicationRequest DiureticMed) =>
+            IEnumerable<MedicationRequest> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<MedicationRequest>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            Encounter ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(MedicationRequest DiureticMed) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> wzzzzzzzzzzzzzzzo_ = context.Operators.Select<MedicationRequest, Encounter>(wzzzzzzzzzzzzzzzm_, wzzzzzzzzzzzzzzzn_);
+            IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Select<MedicationRequest, Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return wzzzzzzzzzzzzzzzo_;
+            return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> wzzzzzzzzzzzzzzzf_ = context.Operators.SelectMany<Encounter, Encounter>(wzzzzzzzzzzzzzzzd_, wzzzzzzzzzzzzzzze_);
+        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.SelectMany<Encounter, Encounter>(ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-        return wzzzzzzzzzzzzzzzf_;
+        return ezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Epilepsy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> yzzzzzzzzzzzzzzzh_ = this.Qualifying_Encounter(context);
-        bool? yzzzzzzzzzzzzzzzi_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Qualifying_Encounter(context);
+        bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> yzzzzzzzzzzzzzzzk_ = InpatientEncounter?.Diagnosis;
-            bool? yzzzzzzzzzzzzzzzl_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = InpatientEncounter?.Diagnosis;
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference yzzzzzzzzzzzzzzzo_ = Dx?.Condition;
-                Condition yzzzzzzzzzzzzzzzp_ = CQMCommon_2_2_000.Instance.GetCondition(context, yzzzzzzzzzzzzzzzo_);
-                CodeableConcept yzzzzzzzzzzzzzzzq_ = yzzzzzzzzzzzzzzzp_?.Code;
-                CqlConcept yzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, yzzzzzzzzzzzzzzzq_);
-                CqlValueSet yzzzzzzzzzzzzzzzs_ = this.Epilepsy(context);
-                bool? yzzzzzzzzzzzzzzzt_ = context.Operators.ConceptInValueSet(yzzzzzzzzzzzzzzzr_, yzzzzzzzzzzzzzzzs_);
-                bool? yzzzzzzzzzzzzzzzu_(Extension @this)
+                ResourceReference gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = Dx?.Condition;
+                Condition hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = CQMCommon_2_2_000.Instance.GetCondition(context, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                CodeableConcept hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_?.Code;
+                CqlConcept hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlValueSet hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Epilepsy(context);
+                bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConceptInValueSet(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_(Extension @this)
                 {
-                    string zzzzzzzzzzzzzzzzd_ = @this?.Url;
-                    FhirString zzzzzzzzzzzzzzzze_ = context.Operators.Convert<FhirString>(zzzzzzzzzzzzzzzzd_);
-                    string zzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToString(context, zzzzzzzzzzzzzzzze_);
-                    bool? zzzzzzzzzzzzzzzzg_ = context.Operators.Equal(zzzzzzzzzzzzzzzzf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Url;
+                    FhirString hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<FhirString>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                    string hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToString(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return zzzzzzzzzzzzzzzzg_;
+                    return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                IEnumerable<Extension> yzzzzzzzzzzzzzzzv_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), yzzzzzzzzzzzzzzzu_);
-                object yzzzzzzzzzzzzzzzw_(Extension @this)
+                        : default), hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                object hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_(Extension @this)
                 {
-                    DataType zzzzzzzzzzzzzzzzh_ = @this?.Value;
+                    DataType hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Value;
 
-                    return zzzzzzzzzzzzzzzzh_;
+                    return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                IEnumerable<object> yzzzzzzzzzzzzzzzx_ = context.Operators.Select<Extension, object>(yzzzzzzzzzzzzzzzv_, yzzzzzzzzzzzzzzzw_);
-                object yzzzzzzzzzzzzzzzy_ = context.Operators.SingletonFrom<object>(yzzzzzzzzzzzzzzzx_);
-                CqlConcept yzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, yzzzzzzzzzzzzzzzy_ as CodeableConcept);
-                CqlValueSet zzzzzzzzzzzzzzzza_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? zzzzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(yzzzzzzzzzzzzzzzz_, zzzzzzzzzzzzzzzza_);
-                bool? zzzzzzzzzzzzzzzzc_ = context.Operators.And(yzzzzzzzzzzzzzzzt_, zzzzzzzzzzzzzzzzb_);
+                IEnumerable<object> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Extension, object>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                object hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.SingletonFrom<object>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                CqlConcept hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CodeableConcept);
+                CqlValueSet hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return zzzzzzzzzzzzzzzzc_;
+                return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> yzzzzzzzzzzzzzzzm_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)yzzzzzzzzzzzzzzzk_, yzzzzzzzzzzzzzzzl_);
-            bool? yzzzzzzzzzzzzzzzn_ = context.Operators.Exists<Encounter.DiagnosisComponent>(yzzzzzzzzzzzzzzzm_);
+            IEnumerable<Encounter.DiagnosisComponent> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            bool? gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Exists<Encounter.DiagnosisComponent>(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-            return yzzzzzzzzzzzzzzzn_;
+            return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
         };
-        IEnumerable<Encounter> yzzzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter>(yzzzzzzzzzzzzzzzh_, yzzzzzzzzzzzzzzzi_);
+        IEnumerable<Encounter> gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<Encounter>(gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-        return yzzzzzzzzzzzzzzzj_;
+        return gzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with High BMI by Exam")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_High_BMI_by_Exam(CqlContext context)
     {
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzi_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzj_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Encounter InpatientEncounter)
         {
-            CqlCode zzzzzzzzzzzzzzzzl_ = this.Body_mass_index__BMI___Ratio_(context);
-            IEnumerable<CqlCode> zzzzzzzzzzzzzzzzm_ = context.Operators.ToList<CqlCode>(zzzzzzzzzzzzzzzzl_);
-            IEnumerable<Observation> zzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, zzzzzzzzzzzzzzzzm_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-            bool? zzzzzzzzzzzzzzzzo_(Observation BMI)
+            CqlCode hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Body_mass_index__BMI___Ratio_(context);
+            IEnumerable<CqlCode> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ToList<CqlCode>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            IEnumerable<Observation> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+            bool? hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Observation BMI)
             {
-                DataType zzzzzzzzzzzzzzzzs_ = BMI?.Effective;
-                object zzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzs_);
-                CqlInterval<CqlDateTime> zzzzzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.ToInterval(context, zzzzzzzzzzzzzzzzt_);
-                CqlDateTime zzzzzzzzzzzzzzzzv_ = context.Operators.Start(zzzzzzzzzzzzzzzzu_);
-                CqlInterval<CqlDateTime> zzzzzzzzzzzzzzzzw_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                bool? zzzzzzzzzzzzzzzzx_ = context.Operators.In<CqlDateTime>(zzzzzzzzzzzzzzzzv_, zzzzzzzzzzzzzzzzw_, default);
-                DataType zzzzzzzzzzzzzzzzy_ = BMI?.Value;
-                object zzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzzzzy_);
-                CqlQuantity azzzzzzzzzzzzzzzza_ = context.Operators.Quantity(25m, "kg/m2");
-                bool? azzzzzzzzzzzzzzzzb_ = context.Operators.GreaterOrEqual(zzzzzzzzzzzzzzzzz_ as CqlQuantity, azzzzzzzzzzzzzzzza_);
-                bool? azzzzzzzzzzzzzzzzc_ = context.Operators.And(zzzzzzzzzzzzzzzzx_, azzzzzzzzzzzzzzzzb_);
+                DataType izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = BMI?.Effective;
+                object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.ToInterval(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                CqlDateTime izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Start(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.In<CqlDateTime>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, default);
+                DataType izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = BMI?.Value;
+                object izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                CqlQuantity izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Quantity(25m, "kg/m2");
+                bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.GreaterOrEqual(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CqlQuantity, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return azzzzzzzzzzzzzzzzc_;
+                return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<Observation> zzzzzzzzzzzzzzzzp_ = context.Operators.Where<Observation>(zzzzzzzzzzzzzzzzn_, zzzzzzzzzzzzzzzzo_);
-            Encounter zzzzzzzzzzzzzzzzq_(Observation BMI) =>
+            IEnumerable<Observation> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Observation>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            Encounter izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Observation BMI) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> zzzzzzzzzzzzzzzzr_ = context.Operators.Select<Observation, Encounter>(zzzzzzzzzzzzzzzzp_, zzzzzzzzzzzzzzzzq_);
+            IEnumerable<Encounter> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Observation, Encounter>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
 
-            return zzzzzzzzzzzzzzzzr_;
+            return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_;
         };
-        IEnumerable<Encounter> zzzzzzzzzzzzzzzzk_ = context.Operators.SelectMany<Encounter, Encounter>(zzzzzzzzzzzzzzzzi_, zzzzzzzzzzzzzzzzj_);
+        IEnumerable<Encounter> hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.SelectMany<Encounter, Encounter>(hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-        return zzzzzzzzzzzzzzzzk_;
+        return hzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Leukemia or Lymphoma Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzzd_ = this.Qualifying_Encounter(context);
-        bool? azzzzzzzzzzzzzzzze_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Qualifying_Encounter(context);
+        bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> azzzzzzzzzzzzzzzzg_ = InpatientEncounter?.Diagnosis;
-            bool? azzzzzzzzzzzzzzzzh_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = InpatientEncounter?.Diagnosis;
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference azzzzzzzzzzzzzzzzk_ = Dx?.Condition;
-                Condition azzzzzzzzzzzzzzzzl_ = CQMCommon_2_2_000.Instance.GetCondition(context, azzzzzzzzzzzzzzzzk_);
-                CodeableConcept azzzzzzzzzzzzzzzzm_ = azzzzzzzzzzzzzzzzl_?.Code;
-                CqlConcept azzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, azzzzzzzzzzzzzzzzm_);
-                CqlValueSet azzzzzzzzzzzzzzzzo_ = this.Leukemia_or_Lymphoma(context);
-                bool? azzzzzzzzzzzzzzzzp_ = context.Operators.ConceptInValueSet(azzzzzzzzzzzzzzzzn_, azzzzzzzzzzzzzzzzo_);
-                bool? azzzzzzzzzzzzzzzzq_(Extension @this)
+                ResourceReference izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = Dx?.Condition;
+                Condition izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = CQMCommon_2_2_000.Instance.GetCondition(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                CodeableConcept izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_?.Code;
+                CqlConcept izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                CqlValueSet izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = this.Leukemia_or_Lymphoma(context);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.ConceptInValueSet(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Extension @this)
                 {
-                    string azzzzzzzzzzzzzzzzz_ = @this?.Url;
-                    FhirString bzzzzzzzzzzzzzzzza_ = context.Operators.Convert<FhirString>(azzzzzzzzzzzzzzzzz_);
-                    string bzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToString(context, bzzzzzzzzzzzzzzzza_);
-                    bool? bzzzzzzzzzzzzzzzzc_ = context.Operators.Equal(bzzzzzzzzzzzzzzzzb_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = @this?.Url;
+                    FhirString jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Convert<FhirString>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                    string jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToString(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Equal(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return bzzzzzzzzzzzzzzzzc_;
+                    return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                IEnumerable<Extension> azzzzzzzzzzzzzzzzr_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), azzzzzzzzzzzzzzzzq_);
-                object azzzzzzzzzzzzzzzzs_(Extension @this)
+                        : default), jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_(Extension @this)
                 {
-                    DataType bzzzzzzzzzzzzzzzzd_ = @this?.Value;
+                    DataType jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Value;
 
-                    return bzzzzzzzzzzzzzzzzd_;
+                    return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
                 };
-                IEnumerable<object> azzzzzzzzzzzzzzzzt_ = context.Operators.Select<Extension, object>(azzzzzzzzzzzzzzzzr_, azzzzzzzzzzzzzzzzs_);
-                object azzzzzzzzzzzzzzzzu_ = context.Operators.SingletonFrom<object>(azzzzzzzzzzzzzzzzt_);
-                CqlConcept azzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, azzzzzzzzzzzzzzzzu_ as CodeableConcept);
-                CqlValueSet azzzzzzzzzzzzzzzzw_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? azzzzzzzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(azzzzzzzzzzzzzzzzv_, azzzzzzzzzzzzzzzzw_);
-                bool? azzzzzzzzzzzzzzzzy_ = context.Operators.And(azzzzzzzzzzzzzzzzp_, azzzzzzzzzzzzzzzzx_);
+                IEnumerable<object> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Select<Extension, object>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                object jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.SingletonFrom<object>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                CqlConcept jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ as CodeableConcept);
+                CqlValueSet jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.And(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                return azzzzzzzzzzzzzzzzy_;
+                return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> azzzzzzzzzzzzzzzzi_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)azzzzzzzzzzzzzzzzg_, azzzzzzzzzzzzzzzzh_);
-            bool? azzzzzzzzzzzzzzzzj_ = context.Operators.Exists<Encounter.DiagnosisComponent>(azzzzzzzzzzzzzzzzi_);
+            IEnumerable<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+            bool? izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Exists<Encounter.DiagnosisComponent>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-            return azzzzzzzzzzzzzzzzj_;
+            return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
         };
-        IEnumerable<Encounter> azzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter>(azzzzzzzzzzzzzzzzd_, azzzzzzzzzzzzzzzze_);
+        IEnumerable<Encounter> izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Encounter>(izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-        return azzzzzzzzzzzzzzzzf_;
+        return izzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Liver Disease Moderate to Severe Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzze_ = this.Qualifying_Encounter(context);
-        bool? bzzzzzzzzzzzzzzzzf_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Qualifying_Encounter(context);
+        bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzzh_ = InpatientEncounter?.Diagnosis;
-            bool? bzzzzzzzzzzzzzzzzi_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = InpatientEncounter?.Diagnosis;
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference bzzzzzzzzzzzzzzzzl_ = Dx?.Condition;
-                Condition bzzzzzzzzzzzzzzzzm_ = CQMCommon_2_2_000.Instance.GetCondition(context, bzzzzzzzzzzzzzzzzl_);
-                CodeableConcept bzzzzzzzzzzzzzzzzn_ = bzzzzzzzzzzzzzzzzm_?.Code;
-                CqlConcept bzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzzzzzzzn_);
-                CqlValueSet bzzzzzzzzzzzzzzzzp_ = this.Liver_Disease_Moderate_to_Severe(context);
-                bool? bzzzzzzzzzzzzzzzzq_ = context.Operators.ConceptInValueSet(bzzzzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzzzzp_);
-                bool? bzzzzzzzzzzzzzzzzr_(Extension @this)
+                ResourceReference jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = Dx?.Condition;
+                Condition jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = CQMCommon_2_2_000.Instance.GetCondition(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                CodeableConcept jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_?.Code;
+                CqlConcept jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                CqlValueSet kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Liver_Disease_Moderate_to_Severe(context);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Extension @this)
                 {
-                    string czzzzzzzzzzzzzzzza_ = @this?.Url;
-                    FhirString czzzzzzzzzzzzzzzzb_ = context.Operators.Convert<FhirString>(czzzzzzzzzzzzzzzza_);
-                    string czzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToString(context, czzzzzzzzzzzzzzzzb_);
-                    bool? czzzzzzzzzzzzzzzzd_ = context.Operators.Equal(czzzzzzzzzzzzzzzzc_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Url;
+                    FhirString kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Convert<FhirString>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                    string kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToString(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                    bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Equal(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return czzzzzzzzzzzzzzzzd_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
                 };
-                IEnumerable<Extension> bzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), bzzzzzzzzzzzzzzzzr_);
-                object bzzzzzzzzzzzzzzzzt_(Extension @this)
+                        : default), kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Extension @this)
                 {
-                    DataType czzzzzzzzzzzzzzzze_ = @this?.Value;
+                    DataType kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Value;
 
-                    return czzzzzzzzzzzzzzzze_;
+                    return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
                 };
-                IEnumerable<object> bzzzzzzzzzzzzzzzzu_ = context.Operators.Select<Extension, object>(bzzzzzzzzzzzzzzzzs_, bzzzzzzzzzzzzzzzzt_);
-                object bzzzzzzzzzzzzzzzzv_ = context.Operators.SingletonFrom<object>(bzzzzzzzzzzzzzzzzu_);
-                CqlConcept bzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bzzzzzzzzzzzzzzzzv_ as CodeableConcept);
-                CqlValueSet bzzzzzzzzzzzzzzzzx_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? bzzzzzzzzzzzzzzzzy_ = context.Operators.ConceptInValueSet(bzzzzzzzzzzzzzzzzw_, bzzzzzzzzzzzzzzzzx_);
-                bool? bzzzzzzzzzzzzzzzzz_ = context.Operators.And(bzzzzzzzzzzzzzzzzq_, bzzzzzzzzzzzzzzzzy_);
+                IEnumerable<object> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Select<Extension, object>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                object kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<object>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                CqlConcept kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CodeableConcept);
+                CqlValueSet kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.And(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                return bzzzzzzzzzzzzzzzzz_;
+                return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> bzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)bzzzzzzzzzzzzzzzzh_, bzzzzzzzzzzzzzzzzi_);
-            bool? bzzzzzzzzzzzzzzzzk_ = context.Operators.Exists<Encounter.DiagnosisComponent>(bzzzzzzzzzzzzzzzzj_);
+            IEnumerable<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            bool? jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Exists<Encounter.DiagnosisComponent>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-            return bzzzzzzzzzzzzzzzzk_;
+            return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<Encounter> bzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Encounter>(bzzzzzzzzzzzzzzzze_, bzzzzzzzzzzzzzzzzf_);
+        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter>(jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-        return bzzzzzzzzzzzzzzzzg_;
+        return jzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Low BMI")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Low_BMI(CqlContext context)
     {
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzzf_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzzg_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Encounter InpatientEncounter)
         {
-            CqlCode czzzzzzzzzzzzzzzzi_ = this.Body_mass_index__BMI___Ratio_(context);
-            IEnumerable<CqlCode> czzzzzzzzzzzzzzzzj_ = context.Operators.ToList<CqlCode>(czzzzzzzzzzzzzzzzi_);
-            IEnumerable<Observation> czzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, czzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-            bool? czzzzzzzzzzzzzzzzl_(Observation BMI)
+            CqlCode kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Body_mass_index__BMI___Ratio_(context);
+            IEnumerable<CqlCode> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.ToList<CqlCode>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+            bool? kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Observation BMI)
             {
-                DataType czzzzzzzzzzzzzzzzp_ = BMI?.Effective;
-                object czzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzp_);
-                CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.ToInterval(context, czzzzzzzzzzzzzzzzq_);
-                CqlDateTime czzzzzzzzzzzzzzzzs_ = context.Operators.Start(czzzzzzzzzzzzzzzzr_);
-                CqlInterval<CqlDateTime> czzzzzzzzzzzzzzzzt_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                bool? czzzzzzzzzzzzzzzzu_ = context.Operators.In<CqlDateTime>(czzzzzzzzzzzzzzzzs_, czzzzzzzzzzzzzzzzt_, default);
-                DataType czzzzzzzzzzzzzzzzv_ = BMI?.Value;
-                object czzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, czzzzzzzzzzzzzzzzv_);
-                CqlQuantity czzzzzzzzzzzzzzzzx_ = context.Operators.Quantity(18.5m, "kg/m2");
-                bool? czzzzzzzzzzzzzzzzy_ = context.Operators.Less(czzzzzzzzzzzzzzzzw_ as CqlQuantity, czzzzzzzzzzzzzzzzx_);
-                bool? czzzzzzzzzzzzzzzzz_ = context.Operators.And(czzzzzzzzzzzzzzzzu_, czzzzzzzzzzzzzzzzy_);
+                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = BMI?.Effective;
+                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = QICoreCommon_2_1_000.Instance.ToInterval(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlDateTime lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Start(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.In<CqlDateTime>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, default);
+                DataType lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = BMI?.Value;
+                object lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                CqlQuantity lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Quantity(18.5m, "kg/m2");
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Less(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ as CqlQuantity, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
 
-                return czzzzzzzzzzzzzzzzz_;
+                return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
             };
-            IEnumerable<Observation> czzzzzzzzzzzzzzzzm_ = context.Operators.Where<Observation>(czzzzzzzzzzzzzzzzk_, czzzzzzzzzzzzzzzzl_);
-            Encounter czzzzzzzzzzzzzzzzn_(Observation BMI) =>
+            IEnumerable<Observation> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Observation>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            Encounter kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Observation BMI) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> czzzzzzzzzzzzzzzzo_ = context.Operators.Select<Observation, Encounter>(czzzzzzzzzzzzzzzzm_, czzzzzzzzzzzzzzzzn_);
+            IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Select<Observation, Encounter>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return czzzzzzzzzzzzzzzzo_;
+            return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> czzzzzzzzzzzzzzzzh_ = context.Operators.SelectMany<Encounter, Encounter>(czzzzzzzzzzzzzzzzf_, czzzzzzzzzzzzzzzzg_);
+        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.SelectMany<Encounter, Encounter>(kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-        return czzzzzzzzzzzzzzzzh_;
+        return kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Malignant Bone Disease Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> dzzzzzzzzzzzzzzzza_ = this.Qualifying_Encounter(context);
-        bool? dzzzzzzzzzzzzzzzzb_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Qualifying_Encounter(context);
+        bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> dzzzzzzzzzzzzzzzzd_ = InpatientEncounter?.Diagnosis;
-            bool? dzzzzzzzzzzzzzzzze_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = InpatientEncounter?.Diagnosis;
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference dzzzzzzzzzzzzzzzzh_ = Dx?.Condition;
-                Condition dzzzzzzzzzzzzzzzzi_ = CQMCommon_2_2_000.Instance.GetCondition(context, dzzzzzzzzzzzzzzzzh_);
-                CodeableConcept dzzzzzzzzzzzzzzzzj_ = dzzzzzzzzzzzzzzzzi_?.Code;
-                CqlConcept dzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzzj_);
-                CqlValueSet dzzzzzzzzzzzzzzzzl_ = this.Malignant_Bone_Disease(context);
-                bool? dzzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzzk_, dzzzzzzzzzzzzzzzzl_);
-                bool? dzzzzzzzzzzzzzzzzn_(Extension @this)
+                ResourceReference lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = Dx?.Condition;
+                Condition lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = CQMCommon_2_2_000.Instance.GetCondition(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                CodeableConcept lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_?.Code;
+                CqlConcept lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CqlValueSet lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = this.Malignant_Bone_Disease(context);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.ConceptInValueSet(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Extension @this)
                 {
-                    string dzzzzzzzzzzzzzzzzw_ = @this?.Url;
-                    FhirString dzzzzzzzzzzzzzzzzx_ = context.Operators.Convert<FhirString>(dzzzzzzzzzzzzzzzzw_);
-                    string dzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToString(context, dzzzzzzzzzzzzzzzzx_);
-                    bool? dzzzzzzzzzzzzzzzzz_ = context.Operators.Equal(dzzzzzzzzzzzzzzzzy_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = @this?.Url;
+                    FhirString mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<FhirString>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                    string mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return dzzzzzzzzzzzzzzzzz_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Extension> dzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), dzzzzzzzzzzzzzzzzn_);
-                object dzzzzzzzzzzzzzzzzp_(Extension @this)
+                        : default), lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Extension @this)
                 {
-                    DataType ezzzzzzzzzzzzzzzza_ = @this?.Value;
+                    DataType mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = @this?.Value;
 
-                    return ezzzzzzzzzzzzzzzza_;
+                    return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<object> dzzzzzzzzzzzzzzzzq_ = context.Operators.Select<Extension, object>(dzzzzzzzzzzzzzzzzo_, dzzzzzzzzzzzzzzzzp_);
-                object dzzzzzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<object>(dzzzzzzzzzzzzzzzzq_);
-                CqlConcept dzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dzzzzzzzzzzzzzzzzr_ as CodeableConcept);
-                CqlValueSet dzzzzzzzzzzzzzzzzt_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? dzzzzzzzzzzzzzzzzu_ = context.Operators.ConceptInValueSet(dzzzzzzzzzzzzzzzzs_, dzzzzzzzzzzzzzzzzt_);
-                bool? dzzzzzzzzzzzzzzzzv_ = context.Operators.And(dzzzzzzzzzzzzzzzzm_, dzzzzzzzzzzzzzzzzu_);
+                IEnumerable<object> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Select<Extension, object>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                object mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.SingletonFrom<object>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlConcept mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ as CodeableConcept);
+                CqlValueSet mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.And(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
 
-                return dzzzzzzzzzzzzzzzzv_;
+                return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> dzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)dzzzzzzzzzzzzzzzzd_, dzzzzzzzzzzzzzzzze_);
-            bool? dzzzzzzzzzzzzzzzzg_ = context.Operators.Exists<Encounter.DiagnosisComponent>(dzzzzzzzzzzzzzzzzf_);
+            IEnumerable<Encounter.DiagnosisComponent> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            bool? lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Exists<Encounter.DiagnosisComponent>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-            return dzzzzzzzzzzzzzzzzg_;
+            return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
         };
-        IEnumerable<Encounter> dzzzzzzzzzzzzzzzzc_ = context.Operators.Where<Encounter>(dzzzzzzzzzzzzzzzza_, dzzzzzzzzzzzzzzzzb_);
+        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Where<Encounter>(lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return dzzzzzzzzzzzzzzzzc_;
+        return lzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Neurologic Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzb_ = this.Qualifying_Encounter(context);
-        bool? ezzzzzzzzzzzzzzzzc_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Qualifying_Encounter(context);
+        bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> ezzzzzzzzzzzzzzzze_ = InpatientEncounter?.Diagnosis;
-            bool? ezzzzzzzzzzzzzzzzf_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = InpatientEncounter?.Diagnosis;
+            bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference ezzzzzzzzzzzzzzzzi_ = Dx?.Condition;
-                Condition ezzzzzzzzzzzzzzzzj_ = CQMCommon_2_2_000.Instance.GetCondition(context, ezzzzzzzzzzzzzzzzi_);
-                CodeableConcept ezzzzzzzzzzzzzzzzk_ = ezzzzzzzzzzzzzzzzj_?.Code;
-                CqlConcept ezzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzk_);
-                CqlValueSet ezzzzzzzzzzzzzzzzm_ = this.Neurologic_Movement_and_Related_Disorders(context);
-                bool? ezzzzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzzl_, ezzzzzzzzzzzzzzzzm_);
-                bool? ezzzzzzzzzzzzzzzzo_(Extension @this)
+                ResourceReference mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = Dx?.Condition;
+                Condition mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = CQMCommon_2_2_000.Instance.GetCondition(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                CodeableConcept mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_?.Code;
+                CqlConcept mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                CqlValueSet mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = this.Neurologic_Movement_and_Related_Disorders(context);
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.ConceptInValueSet(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Extension @this)
                 {
-                    string ezzzzzzzzzzzzzzzzx_ = @this?.Url;
-                    FhirString ezzzzzzzzzzzzzzzzy_ = context.Operators.Convert<FhirString>(ezzzzzzzzzzzzzzzzx_);
-                    string ezzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToString(context, ezzzzzzzzzzzzzzzzy_);
-                    bool? fzzzzzzzzzzzzzzzza_ = context.Operators.Equal(ezzzzzzzzzzzzzzzzz_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Url;
+                    FhirString nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Convert<FhirString>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                    string nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToString(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return fzzzzzzzzzzzzzzzza_;
+                    return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
                 };
-                IEnumerable<Extension> ezzzzzzzzzzzzzzzzp_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), ezzzzzzzzzzzzzzzzo_);
-                object ezzzzzzzzzzzzzzzzq_(Extension @this)
+                        : default), mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Extension @this)
                 {
-                    DataType fzzzzzzzzzzzzzzzzb_ = @this?.Value;
+                    DataType nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = @this?.Value;
 
-                    return fzzzzzzzzzzzzzzzzb_;
+                    return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                 };
-                IEnumerable<object> ezzzzzzzzzzzzzzzzr_ = context.Operators.Select<Extension, object>(ezzzzzzzzzzzzzzzzp_, ezzzzzzzzzzzzzzzzq_);
-                object ezzzzzzzzzzzzzzzzs_ = context.Operators.SingletonFrom<object>(ezzzzzzzzzzzzzzzzr_);
-                CqlConcept ezzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ezzzzzzzzzzzzzzzzs_ as CodeableConcept);
-                CqlValueSet ezzzzzzzzzzzzzzzzu_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? ezzzzzzzzzzzzzzzzv_ = context.Operators.ConceptInValueSet(ezzzzzzzzzzzzzzzzt_, ezzzzzzzzzzzzzzzzu_);
-                bool? ezzzzzzzzzzzzzzzzw_ = context.Operators.And(ezzzzzzzzzzzzzzzzn_, ezzzzzzzzzzzzzzzzv_);
+                IEnumerable<object> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Extension, object>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                object nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<object>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ as CodeableConcept);
+                CqlValueSet nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.ConceptInValueSet(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.And(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
 
-                return ezzzzzzzzzzzzzzzzw_;
+                return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> ezzzzzzzzzzzzzzzzg_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)ezzzzzzzzzzzzzzzze_, ezzzzzzzzzzzzzzzzf_);
-            bool? ezzzzzzzzzzzzzzzzh_ = context.Operators.Exists<Encounter.DiagnosisComponent>(ezzzzzzzzzzzzzzzzg_);
+            IEnumerable<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+            bool? mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Exists<Encounter.DiagnosisComponent>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
 
-            return ezzzzzzzzzzzzzzzzh_;
+            return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
         };
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzzd_ = context.Operators.Where<Encounter>(ezzzzzzzzzzzzzzzzb_, ezzzzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Encounter>(mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-        return ezzzzzzzzzzzzzzzzd_;
+        return mzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Obesity Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Obesity_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> fzzzzzzzzzzzzzzzzc_ = this.Qualifying_Encounter(context);
-        bool? fzzzzzzzzzzzzzzzzd_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.Qualifying_Encounter(context);
+        bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzzf_ = InpatientEncounter?.Diagnosis;
-            bool? fzzzzzzzzzzzzzzzzg_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = InpatientEncounter?.Diagnosis;
+            bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference fzzzzzzzzzzzzzzzzj_ = Dx?.Condition;
-                Condition fzzzzzzzzzzzzzzzzk_ = CQMCommon_2_2_000.Instance.GetCondition(context, fzzzzzzzzzzzzzzzzj_);
-                CodeableConcept fzzzzzzzzzzzzzzzzl_ = fzzzzzzzzzzzzzzzzk_?.Code;
-                CqlConcept fzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzzzzzzzl_);
-                CqlValueSet fzzzzzzzzzzzzzzzzn_ = this.Obesity(context);
-                bool? fzzzzzzzzzzzzzzzzo_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzzzzzzzm_, fzzzzzzzzzzzzzzzzn_);
-                bool? fzzzzzzzzzzzzzzzzp_(Extension @this)
+                ResourceReference nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = Dx?.Condition;
+                Condition nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = CQMCommon_2_2_000.Instance.GetCondition(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                CodeableConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_?.Code;
+                CqlConcept nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                CqlValueSet nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = this.Obesity(context);
+                bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.ConceptInValueSet(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_(Extension @this)
                 {
-                    string fzzzzzzzzzzzzzzzzy_ = @this?.Url;
-                    FhirString fzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<FhirString>(fzzzzzzzzzzzzzzzzy_);
-                    string gzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToString(context, fzzzzzzzzzzzzzzzzz_);
-                    bool? gzzzzzzzzzzzzzzzzb_ = context.Operators.Equal(gzzzzzzzzzzzzzzzza_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = @this?.Url;
+                    FhirString ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<FhirString>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                    string ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToString(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                    bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Equal(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return gzzzzzzzzzzzzzzzzb_;
+                    return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
                 };
-                IEnumerable<Extension> fzzzzzzzzzzzzzzzzq_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), fzzzzzzzzzzzzzzzzp_);
-                object fzzzzzzzzzzzzzzzzr_(Extension @this)
+                        : default), ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Extension @this)
                 {
-                    DataType gzzzzzzzzzzzzzzzzc_ = @this?.Value;
+                    DataType ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = @this?.Value;
 
-                    return gzzzzzzzzzzzzzzzzc_;
+                    return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
                 };
-                IEnumerable<object> fzzzzzzzzzzzzzzzzs_ = context.Operators.Select<Extension, object>(fzzzzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzzzzr_);
-                object fzzzzzzzzzzzzzzzzt_ = context.Operators.SingletonFrom<object>(fzzzzzzzzzzzzzzzzs_);
-                CqlConcept fzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fzzzzzzzzzzzzzzzzt_ as CodeableConcept);
-                CqlValueSet fzzzzzzzzzzzzzzzzv_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? fzzzzzzzzzzzzzzzzw_ = context.Operators.ConceptInValueSet(fzzzzzzzzzzzzzzzzu_, fzzzzzzzzzzzzzzzzv_);
-                bool? fzzzzzzzzzzzzzzzzx_ = context.Operators.And(fzzzzzzzzzzzzzzzzo_, fzzzzzzzzzzzzzzzzw_);
+                IEnumerable<object> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Select<Extension, object>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                object ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.SingletonFrom<object>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlConcept ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ as CodeableConcept);
+                CqlValueSet ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.ConceptInValueSet(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.And(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
 
-                return fzzzzzzzzzzzzzzzzx_;
+                return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> fzzzzzzzzzzzzzzzzh_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)fzzzzzzzzzzzzzzzzf_, fzzzzzzzzzzzzzzzzg_);
-            bool? fzzzzzzzzzzzzzzzzi_ = context.Operators.Exists<Encounter.DiagnosisComponent>(fzzzzzzzzzzzzzzzzh_);
+            IEnumerable<Encounter.DiagnosisComponent> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+            bool? nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Exists<Encounter.DiagnosisComponent>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
 
-            return fzzzzzzzzzzzzzzzzi_;
+            return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
         };
-        IEnumerable<Encounter> fzzzzzzzzzzzzzzzze_ = context.Operators.Where<Encounter>(fzzzzzzzzzzzzzzzzc_, fzzzzzzzzzzzzzzzzd_);
+        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Where<Encounter>(nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-        return fzzzzzzzzzzzzzzzze_;
+        return nzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Opioid Medication Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzzd_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzze_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_(Encounter InpatientEncounter)
         {
-            CqlValueSet gzzzzzzzzzzzzzzzzg_ = this.Opioids(context);
-            IEnumerable<MedicationRequest> gzzzzzzzzzzzzzzzzh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gzzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> gzzzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gzzzzzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> gzzzzzzzzzzzzzzzzk_ = context.Operators.Union<MedicationRequest>(gzzzzzzzzzzzzzzzzh_, gzzzzzzzzzzzzzzzzj_);
-            bool? gzzzzzzzzzzzzzzzzl_(MedicationRequest OpioidMed)
+            CqlValueSet ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Opioids(context);
+            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Union<MedicationRequest>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+            bool? ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(MedicationRequest OpioidMed)
             {
-                Code<MedicationRequest.MedicationrequestStatus> gzzzzzzzzzzzzzzzzp_ = OpioidMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? gzzzzzzzzzzzzzzzzq_ = gzzzzzzzzzzzzzzzzp_?.Value;
-                string gzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<string>(gzzzzzzzzzzzzzzzzq_);
-                bool? gzzzzzzzzzzzzzzzzs_ = context.Operators.Equal(gzzzzzzzzzzzzzzzzr_, "active");
-                Code<MedicationRequest.MedicationRequestIntent> gzzzzzzzzzzzzzzzzt_ = OpioidMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? gzzzzzzzzzzzzzzzzu_ = gzzzzzzzzzzzzzzzzt_?.Value;
-                string gzzzzzzzzzzzzzzzzv_ = context.Operators.Convert<string>(gzzzzzzzzzzzzzzzzu_);
-                bool? gzzzzzzzzzzzzzzzzw_ = context.Operators.Equal(gzzzzzzzzzzzzzzzzv_, "order");
-                MedicationRequest.MedicationRequestIntent? gzzzzzzzzzzzzzzzzy_ = gzzzzzzzzzzzzzzzzt_?.Value;
-                string gzzzzzzzzzzzzzzzzz_ = context.Operators.Convert<string>(gzzzzzzzzzzzzzzzzy_);
-                bool? hzzzzzzzzzzzzzzzza_ = context.Operators.Equal(gzzzzzzzzzzzzzzzzz_, "plan");
-                DataType hzzzzzzzzzzzzzzzzb_ = OpioidMed?.Reported;
-                object hzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hzzzzzzzzzzzzzzzzb_);
-                object hzzzzzzzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(hzzzzzzzzzzzzzzzzc_, "reference");
-                string hzzzzzzzzzzzzzzzze_ = context.Operators.LateBoundProperty<string>(hzzzzzzzzzzzzzzzzd_, "value");
-                string hzzzzzzzzzzzzzzzzf_ = QICoreCommon_2_1_000.Instance.getId(context, hzzzzzzzzzzzzzzzze_);
-                Id hzzzzzzzzzzzzzzzzg_()
+                Code<MedicationRequest.MedicationrequestStatus> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = OpioidMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_?.Value;
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, "active");
+                Code<MedicationRequest.MedicationRequestIntent> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = OpioidMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.Value;
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, "order");
+                MedicationRequest.MedicationRequestIntent? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_?.Value;
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, "plan");
+                DataType pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = OpioidMed?.Reported;
+                object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                object pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.LateBoundProperty<object>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_, "reference");
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.LateBoundProperty<string>(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, "value");
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.getId(context, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                Id pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_()
                 {
-                    bool izzzzzzzzzzzzzzzzd_()
+                    bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_()
                     {
-                        Patient izzzzzzzzzzzzzzzze_ = this.Patient(context);
-                        bool izzzzzzzzzzzzzzzzf_ = izzzzzzzzzzzzzzzze_ is Resource;
+                        Patient qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Patient(context);
+                        bool qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is Resource;
 
-                        return izzzzzzzzzzzzzzzzf_;
+                        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
                     };
-                    if (izzzzzzzzzzzzzzzzd_())
+                    if (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_())
                     {
-                        Patient izzzzzzzzzzzzzzzzg_ = this.Patient(context);
+                        Patient qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = this.Patient(context);
 
-                        return (izzzzzzzzzzzzzzzzg_ as Resource).IdElement;
+                        return (qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ as Resource).IdElement;
                     }
                     else
                     {
                         return default;
                     }
                 };
-                string hzzzzzzzzzzzzzzzzh_ = (hzzzzzzzzzzzzzzzzg_())?.Value;
-                bool? hzzzzzzzzzzzzzzzzi_ = context.Operators.Equal(hzzzzzzzzzzzzzzzzf_, hzzzzzzzzzzzzzzzzh_);
-                bool? hzzzzzzzzzzzzzzzzj_ = context.Operators.And(hzzzzzzzzzzzzzzzza_, hzzzzzzzzzzzzzzzzi_);
-                bool? hzzzzzzzzzzzzzzzzk_ = context.Operators.Or(gzzzzzzzzzzzzzzzzw_, hzzzzzzzzzzzzzzzzj_);
-                bool? hzzzzzzzzzzzzzzzzl_ = context.Operators.And(gzzzzzzzzzzzzzzzzs_, hzzzzzzzzzzzzzzzzk_);
-                bool? hzzzzzzzzzzzzzzzzm_ = QICoreCommon_2_1_000.Instance.isCommunity(context, OpioidMed);
-                bool? hzzzzzzzzzzzzzzzzn_ = context.Operators.And(hzzzzzzzzzzzzzzzzl_, hzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDate> hzzzzzzzzzzzzzzzzo_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, OpioidMed);
-                CqlDate hzzzzzzzzzzzzzzzzp_ = hzzzzzzzzzzzzzzzzo_?.low;
-                CqlDateTime hzzzzzzzzzzzzzzzzq_ = context.Operators.ConvertDateToDateTime(hzzzzzzzzzzzzzzzzp_);
-                CqlDate hzzzzzzzzzzzzzzzzs_ = hzzzzzzzzzzzzzzzzo_?.high;
-                CqlDateTime hzzzzzzzzzzzzzzzzt_ = context.Operators.ConvertDateToDateTime(hzzzzzzzzzzzzzzzzs_);
-                bool? hzzzzzzzzzzzzzzzzv_ = hzzzzzzzzzzzzzzzzo_?.lowClosed;
-                bool? hzzzzzzzzzzzzzzzzx_ = hzzzzzzzzzzzzzzzzo_?.highClosed;
-                CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzzy_ = context.Operators.Interval(hzzzzzzzzzzzzzzzzq_, hzzzzzzzzzzzzzzzzt_, hzzzzzzzzzzzzzzzzv_, hzzzzzzzzzzzzzzzzx_);
-                Period hzzzzzzzzzzzzzzzzz_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, hzzzzzzzzzzzzzzzzz_);
-                bool? izzzzzzzzzzzzzzzzb_ = context.Operators.OverlapsBefore(hzzzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzza_, default);
-                bool? izzzzzzzzzzzzzzzzc_ = context.Operators.And(hzzzzzzzzzzzzzzzzn_, izzzzzzzzzzzzzzzzb_);
+                string pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = (pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_())?.Value;
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Or(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = QICoreCommon_2_1_000.Instance.isCommunity(context, OpioidMed);
+                bool? pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                CqlInterval<CqlDate> pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, OpioidMed);
+                CqlDate qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.low;
+                CqlDateTime qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ConvertDateToDateTime(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CqlDate qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.high;
+                CqlDateTime qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConvertDateToDateTime(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.lowClosed;
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_?.highClosed;
+                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Interval(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                Period qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.OverlapsBefore(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, default);
+                bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(pzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return izzzzzzzzzzzzzzzzc_;
+                return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<MedicationRequest> gzzzzzzzzzzzzzzzzm_ = context.Operators.Where<MedicationRequest>(gzzzzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzzzzl_);
-            Encounter gzzzzzzzzzzzzzzzzn_(MedicationRequest OpioidMed) =>
+            IEnumerable<MedicationRequest> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<MedicationRequest>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            Encounter ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(MedicationRequest OpioidMed) =>
                 InpatientEncounter;
-            IEnumerable<Encounter> gzzzzzzzzzzzzzzzzo_ = context.Operators.Select<MedicationRequest, Encounter>(gzzzzzzzzzzzzzzzzm_, gzzzzzzzzzzzzzzzzn_);
+            IEnumerable<Encounter> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Select<MedicationRequest, Encounter>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return gzzzzzzzzzzzzzzzzo_;
+            return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzzf_ = context.Operators.SelectMany<Encounter, Encounter>(gzzzzzzzzzzzzzzzzd_, gzzzzzzzzzzzzzzzze_);
+        IEnumerable<Encounter> ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.SelectMany<Encounter, Encounter>(ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_, ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
 
-        return gzzzzzzzzzzzzzzzzf_;
+        return ozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Osteoporosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> izzzzzzzzzzzzzzzzh_ = this.Qualifying_Encounter(context);
-        bool? izzzzzzzzzzzzzzzzi_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = this.Qualifying_Encounter(context);
+        bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzzk_ = InpatientEncounter?.Diagnosis;
-            bool? izzzzzzzzzzzzzzzzl_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = InpatientEncounter?.Diagnosis;
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference izzzzzzzzzzzzzzzzo_ = Dx?.Condition;
-                Condition izzzzzzzzzzzzzzzzp_ = CQMCommon_2_2_000.Instance.GetCondition(context, izzzzzzzzzzzzzzzzo_);
-                CodeableConcept izzzzzzzzzzzzzzzzq_ = izzzzzzzzzzzzzzzzp_?.Code;
-                CqlConcept izzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, izzzzzzzzzzzzzzzzq_);
-                CqlValueSet izzzzzzzzzzzzzzzzs_ = this.Osteoporosis(context);
-                bool? izzzzzzzzzzzzzzzzt_ = context.Operators.ConceptInValueSet(izzzzzzzzzzzzzzzzr_, izzzzzzzzzzzzzzzzs_);
-                bool? izzzzzzzzzzzzzzzzu_(Extension @this)
+                ResourceReference qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = Dx?.Condition;
+                Condition rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = CQMCommon_2_2_000.Instance.GetCondition(context, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+                CodeableConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_?.Code;
+                CqlConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Osteoporosis(context);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConceptInValueSet(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_(Extension @this)
                 {
-                    string jzzzzzzzzzzzzzzzzd_ = @this?.Url;
-                    FhirString jzzzzzzzzzzzzzzzze_ = context.Operators.Convert<FhirString>(jzzzzzzzzzzzzzzzzd_);
-                    string jzzzzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToString(context, jzzzzzzzzzzzzzzzze_);
-                    bool? jzzzzzzzzzzzzzzzzg_ = context.Operators.Equal(jzzzzzzzzzzzzzzzzf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = @this?.Url;
+                    FhirString rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.Convert<FhirString>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+                    string rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToString(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Equal(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return jzzzzzzzzzzzzzzzzg_;
+                    return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
                 };
-                IEnumerable<Extension> izzzzzzzzzzzzzzzzv_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), izzzzzzzzzzzzzzzzu_);
-                object izzzzzzzzzzzzzzzzw_(Extension @this)
+                        : default), rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_(Extension @this)
                 {
-                    DataType jzzzzzzzzzzzzzzzzh_ = @this?.Value;
+                    DataType rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Value;
 
-                    return jzzzzzzzzzzzzzzzzh_;
+                    return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                IEnumerable<object> izzzzzzzzzzzzzzzzx_ = context.Operators.Select<Extension, object>(izzzzzzzzzzzzzzzzv_, izzzzzzzzzzzzzzzzw_);
-                object izzzzzzzzzzzzzzzzy_ = context.Operators.SingletonFrom<object>(izzzzzzzzzzzzzzzzx_);
-                CqlConcept izzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, izzzzzzzzzzzzzzzzy_ as CodeableConcept);
-                CqlValueSet jzzzzzzzzzzzzzzzza_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? jzzzzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(izzzzzzzzzzzzzzzzz_, jzzzzzzzzzzzzzzzza_);
-                bool? jzzzzzzzzzzzzzzzzc_ = context.Operators.And(izzzzzzzzzzzzzzzzt_, jzzzzzzzzzzzzzzzzb_);
+                IEnumerable<object> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Select<Extension, object>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                object rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.SingletonFrom<object>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                CqlConcept rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ as CodeableConcept);
+                CqlValueSet rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.ConceptInValueSet(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+                bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.And(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-                return jzzzzzzzzzzzzzzzzc_;
+                return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> izzzzzzzzzzzzzzzzm_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)izzzzzzzzzzzzzzzzk_, izzzzzzzzzzzzzzzzl_);
-            bool? izzzzzzzzzzzzzzzzn_ = context.Operators.Exists<Encounter.DiagnosisComponent>(izzzzzzzzzzzzzzzzm_);
+            IEnumerable<Encounter.DiagnosisComponent> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+            bool? qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Exists<Encounter.DiagnosisComponent>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
 
-            return izzzzzzzzzzzzzzzzn_;
+            return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_;
         };
-        IEnumerable<Encounter> izzzzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter>(izzzzzzzzzzzzzzzzh_, izzzzzzzzzzzzzzzzi_);
+        IEnumerable<Encounter> qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<Encounter>(qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
 
-        return izzzzzzzzzzzzzzzzj_;
+        return qzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Peripheral Neuropathy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzi_ = this.Qualifying_Encounter(context);
-        bool? jzzzzzzzzzzzzzzzzj_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = this.Qualifying_Encounter(context);
+        bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzl_ = InpatientEncounter?.Diagnosis;
-            bool? jzzzzzzzzzzzzzzzzm_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = InpatientEncounter?.Diagnosis;
+            bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference jzzzzzzzzzzzzzzzzp_ = Dx?.Condition;
-                Condition jzzzzzzzzzzzzzzzzq_ = CQMCommon_2_2_000.Instance.GetCondition(context, jzzzzzzzzzzzzzzzzp_);
-                CodeableConcept jzzzzzzzzzzzzzzzzr_ = jzzzzzzzzzzzzzzzzq_?.Code;
-                CqlConcept jzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzzr_);
-                CqlValueSet jzzzzzzzzzzzzzzzzt_ = this.Peripheral_Neuropathy(context);
-                bool? jzzzzzzzzzzzzzzzzu_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzzzzs_, jzzzzzzzzzzzzzzzzt_);
-                bool? jzzzzzzzzzzzzzzzzv_(Extension @this)
+                ResourceReference szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = Dx?.Condition;
+                Condition szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = CQMCommon_2_2_000.Instance.GetCondition(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                CodeableConcept szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_?.Code;
+                CqlConcept szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                CqlValueSet szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = this.Peripheral_Neuropathy(context);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.ConceptInValueSet(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_(Extension @this)
                 {
-                    string kzzzzzzzzzzzzzzzze_ = @this?.Url;
-                    FhirString kzzzzzzzzzzzzzzzzf_ = context.Operators.Convert<FhirString>(kzzzzzzzzzzzzzzzze_);
-                    string kzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToString(context, kzzzzzzzzzzzzzzzzf_);
-                    bool? kzzzzzzzzzzzzzzzzh_ = context.Operators.Equal(kzzzzzzzzzzzzzzzzg_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = @this?.Url;
+                    FhirString szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Convert<FhirString>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+                    string szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToString(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.Equal(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return kzzzzzzzzzzzzzzzzh_;
+                    return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
                 };
-                IEnumerable<Extension> jzzzzzzzzzzzzzzzzw_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), jzzzzzzzzzzzzzzzzv_);
-                object jzzzzzzzzzzzzzzzzx_(Extension @this)
+                        : default), szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_);
+                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_(Extension @this)
                 {
-                    DataType kzzzzzzzzzzzzzzzzi_ = @this?.Value;
+                    DataType szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = @this?.Value;
 
-                    return kzzzzzzzzzzzzzzzzi_;
+                    return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
                 };
-                IEnumerable<object> jzzzzzzzzzzzzzzzzy_ = context.Operators.Select<Extension, object>(jzzzzzzzzzzzzzzzzw_, jzzzzzzzzzzzzzzzzx_);
-                object jzzzzzzzzzzzzzzzzz_ = context.Operators.SingletonFrom<object>(jzzzzzzzzzzzzzzzzy_);
-                CqlConcept kzzzzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzzzzz_ as CodeableConcept);
-                CqlValueSet kzzzzzzzzzzzzzzzzb_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? kzzzzzzzzzzzzzzzzc_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzzzza_, kzzzzzzzzzzzzzzzzb_);
-                bool? kzzzzzzzzzzzzzzzzd_ = context.Operators.And(jzzzzzzzzzzzzzzzzu_, kzzzzzzzzzzzzzzzzc_);
+                IEnumerable<object> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.Select<Extension, object>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                object szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.SingletonFrom<object>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                CqlConcept szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ as CodeableConcept);
+                CqlValueSet szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.And(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
 
-                return kzzzzzzzzzzzzzzzzd_;
+                return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> jzzzzzzzzzzzzzzzzn_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)jzzzzzzzzzzzzzzzzl_, jzzzzzzzzzzzzzzzzm_);
-            bool? jzzzzzzzzzzzzzzzzo_ = context.Operators.Exists<Encounter.DiagnosisComponent>(jzzzzzzzzzzzzzzzzn_);
+            IEnumerable<Encounter.DiagnosisComponent> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+            bool? rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Exists<Encounter.DiagnosisComponent>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
 
-            return jzzzzzzzzzzzzzzzzo_;
+            return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_;
         };
-        IEnumerable<Encounter> jzzzzzzzzzzzzzzzzk_ = context.Operators.Where<Encounter>(jzzzzzzzzzzzzzzzzi_, jzzzzzzzzzzzzzzzzj_);
+        IEnumerable<Encounter> rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Where<Encounter>(rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_, rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-        return jzzzzzzzzzzzzzzzzk_;
+        return rzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Stroke Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Stroke_Present_on_Admission(CqlContext context)
     {
-        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzj_ = this.Qualifying_Encounter(context);
-        bool? kzzzzzzzzzzzzzzzzk_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = this.Qualifying_Encounter(context);
+        bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_(Encounter InpatientEncounter)
         {
-            List<Encounter.DiagnosisComponent> kzzzzzzzzzzzzzzzzm_ = InpatientEncounter?.Diagnosis;
-            bool? kzzzzzzzzzzzzzzzzn_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = InpatientEncounter?.Diagnosis;
+            bool? szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference kzzzzzzzzzzzzzzzzq_ = Dx?.Condition;
-                Condition kzzzzzzzzzzzzzzzzr_ = CQMCommon_2_2_000.Instance.GetCondition(context, kzzzzzzzzzzzzzzzzq_);
-                CodeableConcept kzzzzzzzzzzzzzzzzs_ = kzzzzzzzzzzzzzzzzr_?.Code;
-                CqlConcept kzzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzzzzzs_);
-                CqlValueSet kzzzzzzzzzzzzzzzzu_ = this.Stroke(context);
-                bool? kzzzzzzzzzzzzzzzzv_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzzzzt_, kzzzzzzzzzzzzzzzzu_);
-                bool? kzzzzzzzzzzzzzzzzw_(Extension @this)
+                ResourceReference tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = Dx?.Condition;
+                Condition tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = CQMCommon_2_2_000.Instance.GetCondition(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+                CodeableConcept tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_?.Code;
+                CqlConcept tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
+                CqlValueSet tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = this.Stroke(context);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.ConceptInValueSet(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_(Extension @this)
                 {
-                    string lzzzzzzzzzzzzzzzzf_ = @this?.Url;
-                    FhirString lzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<FhirString>(lzzzzzzzzzzzzzzzzf_);
-                    string lzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToString(context, lzzzzzzzzzzzzzzzzg_);
-                    bool? lzzzzzzzzzzzzzzzzi_ = context.Operators.Equal(lzzzzzzzzzzzzzzzzh_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = @this?.Url;
+                    FhirString tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Convert<FhirString>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
+                    string tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToString(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_);
+                    bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Equal(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return lzzzzzzzzzzzzzzzzi_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_;
                 };
-                IEnumerable<Extension> kzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), kzzzzzzzzzzzzzzzzw_);
-                object kzzzzzzzzzzzzzzzzy_(Extension @this)
+                        : default), tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_);
+                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_(Extension @this)
                 {
-                    DataType lzzzzzzzzzzzzzzzzj_ = @this?.Value;
+                    DataType tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = @this?.Value;
 
-                    return lzzzzzzzzzzzzzzzzj_;
+                    return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_;
                 };
-                IEnumerable<object> kzzzzzzzzzzzzzzzzz_ = context.Operators.Select<Extension, object>(kzzzzzzzzzzzzzzzzx_, kzzzzzzzzzzzzzzzzy_);
-                object lzzzzzzzzzzzzzzzza_ = context.Operators.SingletonFrom<object>(kzzzzzzzzzzzzzzzzz_);
-                CqlConcept lzzzzzzzzzzzzzzzzb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzza_ as CodeableConcept);
-                CqlValueSet lzzzzzzzzzzzzzzzzc_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? lzzzzzzzzzzzzzzzzd_ = context.Operators.ConceptInValueSet(lzzzzzzzzzzzzzzzzb_, lzzzzzzzzzzzzzzzzc_);
-                bool? lzzzzzzzzzzzzzzzze_ = context.Operators.And(kzzzzzzzzzzzzzzzzv_, lzzzzzzzzzzzzzzzzd_);
+                IEnumerable<object> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = context.Operators.Select<Extension, object>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_);
+                object tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.SingletonFrom<object>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                CqlConcept tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ as CodeableConcept);
+                CqlValueSet tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.ConceptInValueSet(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = context.Operators.And(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
 
-                return lzzzzzzzzzzzzzzzze_;
+                return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> kzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)kzzzzzzzzzzzzzzzzm_, kzzzzzzzzzzzzzzzzn_);
-            bool? kzzzzzzzzzzzzzzzzp_ = context.Operators.Exists<Encounter.DiagnosisComponent>(kzzzzzzzzzzzzzzzzo_);
+            IEnumerable<Encounter.DiagnosisComponent> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+            bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Exists<Encounter.DiagnosisComponent>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
 
-            return kzzzzzzzzzzzzzzzzp_;
+            return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
         };
-        IEnumerable<Encounter> kzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Encounter>(kzzzzzzzzzzzzzzzzj_, kzzzzzzzzzzzzzzzzk_);
+        IEnumerable<Encounter> szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = context.Operators.Where<Encounter>(szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_);
 
-        return kzzzzzzzzzzzzzzzzl_;
+        return szzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Encounter with Suicide Attempt")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Suicide_Attempt(CqlContext context)
     {
-        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzk_ = this.Qualifying_Encounter(context);
-        bool? lzzzzzzzzzzzzzzzzl_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = this.Qualifying_Encounter(context);
+        bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_(Encounter InpatientEncounter)
         {
-            IEnumerable<Condition> lzzzzzzzzzzzzzzzzn_ = CQMCommon_2_2_000.Instance.EncounterDiagnosis(context, InpatientEncounter);
-            bool? lzzzzzzzzzzzzzzzzo_(Condition @this)
+            IEnumerable<Condition> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = CQMCommon_2_2_000.Instance.EncounterDiagnosis(context, InpatientEncounter);
+            bool? tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_(Condition @this)
             {
-                CodeableConcept lzzzzzzzzzzzzzzzzu_ = @this?.Code;
-                CqlConcept lzzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzzu_);
-                bool? lzzzzzzzzzzzzzzzzw_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzzzzzv_ is null));
+                CodeableConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = @this?.Code;
+                CqlConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = context.Operators.Not((bool?)(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ is null));
 
-                return lzzzzzzzzzzzzzzzzw_;
+                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_;
             };
-            IEnumerable<Condition> lzzzzzzzzzzzzzzzzp_ = context.Operators.Where<Condition>(lzzzzzzzzzzzzzzzzn_, lzzzzzzzzzzzzzzzzo_);
-            CqlConcept lzzzzzzzzzzzzzzzzq_(Condition @this)
+            IEnumerable<Condition> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Where<Condition>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_);
+            CqlConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_(Condition @this)
             {
-                CodeableConcept lzzzzzzzzzzzzzzzzx_ = @this?.Code;
-                CqlConcept lzzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lzzzzzzzzzzzzzzzzx_);
+                CodeableConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = @this?.Code;
+                CqlConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
 
-                return lzzzzzzzzzzzzzzzzy_;
+                return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
             };
-            IEnumerable<CqlConcept> lzzzzzzzzzzzzzzzzr_ = context.Operators.Select<Condition, CqlConcept>(lzzzzzzzzzzzzzzzzp_, lzzzzzzzzzzzzzzzzq_);
-            CqlValueSet lzzzzzzzzzzzzzzzzs_ = this.Suicide_Attempt(context);
-            bool? lzzzzzzzzzzzzzzzzt_ = context.Operators.ConceptsInValueSet(lzzzzzzzzzzzzzzzzr_, lzzzzzzzzzzzzzzzzs_);
+            IEnumerable<CqlConcept> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Condition, CqlConcept>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_);
+            CqlValueSet uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Suicide_Attempt(context);
+            bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.ConceptsInValueSet(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-            return lzzzzzzzzzzzzzzzzt_;
+            return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
         };
-        IEnumerable<Encounter> lzzzzzzzzzzzzzzzzm_ = context.Operators.Where<Encounter>(lzzzzzzzzzzzzzzzzk_, lzzzzzzzzzzzzzzzzl_);
+        IEnumerable<Encounter> tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = context.Operators.Where<Encounter>(tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_, tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
 
-        return lzzzzzzzzzzzzzzzzm_;
+        return tzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? lzzzzzzzzzzzzzzzzz_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return lzzzzzzzzzzzzzzzzz_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> mzzzzzzzzzzzzzzzza_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return mzzzzzzzzzzzzzzzza_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? mzzzzzzzzzzzzzzzzb_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return mzzzzzzzzzzzzzzzzb_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode mzzzzzzzzzzzzzzzzc_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return mzzzzzzzzzzzzzzzzc_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzd_ = this.Encounter_with_a_Fall_Present_on_Admission(context);
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = this.Encounter_with_a_Fall_Present_on_Admission(context);
 
-        return mzzzzzzzzzzzzzzzzd_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Encounter where a Fall and Moderate Injury Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_and_Moderate_Injury_Occurred(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzze_ = this.Encounter_where_a_Fall_Occurred(context);
-        bool? mzzzzzzzzzzzzzzzzf_(Encounter FallOccurred)
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = this.Encounter_where_a_Fall_Occurred(context);
+        bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_(Encounter FallOccurred)
         {
-            List<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzh_ = FallOccurred?.Diagnosis;
-            bool? mzzzzzzzzzzzzzzzzi_(Encounter.DiagnosisComponent Dx)
+            List<Encounter.DiagnosisComponent> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = FallOccurred?.Diagnosis;
+            bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_(Encounter.DiagnosisComponent Dx)
             {
-                ResourceReference mzzzzzzzzzzzzzzzzl_ = Dx?.Condition;
-                Condition mzzzzzzzzzzzzzzzzm_ = CQMCommon_2_2_000.Instance.GetCondition(context, mzzzzzzzzzzzzzzzzl_);
-                CodeableConcept mzzzzzzzzzzzzzzzzn_ = mzzzzzzzzzzzzzzzzm_?.Code;
-                CqlConcept mzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mzzzzzzzzzzzzzzzzn_);
-                CqlValueSet mzzzzzzzzzzzzzzzzp_ = this.Moderate_Injuries(context);
-                bool? mzzzzzzzzzzzzzzzzq_ = context.Operators.ConceptInValueSet(mzzzzzzzzzzzzzzzzo_, mzzzzzzzzzzzzzzzzp_);
-                bool? mzzzzzzzzzzzzzzzzr_(Extension @this)
+                ResourceReference uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = Dx?.Condition;
+                Condition uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = CQMCommon_2_2_000.Instance.GetCondition(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_);
+                CodeableConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_?.Code;
+                CqlConcept uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = this.Moderate_Injuries(context);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_(Extension @this)
                 {
-                    string nzzzzzzzzzzzzzzzzh_ = @this?.Url;
-                    FhirString nzzzzzzzzzzzzzzzzi_ = context.Operators.Convert<FhirString>(nzzzzzzzzzzzzzzzzh_);
-                    string nzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToString(context, nzzzzzzzzzzzzzzzzi_);
-                    bool? nzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(nzzzzzzzzzzzzzzzzj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = @this?.Url;
+                    FhirString vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_ = context.Operators.Convert<FhirString>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_);
+                    string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToString(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+                    bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Equal(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return nzzzzzzzzzzzzzzzzk_;
+                    return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
                 };
-                IEnumerable<Extension> mzzzzzzzzzzzzzzzzs_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), mzzzzzzzzzzzzzzzzr_);
-                object mzzzzzzzzzzzzzzzzt_(Extension @this)
+                        : default), vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_);
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_(Extension @this)
                 {
-                    DataType nzzzzzzzzzzzzzzzzl_ = @this?.Value;
+                    DataType vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_ = @this?.Value;
 
-                    return nzzzzzzzzzzzzzzzzl_;
+                    return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw_;
                 };
-                IEnumerable<object> mzzzzzzzzzzzzzzzzu_ = context.Operators.Select<Extension, object>(mzzzzzzzzzzzzzzzzs_, mzzzzzzzzzzzzzzzzt_);
-                object mzzzzzzzzzzzzzzzzv_ = context.Operators.SingletonFrom<object>(mzzzzzzzzzzzzzzzzu_);
-                CqlConcept mzzzzzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mzzzzzzzzzzzzzzzzv_ as CodeableConcept);
-                CqlValueSet mzzzzzzzzzzzzzzzzx_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                bool? mzzzzzzzzzzzzzzzzy_ = context.Operators.ConceptInValueSet(mzzzzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzzzzx_);
-                bool? mzzzzzzzzzzzzzzzzz_(Extension @this)
+                IEnumerable<object> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = context.Operators.Select<Extension, object>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_);
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<object>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+                CqlConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ as CodeableConcept);
+                CqlValueSet vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.ConceptInValueSet(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzh_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_(Extension @this)
                 {
-                    string nzzzzzzzzzzzzzzzzm_ = @this?.Url;
-                    FhirString nzzzzzzzzzzzzzzzzn_ = context.Operators.Convert<FhirString>(nzzzzzzzzzzzzzzzzm_);
-                    string nzzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToString(context, nzzzzzzzzzzzzzzzzn_);
-                    bool? nzzzzzzzzzzzzzzzzp_ = context.Operators.Equal(nzzzzzzzzzzzzzzzzo_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+                    string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_ = @this?.Url;
+                    FhirString vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_ = context.Operators.Convert<FhirString>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx_);
+                    string vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToString(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzy_);
+                    bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_ = context.Operators.Equal(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-                    return nzzzzzzzzzzzzzzzzp_;
+                    return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzza_;
                 };
-                IEnumerable<Extension> nzzzzzzzzzzzzzzzza_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
+                IEnumerable<Extension> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Dx is Element
                         ? (Dx as Element).Extension
-                        : default), mzzzzzzzzzzzzzzzzz_);
-                object nzzzzzzzzzzzzzzzzb_(Extension @this)
+                        : default), vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_);
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_(Extension @this)
                 {
-                    DataType nzzzzzzzzzzzzzzzzq_ = @this?.Value;
+                    DataType wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_ = @this?.Value;
 
-                    return nzzzzzzzzzzzzzzzzq_;
+                    return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_;
                 };
-                IEnumerable<object> nzzzzzzzzzzzzzzzzc_ = context.Operators.Select<Extension, object>(nzzzzzzzzzzzzzzzza_, nzzzzzzzzzzzzzzzzb_);
-                object nzzzzzzzzzzzzzzzzd_ = context.Operators.SingletonFrom<object>(nzzzzzzzzzzzzzzzzc_);
-                CqlConcept nzzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nzzzzzzzzzzzzzzzzd_ as CodeableConcept);
-                bool? nzzzzzzzzzzzzzzzzf_ = context.Operators.Or(mzzzzzzzzzzzzzzzzy_, (bool?)(nzzzzzzzzzzzzzzzze_ is null));
-                bool? nzzzzzzzzzzzzzzzzg_ = context.Operators.And(mzzzzzzzzzzzzzzzzq_, nzzzzzzzzzzzzzzzzf_);
+                IEnumerable<object> vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Select<Extension, object>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
+                object vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<object>(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_);
+                CqlConcept vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ as CodeableConcept);
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.Or(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_, (bool?)(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ is null));
+                bool? vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.And(vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzb_, vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-                return nzzzzzzzzzzzzzzzzg_;
+                return vzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
             };
-            IEnumerable<Encounter.DiagnosisComponent> mzzzzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)mzzzzzzzzzzzzzzzzh_, mzzzzzzzzzzzzzzzzi_);
-            bool? mzzzzzzzzzzzzzzzzk_ = context.Operators.Exists<Encounter.DiagnosisComponent>(mzzzzzzzzzzzzzzzzj_);
+            IEnumerable<Encounter.DiagnosisComponent> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzt_);
+            bool? uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_ = context.Operators.Exists<Encounter.DiagnosisComponent>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzu_);
 
-            return mzzzzzzzzzzzzzzzzk_;
+            return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv_;
         };
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzzg_ = context.Operators.Where<Encounter>(mzzzzzzzzzzzzzzzze_, mzzzzzzzzzzzzzzzzf_);
+        IEnumerable<Encounter> uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter>(uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_, uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_);
 
-        return mzzzzzzzzzzzzzzzzg_;
+        return uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
-        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzr_ = this.Encounter_where_a_Fall_and_Major_Injury_Occurred(context);
-        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzs_ = this.Encounter_where_a_Fall_and_Moderate_Injury_Occurred(context);
-        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzt_ = context.Operators.Union<Encounter>(nzzzzzzzzzzzzzzzzr_, nzzzzzzzzzzzzzzzzs_);
+        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_ = this.Encounter_where_a_Fall_and_Major_Injury_Occurred(context);
+        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_ = this.Encounter_where_a_Fall_and_Moderate_Injury_Occurred(context);
+        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_ = context.Operators.Union<Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzc_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzd_);
 
-        return nzzzzzzzzzzzzzzzzt_;
+        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Denominator Observation")]
     public int? Denominator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
-        CqlInterval<CqlDateTime> nzzzzzzzzzzzzzzzzu_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-        CqlDateTime nzzzzzzzzzzzzzzzzv_ = context.Operators.Start(nzzzzzzzzzzzzzzzzu_);
-        CqlDateTime nzzzzzzzzzzzzzzzzx_ = context.Operators.End(nzzzzzzzzzzzzzzzzu_);
-        int? nzzzzzzzzzzzzzzzzy_ = context.Operators.DurationBetween(nzzzzzzzzzzzzzzzzv_, nzzzzzzzzzzzzzzzzx_, "day");
+        CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+        CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_ = context.Operators.Start(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+        CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_ = context.Operators.End(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzf_);
+        int? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_ = context.Operators.DurationBetween(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzg_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi_, "day");
 
-        return nzzzzzzzzzzzzzzzzy_;
+        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Numerator Observation")]
     public int? Numerator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
-        IEnumerable<Encounter> nzzzzzzzzzzzzzzzzz_ = this.Encounter_where_a_Fall_and_Major_Injury_Occurred(context);
-        bool? ozzzzzzzzzzzzzzzza_(Encounter FallsEncounter)
+        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_ = this.Encounter_where_a_Fall_and_Major_Injury_Occurred(context);
+        bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_(Encounter FallsEncounter)
         {
-            Period ozzzzzzzzzzzzzzzzd_ = FallsEncounter?.Period;
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ozzzzzzzzzzzzzzzzd_);
-            CqlDateTime ozzzzzzzzzzzzzzzzf_ = context.Operators.End(ozzzzzzzzzzzzzzzze_);
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzg_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-            bool? ozzzzzzzzzzzzzzzzh_ = context.Operators.In<CqlDateTime>(ozzzzzzzzzzzzzzzzf_, ozzzzzzzzzzzzzzzzg_, default);
+            Period wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_ = FallsEncounter?.Period;
+            CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzo_);
+            CqlDateTime wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_ = context.Operators.End(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzp_);
+            CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+            bool? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_ = context.Operators.In<CqlDateTime>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzq_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzr_, default);
 
-            return ozzzzzzzzzzzzzzzzh_;
+            return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzs_;
         };
-        IEnumerable<Encounter> ozzzzzzzzzzzzzzzzb_ = context.Operators.Where<Encounter>(nzzzzzzzzzzzzzzzzz_, ozzzzzzzzzzzzzzzza_);
-        int? ozzzzzzzzzzzzzzzzc_ = context.Operators.Count<Encounter>(ozzzzzzzzzzzzzzzzb_);
+        IEnumerable<Encounter> wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_ = context.Operators.Where<Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk_, wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzl_);
+        int? wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_ = context.Operators.Count<Encounter>(wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzm_);
 
-        return ozzzzzzzzzzzzzzzzc_;
+        return wzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzn_;
     }
 
 

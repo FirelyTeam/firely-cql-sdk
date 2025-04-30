@@ -33,10 +33,10 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context)
     {
-        (CqlTupleMetadata, string result1, string result2)? jzzzzzf_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
-        (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? jzzzzzg_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", jzzzzzf_);
+        (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
+        (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
 
-        return jzzzzzg_;
+        return b_;
     }
 
 

@@ -268,7 +268,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
 
     [CqlCodeDefinition("Best corrected visual acuity (observable entity)", codeId: "419775003", codeSystem: "http://snomed.info/sct")]
     public CqlCode Best_corrected_visual_acuity__observable_entity_(CqlContext _) => _Best_corrected_visual_acuity__observable_entity_;
-    private static readonly CqlCode _Best_corrected_visual_acuity__observable_entity_ = new CqlCode("419775003", "http://snomed.info/sct", default, default);
+    private static readonly CqlCode _Best_corrected_visual_acuity__observable_entity_ = new CqlCode("419775003", "http://snomed.info/sct");
 
     #endregion Codes
 
@@ -276,7 +276,9 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
 
     [CqlCodeSystemDefinition("SNOMEDCT")]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem _SNOMEDCT = new CqlCodeSystem();
+    private static readonly CqlCodeSystem _SNOMEDCT =
+      new CqlCodeSystem("http://snomed.info/sct", null,
+          _Best_corrected_visual_acuity__observable_entity_);
 
     #endregion CodeSystems
 
@@ -285,12 +287,12 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime ozzzzzzzzzzzzzzzzi_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime ozzzzzzzzzzzzzzzzj_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzk_ = context.Operators.Interval(ozzzzzzzzzzzzzzzzi_, ozzzzzzzzzzzzzzzzj_, true, true);
-        object ozzzzzzzzzzzzzzzzl_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", ozzzzzzzzzzzzzzzzk_);
+        CqlDateTime pzzzzzzzzzzzzj_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime pzzzzzzzzzzzzk_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> pzzzzzzzzzzzzl_ = context.Operators.Interval(pzzzzzzzzzzzzj_, pzzzzzzzzzzzzk_, true, true);
+        object pzzzzzzzzzzzzm_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", pzzzzzzzzzzzzl_);
 
-        return (CqlInterval<CqlDateTime>)ozzzzzzzzzzzzzzzzl_;
+        return (CqlInterval<CqlDateTime>)pzzzzzzzzzzzzm_;
     }
 
 
@@ -301,375 +303,375 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> ozzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient ozzzzzzzzzzzzzzzzn_ = context.Operators.SingletonFrom<Patient>(ozzzzzzzzzzzzzzzzm_);
+        IEnumerable<Patient> pzzzzzzzzzzzzn_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient pzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<Patient>(pzzzzzzzzzzzzn_);
 
-        return ozzzzzzzzzzzzzzzzn_;
+        return pzzzzzzzzzzzzo_;
     }
 
 
     [CqlExpressionDefinition("Cataract Surgery Between January and September of Measurement Period")]
     public IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context)
     {
-        CqlValueSet ozzzzzzzzzzzzzzzzo_ = this.Cataract_Surgery(context);
-        IEnumerable<Procedure> ozzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ozzzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        bool? ozzzzzzzzzzzzzzzzq_(Procedure CataractSurgery)
+        CqlValueSet pzzzzzzzzzzzzp_ = this.Cataract_Surgery(context);
+        IEnumerable<Procedure> pzzzzzzzzzzzzq_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, pzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        bool? pzzzzzzzzzzzzr_(Procedure CataractSurgery)
         {
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzs_ = this.Measurement_Period(context);
-            DataType ozzzzzzzzzzzzzzzzt_ = CataractSurgery?.Performed;
-            object ozzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzt_);
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, ozzzzzzzzzzzzzzzzu_);
-            bool? ozzzzzzzzzzzzzzzzw_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ozzzzzzzzzzzzzzzzs_, ozzzzzzzzzzzzzzzzv_, default);
-            object ozzzzzzzzzzzzzzzzy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ozzzzzzzzzzzzzzzzt_);
-            CqlInterval<CqlDateTime> ozzzzzzzzzzzzzzzzz_ = QICoreCommon_2_1_000.Instance.toInterval(context, ozzzzzzzzzzzzzzzzy_);
-            CqlDateTime pzzzzzzzzzzzzzzzza_ = context.Operators.Start(ozzzzzzzzzzzzzzzzz_);
-            CqlDateTime pzzzzzzzzzzzzzzzzc_ = context.Operators.End(ozzzzzzzzzzzzzzzzs_);
-            CqlQuantity pzzzzzzzzzzzzzzzzd_ = context.Operators.Quantity(92m, "days");
-            CqlDateTime pzzzzzzzzzzzzzzzze_ = context.Operators.Subtract(pzzzzzzzzzzzzzzzzc_, pzzzzzzzzzzzzzzzzd_);
-            bool? pzzzzzzzzzzzzzzzzf_ = context.Operators.SameOrBefore(pzzzzzzzzzzzzzzzza_, pzzzzzzzzzzzzzzzze_, default);
-            bool? pzzzzzzzzzzzzzzzzg_ = context.Operators.And(ozzzzzzzzzzzzzzzzw_, pzzzzzzzzzzzzzzzzf_);
-            Code<EventStatus> pzzzzzzzzzzzzzzzzh_ = CataractSurgery?.StatusElement;
-            EventStatus? pzzzzzzzzzzzzzzzzi_ = pzzzzzzzzzzzzzzzzh_?.Value;
-            string pzzzzzzzzzzzzzzzzj_ = context.Operators.Convert<string>(pzzzzzzzzzzzzzzzzi_);
-            bool? pzzzzzzzzzzzzzzzzk_ = context.Operators.Equal(pzzzzzzzzzzzzzzzzj_, "completed");
-            bool? pzzzzzzzzzzzzzzzzl_ = context.Operators.And(pzzzzzzzzzzzzzzzzg_, pzzzzzzzzzzzzzzzzk_);
+            CqlInterval<CqlDateTime> pzzzzzzzzzzzzt_ = this.Measurement_Period(context);
+            DataType pzzzzzzzzzzzzu_ = CataractSurgery?.Performed;
+            object pzzzzzzzzzzzzv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzu_);
+            CqlInterval<CqlDateTime> pzzzzzzzzzzzzw_ = QICoreCommon_2_1_000.Instance.toInterval(context, pzzzzzzzzzzzzv_);
+            bool? pzzzzzzzzzzzzx_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(pzzzzzzzzzzzzt_, pzzzzzzzzzzzzw_, default);
+            object pzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, pzzzzzzzzzzzzu_);
+            CqlInterval<CqlDateTime> qzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.toInterval(context, pzzzzzzzzzzzzz_);
+            CqlDateTime qzzzzzzzzzzzzb_ = context.Operators.Start(qzzzzzzzzzzzza_);
+            CqlDateTime qzzzzzzzzzzzzd_ = context.Operators.End(pzzzzzzzzzzzzt_);
+            CqlQuantity qzzzzzzzzzzzze_ = context.Operators.Quantity(92m, "days");
+            CqlDateTime qzzzzzzzzzzzzf_ = context.Operators.Subtract(qzzzzzzzzzzzzd_, qzzzzzzzzzzzze_);
+            bool? qzzzzzzzzzzzzg_ = context.Operators.SameOrBefore(qzzzzzzzzzzzzb_, qzzzzzzzzzzzzf_, default);
+            bool? qzzzzzzzzzzzzh_ = context.Operators.And(pzzzzzzzzzzzzx_, qzzzzzzzzzzzzg_);
+            Code<EventStatus> qzzzzzzzzzzzzi_ = CataractSurgery?.StatusElement;
+            EventStatus? qzzzzzzzzzzzzj_ = qzzzzzzzzzzzzi_?.Value;
+            string qzzzzzzzzzzzzk_ = context.Operators.Convert<string>(qzzzzzzzzzzzzj_);
+            bool? qzzzzzzzzzzzzl_ = context.Operators.Equal(qzzzzzzzzzzzzk_, "completed");
+            bool? qzzzzzzzzzzzzm_ = context.Operators.And(qzzzzzzzzzzzzh_, qzzzzzzzzzzzzl_);
 
-            return pzzzzzzzzzzzzzzzzl_;
+            return qzzzzzzzzzzzzm_;
         };
-        IEnumerable<Procedure> ozzzzzzzzzzzzzzzzr_ = context.Operators.Where<Procedure>(ozzzzzzzzzzzzzzzzp_, ozzzzzzzzzzzzzzzzq_);
+        IEnumerable<Procedure> pzzzzzzzzzzzzs_ = context.Operators.Where<Procedure>(pzzzzzzzzzzzzq_, pzzzzzzzzzzzzr_);
 
-        return ozzzzzzzzzzzzzzzzr_;
+        return pzzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Procedure> Initial_Population(CqlContext context)
     {
-        IEnumerable<Procedure> pzzzzzzzzzzzzzzzzm_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
-        bool? pzzzzzzzzzzzzzzzzn_(Procedure CataractSurgeryPerformed)
+        IEnumerable<Procedure> qzzzzzzzzzzzzn_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+        bool? qzzzzzzzzzzzzo_(Procedure CataractSurgeryPerformed)
         {
-            Patient pzzzzzzzzzzzzzzzzp_ = this.Patient(context);
-            Date pzzzzzzzzzzzzzzzzq_ = pzzzzzzzzzzzzzzzzp_?.BirthDateElement;
-            string pzzzzzzzzzzzzzzzzr_ = pzzzzzzzzzzzzzzzzq_?.Value;
-            CqlDate pzzzzzzzzzzzzzzzzs_ = context.Operators.ConvertStringToDate(pzzzzzzzzzzzzzzzzr_);
-            CqlInterval<CqlDateTime> pzzzzzzzzzzzzzzzzt_ = this.Measurement_Period(context);
-            CqlDateTime pzzzzzzzzzzzzzzzzu_ = context.Operators.Start(pzzzzzzzzzzzzzzzzt_);
-            CqlDate pzzzzzzzzzzzzzzzzv_ = context.Operators.DateFrom(pzzzzzzzzzzzzzzzzu_);
-            int? pzzzzzzzzzzzzzzzzw_ = context.Operators.CalculateAgeAt(pzzzzzzzzzzzzzzzzs_, pzzzzzzzzzzzzzzzzv_, "year");
-            bool? pzzzzzzzzzzzzzzzzx_ = context.Operators.GreaterOrEqual(pzzzzzzzzzzzzzzzzw_, 18);
+            Patient qzzzzzzzzzzzzq_ = this.Patient(context);
+            Date qzzzzzzzzzzzzr_ = qzzzzzzzzzzzzq_?.BirthDateElement;
+            string qzzzzzzzzzzzzs_ = qzzzzzzzzzzzzr_?.Value;
+            CqlDate qzzzzzzzzzzzzt_ = context.Operators.ConvertStringToDate(qzzzzzzzzzzzzs_);
+            CqlInterval<CqlDateTime> qzzzzzzzzzzzzu_ = this.Measurement_Period(context);
+            CqlDateTime qzzzzzzzzzzzzv_ = context.Operators.Start(qzzzzzzzzzzzzu_);
+            CqlDate qzzzzzzzzzzzzw_ = context.Operators.DateFrom(qzzzzzzzzzzzzv_);
+            int? qzzzzzzzzzzzzx_ = context.Operators.CalculateAgeAt(qzzzzzzzzzzzzt_, qzzzzzzzzzzzzw_, "year");
+            bool? qzzzzzzzzzzzzy_ = context.Operators.GreaterOrEqual(qzzzzzzzzzzzzx_, 18);
 
-            return pzzzzzzzzzzzzzzzzx_;
+            return qzzzzzzzzzzzzy_;
         };
-        IEnumerable<Procedure> pzzzzzzzzzzzzzzzzo_ = context.Operators.Where<Procedure>(pzzzzzzzzzzzzzzzzm_, pzzzzzzzzzzzzzzzzn_);
+        IEnumerable<Procedure> qzzzzzzzzzzzzp_ = context.Operators.Where<Procedure>(qzzzzzzzzzzzzn_, qzzzzzzzzzzzzo_);
 
-        return pzzzzzzzzzzzzzzzzo_;
+        return qzzzzzzzzzzzzp_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Procedure> Denominator(CqlContext context)
     {
-        IEnumerable<Procedure> pzzzzzzzzzzzzzzzzy_ = this.Initial_Population(context);
+        IEnumerable<Procedure> qzzzzzzzzzzzzz_ = this.Initial_Population(context);
 
-        return pzzzzzzzzzzzzzzzzy_;
+        return qzzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Procedure> Denominator_Exclusions(CqlContext context)
     {
-        IEnumerable<Procedure> pzzzzzzzzzzzzzzzzz_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
-        IEnumerable<Procedure> qzzzzzzzzzzzzzzzza_(Procedure CataractSurgeryPerformed)
+        IEnumerable<Procedure> rzzzzzzzzzzzza_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+        IEnumerable<Procedure> rzzzzzzzzzzzzb_(Procedure CataractSurgeryPerformed)
         {
-            CqlValueSet qzzzzzzzzzzzzzzzzc_ = this.Acute_and_Subacute_Iridocyclitis(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet qzzzzzzzzzzzzzzzze_ = this.Amblyopia(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzg_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzd_, qzzzzzzzzzzzzzzzzf_);
-            CqlValueSet qzzzzzzzzzzzzzzzzh_ = this.Burn_Confined_to_Eye_and_Adnexa(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet qzzzzzzzzzzzzzzzzj_ = this.Cataract_Secondary_to_Ocular_Disorders(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzl_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzi_, qzzzzzzzzzzzzzzzzk_);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzm_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzg_, qzzzzzzzzzzzzzzzzl_);
-            CqlValueSet qzzzzzzzzzzzzzzzzn_ = this.Cataract_Congenital(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet qzzzzzzzzzzzzzzzzp_ = this.Cataract_Mature_or_Hypermature(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzr_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzo_, qzzzzzzzzzzzzzzzzq_);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzs_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzm_, qzzzzzzzzzzzzzzzzr_);
-            CqlValueSet qzzzzzzzzzzzzzzzzt_ = this.Cataract_Posterior_Polar(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet qzzzzzzzzzzzzzzzzv_ = this.Central_Corneal_Ulcer(context);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzx_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzu_, qzzzzzzzzzzzzzzzzw_);
-            IEnumerable<Condition> qzzzzzzzzzzzzzzzzy_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzs_, qzzzzzzzzzzzzzzzzx_);
-            CqlValueSet qzzzzzzzzzzzzzzzzz_ = this.Certain_Types_of_Iridocyclitis(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, qzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet rzzzzzzzzzzzzzzzzb_ = this.Choroidal_Degenerations(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzd_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzza_, rzzzzzzzzzzzzzzzzc_);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzze_ = context.Operators.Union<Condition>(qzzzzzzzzzzzzzzzzy_, rzzzzzzzzzzzzzzzzd_);
-            CqlValueSet rzzzzzzzzzzzzzzzzf_ = this.Choroidal_Detachment(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet rzzzzzzzzzzzzzzzzh_ = this.Choroidal_Hemorrhage_and_Rupture(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzj_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzg_, rzzzzzzzzzzzzzzzzi_);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzk_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzze_, rzzzzzzzzzzzzzzzzj_);
-            CqlValueSet rzzzzzzzzzzzzzzzzl_ = this.Chronic_Iridocyclitis(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet rzzzzzzzzzzzzzzzzn_ = this.Cloudy_Cornea(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzp_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzm_, rzzzzzzzzzzzzzzzzo_);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzq_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzk_, rzzzzzzzzzzzzzzzzp_);
-            CqlValueSet rzzzzzzzzzzzzzzzzr_ = this.Corneal_Edema(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet rzzzzzzzzzzzzzzzzt_ = this.Disorders_of_Cornea_Including_Corneal_Opacity(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzv_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzs_, rzzzzzzzzzzzzzzzzu_);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzw_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzq_, rzzzzzzzzzzzzzzzzv_);
-            CqlValueSet rzzzzzzzzzzzzzzzzx_ = this.Degeneration_of_Macula_and_Posterior_Pole(context);
-            IEnumerable<Condition> rzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet rzzzzzzzzzzzzzzzzz_ = this.Degenerative_Disorders_of_Globe(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzb_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzy_, szzzzzzzzzzzzzzzza_);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzc_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzzzzzw_, szzzzzzzzzzzzzzzzb_);
-            CqlValueSet szzzzzzzzzzzzzzzzd_ = this.Diabetic_Macular_Edema(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet szzzzzzzzzzzzzzzzf_ = this.Diabetic_Retinopathy(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzh_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzze_, szzzzzzzzzzzzzzzzg_);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzi_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzc_, szzzzzzzzzzzzzzzzh_);
-            CqlValueSet szzzzzzzzzzzzzzzzj_ = this.Disorders_of_Optic_Chiasm(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet szzzzzzzzzzzzzzzzl_ = this.Disorders_of_Visual_Cortex(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzn_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzk_, szzzzzzzzzzzzzzzzm_);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzo_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzi_, szzzzzzzzzzzzzzzzn_);
-            CqlValueSet szzzzzzzzzzzzzzzzp_ = this.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet szzzzzzzzzzzzzzzzr_ = this.Focal_Chorioretinitis_and_Focal_Retinochoroiditis(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzt_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzq_, szzzzzzzzzzzzzzzzs_);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzu_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzo_, szzzzzzzzzzzzzzzzt_);
-            CqlValueSet szzzzzzzzzzzzzzzzv_ = this.Glaucoma(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet szzzzzzzzzzzzzzzzx_ = this.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(context);
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> szzzzzzzzzzzzzzzzz_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzw_, szzzzzzzzzzzzzzzzy_);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzza_ = context.Operators.Union<Condition>(szzzzzzzzzzzzzzzzu_, szzzzzzzzzzzzzzzzz_);
-            CqlValueSet tzzzzzzzzzzzzzzzzb_ = this.Hereditary_Choroidal_Dystrophies(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet tzzzzzzzzzzzzzzzzd_ = this.Hereditary_Corneal_Dystrophies(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzf_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzc_, tzzzzzzzzzzzzzzzze_);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzg_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzza_, tzzzzzzzzzzzzzzzzf_);
-            CqlValueSet tzzzzzzzzzzzzzzzzh_ = this.Hereditary_Retinal_Dystrophies(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet tzzzzzzzzzzzzzzzzj_ = this.Hypotony_of_Eye(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzl_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzi_, tzzzzzzzzzzzzzzzzk_);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzm_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzg_, tzzzzzzzzzzzzzzzzl_);
-            CqlValueSet tzzzzzzzzzzzzzzzzn_ = this.Injury_to_Optic_Nerve_and_Pathways(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet tzzzzzzzzzzzzzzzzp_ = this.Macular_Scar_of_Posterior_Polar(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzr_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzo_, tzzzzzzzzzzzzzzzzq_);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzs_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzm_, tzzzzzzzzzzzzzzzzr_);
-            CqlValueSet tzzzzzzzzzzzzzzzzt_ = this.Morgagnian_Cataract(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet tzzzzzzzzzzzzzzzzv_ = this.Nystagmus_and_Other_Irregular_Eye_Movements(context);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzx_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzu_, tzzzzzzzzzzzzzzzzw_);
-            IEnumerable<Condition> tzzzzzzzzzzzzzzzzy_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzs_, tzzzzzzzzzzzzzzzzx_);
-            CqlValueSet tzzzzzzzzzzzzzzzzz_ = this.Open_Wound_of_Eyeball(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet uzzzzzzzzzzzzzzzzb_ = this.Optic_Atrophy(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzd_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzza_, uzzzzzzzzzzzzzzzzc_);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzze_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzzzzzy_, uzzzzzzzzzzzzzzzzd_);
-            CqlValueSet uzzzzzzzzzzzzzzzzf_ = this.Optic_Neuritis(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet uzzzzzzzzzzzzzzzzh_ = this.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzj_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzg_, uzzzzzzzzzzzzzzzzi_);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzk_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzze_, uzzzzzzzzzzzzzzzzj_);
-            CqlValueSet uzzzzzzzzzzzzzzzzl_ = this.Other_Background_Retinopathy_and_Retinal_Vascular_Changes(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet uzzzzzzzzzzzzzzzzn_ = this.Other_Disorders_of_Optic_Nerve(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzp_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzm_, uzzzzzzzzzzzzzzzzo_);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzq_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzk_, uzzzzzzzzzzzzzzzzp_);
-            CqlValueSet uzzzzzzzzzzzzzzzzr_ = this.Other_Endophthalmitis(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet uzzzzzzzzzzzzzzzzt_ = this.Other_Proliferative_Retinopathy(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzv_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzs_, uzzzzzzzzzzzzzzzzu_);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzw_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzq_, uzzzzzzzzzzzzzzzzv_);
-            CqlValueSet uzzzzzzzzzzzzzzzzx_ = this.Pathologic_Myopia(context);
-            IEnumerable<Condition> uzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet uzzzzzzzzzzzzzzzzz_ = this.Posterior_Lenticonus(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzb_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzy_, vzzzzzzzzzzzzzzzza_);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzc_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzzzzzw_, vzzzzzzzzzzzzzzzzb_);
-            CqlValueSet vzzzzzzzzzzzzzzzzd_ = this.Prior_Penetrating_Keratoplasty(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet vzzzzzzzzzzzzzzzzf_ = this.Purulent_Endophthalmitis(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzh_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzze_, vzzzzzzzzzzzzzzzzg_);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzi_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzc_, vzzzzzzzzzzzzzzzzh_);
-            CqlValueSet vzzzzzzzzzzzzzzzzj_ = this.Retinal_Detachment_with_Retinal_Defect(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzk_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet vzzzzzzzzzzzzzzzzl_ = this.Retinal_Vascular_Occlusion(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzn_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzk_, vzzzzzzzzzzzzzzzzm_);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzo_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzi_, vzzzzzzzzzzzzzzzzn_);
-            CqlValueSet vzzzzzzzzzzzzzzzzp_ = this.Retrolental_Fibroplasias(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzq_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet vzzzzzzzzzzzzzzzzr_ = this.Scleritis(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzt_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzq_, vzzzzzzzzzzzzzzzzs_);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzu_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzo_, vzzzzzzzzzzzzzzzzt_);
-            CqlValueSet vzzzzzzzzzzzzzzzzv_ = this.Separation_of_Retinal_Layers(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzw_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet vzzzzzzzzzzzzzzzzx_ = this.Traumatic_Cataract(context);
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzzzzzx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> vzzzzzzzzzzzzzzzzz_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzw_, vzzzzzzzzzzzzzzzzy_);
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzza_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzzzzzu_, vzzzzzzzzzzzzzzzzz_);
-            CqlValueSet wzzzzzzzzzzzzzzzzb_ = this.Uveitis(context);
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            CqlValueSet wzzzzzzzzzzzzzzzzd_ = this.Vascular_Disorders_of_Iris_and_Ciliary_Body(context);
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzf_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzzzzzc_, wzzzzzzzzzzzzzzzze_);
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzg_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzzzzza_, wzzzzzzzzzzzzzzzzf_);
-            CqlValueSet wzzzzzzzzzzzzzzzzh_ = this.Visual_Field_Defects(context);
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzi_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzzzzzh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzj_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzzzzzg_, wzzzzzzzzzzzzzzzzi_);
-            bool? wzzzzzzzzzzzzzzzzk_(Condition ComorbidDiagnosis)
+            CqlValueSet rzzzzzzzzzzzzd_ = this.Acute_and_Subacute_Iridocyclitis(context);
+            IEnumerable<Condition> rzzzzzzzzzzzze_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet rzzzzzzzzzzzzf_ = this.Amblyopia(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> rzzzzzzzzzzzzh_ = context.Operators.Union<Condition>(rzzzzzzzzzzzze_, rzzzzzzzzzzzzg_);
+            CqlValueSet rzzzzzzzzzzzzi_ = this.Burn_Confined_to_Eye_and_Adnexa(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet rzzzzzzzzzzzzk_ = this.Cataract_Secondary_to_Ocular_Disorders(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzl_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> rzzzzzzzzzzzzm_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzj_, rzzzzzzzzzzzzl_);
+            IEnumerable<Condition> rzzzzzzzzzzzzn_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzh_, rzzzzzzzzzzzzm_);
+            CqlValueSet rzzzzzzzzzzzzo_ = this.Cataract_Congenital(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzp_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet rzzzzzzzzzzzzq_ = this.Cataract_Mature_or_Hypermature(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzr_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> rzzzzzzzzzzzzs_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzp_, rzzzzzzzzzzzzr_);
+            IEnumerable<Condition> rzzzzzzzzzzzzt_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzn_, rzzzzzzzzzzzzs_);
+            CqlValueSet rzzzzzzzzzzzzu_ = this.Cataract_Posterior_Polar(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet rzzzzzzzzzzzzw_ = this.Central_Corneal_Ulcer(context);
+            IEnumerable<Condition> rzzzzzzzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> rzzzzzzzzzzzzy_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzv_, rzzzzzzzzzzzzx_);
+            IEnumerable<Condition> rzzzzzzzzzzzzz_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzt_, rzzzzzzzzzzzzy_);
+            CqlValueSet szzzzzzzzzzzza_ = this.Certain_Types_of_Iridocyclitis(context);
+            IEnumerable<Condition> szzzzzzzzzzzzb_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet szzzzzzzzzzzzc_ = this.Choroidal_Degenerations(context);
+            IEnumerable<Condition> szzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> szzzzzzzzzzzze_ = context.Operators.Union<Condition>(szzzzzzzzzzzzb_, szzzzzzzzzzzzd_);
+            IEnumerable<Condition> szzzzzzzzzzzzf_ = context.Operators.Union<Condition>(rzzzzzzzzzzzzz_, szzzzzzzzzzzze_);
+            CqlValueSet szzzzzzzzzzzzg_ = this.Choroidal_Detachment(context);
+            IEnumerable<Condition> szzzzzzzzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet szzzzzzzzzzzzi_ = this.Choroidal_Hemorrhage_and_Rupture(context);
+            IEnumerable<Condition> szzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> szzzzzzzzzzzzk_ = context.Operators.Union<Condition>(szzzzzzzzzzzzh_, szzzzzzzzzzzzj_);
+            IEnumerable<Condition> szzzzzzzzzzzzl_ = context.Operators.Union<Condition>(szzzzzzzzzzzzf_, szzzzzzzzzzzzk_);
+            CqlValueSet szzzzzzzzzzzzm_ = this.Chronic_Iridocyclitis(context);
+            IEnumerable<Condition> szzzzzzzzzzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet szzzzzzzzzzzzo_ = this.Cloudy_Cornea(context);
+            IEnumerable<Condition> szzzzzzzzzzzzp_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> szzzzzzzzzzzzq_ = context.Operators.Union<Condition>(szzzzzzzzzzzzn_, szzzzzzzzzzzzp_);
+            IEnumerable<Condition> szzzzzzzzzzzzr_ = context.Operators.Union<Condition>(szzzzzzzzzzzzl_, szzzzzzzzzzzzq_);
+            CqlValueSet szzzzzzzzzzzzs_ = this.Corneal_Edema(context);
+            IEnumerable<Condition> szzzzzzzzzzzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet szzzzzzzzzzzzu_ = this.Disorders_of_Cornea_Including_Corneal_Opacity(context);
+            IEnumerable<Condition> szzzzzzzzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> szzzzzzzzzzzzw_ = context.Operators.Union<Condition>(szzzzzzzzzzzzt_, szzzzzzzzzzzzv_);
+            IEnumerable<Condition> szzzzzzzzzzzzx_ = context.Operators.Union<Condition>(szzzzzzzzzzzzr_, szzzzzzzzzzzzw_);
+            CqlValueSet szzzzzzzzzzzzy_ = this.Degeneration_of_Macula_and_Posterior_Pole(context);
+            IEnumerable<Condition> szzzzzzzzzzzzz_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, szzzzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet tzzzzzzzzzzzza_ = this.Degenerative_Disorders_of_Globe(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzb_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> tzzzzzzzzzzzzc_ = context.Operators.Union<Condition>(szzzzzzzzzzzzz_, tzzzzzzzzzzzzb_);
+            IEnumerable<Condition> tzzzzzzzzzzzzd_ = context.Operators.Union<Condition>(szzzzzzzzzzzzx_, tzzzzzzzzzzzzc_);
+            CqlValueSet tzzzzzzzzzzzze_ = this.Diabetic_Macular_Edema(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet tzzzzzzzzzzzzg_ = this.Diabetic_Retinopathy(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> tzzzzzzzzzzzzi_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzf_, tzzzzzzzzzzzzh_);
+            IEnumerable<Condition> tzzzzzzzzzzzzj_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzd_, tzzzzzzzzzzzzi_);
+            CqlValueSet tzzzzzzzzzzzzk_ = this.Disorders_of_Optic_Chiasm(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzl_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet tzzzzzzzzzzzzm_ = this.Disorders_of_Visual_Cortex(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> tzzzzzzzzzzzzo_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzl_, tzzzzzzzzzzzzn_);
+            IEnumerable<Condition> tzzzzzzzzzzzzp_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzj_, tzzzzzzzzzzzzo_);
+            CqlValueSet tzzzzzzzzzzzzq_ = this.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzr_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet tzzzzzzzzzzzzs_ = this.Focal_Chorioretinitis_and_Focal_Retinochoroiditis(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> tzzzzzzzzzzzzu_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzr_, tzzzzzzzzzzzzt_);
+            IEnumerable<Condition> tzzzzzzzzzzzzv_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzp_, tzzzzzzzzzzzzu_);
+            CqlValueSet tzzzzzzzzzzzzw_ = this.Glaucoma(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet tzzzzzzzzzzzzy_ = this.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(context);
+            IEnumerable<Condition> tzzzzzzzzzzzzz_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, tzzzzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> uzzzzzzzzzzzza_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzx_, tzzzzzzzzzzzzz_);
+            IEnumerable<Condition> uzzzzzzzzzzzzb_ = context.Operators.Union<Condition>(tzzzzzzzzzzzzv_, uzzzzzzzzzzzza_);
+            CqlValueSet uzzzzzzzzzzzzc_ = this.Hereditary_Choroidal_Dystrophies(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet uzzzzzzzzzzzze_ = this.Hereditary_Corneal_Dystrophies(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> uzzzzzzzzzzzzg_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzd_, uzzzzzzzzzzzzf_);
+            IEnumerable<Condition> uzzzzzzzzzzzzh_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzb_, uzzzzzzzzzzzzg_);
+            CqlValueSet uzzzzzzzzzzzzi_ = this.Hereditary_Retinal_Dystrophies(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet uzzzzzzzzzzzzk_ = this.Hypotony_of_Eye(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzl_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> uzzzzzzzzzzzzm_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzj_, uzzzzzzzzzzzzl_);
+            IEnumerable<Condition> uzzzzzzzzzzzzn_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzh_, uzzzzzzzzzzzzm_);
+            CqlValueSet uzzzzzzzzzzzzo_ = this.Injury_to_Optic_Nerve_and_Pathways(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzp_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet uzzzzzzzzzzzzq_ = this.Macular_Scar_of_Posterior_Polar(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzr_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> uzzzzzzzzzzzzs_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzp_, uzzzzzzzzzzzzr_);
+            IEnumerable<Condition> uzzzzzzzzzzzzt_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzn_, uzzzzzzzzzzzzs_);
+            CqlValueSet uzzzzzzzzzzzzu_ = this.Morgagnian_Cataract(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet uzzzzzzzzzzzzw_ = this.Nystagmus_and_Other_Irregular_Eye_Movements(context);
+            IEnumerable<Condition> uzzzzzzzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, uzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> uzzzzzzzzzzzzy_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzv_, uzzzzzzzzzzzzx_);
+            IEnumerable<Condition> uzzzzzzzzzzzzz_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzt_, uzzzzzzzzzzzzy_);
+            CqlValueSet vzzzzzzzzzzzza_ = this.Open_Wound_of_Eyeball(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzb_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet vzzzzzzzzzzzzc_ = this.Optic_Atrophy(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> vzzzzzzzzzzzze_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzb_, vzzzzzzzzzzzzd_);
+            IEnumerable<Condition> vzzzzzzzzzzzzf_ = context.Operators.Union<Condition>(uzzzzzzzzzzzzz_, vzzzzzzzzzzzze_);
+            CqlValueSet vzzzzzzzzzzzzg_ = this.Optic_Neuritis(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet vzzzzzzzzzzzzi_ = this.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> vzzzzzzzzzzzzk_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzh_, vzzzzzzzzzzzzj_);
+            IEnumerable<Condition> vzzzzzzzzzzzzl_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzf_, vzzzzzzzzzzzzk_);
+            CqlValueSet vzzzzzzzzzzzzm_ = this.Other_Background_Retinopathy_and_Retinal_Vascular_Changes(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet vzzzzzzzzzzzzo_ = this.Other_Disorders_of_Optic_Nerve(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzp_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> vzzzzzzzzzzzzq_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzn_, vzzzzzzzzzzzzp_);
+            IEnumerable<Condition> vzzzzzzzzzzzzr_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzl_, vzzzzzzzzzzzzq_);
+            CqlValueSet vzzzzzzzzzzzzs_ = this.Other_Endophthalmitis(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet vzzzzzzzzzzzzu_ = this.Other_Proliferative_Retinopathy(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzv_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> vzzzzzzzzzzzzw_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzt_, vzzzzzzzzzzzzv_);
+            IEnumerable<Condition> vzzzzzzzzzzzzx_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzr_, vzzzzzzzzzzzzw_);
+            CqlValueSet vzzzzzzzzzzzzy_ = this.Pathologic_Myopia(context);
+            IEnumerable<Condition> vzzzzzzzzzzzzz_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, vzzzzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet wzzzzzzzzzzzza_ = this.Posterior_Lenticonus(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzb_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzza_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> wzzzzzzzzzzzzc_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzz_, wzzzzzzzzzzzzb_);
+            IEnumerable<Condition> wzzzzzzzzzzzzd_ = context.Operators.Union<Condition>(vzzzzzzzzzzzzx_, wzzzzzzzzzzzzc_);
+            CqlValueSet wzzzzzzzzzzzze_ = this.Prior_Penetrating_Keratoplasty(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet wzzzzzzzzzzzzg_ = this.Purulent_Endophthalmitis(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzh_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> wzzzzzzzzzzzzi_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzf_, wzzzzzzzzzzzzh_);
+            IEnumerable<Condition> wzzzzzzzzzzzzj_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzd_, wzzzzzzzzzzzzi_);
+            CqlValueSet wzzzzzzzzzzzzk_ = this.Retinal_Detachment_with_Retinal_Defect(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzl_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet wzzzzzzzzzzzzm_ = this.Retinal_Vascular_Occlusion(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> wzzzzzzzzzzzzo_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzl_, wzzzzzzzzzzzzn_);
+            IEnumerable<Condition> wzzzzzzzzzzzzp_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzj_, wzzzzzzzzzzzzo_);
+            CqlValueSet wzzzzzzzzzzzzq_ = this.Retrolental_Fibroplasias(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzr_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet wzzzzzzzzzzzzs_ = this.Scleritis(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzt_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> wzzzzzzzzzzzzu_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzr_, wzzzzzzzzzzzzt_);
+            IEnumerable<Condition> wzzzzzzzzzzzzv_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzp_, wzzzzzzzzzzzzu_);
+            CqlValueSet wzzzzzzzzzzzzw_ = this.Separation_of_Retinal_Layers(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzx_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet wzzzzzzzzzzzzy_ = this.Traumatic_Cataract(context);
+            IEnumerable<Condition> wzzzzzzzzzzzzz_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, wzzzzzzzzzzzzy_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> xzzzzzzzzzzzza_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzx_, wzzzzzzzzzzzzz_);
+            IEnumerable<Condition> xzzzzzzzzzzzzb_ = context.Operators.Union<Condition>(wzzzzzzzzzzzzv_, xzzzzzzzzzzzza_);
+            CqlValueSet xzzzzzzzzzzzzc_ = this.Uveitis(context);
+            IEnumerable<Condition> xzzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, xzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            CqlValueSet xzzzzzzzzzzzze_ = this.Vascular_Disorders_of_Iris_and_Ciliary_Body(context);
+            IEnumerable<Condition> xzzzzzzzzzzzzf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, xzzzzzzzzzzzze_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> xzzzzzzzzzzzzg_ = context.Operators.Union<Condition>(xzzzzzzzzzzzzd_, xzzzzzzzzzzzzf_);
+            IEnumerable<Condition> xzzzzzzzzzzzzh_ = context.Operators.Union<Condition>(xzzzzzzzzzzzzb_, xzzzzzzzzzzzzg_);
+            CqlValueSet xzzzzzzzzzzzzi_ = this.Visual_Field_Defects(context);
+            IEnumerable<Condition> xzzzzzzzzzzzzj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, xzzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+            IEnumerable<Condition> xzzzzzzzzzzzzk_ = context.Operators.Union<Condition>(xzzzzzzzzzzzzh_, xzzzzzzzzzzzzj_);
+            bool? xzzzzzzzzzzzzl_(Condition ComorbidDiagnosis)
             {
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ComorbidDiagnosis);
-                DataType wzzzzzzzzzzzzzzzzp_ = CataractSurgeryPerformed?.Performed;
-                object wzzzzzzzzzzzzzzzzq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, wzzzzzzzzzzzzzzzzp_);
-                CqlInterval<CqlDateTime> wzzzzzzzzzzzzzzzzr_ = QICoreCommon_2_1_000.Instance.toInterval(context, wzzzzzzzzzzzzzzzzq_);
-                bool? wzzzzzzzzzzzzzzzzs_ = context.Operators.OverlapsBefore(wzzzzzzzzzzzzzzzzo_, wzzzzzzzzzzzzzzzzr_, default);
-                bool? wzzzzzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.isActive(context, ComorbidDiagnosis);
-                bool? wzzzzzzzzzzzzzzzzu_ = context.Operators.And(wzzzzzzzzzzzzzzzzs_, wzzzzzzzzzzzzzzzzt_);
+                CqlInterval<CqlDateTime> xzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ComorbidDiagnosis);
+                DataType xzzzzzzzzzzzzq_ = CataractSurgeryPerformed?.Performed;
+                object xzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzq_);
+                CqlInterval<CqlDateTime> xzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzr_);
+                bool? xzzzzzzzzzzzzt_ = context.Operators.OverlapsBefore(xzzzzzzzzzzzzp_, xzzzzzzzzzzzzs_, default);
+                bool? xzzzzzzzzzzzzu_ = QICoreCommon_2_1_000.Instance.isActive(context, ComorbidDiagnosis);
+                bool? xzzzzzzzzzzzzv_ = context.Operators.And(xzzzzzzzzzzzzt_, xzzzzzzzzzzzzu_);
 
-                return wzzzzzzzzzzzzzzzzu_;
+                return xzzzzzzzzzzzzv_;
             };
-            IEnumerable<Condition> wzzzzzzzzzzzzzzzzl_ = context.Operators.Where<Condition>(wzzzzzzzzzzzzzzzzj_, wzzzzzzzzzzzzzzzzk_);
-            Procedure wzzzzzzzzzzzzzzzzm_(Condition ComorbidDiagnosis) =>
+            IEnumerable<Condition> xzzzzzzzzzzzzm_ = context.Operators.Where<Condition>(xzzzzzzzzzzzzk_, xzzzzzzzzzzzzl_);
+            Procedure xzzzzzzzzzzzzn_(Condition ComorbidDiagnosis) =>
                 CataractSurgeryPerformed;
-            IEnumerable<Procedure> wzzzzzzzzzzzzzzzzn_ = context.Operators.Select<Condition, Procedure>(wzzzzzzzzzzzzzzzzl_, wzzzzzzzzzzzzzzzzm_);
+            IEnumerable<Procedure> xzzzzzzzzzzzzo_ = context.Operators.Select<Condition, Procedure>(xzzzzzzzzzzzzm_, xzzzzzzzzzzzzn_);
 
-            return wzzzzzzzzzzzzzzzzn_;
+            return xzzzzzzzzzzzzo_;
         };
-        IEnumerable<Procedure> qzzzzzzzzzzzzzzzzb_ = context.Operators.SelectMany<Procedure, Procedure>(pzzzzzzzzzzzzzzzzz_, qzzzzzzzzzzzzzzzza_);
+        IEnumerable<Procedure> rzzzzzzzzzzzzc_ = context.Operators.SelectMany<Procedure, Procedure>(rzzzzzzzzzzzza_, rzzzzzzzzzzzzb_);
 
-        return qzzzzzzzzzzzzzzzzb_;
+        return rzzzzzzzzzzzzc_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Procedure> Numerator(CqlContext context)
     {
-        IEnumerable<Procedure> wzzzzzzzzzzzzzzzzv_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
-        IEnumerable<Procedure> wzzzzzzzzzzzzzzzzw_(Procedure CataractSurgeryPerformed)
+        IEnumerable<Procedure> xzzzzzzzzzzzzw_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+        IEnumerable<Procedure> xzzzzzzzzzzzzx_(Procedure CataractSurgeryPerformed)
         {
-            CqlCode wzzzzzzzzzzzzzzzzy_ = this.Best_corrected_visual_acuity__observable_entity_(context);
-            IEnumerable<CqlCode> wzzzzzzzzzzzzzzzzz_ = context.Operators.ToList<CqlCode>(wzzzzzzzzzzzzzzzzy_);
-            IEnumerable<Observation> xzzzzzzzzzzzzzzzza_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, wzzzzzzzzzzzzzzzzz_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-            CqlValueSet xzzzzzzzzzzzzzzzzb_ = this.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(context);
-            IEnumerable<Observation> xzzzzzzzzzzzzzzzzc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, xzzzzzzzzzzzzzzzzb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-            IEnumerable<Observation> xzzzzzzzzzzzzzzzzd_ = context.Operators.Union<Observation>(xzzzzzzzzzzzzzzzza_, xzzzzzzzzzzzzzzzzc_);
-            bool? xzzzzzzzzzzzzzzzze_(Observation VisualAcuityExamPerformed)
+            CqlCode xzzzzzzzzzzzzz_ = this.Best_corrected_visual_acuity__observable_entity_(context);
+            IEnumerable<CqlCode> yzzzzzzzzzzzza_ = context.Operators.ToList<CqlCode>(xzzzzzzzzzzzzz_);
+            IEnumerable<Observation> yzzzzzzzzzzzzb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, yzzzzzzzzzzzza_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+            CqlValueSet yzzzzzzzzzzzzc_ = this.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(context);
+            IEnumerable<Observation> yzzzzzzzzzzzzd_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, yzzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+            IEnumerable<Observation> yzzzzzzzzzzzze_ = context.Operators.Union<Observation>(yzzzzzzzzzzzzb_, yzzzzzzzzzzzzd_);
+            bool? yzzzzzzzzzzzzf_(Observation VisualAcuityExamPerformed)
             {
-                DataType xzzzzzzzzzzzzzzzzi_ = VisualAcuityExamPerformed?.Effective;
-                object xzzzzzzzzzzzzzzzzj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzi_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzk_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzzzzzj_);
-                CqlDateTime xzzzzzzzzzzzzzzzzl_ = context.Operators.Start(xzzzzzzzzzzzzzzzzk_);
-                DataType xzzzzzzzzzzzzzzzzm_ = CataractSurgeryPerformed?.Performed;
-                object xzzzzzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzo_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzzzzzn_);
-                CqlDateTime xzzzzzzzzzzzzzzzzp_ = context.Operators.End(xzzzzzzzzzzzzzzzzo_);
-                object xzzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzs_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzzzzzr_);
-                CqlDateTime xzzzzzzzzzzzzzzzzt_ = context.Operators.End(xzzzzzzzzzzzzzzzzs_);
-                CqlQuantity xzzzzzzzzzzzzzzzzu_ = context.Operators.Quantity(90m, "days");
-                CqlDateTime xzzzzzzzzzzzzzzzzv_ = context.Operators.Add(xzzzzzzzzzzzzzzzzt_, xzzzzzzzzzzzzzzzzu_);
-                CqlInterval<CqlDateTime> xzzzzzzzzzzzzzzzzw_ = context.Operators.Interval(xzzzzzzzzzzzzzzzzp_, xzzzzzzzzzzzzzzzzv_, false, true);
-                bool? xzzzzzzzzzzzzzzzzx_ = context.Operators.In<CqlDateTime>(xzzzzzzzzzzzzzzzzl_, xzzzzzzzzzzzzzzzzw_, "day");
-                object xzzzzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, xzzzzzzzzzzzzzzzzm_);
-                CqlInterval<CqlDateTime> yzzzzzzzzzzzzzzzza_ = QICoreCommon_2_1_000.Instance.toInterval(context, xzzzzzzzzzzzzzzzzz_);
-                CqlDateTime yzzzzzzzzzzzzzzzzb_ = context.Operators.End(yzzzzzzzzzzzzzzzza_);
-                bool? yzzzzzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(yzzzzzzzzzzzzzzzzb_ is null));
-                bool? yzzzzzzzzzzzzzzzzd_ = context.Operators.And(xzzzzzzzzzzzzzzzzx_, yzzzzzzzzzzzzzzzzc_);
-                Code<ObservationStatus> yzzzzzzzzzzzzzzzze_ = VisualAcuityExamPerformed?.StatusElement;
-                ObservationStatus? yzzzzzzzzzzzzzzzzf_ = yzzzzzzzzzzzzzzzze_?.Value;
-                Code<ObservationStatus> yzzzzzzzzzzzzzzzzg_ = context.Operators.Convert<Code<ObservationStatus>>(yzzzzzzzzzzzzzzzzf_);
-                string yzzzzzzzzzzzzzzzzh_ = context.Operators.Convert<string>(yzzzzzzzzzzzzzzzzg_);
-                string[] yzzzzzzzzzzzzzzzzi_ = [
+                DataType yzzzzzzzzzzzzj_ = VisualAcuityExamPerformed?.Effective;
+                object yzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzj_);
+                CqlInterval<CqlDateTime> yzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, yzzzzzzzzzzzzk_);
+                CqlDateTime yzzzzzzzzzzzzm_ = context.Operators.Start(yzzzzzzzzzzzzl_);
+                DataType yzzzzzzzzzzzzn_ = CataractSurgeryPerformed?.Performed;
+                object yzzzzzzzzzzzzo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzn_);
+                CqlInterval<CqlDateTime> yzzzzzzzzzzzzp_ = QICoreCommon_2_1_000.Instance.toInterval(context, yzzzzzzzzzzzzo_);
+                CqlDateTime yzzzzzzzzzzzzq_ = context.Operators.End(yzzzzzzzzzzzzp_);
+                object yzzzzzzzzzzzzs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzn_);
+                CqlInterval<CqlDateTime> yzzzzzzzzzzzzt_ = QICoreCommon_2_1_000.Instance.toInterval(context, yzzzzzzzzzzzzs_);
+                CqlDateTime yzzzzzzzzzzzzu_ = context.Operators.End(yzzzzzzzzzzzzt_);
+                CqlQuantity yzzzzzzzzzzzzv_ = context.Operators.Quantity(90m, "days");
+                CqlDateTime yzzzzzzzzzzzzw_ = context.Operators.Add(yzzzzzzzzzzzzu_, yzzzzzzzzzzzzv_);
+                CqlInterval<CqlDateTime> yzzzzzzzzzzzzx_ = context.Operators.Interval(yzzzzzzzzzzzzq_, yzzzzzzzzzzzzw_, false, true);
+                bool? yzzzzzzzzzzzzy_ = context.Operators.In<CqlDateTime>(yzzzzzzzzzzzzm_, yzzzzzzzzzzzzx_, "day");
+                object zzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzn_);
+                CqlInterval<CqlDateTime> zzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.toInterval(context, zzzzzzzzzzzzza_);
+                CqlDateTime zzzzzzzzzzzzzc_ = context.Operators.End(zzzzzzzzzzzzzb_);
+                bool? zzzzzzzzzzzzzd_ = context.Operators.Not((bool?)(zzzzzzzzzzzzzc_ is null));
+                bool? zzzzzzzzzzzzze_ = context.Operators.And(yzzzzzzzzzzzzy_, zzzzzzzzzzzzzd_);
+                Code<ObservationStatus> zzzzzzzzzzzzzf_ = VisualAcuityExamPerformed?.StatusElement;
+                ObservationStatus? zzzzzzzzzzzzzg_ = zzzzzzzzzzzzzf_?.Value;
+                Code<ObservationStatus> zzzzzzzzzzzzzh_ = context.Operators.Convert<Code<ObservationStatus>>(zzzzzzzzzzzzzg_);
+                string zzzzzzzzzzzzzi_ = context.Operators.Convert<string>(zzzzzzzzzzzzzh_);
+                string[] zzzzzzzzzzzzzj_ = [
                     "final",
                     "amended",
                     "corrected",
                     "preliminary",
                 ];
-                bool? yzzzzzzzzzzzzzzzzj_ = context.Operators.In<string>(yzzzzzzzzzzzzzzzzh_, yzzzzzzzzzzzzzzzzi_ as IEnumerable<string>);
-                bool? yzzzzzzzzzzzzzzzzk_ = context.Operators.And(yzzzzzzzzzzzzzzzzd_, yzzzzzzzzzzzzzzzzj_);
-                DataType yzzzzzzzzzzzzzzzzl_ = VisualAcuityExamPerformed?.Value;
-                object yzzzzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, yzzzzzzzzzzzzzzzzl_);
-                CqlValueSet yzzzzzzzzzzzzzzzzn_ = this.Visual_Acuity_20_40_or_Better(context);
-                bool? yzzzzzzzzzzzzzzzzo_ = context.Operators.ConceptInValueSet(yzzzzzzzzzzzzzzzzm_ as CqlConcept, yzzzzzzzzzzzzzzzzn_);
-                bool? yzzzzzzzzzzzzzzzzp_ = context.Operators.And(yzzzzzzzzzzzzzzzzk_, yzzzzzzzzzzzzzzzzo_);
+                bool? zzzzzzzzzzzzzk_ = context.Operators.In<string>(zzzzzzzzzzzzzi_, zzzzzzzzzzzzzj_ as IEnumerable<string>);
+                bool? zzzzzzzzzzzzzl_ = context.Operators.And(zzzzzzzzzzzzze_, zzzzzzzzzzzzzk_);
+                DataType zzzzzzzzzzzzzm_ = VisualAcuityExamPerformed?.Value;
+                object zzzzzzzzzzzzzn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, zzzzzzzzzzzzzm_);
+                CqlValueSet zzzzzzzzzzzzzo_ = this.Visual_Acuity_20_40_or_Better(context);
+                bool? zzzzzzzzzzzzzp_ = context.Operators.ConceptInValueSet(zzzzzzzzzzzzzn_ as CqlConcept, zzzzzzzzzzzzzo_);
+                bool? zzzzzzzzzzzzzq_ = context.Operators.And(zzzzzzzzzzzzzl_, zzzzzzzzzzzzzp_);
 
-                return yzzzzzzzzzzzzzzzzp_;
+                return zzzzzzzzzzzzzq_;
             };
-            IEnumerable<Observation> xzzzzzzzzzzzzzzzzf_ = context.Operators.Where<Observation>(xzzzzzzzzzzzzzzzzd_, xzzzzzzzzzzzzzzzze_);
-            Procedure xzzzzzzzzzzzzzzzzg_(Observation VisualAcuityExamPerformed) =>
+            IEnumerable<Observation> yzzzzzzzzzzzzg_ = context.Operators.Where<Observation>(yzzzzzzzzzzzze_, yzzzzzzzzzzzzf_);
+            Procedure yzzzzzzzzzzzzh_(Observation VisualAcuityExamPerformed) =>
                 CataractSurgeryPerformed;
-            IEnumerable<Procedure> xzzzzzzzzzzzzzzzzh_ = context.Operators.Select<Observation, Procedure>(xzzzzzzzzzzzzzzzzf_, xzzzzzzzzzzzzzzzzg_);
+            IEnumerable<Procedure> yzzzzzzzzzzzzi_ = context.Operators.Select<Observation, Procedure>(yzzzzzzzzzzzzg_, yzzzzzzzzzzzzh_);
 
-            return xzzzzzzzzzzzzzzzzh_;
+            return yzzzzzzzzzzzzi_;
         };
-        IEnumerable<Procedure> wzzzzzzzzzzzzzzzzx_ = context.Operators.SelectMany<Procedure, Procedure>(wzzzzzzzzzzzzzzzzv_, wzzzzzzzzzzzzzzzzw_);
+        IEnumerable<Procedure> xzzzzzzzzzzzzy_ = context.Operators.SelectMany<Procedure, Procedure>(xzzzzzzzzzzzzw_, xzzzzzzzzzzzzx_);
 
-        return wzzzzzzzzzzzzzzzzx_;
+        return xzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? yzzzzzzzzzzzzzzzzq_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? zzzzzzzzzzzzzr_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
-        return yzzzzzzzzzzzzzzzzq_;
+        return zzzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> yzzzzzzzzzzzzzzzzr_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> zzzzzzzzzzzzzs_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
-        return yzzzzzzzzzzzzzzzzr_;
+        return zzzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? yzzzzzzzzzzzzzzzzs_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? zzzzzzzzzzzzzt_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
-        return yzzzzzzzzzzzzzzzzs_;
+        return zzzzzzzzzzzzzt_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode yzzzzzzzzzzzzzzzzt_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode zzzzzzzzzzzzzu_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
-        return yzzzzzzzzzzzzzzzzt_;
+        return zzzzzzzzzzzzzu_;
     }
 
 

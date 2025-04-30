@@ -22,30 +22,12 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(codeSystem))
             {
-                if (_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
-                {
-                    var initMembers = codes
-                        .SelectToArray(coding =>
-                                           Expression.New(
-                                               ConstructorInfos.CqlCode,
-                                               Expression.Constant(coding.code),
-                                               Expression.Constant(coding.system),
-                                               NullExpression.String,
-                                               NullExpression.String
-                                           ));
-                    var codesArgs = codes.SelectToArray(c => (c.code!, c.system!));
-                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlExpressions.ParameterExpression);
-                    var codesys = new CqlCodeSystemDefinition(lambda, codeSystem.name!, codesArgs);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, codesys);
-                }
-                else
-                {
-                    var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                    var lambda = Expression.Lambda(newArray, CqlExpressions.ParameterExpression);
-                    var codesys = new CqlCodeSystemDefinition(lambda, codeSystem.name!, []);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, codesys);
-                }
+                if (!_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+                    codes = [];
+
+                var cqlCodeSystem = new CqlCodeSystem(codeSystem.id, codeSystem.version, codes);
+                var cqlCodeSystemDefinition = new CqlCodeSystemDefinition(codeSystem.name!, cqlCodeSystem);
+                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, cqlCodeSystemDefinition);
             }
         });
 
@@ -111,19 +93,10 @@ partial class ExpressionBuilderContext
                     throw this.NewExpressionBuildingException(
                         $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})", null);
 
-                var systemCode = new CqlCode(codeDef.id, csUrl);
-                _libraryContext.AddCode(codeDef, systemCode);
-
-                var newCodingExpression = Expression.New(
-                    ConstructorInfos.CqlCode,
-                    Expression.Constant(codeDef.id),
-                    Expression.Constant(csUrl),
-                    NullExpression.String,
-                    NullExpression.String!
-                );
-                var lambda = Expression.Lambda(newCodingExpression, CqlExpressions.ParameterExpression);
-                var codDef = new CqlCodeDefinition(lambda, codeDef.name!, codeDef.id, csUrl);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeDef.name!, codDef);
+                var cqlCode = new CqlCode(codeDef.id, csUrl);
+                _libraryContext.AddCode(codeDef, cqlCode);
+                var cqlCodeDefinition = new CqlCodeDefinition(codeDef.name, cqlCode);
+                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeDef.name, cqlCodeDefinition);
             }
         });
 
@@ -200,7 +173,7 @@ partial class ExpressionBuilderContext
                 }
 
                 if (function?.operand != null &&
-                    _libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryVersionedIdentifier, expressionDefName, functionParameterTypes))
+                    _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, expressionDefName, functionParameterTypes))
                 {
                     var ops = function.operand
                                       .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
@@ -256,7 +229,7 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(parameter))
             {
-                if (_libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryVersionedIdentifier, parameter.name!))
+                if (_libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, parameter.name!))
                     throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}",
                                                               null);
 

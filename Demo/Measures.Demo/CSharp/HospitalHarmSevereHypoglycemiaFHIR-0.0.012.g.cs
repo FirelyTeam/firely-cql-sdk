@@ -64,7 +64,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 
     [CqlCodeDefinition("Birth date", codeId: "21112-8", codeSystem: "http://loinc.org")]
     public CqlCode Birth_date(CqlContext _) => _Birth_date;
-    private static readonly CqlCode _Birth_date = new CqlCode("21112-8", "http://loinc.org", default, default);
+    private static readonly CqlCode _Birth_date = new CqlCode("21112-8", "http://loinc.org");
 
     #endregion Codes
 
@@ -72,7 +72,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 
     [CqlCodeSystemDefinition("LOINC")]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem _LOINC = new CqlCodeSystem();
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null,
+          _Birth_date);
 
     #endregion CodeSystems
 
@@ -81,12 +83,12 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime ezzzzzzzzzzzzzzzf_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime ezzzzzzzzzzzzzzzg_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzh_ = context.Operators.Interval(ezzzzzzzzzzzzzzzf_, ezzzzzzzzzzzzzzzg_, true, false);
-        object ezzzzzzzzzzzzzzzi_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", ezzzzzzzzzzzzzzzh_);
+        CqlDateTime uzzzzzzw_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime uzzzzzzx_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> uzzzzzzy_ = context.Operators.Interval(uzzzzzzw_, uzzzzzzx_, true, false);
+        object uzzzzzzz_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", uzzzzzzy_);
 
-        return (CqlInterval<CqlDateTime>)ezzzzzzzzzzzzzzzi_;
+        return (CqlInterval<CqlDateTime>)uzzzzzzz_;
     }
 
 
@@ -97,353 +99,353 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> ezzzzzzzzzzzzzzzj_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient ezzzzzzzzzzzzzzzk_ = context.Operators.SingletonFrom<Patient>(ezzzzzzzzzzzzzzzj_);
+        IEnumerable<Patient> vzzzzzza_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient vzzzzzzb_ = context.Operators.SingletonFrom<Patient>(vzzzzzza_);
 
-        return ezzzzzzzzzzzzzzzk_;
+        return vzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> ezzzzzzzzzzzzzzzl_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> vzzzzzzc_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
-        return ezzzzzzzzzzzzzzzl_;
+        return vzzzzzzc_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
-        IEnumerable<Coding> ezzzzzzzzzzzzzzzm_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
+        IEnumerable<Coding> vzzzzzzd_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
-        return ezzzzzzzzzzzzzzzm_;
+        return vzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode ezzzzzzzzzzzzzzzn_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+        CqlCode vzzzzzze_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
-        return ezzzzzzzzzzzzzzzn_;
+        return vzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context)
     {
-        CqlValueSet ezzzzzzzzzzzzzzzo_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ezzzzzzzzzzzzzzzo_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        bool? ezzzzzzzzzzzzzzzq_(Encounter EncounterInpatient)
+        CqlValueSet vzzzzzzf_ = this.Encounter_Inpatient(context);
+        IEnumerable<Encounter> vzzzzzzg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, vzzzzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        bool? vzzzzzzh_(Encounter EncounterInpatient)
         {
-            Code<Encounter.EncounterStatus> ezzzzzzzzzzzzzzzs_ = EncounterInpatient?.StatusElement;
-            string ezzzzzzzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, ezzzzzzzzzzzzzzzs_);
-            bool? ezzzzzzzzzzzzzzzu_ = context.Operators.Equal(ezzzzzzzzzzzzzzzt_, "finished");
-            Period ezzzzzzzzzzzzzzzv_ = EncounterInpatient?.Period;
-            CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ezzzzzzzzzzzzzzzv_);
-            CqlDateTime ezzzzzzzzzzzzzzzx_ = context.Operators.End(ezzzzzzzzzzzzzzzw_);
-            CqlInterval<CqlDateTime> ezzzzzzzzzzzzzzzy_ = this.Measurement_Period(context);
-            bool? ezzzzzzzzzzzzzzzz_ = context.Operators.In<CqlDateTime>(ezzzzzzzzzzzzzzzx_, ezzzzzzzzzzzzzzzy_, default);
-            bool? fzzzzzzzzzzzzzzza_ = context.Operators.And(ezzzzzzzzzzzzzzzu_, ezzzzzzzzzzzzzzzz_);
+            Code<Encounter.EncounterStatus> vzzzzzzj_ = EncounterInpatient?.StatusElement;
+            string vzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, vzzzzzzj_);
+            bool? vzzzzzzl_ = context.Operators.Equal(vzzzzzzk_, "finished");
+            Period vzzzzzzm_ = EncounterInpatient?.Period;
+            CqlInterval<CqlDateTime> vzzzzzzn_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, vzzzzzzm_);
+            CqlDateTime vzzzzzzo_ = context.Operators.End(vzzzzzzn_);
+            CqlInterval<CqlDateTime> vzzzzzzp_ = this.Measurement_Period(context);
+            bool? vzzzzzzq_ = context.Operators.In<CqlDateTime>(vzzzzzzo_, vzzzzzzp_, default);
+            bool? vzzzzzzr_ = context.Operators.And(vzzzzzzl_, vzzzzzzq_);
 
-            return fzzzzzzzzzzzzzzza_;
+            return vzzzzzzr_;
         };
-        IEnumerable<Encounter> ezzzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter>(ezzzzzzzzzzzzzzzp_, ezzzzzzzzzzzzzzzq_);
+        IEnumerable<Encounter> vzzzzzzi_ = context.Operators.Where<Encounter>(vzzzzzzg_, vzzzzzzh_);
 
-        return ezzzzzzzzzzzzzzzr_;
+        return vzzzzzzi_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> fzzzzzzzzzzzzzzzb_ = this.Inpatient_Encounter_During_Measurement_Period(context);
-        bool? fzzzzzzzzzzzzzzzc_(Encounter InpatientEncounter)
+        IEnumerable<Encounter> vzzzzzzs_ = this.Inpatient_Encounter_During_Measurement_Period(context);
+        bool? vzzzzzzt_(Encounter InpatientEncounter)
         {
-            Patient fzzzzzzzzzzzzzzze_ = this.Patient(context);
-            Date fzzzzzzzzzzzzzzzf_ = fzzzzzzzzzzzzzzze_?.BirthDateElement;
-            string fzzzzzzzzzzzzzzzg_ = fzzzzzzzzzzzzzzzf_?.Value;
-            CqlDateTime fzzzzzzzzzzzzzzzh_ = context.Operators.ConvertStringToDateTime(fzzzzzzzzzzzzzzzg_);
-            CqlInterval<CqlDateTime> fzzzzzzzzzzzzzzzi_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-            CqlDateTime fzzzzzzzzzzzzzzzj_ = context.Operators.Start(fzzzzzzzzzzzzzzzi_);
-            int? fzzzzzzzzzzzzzzzk_ = context.Operators.CalculateAgeAt(fzzzzzzzzzzzzzzzh_, fzzzzzzzzzzzzzzzj_, "year");
-            bool? fzzzzzzzzzzzzzzzl_ = context.Operators.GreaterOrEqual(fzzzzzzzzzzzzzzzk_, 18);
+            Patient vzzzzzzv_ = this.Patient(context);
+            Date vzzzzzzw_ = vzzzzzzv_?.BirthDateElement;
+            string vzzzzzzx_ = vzzzzzzw_?.Value;
+            CqlDateTime vzzzzzzy_ = context.Operators.ConvertStringToDateTime(vzzzzzzx_);
+            CqlInterval<CqlDateTime> vzzzzzzz_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+            CqlDateTime wzzzzzza_ = context.Operators.Start(vzzzzzzz_);
+            int? wzzzzzzb_ = context.Operators.CalculateAgeAt(vzzzzzzy_, wzzzzzza_, "year");
+            bool? wzzzzzzc_ = context.Operators.GreaterOrEqual(wzzzzzzb_, 18);
 
-            return fzzzzzzzzzzzzzzzl_;
+            return wzzzzzzc_;
         };
-        IEnumerable<Encounter> fzzzzzzzzzzzzzzzd_ = context.Operators.Where<Encounter>(fzzzzzzzzzzzzzzzb_, fzzzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> vzzzzzzu_ = context.Operators.Where<Encounter>(vzzzzzzs_, vzzzzzzt_);
 
-        return fzzzzzzzzzzzzzzzd_;
+        return vzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Hypoglycemic Medication Administration")]
     public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
     {
-        CqlValueSet fzzzzzzzzzzzzzzzm_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-        IEnumerable<MedicationAdministration> fzzzzzzzzzzzzzzzn_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, fzzzzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-        IEnumerable<MedicationAdministration> fzzzzzzzzzzzzzzzp_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, fzzzzzzzzzzzzzzzm_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-        IEnumerable<MedicationAdministration> fzzzzzzzzzzzzzzzq_ = context.Operators.Union<MedicationAdministration>(fzzzzzzzzzzzzzzzn_, fzzzzzzzzzzzzzzzp_);
-        bool? fzzzzzzzzzzzzzzzr_(MedicationAdministration HypoMedication)
+        CqlValueSet wzzzzzzd_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+        IEnumerable<MedicationAdministration> wzzzzzze_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, wzzzzzzd_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+        IEnumerable<MedicationAdministration> wzzzzzzg_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, wzzzzzzd_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+        IEnumerable<MedicationAdministration> wzzzzzzh_ = context.Operators.Union<MedicationAdministration>(wzzzzzze_, wzzzzzzg_);
+        bool? wzzzzzzi_(MedicationAdministration HypoMedication)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> fzzzzzzzzzzzzzzzt_ = HypoMedication?.StatusElement;
-            string fzzzzzzzzzzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToString(context, fzzzzzzzzzzzzzzzt_);
-            bool? fzzzzzzzzzzzzzzzv_ = context.Operators.Equal(fzzzzzzzzzzzzzzzu_, "completed");
-            string fzzzzzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, fzzzzzzzzzzzzzzzt_);
-            bool? fzzzzzzzzzzzzzzzy_ = context.Operators.Equal(fzzzzzzzzzzzzzzzx_, "not-done");
-            bool? fzzzzzzzzzzzzzzzz_ = context.Operators.Not(fzzzzzzzzzzzzzzzy_);
-            bool? gzzzzzzzzzzzzzzza_ = context.Operators.And(fzzzzzzzzzzzzzzzv_, fzzzzzzzzzzzzzzzz_);
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> wzzzzzzk_ = HypoMedication?.StatusElement;
+            string wzzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToString(context, wzzzzzzk_);
+            bool? wzzzzzzm_ = context.Operators.Equal(wzzzzzzl_, "completed");
+            string wzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToString(context, wzzzzzzk_);
+            bool? wzzzzzzp_ = context.Operators.Equal(wzzzzzzo_, "not-done");
+            bool? wzzzzzzq_ = context.Operators.Not(wzzzzzzp_);
+            bool? wzzzzzzr_ = context.Operators.And(wzzzzzzm_, wzzzzzzq_);
 
-            return gzzzzzzzzzzzzzzza_;
+            return wzzzzzzr_;
         };
-        IEnumerable<MedicationAdministration> fzzzzzzzzzzzzzzzs_ = context.Operators.Where<MedicationAdministration>(fzzzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzzzr_);
+        IEnumerable<MedicationAdministration> wzzzzzzj_ = context.Operators.Where<MedicationAdministration>(wzzzzzzh_, wzzzzzzi_);
 
-        return fzzzzzzzzzzzzzzzs_;
+        return wzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Qualifying Encounter with Hypoglycemic Medication Administration")]
     public IEnumerable<Encounter> Qualifying_Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzb_ = this.Qualifying_Encounter(context);
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzc_(Encounter QualifyingEncounter)
+        IEnumerable<Encounter> wzzzzzzs_ = this.Qualifying_Encounter(context);
+        IEnumerable<Encounter> wzzzzzzt_(Encounter QualifyingEncounter)
         {
-            IEnumerable<MedicationAdministration> gzzzzzzzzzzzzzzze_ = this.Hypoglycemic_Medication_Administration(context);
-            bool? gzzzzzzzzzzzzzzzf_(MedicationAdministration HypoglycemicMedication)
+            IEnumerable<MedicationAdministration> wzzzzzzv_ = this.Hypoglycemic_Medication_Administration(context);
+            bool? wzzzzzzw_(MedicationAdministration HypoglycemicMedication)
             {
-                DataType gzzzzzzzzzzzzzzzj_ = HypoglycemicMedication?.Effective;
-                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, gzzzzzzzzzzzzzzzj_);
-                CqlDateTime gzzzzzzzzzzzzzzzl_ = context.Operators.Start(gzzzzzzzzzzzzzzzk_);
-                CqlInterval<CqlDateTime> gzzzzzzzzzzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                bool? gzzzzzzzzzzzzzzzn_ = context.Operators.In<CqlDateTime>(gzzzzzzzzzzzzzzzl_, gzzzzzzzzzzzzzzzm_, default);
+                DataType xzzzzzza_ = HypoglycemicMedication?.Effective;
+                CqlInterval<CqlDateTime> xzzzzzzb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, xzzzzzza_);
+                CqlDateTime xzzzzzzc_ = context.Operators.Start(xzzzzzzb_);
+                CqlInterval<CqlDateTime> xzzzzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                bool? xzzzzzze_ = context.Operators.In<CqlDateTime>(xzzzzzzc_, xzzzzzzd_, default);
 
-                return gzzzzzzzzzzzzzzzn_;
+                return xzzzzzze_;
             };
-            IEnumerable<MedicationAdministration> gzzzzzzzzzzzzzzzg_ = context.Operators.Where<MedicationAdministration>(gzzzzzzzzzzzzzzze_, gzzzzzzzzzzzzzzzf_);
-            Encounter gzzzzzzzzzzzzzzzh_(MedicationAdministration HypoglycemicMedication) =>
+            IEnumerable<MedicationAdministration> wzzzzzzx_ = context.Operators.Where<MedicationAdministration>(wzzzzzzv_, wzzzzzzw_);
+            Encounter wzzzzzzy_(MedicationAdministration HypoglycemicMedication) =>
                 QualifyingEncounter;
-            IEnumerable<Encounter> gzzzzzzzzzzzzzzzi_ = context.Operators.Select<MedicationAdministration, Encounter>(gzzzzzzzzzzzzzzzg_, gzzzzzzzzzzzzzzzh_);
+            IEnumerable<Encounter> wzzzzzzz_ = context.Operators.Select<MedicationAdministration, Encounter>(wzzzzzzx_, wzzzzzzy_);
 
-            return gzzzzzzzzzzzzzzzi_;
+            return wzzzzzzz_;
         };
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzd_ = context.Operators.SelectMany<Encounter, Encounter>(gzzzzzzzzzzzzzzzb_, gzzzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> wzzzzzzu_ = context.Operators.SelectMany<Encounter, Encounter>(wzzzzzzs_, wzzzzzzt_);
 
-        return gzzzzzzzzzzzzzzzd_;
+        return wzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzo_ = this.Qualifying_Encounter_with_Hypoglycemic_Medication_Administration(context);
+        IEnumerable<Encounter> xzzzzzzf_ = this.Qualifying_Encounter_with_Hypoglycemic_Medication_Administration(context);
 
-        return gzzzzzzzzzzzzzzzo_;
+        return xzzzzzzf_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzp_ = this.Initial_Population(context);
+        IEnumerable<Encounter> xzzzzzzg_ = this.Initial_Population(context);
 
-        return gzzzzzzzzzzzzzzzp_;
+        return xzzzzzzg_;
     }
 
 
     [CqlExpressionDefinition("Severe Hypoglycemic Harm Event")]
     public IEnumerable<Encounter> Severe_Hypoglycemic_Harm_Event(CqlContext context)
     {
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzq_ = this.Denominator(context);
-        bool? gzzzzzzzzzzzzzzzr_(Encounter QualifyingEncounter)
+        IEnumerable<Encounter> xzzzzzzh_ = this.Denominator(context);
+        bool? xzzzzzzi_(Encounter QualifyingEncounter)
         {
-            CqlValueSet gzzzzzzzzzzzzzzzt_ = this.Glucose_lab_test(context);
-            IEnumerable<Observation> gzzzzzzzzzzzzzzzu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, gzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-            IEnumerable<Observation> gzzzzzzzzzzzzzzzv_(Observation BloodGlucoseLab)
+            CqlValueSet xzzzzzzk_ = this.Glucose_lab_test(context);
+            IEnumerable<Observation> xzzzzzzl_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, xzzzzzzk_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<Observation> xzzzzzzm_(Observation BloodGlucoseLab)
             {
-                IEnumerable<MedicationAdministration> hzzzzzzzzzzzzzzzh_ = this.Hypoglycemic_Medication_Administration(context);
-                bool? hzzzzzzzzzzzzzzzi_(MedicationAdministration HypoglycemicMeds)
+                IEnumerable<MedicationAdministration> xzzzzzzy_ = this.Hypoglycemic_Medication_Administration(context);
+                bool? xzzzzzzz_(MedicationAdministration HypoglycemicMeds)
                 {
-                    DataType hzzzzzzzzzzzzzzzm_ = HypoglycemicMeds?.Effective;
-                    CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzzzzzzzzzzzzm_);
-                    CqlDateTime hzzzzzzzzzzzzzzzo_ = context.Operators.Start(hzzzzzzzzzzzzzzzn_);
-                    DataType hzzzzzzzzzzzzzzzp_ = BloodGlucoseLab?.Effective;
-                    CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzzzzzzzzzzzzp_);
-                    CqlDateTime hzzzzzzzzzzzzzzzr_ = context.Operators.Start(hzzzzzzzzzzzzzzzq_);
-                    CqlQuantity hzzzzzzzzzzzzzzzs_ = context.Operators.Quantity(24m, "hours");
-                    CqlDateTime hzzzzzzzzzzzzzzzt_ = context.Operators.Subtract(hzzzzzzzzzzzzzzzr_, hzzzzzzzzzzzzzzzs_);
-                    CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzv_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzzzzzzzzzzzzp_);
-                    CqlDateTime hzzzzzzzzzzzzzzzw_ = context.Operators.Start(hzzzzzzzzzzzzzzzv_);
-                    CqlInterval<CqlDateTime> hzzzzzzzzzzzzzzzx_ = context.Operators.Interval(hzzzzzzzzzzzzzzzt_, hzzzzzzzzzzzzzzzw_, true, true);
-                    bool? hzzzzzzzzzzzzzzzy_ = context.Operators.In<CqlDateTime>(hzzzzzzzzzzzzzzzo_, hzzzzzzzzzzzzzzzx_, default);
-                    CqlInterval<CqlDateTime> izzzzzzzzzzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzzzzzzzzzzzzp_);
-                    CqlDateTime izzzzzzzzzzzzzzzb_ = context.Operators.Start(izzzzzzzzzzzzzzza_);
-                    bool? izzzzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(izzzzzzzzzzzzzzzb_ is null));
-                    bool? izzzzzzzzzzzzzzzd_ = context.Operators.And(hzzzzzzzzzzzzzzzy_, izzzzzzzzzzzzzzzc_);
-                    Code<ObservationStatus> izzzzzzzzzzzzzzze_ = BloodGlucoseLab?.StatusElement;
-                    string izzzzzzzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, izzzzzzzzzzzzzzze_);
-                    bool? izzzzzzzzzzzzzzzg_ = context.Operators.Equal(izzzzzzzzzzzzzzzf_, "final");
-                    bool? izzzzzzzzzzzzzzzh_ = context.Operators.And(izzzzzzzzzzzzzzzd_, izzzzzzzzzzzzzzzg_);
-                    string izzzzzzzzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, izzzzzzzzzzzzzzze_);
-                    bool? izzzzzzzzzzzzzzzk_ = context.Operators.Equal(izzzzzzzzzzzzzzzj_, "cancelled");
-                    bool? izzzzzzzzzzzzzzzl_ = context.Operators.Not(izzzzzzzzzzzzzzzk_);
-                    bool? izzzzzzzzzzzzzzzm_ = context.Operators.And(izzzzzzzzzzzzzzzh_, izzzzzzzzzzzzzzzl_);
-                    CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, hzzzzzzzzzzzzzzzm_);
-                    CqlDateTime izzzzzzzzzzzzzzzp_ = context.Operators.Start(izzzzzzzzzzzzzzzo_);
-                    CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? izzzzzzzzzzzzzzzr_ = context.Operators.In<CqlDateTime>(izzzzzzzzzzzzzzzp_, izzzzzzzzzzzzzzzq_, default);
-                    bool? izzzzzzzzzzzzzzzs_ = context.Operators.And(izzzzzzzzzzzzzzzm_, izzzzzzzzzzzzzzzr_);
+                    DataType yzzzzzzd_ = HypoglycemicMeds?.Effective;
+                    CqlInterval<CqlDateTime> yzzzzzze_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, yzzzzzzd_);
+                    CqlDateTime yzzzzzzf_ = context.Operators.Start(yzzzzzze_);
+                    DataType yzzzzzzg_ = BloodGlucoseLab?.Effective;
+                    CqlInterval<CqlDateTime> yzzzzzzh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, yzzzzzzg_);
+                    CqlDateTime yzzzzzzi_ = context.Operators.Start(yzzzzzzh_);
+                    CqlQuantity yzzzzzzj_ = context.Operators.Quantity(24m, "hours");
+                    CqlDateTime yzzzzzzk_ = context.Operators.Subtract(yzzzzzzi_, yzzzzzzj_);
+                    CqlInterval<CqlDateTime> yzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, yzzzzzzg_);
+                    CqlDateTime yzzzzzzn_ = context.Operators.Start(yzzzzzzm_);
+                    CqlInterval<CqlDateTime> yzzzzzzo_ = context.Operators.Interval(yzzzzzzk_, yzzzzzzn_, true, true);
+                    bool? yzzzzzzp_ = context.Operators.In<CqlDateTime>(yzzzzzzf_, yzzzzzzo_, default);
+                    CqlInterval<CqlDateTime> yzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, yzzzzzzg_);
+                    CqlDateTime yzzzzzzs_ = context.Operators.Start(yzzzzzzr_);
+                    bool? yzzzzzzt_ = context.Operators.Not((bool?)(yzzzzzzs_ is null));
+                    bool? yzzzzzzu_ = context.Operators.And(yzzzzzzp_, yzzzzzzt_);
+                    Code<ObservationStatus> yzzzzzzv_ = BloodGlucoseLab?.StatusElement;
+                    string yzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzv_);
+                    bool? yzzzzzzx_ = context.Operators.Equal(yzzzzzzw_, "final");
+                    bool? yzzzzzzy_ = context.Operators.And(yzzzzzzu_, yzzzzzzx_);
+                    string zzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzv_);
+                    bool? zzzzzzzb_ = context.Operators.Equal(zzzzzzza_, "cancelled");
+                    bool? zzzzzzzc_ = context.Operators.Not(zzzzzzzb_);
+                    bool? zzzzzzzd_ = context.Operators.And(yzzzzzzy_, zzzzzzzc_);
+                    CqlInterval<CqlDateTime> zzzzzzzf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, yzzzzzzd_);
+                    CqlDateTime zzzzzzzg_ = context.Operators.Start(zzzzzzzf_);
+                    CqlInterval<CqlDateTime> zzzzzzzh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                    bool? zzzzzzzi_ = context.Operators.In<CqlDateTime>(zzzzzzzg_, zzzzzzzh_, default);
+                    bool? zzzzzzzj_ = context.Operators.And(zzzzzzzd_, zzzzzzzi_);
 
-                    return izzzzzzzzzzzzzzzs_;
+                    return zzzzzzzj_;
                 };
-                IEnumerable<MedicationAdministration> hzzzzzzzzzzzzzzzj_ = context.Operators.Where<MedicationAdministration>(hzzzzzzzzzzzzzzzh_, hzzzzzzzzzzzzzzzi_);
-                Observation hzzzzzzzzzzzzzzzk_(MedicationAdministration HypoglycemicMeds) =>
+                IEnumerable<MedicationAdministration> yzzzzzza_ = context.Operators.Where<MedicationAdministration>(xzzzzzzy_, xzzzzzzz_);
+                Observation yzzzzzzb_(MedicationAdministration HypoglycemicMeds) =>
                     BloodGlucoseLab;
-                IEnumerable<Observation> hzzzzzzzzzzzzzzzl_ = context.Operators.Select<MedicationAdministration, Observation>(hzzzzzzzzzzzzzzzj_, hzzzzzzzzzzzzzzzk_);
+                IEnumerable<Observation> yzzzzzzc_ = context.Operators.Select<MedicationAdministration, Observation>(yzzzzzza_, yzzzzzzb_);
 
-                return hzzzzzzzzzzzzzzzl_;
+                return yzzzzzzc_;
             };
-            IEnumerable<Observation> gzzzzzzzzzzzzzzzw_ = context.Operators.SelectMany<Observation, Observation>(gzzzzzzzzzzzzzzzu_, gzzzzzzzzzzzzzzzv_);
-            IEnumerable<Observation> gzzzzzzzzzzzzzzzy_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, gzzzzzzzzzzzzzzzt_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-            IEnumerable<Observation> gzzzzzzzzzzzzzzzz_(Observation BloodGlucoseLab)
+            IEnumerable<Observation> xzzzzzzn_ = context.Operators.SelectMany<Observation, Observation>(xzzzzzzl_, xzzzzzzm_);
+            IEnumerable<Observation> xzzzzzzp_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, xzzzzzzk_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<Observation> xzzzzzzq_(Observation BloodGlucoseLab)
             {
-                IEnumerable<MedicationAdministration> izzzzzzzzzzzzzzzt_ = this.Hypoglycemic_Medication_Administration(context);
-                bool? izzzzzzzzzzzzzzzu_(MedicationAdministration HypoglycemicMeds)
+                IEnumerable<MedicationAdministration> zzzzzzzk_ = this.Hypoglycemic_Medication_Administration(context);
+                bool? zzzzzzzl_(MedicationAdministration HypoglycemicMeds)
                 {
-                    DataType izzzzzzzzzzzzzzzy_ = HypoglycemicMeds?.Effective;
-                    CqlInterval<CqlDateTime> izzzzzzzzzzzzzzzz_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, izzzzzzzzzzzzzzzy_);
-                    CqlDateTime jzzzzzzzzzzzzzzza_ = context.Operators.Start(izzzzzzzzzzzzzzzz_);
-                    DataType jzzzzzzzzzzzzzzzb_ = BloodGlucoseLab?.Effective;
-                    CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzzzzzzzzzzzzb_);
-                    CqlDateTime jzzzzzzzzzzzzzzzd_ = context.Operators.Start(jzzzzzzzzzzzzzzzc_);
-                    CqlQuantity jzzzzzzzzzzzzzzze_ = context.Operators.Quantity(24m, "hours");
-                    CqlDateTime jzzzzzzzzzzzzzzzf_ = context.Operators.Subtract(jzzzzzzzzzzzzzzzd_, jzzzzzzzzzzzzzzze_);
-                    CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzzzzzzzzzzzzb_);
-                    CqlDateTime jzzzzzzzzzzzzzzzi_ = context.Operators.Start(jzzzzzzzzzzzzzzzh_);
-                    CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzj_ = context.Operators.Interval(jzzzzzzzzzzzzzzzf_, jzzzzzzzzzzzzzzzi_, true, true);
-                    bool? jzzzzzzzzzzzzzzzk_ = context.Operators.In<CqlDateTime>(jzzzzzzzzzzzzzzza_, jzzzzzzzzzzzzzzzj_, default);
-                    CqlInterval<CqlDateTime> jzzzzzzzzzzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, jzzzzzzzzzzzzzzzb_);
-                    CqlDateTime jzzzzzzzzzzzzzzzn_ = context.Operators.Start(jzzzzzzzzzzzzzzzm_);
-                    bool? jzzzzzzzzzzzzzzzo_ = context.Operators.Not((bool?)(jzzzzzzzzzzzzzzzn_ is null));
-                    bool? jzzzzzzzzzzzzzzzp_ = context.Operators.And(jzzzzzzzzzzzzzzzk_, jzzzzzzzzzzzzzzzo_);
-                    Code<ObservationStatus> jzzzzzzzzzzzzzzzq_ = BloodGlucoseLab?.StatusElement;
-                    string jzzzzzzzzzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToString(context, jzzzzzzzzzzzzzzzq_);
-                    bool? jzzzzzzzzzzzzzzzs_ = context.Operators.Equal(jzzzzzzzzzzzzzzzr_, "final");
-                    bool? jzzzzzzzzzzzzzzzt_ = context.Operators.And(jzzzzzzzzzzzzzzzp_, jzzzzzzzzzzzzzzzs_);
-                    string jzzzzzzzzzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, jzzzzzzzzzzzzzzzq_);
-                    bool? jzzzzzzzzzzzzzzzw_ = context.Operators.Equal(jzzzzzzzzzzzzzzzv_, "cancelled");
-                    bool? jzzzzzzzzzzzzzzzx_ = context.Operators.Not(jzzzzzzzzzzzzzzzw_);
-                    bool? jzzzzzzzzzzzzzzzy_ = context.Operators.And(jzzzzzzzzzzzzzzzt_, jzzzzzzzzzzzzzzzx_);
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, izzzzzzzzzzzzzzzy_);
-                    CqlDateTime kzzzzzzzzzzzzzzzb_ = context.Operators.Start(kzzzzzzzzzzzzzzza_);
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? kzzzzzzzzzzzzzzzd_ = context.Operators.In<CqlDateTime>(kzzzzzzzzzzzzzzzb_, kzzzzzzzzzzzzzzzc_, default);
-                    bool? kzzzzzzzzzzzzzzze_ = context.Operators.And(jzzzzzzzzzzzzzzzy_, kzzzzzzzzzzzzzzzd_);
+                    DataType zzzzzzzp_ = HypoglycemicMeds?.Effective;
+                    CqlInterval<CqlDateTime> zzzzzzzq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, zzzzzzzp_);
+                    CqlDateTime zzzzzzzr_ = context.Operators.Start(zzzzzzzq_);
+                    DataType zzzzzzzs_ = BloodGlucoseLab?.Effective;
+                    CqlInterval<CqlDateTime> zzzzzzzt_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, zzzzzzzs_);
+                    CqlDateTime zzzzzzzu_ = context.Operators.Start(zzzzzzzt_);
+                    CqlQuantity zzzzzzzv_ = context.Operators.Quantity(24m, "hours");
+                    CqlDateTime zzzzzzzw_ = context.Operators.Subtract(zzzzzzzu_, zzzzzzzv_);
+                    CqlInterval<CqlDateTime> zzzzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, zzzzzzzs_);
+                    CqlDateTime zzzzzzzz_ = context.Operators.Start(zzzzzzzy_);
+                    CqlInterval<CqlDateTime> azzzzzzza_ = context.Operators.Interval(zzzzzzzw_, zzzzzzzz_, true, true);
+                    bool? azzzzzzzb_ = context.Operators.In<CqlDateTime>(zzzzzzzr_, azzzzzzza_, default);
+                    CqlInterval<CqlDateTime> azzzzzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, zzzzzzzs_);
+                    CqlDateTime azzzzzzze_ = context.Operators.Start(azzzzzzzd_);
+                    bool? azzzzzzzf_ = context.Operators.Not((bool?)(azzzzzzze_ is null));
+                    bool? azzzzzzzg_ = context.Operators.And(azzzzzzzb_, azzzzzzzf_);
+                    Code<ObservationStatus> azzzzzzzh_ = BloodGlucoseLab?.StatusElement;
+                    string azzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToString(context, azzzzzzzh_);
+                    bool? azzzzzzzj_ = context.Operators.Equal(azzzzzzzi_, "final");
+                    bool? azzzzzzzk_ = context.Operators.And(azzzzzzzg_, azzzzzzzj_);
+                    string azzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToString(context, azzzzzzzh_);
+                    bool? azzzzzzzn_ = context.Operators.Equal(azzzzzzzm_, "cancelled");
+                    bool? azzzzzzzo_ = context.Operators.Not(azzzzzzzn_);
+                    bool? azzzzzzzp_ = context.Operators.And(azzzzzzzk_, azzzzzzzo_);
+                    CqlInterval<CqlDateTime> azzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, zzzzzzzp_);
+                    CqlDateTime azzzzzzzs_ = context.Operators.Start(azzzzzzzr_);
+                    CqlInterval<CqlDateTime> azzzzzzzt_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                    bool? azzzzzzzu_ = context.Operators.In<CqlDateTime>(azzzzzzzs_, azzzzzzzt_, default);
+                    bool? azzzzzzzv_ = context.Operators.And(azzzzzzzp_, azzzzzzzu_);
 
-                    return kzzzzzzzzzzzzzzze_;
+                    return azzzzzzzv_;
                 };
-                IEnumerable<MedicationAdministration> izzzzzzzzzzzzzzzv_ = context.Operators.Where<MedicationAdministration>(izzzzzzzzzzzzzzzt_, izzzzzzzzzzzzzzzu_);
-                Observation izzzzzzzzzzzzzzzw_(MedicationAdministration HypoglycemicMeds) =>
+                IEnumerable<MedicationAdministration> zzzzzzzm_ = context.Operators.Where<MedicationAdministration>(zzzzzzzk_, zzzzzzzl_);
+                Observation zzzzzzzn_(MedicationAdministration HypoglycemicMeds) =>
                     BloodGlucoseLab;
-                IEnumerable<Observation> izzzzzzzzzzzzzzzx_ = context.Operators.Select<MedicationAdministration, Observation>(izzzzzzzzzzzzzzzv_, izzzzzzzzzzzzzzzw_);
+                IEnumerable<Observation> zzzzzzzo_ = context.Operators.Select<MedicationAdministration, Observation>(zzzzzzzm_, zzzzzzzn_);
 
-                return izzzzzzzzzzzzzzzx_;
+                return zzzzzzzo_;
             };
-            IEnumerable<Observation> hzzzzzzzzzzzzzzza_ = context.Operators.SelectMany<Observation, Observation>(gzzzzzzzzzzzzzzzy_, gzzzzzzzzzzzzzzzz_);
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzb_(Observation BloodGlucoseLab)
+            IEnumerable<Observation> xzzzzzzr_ = context.Operators.SelectMany<Observation, Observation>(xzzzzzzp_, xzzzzzzq_);
+            IEnumerable<Observation> xzzzzzzs_(Observation BloodGlucoseLab)
             {
-                CqlValueSet kzzzzzzzzzzzzzzzf_ = this.Glucose_lab_test(context);
-                IEnumerable<Observation> kzzzzzzzzzzzzzzzg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kzzzzzzzzzzzzzzzf_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? kzzzzzzzzzzzzzzzh_(Observation FollowupBloodGlucoseLab)
+                CqlValueSet azzzzzzzw_ = this.Glucose_lab_test(context);
+                IEnumerable<Observation> azzzzzzzx_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, azzzzzzzw_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+                bool? azzzzzzzy_(Observation FollowupBloodGlucoseLab)
                 {
-                    DataType kzzzzzzzzzzzzzzzl_ = FollowupBloodGlucoseLab?.Effective;
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzzzzzzzzzl_);
-                    CqlDateTime kzzzzzzzzzzzzzzzn_ = context.Operators.Start(kzzzzzzzzzzzzzzzm_);
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? kzzzzzzzzzzzzzzzp_ = context.Operators.In<CqlDateTime>(kzzzzzzzzzzzzzzzn_, kzzzzzzzzzzzzzzzo_, default);
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzzzzzzzzzl_);
-                    CqlDateTime kzzzzzzzzzzzzzzzs_ = context.Operators.Start(kzzzzzzzzzzzzzzzr_);
-                    DataType kzzzzzzzzzzzzzzzt_ = BloodGlucoseLab?.Effective;
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzzzzzzzzzt_);
-                    CqlDateTime kzzzzzzzzzzzzzzzv_ = context.Operators.Start(kzzzzzzzzzzzzzzzu_);
-                    CqlInterval<CqlDateTime> kzzzzzzzzzzzzzzzx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzzzzzzzzzt_);
-                    CqlDateTime kzzzzzzzzzzzzzzzy_ = context.Operators.Start(kzzzzzzzzzzzzzzzx_);
-                    CqlQuantity kzzzzzzzzzzzzzzzz_ = context.Operators.Quantity(5m, "minutes");
-                    CqlDateTime lzzzzzzzzzzzzzzza_ = context.Operators.Add(kzzzzzzzzzzzzzzzy_, kzzzzzzzzzzzzzzzz_);
-                    CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzb_ = context.Operators.Interval(kzzzzzzzzzzzzzzzv_, lzzzzzzzzzzzzzzza_, false, true);
-                    bool? lzzzzzzzzzzzzzzzc_ = context.Operators.In<CqlDateTime>(kzzzzzzzzzzzzzzzs_, lzzzzzzzzzzzzzzzb_, default);
-                    CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzze_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, kzzzzzzzzzzzzzzzt_);
-                    CqlDateTime lzzzzzzzzzzzzzzzf_ = context.Operators.Start(lzzzzzzzzzzzzzzze_);
-                    bool? lzzzzzzzzzzzzzzzg_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzzzzf_ is null));
-                    bool? lzzzzzzzzzzzzzzzh_ = context.Operators.And(lzzzzzzzzzzzzzzzc_, lzzzzzzzzzzzzzzzg_);
-                    bool? lzzzzzzzzzzzzzzzi_ = context.Operators.And(kzzzzzzzzzzzzzzzp_, lzzzzzzzzzzzzzzzh_);
-                    Code<ObservationStatus> lzzzzzzzzzzzzzzzj_ = FollowupBloodGlucoseLab?.StatusElement;
-                    string lzzzzzzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, lzzzzzzzzzzzzzzzj_);
-                    bool? lzzzzzzzzzzzzzzzl_ = context.Operators.Equal(lzzzzzzzzzzzzzzzk_, "final");
-                    bool? lzzzzzzzzzzzzzzzm_ = context.Operators.And(lzzzzzzzzzzzzzzzi_, lzzzzzzzzzzzzzzzl_);
-                    string lzzzzzzzzzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToString(context, lzzzzzzzzzzzzzzzj_);
-                    bool? lzzzzzzzzzzzzzzzp_ = context.Operators.Equal(lzzzzzzzzzzzzzzzo_, "cancelled");
-                    bool? lzzzzzzzzzzzzzzzq_ = context.Operators.Not(lzzzzzzzzzzzzzzzp_);
-                    bool? lzzzzzzzzzzzzzzzr_ = context.Operators.And(lzzzzzzzzzzzzzzzm_, lzzzzzzzzzzzzzzzq_);
-                    DataType lzzzzzzzzzzzzzzzs_ = FollowupBloodGlucoseLab?.Value;
-                    CqlQuantity lzzzzzzzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, lzzzzzzzzzzzzzzzs_ as Quantity);
-                    CqlQuantity lzzzzzzzzzzzzzzzu_ = context.Operators.Quantity(80m, "mg/dL");
-                    bool? lzzzzzzzzzzzzzzzv_ = context.Operators.Greater(lzzzzzzzzzzzzzzzt_, lzzzzzzzzzzzzzzzu_);
-                    bool? lzzzzzzzzzzzzzzzw_ = context.Operators.And(lzzzzzzzzzzzzzzzr_, lzzzzzzzzzzzzzzzv_);
+                    DataType bzzzzzzzc_ = FollowupBloodGlucoseLab?.Effective;
+                    CqlInterval<CqlDateTime> bzzzzzzzd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzzzzzzc_);
+                    CqlDateTime bzzzzzzze_ = context.Operators.Start(bzzzzzzzd_);
+                    CqlInterval<CqlDateTime> bzzzzzzzf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                    bool? bzzzzzzzg_ = context.Operators.In<CqlDateTime>(bzzzzzzze_, bzzzzzzzf_, default);
+                    CqlInterval<CqlDateTime> bzzzzzzzi_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzzzzzzc_);
+                    CqlDateTime bzzzzzzzj_ = context.Operators.Start(bzzzzzzzi_);
+                    DataType bzzzzzzzk_ = BloodGlucoseLab?.Effective;
+                    CqlInterval<CqlDateTime> bzzzzzzzl_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzzzzzzk_);
+                    CqlDateTime bzzzzzzzm_ = context.Operators.Start(bzzzzzzzl_);
+                    CqlInterval<CqlDateTime> bzzzzzzzo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzzzzzzk_);
+                    CqlDateTime bzzzzzzzp_ = context.Operators.Start(bzzzzzzzo_);
+                    CqlQuantity bzzzzzzzq_ = context.Operators.Quantity(5m, "minutes");
+                    CqlDateTime bzzzzzzzr_ = context.Operators.Add(bzzzzzzzp_, bzzzzzzzq_);
+                    CqlInterval<CqlDateTime> bzzzzzzzs_ = context.Operators.Interval(bzzzzzzzm_, bzzzzzzzr_, false, true);
+                    bool? bzzzzzzzt_ = context.Operators.In<CqlDateTime>(bzzzzzzzj_, bzzzzzzzs_, default);
+                    CqlInterval<CqlDateTime> bzzzzzzzv_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bzzzzzzzk_);
+                    CqlDateTime bzzzzzzzw_ = context.Operators.Start(bzzzzzzzv_);
+                    bool? bzzzzzzzx_ = context.Operators.Not((bool?)(bzzzzzzzw_ is null));
+                    bool? bzzzzzzzy_ = context.Operators.And(bzzzzzzzt_, bzzzzzzzx_);
+                    bool? bzzzzzzzz_ = context.Operators.And(bzzzzzzzg_, bzzzzzzzy_);
+                    Code<ObservationStatus> czzzzzzza_ = FollowupBloodGlucoseLab?.StatusElement;
+                    string czzzzzzzb_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzzzza_);
+                    bool? czzzzzzzc_ = context.Operators.Equal(czzzzzzzb_, "final");
+                    bool? czzzzzzzd_ = context.Operators.And(bzzzzzzzz_, czzzzzzzc_);
+                    string czzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzzzza_);
+                    bool? czzzzzzzg_ = context.Operators.Equal(czzzzzzzf_, "cancelled");
+                    bool? czzzzzzzh_ = context.Operators.Not(czzzzzzzg_);
+                    bool? czzzzzzzi_ = context.Operators.And(czzzzzzzd_, czzzzzzzh_);
+                    DataType czzzzzzzj_ = FollowupBloodGlucoseLab?.Value;
+                    CqlQuantity czzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, czzzzzzzj_ as Quantity);
+                    CqlQuantity czzzzzzzl_ = context.Operators.Quantity(80m, "mg/dL");
+                    bool? czzzzzzzm_ = context.Operators.Greater(czzzzzzzk_, czzzzzzzl_);
+                    bool? czzzzzzzn_ = context.Operators.And(czzzzzzzi_, czzzzzzzm_);
 
-                    return lzzzzzzzzzzzzzzzw_;
+                    return czzzzzzzn_;
                 };
-                IEnumerable<Observation> kzzzzzzzzzzzzzzzi_ = context.Operators.Where<Observation>(kzzzzzzzzzzzzzzzg_, kzzzzzzzzzzzzzzzh_);
-                Observation kzzzzzzzzzzzzzzzj_(Observation FollowupBloodGlucoseLab) =>
+                IEnumerable<Observation> azzzzzzzz_ = context.Operators.Where<Observation>(azzzzzzzx_, azzzzzzzy_);
+                Observation bzzzzzzza_(Observation FollowupBloodGlucoseLab) =>
                     BloodGlucoseLab;
-                IEnumerable<Observation> kzzzzzzzzzzzzzzzk_ = context.Operators.Select<Observation, Observation>(kzzzzzzzzzzzzzzzi_, kzzzzzzzzzzzzzzzj_);
+                IEnumerable<Observation> bzzzzzzzb_ = context.Operators.Select<Observation, Observation>(azzzzzzzz_, bzzzzzzza_);
 
-                return kzzzzzzzzzzzzzzzk_;
+                return bzzzzzzzb_;
             };
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzc_ = context.Operators.SelectMany<Observation, Observation>(hzzzzzzzzzzzzzzza_, hzzzzzzzzzzzzzzzb_);
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzd_ = context.Operators.Except<Observation>(gzzzzzzzzzzzzzzzw_, hzzzzzzzzzzzzzzzc_);
-            bool? hzzzzzzzzzzzzzzze_(Observation BloodGlucoseLab)
+            IEnumerable<Observation> xzzzzzzt_ = context.Operators.SelectMany<Observation, Observation>(xzzzzzzr_, xzzzzzzs_);
+            IEnumerable<Observation> xzzzzzzu_ = context.Operators.Except<Observation>(xzzzzzzn_, xzzzzzzt_);
+            bool? xzzzzzzv_(Observation BloodGlucoseLab)
             {
-                DataType lzzzzzzzzzzzzzzzx_ = BloodGlucoseLab?.Effective;
-                CqlInterval<CqlDateTime> lzzzzzzzzzzzzzzzy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, lzzzzzzzzzzzzzzzx_);
-                CqlDateTime lzzzzzzzzzzzzzzzz_ = context.Operators.Start(lzzzzzzzzzzzzzzzy_);
-                CqlInterval<CqlDateTime> mzzzzzzzzzzzzzzza_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                bool? mzzzzzzzzzzzzzzzb_ = context.Operators.In<CqlDateTime>(lzzzzzzzzzzzzzzzz_, mzzzzzzzzzzzzzzza_, default);
-                DataType mzzzzzzzzzzzzzzzc_ = BloodGlucoseLab?.Value;
-                CqlQuantity mzzzzzzzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, mzzzzzzzzzzzzzzzc_ as Quantity);
-                CqlQuantity mzzzzzzzzzzzzzzze_ = context.Operators.Quantity(40m, "mg/dL");
-                bool? mzzzzzzzzzzzzzzzf_ = context.Operators.Less(mzzzzzzzzzzzzzzzd_, mzzzzzzzzzzzzzzze_);
-                bool? mzzzzzzzzzzzzzzzg_ = context.Operators.And(mzzzzzzzzzzzzzzzb_, mzzzzzzzzzzzzzzzf_);
+                DataType czzzzzzzo_ = BloodGlucoseLab?.Effective;
+                CqlInterval<CqlDateTime> czzzzzzzp_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, czzzzzzzo_);
+                CqlDateTime czzzzzzzq_ = context.Operators.Start(czzzzzzzp_);
+                CqlInterval<CqlDateTime> czzzzzzzr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                bool? czzzzzzzs_ = context.Operators.In<CqlDateTime>(czzzzzzzq_, czzzzzzzr_, default);
+                DataType czzzzzzzt_ = BloodGlucoseLab?.Value;
+                CqlQuantity czzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, czzzzzzzt_ as Quantity);
+                CqlQuantity czzzzzzzv_ = context.Operators.Quantity(40m, "mg/dL");
+                bool? czzzzzzzw_ = context.Operators.Less(czzzzzzzu_, czzzzzzzv_);
+                bool? czzzzzzzx_ = context.Operators.And(czzzzzzzs_, czzzzzzzw_);
 
-                return mzzzzzzzzzzzzzzzg_;
+                return czzzzzzzx_;
             };
-            IEnumerable<Observation> hzzzzzzzzzzzzzzzf_ = context.Operators.Where<Observation>(hzzzzzzzzzzzzzzzd_, hzzzzzzzzzzzzzzze_);
-            bool? hzzzzzzzzzzzzzzzg_ = context.Operators.Exists<Observation>(hzzzzzzzzzzzzzzzf_);
+            IEnumerable<Observation> xzzzzzzw_ = context.Operators.Where<Observation>(xzzzzzzu_, xzzzzzzv_);
+            bool? xzzzzzzx_ = context.Operators.Exists<Observation>(xzzzzzzw_);
 
-            return hzzzzzzzzzzzzzzzg_;
+            return xzzzzzzx_;
         };
-        IEnumerable<Encounter> gzzzzzzzzzzzzzzzs_ = context.Operators.Where<Encounter>(gzzzzzzzzzzzzzzzq_, gzzzzzzzzzzzzzzzr_);
+        IEnumerable<Encounter> xzzzzzzj_ = context.Operators.Where<Encounter>(xzzzzzzh_, xzzzzzzi_);
 
-        return gzzzzzzzzzzzzzzzs_;
+        return xzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzzzh_ = this.Severe_Hypoglycemic_Harm_Event(context);
+        IEnumerable<Encounter> czzzzzzzy_ = this.Severe_Hypoglycemic_Harm_Event(context);
 
-        return mzzzzzzzzzzzzzzzh_;
+        return czzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
-        IEnumerable<Coding> mzzzzzzzzzzzzzzzi_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
+        IEnumerable<Coding> czzzzzzzz_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
-        return mzzzzzzzzzzzzzzzi_;
+        return czzzzzzzz_;
     }
 
 

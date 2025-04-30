@@ -41,7 +41,7 @@ partial class LibraryExpressionBuilderContext
             if (!HasAliasForLibraryVersionedIdentifier(libraryName))
                 throw new CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(library).ToException();
 
-            foreach (var (definitionName, signature, expression) in LibrarySetContext!.LibrarySetDefinitions.EnumerateExpressionsByLibraryName(libraryName))
+            foreach (var (definitionName, signature, expression) in LibrarySetContext!.LibrarySetDefinitions.SelectDefinitionsByLibraryName(libraryName))
                 LibraryDefinitions.Add(libraryName, definitionName, signature, expression);
         }
     }

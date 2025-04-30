@@ -45,119 +45,119 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     [CqlExpressionDefinition("Professional or Institutional Claims")]
     public IEnumerable<Claim> Professional_or_Institutional_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
-        bool? lzzzzzzzk_(Claim MedicalClaim)
+        bool? uzzzzzzzzzzi_(Claim MedicalClaim)
         {
-            CodeableConcept lzzzzzzzm_ = MedicalClaim?.Type;
-            CqlConcept lzzzzzzzn_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, lzzzzzzzm_);
-            CqlCode[] lzzzzzzzo_ = lzzzzzzzn_?.codes;
-            CqlCode lzzzzzzzp_ = NCQATerminology_1_0_0.Instance.Professional(context);
-            bool? lzzzzzzzq_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)lzzzzzzzo_, lzzzzzzzp_);
-            CqlConcept lzzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, lzzzzzzzm_);
-            CqlCode[] lzzzzzzzt_ = lzzzzzzzs_?.codes;
-            CqlCode lzzzzzzzu_ = NCQATerminology_1_0_0.Instance.Institutional(context);
-            bool? lzzzzzzzv_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)lzzzzzzzt_, lzzzzzzzu_);
-            bool? lzzzzzzzw_ = context.Operators.Or(lzzzzzzzq_, lzzzzzzzv_);
+            CodeableConcept uzzzzzzzzzzk_ = MedicalClaim?.Type;
+            CqlConcept uzzzzzzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, uzzzzzzzzzzk_);
+            CqlCode[] uzzzzzzzzzzm_ = uzzzzzzzzzzl_?.codes;
+            CqlCode uzzzzzzzzzzn_ = NCQATerminology_1_0_0.Instance.Professional(context);
+            bool? uzzzzzzzzzzo_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)uzzzzzzzzzzm_, uzzzzzzzzzzn_);
+            CqlConcept uzzzzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, uzzzzzzzzzzk_);
+            CqlCode[] uzzzzzzzzzzr_ = uzzzzzzzzzzq_?.codes;
+            CqlCode uzzzzzzzzzzs_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+            bool? uzzzzzzzzzzt_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)uzzzzzzzzzzr_, uzzzzzzzzzzs_);
+            bool? uzzzzzzzzzzu_ = context.Operators.Or(uzzzzzzzzzzo_, uzzzzzzzzzzt_);
 
-            return lzzzzzzzw_;
+            return uzzzzzzzzzzu_;
         };
-        IEnumerable<Claim> lzzzzzzzl_ = context.Operators.Where<Claim>(claim, lzzzzzzzk_);
+        IEnumerable<Claim> uzzzzzzzzzzj_ = context.Operators.Where<Claim>(claim, uzzzzzzzzzzi_);
 
-        return lzzzzzzzl_;
+        return uzzzzzzzzzzj_;
     }
 
 
     [CqlExpressionDefinition("Pharmacy Claims")]
     public IEnumerable<Claim> Pharmacy_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
-        bool? lzzzzzzzx_(Claim PharmacyClaim)
+        bool? uzzzzzzzzzzv_(Claim PharmacyClaim)
         {
-            CodeableConcept lzzzzzzzz_ = PharmacyClaim?.Type;
-            CqlConcept mzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, lzzzzzzzz_);
-            CqlCode[] mzzzzzzzb_ = mzzzzzzza_?.codes;
-            CqlCode mzzzzzzzc_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
-            bool? mzzzzzzzd_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)mzzzzzzzb_, mzzzzzzzc_);
+            CodeableConcept uzzzzzzzzzzx_ = PharmacyClaim?.Type;
+            CqlConcept uzzzzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, uzzzzzzzzzzx_);
+            CqlCode[] uzzzzzzzzzzz_ = uzzzzzzzzzzy_?.codes;
+            CqlCode vzzzzzzzzzza_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
+            bool? vzzzzzzzzzzb_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)uzzzzzzzzzzz_, vzzzzzzzzzza_);
 
-            return mzzzzzzzd_;
+            return vzzzzzzzzzzb_;
         };
-        IEnumerable<Claim> lzzzzzzzy_ = context.Operators.Where<Claim>(claim, lzzzzzzzx_);
+        IEnumerable<Claim> uzzzzzzzzzzw_ = context.Operators.Where<Claim>(claim, uzzzzzzzzzzv_);
 
-        return lzzzzzzzy_;
+        return uzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Professional or Institutional Claims Response")]
     public IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
-        bool? mzzzzzzze_(ClaimResponse MedicalResponse)
+        bool? vzzzzzzzzzzc_(ClaimResponse MedicalResponse)
         {
-            CodeableConcept mzzzzzzzg_ = MedicalResponse?.Type;
-            CqlConcept mzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, mzzzzzzzg_);
-            CqlCode[] mzzzzzzzi_ = mzzzzzzzh_?.codes;
-            CqlCode mzzzzzzzj_ = NCQATerminology_1_0_0.Instance.Professional(context);
-            bool? mzzzzzzzk_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)mzzzzzzzi_, mzzzzzzzj_);
-            CqlConcept mzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, mzzzzzzzg_);
-            CqlCode[] mzzzzzzzn_ = mzzzzzzzm_?.codes;
-            CqlCode mzzzzzzzo_ = NCQATerminology_1_0_0.Instance.Institutional(context);
-            bool? mzzzzzzzp_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)mzzzzzzzn_, mzzzzzzzo_);
-            bool? mzzzzzzzq_ = context.Operators.Or(mzzzzzzzk_, mzzzzzzzp_);
+            CodeableConcept vzzzzzzzzzze_ = MedicalResponse?.Type;
+            CqlConcept vzzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, vzzzzzzzzzze_);
+            CqlCode[] vzzzzzzzzzzg_ = vzzzzzzzzzzf_?.codes;
+            CqlCode vzzzzzzzzzzh_ = NCQATerminology_1_0_0.Instance.Professional(context);
+            bool? vzzzzzzzzzzi_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)vzzzzzzzzzzg_, vzzzzzzzzzzh_);
+            CqlConcept vzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, vzzzzzzzzzze_);
+            CqlCode[] vzzzzzzzzzzl_ = vzzzzzzzzzzk_?.codes;
+            CqlCode vzzzzzzzzzzm_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+            bool? vzzzzzzzzzzn_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)vzzzzzzzzzzl_, vzzzzzzzzzzm_);
+            bool? vzzzzzzzzzzo_ = context.Operators.Or(vzzzzzzzzzzi_, vzzzzzzzzzzn_);
 
-            return mzzzzzzzq_;
+            return vzzzzzzzzzzo_;
         };
-        IEnumerable<ClaimResponse> mzzzzzzzf_ = context.Operators.Where<ClaimResponse>(claimResponse, mzzzzzzze_);
+        IEnumerable<ClaimResponse> vzzzzzzzzzzd_ = context.Operators.Where<ClaimResponse>(claimResponse, vzzzzzzzzzzc_);
 
-        return mzzzzzzzf_;
+        return vzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Pharmacy Claims Response")]
     public IEnumerable<ClaimResponse> Pharmacy_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
-        bool? mzzzzzzzr_(ClaimResponse PharmacyResponse)
+        bool? vzzzzzzzzzzp_(ClaimResponse PharmacyResponse)
         {
-            CodeableConcept mzzzzzzzt_ = PharmacyResponse?.Type;
-            CqlConcept mzzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, mzzzzzzzt_);
-            CqlCode[] mzzzzzzzv_ = mzzzzzzzu_?.codes;
-            CqlCode mzzzzzzzw_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
-            bool? mzzzzzzzx_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)mzzzzzzzv_, mzzzzzzzw_);
+            CodeableConcept vzzzzzzzzzzr_ = PharmacyResponse?.Type;
+            CqlConcept vzzzzzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, vzzzzzzzzzzr_);
+            CqlCode[] vzzzzzzzzzzt_ = vzzzzzzzzzzs_?.codes;
+            CqlCode vzzzzzzzzzzu_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
+            bool? vzzzzzzzzzzv_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)vzzzzzzzzzzt_, vzzzzzzzzzzu_);
 
-            return mzzzzzzzx_;
+            return vzzzzzzzzzzv_;
         };
-        IEnumerable<ClaimResponse> mzzzzzzzs_ = context.Operators.Where<ClaimResponse>(claimResponse, mzzzzzzzr_);
+        IEnumerable<ClaimResponse> vzzzzzzzzzzq_ = context.Operators.Where<ClaimResponse>(claimResponse, vzzzzzzzzzzp_);
 
-        return mzzzzzzzs_;
+        return vzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Procedure and POS")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_and_POS(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<Claim> mzzzzzzzy_ = this.Professional_or_Institutional_Claims(context, claim);
-        string mzzzzzzzz_(CqlCode p)
+        IEnumerable<Claim> vzzzzzzzzzzw_ = this.Professional_or_Institutional_Claims(context, claim);
+        string vzzzzzzzzzzx_(CqlCode p)
         {
-            string nzzzzzzzl_ = p?.code;
+            string wzzzzzzzzzzj_ = p?.code;
 
-            return nzzzzzzzl_;
+            return wzzzzzzzzzzj_;
         };
-        IEnumerable<string> nzzzzzzza_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, mzzzzzzzz_);
-        IEnumerable<string> nzzzzzzzb_ = context.Operators.Distinct<string>(nzzzzzzza_);
-        string nzzzzzzzc_(CqlCode pos)
+        IEnumerable<string> vzzzzzzzzzzy_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, vzzzzzzzzzzx_);
+        IEnumerable<string> vzzzzzzzzzzz_ = context.Operators.Distinct<string>(vzzzzzzzzzzy_);
+        string wzzzzzzzzzza_(CqlCode pos)
         {
-            string nzzzzzzzm_ = pos?.code;
+            string wzzzzzzzzzzk_ = pos?.code;
 
-            return nzzzzzzzm_;
+            return wzzzzzzzzzzk_;
         };
-        IEnumerable<string> nzzzzzzzd_ = context.Operators.Select<CqlCode, string>(posCodes, nzzzzzzzc_);
-        IEnumerable<string> nzzzzzzze_ = context.Operators.Distinct<string>(nzzzzzzzd_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? nzzzzzzzf_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, mzzzzzzzy_, nzzzzzzzb_, nzzzzzzze_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] nzzzzzzzg_ = [
-            nzzzzzzzf_,
+        IEnumerable<string> wzzzzzzzzzzb_ = context.Operators.Select<CqlCode, string>(posCodes, wzzzzzzzzzza_);
+        IEnumerable<string> wzzzzzzzzzzc_ = context.Operators.Distinct<string>(wzzzzzzzzzzb_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? wzzzzzzzzzzd_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, vzzzzzzzzzzw_, vzzzzzzzzzzz_, wzzzzzzzzzzc_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] wzzzzzzzzzze_ = [
+            wzzzzzzzzzzd_,
         ];
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzh_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithPosCode)
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithPosCode)
         {
-            IEnumerable<Claim> nzzzzzzzn_ = ClaimWithPosCode?.MedicalClaim;
-            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? nzzzzzzzo_(Claim ClaimofInterest)
+            IEnumerable<Claim> wzzzzzzzzzzl_ = ClaimWithPosCode?.MedicalClaim;
+            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzzzm_(Claim ClaimofInterest)
             {
-                IEnumerable<Claim.ItemComponent> nzzzzzzzt_()
+                IEnumerable<Claim.ItemComponent> wzzzzzzzzzzr_()
                 {
                     if (ClaimofInterest is null)
                     {
@@ -165,89 +165,89 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     }
                     else
                     {
-                        List<Claim.ItemComponent> ozzzzzzza_ = ClaimofInterest?.Item;
-                        bool? ozzzzzzzb_(Claim.ItemComponent ItemOnLine)
+                        List<Claim.ItemComponent> wzzzzzzzzzzy_ = ClaimofInterest?.Item;
+                        bool? wzzzzzzzzzzz_(Claim.ItemComponent ItemOnLine)
                         {
-                            CodeableConcept ozzzzzzzd_ = ItemOnLine?.ProductOrService;
-                            CqlConcept ozzzzzzze_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ozzzzzzzd_);
-                            CqlCode[] ozzzzzzzf_ = ozzzzzzze_?.codes;
-                            bool? ozzzzzzzg_(CqlCode LineCode)
+                            CodeableConcept xzzzzzzzzzzb_ = ItemOnLine?.ProductOrService;
+                            CqlConcept xzzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, xzzzzzzzzzzb_);
+                            CqlCode[] xzzzzzzzzzzd_ = xzzzzzzzzzzc_?.codes;
+                            bool? xzzzzzzzzzze_(CqlCode LineCode)
                             {
-                                string ozzzzzzzq_ = LineCode?.code;
-                                IEnumerable<string> ozzzzzzzr_ = ClaimWithPosCode?.ProceduresAsStrings;
-                                bool? ozzzzzzzs_ = context.Operators.In<string>(ozzzzzzzq_, ozzzzzzzr_);
+                                string xzzzzzzzzzzo_ = LineCode?.code;
+                                IEnumerable<string> xzzzzzzzzzzp_ = ClaimWithPosCode?.ProceduresAsStrings;
+                                bool? xzzzzzzzzzzq_ = context.Operators.In<string>(xzzzzzzzzzzo_, xzzzzzzzzzzp_);
 
-                                return ozzzzzzzs_;
+                                return xzzzzzzzzzzq_;
                             };
-                            IEnumerable<CqlCode> ozzzzzzzh_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ozzzzzzzf_, ozzzzzzzg_);
-                            bool? ozzzzzzzi_ = context.Operators.Exists<CqlCode>(ozzzzzzzh_);
-                            DataType ozzzzzzzj_ = ItemOnLine?.Location;
-                            CqlConcept ozzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ozzzzzzzj_ as CodeableConcept);
-                            CqlCode[] ozzzzzzzl_ = ozzzzzzzk_?.codes;
-                            bool? ozzzzzzzm_(CqlCode PosCode)
+                            IEnumerable<CqlCode> xzzzzzzzzzzf_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)xzzzzzzzzzzd_, xzzzzzzzzzze_);
+                            bool? xzzzzzzzzzzg_ = context.Operators.Exists<CqlCode>(xzzzzzzzzzzf_);
+                            DataType xzzzzzzzzzzh_ = ItemOnLine?.Location;
+                            CqlConcept xzzzzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, xzzzzzzzzzzh_ as CodeableConcept);
+                            CqlCode[] xzzzzzzzzzzj_ = xzzzzzzzzzzi_?.codes;
+                            bool? xzzzzzzzzzzk_(CqlCode PosCode)
                             {
-                                string ozzzzzzzt_ = PosCode?.code;
-                                IEnumerable<string> ozzzzzzzu_ = ClaimWithPosCode?.POSAsString;
-                                bool? ozzzzzzzv_ = context.Operators.In<string>(ozzzzzzzt_, ozzzzzzzu_);
+                                string xzzzzzzzzzzr_ = PosCode?.code;
+                                IEnumerable<string> xzzzzzzzzzzs_ = ClaimWithPosCode?.POSAsString;
+                                bool? xzzzzzzzzzzt_ = context.Operators.In<string>(xzzzzzzzzzzr_, xzzzzzzzzzzs_);
 
-                                return ozzzzzzzv_;
+                                return xzzzzzzzzzzt_;
                             };
-                            IEnumerable<CqlCode> ozzzzzzzn_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ozzzzzzzl_, ozzzzzzzm_);
-                            bool? ozzzzzzzo_ = context.Operators.Exists<CqlCode>(ozzzzzzzn_);
-                            bool? ozzzzzzzp_ = context.Operators.And(ozzzzzzzi_, ozzzzzzzo_);
+                            IEnumerable<CqlCode> xzzzzzzzzzzl_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)xzzzzzzzzzzj_, xzzzzzzzzzzk_);
+                            bool? xzzzzzzzzzzm_ = context.Operators.Exists<CqlCode>(xzzzzzzzzzzl_);
+                            bool? xzzzzzzzzzzn_ = context.Operators.And(xzzzzzzzzzzg_, xzzzzzzzzzzm_);
 
-                            return ozzzzzzzp_;
+                            return xzzzzzzzzzzn_;
                         };
-                        IEnumerable<Claim.ItemComponent> ozzzzzzzc_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ozzzzzzza_, ozzzzzzzb_);
+                        IEnumerable<Claim.ItemComponent> xzzzzzzzzzza_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)wzzzzzzzzzzy_, wzzzzzzzzzzz_);
 
-                        return ozzzzzzzc_;
+                        return xzzzzzzzzzza_;
                     }
                 };
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? nzzzzzzzu_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, ClaimofInterest, nzzzzzzzt_());
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] nzzzzzzzv_ = [
-                    nzzzzzzzu_,
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? wzzzzzzzzzzs_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, ClaimofInterest, wzzzzzzzzzzr_());
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] wzzzzzzzzzzt_ = [
+                    wzzzzzzzzzzs_,
                 ];
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? nzzzzzzzw_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzzzu_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
                 {
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ozzzzzzzw_()
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? xzzzzzzzzzzu_()
                     {
-                        bool ozzzzzzzx_()
+                        bool xzzzzzzzzzzv_()
                         {
-                            IEnumerable<Claim.ItemComponent> ozzzzzzzy_ = LineItemDefinition?.LineItems;
-                            bool? ozzzzzzzz_ = context.Operators.Exists<Claim.ItemComponent>(ozzzzzzzy_);
+                            IEnumerable<Claim.ItemComponent> xzzzzzzzzzzw_ = LineItemDefinition?.LineItems;
+                            bool? xzzzzzzzzzzx_ = context.Operators.Exists<Claim.ItemComponent>(xzzzzzzzzzzw_);
 
-                            return ozzzzzzzz_ ?? false;
+                            return xzzzzzzzzzzx_ ?? false;
                         };
-                        if (ozzzzzzzx_())
+                        if (xzzzzzzzzzzv_())
                         {
-                            Claim pzzzzzzza_ = LineItemDefinition?.Claim;
-                            IEnumerable<Claim.ItemComponent> pzzzzzzzb_ = LineItemDefinition?.LineItems;
-                            bool? pzzzzzzzc_(Claim.ItemComponent @this)
+                            Claim xzzzzzzzzzzy_ = LineItemDefinition?.Claim;
+                            IEnumerable<Claim.ItemComponent> xzzzzzzzzzzz_ = LineItemDefinition?.LineItems;
+                            bool? yzzzzzzzzzza_(Claim.ItemComponent @this)
                             {
-                                DataType pzzzzzzzk_ = @this?.Serviced;
-                                bool? pzzzzzzzl_ = context.Operators.Not((bool?)(pzzzzzzzk_ is null));
+                                DataType yzzzzzzzzzzi_ = @this?.Serviced;
+                                bool? yzzzzzzzzzzj_ = context.Operators.Not((bool?)(yzzzzzzzzzzi_ is null));
 
-                                return pzzzzzzzl_;
+                                return yzzzzzzzzzzj_;
                             };
-                            IEnumerable<Claim.ItemComponent> pzzzzzzzd_ = context.Operators.Where<Claim.ItemComponent>(pzzzzzzzb_, pzzzzzzzc_);
-                            object pzzzzzzze_(Claim.ItemComponent @this)
+                            IEnumerable<Claim.ItemComponent> yzzzzzzzzzzb_ = context.Operators.Where<Claim.ItemComponent>(xzzzzzzzzzzz_, yzzzzzzzzzza_);
+                            object yzzzzzzzzzzc_(Claim.ItemComponent @this)
                             {
-                                DataType pzzzzzzzm_ = @this?.Serviced;
+                                DataType yzzzzzzzzzzk_ = @this?.Serviced;
 
-                                return pzzzzzzzm_;
+                                return yzzzzzzzzzzk_;
                             };
-                            IEnumerable<object> pzzzzzzzf_ = context.Operators.Select<Claim.ItemComponent, object>(pzzzzzzzd_, pzzzzzzze_);
-                            CqlInterval<CqlDateTime> pzzzzzzzg_(object NormalDate)
+                            IEnumerable<object> yzzzzzzzzzzd_ = context.Operators.Select<Claim.ItemComponent, object>(yzzzzzzzzzzb_, yzzzzzzzzzzc_);
+                            CqlInterval<CqlDateTime> yzzzzzzzzzze_(object NormalDate)
                             {
-                                CqlInterval<CqlDateTime> pzzzzzzzn_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                CqlInterval<CqlDateTime> yzzzzzzzzzzl_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
-                                return pzzzzzzzn_;
+                                return yzzzzzzzzzzl_;
                             };
-                            IEnumerable<CqlInterval<CqlDateTime>> pzzzzzzzh_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(pzzzzzzzf_, pzzzzzzzg_);
-                            IEnumerable<CqlInterval<CqlDateTime>> pzzzzzzzi_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(pzzzzzzzh_);
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? pzzzzzzzj_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, pzzzzzzza_, pzzzzzzzi_);
+                            IEnumerable<CqlInterval<CqlDateTime>> yzzzzzzzzzzf_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(yzzzzzzzzzzd_, yzzzzzzzzzze_);
+                            IEnumerable<CqlInterval<CqlDateTime>> yzzzzzzzzzzg_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(yzzzzzzzzzzf_);
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? yzzzzzzzzzzh_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, xzzzzzzzzzzy_, yzzzzzzzzzzg_);
 
-                            return pzzzzzzzj_;
+                            return yzzzzzzzzzzh_;
                         }
                         else
                         {
@@ -255,56 +255,56 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                     };
 
-                    return ozzzzzzzw_();
+                    return xzzzzzzzzzzu_();
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)nzzzzzzzv_, nzzzzzzzw_);
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzx_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? nzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzy_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzv_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)wzzzzzzzzzzt_, wzzzzzzzzzzu_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzzzv_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzzzx_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzzzw_);
 
-                return nzzzzzzzz_;
+                return wzzzzzzzzzzx_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzp_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzn_, nzzzzzzzo_);
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzq_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzp_);
-            bool? nzzzzzzzr_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzn_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzzzl_, wzzzzzzzzzzm_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzo_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzzzn_);
+            bool? wzzzzzzzzzzp_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
             {
-                bool? pzzzzzzzo_ = context.Operators.Not((bool?)(FinalList is null));
+                bool? yzzzzzzzzzzm_ = context.Operators.Not((bool?)(FinalList is null));
 
-                return pzzzzzzzo_;
+                return yzzzzzzzzzzm_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzq_, nzzzzzzzr_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzq_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzzzo_, wzzzzzzzzzzp_);
 
-            return nzzzzzzzs_;
+            return wzzzzzzzzzzq_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> nzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)nzzzzzzzg_, nzzzzzzzh_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> nzzzzzzzj_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(nzzzzzzzi_);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzk_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(nzzzzzzzj_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> wzzzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)wzzzzzzzzzze_, wzzzzzzzzzzf_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> wzzzzzzzzzzh_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(wzzzzzzzzzzg_);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzi_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(wzzzzzzzzzzh_);
 
-        return nzzzzzzzk_;
+        return wzzzzzzzzzzi_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Procedure in Header or on Line Item")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<Claim> pzzzzzzzp_ = this.Professional_or_Institutional_Claims(context, claim);
-        string pzzzzzzzq_(CqlCode p)
+        IEnumerable<Claim> yzzzzzzzzzzn_ = this.Professional_or_Institutional_Claims(context, claim);
+        string yzzzzzzzzzzo_(CqlCode p)
         {
-            string pzzzzzzzz_ = p?.code;
+            string yzzzzzzzzzzx_ = p?.code;
 
-            return pzzzzzzzz_;
+            return yzzzzzzzzzzx_;
         };
-        IEnumerable<string> pzzzzzzzr_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, pzzzzzzzq_);
-        IEnumerable<string> pzzzzzzzs_ = context.Operators.Distinct<string>(pzzzzzzzr_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? pzzzzzzzt_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, pzzzzzzzp_, pzzzzzzzs_, default);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] pzzzzzzzu_ = [
-            pzzzzzzzt_,
+        IEnumerable<string> yzzzzzzzzzzp_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, yzzzzzzzzzzo_);
+        IEnumerable<string> yzzzzzzzzzzq_ = context.Operators.Distinct<string>(yzzzzzzzzzzp_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? yzzzzzzzzzzr_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, yzzzzzzzzzzn_, yzzzzzzzzzzq_, default);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] yzzzzzzzzzzs_ = [
+            yzzzzzzzzzzr_,
         ];
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzv_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithProcedure)
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> yzzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithProcedure)
         {
-            IEnumerable<Claim> qzzzzzzza_ = ClaimWithProcedure?.MedicalClaim;
-            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzb_(Claim ClaimofInterest)
+            IEnumerable<Claim> yzzzzzzzzzzy_ = ClaimWithProcedure?.MedicalClaim;
+            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? yzzzzzzzzzzz_(Claim ClaimofInterest)
             {
-                IEnumerable<Claim.ItemComponent> qzzzzzzzg_()
+                IEnumerable<Claim.ItemComponent> zzzzzzzzzzze_()
                 {
                     if (ClaimofInterest is null)
                     {
@@ -312,122 +312,122 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     }
                     else
                     {
-                        List<Claim.ItemComponent> qzzzzzzzn_ = ClaimofInterest?.Item;
-                        bool? qzzzzzzzo_(Claim.ItemComponent ItemOnLine)
+                        List<Claim.ItemComponent> zzzzzzzzzzzl_ = ClaimofInterest?.Item;
+                        bool? zzzzzzzzzzzm_(Claim.ItemComponent ItemOnLine)
                         {
-                            CodeableConcept qzzzzzzzq_ = ItemOnLine?.ProductOrService;
-                            CqlConcept qzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, qzzzzzzzq_);
-                            CqlCode[] qzzzzzzzs_ = qzzzzzzzr_?.codes;
-                            bool? qzzzzzzzt_(CqlCode LineCode)
+                            CodeableConcept zzzzzzzzzzzo_ = ItemOnLine?.ProductOrService;
+                            CqlConcept zzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, zzzzzzzzzzzo_);
+                            CqlCode[] zzzzzzzzzzzq_ = zzzzzzzzzzzp_?.codes;
+                            bool? zzzzzzzzzzzr_(CqlCode LineCode)
                             {
-                                string rzzzzzzzm_ = LineCode?.code;
-                                IEnumerable<string> rzzzzzzzn_ = ClaimWithProcedure?.ProceduresAsStrings;
-                                bool? rzzzzzzzo_ = context.Operators.In<string>(rzzzzzzzm_, rzzzzzzzn_);
+                                string azzzzzzzzzzzk_ = LineCode?.code;
+                                IEnumerable<string> azzzzzzzzzzzl_ = ClaimWithProcedure?.ProceduresAsStrings;
+                                bool? azzzzzzzzzzzm_ = context.Operators.In<string>(azzzzzzzzzzzk_, azzzzzzzzzzzl_);
 
-                                return rzzzzzzzo_;
+                                return azzzzzzzzzzzm_;
                             };
-                            IEnumerable<CqlCode> qzzzzzzzu_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)qzzzzzzzs_, qzzzzzzzt_);
-                            bool? qzzzzzzzv_ = context.Operators.Exists<CqlCode>(qzzzzzzzu_);
-                            List<Claim.ProcedureComponent> qzzzzzzzw_ = ClaimofInterest?.Procedure;
-                            bool? qzzzzzzzx_(Claim.ProcedureComponent @this)
+                            IEnumerable<CqlCode> zzzzzzzzzzzs_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)zzzzzzzzzzzq_, zzzzzzzzzzzr_);
+                            bool? zzzzzzzzzzzt_ = context.Operators.Exists<CqlCode>(zzzzzzzzzzzs_);
+                            List<Claim.ProcedureComponent> zzzzzzzzzzzu_ = ClaimofInterest?.Procedure;
+                            bool? zzzzzzzzzzzv_(Claim.ProcedureComponent @this)
                             {
-                                DataType rzzzzzzzp_ = @this?.Procedure;
-                                bool? rzzzzzzzq_ = context.Operators.Not((bool?)(rzzzzzzzp_ is null));
+                                DataType azzzzzzzzzzzn_ = @this?.Procedure;
+                                bool? azzzzzzzzzzzo_ = context.Operators.Not((bool?)(azzzzzzzzzzzn_ is null));
 
-                                return rzzzzzzzq_;
+                                return azzzzzzzzzzzo_;
                             };
-                            IEnumerable<Claim.ProcedureComponent> qzzzzzzzy_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)qzzzzzzzw_, qzzzzzzzx_);
-                            object qzzzzzzzz_(Claim.ProcedureComponent @this)
+                            IEnumerable<Claim.ProcedureComponent> zzzzzzzzzzzw_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)zzzzzzzzzzzu_, zzzzzzzzzzzv_);
+                            object zzzzzzzzzzzx_(Claim.ProcedureComponent @this)
                             {
-                                DataType rzzzzzzzr_ = @this?.Procedure;
+                                DataType azzzzzzzzzzzp_ = @this?.Procedure;
 
-                                return rzzzzzzzr_;
+                                return azzzzzzzzzzzp_;
                             };
-                            IEnumerable<object> rzzzzzzza_ = context.Operators.Select<Claim.ProcedureComponent, object>(qzzzzzzzy_, qzzzzzzzz_);
-                            bool? rzzzzzzzb_(object @this)
+                            IEnumerable<object> zzzzzzzzzzzy_ = context.Operators.Select<Claim.ProcedureComponent, object>(zzzzzzzzzzzw_, zzzzzzzzzzzx_);
+                            bool? zzzzzzzzzzzz_(object @this)
                             {
-                                object rzzzzzzzs_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                                bool? rzzzzzzzt_ = context.Operators.Not((bool?)(rzzzzzzzs_ is null));
+                                object azzzzzzzzzzzq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                bool? azzzzzzzzzzzr_ = context.Operators.Not((bool?)(azzzzzzzzzzzq_ is null));
 
-                                return rzzzzzzzt_;
+                                return azzzzzzzzzzzr_;
                             };
-                            IEnumerable<object> rzzzzzzzc_ = context.Operators.Where<object>(rzzzzzzza_, rzzzzzzzb_);
-                            object rzzzzzzzd_(object @this)
+                            IEnumerable<object> azzzzzzzzzzza_ = context.Operators.Where<object>(zzzzzzzzzzzy_, zzzzzzzzzzzz_);
+                            object azzzzzzzzzzzb_(object @this)
                             {
-                                object rzzzzzzzu_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                object azzzzzzzzzzzs_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                                return rzzzzzzzu_;
+                                return azzzzzzzzzzzs_;
                             };
-                            IEnumerable<object> rzzzzzzze_ = context.Operators.Select<object, object>(rzzzzzzzc_, rzzzzzzzd_);
-                            IEnumerable<object> rzzzzzzzf_ = context.Operators.FlattenLateBoundList(rzzzzzzze_);
-                            Coding rzzzzzzzg_(object @object) =>
+                            IEnumerable<object> azzzzzzzzzzzc_ = context.Operators.Select<object, object>(azzzzzzzzzzza_, azzzzzzzzzzzb_);
+                            IEnumerable<object> azzzzzzzzzzzd_ = context.Operators.FlattenLateBoundList(azzzzzzzzzzzc_);
+                            Coding azzzzzzzzzzze_(object @object) =>
                                 (Coding)@object;
-                            IEnumerable<Coding> rzzzzzzzh_ = context.Operators.Select<object, Coding>(rzzzzzzzf_, rzzzzzzzg_);
-                            bool? rzzzzzzzi_(Coding HeaderCode)
+                            IEnumerable<Coding> azzzzzzzzzzzf_ = context.Operators.Select<object, Coding>(azzzzzzzzzzzd_, azzzzzzzzzzze_);
+                            bool? azzzzzzzzzzzg_(Coding HeaderCode)
                             {
-                                Code rzzzzzzzv_ = HeaderCode?.CodeElement;
-                                string rzzzzzzzw_ = rzzzzzzzv_?.Value;
-                                IEnumerable<string> rzzzzzzzx_ = ClaimWithProcedure?.ProceduresAsStrings;
-                                bool? rzzzzzzzy_ = context.Operators.In<string>(rzzzzzzzw_, rzzzzzzzx_);
+                                Code azzzzzzzzzzzt_ = HeaderCode?.CodeElement;
+                                string azzzzzzzzzzzu_ = azzzzzzzzzzzt_?.Value;
+                                IEnumerable<string> azzzzzzzzzzzv_ = ClaimWithProcedure?.ProceduresAsStrings;
+                                bool? azzzzzzzzzzzw_ = context.Operators.In<string>(azzzzzzzzzzzu_, azzzzzzzzzzzv_);
 
-                                return rzzzzzzzy_;
+                                return azzzzzzzzzzzw_;
                             };
-                            IEnumerable<Coding> rzzzzzzzj_ = context.Operators.Where<Coding>(rzzzzzzzh_, rzzzzzzzi_);
-                            bool? rzzzzzzzk_ = context.Operators.Exists<Coding>(rzzzzzzzj_);
-                            bool? rzzzzzzzl_ = context.Operators.Or(qzzzzzzzv_, rzzzzzzzk_);
+                            IEnumerable<Coding> azzzzzzzzzzzh_ = context.Operators.Where<Coding>(azzzzzzzzzzzf_, azzzzzzzzzzzg_);
+                            bool? azzzzzzzzzzzi_ = context.Operators.Exists<Coding>(azzzzzzzzzzzh_);
+                            bool? azzzzzzzzzzzj_ = context.Operators.Or(zzzzzzzzzzzt_, azzzzzzzzzzzi_);
 
-                            return rzzzzzzzl_;
+                            return azzzzzzzzzzzj_;
                         };
-                        IEnumerable<Claim.ItemComponent> qzzzzzzzp_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)qzzzzzzzn_, qzzzzzzzo_);
+                        IEnumerable<Claim.ItemComponent> zzzzzzzzzzzn_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)zzzzzzzzzzzl_, zzzzzzzzzzzm_);
 
-                        return qzzzzzzzp_;
+                        return zzzzzzzzzzzn_;
                     }
                 };
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? qzzzzzzzh_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, ClaimofInterest, qzzzzzzzg_());
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] qzzzzzzzi_ = [
-                    qzzzzzzzh_,
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? zzzzzzzzzzzf_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, ClaimofInterest, zzzzzzzzzzze_());
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] zzzzzzzzzzzg_ = [
+                    zzzzzzzzzzzf_,
                 ];
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzj_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? zzzzzzzzzzzh_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
                 {
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? rzzzzzzzz_()
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? azzzzzzzzzzzx_()
                     {
-                        bool szzzzzzza_()
+                        bool azzzzzzzzzzzy_()
                         {
-                            IEnumerable<Claim.ItemComponent> szzzzzzzb_ = LineItemDefinition?.LineItems;
-                            bool? szzzzzzzc_ = context.Operators.Exists<Claim.ItemComponent>(szzzzzzzb_);
+                            IEnumerable<Claim.ItemComponent> azzzzzzzzzzzz_ = LineItemDefinition?.LineItems;
+                            bool? bzzzzzzzzzzza_ = context.Operators.Exists<Claim.ItemComponent>(azzzzzzzzzzzz_);
 
-                            return szzzzzzzc_ ?? false;
+                            return bzzzzzzzzzzza_ ?? false;
                         };
-                        if (szzzzzzza_())
+                        if (azzzzzzzzzzzy_())
                         {
-                            Claim szzzzzzzd_ = LineItemDefinition?.Claim;
-                            IEnumerable<Claim.ItemComponent> szzzzzzze_ = LineItemDefinition?.LineItems;
-                            bool? szzzzzzzf_(Claim.ItemComponent @this)
+                            Claim bzzzzzzzzzzzb_ = LineItemDefinition?.Claim;
+                            IEnumerable<Claim.ItemComponent> bzzzzzzzzzzzc_ = LineItemDefinition?.LineItems;
+                            bool? bzzzzzzzzzzzd_(Claim.ItemComponent @this)
                             {
-                                DataType szzzzzzzn_ = @this?.Serviced;
-                                bool? szzzzzzzo_ = context.Operators.Not((bool?)(szzzzzzzn_ is null));
+                                DataType bzzzzzzzzzzzl_ = @this?.Serviced;
+                                bool? bzzzzzzzzzzzm_ = context.Operators.Not((bool?)(bzzzzzzzzzzzl_ is null));
 
-                                return szzzzzzzo_;
+                                return bzzzzzzzzzzzm_;
                             };
-                            IEnumerable<Claim.ItemComponent> szzzzzzzg_ = context.Operators.Where<Claim.ItemComponent>(szzzzzzze_, szzzzzzzf_);
-                            object szzzzzzzh_(Claim.ItemComponent @this)
+                            IEnumerable<Claim.ItemComponent> bzzzzzzzzzzze_ = context.Operators.Where<Claim.ItemComponent>(bzzzzzzzzzzzc_, bzzzzzzzzzzzd_);
+                            object bzzzzzzzzzzzf_(Claim.ItemComponent @this)
                             {
-                                DataType szzzzzzzp_ = @this?.Serviced;
+                                DataType bzzzzzzzzzzzn_ = @this?.Serviced;
 
-                                return szzzzzzzp_;
+                                return bzzzzzzzzzzzn_;
                             };
-                            IEnumerable<object> szzzzzzzi_ = context.Operators.Select<Claim.ItemComponent, object>(szzzzzzzg_, szzzzzzzh_);
-                            CqlInterval<CqlDateTime> szzzzzzzj_(object NormalDate)
+                            IEnumerable<object> bzzzzzzzzzzzg_ = context.Operators.Select<Claim.ItemComponent, object>(bzzzzzzzzzzze_, bzzzzzzzzzzzf_);
+                            CqlInterval<CqlDateTime> bzzzzzzzzzzzh_(object NormalDate)
                             {
-                                CqlInterval<CqlDateTime> szzzzzzzq_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                CqlInterval<CqlDateTime> bzzzzzzzzzzzo_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
-                                return szzzzzzzq_;
+                                return bzzzzzzzzzzzo_;
                             };
-                            IEnumerable<CqlInterval<CqlDateTime>> szzzzzzzk_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(szzzzzzzi_, szzzzzzzj_);
-                            IEnumerable<CqlInterval<CqlDateTime>> szzzzzzzl_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(szzzzzzzk_);
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzm_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, szzzzzzzd_, szzzzzzzl_);
+                            IEnumerable<CqlInterval<CqlDateTime>> bzzzzzzzzzzzi_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bzzzzzzzzzzzg_, bzzzzzzzzzzzh_);
+                            IEnumerable<CqlInterval<CqlDateTime>> bzzzzzzzzzzzj_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bzzzzzzzzzzzi_);
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzzzk_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, bzzzzzzzzzzzb_, bzzzzzzzzzzzj_);
 
-                            return szzzzzzzm_;
+                            return bzzzzzzzzzzzk_;
                         }
                         else
                         {
@@ -435,53 +435,53 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                     };
 
-                    return rzzzzzzzz_();
+                    return azzzzzzzzzzzx_();
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzk_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)qzzzzzzzi_, qzzzzzzzj_);
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzl_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzk_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzm_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzl_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> zzzzzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)zzzzzzzzzzzg_, zzzzzzzzzzzh_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> zzzzzzzzzzzj_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(zzzzzzzzzzzi_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? zzzzzzzzzzzk_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(zzzzzzzzzzzj_);
 
-                return qzzzzzzzm_;
+                return zzzzzzzzzzzk_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzc_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzza_, qzzzzzzzb_);
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzd_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzc_);
-            bool? qzzzzzzze_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> zzzzzzzzzzza_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(yzzzzzzzzzzy_, yzzzzzzzzzzz_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> zzzzzzzzzzzb_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(zzzzzzzzzzza_);
+            bool? zzzzzzzzzzzc_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
             {
-                bool? szzzzzzzr_ = context.Operators.Not((bool?)(FinalList is null));
+                bool? bzzzzzzzzzzzp_ = context.Operators.Not((bool?)(FinalList is null));
 
-                return szzzzzzzr_;
+                return bzzzzzzzzzzzp_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzf_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzd_, qzzzzzzze_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> zzzzzzzzzzzd_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(zzzzzzzzzzzb_, zzzzzzzzzzzc_);
 
-            return qzzzzzzzf_;
+            return zzzzzzzzzzzd_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> pzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)pzzzzzzzu_, pzzzzzzzv_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> pzzzzzzzx_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(pzzzzzzzw_);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzy_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(pzzzzzzzx_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> yzzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)yzzzzzzzzzzs_, yzzzzzzzzzzt_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> yzzzzzzzzzzv_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(yzzzzzzzzzzu_);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> yzzzzzzzzzzw_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(yzzzzzzzzzzv_);
 
-        return pzzzzzzzy_;
+        return yzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Diagnosis")]
     public (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Medical_Claims_With_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        IEnumerable<Claim> szzzzzzzs_ = this.Professional_or_Institutional_Claims(context, claim);
-        string szzzzzzzt_(CqlCode d)
+        IEnumerable<Claim> bzzzzzzzzzzzq_ = this.Professional_or_Institutional_Claims(context, claim);
+        string bzzzzzzzzzzzr_(CqlCode d)
         {
-            string tzzzzzzzc_ = d?.code;
+            string czzzzzzzzzzza_ = d?.code;
 
-            return tzzzzzzzc_;
+            return czzzzzzzzzzza_;
         };
-        IEnumerable<string> szzzzzzzu_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, szzzzzzzt_);
-        IEnumerable<string> szzzzzzzv_ = context.Operators.Distinct<string>(szzzzzzzu_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? szzzzzzzw_ = (CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf, szzzzzzzs_, szzzzzzzv_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?[] szzzzzzzx_ = [
-            szzzzzzzw_,
+        IEnumerable<string> bzzzzzzzzzzzs_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, bzzzzzzzzzzzr_);
+        IEnumerable<string> bzzzzzzzzzzzt_ = context.Operators.Distinct<string>(bzzzzzzzzzzzs_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? bzzzzzzzzzzzu_ = (CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf, bzzzzzzzzzzzq_, bzzzzzzzzzzzt_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?[] bzzzzzzzzzzzv_ = [
+            bzzzzzzzzzzzu_,
         ];
-        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzy_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? ClaimWithDiagnosis)
+        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? ClaimWithDiagnosis)
         {
-            IEnumerable<Claim> tzzzzzzzd_()
+            IEnumerable<Claim> czzzzzzzzzzzb_()
             {
                 if (ClaimWithDiagnosis?.MedicalClaim is null)
                 {
@@ -489,365 +489,365 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 }
                 else
                 {
-                    IEnumerable<Claim> tzzzzzzzk_ = ClaimWithDiagnosis?.MedicalClaim;
-                    bool? tzzzzzzzl_(Claim DiagnosisLine)
+                    IEnumerable<Claim> czzzzzzzzzzzi_ = ClaimWithDiagnosis?.MedicalClaim;
+                    bool? czzzzzzzzzzzj_(Claim DiagnosisLine)
                     {
-                        List<Claim.DiagnosisComponent> tzzzzzzzn_ = DiagnosisLine?.Diagnosis;
-                        bool? tzzzzzzzo_(Claim.DiagnosisComponent @this)
+                        List<Claim.DiagnosisComponent> czzzzzzzzzzzl_ = DiagnosisLine?.Diagnosis;
+                        bool? czzzzzzzzzzzm_(Claim.DiagnosisComponent @this)
                         {
-                            DataType uzzzzzzzc_ = @this?.Diagnosis;
-                            bool? uzzzzzzzd_ = context.Operators.Not((bool?)(uzzzzzzzc_ is null));
+                            DataType dzzzzzzzzzzza_ = @this?.Diagnosis;
+                            bool? dzzzzzzzzzzzb_ = context.Operators.Not((bool?)(dzzzzzzzzzzza_ is null));
 
-                            return uzzzzzzzd_;
+                            return dzzzzzzzzzzzb_;
                         };
-                        IEnumerable<Claim.DiagnosisComponent> tzzzzzzzp_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)tzzzzzzzn_, tzzzzzzzo_);
-                        object tzzzzzzzq_(Claim.DiagnosisComponent @this)
+                        IEnumerable<Claim.DiagnosisComponent> czzzzzzzzzzzn_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)czzzzzzzzzzzl_, czzzzzzzzzzzm_);
+                        object czzzzzzzzzzzo_(Claim.DiagnosisComponent @this)
                         {
-                            DataType uzzzzzzze_ = @this?.Diagnosis;
+                            DataType dzzzzzzzzzzzc_ = @this?.Diagnosis;
 
-                            return uzzzzzzze_;
+                            return dzzzzzzzzzzzc_;
                         };
-                        IEnumerable<object> tzzzzzzzr_ = context.Operators.Select<Claim.DiagnosisComponent, object>(tzzzzzzzp_, tzzzzzzzq_);
-                        bool? tzzzzzzzs_(object @this)
+                        IEnumerable<object> czzzzzzzzzzzp_ = context.Operators.Select<Claim.DiagnosisComponent, object>(czzzzzzzzzzzn_, czzzzzzzzzzzo_);
+                        bool? czzzzzzzzzzzq_(object @this)
                         {
-                            object uzzzzzzzf_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                            bool? uzzzzzzzg_ = context.Operators.Not((bool?)(uzzzzzzzf_ is null));
+                            object dzzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                            bool? dzzzzzzzzzzze_ = context.Operators.Not((bool?)(dzzzzzzzzzzzd_ is null));
 
-                            return uzzzzzzzg_;
+                            return dzzzzzzzzzzze_;
                         };
-                        IEnumerable<object> tzzzzzzzt_ = context.Operators.Where<object>(tzzzzzzzr_, tzzzzzzzs_);
-                        object tzzzzzzzu_(object @this)
+                        IEnumerable<object> czzzzzzzzzzzr_ = context.Operators.Where<object>(czzzzzzzzzzzp_, czzzzzzzzzzzq_);
+                        object czzzzzzzzzzzs_(object @this)
                         {
-                            object uzzzzzzzh_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                            object dzzzzzzzzzzzf_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                            return uzzzzzzzh_;
+                            return dzzzzzzzzzzzf_;
                         };
-                        IEnumerable<object> tzzzzzzzv_ = context.Operators.Select<object, object>(tzzzzzzzt_, tzzzzzzzu_);
-                        IEnumerable<object> tzzzzzzzw_ = context.Operators.FlattenLateBoundList(tzzzzzzzv_);
-                        Coding tzzzzzzzx_(object @object) =>
+                        IEnumerable<object> czzzzzzzzzzzt_ = context.Operators.Select<object, object>(czzzzzzzzzzzr_, czzzzzzzzzzzs_);
+                        IEnumerable<object> czzzzzzzzzzzu_ = context.Operators.FlattenLateBoundList(czzzzzzzzzzzt_);
+                        Coding czzzzzzzzzzzv_(object @object) =>
                             (Coding)@object;
-                        IEnumerable<Coding> tzzzzzzzy_ = context.Operators.Select<object, Coding>(tzzzzzzzw_, tzzzzzzzx_);
-                        bool? tzzzzzzzz_(Coding HeaderCode)
+                        IEnumerable<Coding> czzzzzzzzzzzw_ = context.Operators.Select<object, Coding>(czzzzzzzzzzzu_, czzzzzzzzzzzv_);
+                        bool? czzzzzzzzzzzx_(Coding HeaderCode)
                         {
-                            Code uzzzzzzzi_ = HeaderCode?.CodeElement;
-                            string uzzzzzzzj_ = uzzzzzzzi_?.Value;
-                            IEnumerable<string> uzzzzzzzk_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-                            bool? uzzzzzzzl_ = context.Operators.In<string>(uzzzzzzzj_, uzzzzzzzk_);
+                            Code dzzzzzzzzzzzg_ = HeaderCode?.CodeElement;
+                            string dzzzzzzzzzzzh_ = dzzzzzzzzzzzg_?.Value;
+                            IEnumerable<string> dzzzzzzzzzzzi_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+                            bool? dzzzzzzzzzzzj_ = context.Operators.In<string>(dzzzzzzzzzzzh_, dzzzzzzzzzzzi_);
 
-                            return uzzzzzzzl_;
+                            return dzzzzzzzzzzzj_;
                         };
-                        IEnumerable<Coding> uzzzzzzza_ = context.Operators.Where<Coding>(tzzzzzzzy_, tzzzzzzzz_);
-                        bool? uzzzzzzzb_ = context.Operators.Exists<Coding>(uzzzzzzza_);
+                        IEnumerable<Coding> czzzzzzzzzzzy_ = context.Operators.Where<Coding>(czzzzzzzzzzzw_, czzzzzzzzzzzx_);
+                        bool? czzzzzzzzzzzz_ = context.Operators.Exists<Coding>(czzzzzzzzzzzy_);
 
-                        return uzzzzzzzb_;
+                        return czzzzzzzzzzzz_;
                     };
-                    IEnumerable<Claim> tzzzzzzzm_ = context.Operators.Where<Claim>(tzzzzzzzk_, tzzzzzzzl_);
+                    IEnumerable<Claim> czzzzzzzzzzzk_ = context.Operators.Where<Claim>(czzzzzzzzzzzi_, czzzzzzzzzzzj_);
 
-                    return tzzzzzzzm_;
+                    return czzzzzzzzzzzk_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? tzzzzzzze_ = (CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV, tzzzzzzzd_());
-            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?[] tzzzzzzzf_ = [
-                tzzzzzzze_,
+            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? czzzzzzzzzzzc_ = (CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV, czzzzzzzzzzzb_());
+            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?[] czzzzzzzzzzzd_ = [
+                czzzzzzzzzzzc_,
             ];
-            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzg_((CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? HeaderDefinition)
+            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? czzzzzzzzzzze_((CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? HeaderDefinition)
             {
-                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? uzzzzzzzm_()
+                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzzzk_()
                 {
-                    bool uzzzzzzzr_()
+                    bool dzzzzzzzzzzzp_()
                     {
-                        IEnumerable<Claim> uzzzzzzzs_ = HeaderDefinition?.DiagnosisItems;
-                        bool? uzzzzzzzt_ = context.Operators.Exists<Claim>(uzzzzzzzs_);
+                        IEnumerable<Claim> dzzzzzzzzzzzq_ = HeaderDefinition?.DiagnosisItems;
+                        bool? dzzzzzzzzzzzr_ = context.Operators.Exists<Claim>(dzzzzzzzzzzzq_);
 
-                        return uzzzzzzzt_ ?? false;
+                        return dzzzzzzzzzzzr_ ?? false;
                     };
-                    if (uzzzzzzzr_())
+                    if (dzzzzzzzzzzzp_())
                     {
-                        IEnumerable<Claim> uzzzzzzzu_ = HeaderDefinition?.DiagnosisItems;
-                        bool? uzzzzzzzw_(Claim @this)
+                        IEnumerable<Claim> dzzzzzzzzzzzs_ = HeaderDefinition?.DiagnosisItems;
+                        bool? dzzzzzzzzzzzu_(Claim @this)
                         {
-                            List<Claim.ItemComponent> vzzzzzzzf_ = @this?.Item;
-                            bool? vzzzzzzzg_ = context.Operators.Not((bool?)(vzzzzzzzf_ is null));
+                            List<Claim.ItemComponent> ezzzzzzzzzzzd_ = @this?.Item;
+                            bool? ezzzzzzzzzzze_ = context.Operators.Not((bool?)(ezzzzzzzzzzzd_ is null));
 
-                            return vzzzzzzzg_;
+                            return ezzzzzzzzzzze_;
                         };
-                        IEnumerable<Claim> uzzzzzzzx_ = context.Operators.Where<Claim>(uzzzzzzzu_, uzzzzzzzw_);
-                        List<Claim.ItemComponent> uzzzzzzzy_(Claim @this)
+                        IEnumerable<Claim> dzzzzzzzzzzzv_ = context.Operators.Where<Claim>(dzzzzzzzzzzzs_, dzzzzzzzzzzzu_);
+                        List<Claim.ItemComponent> dzzzzzzzzzzzw_(Claim @this)
                         {
-                            List<Claim.ItemComponent> vzzzzzzzh_ = @this?.Item;
+                            List<Claim.ItemComponent> ezzzzzzzzzzzf_ = @this?.Item;
 
-                            return vzzzzzzzh_;
+                            return ezzzzzzzzzzzf_;
                         };
-                        IEnumerable<List<Claim.ItemComponent>> uzzzzzzzz_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(uzzzzzzzx_, uzzzzzzzy_);
-                        IEnumerable<Claim.ItemComponent> vzzzzzzza_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)uzzzzzzzz_);
-                        CqlInterval<CqlDateTime> vzzzzzzzb_(Claim.ItemComponent NormalDate)
+                        IEnumerable<List<Claim.ItemComponent>> dzzzzzzzzzzzx_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(dzzzzzzzzzzzv_, dzzzzzzzzzzzw_);
+                        IEnumerable<Claim.ItemComponent> dzzzzzzzzzzzy_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)dzzzzzzzzzzzx_);
+                        CqlInterval<CqlDateTime> dzzzzzzzzzzzz_(Claim.ItemComponent NormalDate)
                         {
-                            DataType vzzzzzzzi_ = NormalDate?.Serviced;
-                            CqlInterval<CqlDateTime> vzzzzzzzj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, vzzzzzzzi_);
+                            DataType ezzzzzzzzzzzg_ = NormalDate?.Serviced;
+                            CqlInterval<CqlDateTime> ezzzzzzzzzzzh_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ezzzzzzzzzzzg_);
 
-                            return vzzzzzzzj_;
+                            return ezzzzzzzzzzzh_;
                         };
-                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzc_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(vzzzzzzza_, vzzzzzzzb_);
-                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzd_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(vzzzzzzzc_);
-                        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? vzzzzzzze_ = (CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg, uzzzzzzzu_, vzzzzzzzd_);
+                        IEnumerable<CqlInterval<CqlDateTime>> ezzzzzzzzzzza_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(dzzzzzzzzzzzy_, dzzzzzzzzzzzz_);
+                        IEnumerable<CqlInterval<CqlDateTime>> ezzzzzzzzzzzb_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ezzzzzzzzzzza_);
+                        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ezzzzzzzzzzzc_ = (CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg, dzzzzzzzzzzzs_, ezzzzzzzzzzzb_);
 
-                        return vzzzzzzze_;
+                        return ezzzzzzzzzzzc_;
                     }
                     else
                     {
                         return null as (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                     }
                 };
-                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] uzzzzzzzn_ = [
-                    uzzzzzzzm_(),
+                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] dzzzzzzzzzzzl_ = [
+                    dzzzzzzzzzzzk_(),
                 ];
-                bool? uzzzzzzzo_((CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                bool? dzzzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? vzzzzzzzk_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? ezzzzzzzzzzzi_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return vzzzzzzzk_;
+                    return ezzzzzzzzzzzi_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzp_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)uzzzzzzzn_, uzzzzzzzo_);
-                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? uzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(uzzzzzzzp_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzzzzn_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)dzzzzzzzzzzzl_, dzzzzzzzzzzzm_);
+                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzzzo_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzzzzn_);
 
-                return uzzzzzzzq_;
+                return dzzzzzzzzzzzo_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> tzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?>)tzzzzzzzf_, tzzzzzzzg_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> tzzzzzzzi_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(tzzzzzzzh_);
-            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzj_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(tzzzzzzzi_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzzzzf_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?>)czzzzzzzzzzzd_, czzzzzzzzzzze_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzzzzg_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(czzzzzzzzzzzf_);
+            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? czzzzzzzzzzzh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(czzzzzzzzzzzg_);
 
-            return tzzzzzzzj_;
+            return czzzzzzzzzzzh_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)szzzzzzzx_, szzzzzzzy_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> tzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzz_);
-        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(tzzzzzzza_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)bzzzzzzzzzzzv_, bzzzzzzzzzzzw_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(bzzzzzzzzzzzx_);
+        (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(bzzzzzzzzzzzy_);
 
-        return tzzzzzzzb_;
+        return bzzzzzzzzzzzz_;
     }
 
 
     [CqlExpressionDefinition("Pharmacy Claim With Medication")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> Pharmacy_Claim_With_Medication(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
     {
-        IEnumerable<Claim> vzzzzzzzl_ = this.Pharmacy_Claims(context, claim);
-        string vzzzzzzzm_(CqlCode p)
+        IEnumerable<Claim> ezzzzzzzzzzzj_ = this.Pharmacy_Claims(context, claim);
+        string ezzzzzzzzzzzk_(CqlCode p)
         {
-            string vzzzzzzzu_ = p?.code;
+            string ezzzzzzzzzzzs_ = p?.code;
 
-            return vzzzzzzzu_;
+            return ezzzzzzzzzzzs_;
         };
-        IEnumerable<string> vzzzzzzzn_ = context.Operators.Select<CqlCode, string>(MedicationCodes, vzzzzzzzm_);
-        IEnumerable<string> vzzzzzzzo_ = context.Operators.Distinct<string>(vzzzzzzzn_);
-        (CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)? vzzzzzzzp_ = (CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK, vzzzzzzzl_, vzzzzzzzo_);
-        (CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?[] vzzzzzzzq_ = [
-            vzzzzzzzp_,
+        IEnumerable<string> ezzzzzzzzzzzl_ = context.Operators.Select<CqlCode, string>(MedicationCodes, ezzzzzzzzzzzk_);
+        IEnumerable<string> ezzzzzzzzzzzm_ = context.Operators.Distinct<string>(ezzzzzzzzzzzl_);
+        (CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)? ezzzzzzzzzzzn_ = (CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK, ezzzzzzzzzzzj_, ezzzzzzzzzzzm_);
+        (CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?[] ezzzzzzzzzzzo_ = [
+            ezzzzzzzzzzzn_,
         ];
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> vzzzzzzzr_((CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)? ClaimWithMedication)
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> ezzzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)? ClaimWithMedication)
         {
-            IEnumerable<Claim> vzzzzzzzv_ = ClaimWithMedication?.PharmacyClaim;
-            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? vzzzzzzzw_(Claim Pharmacy)
+            IEnumerable<Claim> ezzzzzzzzzzzt_ = ClaimWithMedication?.PharmacyClaim;
+            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? ezzzzzzzzzzzu_(Claim Pharmacy)
             {
-                List<Claim.ItemComponent> wzzzzzzza_ = Pharmacy?.Item;
-                bool? wzzzzzzzb_(Claim.ItemComponent ItemOnLine)
+                List<Claim.ItemComponent> ezzzzzzzzzzzy_ = Pharmacy?.Item;
+                bool? ezzzzzzzzzzzz_(Claim.ItemComponent ItemOnLine)
                 {
-                    CodeableConcept wzzzzzzzi_ = ItemOnLine?.ProductOrService;
-                    CqlConcept wzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, wzzzzzzzi_);
-                    CqlCode[] wzzzzzzzk_ = wzzzzzzzj_?.codes;
-                    bool? wzzzzzzzl_(CqlCode LineCode)
+                    CodeableConcept fzzzzzzzzzzzg_ = ItemOnLine?.ProductOrService;
+                    CqlConcept fzzzzzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, fzzzzzzzzzzzg_);
+                    CqlCode[] fzzzzzzzzzzzi_ = fzzzzzzzzzzzh_?.codes;
+                    bool? fzzzzzzzzzzzj_(CqlCode LineCode)
                     {
-                        string wzzzzzzzo_ = LineCode?.code;
-                        IEnumerable<string> wzzzzzzzp_ = ClaimWithMedication?.MedicationsAsStrings;
-                        bool? wzzzzzzzq_ = context.Operators.In<string>(wzzzzzzzo_, wzzzzzzzp_);
+                        string fzzzzzzzzzzzm_ = LineCode?.code;
+                        IEnumerable<string> fzzzzzzzzzzzn_ = ClaimWithMedication?.MedicationsAsStrings;
+                        bool? fzzzzzzzzzzzo_ = context.Operators.In<string>(fzzzzzzzzzzzm_, fzzzzzzzzzzzn_);
 
-                        return wzzzzzzzq_;
+                        return fzzzzzzzzzzzo_;
                     };
-                    IEnumerable<CqlCode> wzzzzzzzm_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)wzzzzzzzk_, wzzzzzzzl_);
-                    bool? wzzzzzzzn_ = context.Operators.Exists<CqlCode>(wzzzzzzzm_);
+                    IEnumerable<CqlCode> fzzzzzzzzzzzk_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)fzzzzzzzzzzzi_, fzzzzzzzzzzzj_);
+                    bool? fzzzzzzzzzzzl_ = context.Operators.Exists<CqlCode>(fzzzzzzzzzzzk_);
 
-                    return wzzzzzzzn_;
+                    return fzzzzzzzzzzzl_;
                 };
-                IEnumerable<Claim.ItemComponent> wzzzzzzzc_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)wzzzzzzza_, wzzzzzzzb_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? wzzzzzzzd_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, Pharmacy, wzzzzzzzc_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] wzzzzzzze_ = [
-                    wzzzzzzzd_,
+                IEnumerable<Claim.ItemComponent> fzzzzzzzzzzza_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ezzzzzzzzzzzy_, ezzzzzzzzzzzz_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? fzzzzzzzzzzzb_ = (CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP, Pharmacy, fzzzzzzzzzzza_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?[] fzzzzzzzzzzzc_ = [
+                    fzzzzzzzzzzzb_,
                 ];
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? wzzzzzzzf_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? fzzzzzzzzzzzd_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)? LineItemDefinition)
                 {
-                    Claim wzzzzzzzr_ = LineItemDefinition?.Claim;
-                    Claim[] wzzzzzzzs_ = [
-                        wzzzzzzzr_,
+                    Claim fzzzzzzzzzzzp_ = LineItemDefinition?.Claim;
+                    Claim[] fzzzzzzzzzzzq_ = [
+                        fzzzzzzzzzzzp_,
                     ];
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? wzzzzzzzt_(Claim ClaimLines)
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? fzzzzzzzzzzzr_(Claim ClaimLines)
                     {
-                        List<Claim.ItemComponent> wzzzzzzzw_ = ClaimLines?.Item;
-                        bool? wzzzzzzzx_(Claim.ItemComponent i)
+                        List<Claim.ItemComponent> fzzzzzzzzzzzu_ = ClaimLines?.Item;
+                        bool? fzzzzzzzzzzzv_(Claim.ItemComponent i)
                         {
-                            CodeableConcept xzzzzzzzg_ = i?.ProductOrService;
-                            CqlConcept xzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, xzzzzzzzg_);
-                            CqlCode[] xzzzzzzzi_ = xzzzzzzzh_?.codes;
-                            bool? xzzzzzzzj_(CqlCode LineCode)
+                            CodeableConcept gzzzzzzzzzzze_ = i?.ProductOrService;
+                            CqlConcept gzzzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, gzzzzzzzzzzze_);
+                            CqlCode[] gzzzzzzzzzzzg_ = gzzzzzzzzzzzf_?.codes;
+                            bool? gzzzzzzzzzzzh_(CqlCode LineCode)
                             {
-                                string xzzzzzzzm_ = LineCode?.code;
-                                IEnumerable<string> xzzzzzzzn_ = ClaimWithMedication?.MedicationsAsStrings;
-                                bool? xzzzzzzzo_ = context.Operators.In<string>(xzzzzzzzm_, xzzzzzzzn_);
+                                string gzzzzzzzzzzzk_ = LineCode?.code;
+                                IEnumerable<string> gzzzzzzzzzzzl_ = ClaimWithMedication?.MedicationsAsStrings;
+                                bool? gzzzzzzzzzzzm_ = context.Operators.In<string>(gzzzzzzzzzzzk_, gzzzzzzzzzzzl_);
 
-                                return xzzzzzzzo_;
+                                return gzzzzzzzzzzzm_;
                             };
-                            IEnumerable<CqlCode> xzzzzzzzk_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)xzzzzzzzi_, xzzzzzzzj_);
-                            bool? xzzzzzzzl_ = context.Operators.Exists<CqlCode>(xzzzzzzzk_);
+                            IEnumerable<CqlCode> gzzzzzzzzzzzi_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)gzzzzzzzzzzzg_, gzzzzzzzzzzzh_);
+                            bool? gzzzzzzzzzzzj_ = context.Operators.Exists<CqlCode>(gzzzzzzzzzzzi_);
 
-                            return xzzzzzzzl_;
+                            return gzzzzzzzzzzzj_;
                         };
-                        IEnumerable<Claim.ItemComponent> wzzzzzzzy_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)wzzzzzzzw_, wzzzzzzzx_);
-                        (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? wzzzzzzzz_(Claim.ItemComponent i)
+                        IEnumerable<Claim.ItemComponent> fzzzzzzzzzzzw_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)fzzzzzzzzzzzu_, fzzzzzzzzzzzv_);
+                        (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? fzzzzzzzzzzzx_(Claim.ItemComponent i)
                         {
-                            CqlInterval<CqlDateTime> xzzzzzzzp_()
+                            CqlInterval<CqlDateTime> gzzzzzzzzzzzn_()
                             {
-                                bool xzzzzzzzr_()
+                                bool gzzzzzzzzzzzp_()
                                 {
-                                    Quantity xzzzzzzzs_ = i?.Quantity;
-                                    bool? xzzzzzzzt_ = context.Operators.Not((bool?)(xzzzzzzzs_ is null));
+                                    Quantity gzzzzzzzzzzzq_ = i?.Quantity;
+                                    bool? gzzzzzzzzzzzr_ = context.Operators.Not((bool?)(gzzzzzzzzzzzq_ is null));
 
-                                    return xzzzzzzzt_ ?? false;
+                                    return gzzzzzzzzzzzr_ ?? false;
                                 };
-                                if (xzzzzzzzr_())
+                                if (gzzzzzzzzzzzp_())
                                 {
-                                    CqlInterval<CqlDateTime> xzzzzzzzu_()
+                                    CqlInterval<CqlDateTime> gzzzzzzzzzzzs_()
                                     {
-                                        bool xzzzzzzzv_()
+                                        bool gzzzzzzzzzzzt_()
                                         {
-                                            DataType xzzzzzzzw_ = i?.Serviced;
-                                            bool xzzzzzzzx_ = xzzzzzzzw_ is Period;
+                                            DataType gzzzzzzzzzzzu_ = i?.Serviced;
+                                            bool gzzzzzzzzzzzv_ = gzzzzzzzzzzzu_ is Period;
 
-                                            return xzzzzzzzx_;
+                                            return gzzzzzzzzzzzv_;
                                         };
-                                        if (xzzzzzzzv_())
+                                        if (gzzzzzzzzzzzt_())
                                         {
-                                            DataType xzzzzzzzy_ = i?.Serviced;
-                                            CqlInterval<CqlDateTime> xzzzzzzzz_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, xzzzzzzzy_);
-                                            CqlDateTime yzzzzzzza_ = context.Operators.Start(xzzzzzzzz_);
-                                            CqlInterval<CqlDateTime> yzzzzzzzc_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, xzzzzzzzy_);
-                                            CqlDateTime yzzzzzzzd_ = context.Operators.Start(yzzzzzzzc_);
-                                            Quantity yzzzzzzze_ = i?.Quantity;
-                                            FhirDecimal yzzzzzzzf_ = yzzzzzzze_?.ValueElement;
-                                            decimal? yzzzzzzzg_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, yzzzzzzzf_);
-                                            CqlDateTime yzzzzzzzh_ = context.Operators.Add(yzzzzzzzd_, new CqlQuantity(yzzzzzzzg_, "day"));
-                                            CqlQuantity yzzzzzzzi_ = context.Operators.Quantity(1m, "day");
-                                            CqlDateTime yzzzzzzzj_ = context.Operators.Subtract(yzzzzzzzh_, yzzzzzzzi_);
-                                            CqlInterval<CqlDateTime> yzzzzzzzk_ = context.Operators.Interval(yzzzzzzza_, yzzzzzzzj_, true, true);
+                                            DataType gzzzzzzzzzzzw_ = i?.Serviced;
+                                            CqlInterval<CqlDateTime> gzzzzzzzzzzzx_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, gzzzzzzzzzzzw_);
+                                            CqlDateTime gzzzzzzzzzzzy_ = context.Operators.Start(gzzzzzzzzzzzx_);
+                                            CqlInterval<CqlDateTime> hzzzzzzzzzzza_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, gzzzzzzzzzzzw_);
+                                            CqlDateTime hzzzzzzzzzzzb_ = context.Operators.Start(hzzzzzzzzzzza_);
+                                            Quantity hzzzzzzzzzzzc_ = i?.Quantity;
+                                            FhirDecimal hzzzzzzzzzzzd_ = hzzzzzzzzzzzc_?.ValueElement;
+                                            decimal? hzzzzzzzzzzze_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, hzzzzzzzzzzzd_);
+                                            CqlDateTime hzzzzzzzzzzzf_ = context.Operators.Add(hzzzzzzzzzzzb_, new CqlQuantity(hzzzzzzzzzzze_, "day"));
+                                            CqlQuantity hzzzzzzzzzzzg_ = context.Operators.Quantity(1m, "day");
+                                            CqlDateTime hzzzzzzzzzzzh_ = context.Operators.Subtract(hzzzzzzzzzzzf_, hzzzzzzzzzzzg_);
+                                            CqlInterval<CqlDateTime> hzzzzzzzzzzzi_ = context.Operators.Interval(gzzzzzzzzzzzy_, hzzzzzzzzzzzh_, true, true);
 
-                                            return yzzzzzzzk_;
+                                            return hzzzzzzzzzzzi_;
                                         }
                                         else
                                         {
-                                            DataType yzzzzzzzl_ = i?.Serviced;
-                                            CqlDate yzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            CqlDate yzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            Quantity yzzzzzzzp_ = i?.Quantity;
-                                            FhirDecimal yzzzzzzzq_ = yzzzzzzzp_?.ValueElement;
-                                            decimal? yzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, yzzzzzzzq_);
-                                            CqlDate yzzzzzzzs_ = context.Operators.Add(yzzzzzzzo_, new CqlQuantity(yzzzzzzzr_, "day"));
-                                            CqlQuantity yzzzzzzzt_ = context.Operators.Quantity(1m, "day");
-                                            CqlDate yzzzzzzzu_ = context.Operators.Subtract(yzzzzzzzs_, yzzzzzzzt_);
-                                            CqlInterval<CqlDate> yzzzzzzzv_ = context.Operators.Interval(yzzzzzzzm_, yzzzzzzzu_, true, true);
-                                            CqlDate yzzzzzzzw_ = yzzzzzzzv_?.low;
-                                            CqlDateTime yzzzzzzzx_ = context.Operators.ConvertDateToDateTime(yzzzzzzzw_);
-                                            CqlDate yzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            CqlDate zzzzzzzzb_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            FhirDecimal zzzzzzzzd_ = yzzzzzzzp_?.ValueElement;
-                                            decimal? zzzzzzzze_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, zzzzzzzzd_);
-                                            CqlDate zzzzzzzzf_ = context.Operators.Add(zzzzzzzzb_, new CqlQuantity(zzzzzzzze_, "day"));
-                                            CqlDate zzzzzzzzh_ = context.Operators.Subtract(zzzzzzzzf_, yzzzzzzzt_);
-                                            CqlInterval<CqlDate> zzzzzzzzi_ = context.Operators.Interval(yzzzzzzzz_, zzzzzzzzh_, true, true);
-                                            CqlDate zzzzzzzzj_ = zzzzzzzzi_?.high;
-                                            CqlDateTime zzzzzzzzk_ = context.Operators.ConvertDateToDateTime(zzzzzzzzj_);
-                                            CqlDate zzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            CqlDate zzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            FhirDecimal zzzzzzzzq_ = yzzzzzzzp_?.ValueElement;
-                                            decimal? zzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, zzzzzzzzq_);
-                                            CqlDate zzzzzzzzs_ = context.Operators.Add(zzzzzzzzo_, new CqlQuantity(zzzzzzzzr_, "day"));
-                                            CqlDate zzzzzzzzu_ = context.Operators.Subtract(zzzzzzzzs_, yzzzzzzzt_);
-                                            CqlInterval<CqlDate> zzzzzzzzv_ = context.Operators.Interval(zzzzzzzzm_, zzzzzzzzu_, true, true);
-                                            bool? zzzzzzzzw_ = zzzzzzzzv_?.lowClosed;
-                                            CqlDate zzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            CqlDate azzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToDate(context, yzzzzzzzl_ as Date);
-                                            FhirDecimal azzzzzzzzc_ = yzzzzzzzp_?.ValueElement;
-                                            decimal? azzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, azzzzzzzzc_);
-                                            CqlDate azzzzzzzze_ = context.Operators.Add(azzzzzzzza_, new CqlQuantity(azzzzzzzzd_, "day"));
-                                            CqlDate azzzzzzzzg_ = context.Operators.Subtract(azzzzzzzze_, yzzzzzzzt_);
-                                            CqlInterval<CqlDate> azzzzzzzzh_ = context.Operators.Interval(zzzzzzzzy_, azzzzzzzzg_, true, true);
-                                            bool? azzzzzzzzi_ = azzzzzzzzh_?.highClosed;
-                                            CqlInterval<CqlDateTime> azzzzzzzzj_ = context.Operators.Interval(yzzzzzzzx_, zzzzzzzzk_, zzzzzzzzw_, azzzzzzzzi_);
+                                            DataType hzzzzzzzzzzzj_ = i?.Serviced;
+                                            CqlDate hzzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            CqlDate hzzzzzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            Quantity hzzzzzzzzzzzn_ = i?.Quantity;
+                                            FhirDecimal hzzzzzzzzzzzo_ = hzzzzzzzzzzzn_?.ValueElement;
+                                            decimal? hzzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, hzzzzzzzzzzzo_);
+                                            CqlDate hzzzzzzzzzzzq_ = context.Operators.Add(hzzzzzzzzzzzm_, new CqlQuantity(hzzzzzzzzzzzp_, "day"));
+                                            CqlQuantity hzzzzzzzzzzzr_ = context.Operators.Quantity(1m, "day");
+                                            CqlDate hzzzzzzzzzzzs_ = context.Operators.Subtract(hzzzzzzzzzzzq_, hzzzzzzzzzzzr_);
+                                            CqlInterval<CqlDate> hzzzzzzzzzzzt_ = context.Operators.Interval(hzzzzzzzzzzzk_, hzzzzzzzzzzzs_, true, true);
+                                            CqlDate hzzzzzzzzzzzu_ = hzzzzzzzzzzzt_?.low;
+                                            CqlDateTime hzzzzzzzzzzzv_ = context.Operators.ConvertDateToDateTime(hzzzzzzzzzzzu_);
+                                            CqlDate hzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            CqlDate hzzzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            FhirDecimal izzzzzzzzzzzb_ = hzzzzzzzzzzzn_?.ValueElement;
+                                            decimal? izzzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, izzzzzzzzzzzb_);
+                                            CqlDate izzzzzzzzzzzd_ = context.Operators.Add(hzzzzzzzzzzzz_, new CqlQuantity(izzzzzzzzzzzc_, "day"));
+                                            CqlDate izzzzzzzzzzzf_ = context.Operators.Subtract(izzzzzzzzzzzd_, hzzzzzzzzzzzr_);
+                                            CqlInterval<CqlDate> izzzzzzzzzzzg_ = context.Operators.Interval(hzzzzzzzzzzzx_, izzzzzzzzzzzf_, true, true);
+                                            CqlDate izzzzzzzzzzzh_ = izzzzzzzzzzzg_?.high;
+                                            CqlDateTime izzzzzzzzzzzi_ = context.Operators.ConvertDateToDateTime(izzzzzzzzzzzh_);
+                                            CqlDate izzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            CqlDate izzzzzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            FhirDecimal izzzzzzzzzzzo_ = hzzzzzzzzzzzn_?.ValueElement;
+                                            decimal? izzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, izzzzzzzzzzzo_);
+                                            CqlDate izzzzzzzzzzzq_ = context.Operators.Add(izzzzzzzzzzzm_, new CqlQuantity(izzzzzzzzzzzp_, "day"));
+                                            CqlDate izzzzzzzzzzzs_ = context.Operators.Subtract(izzzzzzzzzzzq_, hzzzzzzzzzzzr_);
+                                            CqlInterval<CqlDate> izzzzzzzzzzzt_ = context.Operators.Interval(izzzzzzzzzzzk_, izzzzzzzzzzzs_, true, true);
+                                            bool? izzzzzzzzzzzu_ = izzzzzzzzzzzt_?.lowClosed;
+                                            CqlDate izzzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            CqlDate izzzzzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToDate(context, hzzzzzzzzzzzj_ as Date);
+                                            FhirDecimal jzzzzzzzzzzza_ = hzzzzzzzzzzzn_?.ValueElement;
+                                            decimal? jzzzzzzzzzzzb_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, jzzzzzzzzzzza_);
+                                            CqlDate jzzzzzzzzzzzc_ = context.Operators.Add(izzzzzzzzzzzy_, new CqlQuantity(jzzzzzzzzzzzb_, "day"));
+                                            CqlDate jzzzzzzzzzzze_ = context.Operators.Subtract(jzzzzzzzzzzzc_, hzzzzzzzzzzzr_);
+                                            CqlInterval<CqlDate> jzzzzzzzzzzzf_ = context.Operators.Interval(izzzzzzzzzzzw_, jzzzzzzzzzzze_, true, true);
+                                            bool? jzzzzzzzzzzzg_ = jzzzzzzzzzzzf_?.highClosed;
+                                            CqlInterval<CqlDateTime> jzzzzzzzzzzzh_ = context.Operators.Interval(hzzzzzzzzzzzv_, izzzzzzzzzzzi_, izzzzzzzzzzzu_, jzzzzzzzzzzzg_);
 
-                                            return azzzzzzzzj_;
+                                            return jzzzzzzzzzzzh_;
                                         }
                                     };
 
-                                    return xzzzzzzzu_();
+                                    return gzzzzzzzzzzzs_();
                                 }
                                 else
                                 {
                                     return null as CqlInterval<CqlDateTime>;
                                 }
                             };
-                            (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? xzzzzzzzq_ = (CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN, xzzzzzzzp_());
+                            (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? gzzzzzzzzzzzo_ = (CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN, gzzzzzzzzzzzn_());
 
-                            return xzzzzzzzq_;
+                            return gzzzzzzzzzzzo_;
                         };
-                        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> xzzzzzzza_ = context.Operators.Select<Claim.ItemComponent, (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>(wzzzzzzzy_, wzzzzzzzz_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)? xzzzzzzzb_ = (CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE, xzzzzzzza_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?[] xzzzzzzzc_ = [
-                            xzzzzzzzb_,
+                        IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> fzzzzzzzzzzzy_ = context.Operators.Select<Claim.ItemComponent, (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>(fzzzzzzzzzzzw_, fzzzzzzzzzzzx_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)? fzzzzzzzzzzzz_ = (CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE, fzzzzzzzzzzzy_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?[] gzzzzzzzzzzza_ = [
+                            fzzzzzzzzzzzz_,
                         ];
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? xzzzzzzzd_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)? ItemCalculation)
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? gzzzzzzzzzzzb_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)? ItemCalculation)
                         {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? azzzzzzzzk_()
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? jzzzzzzzzzzzi_()
                             {
-                                bool azzzzzzzzl_()
+                                bool jzzzzzzzzzzzj_()
                                 {
-                                    IEnumerable<Claim.ItemComponent> azzzzzzzzm_ = LineItemDefinition?.LineItems;
-                                    bool? azzzzzzzzn_ = context.Operators.Exists<Claim.ItemComponent>(azzzzzzzzm_);
+                                    IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzk_ = LineItemDefinition?.LineItems;
+                                    bool? jzzzzzzzzzzzl_ = context.Operators.Exists<Claim.ItemComponent>(jzzzzzzzzzzzk_);
 
-                                    return azzzzzzzzn_ ?? false;
+                                    return jzzzzzzzzzzzl_ ?? false;
                                 };
-                                if (azzzzzzzzl_())
+                                if (jzzzzzzzzzzzj_())
                                 {
-                                    Claim azzzzzzzzo_ = LineItemDefinition?.Claim;
-                                    IEnumerable<Claim.ItemComponent> azzzzzzzzp_ = LineItemDefinition?.LineItems;
-                                    bool? azzzzzzzzr_(Claim.ItemComponent @this)
+                                    Claim jzzzzzzzzzzzm_ = LineItemDefinition?.Claim;
+                                    IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzn_ = LineItemDefinition?.LineItems;
+                                    bool? jzzzzzzzzzzzp_(Claim.ItemComponent @this)
                                     {
-                                        DataType bzzzzzzzzc_ = @this?.Serviced;
-                                        bool? bzzzzzzzzd_ = context.Operators.Not((bool?)(bzzzzzzzzc_ is null));
+                                        DataType kzzzzzzzzzzza_ = @this?.Serviced;
+                                        bool? kzzzzzzzzzzzb_ = context.Operators.Not((bool?)(kzzzzzzzzzzza_ is null));
 
-                                        return bzzzzzzzzd_;
+                                        return kzzzzzzzzzzzb_;
                                     };
-                                    IEnumerable<Claim.ItemComponent> azzzzzzzzs_ = context.Operators.Where<Claim.ItemComponent>(azzzzzzzzp_, azzzzzzzzr_);
-                                    object azzzzzzzzt_(Claim.ItemComponent @this)
+                                    IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzq_ = context.Operators.Where<Claim.ItemComponent>(jzzzzzzzzzzzn_, jzzzzzzzzzzzp_);
+                                    object jzzzzzzzzzzzr_(Claim.ItemComponent @this)
                                     {
-                                        DataType bzzzzzzzze_ = @this?.Serviced;
+                                        DataType kzzzzzzzzzzzc_ = @this?.Serviced;
 
-                                        return bzzzzzzzze_;
+                                        return kzzzzzzzzzzzc_;
                                     };
-                                    IEnumerable<object> azzzzzzzzu_ = context.Operators.Select<Claim.ItemComponent, object>(azzzzzzzzs_, azzzzzzzzt_);
-                                    CqlInterval<CqlDateTime> azzzzzzzzv_(object NormalDate)
+                                    IEnumerable<object> jzzzzzzzzzzzs_ = context.Operators.Select<Claim.ItemComponent, object>(jzzzzzzzzzzzq_, jzzzzzzzzzzzr_);
+                                    CqlInterval<CqlDateTime> jzzzzzzzzzzzt_(object NormalDate)
                                     {
-                                        CqlInterval<CqlDateTime> bzzzzzzzzf_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                        CqlInterval<CqlDateTime> kzzzzzzzzzzzd_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
-                                        return bzzzzzzzzf_;
+                                        return kzzzzzzzzzzzd_;
                                     };
-                                    IEnumerable<CqlInterval<CqlDateTime>> azzzzzzzzw_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(azzzzzzzzu_, azzzzzzzzv_);
-                                    IEnumerable<CqlInterval<CqlDateTime>> azzzzzzzzx_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(azzzzzzzzw_);
-                                    IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> azzzzzzzzy_ = ItemCalculation?.CoveredDays;
-                                    CqlInterval<CqlDateTime> azzzzzzzzz_((CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? d)
+                                    IEnumerable<CqlInterval<CqlDateTime>> jzzzzzzzzzzzu_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(jzzzzzzzzzzzs_, jzzzzzzzzzzzt_);
+                                    IEnumerable<CqlInterval<CqlDateTime>> jzzzzzzzzzzzv_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(jzzzzzzzzzzzu_);
+                                    IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> jzzzzzzzzzzzw_ = ItemCalculation?.CoveredDays;
+                                    CqlInterval<CqlDateTime> jzzzzzzzzzzzx_((CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? d)
                                     {
-                                        CqlInterval<CqlDateTime> bzzzzzzzzg_ = d?.DaysSupplyInterval;
+                                        CqlInterval<CqlDateTime> kzzzzzzzzzzze_ = d?.DaysSupplyInterval;
 
-                                        return bzzzzzzzzg_;
+                                        return kzzzzzzzzzzze_;
                                     };
-                                    IEnumerable<CqlInterval<CqlDateTime>> bzzzzzzzza_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?, CqlInterval<CqlDateTime>>(azzzzzzzzy_, azzzzzzzzz_);
-                                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? bzzzzzzzzb_ = (CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf, azzzzzzzzo_, azzzzzzzzp_, azzzzzzzzx_, bzzzzzzzza_);
+                                    IEnumerable<CqlInterval<CqlDateTime>> jzzzzzzzzzzzy_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?, CqlInterval<CqlDateTime>>(jzzzzzzzzzzzw_, jzzzzzzzzzzzx_);
+                                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? jzzzzzzzzzzzz_ = (CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf, jzzzzzzzzzzzm_, jzzzzzzzzzzzn_, jzzzzzzzzzzzv_, jzzzzzzzzzzzy_);
 
-                                    return bzzzzzzzzb_;
+                                    return jzzzzzzzzzzzz_;
                                 }
                                 else
                                 {
@@ -855,68 +855,68 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 }
                             };
 
-                            return azzzzzzzzk_();
+                            return jzzzzzzzzzzzi_();
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> xzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?>)xzzzzzzzc_, xzzzzzzzd_);
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? xzzzzzzzf_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(xzzzzzzze_);
+                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> gzzzzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)?>)gzzzzzzzzzzza_, gzzzzzzzzzzzb_);
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? gzzzzzzzzzzzd_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(gzzzzzzzzzzzc_);
 
-                        return xzzzzzzzf_;
+                        return gzzzzzzzzzzzd_;
                     };
-                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> wzzzzzzzu_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<Claim>)wzzzzzzzs_, wzzzzzzzt_);
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? wzzzzzzzv_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(wzzzzzzzu_);
+                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> fzzzzzzzzzzzs_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<Claim>)fzzzzzzzzzzzq_, fzzzzzzzzzzzr_);
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? fzzzzzzzzzzzt_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(fzzzzzzzzzzzs_);
 
-                    return wzzzzzzzv_;
+                    return fzzzzzzzzzzzt_;
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> wzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)wzzzzzzze_, wzzzzzzzf_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? wzzzzzzzh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(wzzzzzzzg_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> fzzzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)fzzzzzzzzzzzc_, fzzzzzzzzzzzd_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? fzzzzzzzzzzzf_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(fzzzzzzzzzzze_);
 
-                return wzzzzzzzh_;
+                return fzzzzzzzzzzzf_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> vzzzzzzzx_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(vzzzzzzzv_, vzzzzzzzw_);
-            bool? vzzzzzzzy_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? FinalList)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> ezzzzzzzzzzzv_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(ezzzzzzzzzzzt_, ezzzzzzzzzzzu_);
+            bool? ezzzzzzzzzzzw_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? FinalList)
             {
-                bool? bzzzzzzzzh_ = context.Operators.Not((bool?)(FinalList is null));
+                bool? kzzzzzzzzzzzf_ = context.Operators.Not((bool?)(FinalList is null));
 
-                return bzzzzzzzzh_;
+                return kzzzzzzzzzzzf_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> vzzzzzzzz_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(vzzzzzzzx_, vzzzzzzzy_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> ezzzzzzzzzzzx_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(ezzzzzzzzzzzv_, ezzzzzzzzzzzw_);
 
-            return vzzzzzzzz_;
+            return ezzzzzzzzzzzx_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>> vzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?>)vzzzzzzzq_, vzzzzzzzr_);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> vzzzzzzzt_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>(vzzzzzzzs_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>> ezzzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?>)ezzzzzzzzzzzo_, ezzzzzzzzzzzp_);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> ezzzzzzzzzzzr_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>(ezzzzzzzzzzzq_);
 
-        return vzzzzzzzt_;
+        return ezzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Diagnosis and Procedure")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<Claim> bzzzzzzzzi_ = this.Professional_or_Institutional_Claims(context, claim);
-        string bzzzzzzzzj_(CqlCode d)
+        IEnumerable<Claim> kzzzzzzzzzzzg_ = this.Professional_or_Institutional_Claims(context, claim);
+        string kzzzzzzzzzzzh_(CqlCode d)
         {
-            string bzzzzzzzzv_ = d?.code;
+            string kzzzzzzzzzzzt_ = d?.code;
 
-            return bzzzzzzzzv_;
+            return kzzzzzzzzzzzt_;
         };
-        IEnumerable<string> bzzzzzzzzk_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, bzzzzzzzzj_);
-        IEnumerable<string> bzzzzzzzzl_ = context.Operators.Distinct<string>(bzzzzzzzzk_);
-        string bzzzzzzzzm_(CqlCode p)
+        IEnumerable<string> kzzzzzzzzzzzi_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, kzzzzzzzzzzzh_);
+        IEnumerable<string> kzzzzzzzzzzzj_ = context.Operators.Distinct<string>(kzzzzzzzzzzzi_);
+        string kzzzzzzzzzzzk_(CqlCode p)
         {
-            string bzzzzzzzzw_ = p?.code;
+            string kzzzzzzzzzzzu_ = p?.code;
 
-            return bzzzzzzzzw_;
+            return kzzzzzzzzzzzu_;
         };
-        IEnumerable<string> bzzzzzzzzn_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, bzzzzzzzzm_);
-        IEnumerable<string> bzzzzzzzzo_ = context.Operators.Distinct<string>(bzzzzzzzzn_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? bzzzzzzzzp_ = (CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb, bzzzzzzzzi_, bzzzzzzzzl_, bzzzzzzzzo_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?[] bzzzzzzzzq_ = [
-            bzzzzzzzzp_,
+        IEnumerable<string> kzzzzzzzzzzzl_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, kzzzzzzzzzzzk_);
+        IEnumerable<string> kzzzzzzzzzzzm_ = context.Operators.Distinct<string>(kzzzzzzzzzzzl_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? kzzzzzzzzzzzn_ = (CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb, kzzzzzzzzzzzg_, kzzzzzzzzzzzj_, kzzzzzzzzzzzm_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?[] kzzzzzzzzzzzo_ = [
+            kzzzzzzzzzzzn_,
         ];
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzr_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? ClaimWithDiagnosis)
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> kzzzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? ClaimWithDiagnosis)
         {
-            IEnumerable<Claim> bzzzzzzzzx_()
+            IEnumerable<Claim> kzzzzzzzzzzzv_()
             {
                 if (ClaimWithDiagnosis?.MedicalClaim is null)
                 {
@@ -924,73 +924,73 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 }
                 else
                 {
-                    IEnumerable<Claim> czzzzzzzze_ = ClaimWithDiagnosis?.MedicalClaim;
-                    bool? czzzzzzzzf_(Claim DiagnosisLine)
+                    IEnumerable<Claim> lzzzzzzzzzzzc_ = ClaimWithDiagnosis?.MedicalClaim;
+                    bool? lzzzzzzzzzzzd_(Claim DiagnosisLine)
                     {
-                        List<Claim.DiagnosisComponent> czzzzzzzzh_ = DiagnosisLine?.Diagnosis;
-                        bool? czzzzzzzzi_(Claim.DiagnosisComponent @this)
+                        List<Claim.DiagnosisComponent> lzzzzzzzzzzzf_ = DiagnosisLine?.Diagnosis;
+                        bool? lzzzzzzzzzzzg_(Claim.DiagnosisComponent @this)
                         {
-                            DataType czzzzzzzzw_ = @this?.Diagnosis;
-                            bool? czzzzzzzzx_ = context.Operators.Not((bool?)(czzzzzzzzw_ is null));
+                            DataType lzzzzzzzzzzzu_ = @this?.Diagnosis;
+                            bool? lzzzzzzzzzzzv_ = context.Operators.Not((bool?)(lzzzzzzzzzzzu_ is null));
 
-                            return czzzzzzzzx_;
+                            return lzzzzzzzzzzzv_;
                         };
-                        IEnumerable<Claim.DiagnosisComponent> czzzzzzzzj_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)czzzzzzzzh_, czzzzzzzzi_);
-                        object czzzzzzzzk_(Claim.DiagnosisComponent @this)
+                        IEnumerable<Claim.DiagnosisComponent> lzzzzzzzzzzzh_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)lzzzzzzzzzzzf_, lzzzzzzzzzzzg_);
+                        object lzzzzzzzzzzzi_(Claim.DiagnosisComponent @this)
                         {
-                            DataType czzzzzzzzy_ = @this?.Diagnosis;
+                            DataType lzzzzzzzzzzzw_ = @this?.Diagnosis;
 
-                            return czzzzzzzzy_;
+                            return lzzzzzzzzzzzw_;
                         };
-                        IEnumerable<object> czzzzzzzzl_ = context.Operators.Select<Claim.DiagnosisComponent, object>(czzzzzzzzj_, czzzzzzzzk_);
-                        bool? czzzzzzzzm_(object @this)
+                        IEnumerable<object> lzzzzzzzzzzzj_ = context.Operators.Select<Claim.DiagnosisComponent, object>(lzzzzzzzzzzzh_, lzzzzzzzzzzzi_);
+                        bool? lzzzzzzzzzzzk_(object @this)
                         {
-                            object czzzzzzzzz_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                            bool? dzzzzzzzza_ = context.Operators.Not((bool?)(czzzzzzzzz_ is null));
+                            object lzzzzzzzzzzzx_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                            bool? lzzzzzzzzzzzy_ = context.Operators.Not((bool?)(lzzzzzzzzzzzx_ is null));
 
-                            return dzzzzzzzza_;
+                            return lzzzzzzzzzzzy_;
                         };
-                        IEnumerable<object> czzzzzzzzn_ = context.Operators.Where<object>(czzzzzzzzl_, czzzzzzzzm_);
-                        object czzzzzzzzo_(object @this)
+                        IEnumerable<object> lzzzzzzzzzzzl_ = context.Operators.Where<object>(lzzzzzzzzzzzj_, lzzzzzzzzzzzk_);
+                        object lzzzzzzzzzzzm_(object @this)
                         {
-                            object dzzzzzzzzb_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                            object lzzzzzzzzzzzz_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                            return dzzzzzzzzb_;
+                            return lzzzzzzzzzzzz_;
                         };
-                        IEnumerable<object> czzzzzzzzp_ = context.Operators.Select<object, object>(czzzzzzzzn_, czzzzzzzzo_);
-                        IEnumerable<object> czzzzzzzzq_ = context.Operators.FlattenLateBoundList(czzzzzzzzp_);
-                        Coding czzzzzzzzr_(object @object) =>
+                        IEnumerable<object> lzzzzzzzzzzzn_ = context.Operators.Select<object, object>(lzzzzzzzzzzzl_, lzzzzzzzzzzzm_);
+                        IEnumerable<object> lzzzzzzzzzzzo_ = context.Operators.FlattenLateBoundList(lzzzzzzzzzzzn_);
+                        Coding lzzzzzzzzzzzp_(object @object) =>
                             (Coding)@object;
-                        IEnumerable<Coding> czzzzzzzzs_ = context.Operators.Select<object, Coding>(czzzzzzzzq_, czzzzzzzzr_);
-                        bool? czzzzzzzzt_(Coding HeaderCode)
+                        IEnumerable<Coding> lzzzzzzzzzzzq_ = context.Operators.Select<object, Coding>(lzzzzzzzzzzzo_, lzzzzzzzzzzzp_);
+                        bool? lzzzzzzzzzzzr_(Coding HeaderCode)
                         {
-                            Code dzzzzzzzzc_ = HeaderCode?.CodeElement;
-                            string dzzzzzzzzd_ = dzzzzzzzzc_?.Value;
-                            IEnumerable<string> dzzzzzzzze_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-                            bool? dzzzzzzzzf_ = context.Operators.In<string>(dzzzzzzzzd_, dzzzzzzzze_);
+                            Code mzzzzzzzzzzza_ = HeaderCode?.CodeElement;
+                            string mzzzzzzzzzzzb_ = mzzzzzzzzzzza_?.Value;
+                            IEnumerable<string> mzzzzzzzzzzzc_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+                            bool? mzzzzzzzzzzzd_ = context.Operators.In<string>(mzzzzzzzzzzzb_, mzzzzzzzzzzzc_);
 
-                            return dzzzzzzzzf_;
+                            return mzzzzzzzzzzzd_;
                         };
-                        IEnumerable<Coding> czzzzzzzzu_ = context.Operators.Where<Coding>(czzzzzzzzs_, czzzzzzzzt_);
-                        bool? czzzzzzzzv_ = context.Operators.Exists<Coding>(czzzzzzzzu_);
+                        IEnumerable<Coding> lzzzzzzzzzzzs_ = context.Operators.Where<Coding>(lzzzzzzzzzzzq_, lzzzzzzzzzzzr_);
+                        bool? lzzzzzzzzzzzt_ = context.Operators.Exists<Coding>(lzzzzzzzzzzzs_);
 
-                        return czzzzzzzzv_;
+                        return lzzzzzzzzzzzt_;
                     };
-                    IEnumerable<Claim> czzzzzzzzg_ = context.Operators.Where<Claim>(czzzzzzzze_, czzzzzzzzf_);
+                    IEnumerable<Claim> lzzzzzzzzzzze_ = context.Operators.Where<Claim>(lzzzzzzzzzzzc_, lzzzzzzzzzzzd_);
 
-                    return czzzzzzzzg_;
+                    return lzzzzzzzzzzze_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? bzzzzzzzzy_ = (CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV, bzzzzzzzzx_());
-            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?[] bzzzzzzzzz_ = [
-                bzzzzzzzzy_,
+            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? kzzzzzzzzzzzw_ = (CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV, kzzzzzzzzzzzv_());
+            (CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?[] kzzzzzzzzzzzx_ = [
+                kzzzzzzzzzzzw_,
             ];
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzza_((CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? ClaimWithProcedure)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> kzzzzzzzzzzzy_((CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)? ClaimWithProcedure)
             {
-                IEnumerable<Claim> dzzzzzzzzg_ = ClaimWithProcedure?.DiagnosisItems;
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzh_(Claim ClaimofInterest)
+                IEnumerable<Claim> mzzzzzzzzzzze_ = ClaimWithProcedure?.DiagnosisItems;
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzf_(Claim ClaimofInterest)
                 {
-                    Claim dzzzzzzzzm_()
+                    Claim mzzzzzzzzzzzk_()
                     {
                         if (ClaimofInterest is null)
                         {
@@ -998,141 +998,141 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                         else
                         {
-                            Claim[] dzzzzzzzzt_ = [
+                            Claim[] mzzzzzzzzzzzr_ = [
                                 ClaimofInterest,
                             ];
-                            bool? dzzzzzzzzu_(Claim ItemOnLine)
+                            bool? mzzzzzzzzzzzs_(Claim ItemOnLine)
                             {
-                                List<Claim.ProcedureComponent> dzzzzzzzzx_ = ItemOnLine?.Procedure;
-                                bool? dzzzzzzzzy_(Claim.ProcedureComponent @this)
+                                List<Claim.ProcedureComponent> mzzzzzzzzzzzv_ = ItemOnLine?.Procedure;
+                                bool? mzzzzzzzzzzzw_(Claim.ProcedureComponent @this)
                                 {
-                                    DataType fzzzzzzzza_ = @this?.Procedure;
-                                    bool? fzzzzzzzzb_ = context.Operators.Not((bool?)(fzzzzzzzza_ is null));
+                                    DataType nzzzzzzzzzzzy_ = @this?.Procedure;
+                                    bool? nzzzzzzzzzzzz_ = context.Operators.Not((bool?)(nzzzzzzzzzzzy_ is null));
 
-                                    return fzzzzzzzzb_;
+                                    return nzzzzzzzzzzzz_;
                                 };
-                                IEnumerable<Claim.ProcedureComponent> dzzzzzzzzz_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)dzzzzzzzzx_, dzzzzzzzzy_);
-                                object ezzzzzzzza_(Claim.ProcedureComponent @this)
+                                IEnumerable<Claim.ProcedureComponent> mzzzzzzzzzzzx_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)mzzzzzzzzzzzv_, mzzzzzzzzzzzw_);
+                                object mzzzzzzzzzzzy_(Claim.ProcedureComponent @this)
                                 {
-                                    DataType fzzzzzzzzc_ = @this?.Procedure;
+                                    DataType ozzzzzzzzzzza_ = @this?.Procedure;
 
-                                    return fzzzzzzzzc_;
+                                    return ozzzzzzzzzzza_;
                                 };
-                                IEnumerable<object> ezzzzzzzzb_ = context.Operators.Select<Claim.ProcedureComponent, object>(dzzzzzzzzz_, ezzzzzzzza_);
-                                bool? ezzzzzzzzc_(object @this)
+                                IEnumerable<object> mzzzzzzzzzzzz_ = context.Operators.Select<Claim.ProcedureComponent, object>(mzzzzzzzzzzzx_, mzzzzzzzzzzzy_);
+                                bool? nzzzzzzzzzzza_(object @this)
                                 {
-                                    object fzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                                    bool? fzzzzzzzze_ = context.Operators.Not((bool?)(fzzzzzzzzd_ is null));
+                                    object ozzzzzzzzzzzb_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                    bool? ozzzzzzzzzzzc_ = context.Operators.Not((bool?)(ozzzzzzzzzzzb_ is null));
 
-                                    return fzzzzzzzze_;
+                                    return ozzzzzzzzzzzc_;
                                 };
-                                IEnumerable<object> ezzzzzzzzd_ = context.Operators.Where<object>(ezzzzzzzzb_, ezzzzzzzzc_);
-                                object ezzzzzzzze_(object @this)
+                                IEnumerable<object> nzzzzzzzzzzzb_ = context.Operators.Where<object>(mzzzzzzzzzzzz_, nzzzzzzzzzzza_);
+                                object nzzzzzzzzzzzc_(object @this)
                                 {
-                                    object fzzzzzzzzf_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                    object ozzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                                    return fzzzzzzzzf_;
+                                    return ozzzzzzzzzzzd_;
                                 };
-                                IEnumerable<object> ezzzzzzzzf_ = context.Operators.Select<object, object>(ezzzzzzzzd_, ezzzzzzzze_);
-                                IEnumerable<object> ezzzzzzzzg_ = context.Operators.FlattenLateBoundList(ezzzzzzzzf_);
-                                Coding ezzzzzzzzh_(object @object) =>
+                                IEnumerable<object> nzzzzzzzzzzzd_ = context.Operators.Select<object, object>(nzzzzzzzzzzzb_, nzzzzzzzzzzzc_);
+                                IEnumerable<object> nzzzzzzzzzzze_ = context.Operators.FlattenLateBoundList(nzzzzzzzzzzzd_);
+                                Coding nzzzzzzzzzzzf_(object @object) =>
                                     (Coding)@object;
-                                IEnumerable<Coding> ezzzzzzzzi_ = context.Operators.Select<object, Coding>(ezzzzzzzzg_, ezzzzzzzzh_);
-                                bool? ezzzzzzzzj_(Coding ProcedureHeaderCode)
+                                IEnumerable<Coding> nzzzzzzzzzzzg_ = context.Operators.Select<object, Coding>(nzzzzzzzzzzze_, nzzzzzzzzzzzf_);
+                                bool? nzzzzzzzzzzzh_(Coding ProcedureHeaderCode)
                                 {
-                                    Code fzzzzzzzzg_ = ProcedureHeaderCode?.CodeElement;
-                                    string fzzzzzzzzh_ = fzzzzzzzzg_?.Value;
-                                    IEnumerable<string> fzzzzzzzzi_ = ClaimWithDiagnosis?.ProceduresAsStrings;
-                                    bool? fzzzzzzzzj_ = context.Operators.In<string>(fzzzzzzzzh_, fzzzzzzzzi_);
+                                    Code ozzzzzzzzzzze_ = ProcedureHeaderCode?.CodeElement;
+                                    string ozzzzzzzzzzzf_ = ozzzzzzzzzzze_?.Value;
+                                    IEnumerable<string> ozzzzzzzzzzzg_ = ClaimWithDiagnosis?.ProceduresAsStrings;
+                                    bool? ozzzzzzzzzzzh_ = context.Operators.In<string>(ozzzzzzzzzzzf_, ozzzzzzzzzzzg_);
 
-                                    return fzzzzzzzzj_;
+                                    return ozzzzzzzzzzzh_;
                                 };
-                                IEnumerable<Coding> ezzzzzzzzk_ = context.Operators.Where<Coding>(ezzzzzzzzi_, ezzzzzzzzj_);
-                                bool? ezzzzzzzzl_ = context.Operators.Exists<Coding>(ezzzzzzzzk_);
-                                List<Claim.ItemComponent> ezzzzzzzzm_ = ItemOnLine?.Item;
-                                bool? ezzzzzzzzn_(Claim.ItemComponent @this)
+                                IEnumerable<Coding> nzzzzzzzzzzzi_ = context.Operators.Where<Coding>(nzzzzzzzzzzzg_, nzzzzzzzzzzzh_);
+                                bool? nzzzzzzzzzzzj_ = context.Operators.Exists<Coding>(nzzzzzzzzzzzi_);
+                                List<Claim.ItemComponent> nzzzzzzzzzzzk_ = ItemOnLine?.Item;
+                                bool? nzzzzzzzzzzzl_(Claim.ItemComponent @this)
                                 {
-                                    CodeableConcept fzzzzzzzzk_ = @this?.ProductOrService;
-                                    bool? fzzzzzzzzl_ = context.Operators.Not((bool?)(fzzzzzzzzk_ is null));
+                                    CodeableConcept ozzzzzzzzzzzi_ = @this?.ProductOrService;
+                                    bool? ozzzzzzzzzzzj_ = context.Operators.Not((bool?)(ozzzzzzzzzzzi_ is null));
 
-                                    return fzzzzzzzzl_;
+                                    return ozzzzzzzzzzzj_;
                                 };
-                                IEnumerable<Claim.ItemComponent> ezzzzzzzzo_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ezzzzzzzzm_, ezzzzzzzzn_);
-                                CodeableConcept ezzzzzzzzp_(Claim.ItemComponent @this)
+                                IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzm_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)nzzzzzzzzzzzk_, nzzzzzzzzzzzl_);
+                                CodeableConcept nzzzzzzzzzzzn_(Claim.ItemComponent @this)
                                 {
-                                    CodeableConcept fzzzzzzzzm_ = @this?.ProductOrService;
+                                    CodeableConcept ozzzzzzzzzzzk_ = @this?.ProductOrService;
 
-                                    return fzzzzzzzzm_;
+                                    return ozzzzzzzzzzzk_;
                                 };
-                                IEnumerable<CodeableConcept> ezzzzzzzzq_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(ezzzzzzzzo_, ezzzzzzzzp_);
-                                bool? ezzzzzzzzr_(CodeableConcept @this)
+                                IEnumerable<CodeableConcept> nzzzzzzzzzzzo_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(nzzzzzzzzzzzm_, nzzzzzzzzzzzn_);
+                                bool? nzzzzzzzzzzzp_(CodeableConcept @this)
                                 {
-                                    List<Coding> fzzzzzzzzn_ = @this?.Coding;
-                                    bool? fzzzzzzzzo_ = context.Operators.Not((bool?)(fzzzzzzzzn_ is null));
+                                    List<Coding> ozzzzzzzzzzzl_ = @this?.Coding;
+                                    bool? ozzzzzzzzzzzm_ = context.Operators.Not((bool?)(ozzzzzzzzzzzl_ is null));
 
-                                    return fzzzzzzzzo_;
+                                    return ozzzzzzzzzzzm_;
                                 };
-                                IEnumerable<CodeableConcept> ezzzzzzzzs_ = context.Operators.Where<CodeableConcept>(ezzzzzzzzq_, ezzzzzzzzr_);
-                                List<Coding> ezzzzzzzzt_(CodeableConcept @this)
+                                IEnumerable<CodeableConcept> nzzzzzzzzzzzq_ = context.Operators.Where<CodeableConcept>(nzzzzzzzzzzzo_, nzzzzzzzzzzzp_);
+                                List<Coding> nzzzzzzzzzzzr_(CodeableConcept @this)
                                 {
-                                    List<Coding> fzzzzzzzzp_ = @this?.Coding;
+                                    List<Coding> ozzzzzzzzzzzn_ = @this?.Coding;
 
-                                    return fzzzzzzzzp_;
+                                    return ozzzzzzzzzzzn_;
                                 };
-                                IEnumerable<List<Coding>> ezzzzzzzzu_ = context.Operators.Select<CodeableConcept, List<Coding>>(ezzzzzzzzs_, ezzzzzzzzt_);
-                                IEnumerable<Coding> ezzzzzzzzv_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ezzzzzzzzu_);
-                                bool? ezzzzzzzzw_(Coding LineCode)
+                                IEnumerable<List<Coding>> nzzzzzzzzzzzs_ = context.Operators.Select<CodeableConcept, List<Coding>>(nzzzzzzzzzzzq_, nzzzzzzzzzzzr_);
+                                IEnumerable<Coding> nzzzzzzzzzzzt_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)nzzzzzzzzzzzs_);
+                                bool? nzzzzzzzzzzzu_(Coding LineCode)
                                 {
-                                    Code fzzzzzzzzq_ = LineCode?.CodeElement;
-                                    string fzzzzzzzzr_ = fzzzzzzzzq_?.Value;
-                                    IEnumerable<string> fzzzzzzzzs_ = ClaimWithDiagnosis?.ProceduresAsStrings;
-                                    bool? fzzzzzzzzt_ = context.Operators.In<string>(fzzzzzzzzr_, fzzzzzzzzs_);
+                                    Code ozzzzzzzzzzzo_ = LineCode?.CodeElement;
+                                    string ozzzzzzzzzzzp_ = ozzzzzzzzzzzo_?.Value;
+                                    IEnumerable<string> ozzzzzzzzzzzq_ = ClaimWithDiagnosis?.ProceduresAsStrings;
+                                    bool? ozzzzzzzzzzzr_ = context.Operators.In<string>(ozzzzzzzzzzzp_, ozzzzzzzzzzzq_);
 
-                                    return fzzzzzzzzt_;
+                                    return ozzzzzzzzzzzr_;
                                 };
-                                IEnumerable<Coding> ezzzzzzzzx_ = context.Operators.Where<Coding>(ezzzzzzzzv_, ezzzzzzzzw_);
-                                bool? ezzzzzzzzy_ = context.Operators.Exists<Coding>(ezzzzzzzzx_);
-                                bool? ezzzzzzzzz_ = context.Operators.Or(ezzzzzzzzl_, ezzzzzzzzy_);
+                                IEnumerable<Coding> nzzzzzzzzzzzv_ = context.Operators.Where<Coding>(nzzzzzzzzzzzt_, nzzzzzzzzzzzu_);
+                                bool? nzzzzzzzzzzzw_ = context.Operators.Exists<Coding>(nzzzzzzzzzzzv_);
+                                bool? nzzzzzzzzzzzx_ = context.Operators.Or(nzzzzzzzzzzzj_, nzzzzzzzzzzzw_);
 
-                                return ezzzzzzzzz_;
+                                return nzzzzzzzzzzzx_;
                             };
-                            IEnumerable<Claim> dzzzzzzzzv_ = context.Operators.Where<Claim>((IEnumerable<Claim>)dzzzzzzzzt_, dzzzzzzzzu_);
-                            Claim dzzzzzzzzw_ = context.Operators.SingletonFrom<Claim>(dzzzzzzzzv_);
+                            IEnumerable<Claim> mzzzzzzzzzzzt_ = context.Operators.Where<Claim>((IEnumerable<Claim>)mzzzzzzzzzzzr_, mzzzzzzzzzzzs_);
+                            Claim mzzzzzzzzzzzu_ = context.Operators.SingletonFrom<Claim>(mzzzzzzzzzzzt_);
 
-                            return dzzzzzzzzw_;
+                            return mzzzzzzzzzzzu_;
                         }
                     };
-                    (CqlTupleMetadata, Claim ProcedureItems)? dzzzzzzzzn_ = (CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG, dzzzzzzzzm_());
-                    (CqlTupleMetadata, Claim ProcedureItems)?[] dzzzzzzzzo_ = [
-                        dzzzzzzzzn_,
+                    (CqlTupleMetadata, Claim ProcedureItems)? mzzzzzzzzzzzl_ = (CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG, mzzzzzzzzzzzk_());
+                    (CqlTupleMetadata, Claim ProcedureItems)?[] mzzzzzzzzzzzm_ = [
+                        mzzzzzzzzzzzl_,
                     ];
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzp_((CqlTupleMetadata, Claim ProcedureItems)? HeaderDefinition)
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzn_((CqlTupleMetadata, Claim ProcedureItems)? HeaderDefinition)
                     {
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzu_()
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ozzzzzzzzzzzs_()
                         {
-                            bool fzzzzzzzzv_()
+                            bool ozzzzzzzzzzzt_()
                             {
-                                Claim fzzzzzzzzw_ = HeaderDefinition?.ProcedureItems;
-                                bool? fzzzzzzzzx_ = context.Operators.Not((bool?)(fzzzzzzzzw_ is null));
+                                Claim ozzzzzzzzzzzu_ = HeaderDefinition?.ProcedureItems;
+                                bool? ozzzzzzzzzzzv_ = context.Operators.Not((bool?)(ozzzzzzzzzzzu_ is null));
 
-                                return fzzzzzzzzx_ ?? false;
+                                return ozzzzzzzzzzzv_ ?? false;
                             };
-                            if (fzzzzzzzzv_())
+                            if (ozzzzzzzzzzzt_())
                             {
-                                Claim fzzzzzzzzy_ = HeaderDefinition?.ProcedureItems;
-                                List<Claim.ItemComponent> gzzzzzzzza_ = fzzzzzzzzy_?.Item;
-                                CqlInterval<CqlDateTime> gzzzzzzzzb_(Claim.ItemComponent NormalDate)
+                                Claim ozzzzzzzzzzzw_ = HeaderDefinition?.ProcedureItems;
+                                List<Claim.ItemComponent> ozzzzzzzzzzzy_ = ozzzzzzzzzzzw_?.Item;
+                                CqlInterval<CqlDateTime> ozzzzzzzzzzzz_(Claim.ItemComponent NormalDate)
                                 {
-                                    DataType gzzzzzzzzf_ = NormalDate?.Serviced;
-                                    CqlInterval<CqlDateTime> gzzzzzzzzg_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, gzzzzzzzzf_);
+                                    DataType pzzzzzzzzzzzd_ = NormalDate?.Serviced;
+                                    CqlInterval<CqlDateTime> pzzzzzzzzzzze_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, pzzzzzzzzzzzd_);
 
-                                    return gzzzzzzzzg_;
+                                    return pzzzzzzzzzzze_;
                                 };
-                                IEnumerable<CqlInterval<CqlDateTime>> gzzzzzzzzc_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)gzzzzzzzza_, gzzzzzzzzb_);
-                                IEnumerable<CqlInterval<CqlDateTime>> gzzzzzzzzd_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(gzzzzzzzzc_);
-                                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? gzzzzzzzze_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, fzzzzzzzzy_, gzzzzzzzzd_);
+                                IEnumerable<CqlInterval<CqlDateTime>> pzzzzzzzzzzza_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)ozzzzzzzzzzzy_, ozzzzzzzzzzzz_);
+                                IEnumerable<CqlInterval<CqlDateTime>> pzzzzzzzzzzzb_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(pzzzzzzzzzzza_);
+                                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? pzzzzzzzzzzzc_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, ozzzzzzzzzzzw_, pzzzzzzzzzzzb_);
 
-                                return gzzzzzzzze_;
+                                return pzzzzzzzzzzzc_;
                             }
                             else
                             {
@@ -1140,70 +1140,70 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             }
                         };
 
-                        return fzzzzzzzzu_();
+                        return ozzzzzzzzzzzs_();
                     };
-                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, Claim ProcedureItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim ProcedureItems)?>)dzzzzzzzzo_, dzzzzzzzzp_);
-                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzr_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzq_);
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzs_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzr_);
+                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzo_ = context.Operators.Select<(CqlTupleMetadata, Claim ProcedureItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim ProcedureItems)?>)mzzzzzzzzzzzm_, mzzzzzzzzzzzn_);
+                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzp_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzo_);
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzp_);
 
-                    return dzzzzzzzzs_;
+                    return mzzzzzzzzzzzq_;
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzi_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzg_, dzzzzzzzzh_);
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzj_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzi_);
-                bool? dzzzzzzzzk_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzg_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzze_, mzzzzzzzzzzzf_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzh_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzg_);
+                bool? mzzzzzzzzzzzi_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? gzzzzzzzzh_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? pzzzzzzzzzzzf_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return gzzzzzzzzh_;
+                    return pzzzzzzzzzzzf_;
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzl_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzj_, dzzzzzzzzk_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzj_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzh_, mzzzzzzzzzzzi_);
 
-                return dzzzzzzzzl_;
+                return mzzzzzzzzzzzj_;
             };
-            IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> czzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?>)bzzzzzzzzz_, czzzzzzzza_);
-            IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> czzzzzzzzc_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(czzzzzzzzb_);
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzd_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(czzzzzzzzc_);
+            IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> kzzzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> DiagnosisItems)?>)kzzzzzzzzzzzx_, kzzzzzzzzzzzy_);
+            IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> lzzzzzzzzzzza_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(kzzzzzzzzzzzz_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> lzzzzzzzzzzzb_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(lzzzzzzzzzzza_);
 
-            return czzzzzzzzd_;
+            return lzzzzzzzzzzzb_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> bzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)bzzzzzzzzq_, bzzzzzzzzr_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> bzzzzzzzzt_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(bzzzzzzzzs_);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzu_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(bzzzzzzzzt_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> kzzzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)kzzzzzzzzzzzo_, kzzzzzzzzzzzp_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> kzzzzzzzzzzzr_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(kzzzzzzzzzzzq_);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> kzzzzzzzzzzzs_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(kzzzzzzzzzzzr_);
 
-        return bzzzzzzzzu_;
+        return kzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Principal Diagnosis and Procedure")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<Claim> gzzzzzzzzi_ = this.Professional_or_Institutional_Claims(context, claim);
-        string gzzzzzzzzj_(CqlCode d)
+        IEnumerable<Claim> pzzzzzzzzzzzg_ = this.Professional_or_Institutional_Claims(context, claim);
+        string pzzzzzzzzzzzh_(CqlCode d)
         {
-            string gzzzzzzzzv_ = d?.code;
+            string pzzzzzzzzzzzt_ = d?.code;
 
-            return gzzzzzzzzv_;
+            return pzzzzzzzzzzzt_;
         };
-        IEnumerable<string> gzzzzzzzzk_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, gzzzzzzzzj_);
-        IEnumerable<string> gzzzzzzzzl_ = context.Operators.Distinct<string>(gzzzzzzzzk_);
-        string gzzzzzzzzm_(CqlCode p)
+        IEnumerable<string> pzzzzzzzzzzzi_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, pzzzzzzzzzzzh_);
+        IEnumerable<string> pzzzzzzzzzzzj_ = context.Operators.Distinct<string>(pzzzzzzzzzzzi_);
+        string pzzzzzzzzzzzk_(CqlCode p)
         {
-            string gzzzzzzzzw_ = p?.code;
+            string pzzzzzzzzzzzu_ = p?.code;
 
-            return gzzzzzzzzw_;
+            return pzzzzzzzzzzzu_;
         };
-        IEnumerable<string> gzzzzzzzzn_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, gzzzzzzzzm_);
-        IEnumerable<string> gzzzzzzzzo_ = context.Operators.Distinct<string>(gzzzzzzzzn_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? gzzzzzzzzp_ = (CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb, gzzzzzzzzi_, gzzzzzzzzl_, gzzzzzzzzo_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?[] gzzzzzzzzq_ = [
-            gzzzzzzzzp_,
+        IEnumerable<string> pzzzzzzzzzzzl_ = context.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, pzzzzzzzzzzzk_);
+        IEnumerable<string> pzzzzzzzzzzzm_ = context.Operators.Distinct<string>(pzzzzzzzzzzzl_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? pzzzzzzzzzzzn_ = (CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb, pzzzzzzzzzzzg_, pzzzzzzzzzzzj_, pzzzzzzzzzzzm_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?[] pzzzzzzzzzzzo_ = [
+            pzzzzzzzzzzzn_,
         ];
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> gzzzzzzzzr_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? ClaimWithProcedure)
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)? ClaimWithProcedure)
         {
-            IEnumerable<Claim> gzzzzzzzzx_ = ClaimWithProcedure?.MedicalClaim;
-            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? gzzzzzzzzy_(Claim ClaimofInterest)
+            IEnumerable<Claim> pzzzzzzzzzzzv_ = ClaimWithProcedure?.MedicalClaim;
+            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? pzzzzzzzzzzzw_(Claim ClaimofInterest)
             {
-                Claim hzzzzzzzzd_()
+                Claim qzzzzzzzzzzzb_()
                 {
                     if (ClaimofInterest is null)
                     {
@@ -1211,124 +1211,124 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     }
                     else
                     {
-                        Claim[] hzzzzzzzzk_ = [
+                        Claim[] qzzzzzzzzzzzi_ = [
                             ClaimofInterest,
                         ];
-                        bool? hzzzzzzzzl_(Claim ItemOnLine)
+                        bool? qzzzzzzzzzzzj_(Claim ItemOnLine)
                         {
-                            List<Claim.ItemComponent> hzzzzzzzzo_ = ItemOnLine?.Item;
-                            bool? hzzzzzzzzp_(Claim.ItemComponent @this)
+                            List<Claim.ItemComponent> qzzzzzzzzzzzm_ = ItemOnLine?.Item;
+                            bool? qzzzzzzzzzzzn_(Claim.ItemComponent @this)
                             {
-                                CodeableConcept izzzzzzzzr_ = @this?.ProductOrService;
-                                bool? izzzzzzzzs_ = context.Operators.Not((bool?)(izzzzzzzzr_ is null));
+                                CodeableConcept rzzzzzzzzzzzp_ = @this?.ProductOrService;
+                                bool? rzzzzzzzzzzzq_ = context.Operators.Not((bool?)(rzzzzzzzzzzzp_ is null));
 
-                                return izzzzzzzzs_;
+                                return rzzzzzzzzzzzq_;
                             };
-                            IEnumerable<Claim.ItemComponent> hzzzzzzzzq_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)hzzzzzzzzo_, hzzzzzzzzp_);
-                            CodeableConcept hzzzzzzzzr_(Claim.ItemComponent @this)
+                            IEnumerable<Claim.ItemComponent> qzzzzzzzzzzzo_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)qzzzzzzzzzzzm_, qzzzzzzzzzzzn_);
+                            CodeableConcept qzzzzzzzzzzzp_(Claim.ItemComponent @this)
                             {
-                                CodeableConcept izzzzzzzzt_ = @this?.ProductOrService;
+                                CodeableConcept rzzzzzzzzzzzr_ = @this?.ProductOrService;
 
-                                return izzzzzzzzt_;
+                                return rzzzzzzzzzzzr_;
                             };
-                            IEnumerable<CodeableConcept> hzzzzzzzzs_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(hzzzzzzzzq_, hzzzzzzzzr_);
-                            bool? hzzzzzzzzt_(CodeableConcept @this)
+                            IEnumerable<CodeableConcept> qzzzzzzzzzzzq_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(qzzzzzzzzzzzo_, qzzzzzzzzzzzp_);
+                            bool? qzzzzzzzzzzzr_(CodeableConcept @this)
                             {
-                                List<Coding> izzzzzzzzu_ = @this?.Coding;
-                                bool? izzzzzzzzv_ = context.Operators.Not((bool?)(izzzzzzzzu_ is null));
+                                List<Coding> rzzzzzzzzzzzs_ = @this?.Coding;
+                                bool? rzzzzzzzzzzzt_ = context.Operators.Not((bool?)(rzzzzzzzzzzzs_ is null));
 
-                                return izzzzzzzzv_;
+                                return rzzzzzzzzzzzt_;
                             };
-                            IEnumerable<CodeableConcept> hzzzzzzzzu_ = context.Operators.Where<CodeableConcept>(hzzzzzzzzs_, hzzzzzzzzt_);
-                            List<Coding> hzzzzzzzzv_(CodeableConcept @this)
+                            IEnumerable<CodeableConcept> qzzzzzzzzzzzs_ = context.Operators.Where<CodeableConcept>(qzzzzzzzzzzzq_, qzzzzzzzzzzzr_);
+                            List<Coding> qzzzzzzzzzzzt_(CodeableConcept @this)
                             {
-                                List<Coding> izzzzzzzzw_ = @this?.Coding;
+                                List<Coding> rzzzzzzzzzzzu_ = @this?.Coding;
 
-                                return izzzzzzzzw_;
+                                return rzzzzzzzzzzzu_;
                             };
-                            IEnumerable<List<Coding>> hzzzzzzzzw_ = context.Operators.Select<CodeableConcept, List<Coding>>(hzzzzzzzzu_, hzzzzzzzzv_);
-                            IEnumerable<Coding> hzzzzzzzzx_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)hzzzzzzzzw_);
-                            bool? hzzzzzzzzy_(Coding LineCode)
+                            IEnumerable<List<Coding>> qzzzzzzzzzzzu_ = context.Operators.Select<CodeableConcept, List<Coding>>(qzzzzzzzzzzzs_, qzzzzzzzzzzzt_);
+                            IEnumerable<Coding> qzzzzzzzzzzzv_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)qzzzzzzzzzzzu_);
+                            bool? qzzzzzzzzzzzw_(Coding LineCode)
                             {
-                                Code izzzzzzzzx_ = LineCode?.CodeElement;
-                                string izzzzzzzzy_ = izzzzzzzzx_?.Value;
-                                IEnumerable<string> izzzzzzzzz_ = ClaimWithProcedure?.ProceduresAsStrings;
-                                bool? jzzzzzzzza_ = context.Operators.In<string>(izzzzzzzzy_, izzzzzzzzz_);
+                                Code rzzzzzzzzzzzv_ = LineCode?.CodeElement;
+                                string rzzzzzzzzzzzw_ = rzzzzzzzzzzzv_?.Value;
+                                IEnumerable<string> rzzzzzzzzzzzx_ = ClaimWithProcedure?.ProceduresAsStrings;
+                                bool? rzzzzzzzzzzzy_ = context.Operators.In<string>(rzzzzzzzzzzzw_, rzzzzzzzzzzzx_);
 
-                                return jzzzzzzzza_;
+                                return rzzzzzzzzzzzy_;
                             };
-                            IEnumerable<Coding> hzzzzzzzzz_ = context.Operators.Where<Coding>(hzzzzzzzzx_, hzzzzzzzzy_);
-                            bool? izzzzzzzza_ = context.Operators.Exists<Coding>(hzzzzzzzzz_);
-                            List<Claim.ProcedureComponent> izzzzzzzzb_ = ItemOnLine?.Procedure;
-                            bool? izzzzzzzzc_(Claim.ProcedureComponent @this)
+                            IEnumerable<Coding> qzzzzzzzzzzzx_ = context.Operators.Where<Coding>(qzzzzzzzzzzzv_, qzzzzzzzzzzzw_);
+                            bool? qzzzzzzzzzzzy_ = context.Operators.Exists<Coding>(qzzzzzzzzzzzx_);
+                            List<Claim.ProcedureComponent> qzzzzzzzzzzzz_ = ItemOnLine?.Procedure;
+                            bool? rzzzzzzzzzzza_(Claim.ProcedureComponent @this)
                             {
-                                DataType jzzzzzzzzb_ = @this?.Procedure;
-                                bool? jzzzzzzzzc_ = context.Operators.Not((bool?)(jzzzzzzzzb_ is null));
+                                DataType rzzzzzzzzzzzz_ = @this?.Procedure;
+                                bool? szzzzzzzzzzza_ = context.Operators.Not((bool?)(rzzzzzzzzzzzz_ is null));
 
-                                return jzzzzzzzzc_;
+                                return szzzzzzzzzzza_;
                             };
-                            IEnumerable<Claim.ProcedureComponent> izzzzzzzzd_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)izzzzzzzzb_, izzzzzzzzc_);
-                            object izzzzzzzze_(Claim.ProcedureComponent @this)
+                            IEnumerable<Claim.ProcedureComponent> rzzzzzzzzzzzb_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)qzzzzzzzzzzzz_, rzzzzzzzzzzza_);
+                            object rzzzzzzzzzzzc_(Claim.ProcedureComponent @this)
                             {
-                                DataType jzzzzzzzzd_ = @this?.Procedure;
+                                DataType szzzzzzzzzzzb_ = @this?.Procedure;
 
-                                return jzzzzzzzzd_;
+                                return szzzzzzzzzzzb_;
                             };
-                            IEnumerable<object> izzzzzzzzf_ = context.Operators.Select<Claim.ProcedureComponent, object>(izzzzzzzzd_, izzzzzzzze_);
-                            bool? izzzzzzzzg_(object @this)
+                            IEnumerable<object> rzzzzzzzzzzzd_ = context.Operators.Select<Claim.ProcedureComponent, object>(rzzzzzzzzzzzb_, rzzzzzzzzzzzc_);
+                            bool? rzzzzzzzzzzze_(object @this)
                             {
-                                object jzzzzzzzze_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                                bool? jzzzzzzzzf_ = context.Operators.Not((bool?)(jzzzzzzzze_ is null));
+                                object szzzzzzzzzzzc_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                bool? szzzzzzzzzzzd_ = context.Operators.Not((bool?)(szzzzzzzzzzzc_ is null));
 
-                                return jzzzzzzzzf_;
+                                return szzzzzzzzzzzd_;
                             };
-                            IEnumerable<object> izzzzzzzzh_ = context.Operators.Where<object>(izzzzzzzzf_, izzzzzzzzg_);
-                            object izzzzzzzzi_(object @this)
+                            IEnumerable<object> rzzzzzzzzzzzf_ = context.Operators.Where<object>(rzzzzzzzzzzzd_, rzzzzzzzzzzze_);
+                            object rzzzzzzzzzzzg_(object @this)
                             {
-                                object jzzzzzzzzg_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                                object szzzzzzzzzzze_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                                return jzzzzzzzzg_;
+                                return szzzzzzzzzzze_;
                             };
-                            IEnumerable<object> izzzzzzzzj_ = context.Operators.Select<object, object>(izzzzzzzzh_, izzzzzzzzi_);
-                            IEnumerable<object> izzzzzzzzk_ = context.Operators.FlattenLateBoundList(izzzzzzzzj_);
-                            Coding izzzzzzzzl_(object @object) =>
+                            IEnumerable<object> rzzzzzzzzzzzh_ = context.Operators.Select<object, object>(rzzzzzzzzzzzf_, rzzzzzzzzzzzg_);
+                            IEnumerable<object> rzzzzzzzzzzzi_ = context.Operators.FlattenLateBoundList(rzzzzzzzzzzzh_);
+                            Coding rzzzzzzzzzzzj_(object @object) =>
                                 (Coding)@object;
-                            IEnumerable<Coding> izzzzzzzzm_ = context.Operators.Select<object, Coding>(izzzzzzzzk_, izzzzzzzzl_);
-                            bool? izzzzzzzzn_(Coding HeaderCode)
+                            IEnumerable<Coding> rzzzzzzzzzzzk_ = context.Operators.Select<object, Coding>(rzzzzzzzzzzzi_, rzzzzzzzzzzzj_);
+                            bool? rzzzzzzzzzzzl_(Coding HeaderCode)
                             {
-                                Code jzzzzzzzzh_ = HeaderCode?.CodeElement;
-                                string jzzzzzzzzi_ = jzzzzzzzzh_?.Value;
-                                IEnumerable<string> jzzzzzzzzj_ = ClaimWithProcedure?.ProceduresAsStrings;
-                                bool? jzzzzzzzzk_ = context.Operators.In<string>(jzzzzzzzzi_, jzzzzzzzzj_);
+                                Code szzzzzzzzzzzf_ = HeaderCode?.CodeElement;
+                                string szzzzzzzzzzzg_ = szzzzzzzzzzzf_?.Value;
+                                IEnumerable<string> szzzzzzzzzzzh_ = ClaimWithProcedure?.ProceduresAsStrings;
+                                bool? szzzzzzzzzzzi_ = context.Operators.In<string>(szzzzzzzzzzzg_, szzzzzzzzzzzh_);
 
-                                return jzzzzzzzzk_;
+                                return szzzzzzzzzzzi_;
                             };
-                            IEnumerable<Coding> izzzzzzzzo_ = context.Operators.Where<Coding>(izzzzzzzzm_, izzzzzzzzn_);
-                            bool? izzzzzzzzp_ = context.Operators.Exists<Coding>(izzzzzzzzo_);
-                            bool? izzzzzzzzq_ = context.Operators.Or(izzzzzzzza_, izzzzzzzzp_);
+                            IEnumerable<Coding> rzzzzzzzzzzzm_ = context.Operators.Where<Coding>(rzzzzzzzzzzzk_, rzzzzzzzzzzzl_);
+                            bool? rzzzzzzzzzzzn_ = context.Operators.Exists<Coding>(rzzzzzzzzzzzm_);
+                            bool? rzzzzzzzzzzzo_ = context.Operators.Or(qzzzzzzzzzzzy_, rzzzzzzzzzzzn_);
 
-                            return izzzzzzzzq_;
+                            return rzzzzzzzzzzzo_;
                         };
-                        IEnumerable<Claim> hzzzzzzzzm_ = context.Operators.Where<Claim>((IEnumerable<Claim>)hzzzzzzzzk_, hzzzzzzzzl_);
-                        Claim hzzzzzzzzn_ = context.Operators.SingletonFrom<Claim>(hzzzzzzzzm_);
+                        IEnumerable<Claim> qzzzzzzzzzzzk_ = context.Operators.Where<Claim>((IEnumerable<Claim>)qzzzzzzzzzzzi_, qzzzzzzzzzzzj_);
+                        Claim qzzzzzzzzzzzl_ = context.Operators.SingletonFrom<Claim>(qzzzzzzzzzzzk_);
 
-                        return hzzzzzzzzn_;
+                        return qzzzzzzzzzzzl_;
                     }
                 };
-                (CqlTupleMetadata, Claim Claim, Claim ProcedureItems)? hzzzzzzzze_ = (CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX, ClaimofInterest, hzzzzzzzzd_());
-                (CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?[] hzzzzzzzzf_ = [
-                    hzzzzzzzze_,
+                (CqlTupleMetadata, Claim Claim, Claim ProcedureItems)? qzzzzzzzzzzzc_ = (CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX, ClaimofInterest, qzzzzzzzzzzzb_());
+                (CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?[] qzzzzzzzzzzzd_ = [
+                    qzzzzzzzzzzzc_,
                 ];
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? hzzzzzzzzg_((CqlTupleMetadata, Claim Claim, Claim ProcedureItems)? DiagnosisCheck)
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzzzzze_((CqlTupleMetadata, Claim Claim, Claim ProcedureItems)? DiagnosisCheck)
                 {
-                    Claim jzzzzzzzzl_ = DiagnosisCheck?.ProcedureItems;
-                    Claim[] jzzzzzzzzm_ = [
-                        jzzzzzzzzl_,
+                    Claim szzzzzzzzzzzj_ = DiagnosisCheck?.ProcedureItems;
+                    Claim[] szzzzzzzzzzzk_ = [
+                        szzzzzzzzzzzj_,
                     ];
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzn_(Claim ClaimforDiagnosis)
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzl_(Claim ClaimforDiagnosis)
                     {
-                        List<Claim.ItemComponent> jzzzzzzzzr_ = ClaimforDiagnosis?.Item;
-                        Claim jzzzzzzzzs_()
+                        List<Claim.ItemComponent> szzzzzzzzzzzp_ = ClaimforDiagnosis?.Item;
+                        Claim szzzzzzzzzzzq_()
                         {
                             if (ClaimforDiagnosis is null)
                             {
@@ -1336,78 +1336,78 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             }
                             else
                             {
-                                Claim[] jzzzzzzzzz_ = [
+                                Claim[] szzzzzzzzzzzx_ = [
                                     ClaimforDiagnosis,
                                 ];
-                                bool? kzzzzzzzza_(Claim RightClaim)
+                                bool? szzzzzzzzzzzy_(Claim RightClaim)
                                 {
-                                    List<Claim.DiagnosisComponent> kzzzzzzzzd_ = RightClaim?.Diagnosis;
-                                    bool? kzzzzzzzze_(Claim.DiagnosisComponent RightDiagnosis)
+                                    List<Claim.DiagnosisComponent> tzzzzzzzzzzzb_ = RightClaim?.Diagnosis;
+                                    bool? tzzzzzzzzzzzc_(Claim.DiagnosisComponent RightDiagnosis)
                                     {
-                                        PositiveInt kzzzzzzzzh_ = RightDiagnosis?.SequenceElement;
-                                        Integer kzzzzzzzzi_ = context.Operators.Convert<Integer>(kzzzzzzzzh_);
-                                        int? kzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, kzzzzzzzzi_);
-                                        bool? kzzzzzzzzk_ = context.Operators.Equal(kzzzzzzzzj_, 1);
-                                        DataType kzzzzzzzzl_ = RightDiagnosis?.Diagnosis;
-                                        IEnumerable<Coding> kzzzzzzzzm_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(kzzzzzzzzl_, "coding");
-                                        bool? kzzzzzzzzn_(Coding DiagnosisCode)
+                                        PositiveInt tzzzzzzzzzzzf_ = RightDiagnosis?.SequenceElement;
+                                        Integer tzzzzzzzzzzzg_ = context.Operators.Convert<Integer>(tzzzzzzzzzzzf_);
+                                        int? tzzzzzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, tzzzzzzzzzzzg_);
+                                        bool? tzzzzzzzzzzzi_ = context.Operators.Equal(tzzzzzzzzzzzh_, 1);
+                                        DataType tzzzzzzzzzzzj_ = RightDiagnosis?.Diagnosis;
+                                        IEnumerable<Coding> tzzzzzzzzzzzk_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(tzzzzzzzzzzzj_, "coding");
+                                        bool? tzzzzzzzzzzzl_(Coding DiagnosisCode)
                                         {
-                                            Code kzzzzzzzzr_ = DiagnosisCode?.CodeElement;
-                                            string kzzzzzzzzs_ = kzzzzzzzzr_?.Value;
-                                            IEnumerable<string> kzzzzzzzzt_ = ClaimWithProcedure?.DiagnosesAsStrings;
-                                            bool? kzzzzzzzzu_ = context.Operators.In<string>(kzzzzzzzzs_, kzzzzzzzzt_);
+                                            Code tzzzzzzzzzzzp_ = DiagnosisCode?.CodeElement;
+                                            string tzzzzzzzzzzzq_ = tzzzzzzzzzzzp_?.Value;
+                                            IEnumerable<string> tzzzzzzzzzzzr_ = ClaimWithProcedure?.DiagnosesAsStrings;
+                                            bool? tzzzzzzzzzzzs_ = context.Operators.In<string>(tzzzzzzzzzzzq_, tzzzzzzzzzzzr_);
 
-                                            return kzzzzzzzzu_;
+                                            return tzzzzzzzzzzzs_;
                                         };
-                                        IEnumerable<Coding> kzzzzzzzzo_ = context.Operators.Where<Coding>(kzzzzzzzzm_, kzzzzzzzzn_);
-                                        bool? kzzzzzzzzp_ = context.Operators.Exists<Coding>(kzzzzzzzzo_);
-                                        bool? kzzzzzzzzq_ = context.Operators.And(kzzzzzzzzk_, kzzzzzzzzp_);
+                                        IEnumerable<Coding> tzzzzzzzzzzzm_ = context.Operators.Where<Coding>(tzzzzzzzzzzzk_, tzzzzzzzzzzzl_);
+                                        bool? tzzzzzzzzzzzn_ = context.Operators.Exists<Coding>(tzzzzzzzzzzzm_);
+                                        bool? tzzzzzzzzzzzo_ = context.Operators.And(tzzzzzzzzzzzi_, tzzzzzzzzzzzn_);
 
-                                        return kzzzzzzzzq_;
+                                        return tzzzzzzzzzzzo_;
                                     };
-                                    IEnumerable<Claim.DiagnosisComponent> kzzzzzzzzf_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)kzzzzzzzzd_, kzzzzzzzze_);
-                                    bool? kzzzzzzzzg_ = context.Operators.Exists<Claim.DiagnosisComponent>(kzzzzzzzzf_);
+                                    IEnumerable<Claim.DiagnosisComponent> tzzzzzzzzzzzd_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)tzzzzzzzzzzzb_, tzzzzzzzzzzzc_);
+                                    bool? tzzzzzzzzzzze_ = context.Operators.Exists<Claim.DiagnosisComponent>(tzzzzzzzzzzzd_);
 
-                                    return kzzzzzzzzg_;
+                                    return tzzzzzzzzzzze_;
                                 };
-                                IEnumerable<Claim> kzzzzzzzzb_ = context.Operators.Where<Claim>((IEnumerable<Claim>)jzzzzzzzzz_, kzzzzzzzza_);
-                                Claim kzzzzzzzzc_ = context.Operators.SingletonFrom<Claim>(kzzzzzzzzb_);
+                                IEnumerable<Claim> szzzzzzzzzzzz_ = context.Operators.Where<Claim>((IEnumerable<Claim>)szzzzzzzzzzzx_, szzzzzzzzzzzy_);
+                                Claim tzzzzzzzzzzza_ = context.Operators.SingletonFrom<Claim>(szzzzzzzzzzzz_);
 
-                                return kzzzzzzzzc_;
+                                return tzzzzzzzzzzza_;
                             }
                         };
-                        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)? jzzzzzzzzt_ = (CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe, (IEnumerable<Claim.ItemComponent>)jzzzzzzzzr_, jzzzzzzzzs_());
-                        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?[] jzzzzzzzzu_ = [
-                            jzzzzzzzzt_,
+                        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)? szzzzzzzzzzzr_ = (CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe, (IEnumerable<Claim.ItemComponent>)szzzzzzzzzzzp_, szzzzzzzzzzzq_());
+                        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?[] szzzzzzzzzzzs_ = [
+                            szzzzzzzzzzzr_,
                         ];
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzv_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)? LineItemDefinition)
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)? LineItemDefinition)
                         {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? kzzzzzzzzv_()
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzzzzzt_()
                             {
-                                bool kzzzzzzzzw_()
+                                bool tzzzzzzzzzzzu_()
                                 {
-                                    bool? kzzzzzzzzx_ = context.Operators.Not((bool?)(LineItemDefinition is null));
-                                    Claim kzzzzzzzzy_ = LineItemDefinition?.LineItems;
-                                    bool? kzzzzzzzzz_ = context.Operators.Not((bool?)(kzzzzzzzzy_ is null));
-                                    bool? lzzzzzzzza_ = context.Operators.And(kzzzzzzzzx_, kzzzzzzzzz_);
+                                    bool? tzzzzzzzzzzzv_ = context.Operators.Not((bool?)(LineItemDefinition is null));
+                                    Claim tzzzzzzzzzzzw_ = LineItemDefinition?.LineItems;
+                                    bool? tzzzzzzzzzzzx_ = context.Operators.Not((bool?)(tzzzzzzzzzzzw_ is null));
+                                    bool? tzzzzzzzzzzzy_ = context.Operators.And(tzzzzzzzzzzzv_, tzzzzzzzzzzzx_);
 
-                                    return lzzzzzzzza_ ?? false;
+                                    return tzzzzzzzzzzzy_ ?? false;
                                 };
-                                if (kzzzzzzzzw_())
+                                if (tzzzzzzzzzzzu_())
                                 {
-                                    Claim lzzzzzzzzb_ = LineItemDefinition?.LineItems;
-                                    List<Claim.ItemComponent> lzzzzzzzzd_ = lzzzzzzzzb_?.Item;
-                                    CqlInterval<CqlDateTime> lzzzzzzzze_(Claim.ItemComponent NormalDate)
+                                    Claim tzzzzzzzzzzzz_ = LineItemDefinition?.LineItems;
+                                    List<Claim.ItemComponent> uzzzzzzzzzzzb_ = tzzzzzzzzzzzz_?.Item;
+                                    CqlInterval<CqlDateTime> uzzzzzzzzzzzc_(Claim.ItemComponent NormalDate)
                                     {
-                                        DataType lzzzzzzzzh_ = NormalDate?.Serviced;
-                                        CqlInterval<CqlDateTime> lzzzzzzzzi_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, lzzzzzzzzh_);
+                                        DataType uzzzzzzzzzzzf_ = NormalDate?.Serviced;
+                                        CqlInterval<CqlDateTime> uzzzzzzzzzzzg_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, uzzzzzzzzzzzf_);
 
-                                        return lzzzzzzzzi_;
+                                        return uzzzzzzzzzzzg_;
                                     };
-                                    IEnumerable<CqlInterval<CqlDateTime>> lzzzzzzzzf_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)lzzzzzzzzd_, lzzzzzzzze_);
-                                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? lzzzzzzzzg_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, lzzzzzzzzb_, lzzzzzzzzf_);
+                                    IEnumerable<CqlInterval<CqlDateTime>> uzzzzzzzzzzzd_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>((IEnumerable<Claim.ItemComponent>)uzzzzzzzzzzzb_, uzzzzzzzzzzzc_);
+                                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? uzzzzzzzzzzze_ = (CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd, tzzzzzzzzzzzz_, uzzzzzzzzzzzd_);
 
-                                    return lzzzzzzzzg_;
+                                    return uzzzzzzzzzzze_;
                                 }
                                 else
                                 {
@@ -1415,65 +1415,65 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 }
                             };
 
-                            return kzzzzzzzzv_();
+                            return tzzzzzzzzzzzt_();
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?>)jzzzzzzzzu_, jzzzzzzzzv_);
-                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzx_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzw_);
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzy_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzx_);
+                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?>)szzzzzzzzzzzs_, szzzzzzzzzzzt_);
+                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzzzzu_);
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzzzzv_);
 
-                        return jzzzzzzzzy_;
+                        return szzzzzzzzzzzw_;
                     };
-                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzo_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<Claim>)jzzzzzzzzm_, jzzzzzzzzn_);
-                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzp_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzo_);
-                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzp_);
+                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzzzzm_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<Claim>)szzzzzzzzzzzk_, szzzzzzzzzzzl_);
+                    IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzzzzn_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzzzzm_);
+                    (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzo_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzzzzn_);
 
-                    return jzzzzzzzzq_;
+                    return szzzzzzzzzzzo_;
                 };
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> hzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?>)hzzzzzzzzf_, hzzzzzzzzg_);
-                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> hzzzzzzzzi_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(hzzzzzzzzh_);
-                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? hzzzzzzzzj_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(hzzzzzzzzi_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzzzzzf_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, Claim Claim, Claim ProcedureItems)?>)qzzzzzzzzzzzd_, qzzzzzzzzzzze_);
+                IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzzzzzg_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzzzzzf_);
+                (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzzzzzh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzzzzzg_);
 
-                return hzzzzzzzzj_;
+                return qzzzzzzzzzzzh_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> gzzzzzzzzz_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(gzzzzzzzzx_, gzzzzzzzzy_);
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> hzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(gzzzzzzzzz_);
-            bool? hzzzzzzzzb_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzx_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(pzzzzzzzzzzzv_, pzzzzzzzzzzzw_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(pzzzzzzzzzzzx_);
+            bool? pzzzzzzzzzzzz_((CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
             {
-                bool? lzzzzzzzzj_ = context.Operators.Not((bool?)(FinalList is null));
+                bool? uzzzzzzzzzzzh_ = context.Operators.Not((bool?)(FinalList is null));
 
-                return lzzzzzzzzj_;
+                return uzzzzzzzzzzzh_;
             };
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> hzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(hzzzzzzzza_, hzzzzzzzzb_);
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzzzzza_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(pzzzzzzzzzzzy_, pzzzzzzzzzzzz_);
 
-            return hzzzzzzzzc_;
+            return qzzzzzzzzzzza_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> gzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)gzzzzzzzzq_, gzzzzzzzzr_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> gzzzzzzzzt_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(gzzzzzzzzs_);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> gzzzzzzzzu_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(gzzzzzzzzt_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> pzzzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)pzzzzzzzzzzzo_, pzzzzzzzzzzzp_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> pzzzzzzzzzzzr_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(pzzzzzzzzzzzq_);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzs_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(pzzzzzzzzzzzr_);
 
-        return gzzzzzzzzu_;
+        return pzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Principal Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        IEnumerable<Claim> lzzzzzzzzk_ = this.Professional_or_Institutional_Claims(context, claim);
-        string lzzzzzzzzl_(CqlCode d)
+        IEnumerable<Claim> uzzzzzzzzzzzi_ = this.Professional_or_Institutional_Claims(context, claim);
+        string uzzzzzzzzzzzj_(CqlCode d)
         {
-            string lzzzzzzzzu_ = d?.code;
+            string uzzzzzzzzzzzs_ = d?.code;
 
-            return lzzzzzzzzu_;
+            return uzzzzzzzzzzzs_;
         };
-        IEnumerable<string> lzzzzzzzzm_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, lzzzzzzzzl_);
-        IEnumerable<string> lzzzzzzzzn_ = context.Operators.Distinct<string>(lzzzzzzzzm_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? lzzzzzzzzo_ = (CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf, lzzzzzzzzk_, lzzzzzzzzn_);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?[] lzzzzzzzzp_ = [
-            lzzzzzzzzo_,
+        IEnumerable<string> uzzzzzzzzzzzk_ = context.Operators.Select<CqlCode, string>(DiagnosisValueSet, uzzzzzzzzzzzj_);
+        IEnumerable<string> uzzzzzzzzzzzl_ = context.Operators.Distinct<string>(uzzzzzzzzzzzk_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? uzzzzzzzzzzzm_ = (CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf, uzzzzzzzzzzzi_, uzzzzzzzzzzzl_);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?[] uzzzzzzzzzzzn_ = [
+            uzzzzzzzzzzzm_,
         ];
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> lzzzzzzzzq_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? ClaimWithDiagnosis)
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)? ClaimWithDiagnosis)
         {
-            IEnumerable<Claim> lzzzzzzzzv_()
+            IEnumerable<Claim> uzzzzzzzzzzzt_()
             {
                 if (ClaimWithDiagnosis?.MedicalClaim is null)
                 {
@@ -1481,85 +1481,85 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 }
                 else
                 {
-                    IEnumerable<Claim> mzzzzzzzzc_ = ClaimWithDiagnosis?.MedicalClaim;
-                    bool? mzzzzzzzzd_(Claim RightClaim)
+                    IEnumerable<Claim> vzzzzzzzzzzza_ = ClaimWithDiagnosis?.MedicalClaim;
+                    bool? vzzzzzzzzzzzb_(Claim RightClaim)
                     {
-                        List<Claim.DiagnosisComponent> mzzzzzzzzf_ = RightClaim?.Diagnosis;
-                        bool? mzzzzzzzzg_(Claim.DiagnosisComponent RightDiagnosis)
+                        List<Claim.DiagnosisComponent> vzzzzzzzzzzzd_ = RightClaim?.Diagnosis;
+                        bool? vzzzzzzzzzzze_(Claim.DiagnosisComponent RightDiagnosis)
                         {
-                            PositiveInt mzzzzzzzzj_ = RightDiagnosis?.SequenceElement;
-                            Integer mzzzzzzzzk_ = context.Operators.Convert<Integer>(mzzzzzzzzj_);
-                            int? mzzzzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, mzzzzzzzzk_);
-                            bool? mzzzzzzzzm_ = context.Operators.Equal(mzzzzzzzzl_, 1);
-                            DataType mzzzzzzzzn_ = RightDiagnosis?.Diagnosis;
-                            IEnumerable<Coding> mzzzzzzzzo_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(mzzzzzzzzn_, "coding");
-                            bool? mzzzzzzzzp_(Coding DiagnosisCode)
+                            PositiveInt vzzzzzzzzzzzh_ = RightDiagnosis?.SequenceElement;
+                            Integer vzzzzzzzzzzzi_ = context.Operators.Convert<Integer>(vzzzzzzzzzzzh_);
+                            int? vzzzzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, vzzzzzzzzzzzi_);
+                            bool? vzzzzzzzzzzzk_ = context.Operators.Equal(vzzzzzzzzzzzj_, 1);
+                            DataType vzzzzzzzzzzzl_ = RightDiagnosis?.Diagnosis;
+                            IEnumerable<Coding> vzzzzzzzzzzzm_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(vzzzzzzzzzzzl_, "coding");
+                            bool? vzzzzzzzzzzzn_(Coding DiagnosisCode)
                             {
-                                Code mzzzzzzzzt_ = DiagnosisCode?.CodeElement;
-                                string mzzzzzzzzu_ = mzzzzzzzzt_?.Value;
-                                IEnumerable<string> mzzzzzzzzv_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
-                                bool? mzzzzzzzzw_ = context.Operators.In<string>(mzzzzzzzzu_, mzzzzzzzzv_);
+                                Code vzzzzzzzzzzzr_ = DiagnosisCode?.CodeElement;
+                                string vzzzzzzzzzzzs_ = vzzzzzzzzzzzr_?.Value;
+                                IEnumerable<string> vzzzzzzzzzzzt_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
+                                bool? vzzzzzzzzzzzu_ = context.Operators.In<string>(vzzzzzzzzzzzs_, vzzzzzzzzzzzt_);
 
-                                return mzzzzzzzzw_;
+                                return vzzzzzzzzzzzu_;
                             };
-                            IEnumerable<Coding> mzzzzzzzzq_ = context.Operators.Where<Coding>(mzzzzzzzzo_, mzzzzzzzzp_);
-                            bool? mzzzzzzzzr_ = context.Operators.Exists<Coding>(mzzzzzzzzq_);
-                            bool? mzzzzzzzzs_ = context.Operators.And(mzzzzzzzzm_, mzzzzzzzzr_);
+                            IEnumerable<Coding> vzzzzzzzzzzzo_ = context.Operators.Where<Coding>(vzzzzzzzzzzzm_, vzzzzzzzzzzzn_);
+                            bool? vzzzzzzzzzzzp_ = context.Operators.Exists<Coding>(vzzzzzzzzzzzo_);
+                            bool? vzzzzzzzzzzzq_ = context.Operators.And(vzzzzzzzzzzzk_, vzzzzzzzzzzzp_);
 
-                            return mzzzzzzzzs_;
+                            return vzzzzzzzzzzzq_;
                         };
-                        IEnumerable<Claim.DiagnosisComponent> mzzzzzzzzh_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)mzzzzzzzzf_, mzzzzzzzzg_);
-                        bool? mzzzzzzzzi_ = context.Operators.Exists<Claim.DiagnosisComponent>(mzzzzzzzzh_);
+                        IEnumerable<Claim.DiagnosisComponent> vzzzzzzzzzzzf_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)vzzzzzzzzzzzd_, vzzzzzzzzzzze_);
+                        bool? vzzzzzzzzzzzg_ = context.Operators.Exists<Claim.DiagnosisComponent>(vzzzzzzzzzzzf_);
 
-                        return mzzzzzzzzi_;
+                        return vzzzzzzzzzzzg_;
                     };
-                    IEnumerable<Claim> mzzzzzzzze_ = context.Operators.Where<Claim>(mzzzzzzzzc_, mzzzzzzzzd_);
+                    IEnumerable<Claim> vzzzzzzzzzzzc_ = context.Operators.Where<Claim>(vzzzzzzzzzzza_, vzzzzzzzzzzzb_);
 
-                    return mzzzzzzzze_;
+                    return vzzzzzzzzzzzc_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<Claim> LineItems)? lzzzzzzzzw_ = (CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL, lzzzzzzzzv_());
-            (CqlTupleMetadata, IEnumerable<Claim> LineItems)?[] lzzzzzzzzx_ = [
-                lzzzzzzzzw_,
+            (CqlTupleMetadata, IEnumerable<Claim> LineItems)? uzzzzzzzzzzzu_ = (CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL, uzzzzzzzzzzzt_());
+            (CqlTupleMetadata, IEnumerable<Claim> LineItems)?[] uzzzzzzzzzzzv_ = [
+                uzzzzzzzzzzzu_,
             ];
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> lzzzzzzzzy_((CqlTupleMetadata, IEnumerable<Claim> LineItems)? LineItemDefinition)
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<Claim> LineItems)? LineItemDefinition)
             {
-                IEnumerable<Claim> mzzzzzzzzx_ = LineItemDefinition?.LineItems;
-                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzy_(Claim ClaimWithDiagnosis)
+                IEnumerable<Claim> vzzzzzzzzzzzv_ = LineItemDefinition?.LineItems;
+                (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? vzzzzzzzzzzzw_(Claim ClaimWithDiagnosis)
                 {
-                    (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? nzzzzzzzzd_()
+                    (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzzzzb_()
                     {
                         if ((context.Operators.Not((bool?)(ClaimWithDiagnosis is null))) ?? false)
                         {
-                            IEnumerable<Claim> nzzzzzzzze_ = LineItemDefinition?.LineItems;
-                            bool? nzzzzzzzzg_(Claim @this)
+                            IEnumerable<Claim> wzzzzzzzzzzzc_ = LineItemDefinition?.LineItems;
+                            bool? wzzzzzzzzzzze_(Claim @this)
                             {
-                                List<Claim.ItemComponent> nzzzzzzzzp_ = @this?.Item;
-                                bool? nzzzzzzzzq_ = context.Operators.Not((bool?)(nzzzzzzzzp_ is null));
+                                List<Claim.ItemComponent> wzzzzzzzzzzzn_ = @this?.Item;
+                                bool? wzzzzzzzzzzzo_ = context.Operators.Not((bool?)(wzzzzzzzzzzzn_ is null));
 
-                                return nzzzzzzzzq_;
+                                return wzzzzzzzzzzzo_;
                             };
-                            IEnumerable<Claim> nzzzzzzzzh_ = context.Operators.Where<Claim>(nzzzzzzzze_, nzzzzzzzzg_);
-                            List<Claim.ItemComponent> nzzzzzzzzi_(Claim @this)
+                            IEnumerable<Claim> wzzzzzzzzzzzf_ = context.Operators.Where<Claim>(wzzzzzzzzzzzc_, wzzzzzzzzzzze_);
+                            List<Claim.ItemComponent> wzzzzzzzzzzzg_(Claim @this)
                             {
-                                List<Claim.ItemComponent> nzzzzzzzzr_ = @this?.Item;
+                                List<Claim.ItemComponent> wzzzzzzzzzzzp_ = @this?.Item;
 
-                                return nzzzzzzzzr_;
+                                return wzzzzzzzzzzzp_;
                             };
-                            IEnumerable<List<Claim.ItemComponent>> nzzzzzzzzj_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(nzzzzzzzzh_, nzzzzzzzzi_);
-                            IEnumerable<Claim.ItemComponent> nzzzzzzzzk_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)nzzzzzzzzj_);
-                            CqlInterval<CqlDateTime> nzzzzzzzzl_(Claim.ItemComponent NormalDate)
+                            IEnumerable<List<Claim.ItemComponent>> wzzzzzzzzzzzh_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(wzzzzzzzzzzzf_, wzzzzzzzzzzzg_);
+                            IEnumerable<Claim.ItemComponent> wzzzzzzzzzzzi_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)wzzzzzzzzzzzh_);
+                            CqlInterval<CqlDateTime> wzzzzzzzzzzzj_(Claim.ItemComponent NormalDate)
                             {
-                                DataType nzzzzzzzzs_ = NormalDate?.Serviced;
-                                CqlInterval<CqlDateTime> nzzzzzzzzt_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, nzzzzzzzzs_);
+                                DataType wzzzzzzzzzzzq_ = NormalDate?.Serviced;
+                                CqlInterval<CqlDateTime> wzzzzzzzzzzzr_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, wzzzzzzzzzzzq_);
 
-                                return nzzzzzzzzt_;
+                                return wzzzzzzzzzzzr_;
                             };
-                            IEnumerable<CqlInterval<CqlDateTime>> nzzzzzzzzm_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(nzzzzzzzzk_, nzzzzzzzzl_);
-                            IEnumerable<CqlInterval<CqlDateTime>> nzzzzzzzzn_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(nzzzzzzzzm_);
-                            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? nzzzzzzzzo_ = (CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg, nzzzzzzzze_, nzzzzzzzzn_);
+                            IEnumerable<CqlInterval<CqlDateTime>> wzzzzzzzzzzzk_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(wzzzzzzzzzzzi_, wzzzzzzzzzzzj_);
+                            IEnumerable<CqlInterval<CqlDateTime>> wzzzzzzzzzzzl_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(wzzzzzzzzzzzk_);
+                            (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzzzzm_ = (CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg, wzzzzzzzzzzzc_, wzzzzzzzzzzzl_);
 
-                            return nzzzzzzzzo_;
+                            return wzzzzzzzzzzzm_;
                         }
                         else
                         {
@@ -1567,1468 +1567,1468 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                     };
 
-                    return nzzzzzzzzd_();
+                    return wzzzzzzzzzzzb_();
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzz_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzx_, mzzzzzzzzy_);
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzz_);
-                bool? nzzzzzzzzb_((CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> vzzzzzzzzzzzx_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(vzzzzzzzzzzzv_, vzzzzzzzzzzzw_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> vzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(vzzzzzzzzzzzx_);
+                bool? vzzzzzzzzzzzz_((CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? nzzzzzzzzu_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? wzzzzzzzzzzzs_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return nzzzzzzzzu_;
+                    return wzzzzzzzzzzzs_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> nzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(nzzzzzzzza_, nzzzzzzzzb_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzzzza_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(vzzzzzzzzzzzy_, vzzzzzzzzzzzz_);
 
-                return nzzzzzzzzc_;
+                return wzzzzzzzzzzza_;
             };
-            IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> lzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> LineItems)?, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> LineItems)?>)lzzzzzzzzx_, lzzzzzzzzy_);
-            IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> mzzzzzzzza_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(lzzzzzzzzz_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzb_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(mzzzzzzzza_);
+            IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> uzzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> LineItems)?, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> LineItems)?>)uzzzzzzzzzzzv_, uzzzzzzzzzzzw_);
+            IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> uzzzzzzzzzzzy_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(uzzzzzzzzzzzx_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzzzzzz_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(uzzzzzzzzzzzy_);
 
-            return mzzzzzzzzb_;
+            return uzzzzzzzzzzzz_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> lzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)lzzzzzzzzp_, lzzzzzzzzq_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> lzzzzzzzzs_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(lzzzzzzzzr_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> lzzzzzzzzt_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(lzzzzzzzzs_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> uzzzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)uzzzzzzzzzzzn_, uzzzzzzzzzzzo_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> uzzzzzzzzzzzq_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(uzzzzzzzzzzzp_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzzzzzr_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(uzzzzzzzzzzzq_);
 
-        return lzzzzzzzzt_;
+        return uzzzzzzzzzzzr_;
     }
 
 
     [CqlExpressionDefinition("Get All Professional and Institutional Claims and Claim Responses")]
     public (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
-        IEnumerable<ClaimResponse> nzzzzzzzzv_ = this.Professional_or_Institutional_Claims_Response(context, claimResponse);
-        IEnumerable<Claim> nzzzzzzzzw_ = this.Professional_or_Institutional_Claims(context, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? nzzzzzzzzx_ = (CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE, nzzzzzzzzv_, nzzzzzzzzw_);
+        IEnumerable<ClaimResponse> wzzzzzzzzzzzt_ = this.Professional_or_Institutional_Claims_Response(context, claimResponse);
+        IEnumerable<Claim> wzzzzzzzzzzzu_ = this.Professional_or_Institutional_Claims(context, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? wzzzzzzzzzzzv_ = (CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE, wzzzzzzzzzzzt_, wzzzzzzzzzzzu_);
 
-        return nzzzzzzzzx_;
+        return wzzzzzzzzzzzv_;
     }
 
 
     [CqlExpressionDefinition("Get All Paid Claim Reponses")]
     public IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> Get_All_Paid_Claim_Reponses(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
-        bool? nzzzzzzzzy_(ClaimResponse ResponseItem)
+        bool? wzzzzzzzzzzzw_(ClaimResponse ResponseItem)
         {
-            Code<ClaimProcessingCodes> ozzzzzzzzg_ = ResponseItem?.OutcomeElement;
-            string ozzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToString(context, ozzzzzzzzg_);
-            string[] ozzzzzzzzi_ = [
+            Code<ClaimProcessingCodes> xzzzzzzzzzzze_ = ResponseItem?.OutcomeElement;
+            string xzzzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, xzzzzzzzzzzze_);
+            string[] xzzzzzzzzzzzg_ = [
                 "complete",
                 "partial",
             ];
-            bool? ozzzzzzzzj_ = context.Operators.In<string>(ozzzzzzzzh_, ozzzzzzzzi_ as IEnumerable<string>);
+            bool? xzzzzzzzzzzzh_ = context.Operators.In<string>(xzzzzzzzzzzzf_, xzzzzzzzzzzzg_ as IEnumerable<string>);
 
-            return ozzzzzzzzj_;
+            return xzzzzzzzzzzzh_;
         };
-        IEnumerable<ClaimResponse> nzzzzzzzzz_ = context.Operators.Where<ClaimResponse>(claimResponse, nzzzzzzzzy_);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)? ozzzzzzzza_ = (CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR, nzzzzzzzzz_);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?[] ozzzzzzzzb_ = [
-            ozzzzzzzza_,
+        IEnumerable<ClaimResponse> wzzzzzzzzzzzx_ = context.Operators.Where<ClaimResponse>(claimResponse, wzzzzzzzzzzzw_);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)? wzzzzzzzzzzzy_ = (CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR, wzzzzzzzzzzzx_);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?[] wzzzzzzzzzzzz_ = [
+            wzzzzzzzzzzzy_,
         ];
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ozzzzzzzzc_((CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)? ClaimResponse)
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> xzzzzzzzzzzza_((CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)? ClaimResponse)
         {
-            IEnumerable<ClaimResponse> ozzzzzzzzk_ = ClaimResponse?.PaidResponse;
-            (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ozzzzzzzzl_(ClaimResponse ClmResp)
+            IEnumerable<ClaimResponse> xzzzzzzzzzzzi_ = ClaimResponse?.PaidResponse;
+            (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? xzzzzzzzzzzzj_(ClaimResponse ClmResp)
             {
-                ResourceReference ozzzzzzzzo_ = ClmResp?.Request;
-                FhirString ozzzzzzzzp_ = ozzzzzzzzo_?.ReferenceElement;
-                string ozzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToString(context, ozzzzzzzzp_);
-                string ozzzzzzzzr_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ozzzzzzzzq_);
-                List<ClaimResponse.ItemComponent> ozzzzzzzzs_ = ClmResp?.Item;
-                bool? ozzzzzzzzt_(ClaimResponse.ItemComponent ResponseItem)
+                ResourceReference xzzzzzzzzzzzm_ = ClmResp?.Request;
+                FhirString xzzzzzzzzzzzn_ = xzzzzzzzzzzzm_?.ReferenceElement;
+                string xzzzzzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToString(context, xzzzzzzzzzzzn_);
+                string xzzzzzzzzzzzp_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, xzzzzzzzzzzzo_);
+                List<ClaimResponse.ItemComponent> xzzzzzzzzzzzq_ = ClmResp?.Item;
+                bool? xzzzzzzzzzzzr_(ClaimResponse.ItemComponent ResponseItem)
                 {
-                    List<ClaimResponse.AdjudicationComponent> ozzzzzzzzw_ = ResponseItem?.Adjudication;
-                    bool? ozzzzzzzzx_(ClaimResponse.AdjudicationComponent @this)
+                    List<ClaimResponse.AdjudicationComponent> xzzzzzzzzzzzu_ = ResponseItem?.Adjudication;
+                    bool? xzzzzzzzzzzzv_(ClaimResponse.AdjudicationComponent @this)
                     {
-                        CodeableConcept pzzzzzzzzs_ = @this?.Category;
-                        bool? pzzzzzzzzt_ = context.Operators.Not((bool?)(pzzzzzzzzs_ is null));
+                        CodeableConcept yzzzzzzzzzzzq_ = @this?.Category;
+                        bool? yzzzzzzzzzzzr_ = context.Operators.Not((bool?)(yzzzzzzzzzzzq_ is null));
 
-                        return pzzzzzzzzt_;
+                        return yzzzzzzzzzzzr_;
                     };
-                    IEnumerable<ClaimResponse.AdjudicationComponent> ozzzzzzzzy_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)ozzzzzzzzw_, ozzzzzzzzx_);
-                    CodeableConcept ozzzzzzzzz_(ClaimResponse.AdjudicationComponent @this)
+                    IEnumerable<ClaimResponse.AdjudicationComponent> xzzzzzzzzzzzw_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)xzzzzzzzzzzzu_, xzzzzzzzzzzzv_);
+                    CodeableConcept xzzzzzzzzzzzx_(ClaimResponse.AdjudicationComponent @this)
                     {
-                        CodeableConcept pzzzzzzzzu_ = @this?.Category;
+                        CodeableConcept yzzzzzzzzzzzs_ = @this?.Category;
 
-                        return pzzzzzzzzu_;
+                        return yzzzzzzzzzzzs_;
                     };
-                    IEnumerable<CodeableConcept> pzzzzzzzza_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, CodeableConcept>(ozzzzzzzzy_, ozzzzzzzzz_);
-                    bool? pzzzzzzzzb_(CodeableConcept @this)
+                    IEnumerable<CodeableConcept> xzzzzzzzzzzzy_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, CodeableConcept>(xzzzzzzzzzzzw_, xzzzzzzzzzzzx_);
+                    bool? xzzzzzzzzzzzz_(CodeableConcept @this)
                     {
-                        List<Coding> pzzzzzzzzv_ = @this?.Coding;
-                        bool? pzzzzzzzzw_ = context.Operators.Not((bool?)(pzzzzzzzzv_ is null));
+                        List<Coding> yzzzzzzzzzzzt_ = @this?.Coding;
+                        bool? yzzzzzzzzzzzu_ = context.Operators.Not((bool?)(yzzzzzzzzzzzt_ is null));
 
-                        return pzzzzzzzzw_;
+                        return yzzzzzzzzzzzu_;
                     };
-                    IEnumerable<CodeableConcept> pzzzzzzzzc_ = context.Operators.Where<CodeableConcept>(pzzzzzzzza_, pzzzzzzzzb_);
-                    List<Coding> pzzzzzzzzd_(CodeableConcept @this)
+                    IEnumerable<CodeableConcept> yzzzzzzzzzzza_ = context.Operators.Where<CodeableConcept>(xzzzzzzzzzzzy_, xzzzzzzzzzzzz_);
+                    List<Coding> yzzzzzzzzzzzb_(CodeableConcept @this)
                     {
-                        List<Coding> pzzzzzzzzx_ = @this?.Coding;
+                        List<Coding> yzzzzzzzzzzzv_ = @this?.Coding;
 
-                        return pzzzzzzzzx_;
+                        return yzzzzzzzzzzzv_;
                     };
-                    IEnumerable<List<Coding>> pzzzzzzzze_ = context.Operators.Select<CodeableConcept, List<Coding>>(pzzzzzzzzc_, pzzzzzzzzd_);
-                    IEnumerable<Coding> pzzzzzzzzf_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)pzzzzzzzze_);
-                    bool? pzzzzzzzzg_(Coding CategoryItem)
+                    IEnumerable<List<Coding>> yzzzzzzzzzzzc_ = context.Operators.Select<CodeableConcept, List<Coding>>(yzzzzzzzzzzza_, yzzzzzzzzzzzb_);
+                    IEnumerable<Coding> yzzzzzzzzzzzd_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)yzzzzzzzzzzzc_);
+                    bool? yzzzzzzzzzzze_(Coding CategoryItem)
                     {
-                        Code pzzzzzzzzy_ = CategoryItem?.CodeElement;
-                        string pzzzzzzzzz_ = pzzzzzzzzy_?.Value;
-                        bool? qzzzzzzzza_ = context.Operators.Equal(pzzzzzzzzz_, "benefit");
+                        Code yzzzzzzzzzzzw_ = CategoryItem?.CodeElement;
+                        string yzzzzzzzzzzzx_ = yzzzzzzzzzzzw_?.Value;
+                        bool? yzzzzzzzzzzzy_ = context.Operators.Equal(yzzzzzzzzzzzx_, "benefit");
 
-                        return qzzzzzzzza_;
+                        return yzzzzzzzzzzzy_;
                     };
-                    IEnumerable<Coding> pzzzzzzzzh_ = context.Operators.Where<Coding>(pzzzzzzzzf_, pzzzzzzzzg_);
-                    bool? pzzzzzzzzi_ = context.Operators.Exists<Coding>(pzzzzzzzzh_);
-                    bool? pzzzzzzzzk_(ClaimResponse.AdjudicationComponent @this)
+                    IEnumerable<Coding> yzzzzzzzzzzzf_ = context.Operators.Where<Coding>(yzzzzzzzzzzzd_, yzzzzzzzzzzze_);
+                    bool? yzzzzzzzzzzzg_ = context.Operators.Exists<Coding>(yzzzzzzzzzzzf_);
+                    bool? yzzzzzzzzzzzi_(ClaimResponse.AdjudicationComponent @this)
                     {
-                        Money qzzzzzzzzb_ = @this?.Amount;
-                        bool? qzzzzzzzzc_ = context.Operators.Not((bool?)(qzzzzzzzzb_ is null));
+                        Money yzzzzzzzzzzzz_ = @this?.Amount;
+                        bool? zzzzzzzzzzzza_ = context.Operators.Not((bool?)(yzzzzzzzzzzzz_ is null));
 
-                        return qzzzzzzzzc_;
+                        return zzzzzzzzzzzza_;
                     };
-                    IEnumerable<ClaimResponse.AdjudicationComponent> pzzzzzzzzl_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)ozzzzzzzzw_, pzzzzzzzzk_);
-                    Money pzzzzzzzzm_(ClaimResponse.AdjudicationComponent @this)
+                    IEnumerable<ClaimResponse.AdjudicationComponent> yzzzzzzzzzzzj_ = context.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)xzzzzzzzzzzzu_, yzzzzzzzzzzzi_);
+                    Money yzzzzzzzzzzzk_(ClaimResponse.AdjudicationComponent @this)
                     {
-                        Money qzzzzzzzzd_ = @this?.Amount;
+                        Money zzzzzzzzzzzzb_ = @this?.Amount;
 
-                        return qzzzzzzzzd_;
+                        return zzzzzzzzzzzzb_;
                     };
-                    IEnumerable<Money> pzzzzzzzzn_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, Money>(pzzzzzzzzl_, pzzzzzzzzm_);
-                    bool? pzzzzzzzzo_(Money DollarAmount)
+                    IEnumerable<Money> yzzzzzzzzzzzl_ = context.Operators.Select<ClaimResponse.AdjudicationComponent, Money>(yzzzzzzzzzzzj_, yzzzzzzzzzzzk_);
+                    bool? yzzzzzzzzzzzm_(Money DollarAmount)
                     {
-                        FhirDecimal qzzzzzzzze_ = DollarAmount?.ValueElement;
-                        decimal? qzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, qzzzzzzzze_);
-                        decimal? qzzzzzzzzg_ = context.Operators.ConvertIntegerToDecimal(0);
-                        bool? qzzzzzzzzh_ = context.Operators.Greater(qzzzzzzzzf_, qzzzzzzzzg_);
+                        FhirDecimal zzzzzzzzzzzzc_ = DollarAmount?.ValueElement;
+                        decimal? zzzzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, zzzzzzzzzzzzc_);
+                        decimal? zzzzzzzzzzzze_ = context.Operators.ConvertIntegerToDecimal(0);
+                        bool? zzzzzzzzzzzzf_ = context.Operators.Greater(zzzzzzzzzzzzd_, zzzzzzzzzzzze_);
 
-                        return qzzzzzzzzh_;
+                        return zzzzzzzzzzzzf_;
                     };
-                    IEnumerable<Money> pzzzzzzzzp_ = context.Operators.Where<Money>(pzzzzzzzzn_, pzzzzzzzzo_);
-                    bool? pzzzzzzzzq_ = context.Operators.Exists<Money>(pzzzzzzzzp_);
-                    bool? pzzzzzzzzr_ = context.Operators.And(pzzzzzzzzi_, pzzzzzzzzq_);
+                    IEnumerable<Money> yzzzzzzzzzzzn_ = context.Operators.Where<Money>(yzzzzzzzzzzzl_, yzzzzzzzzzzzm_);
+                    bool? yzzzzzzzzzzzo_ = context.Operators.Exists<Money>(yzzzzzzzzzzzn_);
+                    bool? yzzzzzzzzzzzp_ = context.Operators.And(yzzzzzzzzzzzg_, yzzzzzzzzzzzo_);
 
-                    return pzzzzzzzzr_;
+                    return yzzzzzzzzzzzp_;
                 };
-                IEnumerable<ClaimResponse.ItemComponent> ozzzzzzzzu_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)ozzzzzzzzs_, ozzzzzzzzt_);
-                (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ozzzzzzzzv_ = (CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO, ClmResp, ozzzzzzzzr_, ozzzzzzzzu_);
+                IEnumerable<ClaimResponse.ItemComponent> xzzzzzzzzzzzs_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)xzzzzzzzzzzzq_, xzzzzzzzzzzzr_);
+                (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? xzzzzzzzzzzzt_ = (CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO, ClmResp, xzzzzzzzzzzzp_, xzzzzzzzzzzzs_);
 
-                return ozzzzzzzzv_;
+                return xzzzzzzzzzzzt_;
             };
-            IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ozzzzzzzzm_ = context.Operators.Select<ClaimResponse, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ozzzzzzzzk_, ozzzzzzzzl_);
-            IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ozzzzzzzzn_ = context.Operators.Distinct<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ozzzzzzzzm_);
+            IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> xzzzzzzzzzzzk_ = context.Operators.Select<ClaimResponse, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(xzzzzzzzzzzzi_, xzzzzzzzzzzzj_);
+            IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> xzzzzzzzzzzzl_ = context.Operators.Distinct<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(xzzzzzzzzzzzk_);
 
-            return ozzzzzzzzn_;
+            return xzzzzzzzzzzzl_;
         };
-        IEnumerable<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> ozzzzzzzzd_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?>)ozzzzzzzzb_, ozzzzzzzzc_);
-        IEnumerable<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> ozzzzzzzze_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(ozzzzzzzzd_);
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ozzzzzzzzf_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(ozzzzzzzze_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> xzzzzzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> PaidResponse)?>)wzzzzzzzzzzzz_, xzzzzzzzzzzza_);
+        IEnumerable<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> xzzzzzzzzzzzc_ = context.Operators.Distinct<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(xzzzzzzzzzzzb_);
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> xzzzzzzzzzzzd_ = context.Operators.SingletonFrom<IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(xzzzzzzzzzzzc_);
 
-        return ozzzzzzzzf_;
+        return xzzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Get All Claims With Procedure and Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_and_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        bool? qzzzzzzzzi_(Claim AllClaims)
+        bool? zzzzzzzzzzzzg_(Claim AllClaims)
         {
-            List<Claim.ItemComponent> qzzzzzzzzn_ = AllClaims?.Item;
-            bool? qzzzzzzzzo_(Claim.ItemComponent @this)
+            List<Claim.ItemComponent> zzzzzzzzzzzzl_ = AllClaims?.Item;
+            bool? zzzzzzzzzzzzm_(Claim.ItemComponent @this)
             {
-                CodeableConcept rzzzzzzzzq_ = @this?.ProductOrService;
-                bool? rzzzzzzzzr_ = context.Operators.Not((bool?)(rzzzzzzzzq_ is null));
+                CodeableConcept azzzzzzzzzzzzo_ = @this?.ProductOrService;
+                bool? azzzzzzzzzzzzp_ = context.Operators.Not((bool?)(azzzzzzzzzzzzo_ is null));
 
-                return rzzzzzzzzr_;
+                return azzzzzzzzzzzzp_;
             };
-            IEnumerable<Claim.ItemComponent> qzzzzzzzzp_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)qzzzzzzzzn_, qzzzzzzzzo_);
-            CodeableConcept qzzzzzzzzq_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> zzzzzzzzzzzzn_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)zzzzzzzzzzzzl_, zzzzzzzzzzzzm_);
+            CodeableConcept zzzzzzzzzzzzo_(Claim.ItemComponent @this)
             {
-                CodeableConcept rzzzzzzzzs_ = @this?.ProductOrService;
+                CodeableConcept azzzzzzzzzzzzq_ = @this?.ProductOrService;
 
-                return rzzzzzzzzs_;
+                return azzzzzzzzzzzzq_;
             };
-            IEnumerable<CodeableConcept> qzzzzzzzzr_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(qzzzzzzzzp_, qzzzzzzzzq_);
-            bool? qzzzzzzzzs_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> zzzzzzzzzzzzp_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(zzzzzzzzzzzzn_, zzzzzzzzzzzzo_);
+            bool? zzzzzzzzzzzzq_(CodeableConcept @this)
             {
-                List<Coding> rzzzzzzzzt_ = @this?.Coding;
-                bool? rzzzzzzzzu_ = context.Operators.Not((bool?)(rzzzzzzzzt_ is null));
+                List<Coding> azzzzzzzzzzzzr_ = @this?.Coding;
+                bool? azzzzzzzzzzzzs_ = context.Operators.Not((bool?)(azzzzzzzzzzzzr_ is null));
 
-                return rzzzzzzzzu_;
+                return azzzzzzzzzzzzs_;
             };
-            IEnumerable<CodeableConcept> qzzzzzzzzt_ = context.Operators.Where<CodeableConcept>(qzzzzzzzzr_, qzzzzzzzzs_);
-            List<Coding> qzzzzzzzzu_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> zzzzzzzzzzzzr_ = context.Operators.Where<CodeableConcept>(zzzzzzzzzzzzp_, zzzzzzzzzzzzq_);
+            List<Coding> zzzzzzzzzzzzs_(CodeableConcept @this)
             {
-                List<Coding> rzzzzzzzzv_ = @this?.Coding;
+                List<Coding> azzzzzzzzzzzzt_ = @this?.Coding;
 
-                return rzzzzzzzzv_;
+                return azzzzzzzzzzzzt_;
             };
-            IEnumerable<List<Coding>> qzzzzzzzzv_ = context.Operators.Select<CodeableConcept, List<Coding>>(qzzzzzzzzt_, qzzzzzzzzu_);
-            IEnumerable<Coding> qzzzzzzzzw_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)qzzzzzzzzv_);
-            bool? qzzzzzzzzx_(Coding ProductOrServiceCode)
+            IEnumerable<List<Coding>> zzzzzzzzzzzzt_ = context.Operators.Select<CodeableConcept, List<Coding>>(zzzzzzzzzzzzr_, zzzzzzzzzzzzs_);
+            IEnumerable<Coding> zzzzzzzzzzzzu_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)zzzzzzzzzzzzt_);
+            bool? zzzzzzzzzzzzv_(Coding ProductOrServiceCode)
             {
-                CqlCode rzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                bool? rzzzzzzzzx_ = context.Operators.In<CqlCode>(rzzzzzzzzw_, ProductOrServiceValueSet);
+                CqlCode azzzzzzzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                bool? azzzzzzzzzzzzv_ = context.Operators.In<CqlCode>(azzzzzzzzzzzzu_, ProductOrServiceValueSet);
 
-                return rzzzzzzzzx_;
+                return azzzzzzzzzzzzv_;
             };
-            IEnumerable<Coding> qzzzzzzzzy_ = context.Operators.Where<Coding>(qzzzzzzzzw_, qzzzzzzzzx_);
-            bool? qzzzzzzzzz_ = context.Operators.Exists<Coding>(qzzzzzzzzy_);
-            List<Claim.DiagnosisComponent> rzzzzzzzza_ = AllClaims?.Diagnosis;
-            bool? rzzzzzzzzb_(Claim.DiagnosisComponent @this)
+            IEnumerable<Coding> zzzzzzzzzzzzw_ = context.Operators.Where<Coding>(zzzzzzzzzzzzu_, zzzzzzzzzzzzv_);
+            bool? zzzzzzzzzzzzx_ = context.Operators.Exists<Coding>(zzzzzzzzzzzzw_);
+            List<Claim.DiagnosisComponent> zzzzzzzzzzzzy_ = AllClaims?.Diagnosis;
+            bool? zzzzzzzzzzzzz_(Claim.DiagnosisComponent @this)
             {
-                DataType rzzzzzzzzy_ = @this?.Diagnosis;
-                bool? rzzzzzzzzz_ = context.Operators.Not((bool?)(rzzzzzzzzy_ is null));
+                DataType azzzzzzzzzzzzw_ = @this?.Diagnosis;
+                bool? azzzzzzzzzzzzx_ = context.Operators.Not((bool?)(azzzzzzzzzzzzw_ is null));
 
-                return rzzzzzzzzz_;
+                return azzzzzzzzzzzzx_;
             };
-            IEnumerable<Claim.DiagnosisComponent> rzzzzzzzzc_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)rzzzzzzzza_, rzzzzzzzzb_);
-            object rzzzzzzzzd_(Claim.DiagnosisComponent @this)
+            IEnumerable<Claim.DiagnosisComponent> azzzzzzzzzzzza_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)zzzzzzzzzzzzy_, zzzzzzzzzzzzz_);
+            object azzzzzzzzzzzzb_(Claim.DiagnosisComponent @this)
             {
-                DataType szzzzzzzza_ = @this?.Diagnosis;
+                DataType azzzzzzzzzzzzy_ = @this?.Diagnosis;
 
-                return szzzzzzzza_;
+                return azzzzzzzzzzzzy_;
             };
-            IEnumerable<object> rzzzzzzzze_ = context.Operators.Select<Claim.DiagnosisComponent, object>(rzzzzzzzzc_, rzzzzzzzzd_);
-            bool? rzzzzzzzzf_(object @this)
+            IEnumerable<object> azzzzzzzzzzzzc_ = context.Operators.Select<Claim.DiagnosisComponent, object>(azzzzzzzzzzzza_, azzzzzzzzzzzzb_);
+            bool? azzzzzzzzzzzzd_(object @this)
             {
-                object szzzzzzzzb_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                bool? szzzzzzzzc_ = context.Operators.Not((bool?)(szzzzzzzzb_ is null));
+                object azzzzzzzzzzzzz_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                bool? bzzzzzzzzzzzza_ = context.Operators.Not((bool?)(azzzzzzzzzzzzz_ is null));
 
-                return szzzzzzzzc_;
+                return bzzzzzzzzzzzza_;
             };
-            IEnumerable<object> rzzzzzzzzg_ = context.Operators.Where<object>(rzzzzzzzze_, rzzzzzzzzf_);
-            object rzzzzzzzzh_(object @this)
+            IEnumerable<object> azzzzzzzzzzzze_ = context.Operators.Where<object>(azzzzzzzzzzzzc_, azzzzzzzzzzzzd_);
+            object azzzzzzzzzzzzf_(object @this)
             {
-                object szzzzzzzzd_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                object bzzzzzzzzzzzzb_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                return szzzzzzzzd_;
+                return bzzzzzzzzzzzzb_;
             };
-            IEnumerable<object> rzzzzzzzzi_ = context.Operators.Select<object, object>(rzzzzzzzzg_, rzzzzzzzzh_);
-            IEnumerable<object> rzzzzzzzzj_ = context.Operators.FlattenLateBoundList(rzzzzzzzzi_);
-            Coding rzzzzzzzzk_(object @object) =>
+            IEnumerable<object> azzzzzzzzzzzzg_ = context.Operators.Select<object, object>(azzzzzzzzzzzze_, azzzzzzzzzzzzf_);
+            IEnumerable<object> azzzzzzzzzzzzh_ = context.Operators.FlattenLateBoundList(azzzzzzzzzzzzg_);
+            Coding azzzzzzzzzzzzi_(object @object) =>
                 (Coding)@object;
-            IEnumerable<Coding> rzzzzzzzzl_ = context.Operators.Select<object, Coding>(rzzzzzzzzj_, rzzzzzzzzk_);
-            bool? rzzzzzzzzm_(Coding DiagnosisCode)
+            IEnumerable<Coding> azzzzzzzzzzzzj_ = context.Operators.Select<object, Coding>(azzzzzzzzzzzzh_, azzzzzzzzzzzzi_);
+            bool? azzzzzzzzzzzzk_(Coding DiagnosisCode)
             {
-                CqlCode szzzzzzzze_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
-                bool? szzzzzzzzf_ = context.Operators.In<CqlCode>(szzzzzzzze_, DiagnosisValueSet);
+                CqlCode bzzzzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
+                bool? bzzzzzzzzzzzzd_ = context.Operators.In<CqlCode>(bzzzzzzzzzzzzc_, DiagnosisValueSet);
 
-                return szzzzzzzzf_;
+                return bzzzzzzzzzzzzd_;
             };
-            IEnumerable<Coding> rzzzzzzzzn_ = context.Operators.Where<Coding>(rzzzzzzzzl_, rzzzzzzzzm_);
-            bool? rzzzzzzzzo_ = context.Operators.Exists<Coding>(rzzzzzzzzn_);
-            bool? rzzzzzzzzp_ = context.Operators.And(qzzzzzzzzz_, rzzzzzzzzo_);
+            IEnumerable<Coding> azzzzzzzzzzzzl_ = context.Operators.Where<Coding>(azzzzzzzzzzzzj_, azzzzzzzzzzzzk_);
+            bool? azzzzzzzzzzzzm_ = context.Operators.Exists<Coding>(azzzzzzzzzzzzl_);
+            bool? azzzzzzzzzzzzn_ = context.Operators.And(zzzzzzzzzzzzx_, azzzzzzzzzzzzm_);
 
-            return rzzzzzzzzp_;
+            return azzzzzzzzzzzzn_;
         };
-        IEnumerable<Claim> qzzzzzzzzj_ = context.Operators.Where<Claim>(claim, qzzzzzzzzi_);
-        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? qzzzzzzzzk_(Claim ProcedureClaims)
+        IEnumerable<Claim> zzzzzzzzzzzzh_ = context.Operators.Where<Claim>(claim, zzzzzzzzzzzzg_);
+        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? zzzzzzzzzzzzi_(Claim ProcedureClaims)
         {
-            Id szzzzzzzzg_ = ProcedureClaims?.IdElement;
-            List<Claim.ItemComponent> szzzzzzzzh_ = ProcedureClaims?.Item;
-            bool? szzzzzzzzi_(Claim.ItemComponent ResponseItem)
+            Id bzzzzzzzzzzzze_ = ProcedureClaims?.IdElement;
+            List<Claim.ItemComponent> bzzzzzzzzzzzzf_ = ProcedureClaims?.Item;
+            bool? bzzzzzzzzzzzzg_(Claim.ItemComponent ResponseItem)
             {
-                CodeableConcept szzzzzzzzl_ = ResponseItem?.ProductOrService;
-                List<Coding> szzzzzzzzm_ = szzzzzzzzl_?.Coding;
-                bool? szzzzzzzzn_(Coding ProductOrServiceCode)
+                CodeableConcept bzzzzzzzzzzzzj_ = ResponseItem?.ProductOrService;
+                List<Coding> bzzzzzzzzzzzzk_ = bzzzzzzzzzzzzj_?.Coding;
+                bool? bzzzzzzzzzzzzl_(Coding ProductOrServiceCode)
                 {
-                    CqlCode szzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                    bool? szzzzzzzzr_ = context.Operators.In<CqlCode>(szzzzzzzzq_, ProductOrServiceValueSet);
+                    CqlCode bzzzzzzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                    bool? bzzzzzzzzzzzzp_ = context.Operators.In<CqlCode>(bzzzzzzzzzzzzo_, ProductOrServiceValueSet);
 
-                    return szzzzzzzzr_;
+                    return bzzzzzzzzzzzzp_;
                 };
-                IEnumerable<Coding> szzzzzzzzo_ = context.Operators.Where<Coding>((IEnumerable<Coding>)szzzzzzzzm_, szzzzzzzzn_);
-                bool? szzzzzzzzp_ = context.Operators.Exists<Coding>(szzzzzzzzo_);
+                IEnumerable<Coding> bzzzzzzzzzzzzm_ = context.Operators.Where<Coding>((IEnumerable<Coding>)bzzzzzzzzzzzzk_, bzzzzzzzzzzzzl_);
+                bool? bzzzzzzzzzzzzn_ = context.Operators.Exists<Coding>(bzzzzzzzzzzzzm_);
 
-                return szzzzzzzzp_;
+                return bzzzzzzzzzzzzn_;
             };
-            IEnumerable<Claim.ItemComponent> szzzzzzzzj_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)szzzzzzzzh_, szzzzzzzzi_);
-            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? szzzzzzzzk_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, szzzzzzzzg_, szzzzzzzzj_);
+            IEnumerable<Claim.ItemComponent> bzzzzzzzzzzzzh_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bzzzzzzzzzzzzf_, bzzzzzzzzzzzzg_);
+            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bzzzzzzzzzzzzi_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, bzzzzzzzzzzzze_, bzzzzzzzzzzzzh_);
 
-            return szzzzzzzzk_;
+            return bzzzzzzzzzzzzi_;
         };
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> qzzzzzzzzl_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(qzzzzzzzzj_, qzzzzzzzzk_);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> qzzzzzzzzm_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(qzzzzzzzzl_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> zzzzzzzzzzzzj_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(zzzzzzzzzzzzh_, zzzzzzzzzzzzi_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> zzzzzzzzzzzzk_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(zzzzzzzzzzzzj_);
 
-        return qzzzzzzzzm_;
+        return zzzzzzzzzzzzk_;
     }
 
 
     [CqlExpressionDefinition("Get Corresponding Claim for Services and Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_and_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> szzzzzzzzs_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> szzzzzzzzt_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? szzzzzzzzu_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, szzzzzzzzs_, szzzzzzzzt_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] szzzzzzzzv_ = [
-            szzzzzzzzu_,
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> bzzzzzzzzzzzzq_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> bzzzzzzzzzzzzr_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? bzzzzzzzzzzzzs_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, bzzzzzzzzzzzzq_, bzzzzzzzzzzzzr_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] bzzzzzzzzzzzzt_ = [
+            bzzzzzzzzzzzzs_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzw_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzzzzu_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
         {
-            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> tzzzzzzzza_ = ClaimAndResponse?.MedicalClaim;
-            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? tzzzzzzzzb_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
+            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> bzzzzzzzzzzzzy_ = ClaimAndResponse?.MedicalClaim;
+            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? bzzzzzzzzzzzzz_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
             {
-                IEnumerable<Claim.ItemComponent> tzzzzzzzzk_ = medClaim?.LineItems;
-                bool? tzzzzzzzzl_(Claim.ItemComponent medClaimLineItem)
+                IEnumerable<Claim.ItemComponent> czzzzzzzzzzzzi_ = medClaim?.LineItems;
+                bool? czzzzzzzzzzzzj_(Claim.ItemComponent medClaimLineItem)
                 {
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzo_ = ClaimAndResponse?.PaidMedicalClaimResponse;
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzp_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> czzzzzzzzzzzzm_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> czzzzzzzzzzzzn_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
                     {
-                        IEnumerable<ClaimResponse.ItemComponent> tzzzzzzzzs_ = pClaim?.LineItems;
-                        bool? tzzzzzzzzt_(ClaimResponse.ItemComponent pClaimLineItem)
+                        IEnumerable<ClaimResponse.ItemComponent> czzzzzzzzzzzzq_ = pClaim?.LineItems;
+                        bool? czzzzzzzzzzzzr_(ClaimResponse.ItemComponent pClaimLineItem)
                         {
-                            Id tzzzzzzzzx_()
+                            Id czzzzzzzzzzzzv_()
                             {
-                                bool uzzzzzzzzl_()
+                                bool dzzzzzzzzzzzzj_()
                                 {
-                                    Claim uzzzzzzzzm_ = medClaim?.ClaimofInterest;
-                                    bool uzzzzzzzzn_ = uzzzzzzzzm_ is Resource;
+                                    Claim dzzzzzzzzzzzzk_ = medClaim?.ClaimofInterest;
+                                    bool dzzzzzzzzzzzzl_ = dzzzzzzzzzzzzk_ is Resource;
 
-                                    return uzzzzzzzzn_;
+                                    return dzzzzzzzzzzzzl_;
                                 };
-                                if (uzzzzzzzzl_())
+                                if (dzzzzzzzzzzzzj_())
                                 {
-                                    Claim uzzzzzzzzo_ = medClaim?.ClaimofInterest;
+                                    Claim dzzzzzzzzzzzzm_ = medClaim?.ClaimofInterest;
 
-                                    return (uzzzzzzzzo_ as Resource).IdElement;
+                                    return (dzzzzzzzzzzzzm_ as Resource).IdElement;
                                 }
                                 else
                                 {
                                     return default;
                                 }
                             };
-                            string tzzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzzzzx_());
-                            ClaimResponse tzzzzzzzzz_ = pClaim?.Response;
-                            ResourceReference uzzzzzzzza_ = tzzzzzzzzz_?.Request;
-                            FhirString uzzzzzzzzb_ = uzzzzzzzza_?.ReferenceElement;
-                            string uzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToString(context, uzzzzzzzzb_);
-                            string uzzzzzzzzd_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, uzzzzzzzzc_);
-                            bool? uzzzzzzzze_ = context.Operators.Equal(tzzzzzzzzy_, uzzzzzzzzd_);
-                            PositiveInt uzzzzzzzzf_ = medClaimLineItem?.SequenceElement;
-                            Integer uzzzzzzzzg_ = context.Operators.Convert<Integer>(uzzzzzzzzf_);
-                            PositiveInt uzzzzzzzzh_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer uzzzzzzzzi_ = context.Operators.Convert<Integer>(uzzzzzzzzh_);
-                            bool? uzzzzzzzzj_ = context.Operators.Equal(uzzzzzzzzg_, uzzzzzzzzi_);
-                            bool? uzzzzzzzzk_ = context.Operators.And(uzzzzzzzze_, uzzzzzzzzj_);
+                            string czzzzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzzzzzzzzzv_());
+                            ClaimResponse czzzzzzzzzzzzx_ = pClaim?.Response;
+                            ResourceReference czzzzzzzzzzzzy_ = czzzzzzzzzzzzx_?.Request;
+                            FhirString czzzzzzzzzzzzz_ = czzzzzzzzzzzzy_?.ReferenceElement;
+                            string dzzzzzzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzzzzzzzzzz_);
+                            string dzzzzzzzzzzzzb_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, dzzzzzzzzzzzza_);
+                            bool? dzzzzzzzzzzzzc_ = context.Operators.Equal(czzzzzzzzzzzzw_, dzzzzzzzzzzzzb_);
+                            PositiveInt dzzzzzzzzzzzzd_ = medClaimLineItem?.SequenceElement;
+                            Integer dzzzzzzzzzzzze_ = context.Operators.Convert<Integer>(dzzzzzzzzzzzzd_);
+                            PositiveInt dzzzzzzzzzzzzf_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer dzzzzzzzzzzzzg_ = context.Operators.Convert<Integer>(dzzzzzzzzzzzzf_);
+                            bool? dzzzzzzzzzzzzh_ = context.Operators.Equal(dzzzzzzzzzzzze_, dzzzzzzzzzzzzg_);
+                            bool? dzzzzzzzzzzzzi_ = context.Operators.And(dzzzzzzzzzzzzc_, dzzzzzzzzzzzzh_);
 
-                            return uzzzzzzzzk_;
+                            return dzzzzzzzzzzzzi_;
                         };
-                        IEnumerable<ClaimResponse.ItemComponent> tzzzzzzzzu_ = context.Operators.Where<ClaimResponse.ItemComponent>(tzzzzzzzzs_, tzzzzzzzzt_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? tzzzzzzzzv_(ClaimResponse.ItemComponent pClaimLineItem) =>
+                        IEnumerable<ClaimResponse.ItemComponent> czzzzzzzzzzzzs_ = context.Operators.Where<ClaimResponse.ItemComponent>(czzzzzzzzzzzzq_, czzzzzzzzzzzzr_);
+                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? czzzzzzzzzzzzt_(ClaimResponse.ItemComponent pClaimLineItem) =>
                             pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzw_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzu_, tzzzzzzzzv_);
+                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> czzzzzzzzzzzzu_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(czzzzzzzzzzzzs_, czzzzzzzzzzzzt_);
 
-                        return tzzzzzzzzw_;
+                        return czzzzzzzzzzzzu_;
                     };
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzq_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzo_, tzzzzzzzzp_);
-                    bool? tzzzzzzzzr_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzq_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> czzzzzzzzzzzzo_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(czzzzzzzzzzzzm_, czzzzzzzzzzzzn_);
+                    bool? czzzzzzzzzzzzp_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(czzzzzzzzzzzzo_);
 
-                    return tzzzzzzzzr_;
+                    return czzzzzzzzzzzzp_;
                 };
-                IEnumerable<Claim.ItemComponent> tzzzzzzzzm_ = context.Operators.Where<Claim.ItemComponent>(tzzzzzzzzk_, tzzzzzzzzl_);
-                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? tzzzzzzzzn_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, tzzzzzzzzm_);
+                IEnumerable<Claim.ItemComponent> czzzzzzzzzzzzk_ = context.Operators.Where<Claim.ItemComponent>(czzzzzzzzzzzzi_, czzzzzzzzzzzzj_);
+                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? czzzzzzzzzzzzl_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, czzzzzzzzzzzzk_);
 
-                return tzzzzzzzzn_;
+                return czzzzzzzzzzzzl_;
             };
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> tzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(tzzzzzzzza_, tzzzzzzzzb_);
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> tzzzzzzzzd_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(tzzzzzzzzc_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? tzzzzzzzze_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, tzzzzzzzzd_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] tzzzzzzzzf_ = [
-                tzzzzzzzze_,
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzzzza_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bzzzzzzzzzzzzy_, bzzzzzzzzzzzzz_);
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzzzzb_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(czzzzzzzzzzzza_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? czzzzzzzzzzzzc_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, czzzzzzzzzzzzb_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] czzzzzzzzzzzzd_ = [
+                czzzzzzzzzzzzc_,
             ];
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzzg_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? czzzzzzzzzzzze_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
             {
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? uzzzzzzzzp_()
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzzzzn_()
                 {
-                    bool uzzzzzzzzu_()
+                    bool dzzzzzzzzzzzzs_()
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> uzzzzzzzzv_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? uzzzzzzzzw_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> dzzzzzzzzzzzzt_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? dzzzzzzzzzzzzu_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> vzzzzzzzzc_ = @this?.ClaimItem;
-                            bool? vzzzzzzzzd_ = context.Operators.Not((bool?)(vzzzzzzzzc_ is null));
+                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzza_ = @this?.ClaimItem;
+                            bool? ezzzzzzzzzzzzb_ = context.Operators.Not((bool?)(ezzzzzzzzzzzza_ is null));
 
-                            return vzzzzzzzzd_;
+                            return ezzzzzzzzzzzzb_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> uzzzzzzzzx_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(uzzzzzzzzv_, uzzzzzzzzw_);
-                        IEnumerable<Claim.ItemComponent> uzzzzzzzzy_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> dzzzzzzzzzzzzv_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(dzzzzzzzzzzzzt_, dzzzzzzzzzzzzu_);
+                        IEnumerable<Claim.ItemComponent> dzzzzzzzzzzzzw_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> vzzzzzzzze_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzzc_ = @this?.ClaimItem;
 
-                            return vzzzzzzzze_;
+                            return ezzzzzzzzzzzzc_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> uzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(uzzzzzzzzx_, uzzzzzzzzy_);
-                        IEnumerable<Claim.ItemComponent> vzzzzzzzza_ = context.Operators.Flatten<Claim.ItemComponent>(uzzzzzzzzz_);
-                        bool? vzzzzzzzzb_ = context.Operators.Exists<Claim.ItemComponent>(vzzzzzzzza_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> dzzzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(dzzzzzzzzzzzzv_, dzzzzzzzzzzzzw_);
+                        IEnumerable<Claim.ItemComponent> dzzzzzzzzzzzzy_ = context.Operators.Flatten<Claim.ItemComponent>(dzzzzzzzzzzzzx_);
+                        bool? dzzzzzzzzzzzzz_ = context.Operators.Exists<Claim.ItemComponent>(dzzzzzzzzzzzzy_);
 
-                        return vzzzzzzzzb_ ?? false;
+                        return dzzzzzzzzzzzzz_ ?? false;
                     };
-                    if (uzzzzzzzzu_())
+                    if (dzzzzzzzzzzzzs_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzf_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? vzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> ezzzzzzzzzzzzd_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? ezzzzzzzzzzzze_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? vzzzzzzzzu_ = @this?.PaidClaim;
-                            bool? vzzzzzzzzv_ = context.Operators.Not((bool?)(vzzzzzzzzu_ is null));
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ezzzzzzzzzzzzs_ = @this?.PaidClaim;
+                            bool? ezzzzzzzzzzzzt_ = context.Operators.Not((bool?)(ezzzzzzzzzzzzs_ is null));
 
-                            return vzzzzzzzzv_;
+                            return ezzzzzzzzzzzzt_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzh_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(vzzzzzzzzf_, vzzzzzzzzg_);
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? vzzzzzzzzi_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> ezzzzzzzzzzzzf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(ezzzzzzzzzzzzd_, ezzzzzzzzzzzze_);
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ezzzzzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? vzzzzzzzzw_ = @this?.PaidClaim;
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ezzzzzzzzzzzzu_ = @this?.PaidClaim;
 
-                            return vzzzzzzzzw_;
+                            return ezzzzzzzzzzzzu_;
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> vzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(vzzzzzzzzh_, vzzzzzzzzi_);
-                        bool? vzzzzzzzzl_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> ezzzzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(ezzzzzzzzzzzzf_, ezzzzzzzzzzzzg_);
+                        bool? ezzzzzzzzzzzzj_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> vzzzzzzzzx_ = @this?.ClaimItem;
-                            bool? vzzzzzzzzy_ = context.Operators.Not((bool?)(vzzzzzzzzx_ is null));
+                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzzv_ = @this?.ClaimItem;
+                            bool? ezzzzzzzzzzzzw_ = context.Operators.Not((bool?)(ezzzzzzzzzzzzv_ is null));
 
-                            return vzzzzzzzzy_;
+                            return ezzzzzzzzzzzzw_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzm_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(vzzzzzzzzf_, vzzzzzzzzl_);
-                        IEnumerable<Claim.ItemComponent> vzzzzzzzzn_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> ezzzzzzzzzzzzk_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(ezzzzzzzzzzzzd_, ezzzzzzzzzzzzj_);
+                        IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzzl_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> vzzzzzzzzz_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzzx_ = @this?.ClaimItem;
 
-                            return vzzzzzzzzz_;
+                            return ezzzzzzzzzzzzx_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> vzzzzzzzzo_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(vzzzzzzzzm_, vzzzzzzzzn_);
-                        IEnumerable<Claim.ItemComponent> vzzzzzzzzp_ = context.Operators.Flatten<Claim.ItemComponent>(vzzzzzzzzo_);
-                        CqlInterval<CqlDateTime> vzzzzzzzzq_(Claim.ItemComponent PaidItem)
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> ezzzzzzzzzzzzm_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(ezzzzzzzzzzzzk_, ezzzzzzzzzzzzl_);
+                        IEnumerable<Claim.ItemComponent> ezzzzzzzzzzzzn_ = context.Operators.Flatten<Claim.ItemComponent>(ezzzzzzzzzzzzm_);
+                        CqlInterval<CqlDateTime> ezzzzzzzzzzzzo_(Claim.ItemComponent PaidItem)
                         {
-                            DataType wzzzzzzzza_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> wzzzzzzzzb_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, wzzzzzzzza_);
+                            DataType ezzzzzzzzzzzzy_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> ezzzzzzzzzzzzz_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ezzzzzzzzzzzzy_);
 
-                            return wzzzzzzzzb_;
+                            return ezzzzzzzzzzzzz_;
                         };
-                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzzr_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(vzzzzzzzzp_, vzzzzzzzzq_);
-                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzzs_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(vzzzzzzzzr_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? vzzzzzzzzt_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, vzzzzzzzzj_, vzzzzzzzzs_);
+                        IEnumerable<CqlInterval<CqlDateTime>> ezzzzzzzzzzzzp_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(ezzzzzzzzzzzzn_, ezzzzzzzzzzzzo_);
+                        IEnumerable<CqlInterval<CqlDateTime>> ezzzzzzzzzzzzq_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ezzzzzzzzzzzzp_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ezzzzzzzzzzzzr_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, ezzzzzzzzzzzzh_, ezzzzzzzzzzzzq_);
 
-                        return vzzzzzzzzt_;
+                        return ezzzzzzzzzzzzr_;
                     }
                     else
                     {
                         return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                     }
                 };
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] uzzzzzzzzq_ = [
-                    uzzzzzzzzp_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] dzzzzzzzzzzzzo_ = [
+                    dzzzzzzzzzzzzn_(),
                 ];
-                bool? uzzzzzzzzr_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                bool? dzzzzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? wzzzzzzzzc_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? fzzzzzzzzzzzza_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return wzzzzzzzzc_;
+                    return fzzzzzzzzzzzza_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> uzzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)uzzzzzzzzq_, uzzzzzzzzr_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? uzzzzzzzzt_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(uzzzzzzzzs_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzzzzzq_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)dzzzzzzzzzzzzo_, dzzzzzzzzzzzzp_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzzzzzq_);
 
-                return uzzzzzzzzt_;
+                return dzzzzzzzzzzzzr_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> tzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)tzzzzzzzzf_, tzzzzzzzzg_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> tzzzzzzzzi_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(tzzzzzzzzh_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? tzzzzzzzzj_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(tzzzzzzzzi_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzzzzzf_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)czzzzzzzzzzzzd_, czzzzzzzzzzzze_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzzzzzg_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(czzzzzzzzzzzzf_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? czzzzzzzzzzzzh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(czzzzzzzzzzzzg_);
 
-            return tzzzzzzzzj_;
+            return czzzzzzzzzzzzh_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)szzzzzzzzv_, szzzzzzzzw_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzx_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzy_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzzzzzv_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)bzzzzzzzzzzzzt_, bzzzzzzzzzzzzu_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bzzzzzzzzzzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(bzzzzzzzzzzzzv_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzzzzx_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(bzzzzzzzzzzzzw_);
 
-        return szzzzzzzzz_;
+        return bzzzzzzzzzzzzx_;
     }
 
 
     [CqlExpressionDefinition("Get Paid Claims for Provided Service and Condition")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Service_and_Condition(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? wzzzzzzzzd_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] wzzzzzzzze_ = [
-            wzzzzzzzzd_,
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? fzzzzzzzzzzzzb_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] fzzzzzzzzzzzzc_ = [
+            fzzzzzzzzzzzzb_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzf_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzzzzd_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
         {
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzn_()
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzzzzl_()
             {
-                bool wzzzzzzzzo_()
+                bool fzzzzzzzzzzzzm_()
                 {
-                    IEnumerable<ClaimResponse> wzzzzzzzzp_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> wzzzzzzzzq_ = MedicalClaimAndResponse?.MedicalClaim;
-                    bool? wzzzzzzzzr_ = context.Operators.And((bool?)(wzzzzzzzzp_ is null), (bool?)(wzzzzzzzzq_ is null));
+                    IEnumerable<ClaimResponse> fzzzzzzzzzzzzn_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> fzzzzzzzzzzzzo_ = MedicalClaimAndResponse?.MedicalClaim;
+                    bool? fzzzzzzzzzzzzp_ = context.Operators.And((bool?)(fzzzzzzzzzzzzn_ is null), (bool?)(fzzzzzzzzzzzzo_ is null));
 
-                    return wzzzzzzzzr_ ?? false;
+                    return fzzzzzzzzzzzzp_ ?? false;
                 };
-                if (wzzzzzzzzo_())
+                if (fzzzzzzzzzzzzm_())
                 {
                     return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                 }
                 else
                 {
-                    IEnumerable<ClaimResponse> wzzzzzzzzs_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> wzzzzzzzzt_ = MedicalClaimAndResponse?.MedicalClaim;
-                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzu_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, wzzzzzzzzs_, wzzzzzzzzt_, ProductOrServiceValueSet, DiagnosisValueSet);
+                    IEnumerable<ClaimResponse> fzzzzzzzzzzzzq_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> fzzzzzzzzzzzzr_ = MedicalClaimAndResponse?.MedicalClaim;
+                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzzzzs_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, fzzzzzzzzzzzzq_, fzzzzzzzzzzzzr_, ProductOrServiceValueSet, DiagnosisValueSet);
 
-                    return wzzzzzzzzu_;
+                    return fzzzzzzzzzzzzs_;
                 }
             };
 
-            return wzzzzzzzzn_();
+            return fzzzzzzzzzzzzl_();
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)wzzzzzzzze_, wzzzzzzzzf_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzh_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzg_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzi_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzh_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] wzzzzzzzzj_ = [
-            wzzzzzzzzi_,
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> fzzzzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)fzzzzzzzzzzzzc_, fzzzzzzzzzzzzd_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> fzzzzzzzzzzzzf_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(fzzzzzzzzzzzze_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(fzzzzzzzzzzzzf_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] fzzzzzzzzzzzzh_ = [
+            fzzzzzzzzzzzzg_,
         ];
-        bool? wzzzzzzzzk_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+        bool? fzzzzzzzzzzzzi_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
         {
-            bool? wzzzzzzzzv_ = context.Operators.Not((bool?)(FinalList is null));
+            bool? fzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(FinalList is null));
 
-            return wzzzzzzzzv_;
+            return fzzzzzzzzzzzzt_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> wzzzzzzzzl_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)wzzzzzzzzj_, wzzzzzzzzk_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? wzzzzzzzzm_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(wzzzzzzzzl_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> fzzzzzzzzzzzzj_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)fzzzzzzzzzzzzh_, fzzzzzzzzzzzzi_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzzzzk_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(fzzzzzzzzzzzzj_);
 
-        return wzzzzzzzzm_;
+        return fzzzzzzzzzzzzk_;
     }
 
 
     [CqlExpressionDefinition("Get All Claims With Procedure or Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_or_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        bool? wzzzzzzzzw_(Claim AllClaims)
+        bool? fzzzzzzzzzzzzu_(Claim AllClaims)
         {
-            List<Claim.ItemComponent> xzzzzzzzzb_ = AllClaims?.Item;
-            bool? xzzzzzzzzc_(Claim.ItemComponent @this)
+            List<Claim.ItemComponent> fzzzzzzzzzzzzz_ = AllClaims?.Item;
+            bool? gzzzzzzzzzzzza_(Claim.ItemComponent @this)
             {
-                CodeableConcept yzzzzzzzze_ = @this?.ProductOrService;
-                bool? yzzzzzzzzf_ = context.Operators.Not((bool?)(yzzzzzzzze_ is null));
+                CodeableConcept hzzzzzzzzzzzzc_ = @this?.ProductOrService;
+                bool? hzzzzzzzzzzzzd_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzc_ is null));
 
-                return yzzzzzzzzf_;
+                return hzzzzzzzzzzzzd_;
             };
-            IEnumerable<Claim.ItemComponent> xzzzzzzzzd_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)xzzzzzzzzb_, xzzzzzzzzc_);
-            CodeableConcept xzzzzzzzze_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> gzzzzzzzzzzzzb_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)fzzzzzzzzzzzzz_, gzzzzzzzzzzzza_);
+            CodeableConcept gzzzzzzzzzzzzc_(Claim.ItemComponent @this)
             {
-                CodeableConcept yzzzzzzzzg_ = @this?.ProductOrService;
+                CodeableConcept hzzzzzzzzzzzze_ = @this?.ProductOrService;
 
-                return yzzzzzzzzg_;
+                return hzzzzzzzzzzzze_;
             };
-            IEnumerable<CodeableConcept> xzzzzzzzzf_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(xzzzzzzzzd_, xzzzzzzzze_);
-            bool? xzzzzzzzzg_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> gzzzzzzzzzzzzd_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(gzzzzzzzzzzzzb_, gzzzzzzzzzzzzc_);
+            bool? gzzzzzzzzzzzze_(CodeableConcept @this)
             {
-                List<Coding> yzzzzzzzzh_ = @this?.Coding;
-                bool? yzzzzzzzzi_ = context.Operators.Not((bool?)(yzzzzzzzzh_ is null));
+                List<Coding> hzzzzzzzzzzzzf_ = @this?.Coding;
+                bool? hzzzzzzzzzzzzg_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzf_ is null));
 
-                return yzzzzzzzzi_;
+                return hzzzzzzzzzzzzg_;
             };
-            IEnumerable<CodeableConcept> xzzzzzzzzh_ = context.Operators.Where<CodeableConcept>(xzzzzzzzzf_, xzzzzzzzzg_);
-            List<Coding> xzzzzzzzzi_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> gzzzzzzzzzzzzf_ = context.Operators.Where<CodeableConcept>(gzzzzzzzzzzzzd_, gzzzzzzzzzzzze_);
+            List<Coding> gzzzzzzzzzzzzg_(CodeableConcept @this)
             {
-                List<Coding> yzzzzzzzzj_ = @this?.Coding;
+                List<Coding> hzzzzzzzzzzzzh_ = @this?.Coding;
 
-                return yzzzzzzzzj_;
+                return hzzzzzzzzzzzzh_;
             };
-            IEnumerable<List<Coding>> xzzzzzzzzj_ = context.Operators.Select<CodeableConcept, List<Coding>>(xzzzzzzzzh_, xzzzzzzzzi_);
-            IEnumerable<Coding> xzzzzzzzzk_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)xzzzzzzzzj_);
-            bool? xzzzzzzzzl_(Coding ProductOrServiceCode)
+            IEnumerable<List<Coding>> gzzzzzzzzzzzzh_ = context.Operators.Select<CodeableConcept, List<Coding>>(gzzzzzzzzzzzzf_, gzzzzzzzzzzzzg_);
+            IEnumerable<Coding> gzzzzzzzzzzzzi_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)gzzzzzzzzzzzzh_);
+            bool? gzzzzzzzzzzzzj_(Coding ProductOrServiceCode)
             {
-                CqlCode yzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                bool? yzzzzzzzzl_ = context.Operators.In<CqlCode>(yzzzzzzzzk_, ProductOrServiceValueSet);
+                CqlCode hzzzzzzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                bool? hzzzzzzzzzzzzj_ = context.Operators.In<CqlCode>(hzzzzzzzzzzzzi_, ProductOrServiceValueSet);
 
-                return yzzzzzzzzl_;
+                return hzzzzzzzzzzzzj_;
             };
-            IEnumerable<Coding> xzzzzzzzzm_ = context.Operators.Where<Coding>(xzzzzzzzzk_, xzzzzzzzzl_);
-            bool? xzzzzzzzzn_ = context.Operators.Exists<Coding>(xzzzzzzzzm_);
-            List<Claim.DiagnosisComponent> xzzzzzzzzo_ = AllClaims?.Diagnosis;
-            bool? xzzzzzzzzp_(Claim.DiagnosisComponent @this)
+            IEnumerable<Coding> gzzzzzzzzzzzzk_ = context.Operators.Where<Coding>(gzzzzzzzzzzzzi_, gzzzzzzzzzzzzj_);
+            bool? gzzzzzzzzzzzzl_ = context.Operators.Exists<Coding>(gzzzzzzzzzzzzk_);
+            List<Claim.DiagnosisComponent> gzzzzzzzzzzzzm_ = AllClaims?.Diagnosis;
+            bool? gzzzzzzzzzzzzn_(Claim.DiagnosisComponent @this)
             {
-                DataType yzzzzzzzzm_ = @this?.Diagnosis;
-                bool? yzzzzzzzzn_ = context.Operators.Not((bool?)(yzzzzzzzzm_ is null));
+                DataType hzzzzzzzzzzzzk_ = @this?.Diagnosis;
+                bool? hzzzzzzzzzzzzl_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzk_ is null));
 
-                return yzzzzzzzzn_;
+                return hzzzzzzzzzzzzl_;
             };
-            IEnumerable<Claim.DiagnosisComponent> xzzzzzzzzq_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)xzzzzzzzzo_, xzzzzzzzzp_);
-            object xzzzzzzzzr_(Claim.DiagnosisComponent @this)
+            IEnumerable<Claim.DiagnosisComponent> gzzzzzzzzzzzzo_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)gzzzzzzzzzzzzm_, gzzzzzzzzzzzzn_);
+            object gzzzzzzzzzzzzp_(Claim.DiagnosisComponent @this)
             {
-                DataType yzzzzzzzzo_ = @this?.Diagnosis;
+                DataType hzzzzzzzzzzzzm_ = @this?.Diagnosis;
 
-                return yzzzzzzzzo_;
+                return hzzzzzzzzzzzzm_;
             };
-            IEnumerable<object> xzzzzzzzzs_ = context.Operators.Select<Claim.DiagnosisComponent, object>(xzzzzzzzzq_, xzzzzzzzzr_);
-            bool? xzzzzzzzzt_(object @this)
+            IEnumerable<object> gzzzzzzzzzzzzq_ = context.Operators.Select<Claim.DiagnosisComponent, object>(gzzzzzzzzzzzzo_, gzzzzzzzzzzzzp_);
+            bool? gzzzzzzzzzzzzr_(object @this)
             {
-                object yzzzzzzzzp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
-                bool? yzzzzzzzzq_ = context.Operators.Not((bool?)(yzzzzzzzzp_ is null));
+                object hzzzzzzzzzzzzn_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                bool? hzzzzzzzzzzzzo_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzn_ is null));
 
-                return yzzzzzzzzq_;
+                return hzzzzzzzzzzzzo_;
             };
-            IEnumerable<object> xzzzzzzzzu_ = context.Operators.Where<object>(xzzzzzzzzs_, xzzzzzzzzt_);
-            object xzzzzzzzzv_(object @this)
+            IEnumerable<object> gzzzzzzzzzzzzs_ = context.Operators.Where<object>(gzzzzzzzzzzzzq_, gzzzzzzzzzzzzr_);
+            object gzzzzzzzzzzzzt_(object @this)
             {
-                object yzzzzzzzzr_ = context.Operators.LateBoundProperty<object>(@this, "coding");
+                object hzzzzzzzzzzzzp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
-                return yzzzzzzzzr_;
+                return hzzzzzzzzzzzzp_;
             };
-            IEnumerable<object> xzzzzzzzzw_ = context.Operators.Select<object, object>(xzzzzzzzzu_, xzzzzzzzzv_);
-            IEnumerable<object> xzzzzzzzzx_ = context.Operators.FlattenLateBoundList(xzzzzzzzzw_);
-            Coding xzzzzzzzzy_(object @object) =>
+            IEnumerable<object> gzzzzzzzzzzzzu_ = context.Operators.Select<object, object>(gzzzzzzzzzzzzs_, gzzzzzzzzzzzzt_);
+            IEnumerable<object> gzzzzzzzzzzzzv_ = context.Operators.FlattenLateBoundList(gzzzzzzzzzzzzu_);
+            Coding gzzzzzzzzzzzzw_(object @object) =>
                 (Coding)@object;
-            IEnumerable<Coding> xzzzzzzzzz_ = context.Operators.Select<object, Coding>(xzzzzzzzzx_, xzzzzzzzzy_);
-            bool? yzzzzzzzza_(Coding DiagnosisCode)
+            IEnumerable<Coding> gzzzzzzzzzzzzx_ = context.Operators.Select<object, Coding>(gzzzzzzzzzzzzv_, gzzzzzzzzzzzzw_);
+            bool? gzzzzzzzzzzzzy_(Coding DiagnosisCode)
             {
-                CqlCode yzzzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
-                bool? yzzzzzzzzt_ = context.Operators.In<CqlCode>(yzzzzzzzzs_, DiagnosisValueSet);
+                CqlCode hzzzzzzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
+                bool? hzzzzzzzzzzzzr_ = context.Operators.In<CqlCode>(hzzzzzzzzzzzzq_, DiagnosisValueSet);
 
-                return yzzzzzzzzt_;
+                return hzzzzzzzzzzzzr_;
             };
-            IEnumerable<Coding> yzzzzzzzzb_ = context.Operators.Where<Coding>(xzzzzzzzzz_, yzzzzzzzza_);
-            bool? yzzzzzzzzc_ = context.Operators.Exists<Coding>(yzzzzzzzzb_);
-            bool? yzzzzzzzzd_ = context.Operators.Or(xzzzzzzzzn_, yzzzzzzzzc_);
+            IEnumerable<Coding> gzzzzzzzzzzzzz_ = context.Operators.Where<Coding>(gzzzzzzzzzzzzx_, gzzzzzzzzzzzzy_);
+            bool? hzzzzzzzzzzzza_ = context.Operators.Exists<Coding>(gzzzzzzzzzzzzz_);
+            bool? hzzzzzzzzzzzzb_ = context.Operators.Or(gzzzzzzzzzzzzl_, hzzzzzzzzzzzza_);
 
-            return yzzzzzzzzd_;
+            return hzzzzzzzzzzzzb_;
         };
-        IEnumerable<Claim> wzzzzzzzzx_ = context.Operators.Where<Claim>(claim, wzzzzzzzzw_);
-        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? wzzzzzzzzy_(Claim ProcedureClaims)
+        IEnumerable<Claim> fzzzzzzzzzzzzv_ = context.Operators.Where<Claim>(claim, fzzzzzzzzzzzzu_);
+        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? fzzzzzzzzzzzzw_(Claim ProcedureClaims)
         {
-            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? yzzzzzzzzu_()
+            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? hzzzzzzzzzzzzs_()
             {
-                bool yzzzzzzzzv_()
+                bool hzzzzzzzzzzzzt_()
                 {
-                    List<Claim.ItemComponent> yzzzzzzzzw_ = ProcedureClaims?.Item;
-                    bool? yzzzzzzzzx_(Claim.ItemComponent ResponseItem)
+                    List<Claim.ItemComponent> hzzzzzzzzzzzzu_ = ProcedureClaims?.Item;
+                    bool? hzzzzzzzzzzzzv_(Claim.ItemComponent ResponseItem)
                     {
-                        CodeableConcept zzzzzzzzza_ = ResponseItem?.ProductOrService;
-                        List<Coding> zzzzzzzzzb_ = zzzzzzzzza_?.Coding;
-                        bool? zzzzzzzzzc_(Coding ProductOrServiceCode)
+                        CodeableConcept hzzzzzzzzzzzzy_ = ResponseItem?.ProductOrService;
+                        List<Coding> hzzzzzzzzzzzzz_ = hzzzzzzzzzzzzy_?.Coding;
+                        bool? izzzzzzzzzzzza_(Coding ProductOrServiceCode)
                         {
-                            CqlCode zzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                            bool? zzzzzzzzzg_ = context.Operators.In<CqlCode>(zzzzzzzzzf_, ProductOrServiceValueSet);
+                            CqlCode izzzzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                            bool? izzzzzzzzzzzze_ = context.Operators.In<CqlCode>(izzzzzzzzzzzzd_, ProductOrServiceValueSet);
 
-                            return zzzzzzzzzg_;
+                            return izzzzzzzzzzzze_;
                         };
-                        IEnumerable<Coding> zzzzzzzzzd_ = context.Operators.Where<Coding>((IEnumerable<Coding>)zzzzzzzzzb_, zzzzzzzzzc_);
-                        bool? zzzzzzzzze_ = context.Operators.Exists<Coding>(zzzzzzzzzd_);
+                        IEnumerable<Coding> izzzzzzzzzzzzb_ = context.Operators.Where<Coding>((IEnumerable<Coding>)hzzzzzzzzzzzzz_, izzzzzzzzzzzza_);
+                        bool? izzzzzzzzzzzzc_ = context.Operators.Exists<Coding>(izzzzzzzzzzzzb_);
 
-                        return zzzzzzzzze_;
+                        return izzzzzzzzzzzzc_;
                     };
-                    IEnumerable<Claim.ItemComponent> yzzzzzzzzy_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)yzzzzzzzzw_, yzzzzzzzzx_);
-                    bool? yzzzzzzzzz_ = context.Operators.Exists<Claim.ItemComponent>(yzzzzzzzzy_);
+                    IEnumerable<Claim.ItemComponent> hzzzzzzzzzzzzw_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)hzzzzzzzzzzzzu_, hzzzzzzzzzzzzv_);
+                    bool? hzzzzzzzzzzzzx_ = context.Operators.Exists<Claim.ItemComponent>(hzzzzzzzzzzzzw_);
 
-                    return yzzzzzzzzz_ ?? false;
+                    return hzzzzzzzzzzzzx_ ?? false;
                 };
-                if (yzzzzzzzzv_())
+                if (hzzzzzzzzzzzzt_())
                 {
-                    Id zzzzzzzzzh_ = ProcedureClaims?.IdElement;
-                    List<Claim.ItemComponent> zzzzzzzzzi_ = ProcedureClaims?.Item;
-                    bool? zzzzzzzzzj_(Claim.ItemComponent ResponseItem)
+                    Id izzzzzzzzzzzzf_ = ProcedureClaims?.IdElement;
+                    List<Claim.ItemComponent> izzzzzzzzzzzzg_ = ProcedureClaims?.Item;
+                    bool? izzzzzzzzzzzzh_(Claim.ItemComponent ResponseItem)
                     {
-                        CodeableConcept zzzzzzzzzm_ = ResponseItem?.ProductOrService;
-                        List<Coding> zzzzzzzzzn_ = zzzzzzzzzm_?.Coding;
-                        bool? zzzzzzzzzo_(Coding ProductOrServiceCode)
+                        CodeableConcept izzzzzzzzzzzzk_ = ResponseItem?.ProductOrService;
+                        List<Coding> izzzzzzzzzzzzl_ = izzzzzzzzzzzzk_?.Coding;
+                        bool? izzzzzzzzzzzzm_(Coding ProductOrServiceCode)
                         {
-                            CqlCode zzzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                            bool? zzzzzzzzzs_ = context.Operators.In<CqlCode>(zzzzzzzzzr_, ProductOrServiceValueSet);
+                            CqlCode izzzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                            bool? izzzzzzzzzzzzq_ = context.Operators.In<CqlCode>(izzzzzzzzzzzzp_, ProductOrServiceValueSet);
 
-                            return zzzzzzzzzs_;
+                            return izzzzzzzzzzzzq_;
                         };
-                        IEnumerable<Coding> zzzzzzzzzp_ = context.Operators.Where<Coding>((IEnumerable<Coding>)zzzzzzzzzn_, zzzzzzzzzo_);
-                        bool? zzzzzzzzzq_ = context.Operators.Exists<Coding>(zzzzzzzzzp_);
+                        IEnumerable<Coding> izzzzzzzzzzzzn_ = context.Operators.Where<Coding>((IEnumerable<Coding>)izzzzzzzzzzzzl_, izzzzzzzzzzzzm_);
+                        bool? izzzzzzzzzzzzo_ = context.Operators.Exists<Coding>(izzzzzzzzzzzzn_);
 
-                        return zzzzzzzzzq_;
+                        return izzzzzzzzzzzzo_;
                     };
-                    IEnumerable<Claim.ItemComponent> zzzzzzzzzk_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)zzzzzzzzzi_, zzzzzzzzzj_);
-                    (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? zzzzzzzzzl_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, zzzzzzzzzh_, zzzzzzzzzk_);
+                    IEnumerable<Claim.ItemComponent> izzzzzzzzzzzzi_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)izzzzzzzzzzzzg_, izzzzzzzzzzzzh_);
+                    (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? izzzzzzzzzzzzj_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, izzzzzzzzzzzzf_, izzzzzzzzzzzzi_);
 
-                    return zzzzzzzzzl_;
+                    return izzzzzzzzzzzzj_;
                 }
                 else
                 {
-                    Id zzzzzzzzzt_ = ProcedureClaims?.IdElement;
-                    List<Claim.ItemComponent> zzzzzzzzzu_ = ProcedureClaims?.Item;
-                    bool? zzzzzzzzzv_(Claim.ItemComponent ResponseItem)
+                    Id izzzzzzzzzzzzr_ = ProcedureClaims?.IdElement;
+                    List<Claim.ItemComponent> izzzzzzzzzzzzs_ = ProcedureClaims?.Item;
+                    bool? izzzzzzzzzzzzt_(Claim.ItemComponent ResponseItem)
                     {
-                        PositiveInt zzzzzzzzzy_ = ResponseItem?.SequenceElement;
-                        Integer zzzzzzzzzz_ = context.Operators.Convert<Integer>(zzzzzzzzzy_);
-                        int? azzzzzzzzza_ = zzzzzzzzzz_?.Value;
-                        bool? azzzzzzzzzb_ = context.Operators.Equal(azzzzzzzzza_, 1);
+                        PositiveInt izzzzzzzzzzzzw_ = ResponseItem?.SequenceElement;
+                        Integer izzzzzzzzzzzzx_ = context.Operators.Convert<Integer>(izzzzzzzzzzzzw_);
+                        int? izzzzzzzzzzzzy_ = izzzzzzzzzzzzx_?.Value;
+                        bool? izzzzzzzzzzzzz_ = context.Operators.Equal(izzzzzzzzzzzzy_, 1);
 
-                        return azzzzzzzzzb_;
+                        return izzzzzzzzzzzzz_;
                     };
-                    IEnumerable<Claim.ItemComponent> zzzzzzzzzw_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)zzzzzzzzzu_, zzzzzzzzzv_);
-                    (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? zzzzzzzzzx_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, zzzzzzzzzt_, zzzzzzzzzw_);
+                    IEnumerable<Claim.ItemComponent> izzzzzzzzzzzzu_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)izzzzzzzzzzzzs_, izzzzzzzzzzzzt_);
+                    (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? izzzzzzzzzzzzv_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, ProcedureClaims, izzzzzzzzzzzzr_, izzzzzzzzzzzzu_);
 
-                    return zzzzzzzzzx_;
+                    return izzzzzzzzzzzzv_;
                 }
             };
 
-            return yzzzzzzzzu_();
+            return hzzzzzzzzzzzzs_();
         };
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> wzzzzzzzzz_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(wzzzzzzzzx_, wzzzzzzzzy_);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> xzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(wzzzzzzzzz_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> fzzzzzzzzzzzzx_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(fzzzzzzzzzzzzv_, fzzzzzzzzzzzzw_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> fzzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(fzzzzzzzzzzzzx_);
 
-        return xzzzzzzzza_;
+        return fzzzzzzzzzzzzy_;
     }
 
 
     [CqlExpressionDefinition("Get Corresponding Claim for Services or Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> azzzzzzzzzc_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> azzzzzzzzzd_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? azzzzzzzzze_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, azzzzzzzzzc_, azzzzzzzzzd_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] azzzzzzzzzf_ = [
-            azzzzzzzzze_,
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> jzzzzzzzzzzzza_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> jzzzzzzzzzzzzb_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? jzzzzzzzzzzzzc_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, jzzzzzzzzzzzza_, jzzzzzzzzzzzzb_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] jzzzzzzzzzzzzd_ = [
+            jzzzzzzzzzzzzc_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? azzzzzzzzzg_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzzzze_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
         {
-            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> azzzzzzzzzk_ = ClaimAndResponse?.MedicalClaim;
-            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? azzzzzzzzzl_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
+            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> jzzzzzzzzzzzzi_ = ClaimAndResponse?.MedicalClaim;
+            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? jzzzzzzzzzzzzj_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
             {
-                IEnumerable<Claim.ItemComponent> azzzzzzzzzu_ = medClaim?.LineItems;
-                bool? azzzzzzzzzv_(Claim.ItemComponent medClaimLineItem)
+                IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzs_ = medClaim?.LineItems;
+                bool? jzzzzzzzzzzzzt_(Claim.ItemComponent medClaimLineItem)
                 {
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> azzzzzzzzzy_ = ClaimAndResponse?.PaidMedicalClaimResponse;
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> azzzzzzzzzz_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> jzzzzzzzzzzzzw_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> jzzzzzzzzzzzzx_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
                     {
-                        IEnumerable<ClaimResponse.ItemComponent> bzzzzzzzzzc_ = pClaim?.LineItems;
-                        bool? bzzzzzzzzzd_(ClaimResponse.ItemComponent pClaimLineItem)
+                        IEnumerable<ClaimResponse.ItemComponent> kzzzzzzzzzzzza_ = pClaim?.LineItems;
+                        bool? kzzzzzzzzzzzzb_(ClaimResponse.ItemComponent pClaimLineItem)
                         {
-                            Id bzzzzzzzzzh_()
+                            Id kzzzzzzzzzzzzf_()
                             {
-                                bool bzzzzzzzzzv_()
+                                bool kzzzzzzzzzzzzt_()
                                 {
-                                    Claim bzzzzzzzzzw_ = medClaim?.ClaimofInterest;
-                                    bool bzzzzzzzzzx_ = bzzzzzzzzzw_ is Resource;
+                                    Claim kzzzzzzzzzzzzu_ = medClaim?.ClaimofInterest;
+                                    bool kzzzzzzzzzzzzv_ = kzzzzzzzzzzzzu_ is Resource;
 
-                                    return bzzzzzzzzzx_;
+                                    return kzzzzzzzzzzzzv_;
                                 };
-                                if (bzzzzzzzzzv_())
+                                if (kzzzzzzzzzzzzt_())
                                 {
-                                    Claim bzzzzzzzzzy_ = medClaim?.ClaimofInterest;
+                                    Claim kzzzzzzzzzzzzw_ = medClaim?.ClaimofInterest;
 
-                                    return (bzzzzzzzzzy_ as Resource).IdElement;
+                                    return (kzzzzzzzzzzzzw_ as Resource).IdElement;
                                 }
                                 else
                                 {
                                     return default;
                                 }
                             };
-                            string bzzzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzzzzzzzzh_());
-                            ClaimResponse bzzzzzzzzzj_ = pClaim?.Response;
-                            ResourceReference bzzzzzzzzzk_ = bzzzzzzzzzj_?.Request;
-                            FhirString bzzzzzzzzzl_ = bzzzzzzzzzk_?.ReferenceElement;
-                            string bzzzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToString(context, bzzzzzzzzzl_);
-                            string bzzzzzzzzzn_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, bzzzzzzzzzm_);
-                            bool? bzzzzzzzzzo_ = context.Operators.Equal(bzzzzzzzzzi_, bzzzzzzzzzn_);
-                            PositiveInt bzzzzzzzzzp_ = medClaimLineItem?.SequenceElement;
-                            Integer bzzzzzzzzzq_ = context.Operators.Convert<Integer>(bzzzzzzzzzp_);
-                            PositiveInt bzzzzzzzzzr_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer bzzzzzzzzzs_ = context.Operators.Convert<Integer>(bzzzzzzzzzr_);
-                            bool? bzzzzzzzzzt_ = context.Operators.Equal(bzzzzzzzzzq_, bzzzzzzzzzs_);
-                            bool? bzzzzzzzzzu_ = context.Operators.And(bzzzzzzzzzo_, bzzzzzzzzzt_);
+                            string kzzzzzzzzzzzzg_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzzzzzzzzzf_());
+                            ClaimResponse kzzzzzzzzzzzzh_ = pClaim?.Response;
+                            ResourceReference kzzzzzzzzzzzzi_ = kzzzzzzzzzzzzh_?.Request;
+                            FhirString kzzzzzzzzzzzzj_ = kzzzzzzzzzzzzi_?.ReferenceElement;
+                            string kzzzzzzzzzzzzk_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzzzzzzzzzj_);
+                            string kzzzzzzzzzzzzl_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, kzzzzzzzzzzzzk_);
+                            bool? kzzzzzzzzzzzzm_ = context.Operators.Equal(kzzzzzzzzzzzzg_, kzzzzzzzzzzzzl_);
+                            PositiveInt kzzzzzzzzzzzzn_ = medClaimLineItem?.SequenceElement;
+                            Integer kzzzzzzzzzzzzo_ = context.Operators.Convert<Integer>(kzzzzzzzzzzzzn_);
+                            PositiveInt kzzzzzzzzzzzzp_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer kzzzzzzzzzzzzq_ = context.Operators.Convert<Integer>(kzzzzzzzzzzzzp_);
+                            bool? kzzzzzzzzzzzzr_ = context.Operators.Equal(kzzzzzzzzzzzzo_, kzzzzzzzzzzzzq_);
+                            bool? kzzzzzzzzzzzzs_ = context.Operators.And(kzzzzzzzzzzzzm_, kzzzzzzzzzzzzr_);
 
-                            return bzzzzzzzzzu_;
+                            return kzzzzzzzzzzzzs_;
                         };
-                        IEnumerable<ClaimResponse.ItemComponent> bzzzzzzzzze_ = context.Operators.Where<ClaimResponse.ItemComponent>(bzzzzzzzzzc_, bzzzzzzzzzd_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? bzzzzzzzzzf_(ClaimResponse.ItemComponent pClaimLineItem) =>
+                        IEnumerable<ClaimResponse.ItemComponent> kzzzzzzzzzzzzc_ = context.Operators.Where<ClaimResponse.ItemComponent>(kzzzzzzzzzzzza_, kzzzzzzzzzzzzb_);
+                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? kzzzzzzzzzzzzd_(ClaimResponse.ItemComponent pClaimLineItem) =>
                             pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> bzzzzzzzzzg_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(bzzzzzzzzze_, bzzzzzzzzzf_);
+                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> kzzzzzzzzzzzze_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(kzzzzzzzzzzzzc_, kzzzzzzzzzzzzd_);
 
-                        return bzzzzzzzzzg_;
+                        return kzzzzzzzzzzzze_;
                     };
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> bzzzzzzzzza_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(azzzzzzzzzy_, azzzzzzzzzz_);
-                    bool? bzzzzzzzzzb_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(bzzzzzzzzza_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> jzzzzzzzzzzzzy_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(jzzzzzzzzzzzzw_, jzzzzzzzzzzzzx_);
+                    bool? jzzzzzzzzzzzzz_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(jzzzzzzzzzzzzy_);
 
-                    return bzzzzzzzzzb_;
+                    return jzzzzzzzzzzzzz_;
                 };
-                IEnumerable<Claim.ItemComponent> azzzzzzzzzw_ = context.Operators.Where<Claim.ItemComponent>(azzzzzzzzzu_, azzzzzzzzzv_);
-                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? azzzzzzzzzx_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, azzzzzzzzzw_);
+                IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzu_ = context.Operators.Where<Claim.ItemComponent>(jzzzzzzzzzzzzs_, jzzzzzzzzzzzzt_);
+                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? jzzzzzzzzzzzzv_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, jzzzzzzzzzzzzu_);
 
-                return azzzzzzzzzx_;
+                return jzzzzzzzzzzzzv_;
             };
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> azzzzzzzzzm_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(azzzzzzzzzk_, azzzzzzzzzl_);
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> azzzzzzzzzn_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(azzzzzzzzzm_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? azzzzzzzzzo_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, azzzzzzzzzn_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] azzzzzzzzzp_ = [
-                azzzzzzzzzo_,
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> jzzzzzzzzzzzzk_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(jzzzzzzzzzzzzi_, jzzzzzzzzzzzzj_);
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> jzzzzzzzzzzzzl_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(jzzzzzzzzzzzzk_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? jzzzzzzzzzzzzm_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, jzzzzzzzzzzzzl_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] jzzzzzzzzzzzzn_ = [
+                jzzzzzzzzzzzzm_,
             ];
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? azzzzzzzzzq_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
             {
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bzzzzzzzzzz_()
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? kzzzzzzzzzzzzx_()
                 {
-                    bool czzzzzzzzze_()
+                    bool lzzzzzzzzzzzzc_()
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzf_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? czzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzzzzd_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? lzzzzzzzzzzzze_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> czzzzzzzzzm_ = @this?.ClaimItem;
-                            bool? czzzzzzzzzn_ = context.Operators.Not((bool?)(czzzzzzzzzm_ is null));
+                            IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzk_ = @this?.ClaimItem;
+                            bool? lzzzzzzzzzzzzl_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzk_ is null));
 
-                            return czzzzzzzzzn_;
+                            return lzzzzzzzzzzzzl_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzh_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(czzzzzzzzzf_, czzzzzzzzzg_);
-                        IEnumerable<Claim.ItemComponent> czzzzzzzzzi_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzzzzf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(lzzzzzzzzzzzzd_, lzzzzzzzzzzzze_);
+                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> czzzzzzzzzo_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzm_ = @this?.ClaimItem;
 
-                            return czzzzzzzzzo_;
+                            return lzzzzzzzzzzzzm_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> czzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(czzzzzzzzzh_, czzzzzzzzzi_);
-                        IEnumerable<Claim.ItemComponent> czzzzzzzzzk_ = context.Operators.Flatten<Claim.ItemComponent>(czzzzzzzzzj_);
-                        bool? czzzzzzzzzl_ = context.Operators.Exists<Claim.ItemComponent>(czzzzzzzzzk_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> lzzzzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(lzzzzzzzzzzzzf_, lzzzzzzzzzzzzg_);
+                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzi_ = context.Operators.Flatten<Claim.ItemComponent>(lzzzzzzzzzzzzh_);
+                        bool? lzzzzzzzzzzzzj_ = context.Operators.Exists<Claim.ItemComponent>(lzzzzzzzzzzzzi_);
 
-                        return czzzzzzzzzl_ ?? false;
+                        return lzzzzzzzzzzzzj_ ?? false;
                     };
-                    if (czzzzzzzzze_())
+                    if (lzzzzzzzzzzzzc_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzp_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? czzzzzzzzzq_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzzzzn_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? lzzzzzzzzzzzzo_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? dzzzzzzzzze_ = @this?.PaidClaim;
-                            bool? dzzzzzzzzzf_ = context.Operators.Not((bool?)(dzzzzzzzzze_ is null));
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? mzzzzzzzzzzzzc_ = @this?.PaidClaim;
+                            bool? mzzzzzzzzzzzzd_ = context.Operators.Not((bool?)(mzzzzzzzzzzzzc_ is null));
 
-                            return dzzzzzzzzzf_;
+                            return mzzzzzzzzzzzzd_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzr_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(czzzzzzzzzp_, czzzzzzzzzq_);
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? czzzzzzzzzs_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzzzzp_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(lzzzzzzzzzzzzn_, lzzzzzzzzzzzzo_);
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? lzzzzzzzzzzzzq_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? dzzzzzzzzzg_ = @this?.PaidClaim;
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? mzzzzzzzzzzzze_ = @this?.PaidClaim;
 
-                            return dzzzzzzzzzg_;
+                            return mzzzzzzzzzzzze_;
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> czzzzzzzzzt_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(czzzzzzzzzr_, czzzzzzzzzs_);
-                        bool? czzzzzzzzzv_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> lzzzzzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(lzzzzzzzzzzzzp_, lzzzzzzzzzzzzq_);
+                        bool? lzzzzzzzzzzzzt_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> dzzzzzzzzzh_ = @this?.ClaimItem;
-                            bool? dzzzzzzzzzi_ = context.Operators.Not((bool?)(dzzzzzzzzzh_ is null));
+                            IEnumerable<Claim.ItemComponent> mzzzzzzzzzzzzf_ = @this?.ClaimItem;
+                            bool? mzzzzzzzzzzzzg_ = context.Operators.Not((bool?)(mzzzzzzzzzzzzf_ is null));
 
-                            return dzzzzzzzzzi_;
+                            return mzzzzzzzzzzzzg_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> czzzzzzzzzw_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(czzzzzzzzzp_, czzzzzzzzzv_);
-                        IEnumerable<Claim.ItemComponent> czzzzzzzzzx_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzzzzu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(lzzzzzzzzzzzzn_, lzzzzzzzzzzzzt_);
+                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzv_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> dzzzzzzzzzj_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> mzzzzzzzzzzzzh_ = @this?.ClaimItem;
 
-                            return dzzzzzzzzzj_;
+                            return mzzzzzzzzzzzzh_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> czzzzzzzzzy_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(czzzzzzzzzw_, czzzzzzzzzx_);
-                        IEnumerable<Claim.ItemComponent> czzzzzzzzzz_ = context.Operators.Flatten<Claim.ItemComponent>(czzzzzzzzzy_);
-                        CqlInterval<CqlDateTime> dzzzzzzzzza_(Claim.ItemComponent PaidItem)
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> lzzzzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(lzzzzzzzzzzzzu_, lzzzzzzzzzzzzv_);
+                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzzzzx_ = context.Operators.Flatten<Claim.ItemComponent>(lzzzzzzzzzzzzw_);
+                        CqlInterval<CqlDateTime> lzzzzzzzzzzzzy_(Claim.ItemComponent PaidItem)
                         {
-                            DataType dzzzzzzzzzk_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> dzzzzzzzzzl_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, dzzzzzzzzzk_);
+                            DataType mzzzzzzzzzzzzi_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> mzzzzzzzzzzzzj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, mzzzzzzzzzzzzi_);
 
-                            return dzzzzzzzzzl_;
+                            return mzzzzzzzzzzzzj_;
                         };
-                        IEnumerable<CqlInterval<CqlDateTime>> dzzzzzzzzzb_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(czzzzzzzzzz_, dzzzzzzzzza_);
-                        IEnumerable<CqlInterval<CqlDateTime>> dzzzzzzzzzc_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(dzzzzzzzzzb_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzd_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, czzzzzzzzzt_, dzzzzzzzzzc_);
+                        IEnumerable<CqlInterval<CqlDateTime>> lzzzzzzzzzzzzz_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(lzzzzzzzzzzzzx_, lzzzzzzzzzzzzy_);
+                        IEnumerable<CqlInterval<CqlDateTime>> mzzzzzzzzzzzza_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(lzzzzzzzzzzzzz_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzzb_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, lzzzzzzzzzzzzr_, mzzzzzzzzzzzza_);
 
-                        return dzzzzzzzzzd_;
+                        return mzzzzzzzzzzzzb_;
                     }
                     else
                     {
                         return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                     }
                 };
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] czzzzzzzzza_ = [
-                    bzzzzzzzzzz_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] kzzzzzzzzzzzzy_ = [
+                    kzzzzzzzzzzzzx_(),
                 ];
-                bool? czzzzzzzzzb_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                bool? kzzzzzzzzzzzzz_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? dzzzzzzzzzm_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? mzzzzzzzzzzzzk_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return dzzzzzzzzzm_;
+                    return mzzzzzzzzzzzzk_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> czzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)czzzzzzzzza_, czzzzzzzzzb_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? czzzzzzzzzd_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(czzzzzzzzzc_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> lzzzzzzzzzzzza_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)kzzzzzzzzzzzzy_, kzzzzzzzzzzzzz_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? lzzzzzzzzzzzzb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(lzzzzzzzzzzzza_);
 
-                return czzzzzzzzzd_;
+                return lzzzzzzzzzzzzb_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> azzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)azzzzzzzzzp_, azzzzzzzzzq_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> azzzzzzzzzs_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(azzzzzzzzzr_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? azzzzzzzzzt_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(azzzzzzzzzs_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)jzzzzzzzzzzzzn_, jzzzzzzzzzzzzo_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzzzzq_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzzzzp_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzzzzq_);
 
-            return azzzzzzzzzt_;
+            return jzzzzzzzzzzzzr_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> azzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)azzzzzzzzzf_, azzzzzzzzzg_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> azzzzzzzzzi_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(azzzzzzzzzh_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? azzzzzzzzzj_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(azzzzzzzzzi_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzzzzf_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)jzzzzzzzzzzzzd_, jzzzzzzzzzzzze_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzzzzg_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzzzzf_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzzzzh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzzzzg_);
 
-        return azzzzzzzzzj_;
+        return jzzzzzzzzzzzzh_;
     }
 
 
     [CqlExpressionDefinition("Get Paid Claims for Provided Services or Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? dzzzzzzzzzn_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] dzzzzzzzzzo_ = [
-            dzzzzzzzzzn_,
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? mzzzzzzzzzzzzl_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] mzzzzzzzzzzzzm_ = [
+            mzzzzzzzzzzzzl_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzzn_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
         {
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzt_()
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzzr_()
             {
-                bool dzzzzzzzzzu_()
+                bool mzzzzzzzzzzzzs_()
                 {
-                    IEnumerable<ClaimResponse> dzzzzzzzzzv_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> dzzzzzzzzzw_ = MedicalClaimAndResponse?.MedicalClaim;
-                    bool? dzzzzzzzzzx_ = context.Operators.And((bool?)(dzzzzzzzzzv_ is null), (bool?)(dzzzzzzzzzw_ is null));
+                    IEnumerable<ClaimResponse> mzzzzzzzzzzzzt_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> mzzzzzzzzzzzzu_ = MedicalClaimAndResponse?.MedicalClaim;
+                    bool? mzzzzzzzzzzzzv_ = context.Operators.And((bool?)(mzzzzzzzzzzzzt_ is null), (bool?)(mzzzzzzzzzzzzu_ is null));
 
-                    return dzzzzzzzzzx_ ?? false;
+                    return mzzzzzzzzzzzzv_ ?? false;
                 };
-                if (dzzzzzzzzzu_())
+                if (mzzzzzzzzzzzzs_())
                 {
                     return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                 }
                 else
                 {
-                    IEnumerable<ClaimResponse> dzzzzzzzzzy_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> dzzzzzzzzzz_ = MedicalClaimAndResponse?.MedicalClaim;
-                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ezzzzzzzzza_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, dzzzzzzzzzy_, dzzzzzzzzzz_, ProductOrServiceValueSet, DiagnosisValueSet);
+                    IEnumerable<ClaimResponse> mzzzzzzzzzzzzw_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> mzzzzzzzzzzzzx_ = MedicalClaimAndResponse?.MedicalClaim;
+                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzzy_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, mzzzzzzzzzzzzw_, mzzzzzzzzzzzzx_, ProductOrServiceValueSet, DiagnosisValueSet);
 
-                    return ezzzzzzzzza_;
+                    return mzzzzzzzzzzzzy_;
                 }
             };
 
-            return dzzzzzzzzzt_();
+            return mzzzzzzzzzzzzr_();
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)dzzzzzzzzzo_, dzzzzzzzzzp_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> dzzzzzzzzzr_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzzq_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? dzzzzzzzzzs_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(dzzzzzzzzzr_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzzo_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)mzzzzzzzzzzzzm_, mzzzzzzzzzzzzn_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> mzzzzzzzzzzzzp_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzzo_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? mzzzzzzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(mzzzzzzzzzzzzp_);
 
-        return dzzzzzzzzzs_;
+        return mzzzzzzzzzzzzq_;
     }
 
 
     [CqlExpressionDefinition("Get All Claims With Procedure Only")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_Only(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        bool? ezzzzzzzzzb_(Claim AllClaims)
+        bool? mzzzzzzzzzzzzz_(Claim AllClaims)
         {
-            List<Claim.ItemComponent> ezzzzzzzzzg_ = AllClaims?.Item;
-            bool? ezzzzzzzzzh_(Claim.ItemComponent @this)
+            List<Claim.ItemComponent> nzzzzzzzzzzzze_ = AllClaims?.Item;
+            bool? nzzzzzzzzzzzzf_(Claim.ItemComponent @this)
             {
-                CodeableConcept ezzzzzzzzzt_ = @this?.ProductOrService;
-                bool? ezzzzzzzzzu_ = context.Operators.Not((bool?)(ezzzzzzzzzt_ is null));
+                CodeableConcept nzzzzzzzzzzzzr_ = @this?.ProductOrService;
+                bool? nzzzzzzzzzzzzs_ = context.Operators.Not((bool?)(nzzzzzzzzzzzzr_ is null));
 
-                return ezzzzzzzzzu_;
+                return nzzzzzzzzzzzzs_;
             };
-            IEnumerable<Claim.ItemComponent> ezzzzzzzzzi_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ezzzzzzzzzg_, ezzzzzzzzzh_);
-            CodeableConcept ezzzzzzzzzj_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzzg_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)nzzzzzzzzzzzze_, nzzzzzzzzzzzzf_);
+            CodeableConcept nzzzzzzzzzzzzh_(Claim.ItemComponent @this)
             {
-                CodeableConcept ezzzzzzzzzv_ = @this?.ProductOrService;
+                CodeableConcept nzzzzzzzzzzzzt_ = @this?.ProductOrService;
 
-                return ezzzzzzzzzv_;
+                return nzzzzzzzzzzzzt_;
             };
-            IEnumerable<CodeableConcept> ezzzzzzzzzk_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(ezzzzzzzzzi_, ezzzzzzzzzj_);
-            bool? ezzzzzzzzzl_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> nzzzzzzzzzzzzi_ = context.Operators.Select<Claim.ItemComponent, CodeableConcept>(nzzzzzzzzzzzzg_, nzzzzzzzzzzzzh_);
+            bool? nzzzzzzzzzzzzj_(CodeableConcept @this)
             {
-                List<Coding> ezzzzzzzzzw_ = @this?.Coding;
-                bool? ezzzzzzzzzx_ = context.Operators.Not((bool?)(ezzzzzzzzzw_ is null));
+                List<Coding> nzzzzzzzzzzzzu_ = @this?.Coding;
+                bool? nzzzzzzzzzzzzv_ = context.Operators.Not((bool?)(nzzzzzzzzzzzzu_ is null));
 
-                return ezzzzzzzzzx_;
+                return nzzzzzzzzzzzzv_;
             };
-            IEnumerable<CodeableConcept> ezzzzzzzzzm_ = context.Operators.Where<CodeableConcept>(ezzzzzzzzzk_, ezzzzzzzzzl_);
-            List<Coding> ezzzzzzzzzn_(CodeableConcept @this)
+            IEnumerable<CodeableConcept> nzzzzzzzzzzzzk_ = context.Operators.Where<CodeableConcept>(nzzzzzzzzzzzzi_, nzzzzzzzzzzzzj_);
+            List<Coding> nzzzzzzzzzzzzl_(CodeableConcept @this)
             {
-                List<Coding> ezzzzzzzzzy_ = @this?.Coding;
+                List<Coding> nzzzzzzzzzzzzw_ = @this?.Coding;
 
-                return ezzzzzzzzzy_;
+                return nzzzzzzzzzzzzw_;
             };
-            IEnumerable<List<Coding>> ezzzzzzzzzo_ = context.Operators.Select<CodeableConcept, List<Coding>>(ezzzzzzzzzm_, ezzzzzzzzzn_);
-            IEnumerable<Coding> ezzzzzzzzzp_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ezzzzzzzzzo_);
-            bool? ezzzzzzzzzq_(Coding ProductOrServiceCode)
+            IEnumerable<List<Coding>> nzzzzzzzzzzzzm_ = context.Operators.Select<CodeableConcept, List<Coding>>(nzzzzzzzzzzzzk_, nzzzzzzzzzzzzl_);
+            IEnumerable<Coding> nzzzzzzzzzzzzn_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)nzzzzzzzzzzzzm_);
+            bool? nzzzzzzzzzzzzo_(Coding ProductOrServiceCode)
             {
-                CqlCode ezzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                bool? fzzzzzzzzza_ = context.Operators.In<CqlCode>(ezzzzzzzzzz_, ProductOrServiceValueSet);
+                CqlCode nzzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                bool? nzzzzzzzzzzzzy_ = context.Operators.In<CqlCode>(nzzzzzzzzzzzzx_, ProductOrServiceValueSet);
 
-                return fzzzzzzzzza_;
+                return nzzzzzzzzzzzzy_;
             };
-            IEnumerable<Coding> ezzzzzzzzzr_ = context.Operators.Where<Coding>(ezzzzzzzzzp_, ezzzzzzzzzq_);
-            bool? ezzzzzzzzzs_ = context.Operators.Exists<Coding>(ezzzzzzzzzr_);
+            IEnumerable<Coding> nzzzzzzzzzzzzp_ = context.Operators.Where<Coding>(nzzzzzzzzzzzzn_, nzzzzzzzzzzzzo_);
+            bool? nzzzzzzzzzzzzq_ = context.Operators.Exists<Coding>(nzzzzzzzzzzzzp_);
 
-            return ezzzzzzzzzs_;
+            return nzzzzzzzzzzzzq_;
         };
-        IEnumerable<Claim> ezzzzzzzzzc_ = context.Operators.Where<Claim>(claim, ezzzzzzzzzb_);
-        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ezzzzzzzzzd_(Claim AllClaims)
+        IEnumerable<Claim> nzzzzzzzzzzzza_ = context.Operators.Where<Claim>(claim, mzzzzzzzzzzzzz_);
+        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? nzzzzzzzzzzzzb_(Claim AllClaims)
         {
-            Id fzzzzzzzzzb_ = AllClaims?.IdElement;
-            List<Claim.ItemComponent> fzzzzzzzzzc_ = AllClaims?.Item;
-            bool? fzzzzzzzzzd_(Claim.ItemComponent ResponseItem)
+            Id nzzzzzzzzzzzzz_ = AllClaims?.IdElement;
+            List<Claim.ItemComponent> ozzzzzzzzzzzza_ = AllClaims?.Item;
+            bool? ozzzzzzzzzzzzb_(Claim.ItemComponent ResponseItem)
             {
-                CodeableConcept fzzzzzzzzzg_ = ResponseItem?.ProductOrService;
-                List<Coding> fzzzzzzzzzh_ = fzzzzzzzzzg_?.Coding;
-                bool? fzzzzzzzzzi_(Coding ProductOrServiceCode)
+                CodeableConcept ozzzzzzzzzzzze_ = ResponseItem?.ProductOrService;
+                List<Coding> ozzzzzzzzzzzzf_ = ozzzzzzzzzzzze_?.Coding;
+                bool? ozzzzzzzzzzzzg_(Coding ProductOrServiceCode)
                 {
-                    CqlCode fzzzzzzzzzl_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
-                    bool? fzzzzzzzzzm_ = context.Operators.In<CqlCode>(fzzzzzzzzzl_, ProductOrServiceValueSet);
+                    CqlCode ozzzzzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                    bool? ozzzzzzzzzzzzk_ = context.Operators.In<CqlCode>(ozzzzzzzzzzzzj_, ProductOrServiceValueSet);
 
-                    return fzzzzzzzzzm_;
+                    return ozzzzzzzzzzzzk_;
                 };
-                IEnumerable<Coding> fzzzzzzzzzj_ = context.Operators.Where<Coding>((IEnumerable<Coding>)fzzzzzzzzzh_, fzzzzzzzzzi_);
-                bool? fzzzzzzzzzk_ = context.Operators.Exists<Coding>(fzzzzzzzzzj_);
+                IEnumerable<Coding> ozzzzzzzzzzzzh_ = context.Operators.Where<Coding>((IEnumerable<Coding>)ozzzzzzzzzzzzf_, ozzzzzzzzzzzzg_);
+                bool? ozzzzzzzzzzzzi_ = context.Operators.Exists<Coding>(ozzzzzzzzzzzzh_);
 
-                return fzzzzzzzzzk_;
+                return ozzzzzzzzzzzzi_;
             };
-            IEnumerable<Claim.ItemComponent> fzzzzzzzzze_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)fzzzzzzzzzc_, fzzzzzzzzzd_);
-            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? fzzzzzzzzzf_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, AllClaims, fzzzzzzzzzb_, fzzzzzzzzze_);
+            IEnumerable<Claim.ItemComponent> ozzzzzzzzzzzzc_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ozzzzzzzzzzzza_, ozzzzzzzzzzzzb_);
+            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ozzzzzzzzzzzzd_ = (CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi, AllClaims, nzzzzzzzzzzzzz_, ozzzzzzzzzzzzc_);
 
-            return fzzzzzzzzzf_;
+            return ozzzzzzzzzzzzd_;
         };
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> ezzzzzzzzze_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(ezzzzzzzzzc_, ezzzzzzzzzd_);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> ezzzzzzzzzf_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(ezzzzzzzzze_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> nzzzzzzzzzzzzc_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(nzzzzzzzzzzzza_, nzzzzzzzzzzzzb_);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> nzzzzzzzzzzzzd_ = context.Operators.Distinct<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(nzzzzzzzzzzzzc_);
 
-        return ezzzzzzzzzf_;
+        return nzzzzzzzzzzzzd_;
     }
 
 
     [CqlExpressionDefinition("Get Corresponding Claim for Services Only")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> fzzzzzzzzzn_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
-        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> fzzzzzzzzzo_ = this.Get_All_Claims_With_Procedure_Only(context, claim, ProductOrServiceValueSet);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? fzzzzzzzzzp_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, fzzzzzzzzzn_, fzzzzzzzzzo_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] fzzzzzzzzzq_ = [
-            fzzzzzzzzzp_,
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ozzzzzzzzzzzzl_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> ozzzzzzzzzzzzm_ = this.Get_All_Claims_With_Procedure_Only(context, claim, ProductOrServiceValueSet);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ozzzzzzzzzzzzn_ = (CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV, ozzzzzzzzzzzzl_, ozzzzzzzzzzzzm_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] ozzzzzzzzzzzzo_ = [
+            ozzzzzzzzzzzzn_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzr_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ozzzzzzzzzzzzp_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? ClaimAndResponse)
         {
-            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> fzzzzzzzzzv_ = ClaimAndResponse?.MedicalClaim;
-            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? fzzzzzzzzzw_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
+            IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> ozzzzzzzzzzzzt_ = ClaimAndResponse?.MedicalClaim;
+            (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? ozzzzzzzzzzzzu_((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? medClaim)
             {
-                IEnumerable<Claim.ItemComponent> gzzzzzzzzzf_ = medClaim?.LineItems;
-                bool? gzzzzzzzzzg_(Claim.ItemComponent medClaimLineItem)
+                IEnumerable<Claim.ItemComponent> pzzzzzzzzzzzzd_ = medClaim?.LineItems;
+                bool? pzzzzzzzzzzzze_(Claim.ItemComponent medClaimLineItem)
                 {
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> gzzzzzzzzzj_ = ClaimAndResponse?.PaidMedicalClaimResponse;
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> gzzzzzzzzzk_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> pzzzzzzzzzzzzh_ = ClaimAndResponse?.PaidMedicalClaimResponse;
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> pzzzzzzzzzzzzi_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
                     {
-                        IEnumerable<ClaimResponse.ItemComponent> gzzzzzzzzzn_ = pClaim?.LineItems;
-                        bool? gzzzzzzzzzo_(ClaimResponse.ItemComponent pClaimLineItem)
+                        IEnumerable<ClaimResponse.ItemComponent> pzzzzzzzzzzzzl_ = pClaim?.LineItems;
+                        bool? pzzzzzzzzzzzzm_(ClaimResponse.ItemComponent pClaimLineItem)
                         {
-                            Id gzzzzzzzzzs_()
+                            Id pzzzzzzzzzzzzq_()
                             {
-                                bool hzzzzzzzzzg_()
+                                bool qzzzzzzzzzzzze_()
                                 {
-                                    Claim hzzzzzzzzzh_ = medClaim?.ClaimofInterest;
-                                    bool hzzzzzzzzzi_ = hzzzzzzzzzh_ is Resource;
+                                    Claim qzzzzzzzzzzzzf_ = medClaim?.ClaimofInterest;
+                                    bool qzzzzzzzzzzzzg_ = qzzzzzzzzzzzzf_ is Resource;
 
-                                    return hzzzzzzzzzi_;
+                                    return qzzzzzzzzzzzzg_;
                                 };
-                                if (hzzzzzzzzzg_())
+                                if (qzzzzzzzzzzzze_())
                                 {
-                                    Claim hzzzzzzzzzj_ = medClaim?.ClaimofInterest;
+                                    Claim qzzzzzzzzzzzzh_ = medClaim?.ClaimofInterest;
 
-                                    return (hzzzzzzzzzj_ as Resource).IdElement;
+                                    return (qzzzzzzzzzzzzh_ as Resource).IdElement;
                                 }
                                 else
                                 {
                                     return default;
                                 }
                             };
-                            string gzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, gzzzzzzzzzs_());
-                            ClaimResponse gzzzzzzzzzu_ = pClaim?.Response;
-                            ResourceReference gzzzzzzzzzv_ = gzzzzzzzzzu_?.Request;
-                            FhirString gzzzzzzzzzw_ = gzzzzzzzzzv_?.ReferenceElement;
-                            string gzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, gzzzzzzzzzw_);
-                            string gzzzzzzzzzy_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, gzzzzzzzzzx_);
-                            bool? gzzzzzzzzzz_ = context.Operators.Equal(gzzzzzzzzzt_, gzzzzzzzzzy_);
-                            PositiveInt hzzzzzzzzza_ = medClaimLineItem?.SequenceElement;
-                            Integer hzzzzzzzzzb_ = context.Operators.Convert<Integer>(hzzzzzzzzza_);
-                            PositiveInt hzzzzzzzzzc_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer hzzzzzzzzzd_ = context.Operators.Convert<Integer>(hzzzzzzzzzc_);
-                            bool? hzzzzzzzzze_ = context.Operators.Equal(hzzzzzzzzzb_, hzzzzzzzzzd_);
-                            bool? hzzzzzzzzzf_ = context.Operators.And(gzzzzzzzzzz_, hzzzzzzzzze_);
+                            string pzzzzzzzzzzzzr_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzzzzq_());
+                            ClaimResponse pzzzzzzzzzzzzs_ = pClaim?.Response;
+                            ResourceReference pzzzzzzzzzzzzt_ = pzzzzzzzzzzzzs_?.Request;
+                            FhirString pzzzzzzzzzzzzu_ = pzzzzzzzzzzzzt_?.ReferenceElement;
+                            string pzzzzzzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzzzzu_);
+                            string pzzzzzzzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, pzzzzzzzzzzzzv_);
+                            bool? pzzzzzzzzzzzzx_ = context.Operators.Equal(pzzzzzzzzzzzzr_, pzzzzzzzzzzzzw_);
+                            PositiveInt pzzzzzzzzzzzzy_ = medClaimLineItem?.SequenceElement;
+                            Integer pzzzzzzzzzzzzz_ = context.Operators.Convert<Integer>(pzzzzzzzzzzzzy_);
+                            PositiveInt qzzzzzzzzzzzza_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer qzzzzzzzzzzzzb_ = context.Operators.Convert<Integer>(qzzzzzzzzzzzza_);
+                            bool? qzzzzzzzzzzzzc_ = context.Operators.Equal(pzzzzzzzzzzzzz_, qzzzzzzzzzzzzb_);
+                            bool? qzzzzzzzzzzzzd_ = context.Operators.And(pzzzzzzzzzzzzx_, qzzzzzzzzzzzzc_);
 
-                            return hzzzzzzzzzf_;
+                            return qzzzzzzzzzzzzd_;
                         };
-                        IEnumerable<ClaimResponse.ItemComponent> gzzzzzzzzzp_ = context.Operators.Where<ClaimResponse.ItemComponent>(gzzzzzzzzzn_, gzzzzzzzzzo_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? gzzzzzzzzzq_(ClaimResponse.ItemComponent pClaimLineItem) =>
+                        IEnumerable<ClaimResponse.ItemComponent> pzzzzzzzzzzzzn_ = context.Operators.Where<ClaimResponse.ItemComponent>(pzzzzzzzzzzzzl_, pzzzzzzzzzzzzm_);
+                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pzzzzzzzzzzzzo_(ClaimResponse.ItemComponent pClaimLineItem) =>
                             pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> gzzzzzzzzzr_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(gzzzzzzzzzp_, gzzzzzzzzzq_);
+                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> pzzzzzzzzzzzzp_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(pzzzzzzzzzzzzn_, pzzzzzzzzzzzzo_);
 
-                        return gzzzzzzzzzr_;
+                        return pzzzzzzzzzzzzp_;
                     };
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> gzzzzzzzzzl_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(gzzzzzzzzzj_, gzzzzzzzzzk_);
-                    bool? gzzzzzzzzzm_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(gzzzzzzzzzl_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> pzzzzzzzzzzzzj_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(pzzzzzzzzzzzzh_, pzzzzzzzzzzzzi_);
+                    bool? pzzzzzzzzzzzzk_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(pzzzzzzzzzzzzj_);
 
-                    return gzzzzzzzzzm_;
+                    return pzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Claim.ItemComponent> gzzzzzzzzzh_ = context.Operators.Where<Claim.ItemComponent>(gzzzzzzzzzf_, gzzzzzzzzzg_);
-                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? gzzzzzzzzzi_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, gzzzzzzzzzh_);
+                IEnumerable<Claim.ItemComponent> pzzzzzzzzzzzzf_ = context.Operators.Where<Claim.ItemComponent>(pzzzzzzzzzzzzd_, pzzzzzzzzzzzze_);
+                (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? pzzzzzzzzzzzzg_ = (CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ, medClaim, pzzzzzzzzzzzzf_);
 
-                return gzzzzzzzzzi_;
+                return pzzzzzzzzzzzzg_;
             };
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> fzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(fzzzzzzzzzv_, fzzzzzzzzzw_);
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> fzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(fzzzzzzzzzx_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? fzzzzzzzzzz_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, fzzzzzzzzzy_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] gzzzzzzzzza_ = [
-                fzzzzzzzzzz_,
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> ozzzzzzzzzzzzv_ = context.Operators.Select<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(ozzzzzzzzzzzzt_, ozzzzzzzzzzzzu_);
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> ozzzzzzzzzzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(ozzzzzzzzzzzzv_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ozzzzzzzzzzzzx_ = (CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC, ozzzzzzzzzzzzw_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] ozzzzzzzzzzzzy_ = [
+                ozzzzzzzzzzzzx_,
             ];
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? gzzzzzzzzzb_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ozzzzzzzzzzzzz_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
             {
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? hzzzzzzzzzk_()
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzzzzzzi_()
                 {
-                    bool hzzzzzzzzzp_()
+                    bool qzzzzzzzzzzzzn_()
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> hzzzzzzzzzq_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? hzzzzzzzzzr_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> qzzzzzzzzzzzzo_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? qzzzzzzzzzzzzp_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> hzzzzzzzzzx_ = @this?.ClaimItem;
-                            bool? hzzzzzzzzzy_ = context.Operators.Not((bool?)(hzzzzzzzzzx_ is null));
+                            IEnumerable<Claim.ItemComponent> qzzzzzzzzzzzzv_ = @this?.ClaimItem;
+                            bool? qzzzzzzzzzzzzw_ = context.Operators.Not((bool?)(qzzzzzzzzzzzzv_ is null));
 
-                            return hzzzzzzzzzy_;
+                            return qzzzzzzzzzzzzw_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> hzzzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(hzzzzzzzzzq_, hzzzzzzzzzr_);
-                        IEnumerable<Claim.ItemComponent> hzzzzzzzzzt_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> qzzzzzzzzzzzzq_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(qzzzzzzzzzzzzo_, qzzzzzzzzzzzzp_);
+                        IEnumerable<Claim.ItemComponent> qzzzzzzzzzzzzr_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> hzzzzzzzzzz_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> qzzzzzzzzzzzzx_ = @this?.ClaimItem;
 
-                            return hzzzzzzzzzz_;
+                            return qzzzzzzzzzzzzx_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> hzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(hzzzzzzzzzs_, hzzzzzzzzzt_);
-                        IEnumerable<Claim.ItemComponent> hzzzzzzzzzv_ = context.Operators.Flatten<Claim.ItemComponent>(hzzzzzzzzzu_);
-                        bool? hzzzzzzzzzw_ = context.Operators.Exists<Claim.ItemComponent>(hzzzzzzzzzv_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> qzzzzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(qzzzzzzzzzzzzq_, qzzzzzzzzzzzzr_);
+                        IEnumerable<Claim.ItemComponent> qzzzzzzzzzzzzt_ = context.Operators.Flatten<Claim.ItemComponent>(qzzzzzzzzzzzzs_);
+                        bool? qzzzzzzzzzzzzu_ = context.Operators.Exists<Claim.ItemComponent>(qzzzzzzzzzzzzt_);
 
-                        return hzzzzzzzzzw_ ?? false;
+                        return qzzzzzzzzzzzzu_ ?? false;
                     };
-                    if (hzzzzzzzzzp_())
+                    if (qzzzzzzzzzzzzn_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> izzzzzzzzza_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? izzzzzzzzzb_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> qzzzzzzzzzzzzy_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? qzzzzzzzzzzzzz_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? izzzzzzzzzp_ = @this?.PaidClaim;
-                            bool? izzzzzzzzzq_ = context.Operators.Not((bool?)(izzzzzzzzzp_ is null));
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? rzzzzzzzzzzzzn_ = @this?.PaidClaim;
+                            bool? rzzzzzzzzzzzzo_ = context.Operators.Not((bool?)(rzzzzzzzzzzzzn_ is null));
 
-                            return izzzzzzzzzq_;
+                            return rzzzzzzzzzzzzo_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> izzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(izzzzzzzzza_, izzzzzzzzzb_);
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? izzzzzzzzzd_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> rzzzzzzzzzzzza_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(qzzzzzzzzzzzzy_, qzzzzzzzzzzzzz_);
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? rzzzzzzzzzzzzb_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? izzzzzzzzzr_ = @this?.PaidClaim;
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? rzzzzzzzzzzzzp_ = @this?.PaidClaim;
 
-                            return izzzzzzzzzr_;
+                            return rzzzzzzzzzzzzp_;
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> izzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(izzzzzzzzzc_, izzzzzzzzzd_);
-                        bool? izzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> rzzzzzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(rzzzzzzzzzzzza_, rzzzzzzzzzzzzb_);
+                        bool? rzzzzzzzzzzzze_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> izzzzzzzzzs_ = @this?.ClaimItem;
-                            bool? izzzzzzzzzt_ = context.Operators.Not((bool?)(izzzzzzzzzs_ is null));
+                            IEnumerable<Claim.ItemComponent> rzzzzzzzzzzzzq_ = @this?.ClaimItem;
+                            bool? rzzzzzzzzzzzzr_ = context.Operators.Not((bool?)(rzzzzzzzzzzzzq_ is null));
 
-                            return izzzzzzzzzt_;
+                            return rzzzzzzzzzzzzr_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> izzzzzzzzzh_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(izzzzzzzzza_, izzzzzzzzzg_);
-                        IEnumerable<Claim.ItemComponent> izzzzzzzzzi_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> rzzzzzzzzzzzzf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(qzzzzzzzzzzzzy_, rzzzzzzzzzzzze_);
+                        IEnumerable<Claim.ItemComponent> rzzzzzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> izzzzzzzzzu_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> rzzzzzzzzzzzzs_ = @this?.ClaimItem;
 
-                            return izzzzzzzzzu_;
+                            return rzzzzzzzzzzzzs_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> izzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(izzzzzzzzzh_, izzzzzzzzzi_);
-                        IEnumerable<Claim.ItemComponent> izzzzzzzzzk_ = context.Operators.Flatten<Claim.ItemComponent>(izzzzzzzzzj_);
-                        CqlInterval<CqlDateTime> izzzzzzzzzl_(Claim.ItemComponent PaidItem)
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> rzzzzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(rzzzzzzzzzzzzf_, rzzzzzzzzzzzzg_);
+                        IEnumerable<Claim.ItemComponent> rzzzzzzzzzzzzi_ = context.Operators.Flatten<Claim.ItemComponent>(rzzzzzzzzzzzzh_);
+                        CqlInterval<CqlDateTime> rzzzzzzzzzzzzj_(Claim.ItemComponent PaidItem)
                         {
-                            DataType izzzzzzzzzv_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> izzzzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, izzzzzzzzzv_);
+                            DataType rzzzzzzzzzzzzt_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> rzzzzzzzzzzzzu_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, rzzzzzzzzzzzzt_);
 
-                            return izzzzzzzzzw_;
+                            return rzzzzzzzzzzzzu_;
                         };
-                        IEnumerable<CqlInterval<CqlDateTime>> izzzzzzzzzm_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(izzzzzzzzzk_, izzzzzzzzzl_);
-                        IEnumerable<CqlInterval<CqlDateTime>> izzzzzzzzzn_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(izzzzzzzzzm_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? izzzzzzzzzo_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, izzzzzzzzze_, izzzzzzzzzn_);
+                        IEnumerable<CqlInterval<CqlDateTime>> rzzzzzzzzzzzzk_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(rzzzzzzzzzzzzi_, rzzzzzzzzzzzzj_);
+                        IEnumerable<CqlInterval<CqlDateTime>> rzzzzzzzzzzzzl_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(rzzzzzzzzzzzzk_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? rzzzzzzzzzzzzm_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, rzzzzzzzzzzzzc_, rzzzzzzzzzzzzl_);
 
-                        return izzzzzzzzzo_;
+                        return rzzzzzzzzzzzzm_;
                     }
                     else
                     {
                         return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                     }
                 };
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] hzzzzzzzzzl_ = [
-                    hzzzzzzzzzk_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] qzzzzzzzzzzzzj_ = [
+                    qzzzzzzzzzzzzi_(),
                 ];
-                bool? hzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
+                bool? qzzzzzzzzzzzzk_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList)
                 {
-                    bool? izzzzzzzzzx_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? rzzzzzzzzzzzzv_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return izzzzzzzzzx_;
+                    return rzzzzzzzzzzzzv_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> hzzzzzzzzzn_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)hzzzzzzzzzl_, hzzzzzzzzzm_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? hzzzzzzzzzo_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(hzzzzzzzzzn_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> qzzzzzzzzzzzzl_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)qzzzzzzzzzzzzj_, qzzzzzzzzzzzzk_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? qzzzzzzzzzzzzm_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(qzzzzzzzzzzzzl_);
 
-                return hzzzzzzzzzo_;
+                return qzzzzzzzzzzzzm_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> gzzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)gzzzzzzzzza_, gzzzzzzzzzb_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> gzzzzzzzzzd_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(gzzzzzzzzzc_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? gzzzzzzzzze_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(gzzzzzzzzzd_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzza_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)ozzzzzzzzzzzzy_, ozzzzzzzzzzzzz_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> pzzzzzzzzzzzzb_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(pzzzzzzzzzzzza_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? pzzzzzzzzzzzzc_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(pzzzzzzzzzzzzb_);
 
-            return gzzzzzzzzze_;
+            return pzzzzzzzzzzzzc_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> fzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)fzzzzzzzzzq_, fzzzzzzzzzr_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> fzzzzzzzzzt_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(fzzzzzzzzzs_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? fzzzzzzzzzu_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(fzzzzzzzzzt_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ozzzzzzzzzzzzq_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)ozzzzzzzzzzzzo_, ozzzzzzzzzzzzp_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ozzzzzzzzzzzzr_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ozzzzzzzzzzzzq_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ozzzzzzzzzzzzs_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ozzzzzzzzzzzzr_);
 
-        return fzzzzzzzzzu_;
+        return ozzzzzzzzzzzzs_;
     }
 
 
     [CqlExpressionDefinition("Get Paid Claims for Provided Services Only")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? izzzzzzzzzy_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] izzzzzzzzzz_ = [
-            izzzzzzzzzy_,
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? rzzzzzzzzzzzzw_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] rzzzzzzzzzzzzx_ = [
+            rzzzzzzzzzzzzw_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzza_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? rzzzzzzzzzzzzy_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse)
         {
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzze_()
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzzc_()
             {
-                bool jzzzzzzzzzf_()
+                bool szzzzzzzzzzzzd_()
                 {
-                    IEnumerable<ClaimResponse> jzzzzzzzzzg_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> jzzzzzzzzzh_ = MedicalClaimAndResponse?.MedicalClaim;
-                    bool? jzzzzzzzzzi_ = context.Operators.And((bool?)(jzzzzzzzzzg_ is null), (bool?)(jzzzzzzzzzh_ is null));
+                    IEnumerable<ClaimResponse> szzzzzzzzzzzze_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> szzzzzzzzzzzzf_ = MedicalClaimAndResponse?.MedicalClaim;
+                    bool? szzzzzzzzzzzzg_ = context.Operators.And((bool?)(szzzzzzzzzzzze_ is null), (bool?)(szzzzzzzzzzzzf_ is null));
 
-                    return jzzzzzzzzzi_ ?? false;
+                    return szzzzzzzzzzzzg_ ?? false;
                 };
-                if (jzzzzzzzzzf_())
+                if (szzzzzzzzzzzzd_())
                 {
                     return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
                 }
                 else
                 {
-                    IEnumerable<ClaimResponse> jzzzzzzzzzj_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                    IEnumerable<Claim> jzzzzzzzzzk_ = MedicalClaimAndResponse?.MedicalClaim;
-                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzl_ = this.Get_Corresponding_Claim_for_Services_Only(context, jzzzzzzzzzj_, jzzzzzzzzzk_, ProductOrServiceValueSet);
+                    IEnumerable<ClaimResponse> szzzzzzzzzzzzh_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                    IEnumerable<Claim> szzzzzzzzzzzzi_ = MedicalClaimAndResponse?.MedicalClaim;
+                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzzj_ = this.Get_Corresponding_Claim_for_Services_Only(context, szzzzzzzzzzzzh_, szzzzzzzzzzzzi_, ProductOrServiceValueSet);
 
-                    return jzzzzzzzzzl_;
+                    return szzzzzzzzzzzzj_;
                 }
             };
 
-            return jzzzzzzzzze_();
+            return szzzzzzzzzzzzc_();
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)izzzzzzzzzz_, jzzzzzzzzza_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> jzzzzzzzzzc_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzb_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? jzzzzzzzzzd_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(jzzzzzzzzzc_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> rzzzzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)rzzzzzzzzzzzzx_, rzzzzzzzzzzzzy_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> szzzzzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(rzzzzzzzzzzzzz_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? szzzzzzzzzzzzb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(szzzzzzzzzzzza_);
 
-        return jzzzzzzzzzd_;
+        return szzzzzzzzzzzzb_;
     }
 
 
     [CqlExpressionDefinition("Get All Pharmacy Claims and Claim Responses")]
     public (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? Get_All_Pharmacy_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
-        IEnumerable<ClaimResponse> jzzzzzzzzzm_ = this.Pharmacy_Claims_Response(context, claimResponse);
-        IEnumerable<Claim> jzzzzzzzzzn_ = this.Pharmacy_Claims(context, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? jzzzzzzzzzo_ = (CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV, jzzzzzzzzzm_, jzzzzzzzzzn_);
+        IEnumerable<ClaimResponse> szzzzzzzzzzzzk_ = this.Pharmacy_Claims_Response(context, claimResponse);
+        IEnumerable<Claim> szzzzzzzzzzzzl_ = this.Pharmacy_Claims(context, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? szzzzzzzzzzzzm_ = (CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV, szzzzzzzzzzzzk_, szzzzzzzzzzzzl_);
 
-        return jzzzzzzzzzo_;
+        return szzzzzzzzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("Get Corresponding Claim for Pharmacy Services")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Corresponding_Claim_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> jzzzzzzzzzp_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
-        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> jzzzzzzzzzq_ = this.Pharmacy_Claim_With_Medication(context, claim, ProductOrServiceValueSet);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)? jzzzzzzzzzr_ = (CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF, jzzzzzzzzzp_, jzzzzzzzzzq_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?[] jzzzzzzzzzs_ = [
-            jzzzzzzzzzr_,
+        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> szzzzzzzzzzzzn_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> szzzzzzzzzzzzo_ = this.Pharmacy_Claim_With_Medication(context, claim, ProductOrServiceValueSet);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)? szzzzzzzzzzzzp_ = (CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF, szzzzzzzzzzzzn_, szzzzzzzzzzzzo_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?[] szzzzzzzzzzzzq_ = [
+            szzzzzzzzzzzzp_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? jzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)? ClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? szzzzzzzzzzzzr_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)? ClaimAndResponse)
         {
-            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> jzzzzzzzzzx_ = ClaimAndResponse?.MedicalClaim;
-            (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? jzzzzzzzzzy_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? medClaim)
+            IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> szzzzzzzzzzzzv_ = ClaimAndResponse?.MedicalClaim;
+            (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? szzzzzzzzzzzzw_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? medClaim)
             {
-                IEnumerable<Claim.ItemComponent> kzzzzzzzzzh_ = medClaim?.LineItem;
-                bool? kzzzzzzzzzi_(Claim.ItemComponent medClaimLineItem)
+                IEnumerable<Claim.ItemComponent> tzzzzzzzzzzzzf_ = medClaim?.LineItem;
+                bool? tzzzzzzzzzzzzg_(Claim.ItemComponent medClaimLineItem)
                 {
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> kzzzzzzzzzl_ = ClaimAndResponse?.PaidPharmacyClaimResponse;
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> kzzzzzzzzzm_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzzzzzj_ = ClaimAndResponse?.PaidPharmacyClaimResponse;
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzzzzzk_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim)
                     {
-                        IEnumerable<ClaimResponse.ItemComponent> kzzzzzzzzzp_ = pClaim?.LineItems;
-                        bool? kzzzzzzzzzq_(ClaimResponse.ItemComponent pClaimLineItem)
+                        IEnumerable<ClaimResponse.ItemComponent> tzzzzzzzzzzzzn_ = pClaim?.LineItems;
+                        bool? tzzzzzzzzzzzzo_(ClaimResponse.ItemComponent pClaimLineItem)
                         {
-                            Id kzzzzzzzzzu_()
+                            Id tzzzzzzzzzzzzs_()
                             {
-                                bool lzzzzzzzzzi_()
+                                bool uzzzzzzzzzzzzg_()
                                 {
-                                    Claim lzzzzzzzzzj_ = medClaim?.Claim;
-                                    bool lzzzzzzzzzk_ = lzzzzzzzzzj_ is Resource;
+                                    Claim uzzzzzzzzzzzzh_ = medClaim?.Claim;
+                                    bool uzzzzzzzzzzzzi_ = uzzzzzzzzzzzzh_ is Resource;
 
-                                    return lzzzzzzzzzk_;
+                                    return uzzzzzzzzzzzzi_;
                                 };
-                                if (lzzzzzzzzzi_())
+                                if (uzzzzzzzzzzzzg_())
                                 {
-                                    Claim lzzzzzzzzzl_ = medClaim?.Claim;
+                                    Claim uzzzzzzzzzzzzj_ = medClaim?.Claim;
 
-                                    return (lzzzzzzzzzl_ as Resource).IdElement;
+                                    return (uzzzzzzzzzzzzj_ as Resource).IdElement;
                                 }
                                 else
                                 {
                                     return default;
                                 }
                             };
-                            string kzzzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzzzzzzu_());
-                            ClaimResponse kzzzzzzzzzw_ = pClaim?.Response;
-                            ResourceReference kzzzzzzzzzx_ = kzzzzzzzzzw_?.Request;
-                            FhirString kzzzzzzzzzy_ = kzzzzzzzzzx_?.ReferenceElement;
-                            string kzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzzzzzzy_);
-                            string lzzzzzzzzza_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, kzzzzzzzzzz_);
-                            bool? lzzzzzzzzzb_ = context.Operators.Equal(kzzzzzzzzzv_, lzzzzzzzzza_);
-                            PositiveInt lzzzzzzzzzc_ = medClaimLineItem?.SequenceElement;
-                            Integer lzzzzzzzzzd_ = context.Operators.Convert<Integer>(lzzzzzzzzzc_);
-                            PositiveInt lzzzzzzzzze_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer lzzzzzzzzzf_ = context.Operators.Convert<Integer>(lzzzzzzzzze_);
-                            bool? lzzzzzzzzzg_ = context.Operators.Equal(lzzzzzzzzzd_, lzzzzzzzzzf_);
-                            bool? lzzzzzzzzzh_ = context.Operators.And(lzzzzzzzzzb_, lzzzzzzzzzg_);
+                            string tzzzzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzzzzzzzzs_());
+                            ClaimResponse tzzzzzzzzzzzzu_ = pClaim?.Response;
+                            ResourceReference tzzzzzzzzzzzzv_ = tzzzzzzzzzzzzu_?.Request;
+                            FhirString tzzzzzzzzzzzzw_ = tzzzzzzzzzzzzv_?.ReferenceElement;
+                            string tzzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, tzzzzzzzzzzzzw_);
+                            string tzzzzzzzzzzzzy_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, tzzzzzzzzzzzzx_);
+                            bool? tzzzzzzzzzzzzz_ = context.Operators.Equal(tzzzzzzzzzzzzt_, tzzzzzzzzzzzzy_);
+                            PositiveInt uzzzzzzzzzzzza_ = medClaimLineItem?.SequenceElement;
+                            Integer uzzzzzzzzzzzzb_ = context.Operators.Convert<Integer>(uzzzzzzzzzzzza_);
+                            PositiveInt uzzzzzzzzzzzzc_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer uzzzzzzzzzzzzd_ = context.Operators.Convert<Integer>(uzzzzzzzzzzzzc_);
+                            bool? uzzzzzzzzzzzze_ = context.Operators.Equal(uzzzzzzzzzzzzb_, uzzzzzzzzzzzzd_);
+                            bool? uzzzzzzzzzzzzf_ = context.Operators.And(tzzzzzzzzzzzzz_, uzzzzzzzzzzzze_);
 
-                            return lzzzzzzzzzh_;
+                            return uzzzzzzzzzzzzf_;
                         };
-                        IEnumerable<ClaimResponse.ItemComponent> kzzzzzzzzzr_ = context.Operators.Where<ClaimResponse.ItemComponent>(kzzzzzzzzzp_, kzzzzzzzzzq_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? kzzzzzzzzzs_(ClaimResponse.ItemComponent pClaimLineItem) =>
+                        IEnumerable<ClaimResponse.ItemComponent> tzzzzzzzzzzzzp_ = context.Operators.Where<ClaimResponse.ItemComponent>(tzzzzzzzzzzzzn_, tzzzzzzzzzzzzo_);
+                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? tzzzzzzzzzzzzq_(ClaimResponse.ItemComponent pClaimLineItem) =>
                             pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> kzzzzzzzzzt_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(kzzzzzzzzzr_, kzzzzzzzzzs_);
+                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzzzzzr_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzzzzzp_, tzzzzzzzzzzzzq_);
 
-                        return kzzzzzzzzzt_;
+                        return tzzzzzzzzzzzzr_;
                     };
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> kzzzzzzzzzn_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(kzzzzzzzzzl_, kzzzzzzzzzm_);
-                    bool? kzzzzzzzzzo_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(kzzzzzzzzzn_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> tzzzzzzzzzzzzl_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzzzzzj_, tzzzzzzzzzzzzk_);
+                    bool? tzzzzzzzzzzzzm_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(tzzzzzzzzzzzzl_);
 
-                    return kzzzzzzzzzo_;
+                    return tzzzzzzzzzzzzm_;
                 };
-                IEnumerable<Claim.ItemComponent> kzzzzzzzzzj_ = context.Operators.Where<Claim.ItemComponent>(kzzzzzzzzzh_, kzzzzzzzzzi_);
-                (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? kzzzzzzzzzk_ = (CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK, medClaim, kzzzzzzzzzj_);
+                IEnumerable<Claim.ItemComponent> tzzzzzzzzzzzzh_ = context.Operators.Where<Claim.ItemComponent>(tzzzzzzzzzzzzf_, tzzzzzzzzzzzzg_);
+                (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? tzzzzzzzzzzzzi_ = (CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK, medClaim, tzzzzzzzzzzzzh_);
 
-                return kzzzzzzzzzk_;
+                return tzzzzzzzzzzzzi_;
             };
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> jzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(jzzzzzzzzzx_, jzzzzzzzzzy_);
-            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> kzzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(jzzzzzzzzzz_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? kzzzzzzzzzb_ = (CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON, kzzzzzzzzza_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] kzzzzzzzzzc_ = [
-                kzzzzzzzzzb_,
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> szzzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?, (CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(szzzzzzzzzzzzv_, szzzzzzzzzzzzw_);
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> szzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(szzzzzzzzzzzzx_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? szzzzzzzzzzzzz_ = (CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON, szzzzzzzzzzzzy_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?[] tzzzzzzzzzzzza_ = [
+                szzzzzzzzzzzzz_,
             ];
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? kzzzzzzzzzd_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? tzzzzzzzzzzzzb_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse)
             {
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? lzzzzzzzzzm_()
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? uzzzzzzzzzzzzk_()
                 {
-                    bool lzzzzzzzzzr_()
+                    bool uzzzzzzzzzzzzp_()
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzs_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? lzzzzzzzzzt_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> uzzzzzzzzzzzzq_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? uzzzzzzzzzzzzr_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> lzzzzzzzzzz_ = @this?.ClaimItem;
-                            bool? mzzzzzzzzza_ = context.Operators.Not((bool?)(lzzzzzzzzzz_ is null));
+                            IEnumerable<Claim.ItemComponent> uzzzzzzzzzzzzx_ = @this?.ClaimItem;
+                            bool? uzzzzzzzzzzzzy_ = context.Operators.Not((bool?)(uzzzzzzzzzzzzx_ is null));
 
-                            return mzzzzzzzzza_;
+                            return uzzzzzzzzzzzzy_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> lzzzzzzzzzu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(lzzzzzzzzzs_, lzzzzzzzzzt_);
-                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzv_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> uzzzzzzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(uzzzzzzzzzzzzq_, uzzzzzzzzzzzzr_);
+                        IEnumerable<Claim.ItemComponent> uzzzzzzzzzzzzt_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> mzzzzzzzzzb_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> uzzzzzzzzzzzzz_ = @this?.ClaimItem;
 
-                            return mzzzzzzzzzb_;
+                            return uzzzzzzzzzzzzz_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> lzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(lzzzzzzzzzu_, lzzzzzzzzzv_);
-                        IEnumerable<Claim.ItemComponent> lzzzzzzzzzx_ = context.Operators.Flatten<Claim.ItemComponent>(lzzzzzzzzzw_);
-                        bool? lzzzzzzzzzy_ = context.Operators.Exists<Claim.ItemComponent>(lzzzzzzzzzx_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> uzzzzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(uzzzzzzzzzzzzs_, uzzzzzzzzzzzzt_);
+                        IEnumerable<Claim.ItemComponent> uzzzzzzzzzzzzv_ = context.Operators.Flatten<Claim.ItemComponent>(uzzzzzzzzzzzzu_);
+                        bool? uzzzzzzzzzzzzw_ = context.Operators.Exists<Claim.ItemComponent>(uzzzzzzzzzzzzv_);
 
-                        return lzzzzzzzzzy_ ?? false;
+                        return uzzzzzzzzzzzzw_ ?? false;
                     };
-                    if (lzzzzzzzzzr_())
+                    if (uzzzzzzzzzzzzp_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> mzzzzzzzzzc_ = ClaimWithPaidResponse?.AggregateClaim;
-                        bool? mzzzzzzzzzd_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzzzzza_ = ClaimWithPaidResponse?.AggregateClaim;
+                        bool? vzzzzzzzzzzzzb_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? nzzzzzzzzza_ = @this?.PaidClaim;
-                            bool? nzzzzzzzzzb_ = context.Operators.Not((bool?)(nzzzzzzzzza_ is null));
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? vzzzzzzzzzzzzy_ = @this?.PaidClaim;
+                            bool? vzzzzzzzzzzzzz_ = context.Operators.Not((bool?)(vzzzzzzzzzzzzy_ is null));
 
-                            return nzzzzzzzzzb_;
+                            return vzzzzzzzzzzzzz_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> mzzzzzzzzze_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(mzzzzzzzzzc_, mzzzzzzzzzd_);
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? mzzzzzzzzzf_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(vzzzzzzzzzzzza_, vzzzzzzzzzzzzb_);
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? vzzzzzzzzzzzzd_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? nzzzzzzzzzc_ = @this?.PaidClaim;
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? wzzzzzzzzzzzza_ = @this?.PaidClaim;
 
-                            return nzzzzzzzzzc_;
+                            return wzzzzzzzzzzzza_;
                         };
-                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> mzzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(mzzzzzzzzze_, mzzzzzzzzzf_);
-                        bool? mzzzzzzzzzi_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> vzzzzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(vzzzzzzzzzzzzc_, vzzzzzzzzzzzzd_);
+                        bool? vzzzzzzzzzzzzg_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzd_ = @this?.ClaimItem;
-                            bool? nzzzzzzzzze_ = context.Operators.Not((bool?)(nzzzzzzzzzd_ is null));
+                            IEnumerable<Claim.ItemComponent> wzzzzzzzzzzzzb_ = @this?.ClaimItem;
+                            bool? wzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(wzzzzzzzzzzzzb_ is null));
 
-                            return nzzzzzzzzze_;
+                            return wzzzzzzzzzzzzc_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> mzzzzzzzzzj_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(mzzzzzzzzzc_, mzzzzzzzzzi_);
-                        IEnumerable<Claim.ItemComponent> mzzzzzzzzzk_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzzzzzh_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(vzzzzzzzzzzzza_, vzzzzzzzzzzzzg_);
+                        IEnumerable<Claim.ItemComponent> vzzzzzzzzzzzzi_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzf_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> wzzzzzzzzzzzzd_ = @this?.ClaimItem;
 
-                            return nzzzzzzzzzf_;
+                            return wzzzzzzzzzzzzd_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> mzzzzzzzzzl_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(mzzzzzzzzzj_, mzzzzzzzzzk_);
-                        IEnumerable<Claim.ItemComponent> mzzzzzzzzzm_ = context.Operators.Flatten<Claim.ItemComponent>(mzzzzzzzzzl_);
-                        CqlInterval<CqlDateTime> mzzzzzzzzzn_(Claim.ItemComponent PaidItem)
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> vzzzzzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(vzzzzzzzzzzzzh_, vzzzzzzzzzzzzi_);
+                        IEnumerable<Claim.ItemComponent> vzzzzzzzzzzzzk_ = context.Operators.Flatten<Claim.ItemComponent>(vzzzzzzzzzzzzj_);
+                        CqlInterval<CqlDateTime> vzzzzzzzzzzzzl_(Claim.ItemComponent PaidItem)
                         {
-                            DataType nzzzzzzzzzg_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> nzzzzzzzzzh_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, nzzzzzzzzzg_);
+                            DataType wzzzzzzzzzzzze_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> wzzzzzzzzzzzzf_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, wzzzzzzzzzzzze_);
 
-                            return nzzzzzzzzzh_;
+                            return wzzzzzzzzzzzzf_;
                         };
-                        IEnumerable<CqlInterval<CqlDateTime>> mzzzzzzzzzo_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(mzzzzzzzzzm_, mzzzzzzzzzn_);
-                        IEnumerable<CqlInterval<CqlDateTime>> mzzzzzzzzzp_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(mzzzzzzzzzo_);
-                        bool? mzzzzzzzzzr_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzzzzzzm_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(vzzzzzzzzzzzzk_, vzzzzzzzzzzzzl_);
+                        IEnumerable<CqlInterval<CqlDateTime>> vzzzzzzzzzzzzn_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(vzzzzzzzzzzzzm_);
+                        bool? vzzzzzzzzzzzzp_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzi_ = @this?.ClaimItem;
-                            bool? nzzzzzzzzzj_ = context.Operators.Not((bool?)(nzzzzzzzzzi_ is null));
+                            IEnumerable<Claim.ItemComponent> wzzzzzzzzzzzzg_ = @this?.ClaimItem;
+                            bool? wzzzzzzzzzzzzh_ = context.Operators.Not((bool?)(wzzzzzzzzzzzzg_ is null));
 
-                            return nzzzzzzzzzj_;
+                            return wzzzzzzzzzzzzh_;
                         };
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> mzzzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(mzzzzzzzzzc_, mzzzzzzzzzr_);
-                        IEnumerable<Claim.ItemComponent> mzzzzzzzzzt_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> vzzzzzzzzzzzzq_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(vzzzzzzzzzzzza_, vzzzzzzzzzzzzp_);
+                        IEnumerable<Claim.ItemComponent> vzzzzzzzzzzzzr_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this)
                         {
-                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzk_ = @this?.ClaimItem;
+                            IEnumerable<Claim.ItemComponent> wzzzzzzzzzzzzi_ = @this?.ClaimItem;
 
-                            return nzzzzzzzzzk_;
+                            return wzzzzzzzzzzzzi_;
                         };
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> mzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(mzzzzzzzzzs_, mzzzzzzzzzt_);
-                        IEnumerable<Claim.ItemComponent> mzzzzzzzzzv_ = context.Operators.Flatten<Claim.ItemComponent>(mzzzzzzzzzu_);
-                        CqlInterval<CqlDate> mzzzzzzzzzw_(Claim.ItemComponent i)
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> vzzzzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(vzzzzzzzzzzzzq_, vzzzzzzzzzzzzr_);
+                        IEnumerable<Claim.ItemComponent> vzzzzzzzzzzzzt_ = context.Operators.Flatten<Claim.ItemComponent>(vzzzzzzzzzzzzs_);
+                        CqlInterval<CqlDate> vzzzzzzzzzzzzu_(Claim.ItemComponent i)
                         {
-                            CqlInterval<CqlDate> nzzzzzzzzzl_()
+                            CqlInterval<CqlDate> wzzzzzzzzzzzzj_()
                             {
-                                bool nzzzzzzzzzm_()
+                                bool wzzzzzzzzzzzzk_()
                                 {
-                                    Quantity nzzzzzzzzzn_ = i?.Quantity;
-                                    bool? nzzzzzzzzzo_ = context.Operators.Not((bool?)(nzzzzzzzzzn_ is null));
+                                    Quantity wzzzzzzzzzzzzl_ = i?.Quantity;
+                                    bool? wzzzzzzzzzzzzm_ = context.Operators.Not((bool?)(wzzzzzzzzzzzzl_ is null));
 
-                                    return nzzzzzzzzzo_ ?? false;
+                                    return wzzzzzzzzzzzzm_ ?? false;
                                 };
-                                if (nzzzzzzzzzm_())
+                                if (wzzzzzzzzzzzzk_())
                                 {
-                                    DataType nzzzzzzzzzp_ = i?.Serviced;
-                                    CqlInterval<CqlDateTime> nzzzzzzzzzq_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, nzzzzzzzzzp_);
-                                    CqlDateTime nzzzzzzzzzr_ = context.Operators.Start(nzzzzzzzzzq_);
-                                    CqlDate nzzzzzzzzzs_ = context.Operators.ConvertDateTimeToDate(nzzzzzzzzzr_);
-                                    CqlInterval<CqlDateTime> nzzzzzzzzzu_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, nzzzzzzzzzp_);
-                                    CqlDateTime nzzzzzzzzzv_ = context.Operators.Start(nzzzzzzzzzu_);
-                                    Quantity nzzzzzzzzzw_ = i?.Quantity;
-                                    FhirDecimal nzzzzzzzzzx_ = nzzzzzzzzzw_?.ValueElement;
-                                    decimal? nzzzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, nzzzzzzzzzx_);
-                                    CqlDateTime nzzzzzzzzzz_ = context.Operators.Add(nzzzzzzzzzv_, new CqlQuantity(nzzzzzzzzzy_, "day"));
-                                    CqlQuantity ozzzzzzzzza_ = context.Operators.Quantity(1m, "day");
-                                    CqlDateTime ozzzzzzzzzb_ = context.Operators.Subtract(nzzzzzzzzzz_, ozzzzzzzzza_);
-                                    CqlDate ozzzzzzzzzc_ = context.Operators.ConvertDateTimeToDate(ozzzzzzzzzb_);
-                                    CqlInterval<CqlDate> ozzzzzzzzzd_ = context.Operators.Interval(nzzzzzzzzzs_, ozzzzzzzzzc_, true, true);
+                                    DataType wzzzzzzzzzzzzn_ = i?.Serviced;
+                                    CqlInterval<CqlDateTime> wzzzzzzzzzzzzo_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, wzzzzzzzzzzzzn_);
+                                    CqlDateTime wzzzzzzzzzzzzp_ = context.Operators.Start(wzzzzzzzzzzzzo_);
+                                    CqlDate wzzzzzzzzzzzzq_ = context.Operators.ConvertDateTimeToDate(wzzzzzzzzzzzzp_);
+                                    CqlInterval<CqlDateTime> wzzzzzzzzzzzzs_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, wzzzzzzzzzzzzn_);
+                                    CqlDateTime wzzzzzzzzzzzzt_ = context.Operators.Start(wzzzzzzzzzzzzs_);
+                                    Quantity wzzzzzzzzzzzzu_ = i?.Quantity;
+                                    FhirDecimal wzzzzzzzzzzzzv_ = wzzzzzzzzzzzzu_?.ValueElement;
+                                    decimal? wzzzzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, wzzzzzzzzzzzzv_);
+                                    CqlDateTime wzzzzzzzzzzzzx_ = context.Operators.Add(wzzzzzzzzzzzzt_, new CqlQuantity(wzzzzzzzzzzzzw_, "day"));
+                                    CqlQuantity wzzzzzzzzzzzzy_ = context.Operators.Quantity(1m, "day");
+                                    CqlDateTime wzzzzzzzzzzzzz_ = context.Operators.Subtract(wzzzzzzzzzzzzx_, wzzzzzzzzzzzzy_);
+                                    CqlDate xzzzzzzzzzzzza_ = context.Operators.ConvertDateTimeToDate(wzzzzzzzzzzzzz_);
+                                    CqlInterval<CqlDate> xzzzzzzzzzzzzb_ = context.Operators.Interval(wzzzzzzzzzzzzq_, xzzzzzzzzzzzza_, true, true);
 
-                                    return ozzzzzzzzzd_;
+                                    return xzzzzzzzzzzzzb_;
                                 }
                                 else
                                 {
@@ -3036,185 +3036,185 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 }
                             };
 
-                            return nzzzzzzzzzl_();
+                            return wzzzzzzzzzzzzj_();
                         };
-                        IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzx_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(mzzzzzzzzzv_, mzzzzzzzzzw_);
-                        IEnumerable<CqlInterval<CqlDate>> mzzzzzzzzzy_ = context.Operators.Distinct<CqlInterval<CqlDate>>(mzzzzzzzzzx_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? mzzzzzzzzzz_ = (CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW, mzzzzzzzzzg_, mzzzzzzzzzp_, mzzzzzzzzzy_);
+                        IEnumerable<CqlInterval<CqlDate>> vzzzzzzzzzzzzv_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(vzzzzzzzzzzzzt_, vzzzzzzzzzzzzu_);
+                        IEnumerable<CqlInterval<CqlDate>> vzzzzzzzzzzzzw_ = context.Operators.Distinct<CqlInterval<CqlDate>>(vzzzzzzzzzzzzv_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? vzzzzzzzzzzzzx_ = (CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW, vzzzzzzzzzzzze_, vzzzzzzzzzzzzn_, vzzzzzzzzzzzzw_);
 
-                        return mzzzzzzzzzz_;
+                        return vzzzzzzzzzzzzx_;
                     }
                     else
                     {
                         return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?;
                     }
                 };
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?[] lzzzzzzzzzn_ = [
-                    lzzzzzzzzzm_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?[] uzzzzzzzzzzzzl_ = [
+                    uzzzzzzzzzzzzk_(),
                 ];
-                bool? lzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? FinalList)
+                bool? uzzzzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? FinalList)
                 {
-                    bool? ozzzzzzzzze_ = context.Operators.Not((bool?)(FinalList is null));
+                    bool? xzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(FinalList is null));
 
-                    return ozzzzzzzzze_;
+                    return xzzzzzzzzzzzzc_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> lzzzzzzzzzp_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)lzzzzzzzzzn_, lzzzzzzzzzo_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? lzzzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(lzzzzzzzzzp_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> uzzzzzzzzzzzzn_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)uzzzzzzzzzzzzl_, uzzzzzzzzzzzzm_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? uzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(uzzzzzzzzzzzzn_);
 
-                return lzzzzzzzzzq_;
+                return uzzzzzzzzzzzzo_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> kzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)kzzzzzzzzzc_, kzzzzzzzzzd_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> kzzzzzzzzzf_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(kzzzzzzzzze_);
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? kzzzzzzzzzg_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(kzzzzzzzzzf_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> tzzzzzzzzzzzzc_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)tzzzzzzzzzzzza_, tzzzzzzzzzzzzb_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> tzzzzzzzzzzzzd_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(tzzzzzzzzzzzzc_);
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? tzzzzzzzzzzzze_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(tzzzzzzzzzzzzd_);
 
-            return kzzzzzzzzzg_;
+            return tzzzzzzzzzzzze_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> jzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?>)jzzzzzzzzzs_, jzzzzzzzzzt_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> jzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(jzzzzzzzzzu_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? jzzzzzzzzzw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(jzzzzzzzzzv_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> szzzzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?>)szzzzzzzzzzzzq_, szzzzzzzzzzzzr_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> szzzzzzzzzzzzt_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(szzzzzzzzzzzzs_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? szzzzzzzzzzzzu_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(szzzzzzzzzzzzt_);
 
-        return jzzzzzzzzzw_;
+        return szzzzzzzzzzzzu_;
     }
 
 
     [CqlExpressionDefinition("Get Paid Claims for Pharmacy Services")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Paid_Claims_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? ozzzzzzzzzf_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?[] ozzzzzzzzzg_ = [
-            ozzzzzzzzzf_,
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? xzzzzzzzzzzzzd_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?[] xzzzzzzzzzzzze_ = [
+            xzzzzzzzzzzzzd_,
         ];
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ozzzzzzzzzh_((CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? PharmacyClaimAndResponse)
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? xzzzzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? PharmacyClaimAndResponse)
         {
-            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ozzzzzzzzzl_()
+            (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? xzzzzzzzzzzzzj_()
             {
-                bool ozzzzzzzzzm_()
+                bool xzzzzzzzzzzzzk_()
                 {
-                    IEnumerable<ClaimResponse> ozzzzzzzzzn_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-                    IEnumerable<Claim> ozzzzzzzzzo_ = PharmacyClaimAndResponse?.PharmacyClaim;
-                    bool? ozzzzzzzzzp_ = context.Operators.And((bool?)(ozzzzzzzzzn_ is null), (bool?)(ozzzzzzzzzo_ is null));
+                    IEnumerable<ClaimResponse> xzzzzzzzzzzzzl_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
+                    IEnumerable<Claim> xzzzzzzzzzzzzm_ = PharmacyClaimAndResponse?.PharmacyClaim;
+                    bool? xzzzzzzzzzzzzn_ = context.Operators.And((bool?)(xzzzzzzzzzzzzl_ is null), (bool?)(xzzzzzzzzzzzzm_ is null));
 
-                    return ozzzzzzzzzp_ ?? false;
+                    return xzzzzzzzzzzzzn_ ?? false;
                 };
-                if (ozzzzzzzzzm_())
+                if (xzzzzzzzzzzzzk_())
                 {
                     return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?;
                 }
                 else
                 {
-                    IEnumerable<ClaimResponse> ozzzzzzzzzq_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-                    IEnumerable<Claim> ozzzzzzzzzr_ = PharmacyClaimAndResponse?.PharmacyClaim;
-                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ozzzzzzzzzs_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, ozzzzzzzzzq_, ozzzzzzzzzr_, ProductOrServiceValueSet);
+                    IEnumerable<ClaimResponse> xzzzzzzzzzzzzo_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
+                    IEnumerable<Claim> xzzzzzzzzzzzzp_ = PharmacyClaimAndResponse?.PharmacyClaim;
+                    (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? xzzzzzzzzzzzzq_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, xzzzzzzzzzzzzo_, xzzzzzzzzzzzzp_, ProductOrServiceValueSet);
 
-                    return ozzzzzzzzzs_;
+                    return xzzzzzzzzzzzzq_;
                 }
             };
 
-            return ozzzzzzzzzl_();
+            return xzzzzzzzzzzzzj_();
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> ozzzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?>)ozzzzzzzzzg_, ozzzzzzzzzh_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> ozzzzzzzzzj_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(ozzzzzzzzzi_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ozzzzzzzzzk_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(ozzzzzzzzzj_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> xzzzzzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?>)xzzzzzzzzzzzze_, xzzzzzzzzzzzzf_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> xzzzzzzzzzzzzh_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(xzzzzzzzzzzzzg_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? xzzzzzzzzzzzzi_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(xzzzzzzzzzzzzh_);
 
-        return ozzzzzzzzzk_;
+        return xzzzzzzzzzzzzi_;
     }
 
 
     [CqlExpressionDefinition("Get Claim With Corresponding Claim Response")]
     public IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> Get_Claim_With_Corresponding_Claim_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
-        (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? ozzzzzzzzzt_(Claim Claim)
+        (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? xzzzzzzzzzzzzr_(Claim Claim)
         {
-            bool? ozzzzzzzzzw_(ClaimResponse CR)
+            bool? xzzzzzzzzzzzzu_(ClaimResponse CR)
             {
-                Id pzzzzzzzzzb_ = Claim?.IdElement;
-                string pzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzb_);
-                ResourceReference pzzzzzzzzzd_ = CR?.Request;
-                FhirString pzzzzzzzzze_ = pzzzzzzzzzd_?.ReferenceElement;
-                string pzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzze_);
-                string pzzzzzzzzzg_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, pzzzzzzzzzf_);
-                bool? pzzzzzzzzzh_ = context.Operators.Equal(pzzzzzzzzzc_, pzzzzzzzzzg_);
+                Id xzzzzzzzzzzzzz_ = Claim?.IdElement;
+                string yzzzzzzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, xzzzzzzzzzzzzz_);
+                ResourceReference yzzzzzzzzzzzzb_ = CR?.Request;
+                FhirString yzzzzzzzzzzzzc_ = yzzzzzzzzzzzzb_?.ReferenceElement;
+                string yzzzzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzzzzzzzc_);
+                string yzzzzzzzzzzzze_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, yzzzzzzzzzzzzd_);
+                bool? yzzzzzzzzzzzzf_ = context.Operators.Equal(yzzzzzzzzzzzza_, yzzzzzzzzzzzze_);
 
-                return pzzzzzzzzzh_;
+                return yzzzzzzzzzzzzf_;
             };
-            IEnumerable<ClaimResponse> ozzzzzzzzzx_ = context.Operators.Where<ClaimResponse>(claimResponse, ozzzzzzzzzw_);
-            bool? ozzzzzzzzzy_(Claim C)
+            IEnumerable<ClaimResponse> xzzzzzzzzzzzzv_ = context.Operators.Where<ClaimResponse>(claimResponse, xzzzzzzzzzzzzu_);
+            bool? xzzzzzzzzzzzzw_(Claim C)
             {
-                Id pzzzzzzzzzi_ = Claim?.IdElement;
-                string pzzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzi_);
-                bool? pzzzzzzzzzk_(ClaimResponse CR)
+                Id yzzzzzzzzzzzzg_ = Claim?.IdElement;
+                string yzzzzzzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzzzzzzzg_);
+                bool? yzzzzzzzzzzzzi_(ClaimResponse CR)
                 {
-                    Id pzzzzzzzzzy_ = Claim?.IdElement;
-                    string pzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzy_);
-                    ResourceReference qzzzzzzzzza_ = CR?.Request;
-                    FhirString qzzzzzzzzzb_ = qzzzzzzzzza_?.ReferenceElement;
-                    string qzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToString(context, qzzzzzzzzzb_);
-                    string qzzzzzzzzzd_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, qzzzzzzzzzc_);
-                    bool? qzzzzzzzzze_ = context.Operators.Equal(pzzzzzzzzzz_, qzzzzzzzzzd_);
+                    Id yzzzzzzzzzzzzw_ = Claim?.IdElement;
+                    string yzzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzzzzzzzw_);
+                    ResourceReference yzzzzzzzzzzzzy_ = CR?.Request;
+                    FhirString yzzzzzzzzzzzzz_ = yzzzzzzzzzzzzy_?.ReferenceElement;
+                    string zzzzzzzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzzzzzzzz_);
+                    string zzzzzzzzzzzzzb_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, zzzzzzzzzzzzza_);
+                    bool? zzzzzzzzzzzzzc_ = context.Operators.Equal(yzzzzzzzzzzzzx_, zzzzzzzzzzzzzb_);
 
-                    return qzzzzzzzzze_;
+                    return zzzzzzzzzzzzzc_;
                 };
-                IEnumerable<ClaimResponse> pzzzzzzzzzl_ = context.Operators.Where<ClaimResponse>(claimResponse, pzzzzzzzzzk_);
-                bool? pzzzzzzzzzm_(ClaimResponse @this)
+                IEnumerable<ClaimResponse> yzzzzzzzzzzzzj_ = context.Operators.Where<ClaimResponse>(claimResponse, yzzzzzzzzzzzzi_);
+                bool? yzzzzzzzzzzzzk_(ClaimResponse @this)
                 {
-                    ResourceReference qzzzzzzzzzf_ = @this?.Request;
-                    bool? qzzzzzzzzzg_ = context.Operators.Not((bool?)(qzzzzzzzzzf_ is null));
+                    ResourceReference zzzzzzzzzzzzzd_ = @this?.Request;
+                    bool? zzzzzzzzzzzzze_ = context.Operators.Not((bool?)(zzzzzzzzzzzzzd_ is null));
 
-                    return qzzzzzzzzzg_;
+                    return zzzzzzzzzzzzze_;
                 };
-                IEnumerable<ClaimResponse> pzzzzzzzzzn_ = context.Operators.Where<ClaimResponse>(pzzzzzzzzzl_, pzzzzzzzzzm_);
-                ResourceReference pzzzzzzzzzo_(ClaimResponse @this)
+                IEnumerable<ClaimResponse> yzzzzzzzzzzzzl_ = context.Operators.Where<ClaimResponse>(yzzzzzzzzzzzzj_, yzzzzzzzzzzzzk_);
+                ResourceReference yzzzzzzzzzzzzm_(ClaimResponse @this)
                 {
-                    ResourceReference qzzzzzzzzzh_ = @this?.Request;
+                    ResourceReference zzzzzzzzzzzzzf_ = @this?.Request;
 
-                    return qzzzzzzzzzh_;
+                    return zzzzzzzzzzzzzf_;
                 };
-                IEnumerable<ResourceReference> pzzzzzzzzzp_ = context.Operators.Select<ClaimResponse, ResourceReference>(pzzzzzzzzzn_, pzzzzzzzzzo_);
-                bool? pzzzzzzzzzq_(ResourceReference @this)
+                IEnumerable<ResourceReference> yzzzzzzzzzzzzn_ = context.Operators.Select<ClaimResponse, ResourceReference>(yzzzzzzzzzzzzl_, yzzzzzzzzzzzzm_);
+                bool? yzzzzzzzzzzzzo_(ResourceReference @this)
                 {
-                    FhirString qzzzzzzzzzi_ = @this?.ReferenceElement;
-                    bool? qzzzzzzzzzj_ = context.Operators.Not((bool?)(qzzzzzzzzzi_ is null));
+                    FhirString zzzzzzzzzzzzzg_ = @this?.ReferenceElement;
+                    bool? zzzzzzzzzzzzzh_ = context.Operators.Not((bool?)(zzzzzzzzzzzzzg_ is null));
 
-                    return qzzzzzzzzzj_;
+                    return zzzzzzzzzzzzzh_;
                 };
-                IEnumerable<ResourceReference> pzzzzzzzzzr_ = context.Operators.Where<ResourceReference>(pzzzzzzzzzp_, pzzzzzzzzzq_);
-                FhirString pzzzzzzzzzs_(ResourceReference @this)
+                IEnumerable<ResourceReference> yzzzzzzzzzzzzp_ = context.Operators.Where<ResourceReference>(yzzzzzzzzzzzzn_, yzzzzzzzzzzzzo_);
+                FhirString yzzzzzzzzzzzzq_(ResourceReference @this)
                 {
-                    FhirString qzzzzzzzzzk_ = @this?.ReferenceElement;
+                    FhirString zzzzzzzzzzzzzi_ = @this?.ReferenceElement;
 
-                    return qzzzzzzzzzk_;
+                    return zzzzzzzzzzzzzi_;
                 };
-                IEnumerable<FhirString> pzzzzzzzzzt_ = context.Operators.Select<ResourceReference, FhirString>(pzzzzzzzzzr_, pzzzzzzzzzs_);
-                FhirString pzzzzzzzzzu_ = context.Operators.SingletonFrom<FhirString>(pzzzzzzzzzt_);
-                string pzzzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, pzzzzzzzzzu_);
-                string pzzzzzzzzzw_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, pzzzzzzzzzv_);
-                bool? pzzzzzzzzzx_ = context.Operators.Equal(pzzzzzzzzzj_, pzzzzzzzzzw_);
+                IEnumerable<FhirString> yzzzzzzzzzzzzr_ = context.Operators.Select<ResourceReference, FhirString>(yzzzzzzzzzzzzp_, yzzzzzzzzzzzzq_);
+                FhirString yzzzzzzzzzzzzs_ = context.Operators.SingletonFrom<FhirString>(yzzzzzzzzzzzzr_);
+                string yzzzzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, yzzzzzzzzzzzzs_);
+                string yzzzzzzzzzzzzu_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, yzzzzzzzzzzzzt_);
+                bool? yzzzzzzzzzzzzv_ = context.Operators.Equal(yzzzzzzzzzzzzh_, yzzzzzzzzzzzzu_);
 
-                return pzzzzzzzzzx_;
+                return yzzzzzzzzzzzzv_;
             };
-            IEnumerable<Claim> ozzzzzzzzzz_ = context.Operators.Where<Claim>(claim, ozzzzzzzzzy_);
-            (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? pzzzzzzzzza_ = (CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK, ozzzzzzzzzx_, ozzzzzzzzzz_);
+            IEnumerable<Claim> xzzzzzzzzzzzzx_ = context.Operators.Where<Claim>(claim, xzzzzzzzzzzzzw_);
+            (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? xzzzzzzzzzzzzy_ = (CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK, xzzzzzzzzzzzzv_, xzzzzzzzzzzzzx_);
 
-            return pzzzzzzzzza_;
+            return xzzzzzzzzzzzzy_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> ozzzzzzzzzu_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?>(claim, ozzzzzzzzzt_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> ozzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?>(ozzzzzzzzzu_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> xzzzzzzzzzzzzs_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?>(claim, xzzzzzzzzzzzzr_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> xzzzzzzzzzzzzt_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?>(xzzzzzzzzzzzzs_);
 
-        return ozzzzzzzzzv_;
+        return xzzzzzzzzzzzzt_;
     }
 
 
     [CqlExpressionDefinition("Medical Claims With Nonacute or Acute Inpatient Discharge")]
     public (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(CqlContext context, IEnumerable<Claim> claim)
     {
-        IEnumerable<Claim> qzzzzzzzzzl_ = this.Professional_or_Institutional_Claims(context, claim);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? qzzzzzzzzzm_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, qzzzzzzzzzl_, default, default);
-        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] qzzzzzzzzzn_ = [
-            qzzzzzzzzzm_,
+        IEnumerable<Claim> zzzzzzzzzzzzzj_ = this.Professional_or_Institutional_Claims(context, claim);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? zzzzzzzzzzzzzk_ = (CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi, zzzzzzzzzzzzzj_, default, default);
+        (CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] zzzzzzzzzzzzzl_ = [
+            zzzzzzzzzzzzzk_,
         ];
-        (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? qzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithInpatientStay)
+        (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? zzzzzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? ClaimWithInpatientStay)
         {
-            IEnumerable<Claim> qzzzzzzzzzs_()
+            IEnumerable<Claim> zzzzzzzzzzzzzq_()
             {
                 if (ClaimWithInpatientStay?.MedicalClaim is null)
                 {
@@ -3222,39 +3222,39 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 }
                 else
                 {
-                    IEnumerable<Claim> rzzzzzzzzza_ = ClaimWithInpatientStay?.MedicalClaim;
-                    bool? rzzzzzzzzzb_(Claim c)
+                    IEnumerable<Claim> zzzzzzzzzzzzzy_ = ClaimWithInpatientStay?.MedicalClaim;
+                    bool? zzzzzzzzzzzzzz_(Claim c)
                     {
-                        List<Claim.ItemComponent> rzzzzzzzzzd_ = c?.Item;
-                        bool? rzzzzzzzzze_(Claim.ItemComponent i)
+                        List<Claim.ItemComponent> azzzzzzzzzzzzzb_ = c?.Item;
+                        bool? azzzzzzzzzzzzzc_(Claim.ItemComponent i)
                         {
-                            CodeableConcept rzzzzzzzzzh_ = i?.Revenue;
-                            CqlConcept rzzzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, rzzzzzzzzzh_);
-                            CqlCode[] rzzzzzzzzzj_ = rzzzzzzzzzi_?.codes;
-                            bool? rzzzzzzzzzk_(CqlCode rev)
+                            CodeableConcept azzzzzzzzzzzzzf_ = i?.Revenue;
+                            CqlConcept azzzzzzzzzzzzzg_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, azzzzzzzzzzzzzf_);
+                            CqlCode[] azzzzzzzzzzzzzh_ = azzzzzzzzzzzzzg_?.codes;
+                            bool? azzzzzzzzzzzzzi_(CqlCode rev)
                             {
-                                string rzzzzzzzzzn_ = rev?.code;
-                                CqlValueSet rzzzzzzzzzo_ = this.Inpatient_Stay(context);
-                                bool? rzzzzzzzzzp_ = context.Operators.StringInValueSet(rzzzzzzzzzn_, rzzzzzzzzzo_);
+                                string azzzzzzzzzzzzzl_ = rev?.code;
+                                CqlValueSet azzzzzzzzzzzzzm_ = this.Inpatient_Stay(context);
+                                bool? azzzzzzzzzzzzzn_ = context.Operators.StringInValueSet(azzzzzzzzzzzzzl_, azzzzzzzzzzzzzm_);
 
-                                return rzzzzzzzzzp_;
+                                return azzzzzzzzzzzzzn_;
                             };
-                            IEnumerable<CqlCode> rzzzzzzzzzl_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)rzzzzzzzzzj_, rzzzzzzzzzk_);
-                            bool? rzzzzzzzzzm_ = context.Operators.Exists<CqlCode>(rzzzzzzzzzl_);
+                            IEnumerable<CqlCode> azzzzzzzzzzzzzj_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)azzzzzzzzzzzzzh_, azzzzzzzzzzzzzi_);
+                            bool? azzzzzzzzzzzzzk_ = context.Operators.Exists<CqlCode>(azzzzzzzzzzzzzj_);
 
-                            return rzzzzzzzzzm_;
+                            return azzzzzzzzzzzzzk_;
                         };
-                        IEnumerable<Claim.ItemComponent> rzzzzzzzzzf_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)rzzzzzzzzzd_, rzzzzzzzzze_);
-                        bool? rzzzzzzzzzg_ = context.Operators.Exists<Claim.ItemComponent>(rzzzzzzzzzf_);
+                        IEnumerable<Claim.ItemComponent> azzzzzzzzzzzzzd_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)azzzzzzzzzzzzzb_, azzzzzzzzzzzzzc_);
+                        bool? azzzzzzzzzzzzze_ = context.Operators.Exists<Claim.ItemComponent>(azzzzzzzzzzzzzd_);
 
-                        return rzzzzzzzzzg_;
+                        return azzzzzzzzzzzzze_;
                     };
-                    IEnumerable<Claim> rzzzzzzzzzc_ = context.Operators.Where<Claim>(rzzzzzzzzza_, rzzzzzzzzzb_);
+                    IEnumerable<Claim> azzzzzzzzzzzzza_ = context.Operators.Where<Claim>(zzzzzzzzzzzzzy_, zzzzzzzzzzzzzz_);
 
-                    return rzzzzzzzzzc_;
+                    return azzzzzzzzzzzzza_;
                 }
             };
-            IEnumerable<Claim> qzzzzzzzzzt_()
+            IEnumerable<Claim> zzzzzzzzzzzzzr_()
             {
                 if (ClaimWithInpatientStay?.MedicalClaim is null)
                 {
@@ -3262,714 +3262,714 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 }
                 else
                 {
-                    IEnumerable<Claim> rzzzzzzzzzq_ = ClaimWithInpatientStay?.MedicalClaim;
-                    bool? rzzzzzzzzzr_(Claim c)
+                    IEnumerable<Claim> azzzzzzzzzzzzzo_ = ClaimWithInpatientStay?.MedicalClaim;
+                    bool? azzzzzzzzzzzzzp_(Claim c)
                     {
-                        List<Claim.ItemComponent> rzzzzzzzzzt_ = c?.Item;
-                        bool? rzzzzzzzzzu_(Claim.ItemComponent i)
+                        List<Claim.ItemComponent> azzzzzzzzzzzzzr_ = c?.Item;
+                        bool? azzzzzzzzzzzzzs_(Claim.ItemComponent i)
                         {
-                            CodeableConcept szzzzzzzzzd_ = i?.Revenue;
-                            CqlConcept szzzzzzzzze_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, szzzzzzzzzd_);
-                            CqlCode[] szzzzzzzzzf_ = szzzzzzzzze_?.codes;
-                            bool? szzzzzzzzzg_(CqlCode rev)
+                            CodeableConcept bzzzzzzzzzzzzzb_ = i?.Revenue;
+                            CqlConcept bzzzzzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bzzzzzzzzzzzzzb_);
+                            CqlCode[] bzzzzzzzzzzzzzd_ = bzzzzzzzzzzzzzc_?.codes;
+                            bool? bzzzzzzzzzzzzze_(CqlCode rev)
                             {
-                                string szzzzzzzzzj_ = rev?.code;
-                                CqlValueSet szzzzzzzzzk_ = this.Nonacute_Inpatient_Stay(context);
-                                bool? szzzzzzzzzl_ = context.Operators.StringInValueSet(szzzzzzzzzj_, szzzzzzzzzk_);
+                                string bzzzzzzzzzzzzzh_ = rev?.code;
+                                CqlValueSet bzzzzzzzzzzzzzi_ = this.Nonacute_Inpatient_Stay(context);
+                                bool? bzzzzzzzzzzzzzj_ = context.Operators.StringInValueSet(bzzzzzzzzzzzzzh_, bzzzzzzzzzzzzzi_);
 
-                                return szzzzzzzzzl_;
+                                return bzzzzzzzzzzzzzj_;
                             };
-                            IEnumerable<CqlCode> szzzzzzzzzh_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)szzzzzzzzzf_, szzzzzzzzzg_);
-                            bool? szzzzzzzzzi_ = context.Operators.Exists<CqlCode>(szzzzzzzzzh_);
+                            IEnumerable<CqlCode> bzzzzzzzzzzzzzf_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)bzzzzzzzzzzzzzd_, bzzzzzzzzzzzzze_);
+                            bool? bzzzzzzzzzzzzzg_ = context.Operators.Exists<CqlCode>(bzzzzzzzzzzzzzf_);
 
-                            return szzzzzzzzzi_;
+                            return bzzzzzzzzzzzzzg_;
                         };
-                        IEnumerable<Claim.ItemComponent> rzzzzzzzzzv_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)rzzzzzzzzzt_, rzzzzzzzzzu_);
-                        bool? rzzzzzzzzzw_ = context.Operators.Exists<Claim.ItemComponent>(rzzzzzzzzzv_);
-                        CodeableConcept rzzzzzzzzzx_ = c?.SubType;
-                        List<Coding> rzzzzzzzzzy_ = rzzzzzzzzzx_?.Coding;
-                        bool? rzzzzzzzzzz_(Coding tob)
+                        IEnumerable<Claim.ItemComponent> azzzzzzzzzzzzzt_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)azzzzzzzzzzzzzr_, azzzzzzzzzzzzzs_);
+                        bool? azzzzzzzzzzzzzu_ = context.Operators.Exists<Claim.ItemComponent>(azzzzzzzzzzzzzt_);
+                        CodeableConcept azzzzzzzzzzzzzv_ = c?.SubType;
+                        List<Coding> azzzzzzzzzzzzzw_ = azzzzzzzzzzzzzv_?.Coding;
+                        bool? azzzzzzzzzzzzzx_(Coding tob)
                         {
-                            Code szzzzzzzzzm_ = tob?.CodeElement;
-                            string szzzzzzzzzn_ = szzzzzzzzzm_?.Value;
-                            CqlValueSet szzzzzzzzzo_ = this.Nonacute_Inpatient_Stay(context);
-                            bool? szzzzzzzzzp_ = context.Operators.StringInValueSet(szzzzzzzzzn_, szzzzzzzzzo_);
+                            Code bzzzzzzzzzzzzzk_ = tob?.CodeElement;
+                            string bzzzzzzzzzzzzzl_ = bzzzzzzzzzzzzzk_?.Value;
+                            CqlValueSet bzzzzzzzzzzzzzm_ = this.Nonacute_Inpatient_Stay(context);
+                            bool? bzzzzzzzzzzzzzn_ = context.Operators.StringInValueSet(bzzzzzzzzzzzzzl_, bzzzzzzzzzzzzzm_);
 
-                            return szzzzzzzzzp_;
+                            return bzzzzzzzzzzzzzn_;
                         };
-                        IEnumerable<Coding> szzzzzzzzza_ = context.Operators.Where<Coding>((IEnumerable<Coding>)rzzzzzzzzzy_, rzzzzzzzzzz_);
-                        bool? szzzzzzzzzb_ = context.Operators.Exists<Coding>(szzzzzzzzza_);
-                        bool? szzzzzzzzzc_ = context.Operators.Or(rzzzzzzzzzw_, szzzzzzzzzb_);
+                        IEnumerable<Coding> azzzzzzzzzzzzzy_ = context.Operators.Where<Coding>((IEnumerable<Coding>)azzzzzzzzzzzzzw_, azzzzzzzzzzzzzx_);
+                        bool? azzzzzzzzzzzzzz_ = context.Operators.Exists<Coding>(azzzzzzzzzzzzzy_);
+                        bool? bzzzzzzzzzzzzza_ = context.Operators.Or(azzzzzzzzzzzzzu_, azzzzzzzzzzzzzz_);
 
-                        return szzzzzzzzzc_;
+                        return bzzzzzzzzzzzzza_;
                     };
-                    IEnumerable<Claim> rzzzzzzzzzs_ = context.Operators.Where<Claim>(rzzzzzzzzzq_, rzzzzzzzzzr_);
+                    IEnumerable<Claim> azzzzzzzzzzzzzq_ = context.Operators.Where<Claim>(azzzzzzzzzzzzzo_, azzzzzzzzzzzzzp_);
 
-                    return rzzzzzzzzzs_;
+                    return azzzzzzzzzzzzzq_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)? qzzzzzzzzzu_ = (CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP, qzzzzzzzzzs_(), qzzzzzzzzzt_());
-            (CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?[] qzzzzzzzzzv_ = [
-                qzzzzzzzzzu_,
+            (CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)? zzzzzzzzzzzzzs_ = (CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP, zzzzzzzzzzzzzq_(), zzzzzzzzzzzzzr_());
+            (CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?[] zzzzzzzzzzzzzt_ = [
+                zzzzzzzzzzzzzs_,
             ];
-            (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? qzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)? LineItemDefinition)
+            (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? zzzzzzzzzzzzzu_((CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)? LineItemDefinition)
             {
-                IEnumerable<Claim> szzzzzzzzzq_ = LineItemDefinition?.InpatientStayLineItems;
-                IEnumerable<Claim> szzzzzzzzzr_ = LineItemDefinition?.NonacuteInpatientLineItems;
-                IEnumerable<Claim> szzzzzzzzzs_(Claim nonAcuteInpatientStay)
+                IEnumerable<Claim> bzzzzzzzzzzzzzo_ = LineItemDefinition?.InpatientStayLineItems;
+                IEnumerable<Claim> bzzzzzzzzzzzzzp_ = LineItemDefinition?.NonacuteInpatientLineItems;
+                IEnumerable<Claim> bzzzzzzzzzzzzzq_(Claim nonAcuteInpatientStay)
                 {
-                    IEnumerable<Claim> tzzzzzzzzza_ = LineItemDefinition?.InpatientStayLineItems;
-                    bool? tzzzzzzzzzb_(Claim inpatientStay)
+                    IEnumerable<Claim> bzzzzzzzzzzzzzy_ = LineItemDefinition?.InpatientStayLineItems;
+                    bool? bzzzzzzzzzzzzzz_(Claim inpatientStay)
                     {
-                        Id tzzzzzzzzzf_ = nonAcuteInpatientStay?.IdElement;
-                        Id tzzzzzzzzzg_ = inpatientStay?.IdElement;
-                        bool? tzzzzzzzzzh_ = context.Operators.Equal(tzzzzzzzzzf_, tzzzzzzzzzg_);
+                        Id czzzzzzzzzzzzzd_ = nonAcuteInpatientStay?.IdElement;
+                        Id czzzzzzzzzzzzze_ = inpatientStay?.IdElement;
+                        bool? czzzzzzzzzzzzzf_ = context.Operators.Equal(czzzzzzzzzzzzzd_, czzzzzzzzzzzzze_);
 
-                        return tzzzzzzzzzh_;
+                        return czzzzzzzzzzzzzf_;
                     };
-                    IEnumerable<Claim> tzzzzzzzzzc_ = context.Operators.Where<Claim>(tzzzzzzzzza_, tzzzzzzzzzb_);
-                    Claim tzzzzzzzzzd_(Claim inpatientStay) =>
+                    IEnumerable<Claim> czzzzzzzzzzzzza_ = context.Operators.Where<Claim>(bzzzzzzzzzzzzzy_, bzzzzzzzzzzzzzz_);
+                    Claim czzzzzzzzzzzzzb_(Claim inpatientStay) =>
                         nonAcuteInpatientStay;
-                    IEnumerable<Claim> tzzzzzzzzze_ = context.Operators.Select<Claim, Claim>(tzzzzzzzzzc_, tzzzzzzzzzd_);
+                    IEnumerable<Claim> czzzzzzzzzzzzzc_ = context.Operators.Select<Claim, Claim>(czzzzzzzzzzzzza_, czzzzzzzzzzzzzb_);
 
-                    return tzzzzzzzzze_;
+                    return czzzzzzzzzzzzzc_;
                 };
-                IEnumerable<Claim> szzzzzzzzzt_ = context.Operators.SelectMany<Claim, Claim>(szzzzzzzzzr_, szzzzzzzzzs_);
-                IEnumerable<Claim> szzzzzzzzzw_(Claim inpatientStay)
+                IEnumerable<Claim> bzzzzzzzzzzzzzr_ = context.Operators.SelectMany<Claim, Claim>(bzzzzzzzzzzzzzp_, bzzzzzzzzzzzzzq_);
+                IEnumerable<Claim> bzzzzzzzzzzzzzu_(Claim inpatientStay)
                 {
-                    IEnumerable<Claim> tzzzzzzzzzi_ = LineItemDefinition?.NonacuteInpatientLineItems;
-                    bool? tzzzzzzzzzj_(Claim nonAcuteInpatientStay)
+                    IEnumerable<Claim> czzzzzzzzzzzzzg_ = LineItemDefinition?.NonacuteInpatientLineItems;
+                    bool? czzzzzzzzzzzzzh_(Claim nonAcuteInpatientStay)
                     {
-                        Id tzzzzzzzzzn_ = inpatientStay?.IdElement;
-                        Id tzzzzzzzzzo_ = nonAcuteInpatientStay?.IdElement;
-                        bool? tzzzzzzzzzp_ = context.Operators.Equal(tzzzzzzzzzn_, tzzzzzzzzzo_);
+                        Id czzzzzzzzzzzzzl_ = inpatientStay?.IdElement;
+                        Id czzzzzzzzzzzzzm_ = nonAcuteInpatientStay?.IdElement;
+                        bool? czzzzzzzzzzzzzn_ = context.Operators.Equal(czzzzzzzzzzzzzl_, czzzzzzzzzzzzzm_);
 
-                        return tzzzzzzzzzp_;
+                        return czzzzzzzzzzzzzn_;
                     };
-                    IEnumerable<Claim> tzzzzzzzzzk_ = context.Operators.Where<Claim>(tzzzzzzzzzi_, tzzzzzzzzzj_);
-                    Claim tzzzzzzzzzl_(Claim nonAcuteInpatientStay) =>
+                    IEnumerable<Claim> czzzzzzzzzzzzzi_ = context.Operators.Where<Claim>(czzzzzzzzzzzzzg_, czzzzzzzzzzzzzh_);
+                    Claim czzzzzzzzzzzzzj_(Claim nonAcuteInpatientStay) =>
                         inpatientStay;
-                    IEnumerable<Claim> tzzzzzzzzzm_ = context.Operators.Select<Claim, Claim>(tzzzzzzzzzk_, tzzzzzzzzzl_);
+                    IEnumerable<Claim> czzzzzzzzzzzzzk_ = context.Operators.Select<Claim, Claim>(czzzzzzzzzzzzzi_, czzzzzzzzzzzzzj_);
 
-                    return tzzzzzzzzzm_;
+                    return czzzzzzzzzzzzzk_;
                 };
-                IEnumerable<Claim> szzzzzzzzzx_ = context.Operators.SelectMany<Claim, Claim>(szzzzzzzzzq_, szzzzzzzzzw_);
-                IEnumerable<Claim> szzzzzzzzzy_ = context.Operators.Except<Claim>(szzzzzzzzzq_, szzzzzzzzzx_);
-                (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? szzzzzzzzzz_ = (CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB, szzzzzzzzzq_, szzzzzzzzzt_, szzzzzzzzzy_);
+                IEnumerable<Claim> bzzzzzzzzzzzzzv_ = context.Operators.SelectMany<Claim, Claim>(bzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzu_);
+                IEnumerable<Claim> bzzzzzzzzzzzzzw_ = context.Operators.Except<Claim>(bzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzv_);
+                (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? bzzzzzzzzzzzzzx_ = (CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB, bzzzzzzzzzzzzzo_, bzzzzzzzzzzzzzr_, bzzzzzzzzzzzzzw_);
 
-                return szzzzzzzzzz_;
+                return bzzzzzzzzzzzzzx_;
             };
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> qzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?, (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?>)qzzzzzzzzzv_, qzzzzzzzzzw_);
-            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> qzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(qzzzzzzzzzx_);
-            (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? qzzzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(qzzzzzzzzzy_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> zzzzzzzzzzzzzv_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?, (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?>)zzzzzzzzzzzzzt_, zzzzzzzzzzzzzu_);
+            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> zzzzzzzzzzzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(zzzzzzzzzzzzzv_);
+            (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? zzzzzzzzzzzzzx_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(zzzzzzzzzzzzzw_);
 
-            return qzzzzzzzzzz_;
+            return zzzzzzzzzzzzzx_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> qzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)qzzzzzzzzzn_, qzzzzzzzzzo_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> qzzzzzzzzzq_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(qzzzzzzzzzp_);
-        (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? qzzzzzzzzzr_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(qzzzzzzzzzq_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> zzzzzzzzzzzzzn_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)zzzzzzzzzzzzzl_, zzzzzzzzzzzzzm_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> zzzzzzzzzzzzzo_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(zzzzzzzzzzzzzn_);
+        (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? zzzzzzzzzzzzzp_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(zzzzzzzzzzzzzo_);
 
-        return qzzzzzzzzzr_;
+        return zzzzzzzzzzzzzp_;
     }
 
 
     [CqlExpressionDefinition("Get Prescriber NPI from Claims")]
     public (CqlTupleMetadata, int? IdentifierCount)? Get_Prescriber_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
-        (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? tzzzzzzzzzq_(Claim C)
+        (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? czzzzzzzzzzzzzo_(Claim C)
         {
-            List<Claim.CareTeamComponent> tzzzzzzzzzz_ = C?.CareTeam;
-            bool? uzzzzzzzzza_(Claim.CareTeamComponent ct)
+            List<Claim.CareTeamComponent> czzzzzzzzzzzzzx_ = C?.CareTeam;
+            bool? czzzzzzzzzzzzzy_(Claim.CareTeamComponent ct)
             {
-                PositiveInt uzzzzzzzzzq_ = ct?.SequenceElement;
-                Integer uzzzzzzzzzr_ = context.Operators.Convert<Integer>(uzzzzzzzzzq_);
-                int? uzzzzzzzzzs_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, uzzzzzzzzzr_);
-                bool? uzzzzzzzzzt_ = context.Operators.Equal(uzzzzzzzzzs_, 1);
+                PositiveInt dzzzzzzzzzzzzzo_ = ct?.SequenceElement;
+                Integer dzzzzzzzzzzzzzp_ = context.Operators.Convert<Integer>(dzzzzzzzzzzzzzo_);
+                int? dzzzzzzzzzzzzzq_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, dzzzzzzzzzzzzzp_);
+                bool? dzzzzzzzzzzzzzr_ = context.Operators.Equal(dzzzzzzzzzzzzzq_, 1);
 
-                return uzzzzzzzzzt_;
+                return dzzzzzzzzzzzzzr_;
             };
-            IEnumerable<Claim.CareTeamComponent> uzzzzzzzzzb_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)tzzzzzzzzzz_, uzzzzzzzzza_);
-            bool? uzzzzzzzzzc_(Claim.CareTeamComponent @this)
+            IEnumerable<Claim.CareTeamComponent> czzzzzzzzzzzzzz_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)czzzzzzzzzzzzzx_, czzzzzzzzzzzzzy_);
+            bool? dzzzzzzzzzzzzza_(Claim.CareTeamComponent @this)
             {
-                ResourceReference uzzzzzzzzzu_ = @this?.Provider;
-                bool? uzzzzzzzzzv_ = context.Operators.Not((bool?)(uzzzzzzzzzu_ is null));
+                ResourceReference dzzzzzzzzzzzzzs_ = @this?.Provider;
+                bool? dzzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(dzzzzzzzzzzzzzs_ is null));
 
-                return uzzzzzzzzzv_;
+                return dzzzzzzzzzzzzzt_;
             };
-            IEnumerable<Claim.CareTeamComponent> uzzzzzzzzzd_ = context.Operators.Where<Claim.CareTeamComponent>(uzzzzzzzzzb_, uzzzzzzzzzc_);
-            ResourceReference uzzzzzzzzze_(Claim.CareTeamComponent @this)
+            IEnumerable<Claim.CareTeamComponent> dzzzzzzzzzzzzzb_ = context.Operators.Where<Claim.CareTeamComponent>(czzzzzzzzzzzzzz_, dzzzzzzzzzzzzza_);
+            ResourceReference dzzzzzzzzzzzzzc_(Claim.CareTeamComponent @this)
             {
-                ResourceReference uzzzzzzzzzw_ = @this?.Provider;
+                ResourceReference dzzzzzzzzzzzzzu_ = @this?.Provider;
 
-                return uzzzzzzzzzw_;
+                return dzzzzzzzzzzzzzu_;
             };
-            IEnumerable<ResourceReference> uzzzzzzzzzf_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(uzzzzzzzzzd_, uzzzzzzzzze_);
-            bool? uzzzzzzzzzh_(Claim.CareTeamComponent ct)
+            IEnumerable<ResourceReference> dzzzzzzzzzzzzzd_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(dzzzzzzzzzzzzzb_, dzzzzzzzzzzzzzc_);
+            bool? dzzzzzzzzzzzzzf_(Claim.CareTeamComponent ct)
             {
-                PositiveInt uzzzzzzzzzx_ = ct?.SequenceElement;
-                Integer uzzzzzzzzzy_ = context.Operators.Convert<Integer>(uzzzzzzzzzx_);
-                int? uzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, uzzzzzzzzzy_);
-                bool? vzzzzzzzzza_ = context.Operators.Equal(uzzzzzzzzzz_, 1);
+                PositiveInt dzzzzzzzzzzzzzv_ = ct?.SequenceElement;
+                Integer dzzzzzzzzzzzzzw_ = context.Operators.Convert<Integer>(dzzzzzzzzzzzzzv_);
+                int? dzzzzzzzzzzzzzx_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, dzzzzzzzzzzzzzw_);
+                bool? dzzzzzzzzzzzzzy_ = context.Operators.Equal(dzzzzzzzzzzzzzx_, 1);
 
-                return vzzzzzzzzza_;
+                return dzzzzzzzzzzzzzy_;
             };
-            IEnumerable<Claim.CareTeamComponent> uzzzzzzzzzi_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)tzzzzzzzzzz_, uzzzzzzzzzh_);
-            bool? uzzzzzzzzzj_(Claim.CareTeamComponent @this)
+            IEnumerable<Claim.CareTeamComponent> dzzzzzzzzzzzzzg_ = context.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)czzzzzzzzzzzzzx_, dzzzzzzzzzzzzzf_);
+            bool? dzzzzzzzzzzzzzh_(Claim.CareTeamComponent @this)
             {
-                ResourceReference vzzzzzzzzzb_ = @this?.Provider;
-                bool? vzzzzzzzzzc_ = context.Operators.Not((bool?)(vzzzzzzzzzb_ is null));
+                ResourceReference dzzzzzzzzzzzzzz_ = @this?.Provider;
+                bool? ezzzzzzzzzzzzza_ = context.Operators.Not((bool?)(dzzzzzzzzzzzzzz_ is null));
 
-                return vzzzzzzzzzc_;
+                return ezzzzzzzzzzzzza_;
             };
-            IEnumerable<Claim.CareTeamComponent> uzzzzzzzzzk_ = context.Operators.Where<Claim.CareTeamComponent>(uzzzzzzzzzi_, uzzzzzzzzzj_);
-            ResourceReference uzzzzzzzzzl_(Claim.CareTeamComponent @this)
+            IEnumerable<Claim.CareTeamComponent> dzzzzzzzzzzzzzi_ = context.Operators.Where<Claim.CareTeamComponent>(dzzzzzzzzzzzzzg_, dzzzzzzzzzzzzzh_);
+            ResourceReference dzzzzzzzzzzzzzj_(Claim.CareTeamComponent @this)
             {
-                ResourceReference vzzzzzzzzzd_ = @this?.Provider;
+                ResourceReference ezzzzzzzzzzzzzb_ = @this?.Provider;
 
-                return vzzzzzzzzzd_;
+                return ezzzzzzzzzzzzzb_;
             };
-            IEnumerable<ResourceReference> uzzzzzzzzzm_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(uzzzzzzzzzk_, uzzzzzzzzzl_);
-            string uzzzzzzzzzn_(ResourceReference p)
+            IEnumerable<ResourceReference> dzzzzzzzzzzzzzk_ = context.Operators.Select<Claim.CareTeamComponent, ResourceReference>(dzzzzzzzzzzzzzi_, dzzzzzzzzzzzzzj_);
+            string dzzzzzzzzzzzzzl_(ResourceReference p)
             {
-                FhirString vzzzzzzzzze_ = p?.ReferenceElement;
-                FhirString[] vzzzzzzzzzf_ = [
-                    vzzzzzzzzze_,
+                FhirString ezzzzzzzzzzzzzc_ = p?.ReferenceElement;
+                FhirString[] ezzzzzzzzzzzzzd_ = [
+                    ezzzzzzzzzzzzzc_,
                 ];
-                string vzzzzzzzzzg_(FhirString r)
+                string ezzzzzzzzzzzzze_(FhirString r)
                 {
-                    string vzzzzzzzzzj_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
-                    string vzzzzzzzzzk_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, vzzzzzzzzzj_);
+                    string ezzzzzzzzzzzzzh_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
+                    string ezzzzzzzzzzzzzi_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ezzzzzzzzzzzzzh_);
 
-                    return vzzzzzzzzzk_;
+                    return ezzzzzzzzzzzzzi_;
                 };
-                IEnumerable<string> vzzzzzzzzzh_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)vzzzzzzzzzf_, vzzzzzzzzzg_);
-                string vzzzzzzzzzi_ = context.Operators.SingletonFrom<string>(vzzzzzzzzzh_);
+                IEnumerable<string> ezzzzzzzzzzzzzf_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)ezzzzzzzzzzzzzd_, ezzzzzzzzzzzzze_);
+                string ezzzzzzzzzzzzzg_ = context.Operators.SingletonFrom<string>(ezzzzzzzzzzzzzf_);
 
-                return vzzzzzzzzzi_;
+                return ezzzzzzzzzzzzzg_;
             };
-            IEnumerable<string> uzzzzzzzzzo_ = context.Operators.Select<ResourceReference, string>(uzzzzzzzzzm_, uzzzzzzzzzn_);
-            (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? uzzzzzzzzzp_ = (CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO, C, uzzzzzzzzzf_, uzzzzzzzzzo_);
+            IEnumerable<string> dzzzzzzzzzzzzzm_ = context.Operators.Select<ResourceReference, string>(dzzzzzzzzzzzzzk_, dzzzzzzzzzzzzzl_);
+            (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? dzzzzzzzzzzzzzn_ = (CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO, C, dzzzzzzzzzzzzzd_, dzzzzzzzzzzzzzm_);
 
-            return uzzzzzzzzzp_;
+            return dzzzzzzzzzzzzzn_;
         };
-        IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> tzzzzzzzzzr_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(claim, tzzzzzzzzzq_);
-        IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> tzzzzzzzzzs_ = context.Operators.Distinct<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(tzzzzzzzzzr_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)? tzzzzzzzzzt_ = (CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH, tzzzzzzzzzs_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?[] tzzzzzzzzzu_ = [
-            tzzzzzzzzzt_,
+        IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> czzzzzzzzzzzzzp_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(claim, czzzzzzzzzzzzzo_);
+        IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> czzzzzzzzzzzzzq_ = context.Operators.Distinct<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(czzzzzzzzzzzzzp_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)? czzzzzzzzzzzzzr_ = (CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH, czzzzzzzzzzzzzq_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?[] czzzzzzzzzzzzzs_ = [
+            czzzzzzzzzzzzzr_,
         ];
-        (CqlTupleMetadata, int? IdentifierCount)? tzzzzzzzzzv_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)? ClaimProperties)
+        (CqlTupleMetadata, int? IdentifierCount)? czzzzzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)? ClaimProperties)
         {
-            IEnumerable<Practitioner> vzzzzzzzzzl_ = context.Operators.Retrieve<Practitioner>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Practitioner"));
-            bool? vzzzzzzzzzm_(Practitioner p)
+            IEnumerable<Practitioner> ezzzzzzzzzzzzzj_ = context.Operators.Retrieve<Practitioner>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Practitioner"));
+            bool? ezzzzzzzzzzzzzk_(Practitioner p)
             {
-                Id vzzzzzzzzzu_ = p?.IdElement;
-                string vzzzzzzzzzv_ = FHIRHelpers_4_0_001.Instance.ToString(context, vzzzzzzzzzu_);
-                IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> vzzzzzzzzzw_ = ClaimProperties?.CareTeams;
-                bool? vzzzzzzzzzx_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                Id ezzzzzzzzzzzzzs_ = p?.IdElement;
+                string ezzzzzzzzzzzzzt_ = FHIRHelpers_4_0_001.Instance.ToString(context, ezzzzzzzzzzzzzs_);
+                IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> ezzzzzzzzzzzzzu_ = ClaimProperties?.CareTeams;
+                bool? ezzzzzzzzzzzzzv_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                 {
-                    IEnumerable<string> wzzzzzzzzzd_ = @this?.CareTeamsProviderID;
-                    bool? wzzzzzzzzze_ = context.Operators.Not((bool?)(wzzzzzzzzzd_ is null));
+                    IEnumerable<string> fzzzzzzzzzzzzzb_ = @this?.CareTeamsProviderID;
+                    bool? fzzzzzzzzzzzzzc_ = context.Operators.Not((bool?)(fzzzzzzzzzzzzzb_ is null));
 
-                    return wzzzzzzzzze_;
+                    return fzzzzzzzzzzzzzc_;
                 };
-                IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> vzzzzzzzzzy_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(vzzzzzzzzzw_, vzzzzzzzzzx_);
-                IEnumerable<string> vzzzzzzzzzz_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> ezzzzzzzzzzzzzw_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(ezzzzzzzzzzzzzu_, ezzzzzzzzzzzzzv_);
+                IEnumerable<string> ezzzzzzzzzzzzzx_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                 {
-                    IEnumerable<string> wzzzzzzzzzf_ = @this?.CareTeamsProviderID;
+                    IEnumerable<string> fzzzzzzzzzzzzzd_ = @this?.CareTeamsProviderID;
 
-                    return wzzzzzzzzzf_;
+                    return fzzzzzzzzzzzzzd_;
                 };
-                IEnumerable<IEnumerable<string>> wzzzzzzzzza_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, IEnumerable<string>>(vzzzzzzzzzy_, vzzzzzzzzzz_);
-                IEnumerable<string> wzzzzzzzzzb_ = context.Operators.Flatten<string>(wzzzzzzzzza_);
-                bool? wzzzzzzzzzc_ = context.Operators.In<string>(vzzzzzzzzzv_, wzzzzzzzzzb_);
+                IEnumerable<IEnumerable<string>> ezzzzzzzzzzzzzy_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, IEnumerable<string>>(ezzzzzzzzzzzzzw_, ezzzzzzzzzzzzzx_);
+                IEnumerable<string> ezzzzzzzzzzzzzz_ = context.Operators.Flatten<string>(ezzzzzzzzzzzzzy_);
+                bool? fzzzzzzzzzzzzza_ = context.Operators.In<string>(ezzzzzzzzzzzzzt_, ezzzzzzzzzzzzzz_);
 
-                return wzzzzzzzzzc_;
+                return fzzzzzzzzzzzzza_;
             };
-            IEnumerable<Practitioner> vzzzzzzzzzn_ = context.Operators.Where<Practitioner>(vzzzzzzzzzl_, vzzzzzzzzzm_);
-            (CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)? vzzzzzzzzzo_ = (CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO, vzzzzzzzzzn_);
-            (CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?[] vzzzzzzzzzp_ = [
-                vzzzzzzzzzo_,
+            IEnumerable<Practitioner> ezzzzzzzzzzzzzl_ = context.Operators.Where<Practitioner>(ezzzzzzzzzzzzzj_, ezzzzzzzzzzzzzk_);
+            (CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)? ezzzzzzzzzzzzzm_ = (CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO, ezzzzzzzzzzzzzl_);
+            (CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?[] ezzzzzzzzzzzzzn_ = [
+                ezzzzzzzzzzzzzm_,
             ];
-            (CqlTupleMetadata, int? IdentifierCount)? vzzzzzzzzzq_((CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)? PractitionerMatch)
+            (CqlTupleMetadata, int? IdentifierCount)? ezzzzzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)? PractitionerMatch)
             {
-                IEnumerable<Practitioner> wzzzzzzzzzg_ = PractitionerMatch?.Practitioners;
-                bool? wzzzzzzzzzh_(Practitioner P)
+                IEnumerable<Practitioner> fzzzzzzzzzzzzze_ = PractitionerMatch?.Practitioners;
+                bool? fzzzzzzzzzzzzzf_(Practitioner P)
                 {
-                    bool? wzzzzzzzzzr_ = context.Operators.Not((bool?)(P is null));
+                    bool? fzzzzzzzzzzzzzp_ = context.Operators.Not((bool?)(P is null));
 
-                    return wzzzzzzzzzr_;
+                    return fzzzzzzzzzzzzzp_;
                 };
-                IEnumerable<Practitioner> wzzzzzzzzzi_ = context.Operators.Where<Practitioner>(wzzzzzzzzzg_, wzzzzzzzzzh_);
-                (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? wzzzzzzzzzj_(Practitioner P)
+                IEnumerable<Practitioner> fzzzzzzzzzzzzzg_ = context.Operators.Where<Practitioner>(fzzzzzzzzzzzzze_, fzzzzzzzzzzzzzf_);
+                (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? fzzzzzzzzzzzzzh_(Practitioner P)
                 {
-                    List<Identifier> wzzzzzzzzzs_ = P?.Identifier;
-                    bool? wzzzzzzzzzt_(Identifier l)
+                    List<Identifier> fzzzzzzzzzzzzzq_ = P?.Identifier;
+                    bool? fzzzzzzzzzzzzzr_(Identifier l)
                     {
-                        FhirUri xzzzzzzzzze_ = l?.SystemElement;
-                        string xzzzzzzzzzf_ = xzzzzzzzzze_?.Value;
-                        bool? xzzzzzzzzzg_ = context.Operators.Equal(xzzzzzzzzzf_, "http://hl7.org/fhir/sid/us-npi");
-                        CodeableConcept xzzzzzzzzzh_ = l?.Type;
-                        CqlConcept xzzzzzzzzzi_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, xzzzzzzzzzh_);
-                        CqlCode xzzzzzzzzzj_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
-                        CqlConcept xzzzzzzzzzk_ = context.Operators.ConvertCodeToConcept(xzzzzzzzzzj_);
-                        bool? xzzzzzzzzzl_ = context.Operators.Equivalent(xzzzzzzzzzi_, xzzzzzzzzzk_);
-                        bool? xzzzzzzzzzm_ = context.Operators.And(xzzzzzzzzzg_, xzzzzzzzzzl_);
-                        FhirString xzzzzzzzzzn_ = l?.ValueElement;
-                        string xzzzzzzzzzo_ = xzzzzzzzzzn_?.Value;
-                        bool? xzzzzzzzzzp_ = context.Operators.Not((bool?)(xzzzzzzzzzo_ is null));
-                        bool? xzzzzzzzzzq_ = context.Operators.And(xzzzzzzzzzm_, xzzzzzzzzzp_);
+                        FhirUri gzzzzzzzzzzzzzc_ = l?.SystemElement;
+                        string gzzzzzzzzzzzzzd_ = gzzzzzzzzzzzzzc_?.Value;
+                        bool? gzzzzzzzzzzzzze_ = context.Operators.Equal(gzzzzzzzzzzzzzd_, "http://hl7.org/fhir/sid/us-npi");
+                        CodeableConcept gzzzzzzzzzzzzzf_ = l?.Type;
+                        CqlConcept gzzzzzzzzzzzzzg_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, gzzzzzzzzzzzzzf_);
+                        CqlCode gzzzzzzzzzzzzzh_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept gzzzzzzzzzzzzzi_ = context.Operators.ConvertCodeToConcept(gzzzzzzzzzzzzzh_);
+                        bool? gzzzzzzzzzzzzzj_ = context.Operators.Equivalent(gzzzzzzzzzzzzzg_, gzzzzzzzzzzzzzi_);
+                        bool? gzzzzzzzzzzzzzk_ = context.Operators.And(gzzzzzzzzzzzzze_, gzzzzzzzzzzzzzj_);
+                        FhirString gzzzzzzzzzzzzzl_ = l?.ValueElement;
+                        string gzzzzzzzzzzzzzm_ = gzzzzzzzzzzzzzl_?.Value;
+                        bool? gzzzzzzzzzzzzzn_ = context.Operators.Not((bool?)(gzzzzzzzzzzzzzm_ is null));
+                        bool? gzzzzzzzzzzzzzo_ = context.Operators.And(gzzzzzzzzzzzzzk_, gzzzzzzzzzzzzzn_);
 
-                        return xzzzzzzzzzq_;
+                        return gzzzzzzzzzzzzzo_;
                     };
-                    IEnumerable<Identifier> wzzzzzzzzzu_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)wzzzzzzzzzs_, wzzzzzzzzzt_);
-                    FhirString wzzzzzzzzzv_(Identifier l)
+                    IEnumerable<Identifier> fzzzzzzzzzzzzzs_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)fzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzr_);
+                    FhirString fzzzzzzzzzzzzzt_(Identifier l)
                     {
-                        FhirString xzzzzzzzzzr_ = l?.ValueElement;
+                        FhirString gzzzzzzzzzzzzzp_ = l?.ValueElement;
 
-                        return xzzzzzzzzzr_;
+                        return gzzzzzzzzzzzzzp_;
                     };
-                    IEnumerable<FhirString> wzzzzzzzzzw_ = context.Operators.Select<Identifier, FhirString>(wzzzzzzzzzu_, wzzzzzzzzzv_);
-                    IEnumerable<FhirString> wzzzzzzzzzx_ = context.Operators.Distinct<FhirString>(wzzzzzzzzzw_);
-                    bool? wzzzzzzzzzz_(Identifier l)
+                    IEnumerable<FhirString> fzzzzzzzzzzzzzu_ = context.Operators.Select<Identifier, FhirString>(fzzzzzzzzzzzzzs_, fzzzzzzzzzzzzzt_);
+                    IEnumerable<FhirString> fzzzzzzzzzzzzzv_ = context.Operators.Distinct<FhirString>(fzzzzzzzzzzzzzu_);
+                    bool? fzzzzzzzzzzzzzx_(Identifier l)
                     {
-                        FhirUri xzzzzzzzzzs_ = l?.SystemElement;
-                        string xzzzzzzzzzt_ = xzzzzzzzzzs_?.Value;
-                        bool? xzzzzzzzzzu_ = context.Operators.Equal(xzzzzzzzzzt_, "http://hl7.org/fhir/sid/us-npi");
-                        CodeableConcept xzzzzzzzzzv_ = l?.Type;
-                        CqlConcept xzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, xzzzzzzzzzv_);
-                        CqlCode xzzzzzzzzzx_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
-                        CqlConcept xzzzzzzzzzy_ = context.Operators.ConvertCodeToConcept(xzzzzzzzzzx_);
-                        bool? xzzzzzzzzzz_ = context.Operators.Equivalent(xzzzzzzzzzw_, xzzzzzzzzzy_);
-                        bool? yzzzzzzzzza_ = context.Operators.And(xzzzzzzzzzu_, xzzzzzzzzzz_);
-                        FhirString yzzzzzzzzzb_ = l?.ValueElement;
-                        string yzzzzzzzzzc_ = yzzzzzzzzzb_?.Value;
-                        bool? yzzzzzzzzzd_ = context.Operators.And(yzzzzzzzzza_, (bool?)(yzzzzzzzzzc_ is null));
+                        FhirUri gzzzzzzzzzzzzzq_ = l?.SystemElement;
+                        string gzzzzzzzzzzzzzr_ = gzzzzzzzzzzzzzq_?.Value;
+                        bool? gzzzzzzzzzzzzzs_ = context.Operators.Equal(gzzzzzzzzzzzzzr_, "http://hl7.org/fhir/sid/us-npi");
+                        CodeableConcept gzzzzzzzzzzzzzt_ = l?.Type;
+                        CqlConcept gzzzzzzzzzzzzzu_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, gzzzzzzzzzzzzzt_);
+                        CqlCode gzzzzzzzzzzzzzv_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept gzzzzzzzzzzzzzw_ = context.Operators.ConvertCodeToConcept(gzzzzzzzzzzzzzv_);
+                        bool? gzzzzzzzzzzzzzx_ = context.Operators.Equivalent(gzzzzzzzzzzzzzu_, gzzzzzzzzzzzzzw_);
+                        bool? gzzzzzzzzzzzzzy_ = context.Operators.And(gzzzzzzzzzzzzzs_, gzzzzzzzzzzzzzx_);
+                        FhirString gzzzzzzzzzzzzzz_ = l?.ValueElement;
+                        string hzzzzzzzzzzzzza_ = gzzzzzzzzzzzzzz_?.Value;
+                        bool? hzzzzzzzzzzzzzb_ = context.Operators.And(gzzzzzzzzzzzzzy_, (bool?)(hzzzzzzzzzzzzza_ is null));
 
-                        return yzzzzzzzzzd_;
+                        return hzzzzzzzzzzzzzb_;
                     };
-                    IEnumerable<Identifier> xzzzzzzzzza_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)wzzzzzzzzzs_, wzzzzzzzzzz_);
-                    Identifier xzzzzzzzzzb_(Identifier l) =>
+                    IEnumerable<Identifier> fzzzzzzzzzzzzzy_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)fzzzzzzzzzzzzzq_, fzzzzzzzzzzzzzx_);
+                    Identifier fzzzzzzzzzzzzzz_(Identifier l) =>
                         l;
-                    IEnumerable<Identifier> xzzzzzzzzzc_ = context.Operators.Select<Identifier, Identifier>(xzzzzzzzzza_, xzzzzzzzzzb_);
-                    (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? xzzzzzzzzzd_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, wzzzzzzzzzx_, xzzzzzzzzzc_);
+                    IEnumerable<Identifier> gzzzzzzzzzzzzza_ = context.Operators.Select<Identifier, Identifier>(fzzzzzzzzzzzzzy_, fzzzzzzzzzzzzzz_);
+                    (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? gzzzzzzzzzzzzzb_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, fzzzzzzzzzzzzzv_, gzzzzzzzzzzzzza_);
 
-                    return xzzzzzzzzzd_;
+                    return gzzzzzzzzzzzzzb_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> wzzzzzzzzzk_ = context.Operators.Select<Practitioner, (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(wzzzzzzzzzi_, wzzzzzzzzzj_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? wzzzzzzzzzl_ = (CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE, wzzzzzzzzzk_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?[] wzzzzzzzzzm_ = [
-                    wzzzzzzzzzl_,
+                IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> fzzzzzzzzzzzzzi_ = context.Operators.Select<Practitioner, (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(fzzzzzzzzzzzzzg_, fzzzzzzzzzzzzzh_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? fzzzzzzzzzzzzzj_ = (CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE, fzzzzzzzzzzzzzi_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?[] fzzzzzzzzzzzzzk_ = [
+                    fzzzzzzzzzzzzzj_,
                 ];
-                (CqlTupleMetadata, int? IdentifierCount)? wzzzzzzzzzn_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? GetIdentifiers)
+                (CqlTupleMetadata, int? IdentifierCount)? fzzzzzzzzzzzzzl_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? GetIdentifiers)
                 {
-                    int? yzzzzzzzzze_()
+                    int? hzzzzzzzzzzzzzc_()
                     {
-                        bool yzzzzzzzzzg_()
+                        bool hzzzzzzzzzzzzze_()
                         {
-                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> yzzzzzzzzzh_ = ClaimProperties?.CareTeams;
-                            bool? yzzzzzzzzzi_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> hzzzzzzzzzzzzzf_ = ClaimProperties?.CareTeams;
+                            bool? hzzzzzzzzzzzzzg_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                             {
-                                Claim yzzzzzzzzzn_ = @this?.SingleCareTeam;
-                                bool? yzzzzzzzzzo_ = context.Operators.Not((bool?)(yzzzzzzzzzn_ is null));
+                                Claim hzzzzzzzzzzzzzl_ = @this?.SingleCareTeam;
+                                bool? hzzzzzzzzzzzzzm_ = context.Operators.Not((bool?)(hzzzzzzzzzzzzzl_ is null));
 
-                                return yzzzzzzzzzo_;
+                                return hzzzzzzzzzzzzzm_;
                             };
-                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> yzzzzzzzzzj_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(yzzzzzzzzzh_, yzzzzzzzzzi_);
-                            Claim yzzzzzzzzzk_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> hzzzzzzzzzzzzzh_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(hzzzzzzzzzzzzzf_, hzzzzzzzzzzzzzg_);
+                            Claim hzzzzzzzzzzzzzi_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                             {
-                                Claim yzzzzzzzzzp_ = @this?.SingleCareTeam;
+                                Claim hzzzzzzzzzzzzzn_ = @this?.SingleCareTeam;
 
-                                return yzzzzzzzzzp_;
+                                return hzzzzzzzzzzzzzn_;
                             };
-                            IEnumerable<Claim> yzzzzzzzzzl_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(yzzzzzzzzzj_, yzzzzzzzzzk_);
-                            bool? yzzzzzzzzzm_ = context.Operators.Exists<Claim>(yzzzzzzzzzl_);
+                            IEnumerable<Claim> hzzzzzzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(hzzzzzzzzzzzzzh_, hzzzzzzzzzzzzzi_);
+                            bool? hzzzzzzzzzzzzzk_ = context.Operators.Exists<Claim>(hzzzzzzzzzzzzzj_);
 
-                            return yzzzzzzzzzm_ ?? false;
+                            return hzzzzzzzzzzzzzk_ ?? false;
                         };
-                        if (yzzzzzzzzzg_())
+                        if (hzzzzzzzzzzzzze_())
                         {
-                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> yzzzzzzzzzq_ = ClaimProperties?.CareTeams;
-                            bool? yzzzzzzzzzr_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> hzzzzzzzzzzzzzo_ = ClaimProperties?.CareTeams;
+                            bool? hzzzzzzzzzzzzzp_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                             {
-                                Claim zzzzzzzzzzn_ = @this?.SingleCareTeam;
-                                bool? zzzzzzzzzzo_ = context.Operators.Not((bool?)(zzzzzzzzzzn_ is null));
+                                Claim izzzzzzzzzzzzzl_ = @this?.SingleCareTeam;
+                                bool? izzzzzzzzzzzzzm_ = context.Operators.Not((bool?)(izzzzzzzzzzzzzl_ is null));
 
-                                return zzzzzzzzzzo_;
+                                return izzzzzzzzzzzzzm_;
                             };
-                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> yzzzzzzzzzs_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(yzzzzzzzzzq_, yzzzzzzzzzr_);
-                            Claim yzzzzzzzzzt_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
+                            IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> hzzzzzzzzzzzzzq_ = context.Operators.Where<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>(hzzzzzzzzzzzzzo_, hzzzzzzzzzzzzzp_);
+                            Claim hzzzzzzzzzzzzzr_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                             {
-                                Claim zzzzzzzzzzp_ = @this?.SingleCareTeam;
+                                Claim izzzzzzzzzzzzzn_ = @this?.SingleCareTeam;
 
-                                return zzzzzzzzzzp_;
+                                return izzzzzzzzzzzzzn_;
                             };
-                            IEnumerable<Claim> yzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(yzzzzzzzzzs_, yzzzzzzzzzt_);
-                            bool? yzzzzzzzzzv_(Claim X)
+                            IEnumerable<Claim> hzzzzzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(hzzzzzzzzzzzzzq_, hzzzzzzzzzzzzzr_);
+                            bool? hzzzzzzzzzzzzzt_(Claim X)
                             {
-                                List<Claim.CareTeamComponent> zzzzzzzzzzq_ = X?.CareTeam;
+                                List<Claim.CareTeamComponent> izzzzzzzzzzzzzo_ = X?.CareTeam;
 
-                                return (bool?)(((IEnumerable<Claim.CareTeamComponent>)zzzzzzzzzzq_) is null);
+                                return (bool?)(((IEnumerable<Claim.CareTeamComponent>)izzzzzzzzzzzzzo_) is null);
                             };
-                            IEnumerable<Claim> yzzzzzzzzzw_ = context.Operators.Where<Claim>(yzzzzzzzzzu_, yzzzzzzzzzv_);
-                            int? yzzzzzzzzzx_ = context.Operators.Count<Claim>(yzzzzzzzzzw_);
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> yzzzzzzzzzy_ = GetIdentifiers?.IdentifierTuple;
-                            IEnumerable<FhirString> yzzzzzzzzzz_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+                            IEnumerable<Claim> hzzzzzzzzzzzzzu_ = context.Operators.Where<Claim>(hzzzzzzzzzzzzzs_, hzzzzzzzzzzzzzt_);
+                            int? hzzzzzzzzzzzzzv_ = context.Operators.Count<Claim>(hzzzzzzzzzzzzzu_);
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> hzzzzzzzzzzzzzw_ = GetIdentifiers?.IdentifierTuple;
+                            IEnumerable<FhirString> hzzzzzzzzzzzzzx_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
                             {
-                                IEnumerable<FhirString> zzzzzzzzzzr_ = X?.AllIdentifiers;
+                                IEnumerable<FhirString> izzzzzzzzzzzzzp_ = X?.AllIdentifiers;
 
-                                return zzzzzzzzzzr_;
+                                return izzzzzzzzzzzzzp_;
                             };
-                            IEnumerable<IEnumerable<FhirString>> zzzzzzzzzza_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(yzzzzzzzzzy_, yzzzzzzzzzz_);
-                            IEnumerable<FhirString> zzzzzzzzzzb_ = context.Operators.Flatten<FhirString>(zzzzzzzzzza_);
-                            FhirString zzzzzzzzzzc_(FhirString X) =>
+                            IEnumerable<IEnumerable<FhirString>> hzzzzzzzzzzzzzy_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(hzzzzzzzzzzzzzw_, hzzzzzzzzzzzzzx_);
+                            IEnumerable<FhirString> hzzzzzzzzzzzzzz_ = context.Operators.Flatten<FhirString>(hzzzzzzzzzzzzzy_);
+                            FhirString izzzzzzzzzzzzza_(FhirString X) =>
                                 X;
-                            IEnumerable<FhirString> zzzzzzzzzzd_ = context.Operators.Select<FhirString, FhirString>(zzzzzzzzzzb_, zzzzzzzzzzc_);
-                            IEnumerable<FhirString> zzzzzzzzzze_ = context.Operators.Distinct<FhirString>(zzzzzzzzzzd_);
-                            int? zzzzzzzzzzf_ = context.Operators.Count<FhirString>(zzzzzzzzzze_);
-                            int? zzzzzzzzzzg_ = context.Operators.Add(yzzzzzzzzzx_, zzzzzzzzzzf_);
-                            IEnumerable<Identifier> zzzzzzzzzzi_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+                            IEnumerable<FhirString> izzzzzzzzzzzzzb_ = context.Operators.Select<FhirString, FhirString>(hzzzzzzzzzzzzzz_, izzzzzzzzzzzzza_);
+                            IEnumerable<FhirString> izzzzzzzzzzzzzc_ = context.Operators.Distinct<FhirString>(izzzzzzzzzzzzzb_);
+                            int? izzzzzzzzzzzzzd_ = context.Operators.Count<FhirString>(izzzzzzzzzzzzzc_);
+                            int? izzzzzzzzzzzzze_ = context.Operators.Add(hzzzzzzzzzzzzzv_, izzzzzzzzzzzzzd_);
+                            IEnumerable<Identifier> izzzzzzzzzzzzzg_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
                             {
-                                IEnumerable<Identifier> zzzzzzzzzzs_ = X?.NullIdentifiers;
+                                IEnumerable<Identifier> izzzzzzzzzzzzzq_ = X?.NullIdentifiers;
 
-                                return zzzzzzzzzzs_;
+                                return izzzzzzzzzzzzzq_;
                             };
-                            IEnumerable<IEnumerable<Identifier>> zzzzzzzzzzj_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(yzzzzzzzzzy_, zzzzzzzzzzi_);
-                            IEnumerable<Identifier> zzzzzzzzzzk_ = context.Operators.Flatten<Identifier>(zzzzzzzzzzj_);
-                            int? zzzzzzzzzzl_ = context.Operators.Count<Identifier>(zzzzzzzzzzk_);
-                            int? zzzzzzzzzzm_ = context.Operators.Add(zzzzzzzzzzg_, zzzzzzzzzzl_);
+                            IEnumerable<IEnumerable<Identifier>> izzzzzzzzzzzzzh_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(hzzzzzzzzzzzzzw_, izzzzzzzzzzzzzg_);
+                            IEnumerable<Identifier> izzzzzzzzzzzzzi_ = context.Operators.Flatten<Identifier>(izzzzzzzzzzzzzh_);
+                            int? izzzzzzzzzzzzzj_ = context.Operators.Count<Identifier>(izzzzzzzzzzzzzi_);
+                            int? izzzzzzzzzzzzzk_ = context.Operators.Add(izzzzzzzzzzzzze_, izzzzzzzzzzzzzj_);
 
-                            return zzzzzzzzzzm_;
+                            return izzzzzzzzzzzzzk_;
                         }
                         else
                         {
                             return 0;
                         }
                     };
-                    (CqlTupleMetadata, int? IdentifierCount)? yzzzzzzzzzf_ = (CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS, yzzzzzzzzze_());
+                    (CqlTupleMetadata, int? IdentifierCount)? hzzzzzzzzzzzzzd_ = (CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS, hzzzzzzzzzzzzzc_());
 
-                    return yzzzzzzzzzf_;
+                    return hzzzzzzzzzzzzzd_;
                 };
-                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> wzzzzzzzzzo_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?>)wzzzzzzzzzm_, wzzzzzzzzzn_);
-                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> wzzzzzzzzzp_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(wzzzzzzzzzo_);
-                (CqlTupleMetadata, int? IdentifierCount)? wzzzzzzzzzq_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(wzzzzzzzzzp_);
+                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> fzzzzzzzzzzzzzm_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?>)fzzzzzzzzzzzzzk_, fzzzzzzzzzzzzzl_);
+                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> fzzzzzzzzzzzzzn_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(fzzzzzzzzzzzzzm_);
+                (CqlTupleMetadata, int? IdentifierCount)? fzzzzzzzzzzzzzo_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(fzzzzzzzzzzzzzn_);
 
-                return wzzzzzzzzzq_;
+                return fzzzzzzzzzzzzzo_;
             };
-            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> vzzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?>)vzzzzzzzzzp_, vzzzzzzzzzq_);
-            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> vzzzzzzzzzs_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(vzzzzzzzzzr_);
-            (CqlTupleMetadata, int? IdentifierCount)? vzzzzzzzzzt_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(vzzzzzzzzzs_);
+            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> ezzzzzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Practitioner> Practitioners)?>)ezzzzzzzzzzzzzn_, ezzzzzzzzzzzzzo_);
+            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> ezzzzzzzzzzzzzq_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(ezzzzzzzzzzzzzp_);
+            (CqlTupleMetadata, int? IdentifierCount)? ezzzzzzzzzzzzzr_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(ezzzzzzzzzzzzzq_);
 
-            return vzzzzzzzzzt_;
+            return ezzzzzzzzzzzzzr_;
         };
-        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> tzzzzzzzzzw_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?>)tzzzzzzzzzu_, tzzzzzzzzzv_);
-        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> tzzzzzzzzzx_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(tzzzzzzzzzw_);
-        (CqlTupleMetadata, int? IdentifierCount)? tzzzzzzzzzy_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(tzzzzzzzzzx_);
+        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> czzzzzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams)?>)czzzzzzzzzzzzzs_, czzzzzzzzzzzzzt_);
+        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> czzzzzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(czzzzzzzzzzzzzu_);
+        (CqlTupleMetadata, int? IdentifierCount)? czzzzzzzzzzzzzw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(czzzzzzzzzzzzzv_);
 
-        return tzzzzzzzzzy_;
+        return czzzzzzzzzzzzzw_;
     }
 
 
     [CqlExpressionDefinition("Get Pharmacy NPI from Claims")]
     public (CqlTupleMetadata, int? IdentifierCount)? Get_Pharmacy_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
-        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? zzzzzzzzzzt_(Claim C)
+        (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? izzzzzzzzzzzzzr_(Claim C)
         {
-            List<Claim.ItemComponent> azzzzzzzzzzc_ = C?.Item;
-            bool? azzzzzzzzzze_(Claim.ItemComponent i)
+            List<Claim.ItemComponent> jzzzzzzzzzzzzza_ = C?.Item;
+            bool? jzzzzzzzzzzzzzc_(Claim.ItemComponent i)
             {
-                PositiveInt azzzzzzzzzzw_ = i?.SequenceElement;
-                Integer azzzzzzzzzzx_ = context.Operators.Convert<Integer>(azzzzzzzzzzw_);
-                int? azzzzzzzzzzy_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, azzzzzzzzzzx_);
-                bool? azzzzzzzzzzz_ = context.Operators.Equal(azzzzzzzzzzy_, 1);
+                PositiveInt jzzzzzzzzzzzzzu_ = i?.SequenceElement;
+                Integer jzzzzzzzzzzzzzv_ = context.Operators.Convert<Integer>(jzzzzzzzzzzzzzu_);
+                int? jzzzzzzzzzzzzzw_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, jzzzzzzzzzzzzzv_);
+                bool? jzzzzzzzzzzzzzx_ = context.Operators.Equal(jzzzzzzzzzzzzzw_, 1);
 
-                return azzzzzzzzzzz_;
+                return jzzzzzzzzzzzzzx_;
             };
-            IEnumerable<Claim.ItemComponent> azzzzzzzzzzf_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)azzzzzzzzzzc_, azzzzzzzzzze_);
-            bool? azzzzzzzzzzg_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzzd_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)jzzzzzzzzzzzzza_, jzzzzzzzzzzzzzc_);
+            bool? jzzzzzzzzzzzzze_(Claim.ItemComponent @this)
             {
-                DataType bzzzzzzzzzza_ = @this?.Location;
-                bool? bzzzzzzzzzzb_ = context.Operators.Not((bool?)(bzzzzzzzzzza_ is null));
+                DataType jzzzzzzzzzzzzzy_ = @this?.Location;
+                bool? jzzzzzzzzzzzzzz_ = context.Operators.Not((bool?)(jzzzzzzzzzzzzzy_ is null));
 
-                return bzzzzzzzzzzb_;
+                return jzzzzzzzzzzzzzz_;
             };
-            IEnumerable<Claim.ItemComponent> azzzzzzzzzzh_ = context.Operators.Where<Claim.ItemComponent>(azzzzzzzzzzf_, azzzzzzzzzzg_);
-            object azzzzzzzzzzi_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzzf_ = context.Operators.Where<Claim.ItemComponent>(jzzzzzzzzzzzzzd_, jzzzzzzzzzzzzze_);
+            object jzzzzzzzzzzzzzg_(Claim.ItemComponent @this)
             {
-                DataType bzzzzzzzzzzc_ = @this?.Location;
+                DataType kzzzzzzzzzzzzza_ = @this?.Location;
 
-                return bzzzzzzzzzzc_;
+                return kzzzzzzzzzzzzza_;
             };
-            IEnumerable<object> azzzzzzzzzzj_ = context.Operators.Select<Claim.ItemComponent, object>(azzzzzzzzzzh_, azzzzzzzzzzi_);
-            ResourceReference azzzzzzzzzzk_(object l) =>
+            IEnumerable<object> jzzzzzzzzzzzzzh_ = context.Operators.Select<Claim.ItemComponent, object>(jzzzzzzzzzzzzzf_, jzzzzzzzzzzzzzg_);
+            ResourceReference jzzzzzzzzzzzzzi_(object l) =>
                 l as ResourceReference;
-            IEnumerable<ResourceReference> azzzzzzzzzzl_ = context.Operators.Select<object, ResourceReference>(azzzzzzzzzzj_, azzzzzzzzzzk_);
-            bool? azzzzzzzzzzn_(Claim.ItemComponent i)
+            IEnumerable<ResourceReference> jzzzzzzzzzzzzzj_ = context.Operators.Select<object, ResourceReference>(jzzzzzzzzzzzzzh_, jzzzzzzzzzzzzzi_);
+            bool? jzzzzzzzzzzzzzl_(Claim.ItemComponent i)
             {
-                PositiveInt bzzzzzzzzzzd_ = i?.SequenceElement;
-                Integer bzzzzzzzzzze_ = context.Operators.Convert<Integer>(bzzzzzzzzzzd_);
-                int? bzzzzzzzzzzf_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, bzzzzzzzzzze_);
-                bool? bzzzzzzzzzzg_ = context.Operators.Equal(bzzzzzzzzzzf_, 1);
+                PositiveInt kzzzzzzzzzzzzzb_ = i?.SequenceElement;
+                Integer kzzzzzzzzzzzzzc_ = context.Operators.Convert<Integer>(kzzzzzzzzzzzzzb_);
+                int? kzzzzzzzzzzzzzd_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, kzzzzzzzzzzzzzc_);
+                bool? kzzzzzzzzzzzzze_ = context.Operators.Equal(kzzzzzzzzzzzzzd_, 1);
 
-                return bzzzzzzzzzzg_;
+                return kzzzzzzzzzzzzze_;
             };
-            IEnumerable<Claim.ItemComponent> azzzzzzzzzzo_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)azzzzzzzzzzc_, azzzzzzzzzzn_);
-            bool? azzzzzzzzzzp_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzzm_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)jzzzzzzzzzzzzza_, jzzzzzzzzzzzzzl_);
+            bool? jzzzzzzzzzzzzzn_(Claim.ItemComponent @this)
             {
-                DataType bzzzzzzzzzzh_ = @this?.Location;
-                bool? bzzzzzzzzzzi_ = context.Operators.Not((bool?)(bzzzzzzzzzzh_ is null));
+                DataType kzzzzzzzzzzzzzf_ = @this?.Location;
+                bool? kzzzzzzzzzzzzzg_ = context.Operators.Not((bool?)(kzzzzzzzzzzzzzf_ is null));
 
-                return bzzzzzzzzzzi_;
+                return kzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Claim.ItemComponent> azzzzzzzzzzq_ = context.Operators.Where<Claim.ItemComponent>(azzzzzzzzzzo_, azzzzzzzzzzp_);
-            object azzzzzzzzzzr_(Claim.ItemComponent @this)
+            IEnumerable<Claim.ItemComponent> jzzzzzzzzzzzzzo_ = context.Operators.Where<Claim.ItemComponent>(jzzzzzzzzzzzzzm_, jzzzzzzzzzzzzzn_);
+            object jzzzzzzzzzzzzzp_(Claim.ItemComponent @this)
             {
-                DataType bzzzzzzzzzzj_ = @this?.Location;
+                DataType kzzzzzzzzzzzzzh_ = @this?.Location;
 
-                return bzzzzzzzzzzj_;
+                return kzzzzzzzzzzzzzh_;
             };
-            IEnumerable<object> azzzzzzzzzzs_ = context.Operators.Select<Claim.ItemComponent, object>(azzzzzzzzzzq_, azzzzzzzzzzr_);
-            string azzzzzzzzzzt_(object l)
+            IEnumerable<object> jzzzzzzzzzzzzzq_ = context.Operators.Select<Claim.ItemComponent, object>(jzzzzzzzzzzzzzo_, jzzzzzzzzzzzzzp_);
+            string jzzzzzzzzzzzzzr_(object l)
             {
-                FhirString bzzzzzzzzzzk_ = (l as ResourceReference)?.ReferenceElement;
-                FhirString[] bzzzzzzzzzzl_ = [
-                    bzzzzzzzzzzk_,
+                FhirString kzzzzzzzzzzzzzi_ = (l as ResourceReference)?.ReferenceElement;
+                FhirString[] kzzzzzzzzzzzzzj_ = [
+                    kzzzzzzzzzzzzzi_,
                 ];
-                string bzzzzzzzzzzm_(FhirString r)
+                string kzzzzzzzzzzzzzk_(FhirString r)
                 {
-                    string bzzzzzzzzzzp_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
-                    string bzzzzzzzzzzq_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, bzzzzzzzzzzp_);
+                    string kzzzzzzzzzzzzzn_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
+                    string kzzzzzzzzzzzzzo_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, kzzzzzzzzzzzzzn_);
 
-                    return bzzzzzzzzzzq_;
+                    return kzzzzzzzzzzzzzo_;
                 };
-                IEnumerable<string> bzzzzzzzzzzn_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)bzzzzzzzzzzl_, bzzzzzzzzzzm_);
-                string bzzzzzzzzzzo_ = context.Operators.SingletonFrom<string>(bzzzzzzzzzzn_);
+                IEnumerable<string> kzzzzzzzzzzzzzl_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)kzzzzzzzzzzzzzj_, kzzzzzzzzzzzzzk_);
+                string kzzzzzzzzzzzzzm_ = context.Operators.SingletonFrom<string>(kzzzzzzzzzzzzzl_);
 
-                return bzzzzzzzzzzo_;
+                return kzzzzzzzzzzzzzm_;
             };
-            IEnumerable<string> azzzzzzzzzzu_ = context.Operators.Select<object, string>(azzzzzzzzzzs_, azzzzzzzzzzt_);
-            (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? azzzzzzzzzzv_ = (CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB, (IEnumerable<Claim.ItemComponent>)azzzzzzzzzzc_, azzzzzzzzzzl_, azzzzzzzzzzu_);
+            IEnumerable<string> jzzzzzzzzzzzzzs_ = context.Operators.Select<object, string>(jzzzzzzzzzzzzzq_, jzzzzzzzzzzzzzr_);
+            (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? jzzzzzzzzzzzzzt_ = (CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB, (IEnumerable<Claim.ItemComponent>)jzzzzzzzzzzzzza_, jzzzzzzzzzzzzzj_, jzzzzzzzzzzzzzs_);
 
-            return azzzzzzzzzzv_;
+            return jzzzzzzzzzzzzzt_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> zzzzzzzzzzu_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(claim, zzzzzzzzzzt_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> zzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(zzzzzzzzzzu_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)? zzzzzzzzzzw_ = (CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX, zzzzzzzzzzv_);
-        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?[] zzzzzzzzzzx_ = [
-            zzzzzzzzzzw_,
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> izzzzzzzzzzzzzs_ = context.Operators.Select<Claim, (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(claim, izzzzzzzzzzzzzr_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> izzzzzzzzzzzzzt_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(izzzzzzzzzzzzzs_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)? izzzzzzzzzzzzzu_ = (CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX, izzzzzzzzzzzzzt_);
+        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?[] izzzzzzzzzzzzzv_ = [
+            izzzzzzzzzzzzzu_,
         ];
-        (CqlTupleMetadata, int? IdentifierCount)? zzzzzzzzzzy_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)? ClaimProperties)
+        (CqlTupleMetadata, int? IdentifierCount)? izzzzzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)? ClaimProperties)
         {
-            IEnumerable<Location> bzzzzzzzzzzr_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
-            bool? bzzzzzzzzzzs_(Location l)
+            IEnumerable<Location> kzzzzzzzzzzzzzp_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
+            bool? kzzzzzzzzzzzzzq_(Location l)
             {
-                Id czzzzzzzzzza_ = l?.IdElement;
-                string czzzzzzzzzzb_ = FHIRHelpers_4_0_001.Instance.ToString(context, czzzzzzzzzza_);
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> czzzzzzzzzzc_ = ClaimProperties?.ItemsLocationReferences;
-                bool? czzzzzzzzzzd_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                Id kzzzzzzzzzzzzzy_ = l?.IdElement;
+                string kzzzzzzzzzzzzzz_ = FHIRHelpers_4_0_001.Instance.ToString(context, kzzzzzzzzzzzzzy_);
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> lzzzzzzzzzzzzza_ = ClaimProperties?.ItemsLocationReferences;
+                bool? lzzzzzzzzzzzzzb_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                 {
-                    IEnumerable<string> czzzzzzzzzzj_ = @this?.ItemLocationID;
-                    bool? czzzzzzzzzzk_ = context.Operators.Not((bool?)(czzzzzzzzzzj_ is null));
+                    IEnumerable<string> lzzzzzzzzzzzzzh_ = @this?.ItemLocationID;
+                    bool? lzzzzzzzzzzzzzi_ = context.Operators.Not((bool?)(lzzzzzzzzzzzzzh_ is null));
 
-                    return czzzzzzzzzzk_;
+                    return lzzzzzzzzzzzzzi_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> czzzzzzzzzze_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(czzzzzzzzzzc_, czzzzzzzzzzd_);
-                IEnumerable<string> czzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> lzzzzzzzzzzzzzc_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(lzzzzzzzzzzzzza_, lzzzzzzzzzzzzzb_);
+                IEnumerable<string> lzzzzzzzzzzzzzd_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                 {
-                    IEnumerable<string> czzzzzzzzzzl_ = @this?.ItemLocationID;
+                    IEnumerable<string> lzzzzzzzzzzzzzj_ = @this?.ItemLocationID;
 
-                    return czzzzzzzzzzl_;
+                    return lzzzzzzzzzzzzzj_;
                 };
-                IEnumerable<IEnumerable<string>> czzzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<string>>(czzzzzzzzzze_, czzzzzzzzzzf_);
-                IEnumerable<string> czzzzzzzzzzh_ = context.Operators.Flatten<string>(czzzzzzzzzzg_);
-                bool? czzzzzzzzzzi_ = context.Operators.In<string>(czzzzzzzzzzb_, czzzzzzzzzzh_);
+                IEnumerable<IEnumerable<string>> lzzzzzzzzzzzzze_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<string>>(lzzzzzzzzzzzzzc_, lzzzzzzzzzzzzzd_);
+                IEnumerable<string> lzzzzzzzzzzzzzf_ = context.Operators.Flatten<string>(lzzzzzzzzzzzzze_);
+                bool? lzzzzzzzzzzzzzg_ = context.Operators.In<string>(kzzzzzzzzzzzzzz_, lzzzzzzzzzzzzzf_);
 
-                return czzzzzzzzzzi_;
+                return lzzzzzzzzzzzzzg_;
             };
-            IEnumerable<Location> bzzzzzzzzzzt_ = context.Operators.Where<Location>(bzzzzzzzzzzr_, bzzzzzzzzzzs_);
-            (CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)? bzzzzzzzzzzu_ = (CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf, bzzzzzzzzzzt_);
-            (CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?[] bzzzzzzzzzzv_ = [
-                bzzzzzzzzzzu_,
+            IEnumerable<Location> kzzzzzzzzzzzzzr_ = context.Operators.Where<Location>(kzzzzzzzzzzzzzp_, kzzzzzzzzzzzzzq_);
+            (CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)? kzzzzzzzzzzzzzs_ = (CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf, kzzzzzzzzzzzzzr_);
+            (CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?[] kzzzzzzzzzzzzzt_ = [
+                kzzzzzzzzzzzzzs_,
             ];
-            (CqlTupleMetadata, int? IdentifierCount)? bzzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)? GetLocation)
+            (CqlTupleMetadata, int? IdentifierCount)? kzzzzzzzzzzzzzu_((CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)? GetLocation)
             {
-                IEnumerable<Location> czzzzzzzzzzm_ = GetLocation?.CorrespondingLocations;
-                bool? czzzzzzzzzzn_(Location C)
+                IEnumerable<Location> lzzzzzzzzzzzzzk_ = GetLocation?.CorrespondingLocations;
+                bool? lzzzzzzzzzzzzzl_(Location C)
                 {
-                    bool? czzzzzzzzzzx_ = context.Operators.Not((bool?)(C is null));
+                    bool? lzzzzzzzzzzzzzv_ = context.Operators.Not((bool?)(C is null));
 
-                    return czzzzzzzzzzx_;
+                    return lzzzzzzzzzzzzzv_;
                 };
-                IEnumerable<Location> czzzzzzzzzzo_ = context.Operators.Where<Location>(czzzzzzzzzzm_, czzzzzzzzzzn_);
-                (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? czzzzzzzzzzp_(Location C)
+                IEnumerable<Location> lzzzzzzzzzzzzzm_ = context.Operators.Where<Location>(lzzzzzzzzzzzzzk_, lzzzzzzzzzzzzzl_);
+                (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? lzzzzzzzzzzzzzn_(Location C)
                 {
-                    List<Identifier> czzzzzzzzzzy_ = C?.Identifier;
-                    bool? czzzzzzzzzzz_(Identifier l)
+                    List<Identifier> lzzzzzzzzzzzzzw_ = C?.Identifier;
+                    bool? lzzzzzzzzzzzzzx_(Identifier l)
                     {
-                        FhirUri dzzzzzzzzzzk_ = l?.SystemElement;
-                        string dzzzzzzzzzzl_ = dzzzzzzzzzzk_?.Value;
-                        bool? dzzzzzzzzzzm_ = context.Operators.Equal(dzzzzzzzzzzl_, "http://hl7.org/fhir/sid/us-npi");
-                        CodeableConcept dzzzzzzzzzzn_ = l?.Type;
-                        CqlConcept dzzzzzzzzzzo_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, dzzzzzzzzzzn_);
-                        CqlCode dzzzzzzzzzzp_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
-                        CqlConcept dzzzzzzzzzzq_ = context.Operators.ConvertCodeToConcept(dzzzzzzzzzzp_);
-                        bool? dzzzzzzzzzzr_ = context.Operators.Equivalent(dzzzzzzzzzzo_, dzzzzzzzzzzq_);
-                        bool? dzzzzzzzzzzs_ = context.Operators.And(dzzzzzzzzzzm_, dzzzzzzzzzzr_);
-                        FhirString dzzzzzzzzzzt_ = l?.ValueElement;
-                        string dzzzzzzzzzzu_ = dzzzzzzzzzzt_?.Value;
-                        bool? dzzzzzzzzzzv_ = context.Operators.Not((bool?)(dzzzzzzzzzzu_ is null));
-                        bool? dzzzzzzzzzzw_ = context.Operators.And(dzzzzzzzzzzs_, dzzzzzzzzzzv_);
+                        FhirUri mzzzzzzzzzzzzzi_ = l?.SystemElement;
+                        string mzzzzzzzzzzzzzj_ = mzzzzzzzzzzzzzi_?.Value;
+                        bool? mzzzzzzzzzzzzzk_ = context.Operators.Equal(mzzzzzzzzzzzzzj_, "http://hl7.org/fhir/sid/us-npi");
+                        CodeableConcept mzzzzzzzzzzzzzl_ = l?.Type;
+                        CqlConcept mzzzzzzzzzzzzzm_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, mzzzzzzzzzzzzzl_);
+                        CqlCode mzzzzzzzzzzzzzn_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept mzzzzzzzzzzzzzo_ = context.Operators.ConvertCodeToConcept(mzzzzzzzzzzzzzn_);
+                        bool? mzzzzzzzzzzzzzp_ = context.Operators.Equivalent(mzzzzzzzzzzzzzm_, mzzzzzzzzzzzzzo_);
+                        bool? mzzzzzzzzzzzzzq_ = context.Operators.And(mzzzzzzzzzzzzzk_, mzzzzzzzzzzzzzp_);
+                        FhirString mzzzzzzzzzzzzzr_ = l?.ValueElement;
+                        string mzzzzzzzzzzzzzs_ = mzzzzzzzzzzzzzr_?.Value;
+                        bool? mzzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(mzzzzzzzzzzzzzs_ is null));
+                        bool? mzzzzzzzzzzzzzu_ = context.Operators.And(mzzzzzzzzzzzzzq_, mzzzzzzzzzzzzzt_);
 
-                        return dzzzzzzzzzzw_;
+                        return mzzzzzzzzzzzzzu_;
                     };
-                    IEnumerable<Identifier> dzzzzzzzzzza_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)czzzzzzzzzzy_, czzzzzzzzzzz_);
-                    FhirString dzzzzzzzzzzb_(Identifier l)
+                    IEnumerable<Identifier> lzzzzzzzzzzzzzy_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)lzzzzzzzzzzzzzw_, lzzzzzzzzzzzzzx_);
+                    FhirString lzzzzzzzzzzzzzz_(Identifier l)
                     {
-                        FhirString dzzzzzzzzzzx_ = l?.ValueElement;
+                        FhirString mzzzzzzzzzzzzzv_ = l?.ValueElement;
 
-                        return dzzzzzzzzzzx_;
+                        return mzzzzzzzzzzzzzv_;
                     };
-                    IEnumerable<FhirString> dzzzzzzzzzzc_ = context.Operators.Select<Identifier, FhirString>(dzzzzzzzzzza_, dzzzzzzzzzzb_);
-                    IEnumerable<FhirString> dzzzzzzzzzzd_ = context.Operators.Distinct<FhirString>(dzzzzzzzzzzc_);
-                    bool? dzzzzzzzzzzf_(Identifier l)
+                    IEnumerable<FhirString> mzzzzzzzzzzzzza_ = context.Operators.Select<Identifier, FhirString>(lzzzzzzzzzzzzzy_, lzzzzzzzzzzzzzz_);
+                    IEnumerable<FhirString> mzzzzzzzzzzzzzb_ = context.Operators.Distinct<FhirString>(mzzzzzzzzzzzzza_);
+                    bool? mzzzzzzzzzzzzzd_(Identifier l)
                     {
-                        FhirUri dzzzzzzzzzzy_ = l?.SystemElement;
-                        string dzzzzzzzzzzz_ = dzzzzzzzzzzy_?.Value;
-                        bool? ezzzzzzzzzza_ = context.Operators.Equal(dzzzzzzzzzzz_, "http://hl7.org/fhir/sid/us-npi");
-                        CodeableConcept ezzzzzzzzzzb_ = l?.Type;
-                        CqlConcept ezzzzzzzzzzc_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ezzzzzzzzzzb_);
-                        CqlCode ezzzzzzzzzzd_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
-                        CqlConcept ezzzzzzzzzze_ = context.Operators.ConvertCodeToConcept(ezzzzzzzzzzd_);
-                        bool? ezzzzzzzzzzf_ = context.Operators.Equivalent(ezzzzzzzzzzc_, ezzzzzzzzzze_);
-                        bool? ezzzzzzzzzzg_ = context.Operators.And(ezzzzzzzzzza_, ezzzzzzzzzzf_);
-                        FhirString ezzzzzzzzzzh_ = l?.ValueElement;
-                        string ezzzzzzzzzzi_ = ezzzzzzzzzzh_?.Value;
-                        bool? ezzzzzzzzzzj_ = context.Operators.And(ezzzzzzzzzzg_, (bool?)(ezzzzzzzzzzi_ is null));
+                        FhirUri mzzzzzzzzzzzzzw_ = l?.SystemElement;
+                        string mzzzzzzzzzzzzzx_ = mzzzzzzzzzzzzzw_?.Value;
+                        bool? mzzzzzzzzzzzzzy_ = context.Operators.Equal(mzzzzzzzzzzzzzx_, "http://hl7.org/fhir/sid/us-npi");
+                        CodeableConcept mzzzzzzzzzzzzzz_ = l?.Type;
+                        CqlConcept nzzzzzzzzzzzzza_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, mzzzzzzzzzzzzzz_);
+                        CqlCode nzzzzzzzzzzzzzb_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept nzzzzzzzzzzzzzc_ = context.Operators.ConvertCodeToConcept(nzzzzzzzzzzzzzb_);
+                        bool? nzzzzzzzzzzzzzd_ = context.Operators.Equivalent(nzzzzzzzzzzzzza_, nzzzzzzzzzzzzzc_);
+                        bool? nzzzzzzzzzzzzze_ = context.Operators.And(mzzzzzzzzzzzzzy_, nzzzzzzzzzzzzzd_);
+                        FhirString nzzzzzzzzzzzzzf_ = l?.ValueElement;
+                        string nzzzzzzzzzzzzzg_ = nzzzzzzzzzzzzzf_?.Value;
+                        bool? nzzzzzzzzzzzzzh_ = context.Operators.And(nzzzzzzzzzzzzze_, (bool?)(nzzzzzzzzzzzzzg_ is null));
 
-                        return ezzzzzzzzzzj_;
+                        return nzzzzzzzzzzzzzh_;
                     };
-                    IEnumerable<Identifier> dzzzzzzzzzzg_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)czzzzzzzzzzy_, dzzzzzzzzzzf_);
-                    Identifier dzzzzzzzzzzh_(Identifier l) =>
+                    IEnumerable<Identifier> mzzzzzzzzzzzzze_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)lzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzd_);
+                    Identifier mzzzzzzzzzzzzzf_(Identifier l) =>
                         l;
-                    IEnumerable<Identifier> dzzzzzzzzzzi_ = context.Operators.Select<Identifier, Identifier>(dzzzzzzzzzzg_, dzzzzzzzzzzh_);
-                    (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? dzzzzzzzzzzj_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, dzzzzzzzzzzd_, dzzzzzzzzzzi_);
+                    IEnumerable<Identifier> mzzzzzzzzzzzzzg_ = context.Operators.Select<Identifier, Identifier>(mzzzzzzzzzzzzze_, mzzzzzzzzzzzzzf_);
+                    (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? mzzzzzzzzzzzzzh_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, mzzzzzzzzzzzzzb_, mzzzzzzzzzzzzzg_);
 
-                    return dzzzzzzzzzzj_;
+                    return mzzzzzzzzzzzzzh_;
                 };
-                IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> czzzzzzzzzzq_ = context.Operators.Select<Location, (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(czzzzzzzzzzo_, czzzzzzzzzzp_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? czzzzzzzzzzr_ = (CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE, czzzzzzzzzzq_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?[] czzzzzzzzzzs_ = [
-                    czzzzzzzzzzr_,
+                IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> lzzzzzzzzzzzzzo_ = context.Operators.Select<Location, (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(lzzzzzzzzzzzzzm_, lzzzzzzzzzzzzzn_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? lzzzzzzzzzzzzzp_ = (CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE, lzzzzzzzzzzzzzo_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?[] lzzzzzzzzzzzzzq_ = [
+                    lzzzzzzzzzzzzzp_,
                 ];
-                (CqlTupleMetadata, int? IdentifierCount)? czzzzzzzzzzt_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? GetIdentifiers)
+                (CqlTupleMetadata, int? IdentifierCount)? lzzzzzzzzzzzzzr_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)? GetIdentifiers)
                 {
-                    int? ezzzzzzzzzzk_()
+                    int? nzzzzzzzzzzzzzi_()
                     {
-                        bool ezzzzzzzzzzm_()
+                        bool nzzzzzzzzzzzzzk_()
                         {
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ezzzzzzzzzzn_ = ClaimProperties?.ItemsLocationReferences;
-                            bool? ezzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> nzzzzzzzzzzzzzl_ = ClaimProperties?.ItemsLocationReferences;
+                            bool? nzzzzzzzzzzzzzm_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                             {
-                                IEnumerable<Claim.ItemComponent> ezzzzzzzzzzu_ = @this?.SingleItem;
-                                bool? ezzzzzzzzzzv_ = context.Operators.Not((bool?)(ezzzzzzzzzzu_ is null));
+                                IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzzzs_ = @this?.SingleItem;
+                                bool? nzzzzzzzzzzzzzt_ = context.Operators.Not((bool?)(nzzzzzzzzzzzzzs_ is null));
 
-                                return ezzzzzzzzzzv_;
+                                return nzzzzzzzzzzzzzt_;
                             };
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ezzzzzzzzzzp_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(ezzzzzzzzzzn_, ezzzzzzzzzzo_);
-                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzq_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> nzzzzzzzzzzzzzn_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(nzzzzzzzzzzzzzl_, nzzzzzzzzzzzzzm_);
+                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                             {
-                                IEnumerable<Claim.ItemComponent> ezzzzzzzzzzw_ = @this?.SingleItem;
+                                IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzzzu_ = @this?.SingleItem;
 
-                                return ezzzzzzzzzzw_;
+                                return nzzzzzzzzzzzzzu_;
                             };
-                            IEnumerable<IEnumerable<Claim.ItemComponent>> ezzzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<Claim.ItemComponent>>(ezzzzzzzzzzp_, ezzzzzzzzzzq_);
-                            IEnumerable<Claim.ItemComponent> ezzzzzzzzzzs_ = context.Operators.Flatten<Claim.ItemComponent>(ezzzzzzzzzzr_);
-                            bool? ezzzzzzzzzzt_ = context.Operators.Exists<Claim.ItemComponent>(ezzzzzzzzzzs_);
+                            IEnumerable<IEnumerable<Claim.ItemComponent>> nzzzzzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<Claim.ItemComponent>>(nzzzzzzzzzzzzzn_, nzzzzzzzzzzzzzo_);
+                            IEnumerable<Claim.ItemComponent> nzzzzzzzzzzzzzq_ = context.Operators.Flatten<Claim.ItemComponent>(nzzzzzzzzzzzzzp_);
+                            bool? nzzzzzzzzzzzzzr_ = context.Operators.Exists<Claim.ItemComponent>(nzzzzzzzzzzzzzq_);
 
-                            return ezzzzzzzzzzt_ ?? false;
+                            return nzzzzzzzzzzzzzr_ ?? false;
                         };
-                        if (ezzzzzzzzzzm_())
+                        if (nzzzzzzzzzzzzzk_())
                         {
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ezzzzzzzzzzx_ = ClaimProperties?.ItemsLocationReferences;
-                            bool? ezzzzzzzzzzy_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> nzzzzzzzzzzzzzv_ = ClaimProperties?.ItemsLocationReferences;
+                            bool? nzzzzzzzzzzzzzw_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                             {
-                                IEnumerable<ResourceReference> fzzzzzzzzzzv_ = @this?.ItemLocation;
-                                bool? fzzzzzzzzzzw_ = context.Operators.Not((bool?)(fzzzzzzzzzzv_ is null));
+                                IEnumerable<ResourceReference> ozzzzzzzzzzzzzt_ = @this?.ItemLocation;
+                                bool? ozzzzzzzzzzzzzu_ = context.Operators.Not((bool?)(ozzzzzzzzzzzzzt_ is null));
 
-                                return fzzzzzzzzzzw_;
+                                return ozzzzzzzzzzzzzu_;
                             };
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ezzzzzzzzzzz_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(ezzzzzzzzzzx_, ezzzzzzzzzzy_);
-                            IEnumerable<ResourceReference> fzzzzzzzzzza_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> nzzzzzzzzzzzzzx_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(nzzzzzzzzzzzzzv_, nzzzzzzzzzzzzzw_);
+                            IEnumerable<ResourceReference> nzzzzzzzzzzzzzy_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                             {
-                                IEnumerable<ResourceReference> fzzzzzzzzzzx_ = @this?.ItemLocation;
+                                IEnumerable<ResourceReference> ozzzzzzzzzzzzzv_ = @this?.ItemLocation;
 
-                                return fzzzzzzzzzzx_;
+                                return ozzzzzzzzzzzzzv_;
                             };
-                            IEnumerable<IEnumerable<ResourceReference>> fzzzzzzzzzzb_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<ResourceReference>>(ezzzzzzzzzzz_, fzzzzzzzzzza_);
-                            IEnumerable<ResourceReference> fzzzzzzzzzzc_ = context.Operators.Flatten<ResourceReference>(fzzzzzzzzzzb_);
-                            bool? fzzzzzzzzzzd_(ResourceReference X)
+                            IEnumerable<IEnumerable<ResourceReference>> nzzzzzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<ResourceReference>>(nzzzzzzzzzzzzzx_, nzzzzzzzzzzzzzy_);
+                            IEnumerable<ResourceReference> ozzzzzzzzzzzzza_ = context.Operators.Flatten<ResourceReference>(nzzzzzzzzzzzzzz_);
+                            bool? ozzzzzzzzzzzzzb_(ResourceReference X)
                             {
-                                FhirString fzzzzzzzzzzy_ = X?.ReferenceElement;
-                                string fzzzzzzzzzzz_ = fzzzzzzzzzzy_?.Value;
+                                FhirString ozzzzzzzzzzzzzw_ = X?.ReferenceElement;
+                                string ozzzzzzzzzzzzzx_ = ozzzzzzzzzzzzzw_?.Value;
 
-                                return (bool?)(fzzzzzzzzzzz_ is null);
+                                return (bool?)(ozzzzzzzzzzzzzx_ is null);
                             };
-                            IEnumerable<ResourceReference> fzzzzzzzzzze_ = context.Operators.Where<ResourceReference>(fzzzzzzzzzzc_, fzzzzzzzzzzd_);
-                            int? fzzzzzzzzzzf_ = context.Operators.Count<ResourceReference>(fzzzzzzzzzze_);
-                            IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> fzzzzzzzzzzg_ = GetIdentifiers?.IdentifierTuple;
-                            IEnumerable<FhirString> fzzzzzzzzzzh_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+                            IEnumerable<ResourceReference> ozzzzzzzzzzzzzc_ = context.Operators.Where<ResourceReference>(ozzzzzzzzzzzzza_, ozzzzzzzzzzzzzb_);
+                            int? ozzzzzzzzzzzzzd_ = context.Operators.Count<ResourceReference>(ozzzzzzzzzzzzzc_);
+                            IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> ozzzzzzzzzzzzze_ = GetIdentifiers?.IdentifierTuple;
+                            IEnumerable<FhirString> ozzzzzzzzzzzzzf_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
                             {
-                                IEnumerable<FhirString> gzzzzzzzzzza_ = X?.AllIdentifiers;
+                                IEnumerable<FhirString> ozzzzzzzzzzzzzy_ = X?.AllIdentifiers;
 
-                                return gzzzzzzzzzza_;
+                                return ozzzzzzzzzzzzzy_;
                             };
-                            IEnumerable<IEnumerable<FhirString>> fzzzzzzzzzzi_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(fzzzzzzzzzzg_, fzzzzzzzzzzh_);
-                            IEnumerable<FhirString> fzzzzzzzzzzj_ = context.Operators.Flatten<FhirString>(fzzzzzzzzzzi_);
-                            FhirString fzzzzzzzzzzk_(FhirString X) =>
+                            IEnumerable<IEnumerable<FhirString>> ozzzzzzzzzzzzzg_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(ozzzzzzzzzzzzze_, ozzzzzzzzzzzzzf_);
+                            IEnumerable<FhirString> ozzzzzzzzzzzzzh_ = context.Operators.Flatten<FhirString>(ozzzzzzzzzzzzzg_);
+                            FhirString ozzzzzzzzzzzzzi_(FhirString X) =>
                                 X;
-                            IEnumerable<FhirString> fzzzzzzzzzzl_ = context.Operators.Select<FhirString, FhirString>(fzzzzzzzzzzj_, fzzzzzzzzzzk_);
-                            IEnumerable<FhirString> fzzzzzzzzzzm_ = context.Operators.Distinct<FhirString>(fzzzzzzzzzzl_);
-                            int? fzzzzzzzzzzn_ = context.Operators.Count<FhirString>(fzzzzzzzzzzm_);
-                            int? fzzzzzzzzzzo_ = context.Operators.Add(fzzzzzzzzzzf_, fzzzzzzzzzzn_);
-                            IEnumerable<Identifier> fzzzzzzzzzzq_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+                            IEnumerable<FhirString> ozzzzzzzzzzzzzj_ = context.Operators.Select<FhirString, FhirString>(ozzzzzzzzzzzzzh_, ozzzzzzzzzzzzzi_);
+                            IEnumerable<FhirString> ozzzzzzzzzzzzzk_ = context.Operators.Distinct<FhirString>(ozzzzzzzzzzzzzj_);
+                            int? ozzzzzzzzzzzzzl_ = context.Operators.Count<FhirString>(ozzzzzzzzzzzzzk_);
+                            int? ozzzzzzzzzzzzzm_ = context.Operators.Add(ozzzzzzzzzzzzzd_, ozzzzzzzzzzzzzl_);
+                            IEnumerable<Identifier> ozzzzzzzzzzzzzo_((CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
                             {
-                                IEnumerable<Identifier> gzzzzzzzzzzb_ = X?.NullIdentifiers;
+                                IEnumerable<Identifier> ozzzzzzzzzzzzzz_ = X?.NullIdentifiers;
 
-                                return gzzzzzzzzzzb_;
+                                return ozzzzzzzzzzzzzz_;
                             };
-                            IEnumerable<IEnumerable<Identifier>> fzzzzzzzzzzr_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(fzzzzzzzzzzg_, fzzzzzzzzzzq_);
-                            IEnumerable<Identifier> fzzzzzzzzzzs_ = context.Operators.Flatten<Identifier>(fzzzzzzzzzzr_);
-                            int? fzzzzzzzzzzt_ = context.Operators.Count<Identifier>(fzzzzzzzzzzs_);
-                            int? fzzzzzzzzzzu_ = context.Operators.Add(fzzzzzzzzzzo_, fzzzzzzzzzzt_);
+                            IEnumerable<IEnumerable<Identifier>> ozzzzzzzzzzzzzp_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(ozzzzzzzzzzzzze_, ozzzzzzzzzzzzzo_);
+                            IEnumerable<Identifier> ozzzzzzzzzzzzzq_ = context.Operators.Flatten<Identifier>(ozzzzzzzzzzzzzp_);
+                            int? ozzzzzzzzzzzzzr_ = context.Operators.Count<Identifier>(ozzzzzzzzzzzzzq_);
+                            int? ozzzzzzzzzzzzzs_ = context.Operators.Add(ozzzzzzzzzzzzzm_, ozzzzzzzzzzzzzr_);
 
-                            return fzzzzzzzzzzu_;
+                            return ozzzzzzzzzzzzzs_;
                         }
                         else
                         {
                             return 0;
                         }
                     };
-                    (CqlTupleMetadata, int? IdentifierCount)? ezzzzzzzzzzl_ = (CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS, ezzzzzzzzzzk_());
+                    (CqlTupleMetadata, int? IdentifierCount)? nzzzzzzzzzzzzzj_ = (CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS, nzzzzzzzzzzzzzi_());
 
-                    return ezzzzzzzzzzl_;
+                    return nzzzzzzzzzzzzzj_;
                 };
-                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> czzzzzzzzzzu_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?>)czzzzzzzzzzs_, czzzzzzzzzzt_);
-                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> czzzzzzzzzzv_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(czzzzzzzzzzu_);
-                (CqlTupleMetadata, int? IdentifierCount)? czzzzzzzzzzw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(czzzzzzzzzzv_);
+                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> lzzzzzzzzzzzzzs_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple)?>)lzzzzzzzzzzzzzq_, lzzzzzzzzzzzzzr_);
+                IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> lzzzzzzzzzzzzzt_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(lzzzzzzzzzzzzzs_);
+                (CqlTupleMetadata, int? IdentifierCount)? lzzzzzzzzzzzzzu_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(lzzzzzzzzzzzzzt_);
 
-                return czzzzzzzzzzw_;
+                return lzzzzzzzzzzzzzu_;
             };
-            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> bzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?>)bzzzzzzzzzzv_, bzzzzzzzzzzw_);
-            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> bzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(bzzzzzzzzzzx_);
-            (CqlTupleMetadata, int? IdentifierCount)? bzzzzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(bzzzzzzzzzzy_);
+            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> kzzzzzzzzzzzzzv_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Location> CorrespondingLocations)?>)kzzzzzzzzzzzzzt_, kzzzzzzzzzzzzzu_);
+            IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> kzzzzzzzzzzzzzw_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(kzzzzzzzzzzzzzv_);
+            (CqlTupleMetadata, int? IdentifierCount)? kzzzzzzzzzzzzzx_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(kzzzzzzzzzzzzzw_);
 
-            return bzzzzzzzzzzz_;
+            return kzzzzzzzzzzzzzx_;
         };
-        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> zzzzzzzzzzz_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?>)zzzzzzzzzzx_, zzzzzzzzzzy_);
-        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> azzzzzzzzzza_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(zzzzzzzzzzz_);
-        (CqlTupleMetadata, int? IdentifierCount)? azzzzzzzzzzb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(azzzzzzzzzza_);
+        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> izzzzzzzzzzzzzx_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?, (CqlTupleMetadata, int? IdentifierCount)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences)?>)izzzzzzzzzzzzzv_, izzzzzzzzzzzzzw_);
+        IEnumerable<(CqlTupleMetadata, int? IdentifierCount)?> izzzzzzzzzzzzzy_ = context.Operators.Distinct<(CqlTupleMetadata, int? IdentifierCount)?>(izzzzzzzzzzzzzx_);
+        (CqlTupleMetadata, int? IdentifierCount)? izzzzzzzzzzzzzz_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? IdentifierCount)?>(izzzzzzzzzzzzzy_);
 
-        return azzzzzzzzzzb_;
+        return izzzzzzzzzzzzzz_;
     }
 
 

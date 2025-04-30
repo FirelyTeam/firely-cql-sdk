@@ -487,134 +487,162 @@ partial class ExpressionBuilderContext(
                 }
             }
         }
-        // Prefer a constructor will all parameters.
 
-
-        //var valueTypes = values
-        //    .Select(v => v.Type)
-        //    .ToArray();
-        //var allConstructors = instanceType!
-        //    .GetConstructors();
-        //ConstructorInfo? allParamsCtor = null;
-        //foreach(var ctor in allConstructors)
-        //{
-        //    var ctorParameters = ctor.GetParameters();
-        //    if (ctorParameters.Length == valueTypes.Length)
-        //    {
-        //        if (ctorParameters.All(p => p.T))
-        //    }
-        //}
-
-        var tuples = ine.element!.SelectToArray(el => (el.name!, TranslateArg(el.value)));
-
-        // Handle immutable primitives without public setters on their properties.
-        if (instanceType == typeof(CqlRatio))
+        //Try to use a constructor with all parameters.
+        var parameters = ine.element!.SelectToArray(el => (el.name!, TranslateArg(el.value)));
+        var ctor = instanceType.GetConstructor(parameters.Select(t => t.Item2.Type).ToArray()) ?? instanceType.GetConstructor(Type.EmptyTypes);
+        if (ctor == null)
         {
-            Expression? numeratorExpr = null;
-            Expression? denominatorExpr = null;
-
-            foreach (var tuple in tuples)
+            // Fallback to member initialization if a constructor with all parameters is not available.
+            var elementBindings = new MemberAssignment[parameters.Length];
+            for (int i = 0; i < parameters.Length; i++)
             {
-                if (tuple.Item1 == "numerator")
-                    numeratorExpr = tuple.Item2;
-                else if (tuple.Item1 == "denominator")
-                    denominatorExpr = tuple.Item2;
-                else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlRatio)}");
-            }
-            var ctor = ConstructorInfos.CqlRatio;
-            var @new = Expression.New(ctor,
-                                      numeratorExpr ?? Expression.Default(typeof(CqlQuantity)),
-                                      denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
-            return @new;
-        }
-
-        if (instanceType == typeof(CqlQuantity))
-        {
-            Expression? valueExpr = null;
-            Expression? unitExpr = null;
-
-            foreach (var tuple in tuples)
-            {
-                if (tuple.Item1 == "value")
-                    valueExpr = tuple.Item2;
-                else if (tuple.Item1 == "unit")
-                    unitExpr = tuple.Item2;
-                else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
-            }
-            var ctor = ConstructorInfos.CqlQuantity;
-
-            if (unitExpr is not null)
-                unitExpr = ChangeType(unitExpr, typeof(string), throwOnError: true);
-
-            var @new = Expression.New(ctor,
-                                      valueExpr ?? Expression.Default(typeof(decimal?)),
-                                      unitExpr ?? Expression.Default(typeof(string)));
-            return @new;
-        }
-        if (instanceType == typeof(CqlCode))
-        {
-            Expression? codeExpr = null;
-            Expression? systemExpr = null;
-            Expression? versionExpr = null;
-            Expression? displayExpr = null;
-
-
-            foreach (var tuple in tuples)
-            {
-                if (tuple.Item1 == "code")
-                    codeExpr = tuple.Item2;
-                else if (tuple.Item1 == "system")
-                    systemExpr = tuple.Item2;
-                else if (tuple.Item1 == "version")
-                    versionExpr = tuple.Item2;
-                else if (tuple.Item1 == "display")
-                    displayExpr = tuple.Item2;
-                else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlCode)}");
-            }
-            var ctor = ConstructorInfos.CqlCode;
-            var @new = Expression.New(ctor,
-                                      codeExpr ?? Expression.Default(typeof(string)),
-                                      systemExpr ?? Expression.Default(typeof(string)),
-                                      versionExpr ?? Expression.Default(typeof(string)),
-                                      displayExpr ?? Expression.Default(typeof(string)));
-            return @new;
-        }
-        if (instanceType == typeof(CqlConcept))
-        {
-            Expression? codesExpr = null;
-            Expression? displayExpr = null;
-
-            foreach (var tuple in tuples)
-            {
-                if (tuple.Item1 == "codes")
-                    codesExpr = tuple.Item2;
-                else if (tuple.Item1 == "display")
-                    displayExpr = tuple.Item2;
-                else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
-            }
-            var ctor = ConstructorInfos.CqlConcept;
-            var @new = Expression.New(ctor,
-                                      codesExpr ?? Expression.Default(typeof(IEnumerable<CqlCode>)),
-                                      displayExpr ?? Expression.Default(typeof(string)));
-            return @new;
-        }
-        else
-        {
-            var elementBindings = new MemberAssignment[tuples.Length];
-            for (int i = 0; i < tuples.Length; i++)
-            {
-                var tuple = tuples[i];
+                var tuple = parameters[i];
                 var element = tuple.Item1;
                 var expression = tuple.Item2;
-                var memberInfo = GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                var memberInfo = GetProperty(instanceType, element, _typeResolver) ??
+                                 throw this.NewExpressionBuildingException(
+                                     $"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 var binding = Binding(expression, memberInfo);
                 elementBindings[i] = binding;
             }
-            var ctor = instanceType.GetConstructor(Type.EmptyTypes)!;
-            var @new = Expression.New(ctor);
+
+            var @new = Expression.New(instanceType.GetConstructor(Type.EmptyTypes)!);
             var init = Expression.MemberInit(@new, elementBindings);
             return init;
         }
+
+        var @newInstance = Expression.New(ctor, parameters.Select(t => t.Item2).ToArray());
+        return @newInstance;
+        // // Prefer a constructor will all parameters.
+        //
+        // // Handle immutable primitives without public setters on their properties.
+        // if (instanceType == typeof(CqlRatio))
+        // {
+        //     Expression? numeratorExpr = null;
+        //     Expression? denominatorExpr = null;
+        //
+        //     foreach (var tuple in tuples)
+        //     {
+        //         if (tuple.Item1 == "numerator")
+        //             numeratorExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "denominator")
+        //             denominatorExpr = tuple.Item2;
+        //         else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlRatio)}");
+        //     }
+        //     var ctor = ConstructorInfos.CqlRatio;
+        //     var @new = Expression.New(ctor,
+        //                               numeratorExpr ?? Expression.Default(typeof(CqlQuantity)),
+        //                               denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
+        //     return @new;
+        // }
+        //
+        // if (instanceType == typeof(CqlQuantity))
+        // {
+        //     Expression? valueExpr = null;
+        //     Expression? unitExpr = null;
+        //
+        //     foreach (var tuple in tuples)
+        //     {
+        //         if (tuple.Item1 == "value")
+        //             valueExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "unit")
+        //             unitExpr = tuple.Item2;
+        //         else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
+        //     }
+        //     var ctor = ConstructorInfos.CqlQuantity;
+        //
+        //     if (unitExpr is not null)
+        //         unitExpr = ChangeType(unitExpr, typeof(string), throwOnError: true);
+        //
+        //     var @new = Expression.New(ctor,
+        //                               valueExpr ?? Expression.Default(typeof(decimal?)),
+        //                               unitExpr ?? Expression.Default(typeof(string)));
+        //     return @new;
+        // }
+        // if (instanceType == typeof(CqlCode))
+        // {
+        //     Expression? codeExpr = null;
+        //     Expression? systemExpr = null;
+        //     Expression? versionExpr = null;
+        //     Expression? displayExpr = null;
+        //
+        //
+        //     foreach (var tuple in tuples)
+        //     {
+        //         if (tuple.Item1 == "code")
+        //             codeExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "system")
+        //             systemExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "version")
+        //             versionExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "display")
+        //             displayExpr = tuple.Item2;
+        //         else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlCode)}");
+        //     }
+        //     var ctor = ConstructorInfos.CqlCode;
+        //     var @new = Expression.New(ctor,
+        //                               codeExpr ?? Expression.Default(typeof(string)),
+        //                               systemExpr ?? Expression.Default(typeof(string)),
+        //                               versionExpr ?? Expression.Default(typeof(string)),
+        //                               displayExpr ?? Expression.Default(typeof(string)));
+        //     return @new;
+        // }
+        // if (instanceType == typeof(CqlConcept))
+        // {
+        //     Expression? codesExpr = null;
+        //     Expression? displayExpr = null;
+        //
+        //     foreach (var tuple in tuples)
+        //     {
+        //         if (tuple.Item1 == "codes")
+        //             codesExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "display")
+        //             displayExpr = tuple.Item2;
+        //         else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
+        //     }
+        //     var ctor = ConstructorInfos.CqlConcept;
+        //     var @new = Expression.New(ctor,
+        //                               codesExpr ?? Expression.Default(typeof(IEnumerable<CqlCode>)),
+        //                               displayExpr ?? Expression.Default(typeof(string)));
+        //     return @new;
+        // }
+        // if (instanceType == typeof(CqlValueSet))
+        // {
+        //     Expression? idExpr = null;
+        //     Expression? versionExpr = null;
+        //
+        //     foreach (var tuple in tuples)
+        //     {
+        //         if (tuple.Item1 == "id")
+        //             idExpr = tuple.Item2;
+        //         else if (tuple.Item1 == "version")
+        //             versionExpr = tuple.Item2;
+        //         else throw this.NewExpressionBuildingException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
+        //     }
+        //     var ctor = ConstructorInfos.CqlValueSet;
+        //     var @new = Expression.New(ctor,
+        //                               idExpr ?? Expression.Default(typeof(string)),
+        //                               versionExpr ?? Expression.Default(typeof(string)));
+        //     return @new;
+        // }
+        // else
+        // {
+        //     var elementBindings = new MemberAssignment[tuples.Length];
+        //     for (int i = 0; i < tuples.Length; i++)
+        //     {
+        //         var tuple = tuples[i];
+        //         var element = tuple.Item1;
+        //         var expression = tuple.Item2;
+        //         var memberInfo = GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+        //         var binding = Binding(expression, memberInfo);
+        //         elementBindings[i] = binding;
+        //     }
+        //     var ctor = instanceType.GetConstructor(Type.EmptyTypes)!;
+        //     var @new = Expression.New(ctor);
+        //     var init = Expression.MemberInit(@new, elementBindings);
+        //     return init;
+        // }
     }
 
     internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
