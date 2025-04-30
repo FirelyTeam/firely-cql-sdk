@@ -358,7 +358,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                 {
                     string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
                     string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
-                    string arrayOfCodes = string.Concat(
+                    string arrayOfCodes = string.Join(
+                        ",",
                         csd.CodeSystem.codes.Select(code =>
                         {
                             var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
@@ -366,7 +367,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                                        ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
                                        : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
                             return $"""
-                                    ,
+
                                           {codeField}
                                     """;
                         }));
@@ -375,7 +376,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                           [CqlCodeSystemDefinition({{quotedName}})]
                           public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
                           private static readonly CqlCodeSystem {{fieldName}} =
-                            new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}{{arrayOfCodes}});
+                            new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}, [{{arrayOfCodes}}]);
                           """);
                     return;
                 }

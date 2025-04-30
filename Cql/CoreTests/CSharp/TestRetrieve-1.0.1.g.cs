@@ -89,8 +89,8 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlCodeSystemDefinition("ICD-10")]
     public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
     private static readonly CqlCodeSystem _ICD_10 =
-      new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null,
-          _Encounter_for_palliative_care);
+      new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
+          _Encounter_for_palliative_care]);
 
     #endregion CodeSystems
 
@@ -99,12 +99,12 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context)
     {
-        CqlDateTime kzzzzzl_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime kzzzzzm_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> kzzzzzn_ = context.Operators.Interval(kzzzzzl_, kzzzzzm_, true, false);
-        object kzzzzzo_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", kzzzzzn_);
+        CqlDateTime kzzzzzh_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime kzzzzzi_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> kzzzzzj_ = context.Operators.Interval(kzzzzzh_, kzzzzzi_, true, false);
+        object kzzzzzk_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", kzzzzzj_);
 
-        return kzzzzzo_;
+        return kzzzzzk_;
     }
 
 
@@ -115,32 +115,32 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> kzzzzzp_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient kzzzzzq_ = context.Operators.SingletonFrom<Patient>(kzzzzzp_);
+        IEnumerable<Patient> kzzzzzl_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient kzzzzzm_ = context.Operators.SingletonFrom<Patient>(kzzzzzl_);
 
-        return kzzzzzq_;
+        return kzzzzzm_;
     }
 
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context)
     {
-        IEnumerable<Patient> kzzzzzr_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        IEnumerable<Patient> kzzzzzn_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 
-        return kzzzzzr_;
+        return kzzzzzn_;
     }
 
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context)
     {
-        IEnumerable<Condition> kzzzzzs_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? kzzzzzt_ = context.Operators.Exists<Condition>(kzzzzzs_);
-        IEnumerable<ServiceRequest> kzzzzzu_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-        bool? kzzzzzv_ = context.Operators.Exists<ServiceRequest>(kzzzzzu_);
-        bool? kzzzzzw_ = context.Operators.Or(kzzzzzt_, kzzzzzv_);
+        IEnumerable<Condition> kzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? kzzzzzp_ = context.Operators.Exists<Condition>(kzzzzzo_);
+        IEnumerable<ServiceRequest> kzzzzzq_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+        bool? kzzzzzr_ = context.Operators.Exists<ServiceRequest>(kzzzzzq_);
+        bool? kzzzzzs_ = context.Operators.Or(kzzzzzp_, kzzzzzr_);
 
-        return kzzzzzw_;
+        return kzzzzzs_;
     }
 
 

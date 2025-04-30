@@ -488,16 +488,51 @@ partial class ExpressionBuilderContext(
             }
         }
 
-        //Try to use a constructor with all parameters.
-        var parameters = ine.element!.SelectToArray(el => (el.name!, TranslateArg(el.value)));
-        var ctor = instanceType.GetConstructor(parameters.Select(t => t.Item2.Type).ToArray()) ?? instanceType.GetConstructor(Type.EmptyTypes);
-        if (ctor == null)
-        {
-            // Fallback to member initialization if a constructor with all parameters is not available.
-            var elementBindings = new MemberAssignment[parameters.Length];
-            for (int i = 0; i < parameters.Length; i++)
+        var parameterElements = ine.element!.SelectToArray(el => (el.name!, value:TranslateArg(el.value)));
+
+        var ctor = instanceType.GetConstructors()
+            .OrderByDescending(c => c.GetParameters().Length) // Prefer constructors with more parameters
+            .FirstOrDefault(c =>
             {
-                var tuple = parameters[i];
+                var ctorParameters = c.GetParameters();
+
+                if (ctorParameters.Length < parameterElements.Length)
+                    return false; // Skip constructors with fewer parameters than provided
+
+                for (int i = 0; i < parameterElements.Length; i++)
+                {
+                    if (!ctorParameters[i].ParameterType.IsAssignableFrom(parameterElements[i].Item2.Type))
+                        return false; // Ensure parameter types are compatible
+                }
+
+                // Check if remaining parameters have default values
+                var hasRemainingDefaults = ctorParameters.Skip(parameterElements.Length).All(p => p.HasDefaultValue);
+                return hasRemainingDefaults;
+            });
+
+        if (ctor != null)
+        {
+            var arguments = parameterElements.Select(t => t.Item2).ToList();
+            // Fill in missing parameters with default values
+            arguments.AddRange(
+                ctor.GetParameters()
+                                   .Skip(parameterElements.Length)
+                                   .Select(p =>
+                                               p.DefaultValue is null
+                                                ? NullExpression.ForType(p.ParameterType)
+                                                : Expression.Constant(p.DefaultValue, p.ParameterType)));
+            var newInstance = Expression.New(ctor, arguments);
+            return newInstance;
+        }
+
+        // Fallback to member initialization if a constructor with all parameters is not available.
+        ctor = instanceType.GetConstructor(Type.EmptyTypes);
+        if (ctor != null)
+        {
+            var elementBindings = new MemberAssignment[parameterElements.Length];
+            for (int i = 0; i < parameterElements.Length; i++)
+            {
+                var tuple = parameterElements[i];
                 var element = tuple.Item1;
                 var expression = tuple.Item2;
                 var memberInfo = GetProperty(instanceType, element, _typeResolver) ??
@@ -507,13 +542,36 @@ partial class ExpressionBuilderContext(
                 elementBindings[i] = binding;
             }
 
-            var @new = Expression.New(instanceType.GetConstructor(Type.EmptyTypes)!);
+            var @new = Expression.New(ctor);
             var init = Expression.MemberInit(@new, elementBindings);
             return init;
         }
 
-        var @newInstance = Expression.New(ctor, parameters.Select(t => t.Item2).ToArray());
-        return @newInstance;
+        throw this.NewExpressionBuildingException($"No suitable constructor found for type {instanceType}.");
+
+        // if (ctor == null)
+        // {
+        //     // Fallback to member initialization if a constructor with all parameters is not available.
+        //     var elementBindings = new MemberAssignment[parameterElements.Length];
+        //     for (int i = 0; i < parameterElements.Length; i++)
+        //     {
+        //         var tuple = parameterElements[i];
+        //         var element = tuple.Item1;
+        //         var expression = tuple.Item2;
+        //         var memberInfo = GetProperty(instanceType, element, _typeResolver) ??
+        //                          throw this.NewExpressionBuildingException(
+        //                              $"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+        //         var binding = Binding(expression, memberInfo);
+        //         elementBindings[i] = binding;
+        //     }
+        //
+        //     var @new = Expression.New(instanceType.GetConstructor(Type.EmptyTypes)!);
+        //     var init = Expression.MemberInit(@new, elementBindings);
+        //     return init;
+        // }
+        //
+        // var @newInstance = Expression.New(ctor, parameterElements.Select(t => t.Item2).ToArray());
+        // return @newInstance;
         // // Prefer a constructor will all parameters.
         //
         // // Handle immutable primitives without public setters on their properties.

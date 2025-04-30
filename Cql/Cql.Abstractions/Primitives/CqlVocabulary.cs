@@ -16,5 +16,5 @@ namespace Hl7.Cql.Primitives
     /// <param name="version"></param>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#vocabulary"/>
     [CqlPrimitiveType(CqlPrimitiveType.Vocabulary)]
-    public abstract record CqlVocabulary(string? id, string? version);
+    public abstract record CqlVocabulary(string id, string? version);
 }

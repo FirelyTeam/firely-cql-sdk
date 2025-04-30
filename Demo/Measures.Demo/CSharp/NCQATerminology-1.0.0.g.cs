@@ -229,135 +229,135 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     [CqlCodeSystemDefinition("LOINC")]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
-      new CqlCodeSystem("http://loinc.org", null);
+      new CqlCodeSystem("http://loinc.org", null, []);
 
     [CqlCodeSystemDefinition("SNOMEDCT")]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
-      new CqlCodeSystem("http://snomed.info/sct", null);
+      new CqlCodeSystem("http://snomed.info/sct", null, []);
 
     [CqlCodeSystemDefinition("RoleCode")]
     public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
     private static readonly CqlCodeSystem _RoleCode =
-      new CqlCodeSystem("http://hl7.org/fhir/v3/RoleCode", null);
+      new CqlCodeSystem("http://hl7.org/fhir/v3/RoleCode", null, []);
 
     [CqlCodeSystemDefinition("Diagnosis Role")]
     public CqlCodeSystem Diagnosis_Role(CqlContext _) => _Diagnosis_Role;
     private static readonly CqlCodeSystem _Diagnosis_Role =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null);
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, []);
 
     [CqlCodeSystemDefinition("RequestIntent")]
     public CqlCodeSystem RequestIntent(CqlContext _) => _RequestIntent;
     private static readonly CqlCodeSystem _RequestIntent =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/request-intent", null);
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/request-intent", null, []);
 
     [CqlCodeSystemDefinition("MedicationRequestCategory")]
     public CqlCodeSystem MedicationRequestCategory(CqlContext _) => _MedicationRequestCategory;
     private static readonly CqlCodeSystem _MedicationRequestCategory =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/medicationrequest-category", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, [
           _Inpatient,
           _Outpatient,
           _Community,
-          _Discharge);
+          _Discharge]);
 
     [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
     private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
           _active,
           _recurrence,
           _relapse,
           _inactive,
           _remission,
-          _resolved);
+          _resolved]);
 
     [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-verification", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-verification", null, [
           _unconfirmed,
           _provisional,
           _differential,
           _confirmed,
           _refuted,
-          _entered_in_error);
+          _entered_in_error]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes")]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
           _allergy_active,
           _allergy_inactive,
-          _allergy_resolved);
+          _allergy_resolved]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes")]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
           _allergy_unconfirmed,
           _allergy_confirmed,
-          _allergy_refuted);
+          _allergy_refuted]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceType")]
     public CqlCodeSystem AllergyIntoleranceType(CqlContext _) => _AllergyIntoleranceType;
     private static readonly CqlCodeSystem _AllergyIntoleranceType =
-      new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-type", null,
+      new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-type", null, [
           _Allergy,
-          _Intolerance);
+          _Intolerance]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceCategory")]
     public CqlCodeSystem AllergyIntoleranceCategory(CqlContext _) => _AllergyIntoleranceCategory;
     private static readonly CqlCodeSystem _AllergyIntoleranceCategory =
-      new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-category", null,
+      new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-category", null, [
           _food,
           _medication,
           _environment,
-          _biologic);
+          _biologic]);
 
     [CqlCodeSystemDefinition("ConditionCategoryCodes")]
     public CqlCodeSystem ConditionCategoryCodes(CqlContext _) => _ConditionCategoryCodes;
     private static readonly CqlCodeSystem _ConditionCategoryCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null, [
           _problem_list_item,
-          _encounter_diagnosis);
+          _encounter_diagnosis]);
 
     [CqlCodeSystemDefinition("claim-type")]
     public CqlCodeSystem claim_type(CqlContext _) => _claim_type;
     private static readonly CqlCodeSystem _claim_type =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/claim-type", null,
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/claim-type", null, [
           _Pharmacy,
           _Institutional,
           _Professional,
           _Oral,
-          _Vision);
+          _Vision]);
 
     [CqlCodeSystemDefinition("ActEncounterCodes")]
     public CqlCodeSystem ActEncounterCodes(CqlContext _) => _ActEncounterCodes;
     private static readonly CqlCodeSystem _ActEncounterCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", null,
+      new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", null, [
           _virtual,
           _ambulatory,
           _home_health,
           _inpatient_non_acute,
           _emergency,
-          _inpatient_acute);
+          _inpatient_acute]);
 
     [CqlCodeSystemDefinition("coverage-type")]
     public CqlCodeSystem coverage_type(CqlContext _) => _coverage_type;
     private static readonly CqlCodeSystem _coverage_type =
-      new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", null,
+      new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", null, [
           _drug_policy,
           _mental_health_policy,
           _managed_care_policy,
           _subsidized_health_program,
           _retiree_health_program,
-          _substance_use_policy);
+          _substance_use_policy]);
 
     [CqlCodeSystemDefinition("IdentifierType")]
     public CqlCodeSystem IdentifierType(CqlContext _) => _IdentifierType;
     private static readonly CqlCodeSystem _IdentifierType =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v2-0203", null,
-          _Provider_number);
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v2-0203", null, [
+          _Provider_number]);
 
     #endregion CodeSystems
 

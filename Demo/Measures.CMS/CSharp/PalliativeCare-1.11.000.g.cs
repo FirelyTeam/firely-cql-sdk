@@ -57,8 +57,8 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     [CqlCodeSystemDefinition("LOINC")]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
-      new CqlCodeSystem("http://loinc.org", null,
-          _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_);
+      new CqlCodeSystem("http://loinc.org", null, [
+          _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_]);
 
     #endregion CodeSystems
 
@@ -67,9 +67,9 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object qzzzzzzzzzzzs_ = context.ResolveParameter("PalliativeCare-1.11.000", "Measurement Period", null);
+        object dzzzzzzzzzc_ = context.ResolveParameter("PalliativeCare-1.11.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)qzzzzzzzzzzzs_;
+        return (CqlInterval<CqlDateTime>)dzzzzzzzzzc_;
     }
 
 
@@ -80,79 +80,79 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> qzzzzzzzzzzzt_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient qzzzzzzzzzzzu_ = context.Operators.SingletonFrom<Patient>(qzzzzzzzzzzzt_);
+        IEnumerable<Patient> dzzzzzzzzzd_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient dzzzzzzzzze_ = context.Operators.SingletonFrom<Patient>(dzzzzzzzzzd_);
 
-        return qzzzzzzzzzzzu_;
+        return dzzzzzzzzze_;
     }
 
 
     [CqlExpressionDefinition("Has Palliative Care in the Measurement Period")]
     public bool? Has_Palliative_Care_in_the_Measurement_Period(CqlContext context)
     {
-        CqlCode qzzzzzzzzzzzv_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
-        IEnumerable<CqlCode> qzzzzzzzzzzzw_ = context.Operators.ToList<CqlCode>(qzzzzzzzzzzzv_);
-        IEnumerable<Observation> qzzzzzzzzzzzx_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, qzzzzzzzzzzzw_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> qzzzzzzzzzzzy_ = Status_1_8_000.Instance.isAssessmentPerformed(context, qzzzzzzzzzzzx_);
-        bool? qzzzzzzzzzzzz_(Observation PalliativeAssessment)
+        CqlCode dzzzzzzzzzf_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
+        IEnumerable<CqlCode> dzzzzzzzzzg_ = context.Operators.ToList<CqlCode>(dzzzzzzzzzf_);
+        IEnumerable<Observation> dzzzzzzzzzh_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, dzzzzzzzzzg_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
+        IEnumerable<Observation> dzzzzzzzzzi_ = Status_1_8_000.Instance.isAssessmentPerformed(context, dzzzzzzzzzh_);
+        bool? dzzzzzzzzzj_(Observation PalliativeAssessment)
         {
-            DataType rzzzzzzzzzzzw_ = PalliativeAssessment?.Effective;
-            object rzzzzzzzzzzzx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, rzzzzzzzzzzzw_);
-            CqlInterval<CqlDateTime> rzzzzzzzzzzzy_ = QICoreCommon_2_1_000.Instance.toInterval(context, rzzzzzzzzzzzx_);
-            CqlInterval<CqlDateTime> rzzzzzzzzzzzz_ = this.Measurement_Period(context);
-            bool? szzzzzzzzzzza_ = context.Operators.Overlaps(rzzzzzzzzzzzy_, rzzzzzzzzzzzz_, "day");
+            DataType ezzzzzzzzzg_ = PalliativeAssessment?.Effective;
+            object ezzzzzzzzzh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzg_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzi_ = QICoreCommon_2_1_000.Instance.toInterval(context, ezzzzzzzzzh_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzj_ = this.Measurement_Period(context);
+            bool? ezzzzzzzzzk_ = context.Operators.Overlaps(ezzzzzzzzzi_, ezzzzzzzzzj_, "day");
 
-            return szzzzzzzzzzza_;
+            return ezzzzzzzzzk_;
         };
-        IEnumerable<Observation> rzzzzzzzzzzza_ = context.Operators.Where<Observation>(qzzzzzzzzzzzy_, qzzzzzzzzzzzz_);
-        bool? rzzzzzzzzzzzb_ = context.Operators.Exists<Observation>(rzzzzzzzzzzza_);
-        CqlValueSet rzzzzzzzzzzzc_ = this.Palliative_Care_Diagnosis(context);
-        IEnumerable<Condition> rzzzzzzzzzzzd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, rzzzzzzzzzzzc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        bool? rzzzzzzzzzzze_(Condition PalliativeDiagnosis)
+        IEnumerable<Observation> dzzzzzzzzzk_ = context.Operators.Where<Observation>(dzzzzzzzzzi_, dzzzzzzzzzj_);
+        bool? dzzzzzzzzzl_ = context.Operators.Exists<Observation>(dzzzzzzzzzk_);
+        CqlValueSet dzzzzzzzzzm_ = this.Palliative_Care_Diagnosis(context);
+        IEnumerable<Condition> dzzzzzzzzzn_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, dzzzzzzzzzm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
+        bool? dzzzzzzzzzo_(Condition PalliativeDiagnosis)
         {
-            CqlInterval<CqlDateTime> szzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzc_ = this.Measurement_Period(context);
-            bool? szzzzzzzzzzzd_ = context.Operators.Overlaps(szzzzzzzzzzzb_, szzzzzzzzzzzc_, "day");
+            CqlInterval<CqlDateTime> ezzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
+            CqlInterval<CqlDateTime> ezzzzzzzzzm_ = this.Measurement_Period(context);
+            bool? ezzzzzzzzzn_ = context.Operators.Overlaps(ezzzzzzzzzl_, ezzzzzzzzzm_, "day");
 
-            return szzzzzzzzzzzd_;
+            return ezzzzzzzzzn_;
         };
-        IEnumerable<Condition> rzzzzzzzzzzzf_ = context.Operators.Where<Condition>(rzzzzzzzzzzzd_, rzzzzzzzzzzze_);
-        bool? rzzzzzzzzzzzg_ = context.Operators.Exists<Condition>(rzzzzzzzzzzzf_);
-        bool? rzzzzzzzzzzzh_ = context.Operators.Or(rzzzzzzzzzzzb_, rzzzzzzzzzzzg_);
-        CqlValueSet rzzzzzzzzzzzi_ = this.Palliative_Care_Encounter(context);
-        IEnumerable<Encounter> rzzzzzzzzzzzj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, rzzzzzzzzzzzi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> rzzzzzzzzzzzk_ = Status_1_8_000.Instance.isEncounterPerformed(context, rzzzzzzzzzzzj_);
-        bool? rzzzzzzzzzzzl_(Encounter PalliativeEncounter)
+        IEnumerable<Condition> dzzzzzzzzzp_ = context.Operators.Where<Condition>(dzzzzzzzzzn_, dzzzzzzzzzo_);
+        bool? dzzzzzzzzzq_ = context.Operators.Exists<Condition>(dzzzzzzzzzp_);
+        bool? dzzzzzzzzzr_ = context.Operators.Or(dzzzzzzzzzl_, dzzzzzzzzzq_);
+        CqlValueSet dzzzzzzzzzs_ = this.Palliative_Care_Encounter(context);
+        IEnumerable<Encounter> dzzzzzzzzzt_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dzzzzzzzzzs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> dzzzzzzzzzu_ = Status_1_8_000.Instance.isEncounterPerformed(context, dzzzzzzzzzt_);
+        bool? dzzzzzzzzzv_(Encounter PalliativeEncounter)
         {
-            Period szzzzzzzzzzze_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> szzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, szzzzzzzzzzze_);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzg_ = QICoreCommon_2_1_000.Instance.toInterval(context, szzzzzzzzzzzf_ as object);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzh_ = this.Measurement_Period(context);
-            bool? szzzzzzzzzzzi_ = context.Operators.Overlaps(szzzzzzzzzzzg_, szzzzzzzzzzzh_, "day");
+            Period ezzzzzzzzzo_ = PalliativeEncounter?.Period;
+            CqlInterval<CqlDateTime> ezzzzzzzzzp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ezzzzzzzzzo_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzq_ = QICoreCommon_2_1_000.Instance.toInterval(context, ezzzzzzzzzp_ as object);
+            CqlInterval<CqlDateTime> ezzzzzzzzzr_ = this.Measurement_Period(context);
+            bool? ezzzzzzzzzs_ = context.Operators.Overlaps(ezzzzzzzzzq_, ezzzzzzzzzr_, "day");
 
-            return szzzzzzzzzzzi_;
+            return ezzzzzzzzzs_;
         };
-        IEnumerable<Encounter> rzzzzzzzzzzzm_ = context.Operators.Where<Encounter>(rzzzzzzzzzzzk_, rzzzzzzzzzzzl_);
-        bool? rzzzzzzzzzzzn_ = context.Operators.Exists<Encounter>(rzzzzzzzzzzzm_);
-        bool? rzzzzzzzzzzzo_ = context.Operators.Or(rzzzzzzzzzzzh_, rzzzzzzzzzzzn_);
-        CqlValueSet rzzzzzzzzzzzp_ = this.Palliative_Care_Intervention(context);
-        IEnumerable<Procedure> rzzzzzzzzzzzq_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, rzzzzzzzzzzzp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> rzzzzzzzzzzzr_ = Status_1_8_000.Instance.isInterventionPerformed(context, rzzzzzzzzzzzq_);
-        bool? rzzzzzzzzzzzs_(Procedure PalliativeIntervention)
+        IEnumerable<Encounter> dzzzzzzzzzw_ = context.Operators.Where<Encounter>(dzzzzzzzzzu_, dzzzzzzzzzv_);
+        bool? dzzzzzzzzzx_ = context.Operators.Exists<Encounter>(dzzzzzzzzzw_);
+        bool? dzzzzzzzzzy_ = context.Operators.Or(dzzzzzzzzzr_, dzzzzzzzzzx_);
+        CqlValueSet dzzzzzzzzzz_ = this.Palliative_Care_Intervention(context);
+        IEnumerable<Procedure> ezzzzzzzzza_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, dzzzzzzzzzz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> ezzzzzzzzzb_ = Status_1_8_000.Instance.isInterventionPerformed(context, ezzzzzzzzza_);
+        bool? ezzzzzzzzzc_(Procedure PalliativeIntervention)
         {
-            DataType szzzzzzzzzzzj_ = PalliativeIntervention?.Performed;
-            object szzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, szzzzzzzzzzzj_);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, szzzzzzzzzzzk_);
-            CqlInterval<CqlDateTime> szzzzzzzzzzzm_ = this.Measurement_Period(context);
-            bool? szzzzzzzzzzzn_ = context.Operators.Overlaps(szzzzzzzzzzzl_, szzzzzzzzzzzm_, "day");
+            DataType ezzzzzzzzzt_ = PalliativeIntervention?.Performed;
+            object ezzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ezzzzzzzzzt_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzv_ = QICoreCommon_2_1_000.Instance.toInterval(context, ezzzzzzzzzu_);
+            CqlInterval<CqlDateTime> ezzzzzzzzzw_ = this.Measurement_Period(context);
+            bool? ezzzzzzzzzx_ = context.Operators.Overlaps(ezzzzzzzzzv_, ezzzzzzzzzw_, "day");
 
-            return szzzzzzzzzzzn_;
+            return ezzzzzzzzzx_;
         };
-        IEnumerable<Procedure> rzzzzzzzzzzzt_ = context.Operators.Where<Procedure>(rzzzzzzzzzzzr_, rzzzzzzzzzzzs_);
-        bool? rzzzzzzzzzzzu_ = context.Operators.Exists<Procedure>(rzzzzzzzzzzzt_);
-        bool? rzzzzzzzzzzzv_ = context.Operators.Or(rzzzzzzzzzzzo_, rzzzzzzzzzzzu_);
+        IEnumerable<Procedure> ezzzzzzzzzd_ = context.Operators.Where<Procedure>(ezzzzzzzzzb_, ezzzzzzzzzc_);
+        bool? ezzzzzzzzze_ = context.Operators.Exists<Procedure>(ezzzzzzzzzd_);
+        bool? ezzzzzzzzzf_ = context.Operators.Or(dzzzzzzzzzy_, ezzzzzzzzze_);
 
-        return rzzzzzzzzzzzv_;
+        return ezzzzzzzzzf_;
     }
 
 

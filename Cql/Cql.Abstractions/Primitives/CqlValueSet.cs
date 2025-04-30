@@ -15,5 +15,5 @@ namespace Hl7.Cql.Primitives
     /// <param name="id">The canonical URL of the value set.</param>
     /// <param name="version">The version of the value set.</param>
     [CqlPrimitiveType(CqlPrimitiveType.ValueSet)]
-    public record CqlValueSet(string? id, string? version) : CqlVocabulary(id, version);
+    public record CqlValueSet(string id, string? version = null) : CqlVocabulary(id, version);
 }
