@@ -324,8 +324,6 @@ internal partial class LibrarySetCSharpCodeGenerator
         LibraryWriter LibraryWriter,
         CqlDefinition CqlDefinition) : IAddIndentMutable<DefinitionWriter>
     {
-        private static readonly VariableNameGenerator VariableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
-
         public DefinitionWriter AddIndent(int addIndent = 1) =>
             this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
@@ -410,11 +408,13 @@ internal partial class LibrarySetCSharpCodeGenerator
                     break;
             }
 
+            VariableNameGenerator variableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
+
             var visitedBody = Transform(
                 CqlDefinition.Lambda.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(VariableNameGenerator),
+                new RenameVariablesVisitor(variableNameGenerator),
                 new LocalVariableDeduper(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter)
             );
 

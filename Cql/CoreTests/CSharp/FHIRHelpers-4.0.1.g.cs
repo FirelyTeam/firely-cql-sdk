@@ -68,7 +68,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     [CqlExpressionDefinition("ToInterval")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Quantity quantity)
     {
-        CqlInterval<CqlQuantity> l_()
+        CqlInterval<CqlQuantity> a_()
         {
             if (quantity is null)
             {
@@ -76,93 +76,93 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else
             {
-                CqlInterval<CqlQuantity> m_()
+                CqlInterval<CqlQuantity> b_()
                 {
-                    bool n_()
+                    bool c_()
                     {
-                        Code<Quantity.QuantityComparator> r_ = quantity?.ComparatorElement;
-                        Quantity.QuantityComparator? s_ = r_?.Value;
-                        string t_ = context.Operators.Convert<string>(s_);
-                        bool? u_ = context.Operators.Equal(t_, "<");
+                        Code<Quantity.QuantityComparator> g_ = quantity?.ComparatorElement;
+                        Quantity.QuantityComparator? h_ = g_?.Value;
+                        string i_ = context.Operators.Convert<string>(h_);
+                        bool? j_ = context.Operators.Equal(i_, "<");
 
-                        return u_ ?? false;
+                        return j_ ?? false;
                     };
-                    bool o_()
+                    bool d_()
                     {
-                        Code<Quantity.QuantityComparator> v_ = quantity?.ComparatorElement;
-                        Quantity.QuantityComparator? w_ = v_?.Value;
-                        string x_ = context.Operators.Convert<string>(w_);
-                        bool? y_ = context.Operators.Equal(x_, "<=");
+                        Code<Quantity.QuantityComparator> k_ = quantity?.ComparatorElement;
+                        Quantity.QuantityComparator? l_ = k_?.Value;
+                        string m_ = context.Operators.Convert<string>(l_);
+                        bool? n_ = context.Operators.Equal(m_, "<=");
 
-                        return y_ ?? false;
+                        return n_ ?? false;
                     };
-                    bool p_()
+                    bool e_()
                     {
-                        Code<Quantity.QuantityComparator> z_ = quantity?.ComparatorElement;
-                        Quantity.QuantityComparator? aa_ = z_?.Value;
-                        string ab_ = context.Operators.Convert<string>(aa_);
-                        bool? ac_ = context.Operators.Equal(ab_, ">=");
+                        Code<Quantity.QuantityComparator> o_ = quantity?.ComparatorElement;
+                        Quantity.QuantityComparator? p_ = o_?.Value;
+                        string q_ = context.Operators.Convert<string>(p_);
+                        bool? r_ = context.Operators.Equal(q_, ">=");
 
-                        return ac_ ?? false;
+                        return r_ ?? false;
                     };
-                    bool q_()
+                    bool f_()
                     {
-                        Code<Quantity.QuantityComparator> ad_ = quantity?.ComparatorElement;
-                        Quantity.QuantityComparator? ae_ = ad_?.Value;
-                        string af_ = context.Operators.Convert<string>(ae_);
-                        bool? ag_ = context.Operators.Equal(af_, ">");
+                        Code<Quantity.QuantityComparator> s_ = quantity?.ComparatorElement;
+                        Quantity.QuantityComparator? t_ = s_?.Value;
+                        string u_ = context.Operators.Convert<string>(t_);
+                        bool? v_ = context.Operators.Equal(u_, ">");
 
-                        return ag_ ?? false;
+                        return v_ ?? false;
                     };
-                    if (n_())
+                    if (c_())
                     {
-                        CqlQuantity ah_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ai_ = context.Operators.Interval(default, ah_, true, false);
+                        CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
 
-                        return ai_;
+                        return x_;
                     }
-                    else if (o_())
+                    else if (d_())
                     {
-                        CqlQuantity aj_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ak_ = context.Operators.Interval(default, aj_, true, true);
+                        CqlQuantity y_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
 
-                        return ak_;
+                        return z_;
                     }
-                    else if (p_())
+                    else if (e_())
                     {
-                        CqlQuantity al_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> am_ = context.Operators.Interval(al_, default, true, true);
+                        CqlQuantity aa_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
 
-                        return am_;
+                        return ab_;
                     }
-                    else if (q_())
+                    else if (f_())
                     {
-                        CqlQuantity an_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ao_ = context.Operators.Interval(an_, default, false, true);
+                        CqlQuantity ac_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
 
-                        return ao_;
+                        return ad_;
                     }
                     else
                     {
-                        CqlQuantity ap_ = this.ToQuantity(context, quantity);
-                        CqlInterval<CqlQuantity> ar_ = context.Operators.Interval(ap_, ap_, true, true);
+                        CqlQuantity ae_ = this.ToQuantity(context, quantity);
+                        CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, true, true);
 
-                        return ar_;
+                        return ag_;
                     }
                 };
 
-                return m_();
+                return b_();
             }
         };
 
-        return l_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToInterval")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Range range)
     {
-        CqlInterval<CqlQuantity> as_()
+        CqlInterval<CqlQuantity> a_()
         {
             if (range is null)
             {
@@ -170,24 +170,24 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else
             {
-                Quantity at_ = range?.Low;
-                CqlQuantity au_ = this.ToQuantity(context, at_);
-                Quantity av_ = range?.High;
-                CqlQuantity aw_ = this.ToQuantity(context, av_);
-                CqlInterval<CqlQuantity> ax_ = context.Operators.Interval(au_, aw_, true, true);
+                Quantity b_ = range?.Low;
+                CqlQuantity c_ = this.ToQuantity(context, b_);
+                Quantity d_ = range?.High;
+                CqlQuantity e_ = this.ToQuantity(context, d_);
+                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
 
-                return ax_;
+                return f_;
             }
         };
 
-        return as_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToCalendarUnit")]
     public string ToCalendarUnit(CqlContext context, string unit)
     {
-        string ay_()
+        string a_()
         {
             if ((context.Operators.Equal(unit, "ms")) ?? false)
             {
@@ -227,33 +227,33 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
         };
 
-        return ay_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToQuantity")]
     public CqlQuantity ToQuantity(CqlContext context, Quantity quantity)
     {
-        CqlQuantity az_()
+        CqlQuantity a_()
         {
-            bool ba_()
+            bool b_()
             {
-                Code<Quantity.QuantityComparator> bc_ = quantity?.ComparatorElement;
-                bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
+                Code<Quantity.QuantityComparator> d_ = quantity?.ComparatorElement;
+                bool? e_ = context.Operators.Not((bool?)(d_ is null));
 
-                return bd_ ?? false;
+                return e_ ?? false;
             };
-            bool bb_()
+            bool c_()
             {
-                FhirUri be_ = quantity?.SystemElement;
-                string bg_ = be_?.Value;
-                bool? bh_ = context.Operators.Equal(bg_, "http://unitsofmeasure.org");
-                bool? bi_ = context.Operators.Or((bool?)(be_ is null), bh_);
-                string bk_ = be_?.Value;
-                bool? bl_ = context.Operators.Equal(bk_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                bool? bm_ = context.Operators.Or(bi_, bl_);
+                FhirUri f_ = quantity?.SystemElement;
+                string h_ = f_?.Value;
+                bool? i_ = context.Operators.Equal(h_, "http://unitsofmeasure.org");
+                bool? j_ = context.Operators.Or((bool?)(f_ is null), i_);
+                string l_ = f_?.Value;
+                bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                bool? n_ = context.Operators.Or(j_, m_);
 
-                return bm_ ?? false;
+                return n_ ?? false;
             };
             if (quantity is null)
             {
@@ -263,64 +263,64 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             {
                 return default;
             }
-            else if (ba_())
+            else if (b_())
             {
-                object bn_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
+                object o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
 
-                return bn_ as CqlQuantity;
+                return o_ as CqlQuantity;
             }
-            else if (bb_())
+            else if (c_())
             {
-                FhirDecimal bo_ = quantity?.ValueElement;
-                decimal? bp_ = bo_?.Value;
-                Code bq_ = quantity?.CodeElement;
-                string br_ = bq_?.Value;
-                FhirString bs_ = quantity?.UnitElement;
-                string bt_ = bs_?.Value;
-                string bu_ = this.ToCalendarUnit(context, (br_ ?? bt_) ?? "1");
+                FhirDecimal p_ = quantity?.ValueElement;
+                decimal? q_ = p_?.Value;
+                Code r_ = quantity?.CodeElement;
+                string s_ = r_?.Value;
+                FhirString t_ = quantity?.UnitElement;
+                string u_ = t_?.Value;
+                string v_ = this.ToCalendarUnit(context, (s_ ?? u_) ?? "1");
 
-                return new CqlQuantity(bp_, bu_);
+                return new CqlQuantity(q_, v_);
             }
             else
             {
-                FhirString bv_ = quantity?.UnitElement;
-                string bw_ = bv_?.Value;
-                string bx_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", bw_ ?? "");
-                string by_ = context.Operators.Concatenate(bx_ ?? "", " (");
-                FhirUri bz_ = quantity?.SystemElement;
-                string ca_ = bz_?.Value;
-                string cb_ = context.Operators.Concatenate(by_ ?? "", ca_ ?? "");
-                string cc_ = context.Operators.Concatenate(cb_ ?? "", "|");
-                Code cd_ = quantity?.CodeElement;
-                string ce_ = cd_?.Value;
-                string cf_ = context.Operators.Concatenate(cc_ ?? "", ce_ ?? "");
-                string cg_ = context.Operators.Concatenate(cf_ ?? "", ")");
-                object ch_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", cg_);
+                FhirString w_ = quantity?.UnitElement;
+                string x_ = w_?.Value;
+                string y_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", x_ ?? "");
+                string z_ = context.Operators.Concatenate(y_ ?? "", " (");
+                FhirUri aa_ = quantity?.SystemElement;
+                string ab_ = aa_?.Value;
+                string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
+                string ad_ = context.Operators.Concatenate(ac_ ?? "", "|");
+                Code ae_ = quantity?.CodeElement;
+                string af_ = ae_?.Value;
+                string ag_ = context.Operators.Concatenate(ad_ ?? "", af_ ?? "");
+                string ah_ = context.Operators.Concatenate(ag_ ?? "", ")");
+                object ai_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
 
-                return ch_ as CqlQuantity;
+                return ai_ as CqlQuantity;
             }
         };
 
-        return az_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToQuantityIgnoringComparator")]
     public CqlQuantity ToQuantityIgnoringComparator(CqlContext context, Quantity quantity)
     {
-        CqlQuantity ci_()
+        CqlQuantity a_()
         {
-            bool cj_()
+            bool b_()
             {
-                FhirUri ck_ = quantity?.SystemElement;
-                string cm_ = ck_?.Value;
-                bool? cn_ = context.Operators.Equal(cm_, "http://unitsofmeasure.org");
-                bool? co_ = context.Operators.Or((bool?)(ck_ is null), cn_);
-                string cq_ = ck_?.Value;
-                bool? cr_ = context.Operators.Equal(cq_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                bool? cs_ = context.Operators.Or(co_, cr_);
+                FhirUri c_ = quantity?.SystemElement;
+                string e_ = c_?.Value;
+                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
+                bool? g_ = context.Operators.Or((bool?)(c_ is null), f_);
+                string i_ = c_?.Value;
+                bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                bool? k_ = context.Operators.Or(g_, j_);
 
-                return cs_ ?? false;
+                return k_ ?? false;
             };
             if (quantity is null)
             {
@@ -330,46 +330,46 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             {
                 return default;
             }
-            else if (cj_())
+            else if (b_())
             {
-                FhirDecimal ct_ = quantity?.ValueElement;
-                decimal? cu_ = ct_?.Value;
-                Code cv_ = quantity?.CodeElement;
-                string cw_ = cv_?.Value;
-                FhirString cx_ = quantity?.UnitElement;
-                string cy_ = cx_?.Value;
-                string cz_ = this.ToCalendarUnit(context, (cw_ ?? cy_) ?? "1");
+                FhirDecimal l_ = quantity?.ValueElement;
+                decimal? m_ = l_?.Value;
+                Code n_ = quantity?.CodeElement;
+                string o_ = n_?.Value;
+                FhirString p_ = quantity?.UnitElement;
+                string q_ = p_?.Value;
+                string r_ = this.ToCalendarUnit(context, (o_ ?? q_) ?? "1");
 
-                return new CqlQuantity(cu_, cz_);
+                return new CqlQuantity(m_, r_);
             }
             else
             {
-                FhirString da_ = quantity?.UnitElement;
-                string db_ = da_?.Value;
-                string dc_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", db_ ?? "");
-                string dd_ = context.Operators.Concatenate(dc_ ?? "", " (");
-                FhirUri de_ = quantity?.SystemElement;
-                string df_ = de_?.Value;
-                string dg_ = context.Operators.Concatenate(dd_ ?? "", df_ ?? "");
-                string dh_ = context.Operators.Concatenate(dg_ ?? "", "|");
-                Code di_ = quantity?.CodeElement;
-                string dj_ = di_?.Value;
-                string dk_ = context.Operators.Concatenate(dh_ ?? "", dj_ ?? "");
-                string dl_ = context.Operators.Concatenate(dk_ ?? "", ")");
-                object dm_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", dl_);
+                FhirString s_ = quantity?.UnitElement;
+                string t_ = s_?.Value;
+                string u_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", t_ ?? "");
+                string v_ = context.Operators.Concatenate(u_ ?? "", " (");
+                FhirUri w_ = quantity?.SystemElement;
+                string x_ = w_?.Value;
+                string y_ = context.Operators.Concatenate(v_ ?? "", x_ ?? "");
+                string z_ = context.Operators.Concatenate(y_ ?? "", "|");
+                Code aa_ = quantity?.CodeElement;
+                string ab_ = aa_?.Value;
+                string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
+                string ad_ = context.Operators.Concatenate(ac_ ?? "", ")");
+                object ae_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
 
-                return dm_ as CqlQuantity;
+                return ae_ as CqlQuantity;
             }
         };
 
-        return ci_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToRatio")]
     public CqlRatio ToRatio(CqlContext context, Ratio ratio)
     {
-        CqlRatio dn_()
+        CqlRatio a_()
         {
             if (ratio is null)
             {
@@ -377,23 +377,23 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else
             {
-                Quantity do_ = ratio?.Numerator;
-                CqlQuantity dp_ = this.ToQuantity(context, do_);
-                Quantity dq_ = ratio?.Denominator;
-                CqlQuantity dr_ = this.ToQuantity(context, dq_);
+                Quantity b_ = ratio?.Numerator;
+                CqlQuantity c_ = this.ToQuantity(context, b_);
+                Quantity d_ = ratio?.Denominator;
+                CqlQuantity e_ = this.ToQuantity(context, d_);
 
-                return new CqlRatio(dp_, dr_);
+                return new CqlRatio(c_, e_);
             }
         };
 
-        return dn_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToCode")]
     public CqlCode ToCode(CqlContext context, Coding coding)
     {
-        CqlCode ds_()
+        CqlCode a_()
         {
             if (coding is null)
             {
@@ -401,27 +401,27 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else
             {
-                Code dt_ = coding?.CodeElement;
-                string du_ = dt_?.Value;
-                FhirUri dv_ = coding?.SystemElement;
-                string dw_ = dv_?.Value;
-                FhirString dx_ = coding?.VersionElement;
-                string dy_ = dx_?.Value;
-                FhirString dz_ = coding?.DisplayElement;
-                string ea_ = dz_?.Value;
+                Code b_ = coding?.CodeElement;
+                string c_ = b_?.Value;
+                FhirUri d_ = coding?.SystemElement;
+                string e_ = d_?.Value;
+                FhirString f_ = coding?.VersionElement;
+                string g_ = f_?.Value;
+                FhirString h_ = coding?.DisplayElement;
+                string i_ = h_?.Value;
 
-                return new CqlCode(du_, dw_, dy_, ea_);
+                return new CqlCode(c_, e_, g_, i_);
             }
         };
 
-        return ds_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToConcept")]
     public CqlConcept ToConcept(CqlContext context, CodeableConcept concept)
     {
-        CqlConcept eb_()
+        CqlConcept a_()
         {
             if (concept is null)
             {
@@ -429,2255 +429,2255 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else
             {
-                List<Coding> ec_ = concept?.Coding;
-                CqlCode ed_(Coding C)
+                List<Coding> b_ = concept?.Coding;
+                CqlCode c_(Coding C)
                 {
-                    CqlCode ei_ = this.ToCode(context, C);
+                    CqlCode h_ = this.ToCode(context, C);
 
-                    return ei_;
+                    return h_;
                 };
-                IEnumerable<CqlCode> ee_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)ec_, ed_);
-                IEnumerable<CqlCode> ef_ = context.Operators.Distinct<CqlCode>(ee_);
-                FhirString eg_ = concept?.TextElement;
-                string eh_ = eg_?.Value;
+                IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
+                IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
+                FhirString f_ = concept?.TextElement;
+                string g_ = f_?.Value;
 
-                return new CqlConcept(ef_, eh_);
+                return new CqlConcept(e_, g_);
             }
         };
 
-        return eb_();
+        return a_();
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Account.AccountStatus> value)
     {
-        Account.AccountStatus? ej_ = value?.Value;
-        string ek_ = context.Operators.Convert<string>(ej_);
+        Account.AccountStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ek_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionCardinalityBehavior> value)
     {
-        ActionCardinalityBehavior? el_ = value?.Value;
-        string em_ = context.Operators.Convert<string>(el_);
+        ActionCardinalityBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return em_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionConditionKind> value)
     {
-        ActionConditionKind? en_ = value?.Value;
-        string eo_ = context.Operators.Convert<string>(en_);
+        ActionConditionKind? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return eo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionGroupingBehavior> value)
     {
-        ActionGroupingBehavior? ep_ = value?.Value;
-        string eq_ = context.Operators.Convert<string>(ep_);
+        ActionGroupingBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return eq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionParticipantType> value)
     {
-        ActionParticipantType? er_ = value?.Value;
-        string es_ = context.Operators.Convert<string>(er_);
+        ActionParticipantType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return es_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionPrecheckBehavior> value)
     {
-        ActionPrecheckBehavior? et_ = value?.Value;
-        string eu_ = context.Operators.Convert<string>(et_);
+        ActionPrecheckBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return eu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionRelationshipType> value)
     {
-        ActionRelationshipType? ev_ = value?.Value;
-        string ew_ = context.Operators.Convert<string>(ev_);
+        ActionRelationshipType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ew_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionRequiredBehavior> value)
     {
-        ActionRequiredBehavior? ex_ = value?.Value;
-        string ey_ = context.Operators.Convert<string>(ex_);
+        ActionRequiredBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ey_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActionSelectionBehavior> value)
     {
-        ActionSelectionBehavior? ez_ = value?.Value;
-        string fa_ = context.Operators.Convert<string>(ez_);
+        ActionSelectionBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fa_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ActivityDefinition.RequestResourceType> value)
     {
-        ActivityDefinition.RequestResourceType? fb_ = value?.Value;
-        string fc_ = context.Operators.Convert<string>(fb_);
+        ActivityDefinition.RequestResourceType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Address.AddressType> value)
     {
-        Address.AddressType? fd_ = value?.Value;
-        string fe_ = context.Operators.Convert<string>(fd_);
+        Address.AddressType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fe_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Address.AddressUse> value)
     {
-        Address.AddressUse? ff_ = value?.Value;
-        string fg_ = context.Operators.Convert<string>(ff_);
+        Address.AddressUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AdministrativeGender> value)
     {
-        AdministrativeGender? fh_ = value?.Value;
-        string fi_ = context.Operators.Convert<string>(fh_);
+        AdministrativeGender? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fi_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AdverseEvent.AdverseEventActuality> value)
     {
-        AdverseEvent.AdverseEventActuality? fj_ = value?.Value;
-        string fk_ = context.Operators.Convert<string>(fj_);
+        AdverseEvent.AdverseEventActuality? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.AggregationMode> value)
     {
-        ElementDefinition.AggregationMode? fl_ = value?.Value;
-        string fm_ = context.Operators.Convert<string>(fl_);
+        ElementDefinition.AggregationMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCategory> value)
     {
-        AllergyIntolerance.AllergyIntoleranceCategory? fn_ = value?.Value;
-        string fo_ = context.Operators.Convert<string>(fn_);
+        AllergyIntolerance.AllergyIntoleranceCategory? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCriticality> value)
     {
-        AllergyIntolerance.AllergyIntoleranceCriticality? fp_ = value?.Value;
-        string fq_ = context.Operators.Convert<string>(fp_);
+        AllergyIntolerance.AllergyIntoleranceCriticality? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceSeverity> value)
     {
-        AllergyIntolerance.AllergyIntoleranceSeverity? fr_ = value?.Value;
-        string fs_ = context.Operators.Convert<string>(fr_);
+        AllergyIntolerance.AllergyIntoleranceSeverity? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fs_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceType> value)
     {
-        AllergyIntolerance.AllergyIntoleranceType? ft_ = value?.Value;
-        string fu_ = context.Operators.Convert<string>(ft_);
+        AllergyIntolerance.AllergyIntoleranceType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Appointment.AppointmentStatus> value)
     {
-        Appointment.AppointmentStatus? fv_ = value?.Value;
-        string fw_ = context.Operators.Convert<string>(fv_);
+        Appointment.AppointmentStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionDirectionType> value)
     {
-        TestScript.AssertionDirectionType? fx_ = value?.Value;
-        string fy_ = context.Operators.Convert<string>(fx_);
+        TestScript.AssertionDirectionType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return fy_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionOperatorType> value)
     {
-        TestScript.AssertionOperatorType? fz_ = value?.Value;
-        string ga_ = context.Operators.Convert<string>(fz_);
+        TestScript.AssertionOperatorType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ga_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.AssertionResponseTypes> value)
     {
-        TestScript.AssertionResponseTypes? gb_ = value?.Value;
-        string gc_ = context.Operators.Convert<string>(gb_);
+        TestScript.AssertionResponseTypes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventAction> value)
     {
-        AuditEvent.AuditEventAction? gd_ = value?.Value;
-        string ge_ = context.Operators.Convert<string>(gd_);
+        AuditEvent.AuditEventAction? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ge_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventAgentNetworkType> value)
     {
-        AuditEvent.AuditEventAgentNetworkType? gf_ = value?.Value;
-        string gg_ = context.Operators.Convert<string>(gf_);
+        AuditEvent.AuditEventAgentNetworkType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<AuditEvent.AuditEventOutcome> value)
     {
-        AuditEvent.AuditEventOutcome? gh_ = value?.Value;
-        string gi_ = context.Operators.Convert<string>(gh_);
+        AuditEvent.AuditEventOutcome? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gi_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BindingStrength> value)
     {
-        BindingStrength? gj_ = value?.Value;
-        string gk_ = context.Operators.Convert<string>(gj_);
+        BindingStrength? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value)
     {
-        BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? gl_ = value?.Value;
-        string gm_ = context.Operators.Convert<string>(gl_);
+        BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value)
     {
-        BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? gn_ = value?.Value;
-        string go_ = context.Operators.Convert<string>(gn_);
+        BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return go_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value)
     {
-        BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? gp_ = value?.Value;
-        string gq_ = context.Operators.Convert<string>(gp_);
+        BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.BundleType> value)
     {
-        Bundle.BundleType? gr_ = value?.Value;
-        string gs_ = context.Operators.Convert<string>(gr_);
+        Bundle.BundleType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gs_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatementKind> value)
     {
-        CapabilityStatementKind? gt_ = value?.Value;
-        string gu_ = context.Operators.Convert<string>(gt_);
+        CapabilityStatementKind? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanActivityKind> value)
     {
-        CarePlan.CarePlanActivityKind? gv_ = value?.Value;
-        string gw_ = context.Operators.Convert<string>(gv_);
+        CarePlan.CarePlanActivityKind? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanActivityStatus> value)
     {
-        CarePlan.CarePlanActivityStatus? gx_ = value?.Value;
-        string gy_ = context.Operators.Convert<string>(gx_);
+        CarePlan.CarePlanActivityStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return gy_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CarePlan.CarePlanIntent> value)
     {
-        CarePlan.CarePlanIntent? gz_ = value?.Value;
-        string ha_ = context.Operators.Convert<string>(gz_);
+        CarePlan.CarePlanIntent? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ha_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestStatus> value)
     {
-        RequestStatus? hb_ = value?.Value;
-        string hc_ = context.Operators.Convert<string>(hb_);
+        RequestStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CareTeam.CareTeamStatus> value)
     {
-        CareTeam.CareTeamStatus? hd_ = value?.Value;
-        string he_ = context.Operators.Convert<string>(hd_);
+        CareTeam.CareTeamStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return he_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CatalogEntry.CatalogEntryRelationType> value)
     {
-        CatalogEntry.CatalogEntryRelationType? hf_ = value?.Value;
-        string hg_ = context.Operators.Convert<string>(hf_);
+        CatalogEntry.CatalogEntryRelationType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<InvoicePriceComponentType> value)
     {
-        InvoicePriceComponentType? hh_ = value?.Value;
-        string hi_ = context.Operators.Convert<string>(hh_);
+        InvoicePriceComponentType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hi_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ChargeItem.ChargeItemStatus> value)
     {
-        ChargeItem.ChargeItemStatus? hj_ = value?.Value;
-        string hk_ = context.Operators.Convert<string>(hj_);
+        ChargeItem.ChargeItemStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FinancialResourceStatusCodes> value)
     {
-        FinancialResourceStatusCodes? hl_ = value?.Value;
-        string hm_ = context.Operators.Convert<string>(hl_);
+        FinancialResourceStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClinicalImpression.ClinicalImpressionStatus> value)
     {
-        ClinicalImpression.ClinicalImpressionStatus? hn_ = value?.Value;
-        string ho_ = context.Operators.Convert<string>(hn_);
+        ClinicalImpression.ClinicalImpressionStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ho_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TerminologyCapabilities.CodeSearchSupport> value)
     {
-        TerminologyCapabilities.CodeSearchSupport? hp_ = value?.Value;
-        string hq_ = context.Operators.Convert<string>(hp_);
+        TerminologyCapabilities.CodeSearchSupport? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystemContentMode> value)
     {
-        CodeSystemContentMode? hr_ = value?.Value;
-        string hs_ = context.Operators.Convert<string>(hr_);
+        CodeSystemContentMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hs_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystem.CodeSystemHierarchyMeaning> value)
     {
-        CodeSystem.CodeSystemHierarchyMeaning? ht_ = value?.Value;
-        string hu_ = context.Operators.Convert<string>(ht_);
+        CodeSystem.CodeSystemHierarchyMeaning? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestPriority> value)
     {
-        RequestPriority? hv_ = value?.Value;
-        string hw_ = context.Operators.Convert<string>(hv_);
+        RequestPriority? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EventStatus> value)
     {
-        EventStatus? hx_ = value?.Value;
-        string hy_ = context.Operators.Convert<string>(hx_);
+        EventStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return hy_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CompartmentType> value)
     {
-        CompartmentType? hz_ = value?.Value;
-        string ia_ = context.Operators.Convert<string>(hz_);
+        CompartmentType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ia_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Composition.CompositionAttestationMode> value)
     {
-        Composition.CompositionAttestationMode? ib_ = value?.Value;
-        string ic_ = context.Operators.Convert<string>(ib_);
+        Composition.CompositionAttestationMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ic_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CompositionStatus> value)
     {
-        CompositionStatus? id_ = value?.Value;
-        string ie_ = context.Operators.Convert<string>(id_);
+        CompositionStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ie_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConceptMapEquivalence> value)
     {
-        ConceptMapEquivalence? if_ = value?.Value;
-        string ig_ = context.Operators.Convert<string>(if_);
+        ConceptMapEquivalence? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ig_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConceptMap.ConceptMapGroupUnmappedMode> value)
     {
-        ConceptMap.ConceptMapGroupUnmappedMode? ih_ = value?.Value;
-        string ii_ = context.Operators.Convert<string>(ih_);
+        ConceptMap.ConceptMapGroupUnmappedMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ii_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ConditionalDeleteStatus> value)
     {
-        CapabilityStatement.ConditionalDeleteStatus? ij_ = value?.Value;
-        string ik_ = context.Operators.Convert<string>(ij_);
+        CapabilityStatement.ConditionalDeleteStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ik_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ConditionalReadStatus> value)
     {
-        CapabilityStatement.ConditionalReadStatus? il_ = value?.Value;
-        string im_ = context.Operators.Convert<string>(il_);
+        CapabilityStatement.ConditionalReadStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return im_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentDataMeaning> value)
     {
-        Consent.ConsentDataMeaning? in_ = value?.Value;
-        string io_ = context.Operators.Convert<string>(in_);
+        Consent.ConsentDataMeaning? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return io_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentProvisionType> value)
     {
-        Consent.ConsentProvisionType? ip_ = value?.Value;
-        string iq_ = context.Operators.Convert<string>(ip_);
+        Consent.ConsentProvisionType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return iq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Consent.ConsentState> value)
     {
-        Consent.ConsentState? ir_ = value?.Value;
-        string is_ = context.Operators.Convert<string>(ir_);
+        Consent.ConsentState? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return is_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ConstraintSeverity> value)
     {
-        ConstraintSeverity? it_ = value?.Value;
-        string iu_ = context.Operators.Convert<string>(it_);
+        ConstraintSeverity? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return iu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ContactPoint.ContactPointSystem> value)
     {
-        ContactPoint.ContactPointSystem? iv_ = value?.Value;
-        string iw_ = context.Operators.Convert<string>(iv_);
+        ContactPoint.ContactPointSystem? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return iw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ContactPoint.ContactPointUse> value)
     {
-        ContactPoint.ContactPointUse? ix_ = value?.Value;
-        string iy_ = context.Operators.Convert<string>(ix_);
+        ContactPoint.ContactPointUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return iy_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contract.ContractResourcePublicationStatusCodes> value)
     {
-        Contract.ContractResourcePublicationStatusCodes? iz_ = value?.Value;
-        string ja_ = context.Operators.Convert<string>(iz_);
+        Contract.ContractResourcePublicationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ja_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contract.ContractResourceStatusCodes> value)
     {
-        Contract.ContractResourceStatusCodes? jb_ = value?.Value;
-        string jc_ = context.Operators.Convert<string>(jb_);
+        Contract.ContractResourceStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Contributor.ContributorType> value)
     {
-        Contributor.ContributorType? jd_ = value?.Value;
-        string je_ = context.Operators.Convert<string>(jd_);
+        Contributor.ContributorType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return je_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Money.Currencies> value)
     {
-        Money.Currencies? jf_ = value?.Value;
-        string jg_ = context.Operators.Convert<string>(jf_);
+        Money.Currencies? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DaysOfWeek> value)
     {
-        DaysOfWeek? jh_ = value?.Value;
-        string ji_ = context.Operators.Convert<string>(jh_);
+        DaysOfWeek? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ji_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DetectedIssue.DetectedIssueSeverity> value)
     {
-        DetectedIssue.DetectedIssueSeverity? jj_ = value?.Value;
-        string jk_ = context.Operators.Convert<string>(jj_);
+        DetectedIssue.DetectedIssueSeverity? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationStatus> value)
     {
-        ObservationStatus? jl_ = value?.Value;
-        string jm_ = context.Operators.Convert<string>(jl_);
+        ObservationStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationState> value)
     {
-        DeviceMetric.DeviceMetricCalibrationState? jn_ = value?.Value;
-        string jo_ = context.Operators.Convert<string>(jn_);
+        DeviceMetric.DeviceMetricCalibrationState? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationType> value)
     {
-        DeviceMetric.DeviceMetricCalibrationType? jp_ = value?.Value;
-        string jq_ = context.Operators.Convert<string>(jp_);
+        DeviceMetric.DeviceMetricCalibrationType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCategory> value)
     {
-        DeviceMetric.DeviceMetricCategory? jr_ = value?.Value;
-        string js_ = context.Operators.Convert<string>(jr_);
+        DeviceMetric.DeviceMetricCategory? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return js_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricColor> value)
     {
-        DeviceMetric.DeviceMetricColor? jt_ = value?.Value;
-        string ju_ = context.Operators.Convert<string>(jt_);
+        DeviceMetric.DeviceMetricColor? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ju_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricOperationalStatus> value)
     {
-        DeviceMetric.DeviceMetricOperationalStatus? jv_ = value?.Value;
-        string jw_ = context.Operators.Convert<string>(jv_);
+        DeviceMetric.DeviceMetricOperationalStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceNameType> value)
     {
-        DeviceNameType? jx_ = value?.Value;
-        string jy_ = context.Operators.Convert<string>(jx_);
+        DeviceNameType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return jy_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DeviceUseStatement.DeviceUseStatementStatus> value)
     {
-        DeviceUseStatement.DeviceUseStatementStatus? jz_ = value?.Value;
-        string ka_ = context.Operators.Convert<string>(jz_);
+        DeviceUseStatement.DeviceUseStatementStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ka_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DiagnosticReport.DiagnosticReportStatus> value)
     {
-        DiagnosticReport.DiagnosticReportStatus? kb_ = value?.Value;
-        string kc_ = context.Operators.Convert<string>(kb_);
+        DiagnosticReport.DiagnosticReportStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return kc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.DiscriminatorType> value)
     {
-        ElementDefinition.DiscriminatorType? kd_ = value?.Value;
-        string ke_ = context.Operators.Convert<string>(kd_);
+        ElementDefinition.DiscriminatorType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ke_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Composition.V3ConfidentialityClassification> value)
     {
-        Composition.V3ConfidentialityClassification? kf_ = value?.Value;
-        string kg_ = context.Operators.Convert<string>(kf_);
+        Composition.V3ConfidentialityClassification? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return kg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.DocumentMode> value)
     {
-        CapabilityStatement.DocumentMode? kh_ = value?.Value;
-        string ki_ = context.Operators.Convert<string>(kh_);
+        CapabilityStatement.DocumentMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ki_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DocumentReferenceStatus> value)
     {
-        DocumentReferenceStatus? kj_ = value?.Value;
-        string kk_ = context.Operators.Convert<string>(kj_);
+        DocumentReferenceStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return kk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DocumentRelationshipType> value)
     {
-        DocumentRelationshipType? kl_ = value?.Value;
-        string km_ = context.Operators.Convert<string>(kl_);
+        DocumentRelationshipType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return km_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value)
     {
-        CoverageEligibilityRequest.EligibilityRequestPurpose? kn_ = value?.Value;
-        string ko_ = context.Operators.Convert<string>(kn_);
+        CoverageEligibilityRequest.EligibilityRequestPurpose? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ko_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value)
     {
-        CoverageEligibilityResponse.EligibilityResponsePurpose? kp_ = value?.Value;
-        string kq_ = context.Operators.Convert<string>(kp_);
+        CoverageEligibilityResponse.EligibilityResponsePurpose? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return kq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.EnableWhenBehavior> value)
     {
-        Questionnaire.EnableWhenBehavior? kr_ = value?.Value;
-        string ks_ = context.Operators.Convert<string>(kr_);
+        Questionnaire.EnableWhenBehavior? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ks_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Encounter.EncounterLocationStatus> value)
     {
-        Encounter.EncounterLocationStatus? kt_ = value?.Value;
-        string ku_ = context.Operators.Convert<string>(kt_);
+        Encounter.EncounterLocationStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ku_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Encounter.EncounterStatus> value)
     {
-        Encounter.EncounterStatus? kv_ = value?.Value;
-        string kw_ = context.Operators.Convert<string>(kv_);
+        Encounter.EncounterStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return kw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Endpoint.EndpointStatus> value)
     {
-        Endpoint.EndpointStatus? kx_ = value?.Value;
-        string ky_ = context.Operators.Convert<string>(kx_);
+        Endpoint.EndpointStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ky_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EpisodeOfCare.EpisodeOfCareStatus> value)
     {
-        EpisodeOfCare.EpisodeOfCareStatus? kz_ = value?.Value;
-        string la_ = context.Operators.Convert<string>(kz_);
+        EpisodeOfCare.EpisodeOfCareStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return la_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.EventCapabilityMode> value)
     {
-        CapabilityStatement.EventCapabilityMode? lb_ = value?.Value;
-        string lc_ = context.Operators.Convert<string>(lb_);
+        CapabilityStatement.EventCapabilityMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Timing.EventTiming> value)
     {
-        Timing.EventTiming? ld_ = value?.Value;
-        string le_ = context.Operators.Convert<string>(ld_);
+        Timing.EventTiming? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return le_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VariableTypeCode> value)
     {
-        VariableTypeCode? lf_ = value?.Value;
-        string lg_ = context.Operators.Convert<string>(lf_);
+        VariableTypeCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ExampleScenario.ExampleScenarioActorType> value)
     {
-        ExampleScenario.ExampleScenarioActorType? lh_ = value?.Value;
-        string li_ = context.Operators.Convert<string>(lh_);
+        ExampleScenario.ExampleScenarioActorType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return li_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value)
     {
-        ExplanationOfBenefit.ExplanationOfBenefitStatus? lj_ = value?.Value;
-        string lk_ = context.Operators.Convert<string>(lj_);
+        ExplanationOfBenefit.ExplanationOfBenefitStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<EffectEvidenceSynthesis.ExposureStateCode> value)
     {
-        EffectEvidenceSynthesis.ExposureStateCode? ll_ = value?.Value;
-        string lm_ = context.Operators.Convert<string>(ll_);
+        EffectEvidenceSynthesis.ExposureStateCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.ExtensionContextType> value)
     {
-        StructureDefinition.ExtensionContextType? ln_ = value?.Value;
-        string lo_ = context.Operators.Convert<string>(ln_);
+        StructureDefinition.ExtensionContextType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRAllTypes> value)
     {
-        FHIRAllTypes? lp_ = value?.Value;
-        string lq_ = context.Operators.Convert<string>(lp_);
+        FHIRAllTypes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRDefinedType> value)
     {
-        FHIRDefinedType? lr_ = value?.Value;
-        string ls_ = context.Operators.Convert<string>(lr_);
+        FHIRDefinedType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ls_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Device.FHIRDeviceStatus> value)
     {
-        Device.FHIRDeviceStatus? lt_ = value?.Value;
-        string lu_ = context.Operators.Convert<string>(lt_);
+        Device.FHIRDeviceStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResourceType> value)
     {
-        ResourceType? lv_ = value?.Value;
-        string lw_ = context.Operators.Convert<string>(lv_);
+        ResourceType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return lw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Substance.FHIRSubstanceStatus> value)
     {
-        Substance.FHIRSubstanceStatus? lx_ = value?.Value;
-        string ly_ = context.Operators.Convert<string>(lx_);
+        Substance.FHIRSubstanceStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ly_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FHIRVersion> value)
     {
-        FHIRVersion? lz_ = value?.Value;
-        string ma_ = context.Operators.Convert<string>(lz_);
+        FHIRVersion? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ma_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FamilyMemberHistory.FamilyHistoryStatus> value)
     {
-        FamilyMemberHistory.FamilyHistoryStatus? mb_ = value?.Value;
-        string mc_ = context.Operators.Convert<string>(mb_);
+        FamilyMemberHistory.FamilyHistoryStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<FilterOperator> value)
     {
-        FilterOperator? md_ = value?.Value;
-        string me_ = context.Operators.Convert<string>(md_);
+        FilterOperator? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return me_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Flag.FlagStatus> value)
     {
-        Flag.FlagStatus? mf_ = value?.Value;
-        string mg_ = context.Operators.Convert<string>(mf_);
+        Flag.FlagStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mg_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Goal.GoalLifecycleStatus> value)
     {
-        Goal.GoalLifecycleStatus? mh_ = value?.Value;
-        string mi_ = context.Operators.Convert<string>(mh_);
+        Goal.GoalLifecycleStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mi_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentRule> value)
     {
-        GraphDefinition.GraphCompartmentRule? mj_ = value?.Value;
-        string mk_ = context.Operators.Convert<string>(mj_);
+        GraphDefinition.GraphCompartmentRule? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentUse> value)
     {
-        GraphDefinition.GraphCompartmentUse? ml_ = value?.Value;
-        string mm_ = context.Operators.Convert<string>(ml_);
+        GraphDefinition.GraphCompartmentUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GroupMeasureCode> value)
     {
-        GroupMeasureCode? mn_ = value?.Value;
-        string mo_ = context.Operators.Convert<string>(mn_);
+        GroupMeasureCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Group.GroupType> value)
     {
-        Group.GroupType? mp_ = value?.Value;
-        string mq_ = context.Operators.Convert<string>(mp_);
+        Group.GroupType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<GuidanceResponse.GuidanceResponseStatus> value)
     {
-        GuidanceResponse.GuidanceResponseStatus? mr_ = value?.Value;
-        string ms_ = context.Operators.Convert<string>(mr_);
+        GuidanceResponse.GuidanceResponseStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ms_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.GuidePageGeneration> value)
     {
-        ImplementationGuide.GuidePageGeneration? mt_ = value?.Value;
-        string mu_ = context.Operators.Convert<string>(mt_);
+        ImplementationGuide.GuidePageGeneration? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.GuideParameterCode> value)
     {
-        ImplementationGuide.GuideParameterCode? mv_ = value?.Value;
-        string mw_ = context.Operators.Convert<string>(mv_);
+        ImplementationGuide.GuideParameterCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return mw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.HTTPVerb> value)
     {
-        Bundle.HTTPVerb? mx_ = value?.Value;
-        string my_ = context.Operators.Convert<string>(mx_);
+        Bundle.HTTPVerb? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return my_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Identifier.IdentifierUse> value)
     {
-        Identifier.IdentifierUse? mz_ = value?.Value;
-        string na_ = context.Operators.Convert<string>(mz_);
+        Identifier.IdentifierUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return na_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Person.IdentityAssuranceLevel> value)
     {
-        Person.IdentityAssuranceLevel? nb_ = value?.Value;
-        string nc_ = context.Operators.Convert<string>(nb_);
+        Person.IdentityAssuranceLevel? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImagingStudy.ImagingStudyStatus> value)
     {
-        ImagingStudy.ImagingStudyStatus? nd_ = value?.Value;
-        string ne_ = context.Operators.Convert<string>(nd_);
+        ImagingStudy.ImagingStudyStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ne_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value)
     {
-        ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? nf_ = value?.Value;
-        string ng_ = context.Operators.Convert<string>(nf_);
+        ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ng_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Immunization.ImmunizationStatusCodes> value)
     {
-        Immunization.ImmunizationStatusCodes? nh_ = value?.Value;
-        string ni_ = context.Operators.Convert<string>(nh_);
+        Immunization.ImmunizationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ni_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Invoice.InvoiceStatus> value)
     {
-        Invoice.InvoiceStatus? nj_ = value?.Value;
-        string nk_ = context.Operators.Convert<string>(nj_);
+        Invoice.InvoiceStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nk_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationOutcome.IssueSeverity> value)
     {
-        OperationOutcome.IssueSeverity? nl_ = value?.Value;
-        string nm_ = context.Operators.Convert<string>(nl_);
+        OperationOutcome.IssueSeverity? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationOutcome.IssueType> value)
     {
-        OperationOutcome.IssueType? nn_ = value?.Value;
-        string no_ = context.Operators.Convert<string>(nn_);
+        OperationOutcome.IssueType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return no_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Patient.LinkType> value)
     {
-        Patient.LinkType? np_ = value?.Value;
-        string nq_ = context.Operators.Convert<string>(np_);
+        Patient.LinkType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Linkage.LinkageType> value)
     {
-        Linkage.LinkageType? nr_ = value?.Value;
-        string ns_ = context.Operators.Convert<string>(nr_);
+        Linkage.LinkageType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ns_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ListMode> value)
     {
-        ListMode? nt_ = value?.Value;
-        string nu_ = context.Operators.Convert<string>(nt_);
+        ListMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nu_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<List.ListStatus> value)
     {
-        List.ListStatus? nv_ = value?.Value;
-        string nw_ = context.Operators.Convert<string>(nv_);
+        List.ListStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return nw_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Location.LocationMode> value)
     {
-        Location.LocationMode? nx_ = value?.Value;
-        string ny_ = context.Operators.Convert<string>(nx_);
+        Location.LocationMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ny_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Location.LocationStatus> value)
     {
-        Location.LocationStatus? nz_ = value?.Value;
-        string oa_ = context.Operators.Convert<string>(nz_);
+        Location.LocationStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oa_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MeasureReport.MeasureReportStatus> value)
     {
-        MeasureReport.MeasureReportStatus? ob_ = value?.Value;
-        string oc_ = context.Operators.Convert<string>(ob_);
+        MeasureReport.MeasureReportStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MeasureReport.MeasureReportType> value)
     {
-        MeasureReport.MeasureReportType? od_ = value?.Value;
-        string oe_ = context.Operators.Convert<string>(od_);
+        MeasureReport.MeasureReportType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oe_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationAdministration.MedicationAdministrationStatusCodes> value)
     {
-        MedicationAdministration.MedicationAdministrationStatusCodes? of_ = value?.Value;
-        string og_ = context.Operators.Convert<string>(of_);
+        MedicationAdministration.MedicationAdministrationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return og_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationDispense.MedicationDispenseStatusCodes> value)
     {
-        MedicationDispense.MedicationDispenseStatusCodes? oh_ = value?.Value;
-        string oi_ = context.Operators.Convert<string>(oh_);
+        MedicationDispense.MedicationDispenseStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oi_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value)
     {
-        MedicationKnowledge.MedicationKnowledgeStatusCodes? oj_ = value?.Value;
-        string ok_ = context.Operators.Convert<string>(oj_);
+        MedicationKnowledge.MedicationKnowledgeStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ok_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationRequest.MedicationRequestIntent> value)
     {
-        MedicationRequest.MedicationRequestIntent? ol_ = value?.Value;
-        string om_ = context.Operators.Convert<string>(ol_);
+        MedicationRequest.MedicationRequestIntent? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return om_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationRequest.MedicationrequestStatus> value)
     {
-        MedicationRequest.MedicationrequestStatus? on_ = value?.Value;
-        string oo_ = context.Operators.Convert<string>(on_);
+        MedicationRequest.MedicationrequestStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oo_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MedicationStatement.MedicationStatusCodes> value)
     {
-        MedicationStatement.MedicationStatusCodes? op_ = value?.Value;
-        string oq_ = context.Operators.Convert<string>(op_);
+        MedicationStatement.MedicationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oq_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Medication.MedicationStatusCodes> value)
     {
-        Medication.MedicationStatusCodes? or_ = value?.Value;
-        string os_ = context.Operators.Convert<string>(or_);
+        Medication.MedicationStatusCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return os_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageDefinition.MessageSignificanceCategory> value)
     {
-        MessageDefinition.MessageSignificanceCategory? ot_ = value?.Value;
-        string ou_ = context.Operators.Convert<string>(ot_);
+        MessageDefinition.MessageSignificanceCategory? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ou_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageheaderResponseRequest> value)
     {
-        MessageheaderResponseRequest? ov_ = value?.Value;
-        string ow_ = context.Operators.Convert<string>(ov_);
+        MessageheaderResponseRequest? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ow_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code value)
     {
-        string ox_ = value?.Value;
+        string a_ = value?.Value;
 
-        return ox_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<HumanName.NameUse> value)
     {
-        HumanName.NameUse? oy_ = value?.Value;
-        string oz_ = context.Operators.Convert<string>(oy_);
+        HumanName.NameUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return oz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NamingSystem.NamingSystemIdentifierType> value)
     {
-        NamingSystem.NamingSystemIdentifierType? pa_ = value?.Value;
-        string pb_ = context.Operators.Convert<string>(pa_);
+        NamingSystem.NamingSystemIdentifierType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NamingSystem.NamingSystemType> value)
     {
-        NamingSystem.NamingSystemType? pc_ = value?.Value;
-        string pd_ = context.Operators.Convert<string>(pc_);
+        NamingSystem.NamingSystemType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pd_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Narrative.NarrativeStatus> value)
     {
-        Narrative.NarrativeStatus? pe_ = value?.Value;
-        string pf_ = context.Operators.Convert<string>(pe_);
+        Narrative.NarrativeStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<NoteType> value)
     {
-        NoteType? pg_ = value?.Value;
-        string ph_ = context.Operators.Convert<string>(pg_);
+        NoteType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ph_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RequestIntent> value)
     {
-        RequestIntent? pi_ = value?.Value;
-        string pj_ = context.Operators.Convert<string>(pi_);
+        RequestIntent? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationDefinition.ObservationDataType> value)
     {
-        ObservationDefinition.ObservationDataType? pk_ = value?.Value;
-        string pl_ = context.Operators.Convert<string>(pk_);
+        ObservationDefinition.ObservationDataType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pl_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ObservationDefinition.ObservationRangeCategory> value)
     {
-        ObservationDefinition.ObservationRangeCategory? pm_ = value?.Value;
-        string pn_ = context.Operators.Convert<string>(pm_);
+        ObservationDefinition.ObservationRangeCategory? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pn_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationDefinition.OperationKind> value)
     {
-        OperationDefinition.OperationKind? po_ = value?.Value;
-        string pp_ = context.Operators.Convert<string>(po_);
+        OperationDefinition.OperationKind? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pp_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<OperationParameterUse> value)
     {
-        OperationParameterUse? pq_ = value?.Value;
-        string pr_ = context.Operators.Convert<string>(pq_);
+        OperationParameterUse? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pr_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.OrientationType> value)
     {
-        MolecularSequence.OrientationType? ps_ = value?.Value;
-        string pt_ = context.Operators.Convert<string>(ps_);
+        MolecularSequence.OrientationType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pt_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Appointment.ParticipantRequired> value)
     {
-        Appointment.ParticipantRequired? pu_ = value?.Value;
-        string pv_ = context.Operators.Convert<string>(pu_);
+        Appointment.ParticipantRequired? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pv_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ParticipationStatus> value)
     {
-        ParticipationStatus? pw_ = value?.Value;
-        string px_ = context.Operators.Convert<string>(pw_);
+        ParticipationStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return px_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.PropertyRepresentation> value)
     {
-        ElementDefinition.PropertyRepresentation? py_ = value?.Value;
-        string pz_ = context.Operators.Convert<string>(py_);
+        ElementDefinition.PropertyRepresentation? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return pz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CodeSystem.PropertyType> value)
     {
-        CodeSystem.PropertyType? qa_ = value?.Value;
-        string qb_ = context.Operators.Convert<string>(qa_);
+        CodeSystem.PropertyType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Provenance.ProvenanceEntityRole> value)
     {
-        Provenance.ProvenanceEntityRole? qc_ = value?.Value;
-        string qd_ = context.Operators.Convert<string>(qc_);
+        Provenance.ProvenanceEntityRole? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qd_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<PublicationStatus> value)
     {
-        PublicationStatus? qe_ = value?.Value;
-        string qf_ = context.Operators.Convert<string>(qe_);
+        PublicationStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.QualityType> value)
     {
-        MolecularSequence.QualityType? qg_ = value?.Value;
-        string qh_ = context.Operators.Convert<string>(qg_);
+        MolecularSequence.QualityType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qh_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Quantity.QuantityComparator> value)
     {
-        Quantity.QuantityComparator? qi_ = value?.Value;
-        string qj_ = context.Operators.Convert<string>(qi_);
+        Quantity.QuantityComparator? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemOperator> value)
     {
-        Questionnaire.QuestionnaireItemOperator? qk_ = value?.Value;
-        string ql_ = context.Operators.Convert<string>(qk_);
+        Questionnaire.QuestionnaireItemOperator? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ql_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemType> value)
     {
-        Questionnaire.QuestionnaireItemType? qm_ = value?.Value;
-        string qn_ = context.Operators.Convert<string>(qm_);
+        Questionnaire.QuestionnaireItemType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qn_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<QuestionnaireResponse.QuestionnaireResponseStatus> value)
     {
-        QuestionnaireResponse.QuestionnaireResponseStatus? qo_ = value?.Value;
-        string qp_ = context.Operators.Convert<string>(qo_);
+        QuestionnaireResponse.QuestionnaireResponseStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qp_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ReferenceHandlingPolicy> value)
     {
-        CapabilityStatement.ReferenceHandlingPolicy? qq_ = value?.Value;
-        string qr_ = context.Operators.Convert<string>(qq_);
+        CapabilityStatement.ReferenceHandlingPolicy? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qr_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.ReferenceVersionRules> value)
     {
-        ElementDefinition.ReferenceVersionRules? qs_ = value?.Value;
-        string qt_ = context.Operators.Convert<string>(qs_);
+        ElementDefinition.ReferenceVersionRules? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qt_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<RelatedArtifact.RelatedArtifactType> value)
     {
-        RelatedArtifact.RelatedArtifactType? qu_ = value?.Value;
-        string qv_ = context.Operators.Convert<string>(qu_);
+        RelatedArtifact.RelatedArtifactType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qv_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClaimProcessingCodes> value)
     {
-        ClaimProcessingCodes? qw_ = value?.Value;
-        string qx_ = context.Operators.Convert<string>(qw_);
+        ClaimProcessingCodes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qx_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.RepositoryType> value)
     {
-        MolecularSequence.RepositoryType? qy_ = value?.Value;
-        string qz_ = context.Operators.Convert<string>(qy_);
+        MolecularSequence.RepositoryType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return qz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchElementDefinition.ResearchElementType> value)
     {
-        ResearchElementDefinition.ResearchElementType? ra_ = value?.Value;
-        string rb_ = context.Operators.Convert<string>(ra_);
+        ResearchElementDefinition.ResearchElementType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchStudy.ResearchStudyStatus> value)
     {
-        ResearchStudy.ResearchStudyStatus? rc_ = value?.Value;
-        string rd_ = context.Operators.Convert<string>(rc_);
+        ResearchStudy.ResearchStudyStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rd_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ResearchSubject.ResearchSubjectStatus> value)
     {
-        ResearchSubject.ResearchSubjectStatus? re_ = value?.Value;
-        string rf_ = context.Operators.Convert<string>(re_);
+        ResearchSubject.ResearchSubjectStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.ResourceVersionPolicy> value)
     {
-        CapabilityStatement.ResourceVersionPolicy? rg_ = value?.Value;
-        string rh_ = context.Operators.Convert<string>(rg_);
+        CapabilityStatement.ResourceVersionPolicy? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rh_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MessageHeader.ResponseType> value)
     {
-        MessageHeader.ResponseType? ri_ = value?.Value;
-        string rj_ = context.Operators.Convert<string>(ri_);
+        MessageHeader.ResponseType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.RestfulCapabilityMode> value)
     {
-        CapabilityStatement.RestfulCapabilityMode? rk_ = value?.Value;
-        string rl_ = context.Operators.Convert<string>(rk_);
+        CapabilityStatement.RestfulCapabilityMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rl_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ImplementationGuide.SPDXLicense> value)
     {
-        ImplementationGuide.SPDXLicense? rm_ = value?.Value;
-        string rn_ = context.Operators.Convert<string>(rm_);
+        ImplementationGuide.SPDXLicense? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rn_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.SearchComparator> value)
     {
-        SearchParameter.SearchComparator? ro_ = value?.Value;
-        string rp_ = context.Operators.Convert<string>(ro_);
+        SearchParameter.SearchComparator? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rp_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Bundle.SearchEntryMode> value)
     {
-        Bundle.SearchEntryMode? rq_ = value?.Value;
-        string rr_ = context.Operators.Convert<string>(rq_);
+        Bundle.SearchEntryMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rr_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.SearchModifierCode> value)
     {
-        SearchParameter.SearchModifierCode? rs_ = value?.Value;
-        string rt_ = context.Operators.Convert<string>(rs_);
+        SearchParameter.SearchModifierCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rt_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParamType> value)
     {
-        SearchParamType? ru_ = value?.Value;
-        string rv_ = context.Operators.Convert<string>(ru_);
+        SearchParamType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rv_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.SequenceType> value)
     {
-        MolecularSequence.SequenceType? rw_ = value?.Value;
-        string rx_ = context.Operators.Convert<string>(rw_);
+        MolecularSequence.SequenceType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rx_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ElementDefinition.SlicingRules> value)
     {
-        ElementDefinition.SlicingRules? ry_ = value?.Value;
-        string rz_ = context.Operators.Convert<string>(ry_);
+        ElementDefinition.SlicingRules? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return rz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Slot.SlotStatus> value)
     {
-        Slot.SlotStatus? sa_ = value?.Value;
-        string sb_ = context.Operators.Convert<string>(sa_);
+        Slot.SlotStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<DataRequirement.SortDirection> value)
     {
-        DataRequirement.SortDirection? sc_ = value?.Value;
-        string sd_ = context.Operators.Convert<string>(sc_);
+        DataRequirement.SortDirection? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sd_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SpecimenDefinition.SpecimenContainedPreference> value)
     {
-        SpecimenDefinition.SpecimenContainedPreference? se_ = value?.Value;
-        string sf_ = context.Operators.Convert<string>(se_);
+        SpecimenDefinition.SpecimenContainedPreference? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Specimen.SpecimenStatus> value)
     {
-        Specimen.SpecimenStatus? sg_ = value?.Value;
-        string sh_ = context.Operators.Convert<string>(sg_);
+        Specimen.SpecimenStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sh_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VerificationResult.StatusCode> value)
     {
-        VerificationResult.StatusCode? si_ = value?.Value;
-        string sj_ = context.Operators.Convert<string>(si_);
+        VerificationResult.StatusCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<MolecularSequence.StrandType> value)
     {
-        MolecularSequence.StrandType? sk_ = value?.Value;
-        string sl_ = context.Operators.Convert<string>(sk_);
+        MolecularSequence.StrandType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sl_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.StructureDefinitionKind> value)
     {
-        StructureDefinition.StructureDefinitionKind? sm_ = value?.Value;
-        string sn_ = context.Operators.Convert<string>(sm_);
+        StructureDefinition.StructureDefinitionKind? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sn_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapContextType> value)
     {
-        StructureMap.StructureMapContextType? so_ = value?.Value;
-        string sp_ = context.Operators.Convert<string>(so_);
+        StructureMap.StructureMapContextType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sp_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapGroupTypeMode> value)
     {
-        StructureMap.StructureMapGroupTypeMode? sq_ = value?.Value;
-        string sr_ = context.Operators.Convert<string>(sq_);
+        StructureMap.StructureMapGroupTypeMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sr_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapInputMode> value)
     {
-        StructureMap.StructureMapInputMode? ss_ = value?.Value;
-        string st_ = context.Operators.Convert<string>(ss_);
+        StructureMap.StructureMapInputMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return st_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapModelMode> value)
     {
-        StructureMap.StructureMapModelMode? su_ = value?.Value;
-        string sv_ = context.Operators.Convert<string>(su_);
+        StructureMap.StructureMapModelMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sv_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapSourceListMode> value)
     {
-        StructureMap.StructureMapSourceListMode? sw_ = value?.Value;
-        string sx_ = context.Operators.Convert<string>(sw_);
+        StructureMap.StructureMapSourceListMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sx_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapTargetListMode> value)
     {
-        StructureMap.StructureMapTargetListMode? sy_ = value?.Value;
-        string sz_ = context.Operators.Convert<string>(sy_);
+        StructureMap.StructureMapTargetListMode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return sz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureMap.StructureMapTransform> value)
     {
-        StructureMap.StructureMapTransform? ta_ = value?.Value;
-        string tb_ = context.Operators.Convert<string>(ta_);
+        StructureMap.StructureMapTransform? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Subscription.SubscriptionChannelType> value)
     {
-        Subscription.SubscriptionChannelType? tc_ = value?.Value;
-        string td_ = context.Operators.Convert<string>(tc_);
+        Subscription.SubscriptionChannelType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return td_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Subscription.SubscriptionStatus> value)
     {
-        Subscription.SubscriptionStatus? te_ = value?.Value;
-        string tf_ = context.Operators.Convert<string>(te_);
+        Subscription.SubscriptionStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SupplyDelivery.SupplyDeliveryStatus> value)
     {
-        SupplyDelivery.SupplyDeliveryStatus? tg_ = value?.Value;
-        string th_ = context.Operators.Convert<string>(tg_);
+        SupplyDelivery.SupplyDeliveryStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return th_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SupplyRequest.SupplyRequestStatus> value)
     {
-        SupplyRequest.SupplyRequestStatus? ti_ = value?.Value;
-        string tj_ = context.Operators.Convert<string>(ti_);
+        SupplyRequest.SupplyRequestStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.SystemRestfulInteraction> value)
     {
-        CapabilityStatement.SystemRestfulInteraction? tk_ = value?.Value;
-        string tl_ = context.Operators.Convert<string>(tk_);
+        CapabilityStatement.SystemRestfulInteraction? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tl_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Task.TaskIntent> value)
     {
-        Task.TaskIntent? tm_ = value?.Value;
-        string tn_ = context.Operators.Convert<string>(tm_);
+        Task.TaskIntent? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tn_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Task.TaskStatus> value)
     {
-        Task.TaskStatus? to_ = value?.Value;
-        string tp_ = context.Operators.Convert<string>(to_);
+        Task.TaskStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tp_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportActionResult> value)
     {
-        TestReport.TestReportActionResult? tq_ = value?.Value;
-        string tr_ = context.Operators.Convert<string>(tq_);
+        TestReport.TestReportActionResult? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tr_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportParticipantType> value)
     {
-        TestReport.TestReportParticipantType? ts_ = value?.Value;
-        string tt_ = context.Operators.Convert<string>(ts_);
+        TestReport.TestReportParticipantType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tt_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportResult> value)
     {
-        TestReport.TestReportResult? tu_ = value?.Value;
-        string tv_ = context.Operators.Convert<string>(tu_);
+        TestReport.TestReportResult? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tv_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestReport.TestReportStatus> value)
     {
-        TestReport.TestReportStatus? tw_ = value?.Value;
-        string tx_ = context.Operators.Convert<string>(tw_);
+        TestReport.TestReportStatus? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tx_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TestScript.TestScriptRequestMethodCode> value)
     {
-        TestScript.TestScriptRequestMethodCode? ty_ = value?.Value;
-        string tz_ = context.Operators.Convert<string>(ty_);
+        TestScript.TestScriptRequestMethodCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return tz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<TriggerDefinition.TriggerType> value)
     {
-        TriggerDefinition.TriggerType? ua_ = value?.Value;
-        string ub_ = context.Operators.Convert<string>(ua_);
+        TriggerDefinition.TriggerType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ub_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<StructureDefinition.TypeDerivationRule> value)
     {
-        StructureDefinition.TypeDerivationRule? uc_ = value?.Value;
-        string ud_ = context.Operators.Convert<string>(uc_);
+        StructureDefinition.TypeDerivationRule? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ud_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<CapabilityStatement.TypeRestfulInteraction> value)
     {
-        CapabilityStatement.TypeRestfulInteraction? ue_ = value?.Value;
-        string uf_ = context.Operators.Convert<string>(ue_);
+        CapabilityStatement.TypeRestfulInteraction? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return uf_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Device.UDIEntryType> value)
     {
-        Device.UDIEntryType? ug_ = value?.Value;
-        string uh_ = context.Operators.Convert<string>(ug_);
+        Device.UDIEntryType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return uh_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<Timing.UnitsOfTime> value)
     {
-        Timing.UnitsOfTime? ui_ = value?.Value;
-        string uj_ = context.Operators.Convert<string>(ui_);
+        Timing.UnitsOfTime? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return uj_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<ClaimUseCode> value)
     {
-        ClaimUseCode? uk_ = value?.Value;
-        string ul_ = context.Operators.Convert<string>(uk_);
+        ClaimUseCode? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ul_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VisionPrescription.VisionBase> value)
     {
-        VisionPrescription.VisionBase? um_ = value?.Value;
-        string un_ = context.Operators.Convert<string>(um_);
+        VisionPrescription.VisionBase? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return un_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<VisionPrescription.VisionEyes> value)
     {
-        VisionPrescription.VisionEyes? uo_ = value?.Value;
-        string up_ = context.Operators.Convert<string>(uo_);
+        VisionPrescription.VisionEyes? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return up_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Code<SearchParameter.XPathUsageType> value)
     {
-        SearchParameter.XPathUsageType? uq_ = value?.Value;
-        string ur_ = context.Operators.Convert<string>(uq_);
+        SearchParameter.XPathUsageType? a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ur_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, Base64Binary value)
     {
-        byte[] us_ = value?.Value;
-        string ut_ = context.Operators.Convert<string>(us_);
+        byte[] a_ = value?.Value;
+        string b_ = context.Operators.Convert<string>(a_);
 
-        return ut_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, FhirString value)
     {
-        string uu_ = value?.Value;
+        string a_ = value?.Value;
 
-        return uu_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, FhirUri value)
     {
-        string uv_ = value?.Value;
+        string a_ = value?.Value;
 
-        return uv_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToString")]
     public string ToString(CqlContext context, XHtml value)
     {
-        string uw_ = value?.Value;
+        string a_ = value?.Value;
 
-        return uw_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToBoolean")]
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {
-        bool? ux_ = value?.Value;
+        bool? a_ = value?.Value;
 
-        return ux_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToDate")]
     public CqlDate ToDate(CqlContext context, Date value)
     {
-        string uy_ = value?.Value;
-        CqlDate uz_ = context.Operators.ConvertStringToDate(uy_);
+        string a_ = value?.Value;
+        CqlDate b_ = context.Operators.ConvertStringToDate(a_);
 
-        return uz_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToDateTime")]
     public CqlDateTime ToDateTime(CqlContext context, FhirDateTime value)
     {
-        CqlDateTime va_ = context.Operators.Convert<CqlDateTime>(value);
+        CqlDateTime a_ = context.Operators.Convert<CqlDateTime>(value);
 
-        return va_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToDateTime")]
     public CqlDateTime ToDateTime(CqlContext context, Instant value)
     {
-        DateTimeOffset? vb_ = value?.Value;
-        CqlDateTime vc_ = context.Operators.Convert<CqlDateTime>(vb_);
+        DateTimeOffset? a_ = value?.Value;
+        CqlDateTime b_ = context.Operators.Convert<CqlDateTime>(a_);
 
-        return vc_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("ToDecimal")]
     public decimal? ToDecimal(CqlContext context, FhirDecimal value)
     {
-        decimal? vd_ = value?.Value;
+        decimal? a_ = value?.Value;
 
-        return vd_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToInteger")]
     public int? ToInteger(CqlContext context, Integer value)
     {
-        int? ve_ = value?.Value;
+        int? a_ = value?.Value;
 
-        return ve_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("ToTime")]
     public CqlTime ToTime(CqlContext context, Time value)
     {
-        string vf_ = value?.Value;
-        CqlTime vg_ = context.Operators.ConvertStringToTime(vf_);
+        string a_ = value?.Value;
+        CqlTime b_ = context.Operators.ConvertStringToTime(a_);
 
-        return vg_;
+        return b_;
     }
 
 

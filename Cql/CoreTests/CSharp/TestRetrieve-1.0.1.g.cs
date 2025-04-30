@@ -99,12 +99,12 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context)
     {
-        CqlDateTime kzzzzzh_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime kzzzzzi_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> kzzzzzj_ = context.Operators.Interval(kzzzzzh_, kzzzzzi_, true, false);
-        object kzzzzzk_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", kzzzzzj_);
+        CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
 
-        return kzzzzzk_;
+        return d_;
     }
 
 
@@ -115,32 +115,32 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> kzzzzzl_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient kzzzzzm_ = context.Operators.SingletonFrom<Patient>(kzzzzzl_);
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
-        return kzzzzzm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context)
     {
-        IEnumerable<Patient> kzzzzzn_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 
-        return kzzzzzn_;
+        return a_;
     }
 
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context)
     {
-        IEnumerable<Condition> kzzzzzo_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? kzzzzzp_ = context.Operators.Exists<Condition>(kzzzzzo_);
-        IEnumerable<ServiceRequest> kzzzzzq_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-        bool? kzzzzzr_ = context.Operators.Exists<ServiceRequest>(kzzzzzq_);
-        bool? kzzzzzs_ = context.Operators.Or(kzzzzzp_, kzzzzzr_);
+        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? b_ = context.Operators.Exists<Condition>(a_);
+        IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+        bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
+        bool? e_ = context.Operators.Or(b_, d_);
 
-        return kzzzzzs_;
+        return e_;
     }
 
 

@@ -63,54 +63,54 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> lzzza_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient lzzzb_ = context.Operators.SingletonFrom<Patient>(lzzza_);
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
-        return lzzzb_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
     {
-        CqlCode lzzzc_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode> lzzzd_ = context.Operators.ToList<CqlCode>(lzzzc_);
-        IEnumerable<Observation> lzzze_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, lzzzd_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? lzzzf_(Observation O)
+        CqlCode a_ = this.Tobacco_Smoking_Status(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        bool? d_(Observation O)
         {
-            Code<ObservationStatus> lzzzh_ = O?.StatusElement;
-            string lzzzi_ = FHIRHelpers_4_3_000.Instance.ToString(context, lzzzh_);
-            string[] lzzzj_ = [
+            Code<ObservationStatus> f_ = O?.StatusElement;
+            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
+            string[] h_ = [
                 "final",
                 "amended",
             ];
-            bool? lzzzk_ = context.Operators.In<string>(lzzzi_, lzzzj_ as IEnumerable<string>);
+            bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 
-            return lzzzk_;
+            return i_;
         };
-        IEnumerable<Observation> lzzzg_ = context.Operators.Where<Observation>(lzzze_, lzzzf_);
+        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
-        return lzzzg_;
+        return e_;
     }
 
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
-        CqlValueSet lzzzl_ = this.Lung_Cancer(context);
-        IEnumerable<Condition> lzzzm_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, lzzzl_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? lzzzn_(Condition C)
+        CqlValueSet a_ = this.Lung_Cancer(context);
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? c_(Condition C)
         {
-            CodeableConcept lzzzp_ = C?.ClinicalStatus;
-            CqlConcept lzzzq_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, lzzzp_);
-            CqlValueSet lzzzr_ = this.Condition_Clinical_Status(context);
-            bool? lzzzs_ = context.Operators.ConceptInValueSet(lzzzq_, lzzzr_);
+            CodeableConcept e_ = C?.ClinicalStatus;
+            CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
+            CqlValueSet g_ = this.Condition_Clinical_Status(context);
+            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
-            return lzzzs_;
+            return h_;
         };
-        IEnumerable<Condition> lzzzo_ = context.Operators.Where<Condition>(lzzzm_, lzzzn_);
+        IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
-        return lzzzo_;
+        return d_;
     }
 
 

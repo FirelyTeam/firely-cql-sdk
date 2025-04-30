@@ -69,9 +69,9 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object izzzzzzzzzzzzzk_ = context.ResolveParameter("TJCOverall-8.14.000", "Measurement Period", null);
+        object a_ = context.ResolveParameter("TJCOverall-8.14.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)izzzzzzzzzzzzzk_;
+        return (CqlInterval<CqlDateTime>)a_;
     }
 
 
@@ -82,239 +82,239 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
-        IEnumerable<Patient> izzzzzzzzzzzzzl_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient izzzzzzzzzzzzzm_ = context.Operators.SingletonFrom<Patient>(izzzzzzzzzzzzzl_);
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
-        return izzzzzzzzzzzzzm_;
+        return b_;
     }
 
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter with Age")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_with_Age(CqlContext context)
     {
-        CqlValueSet izzzzzzzzzzzzzn_ = this.Nonelective_Inpatient_Encounter(context);
-        IEnumerable<Encounter> izzzzzzzzzzzzzo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, izzzzzzzzzzzzzn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? izzzzzzzzzzzzzp_(Encounter NonElectiveEncounter)
+        CqlValueSet a_ = this.Nonelective_Inpatient_Encounter(context);
+        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        bool? c_(Encounter NonElectiveEncounter)
         {
-            Patient izzzzzzzzzzzzzr_ = this.Patient(context);
-            Date izzzzzzzzzzzzzs_ = izzzzzzzzzzzzzr_?.BirthDateElement;
-            string izzzzzzzzzzzzzt_ = izzzzzzzzzzzzzs_?.Value;
-            CqlDate izzzzzzzzzzzzzu_ = context.Operators.ConvertStringToDate(izzzzzzzzzzzzzt_);
-            Period izzzzzzzzzzzzzv_ = NonElectiveEncounter?.Period;
-            CqlInterval<CqlDateTime> izzzzzzzzzzzzzw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, izzzzzzzzzzzzzv_);
-            CqlDateTime izzzzzzzzzzzzzx_ = context.Operators.Start(izzzzzzzzzzzzzw_);
-            CqlDate izzzzzzzzzzzzzy_ = context.Operators.DateFrom(izzzzzzzzzzzzzx_);
-            int? izzzzzzzzzzzzzz_ = context.Operators.CalculateAgeAt(izzzzzzzzzzzzzu_, izzzzzzzzzzzzzy_, "year");
-            bool? jzzzzzzzzzzzzza_ = context.Operators.GreaterOrEqual(izzzzzzzzzzzzzz_, 18);
-            CqlInterval<CqlDateTime> jzzzzzzzzzzzzzc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, izzzzzzzzzzzzzv_);
-            CqlDateTime jzzzzzzzzzzzzzd_ = context.Operators.End(jzzzzzzzzzzzzzc_);
-            CqlInterval<CqlDateTime> jzzzzzzzzzzzzze_ = this.Measurement_Period(context);
-            bool? jzzzzzzzzzzzzzf_ = context.Operators.In<CqlDateTime>(jzzzzzzzzzzzzzd_, jzzzzzzzzzzzzze_, "day");
-            bool? jzzzzzzzzzzzzzg_ = context.Operators.And(jzzzzzzzzzzzzza_, jzzzzzzzzzzzzzf_);
+            Patient e_ = this.Patient(context);
+            Date f_ = e_?.BirthDateElement;
+            string g_ = f_?.Value;
+            CqlDate h_ = context.Operators.ConvertStringToDate(g_);
+            Period i_ = NonElectiveEncounter?.Period;
+            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+            CqlDateTime k_ = context.Operators.Start(j_);
+            CqlDate l_ = context.Operators.DateFrom(k_);
+            int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
+            bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
+            CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
+            bool? t_ = context.Operators.And(n_, s_);
 
-            return jzzzzzzzzzzzzzg_;
+            return t_;
         };
-        IEnumerable<Encounter> izzzzzzzzzzzzzq_ = context.Operators.Where<Encounter>(izzzzzzzzzzzzzo_, izzzzzzzzzzzzzp_);
+        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
-        return izzzzzzzzzzzzzq_;
+        return d_;
     }
 
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> jzzzzzzzzzzzzzh_ = this.Non_Elective_Inpatient_Encounter_with_Age(context);
-        bool? jzzzzzzzzzzzzzi_(Encounter NonElectiveEncounterWithAge)
+        IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter_with_Age(context);
+        bool? b_(Encounter NonElectiveEncounterWithAge)
         {
-            Condition jzzzzzzzzzzzzzk_ = CQMCommon_2_2_000.Instance.principalDiagnosis(context, NonElectiveEncounterWithAge);
-            CodeableConcept jzzzzzzzzzzzzzl_ = jzzzzzzzzzzzzzk_?.Code;
-            CqlConcept jzzzzzzzzzzzzzm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzl_);
-            CqlValueSet jzzzzzzzzzzzzzn_ = this.Ischemic_Stroke(context);
-            bool? jzzzzzzzzzzzzzo_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzm_, jzzzzzzzzzzzzzn_);
+            Condition d_ = CQMCommon_2_2_000.Instance.principalDiagnosis(context, NonElectiveEncounterWithAge);
+            CodeableConcept e_ = d_?.Code;
+            CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
+            CqlValueSet g_ = this.Ischemic_Stroke(context);
+            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
-            return jzzzzzzzzzzzzzo_;
+            return h_;
         };
-        IEnumerable<Encounter> jzzzzzzzzzzzzzj_ = context.Operators.Where<Encounter>(jzzzzzzzzzzzzzh_, jzzzzzzzzzzzzzi_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
-        return jzzzzzzzzzzzzzj_;
+        return c_;
     }
 
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters with Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context)
     {
-        IEnumerable<Encounter> jzzzzzzzzzzzzzp_ = this.Ischemic_Stroke_Encounter(context);
-        bool? jzzzzzzzzzzzzzq_(Encounter IschemicStrokeEncounter)
+        IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
+        bool? b_(Encounter IschemicStrokeEncounter)
         {
-            Encounter.HospitalizationComponent jzzzzzzzzzzzzzs_ = IschemicStrokeEncounter?.Hospitalization;
-            CodeableConcept jzzzzzzzzzzzzzt_ = jzzzzzzzzzzzzzs_?.DischargeDisposition;
-            CqlConcept jzzzzzzzzzzzzzu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzt_);
-            CqlValueSet jzzzzzzzzzzzzzv_ = this.Discharge_To_Acute_Care_Facility(context);
-            bool? jzzzzzzzzzzzzzw_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzu_, jzzzzzzzzzzzzzv_);
-            CodeableConcept jzzzzzzzzzzzzzy_ = jzzzzzzzzzzzzzs_?.DischargeDisposition;
-            CqlConcept jzzzzzzzzzzzzzz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jzzzzzzzzzzzzzy_);
-            CqlValueSet kzzzzzzzzzzzzza_ = this.Left_Against_Medical_Advice(context);
-            bool? kzzzzzzzzzzzzzb_ = context.Operators.ConceptInValueSet(jzzzzzzzzzzzzzz_, kzzzzzzzzzzzzza_);
-            bool? kzzzzzzzzzzzzzc_ = context.Operators.Or(jzzzzzzzzzzzzzw_, kzzzzzzzzzzzzzb_);
-            CodeableConcept kzzzzzzzzzzzzze_ = jzzzzzzzzzzzzzs_?.DischargeDisposition;
-            CqlConcept kzzzzzzzzzzzzzf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzze_);
-            CqlValueSet kzzzzzzzzzzzzzg_ = this.Patient_Expired(context);
-            bool? kzzzzzzzzzzzzzh_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzf_, kzzzzzzzzzzzzzg_);
-            bool? kzzzzzzzzzzzzzi_ = context.Operators.Or(kzzzzzzzzzzzzzc_, kzzzzzzzzzzzzzh_);
-            CodeableConcept kzzzzzzzzzzzzzk_ = jzzzzzzzzzzzzzs_?.DischargeDisposition;
-            CqlConcept kzzzzzzzzzzzzzl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzzk_);
-            CqlValueSet kzzzzzzzzzzzzzm_ = this.Discharged_to_Home_for_Hospice_Care(context);
-            bool? kzzzzzzzzzzzzzn_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzl_, kzzzzzzzzzzzzzm_);
-            bool? kzzzzzzzzzzzzzo_ = context.Operators.Or(kzzzzzzzzzzzzzi_, kzzzzzzzzzzzzzn_);
-            CodeableConcept kzzzzzzzzzzzzzq_ = jzzzzzzzzzzzzzs_?.DischargeDisposition;
-            CqlConcept kzzzzzzzzzzzzzr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kzzzzzzzzzzzzzq_);
-            CqlValueSet kzzzzzzzzzzzzzs_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-            bool? kzzzzzzzzzzzzzt_ = context.Operators.ConceptInValueSet(kzzzzzzzzzzzzzr_, kzzzzzzzzzzzzzs_);
-            bool? kzzzzzzzzzzzzzu_ = context.Operators.Or(kzzzzzzzzzzzzzo_, kzzzzzzzzzzzzzt_);
+            Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter?.Hospitalization;
+            CodeableConcept e_ = d_?.DischargeDisposition;
+            CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
+            CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
+            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            CodeableConcept j_ = d_?.DischargeDisposition;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            CqlValueSet l_ = this.Left_Against_Medical_Advice(context);
+            bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
+            bool? n_ = context.Operators.Or(h_, m_);
+            CodeableConcept p_ = d_?.DischargeDisposition;
+            CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
+            CqlValueSet r_ = this.Patient_Expired(context);
+            bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
+            bool? t_ = context.Operators.Or(n_, s_);
+            CodeableConcept v_ = d_?.DischargeDisposition;
+            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+            CqlValueSet x_ = this.Discharged_to_Home_for_Hospice_Care(context);
+            bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+            bool? z_ = context.Operators.Or(t_, y_);
+            CodeableConcept ab_ = d_?.DischargeDisposition;
+            CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_);
+            CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
+            bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+            bool? af_ = context.Operators.Or(z_, ae_);
 
-            return kzzzzzzzzzzzzzu_;
+            return af_;
         };
-        IEnumerable<Encounter> jzzzzzzzzzzzzzr_ = context.Operators.Where<Encounter>(jzzzzzzzzzzzzzp_, jzzzzzzzzzzzzzq_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
-        return jzzzzzzzzzzzzzr_;
+        return c_;
     }
 
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context)
     {
-        CqlValueSet kzzzzzzzzzzzzzv_ = this.Comfort_Measures(context);
-        IEnumerable<ServiceRequest> kzzzzzzzzzzzzzw_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, kzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        bool? kzzzzzzzzzzzzzx_(ServiceRequest SR)
+        CqlValueSet a_ = this.Comfort_Measures(context);
+        IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        bool? c_(ServiceRequest SR)
         {
-            Code<RequestStatus> lzzzzzzzzzzzzze_ = SR?.StatusElement;
-            RequestStatus? lzzzzzzzzzzzzzf_ = lzzzzzzzzzzzzze_?.Value;
-            Code<RequestStatus> lzzzzzzzzzzzzzg_ = context.Operators.Convert<Code<RequestStatus>>(lzzzzzzzzzzzzzf_);
-            string lzzzzzzzzzzzzzh_ = context.Operators.Convert<string>(lzzzzzzzzzzzzzg_);
-            string[] lzzzzzzzzzzzzzi_ = [
+            Code<RequestStatus> j_ = SR?.StatusElement;
+            RequestStatus? k_ = j_?.Value;
+            Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
+            string m_ = context.Operators.Convert<string>(l_);
+            string[] n_ = [
                 "active",
                 "completed",
                 "on-hold",
             ];
-            bool? lzzzzzzzzzzzzzj_ = context.Operators.In<string>(lzzzzzzzzzzzzzh_, lzzzzzzzzzzzzzi_ as IEnumerable<string>);
-            Code<RequestIntent> lzzzzzzzzzzzzzk_ = SR?.IntentElement;
-            RequestIntent? lzzzzzzzzzzzzzl_ = lzzzzzzzzzzzzzk_?.Value;
-            Code<RequestIntent> lzzzzzzzzzzzzzm_ = context.Operators.Convert<Code<RequestIntent>>(lzzzzzzzzzzzzzl_);
-            string lzzzzzzzzzzzzzn_ = context.Operators.Convert<string>(lzzzzzzzzzzzzzm_);
-            string[] lzzzzzzzzzzzzzo_ = [
+            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            Code<RequestIntent> p_ = SR?.IntentElement;
+            RequestIntent? q_ = p_?.Value;
+            Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
+            string s_ = context.Operators.Convert<string>(r_);
+            string[] t_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? lzzzzzzzzzzzzzp_ = context.Operators.In<string>(lzzzzzzzzzzzzzn_, lzzzzzzzzzzzzzo_ as IEnumerable<string>);
-            bool? lzzzzzzzzzzzzzq_ = context.Operators.And(lzzzzzzzzzzzzzj_, lzzzzzzzzzzzzzp_);
-            FhirBoolean lzzzzzzzzzzzzzr_ = SR?.DoNotPerformElement;
-            bool? lzzzzzzzzzzzzzs_ = lzzzzzzzzzzzzzr_?.Value;
-            bool? lzzzzzzzzzzzzzt_ = context.Operators.IsTrue(lzzzzzzzzzzzzzs_);
-            bool? lzzzzzzzzzzzzzu_ = context.Operators.Not(lzzzzzzzzzzzzzt_);
-            bool? lzzzzzzzzzzzzzv_ = context.Operators.And(lzzzzzzzzzzzzzq_, lzzzzzzzzzzzzzu_);
+            bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+            bool? v_ = context.Operators.And(o_, u_);
+            FhirBoolean w_ = SR?.DoNotPerformElement;
+            bool? x_ = w_?.Value;
+            bool? y_ = context.Operators.IsTrue(x_);
+            bool? z_ = context.Operators.Not(y_);
+            bool? aa_ = context.Operators.And(v_, z_);
 
-            return lzzzzzzzzzzzzzv_;
+            return aa_;
         };
-        IEnumerable<ServiceRequest> kzzzzzzzzzzzzzy_ = context.Operators.Where<ServiceRequest>(kzzzzzzzzzzzzzw_, kzzzzzzzzzzzzzx_);
-        IEnumerable<Procedure> lzzzzzzzzzzzzza_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, kzzzzzzzzzzzzzv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        bool? lzzzzzzzzzzzzzb_(Procedure InterventionPerformed)
+        IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
+        IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        bool? g_(Procedure InterventionPerformed)
         {
-            Code<EventStatus> lzzzzzzzzzzzzzw_ = InterventionPerformed?.StatusElement;
-            EventStatus? lzzzzzzzzzzzzzx_ = lzzzzzzzzzzzzzw_?.Value;
-            string lzzzzzzzzzzzzzy_ = context.Operators.Convert<string>(lzzzzzzzzzzzzzx_);
-            string[] lzzzzzzzzzzzzzz_ = [
+            Code<EventStatus> ab_ = InterventionPerformed?.StatusElement;
+            EventStatus? ac_ = ab_?.Value;
+            string ad_ = context.Operators.Convert<string>(ac_);
+            string[] ae_ = [
                 "completed",
                 "in-progress",
             ];
-            bool? mzzzzzzzzzzzzza_ = context.Operators.In<string>(lzzzzzzzzzzzzzy_, lzzzzzzzzzzzzzz_ as IEnumerable<string>);
+            bool? af_ = context.Operators.In<string>(ad_, ae_ as IEnumerable<string>);
 
-            return mzzzzzzzzzzzzza_;
+            return af_;
         };
-        IEnumerable<Procedure> lzzzzzzzzzzzzzc_ = context.Operators.Where<Procedure>(lzzzzzzzzzzzzza_, lzzzzzzzzzzzzzb_);
-        IEnumerable<object> lzzzzzzzzzzzzzd_ = context.Operators.Union<object>(kzzzzzzzzzzzzzy_ as IEnumerable<object>, lzzzzzzzzzzzzzc_ as IEnumerable<object>);
+        IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
+        IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
 
-        return lzzzzzzzzzzzzzd_;
+        return i_;
     }
 
 
     [CqlExpressionDefinition("Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzb_ = this.Ischemic_Stroke_Encounter(context);
-        IEnumerable<Encounter> mzzzzzzzzzzzzzc_(Encounter IschemicStrokeEncounter)
+        IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
+        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
         {
-            IEnumerable<object> mzzzzzzzzzzzzze_ = this.Intervention_Comfort_Measures(context);
-            bool? mzzzzzzzzzzzzzf_(object ComfortMeasure)
+            IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
+            bool? e_(object ComfortMeasure)
             {
-                object mzzzzzzzzzzzzzj_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                object mzzzzzzzzzzzzzk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzj_);
-                CqlInterval<CqlDateTime> mzzzzzzzzzzzzzl_ = QICoreCommon_2_1_000.Instance.toInterval(context, mzzzzzzzzzzzzzk_);
-                CqlDateTime mzzzzzzzzzzzzzm_ = context.Operators.Start(mzzzzzzzzzzzzzl_);
-                object mzzzzzzzzzzzzzn_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
-                CqlDateTime mzzzzzzzzzzzzzo_ = context.Operators.LateBoundProperty<CqlDateTime>(mzzzzzzzzzzzzzn_, "value");
-                CqlInterval<CqlDateTime> mzzzzzzzzzzzzzp_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? mzzzzzzzzzzzzzq_ = context.Operators.In<CqlDateTime>(mzzzzzzzzzzzzzm_ ?? mzzzzzzzzzzzzzo_, mzzzzzzzzzzzzzp_, default);
+                object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_);
+                CqlDateTime l_ = context.Operators.Start(k_);
+                object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
+                CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+                CqlInterval<CqlDateTime> o_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? p_ = context.Operators.In<CqlDateTime>(l_ ?? n_, o_, default);
 
-                return mzzzzzzzzzzzzzq_;
+                return p_;
             };
-            IEnumerable<object> mzzzzzzzzzzzzzg_ = context.Operators.Where<object>(mzzzzzzzzzzzzze_, mzzzzzzzzzzzzzf_);
-            Encounter mzzzzzzzzzzzzzh_(object ComfortMeasure) =>
+            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+            Encounter g_(object ComfortMeasure) =>
                 IschemicStrokeEncounter;
-            IEnumerable<Encounter> mzzzzzzzzzzzzzi_ = context.Operators.Select<object, Encounter>(mzzzzzzzzzzzzzg_, mzzzzzzzzzzzzzh_);
+            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
-            return mzzzzzzzzzzzzzi_;
+            return h_;
         };
-        IEnumerable<Encounter> mzzzzzzzzzzzzzd_ = context.Operators.SelectMany<Encounter, Encounter>(mzzzzzzzzzzzzzb_, mzzzzzzzzzzzzzc_);
+        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
-        return mzzzzzzzzzzzzzd_;
+        return c_;
     }
 
 
     [CqlExpressionDefinition("Encounter with Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context)
     {
-        IEnumerable<Encounter> mzzzzzzzzzzzzzr_ = this.Ischemic_Stroke_Encounter(context);
-        IEnumerable<Encounter> mzzzzzzzzzzzzzs_(Encounter IschemicStrokeEncounter)
+        IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
+        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
         {
-            IEnumerable<object> mzzzzzzzzzzzzzu_ = this.Intervention_Comfort_Measures(context);
-            bool? mzzzzzzzzzzzzzv_(object ComfortMeasure)
+            IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
+            bool? e_(object ComfortMeasure)
             {
-                object mzzzzzzzzzzzzzz_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                object nzzzzzzzzzzzzza_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mzzzzzzzzzzzzzz_);
-                CqlInterval<CqlDateTime> nzzzzzzzzzzzzzb_ = QICoreCommon_2_1_000.Instance.toInterval(context, nzzzzzzzzzzzzza_);
-                CqlDateTime nzzzzzzzzzzzzzc_ = context.Operators.Start(nzzzzzzzzzzzzzb_);
-                object nzzzzzzzzzzzzzd_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
-                CqlDateTime nzzzzzzzzzzzzze_ = context.Operators.LateBoundProperty<CqlDateTime>(nzzzzzzzzzzzzzd_, "value");
-                CqlInterval<CqlDateTime> nzzzzzzzzzzzzzf_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? nzzzzzzzzzzzzzg_ = context.Operators.In<CqlDateTime>(nzzzzzzzzzzzzzc_ ?? nzzzzzzzzzzzzze_, nzzzzzzzzzzzzzf_, default);
+                object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_);
+                CqlDateTime l_ = context.Operators.Start(k_);
+                object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
+                CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+                CqlInterval<CqlDateTime> o_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? p_ = context.Operators.In<CqlDateTime>(l_ ?? n_, o_, default);
 
-                return nzzzzzzzzzzzzzg_;
+                return p_;
             };
-            IEnumerable<object> mzzzzzzzzzzzzzw_ = context.Operators.Where<object>(mzzzzzzzzzzzzzu_, mzzzzzzzzzzzzzv_);
-            Encounter mzzzzzzzzzzzzzx_(object ComfortMeasure) =>
+            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+            Encounter g_(object ComfortMeasure) =>
                 IschemicStrokeEncounter;
-            IEnumerable<Encounter> mzzzzzzzzzzzzzy_ = context.Operators.Select<object, Encounter>(mzzzzzzzzzzzzzw_, mzzzzzzzzzzzzzx_);
+            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
-            return mzzzzzzzzzzzzzy_;
+            return h_;
         };
-        IEnumerable<Encounter> mzzzzzzzzzzzzzt_ = context.Operators.SelectMany<Encounter, Encounter>(mzzzzzzzzzzzzzr_, mzzzzzzzzzzzzzs_);
+        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
-        return mzzzzzzzzzzzzzt_;
+        return c_;
     }
 
 
     [CqlExpressionDefinition("CalendarDayOfOrDayAfter")]
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
-        CqlDate nzzzzzzzzzzzzzh_ = context.Operators.DateFrom(StartValue);
-        CqlQuantity nzzzzzzzzzzzzzj_ = context.Operators.Quantity(1m, "day");
-        CqlDate nzzzzzzzzzzzzzk_ = context.Operators.Add(nzzzzzzzzzzzzzh_, nzzzzzzzzzzzzzj_);
-        CqlInterval<CqlDate> nzzzzzzzzzzzzzl_ = context.Operators.Interval(nzzzzzzzzzzzzzh_, nzzzzzzzzzzzzzk_, true, true);
+        CqlDate a_ = context.Operators.DateFrom(StartValue);
+        CqlQuantity c_ = context.Operators.Quantity(1m, "day");
+        CqlDate d_ = context.Operators.Add(a_, c_);
+        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
 
-        return nzzzzzzzzzzzzzl_;
+        return e_;
     }
 
 
