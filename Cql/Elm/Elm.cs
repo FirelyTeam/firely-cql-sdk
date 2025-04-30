@@ -24,7 +24,7 @@ internal static class IGetVersionedIdentifierExtensions
     /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
     /// <returns>The identifier with version, or just the identifier if no version exists.</returns>
     /// <remarks>The identifier and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
-    public static string? GetVersionedIdentifier(
+    public static string? GetVersionedLibraryIdentifierString(
         this IGetVersionedIdentifier getVersionedIdentifier,
         bool throwError = true) =>
         getVersionedIdentifier.VersionedIdentifier switch
@@ -35,16 +35,7 @@ internal static class IGetVersionedIdentifierExtensions
         };
 
     public static CqlVersionedLibraryIdentifier GetVersionedLibraryIdentifier(this IGetVersionedIdentifier getVersionedIdentifier) =>
-        CqlVersionedLibraryIdentifier.Parse(getVersionedIdentifier.GetVersionedIdentifier()!);
-
-    public static CqlVersionedLibraryIdentifier ToCqlVersionedLibraryIdentifier(this VersionedIdentifier identifier)
-    {
-        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
-        ArgumentNullException.ThrowIfNull(identifier);
-        ArgumentNullException.ThrowIfNull(identifier.id);
-
-        return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
-    }
+        CqlVersionedLibraryIdentifier.Parse(getVersionedIdentifier.GetVersionedLibraryIdentifierString()!);
 }
 
 /// <summary>
@@ -57,6 +48,11 @@ internal interface IGetVersionedIdentifier
     /// </summary>
     /// <value>The versioned identifier, or error if the identifier is missing.</value>
     (VersionedIdentifier? Result, Exception? Error) VersionedIdentifier { get; }
+
+    /// <summary>
+    /// Gets the versioned library identifier.
+    /// </summary>
+    CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -82,7 +78,18 @@ partial class Library : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifier(false);
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (identifier is not { id.Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
+        }
+    }
+
+    /// <inheritdoc />
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -97,7 +104,18 @@ partial class IncludeDef : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifier(false);
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (path is not { Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(path, version);
+        }
+    }
+
+    /// <inheritdoc />
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -121,6 +139,17 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
 
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
+
+    /// <inheritdoc />
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (id is not { Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(id, version);
+        }
+    }
 
     /// <inheritdoc />
     public override string? ToString() => GetVersionedIdentifier(false);

@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
             CqlDefinitionDictionary definitions = new();
-            definitions.Add(library.GetVersionedIdentifier()!, expressionName, definition);
+            definitions.Add(library.GetVersionedLibraryIdentifierString()!, expressionName, definition);
 
             var generateCSharp =
                 elmToolkitServices
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
                     .CreateLibrarySetInvoker();
 
-            var result = librarySetInvoker.InvokeLibraryDefinition(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
+            var result = librarySetInvoker.InvokeLibraryDefinition(ctx!, library.VersionedLibraryIdentifier, expressionName);
             return result;
         }
 

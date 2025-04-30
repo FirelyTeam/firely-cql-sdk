@@ -109,7 +109,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
     /// <returns>The dependencies of the parent library, or an empty list if the library is not part of this <see cref="LibrarySet"/>.</returns>
     /// <exception cref="KeyNotFoundError">If the library is not part of the LibrarySet and if throwError is set to <c>true</c>.</exception>
     public IReadOnlySet<Library> GetLibraryDependencies(Library parent, bool throwError = true) =>
-        GetLibraryDependencies(parent.GetVersionedIdentifier(), throwError);
+        GetLibraryDependencies(parent.GetVersionedLibraryIdentifierString(), throwError);
 
     /// <summary>
     /// Loads the libraries from the specified collection of files.
@@ -145,7 +145,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
         {
             try
             {
-                _libraryInfosByVersionedIdentifier.Add(library.GetVersionedIdentifier()!, (library, []));
+                _libraryInfosByVersionedIdentifier.Add(library.GetVersionedLibraryIdentifierString()!, (library, []));
                 _librariesNotCalculatedYet.Add(library);
             }
             catch (ArgumentNullException)
@@ -174,12 +174,12 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var dependencies = _libraryInfosByVersionedIdentifier[library.GetVersionedIdentifier()!].dependencies;
+            var dependencies = _libraryInfosByVersionedIdentifier[library.GetVersionedLibraryIdentifierString()!].dependencies;
             if (library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    var toKey = includeDef.GetVersionedIdentifier(true)!;
+                    var toKey = includeDef.GetVersionedLibraryIdentifierString(true)!;
                     var toLib = _libraryInfosByVersionedIdentifier.GetValueOrDefault(toKey).library ??
                                 throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
@@ -198,13 +198,13 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
         var rootLibraries = new LibraryByVersionedIdentifierHashSet(
             allLibraries
-                .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!)));
+                .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedLibraryIdentifierString()!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
                                            .TopologicalSort(
-                                               lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
+                                               lib => GetLibraryDependencies(lib.GetVersionedLibraryIdentifierString()!))
                                            .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByVersionedIdentifier.Count);
 
@@ -254,7 +254,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
             foreach (var library in librariesLoaded)
             {
-                if (!_libraryInfosByVersionedIdentifier.TryAdd(library.GetVersionedIdentifier()!, (library, [])))
+                if (!_libraryInfosByVersionedIdentifier.TryAdd(library.GetVersionedLibraryIdentifierString()!, (library, [])))
                     continue; // Already loaded, skip
 
                 if (library.includes is { Length: > 0 } includeDefs)
@@ -278,8 +278,8 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
     }
 
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
-        getNextItems: lib => GetLibraryDependencies(lib.GetVersionedIdentifier(false)),
-        formatItem: lib => lib.GetVersionedIdentifier(false) ?? "???");
+        getNextItems: lib => GetLibraryDependencies(lib.GetVersionedLibraryIdentifierString(false)),
+        formatItem: lib => lib.GetVersionedLibraryIdentifierString(false) ?? "???");
 
     /// <summary>
     /// Given a reference that appears in a library, this method will attempt to resolve the definition.
@@ -354,7 +354,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
         /// <inheritdoc/>
         public IEnumerable<string> Keys =>
             LibrarySet.GetCalculatedState().TopologicallySortedLibraries
-                      .Select(lib => lib.GetVersionedIdentifier(true)!);
+                      .Select(lib => lib.GetVersionedLibraryIdentifierString(true)!);
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -364,7 +364,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
             LibrarySet
                 .GetCalculatedState()
                 .TopologicallySortedLibraries
-                .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifier(true)!, lib))
+                .Select(lib => KeyValuePair.Create(lib.GetVersionedLibraryIdentifierString(true)!, lib))
                 .GetEnumerator();
     }
 
@@ -374,12 +374,12 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
         var dependencies =
             _libraryInfosByVersionedIdentifier
-                .Select(kv => (libId: kv.Key, depLibIds: kv.Value.dependencies.Select(dep => dep.GetVersionedIdentifier()!)))
+                .Select(kv => (libId: kv.Key, depLibIds: kv.Value.dependencies.Select(dep => dep.GetVersionedLibraryIdentifierString()!)))
                 .ToDictionary(t => t.libId, t => new HashSet<string>(t.depLibIds));
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var libId = library.GetVersionedIdentifier()!;
-            var depLibIds = library.includes?.Select(i => i.GetVersionedIdentifier()!).ToArray() ?? [];
+            var libId = library.GetVersionedLibraryIdentifierString()!;
+            var depLibIds = library.includes?.Select(i => i.GetVersionedLibraryIdentifierString()!).ToArray() ?? [];
             dependencies
                 .GetOrAdd(libId, _ => new HashSet<string>())
                 .AddRange(depLibIds);
@@ -387,7 +387,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
         var libIdsAvail =
             _libraryInfosByVersionedIdentifier.Keys
-                                              .Concat(_librariesNotCalculatedYet.Select(l => l.GetVersionedIdentifier()!))
+                                              .Concat(_librariesNotCalculatedYet.Select(l => l.GetVersionedLibraryIdentifierString()!))
                                               .ToHashSet();
 
         var mermaid = dependencies.Keys
@@ -409,11 +409,11 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var libId = library.GetVersionedIdentifier()!;
+            var libId = library.GetVersionedLibraryIdentifierString()!;
             if (brokenFroms.Contains(libId))
                 librariesToRemove.Add(KeyValuePair.Create(libId, library));
         }
-        _librariesNotCalculatedYet.RemoveWhere(l => brokenFroms.Contains(l.GetVersionedIdentifier()!));
+        _librariesNotCalculatedYet.RemoveWhere(l => brokenFroms.Contains(l.GetVersionedLibraryIdentifierString()!));
         return librariesToRemove;
     }
 }

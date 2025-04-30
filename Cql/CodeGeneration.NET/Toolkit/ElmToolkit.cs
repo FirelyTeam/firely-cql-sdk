@@ -165,7 +165,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
         {
-            var elmVersionedIdentifier = library.identifier.ToCqlVersionedLibraryIdentifier();
+            var elmVersionedIdentifier = library.VersionedLibraryIdentifier;
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
             if (libraryCompilation.ResultCSharpSourceCode is not null
                 || libraryCompilation.ResultAssemblyBinary is not null)
@@ -211,7 +211,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) =>
-                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.GetVersionedIdentifier()!)));
+                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.GetVersionedLibraryIdentifierString()!)));
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -232,8 +232,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
-                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
-                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.GetVersionedIdentifier()));
+                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedLibraryIdentifierString())),
+                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.GetVersionedLibraryIdentifierString()));
 
     /// <summary>
     /// Builds the library set definitions.
@@ -255,8 +255,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>
-                                         logMessage("Could not convert ELM into definitions for {id}", library.GetVersionedIdentifier())),
-                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.GetVersionedIdentifier()))
+                                         logMessage("Could not convert ELM into definitions for {id}", library.GetVersionedLibraryIdentifierString())),
+                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.GetVersionedLibraryIdentifierString()))
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }

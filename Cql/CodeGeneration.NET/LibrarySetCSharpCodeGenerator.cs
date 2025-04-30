@@ -114,7 +114,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
             Action<Library>? onBeforeProcessLibrary = null) =>
             LibrarySet
-                .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
+                .Where(library => Definitions.Libraries.Contains(library.GetVersionedLibraryIdentifierString()!))
                 .TrySelect(
                     library =>
                     {
@@ -142,9 +142,9 @@ internal partial class LibrarySetCSharpCodeGenerator
             TextWriter textWriter,
             int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
 
-        private VersionedIdentifier LibraryVersionedIdentifier => ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
-        public string LibraryName { get; } = Library.GetVersionedIdentifier()!;
-        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.GetVersionedIdentifier()!)!;
+        private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
+        public string LibraryName { get; } = Library.GetVersionedLibraryIdentifierString()!;
+        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.GetVersionedLibraryIdentifierString()!)!;
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -200,13 +200,13 @@ internal partial class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"""
                                           #region ILibrary Implementation
 
-                                          public string Name => {LibraryVersionedIdentifier.id.QuoteString()};
-                                          public string Version => {LibraryVersionedIdentifier.version.QuoteString()};
+                                          public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
+                                          public string Version => {LibraryVersionedIdentifier.Version?.ToString().QuoteOrNullString()};
                                           """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
+                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedLibraryIdentifierString()!))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
@@ -305,9 +305,9 @@ internal partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             IndentedTextWriter.WriteLine(
-                LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryVersionedIdentifier.id.QuoteString()}, {version.QuoteString()})]"
-                    : $"[CqlLibrary({LibraryVersionedIdentifier.id.QuoteString()})]");
+                LibraryVersionedIdentifier.Version is { } version && Version.TryParse(version, out _)
+                    ? $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
+                    : $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()})]");
 
             IndentedTextWriter.WriteLine($$"""
                                            public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>

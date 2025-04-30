@@ -87,7 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var (library, cSharp) = t;
                         var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
-                        results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
+                        results.Add(library.GetVersionedLibraryIdentifierString()!, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
                     buildExceptionHandlingStrategy);
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<Assembly> assemblyReferences,
             AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
-            var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
+            var libraryVersionedIdentifier = library.GetVersionedLibraryIdentifierString()!;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
-                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
+                if (assemblies.TryGetValue(libraryDependency.GetVersionedLibraryIdentifierString()!, out var referencedDll))
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
@@ -207,7 +207,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string CreateAssemblyInfoSourceString(Library library)
         {
-            var parts = library.GetVersionedIdentifier()!.Split('-');
+            var parts = library.GetVersionedLibraryIdentifierString()!.Split('-');
             string name = parts[0];
             string version = string.Empty;
 

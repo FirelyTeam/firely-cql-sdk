@@ -6,14 +6,14 @@ internal static class LibraryExtensions
     {
         var nodesById =
             libraries
-                .Select(l => new LibraryDependencyNode(l.GetVersionedIdentifier()!, l, []))
+                .Select(l => new LibraryDependencyNode(l.GetVersionedLibraryIdentifierString()!, l, []))
                 .ToDictionary(l => l.VersionedIdentifier);
 
         foreach (var node in nodesById.Values)
         {
             var dependencyNodes =
                 (node.Library!.includes ?? [])
-                    .Select(includeDef => includeDef.GetVersionedIdentifier()!)
+                    .Select(includeDef => includeDef.GetVersionedLibraryIdentifierString()!)
                     .Select(includeId =>
                                 nodesById
                                     .GetValueOrDefault(includeId)

@@ -153,7 +153,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         var ctx = FhirCqlContext.ForBundle();
                         var result = lsi.InvokeLibraryDefinition(
                             ctx,
-                            lib.GetVersionedLibraryIdentifier(),
+                            lib.VersionedLibraryIdentifier,
                             new("f", typeof(Hl7.Fhir.Model.Id)),
                             new Hl7.Fhir.Model.Id("id"));
                         var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
@@ -182,7 +182,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         var range = new Hl7.Fhir.Model.Range(new Quantity(1m, "m"), new Quantity(2m, "m"));
                         var result = lsi.InvokeLibraryDefinition(
                             ctx,
-                            lib.GetVersionedLibraryIdentifier(),
+                            lib.VersionedLibraryIdentifier,
                             new("f", typeof(object)),
                             range);
                         result.Should().BeOfType<Hl7.Fhir.Model.Range>()

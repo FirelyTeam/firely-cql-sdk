@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     var ctx = FhirCqlContext.ForBundle(bundle);
                     var resultObj = (T?)librarySetInvoker.InvokeLibraryDefinition(
                         ctx,
-                        library.GetVersionedLibraryIdentifier()!,
+                        library.VersionedLibraryIdentifier!,
                         member);
                     Assert.IsInstanceOfType(resultObj, typeof(T));
                     result = (T?)resultObj;

@@ -29,7 +29,7 @@ internal partial class LibraryExpressionBuilderContext
         _logger = logger;
         _expressionBuilder = expressionBuilder;
         Library = library;
-        LibraryVersionedIdentifier = Library.GetVersionedIdentifier()!;
+        LibraryVersionedIdentifier = Library.GetVersionedLibraryIdentifierString()!;
     }
 
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
@@ -42,7 +42,7 @@ internal partial class LibraryExpressionBuilderContext
     /// <summary>
     /// Gets the versioned identifier of the library, which is the name and version of the library.
     /// </summary>
-    /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedIdentifier"/>
+    /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedLibraryIdentifierString"/>
     public string LibraryVersionedIdentifier { get; }
 
     public CqlDefinitionDictionary ProcessLibrary() =>

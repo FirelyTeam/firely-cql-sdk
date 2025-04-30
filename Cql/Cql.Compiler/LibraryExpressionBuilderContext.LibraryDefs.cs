@@ -37,7 +37,7 @@ partial class LibraryExpressionBuilderContext
 
         void AddDefinitions(Library library)
         {
-            string libraryName = library.GetVersionedIdentifier()!;
+            string libraryName = library.GetVersionedLibraryIdentifierString()!;
             if (!HasAliasForLibraryVersionedIdentifier(libraryName))
                 throw new CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(library).ToException();
 
@@ -161,7 +161,7 @@ partial class LibraryExpressionBuilderContext
         {
             foreach (var codeSystemDef in codeSystemDefs)
             {
-                var libraryNameAndName = new VersionedIdentifier(library.GetVersionedIdentifier()!, codeSystemDef.name);
+                var libraryNameAndName = new VersionedIdentifier(library.GetVersionedLibraryIdentifierString()!, codeSystemDef.name);
                 var newValue = codeSystemDef.id;
                 if (!_codeSystemIdsByCodeSystemRefs.TryAdd(libraryNameAndName, newValue))
                 {
