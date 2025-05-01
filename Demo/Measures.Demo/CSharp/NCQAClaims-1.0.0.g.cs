@@ -49,11 +49,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         {
             CodeableConcept c_ = MedicalClaim?.Type;
             CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] e_ = d_?.codes;
+            IReadOnlyList<CqlCode> e_ = d_?.codes;
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
             CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] j_ = i_?.codes;
+            IReadOnlyList<CqlCode> j_ = i_?.codes;
             CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
             bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
             bool? m_ = context.Operators.Or(g_, l_);
@@ -73,7 +73,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         {
             CodeableConcept c_ = PharmacyClaim?.Type;
             CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] e_ = d_?.codes;
+            IReadOnlyList<CqlCode> e_ = d_?.codes;
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
@@ -92,11 +92,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         {
             CodeableConcept c_ = MedicalResponse?.Type;
             CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] e_ = d_?.codes;
+            IReadOnlyList<CqlCode> e_ = d_?.codes;
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
             CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] j_ = i_?.codes;
+            IReadOnlyList<CqlCode> j_ = i_?.codes;
             CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
             bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
             bool? m_ = context.Operators.Or(g_, l_);
@@ -116,7 +116,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         {
             CodeableConcept c_ = PharmacyResponse?.Type;
             CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode[] e_ = d_?.codes;
+            IReadOnlyList<CqlCode> e_ = d_?.codes;
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
@@ -170,7 +170,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             CodeableConcept af_ = ItemOnLine?.ProductOrService;
                             CqlConcept ag_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, af_);
-                            CqlCode[] ah_ = ag_?.codes;
+                            IReadOnlyList<CqlCode> ah_ = ag_?.codes;
                             bool? ai_(CqlCode LineCode)
                             {
                                 string as_ = LineCode?.code;
@@ -183,7 +183,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             bool? ak_ = context.Operators.Exists<CqlCode>(aj_);
                             DataType al_ = ItemOnLine?.Location;
                             CqlConcept am_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_ as CodeableConcept);
-                            CqlCode[] an_ = am_?.codes;
+                            IReadOnlyList<CqlCode> an_ = am_?.codes;
                             bool? ao_(CqlCode PosCode)
                             {
                                 string av_ = PosCode?.code;
@@ -317,7 +317,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             CodeableConcept ab_ = ItemOnLine?.ProductOrService;
                             CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-                            CqlCode[] ad_ = ac_?.codes;
+                            IReadOnlyList<CqlCode> ad_ = ac_?.codes;
                             bool? ae_(CqlCode LineCode)
                             {
                                 string ax_ = LineCode?.code;
@@ -652,7 +652,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 {
                     CodeableConcept x_ = ItemOnLine?.ProductOrService;
                     CqlConcept y_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, x_);
-                    CqlCode[] z_ = y_?.codes;
+                    IReadOnlyList<CqlCode> z_ = y_?.codes;
                     bool? aa_(CqlCode LineCode)
                     {
                         string ad_ = LineCode?.code;
@@ -684,7 +684,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             CodeableConcept av_ = i?.ProductOrService;
                             CqlConcept aw_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, av_);
-                            CqlCode[] ax_ = aw_?.codes;
+                            IReadOnlyList<CqlCode> ax_ = aw_?.codes;
                             bool? ay_(CqlCode LineCode)
                             {
                                 string bb_ = LineCode?.code;
@@ -3230,7 +3230,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             CodeableConcept w_ = i?.Revenue;
                             CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_);
-                            CqlCode[] y_ = x_?.codes;
+                            IReadOnlyList<CqlCode> y_ = x_?.codes;
                             bool? z_(CqlCode rev)
                             {
                                 string ac_ = rev?.code;
@@ -3270,7 +3270,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             CodeableConcept as_ = i?.Revenue;
                             CqlConcept at_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, as_);
-                            CqlCode[] au_ = at_?.codes;
+                            IReadOnlyList<CqlCode> au_ = at_?.codes;
                             bool? av_(CqlCode rev)
                             {
                                 string ay_ = rev?.code;

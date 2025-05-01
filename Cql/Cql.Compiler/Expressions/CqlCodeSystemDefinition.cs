@@ -13,11 +13,13 @@ using Hl7.Cql.Primitives;
 namespace Hl7.Cql.Compiler.Expressions;
 
 /// <seealso cref="CodeSystemDef"/>
+/// <seealso cref="CqlCodeSystem"/>
 /// <seealso cref="CqlCodeSystemDefinitionAttribute"/>
 internal class CqlCodeSystemDefinition(
     string name,
     CqlCodeSystem codeSystem)
-    : CqlDefinition(null!, name)
+    : CqlDefinition(name)
 {
     public CqlCodeSystem CodeSystem { get; } = codeSystem;
+    public override Type ReturnType => typeof(CqlCodeSystem);
 }

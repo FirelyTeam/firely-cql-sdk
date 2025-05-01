@@ -203,7 +203,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
         {
             DataType e_ = CTScan?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
-            CqlCode[] g_ = (f_ as CqlConcept)?.codes;
+            IReadOnlyList<CqlCode> g_ = (f_ as CqlConcept)?.codes;
             CqlCode h_ = this.Full_Body(context);
             bool? i_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)g_, h_);
 

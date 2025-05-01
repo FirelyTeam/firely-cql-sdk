@@ -8,12 +8,19 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler.Expressions;
 
 /// <seealso cref="ConceptDef"/>
+/// <seealso cref="CqlConcept"/>
 /// <seealso cref="CqlConceptDefinitionAttribute"/>
 internal class CqlConceptDefinition(
-    LambdaExpression lambda,
-    string name)
-    : CqlDefinition(lambda, name);
+    string name,
+    string? display,
+    IReadOnlyList<CqlCode> codes)
+    : CqlDefinition(name) {
+    public string? Display { get; } = display;
+    public IReadOnlyList<CqlCode> Codes { get; } = codes;
+    public override Type ReturnType => typeof(CqlConcept);
+}

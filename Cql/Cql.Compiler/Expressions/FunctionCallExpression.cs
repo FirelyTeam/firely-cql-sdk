@@ -23,10 +23,10 @@ namespace Hl7.Cql.Compiler.Expressions
     internal class FunctionCallExpression : Expression
     {
         private static readonly ConstructorInfo DefinitionSignatureCtor =
-            ReflectionUtility.ConstructorOf(() => new DefinitionSignature("", Array.Empty<Type>()));
+            ReflectionUtility.ConstructorOf(() => new DefinitionSignature(default(string)!, default(Type[])!));
 
         private static readonly MethodInfo DefinitionDictionaryIndexGetter =
-            ReflectionUtility.MethodOf(() => default(DelegateDefinitionDictionary)!["", default(DefinitionSignature)!]);
+            ReflectionUtility.MethodOf(() => default(DelegateDefinitionDictionary)![default(string)!, default(DefinitionSignature)!]);
 
         public FunctionCallExpression(Expression definitions,
             string libraryName, string functionName, IReadOnlyCollection<Expression> arguments, Type functionType)

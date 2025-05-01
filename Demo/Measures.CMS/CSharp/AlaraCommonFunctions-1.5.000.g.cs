@@ -230,7 +230,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     {
         DataType a_ = Obs?.Value;
         object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
-        CqlCode[] c_ = (b_ as CqlConcept)?.codes;
+        IReadOnlyList<CqlCode> c_ = (b_ as CqlConcept)?.codes;
         bool? d_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)c_, code);
         decimal? e_ = this.Global_Noise_Value(context, Obs);
         bool? f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);

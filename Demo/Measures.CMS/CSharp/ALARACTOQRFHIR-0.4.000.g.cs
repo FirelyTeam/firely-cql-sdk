@@ -195,7 +195,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         {
             DataType d_ = CTScan?.Value;
             object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            CqlCode[] f_ = (e_ as CqlConcept)?.codes;
+            IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
             CqlCode g_ = this.Full_Body(context);
             bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
 

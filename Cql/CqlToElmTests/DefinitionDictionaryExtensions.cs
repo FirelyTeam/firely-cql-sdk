@@ -40,8 +40,8 @@ internal static class DefinitionDictionaryExtensions
                     expr = visitor.Visit(expr);
 
             var @delegate = debug is not null
-                                ? ((CqlDefinition)expr).Lambda.Compile(debug)
-                                : ((CqlDefinition)expr).Lambda.Compile();
+                                ? ((CqlLambdaDefinition)expr).LambdaExpression.Compile(debug)
+                                : ((CqlLambdaDefinition)expr).LambdaExpression.Compile();
             delegates.AddDefinition(libraryName, definitionSignature, @delegate);
         }
 

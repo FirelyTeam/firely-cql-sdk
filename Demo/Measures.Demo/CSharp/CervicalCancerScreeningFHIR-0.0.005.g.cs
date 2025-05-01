@@ -301,7 +301,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlCode af_ = this.laboratory(context);
                 CqlConcept ag_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, CervicalCytologyCategory);
-                CqlCode[] ah_ = ag_?.codes;
+                IReadOnlyList<CqlCode> ah_ = ag_?.codes;
                 bool? ai_ = context.Operators.In<CqlCode>(af_, (IEnumerable<CqlCode>)ah_);
 
                 return ai_;
@@ -354,7 +354,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlCode aq_ = this.laboratory(context);
                 CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, HPVTestCategory);
-                CqlCode[] as_ = ar_?.codes;
+                IReadOnlyList<CqlCode> as_ = ar_?.codes;
                 bool? at_ = context.Operators.In<CqlCode>(aq_, (IEnumerable<CqlCode>)as_);
 
                 return at_;
@@ -434,7 +434,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         {
             CqlCode e_ = this.laboratory(context);
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, category);
-            CqlCode[] g_ = f_?.codes;
+            IReadOnlyList<CqlCode> g_ = f_?.codes;
             bool? h_ = context.Operators.In<CqlCode>(e_, (IEnumerable<CqlCode>)g_);
 
             return h_;

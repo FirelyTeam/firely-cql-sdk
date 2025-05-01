@@ -78,7 +78,7 @@ partial class CqlComparers
 
             // More performance to have the hashset with the smallest set
             var (codesSet, compareSet) =
-                x.codes!.Length < y.codes!.Length
+                x.codes.Count < y.codes.Count
                     ? (new HashSet<CqlCode>(x.codes, codeEquivalenceComparer), y.codes)
                     : (new HashSet<CqlCode>(y.codes, codeEquivalenceComparer), x.codes);
             bool isEquivalent = codesSet.Overlaps(compareSet);

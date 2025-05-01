@@ -39,7 +39,6 @@ partial class ExpressionBuilderContext
                 }
 
                 var returnType = definition.ReturnType;
-
                 return returnType;
             }
 

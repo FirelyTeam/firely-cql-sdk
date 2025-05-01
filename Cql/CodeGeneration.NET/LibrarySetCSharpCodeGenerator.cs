@@ -371,8 +371,33 @@ internal partial class LibrarySetCSharpCodeGenerator
                           public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
                           private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
                           """);
-                    return;
-                }
+                } return;
+
+                case CqlConceptDefinition ccd:
+                {
+                    string quotedConceptDisplay = ccd.Display.QuoteOrNullString();
+                    string arrayOfCodes = string.Join(
+                        ",",
+                        ccd.Codes.Select(code =>
+                        {
+                            var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
+                            var codeField = cqlCodeDefinition is not null
+                                                ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                                : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
+                            return $"""
+
+                                          {codeField}
+                                    """;
+                        }));
+                    tw.WriteLine(
+                        $$"""
+                          [CqlConceptDefinition({{quotedName}})]
+                          public CqlConcept {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlConcept {{fieldName}} =
+                            new CqlConcept([{{arrayOfCodes}}],
+                                {{quotedConceptDisplay}});
+                          """);
+                    } return;
 
                 case CqlCodeSystemDefinition csd:
                 {
@@ -398,10 +423,10 @@ internal partial class LibrarySetCSharpCodeGenerator
                           private static readonly CqlCodeSystem {{fieldName}} =
                             new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}, [{{arrayOfCodes}}]);
                           """);
-                    return;
-                }
+                } return;
 
                 case CqlCodeDefinition cd:
+                {
                     var quotedCodeId = cd.Code.code!.QuoteString();
                     var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
                     tw.WriteLine(
@@ -410,30 +435,26 @@ internal partial class LibrarySetCSharpCodeGenerator
                           public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
                           private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}});
                           """);
-                    return;
-
-                case CqlExpressionDefinition ed:
-                    tw.WriteLine(
-                        $"""
-                         [{definitionAttributeTypeName}({quotedName})]
-                         """);
-                    foreach (var tag in ed.Tags)
-                        foreach (var tagValue in tag.Values)
-                            tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
-                    break;
-
-                default:
-                    tw.WriteLine(
-                        $"""
-                         [{definitionAttributeTypeName}({quotedName})]
-                         """);
-                    break;
+                } return;
             }
+
+            if (CqlDefinition is not CqlLambdaDefinition ld)
+                throw new NotSupportedException($"No support for {CqlDefinition.GetType()}");
+
+            tw.WriteLine(
+                $"""
+                 [{definitionAttributeTypeName}({quotedName})]
+                 """);
+
+            if (CqlDefinition is CqlExpressionDefinition ed)
+                foreach (var tag in ed.Tags)
+                    foreach (var tagValue in tag.Values)
+                        tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
             VariableNameGenerator variableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
 
             var visitedBody = Transform(
-                CqlDefinition.Lambda.Body,
+                ld.LambdaExpression.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(variableNameGenerator),
@@ -447,7 +468,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
                 0);
 
-            var parameters = CqlDefinition.Lambda.Parameters.Skip(1);
+            var parameters = ld.LambdaExpression.Parameters.Skip(1);
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
             var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public");
             tw.WriteLine(definitionWithBody);

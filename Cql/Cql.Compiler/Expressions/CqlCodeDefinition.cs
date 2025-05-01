@@ -13,10 +13,12 @@ using Hl7.Cql.Primitives;
 namespace Hl7.Cql.Compiler.Expressions;
 
 /// <seealso cref="CodeDef"/>
+/// <seealso cref="CqlCode"/>
 /// <seealso cref="CqlCodeDefinitionAttribute"/>
 internal class CqlCodeDefinition(
     string name,
     CqlCode code)
-    : CqlDefinition(null!, name) {
+    : CqlDefinition(name) {
     public CqlCode Code { get; } = code;
+    public override Type ReturnType => typeof(CqlCodeDefinition);
 }

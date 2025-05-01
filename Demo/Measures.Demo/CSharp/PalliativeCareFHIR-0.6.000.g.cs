@@ -114,7 +114,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             {
                 CqlCode ag_ = this.survey(context);
                 CqlConcept ah_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PalliativeAssessmentCategory);
-                CqlCode[] ai_ = ah_?.codes;
+                IReadOnlyList<CqlCode> ai_ = ah_?.codes;
                 bool? aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
 
                 return aj_;

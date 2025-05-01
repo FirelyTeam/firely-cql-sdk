@@ -13,12 +13,11 @@ namespace Hl7.Cql.Compiler.Expressions;
 
 /// <seealso cref="ExpressionDef"/>
 /// <seealso cref="CqlExpressionDefinitionAttribute"/>
-internal class CqlExpressionDefinition
-(
-    LambdaExpression lambda,
+internal class CqlExpressionDefinition(
+    LambdaExpression lambdaExpression,
     string name,
     (string tagName, string[] tagValues)[]? tags = null)
-    : CqlDefinition(lambda, name)
+    : CqlLambdaDefinition(lambdaExpression, name)
 {
     public (string Name, string[] Values)[] Tags { get; } = tags ?? [];
 }

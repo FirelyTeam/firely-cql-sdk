@@ -13,6 +13,6 @@ namespace Hl7.Cql.Compiler;
 /// <seealso cref="ParameterDef"/>
 /// <seealso cref="CqlParameterDefinitionAttribute"/>
 internal class CqlParameterDefinition(
-    LambdaExpression lambda,
+    LambdaExpression lambdaExpression,
     string name)
-    : CqlDefinition(lambda, name);
+    : CqlLambdaDefinition(lambdaExpression, name);
