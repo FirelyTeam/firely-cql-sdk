@@ -138,7 +138,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("V3TimingEvent")]
+    [CqlCodeSystemDefinition("V3TimingEvent", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", codeSystemVersion: null)]
     public CqlCodeSystem V3TimingEvent(CqlContext _) => _V3TimingEvent;
     private static readonly CqlCodeSystem _V3TimingEvent =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, [
@@ -157,7 +157,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
           _PCV,
           _WAKE]);
 
-    [CqlCodeSystemDefinition("EventTiming")]
+    [CqlCodeSystemDefinition("EventTiming", codeSystemId: "http://hl7.org/fhir/event-timing", codeSystemVersion: null)]
     public CqlCodeSystem EventTiming(CqlContext _) => _EventTiming;
     private static readonly CqlCodeSystem _EventTiming =
       new CqlCodeSystem("http://hl7.org/fhir/event-timing", null, [

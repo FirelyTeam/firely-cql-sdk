@@ -54,7 +54,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ObservationCategoryCodes")]
+    [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
     public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
     private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
@@ -63,7 +63,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
           _survey,
           _vital_signs]);
 
-    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
     private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [

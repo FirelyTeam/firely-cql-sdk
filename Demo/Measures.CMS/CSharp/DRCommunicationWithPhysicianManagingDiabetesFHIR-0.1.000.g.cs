@@ -114,7 +114,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
@@ -124,7 +124,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
           _Optometrist__occupation_,
           _Physician__occupation_]);
 
-    [CqlCodeSystemDefinition("ActCode")]
+    [CqlCodeSystemDefinition("ActCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-ActCode", codeSystemVersion: null)]
     public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
     private static readonly CqlCodeSystem _ActCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode", null, [

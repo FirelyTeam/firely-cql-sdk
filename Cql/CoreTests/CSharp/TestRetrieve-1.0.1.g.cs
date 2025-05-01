@@ -86,7 +86,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ICD-10")]
+    [CqlCodeSystemDefinition("ICD-10", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
     public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
     private static readonly CqlCodeSystem _ICD_10 =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [

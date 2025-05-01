@@ -154,7 +154,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
@@ -172,13 +172,13 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
           _VR_12_Physical_component_summary__PCS__score___oblique_method_T_score,
           _VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score]);
 
-    [CqlCodeSystemDefinition("CPT")]
+    [CqlCodeSystemDefinition("CPT", codeSystemId: "http://www.ama-assn.org/go/cpt", codeSystemVersion: null)]
     public CqlCodeSystem CPT(CqlContext _) => _CPT;
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [
           _Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure]);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [

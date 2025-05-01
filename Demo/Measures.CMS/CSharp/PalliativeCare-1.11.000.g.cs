@@ -54,7 +54,7 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [

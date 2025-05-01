@@ -126,7 +126,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC:2.69")]
+    [CqlCodeSystemDefinition("LOINC:2.69", codeSystemId: "http://loinc.org", codeSystemVersion: "2.69")]
     public CqlCodeSystem LOINC_2_69(CqlContext _) => _LOINC_2_69;
     private static readonly CqlCodeSystem _LOINC_2_69 =
       new CqlCodeSystem("http://loinc.org", "2.69", [

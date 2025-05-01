@@ -154,7 +154,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
     private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
@@ -165,7 +165,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
           _remission,
           _resolved]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
@@ -173,7 +173,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
           _allergy_inactive,
           _allergy_resolved]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
@@ -181,26 +181,26 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
           _allergy_refuted,
           _allergy_unconfirmed]);
 
-    [CqlCodeSystemDefinition("Diagnosis Role")]
+    [CqlCodeSystemDefinition("Diagnosis Role", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
     public CqlCodeSystem Diagnosis_Role(CqlContext _) => _Diagnosis_Role;
     private static readonly CqlCodeSystem _Diagnosis_Role =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, [
           _Billing]);
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Birthdate]);
 
-    [CqlCodeSystemDefinition("MedicationRequestCategory")]
+    [CqlCodeSystemDefinition("MedicationRequestCategory", codeSystemId: "http://terminology.hl7.org/CodeSystem/medicationrequest-category", codeSystemVersion: null)]
     public CqlCodeSystem MedicationRequestCategory(CqlContext _) => _MedicationRequestCategory;
     private static readonly CqlCodeSystem _MedicationRequestCategory =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, [
           _Community,
           _Discharge]);
 
-    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
@@ -211,13 +211,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
           _refuted,
           _unconfirmed]);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Dead]);
 
-    [CqlCodeSystemDefinition("RoleCode")]
+    [CqlCodeSystemDefinition("RoleCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-RoleCode", codeSystemVersion: null)]
     public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
     private static readonly CqlCodeSystem _RoleCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, [

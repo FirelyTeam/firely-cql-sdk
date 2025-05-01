@@ -24,7 +24,9 @@ Hl7.Cql.Abstractions.CqlCodeDefinitionAttribute.CodeSystem.get -> string?
 Hl7.Cql.Abstractions.CqlCodeDefinitionAttribute.CodeVersion.get -> string?
 Hl7.Cql.Abstractions.CqlCodeDefinitionAttribute.CqlCodeDefinitionAttribute(string! name, string! codeId, string? codeSystem = null, string? codeVersion = null, string? codeDisplay = null) -> void
 Hl7.Cql.Abstractions.CqlCodeSystemDefinitionAttribute
-Hl7.Cql.Abstractions.CqlCodeSystemDefinitionAttribute.CqlCodeSystemDefinitionAttribute(string! name) -> void
+Hl7.Cql.Abstractions.CqlCodeSystemDefinitionAttribute.CodeSystemId.get -> string!
+Hl7.Cql.Abstractions.CqlCodeSystemDefinitionAttribute.CodeSystemVersion.get -> string?
+Hl7.Cql.Abstractions.CqlCodeSystemDefinitionAttribute.CqlCodeSystemDefinitionAttribute(string! name, string! codeSystemId, string? codeSystemVersion) -> void
 Hl7.Cql.Abstractions.CqlConceptDefinitionAttribute
 Hl7.Cql.Abstractions.CqlConceptDefinitionAttribute.CqlConceptDefinitionAttribute(string! name) -> void
 Hl7.Cql.Abstractions.CqlDefinitionAttribute

@@ -418,7 +418,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         }));
                     tw.WriteLine(
                         $$"""
-                          [CqlCodeSystemDefinition({{quotedName}})]
+                          [CqlCodeSystemDefinition({{quotedName}}, codeSystemId: {{quotedCodeSystemId}}, codeSystemVersion: {{quotedCodeSystemVersion}})]
                           public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
                           private static readonly CqlCodeSystem {{fieldName}} =
                             new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}, [{{arrayOfCodes}}]);

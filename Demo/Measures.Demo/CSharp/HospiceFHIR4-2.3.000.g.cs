@@ -54,7 +54,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("SNOMEDCT:2017-09")]
+    [CqlCodeSystemDefinition("SNOMEDCT:2017-09", codeSystemId: "http://snomed.info/sct", codeSystemVersion: "http://snomed.info/sct/version/201709")]
     public CqlCodeSystem SNOMEDCT_2017_09(CqlContext _) => _SNOMEDCT_2017_09;
     private static readonly CqlCodeSystem _SNOMEDCT_2017_09 =
       new CqlCodeSystem("http://snomed.info/sct", "http://snomed.info/sct/version/201709", [

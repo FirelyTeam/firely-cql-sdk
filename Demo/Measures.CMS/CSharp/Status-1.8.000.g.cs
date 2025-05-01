@@ -46,7 +46,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ObservationCategoryCodes")]
+    [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
     public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
     private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [

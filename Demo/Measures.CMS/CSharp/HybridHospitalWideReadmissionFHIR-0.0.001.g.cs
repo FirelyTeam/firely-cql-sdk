@@ -94,7 +94,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
@@ -102,12 +102,12 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
           _Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry,
           _Systolic_blood_pressure]);
 
-    [CqlCodeSystemDefinition("ActCode")]
+    [CqlCodeSystemDefinition("ActCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-ActCode", codeSystemVersion: null)]
     public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
     private static readonly CqlCodeSystem _ActCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode", null, []);
 
-    [CqlCodeSystemDefinition("Source of Payment Typology")]
+    [CqlCodeSystemDefinition("Source of Payment Typology", codeSystemId: "https://nahdo.org/sopt", codeSystemVersion: null)]
     public CqlCodeSystem Source_of_Payment_Typology(CqlContext _) => _Source_of_Payment_Typology;
     private static readonly CqlCodeSystem _Source_of_Payment_Typology =
       new CqlCodeSystem("https://nahdo.org/sopt", null, []);

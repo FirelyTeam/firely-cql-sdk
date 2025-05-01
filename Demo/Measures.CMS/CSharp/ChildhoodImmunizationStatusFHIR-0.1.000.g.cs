@@ -270,7 +270,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
@@ -284,19 +284,19 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
           _Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_,
           _Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_]);
 
-    [CqlCodeSystemDefinition("CPT")]
+    [CqlCodeSystemDefinition("CPT", codeSystemId: "http://www.ama-assn.org/go/cpt", codeSystemVersion: null)]
     public CqlCodeSystem CPT(CqlContext _) => _CPT;
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [
           _Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional]);
 
-    [CqlCodeSystemDefinition("CVX")]
+    [CqlCodeSystemDefinition("CVX", codeSystemId: "http://hl7.org/fhir/sid/cvx", codeSystemVersion: null)]
     public CqlCodeSystem CVX(CqlContext _) => _CVX;
     private static readonly CqlCodeSystem _CVX =
       new CqlCodeSystem("http://hl7.org/fhir/sid/cvx", null, [
           _rotavirus__live__monovalent_vaccine]);
 
-    [CqlCodeSystemDefinition("ICD10")]
+    [CqlCodeSystemDefinition("ICD10", codeSystemId: "http://www.cms.gov/Medicare/Coding/ICD10", codeSystemVersion: null)]
     public CqlCodeSystem ICD10(CqlContext _) => _ICD10;
     private static readonly CqlCodeSystem _ICD10 =
       new CqlCodeSystem("http://www.cms.gov/Medicare/Coding/ICD10", null, [

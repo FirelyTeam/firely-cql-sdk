@@ -162,7 +162,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("CPT")]
+    [CqlCodeSystemDefinition("CPT", codeSystemId: "http://www.ama-assn.org/go/cpt", codeSystemVersion: null)]
     public CqlCodeSystem CPT(CqlContext _) => _CPT;
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [
@@ -171,7 +171,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
           _Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure,
           _Unlisted_preventive_medicine_service]);
 
-    [CqlCodeSystemDefinition("ICD10CM")]
+    [CqlCodeSystemDefinition("ICD10CM", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
     public CqlCodeSystem ICD10CM(CqlContext _) => _ICD10CM;
     private static readonly CqlCodeSystem _ICD10CM =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [

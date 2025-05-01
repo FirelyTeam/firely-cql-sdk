@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
@@ -65,6 +66,16 @@ public static class LibrarySetInvokerExtensions
         params object?[] args)
     {
         var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
+        if (definitionSignature.ParameterTypes.Length is {} pLength
+            && pLength != args.Length)
+        {
+            if (pLength != 0 || !args.All(a => a is not null))
+                throw new ArgumentException("The arguments must be the same amount as the signature types.", nameof(args));
+
+            // Let's be nice and allow the user to call a definition with no arguments, provided they are not null and match the signature types exactly.
+            var signature = args.SelectToArray(a => a!.GetType().MakeNullable() );
+            definitionSignature = new DefinitionSignature(definitionSignature.Name, signature);
+        }
         var definitionInvoker = libraryInvoker.Definitions[definitionSignature];
         var result = definitionInvoker.Invoke(cqlContext, args);
         return result;

@@ -42,7 +42,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ICD10")]
+    [CqlCodeSystemDefinition("ICD10", codeSystemId: "http://hl7.org/fhir/sid/icd-10", codeSystemVersion: null)]
     public CqlCodeSystem ICD10(CqlContext _) => _ICD10;
     private static readonly CqlCodeSystem _ICD10 =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10", null, [

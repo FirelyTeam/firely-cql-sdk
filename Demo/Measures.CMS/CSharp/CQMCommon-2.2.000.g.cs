@@ -66,7 +66,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("DiagnosisRole")]
+    [CqlCodeSystemDefinition("DiagnosisRole", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
     public CqlCodeSystem DiagnosisRole(CqlContext _) => _DiagnosisRole;
     private static readonly CqlCodeSystem _DiagnosisRole =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, [

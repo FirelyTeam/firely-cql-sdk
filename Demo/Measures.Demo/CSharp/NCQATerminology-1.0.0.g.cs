@@ -226,32 +226,32 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, []);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, []);
 
-    [CqlCodeSystemDefinition("RoleCode")]
+    [CqlCodeSystemDefinition("RoleCode", codeSystemId: "http://hl7.org/fhir/v3/RoleCode", codeSystemVersion: null)]
     public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
     private static readonly CqlCodeSystem _RoleCode =
       new CqlCodeSystem("http://hl7.org/fhir/v3/RoleCode", null, []);
 
-    [CqlCodeSystemDefinition("Diagnosis Role")]
+    [CqlCodeSystemDefinition("Diagnosis Role", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
     public CqlCodeSystem Diagnosis_Role(CqlContext _) => _Diagnosis_Role;
     private static readonly CqlCodeSystem _Diagnosis_Role =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, []);
 
-    [CqlCodeSystemDefinition("RequestIntent")]
+    [CqlCodeSystemDefinition("RequestIntent", codeSystemId: "http://terminology.hl7.org/CodeSystem/request-intent", codeSystemVersion: null)]
     public CqlCodeSystem RequestIntent(CqlContext _) => _RequestIntent;
     private static readonly CqlCodeSystem _RequestIntent =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/request-intent", null, []);
 
-    [CqlCodeSystemDefinition("MedicationRequestCategory")]
+    [CqlCodeSystemDefinition("MedicationRequestCategory", codeSystemId: "http://terminology.hl7.org/CodeSystem/medicationrequest-category", codeSystemVersion: null)]
     public CqlCodeSystem MedicationRequestCategory(CqlContext _) => _MedicationRequestCategory;
     private static readonly CqlCodeSystem _MedicationRequestCategory =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, [
@@ -260,7 +260,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _Community,
           _Discharge]);
 
-    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
     private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
@@ -271,7 +271,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _remission,
           _resolved]);
 
-    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-verification", codeSystemVersion: null)]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-verification", null, [
@@ -282,7 +282,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _refuted,
           _entered_in_error]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
@@ -290,7 +290,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _allergy_inactive,
           _allergy_resolved]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
@@ -298,14 +298,14 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _allergy_confirmed,
           _allergy_refuted]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceType")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceType", codeSystemId: "http://hl7.org/fhir/allergy-intolerance-type", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceType(CqlContext _) => _AllergyIntoleranceType;
     private static readonly CqlCodeSystem _AllergyIntoleranceType =
       new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-type", null, [
           _Allergy,
           _Intolerance]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceCategory")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceCategory", codeSystemId: "http://hl7.org/fhir/allergy-intolerance-category", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceCategory(CqlContext _) => _AllergyIntoleranceCategory;
     private static readonly CqlCodeSystem _AllergyIntoleranceCategory =
       new CqlCodeSystem("http://hl7.org/fhir/allergy-intolerance-category", null, [
@@ -314,14 +314,14 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _environment,
           _biologic]);
 
-    [CqlCodeSystemDefinition("ConditionCategoryCodes")]
+    [CqlCodeSystemDefinition("ConditionCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-category", codeSystemVersion: null)]
     public CqlCodeSystem ConditionCategoryCodes(CqlContext _) => _ConditionCategoryCodes;
     private static readonly CqlCodeSystem _ConditionCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null, [
           _problem_list_item,
           _encounter_diagnosis]);
 
-    [CqlCodeSystemDefinition("claim-type")]
+    [CqlCodeSystemDefinition("claim-type", codeSystemId: "http://terminology.hl7.org/CodeSystem/claim-type", codeSystemVersion: null)]
     public CqlCodeSystem claim_type(CqlContext _) => _claim_type;
     private static readonly CqlCodeSystem _claim_type =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/claim-type", null, [
@@ -331,7 +331,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _Oral,
           _Vision]);
 
-    [CqlCodeSystemDefinition("ActEncounterCodes")]
+    [CqlCodeSystemDefinition("ActEncounterCodes", codeSystemId: "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", codeSystemVersion: null)]
     public CqlCodeSystem ActEncounterCodes(CqlContext _) => _ActEncounterCodes;
     private static readonly CqlCodeSystem _ActEncounterCodes =
       new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", null, [
@@ -342,7 +342,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _emergency,
           _inpatient_acute]);
 
-    [CqlCodeSystemDefinition("coverage-type")]
+    [CqlCodeSystemDefinition("coverage-type", codeSystemId: "http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", codeSystemVersion: null)]
     public CqlCodeSystem coverage_type(CqlContext _) => _coverage_type;
     private static readonly CqlCodeSystem _coverage_type =
       new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", null, [
@@ -353,7 +353,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _retiree_health_program,
           _substance_use_policy]);
 
-    [CqlCodeSystemDefinition("IdentifierType")]
+    [CqlCodeSystemDefinition("IdentifierType", codeSystemId: "http://terminology.hl7.org/CodeSystem/v2-0203", codeSystemVersion: null)]
     public CqlCodeSystem IdentifierType(CqlContext _) => _IdentifierType;
     private static readonly CqlCodeSystem _IdentifierType =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v2-0203", null, [

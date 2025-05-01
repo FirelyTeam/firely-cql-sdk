@@ -266,7 +266,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("RXNORM")]
+    [CqlCodeSystemDefinition("RXNORM", codeSystemId: "http://www.nlm.nih.gov/research/umls/rxnorm", codeSystemVersion: null)]
     public CqlCodeSystem RXNORM(CqlContext _) => _RXNORM;
     private static readonly CqlCodeSystem _RXNORM =
       new CqlCodeSystem("http://www.nlm.nih.gov/research/umls/rxnorm", null, [
@@ -287,7 +287,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
           _doxepin_75_MG_Oral_Capsule,
           _ergoloid_mesylates__USP_1_MG_Oral_Tablet]);
 
-    [CqlCodeSystemDefinition("CPT")]
+    [CqlCodeSystemDefinition("CPT", codeSystemId: "http://www.ama-assn.org/go/cpt", codeSystemVersion: null)]
     public CqlCodeSystem CPT(CqlContext _) => _CPT;
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [

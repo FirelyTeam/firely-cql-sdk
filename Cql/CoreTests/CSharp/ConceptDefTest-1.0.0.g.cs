@@ -46,7 +46,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("SNOMED")]
+    [CqlCodeSystemDefinition("SNOMED", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMED(CqlContext _) => _SNOMED;
     private static readonly CqlCodeSystem _SNOMED =
       new CqlCodeSystem("http://snomed.info/sct", null, [

@@ -70,13 +70,13 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Dead]);
 
-    [CqlCodeSystemDefinition("HSLOC")]
+    [CqlCodeSystemDefinition("HSLOC", codeSystemId: "http://cts.nlm.nih.gov/fhir/cs/hsloc", codeSystemVersion: null)]
     public CqlCodeSystem HSLOC(CqlContext _) => _HSLOC;
     private static readonly CqlCodeSystem _HSLOC =
       new CqlCodeSystem("http://cts.nlm.nih.gov/fhir/cs/hsloc", null, []);

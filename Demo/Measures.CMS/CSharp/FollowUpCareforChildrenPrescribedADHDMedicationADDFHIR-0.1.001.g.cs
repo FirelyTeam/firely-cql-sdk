@@ -142,7 +142,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("RXNORM")]
+    [CqlCodeSystemDefinition("RXNORM", codeSystemId: "http://www.nlm.nih.gov/research/umls/rxnorm", codeSystemVersion: null)]
     public CqlCodeSystem RXNORM(CqlContext _) => _RXNORM;
     private static readonly CqlCodeSystem _RXNORM =
       new CqlCodeSystem("http://www.nlm.nih.gov/research/umls/rxnorm", null, [

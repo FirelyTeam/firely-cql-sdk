@@ -62,7 +62,7 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("AdministrativeGender")]
+    [CqlCodeSystemDefinition("AdministrativeGender", codeSystemId: "http://hl7.org/fhir/administrative-gender", codeSystemVersion: null)]
     public CqlCodeSystem AdministrativeGender(CqlContext _) => _AdministrativeGender;
     private static readonly CqlCodeSystem _AdministrativeGender =
       new CqlCodeSystem("http://hl7.org/fhir/administrative-gender", null, [

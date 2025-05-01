@@ -266,19 +266,19 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Birthdate]);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Dead]);
 
-    [CqlCodeSystemDefinition("ActCode")]
+    [CqlCodeSystemDefinition("ActCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-ActCode", codeSystemVersion: null)]
     public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
     private static readonly CqlCodeSystem _ActCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode", null, [
@@ -294,14 +294,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _short_stay,
           _virtual]);
 
-    [CqlCodeSystemDefinition("RoleCode")]
+    [CqlCodeSystemDefinition("RoleCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-RoleCode", codeSystemVersion: null)]
     public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
     private static readonly CqlCodeSystem _RoleCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, [
           _ER,
           _ICU]);
 
-    [CqlCodeSystemDefinition("Diagnosis Role")]
+    [CqlCodeSystemDefinition("Diagnosis Role", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
     public CqlCodeSystem Diagnosis_Role(CqlContext _) => _Diagnosis_Role;
     private static readonly CqlCodeSystem _Diagnosis_Role =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, [
@@ -314,12 +314,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _post_op,
           _Billing]);
 
-    [CqlCodeSystemDefinition("RequestIntent")]
+    [CqlCodeSystemDefinition("RequestIntent", codeSystemId: "http://hl7.org/fhir/request-intent", codeSystemVersion: null)]
     public CqlCodeSystem RequestIntent(CqlContext _) => _RequestIntent;
     private static readonly CqlCodeSystem _RequestIntent =
       new CqlCodeSystem("http://hl7.org/fhir/request-intent", null, []);
 
-    [CqlCodeSystemDefinition("MedicationRequestCategory")]
+    [CqlCodeSystemDefinition("MedicationRequestCategory", codeSystemId: "http://terminology.hl7.org/CodeSystem/medicationrequest-category", codeSystemVersion: null)]
     public CqlCodeSystem MedicationRequestCategory(CqlContext _) => _MedicationRequestCategory;
     private static readonly CqlCodeSystem _MedicationRequestCategory =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, [
@@ -328,7 +328,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _Community,
           _Discharge]);
 
-    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
     private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
@@ -339,7 +339,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _remission,
           _resolved]);
 
-    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
@@ -350,7 +350,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _refuted,
           _entered_in_error]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
@@ -358,7 +358,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _allergy_inactive,
           _allergy_resolved]);
 
-    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
@@ -366,7 +366,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _allergy_confirmed,
           _allergy_refuted]);
 
-    [CqlCodeSystemDefinition("ObservationCategoryCodes")]
+    [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
     public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
     private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
@@ -380,20 +380,20 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
           _therapy,
           _activity]);
 
-    [CqlCodeSystemDefinition("USCoreObservationCategoryExtensionCodes")]
+    [CqlCodeSystemDefinition("USCoreObservationCategoryExtensionCodes", codeSystemId: "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", codeSystemVersion: null)]
     public CqlCodeSystem USCoreObservationCategoryExtensionCodes(CqlContext _) => _USCoreObservationCategoryExtensionCodes;
     private static readonly CqlCodeSystem _USCoreObservationCategoryExtensionCodes =
       new CqlCodeSystem("http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", null, [
           _clinical_test]);
 
-    [CqlCodeSystemDefinition("ConditionCategory")]
+    [CqlCodeSystemDefinition("ConditionCategory", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-category", codeSystemVersion: null)]
     public CqlCodeSystem ConditionCategory(CqlContext _) => _ConditionCategory;
     private static readonly CqlCodeSystem _ConditionCategory =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null, [
           _problem_list_item,
           _encounter_diagnosis]);
 
-    [CqlCodeSystemDefinition("USCoreConditionCategoryExtensionCodes")]
+    [CqlCodeSystemDefinition("USCoreConditionCategoryExtensionCodes", codeSystemId: "http://hl7.org/fhir/us/core/CodeSystem/condition-category", codeSystemVersion: null)]
     public CqlCodeSystem USCoreConditionCategoryExtensionCodes(CqlContext _) => _USCoreConditionCategoryExtensionCodes;
     private static readonly CqlCodeSystem _USCoreConditionCategoryExtensionCodes =
       new CqlCodeSystem("http://hl7.org/fhir/us/core/CodeSystem/condition-category", null, [

@@ -90,13 +90,13 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Gleason_score_in_Specimen_Qualitative]);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
@@ -107,7 +107,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
           _T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_,
           _Tumor_staging__tumor_staging_]);
 
-    [CqlCodeSystemDefinition("UCUM")]
+    [CqlCodeSystemDefinition("UCUM", codeSystemId: "http://unitsofmeasure.org", codeSystemVersion: null)]
     public CqlCodeSystem UCUM(CqlContext _) => _UCUM;
     private static readonly CqlCodeSystem _UCUM =
       new CqlCodeSystem("http://unitsofmeasure.org", null, []);

@@ -174,7 +174,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("LOINC")]
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
@@ -208,7 +208,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
           _VR_36_Physical_component_summary__PCS__score___oblique_method_T_score,
           _VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score]);
 
-    [CqlCodeSystemDefinition("SNOMEDCT")]
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [

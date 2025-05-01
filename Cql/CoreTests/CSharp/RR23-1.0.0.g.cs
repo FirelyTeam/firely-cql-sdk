@@ -54,13 +54,13 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #region CodeSystems
 
-    [CqlCodeSystemDefinition("ACME Product Catalog")]
+    [CqlCodeSystemDefinition("ACME Product Catalog", codeSystemId: "http://acme.org/product-catalog", codeSystemVersion: null)]
     public CqlCodeSystem ACME_Product_Catalog(CqlContext _) => _ACME_Product_Catalog;
     private static readonly CqlCodeSystem _ACME_Product_Catalog =
       new CqlCodeSystem("http://acme.org/product-catalog", null, [
           _Tiny_Umbrella]);
 
-    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
