@@ -9,17 +9,42 @@
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Maps library, definition, and signatures to values.
+/// Represents a specialized dictionary for managing definitions, organized by library name,
+/// definition name, and their associated signatures. This class provides functionality to add,
+/// retrieve, query, and merge definitions based on their signatures and library context.
 /// </summary>
-/// <typeparam name="T">The value mapped by the keys in this dictionary.</typeparam>
-internal class DefinitionDictionary<T> where T : class
+/// <typeparam name="T">
+/// The type of the definitions stored in the dictionary. This type must be a reference type.
+/// </typeparam>
+/// <remarks>
+/// This class is designed to support scenarios where definitions are grouped by libraries and
+/// further categorized by their names and signatures. It allows efficient lookup and management
+/// of definitions, including support for merging multiple dictionaries and selecting definitions
+/// by library or globally.
+/// </remarks>
+public class DefinitionDictionary<T> where T : class
 {
     private readonly Dictionary<
         /* libraryName:             */string,
         /* signaturesPerDefinition: */Dictionary<
             /* definitionName:       */string,
-            /* signatureDefinitions: */List<(Type[] Signature, T T)>>> _signatureDefinitionsPerDefinitionNamePerLibraryName = new();
+            /* signatureDefinitions: */List<(Type[] Signature, T Definition)>>> _signatureDefinitionsPerDefinitionNamePerLibraryName = new();
 
+    /// <summary>
+    /// Gets the definition associated with the specified library name and definition signature.
+    /// </summary>
+    /// <param name="libraryName">
+    /// The name of the library containing the definition. If <see langword="null"/>, an empty string is used.
+    /// </param>
+    /// <param name="definitionSignature">
+    /// The signature of the definition, including its name and parameter types.
+    /// </param>
+    /// <returns>
+    /// The definition of type <typeparamref name="T"/> that matches the specified library name and definition signature.
+    /// </returns>
+    /// <exception cref="KeyNotFoundException">
+    /// Thrown when no matching definition is found for the specified library name and definition signature.
+    /// </exception>
     public T this[
         string? libraryName,
         DefinitionSignature definitionSignature]
@@ -37,6 +62,21 @@ internal class DefinitionDictionary<T> where T : class
         }
     }
 
+    /// <summary>
+    /// Determines whether a definition with the specified library name and definition signature exists in the dictionary.
+    /// </summary>
+    /// <param name="libraryName">
+    /// The name of the library containing the definition. If <c>null</c>, an empty string is used as the library name.
+    /// </param>
+    /// <param name="definitionSignature">
+    /// The signature of the definition to check for existence.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if a definition with the specified library name and signature exists; otherwise, <c>false</c>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if <paramref name="definitionSignature"/> is <c>null</c>.
+    /// </exception>
     public bool ContainsDefinition(
         string? libraryName,
         DefinitionSignature definitionSignature)
@@ -56,6 +96,22 @@ internal class DefinitionDictionary<T> where T : class
         return false;
     }
 
+    /// <summary>
+    /// Attempts to retrieve a definition from the dictionary based on the specified library name and definition signature.
+    /// </summary>
+    /// <param name="libraryName">
+    /// The name of the library containing the definition. If <c>null</c>, an empty string is used as the default library name.
+    /// </param>
+    /// <param name="definitionSignature">
+    /// The signature of the definition to retrieve, including its name and parameter types.
+    /// </param>
+    /// <param name="definition">
+    /// When this method returns, contains the definition associated with the specified library name and signature,
+    /// if found; otherwise, <c>null</c>. This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if a matching definition is found; otherwise, <c>false</c>.
+    /// </returns>
     public bool TryGetDefinition(
         string? libraryName,
         DefinitionSignature definitionSignature,
@@ -72,6 +128,23 @@ internal class DefinitionDictionary<T> where T : class
         return definition != null;
     }
 
+    /// <summary>
+    /// Adds a new definition to the dictionary for a specified library.
+    /// </summary>
+    /// <param name="libraryName">
+    /// The name of the library to which the definition belongs.
+    /// This value cannot be null, empty, or consist only of whitespace.
+    /// </param>
+    /// <param name="definitionSignature">
+    /// The signature of the definition, which includes its name and parameter types.
+    /// </param>
+    /// <param name="definition">
+    /// The definition object to be added to the dictionary.
+    /// </param>
+    /// <exception cref="ArgumentException">
+    /// Thrown when <paramref name="libraryName"/> is null, empty, or consists only of whitespace,
+    /// or when a definition with the same signature already exists in the specified library.
+    /// </exception>
     public void AddDefinition(
         string libraryName,
         DefinitionSignature definitionSignature,
@@ -101,24 +174,33 @@ internal class DefinitionDictionary<T> where T : class
 
 
     /// <summary>
-    /// Gets the libraries defined in this dictionary.
+    /// Gets a read-only collection of library names that are currently defined in the dictionary.
     /// </summary>
+    /// <value>
+    /// A collection of strings representing the names of the libraries.
+    /// </value>
+    /// <remarks>
+    /// This property provides access to the keys of the internal dictionary that stores definitions
+    /// grouped by library names. It can be used to enumerate all libraries for which definitions
+    /// have been added.
+    /// </remarks>
     public IReadOnlyCollection<string> Libraries => _signatureDefinitionsPerDefinitionNamePerLibraryName.Keys;
 
     /// <summary>
-    /// Enumerates all definitions, their signatures, and their associated definitions for a given library name.
+    /// Retrieves all definitions associated with the specified library name.
     /// </summary>
-    /// <param name="libraryName">The name of the library to enumerate definitions definitions for.</param>
+    /// <param name="libraryName">
+    /// The name of the library for which definitions are to be retrieved. 
+    /// If <see langword="null"/>, an empty string is used as the library name.
+    /// </param>
     /// <returns>
-    /// An enumerable collection of tuples, where each tuple contains:
-    /// <list type="bullet">
-    /// <item><description>The definition name.</description></item>
-    /// <item><description>The type signature of the definition's definition.</description></item>
-    /// <item><description>The associated definition.</description></item>
-    /// </list>
+    /// An enumerable collection of tuples, where each tuple contains a <see cref="DefinitionSignature"/> 
+    /// representing the signature of a definition and the corresponding definition of type <typeparamref name="T"/>.
     /// </returns>
-    /// <exception cref="ArgumentException">Thrown if the specified library does not exist in the dictionary.</exception>
-    public IEnumerable<(string definitionName, Type[] signature, T definition)> SelectDefinitionsByLibraryName(string? libraryName)
+    /// <exception cref="ArgumentException">
+    /// Thrown when the specified library name does not exist in the dictionary.
+    /// </exception>
+    public IEnumerable<(DefinitionSignature definitionSignature, T definition)> SelectDefinitionsByLibraryName(string? libraryName)
     {
         libraryName ??= string.Empty;
         if (!_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signatureDefinitionsPerDefinition))
@@ -126,8 +208,31 @@ internal class DefinitionDictionary<T> where T : class
 
         foreach (var (definitionName, signatureDefinitions) in signatureDefinitionsPerDefinition)
             foreach (var (signature, definition) in signatureDefinitions)
-                yield return (definitionName, signature, definition);
+                yield return (new (definitionName, signature), definition);
     }
+
+    /// <summary>
+    /// Retrieves all definitions stored in the dictionary, including their associated library names
+    /// and definition signatures.
+    /// </summary>
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of tuples, where each tuple contains:
+    /// <list type="bullet">
+    /// <item>
+    /// <description>The library name as a <see cref="string"/>.</description>
+    /// </item>
+    /// <item>
+    /// <description>The <see cref="DefinitionSignature"/> associated with the definition.</description>
+    /// </item>
+    /// <item>
+    /// <description>The definition of type <typeparamref name="T"/>.</description>
+    /// </item>
+    /// </list>
+    /// </returns>
+    /// <remarks>
+    /// This method iterates through all libraries, definition names, and their associated signatures
+    /// to return a complete list of definitions stored in the dictionary.
+    /// </remarks>
 
     public IEnumerable<(string libraryName, DefinitionSignature definitionSignature, T definition)> SelectDefinitions()
     {
@@ -137,12 +242,6 @@ internal class DefinitionDictionary<T> where T : class
                     yield return (libraryName, new (definitionName, signature), definition);
     }
 
-    /// <summary>
-    /// Tries to get key-value pairs of definitions and their values.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitions">The <see langword="out"/> parameter containing the result.</param>
-    /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
     internal bool TryGetDefinitionsForLibrary(
         string? libraryName,
         [NotNullWhen(true)] out IEnumerable<KeyValuePair<string, List<(Type[], T)>>>? definitions)
@@ -155,6 +254,16 @@ internal class DefinitionDictionary<T> where T : class
         return definitions != null;
     }
 
+    /// <summary>
+    /// Merges the specified <see cref="DefinitionDictionary{T}"/> instances into the current dictionary.
+    /// </summary>
+    /// <param name="dictionaries">
+    /// An array of <see cref="DefinitionDictionary{T}"/> instances to merge into the current dictionary.
+    /// </param>
+    /// <remarks>
+    /// This method adds all definitions from the provided dictionaries into the current dictionary.
+    /// If a library already exists in the current dictionary, its definitions are not overwritten.
+    /// </remarks>
     public void Merge(params DefinitionDictionary<T>[] dictionaries)
     {
         foreach (var dictionary in dictionaries)
@@ -164,8 +273,8 @@ internal class DefinitionDictionary<T> where T : class
                 if (Libraries.Contains(libKey))
                     continue;
 
-                foreach (var (definitionName, signature, definition) in dictionary.SelectDefinitionsByLibraryName(libKey))
-                    AddDefinition(libKey, new(definitionName, signature), definition);
+                foreach (var (definitionSignature, definition) in dictionary.SelectDefinitionsByLibraryName(libKey))
+                    AddDefinition(libKey, definitionSignature, definition);
             }
     }
 
@@ -179,7 +288,7 @@ internal class DefinitionDictionary<T> where T : class
     /// <returns>The best match for <paramref name="signature"/>, or <c>null</c> if no match exists</returns>
     internal T? BestMatch(
         Type[] signature,
-        IEnumerable<(Type[] Signature, T T)> signatureDefinitions,
+        IEnumerable<(Type[] Signature, T Definition)> signatureDefinitions,
         Func<Type, Type, bool>? conversionCheck = null)
     {
         var groups = (from overload in signatureDefinitions
@@ -191,7 +300,7 @@ internal class DefinitionDictionary<T> where T : class
                       select g).ToArray();
 
         if (groups is [{ } item0, ..])
-            return item0.ToArray() is [{ } itemOnly] ? itemOnly.T : null;
+            return item0.ToArray() is [{ } itemOnly] ? itemOnly.Definition : null;
 
         return null;
     }

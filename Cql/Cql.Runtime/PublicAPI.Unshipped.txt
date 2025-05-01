@@ -540,6 +540,7 @@ Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null) -> void
+Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>!
 Hl7.Cql.Runtime.CqlContext.MessageReceived -> System.EventHandler<Hl7.Cql.Operators.MessageEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
@@ -561,6 +562,16 @@ Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.get -> Hl7.Cql.Runtime.
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.init -> void
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.get -> Hl7.Cql.Runtime.CqlLibraryVersion?
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.init -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>
+Hl7.Cql.Runtime.DefinitionDictionary<T>.AddDefinition(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionDictionary() -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitions() -> System.Collections.Generic.IEnumerable<(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition)>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitionsByLibraryName(string? libraryName) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition)>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature].get -> T!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, out T? definition) -> bool
 Hl7.Cql.Runtime.DefinitionSignature
 Hl7.Cql.Runtime.DefinitionSignature.Deconstruct(out string! name, out System.Type![]! parameterTypes) -> void
 Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature(string! name, params System.Type![]! parameterTypes) -> void

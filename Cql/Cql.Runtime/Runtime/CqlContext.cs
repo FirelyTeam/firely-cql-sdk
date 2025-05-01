@@ -18,7 +18,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Contains all definitions required during execution.
         /// </summary>
-        internal DelegateDefinitionDictionary Definitions { get; } = new();
+        public DelegateDefinitionDictionary Definitions { get; } = new();
 
         /// <summary>
         /// Gets the implementation of <see cref="ICqlOperators"/> this execution uses.
