@@ -36,12 +36,8 @@ internal static class Program
         InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
         PackageFromExamplesFolder(loggerFactory);
-        return;
 
-        //string[] exampleSetNames = ["Tests"];
-        string[] exampleSetNames = ["RR23"];
-        //string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
-        //string[] exampleSetNames = ["CMS"];
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
