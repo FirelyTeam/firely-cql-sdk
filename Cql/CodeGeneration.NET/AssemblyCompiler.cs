@@ -87,7 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var (library, cSharp) = t;
                         var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
-                        results.Add(library.GetVersionedLibraryIdentifierString()!, assemblyBinaryWithSourceCode);
+                        results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
                     buildExceptionHandlingStrategy);
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<Assembly> assemblyReferences,
             AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
-            var libraryVersionedIdentifier = library.GetVersionedLibraryIdentifierString()!;
+            string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
-                if (assemblies.TryGetValue(libraryDependency.GetVersionedLibraryIdentifierString()!, out var referencedDll))
+                if (assemblies.TryGetValue(libraryDependency.VersionedLibraryIdentifier, out var referencedDll))
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
@@ -207,12 +207,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string CreateAssemblyInfoSourceString(Library library)
         {
-            var parts = library.GetVersionedLibraryIdentifierString()!.Split('-');
-            string name = parts[0];
-            string version = string.Empty;
-
-            if (parts.Length > 1)
-                version = parts[1];
+            (string name, string? version) = library.VersionedLibraryIdentifier;
 
             var text = $"""
                         [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]

@@ -37,7 +37,7 @@ partial class LibraryExpressionBuilderContext
 
         void AddDefinitions(Library library)
         {
-            string libraryName = library.GetVersionedLibraryIdentifierString()!;
+            string libraryName = library.VersionedLibraryIdentifier;
             if (!HasAliasForLibraryVersionedIdentifier(libraryName))
                 throw new CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(library).ToException();
 
@@ -140,7 +140,7 @@ partial class LibraryExpressionBuilderContext
 
     #region Url By CodeSystemRef (cross library)
 
-    private readonly VersionedIdentifierDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
+    private readonly CodeSystemRefDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
 
     private void AddCodeSystemRefsFromIncludes()
     {
@@ -161,7 +161,7 @@ partial class LibraryExpressionBuilderContext
         {
             foreach (var codeSystemDef in codeSystemDefs)
             {
-                var libraryNameAndName = new VersionedIdentifier(library.GetVersionedLibraryIdentifierString()!, codeSystemDef.name);
+                var libraryNameAndName = (library.VersionedLibraryIdentifier, codeSystemDef.name);
                 var newValue = codeSystemDef.id;
                 if (!_codeSystemIdsByCodeSystemRefs.TryAdd(libraryNameAndName, newValue))
                 {
@@ -180,7 +180,7 @@ partial class LibraryExpressionBuilderContext
     /// <param name="codeSystemRef">The code system reference.</param>
     /// <param name="url">The URL of the code system.</param>
     /// <returns>True if the code system name is found, false otherwise.</returns>
-    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
+    public bool TryGetCodeSystemName(Elm.CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
         var libraryName = GetLibraryVersionedIdentifierFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
@@ -188,9 +188,5 @@ partial class LibraryExpressionBuilderContext
 
     #endregion
 
-    private readonly record struct VersionedIdentifier(string? LibraryName, string Name);
-
-    private class VersionedIdentifierDictionary<TValue> : Dictionary<VersionedIdentifier, TValue>
-    {
-    }
+    private class CodeSystemRefDictionary<TValue> : Dictionary<(string? LibraryName, string Name), TValue>;
 }

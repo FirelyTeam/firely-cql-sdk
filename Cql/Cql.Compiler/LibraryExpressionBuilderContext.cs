@@ -29,7 +29,7 @@ internal partial class LibraryExpressionBuilderContext
         _logger = logger;
         _expressionBuilder = expressionBuilder;
         Library = library;
-        LibraryVersionedIdentifier = Library.GetVersionedLibraryIdentifierString()!;
+        LibraryVersionedIdentifier = Library.VersionedLibraryIdentifier;
     }
 
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();

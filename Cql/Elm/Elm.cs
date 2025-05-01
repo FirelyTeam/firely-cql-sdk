@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Threading;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Runtime;
 
@@ -18,24 +19,23 @@ namespace Hl7.Cql.Elm;
 internal static class IGetVersionedIdentifierExtensions
 {
     /// <summary>
-    /// Gets the identifier with the version, or just the identifier if no version exists.
+    /// Retrieves the versioned library identifier string from the specified 
+    /// <see cref="IGetVersionedIdentifier"/> instance. This string represents the 
+    /// name and version of the library in a formatted manner.
     /// </summary>
-    /// <param name="getVersionedIdentifier">The instance to get the versioned identifier string from.</param>
-    /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
-    /// <returns>The identifier with version, or just the identifier if no version exists.</returns>
-    /// <remarks>The identifier and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
+    /// <param name="getVersionedIdentifier">
+    /// The <see cref="IGetVersionedIdentifier"/> instance from which to retrieve the versioned library identifier string.
+    /// </param>
+    /// <returns>
+    /// A string representing the versioned library identifier if available; otherwise, <c>null</c>.
+    /// </returns>
     public static string? GetVersionedLibraryIdentifierString(
-        this IGetVersionedIdentifier getVersionedIdentifier,
-        bool throwError = true) =>
+        this IGetVersionedIdentifier getVersionedIdentifier) =>
         getVersionedIdentifier.VersionedIdentifier switch
         {
-            ({ } result, _)                => result.GetVersionedIdentifier(throwError),
-            (_, { } error) when throwError => throw error,
-            _                              => null
+            ({ } result, _) => result.GetVersionedLibraryIdentifierString(),
+            _               => null
         };
-
-    public static CqlVersionedLibraryIdentifier GetVersionedLibraryIdentifier(this IGetVersionedIdentifier getVersionedIdentifier) =>
-        CqlVersionedLibraryIdentifier.Parse(getVersionedIdentifier.GetVersionedLibraryIdentifierString()!);
 }
 
 /// <summary>
@@ -52,6 +52,8 @@ internal interface IGetVersionedIdentifier
     /// <summary>
     /// Gets the versioned library identifier.
     /// </summary>
+    [JsonIgnore]
+    [XmlIgnore]
     CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
 
@@ -91,7 +93,7 @@ partial class Library : IGetVersionedIdentifier
     }
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedLibraryIdentifierString(false);
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString();
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -104,6 +106,7 @@ partial class IncludeDef : IGetVersionedIdentifier
             { Length: > 0 } => (new() { id = path, version = version is { Length: 0 } ? null : version }, null),
             _               => (null, new MissingIdentifierError(this).ToException())
         };
+
 
     /// <inheritdoc />
     [JsonIgnore]
@@ -119,27 +122,14 @@ partial class IncludeDef : IGetVersionedIdentifier
     }
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedLibraryIdentifierString(false);
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString();
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class VersionedIdentifier : IGetVersionedIdentifier
 {
-    internal string? GetVersionedIdentifier(bool throwError = true)
-    {
-        if (string.IsNullOrEmpty(id))
-        {
-            if (throwError) throw new MissingNameError(this).ToException();
-            return null;
-        }
-
-        if (string.IsNullOrEmpty(version))
-        {
-            return id;
-        }
-
-        return $"{id}-{version}";
-    }
+    internal string? GetVersionedLibraryIdentifierString() =>
+        CqlVersionedLibraryIdentifier.BuildString(id, version);
 
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
@@ -158,7 +148,7 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     }
 
     /// <inheritdoc />
-    public override string? ToString() => GetVersionedIdentifier(false);
+    public override string? ToString() => GetVersionedLibraryIdentifierString();
 }
 
 #endregion

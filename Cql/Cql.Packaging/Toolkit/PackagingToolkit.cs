@@ -92,7 +92,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.GetVersionedLibraryIdentifierString()!);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.VersionedLibraryIdentifier);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
@@ -154,8 +154,8 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                          overrideDate: Config.OverrideDate,
                          errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
-                             .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedLibraryIdentifierString()!)),
-                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedLibraryIdentifierString()))
+                             .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.VersionedLibraryIdentifier)),
+                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.VersionedLibraryIdentifier))
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);

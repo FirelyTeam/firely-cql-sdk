@@ -34,5 +34,5 @@ public readonly record struct ElmToolkitConversionRecord(
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; } = CqlVersionedLibraryIdentifier.Parse(SourceElmLibrary.GetVersionedLibraryIdentifierString()!);
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => SourceElmLibrary.VersionedLibraryIdentifier;
 }

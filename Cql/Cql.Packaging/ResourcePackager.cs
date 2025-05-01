@@ -44,10 +44,10 @@ internal class ResourcePackager(
         {
             onNextLibrary?.Invoke(elmLibrary);
 
-            var versionedIdentifier = elmLibrary.GetVersionedLibraryIdentifierString()!;
+            string versionedIdentifier = elmLibrary.VersionedLibraryIdentifier;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;
             var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
-            if (versionedIdentifier != elmLibraryInput.GetVersionedLibraryIdentifierString()!) throw new InvalidOperationException("Versioned identifiers do not match.");
+            if (versionedIdentifier != elmLibraryInput.VersionedLibraryIdentifier) throw new InvalidOperationException("Versioned identifiers do not match.");
 
             var fhirLibrary = LibraryPackager.CreateLibraryResource(
                 libraryPackagerLogger,
@@ -322,7 +322,7 @@ internal static class LibraryPackager
         var bytes = elmBytes;
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.GetVersionedLibraryIdentifierString()}+elm",
+            ElementId = $"{elmLibrary.VersionedLibraryIdentifier}+elm",
             ContentType = ElmLibrary.JsonMimeType,
             Data = bytes,
         };
@@ -439,7 +439,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedLibraryIdentifierString()}+cql",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+cql",
             ContentType = "text/cql",
             Data = cqlBytes,
         };
@@ -492,7 +492,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedLibraryIdentifierString()}+dll",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+dll",
             ContentType = "application/octet-stream",
             Data = assemblyBytes,
         };

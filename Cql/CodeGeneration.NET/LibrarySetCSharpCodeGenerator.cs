@@ -114,7 +114,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
             Action<Library>? onBeforeProcessLibrary = null) =>
             LibrarySet
-                .Where(library => Definitions.Libraries.Contains(library.GetVersionedLibraryIdentifierString()!))
+                .Where(library => Definitions.Libraries.Contains(library.VersionedLibraryIdentifier))
                 .TrySelect(
                     library =>
                     {
@@ -143,8 +143,8 @@ internal partial class LibrarySetCSharpCodeGenerator
             int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
 
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
-        public string LibraryName { get; } = Library.GetVersionedLibraryIdentifierString()!;
-        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.GetVersionedLibraryIdentifierString()!)!;
+        public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
+        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.VersionedLibraryIdentifier)!;
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -206,7 +206,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedLibraryIdentifierString()!))
+                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];

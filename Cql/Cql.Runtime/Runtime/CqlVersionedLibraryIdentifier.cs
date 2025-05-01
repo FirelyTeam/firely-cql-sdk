@@ -80,12 +80,28 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     internal string ToString(string delimiter)
     {
-        return (Identifier, Version) switch
-        {
-            ({ } identifier, { } version) => $"{identifier}{delimiter}{version}",
-            ({ } identifier, _)           => identifier.ToString(),
-        };
+        return BuildString(Identifier, Version, delimiter)!;
     }
+
+    /// <summary>
+    /// Constructs a string representation of a CQL versioned library identifier.
+    /// </summary>
+    /// <param name="identifier">The identifier of the CQL library.</param>
+    /// <param name="version">The version of the CQL library. This parameter is optional.</param>
+    /// <param name="delimiter">The delimiter used to separate the identifier and version. Defaults to "-".</param>
+    /// <returns>A string combining the identifier and version, separated by the specified delimiter.
+    /// If the version is not provided, only the identifier is returned.
+    /// If the identifier is not provided, null is returned.</returns>
+    public static string? BuildString(
+        string identifier,
+        string? version = null,
+        string delimiter = IdentifierVersionDelimiter) =>
+        (identifier, version) switch
+        {
+            ({ Length:>0 } id, { Length: > 0 } ver) => $"{id}{delimiter}{ver}",
+            ({ Length: > 0 } id, _)     => id,
+            _ => null
+        };
 
     #region Parsing
 

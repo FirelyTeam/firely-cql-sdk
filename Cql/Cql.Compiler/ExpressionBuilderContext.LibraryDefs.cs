@@ -216,7 +216,7 @@ partial class ExpressionBuilderContext
                             ?? throw this.NewExpressionBuildingException(
                                 $"Include {includeDef.localId} does not have a alias.");
 
-                var libNav = includeDef.GetVersionedLibraryIdentifierString(false) ??
+                var libNav = includeDef.GetVersionedLibraryIdentifierString() ??
                              throw this.NewExpressionBuildingException(
                                  $"Include {includeDef.localId} does not have a well-formed name and version");
                 _libraryContext.AddAliasLibraryVersionedIdentifier(alias, libNav);
