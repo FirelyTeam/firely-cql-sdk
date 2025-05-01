@@ -631,6 +631,7 @@ static Hl7.Cql.Runtime.CqlLibraryVersion.operator !=(Hl7.Cql.Runtime.CqlLibraryV
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.BuildString(string! identifier, string? version = null, string! delimiter = "-") -> string?
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier

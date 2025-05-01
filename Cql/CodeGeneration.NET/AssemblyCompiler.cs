@@ -207,7 +207,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string CreateAssemblyInfoSourceString(Library library)
         {
-            (string name, string? version) = library.VersionedLibraryIdentifier;
+            var (name, version) = library.VersionedLibraryIdentifier;
 
             var text = $"""
                         [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]

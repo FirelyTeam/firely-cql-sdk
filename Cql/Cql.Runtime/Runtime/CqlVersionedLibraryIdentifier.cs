@@ -185,4 +185,5 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryIdentifier identifier) => FromNameAndVersion(identifier);
 
     #endregion
+
 }

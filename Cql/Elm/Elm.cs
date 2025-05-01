@@ -19,8 +19,8 @@ namespace Hl7.Cql.Elm;
 internal static class IGetVersionedIdentifierExtensions
 {
     /// <summary>
-    /// Retrieves the versioned library identifier string from the specified 
-    /// <see cref="IGetVersionedIdentifier"/> instance. This string represents the 
+    /// Retrieves the versioned library identifier string from the specified
+    /// <see cref="IGetVersionedIdentifier"/> instance. This string represents the
     /// name and version of the library in a formatted manner.
     /// </summary>
     /// <param name="getVersionedIdentifier">
