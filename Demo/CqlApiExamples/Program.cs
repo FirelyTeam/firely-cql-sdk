@@ -233,9 +233,6 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
 
-        static bool IsAnyTypeOf(Type target, params Type[] types) =>
-            types.Any(type => type.IsAssignableFrom(target));
-
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);

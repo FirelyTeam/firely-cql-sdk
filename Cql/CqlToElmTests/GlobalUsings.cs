@@ -18,3 +18,4 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using CqlDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition>;
+global using DelegateDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate>;

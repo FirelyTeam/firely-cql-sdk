@@ -285,7 +285,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
             var cqlDefinitionDictionary = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
-            var cqlDefinition = cqlDefinitionDictionary["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)].Lambda;
+            var cqlDefinition = cqlDefinitionDictionary["FuncTest-1.0.0", new DefinitionSignature("ToInteger", typeof(CqlContext), typeof(decimal?))].Lambda;
             cqlDefinition.Parameters.Should().HaveCount(2);
             cqlDefinition.Parameters[1].Name.Should().Be("decimal");
 

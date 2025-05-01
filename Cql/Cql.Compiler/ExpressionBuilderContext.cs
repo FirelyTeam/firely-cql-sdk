@@ -1172,7 +1172,7 @@ partial class ExpressionBuilderContext(
 
     protected Expression ParameterRef(ParameterRef op)
     {
-        if (_libraryContext.LibraryDefinitions.TryGetValue(_libraryContext.LibraryVersionedIdentifier, op.name!, out var lambda))
+        if (_libraryContext.LibraryDefinitions.TryGetDefinition(_libraryContext.LibraryVersionedIdentifier, op.name!, out var lambda))
         {
             var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda);
             return invoke;

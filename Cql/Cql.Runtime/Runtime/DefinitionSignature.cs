@@ -1,4 +1,4 @@
-    namespace Hl7.Cql.Invocation.Toolkit;
+    namespace Hl7.Cql.Runtime;
 
     /// <summary>
     /// Represents the signature of a definition, including its name and parameter types.
@@ -41,7 +41,7 @@
         /// <param name="parameterTypes">The parameter types array to process.</param>
         /// <returns>A non-null array of parameter types.</returns>
         private static Type[] CalcParameterTypes(Type[] parameterTypes) =>
-            parameterTypes is { Length: > 0 } ? parameterTypes : Array.Empty<Type>();
+            parameterTypes is { Length: > 0 } ? parameterTypes : [];
 
         /// <summary>
         /// Calculates a hash code for the <see cref="DefinitionSignature"/> instance based on its name and parameter types.

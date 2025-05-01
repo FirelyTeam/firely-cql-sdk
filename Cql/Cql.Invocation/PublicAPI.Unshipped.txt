@@ -1,6 +1,6 @@
 ﻿#nullable enable
 abstract Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Invoke(Hl7.Cql.Runtime.CqlContext! cqlContext, params object?[]! args) -> object?
-abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.Definitions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Invocation.Toolkit.DefinitionSignature!, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
+abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.Definitions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.DefinitionSignature!, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.DependencyLibraryIdentifiers.get -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
@@ -13,11 +13,6 @@ Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibrarySetName.get -> string!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>!
-Hl7.Cql.Invocation.Toolkit.DefinitionSignature
-Hl7.Cql.Invocation.Toolkit.DefinitionSignature.Deconstruct(out string! name, out System.Type![]! parameterTypes) -> void
-Hl7.Cql.Invocation.Toolkit.DefinitionSignature.DefinitionSignature(string! name, params System.Type![]! parameterTypes) -> void
-Hl7.Cql.Invocation.Toolkit.DefinitionSignature.Name.get -> string!
-Hl7.Cql.Invocation.Toolkit.DefinitionSignature.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionInvokerExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitInvocationExtensions
@@ -48,15 +43,10 @@ Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LibrarySetName.get -> string!
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 override Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ToString() -> string!
-override Hl7.Cql.Invocation.Toolkit.DefinitionSignature.Equals(object? other) -> bool
-override Hl7.Cql.Invocation.Toolkit.DefinitionSignature.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.DependencyLibraryIdentifiers.get -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier>!
 override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 override Hl7.Cql.Invocation.Toolkit.LibraryInvoker.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.ToString() -> string?
-static Hl7.Cql.Invocation.Toolkit.DefinitionSignature.implicit operator Hl7.Cql.Invocation.Toolkit.DefinitionSignature!(string! name) -> Hl7.Cql.Invocation.Toolkit.DefinitionSignature!
-static Hl7.Cql.Invocation.Toolkit.DefinitionSignature.operator !=(Hl7.Cql.Invocation.Toolkit.DefinitionSignature? left, Hl7.Cql.Invocation.Toolkit.DefinitionSignature? right) -> bool
-static Hl7.Cql.Invocation.Toolkit.DefinitionSignature.operator ==(Hl7.Cql.Invocation.Toolkit.DefinitionSignature? left, Hl7.Cql.Invocation.Toolkit.DefinitionSignature? right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 static Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionInvokerExtensions.SelectResults(this System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>! definitionInvokers, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Runtime.ValueExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>? definitionInvocationExceptionCallback = null) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, object? invocationResult)>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitInvocationExtensions.CreateInvocationToolkit(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
@@ -71,7 +61,7 @@ static Hl7.Cql.Invocation.Toolkit.Extensions.LibraryInvokerExtensions.SelectCode
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibraryInvokerExtensions.SelectExpressions(this Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibraryInvokerExtensions.SelectFunctions(this Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibraryInvokerExtensions.SelectValueSets(this Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definition, Hl7.Cql.Primitives.CqlValueSet! valueSet)>!
-static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.InvokeLibraryDefinition(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Invocation.Toolkit.DefinitionSignature! definitionSignature, params object?[]! args) -> object?
+static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.InvokeLibraryDefinition(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, params object?[]! args) -> object?
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.SelectExpressions(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.SelectExpressionsForLibrary(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.SelectFunctions(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!

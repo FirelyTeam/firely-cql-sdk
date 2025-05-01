@@ -16,16 +16,16 @@ public class LibrarySetExpressionBuilderTests
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
 
-        var librarySetInvoker = new ElmToolkit()
-                                .AddElmLibraries(librarySet)
-                                .CompileToAssemblies()
-                                .CreateInvocationToolkit()
-                                .CreateLibrarySetInvoker();
-        var cqlContext = FhirCqlContext.CreateContext();
-        var cqlCode = librarySetInvoker.InvokeLibraryDefinition(
-                          cqlContext,
-                          (CqlVersionedLibraryIdentifier)"CumulativeMedicationDuration-4.1.000",
-                          "Every eight hours (qualifier value)") as CqlCode;
-        Assert.AreEqual(new CqlCode("307469008", "http://snomed.info/sct"), cqlCode);
+        new ElmToolkit()
+            .AddElmLibraries(librarySet)
+            .UseLibrarySetInvoker(librarySetInvoker =>
+            {
+                var cqlContext = FhirCqlContext.CreateContext();
+                var cqlCode = librarySetInvoker.InvokeLibraryDefinition(
+                                  cqlContext,
+                                  (CqlVersionedLibraryIdentifier)"CumulativeMedicationDuration-4.1.000",
+                                  "Every eight hours (qualifier value)") as CqlCode;
+                Assert.AreEqual(new CqlCode("307469008", "http://snomed.info/sct"), cqlCode);
+            });
     }
 }

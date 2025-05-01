@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
             CqlDefinitionDictionary definitions = new();
-            definitions.Add(library.VersionedLibraryIdentifier, expressionName, definition);
+            definitions.AddDefinition(library.VersionedLibraryIdentifier, expressionName, definition);
 
             var generateCSharp =
                 elmToolkitServices

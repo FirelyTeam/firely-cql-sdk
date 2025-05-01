@@ -3,11 +3,10 @@
 namespace Hl7.Cql.Compiler;
 
 internal class CqlValueSetDefinition(
-    LambdaExpression lambda,
     string name,
     string valueSetId,
     string? valueSetVersion)
-    : CqlDefinition(lambda, name) {
+    : CqlDefinition(null!, name) {
     public string ValueSetId { get; } = valueSetId;
     public string? ValueSetVersion { get; } = valueSetVersion;
 }

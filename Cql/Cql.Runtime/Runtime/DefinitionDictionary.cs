@@ -20,46 +20,14 @@ internal class DefinitionDictionary<T> where T : class
             /* definitionName:       */string,
             /* signatureDefinitions: */List<(Type[] Signature, T T)>>> _signatureDefinitionsPerDefinitionNamePerLibraryName = new();
 
-    /// <summary>
-    /// Gets the value for the given <paramref name="libraryName"/> and <paramref name="definitionName"/>.
-    /// This indexer should be used for CQL definitions.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <returns>The value, if present.</returns>
-    /// <exception cref="KeyNotFoundException">If the library &amp; definition pair is not found in the dictionary.</exception>
     public T this[
         string? libraryName,
-        string definitionName]
+        DefinitionSignature definitionSignature]
     {
         get
         {
             libraryName ??= string.Empty;
-            if (!_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName)
-                || signaturesDefinitionsPerDefinitionName[definitionName] is not [{ Signature.Length: 0 } signatureDefinition0])
-                throw new KeyNotFoundException($"No matching overload for {definitionName} in {libraryName} could be found.");
-
-            return signatureDefinition0.T;
-        }
-    }
-
-    /// <summary>
-    /// Gets the value for the given <paramref name="libraryName"/>, <paramref name="definitionName"/>, and signature.
-    /// This indexer should be used for CQL functions.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="signature">The signature of the definition.</param>
-    /// <returns>The value, if present.</returns>
-    /// <exception cref="KeyNotFoundException">If the library, definition, &amp; signature is not found in the dictionary.</exception>
-    public T this[
-        string? libraryName,
-        string definitionName,
-        params Type[] signature]
-    {
-        get
-        {
-            libraryName ??= string.Empty;
+            var (definitionName, signature) = definitionSignature;
             if (!_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName))
                 throw new KeyNotFoundException($"No overload of {definitionName} matches the arguments {string.Join(",", signature.Select(p => p.Name))}");
 
@@ -69,41 +37,18 @@ internal class DefinitionDictionary<T> where T : class
         }
     }
 
-    /// <summary>
-    /// Returns <see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definitionName"/> is present in this dictionary.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definitionName"/> is present in this dictionary.</returns>
     public bool ContainsDefinition(
         string? libraryName,
-        string definitionName)
-    {
-        libraryName ??= string.Empty;
-        return _signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName)
-               && signaturesDefinitionsPerDefinitionName.ContainsKey(definitionName);
-    }
-
-    /// <summary>
-    /// Returns <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="definitionSignature"/> is present in this dictionary.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="definitionSignature">The signature of the definition.</param>
-    /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="definitionSignature"/> is present in this dictionary.</returns>
-    public bool ContainsDefinition(
-        string? libraryName,
-        string definitionName,
-        Type[] definitionSignature)
+        DefinitionSignature definitionSignature)
     {
         libraryName ??= string.Empty;
         if (!_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName)
-            || !signaturesDefinitionsPerDefinitionName.TryGetValue(definitionName, out var signatureDefinitions))
+            || !signaturesDefinitionsPerDefinitionName.TryGetValue(definitionSignature.Name, out var signatureDefinitions))
             return false;
 
         foreach (var signatureDefinition in signatureDefinitions)
         {
-            var score = Score(definitionSignature, signatureDefinition.Signature);
+            var score = Score(definitionSignature.ParameterTypes, signatureDefinition.Signature);
             if (score == 0)
                 return true;
         }
@@ -111,45 +56,13 @@ internal class DefinitionDictionary<T> where T : class
         return false;
     }
 
-    /// <summary>
-    /// Tries to get the value for the given library and definition.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="definition">The <see langword="out"/> parameter containing the result.</param>
-    /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definitionName"/> is present in this dictionary.</returns>
-    public bool TryGetValue(
+    public bool TryGetDefinition(
         string? libraryName,
-        string definitionName,
+        DefinitionSignature definitionSignature,
         [NotNullWhen(true)] out T? definition)
     {
         libraryName ??= string.Empty;
-        definition = null;
-
-        if (_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName)
-            && signaturesDefinitionsPerDefinitionName.TryGetValue(definitionName, out var signatureDefinitions)
-            && signatureDefinitions is [{ Signature.Length: 0 } signatureDefinition])
-            definition = signatureDefinition.T;
-
-        return definition != null;
-    }
-
-
-    /// <summary>
-    /// Tries to get the best match value for <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="signature"/>.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="signature">The signature of the definition.</param>
-    /// <param name="definition">The <see langword="out"/> parameter containing the result.</param>
-    /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definitionName"/>, and <paramref name="signature"/> is present in this dictionary.</returns>
-    public bool TryGetValue(
-        string? libraryName,
-        string definitionName,
-        Type[] signature,
-        [NotNullWhen(true)] out T? definition)
-    {
-        libraryName ??= string.Empty;
+        var (definitionName, signature) = definitionSignature;
         definition = null;
 
         if (_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signaturesDefinitionsPerDefinitionName)
@@ -159,16 +72,9 @@ internal class DefinitionDictionary<T> where T : class
         return definition != null;
     }
 
-    /// <summary>
-    /// Adds the value for the given library and definition.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="definition">The value to add.</param>
-    /// <exception cref="ArgumentException">If a value already exists for this library and definition.</exception>
-    public void Add(
+    public void AddDefinition(
         string libraryName,
-        string definitionName,
+        DefinitionSignature definitionSignature,
         T definition)
     {
         if (string.IsNullOrWhiteSpace(libraryName))
@@ -181,53 +87,18 @@ internal class DefinitionDictionary<T> where T : class
             _signatureDefinitionsPerDefinitionNamePerLibraryName.Add(libraryName, signatureDefinitionsPerDefinition);
         }
 
-        if (!signatureDefinitionsPerDefinition.TryGetValue(definitionName, out var signatureDefinitions))
-        {
-            signatureDefinitions = [];
-            signatureDefinitionsPerDefinition.Add(definitionName, signatureDefinitions);
-        }
-        else if (signatureDefinitions.Any(o => o.Signature.Length == 0))
-            throw new ArgumentException($"An overload for {definitionName} with no parameters has already been added to this dictionary.",
-                                        nameof(definitionName));
-
-        signatureDefinitions.Add((Type.EmptyTypes, definition));
-    }
-
-    /// <summary>
-    /// Adds the value for the given library, definition, and signature.
-    /// </summary>
-    /// <param name="libraryName">The name of the library.</param>
-    /// <param name="definitionName">The name of the definition.</param>
-    /// <param name="signature">The signature of the definition.</param>
-    /// <param name="definition">The value to add.</param>
-    /// <exception cref="ArgumentException">If a value already exists for this library and definition.</exception>
-    public void Add(
-        string libraryName,
-        string definitionName,
-        Type[] signature,
-        T definition)
-    {
-        if (string.IsNullOrWhiteSpace(libraryName))
-            throw new ArgumentException($"'{nameof(libraryName)}' cannot be null or whitespace.", nameof(libraryName));
-
-        libraryName ??= string.Empty;
-        if (!_signatureDefinitionsPerDefinitionNamePerLibraryName.TryGetValue(libraryName, out var signatureDefinitionsPerDefinition))
-        {
-            signatureDefinitionsPerDefinition = new Dictionary<string, List<(Type[], T)>>();
-            _signatureDefinitionsPerDefinitionNamePerLibraryName.Add(libraryName, signatureDefinitionsPerDefinition);
-        }
-
-        if (ContainsDefinition(libraryName, definitionName, signature))
+        if (ContainsDefinition(libraryName, definitionSignature))
             throw new ArgumentException("Overload already exists.");
 
-        if (!signatureDefinitionsPerDefinition.TryGetValue(definitionName, out var signatureDefinitions))
+        if (!signatureDefinitionsPerDefinition.TryGetValue(definitionSignature.Name, out var signatureDefinitions))
         {
             signatureDefinitions = [];
-            signatureDefinitionsPerDefinition.Add(definitionName, signatureDefinitions);
+            signatureDefinitionsPerDefinition.Add(definitionSignature.Name, signatureDefinitions);
         }
 
-        signatureDefinitions.Add((signature, definition));
+        signatureDefinitions.Add((definitionSignature.ParameterTypes, definition));
     }
+
 
     /// <summary>
     /// Gets the libraries defined in this dictionary.
@@ -258,24 +129,12 @@ internal class DefinitionDictionary<T> where T : class
                 yield return (definitionName, signature, definition);
     }
 
-    /// <summary>
-    /// Enumerates all definitions, their signatures, and their associated definitions across all libraries.
-    /// </summary>
-    /// <returns>
-    /// An enumerable collection of tuples, where each tuple contains:
-    /// <list type="bullet">
-    /// <item><description>The library name.</description></item>
-    /// <item><description>The definition name.</description></item>
-    /// <item><description>The type signature of the definition's definition.</description></item>
-    /// <item><description>The associated definition.</description></item>
-    /// </list>
-    /// </returns>
-    public IEnumerable<(string libraryName, string definitionName, Type[] signature, T definition)> SelectDefinitions()
+    public IEnumerable<(string libraryName, DefinitionSignature definitionSignature, T definition)> SelectDefinitions()
     {
         foreach (var (libraryName, definitions) in _signatureDefinitionsPerDefinitionNamePerLibraryName)
             foreach (var (definitionName, signatureDefinitions) in definitions)
                 foreach (var (signature, definition) in signatureDefinitions)
-                    yield return (libraryName, definitionName, signature, definition);
+                    yield return (libraryName, new (definitionName, signature), definition);
     }
 
     /// <summary>
@@ -284,7 +143,7 @@ internal class DefinitionDictionary<T> where T : class
     /// <param name="libraryName">The name of the library.</param>
     /// <param name="definitions">The <see langword="out"/> parameter containing the result.</param>
     /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
-    public bool TryGetDefinitionsForLibrary(
+    internal bool TryGetDefinitionsForLibrary(
         string? libraryName,
         [NotNullWhen(true)] out IEnumerable<KeyValuePair<string, List<(Type[], T)>>>? definitions)
     {
@@ -296,11 +155,6 @@ internal class DefinitionDictionary<T> where T : class
         return definitions != null;
     }
 
-    /// <summary>
-    /// Merges <paramref name="dictionaries"/> into this dictionary, with existing keys remaining preserved.
-    /// This means that if a key exists in this dictionary, it will not be overwritten by the value of keys in <paramref name="dictionaries"/>.
-    /// </summary>
-    /// <param name="dictionaries">The dictionaries to merge into this dictionary.</param>
     public void Merge(params DefinitionDictionary<T>[] dictionaries)
     {
         foreach (var dictionary in dictionaries)
@@ -311,7 +165,7 @@ internal class DefinitionDictionary<T> where T : class
                     continue;
 
                 foreach (var (definitionName, signature, definition) in dictionary.SelectDefinitionsByLibraryName(libKey))
-                    Add(libKey, definitionName, signature, definition);
+                    AddDefinition(libKey, new(definitionName, signature), definition);
             }
     }
 

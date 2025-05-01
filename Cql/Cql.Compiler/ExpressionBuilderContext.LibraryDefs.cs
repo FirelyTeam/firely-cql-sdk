@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
@@ -27,7 +28,7 @@ partial class ExpressionBuilderContext
 
                 var cqlCodeSystem = new CqlCodeSystem(codeSystem.id, codeSystem.version, codes);
                 var cqlCodeSystemDefinition = new CqlCodeSystemDefinition(codeSystem.name!, cqlCodeSystem);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, cqlCodeSystemDefinition);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, cqlCodeSystemDefinition);
             }
         });
 
@@ -43,7 +44,7 @@ partial class ExpressionBuilderContext
                     var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                     var lambda = Expression.Lambda(newArray, CqlExpressions.ParameterExpression);
                     var cd = new CqlConceptDefinition(lambda, conceptDef.name!);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, conceptDef.name!, cd);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, conceptDef.name!, cd);
                 }
                 else
                 {
@@ -70,7 +71,7 @@ partial class ExpressionBuilderContext
                     var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var lambda = Expression.Lambda(newConcept, CqlExpressions.ParameterExpression);
                     var cd = new CqlConceptDefinition(lambda, conceptDef.name!);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, conceptDef.name, cd);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, conceptDef.name, cd);
                 }
             }
         });
@@ -96,7 +97,7 @@ partial class ExpressionBuilderContext
                 var cqlCode = new CqlCode(codeDef.id, csUrl);
                 _libraryContext.AddCode(codeDef, cqlCode);
                 var cqlCodeDefinition = new CqlCodeDefinition(codeDef.name, cqlCode);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeDef.name, cqlCodeDefinition);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, codeDef.name, cqlCodeDefinition);
             }
         });
 
@@ -156,11 +157,8 @@ partial class ExpressionBuilderContext
                                 @params[o + 1] = (funcOps[o].name, functionParameterTypes[o]);
                             var notImplemented = NotImplemented(expressionKey, @params, returnType);
                             var paramTypes = @params.Select(p => p.type).ToArray();
-                            _libraryContext.LibraryDefinitions.Add(
-                                _libraryContext.LibraryVersionedIdentifier,
-                                expressionDefName,
-                                paramTypes,
-                                new CqlFunctionDefinition(notImplemented, expressionDefName));
+                            CqlDefinition definition = new CqlFunctionDefinition(notImplemented, expressionDefName);
+                            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, paramTypes), definition);
                             _logger.LogWarning(FormatMessage(
                                                    $"Function '{expressionDefName}' is declared external, but it was not defined in the expression scope. " +
                                                    "A stub has been created that throws a NotImplemented exception."), expressionDef);
@@ -173,7 +171,7 @@ partial class ExpressionBuilderContext
                 }
 
                 if (function?.operand != null &&
-                    _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, expressionDefName, functionParameterTypes))
+                    _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, functionParameterTypes)))
                 {
                     var ops = function.operand
                                       .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
@@ -201,7 +199,7 @@ partial class ExpressionBuilderContext
 
                     var def = new CqlExpressionDefinition(lambda, expressionDefName, tags);
                     Type[] signature = functionParameterTypes ?? [];
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, expressionDefName, signature, def);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, signature), def);
                 }
             }
         });
@@ -243,7 +241,7 @@ partial class ExpressionBuilderContext
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
                 var paramDef = new CqlParameterDefinition(lambda, parameter.name!);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, parameter.name!, paramDef);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, parameter.name!, paramDef);
             }
         });
 
@@ -253,13 +251,8 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(valueSetDef))
             {
-                var @new = Expression.New(ConstructorInfos.CqlValueSet,
-                                          Expression.Constant(valueSetDef.id, typeof(string)),
-                                          Expression.Constant(valueSetDef.version, typeof(string)));
-                var contextParameter = CqlExpressions.ParameterExpression;
-                var lambda = Expression.Lambda(@new, contextParameter);
-                var def = new CqlValueSetDefinition(lambda, valueSetDef.name!, valueSetDef.id, valueSetDef.version);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, valueSetDef.name!, def);
+                var def = new CqlValueSetDefinition(valueSetDef.name!, valueSetDef.id, valueSetDef.version);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, valueSetDef.name!, def);
             }
         });
 }

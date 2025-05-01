@@ -31,7 +31,7 @@ partial class ExpressionBuilderContext
             case ExpressionRef expressionRef:
             {
                 var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryVersionedIdentifier;
-                if (!_libraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                if (!_libraryContext.LibraryDefinitions.TryGetDefinition(libraryName, expressionRef.name, out var definition))
                 {
                     if (throwIfNotFound)
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");

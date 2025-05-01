@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler.Expressions
@@ -14,21 +15,23 @@ namespace Hl7.Cql.Compiler.Expressions
 
     /// <summary>
     /// This is a custom expression representing the invocation of a function using
-    /// a lookup on a <see cref="DefinitionDictionary{Delegate}"/>.
+    /// a lookup on a <see cref="DelegateDefinitionDictionary"/>.
     /// </summary>
     /// <remarks>The expression reduces to a lookup on a
-    /// <see cref="DefinitionDictionary{Delegate}"/> expression by item, plus the invocation
+    /// <see cref="DelegateDefinitionDictionary"/> expression by item, plus the invocation
     /// of the delegate, if found.</remarks>.
     internal class FunctionCallExpression : Expression
     {
-        private static readonly PropertyInfo itemProperty =
-            typeof(DefinitionDictionary<Delegate>)
-            .GetProperty("Item", [typeof(string), typeof(string), typeof(Type[])])!;
+        private static readonly ConstructorInfo DefinitionSignatureCtor =
+            ReflectionUtility.ConstructorOf(() => new DefinitionSignature("", Array.Empty<Type>()));
+
+        private static readonly MethodInfo DefinitionDictionaryIndexGetter =
+            ReflectionUtility.MethodOf(() => default(DelegateDefinitionDictionary)!["", default(DefinitionSignature)!]);
 
         public FunctionCallExpression(Expression definitions,
             string libraryName, string functionName, IReadOnlyCollection<Expression> arguments, Type functionType)
         {
-            if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
+            if (definitions.Type != typeof(DelegateDefinitionDictionary))
                 throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
                     nameof(definitions));
 
@@ -48,23 +51,26 @@ namespace Hl7.Cql.Compiler.Expressions
 
         public override Expression Reduce()
         {
-            var argumentTypesExpressions = Arguments
-                .Skip(1)
-                .Select(a => Constant(a.Type));
+            return CallDefinitionDictionaryIndexGet(FunctionType, Definitions, LibraryName, FunctionName, Arguments);
+        }
 
-            var typeArrayInitializer = NewArrayInit(typeof(Type), argumentTypesExpressions);
+        internal static Expression CallDefinitionDictionaryIndexGet(
+            Type functionType,
+            Expression definitions,
+            string libraryName,
+            string functionName,
+            IReadOnlyCollection<Expression> arguments)
+        {
+            var argumentTypesExpressions = arguments
+                                           .Skip(1)
+                                           .Select(a => Constant(a.Type));
 
-            var indices = new Expression[]
-            {
-                Constant(LibraryName),
-                Constant(FunctionName),
-                typeArrayInitializer
-            };
-
-            var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = index.NewTypeAsExpression(FunctionType);
-            var invoke = Invoke(asFunc, Arguments);
-
+            var newArrayExpression = NewArrayInit(typeof(Type), argumentTypesExpressions);
+            var definitionSignatureCtor = DefinitionSignatureCtor;
+            var definitionSignature = New(definitionSignatureCtor, [Constant(functionName), newArrayExpression]);
+            var indexExpression = Call(definitions, DefinitionDictionaryIndexGetter, [Constant(libraryName), definitionSignature]);
+            var asFunc = indexExpression.NewTypeAsExpression(functionType);
+            var invoke = Invoke(asFunc, arguments);
             return invoke;
         }
 

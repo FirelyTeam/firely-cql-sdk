@@ -561,6 +561,11 @@ Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.get -> Hl7.Cql.Runtime.
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.init -> void
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.get -> Hl7.Cql.Runtime.CqlLibraryVersion?
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.init -> void
+Hl7.Cql.Runtime.DefinitionSignature
+Hl7.Cql.Runtime.DefinitionSignature.Deconstruct(out string! name, out System.Type![]! parameterTypes) -> void
+Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature(string! name, params System.Type![]! parameterTypes) -> void
+Hl7.Cql.Runtime.DefinitionSignature.Name.get -> string!
+Hl7.Cql.Runtime.DefinitionSignature.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Runtime.IO.DirectoryInfoHandler
 Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
@@ -610,6 +615,8 @@ override Hl7.Cql.Runtime.CqlLibraryVersion.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlLibraryVersion.ToString() -> string!
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
+override Hl7.Cql.Runtime.DefinitionSignature.Equals(object? other) -> bool
+override Hl7.Cql.Runtime.DefinitionSignature.GetHashCode() -> int
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Runtime.CompilerServices.ITuple!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, System.Runtime.CompilerServices.ITuple! value, System.Text.Json.JsonSerializerOptions! options) -> void
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
@@ -641,6 +648,9 @@ static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature!(string! name) -> Hl7.Cql.Runtime.DefinitionSignature!
+static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
+static Hl7.Cql.Runtime.DefinitionSignature.operator ==(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
