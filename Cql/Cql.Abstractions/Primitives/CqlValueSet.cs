@@ -12,24 +12,8 @@ namespace Hl7.Cql.Primitives
     /// Implements the System ValueSet type.
     /// </summary>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#valueset"/>
+    /// <param name="id">The canonical URL of the value set.</param>
+    /// <param name="version">The version of the value set.</param>
     [CqlPrimitiveType(CqlPrimitiveType.ValueSet)]
-    public class CqlValueSet : CqlVocabulary
-    {
-
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        public CqlValueSet()
-        {
-        }
-
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="id">The canonical URL of the value set.</param>
-        /// <param name="version">The version of the value set.</param>
-        public CqlValueSet(string? id, string? version) : base(id, version)
-        {
-        }
-    }
+    public record CqlValueSet(string id, string? version = null) : CqlVocabulary(id, version);
 }

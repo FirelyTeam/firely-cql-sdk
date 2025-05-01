@@ -33,3 +33,5 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 global using Microsoft.Extensions.Options;
 global using static Hl7.Cql.Comparers.CqlComparerSharedMethods;
+global using CqlDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition>;
+global using DelegateDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate>;

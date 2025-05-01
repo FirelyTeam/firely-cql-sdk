@@ -18,8 +18,9 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class DefinitionInvokerExtensions
 {
     /// <summary>
-    /// Enumerates the results of library definitions.
+    /// Enumerates library expression invocations.
     /// </summary>
+    ///
     /// <param name="definitionInvokers">The definition invokers to get results from.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
     /// <param name="definitionInvocationExceptionCallback">
@@ -49,13 +50,16 @@ public static class DefinitionInvokerExtensions
     /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
     /// </para>
     /// </remarks>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateResults(
+    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? invocationResult)> SelectResults(
         this IEnumerable<DefinitionInvoker> definitionInvokers,
         CqlContext cqlContext,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
         if (definitionInvokers.TryGetNonEnumeratedCount(out int count) && count == 0)
             return [];
+
+        // We can only invoke definitions with no additional parameters besides the CqlContext.
+        definitionInvokers = definitionInvokers.Where(definitionInvoker => definitionInvoker.ParameterTypes.Length == 0);
 
         // We need to enumerate twice, which isn't a problem in the case of collections.
         if (definitionInvokers is not IReadOnlyCollection<DefinitionInvoker> or ICollection<DefinitionInvoker>)

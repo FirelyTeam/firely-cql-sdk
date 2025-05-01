@@ -2,8 +2,14 @@
 
 namespace CqlApiExamples;
 
-internal class Directories(string librarySetName)
+internal record Directories
 {
+    public Directories(string librarySetName)
+    {
+        LibrarySetName = librarySetName;
+        FhirInDirectory = LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Resources");
+    }
+
     public static Directories Create(string librarySetName)
     {
         Debug.Assert(
@@ -35,7 +41,7 @@ internal class Directories(string librarySetName)
     public static DirectoryInfo AuthoringProjectDirectory => CurrentSolutionDirectory.CreateSubdirectory("Demo").CreateSubdirectory("Measures.Authoring");
     public static DirectoryInfo LibrarySetsDirectory { get; } = CurrentSolutionDirectory.CreateSubdirectory("LibrarySets");
 
-    public string LibrarySetName { get; } = librarySetName;
+    public string LibrarySetName { get; }
     public DirectoryInfo GeneratedDirectory =>
         CurrentDirectory.CreateSubdirectory("output").CreateSubdirectory(LibrarySetName);
 
@@ -52,7 +58,8 @@ internal class Directories(string librarySetName)
     public DirectoryInfo CSharpOutDirectory => GeneratedDirectory.CreateSubdirectory("CSharp");
     public DirectoryInfo AssembliesOutDirectory => GeneratedDirectory.CreateSubdirectory("Assemblies");
     public DirectoryInfo FhirOutDirectory => GeneratedDirectory.CreateSubdirectory("Fhir");
-    public DirectoryInfo FhirInDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Resources");
+    public DirectoryInfo FhirInDirectory { get; init; }
+
     public DirectoryInfo? ValueSetsFromDirectory =>
         LibrarySetName switch
         {

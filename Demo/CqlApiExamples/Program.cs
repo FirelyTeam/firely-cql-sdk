@@ -17,10 +17,9 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions;
 
 namespace CqlApiExamples;
-
-using static FormattableString;
 
 internal static class Program
 {
@@ -32,20 +31,19 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        // AddDuplicates(loggerFactory);
-        // Add3And2Example(loggerFactory);
-        // InvokeCqlExample(loggerFactory);
-        //InvokeCqlFromExamplesFolder(loggerFactory);
-        //PackageFromExamplesFolder(loggerFactory);
-        //
-        string[] exampleSetNames = ["RR23"];
-        //string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
-        //string[] exampleSetNames = ["CMS"];
+        AddDuplicates(loggerFactory);
+        Add3And2Example(loggerFactory);
+        InvokeCqlExample(loggerFactory);
+        InvokeCqlFromExamplesFolder(loggerFactory);
+        PackageFromExamplesFolder(loggerFactory);
+
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
             //PackageCqlToFhirExample(loggerFactory, dirs);
-            //PackageElmToFhirExample(loggerFactory, dirs);
+            PackageElmToFhirExample(loggerFactory, dirs);
+            dirs = dirs with { FhirInDirectory = dirs.FhirOutDirectory };
             InvokeResourceExample(loggerFactory, dirs);
         }
     }
@@ -152,7 +150,7 @@ internal static class Program
         using var librarySetInvoker = cqlToolkit
                                       .AddCqlLibraries(cqlLibraryString)
                                       .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
-        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
+        var result = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
         Trace.Assert(result is 3);
     }
 
@@ -183,6 +181,11 @@ internal static class Program
                 //.SetIgnoreEnumerationExceptions()
                 .AddAssemblyBinariesInFhirLibrariesFromDirectory(dir)
                 .CreateLibrarySetInvoker(dirs.LibrarySetName);
+        if (librarySetInvoker.LibraryInvokers.Count == 0)
+        {
+            logger.LogWarning("No library invokers.");
+            return;
+        }
 
         if (dirs.LibrarySetName == "RR23")
         {
@@ -190,7 +193,7 @@ internal static class Program
             var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
             var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
             var cqlContext = FhirCqlContext.ForBundle(bundle);
-            var result = librarySetInvoker.GetLibraryDefinitionResult(
+            var result = librarySetInvoker.InvokeLibraryDefinition(
                 cqlContext,
                 (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
                 "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
@@ -226,15 +229,6 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
 
-        var results = librarySetInvoker
-            .EnumerateLibrarySetDefinitionsResults(
-                cqlContext,
-                definition => !IsAnyTypeOf(definition.ReturnType, typeof(ValueSet), typeof(Code), typeof(CodeSystem)));
-
-        static bool IsAnyTypeOf(Type target, params Type[] types) =>
-            types.Any(type => type.IsAssignableFrom(target));
-
-
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -243,7 +237,7 @@ internal static class Program
         object? Invoke(string libraryName, string declarationName)
         {
             var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
-            var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, declarationName);
+            var result = librarySetInvoker.InvokeLibraryDefinition(cqlContext, libraryIdentifier, declarationName);
             return result;
         }
     }
@@ -314,33 +308,34 @@ internal static class Program
         // Create fluent cql toolkit
         var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit =
-            new CqlToolkit(loggerFactory, config).SetIgnoreEnumerationExceptions();
+            new CqlToolkit(loggerFactory, config)
+                .SetIgnoreEnumerationExceptions()
+                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory);
 
-        var elmToolkit =
-            cqlToolkit.CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
-                      .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
-                      // ELM -> Assemblies
-                      .CompileToAssemblies()
-                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
-                      .With(elmToolkit =>
-                                elmToolkit.TryGetFirstCSharpFileLines()
-                                          .IfNotNull(t => logger.LogInformation(
-                                                         $"""
-                                                          First 50 C# lines for {t.LibraryIdentifier}:
-                                                          {t.CSharpSourceCode.TakeLines(50)}
-                                                          """)))
-                      .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
-                      .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
-                      .With(packagingToolkit =>
-                      {
-                          packagingToolkit.TryGetFirstPackageFileLines()
-                                          .IfNotNull(t => logger.LogInformation(
-                                                         $"""
-                                                          First 50 FHIR lines for {t.LibraryIdentifier}:
-                                                          {t.FhirLibraryJson.TakeLines(50)}
-                                                          """));
-                      });
+        cqlToolkit.CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
+                  .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
+                  // ELM -> Assemblies
+                  .CompileToAssemblies()
+                  .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                  .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                  .With(elmToolkit =>
+                            elmToolkit.TryGetFirstCSharpFileLines()
+                                      .IfNotNull(t => logger.LogInformation(
+                                                     $"""
+                                                      First 50 C# lines for {t.LibraryIdentifier}:
+                                                      {t.CSharpSourceCode.TakeLines(50)}
+                                                      """)))
+                  .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
+                  .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
+                  .With(packagingToolkit =>
+                  {
+                      packagingToolkit.TryGetFirstPackageFileLines()
+                                      .IfNotNull(t => logger.LogInformation(
+                                                     $"""
+                                                      First 50 FHIR lines for {t.LibraryIdentifier}:
+                                                      {t.FhirLibraryJson.TakeLines(50)}
+                                                      """));
+                  });
     }
 
     /// <summary>
@@ -373,7 +368,7 @@ internal static class Program
         using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(); // NOTE: 'librarySetInvoker' is a disposable object!
 
         // Execute CQL
-        var threePlusTwo = librarySetInvoker.GetLibraryDefinitionResult(
+        var threePlusTwo = librarySetInvoker.InvokeLibraryDefinition(
             FhirCqlContext.ForBundle(),
             CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
             "ThreePlusTwo");
@@ -401,45 +396,68 @@ file static class Extensions
             sb.AppendLine($"- LibrarySetName: {name}");
         sb.AppendLine("- Libraries:");
 
-        IEnumerable<(DefinitionInvoker def, object? result)> definitions =
+        IEnumerable<(DefinitionInvoker definitionInvoker, object? result)> definitions =
             cqlContext is null
-            ? librarySetInvoker.EnumerateLibrarySetDefinitions().Select(def=> (def, default(object)))
-            : librarySetInvoker.EnumerateLibrarySetDefinitionsResults(cqlContext);
+                ? librarySetInvoker
+                  .SelectExpressions()
+                  .Select(definitionInvoker => (definitionInvoker, default(object)))
+                : librarySetInvoker
+                  .SelectExpressions()
+                  .SelectResults(cqlContext, null);
 
-        foreach (var grouping1 in
-                 definitions.GroupBy(o => o.def.LibraryIdentifier))
+        foreach (var groupedByLibrary in
+                 definitions.GroupBy(o => o.definitionInvoker.LibraryIdentifier))
         {
-            var libId = grouping1.Key;
-            sb.AppendLine($"  - LibraryName: {libId}");
-            foreach (var (index, (def, result)) in grouping1
-                                         .GroupBy(def => def.def.ValueSetId is not null)
-                                         .OrderBy(t => !t.Key)
-                                         .SelectMany(g => g.Indexed())
+            var libraryIdentifier = groupedByLibrary.Key;
+            sb.AppendLine($"  - LibraryName: {libraryIdentifier}");
+            foreach (var (index, (definitionInvoker, result)) in groupedByLibrary
+                                                                 .OrderBy(t =>
+                                                                              t.definitionInvoker.CqlDefinitionAttribute switch
+                                                                              {
+                                                                                  CqlFunctionDefinitionAttribute   => 10,
+                                                                                  CqlExpressionDefinitionAttribute => 8,
+                                                                                  CqlConceptDefinitionAttribute    => 6,
+                                                                                  CqlCodeDefinitionAttribute       => 4,
+                                                                                  CqlCodeSystemDefinitionAttribute => 2,
+                                                                                  CqlValueSetDefinitionAttribute   => 0,
+                                                                                  _                                => 20,
+                                                                              })
+                                                                 .GroupBy(def => def.definitionInvoker.CqlDefinitionAttribute.GetType().Name)
+                                                                 .SelectMany(g => g.Indexed())
                      //.Indexed()
                     )
             {
-                if (def.ValueSetId is { } vsid)
-                {
-                    if (index is 0)
-                        sb.AppendLine($"    ValueSets:");
-                    sb.AppendLine($"      - ValueSetNane: {def.DefinitionName}");
-                    sb.AppendLine($"      - ValueSetId: {vsid}");
-                }
-                else
-                {
-                    if (index is 0)
-                        sb.AppendLine($"    Definitions:");
-                    sb.AppendLine($"      - DefinitionName: {def.DefinitionName}");
-                    sb.AppendLine($"        ReturnType: {TypeHierarchy(def.ReturnType)}");
-                    if (cqlContext is not null)
-                        sb.AppendLine($"        Result: {result}");
-                }
+                string attrName = definitionInvoker.CqlDefinitionAttribute.GetType().Name["Cql".Length .. ^"DefinitionAttribute".Length];
+                if (index is 0)
+                    sb.AppendLine($"    {attrName}s:");
+                sb.AppendLine($"      - Name: {definitionInvoker.DefinitionName}");
 
-                foreach (var (tagIndex, (key, value)) in def.TagValuesByName.Indexed())
+                switch (definitionInvoker.CqlDefinitionAttribute)
                 {
-                    if (tagIndex == 0)
-                        sb.AppendLine($"        Tags:");
-                    sb.AppendLine($"          - {key}: {string.Join(", ", value)}");
+                    case CqlValueSetDefinitionAttribute vsda:
+                        sb.AppendLine($"      - Id: {vsda.ValueSetId}");
+                        sb.AppendLine($"      - Version: {vsda.ValueSetVersion}");
+                        break;
+
+                    case CqlCodeDefinitionAttribute cda:
+                        sb.AppendLine($"      - Id: {cda.CodeId}");
+                        sb.AppendLine($"      - Version: {cda.CodeVersion}");
+                        sb.AppendLine($"      - System: {cda.CodeSystem}");
+                        sb.AppendLine($"      - Display: {cda.CodeDisplay}");
+                        break;
+
+                    case CqlExpressionDefinitionAttribute eda:
+                        sb.AppendLine($"        ReturnType: {TypeHierarchy(definitionInvoker.ReturnType)}");
+                        if (cqlContext is not null)
+                            sb.AppendLine($"        Result: {result}");
+                        foreach (var (tagIndex, (tagName, tagValues)) in definitionInvoker.TagValuesByName.Indexed())
+                        {
+                            if (tagIndex == 0)
+                                sb.AppendLine($"        Tags:");
+                            sb.AppendLine($"          - {tagName}: {string.Join(", ", tagValues)}");
+                        }
+
+                        break;
                 }
             }
         }

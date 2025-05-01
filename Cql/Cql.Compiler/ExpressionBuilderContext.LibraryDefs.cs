@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
@@ -22,27 +23,12 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(codeSystem))
             {
-                if (_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
-                {
-                    var initMembers = codes
-                        .SelectToArray(coding =>
-                            Expression.New(
-                                ConstructorInfos.CqlCode,
-                                Expression.Constant(coding.code),
-                                Expression.Constant(coding.system),
-                                NullExpression.String,
-                                NullExpression.String
-                            ));
-                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var lambda = Expression.Lambda(arrayOfCodesInitializer, CqlExpressions.ParameterExpression);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name, lambda);
-                }
-                else
-                {
-                    var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                    var lambda = Expression.Lambda(newArray, CqlExpressions.ParameterExpression);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeSystem.name, lambda);
-                }
+                if (!_libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+                    codes = [];
+
+                var cqlCodeSystem = new CqlCodeSystem(codeSystem.id, codeSystem.version, codes);
+                var cqlCodeSystemDefinition = new CqlCodeSystemDefinition(codeSystem.name!, cqlCodeSystem);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, codeSystem.name!, cqlCodeSystemDefinition);
             }
         });
 
@@ -53,38 +39,20 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(conceptDef))
             {
-                if (conceptDef.code.Length <= 0)
+                var conceptDefName = conceptDef.name!;
+                CqlCode[] cqlCodes = [];
+                if (conceptDef.code is { Length: > 0 } codeRefs)
                 {
-                    var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                    var lambda = Expression.Lambda(newArray, CqlExpressions.ParameterExpression);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, conceptDef.name, lambda);
-                }
-                else
-                {
-                    var initMembers = new Expression[conceptDef.code.Length];
-                    for (int i = 0; i < conceptDef.code.Length; i++)
+                    cqlCodes = codeRefs.SelectToArray(codeRef =>
                     {
-                        var codeRef = conceptDef.code[i];
                         if (!_libraryContext.TryGetCode(codeRef, out var systemCode))
                             throw this.NewExpressionBuildingException(
-                                $"Code {codeRef.name} in concept {conceptDef.name} is not defined.", null);
-
-                        initMembers[i] = Expression.New(
-                            ConstructorInfos.CqlCode,
-                            Expression.Constant(systemCode.code),
-                            Expression.Constant(systemCode.system),
-                            NullExpression.String,
-                            NullExpression.String
-                        );
-                    }
-
-                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var asEnumerable = arrayOfCodesInitializer.NewTypeAsExpression<IEnumerable<CqlCode>>();
-                    var display = Expression.Constant(conceptDef.display, typeof(string));
-                    var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
-                    var lambda = Expression.Lambda(newConcept, CqlExpressions.ParameterExpression);
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, conceptDef.name, lambda);
+                                $"Code {codeRef.name} in concept {conceptDefName} is not defined.", null);
+                        return new CqlCode(systemCode.code, systemCode.system /*, systemCode.version, systemCode.display*/);
+                    });
                 }
+                var cqlConceptDefinition = new CqlConceptDefinition(conceptDefName, conceptDef.display, cqlCodes);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, conceptDefName, cqlConceptDefinition);
             }
         });
 
@@ -95,30 +63,21 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(codeDef))
             {
-
                 if (codeDef.codeSystem == null)
                     throw this.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
 
                 if (!_libraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
                     throw this.NewExpressionBuildingException($"Undefined code system {codeDef.codeSystem.name!}",
-                        null);
+                                                              null);
 
                 if (!codeNameCodeSystemUrlsSet.Add((codeDef.name!, csUrl!)))
                     throw this.NewExpressionBuildingException(
                         $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})", null);
 
-                var systemCode = new CqlCode(codeDef.id, csUrl);
-                _libraryContext.AddCode(codeDef, systemCode);
-
-                var newCodingExpression = Expression.New(
-                    ConstructorInfos.CqlCode,
-                    Expression.Constant(codeDef.id),
-                    Expression.Constant(csUrl),
-                    NullExpression.String,
-                    NullExpression.String!
-                );
-                var lambda = Expression.Lambda(newCodingExpression, CqlExpressions.ParameterExpression);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, codeDef.name!, lambda);
+                var cqlCode = new CqlCode(codeDef.id, csUrl);
+                _libraryContext.AddCode(codeDef, cqlCode);
+                var cqlCodeDefinition = new CqlCodeDefinition(codeDef.name, cqlCode);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, codeDef.name, cqlCodeDefinition);
             }
         });
 
@@ -131,14 +90,15 @@ partial class ExpressionBuilderContext
 
             using (PushElement(expressionDef))
             {
-                if (string.IsNullOrWhiteSpace(expressionDef.name))
+                var expressionDefName = expressionDef.name;
+                if (string.IsNullOrWhiteSpace(expressionDefName))
                 {
                     throw this.NewExpressionBuildingException(
                         $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.",
                         null);
                 }
 
-                var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDef.name}";
+                var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
                 Type[] functionParameterTypes = Type.EmptyTypes;
                 var parameters = new[] { CqlExpressions.ParameterExpression };
                 var function = expressionDef as FunctionDef;
@@ -159,7 +119,7 @@ partial class ExpressionBuilderContext
                         }
                         else
                             throw this.NewExpressionBuildingException(
-                                $"Operand for function {expressionDef.name} is missing its {nameof(operand.operandTypeSpecifier)} property",
+                                $"Operand for function {expressionDefName} is missing its {nameof(operand.operandTypeSpecifier)} property",
                                 null);
                     }
 
@@ -170,18 +130,18 @@ partial class ExpressionBuilderContext
                         if (_expressionBuilderSettings.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
-                            var funcOps = function.operand ?? Array.Empty<OperandDef>();
+                            var funcOps = function.operand ?? [];
                             var @params = new (string name, Type type)[funcOps.Length + 1];
                             @params[0] = ("context", CqlExpressions.ParameterExpression.Type);
                             for (int o = 0; o < funcOps.Length; o++)
                                 @params[o + 1] = (funcOps[o].name, functionParameterTypes[o]);
                             var notImplemented = NotImplemented(expressionKey, @params, returnType);
                             var paramTypes = @params.Select(p => p.type).ToArray();
-                            _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, expressionDef.name,
-                               paramTypes, notImplemented);
+                            var definition = new CqlFunctionDefinition(notImplemented, expressionDefName);
+                            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, paramTypes), definition);
                             _logger.LogWarning(FormatMessage(
-                                $"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
-                                "A stub has been created that throws a NotImplemented exception."), expressionDef);
+                                                   $"Function '{expressionDefName}' is declared external, but it was not defined in the expression scope. " +
+                                                   "A stub has been created that throws a NotImplemented exception."), expressionDef);
                             return;
                         }
 
@@ -190,38 +150,37 @@ partial class ExpressionBuilderContext
                     }
                 }
 
-                //ctx = ctx.Deeper(expressionDef);
-                var bodyExpression = TranslateArg(expressionDef.expression);
-                var lambda = Expression.Lambda(bodyExpression, parameters);
                 if (function?.operand != null &&
-                    _libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryVersionedIdentifier, expressionDef.name,
-                        functionParameterTypes))
+                    _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier,
+                                                                          new(expressionDefName, functionParameterTypes)))
                 {
                     var ops = function.operand
-                        .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
-                        .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-                    _logger.LogWarning(FormatMessage(
-                        $"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
+                                      .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
+                                      .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
+                    _logger.LogWarning(
+                        FormatMessage(
+                            $"Function {expressionDefName}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
                 }
                 else
                 {
+                    var bodyExpression = TranslateArg(expressionDef.expression);
+                    var lambda = Expression.Lambda(bodyExpression, parameters);
+
+                    (string name, string[] values)[] tags = [];
                     if (expressionDef.annotation is { Length: > 0 } annotations)
                     {
-                        var tags = annotations.OfType<Annotation>()
-                            .SelectMany(a => a.t ?? [])
-                            .Where(tag => !string.IsNullOrWhiteSpace(tag?.name));
-
-                        foreach (var tag in tags)
-                        {
-                            string[] values = [tag.value ?? ""];
-                            _libraryContext.LibraryDefinitions.AddTag(_libraryContext.LibraryVersionedIdentifier, expressionDef.name,
-                                functionParameterTypes, tag.name, values);
-                        }
+                        tags = annotations
+                               .OfType<Annotation>()
+                               .SelectMany(a => a.t ?? [])
+                               .SelectWhere(tag => string.IsNullOrWhiteSpace(tag?.name)
+                                                       ? default
+                                                       : (true, (name: tag.name!, values: (string[]) [tag.value ?? ""])))
+                               .ToArray();
                     }
 
+                    var def = new CqlExpressionDefinition(lambda, expressionDefName, tags);
                     Type[] signature = functionParameterTypes ?? [];
-                    _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, expressionDef.name, signature,
-                        lambda);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, signature), def);
                 }
             }
         });
@@ -236,7 +195,7 @@ partial class ExpressionBuilderContext
                             ?? throw this.NewExpressionBuildingException(
                                 $"Include {includeDef.localId} does not have a alias.");
 
-                var libNav = includeDef.GetVersionedIdentifier(false) ??
+                var libNav = includeDef.GetVersionedLibraryIdentifierString() ??
                              throw this.NewExpressionBuildingException(
                                  $"Include {includeDef.localId} does not have a well-formed name and version");
                 _libraryContext.AddAliasLibraryVersionedIdentifier(alias, libNav);
@@ -249,22 +208,23 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(parameter))
             {
-                if (_libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryVersionedIdentifier, parameter.name!))
-                    throw this.NewExpressionBuildingException($"There is already a definition named {parameter.name}",
-                        null);
+                var parameterName = parameter.name!;
+                if (_libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, parameterName))
+                    throw this.NewExpressionBuildingException($"There is already a definition named {parameterName}",
+                                                              null);
 
-                Expression? defaultValue = null;
-                if (parameter.@default != null)
-                    defaultValue = TranslateArg(parameter.@default).NewTypeAsExpression<object>();
-                else defaultValue = NullExpression.Object;
-
-                var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryVersionedIdentifier, parameter.name, defaultValue);
+                var defaultValue =
+                    parameter.@default != null
+                        ? TranslateArg(parameter.@default).NewTypeAsExpression<object>()
+                        : NullExpression.Object;
+                var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryVersionedIdentifier, parameterName, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;
                 var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, parameter.name!, lambda);
+                var paramDef = new CqlParameterDefinition(lambda, parameterName);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, parameterName, paramDef);
             }
         });
 
@@ -274,12 +234,8 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(valueSetDef))
             {
-                var @new = Expression.New(ConstructorInfos.CqlValueSet,
-                    Expression.Constant(valueSetDef.id, typeof(string)),
-                    Expression.Constant(valueSetDef.version, typeof(string)));
-                var contextParameter = CqlExpressions.ParameterExpression;
-                var lambda = Expression.Lambda(@new, contextParameter);
-                _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryVersionedIdentifier, valueSetDef.name!, lambda);
+                var def = new CqlValueSetDefinition(valueSetDef.name!, valueSetDef.id, valueSetDef.version);
+                _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, valueSetDef.name!, def);
             }
         });
 }

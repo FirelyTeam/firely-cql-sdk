@@ -44,10 +44,10 @@ internal class ResourcePackager(
         {
             onNextLibrary?.Invoke(elmLibrary);
 
-            var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
+            string versionedIdentifier = elmLibrary.VersionedLibraryIdentifier;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;
             var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
-            if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!) throw new InvalidOperationException("Versioned identifiers do not match.");
+            if (versionedIdentifier != elmLibraryInput.VersionedLibraryIdentifier) throw new InvalidOperationException("Versioned identifiers do not match.");
 
             var fhirLibrary = LibraryPackager.CreateLibraryResource(
                 libraryPackagerLogger,
@@ -322,7 +322,7 @@ internal static class LibraryPackager
         var bytes = elmBytes;
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.GetVersionedIdentifier()}+elm",
+            ElementId = $"{elmLibrary.VersionedLibraryIdentifier}+elm",
             ContentType = ElmLibrary.JsonMimeType,
             Data = bytes,
         };
@@ -337,7 +337,7 @@ internal static class LibraryPackager
         // https://hl7.org/fhir/uv/cql/STU1/StructureDefinition-cql-library.html
         var fhirLibrary = new FhirLibrary();
         fhirLibrary.Type = LogicLibraryCodeableConcept;
-        fhirLibrary.Id = FhirIdGenerator.GenerateFhirId(elmLibrary.identifier.ToCqlVersionedLibraryIdentifier());
+        fhirLibrary.Id = FhirIdGenerator.GenerateFhirId(elmLibrary.VersionedLibraryIdentifier);
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
         fhirLibrary.Url = resourceCanonicalBuilder(fhirLibrary.TypeName, elmLibrary.identifier?.id!); // NOTE: We do NOT include the version
@@ -439,7 +439,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+cql",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+cql",
             ContentType = "text/cql",
             Data = cqlBytes,
         };
@@ -492,7 +492,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+dll",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+dll",
             ContentType = "application/octet-stream",
             Data = assemblyBytes,
         };

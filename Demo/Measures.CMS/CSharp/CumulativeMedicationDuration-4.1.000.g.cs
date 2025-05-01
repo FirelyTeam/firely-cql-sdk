@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("CumulativeMedicationDuration", "4.1.000")]
 public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton<CumulativeMedicationDuration_4_1_000>
 {
@@ -28,295 +28,245 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Codes
+
+    [CqlCodeDefinition("HS", codeId: "HS", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode HS(CqlContext _) => _HS;
+    private static readonly CqlCode _HS = new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("WAKE", codeId: "WAKE", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode WAKE(CqlContext _) => _WAKE;
+    private static readonly CqlCode _WAKE = new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("C", codeId: "C", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode C(CqlContext _) => _C;
+    private static readonly CqlCode _C = new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("CM", codeId: "CM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CM(CqlContext _) => _CM;
+    private static readonly CqlCode _CM = new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("CD", codeId: "CD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CD(CqlContext _) => _CD;
+    private static readonly CqlCode _CD = new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("CV", codeId: "CV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CV(CqlContext _) => _CV;
+    private static readonly CqlCode _CV = new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("AC", codeId: "AC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode AC(CqlContext _) => _AC;
+    private static readonly CqlCode _AC = new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("ACM", codeId: "ACM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACM(CqlContext _) => _ACM;
+    private static readonly CqlCode _ACM = new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("ACD", codeId: "ACD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACD(CqlContext _) => _ACD;
+    private static readonly CqlCode _ACD = new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("ACV", codeId: "ACV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACV(CqlContext _) => _ACV;
+    private static readonly CqlCode _ACV = new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("PC", codeId: "PC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PC(CqlContext _) => _PC;
+    private static readonly CqlCode _PC = new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("PCM", codeId: "PCM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCM(CqlContext _) => _PCM;
+    private static readonly CqlCode _PCM = new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("PCD", codeId: "PCD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCD(CqlContext _) => _PCD;
+    private static readonly CqlCode _PCD = new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("PCV", codeId: "PCV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCV(CqlContext _) => _PCV;
+    private static readonly CqlCode _PCV = new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
+
+    [CqlCodeDefinition("MORN", codeId: "MORN", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN(CqlContext _) => _MORN;
+    private static readonly CqlCode _MORN = new CqlCode("MORN", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("MORN.early", codeId: "MORN.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN_early(CqlContext _) => _MORN_early;
+    private static readonly CqlCode _MORN_early = new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("MORN.late", codeId: "MORN.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN_late(CqlContext _) => _MORN_late;
+    private static readonly CqlCode _MORN_late = new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("NOON", codeId: "NOON", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode NOON(CqlContext _) => _NOON;
+    private static readonly CqlCode _NOON = new CqlCode("NOON", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("AFT", codeId: "AFT", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT(CqlContext _) => _AFT;
+    private static readonly CqlCode _AFT = new CqlCode("AFT", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("AFT.early", codeId: "AFT.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT_early(CqlContext _) => _AFT_early;
+    private static readonly CqlCode _AFT_early = new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("AFT.late", codeId: "AFT.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT_late(CqlContext _) => _AFT_late;
+    private static readonly CqlCode _AFT_late = new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("EVE", codeId: "EVE", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE(CqlContext _) => _EVE;
+    private static readonly CqlCode _EVE = new CqlCode("EVE", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("EVE.early", codeId: "EVE.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE_early(CqlContext _) => _EVE_early;
+    private static readonly CqlCode _EVE_early = new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("EVE.late", codeId: "EVE.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE_late(CqlContext _) => _EVE_late;
+    private static readonly CqlCode _EVE_late = new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("HS")]
-    public CqlCode HS(CqlContext context) =>
-        new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("NIGHT", codeId: "NIGHT", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode NIGHT(CqlContext _) => _NIGHT;
+    private static readonly CqlCode _NIGHT = new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing");
 
-
-    [CqlDeclaration("WAKE")]
-    public CqlCode WAKE(CqlContext context) =>
-        new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("C")]
-    public CqlCode C(CqlContext context) =>
-        new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("CM")]
-    public CqlCode CM(CqlContext context) =>
-        new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("CD")]
-    public CqlCode CD(CqlContext context) =>
-        new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("CV")]
-    public CqlCode CV(CqlContext context) =>
-        new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("AC")]
-    public CqlCode AC(CqlContext context) =>
-        new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("ACM")]
-    public CqlCode ACM(CqlContext context) =>
-        new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("ACD")]
-    public CqlCode ACD(CqlContext context) =>
-        new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("ACV")]
-    public CqlCode ACV(CqlContext context) =>
-        new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PC")]
-    public CqlCode PC(CqlContext context) =>
-        new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCM")]
-    public CqlCode PCM(CqlContext context) =>
-        new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCD")]
-    public CqlCode PCD(CqlContext context) =>
-        new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCV")]
-    public CqlCode PCV(CqlContext context) =>
-        new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("MORN")]
-    public CqlCode MORN(CqlContext context) =>
-        new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("MORN.early")]
-    public CqlCode MORN_early(CqlContext context) =>
-        new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("MORN.late")]
-    public CqlCode MORN_late(CqlContext context) =>
-        new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("NOON")]
-    public CqlCode NOON(CqlContext context) =>
-        new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("AFT")]
-    public CqlCode AFT(CqlContext context) =>
-        new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("AFT.early")]
-    public CqlCode AFT_early(CqlContext context) =>
-        new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("AFT.late")]
-    public CqlCode AFT_late(CqlContext context) =>
-        new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("EVE")]
-    public CqlCode EVE(CqlContext context) =>
-        new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("EVE.early")]
-    public CqlCode EVE_early(CqlContext context) =>
-        new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("EVE.late")]
-    public CqlCode EVE_late(CqlContext context) =>
-        new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("NIGHT")]
-    public CqlCode NIGHT(CqlContext context) =>
-        new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("PHS")]
-    public CqlCode PHS(CqlContext context) =>
-        new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("Every eight hours (qualifier value)")]
-    public CqlCode Every_eight_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("307469008", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every eight to twelve hours (qualifier value)")]
-    public CqlCode Every_eight_to_twelve_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396140003", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every forty eight hours (qualifier value)")]
-    public CqlCode Every_forty_eight_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396131002", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every forty hours (qualifier value)")]
-    public CqlCode Every_forty_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396130001", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every four hours (qualifier value)")]
-    public CqlCode Every_four_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("225756002", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every seventy two hours (qualifier value)")]
-    public CqlCode Every_seventy_two_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396143001", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every six hours (qualifier value)")]
-    public CqlCode Every_six_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("307468000", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every six to eight hours (qualifier value)")]
-    public CqlCode Every_six_to_eight_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396139000", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every thirty six hours (qualifier value)")]
-    public CqlCode Every_thirty_six_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396126004", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every three to four hours (qualifier value)")]
-    public CqlCode Every_three_to_four_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("225754004", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every three to six hours (qualifier value)")]
-    public CqlCode Every_three_to_six_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396127008", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every twelve hours (qualifier value)")]
-    public CqlCode Every_twelve_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("307470009", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every twenty four hours (qualifier value)")]
-    public CqlCode Every_twenty_four_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("396125000", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Every two to four hours (qualifier value)")]
-    public CqlCode Every_two_to_four_hours__qualifier_value_(CqlContext context) =>
-        new CqlCode("225752000", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Four times daily (qualifier value)")]
-    public CqlCode Four_times_daily__qualifier_value_(CqlContext context) =>
-        new CqlCode("307439001", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Once daily (qualifier value)")]
-    public CqlCode Once_daily__qualifier_value_(CqlContext context) =>
-        new CqlCode("229797004", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("One to four times a day (qualifier value)")]
-    public CqlCode One_to_four_times_a_day__qualifier_value_(CqlContext context) =>
-        new CqlCode("396109005", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("One to three times a day (qualifier value)")]
-    public CqlCode One_to_three_times_a_day__qualifier_value_(CqlContext context) =>
-        new CqlCode("396108002", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("One to two times a day (qualifier value)")]
-    public CqlCode One_to_two_times_a_day__qualifier_value_(CqlContext context) =>
-        new CqlCode("396107007", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Three times daily (qualifier value)")]
-    public CqlCode Three_times_daily__qualifier_value_(CqlContext context) =>
-        new CqlCode("229798009", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Twice a day (qualifier value)")]
-    public CqlCode Twice_a_day__qualifier_value_(CqlContext context) =>
-        new CqlCode("229799001", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("Two to four times a day (qualifier value)")]
-    public CqlCode Two_to_four_times_a_day__qualifier_value_(CqlContext context) =>
-        new CqlCode("396111001", "http://snomed.info/sct", default, default);
-
-
-    [CqlDeclaration("V3TimingEvent")]
-    public CqlCode[] V3TimingEvent(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("EventTiming")]
-    public CqlCode[] EventTiming(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("ErrorLevel")]
+    [CqlCodeDefinition("PHS", codeId: "PHS", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode PHS(CqlContext _) => _PHS;
+    private static readonly CqlCode _PHS = new CqlCode("PHS", "http://hl7.org/fhir/event-timing");
+
+    [CqlCodeDefinition("Every eight hours (qualifier value)", codeId: "307469008", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_eight_hours__qualifier_value_(CqlContext _) => _Every_eight_hours__qualifier_value_;
+    private static readonly CqlCode _Every_eight_hours__qualifier_value_ = new CqlCode("307469008", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every eight to twelve hours (qualifier value)", codeId: "396140003", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_eight_to_twelve_hours__qualifier_value_(CqlContext _) => _Every_eight_to_twelve_hours__qualifier_value_;
+    private static readonly CqlCode _Every_eight_to_twelve_hours__qualifier_value_ = new CqlCode("396140003", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every forty eight hours (qualifier value)", codeId: "396131002", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_forty_eight_hours__qualifier_value_(CqlContext _) => _Every_forty_eight_hours__qualifier_value_;
+    private static readonly CqlCode _Every_forty_eight_hours__qualifier_value_ = new CqlCode("396131002", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every forty hours (qualifier value)", codeId: "396130001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_forty_hours__qualifier_value_(CqlContext _) => _Every_forty_hours__qualifier_value_;
+    private static readonly CqlCode _Every_forty_hours__qualifier_value_ = new CqlCode("396130001", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every four hours (qualifier value)", codeId: "225756002", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_four_hours__qualifier_value_(CqlContext _) => _Every_four_hours__qualifier_value_;
+    private static readonly CqlCode _Every_four_hours__qualifier_value_ = new CqlCode("225756002", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every seventy two hours (qualifier value)", codeId: "396143001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_seventy_two_hours__qualifier_value_(CqlContext _) => _Every_seventy_two_hours__qualifier_value_;
+    private static readonly CqlCode _Every_seventy_two_hours__qualifier_value_ = new CqlCode("396143001", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every six hours (qualifier value)", codeId: "307468000", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_six_hours__qualifier_value_(CqlContext _) => _Every_six_hours__qualifier_value_;
+    private static readonly CqlCode _Every_six_hours__qualifier_value_ = new CqlCode("307468000", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every six to eight hours (qualifier value)", codeId: "396139000", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_six_to_eight_hours__qualifier_value_(CqlContext _) => _Every_six_to_eight_hours__qualifier_value_;
+    private static readonly CqlCode _Every_six_to_eight_hours__qualifier_value_ = new CqlCode("396139000", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every thirty six hours (qualifier value)", codeId: "396126004", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_thirty_six_hours__qualifier_value_(CqlContext _) => _Every_thirty_six_hours__qualifier_value_;
+    private static readonly CqlCode _Every_thirty_six_hours__qualifier_value_ = new CqlCode("396126004", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every three to four hours (qualifier value)", codeId: "225754004", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_three_to_four_hours__qualifier_value_(CqlContext _) => _Every_three_to_four_hours__qualifier_value_;
+    private static readonly CqlCode _Every_three_to_four_hours__qualifier_value_ = new CqlCode("225754004", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every three to six hours (qualifier value)", codeId: "396127008", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_three_to_six_hours__qualifier_value_(CqlContext _) => _Every_three_to_six_hours__qualifier_value_;
+    private static readonly CqlCode _Every_three_to_six_hours__qualifier_value_ = new CqlCode("396127008", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every twelve hours (qualifier value)", codeId: "307470009", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_twelve_hours__qualifier_value_(CqlContext _) => _Every_twelve_hours__qualifier_value_;
+    private static readonly CqlCode _Every_twelve_hours__qualifier_value_ = new CqlCode("307470009", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every twenty four hours (qualifier value)", codeId: "396125000", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_twenty_four_hours__qualifier_value_(CqlContext _) => _Every_twenty_four_hours__qualifier_value_;
+    private static readonly CqlCode _Every_twenty_four_hours__qualifier_value_ = new CqlCode("396125000", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Every two to four hours (qualifier value)", codeId: "225752000", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Every_two_to_four_hours__qualifier_value_(CqlContext _) => _Every_two_to_four_hours__qualifier_value_;
+    private static readonly CqlCode _Every_two_to_four_hours__qualifier_value_ = new CqlCode("225752000", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Four times daily (qualifier value)", codeId: "307439001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Four_times_daily__qualifier_value_(CqlContext _) => _Four_times_daily__qualifier_value_;
+    private static readonly CqlCode _Four_times_daily__qualifier_value_ = new CqlCode("307439001", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Once daily (qualifier value)", codeId: "229797004", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Once_daily__qualifier_value_(CqlContext _) => _Once_daily__qualifier_value_;
+    private static readonly CqlCode _Once_daily__qualifier_value_ = new CqlCode("229797004", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("One to four times a day (qualifier value)", codeId: "396109005", codeSystem: "http://snomed.info/sct")]
+    public CqlCode One_to_four_times_a_day__qualifier_value_(CqlContext _) => _One_to_four_times_a_day__qualifier_value_;
+    private static readonly CqlCode _One_to_four_times_a_day__qualifier_value_ = new CqlCode("396109005", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("One to three times a day (qualifier value)", codeId: "396108002", codeSystem: "http://snomed.info/sct")]
+    public CqlCode One_to_three_times_a_day__qualifier_value_(CqlContext _) => _One_to_three_times_a_day__qualifier_value_;
+    private static readonly CqlCode _One_to_three_times_a_day__qualifier_value_ = new CqlCode("396108002", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("One to two times a day (qualifier value)", codeId: "396107007", codeSystem: "http://snomed.info/sct")]
+    public CqlCode One_to_two_times_a_day__qualifier_value_(CqlContext _) => _One_to_two_times_a_day__qualifier_value_;
+    private static readonly CqlCode _One_to_two_times_a_day__qualifier_value_ = new CqlCode("396107007", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Three times daily (qualifier value)", codeId: "229798009", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Three_times_daily__qualifier_value_(CqlContext _) => _Three_times_daily__qualifier_value_;
+    private static readonly CqlCode _Three_times_daily__qualifier_value_ = new CqlCode("229798009", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Twice a day (qualifier value)", codeId: "229799001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Twice_a_day__qualifier_value_(CqlContext _) => _Twice_a_day__qualifier_value_;
+    private static readonly CqlCode _Twice_a_day__qualifier_value_ = new CqlCode("229799001", "http://snomed.info/sct");
+
+    [CqlCodeDefinition("Two to four times a day (qualifier value)", codeId: "396111001", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Two_to_four_times_a_day__qualifier_value_(CqlContext _) => _Two_to_four_times_a_day__qualifier_value_;
+    private static readonly CqlCode _Two_to_four_times_a_day__qualifier_value_ = new CqlCode("396111001", "http://snomed.info/sct");
+
+    #endregion Codes
+
+    #region CodeSystems
+
+    [CqlCodeSystemDefinition("V3TimingEvent", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", codeSystemVersion: null)]
+    public CqlCodeSystem V3TimingEvent(CqlContext _) => _V3TimingEvent;
+    private static readonly CqlCodeSystem _V3TimingEvent =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, [
+          _HS,
+          _WAKE,
+          _C,
+          _CM,
+          _CD,
+          _CV,
+          _AC,
+          _ACM,
+          _ACD,
+          _ACV,
+          _PC,
+          _PCM,
+          _PCD,
+          _PCV]);
+
+    [CqlCodeSystemDefinition("EventTiming", codeSystemId: "http://hl7.org/fhir/event-timing", codeSystemVersion: null)]
+    public CqlCodeSystem EventTiming(CqlContext _) => _EventTiming;
+    private static readonly CqlCodeSystem _EventTiming =
+      new CqlCodeSystem("http://hl7.org/fhir/event-timing", null, [
+          _MORN,
+          _MORN_early,
+          _MORN_late,
+          _NOON,
+          _AFT,
+          _AFT_early,
+          _AFT_late,
+          _EVE,
+          _EVE_early,
+          _EVE_late,
+          _NIGHT,
+          _PHS]);
+
+    #endregion CodeSystems
+
+    #region Parameters
+
+    [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context)
     {
         object a_ = context.ResolveParameter("CumulativeMedicationDuration-4.1.000", "ErrorLevel", "Warning");
@@ -325,7 +275,11 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -335,6 +289,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         decimal? a_()
@@ -738,6 +693,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         decimal? a_()
@@ -1326,12 +1282,14 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("Quantity")]
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) =>
         ((context.Operators.Not((bool?)(value is null))) ?? false
             ? new CqlQuantity(value, unit)
             : default);
 
 
+    [CqlExpressionDefinition("MedicationRequestPeriod")]
     public CqlInterval<CqlDate> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1591,6 +1549,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("medicationRequestPeriod")]
     public CqlInterval<CqlDate> medicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1850,6 +1809,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("MedicationDispensePeriod")]
     public CqlInterval<CqlDate> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2013,6 +1973,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("medicationDispensePeriod")]
     public CqlInterval<CqlDate> medicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2176,6 +2137,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
         CqlQuantity a_ = context.Operators.Quantity(14m, "days");
@@ -2184,6 +2146,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("MedicationAdministrationPeriod")]
     public CqlInterval<CqlDate> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2243,6 +2206,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("medicationAdministrationPeriod")]
     public CqlInterval<CqlDate> medicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2302,6 +2266,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("CumulativeDuration")]
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2333,6 +2298,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("cumulativeDuration")]
     public int? cumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2364,6 +2330,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("RolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDate>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2415,6 +2382,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("rolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDate>> rolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2466,6 +2434,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("MedicationPeriod")]
     public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2492,6 +2461,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("medicationPeriod")]
     public CqlInterval<CqlDate> medicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2518,6 +2488,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("CumulativeMedicationDuration")]
     public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -2558,6 +2529,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
+    [CqlExpressionDefinition("cumulativeMedicationDuration")]
     public int? cumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -2598,6 +2570,6 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

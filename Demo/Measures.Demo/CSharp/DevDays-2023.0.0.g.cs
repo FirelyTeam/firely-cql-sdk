@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 {
@@ -28,31 +28,32 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Codes
 
-    [CqlDeclaration("Sucked into jet engine")]
-    public CqlCode Sucked_into_jet_engine(CqlContext context) =>
-        new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default);
+    [CqlCodeDefinition("Sucked into jet engine", codeId: "V97.33", codeSystem: "http://hl7.org/fhir/sid/icd-10")]
+    public CqlCode Sucked_into_jet_engine(CqlContext _) => _Sucked_into_jet_engine;
+    private static readonly CqlCode _Sucked_into_jet_engine = new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10");
 
+    [CqlCodeDefinition("Sucked into jet engine, subsequent encounter", codeId: "V97.33XD", codeSystem: "http://hl7.org/fhir/sid/icd-10")]
+    public CqlCode Sucked_into_jet_engine__subsequent_encounter(CqlContext _) => _Sucked_into_jet_engine__subsequent_encounter;
+    private static readonly CqlCode _Sucked_into_jet_engine__subsequent_encounter = new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10");
 
-    [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
-    public CqlCode Sucked_into_jet_engine__subsequent_encounter(CqlContext context) =>
-        new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", default, default);
+    #endregion Codes
 
+    #region CodeSystems
 
-    [CqlDeclaration("ICD10")]
-    public CqlCode[] ICD10(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default),
-            new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", default, default),
-        ];
+    [CqlCodeSystemDefinition("ICD10", codeSystemId: "http://hl7.org/fhir/sid/icd-10", codeSystemVersion: null)]
+    public CqlCodeSystem ICD10(CqlContext _) => _ICD10;
+    private static readonly CqlCodeSystem _ICD10 =
+      new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10", null, [
+          _Sucked_into_jet_engine,
+          _Sucked_into_jet_engine__subsequent_encounter]);
 
-        return a_;
-    }
+    #endregion CodeSystems
 
+    #region Parameters
 
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
@@ -61,7 +62,11 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -71,7 +76,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    [CqlDeclaration("Jet engine conditions")]
+    [CqlExpressionDefinition("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -103,7 +108,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    [CqlDeclaration("Subsequent encounters")]
+    [CqlExpressionDefinition("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -135,7 +140,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    [CqlDeclaration("Initial population")]
+    [CqlExpressionDefinition("Initial population")]
     public bool? Initial_population(CqlContext context)
     {
         IEnumerable<Condition> a_ = this.Jet_engine_conditions(context);
@@ -145,7 +150,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    [CqlDeclaration("Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
         IEnumerable<Condition> a_ = this.Subsequent_encounters(context);
@@ -155,6 +160,6 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

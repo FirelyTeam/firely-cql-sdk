@@ -12,6 +12,8 @@ internal static class StringExtensions
 {
     public static string QuoteString(this string s) => SymbolDisplay.FormatLiteral(s, true);
 
+    public static string QuoteOrNullString(this string? s) => s?.QuoteString() ?? "null";
+
     public static string EscapeKeywords(this string symbol)
     {
         var keyword = SyntaxFacts.GetKeywordKind(symbol);

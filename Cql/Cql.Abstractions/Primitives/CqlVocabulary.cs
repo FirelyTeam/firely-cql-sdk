@@ -9,37 +9,16 @@
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
-    /// Implements the System Vocabulary type.
+    /// Represents a CQL Vocabulary, which is a named collection of concepts and codes
+    /// used to define the semantics of data elements in Clinical Quality Language (CQL).
     /// </summary>
+    /// <param name="id">The canonical URL of the vocabulary instance, uniquely identifying it.</param>
+    /// <param name="version">The version of the vocabulary instance, which may be null if unspecified.</param>
+    /// <remarks>
+    /// The <see cref="CqlVocabulary"/> type is defined as a primitive type in CQL, representing
+    /// the System Vocabulary type as described in the CQL specification.
+    /// </remarks>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#vocabulary"/>
     [CqlPrimitiveType(CqlPrimitiveType.Vocabulary)]
-    public abstract class CqlVocabulary
-    {
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        protected CqlVocabulary()
-        {
-        }
-
-        /// <summary>
-        /// Constructs a new CqlVocabulary instance
-        /// </summary>
-        protected CqlVocabulary(string? id, string? version)
-        {
-            this.id = id;
-            this.version = version;
-        }
-
-        /// <summary>
-        /// The canonical URL of the value set.
-        /// </summary>
-        public string? id { get; init; }
-        /// <summary>
-        /// The version of the value set.
-        /// </summary>
-        public string? version { get; init; }
-
-
-    }
+    public abstract record CqlVocabulary(string id, string? version);
 }

@@ -342,6 +342,7 @@ Hl7.Cql.Elm.In.precisionSpecified.set -> void
 Hl7.Cql.Elm.IncludeDef
 Hl7.Cql.Elm.IncludeDef.IncludeDef() -> void
 Hl7.Cql.Elm.IncludeDef.libraryName.get -> string?
+Hl7.Cql.Elm.IncludeDef.VersionedLibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Elm.IncludedIn
 Hl7.Cql.Elm.IncludedIn.GetPrecision() -> object?
 Hl7.Cql.Elm.IncludedIn.IncludedIn() -> void
@@ -410,6 +411,7 @@ Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.Library() -> void
 Hl7.Cql.Elm.Library.Library(Hl7.Cql.Elm.VersionedIdentifier! identifier) -> void
 Hl7.Cql.Elm.Library.SerializeToJson(bool writeIndented = true) -> string!
+Hl7.Cql.Elm.Library.VersionedLibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
 Hl7.Cql.Elm.List.List() -> void
@@ -783,6 +785,7 @@ Hl7.Cql.Elm.VersionedIdentifier.CompareTo(Hl7.Cql.Elm.VersionedIdentifier? other
 Hl7.Cql.Elm.VersionedIdentifier.Deconstruct(out string! id, out string? version) -> void
 Hl7.Cql.Elm.VersionedIdentifier.Equals(Hl7.Cql.Elm.VersionedIdentifier? other) -> bool
 Hl7.Cql.Elm.VersionedIdentifier.VersionedIdentifier() -> void
+Hl7.Cql.Elm.VersionedIdentifier.VersionedLibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Elm.Width
 Hl7.Cql.Elm.Width.Width() -> void
 Hl7.Cql.Elm.With

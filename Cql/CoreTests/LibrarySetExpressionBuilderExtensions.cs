@@ -1,18 +1,16 @@
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
 internal static class LibrarySetExpressionBuilderExtensions
 {
-    internal static DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
+    internal static CqlDefinitionDictionary ProcessLibrarySet(
         this LibrarySetExpressionBuilder librarySetExpressionBuilder,
         LibrarySet librarySet)
     {
-        var librarySetDefinitions = new DefinitionDictionary<LambdaExpression>();
-        librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, librarySetDefinitions).ForEach();
-        return librarySetDefinitions;
+        CqlDefinitionDictionary definitions = new ();
+        librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ForEach();
+        return definitions;
     }
 }

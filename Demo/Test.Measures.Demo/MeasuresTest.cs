@@ -32,7 +32,7 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator()
         {
-            var patientEverything = new Bundle();  // add some data
+            var patientEverything = new Bundle(); // add some data
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023);
             var bcs = BCSEHEDISMY2022_1_0_0.Instance;
             var numerator = bcs.Numerator(ctx);
@@ -47,13 +47,14 @@ namespace Test
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
             var scope = CreateRuntimeScopeFromFhirResourceFile(dir, lib, version);
 
-            var patientEverything = new Bundle();   // Add data
-            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
+            var patientEverything = new Bundle();                                // Add data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary(); // Add valuesets
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = scope
-                .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version))
-                .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.definitionResult);
+                          .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version))
+                          .SelectResults(ctx)
+                          .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
@@ -73,8 +74,8 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
 
-            var patientEverything = new Bundle();  // Add some data
-            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
+            var patientEverything = new Bundle();                                // Add some data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary(); // Add valuesets
             var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();
@@ -109,8 +110,9 @@ namespace Test
             CqlContext context)
         {
             return scope
-                   .EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
-                   .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.definitionResult);
+                   .SelectExpressionsForLibrary((CqlVersionedLibraryIdentifier)$"{lib}-{version}")
+                   .SelectResults(context)
+                   .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
         }
 
         private static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
@@ -143,7 +145,7 @@ namespace Test
             string lib,
             string version,
             int cacheSize,
-            ILoggerFactory? loggerFactory = null/*,
+            ILoggerFactory? loggerFactory = null /*,
             Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilder = null*/)
         {
             LibrarySet librarySet = new();
@@ -160,7 +162,7 @@ namespace Test
 
             return elmToolkit
                    .AddElmLibraries(librarySet)
-                   .CreateLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
+                   .CreateLibrarySetInvoker( /*configure: configureLibrarySetInvokerBuilder*/);
         }
     }
 }

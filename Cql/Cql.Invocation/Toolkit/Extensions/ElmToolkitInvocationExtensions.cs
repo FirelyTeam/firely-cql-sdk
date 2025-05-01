@@ -25,7 +25,10 @@ public static class ElmToolkitInvocationExtensions
         this ElmToolkit elmToolkit)
     {
         var assemblyBinaries =
-            elmToolkit.GetElmToAssemblyResults().Select(t => t.GetAssemblyBinary());
+            elmToolkit
+                .CompileToAssemblies()
+                .GetElmToAssemblyResults()
+                .Select(t => t.GetAssemblyBinary());
 
         var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.BatchProcessExceptionContinuation)
             .AddAssemblyBinaries(assemblyBinaries);
@@ -45,4 +48,25 @@ public static class ElmToolkitInvocationExtensions
             .CompileToAssemblies()
             .CreateInvocationToolkit()
             .CreateLibrarySetInvoker(name);
+
+    /// <summary>
+    /// Configures and utilizes a <see cref="LibrarySetInvoker"/> for the specified <see cref="ElmToolkit"/> instance.
+    /// </summary>
+    /// <param name="elmToolkit">
+    /// The <see cref="ElmToolkit"/> instance to configure and use the <see cref="LibrarySetInvoker"/>.
+    /// </param>
+    /// <param name="useLibrarySetInvoker">
+    /// An action to perform with the configured <see cref="LibrarySetInvoker"/>.
+    /// </param>
+    /// <param name="librarySetName">
+    /// The name of the library set to be invoked. Defaults to an empty string.
+    /// </param>
+    public static void UseLibrarySetInvoker(
+        this ElmToolkit elmToolkit,
+        Action<LibrarySetInvoker> useLibrarySetInvoker,
+        string librarySetName = "") =>
+        elmToolkit
+            .CreateInvocationToolkit()
+            .UseLibrarySetInvoker(useLibrarySetInvoker, librarySetName);
+
 }

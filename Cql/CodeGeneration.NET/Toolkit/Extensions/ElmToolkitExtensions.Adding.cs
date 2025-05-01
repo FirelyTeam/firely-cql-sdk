@@ -15,6 +15,16 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 public static partial class ElmToolkitExtensions
 {
     /// <summary>
+    /// Adds ELM libraries to the compiler.
+    /// </summary>
+    /// <param name="elmToolkit">The ELM toolkit to add libraries to.</param>
+    /// <param name="elmLibraries">The libraries to add.</param>
+    public static ElmToolkit AddElmLibraries(
+        this ElmToolkit elmToolkit,
+        params ElmLibrary[] elmLibraries)
+        => elmToolkit.AddElmLibraries(elmLibraries.AsEnumerable());
+
+    /// <summary>
     /// Adds ELM libraries from a CQL toolkit to the specified ELM toolkit.
     /// </summary>
     /// <param name="elmToolkit">The ELM toolkit to add libraries to.</param>
