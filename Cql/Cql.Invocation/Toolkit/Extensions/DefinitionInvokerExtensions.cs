@@ -47,9 +47,8 @@ public static class DefinitionInvokerExtensions
 
         var (
             argumentsProviderCallback,
-            invocationExceptionCallback,
             preInvokeHandler,
-            postInvokeHandler) = selectResultsOptions;
+            postInvokeHandler, invocationExceptionCallback) = selectResultsOptions;
 
         if (definitionInvokers.TryGetNonEnumeratedCount(out int count) && count == 0)
             return [];
@@ -163,7 +162,7 @@ public delegate void PostInvokeDefinitionHandler(
 /// including argument provision, pre-invocation actions, and exception handling.
 /// </remarks>
 ///
-/// <param name="DefinitionArgumentsProviderCallback">
+/// <param name="ProviderArgumentsCallback">
 /// A callback function that provides arguments for each <see cref="DefinitionInvoker"/>
 /// that have more than one parameter. When selecting definitions from SelectExpressions, the
 /// default behavior is to not include definitions with parameters, unless includeDefinitionsWithParameters
@@ -179,15 +178,15 @@ public delegate void PostInvokeDefinitionHandler(
 /// A callback invoked after the execution of a definition, containing the result of the invocation.
 /// </param>
 ///
-/// <param name="DefinitionInvocationExceptionCallback">
+/// <param name="InvocationExceptionCallback">
 /// A callback for handling exceptions that occur during the definition invocation.
 /// It takes the <see cref="DefinitionInvoker"/>, the exception, and a continuation strategy as parameters.
 /// </param>
 public record SelectResultsOptions(
-    DefinitionArgumentsProviderCallback? DefinitionArgumentsProviderCallback = null,
-    ValueExceptionHandler<DefinitionInvoker>? DefinitionInvocationExceptionCallback = null,
+    DefinitionArgumentsProviderCallback? ProviderArgumentsCallback = null,
     PreInvokeDefinitionHandler? PreInvokeDefinitionCallback = null,
-    PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null)
+    PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null,
+    ValueExceptionHandler<DefinitionInvoker>? InvocationExceptionCallback = null)
 {
     /// <summary>
     /// Gets the default instance of <see cref="SelectResultsOptions"/> with no custom callbacks or exception handlers.

@@ -114,7 +114,7 @@ public class CqlTupleTests
 
         // Act
         var result = librarySetInvoker
-                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"), TODO)
+                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
                      .SelectResults(ctx)
                      .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
         Assert.IsNotNull(result);
