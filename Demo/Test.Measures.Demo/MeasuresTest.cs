@@ -52,7 +52,7 @@ namespace Test
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = scope
-                          .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version))
+                          .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version), TODO)
                           .SelectResults(ctx)
                           .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
 

@@ -18,11 +18,14 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibraryInvokerExtensions
 {
     /// <summary>
-    /// Enumerates the expressions in the library.
+    /// 
     /// </summary>
-    /// <param name="libraryInvoker">The library invoker.</param>
+    /// <param name="libraryInvoker"></param>
+    /// <param name="includeDefinitionsWithParameters"></param>
+    /// <returns></returns>
     public static IEnumerable<DefinitionInvoker> SelectExpressions(
-        this LibraryInvoker libraryInvoker) =>
+        this LibraryInvoker libraryInvoker,
+        bool includeDefinitionsWithParameters = false) =>
         libraryInvoker
             .Definitions.Values
             .Where(definitionInvoker =>
@@ -37,7 +40,8 @@ public static class LibraryInvokerExtensions
         this LibraryInvoker libraryInvoker) =>
         libraryInvoker
             .Definitions.Values
-            .Where(definitionInvoker => definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
+            .Where(definitionInvoker =>
+                       definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
 
     /// <summary>
     /// Enumerates the value sets in the library.
