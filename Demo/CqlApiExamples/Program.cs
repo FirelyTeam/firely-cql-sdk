@@ -31,21 +31,21 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        // AddDuplicates(loggerFactory);
-        // Add3And2Example(loggerFactory);
-        // InvokeCqlExample(loggerFactory);
+        AddDuplicates(loggerFactory);
+        Add3And2Example(loggerFactory);
+        InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
-        // PackageFromExamplesFolder(loggerFactory);
-        //
-        // string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
-        // foreach (var exampleSetName in exampleSetNames)
-        // {
-        //     Directories dirs = Directories.Create(exampleSetName);
-        //     //PackageCqlToFhirExample(loggerFactory, dirs);
-        //     PackageElmToFhirExample(loggerFactory, dirs);
-        //     dirs = dirs with { FhirInDirectory = dirs.FhirOutDirectory };
-        //     InvokeResourceExample(loggerFactory, dirs);
-        // }
+        PackageFromExamplesFolder(loggerFactory);
+
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
+        foreach (var exampleSetName in exampleSetNames)
+        {
+            Directories dirs = Directories.Create(exampleSetName);
+            //PackageCqlToFhirExample(loggerFactory, dirs);
+            PackageElmToFhirExample(loggerFactory, dirs);
+            dirs = dirs with { FhirInDirectory = dirs.FhirOutDirectory };
+            InvokeResourceExample(loggerFactory, dirs);
+        }
     }
 
     private static void AddDuplicates(ILoggerFactory loggerFactory)
