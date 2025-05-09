@@ -32,7 +32,7 @@ public class InvocationToolkitTests
         // Act
         var result = librarySetInvoker
                      .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                     .SelectResults(ctx, null)
+                     .SelectResults(ctx)
                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         // Assert

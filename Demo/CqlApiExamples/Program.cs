@@ -229,10 +229,33 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
 
-        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
+        //logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
+
+        // Calling invocations individually
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
         Trace.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
+
+        // Invoking all expressions in a library
+        var results = librarySetInvoker
+                      .SelectExpressions()
+                      .SelectResults(
+                          cqlContext,
+                          SelectResultsOptions.Default with
+                          {
+                              PreInvokeDefinitionCallback = (
+                                      invoker,
+                                      context,
+                                      arguments) =>
+                                  logger.LogInformation("Invoking definition {definition} with arguments [{arguments}]", invoker, arguments),
+                              PostInvokeDefinitionCallback = (
+                                      invoker,
+                                      context,
+                                      arguments,
+                                      result) =>
+                                  logger.LogInformation("Invoked definition {definition} with result {result}", invoker, result),
+                          })
+                      .ToList(); // Important to enumerate the results here, otherwise nothing will be invoked
 
         object? Invoke(string libraryName, string declarationName)
         {
@@ -403,7 +426,7 @@ file static class Extensions
                   .Select(definitionInvoker => (definitionInvoker, default(object)))
                 : librarySetInvoker
                   .SelectExpressions()
-                  .SelectResults(cqlContext, null);
+                  .SelectResults(cqlContext);
 
         foreach (var groupedByLibrary in
                  definitions.GroupBy(o => o.definitionInvoker.LibraryIdentifier))
