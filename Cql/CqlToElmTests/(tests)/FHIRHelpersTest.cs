@@ -1,5 +1,4 @@
 using Hl7.Cql.Elm;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
