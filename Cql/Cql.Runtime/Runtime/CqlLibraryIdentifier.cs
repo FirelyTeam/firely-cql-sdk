@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Runtime.Serialization;
 
 namespace Hl7.Cql.Runtime;
@@ -41,10 +42,6 @@ public readonly record struct CqlLibraryIdentifier :
     /// </summary>
     /// <param name="value">The string value of the identifier.</param>
     private CqlLibraryIdentifier(string value) => _value = value; // TryParse will already do validation
-
-    internal static bool IsValid([NotNullWhen(true)]string? value) =>
-        value is not null
-        && !value.Contains('_');
 
     /// <summary>
     /// Returns the string representation of the identifier.
@@ -88,10 +85,8 @@ public readonly record struct CqlLibraryIdentifier :
     static bool IParsable<CqlLibraryIdentifier>.TryParse(
         [NotNullWhen(true)] string? s,
         IFormatProvider? provider,
-        out CqlLibraryIdentifier result)
-    {
-        return TryParse(s, out result);
-    }
+        out CqlLibraryIdentifier result) =>
+        TryParse(s, out result);
 
     /// <summary>
     /// Tries to parse the specified string to a <see cref="CqlLibraryIdentifier"/>.
@@ -101,7 +96,8 @@ public readonly record struct CqlLibraryIdentifier :
     /// <returns><c>true</c> if the string was successfully parsed; otherwise, <c>false</c>.</returns>
     public static bool TryParse(string? s, out CqlLibraryIdentifier result)
     {
-        if (IsValid(s))
+        if (s is not null
+            && !s.Contains('_'))
         {
             result = new CqlLibraryIdentifier(s);
             return true;
@@ -109,6 +105,68 @@ public readonly record struct CqlLibraryIdentifier :
 
         result = default;
         return false;
+    }
+
+    public static bool TryParse(
+        string? s,
+        out CqlLibraryIdentifier result,
+        out ParseError error)
+    {
+        // Initialize outputs
+        result = default;
+        error = ParseError.OK;
+
+        // Rule 1: Input cannot be null or empty
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            error = ParseError.NullOrEmpty;
+            return false;
+        }
+
+        // Rule 2: Input must not contain invalid characters
+        foreach (char c in s)
+        {
+            if (!char.IsLetterOrDigit(c) && c != '.' && c != '-')
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
+        }
+
+        // Rule 3: Input must not start or end with a period or hyphen
+        if (s.StartsWith('.') || s.StartsWith('-') || s.EndsWith('.') || s.EndsWith('-'))
+        {
+            error = ParseError.InvalidStartOrEndCharacter;
+            return false;
+        }
+
+        // Rule 4: Input must not exceed a certain length (e.g., 255 characters)
+        if (s.Length > 255)
+        {
+            error = ParseError.ExceedsMaxLength;
+            return false;
+        }
+
+        // Rule 5: Input must conform to a specific format (e.g., "namespace.libraryname")
+        if (!s.Contains('.'))
+        {
+            error = ParseError.MissingNamespace;
+            return false;
+        }
+
+        // If all rules pass, parsing is successful
+        result = new CqlLibraryIdentifier(s);
+        return true;
+    }
+
+    public enum ParseError
+    {
+        OK = 0,
+        NullOrEmpty = 1,
+        InvalidCharacter = 2,
+        InvalidStartOrEndCharacter = 3,
+        ExceedsMaxLength = 4,
+        MissingNamespace = 5
     }
 
     #endregion

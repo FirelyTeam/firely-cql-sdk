@@ -1,11 +1,29 @@
 using Hl7.Cql.CqlToElm;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 
 namespace CoreTests.Infrastructure
 {
     [TestClass]
     public class CqlLibraryStringTests
     {
+        [TestMethod]
+        public void FromCql_LibraryContainsDashes()
+        {
+            var libraryString = CqlLibraryString.Parse(
+                """
+                library "num-con-mon" version '1.0.0'
+                """);
+
+            Assert.AreEqual("num-con-mon", libraryString.LibraryIdentifier.Identifier.ToString());
+            Assert.AreEqual("1.0.0", libraryString.LibraryIdentifier.Version.ToString());
+            Assert.AreEqual("num-con-mon-1.0.0", libraryString.LibraryIdentifier.ToString());
+
+            var libraryString2 = (CqlVersionedLibraryIdentifier)"num-con-mon-1.0.0";
+            Assert.AreEqual("num-con-mon-1.0.0", libraryString2);
+        }
+
         [TestMethod]
         public void FromCql_ValidCqlContentWithoutVersion_ReturnsCqlLibraryString()
         {
