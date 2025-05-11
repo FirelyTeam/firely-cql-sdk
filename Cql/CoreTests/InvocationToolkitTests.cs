@@ -62,10 +62,7 @@ public class InvocationToolkitTests
                               """;
 
         var cqlToolkit =
-            new CqlToolkit(config: CqlToolkitConfig.Default with
-                {
-                    Models = [CqlModel.ElmR1, CqlModel.Fhir401],
-                })
+            new CqlToolkit()
                 .AddCqlLibraries(cqlMeasuresExample)
                 .TranslateToElm();
 
@@ -112,13 +109,12 @@ public class InvocationToolkitTests
     {
         const int arg1 = 2;
         const int arg2 = 3;
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         var cqlLibraryString = CqlLibraryString.Parse(
             """
             library FunctionTest version '1.0.0'
             define function Add(a Integer, b Integer): a + b
             """);
-        var cqlToolkit = new CqlToolkit(config: cqlToElmProcessorSettings)
+        var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
