@@ -206,18 +206,21 @@ namespace Hl7.Cql.CqlToElm.Test
             bool EnableListDemotion = false,
             bool EnableIntervalPromotion = false,
             bool EnableIntervalDemotion = false,
-            bool AllowNullIntervals = false) =>
-            new(LoggerFactory,
-                new CqlToolkitConfig(
-                    Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
-                    ModelInfos: ModelInfos,
-                    AmbiguousTypeBehavior: AmbiguousTypeBehavior,
-                    EnableListDemotion: EnableListDemotion,
-                    EnableListPromotion: EnableListPromotion,
-                    EnableIntervalDemotion: EnableIntervalDemotion,
-                    EnableIntervalPromotion: EnableIntervalPromotion,
-                    AllowNullIntervals: AllowNullIntervals
-                ));
+            bool AllowNullIntervals = false)
+        {
+            Debug.Assert(CqlToolkitConfig.DefaultCqlModels.SetEquals([CqlModel.ElmR1, CqlModel.Fhir401]));
+            return new CqlToolkit(LoggerFactory,
+                                  new CqlToolkitConfig(
+                                      Models: Models,
+                                      ModelInfos: ModelInfos,
+                                      AmbiguousTypeBehavior: AmbiguousTypeBehavior,
+                                      EnableListDemotion: EnableListDemotion,
+                                      EnableListPromotion: EnableListPromotion,
+                                      EnableIntervalDemotion: EnableIntervalDemotion,
+                                      EnableIntervalPromotion: EnableIntervalPromotion,
+                                      AllowNullIntervals: AllowNullIntervals
+                                  ));
+        }
 
         internal static ElmToolkit CreateElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,

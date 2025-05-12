@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibraryInvokerExtensions
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="libraryInvoker"></param>
     /// <param name="includeDefinitionsWithParameters"></param>
