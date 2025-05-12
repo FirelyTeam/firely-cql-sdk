@@ -213,8 +213,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var qie = context.qualifiedIdentifierExpression();
             var e = context.expression();
             if (e is not null)
-                throw new NotImplementedException();
-            return Visit(qie);
+                return Visit(e);
+            else
+                return Visit(qie);
         }
 
 

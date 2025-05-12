@@ -40,4 +40,29 @@ public class LibraryPackagerTests
         Assert.AreEqual("param", inputParameter.Name);
         Assert.AreEqual(expectedType, inputParameter.Type);
     }
+
+    [DataTestMethod]
+    [DataRow("Input/ELM/Test/ParameterTest_ResultTypeSpecifier.json", false)]
+    [DataRow("Input/ELM/HL7/RR23.json", true)]
+    public void ElmContextToFhir_LibraryTypeIsBasedOnContext(string filename, bool contextExpected)
+    {
+        // Arrange
+        var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
+        // Act
+        var library = LibraryPackager.CreateLibraryResource(
+            NullLoggerFactory.Instance.CreateLogger("Dummy"),
+            typeCrosswalk: _mapper,
+            elmLibrary: elmLibrary,
+            elmBytes: File.ReadAllBytes(filename),
+            cqlBytes: [],
+            assemblyBytes: [],
+            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
+            cSharpSourceCodeById: [],
+            resourceCanonicalBuilder: (_,_,_) => "");
+
+        // Assert
+        Assert.IsNotNull(library);
+        var subjectType = library.Subject as CodeableConcept;
+        subjectType.Coding.Any(coding => coding.System.Equals("http://hl7.org/fhir/resource-types") && coding.Code.Equals("Patient")).Should().Be(contextExpected);
+    }
 }
