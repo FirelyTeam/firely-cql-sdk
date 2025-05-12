@@ -110,14 +110,21 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<Assembly> assemblyReferences,
             AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
+            EmbeddedText[]? embeddedTexts = []; // For embedding C# when enabling debug information
             string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
+                // Write to temp dir (do we need this?)
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
                 librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
                 File.WriteAllText(librarySourcePath, librarySourceString);
+
+                // Embed C# source code
+                var sourceText = SourceText.From(librarySourceString, Encoding.UTF8);
+                var embeddedText = EmbeddedText.FromSource($"{libraryVersionedIdentifier}.cs", sourceText);
+                embeddedTexts = [embeddedText];
             }
 
             var librarySyntaxTree = ParseSyntaxTree(librarySourceString, librarySourcePath);
@@ -147,7 +154,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             using var pdbStreamDisposable = pdbStream as IDisposable;
 
             var emitOptions = CreateEmitOptions(debugInformationFormat);
-            var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions);
+            var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions, embeddedTexts: embeddedTexts);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
