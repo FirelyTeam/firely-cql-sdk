@@ -139,7 +139,7 @@ file static class MeasurePackager
         measure.Version = libVer;
         measure.Name = libName;
         measure.Title = measureAnnotation.value;
-        measure.Url = resourceCanonicalBuilder(measure.TypeName, libName);
+        measure.Url = resourceCanonicalBuilder(measure.TypeName, libName!);
 
         measure.Status = PublicationStatus.Active;
         measure.Date = new DateTimeIso8601(overrideDate, Iso8601DateTimePrecision.Millisecond).ToString();
@@ -151,7 +151,7 @@ file static class MeasurePackager
         measure.Group = [];
 
         AnnotateMeasurePopulations(measure, elmLibrary);
-        string[] library = [resourceCanonicalBuilder("Library", libName, libVer)];
+        string[] library = [resourceCanonicalBuilder("Library", libName!, libVer)];
         measure.Library = library;
         return measure;
     }
@@ -392,7 +392,7 @@ internal static class LibraryPackager
             }
         }
         library.RelatedArtifact.AddRange(result);
-        library.RelatedArtifact.Sort((x, y) => x.Display.CompareTo(y.Display));
+        library.RelatedArtifact.Sort((x, y) => x.Display!.CompareTo(y.Display));
     }
 
     private static void AddDataRequirements(

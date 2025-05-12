@@ -128,12 +128,7 @@ namespace Hl7.Cql.Fhir
 
             static string getTypeSpecFromMapping(ClassMapping cm)
             {
-                string fhirPrefix = "{http://hl7.org/fhir}";
-                return cm.IsBackboneType switch
-                {
-                    false => fhirPrefix + cm.Name,
-                    true => fhirPrefix + cm.DefinitionPath
-                };
+                return "{http://hl7.org/fhir}"+cm.Name;
             }
 
             // Ignore the valuesets, we have to resolve via bindings for now.

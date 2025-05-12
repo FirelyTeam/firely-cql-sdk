@@ -76,14 +76,14 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public async Task<IValueSetFacade> Add(ValueSet vs)
     {
-        if (_valueSets.TryGetValue(vs.Url, out var valueSet)) return valueSet;
+        if (_valueSets.TryGetValue(vs.Url!, out var valueSet)) return valueSet;
 
         // Not cached yet, build it first.
         var newVs = await build(vs).ConfigureAwait(false);
 
         // Add it, or return whatever was in the cache by now. If we were pre-empted, this might be
         // another instance than ours.
-        return _valueSets.GetOrAdd(vs.Url, newVs);
+        return _valueSets.GetOrAdd(vs.Url!, newVs);
 
         async Task<InMemoryValueSet> build(ValueSet vs)
         {
@@ -93,7 +93,7 @@ public class ValueSetSource : IValueSetDictionary
                 await expander.ExpandAsync(vs).ConfigureAwait(false);
             }
 
-            var codes = ToCodes(vs.Expansion.Contains);
+            var codes = ToCodes(vs.Expansion!.Contains);
             return new InMemoryValueSet(codes);
         }
     }
