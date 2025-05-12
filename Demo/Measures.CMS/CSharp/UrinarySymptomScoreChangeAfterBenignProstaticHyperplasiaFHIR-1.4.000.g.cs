@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR", "1.4.000")]
 public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000 : ILibrary, ISingleton<UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000>
 {
@@ -28,103 +28,82 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Hospital Services for Urology")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59")]
-    public CqlValueSet Hospital_Services_for_Urology(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59", default);
+    [CqlValueSetDefinition("Hospital Services for Urology", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59", valueSetVersion: null)]
+    public CqlValueSet Hospital_Services_for_Urology(CqlContext _) => _Hospital_Services_for_Urology;
+    private static readonly CqlValueSet _Hospital_Services_for_Urology = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59", null);
 
+    [CqlValueSetDefinition("Morbid Obesity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.67", valueSetVersion: null)]
+    public CqlValueSet Morbid_Obesity(CqlContext _) => _Morbid_Obesity;
+    private static readonly CqlValueSet _Morbid_Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.67", null);
 
-    [CqlDeclaration("Morbid Obesity")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.67")]
-    public CqlValueSet Morbid_Obesity(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.67", default);
+    [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
+    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
+    [CqlValueSetDefinition("Urinary retention", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.52", valueSetVersion: null)]
+    public CqlValueSet Urinary_retention(CqlContext _) => _Urinary_retention;
+    private static readonly CqlValueSet _Urinary_retention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.52", null);
 
-    [CqlDeclaration("Office Visit")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("Urinary retention")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.52")]
-    public CqlValueSet Urinary_retention(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.52", default);
+    [CqlCodeDefinition("American Urological Association Symptom Index [AUASI]", codeId: "80883-2", codeSystem: "http://loinc.org")]
+    public CqlCode American_Urological_Association_Symptom_Index__AUASI_(CqlContext _) => _American_Urological_Association_Symptom_Index__AUASI_;
+    private static readonly CqlCode _American_Urological_Association_Symptom_Index__AUASI_ = new CqlCode("80883-2", "http://loinc.org");
 
+    [CqlCodeDefinition("Benign prostatic hyperplasia with lower urinary tract symptoms", codeId: "N40.1", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
+    public CqlCode Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms(CqlContext _) => _Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms;
+    private static readonly CqlCode _Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms = new CqlCode("N40.1", "http://hl7.org/fhir/sid/icd-10-cm");
 
-    [CqlDeclaration("American Urological Association Symptom Index [AUASI]")]
-    public CqlCode American_Urological_Association_Symptom_Index__AUASI_(CqlContext context) =>
-        new CqlCode("80883-2", "http://loinc.org", default, default);
+    [CqlCodeDefinition("If you were to spend the rest of your life with your urinary condition just the way it is now, how would you feel about that [IPSS]", codeId: "81090-3", codeSystem: "http://loinc.org")]
+    public CqlCode If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_(CqlContext _) => _If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_;
+    private static readonly CqlCode _If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_ = new CqlCode("81090-3", "http://loinc.org");
 
+    [CqlCodeDefinition("International Prostate Symptom Score [IPSS]", codeId: "80976-4", codeSystem: "http://loinc.org")]
+    public CqlCode International_Prostate_Symptom_Score__IPSS_(CqlContext _) => _International_Prostate_Symptom_Score__IPSS_;
+    private static readonly CqlCode _International_Prostate_Symptom_Score__IPSS_ = new CqlCode("80976-4", "http://loinc.org");
 
-    [CqlDeclaration("Benign prostatic hyperplasia with lower urinary tract symptoms")]
-    public CqlCode Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms(CqlContext context) =>
-        new CqlCode("N40.1", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
+    [CqlCodeDefinition("virtual", codeId: "VR", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
+    public CqlCode @virtual(CqlContext _) => _virtual;
+    private static readonly CqlCode _virtual = new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
+    #endregion Codes
 
-    [CqlDeclaration("If you were to spend the rest of your life with your urinary condition just the way it is now, how would you feel about that [IPSS]")]
-    public CqlCode If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_(CqlContext context) =>
-        new CqlCode("81090-3", "http://loinc.org", default, default);
+    #region CodeSystems
 
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null, [
+          _American_Urological_Association_Symptom_Index__AUASI_,
+          _If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_,
+          _International_Prostate_Symptom_Score__IPSS_]);
 
-    [CqlDeclaration("International Prostate Symptom Score [IPSS]")]
-    public CqlCode International_Prostate_Symptom_Score__IPSS_(CqlContext context) =>
-        new CqlCode("80976-4", "http://loinc.org", default, default);
+    [CqlCodeSystemDefinition("ICD10CM", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
+    public CqlCodeSystem ICD10CM(CqlContext _) => _ICD10CM;
+    private static readonly CqlCodeSystem _ICD10CM =
+      new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
+          _Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms]);
 
+    [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
+    public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
+    private static readonly CqlCodeSystem _ObservationCategoryCodes =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, []);
 
-    [CqlDeclaration("virtual")]
-    public CqlCode @virtual(CqlContext context) =>
-        new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+    [CqlCodeSystemDefinition("ActCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-ActCode", codeSystemVersion: null)]
+    public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
+    private static readonly CqlCodeSystem _ActCode =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode", null, [
+          _virtual]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("80883-2", "http://loinc.org", default, default),
-            new CqlCode("81090-3", "http://loinc.org", default, default),
-            new CqlCode("80976-4", "http://loinc.org", default, default),
-        ];
+    #region Parameters
 
-        return a_;
-    }
-
-
-    [CqlDeclaration("ICD10CM")]
-    public CqlCode[] ICD10CM(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("N40.1", "http://hl7.org/fhir/sid/icd-10-cm", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("ObservationCategoryCodes")]
-    public CqlCode[] ObservationCategoryCodes(CqlContext context)
-    {
-        CqlCode[] a_ = []
-;
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("ActCode")]
-    public CqlCode[] ActCode(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
@@ -136,7 +115,11 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -146,7 +129,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Patient is Male")]
+    [CqlExpressionDefinition("Patient is Male")]
     public bool? Patient_is_Male(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -159,7 +142,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Has Qualifying Encounter")]
+    [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context)
     {
         CqlValueSet a_ = this.Office_Visit(context);
@@ -191,6 +174,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
+    [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
         bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, condition);
@@ -205,7 +189,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Initial BPH Diagnosis Starts Within 6 Months Before the Measurement Period")]
+    [CqlExpressionDefinition("Initial BPH Diagnosis Starts Within 6 Months Before the Measurement Period")]
     public Condition Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(CqlContext context)
     {
         CqlCode a_ = this.Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms(context);
@@ -244,7 +228,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Has Qualifying BPH Diagnosis")]
+    [CqlExpressionDefinition("Has Qualifying BPH Diagnosis")]
     public bool? Has_Qualifying_BPH_Diagnosis(CqlContext context)
     {
         Condition a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
@@ -254,7 +238,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Documented IPSS Assessment Result")]
+    [CqlExpressionDefinition("Documented IPSS Assessment Result")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Documented_IPSS_Assessment_Result(CqlContext context)
     {
         CqlCode a_ = this.International_Prostate_Symptom_Score__IPSS_(context);
@@ -348,7 +332,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("AUA Symptom Index and Quality of Life Assessment Result")]
+    [CqlExpressionDefinition("AUA Symptom Index and Quality of Life Assessment Result")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result(CqlContext context)
     {
         CqlCode a_ = this.American_Urological_Association_Symptom_Index__AUASI_(context);
@@ -636,7 +620,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Symptom Score Assessment")]
+    [CqlExpressionDefinition("Urinary Symptom Score Assessment")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Urinary_Symptom_Score_Assessment(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Documented_IPSS_Assessment_Result(context);
@@ -647,7 +631,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis")]
+    [CqlExpressionDefinition("Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis")]
     public (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
@@ -694,7 +678,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis")]
+    [CqlExpressionDefinition("Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis")]
     public (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
@@ -736,7 +720,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Initial Population")]
+    [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
         bool? a_ = this.Patient_is_Male(context);
@@ -755,7 +739,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
@@ -764,7 +748,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Retention Diagnosis Starts Within 1 Year After Initial BPH Diagnosis")]
+    [CqlExpressionDefinition("Urinary Retention Diagnosis Starts Within 1 Year After Initial BPH Diagnosis")]
     public IEnumerable<Condition> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(CqlContext context)
     {
         CqlValueSet a_ = this.Urinary_retention(context);
@@ -812,7 +796,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Has Initial BPH Diagnosis Starts During or Within 30 Days After End of Hospitalization")]
+    [CqlExpressionDefinition("Has Initial BPH Diagnosis Starts During or Within 30 Days After End of Hospitalization")]
     public Condition Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(CqlContext context)
     {
         Condition a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
@@ -858,7 +842,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Morbid Obesity Diagnosis On or Before Follow Up USS Assessment")]
+    [CqlExpressionDefinition("Morbid Obesity Diagnosis On or Before Follow Up USS Assessment")]
     public IEnumerable<Condition> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(CqlContext context)
     {
         CqlValueSet a_ = this.Morbid_Obesity(context);
@@ -901,7 +885,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("BMI Exam Result Greater Than or Equal To 40 During Measurement Period and On or Before Follow Up USS Assessment")]
+    [CqlExpressionDefinition("BMI Exam Result Greater Than or Equal To 40 During Measurement Period and On or Before Follow Up USS Assessment")]
     [CqlTag("code", "Body mass index (BMI) [Ratio] - 39156-5")]
     [CqlTag("profile", "http://hl7.org/fhir/StructureDefinition/bmi")]
     public bool? BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(CqlContext context)
@@ -967,7 +951,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Morbid Obesity Diagnosis or BMI Exam Result Greater Than or Equal to 40 Starts On or Before Follow Up USS Assessment")]
+    [CqlExpressionDefinition("Morbid Obesity Diagnosis or BMI Exam Result Greater Than or Equal to 40 Starts On or Before Follow Up USS Assessment")]
     public bool? Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(CqlContext context)
     {
         IEnumerable<Condition> a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(context);
@@ -979,7 +963,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Denominator Exclusions")]
+    [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
         IEnumerable<Condition> a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(context);
@@ -994,7 +978,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Symptom Score Change")]
+    [CqlExpressionDefinition("Urinary Symptom Score Change")]
     public int? Urinary_Symptom_Score_Change(CqlContext context)
     {
         (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? a_ = this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis(context);
@@ -1029,7 +1013,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Urinary Symptom Score Improvement Greater Than or Equal To 3")]
+    [CqlExpressionDefinition("Urinary Symptom Score Improvement Greater Than or Equal To 3")]
     public bool? Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3(CqlContext context)
     {
         int? a_ = this.Urinary_Symptom_Score_Change(context);
@@ -1050,7 +1034,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context)
     {
         bool? a_ = this.Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3(context);
@@ -1059,7 +1043,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
@@ -1068,7 +1052,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
@@ -1077,7 +1061,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
@@ -1086,7 +1070,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlDeclaration("SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
         CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
@@ -1095,17 +1079,17 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
-        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
-        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
+      [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
+      ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new(
-        [typeof(CqlDateTime), typeof(int?)],
-        ["effectiveDatetime", "valueInteger"]);
+      [typeof(CqlDateTime), typeof(int?)],
+      ["effectiveDatetime", "valueInteger"]);
 
     #endregion CqlTupleMetadata Properties
 

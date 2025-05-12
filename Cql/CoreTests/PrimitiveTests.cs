@@ -3410,7 +3410,7 @@ namespace CoreTests
             {
                 new ElmToolkit(loggerFactory)
                     .AddElmLibraries(librarySet)
-                    .ConvertElmToAssemblies();
+                    .CompileToAssemblies();
             });
         }
 

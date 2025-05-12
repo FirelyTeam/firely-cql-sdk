@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("Antibiotic", "1.7.000")]
 public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_000>
 {
@@ -28,9 +28,9 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Parameters
 
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         object a_ = context.ResolveParameter("Antibiotic-1.7.000", "Measurement Period", null);
@@ -39,7 +39,11 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -49,6 +53,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
+    [CqlExpressionDefinition("Has Comorbid Condition History")]
     public IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
     {
         IEnumerable<Encounter> a_(Encounter eDate)
@@ -91,6 +96,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
+    [CqlExpressionDefinition("Has Competing Diagnosis History")]
     public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
     {
         IEnumerable<Encounter> a_(Encounter eDate)
@@ -132,6 +138,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
+    [CqlExpressionDefinition("Has Antibiotic Medication History")]
     public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
     {
         IEnumerable<Encounter> a_(Encounter DateOfEpisode)
@@ -170,6 +177,6 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

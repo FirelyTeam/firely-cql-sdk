@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -28,15 +28,17 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Marital Status")]
-    [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
-    public CqlValueSet Marital_Status(CqlContext context) =>
-        new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
+    [CqlValueSetDefinition("Marital Status", valueSetId: "http://hl7.org/fhir/ValueSet/marital-status", valueSetVersion: null)]
+    public CqlValueSet Marital_Status(CqlContext _) => _Marital_Status;
+    private static readonly CqlValueSet _Marital_Status = new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", null);
 
+    #endregion ValueSets
 
-    [CqlDeclaration("AgeThreshold")]
+    #region Parameters
+
+    [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
     {
         object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
@@ -45,7 +47,11 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -55,7 +61,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("CurrentDate")]
+    [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
         CqlDate a_ = context.Operators.Today();
@@ -64,7 +70,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("Patient Filter")]
+    [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -99,7 +105,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("Patient Birthdate")]
+    [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
         Patient a_ = this.Patient_Filter(context);
@@ -109,7 +115,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("Patient Age in Years")]
+    [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context)
     {
         Date a_ = this.Patient_Birthdate(context);
@@ -121,7 +127,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    [CqlDeclaration("Patient Older Than AgeThreshold")]
+    [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
         int? a_ = this.Patient_Age_in_Years(context);
@@ -132,6 +138,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

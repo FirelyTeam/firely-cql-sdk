@@ -11,6 +11,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal static class TextWriterExtensions
     {
         public const int SpacesPerIndentLevel = 4;
+        public static string IndentString { get; } = StringExtensions.IndentString(1);
 
         public static void WriteLine(this TextWriter writer, int indent, string text = "")
         {
@@ -28,7 +29,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.Append(StringExtensions.IndentString(indent));
             sb.AppendLine(text);
         }
-        
+
         public static void Append(this StringBuilder sb, int indent, string text)
         {
             sb.Append(StringExtensions.IndentString(indent));

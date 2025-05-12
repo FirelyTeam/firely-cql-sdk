@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -9,39 +9,32 @@
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
-    /// Implements the System Concept type.
+    /// Represents a CQL Concept, which is a collection of codes with an optional display name.
     /// </summary>
+    /// <remarks>
+    /// A CQL Concept is used to group related codes together, typically for use in clinical quality measures.
+    /// </remarks>
+    /// <param name="codes">The collection of <see cref="CqlCode"/> instances that define the concept.</param>
+    /// <param name="display">The display name of the concept, providing a human-readable description.</param>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#concept-1"/>
     [CqlPrimitiveType(CqlPrimitiveType.Concept)]
-    public class CqlConcept
+    public record CqlConcept(IReadOnlyList<CqlCode>? codes, string? display)
     {
         /// <summary>
-        /// Creates an instance.
+        /// Represents a CQL Concept, which is a collection of codes with an optional display name.
         /// </summary>
-        public CqlConcept()
-        {
-        }
+        /// <remarks>
+        /// A CQL Concept is used to group related codes together, typically for use in clinical quality measures.
+        /// </remarks>
+        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#concept-1"/>
+        /// <param name="codes">The collection of <see cref="CqlCode"/> instances that define the concept.</param>
+        /// <param name="display">The display name of the concept, providing a human-readable description.</param>
+        public CqlConcept(IEnumerable<CqlCode>? codes, string? display) : this(codes?.ToArray(), display) {}
 
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="codes">The codes in this concept.</param>
-        /// <param name="display">The display name of this concept.</param>
-        public CqlConcept(IEnumerable<CqlCode> codes, string? display)
-        {
-            this.codes = codes?.ToArray() ?? Array.Empty<CqlCode>();
-            this.display = display;
-        }
+        /// <summary>The collection of <see cref="CqlCode"/> instances that define the concept.</summary>
+        public IReadOnlyList<CqlCode> codes { get; init; } = codes;
 
-        /// <summary>
-        /// The codes in this concept.
-        /// </summary>
-        public CqlCode[]? codes { get; init; }
-
-        /// <summary>
-        /// The display name of this concept.
-        /// </summary>
-        public string? display { get; init; }
-
+        /// <summary>The display name of the concept, providing a human-readable description.</summary>
+        public string? display { get; init; } = display;
     }
 }

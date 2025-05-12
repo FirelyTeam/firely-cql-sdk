@@ -1,0 +1,152 @@
+{
+    "resourceType": "Library",
+    "id": "RR23",
+    "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>RR23-Umbrella Measure.</h2><ul><li>Purpose: proportional measure, proportion of patients who were injured due to rockfall, and who received a tiny umbrella within 7 days after the date of diagnosis.</li><li>Initial population: Patients aged 16 and older who have sustained an injury due to falling rock.</li><li>Denominator: Initial Population</li><li>Numerator: Supply of 'ACME Umbrella' within 7 days of 'recording of the (latestmost recent) rock fall condition within the measurement period'.</li></ul>  </div>"
+    },
+    "url": "http://moh.alpha.alp/Library/RR23",
+    "identifier": [
+        {
+            "use": "official",
+            "system": "http://moh.alpha.alp/Library/Identifier",
+            "value": "RR23"
+        }
+    ],
+    "version": "1.0.0",
+    "name": "RR23",
+    "title": "Roadrunners Syndrome - RR23-Umbrella Measure",
+    "status": "active",
+    "experimental": true,
+    "type": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/library-type",
+                "code": "logic-library"
+            }
+        ]
+    },
+    "date": "2023-11-23",
+    "publisher": "MOH Alpha",
+    "description": "Library used to validate guidance related to Roadrunners Syndrome",
+    "approvalDate": "2023-11-23",
+    "lastReviewDate": "2023-11-23",
+    "relatedArtifact": [
+        {
+            "type": "depends-on",
+            "display": "FHIR model information",
+            "resource": "http://fhir.org/guides/cqf/common/Library/FHIR-ModelInfo|4.0.1"
+        },
+        {
+            "type": "depends-on",
+            "display": "Library FHIRHelpers",
+            "resource": "http://fhir.org/guides/cqf/common/Library/FHIRHelpers|4.0.1"
+        },
+        {
+            "type": "depends-on",
+            "display": "Code system ACME Product Catalog",
+            "resource": "http://acme.org/product-catalog"
+        },
+        {
+            "type": "depends-on",
+            "display": "Value set Injury due to falling rock",
+            "resource": "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock"
+        },
+        {
+            "type": "depends-on",
+            "display": "Value set Roadrunners Syndrome Indicators",
+            "resource": "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome"
+        }
+    ],
+    "parameter": [
+        {
+            "name": "Measurement Period",
+            "use": "in",
+            "min": 0,
+            "max": "1",
+            "type": "Period"
+        },
+        {
+            "name": "Patient",
+            "use": "out",
+            "min": 0,
+            "max": "1",
+            "type": "Patient"
+        },
+        {
+            "name": "Initial Population",
+            "use": "out",
+            "min": 0,
+            "max": "*",
+            "type": "boolean"
+        },
+        {
+            "name": "Deniminator",
+            "use": "out",
+            "min": 0,
+            "max": "*",
+            "type": "boolean"
+        },
+        {
+            "name": "Numerator",
+            "use": "out",
+            "min": 0,
+            "max": "*",
+            "type": "boolean"
+        }
+    ],
+    "dataRequirement": [
+        {
+            "type": "Patient",
+            "profile": [
+                "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+        },
+        {
+            "type": "Condition",
+            "profile": [
+                "http://hl7.org/fhir/StructureDefinition/Condition"
+            ],
+            "mustSupport": [
+                "code",
+                "onset",
+                "onset.value"
+            ],
+            "codeFilter": [
+                {
+                    "path": "code",
+                    "valueSet": "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock"
+                }
+            ]
+        },
+        {
+            "type": "SupplyDelivery",
+            "profile": [
+                "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"
+            ],
+            "mustSupport": [
+                "suppliedItem",
+                "suppliedItem.item",
+                "occurrence",
+                "occurrence.value"
+            ],
+            "codeFilter": [
+                {
+                    "path": "item",
+                    "code": [
+                        {
+                            "system": "http://acme.org/product-catalog",
+                            "code": "U707"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "content": [
+        {
+            "contentType": "text/cql",
+            "data": "bGlicmFyeSBSUjIzIHZlcnNpb24gJzEuMC4wJwoKLyoKQHB1Ymxpc2hlcjogTU9IIEFscGhhCkBkZXNjcmlwdGlvbjogTGlicmFyeSB1c2VkIHRvIHZhbGlkYXRlIGd1aWRhbmNlIHJlbGF0ZWQgdG8gUm9hZHJ1bm5lcnMgU3luZHJvbWUKKi8KCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCgpjb2Rlc3lzdGVtICJBQ01FIFByb2R1Y3QgQ2F0YWxvZyI6ICdodHRwOi8vYWNtZS5vcmcvcHJvZHVjdC1jYXRhbG9nJwpjb2Rlc3lzdGVtICJDb25kaXRpb25WZXJpZmljYXRpb25TdGF0dXNDb2RlcyI6ICdodHRwOi8vdGVybWlub2xvZ3kuaGw3Lm9yZy9Db2RlU3lzdGVtL2NvbmRpdGlvbi12ZXItc3RhdHVzJwoKdmFsdWVzZXQgIkluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIjogJ2h0dHA6Ly9tb2guYWxwaGEuYWxwL1ZhbHVlU2V0L0RpYWdub3Npc0luanVyeUR1ZVRvRmFsbGluZ1JvY2snCnZhbHVlc2V0ICJSb2FkcnVubmVycyBTeW5kcm9tZSBJbmRpY2F0b3JzIjogJ2h0dHA6Ly9tb2guYWxwaGEuYWxwL1ZhbHVlU2V0L0RpYWdub3Npc1JvYWRydW5uZXJTeW5kcm9tZScgCgpjb2RlICJUaW55IFVtYnJlbGxhIjogJ1U3MDcnIGZyb20gIkFDTUUgUHJvZHVjdCBDYXRhbG9nIiBkaXNwbGF5ICdBQ01FIFRpbnkgVW1icmVsbGEnCmNvZGUgImVudGVyZWQtaW4tZXJyb3IiOiAnZW50ZXJlZC1pbi1lcnJvcicgZnJvbSBDb25kaXRpb25WZXJpZmljYXRpb25TdGF0dXNDb2RlcwoKLyoKQHBhcmFtZXRlcjogaW4KKi8KcGFyYW1ldGVyICJNZWFzdXJlbWVudCBQZXJpb2QiIGRlZmF1bHQgSW50ZXJ2YWxbQDIwMjMtMDEtMDFULCBAMjAyMy0xMi0zMVRdCgpjb250ZXh0IFBhdGllbnQKCi8qIApAZGVzY3JpcHRpb246IElzIFBhdGllbnQgaW4gSW5pdGlhbCBQb3B1bGF0aW9uID8gUGF0aWVudHMgYWdlZCAxNiBhbmQgb2xkZXIgd2hvIGhhdmUgc3VzdGFpbmVkIGluanVyaWVzIGR1ZSB0byBmYWxsaW5nIHJvY2suCkBwYXJhbWV0ZXI6IG91dAoqLwpkZWZpbmUgIkluaXRpYWwgUG9wdWxhdGlvbiI6CiAgKEFnZUluWWVhcnNBdChzdGFydCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIikgPj0gMTYpIGFuZCBleGlzdHMoIkluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIHdpdGhpbiBtZWFzdXJlbWVudCBwZXJpb2QiKQogIAovKiAKQGRlc2NyaXB0aW9uOiBJcyBQYXRpZW50IGluIERlbm9taW5hdG9yID8gRGVub21pbmF0b3IgZXF1YWxzIHRoZSBpbml0aWFsIHBvcHVsYXRpb24uCkBwYXJhbWV0ZXI6IG91dAoqLyAgCmRlZmluZSAiRGVub21pbmF0b3IiOgogICAgIkluaXRpYWwgUG9wdWxhdGlvbiIKCi8qCkBkZXNjcmlwdGlvbjogSW4gTnVtZXJhdG9yID8gU3VwcGx5IG9mICdBQ01FIFVtYnJlbGxhJyB3aXRoaW4gNyBkYXlzIG9mICJyZWNvcmRpbmcgb2YgdGhlIChsYXRlc3Rtb3N0IHJlY2VudCkgcm9jayBmYWxsIGNvbmRpdGlvbiB3aXRoaW4gdGhlIG1lYXN1cmVtZW50IHBlcmlvZCIgICAgICAgIApAcGFyYW1ldGVyOiBvdXQKKi8KZGVmaW5lICJOdW1lcmF0b3IiOgogICAgZXhpc3RzICJUaW55IFVtYnJlbGxhIFN1cHBseSB3aXRoaW4gNyBkYXlzIGFmdGVyIG1vc3QgcmVjZW50IGluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIgogICAgICAKLyoKQGRlc2NyaXB0aW9uOiBDb25kaXRpb25zIG9mIHR5cGUgJ0luanVyeSBkdWUgdG8gZmFsbGluZyByb2NrJyB3aXRoaW4gdGhlIG1lYXN1cmVtZW50IHBlcmlvZApAZmhpcnF1ZXJ5OiBha2luIHRvIENvbmRpdGlvbj9jb2RlOmluPWh0dHA6Ly9tb2guYWxwaGEuYWxwL1ZhbHVlU2V0L0RpYWdub3Npc0luanVyeUR1ZVRvRmFsbGluZ1JvY2smb25zZXQtZGF0ZT1zYVtQZXJpb2Qtc3RhcnRdJm9uc2V0LWRhdGU9ZWJbUGVyaW9kLWVuZF0KQGRhdGFyZXF1aXJlbWVudDogQ29uZGl0aW9uIGh0dHA6Ly9obDcub3JnL2ZoaXIvU3RydWN0dXJlRGVmaW5pdGlvbi9FbmNvdW50ZXIgWyJjb2RlIiwib25zZXQub2ZUeXBlKERhdGVUaW1lKSIsInN1YmplY3Qub2ZUeXBlKFBhdGllbnQpIl0KQGNvZGVyZXF1aXJlbWVudDogQ29uZGl0aW9uLmNvZGUgaHR0cDovL21vaC5hbHBoYS5hbHAvVmFsdWVTZXQvRGlhZ25vc2lzSW5qdXJ5RHVlVG9GYWxsaW5nUm9jawoqLwpkZWZpbmUgIkluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIHdpdGhpbiBtZWFzdXJlbWVudCBwZXJpb2QiOiAgIAogICAgW0NvbmRpdGlvbjogIkluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIl0gQwogICAgICAgd2hlcmUgKEMub25zZXQudmFsdWUgYXMgRGF0ZVRpbWUpIGR1cmluZyAiTWVhc3VyZW1lbnQgUGVyaW9kIgogICAgICAgICAgCmRlZmluZSAiTGFzdCBpbmp1cnkgZHVlIHRvIGZhbGxpbmcgcm9jayI6CiAgICAgIExhc3QoICJJbmp1cnkgZHVlIHRvIGZhbGxpbmcgcm9jayB3aXRoaW4gbWVhc3VyZW1lbnQgcGVyaW9kIiBDIHNvcnQgYnkgKG9uc2V0LnZhbHVlIGFzIERhdGVUaW1lKSApCgpkZWZpbmUgIkRhdGUgb2YgbGFzdCBpbmp1cnkgZHVlIHRvIGZhbGxpbmcgcm9jayI6CiAgICAgICJMYXN0IGluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIi5vbnNldC52YWx1ZSBhcyBEYXRlVGltZQovKgpAZGVzY3JpcHRpb246IElzIHRoZXJlIGEgc3VwcGx5IG9mIGEgJ0FDTUUgVW1icmVsbGEnIHdpdGhpbiA3IGRheXMgb2YgInJlY29yZGluZyBvZiB0aGUgKGxhdGVzdCkgcm9jayBmYWxsIGNvbmRpdGlvbiB3aXRoaW4gdGhlIG1lYXN1cmVtZW50IHBlcmlvZCIgICAgICAgIApAZmhpcnF1ZXJ5OiBha2luIHRvIC9TdXBwbHlEZWxpdmVyeT9zdXBwbGllZC1pdGVtPWh0dHA6Ly9hY21lLm9yZy9wcm9kdWN0LWNhdGFsb2d8VTcwNyZvY3VycmVuY2UtZGF0ZXRpbWU9bHRbQ29uZGl0aW9uIG9uc2V0IGRhdGUrNyBkYXlzXSAgICAgICAgCkBkYXRhcmVxdWlyZW1lbnQ6IFN1cHBseURlbGl2ZXJ5IGh0dHA6Ly9obDcub3JnL2ZoaXIvU3RydWN0dXJlRGVmaW5pdGlvbi9TdXBwbHlEZWxpdmVyeSBbInN1cHBsaWVkSXRlbS5pdGVtLm9mVHlwZShDb2RlYWJsZUNvbmNlcHQpIiwib2NjdXJyZW5jZURhdGVUaW1lIiwicGF0aWVudCJdCkBjb2RlcmVxdWlyZW1lbnQ6IFN1cHBseURlbGl2ZXJ5Lml0ZW0ub3JmVHlwZShDb2RlYWJsZUNvbmNlcHQpIGh0dHA6Ly9hY21lLm9yZy9wcm9kdWN0LWNhdGFsb2d8VTcwNwoqLwpkZWZpbmUgIlRpbnkgVW1icmVsbGEgU3VwcGx5IHdpdGhpbiA3IGRheXMgYWZ0ZXIgbW9zdCByZWNlbnQgaW5qdXJ5IGR1ZSB0byBmYWxsaW5nIHJvY2siOgogICAgW1N1cHBseURlbGl2ZXJ5XSBTRCAKICAgICAgd2hlcmUgKFNELnN1cHBsaWVkSXRlbS5pdGVtIH4gIlRpbnkgVW1icmVsbGEiKQogICAgICAgYW5kICgiRGF0ZSBvZiBsYXN0IGluanVyeSBkdWUgdG8gZmFsbGluZyByb2NrIiA3IGRheXMgb3IgbGVzcyBiZWZvcmUgKFNELm9jY3VycmVuY2UudmFsdWUgYXMgRGF0ZVRpbWUpKSAKCiAgICAgICAgCiAgICAgICAgIA=="
+        }
+    ]
+}

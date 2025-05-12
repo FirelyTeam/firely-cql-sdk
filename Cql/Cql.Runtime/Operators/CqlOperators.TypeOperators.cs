@@ -175,14 +175,14 @@ namespace Hl7.Cql.Operators
         public CqlDate? ConvertDateTimeToDate(CqlDateTime? d) => d == null ? null : new CqlDate(d!);
 
 
-        public string? ConvertTimeToString(CqlTime? t) => t == null ? null : t.ToString();
+        public string? ConvertTimeToString(CqlTime? t) => t?.ToString();
 
-        public CqlConcept? ConvertCodeToConcept(CqlCode? c) => c == null ? null : new CqlConcept(new[] { c }, c.display);
+        public CqlConcept? ConvertCodeToConcept(CqlCode? c) => c == null ? null : new CqlConcept([c], c.display);
 
-        public IEnumerable<CqlCode>? ConvertConceptToListOfCodes(CqlConcept? c) => c == null ? null : c.codes;
+        public IEnumerable<CqlCode>? ConvertConceptToListOfCodes(CqlConcept? c) => c?.codes;
 
 
-        public CqlConcept? ConvertConceptToListOfCodes(IEnumerable<CqlCode>? c) => c == null ? null : new CqlConcept(c, null);
+        public CqlConcept? ConvertConceptToListOfCodes(IEnumerable<CqlCode>? c) => c == null ? null : new CqlConcept([.. c], null);
 
         #endregion
 

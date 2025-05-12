@@ -6,10 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
@@ -116,7 +116,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Compiles the ELM libraries into .NET assemblies.
     /// </summary>
-    public ElmToolkit ConvertElmToAssemblies()
+    public ElmToolkit CompileToAssemblies()
     {
         var entries = _conversions;
         if (entries.Values.All(predicate: lc => lc is { ResultAssemblyBinary: not null }))
@@ -164,7 +164,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
         {
-            var elmVersionedIdentifier = library.identifier.ToCqlVersionedLibraryIdentifier();
+            var elmVersionedIdentifier = library.VersionedLibraryIdentifier;
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
             if (libraryCompilation.ResultCSharpSourceCode is not null
                 || libraryCompilation.ResultAssemblyBinary is not null)
@@ -210,7 +210,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) =>
-                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.GetVersionedIdentifier()!)));
+                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -222,7 +222,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions) =>
         cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
                 librarySet,
@@ -231,8 +231,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
-                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
-                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.GetVersionedIdentifier()));
+                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.VersionedLibraryIdentifier)),
+                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
 
     /// <summary>
     /// Builds the library set definitions.
@@ -240,11 +240,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <returns>The dictionary of library set definitions.</returns>
-    private DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
+    private DefinitionDictionary<CqlDefinition> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet)
     {
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions = new();
         librarySetExpressionBuilderScoped
             .BuildEachLibraryDefinitions(
                 librarySet,
@@ -254,8 +254,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>
-                                         logMessage("Could not convert ELM into definitions for {id}", library.GetVersionedIdentifier())),
-                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.GetVersionedIdentifier()))
+                                         logMessage("Could not convert ELM into definitions for {id}", library.VersionedLibraryIdentifier)),
+                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier))
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }

@@ -302,9 +302,19 @@ public class TypeExtensionsTests
         Value2
     }
 
-    public interface IGenericInterface<in T>
+    public interface IGenericInterface<T>
     {
         void Method(T value);
+
+        void ParameterModifiers(
+            T value,
+            in T valueIn,
+            out T valueOut,
+            ref T valueRef,
+            params T[] values)
+        {
+            valueOut = default!;
+        }
     }
 
     public interface IGenericInterfaceOnStruct<T>

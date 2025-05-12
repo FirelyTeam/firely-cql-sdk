@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
@@ -16,8 +17,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 
-using SysDateTime = System.DateTime;
-
 /// <summary>
 /// Provides functionality for packaging FHIR resources.
 /// </summary>
@@ -27,13 +26,20 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="config">The configuration settings for the toolkit.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public PackagingToolkit(
-        ILoggerFactory? loggerFactory = null)
+        ILoggerFactory? loggerFactory = null,
+        PackagingToolkitConfig? config = null,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
+        config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = PackagingToolkitConversionsDictionary.Empty;
-        _services = PackagingToolkitServices.Create(loggerFactory);
+        Config = config;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
+        _services = PackagingToolkitServices.Create(loggerFactory, config);
     }
 
     private PackagingToolkitConversionsDictionary _conversions;
@@ -59,6 +65,11 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
+    /// Gets the configuration used by the toolkit.
+    /// </summary>
+    public PackagingToolkitConfig Config { get; }
+
+    /// <summary>
     /// Gets the dictionary of conversions.
     /// </summary>
     public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
@@ -81,7 +92,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.GetVersionedIdentifier()!);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.VersionedLibraryIdentifier);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
@@ -104,10 +115,8 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Converts the added packaging inputs to FHIR resources.
     /// </summary>
-    /// <param name="canonicalRootUrl">The canonical root URL for the FHIR resources.</param>
-    /// <param name="overrideDate">The date to override in the FHIR resources. If not specified, the current time will be used.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    public PackagingToolkit ConvertToFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate = null)
+    public PackagingToolkit ConvertToFhirResources()
     {
         var builder = _conversions.ToBuilder();
 
@@ -142,12 +151,11 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
                          inputsById: id => inputsById[id],
-                         resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
-                         overrideDate: overrideDate,
+                         overrideDate: Config.OverrideDate,
                          errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
-                             .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
-                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
+                             .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.VersionedLibraryIdentifier)),
+                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.VersionedLibraryIdentifier))
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);
@@ -175,4 +183,40 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         o.SourceElmLibrary,
         o.SourceCSharpSourceCode,
         o.SourceAssemblyBinary);
+
+    /// <summary>
+    /// A utility method that serializes FHIR resources to JSON format.
+    /// </summary>
+    /// <param name="fhirResources">The collection of FHIR resources to serialize.</param>
+    /// <param name="writeIndented">Specifies whether the JSON output should be indented.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
+    /// <returns>A collection of tuples containing the resource file name and its JSON representation.</returns>
+    public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
+       IEnumerable<FhirResource> fhirResources,
+       bool writeIndented = false,
+       Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+    {
+        var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
+
+        var updateWriteIndented = writeIndented != jsonSerializerOptions.WriteIndented;
+        var mutateOptions = configureJsonSerializerOptions != null;
+        if (updateWriteIndented || mutateOptions)
+        {
+            // Clone the options since the instance is shared as a singleton.
+            jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
+
+            if (updateWriteIndented)
+                jsonSerializerOptions.WriteIndented = writeIndented;
+
+            if (mutateOptions)
+                jsonSerializerOptions = configureJsonSerializerOptions!(jsonSerializerOptions);
+        }
+
+        foreach (var resource in fhirResources)
+        {
+            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
+            var resourceFileName = resource.GetResourceFileName();
+            yield return (resourceFileName, resourceJson);
+        }
+    }
 }

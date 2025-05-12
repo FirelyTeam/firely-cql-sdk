@@ -31,3 +31,5 @@ global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.Extensions.Logging;
 global using Expression = System.Linq.Expressions.Expression;
 global using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+global using CqlDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition>;
+global using DelegateDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate>;

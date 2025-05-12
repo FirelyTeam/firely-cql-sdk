@@ -6,8 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Toolkit;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -17,60 +18,52 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibraryInvokerExtensions
 {
     /// <summary>
-    /// Enumerates the results of library definitions.
+    ///
     /// </summary>
-    /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
-    /// <param name="cqlContext">The CQL context used for invocation.</param>
-    /// <param name="includeDefinition">The selector for the definition</param>
-    /// <param name="definitionInvocationExceptionCallback">
-    /// <para>
-    /// An optional callback right after an exception is caught, and before it rethrown or ignored,
-    /// based on the currently selected
-    /// <see cref="LibrarySetInvoker.BatchProcessExceptionContinuation">LibrarySetInvoker.BatchProcessExceptionContinuation</see>.
-    /// </para>
-    /// <para>
-    /// In most cases this is only necessary when the selected strategy is set to Ignore exceptions and when the caller
-    /// has a special use case for it, e.g. to keep track of these exceptions.
-    /// </para>
-    /// <para>
-    /// Otherwise, it's best to just catch the exception the normal way.
-    /// </para>
-    /// </param>
-    /// <returns>An enumeration of tuples containing the definition invoker and the result.</returns>
-    ///
-    /// <remarks>
-    /// <para>
-    /// Exceptions are enriched such that the last <see cref="DefinitionInvoker"/> that caused
-    /// the exception is available when inspecting the <see cref="Exception.Data">Exception.Data["Current"]</see> property.
-    /// </para>
-    ///
-    /// <para>
-    /// From the <see cref="DefinitionInvoker"/> the name of the
-    /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
-    /// </para>
-    /// </remarks>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
+    /// <param name="libraryInvoker"></param>
+    /// <param name="includeDefinitionsWithParameters"></param>
+    /// <returns></returns>
+    public static IEnumerable<DefinitionInvoker> SelectExpressions(
         this LibraryInvoker libraryInvoker,
-        CqlContext cqlContext,
-        Func<DefinitionInvoker, bool>? includeDefinition = null,
-        ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
-    {
-        var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
-        var continuation = libraryInvoker.LibrarySetInvoker.BatchProcessExceptionContinuation;
-        includeDefinition ??= _ => true;
+        bool includeDefinitionsWithParameters = false) =>
+        libraryInvoker
+            .Definitions.Values
+            .Where(definitionInvoker =>
+                       definitionInvoker.ParameterTypes.Length == 0
+                       && definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlExpressionDefinitionAttribute));
 
-        return libraryInvoker.Definitions.Values
-                             .Where(includeDefinition)
-                             .TrySelect(
-                                 definitionInvoker => (definitionInvoker, definitionInvoker.Invoke(cqlContext)),
-                                 errorStrategy => errorStrategy
-                                                  .SetContinuation(continuation)
-                                                  .AddLoggerExceptionHandler(
-                                                      logger,
-                                                      (definitionInvoker, logMessage) =>
-                                                          logMessage("Could not invoke definition {definition} on library {id}",
-                                                                     definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
-                                                  .AddExceptionHandler(definitionInvocationExceptionCallback)
-                             );
-    }
+    /// <summary>
+    /// Enumerates the functions in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<DefinitionInvoker> SelectFunctions(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .Where(definitionInvoker =>
+                       definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlFunctionDefinitionAttribute));
+
+    /// <summary>
+    /// Enumerates the value sets in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<(DefinitionInvoker definition, CqlValueSet valueSet)> SelectValueSets(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlValueSetDefinitionAttribute attr
+                ? (true, (definitionInvoker, new CqlValueSet(attr.ValueSetId, attr.ValueSetVersion)))
+                : default);
+
+    /// <summary>
+    /// Enumerates the codes in the library.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker.</param>
+    public static IEnumerable<(DefinitionInvoker definition, CqlCode code)> SelectCodes(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker
+            .Definitions.Values
+            .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlCodeDefinitionAttribute attr
+                ? (true, (definitionInvoker, new CqlCode(attr.CodeId, attr.CodeSystem, attr.CodeVersion, attr.CodeDisplay)))
+                : default);
 }

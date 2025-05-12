@@ -18,7 +18,7 @@ internal partial class LibrarySetExpressionBuilderContext
     public LibrarySetExpressionBuilderContext(
         LibraryExpressionBuilder libraryExpressionBuilder,
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions)
+        CqlDefinitionDictionary librarySetDefinitions)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
@@ -29,14 +29,14 @@ internal partial class LibrarySetExpressionBuilderContext
     /// <summary>
     /// Gets the merged definitions of all the libraries processed in the <see cref="LibrarySet"/>.
     /// </summary>
-    public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
+    public CqlDefinitionDictionary LibrarySetDefinitions { get; }
 
     /// <summary>
     /// Gets the library set being processed.
     /// </summary>
     public LibrarySet LibrarySet { get; }
 
-    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
+    public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
         Action<Library>? prebuildLibraryHandler = null) =>
         LibrarySet

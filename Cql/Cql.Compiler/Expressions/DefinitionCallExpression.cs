@@ -45,20 +45,8 @@ namespace Hl7.Cql.Compiler.Expressions
 
         public override ExpressionType NodeType => ExpressionType.Extension;
 
-        public override Expression Reduce()
-        {
-            var indices = new Expression[]
-            {
-                Constant(LibraryName),
-                Constant(DefinitionName)
-            };
-
-            var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = index.NewTypeAsExpression(DefinitionType);
-            var invoke = Invoke(asFunc, CqlContextParameter);
-
-            return invoke;
-        }
+        public override Expression Reduce() =>
+            FunctionCallExpression.CallDefinitionDictionaryIndexGet(DefinitionType, Definitions, LibraryName, DefinitionName, [CqlContextParameter]);
 
         protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 

@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -26,7 +25,7 @@ internal sealed class ElmToFhirProgram
     ILogger<ElmToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<FhirOptions> fhirOptions,
+    IOptions<PackagingOptions> packagingOptions,
     IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
 {
     public int Run()
@@ -37,7 +36,7 @@ internal sealed class ElmToFhirProgram
             var opt = elmToFhirOptions.Value;
             var cqlOpt = cqlOptions.Value;
             var elmOpt = elmOptions.Value;
-            var fhirOpt = fhirOptions.Value;
+            var packOpt = packagingOptions.Value;
 
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
@@ -63,7 +62,7 @@ internal sealed class ElmToFhirProgram
             sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.Conversions.Count} ELM libraries from directory {opt.ElmInDir}."));
 
             var elmToolkitResultRecords = elmToolkit
-                                          .ConvertElmToAssemblies()
+                                          .CompileToAssemblies()
                                           .GetElmToAssemblyResults()
                                           .ToList();
             if (elmToolkitResultRecords.Count == 0)
@@ -101,29 +100,22 @@ internal sealed class ElmToFhirProgram
                 }
                 sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-                var packagingToolkit = new PackagingToolkit(loggerFactory)
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+                var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit);
+
                 if (packagingToolkit.Conversions.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
                     return ExitCode.CantPackageNoCqlElmMatches;
                 }
 
-                Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-                if (opt.JsonPretty)
-                    configureJsonSerializerOptions = options =>
-                    {
-                        options.WriteIndented = true;
-                        return options;
-                    };
-
                 packagingToolkit
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .ConvertToFhirResources(fhirOpt.CanonicalRootUrl, fhirOpt.OverrideDate)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit)
+                    .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
-                        configureJsonSerializerOptions);
+                        packOpt.JsonPretty,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;

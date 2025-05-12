@@ -1,6 +1,5 @@
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -286,10 +285,10 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
-            var lambdas = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
-            var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
-            expr.Parameters.Should().HaveCount(2);
-            expr.Parameters[1].Name.Should().Be("decimal");
+            var cqlDefinitionDictionary = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
+            var cqlDefinition = cqlDefinitionDictionary["FuncTest-1.0.0", new DefinitionSignature("ToInteger", typeof(CqlContext), typeof(decimal?))] is CqlLambdaDefinition ld ? ld.LambdaExpression : null;
+            cqlDefinition.Parameters.Should().HaveCount(2);
+            cqlDefinition.Parameters[1].Name.Should().Be("decimal");
 
             var act = () =>
             {

@@ -1,8 +1,7 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Fhir.Model;
-using Task=System.Threading.Tasks.Task;
+using Task = System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -14,16 +13,16 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var cqlToolkit = CreateCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse("""
-                                   library RetrieveTest version '1.0.0'
+                                                          library RetrieveTest version '1.0.0'
 
-                                   using FHIR version '4.0.1'
+                                                          using FHIR version '4.0.1'
 
-                                   valueset "terminology": 'http://fire.ly/ValueSet/Test'
+                                                          valueset "terminology": 'http://fire.ly/ValueSet/Test'
 
-                                   context Patient
+                                                          context Patient
 
-                                   define private Retrieve_AllTerms: [Patient->Condition: code in "terminology"]
-                                   """);
+                                                          define private Retrieve_AllTerms: [Patient->Condition: code in "terminology"]
+                                                          """);
             var library = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(2, library.statements.Length);
@@ -49,24 +48,25 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("terminology", valueSetRef.name);
                 }
 
-                var valueSets = await (new[] {
-                    new ValueSet
-                    {
-                        Id = "http://fire.ly/ValueSet/Test",
-                        Url = "http://fire.ly/ValueSet/Test",
-                        Expansion = new ValueSet.ExpansionComponent
-                        {
-                            Contains = new List<ValueSet.ContainsComponent>
-                            {
-                                new ValueSet.ContainsComponent
-                                {
-                                    Code = "code1",
-                                    System = "http://fire.ly/CodeSystem/Test"
-                                }
-                            }
-                        }
-                    }
-                }.ToValueSetDictionaryAsync());
+                var valueSets = await (new[]
+                                          {
+                                              new ValueSet
+                                              {
+                                                  Id = "http://fire.ly/ValueSet/Test",
+                                                  Url = "http://fire.ly/ValueSet/Test",
+                                                  Expansion = new ValueSet.ExpansionComponent
+                                                  {
+                                                      Contains = new List<ValueSet.ContainsComponent>
+                                                      {
+                                                          new ValueSet.ContainsComponent
+                                                          {
+                                                              Code = "code1",
+                                                              System = "http://fire.ly/CodeSystem/Test"
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                          }.ToValueSetDictionaryAsync());
 
                 var bundle = new Bundle
                 {
@@ -88,7 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                 {
                                     Coding = new List<Coding>
                                     {
-                                        new Coding { Code = "code1",  System = "http://fire.ly/CodeSystem/Test" }
+                                        new Coding { Code = "code1", System = "http://fire.ly/CodeSystem/Test" }
                                     }
                                 }
                             }
@@ -97,9 +97,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 };
 
                 using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
-                var result = librarySetInvoker.GetLibraryDefinitionResult(
+                var result = librarySetInvoker.InvokeLibraryDefinition(
                     FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
-                                              cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
+                    cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
                 Assert.IsNotNull(conditions);
                 var ids = conditions.Select(c => c.Id).ToArray();
@@ -114,15 +114,15 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var cqlToolkit = CreateCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse("""
-                library FilteredRetrieve version '1.0.0'
+                                                          library FilteredRetrieve version '1.0.0'
 
-                using FHIR version '4.0.1'
-                codesystem LOINC: 'http://loinc.org'
-                code "Body height": '8302-2' from LOINC
+                                                          using FHIR version '4.0.1'
+                                                          codesystem LOINC: 'http://loinc.org'
+                                                          code "Body height": '8302-2' from LOINC
 
-                define "Body height observations":
-                    [Observation: "Body height"]
-                """);
+                                                          define "Body height observations":
+                                                              [Observation: "Body height"]
+                                                          """);
             var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
 
             var r = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             {
                                 Coding = new List<Coding>
                                 {
-                                    new Coding { Code = "8302-2",  System = "http://loinc.org" }
+                                    new Coding { Code = "8302-2", System = "http://loinc.org" }
                                 }
                             }
                         }
@@ -174,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             {
                                 Coding = new List<Coding>
                                 {
-                                    new Coding { Code = "29463-7",  System = "http://loinc.org" }
+                                    new Coding { Code = "29463-7", System = "http://loinc.org" }
                                 }
                             }
                         }
@@ -182,7 +182,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
             };
 
-            var result = librarySetInvoker.GetLibraryDefinitionResult(
+            var result = librarySetInvoker.InvokeLibraryDefinition(
                 FhirCqlContext.ForBundle(bundle),
                 cqlLibraryString.LibraryIdentifier, "Body height observations");
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
@@ -28,37 +28,39 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Lung Cancer")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
-    public CqlValueSet Lung_Cancer(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
+    [CqlValueSetDefinition("Lung Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", valueSetVersion: null)]
+    public CqlValueSet Lung_Cancer(CqlContext _) => _Lung_Cancer;
+    private static readonly CqlValueSet _Lung_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", null);
 
+    [CqlValueSetDefinition("Condition Clinical Status", valueSetId: "http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", valueSetVersion: null)]
+    public CqlValueSet Condition_Clinical_Status(CqlContext _) => _Condition_Clinical_Status;
+    private static readonly CqlValueSet _Condition_Clinical_Status = new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", null);
 
-    [CqlDeclaration("Condition Clinical Status")]
-    [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
-    public CqlValueSet Condition_Clinical_Status(CqlContext context) =>
-        new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("Tobacco Smoking Status")]
-    public CqlCode Tobacco_Smoking_Status(CqlContext context) =>
-        new CqlCode("72166-2", "http://loinc.org", default, default);
+    [CqlCodeDefinition("Tobacco Smoking Status", codeId: "72166-2", codeSystem: "http://loinc.org")]
+    public CqlCode Tobacco_Smoking_Status(CqlContext _) => _Tobacco_Smoking_Status;
+    private static readonly CqlCode _Tobacco_Smoking_Status = new CqlCode("72166-2", "http://loinc.org");
 
+    #endregion Codes
 
-    [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("72166-2", "http://loinc.org", default, default),
-        ];
+    #region CodeSystems
 
-        return a_;
-    }
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null, [
+          _Tobacco_Smoking_Status]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("Patient")]
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -68,7 +70,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
-    [CqlDeclaration("Smoking status observation")]
+    [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
     {
         CqlCode a_ = this.Tobacco_Smoking_Status(context);
@@ -92,7 +94,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
-    [CqlDeclaration("Lung cancer diagnosis")]
+    [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
         CqlValueSet a_ = this.Lung_Cancer(context);
@@ -112,6 +114,6 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

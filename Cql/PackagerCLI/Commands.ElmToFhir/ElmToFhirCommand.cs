@@ -53,8 +53,8 @@ internal record ElmToFhirCommand(
         (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
-        (CanonicalRootUrl, [FhirOptions.ConfigSection, nameof(FhirOptions.CanonicalRootUrl)]),
-        (OverrideUtcDateTime, [FhirOptions.ConfigSection, nameof(FhirOptions.OverrideDate)]),
-        (JsonPretty, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.JsonPretty)]),
+        (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
+        (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
+        (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
     ];
 }

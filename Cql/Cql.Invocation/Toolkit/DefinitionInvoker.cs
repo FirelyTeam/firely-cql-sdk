@@ -6,26 +6,37 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
+using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
-
 /// <summary>
-/// Abstract class representing a definition invoker.
+/// Represents an abstract base class for invoking CQL definitions within a library context.
 /// </summary>
-/// <param name="libraryInvoker">The library invoker that created this instance.</param>
-/// <param name="definitionName">The name of the definition.</param>
-/// <param name="methodInfo">The method information for the definition.</param>
-/// <param name="tagValuesByName">The tag values associated with the definition.</param>
-/// <param name="valueSetId">The value set identifier, if any.</param>
+/// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
+/// <param name="returnType">The return type of the CQL definition.</param>
+/// <param name="parameterTypes">The parameter types required by the CQL definition.</param>
+/// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
+/// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
+/// <remarks>
+/// This class provides the core functionality for invoking CQL definitions, including metadata
+/// such as the library identifier, definition name, parameter types, and return type. It also
+/// supports tagging definitions with attributes for categorization or filtering.
+/// </remarks>
+/// <example>
+/// Example usage:
+/// <code>
+/// var result = definitionInvoker.Invoke(cqlContext);
+/// </code>
+/// </example>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    string definitionName,
-    MethodInfo methodInfo,
-    IReadOnlyDictionary<string, IReadOnlySet<string>> tagValuesByName,
-    string? valueSetId)
+    Type returnType,
+    Type[] parameterTypes,
+    CqlDefinitionAttribute cqlDefinitionAttribute,
+    CqlTagAttribute[] cqlTagAttributes)
 {
     /// <summary>
     /// The library invoker that created this instance.
@@ -33,9 +44,25 @@ public abstract class DefinitionInvoker(
     public LibraryInvoker LibraryInvoker { get; } = libraryInvoker;
 
     /// <summary>
-    /// Gets the name of the definition.
+    /// Gets the <see cref="CqlDefinitionAttribute"/> associated with this invoker.
     /// </summary>
-    public string DefinitionName { get; } = definitionName;
+    public CqlDefinitionAttribute CqlDefinitionAttribute { get; } = cqlDefinitionAttribute;
+
+    /// <summary>
+    /// Gets the tag values by tag name that is associated with the definition.
+    /// Where there duplicate tags by name, their values will be combined into a set.
+    /// </summary>
+    public IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName { get; }
+        = cqlTagAttributes
+          .GroupBy(a => a.Name)
+          .ToFrozenDictionary(
+              g => g.Key,
+              IReadOnlySet<string> (g) => g.Select(a => a.Value).ToFrozenSet());
+
+    /// <summary>
+    /// A convenience property to get the library set name.
+    /// </summary>
+    public string LibrarySetName => LibraryInvoker.LibrarySetName;
 
     /// <summary>
     /// A convenience property to get the library identifier of the library that contains this definition.
@@ -43,34 +70,33 @@ public abstract class DefinitionInvoker(
     public CqlVersionedLibraryIdentifier LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
 
     /// <summary>
+    /// Gets the name of the definition.
+    /// </summary>
+    public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
+
+    /// <summary>
+    /// Gets the parameter types of the method.
+    /// </summary>
+    public Type[] ParameterTypes { get; } = parameterTypes;
+
+    /// <summary>
     /// Gets the return type of the method.
     /// </summary>
-    public Type ReturnType => MethodInfo.ReturnType;
-
-    /// <summary>
-    /// Gets the tag values by tag name that is associated with the definition.
-    /// Where there duplicate tags by name, their values will be combined into a set.
-    /// </summary>
-    public IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName { get; } = tagValuesByName;
-
-    /// <summary>
-    /// Gets the value set identifier, if any.
-    /// </summary>
-    public string? ValueSetId { get; } = valueSetId;
-
-    /// <summary>
-    /// Gets the method information for the definition.
-    /// </summary>
-    protected MethodInfo MethodInfo { get; } = methodInfo;
+    public Type ReturnType => returnType;
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
     /// </summary>
     /// <param name="cqlContext">The CQL context.</param>
-    /// <returns>The result of the invocation.</returns>
-    public abstract object? Invoke(CqlContext cqlContext);
+    /// <param name="args">Any additional arguments for the invocation.</param>
+    /// <returns>The result of the invocation (typically when calling a function definition).</returns>
+    public abstract object? Invoke(CqlContext cqlContext, params object?[] args);
 
     /// <inheritdoc />
     public override string ToString() =>
-        $"{{{nameof(LibraryIdentifier)}: {LibraryIdentifier}, {nameof(DefinitionName)}: {DefinitionName}, {nameof(ReturnType)}: {ReturnType.ToCSharpString()}}}";
+        StartBrace()
+            .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
+            .AppendMember(LibraryIdentifier)
+            .AppendMember(DefinitionName)
+            .EndBrace();
 }

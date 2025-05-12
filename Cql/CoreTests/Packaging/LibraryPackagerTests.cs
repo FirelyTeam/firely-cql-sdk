@@ -21,7 +21,6 @@ public class LibraryPackagerTests
     public void ElmParameterToFhir_ParameterTypeCanBeDerivedFromDifferentSources(string filename, FHIRAllTypes expectedType)
     {
         // Arrange
-        var elmFile = new FileInfo(filename);
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         // Act
         var library = LibraryPackager.CreateLibraryResource(
@@ -33,7 +32,7 @@ public class LibraryPackagerTests
             assemblyBytes: [],
             elmLibrarySet: new LibrarySet("", [elmLibrary] ),
             cSharpSourceCodeById: [],
-            resourceCanonicalRootUrl: "");
+            resourceCanonicalBuilder: (_,_,_) => "");
 
         // Assert
         Assert.IsNotNull(library);

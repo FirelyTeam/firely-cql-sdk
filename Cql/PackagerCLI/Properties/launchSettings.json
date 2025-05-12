@@ -20,13 +20,25 @@
       "commandName": "Project",
       "commandLineArgs": ""
     },
+    "PackageCLI (RR23 CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/RR23/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/RR23/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/RR23/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/RR23/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/RR23/CSharp\" "
+    },
     "PackageCLI (Demo CQL->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" "
     },
+    "PackageCLI (clinical_quality_language/Examples CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"C:/Dev/cqframework/clinical_quality_language/Examples/\" --fhir \"C:/Dev/cqframework/clinical_quality_language/Examples/out/fhir\" --dll \"C:/Dev/cqframework/clinical_quality_language/Examples/out/dll\" --cs \"C:/Dev/cqframework/clinical_quality_language/Examples/out/cs\" "
+    },
     "PackageCLI (Demo CQL->ELM)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/ElmOut\" "
+    },
+    "PackageCLI (CoreTests CQL->C#)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/Cql/CoreTests/Input/ELM/HL7\" --cs \"$(CqlSolutionDir)/Cql/CoreTests/CSharp\" "
     },
     "PackageCLI (Demo)": {
       "commandName": "Project",

@@ -12,26 +12,16 @@ namespace Hl7.Cql.Abstractions
     /// Representation of a @tag=value in CQL
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
-    public class CqlTagAttribute : Attribute
+    public class CqlTagAttribute(string name, string value) : Attribute
     {
         /// <summary>
         /// The name of the tag (after @, before =)
         /// </summary>
-        public string Name { get; }
+        public string Name { get; } = name;
+
         /// <summary>
         /// The name of the tag (after =)
         /// </summary>
-        public string Value { get; }
-
-        /// <summary>
-        /// Creates an instance with the corresponding values set
-        /// </summary>
-        /// <param name="Name">name</param>
-        /// <param name="Value">value</param>
-        public CqlTagAttribute(string Name, string Value)
-        {
-            this.Name = Name;
-            this.Value = Value;
-        }
+        public string Value { get; } = value;
     }
 }
