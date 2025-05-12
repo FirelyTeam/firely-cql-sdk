@@ -96,7 +96,7 @@ public static class LibrarySetInvokerExtensions
     /// Thrown when the number of provided arguments does not match the number of parameters in the definition signature,
     /// or when the arguments do not match the expected parameter types.
     /// </exception>
-    [DebuggerStepperBoundary]
+    [DebuggerStepThrough]
     public static object? InvokeLibraryDefinition(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,

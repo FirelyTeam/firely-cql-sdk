@@ -90,6 +90,7 @@ file sealed class DefinitionInvoker_3_0
         return (true, definitionInvoker);
     }
 
+    [DebuggerStepThrough]
     public override object? Invoke(CqlContext cqlContext, params object?[] args)
     {
         object?[] methodArgs = args is { Length: > 0 }

@@ -126,6 +126,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Invocation", "Cql\Cql.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncqa.HT.Infrastructure", "submodules\Ncqa.DQIC\Ncqa.HT.Infrastructure\Ncqa.HT.Infrastructure.csproj", "{BAEF695A-5581-B3EE-B352-CBF447240E55}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevDays", "DevDays", "{14ED22C5-F918-42DB-A301-04B3AED51EBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevDays2025App", "DevDays2025App\DevDays2025App.csproj", "{054088AA-C591-49E2-84D9-08679B12C9A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -252,6 +256,10 @@ Global
 		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054088AA-C591-49E2-84D9-08679B12C9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054088AA-C591-49E2-84D9-08679B12C9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054088AA-C591-49E2-84D9-08679B12C9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054088AA-C591-49E2-84D9-08679B12C9A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,6 +308,7 @@ Global
 		{ACE1D5DB-B8BB-4DC0-B04C-203982E59EC2} = {4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}
 		{50C55FF2-5362-454A-85B9-201E96A3C779} = {ACE1D5DB-B8BB-4DC0-B04C-203982E59EC2}
 		{BAEF695A-5581-B3EE-B352-CBF447240E55} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
+		{054088AA-C591-49E2-84D9-08679B12C9A0} = {14ED22C5-F918-42DB-A301-04B3AED51EBC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
