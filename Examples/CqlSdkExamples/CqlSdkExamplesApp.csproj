@@ -12,7 +12,7 @@
 	<!-- </ItemGroup> -->
 
   <ItemGroup>
-    <ProjectReference Include="..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
