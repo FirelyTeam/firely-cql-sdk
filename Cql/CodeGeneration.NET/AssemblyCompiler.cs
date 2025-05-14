@@ -77,6 +77,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
+            bool outputCSharpToTempFolder = false,
             BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
@@ -86,7 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     t =>
                     {
                         var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat, outputCSharpToTempFolder);
                         results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
@@ -108,19 +109,24 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat,
+            bool outputCSharpToTempFolder)
         {
             EmbeddedText[]? embeddedTexts = []; // For embedding C# when enabling debug information
             string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
-            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+
+            if (outputCSharpToTempFolder)
             {
                 // Write to temp dir (do we need this?)
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
                 librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
                 File.WriteAllText(librarySourcePath, librarySourceString);
-
+            }
+            
+            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+            {
                 // Embed C# source code
                 var sourceText = SourceText.From(librarySourceString, Encoding.UTF8);
                 var embeddedText = EmbeddedText.FromSource($"{libraryVersionedIdentifier}.cs", sourceText);
