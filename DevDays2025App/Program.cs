@@ -1,39 +1,31 @@
 ﻿using System.Diagnostics;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Iso8601;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
+using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
 
-internal class Program
+new Program().PickExample();
+
+internal partial class Program
 {
-    public static void Main(string[] args)
+    void PickExample()
     {
-        using ILoggerFactory loggerFactory =
-            LoggerFactory
-                .Create(lb => lb
-                              .ClearProviders()
-                              .AddConsole());
-        try
-        {
-            //ExecuteBasicCqlHelloWorld(loggerFactory);
-            //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
-            ElmExecuteCrossLibraryCalls(loggerFactory);
-        }
-        catch (Exception e)
-        {
-            Console.Error.WriteLine(e);
-            throw;
-        }
+        //LoadCqlFromDirSaveElmToDir();
+        //LoadElmFromDirSaveCSharpAndDllToDir();
+        PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir();
+        //ExecuteBasicCqlHelloWorld(loggerFactory);
+        //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
+        //ElmExecuteCrossLibraryCalls(loggerFactory);
+
+
     }
 
     private static void ExecuteBasicCqlHelloWorld(ILoggerFactory loggerFactory)
@@ -171,13 +163,6 @@ internal class Program
         Console.WriteLine($"Person of age {yearsOld} is {(result is not true ? "not " : "")}eligible.");
         Debug.Assert(result is false);
     }
-}
 
-file static class Extensions
-{
-    public static T With<T>(this T item, Action<T> action)
-    {
-        action(item);
-        return item;
-    }
+    private static readonly string InitialCurrentDirectory = Environment.CurrentDirectory;
 }
