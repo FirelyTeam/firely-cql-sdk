@@ -20,7 +20,10 @@ internal partial class Program
     {
         //LoadCqlFromDirSaveElmToDir();
         //LoadElmFromDirSaveCSharpAndDllToDir();
-        PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir();
+        //PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir();
+        //PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir();
+        PackageViaCqlToolkitsSaveFhirResourcesToDir();
+
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
         //ElmExecuteCrossLibraryCalls(loggerFactory);
