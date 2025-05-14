@@ -1,7 +1,16 @@
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime.Hosting;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
@@ -69,6 +78,105 @@ namespace CoreTests
             var definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
+        }
+
+        [TestMethod]
+        public void ObservationStatus_Test()
+        {
+            // Arrange
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+
+            var libraryString = CqlLibraryString.Parse("""
+               library CreateObservation version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               define newObservation:
+                   Observation {
+                       status: FHIR.ObservationStatus { value: 'final' }
+                   }
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            // Act
+            var definitions = servicesScope.ServiceProvider
+                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .ProcessLibrary(elmLibrary);
+            // Assert
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
+
+            var result = InvokeLibrary(elmLibrary, "newObservation");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType<Observation>(result);
+            var observation = (Observation)result;
+            Assert.AreEqual(ObservationStatus.Final, observation.Status);
+        }
+
+        [TestMethod]
+        public void AdministrativeGender_Test()
+        {
+            // Arrange
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+
+            var libraryString = CqlLibraryString.Parse("""
+               library CreatePatient version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               define newPatient:
+                   Patient {
+                       gender: FHIR.AdministrativeGender { value: 'female' }
+                   }
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            // Act
+            var definitions = servicesScope.ServiceProvider
+                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .ProcessLibrary(elmLibrary);
+            // Assert
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
+
+            var result = InvokeLibrary(elmLibrary, "newPatient");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType<Patient>(result);
+            var patient = (Patient)result;
+            Assert.AreEqual(AdministrativeGender.Female, patient.Gender);
+        }
+
+        private static Library CreateElmLibrary(CqlLibraryString libraryString)
+        {
+            var cqlToolkitConfig = new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]);
+            var cqlToolkit = new CqlToolkit(config: cqlToolkitConfig)
+                             .AddCqlLibraries([libraryString])
+                             .TranslateToElm();
+            var elmLibrary = cqlToolkit.GetCqlToolkitResults().First().ElmLibrary;
+
+            return elmLibrary;
+        }
+
+        private static object InvokeLibrary(Library elmLibrary, string definition)
+        {
+            var elmToolkit = new ElmToolkit()
+                            .AddElmLibraries([elmLibrary])
+                            .CompileToAssemblies();
+
+            var assembly = elmToolkit.GetElmToAssemblyResults().First().GetAssemblyBinary();
+
+            var invoker = new InvocationToolkit()
+                           .AddAssemblyBinaries([assembly])
+                           .CreateLibrarySetInvoker();
+
+            var result = invoker.InvokeLibraryDefinition(
+                FhirCqlContext.ForBundle(),
+                elmLibrary.VersionedLibraryIdentifier,
+                definition);
+
+            return result;
         }
     }
 }
