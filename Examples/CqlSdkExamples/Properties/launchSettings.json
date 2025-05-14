@@ -1,0 +1,40 @@
+{
+  "profiles": {
+    "210": {
+      "commandName": "Project",
+      "commandLineArgs": "210"
+    },
+    "220": {
+      "commandName": "Project",
+      "commandLineArgs": "220"
+    },
+    "230": {
+      "commandName": "Project",
+      "commandLineArgs": "230"
+    },
+    "240": {
+      "commandName": "Project",
+      "commandLineArgs": "240"
+    },
+    "250": {
+      "commandName": "Project",
+      "commandLineArgs": "250"
+    },
+    "310": {
+      "commandName": "Project",
+      "commandLineArgs": "310"
+    },
+    "320": {
+      "commandName": "Project",
+      "commandLineArgs": "320"
+    },
+    "330": {
+      "commandName": "Project",
+      "commandLineArgs": "330"
+    },
+    "400": {
+      "commandName": "Project",
+      "commandLineArgs": "400"
+    }
+  }
+}

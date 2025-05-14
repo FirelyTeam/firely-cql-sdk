@@ -11,9 +11,9 @@
 		<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505142054" />
 	</ItemGroup>
 
-  <!-- <ItemGroup> -->
-  <!--   <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" /> -->
-  <!-- </ItemGroup> -->
+	<!-- <ItemGroup> -->
+	<!--   <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" /> -->
+	<!-- </ItemGroup> -->
 
 	<ItemGroup>
 		<None Update="**\input\**">
@@ -23,10 +23,15 @@
 		<None Include="**\input\**\*.g.cs">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<Compile Remove="CodeGenTasks\**\*.cs" />
+		<None Include="CodeGenTasks\**\*.cs"></None>
 	</ItemGroup>
 
-	<UsingTask TaskName="ModifySourcesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+	<ItemGroup>
+	  <Folder Include="400 Test\" />
+	</ItemGroup>
 
+	<UsingTask TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Using Namespace="System" />
@@ -81,13 +86,83 @@
 	        }
 					]]>
 			</Code>
+		</Task>
+	</UsingTask>
+
+
+	<UsingTask TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<Task>
+			<Reference Include="System.Core" />
+			<Reference Include="System.Memory" />
+			<Reference Include="System.Text.Json" />
+			<Reference Include="Microsoft.Bcl.AsyncInterfaces" />
+			<Using Namespace="System.Text.Json" />
+			<Using Namespace="System.Text.Json.Nodes" />
+			<Using Namespace="System" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					// Find project directory
+					DirectoryInfo currentDir = new DirectoryInfo(Environment.CurrentDirectory);
+					DirectoryInfo projectDir = currentDir;
+					while (projectDir != null)
+					{
+						bool isInProjectDir = projectDir.EnumerateFiles("*.csproj", SearchOption.TopDirectoryOnly).Any();
+						if (isInProjectDir)
+							break;
+
+						projectDir = projectDir.Parent;
+					}
+
+					if (projectDir == null)
+					{
+						Log.LogMessage(MessageImportance.High, "Project directory not found.");
+						return false;
+					}
+
+					//DirectoryInfo projectDir = new DirectoryInfo(@"C:\Dev\firely-cql-sdk\Examples\CqlSdkExamples");
+
+					// Find all the folders in the project directory, starting with a number
+					var exampleDirs =
+						projectDir
+							.EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
+							.Where(di => Char.IsNumber(di.Name[0]))
+							.ToArray();
+					if (exampleDirs.Length == 0)
+					{
+						Log.LogMessage(MessageImportance.High, "No example dirs found in the project directory.");
+						return false;
+					}
+
+					var launchSettingsJsonPath = Path.Combine(projectDir.FullName, @"Properties\launchSettings.json");
+					var launchSettingsJsonText = File.ReadAllText(launchSettingsJsonPath);
+					var launchSettingsJsonRoot = JsonSerializer.Deserialize<JsonObject>(launchSettingsJsonText);
+					var profiles = launchSettingsJsonRoot["profiles"].AsObject();
+					profiles.Clear();
+					foreach (var exampleDir in exampleDirs)
+					{
+						var tokens = exampleDir.Name.Split(' ');
+						if (tokens.Length <= 1)
+							continue;
+
+						var code = tokens[0];
+						var profile = new JsonObject();
+						profile.Add("commandName", "Project");
+						profile.Add("commandLineArgs", code);
+						profiles.Add(code, profile);
+					}
+
+					var launchSettingsJsonRootNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
+					File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonRootNew);
+      ]]>
+
+			</Code>
 
 		</Task>
-
 	</UsingTask>
 
 	<Target Name="ModifySources" BeforeTargets="CoreCompile">
-		<ModifySourcesTask />
+		<UpdateCurrentDirectoryInSource />
+		<UpdateLaunchSettingsInSource />
 	</Target>
 
 </Project>

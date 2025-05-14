@@ -12,27 +12,30 @@ using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
 
-new Program().PickExample();
+new Program().PickExample(args.ElementAtOrDefault(0));
 
 internal partial class Program
 {
-    void PickExample()
+    void PickExample(string example)
     {
-        //LoadCqlFromDirSaveElmToDir();
-        //LoadElmFromDirSaveCSharpAndDllToDir();
-        //PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir();
-        //PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir();
-        //PackageViaCqlToolkitsSaveFhirResourcesToDir();
-
-        //InvokingCqlHelloWorld();
-        InvokingCqlHelloWorldWithParameter();
-        // InvokingCqlHelloWorldWithFunctionArgument();
+        switch (example)
+        {
+            case "210": LoadCqlFromDirSaveElmToDir(); break;
+            case "220": LoadElmFromDirSaveCSharpAndDllToDir(); break;
+            case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); break;
+            case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); break;
+            case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); break;
+            case "310": InvokingCqlHelloWorld(); break;
+            case "320": InvokingCqlHelloWorldWithParameter(); break;
+            case "330": InvokingCqlHelloWorldWithFunctionArgument(); break;
+            // case "ExecuteBasicCqlHelloWorld":                               ExecuteBasicCqlHelloWorld(loggerFactory); break;
+            // case "ExecuteBasicCqlHelloWorldWithDebugging":                  ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory); break;
+            // case "ElmExecuteCrossLibraryCalls":                             ElmExecuteCrossLibraryCalls(loggerFactory); break;
+        }
 
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
         //ElmExecuteCrossLibraryCalls(loggerFactory);
-
-
     }
 
     private static void ExecuteBasicCqlHelloWorldWithDebugging(ILoggerFactory loggerFactory)
