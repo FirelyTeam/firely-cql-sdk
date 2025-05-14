@@ -11,8 +11,9 @@ using Hl7.Cql.Runtime;
 
 partial class Program
 {
-    void InvokingCqlHelloWorldWithFunctionArgument()
+    void InvokingCqlHelloWorldWithParameter()
     {
+        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);
@@ -20,20 +21,27 @@ partial class Program
         var cql = (CqlLibraryString)"""
                                     library HelloWorldLib version '1.0.0'
 
-                                    define function "HelloWorld"(greeting String) : 'CQL Says: ' + (if greeting is null then '*Nothing*' else '"' + greeting + '"')
+                                    parameter greeting String
+
+                                    define "HelloWorld" : 'CQL Says: ' + (if greeting is null then '*Nothing*' else '"' + greeting + '"')
                                     """;
         using LibrarySetInvoker librarySetInvoker =
             cqlToolkit
                 .AddCqlLibraries(cql)
-                .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+                .CreateLibrarySetInvoker(
+                    enableDebugging ? null : new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
 
-        CqlContext cqlContext = FhirCqlContext.WithDataSource();
+        CqlContext cqlContext = FhirCqlContext.WithDataSource(
+            parameters: new Dictionary<string, object>()
+            {
+                // Try removing the parameter to see what happens
+                { "greeting", "Hello World" }
+            });
 
         object? result = librarySetInvoker.InvokeLibraryDefinition(
             cqlContext: cqlContext,
             libraryIdentifier: cql.LibraryIdentifier,
-            definitionSignature: new DefinitionSignature("HelloWorld", typeof(string)),
-            args: "Hello World");
+            definitionSignature: "HelloWorld");
 
         Console.WriteLine(result);
     }

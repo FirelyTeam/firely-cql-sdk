@@ -1,3 +1,5 @@
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Microsoft.Extensions.Logging;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -9,8 +11,9 @@ using Hl7.Cql.Runtime;
 
 partial class Program
 {
-    void InvokingCqlHelloWorldWithParameter()
+    void InvokingCqlHelloWorld()
     {
+        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);
@@ -18,26 +21,20 @@ partial class Program
         var cql = (CqlLibraryString)"""
                                     library HelloWorldLib version '1.0.0'
 
-                                    parameter greeting String
-
-                                    define "HelloWorld" : 'CQL Says: ' + (if greeting is null then '*Nothing*' else '"' + greeting + '"')
+                                    define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
                                     """;
         using LibrarySetInvoker librarySetInvoker =
             cqlToolkit
                 .AddCqlLibraries(cql)
-                .CreateLibrarySetInvoker();
+                .CreateLibrarySetInvoker(
+                    enableDebugging ? null : new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
 
-        CqlContext cqlContext = FhirCqlContext.WithDataSource(
-            parameters: new Dictionary<string, object>()
-            {
-                // Try removing the parameter to see what happens
-                { "greeting", "Hello World" }
-            });
+        CqlContext cqlContext = FhirCqlContext.WithDataSource();
 
         object? result = librarySetInvoker.InvokeLibraryDefinition(
             cqlContext: cqlContext,
             libraryIdentifier: cql.LibraryIdentifier,
-            definitionSignature: "HelloWorld");
+            definitionSignature: "Hello World");
 
         Console.WriteLine(result);
     }

@@ -1,3 +1,5 @@
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Microsoft.Extensions.Logging;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -9,8 +11,9 @@ using Hl7.Cql.Runtime;
 
 partial class Program
 {
-    void InvokingCqlHelloWorld()
+    void InvokingCqlHelloWorldWithFunctionArgument()
     {
+        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);
@@ -18,19 +21,21 @@ partial class Program
         var cql = (CqlLibraryString)"""
                                     library HelloWorldLib version '1.0.0'
 
-                                    define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
+                                    define function "HelloWorld"(greeting String) : 'CQL Says: ' + (if greeting is null then '*Nothing*' else '"' + greeting + '"')
                                     """;
         using LibrarySetInvoker librarySetInvoker =
             cqlToolkit
                 .AddCqlLibraries(cql)
-                .CreateLibrarySetInvoker();
+                .CreateLibrarySetInvoker(
+                    enableDebugging ? null : new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
 
         CqlContext cqlContext = FhirCqlContext.WithDataSource();
 
         object? result = librarySetInvoker.InvokeLibraryDefinition(
             cqlContext: cqlContext,
             libraryIdentifier: cql.LibraryIdentifier,
-            definitionSignature: "Hello World");
+            definitionSignature: new DefinitionSignature("HelloWorld", typeof(string)),
+            args: "Hello World");
 
         Console.WriteLine(result);
     }
