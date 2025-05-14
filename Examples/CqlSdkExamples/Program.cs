@@ -25,8 +25,8 @@ internal partial class Program
         //PackageViaCqlToolkitsSaveFhirResourcesToDir();
 
         //InvokingCqlHelloWorld();
-        //InvokingCqlHelloWorldWithParameter();
-        InvokingCqlHelloWorldWithFunctionArgument();
+        InvokingCqlHelloWorldWithParameter();
+        // InvokingCqlHelloWorldWithFunctionArgument();
 
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);

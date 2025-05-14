@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505141955" />
+		<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505142054" />
 	</ItemGroup>
 
   <!-- <ItemGroup> -->

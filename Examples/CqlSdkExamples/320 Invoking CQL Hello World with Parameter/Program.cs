@@ -13,13 +13,13 @@ partial class Program
 {
     void InvokingCqlHelloWorldWithParameter()
     {
-        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
+        var enableDebugging = true; // Try setting this to true, then step through InvokeLibraryDefinition
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);
 
         var cql = (CqlLibraryString)"""
-                                    library HelloWorldLib version '1.0.0'
+                                    library HelloWorldLib2 version '1.0.0'
 
                                     parameter greeting String
 
@@ -29,7 +29,7 @@ partial class Program
             cqlToolkit
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker(
-                    enableDebugging ? null : new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+                    enableDebugging ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded) : null);
 
         CqlContext cqlContext = FhirCqlContext.WithDataSource(
             parameters: new Dictionary<string, object>()
