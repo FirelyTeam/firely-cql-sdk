@@ -22,37 +22,17 @@ internal partial class Program
         //LoadElmFromDirSaveCSharpAndDllToDir();
         //PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir();
         //PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir();
-        PackageViaCqlToolkitsSaveFhirResourcesToDir();
+        //PackageViaCqlToolkitsSaveFhirResourcesToDir();
+
+        //InvokingCqlHelloWorld();
+        //InvokingCqlHelloWorldWithParameter();
+        InvokingCqlHelloWorldWithFunctionArgument();
 
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
         //ElmExecuteCrossLibraryCalls(loggerFactory);
 
 
-    }
-
-    private static void ExecuteBasicCqlHelloWorld(ILoggerFactory loggerFactory)
-    {
-        CqlToolkit cqlToolkit = new();
-
-        using LibrarySetInvoker librarySetInvoker =
-            cqlToolkit
-                .AddCqlLibraries(
-                    (CqlLibraryString)"""
-                                      library ExecuteBasicCql version '1.0.0'
-
-                                      define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
-                                      """)
-                .CreateLibrarySetInvoker();
-
-        CqlContext cqlContext = FhirCqlContext.WithDataSource();
-
-        object? result = librarySetInvoker.InvokeLibraryDefinition(
-            cqlContext: cqlContext,
-            libraryIdentifier: (CqlVersionedLibraryIdentifier)"ExecuteBasicCql-1.0.0",
-            definitionSignature: (DefinitionSignature)"HelloWorld");
-
-        Console.WriteLine(result);
     }
 
     private static void ExecuteBasicCqlHelloWorldWithDebugging(ILoggerFactory loggerFactory)
