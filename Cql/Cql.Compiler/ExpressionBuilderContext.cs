@@ -478,11 +478,53 @@ partial class ExpressionBuilderContext(
 
                 if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
                 {
-                    var parseMethod = typeof(Enum)
-                                      .GetMethods()
-                                      .Single(m => m.Name == nameof(Enum.Parse) && m.GetParameters().Length == 3);
-                    var callEnumParse = Expression.Call(parseMethod, Expression.Constant(instanceType), enumValueValue, Expression.Constant(true));
+                    var methodInfo = typeof(Enum).GetMethod(nameof(Enum.Parse), new[] { typeof(Type), typeof(string), typeof(bool) })
+                        ?? throw this.NewExpressionBuildingException($"Could not find Enum.Parse method.");
+
+                    var callEnumParse = Expression.Call(methodInfo, Expression.Constant(instanceType), enumValueValue, Expression.Constant(true));
                     return callEnumParse;
+                }
+            }
+        }
+
+        if (instanceType.IsGenericType
+            && instanceType.GenericTypeArguments.Length == 1
+            && instanceType.GenericTypeArguments[0].IsEnum)
+        {
+            // supports constructs like
+            //  * FHIR.ObservationStatus { value: 'final' }
+            //  * FHIR.AdministrativeGender { value: 'female' }
+            //  * ...
+            // which map to Code<ObservationStatus> or Code<AdministrativeGender
+            if (ine.element?.Length == 1
+                && string.Equals(ine.element![0].name, "value", StringComparison.OrdinalIgnoreCase))
+            {
+                var enumValueValue = TranslateArg(ine.element[0]!.value!);
+
+                if (enumValueValue.Type == instanceType)
+                    return enumValueValue;
+
+                if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
+                {
+                    var enumParseMethod = typeof(Enum).GetMethod(nameof(Enum.Parse), new[] { typeof(Type), typeof(string), typeof(bool) });
+
+                    var genericType = instanceType.GenericTypeArguments[0];
+                    var constructorInfo = instanceType.GetConstructor(new[] { genericType })
+                        ?? throw this.NewExpressionBuildingException($"Could not find constructor for {instanceType}<{genericType}>({genericType})");
+
+                    var parseCall = Expression.Call(
+                        enumParseMethod!,
+                        Expression.Constant(instanceType.GenericTypeArguments[0]),
+                        enumValueValue,
+                        Expression.Constant(true));
+
+                    var typedParsedValue = Expression.Convert(parseCall, genericType.MakeNullable());
+
+                    var genericEnumValue = Expression.New(
+                        constructorInfo,
+                        typedParsedValue);
+
+                    return genericEnumValue;
                 }
             }
         }
