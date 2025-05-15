@@ -118,7 +118,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             if (outputCSharpToTempFolder)
             {
-                // Write to temp dir (do we need this?)
+                // Write the C# source code to a temporary directory for debugging or inspection purposes.
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
                 librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
