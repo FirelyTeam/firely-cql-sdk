@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -16,22 +16,21 @@ new Program().PickExample(args.ElementAtOrDefault(0));
 
 internal partial class Program
 {
-    void PickExample(string example)
+    void PickExample(string? methodName)
     {
-        switch (example)
+        // <codegen-switch>
+        switch (methodName)
         {
-            case "210": LoadCqlFromDirSaveElmToDir(); break;
-            case "220": LoadElmFromDirSaveCSharpAndDllToDir(); break;
-            case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); break;
-            case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); break;
-            case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); break;
-            case "310": InvokingCqlHelloWorld(); break;
-            case "320": InvokingCqlHelloWorldWithParameter(); break;
-            case "330": InvokingCqlHelloWorldWithFunctionArgument(); break;
-            // case "ExecuteBasicCqlHelloWorld":                               ExecuteBasicCqlHelloWorld(loggerFactory); break;
-            // case "ExecuteBasicCqlHelloWorldWithDebugging":                  ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory); break;
-            // case "ElmExecuteCrossLibraryCalls":                             ElmExecuteCrossLibraryCalls(loggerFactory); break;
+            case "210": LoadCqlFromDirSaveElmToDir(); return;
+            case "220": LoadElmFromDirSaveCSharpAndDllToDir(); return;
+            case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); return;
+            case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); return;
+            case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); return;
+            case "310": InvokingCqlHelloWorld(); return;
+            case "320": InvokingCqlHelloWorldWithParameter(); return;
+            case "330": InvokingCqlHelloWorldWithFunctionArgument(); return;
         }
+        // </codegen-switch>
 
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);

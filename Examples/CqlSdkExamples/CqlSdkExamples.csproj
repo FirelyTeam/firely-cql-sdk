@@ -96,9 +96,10 @@
 			<Reference Include="System.Memory" />
 			<Reference Include="System.Text.Json" />
 			<Reference Include="Microsoft.Bcl.AsyncInterfaces" />
+			<Using Namespace="System" />
 			<Using Namespace="System.Text.Json" />
 			<Using Namespace="System.Text.Json.Nodes" />
-			<Using Namespace="System" />
+			<Using Namespace="System.Text.RegularExpressions" />
 			<Code Type="Fragment" Language="cs">
 				<![CDATA[
 					// Find project directory
@@ -119,7 +120,17 @@
 						return false;
 					}
 
-					//DirectoryInfo projectDir = new DirectoryInfo(@"C:\Dev\firely-cql-sdk\Examples\CqlSdkExamples");
+					var mainProgramText = File.ReadAllText(Path.Combine(projectDir.FullName, "Program.cs"));
+					var regexIndent = new Regex(
+						@"//\s<codegen-switch>.*?(?<indent>(\r?\n)[ \t]+)//\s</codegen-switch>",
+						RegexOptions.Singleline);
+
+					var matchIndent = regexIndent.Match(mainProgramText);
+					string indent = matchIndent.Groups["indent"].Value;
+					StringBuilder sb = new StringBuilder();
+					sb.Append("// <codegen-switch>");
+					sb.Append(indent + "switch (methodName)");
+					sb.Append(indent + "{");
 
 					// Find all the folders in the project directory, starting with a number
 					var exampleDirs =
@@ -143,16 +154,40 @@
 						var tokens = exampleDir.Name.Split(' ');
 						if (tokens.Length <= 1)
 							continue;
-
 						var code = tokens[0];
+
+						string programFilePath = Path.Combine(exampleDir.FullName, "Program.cs");
+						if (!File.Exists(programFilePath))
+							continue;
+
+						var programFile = File.ReadAllText(programFilePath);
+						var match = Regex.Match(
+							programFile,
+							@"(?:partial\s+class\s+Program\s+{\s+void\s+)(?<method>\w+)(?:\s*\()");
+						if (!match.Success)
+							continue;
+
+						var methodName = match.Groups["method"].Value;
+
+						sb.Append(indent + @"    case """ + code + @""": " + methodName + "(); return;");
+
 						var profile = new JsonObject();
 						profile.Add("commandName", "Project");
 						profile.Add("commandLineArgs", code);
-						profiles.Add(code, profile);
+						profiles.Add(exampleDir.Name, profile);
 					}
 
-					var launchSettingsJsonRootNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
-					File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonRootNew);
+					sb.Append(indent + "}");
+					sb.Append(indent + "// </codegen-switch>");
+					var mainProgramTextNew = regexIndent.Replace(mainProgramText, sb.ToString());
+					//if (mainProgramText != mainProgramTextNew)
+						File.WriteAllText(Path.Combine(projectDir.FullName, "Program.cs"), mainProgramTextNew);
+
+					var launchSettingsJsonTextNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
+					if (launchSettingsJsonText != launchSettingsJsonTextNew)
+						File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonTextNew);
+
+
       ]]>
 
 			</Code>
@@ -164,5 +199,7 @@
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
+
+	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="https://json.schemastore.org/lazydocker.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
