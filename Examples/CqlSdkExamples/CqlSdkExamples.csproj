@@ -180,7 +180,7 @@
 					sb.Append(indent + "}");
 					sb.Append(indent + "// </codegen-switch>");
 					var mainProgramTextNew = regexIndent.Replace(mainProgramText, sb.ToString());
-					//if (mainProgramText != mainProgramTextNew)
+					if (mainProgramText != mainProgramTextNew)
 						File.WriteAllText(Path.Combine(projectDir.FullName, "Program.cs"), mainProgramTextNew);
 
 					var launchSettingsJsonTextNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
