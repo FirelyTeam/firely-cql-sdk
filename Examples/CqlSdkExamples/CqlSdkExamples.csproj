@@ -25,7 +25,11 @@
 		</None>
 	</ItemGroup>
 
-	<UsingTask TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+	<UsingTask
+		Condition="'$(Configuration)'=='Debug'"
+		TaskName="UpdateCurrentDirectoryInSource"
+		TaskFactory="CodeTaskFactory" 
+		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Using Namespace="System" />
@@ -84,7 +88,11 @@
 	</UsingTask>
 
 
-	<UsingTask TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+	<UsingTask 
+		Condition="'$(Configuration)'=='Debug'"
+		TaskName="UpdateLaunchSettingsInSource"
+		TaskFactory="CodeTaskFactory"
+		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Reference Include="System.Memory" />
@@ -189,11 +197,11 @@
 		</Task>
 	</UsingTask>
 
-	<Target Name="ModifySources" BeforeTargets="CoreCompile">
+	<Target Name="ModifySources"
+	        Condition="'$(Configuration)'=='Debug'"
+	        BeforeTargets="CoreCompile">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
-
-	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="https://json.schemastore.org/lazydocker.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
