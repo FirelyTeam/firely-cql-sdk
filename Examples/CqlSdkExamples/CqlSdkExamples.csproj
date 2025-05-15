@@ -7,13 +7,13 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505142054" />
-	</ItemGroup>
-
 	<!-- <ItemGroup> -->
-	<!--   <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" /> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505142054" /> -->
 	<!-- </ItemGroup> -->
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="**\input\**">
