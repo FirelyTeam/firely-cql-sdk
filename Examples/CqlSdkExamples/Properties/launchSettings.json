@@ -31,6 +31,10 @@
     "330 Invoking CQL Hello World function with Argument": {
       "commandName": "Project",
       "commandLineArgs": "330"
+    },
+    "400 Invoke from FHIR Resources": {
+      "commandName": "Project",
+      "commandLineArgs": "400"
     }
   }
 }

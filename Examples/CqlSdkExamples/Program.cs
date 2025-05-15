@@ -2,9 +2,6 @@ using System.Diagnostics;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
@@ -16,10 +13,10 @@ new Program().PickExample(args.ElementAtOrDefault(0));
 
 internal partial class Program
 {
-    void PickExample(string? methodName)
+    void PickExample(string? code)
     {
         // <codegen-switch>
-        switch (methodName)
+        switch (code)
         {
             case "210": LoadCqlFromDirSaveElmToDir(); return;
             case "220": LoadElmFromDirSaveCSharpAndDllToDir(); return;
@@ -29,41 +26,13 @@ internal partial class Program
             case "310": InvokingCqlHelloWorld(); return;
             case "320": InvokingCqlHelloWorldWithParameter(); return;
             case "330": InvokingCqlHelloWorldWithFunctionArgument(); return;
+            case "400": GetResults(); return;
         }
         // </codegen-switch>
 
         //ExecuteBasicCqlHelloWorld(loggerFactory);
         //ExecuteBasicCqlHelloWorldWithDebugging(loggerFactory);
         //ElmExecuteCrossLibraryCalls(loggerFactory);
-    }
-
-    private static void ExecuteBasicCqlHelloWorldWithDebugging(ILoggerFactory loggerFactory)
-    {
-        CqlToolkit cqlToolkit = new();
-
-        using LibrarySetInvoker librarySetInvoker =
-            cqlToolkit
-                .AddCqlLibraries(
-                    (CqlLibraryString)"""
-                                      library ExecuteBasicCql version '1.0.0'
-
-                                      define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
-                                      """)
-                .CreateLibrarySetInvoker(
-                    elmToolkitConfig: new ElmToolkitConfig(
-                        // In Visual Studio,
-                        // - go to: Tools > Options > Debugging > Require source files to exactly match the original source code
-                        // - uncheck the box
-                        AssemblyCompilerDebugInformationFormat: AssemblyCompilerDebugInformationFormat.Embedded));
-
-        CqlContext cqlContext = FhirCqlContext.WithDataSource();
-
-        object? result = librarySetInvoker.InvokeLibraryDefinition(
-            cqlContext: cqlContext,
-            libraryIdentifier: (CqlVersionedLibraryIdentifier)"ExecuteBasicCql-1.0.0",
-            definitionSignature: (DefinitionSignature)"HelloWorld");
-
-        Console.WriteLine(result);
     }
 
     private static void ElmExecuteCrossLibraryCalls(ILoggerFactory loggerFactory)
