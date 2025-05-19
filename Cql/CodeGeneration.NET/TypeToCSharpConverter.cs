@@ -18,17 +18,17 @@ internal class TypeToCSharpConverter
 
     public TypeToCSharpConverter()
     {
-        _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, TypeNameFormat: FormatTypeNameAsTuple);
+        _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, FormatName: FormatTypeNameAsTuple);
     }
 
     private TextWriterFormattableString FormatTypeNameAsTuple(ITypeNameCSharpFormatContext ctx)
     {
-        if (!ShouldUseTupleType(ctx.TypePartInfo))
+        if (!ShouldUseTupleType(ctx.TypeInfo))
             return ctx.Name;
 
         var rest = string.Join(
             ", ",
-            GetTupleProperties(ctx.TypePartInfo).Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"));
+            GetTupleProperties(ctx.TypeInfo).Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"));
         TextWriterFormattableString formatTypeNameAsTuple = $"(CqlTupleMetadata, {rest})?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
         return formatTypeNameAsTuple;
     }

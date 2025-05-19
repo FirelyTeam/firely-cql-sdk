@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
@@ -34,5 +33,5 @@ public readonly record struct ElmToolkitConversionRecord(
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; } = CqlVersionedLibraryIdentifier.Parse(SourceElmLibrary.GetVersionedIdentifier()!);
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => SourceElmLibrary.VersionedLibraryIdentifier;
 }

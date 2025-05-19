@@ -24,11 +24,12 @@ public static partial class PackagingToolkitExtensions
     /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> containing CQL libraries.</param>
     /// <param name="elmToolkit">The <see cref="ElmToolkit"/> containing ELM compilations.</param>
     /// <returns>The <see cref="PackagingToolkit"/> with added inputs.</returns>
-    public static PackagingToolkit AddPackagingInputsFromCqlAndElmToolkits(
+    public static PackagingToolkit AddPackagingInputs(
         this PackagingToolkit packagingToolkit,
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
+        elmToolkit.CompileToAssemblies();
         var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
         var compilations = elmToolkit.Conversions.Values.SelectWhere(o => o switch
         {

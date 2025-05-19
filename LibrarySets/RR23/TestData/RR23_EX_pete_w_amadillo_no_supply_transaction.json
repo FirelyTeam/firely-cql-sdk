@@ -1,0 +1,308 @@
+{
+  "resourceType": "Bundle",
+  "id": "5edf6cd9-3b8d-474e-b225-a2264cf06888",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "MeasureReport/P23AMA8273533",
+      "resource": {
+        "resourceType": "MeasureReport",
+        "id": "P23AMA8273533",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-MeasureReport.population.description",
+            "valueString": "A measure related to Roadrunners Syndrome, related to the supply of an umbrella as a preventive device."
+          }
+        ],
+        "status": "complete",
+        "type": "individual",
+        "measure": "http://moh.alpha.alp/Library/Measure/RR23UmbrellaMeasure",
+        "subject": {
+          "reference": "Patient/P23AMA"
+        },
+        "date": "2024-02-08T10:46:39+00:00",
+        "period": {
+          "start": "2023-01-01T00:00:00+00:00",
+          "end": "2023-12-31T00:00:00+00:00"
+        },
+        "group": [
+          {
+            "id": "group-1",
+            "population": [
+              {
+                "id": "initial-population",
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                      "code": "initial-population",
+                      "display": "Initial Population"
+                    }
+                  ]
+                },
+                "count": 1
+              },
+              {
+                "id": "numerator",
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-MeasureReport.population.description",
+                    "valueString": "The number of umbrellas supplied to those suffering from Rock Fall conditions."
+                  }
+                ],
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                      "code": "numerator",
+                      "display": "Numerator"
+                    }
+                  ]
+                },
+                "count": 0
+              },
+              {
+                "id": "denominator",
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-MeasureReport.population.description",
+                    "valueString": "Those patients suffering from Rock Fall conditions."
+                  }
+                ],
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                      "code": "denominator",
+                      "display": "Denominator"
+                    }
+                  ]
+                },
+                "count": 1
+              }
+            ],
+            "measureScore": {
+              "value": 0.0
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MeasureReport/P23AMA8273533"
+      }
+    },
+    {
+      "fullUrl": "Patient/P23AMA",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "P23AMA",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Patient:</b> Pete W. Amadillo, M, 2-Sep-2000, CitizenID: 8384652937\r\n                    </div>"
+        },
+        "identifier": [
+          {
+            "use": "usual",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/v2/0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "http://www.miniaf.alp/citreg",
+            "value": "8384652937"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "family": "Amadillo",
+            "given": [
+              "Pete",  "W"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "2000-09-02"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/P23AMA"
+      }
+    },
+    {
+      "fullUrl": "Practitioner/P23AMA219715",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "P23AMA219715",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sherry Dopplemeyer </div>"
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.minhealth.alp/practitioners",
+            "value": "D234123"
+          }
+        ],
+        "name": [
+          {
+            "family": "Dopplemeyer",
+            "given": [
+              "Sherry"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "sherry.dopplemeyer@goodhealth.org"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/P23AMA219715"
+      }
+    },
+    {
+      "fullUrl": "Encounter/P23AMA219709",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "P23AMA219709",
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.goodhealth.org/encounter",
+            "value": "180750"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EMER",
+          "display": "emergency"
+        },
+        "subject": {
+          "reference": "Patient/P23AMA"
+        },
+        "participant": [
+          {
+            "individual": {
+              "reference": "Practitioner/P23AMA219715"
+            }
+          }
+        ],
+        "period": {
+          "start": "2023-04-20T15:00:00+00:00",
+          "end": "2023-04-20T23:30:00+00:00"
+        },
+        "location": [
+          {
+            "location": {
+              "display": "Outpatient Clinic"
+            },
+            "status": "completed",
+            "period": {
+              "start": "2023-04-20T15:00:00+00:00",
+              "end": "2023-04-20T23:30:00+00:00"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/P23AMA219709"
+      }
+    },
+    { "fullUrl": "Condition/P23AMA219759",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "P23AMA219759",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Struck by falling stone</div>"
+        },
+        "identifier": [
+          {
+            "value": "123423"
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "inactive"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "differential"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              },
+              {
+                "system": "http://snomed.info/sct",
+                "code": "439401001",
+                "display": "Diagnosis"
+              }
+            ]
+          }
+        ],
+        "severity": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "24484000",
+              "display": "Severe"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "21902005",
+              "display": "Struck by falling rock or stone"
+            }
+          ],
+          "text": "Struck by falling rock"
+        },
+        "subject": {
+          "reference": "Patient/P23AMA"
+        },
+        "encounter": {
+          "reference": "Encounter/P23AMA219709"
+        },
+        "onsetDateTime": "2023-04-20",
+        "abatementString": "around April 20, 2023",
+        "recordedDate": "2023-04-20",
+        "recorder": {
+          "reference": "Practitioner/P23AMA219715"
+        },
+        "asserter": {
+          "reference": "Practitioner/P23AMA219715"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/P23AMA219759"
+      }
+    }
+  ]
+}

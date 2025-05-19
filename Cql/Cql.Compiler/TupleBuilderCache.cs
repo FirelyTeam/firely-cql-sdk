@@ -110,7 +110,7 @@ internal class TupleBuilderCache : IDisposable
     {
         var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
         var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-        var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor([
+        var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDefinitionAttribute).GetConstructor([
             typeof(string)
         ])!, [cqlName]);
         propertyBuilder.SetCustomAttribute(customAttributeBuilder);

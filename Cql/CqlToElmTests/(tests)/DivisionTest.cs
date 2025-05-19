@@ -11,12 +11,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Integer
 
         [TestMethod]
-        public void Divide_Integer_by_Integer()
+        public void DivideIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Integer_by_Integer version '1.0.0'
+                library DivideIntegerByInteger version '1.0.0'
 
-                define private Divide_Integer_by_Integer: 2 / 4
+                define private DivideIntegerByInteger: 2 / 4
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -67,12 +67,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Integer_by_Long()
+        public void DivideIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Integer_by_Long version '1.0.0'
+                library DivideIntegerByLong version '1.0.0'
 
-                define private Divide_Integer_by_Long: 2 / 3L
+                define private DivideIntegerByLong: 2 / 3L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -123,12 +123,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Integer_by_Decimal()
+        public void DivideIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Integer_by_Decimal version '1.0.0'
+                library DivideIntegerByDecimal version '1.0.0'
 
-                define private Divide_Integer_by_Decimal: 2 / 3.0
+                define private DivideIntegerByDecimal: 2 / 3.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -179,12 +179,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Integer_by_Quantity()
+        public void DivideIntegerByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Integer_by_Quantity version '1.0.0'
+                library DivideIntegerByQuantity version '1.0.0'
 
-                define private Divide_Integer_by_Quantity: 10 / 2.0 '1'
+                define private DivideIntegerByQuantity: 10 / 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -239,12 +239,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Integer_by_Null()
+        public void DivideIntegerByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Integer_by_Null version '1.0.0'
+                library DivideIntegerByNull version '1.0.0'
 
-                define private Divide_Integer_by_Null: 1 / null
+                define private DivideIntegerByNull: 1 / null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -293,12 +293,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Null_by_Integer()
+        public void DivideNullByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Null_by_Integer version '1.0.0'
+                library DivideNullByInteger version '1.0.0'
 
-                define private Divide_Null_by_Integer: null / 1
+                define private DivideNullByInteger: null / 1
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -351,12 +351,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Long
 
         [TestMethod]
-        public void Divide_Long_by_Integer()
+        public void DivideLongByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Long_by_Integer version '1.0.0'
+                library DivideLongByInteger version '1.0.0'
 
-                define private Divide_Long_by_Integer: 10L / 2
+                define private DivideLongByInteger: 10L / 2
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -407,12 +407,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Long_by_Long()
+        public void DivideLongByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Long_by_Long version '1.0.0'
+                library DivideLongByLong version '1.0.0'
 
-                define private Divide_Long_by_Long: 100L / 10L
+                define private DivideLongByLong: 100L / 10L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -463,12 +463,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Long_by_Decimal()
+        public void DivideLongByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Long_by_Decimal version '1.0.0'
+                library DivideLongByDecimal version '1.0.0'
 
-                define private Divide_Long_by_Decimal: -3L / 2.0
+                define private DivideLongByDecimal: -3L / 2.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -519,12 +519,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Long_by_Quantity()
+        public void DivideLongByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Long_by_Quantity version '1.0.0'
+                library DivideLongByQuantity version '1.0.0'
 
-                define private Divide_Long_by_Quantity: 20L / 5.0 '1'
+                define private DivideLongByQuantity: 20L / 5.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -578,12 +578,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Long_by_Null()
+        public void DivideLongByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Long_by_Null version '1.0.0'
+                library DivideLongByNull version '1.0.0'
 
-                define private Divide_Long_by_Null: 1L / null
+                define private DivideLongByNull: 1L / null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -632,12 +632,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Null_by_Long()
+        public void DivideNullByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Null_by_Long version '1.0.0'
+                library DivideNullByLong version '1.0.0'
 
-                define private Divide_Null_by_Long: null / 1L
+                define private DivideNullByLong: null / 1L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -690,12 +690,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Decimal
 
         [TestMethod]
-        public void Divide_Decimal_by_Integer()
+        public void DivideDecimalByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Decimal_by_Integer version '1.0.0'
+                library DivideDecimalByInteger version '1.0.0'
 
-                define private Divide_Decimal_by_Integer: 0.0 / 3
+                define private DivideDecimalByInteger: 0.0 / 3
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -746,7 +746,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Decimal_by_Long()
+        public void DivideDecimalByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library DefaultConverter version '1.0.0'
@@ -802,12 +802,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Decimal_by_Decimal()
+        public void DivideDecimalByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Decimal_by_Decimal version '1.0.0'
+                library DivideDecimalByDecimal version '1.0.0'
 
-                define private Divide_Decimal_by_Decimal: -10.0 / 10.0
+                define private DivideDecimalByDecimal: -10.0 / 10.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -858,12 +858,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Decimal_by_Quantity()
+        public void DivideDecimalByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Decimal_by_Quantity version '1.0.0'
+                library DivideDecimalByQuantity version '1.0.0'
 
-                define private Divide_Decimal_by_Quantity: 3.0 / 2.0 '1'
+                define private DivideDecimalByQuantity: 3.0 / 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -917,12 +917,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Decimal_by_Null()
+        public void DivideDecimalByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Decimal_by_Null version '1.0.0'
+                library DivideDecimalByNull version '1.0.0'
 
-                define private Divide_Decimal_by_Null: 1.0 / null
+                define private DivideDecimalByNull: 1.0 / null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -971,12 +971,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Null_by_Decimal()
+        public void DivideNullByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Null_by_Decimal version '1.0.0'
+                library DivideNullByDecimal version '1.0.0'
 
-                define private Divide_Null_by_Decimal: null / 1.0
+                define private DivideNullByDecimal: null / 1.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1029,12 +1029,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Quantity
 
         [TestMethod]
-        public void Divide_Quantity_by_Quantity()
+        public void DivideQuantityByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Quantity_by_Quantity version '1.0.0'
+                library DivideQuantityByQuantity version '1.0.0'
 
-                define private Divide_Quantity_by_Quantity: 3.0 '1' / 2.0 '1'
+                define private DivideQuantityByQuantity: 3.0 '1' / 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1088,12 +1088,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Quantity_by_Null()
+        public void DivideQuantityByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Quantity_by_Null version '1.0.0'
+                library DivideQuantityByNull version '1.0.0'
 
-                define private Divide_Quantity_by_Null: 3.0 '1' / null
+                define private DivideQuantityByNull: 3.0 '1' / null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1143,12 +1143,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Divide_Null_by_Quantity()
+        public void DivideNullByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Divide_Null_by_Quantity version '1.0.0'
+                library DivideNullByQuantity version '1.0.0'
 
-                define private Divide_Null_by_Quantity: null / 3.0 '1'
+                define private DivideNullByQuantity: null / 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);

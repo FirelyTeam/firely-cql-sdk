@@ -31,7 +31,8 @@ public class InvocationToolkitTests
 
         // Act
         var result = librarySetInvoker
-                     .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .SelectResults(ctx)
                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         // Assert
@@ -61,12 +62,9 @@ public class InvocationToolkitTests
                               """;
 
         var cqlToolkit =
-            new CqlToolkit(config: CqlToolkitConfig.Default with
-                {
-                    Models = [CqlModel.ElmR1, CqlModel.Fhir401],
-                })
+            new CqlToolkit()
                 .AddCqlLibraries(cqlMeasuresExample)
-                .ConvertCqlToElm();
+                .TranslateToElm();
 
         // WORKAROUND: The cql to elm toolkit doesn't support annotations yet.
         var resultElmLibrary = cqlToolkit.Conversions[cqlMeasuresExample].ResultElmLibrary;
@@ -104,5 +102,27 @@ public class InvocationToolkitTests
                                  { "population", ["initial-population"] },
                                  { "description", ["Patients in the IP"] }
                              });
+    }
+
+    [TestMethod]
+    public void TestFunctionInvocation()
+    {
+        const int arg1 = 2;
+        const int arg2 = 3;
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library FunctionTest version '1.0.0'
+            define function Add(a Integer, b Integer): a + b
+            """);
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+
+        var cqlContext = FhirCqlContext.ForBundle();
+        var result =
+            librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibraryString.LibraryIdentifier, "Add", arg1, arg2);
+
+        result.Should().Be(arg1 + arg2, "The function should return the sum of the two arguments.");
     }
 }

@@ -8,10 +8,10 @@ namespace Hl7.Cql.CqlToElm.Test
     public class ConcatenationTest : Base
     {
         [TestMethod]
-        public void Add_String_To_String()
+        public void AddStringToString()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Add_Integer_to_Integer version '1.0.0'
+                library AddStringToString version '1.0.0'
 
                 define private Three: 'hello' & 'world'
                 """);
@@ -69,10 +69,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Add_Three_Strings()
+        public void AddThreeStrings()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Add_Integer_to_Integer version '1.0.0'
+                library AddThreeStrings version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')
                 """);

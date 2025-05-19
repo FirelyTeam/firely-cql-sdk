@@ -15,9 +15,9 @@ namespace Hl7.Cql.Packaging;
 public readonly record struct ResourceFileName : IParsable<ResourceFileName>
 {
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url
-    // Should not contain hyphens - Used as delimiter between parts of the file name
+    // !! Special handling around hyphens as it is used to delimit between resource type, identifier and version
 
-    internal const bool AllowUnderscores = true; // Allowed for now, since NCQA cql files use underscores
+    internal const bool AllowUnderscores = false; // Allowed for now, since NCQA cql files use underscores
 
 #pragma warning disable CS0162 // Unreachable code detected
     private static readonly char[] InvalidChars =

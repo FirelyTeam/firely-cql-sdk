@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
@@ -28,185 +28,157 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Codes
 
-    [CqlDeclaration("AC")]
-    public CqlCode AC(CqlContext context) =>
-        new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("AC", codeId: "AC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode AC(CqlContext _) => _AC;
+    private static readonly CqlCode _AC = new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("ACD", codeId: "ACD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACD(CqlContext _) => _ACD;
+    private static readonly CqlCode _ACD = new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("ACD")]
-    public CqlCode ACD(CqlContext context) =>
-        new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("ACM", codeId: "ACM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACM(CqlContext _) => _ACM;
+    private static readonly CqlCode _ACM = new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("ACV", codeId: "ACV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode ACV(CqlContext _) => _ACV;
+    private static readonly CqlCode _ACV = new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("ACM")]
-    public CqlCode ACM(CqlContext context) =>
-        new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("AFT", codeId: "AFT", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT(CqlContext _) => _AFT;
+    private static readonly CqlCode _AFT = new CqlCode("AFT", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("AFT.early", codeId: "AFT.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT_early(CqlContext _) => _AFT_early;
+    private static readonly CqlCode _AFT_early = new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("ACV")]
-    public CqlCode ACV(CqlContext context) =>
-        new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("AFT.late", codeId: "AFT.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode AFT_late(CqlContext _) => _AFT_late;
+    private static readonly CqlCode _AFT_late = new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("C", codeId: "C", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode C(CqlContext _) => _C;
+    private static readonly CqlCode _C = new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("AFT")]
-    public CqlCode AFT(CqlContext context) =>
-        new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
+    [CqlCodeDefinition("CD", codeId: "CD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CD(CqlContext _) => _CD;
+    private static readonly CqlCode _CD = new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("CM", codeId: "CM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CM(CqlContext _) => _CM;
+    private static readonly CqlCode _CM = new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("AFT.early")]
-    public CqlCode AFT_early(CqlContext context) =>
-        new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
+    [CqlCodeDefinition("CV", codeId: "CV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode CV(CqlContext _) => _CV;
+    private static readonly CqlCode _CV = new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("EVE", codeId: "EVE", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE(CqlContext _) => _EVE;
+    private static readonly CqlCode _EVE = new CqlCode("EVE", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("AFT.late")]
-    public CqlCode AFT_late(CqlContext context) =>
-        new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
+    [CqlCodeDefinition("EVE.early", codeId: "EVE.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE_early(CqlContext _) => _EVE_early;
+    private static readonly CqlCode _EVE_early = new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("EVE.late", codeId: "EVE.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode EVE_late(CqlContext _) => _EVE_late;
+    private static readonly CqlCode _EVE_late = new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("C")]
-    public CqlCode C(CqlContext context) =>
-        new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("HS", codeId: "HS", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode HS(CqlContext _) => _HS;
+    private static readonly CqlCode _HS = new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("MORN", codeId: "MORN", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN(CqlContext _) => _MORN;
+    private static readonly CqlCode _MORN = new CqlCode("MORN", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("CD")]
-    public CqlCode CD(CqlContext context) =>
-        new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("MORN.early", codeId: "MORN.early", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN_early(CqlContext _) => _MORN_early;
+    private static readonly CqlCode _MORN_early = new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("MORN.late", codeId: "MORN.late", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode MORN_late(CqlContext _) => _MORN_late;
+    private static readonly CqlCode _MORN_late = new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("CM")]
-    public CqlCode CM(CqlContext context) =>
-        new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("NIGHT", codeId: "NIGHT", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode NIGHT(CqlContext _) => _NIGHT;
+    private static readonly CqlCode _NIGHT = new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("NOON", codeId: "NOON", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode NOON(CqlContext _) => _NOON;
+    private static readonly CqlCode _NOON = new CqlCode("NOON", "http://hl7.org/fhir/event-timing");
 
-    [CqlDeclaration("CV")]
-    public CqlCode CV(CqlContext context) =>
-        new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeDefinition("PC", codeId: "PC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PC(CqlContext _) => _PC;
+    private static readonly CqlCode _PC = new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("PCD", codeId: "PCD", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCD(CqlContext _) => _PCD;
+    private static readonly CqlCode _PCD = new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("EVE")]
-    public CqlCode EVE(CqlContext context) =>
-        new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
+    [CqlCodeDefinition("PCM", codeId: "PCM", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCM(CqlContext _) => _PCM;
+    private static readonly CqlCode _PCM = new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
+    [CqlCodeDefinition("PCV", codeId: "PCV", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode PCV(CqlContext _) => _PCV;
+    private static readonly CqlCode _PCV = new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("EVE.early")]
-    public CqlCode EVE_early(CqlContext context) =>
-        new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
+    [CqlCodeDefinition("PHS", codeId: "PHS", codeSystem: "http://hl7.org/fhir/event-timing")]
+    public CqlCode PHS(CqlContext _) => _PHS;
+    private static readonly CqlCode _PHS = new CqlCode("PHS", "http://hl7.org/fhir/event-timing");
 
+    [CqlCodeDefinition("WAKE", codeId: "WAKE", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
+    public CqlCode WAKE(CqlContext _) => _WAKE;
+    private static readonly CqlCode _WAKE = new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent");
 
-    [CqlDeclaration("EVE.late")]
-    public CqlCode EVE_late(CqlContext context) =>
-        new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
+    #endregion Codes
 
+    #region CodeSystems
 
-    [CqlDeclaration("HS")]
-    public CqlCode HS(CqlContext context) =>
-        new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
+    [CqlCodeSystemDefinition("V3TimingEvent", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", codeSystemVersion: null)]
+    public CqlCodeSystem V3TimingEvent(CqlContext _) => _V3TimingEvent;
+    private static readonly CqlCodeSystem _V3TimingEvent =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, [
+          _AC,
+          _ACD,
+          _ACM,
+          _ACV,
+          _C,
+          _CD,
+          _CM,
+          _CV,
+          _HS,
+          _PC,
+          _PCD,
+          _PCM,
+          _PCV,
+          _WAKE]);
 
+    [CqlCodeSystemDefinition("EventTiming", codeSystemId: "http://hl7.org/fhir/event-timing", codeSystemVersion: null)]
+    public CqlCodeSystem EventTiming(CqlContext _) => _EventTiming;
+    private static readonly CqlCodeSystem _EventTiming =
+      new CqlCodeSystem("http://hl7.org/fhir/event-timing", null, [
+          _AFT,
+          _AFT_early,
+          _AFT_late,
+          _EVE,
+          _EVE_early,
+          _EVE_late,
+          _MORN,
+          _MORN_early,
+          _MORN_late,
+          _NIGHT,
+          _NOON,
+          _PHS]);
 
-    [CqlDeclaration("MORN")]
-    public CqlCode MORN(CqlContext context) =>
-        new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
+    #endregion CodeSystems
 
+    #region Parameters
 
-    [CqlDeclaration("MORN.early")]
-    public CqlCode MORN_early(CqlContext context) =>
-        new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("MORN.late")]
-    public CqlCode MORN_late(CqlContext context) =>
-        new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("NIGHT")]
-    public CqlCode NIGHT(CqlContext context) =>
-        new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("NOON")]
-    public CqlCode NOON(CqlContext context) =>
-        new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("PC")]
-    public CqlCode PC(CqlContext context) =>
-        new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCD")]
-    public CqlCode PCD(CqlContext context) =>
-        new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCM")]
-    public CqlCode PCM(CqlContext context) =>
-        new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PCV")]
-    public CqlCode PCV(CqlContext context) =>
-        new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("PHS")]
-    public CqlCode PHS(CqlContext context) =>
-        new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
-
-
-    [CqlDeclaration("WAKE")]
-    public CqlCode WAKE(CqlContext context) =>
-        new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
-
-    [CqlDeclaration("V3TimingEvent")]
-    public CqlCode[] V3TimingEvent(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-            new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("EventTiming")]
-    public CqlCode[] EventTiming(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default),
-            new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("ErrorLevel")]
+    [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context)
     {
         object a_ = context.ResolveParameter("CumulativeMedicationDurationFHIR4-1.0.000", "ErrorLevel", "Warning");
@@ -215,7 +187,11 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -225,6 +201,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         decimal? a_()
@@ -628,6 +605,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         decimal? a_()
@@ -658,6 +636,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("MedicationRequestPeriod")]
     public CqlInterval<CqlDateTime> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -809,6 +788,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("MedicationDispensePeriod")]
     public CqlInterval<CqlDateTime> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -881,6 +861,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
         CqlQuantity a_ = context.Operators.Quantity(14m, "days");
@@ -889,6 +870,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("MedicationAdministrationPeriod")]
     public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -943,6 +925,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("CumulativeDuration")]
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> Intervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_ = context.Operators.Collapse(Intervals, "day");
@@ -961,6 +944,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("RolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
@@ -1011,6 +995,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("MedicationPeriod")]
     public CqlInterval<CqlDateTime> MedicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1043,6 +1028,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
+    [CqlExpressionDefinition("CumulativeMedicationDuration")]
     public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -1085,6 +1071,6 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

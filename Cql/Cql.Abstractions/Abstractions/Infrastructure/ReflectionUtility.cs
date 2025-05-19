@@ -44,6 +44,20 @@ internal static class ReflectionUtility
             ?? throw new InvalidOperationException($"Expression is not a method: '{expression}'.");
 
     /// <summary>
+    /// Retrieves the method information for the specified method call expression.
+    /// </summary>
+    /// <param name="fnToMethodCall">The expression representing the method call.</param>
+    /// <param name="expression">The expression string.</param>
+    /// <returns>The method information.</returns>
+    public static MethodInfo MethodOf<T>(
+        Expression<Func<T>> fnToMethodCall,
+        [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
+        (fnToMethodCall.Body is MethodCallExpression mce
+            ? mce.Method
+            : null)
+            ?? throw new InvalidOperationException($"Expression is not a method: '{expression}'.");
+
+    /// <summary>
     /// Retrieves the member information for the specified member expression.
     /// </summary>
     /// <param name="fnToMember">The expression representing the member.</param>
@@ -52,10 +66,12 @@ internal static class ReflectionUtility
     private static MemberInfo MemberOf<T>(
         Expression<Func<T>> fnToMember,
         [CallerArgumentExpression(nameof(fnToMember))] string expression = "") =>
-        (fnToMember.Body is MemberExpression mce
-            ? mce.Member
-            : null)
-            ?? throw new InvalidOperationException($"Expression is not a member: '{expression}'.");
+        fnToMember.Body switch
+        {
+            MemberExpression me      => me.Member,
+            MethodCallExpression mce => mce.Method,
+            _                        => throw new InvalidOperationException($"Expression is not a member: '{expression}'.")
+        };
 
     /// <summary>
     /// Retrieves the member information for the specified property expression.

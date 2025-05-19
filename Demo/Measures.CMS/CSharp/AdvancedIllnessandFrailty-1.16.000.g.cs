@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.16.000")]
 public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_16_000>
 {
@@ -28,83 +28,70 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Advanced Illness")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-    public CqlValueSet Advanced_Illness(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
+    [CqlValueSetDefinition("Advanced Illness", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", valueSetVersion: null)]
+    public CqlValueSet Advanced_Illness(CqlContext _) => _Advanced_Illness;
+    private static readonly CqlValueSet _Advanced_Illness = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
 
+    [CqlValueSetDefinition("Dementia Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", valueSetVersion: null)]
+    public CqlValueSet Dementia_Medications(CqlContext _) => _Dementia_Medications;
+    private static readonly CqlValueSet _Dementia_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
 
-    [CqlDeclaration("Dementia Medications")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-    public CqlValueSet Dementia_Medications(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
+    [CqlValueSetDefinition("Frailty Device", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", valueSetVersion: null)]
+    public CqlValueSet Frailty_Device(CqlContext _) => _Frailty_Device;
+    private static readonly CqlValueSet _Frailty_Device = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
 
+    [CqlValueSetDefinition("Frailty Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", valueSetVersion: null)]
+    public CqlValueSet Frailty_Diagnosis(CqlContext _) => _Frailty_Diagnosis;
+    private static readonly CqlValueSet _Frailty_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
 
-    [CqlDeclaration("Frailty Device")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-    public CqlValueSet Frailty_Device(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
+    [CqlValueSetDefinition("Frailty Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", valueSetVersion: null)]
+    public CqlValueSet Frailty_Encounter(CqlContext _) => _Frailty_Encounter;
+    private static readonly CqlValueSet _Frailty_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
 
+    [CqlValueSetDefinition("Frailty Symptom", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", valueSetVersion: null)]
+    public CqlValueSet Frailty_Symptom(CqlContext _) => _Frailty_Symptom;
+    private static readonly CqlValueSet _Frailty_Symptom = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
 
-    [CqlDeclaration("Frailty Diagnosis")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-    public CqlValueSet Frailty_Diagnosis(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("Frailty Encounter")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-    public CqlValueSet Frailty_Encounter(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
+    [CqlCodeDefinition("Housing status", codeId: "71802-3", codeSystem: "http://loinc.org")]
+    public CqlCode Housing_status(CqlContext _) => _Housing_status;
+    private static readonly CqlCode _Housing_status = new CqlCode("71802-3", "http://loinc.org");
 
+    [CqlCodeDefinition("Lives in a nursing home (finding)", codeId: "160734000", codeSystem: "http://snomed.info/sct")]
+    public CqlCode Lives_in_a_nursing_home__finding_(CqlContext _) => _Lives_in_a_nursing_home__finding_;
+    private static readonly CqlCode _Lives_in_a_nursing_home__finding_ = new CqlCode("160734000", "http://snomed.info/sct");
 
-    [CqlDeclaration("Frailty Symptom")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-    public CqlValueSet Frailty_Symptom(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
+    [CqlCodeDefinition("Medical equipment used", codeId: "98181-1", codeSystem: "http://loinc.org")]
+    public CqlCode Medical_equipment_used(CqlContext _) => _Medical_equipment_used;
+    private static readonly CqlCode _Medical_equipment_used = new CqlCode("98181-1", "http://loinc.org");
 
+    #endregion Codes
 
-    [CqlDeclaration("Housing status")]
-    public CqlCode Housing_status(CqlContext context) =>
-        new CqlCode("71802-3", "http://loinc.org", default, default);
+    #region CodeSystems
 
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null, [
+          _Housing_status,
+          _Medical_equipment_used]);
 
-    [CqlDeclaration("Lives in a nursing home (finding)")]
-    public CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) =>
-        new CqlCode("160734000", "http://snomed.info/sct", default, default);
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
+      new CqlCodeSystem("http://snomed.info/sct", null, [
+          _Lives_in_a_nursing_home__finding_]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("Medical equipment used")]
-    public CqlCode Medical_equipment_used(CqlContext context) =>
-        new CqlCode("98181-1", "http://loinc.org", default, default);
+    #region Parameters
 
-
-    [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("71802-3", "http://loinc.org", default, default),
-            new CqlCode("98181-1", "http://loinc.org", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("SNOMEDCT")]
-    public CqlCode[] SNOMEDCT(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("160734000", "http://snomed.info/sct", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.16.000", "Measurement Period", null);
@@ -113,7 +100,11 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -123,7 +114,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Has Criteria Indicating Frailty")]
+    [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context)
     {
         CqlValueSet a_ = this.Frailty_Device(context);
@@ -220,7 +211,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Has Advanced Illness in Year Before or During Measurement Period")]
+    [CqlExpressionDefinition("Has Advanced Illness in Year Before or During Measurement Period")]
     public bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(CqlContext context)
     {
         CqlValueSet a_ = this.Advanced_Illness(context);
@@ -246,7 +237,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Has Dementia Medications in Year Before or During Measurement Period")]
+    [CqlExpressionDefinition("Has Dementia Medications in Year Before or During Measurement Period")]
     public bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(CqlContext context)
     {
         CqlValueSet a_ = this.Dementia_Medications(context);
@@ -279,7 +270,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Is Age 66 or Older with Advanced Illness and Frailty")]
+    [CqlExpressionDefinition("Is Age 66 or Older with Advanced Illness and Frailty")]
     public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -302,7 +293,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
+    [CqlExpressionDefinition("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
     public bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -335,7 +326,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    [CqlDeclaration("Is Age 66 or Older Living Long Term in a Nursing Home")]
+    [CqlExpressionDefinition("Is Age 66 or Older Living Long Term in a Nursing Home")]
     public bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -397,6 +388,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

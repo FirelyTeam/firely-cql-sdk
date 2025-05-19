@@ -1,20 +1,64 @@
 {
   "profiles": {
+    "PackageCLI (--help)": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "PackageCLI (cql --help)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --help"
+    },
+    "PackageCLI (elm --help)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm --help"
+    },
+    "PackageCLI (--version)": {
+      "commandName": "Project",
+      "commandLineArgs": "--version"
+    },
+    "PackageCLI (No commands)": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    },
+    "PackageCLI (RR23 CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/RR23/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/RR23/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/RR23/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/RR23/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/RR23/CSharp\" "
+    },
+    "PackageCLI (Demo CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" "
+    },
+    "PackageCLI (clinical_quality_language/Examples CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"C:/Dev/cqframework/clinical_quality_language/Examples/\" --fhir \"C:/Dev/cqframework/clinical_quality_language/Examples/out/fhir\" --dll \"C:/Dev/cqframework/clinical_quality_language/Examples/out/dll\" --cs \"C:/Dev/cqframework/clinical_quality_language/Examples/out/cs\" "
+    },
+    "PackageCLI (Demo CQL->ELM)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/ElmOut\" "
+    },
+    "PackageCLI (CoreTests CQL->C#)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/Cql/CoreTests/Input/ELM/HL7\" --cs \"$(CqlSolutionDir)/Cql/CoreTests/CSharp\" "
+    },
     "PackageCLI (Demo)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" "
+    },
+    "PackageCLI (Demo with Command Line Args override)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" "
     },
     "PackageCLI (CMS Measures)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" "
     },
     "PackageCLI (Measures.Authoring)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" "
     },
     "PackageCLI (Ncqa.DQIC\\BuildArtifacts)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" "
     }
   }
 }

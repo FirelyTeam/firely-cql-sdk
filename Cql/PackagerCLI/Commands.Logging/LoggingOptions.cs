@@ -1,0 +1,19 @@
+﻿/*
+ * Copyright(c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Packager.Commands.Logging;
+
+internal record LoggingOptions : IBindOptions
+{
+    public const string ConfigSection = "Logging";
+    static string IBindOptions.ConfigSection => ConfigSection;
+    public static LoggingOptions Default { get; } = new();
+    public bool Append { get; init; }
+    public LogLevel ConsoleLogLevel { get; init; }// = LogLevel.Information;
+    public LogLevel FileLogLevel { get; init; }// = LogLevel.Information;
+}

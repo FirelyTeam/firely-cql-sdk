@@ -15,17 +15,32 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 public static partial class ElmToolkitExtensions
 {
     /// <summary>
+    /// Adds ELM libraries to the compiler.
+    /// </summary>
+    /// <param name="elmToolkit">The ELM toolkit to add libraries to.</param>
+    /// <param name="elmLibraries">The libraries to add.</param>
+    public static ElmToolkit AddElmLibraries(
+        this ElmToolkit elmToolkit,
+        params ElmLibrary[] elmLibraries)
+        => elmToolkit.AddElmLibraries(elmLibraries.AsEnumerable());
+
+    /// <summary>
     /// Adds ELM libraries from a CQL toolkit to the specified ELM toolkit.
     /// </summary>
     /// <param name="elmToolkit">The ELM toolkit to add libraries to.</param>
     /// <param name="cqlToolkit">The CQL toolkit containing the libraries to add.</param>
+    /// <param name="libraryPredicate">The optional handler which libraries to add.</param>
     /// <returns>The updated ELM toolkit.</returns>
     public static ElmToolkit AddElmFromCqlToolkit(
         this ElmToolkit elmToolkit,
-        CqlToolkit cqlToolkit) =>
+        CqlToolkit cqlToolkit,
+        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) =>
         elmToolkit.AddElmLibraries(
             cqlToolkit
                 .GetCqlToolkitResults()
+                .Where(libraryPredicate is not null
+                           ? result => libraryPredicate(result.LibraryIdentifier)
+                           : _ => true)
                 .Select(t => t.ElmLibrary));
 
     /// <summary>

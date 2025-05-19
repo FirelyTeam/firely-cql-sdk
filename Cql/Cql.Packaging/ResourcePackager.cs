@@ -12,15 +12,13 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Packaging;
 
-#pragma warning disable CS1591
-
 internal class ResourcePackager(
     ILoggerFactory loggerFactory,
-    TypeResolver typeResolver)
+    TypeResolver typeResolver,
+    ResourceCanonicalBuilder resourceCanonicalBuilder)
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
@@ -34,12 +32,10 @@ internal class ResourcePackager(
     public IEnumerable<(string libraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
         Func<string, SourceArtefacts> inputsById,
-        string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null)
     {
-        resourceCanonicalRootUrl ??= string.Empty;
         var libraryPackagerLogger = loggerFactory.CreateLogger(typeof(LibraryPackager));
 
         return librarySet.TrySelect(PackageResource, buildExceptionHandlingStrategy);
@@ -48,10 +44,10 @@ internal class ResourcePackager(
         {
             onNextLibrary?.Invoke(elmLibrary);
 
-            var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
+            string versionedIdentifier = elmLibrary.VersionedLibraryIdentifier;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;
             var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
-            if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!) throw new InvalidOperationException("Versioned identifiers do not match.");
+            if (versionedIdentifier != elmLibraryInput.VersionedLibraryIdentifier) throw new InvalidOperationException("Versioned identifiers do not match.");
 
             var fhirLibrary = LibraryPackager.CreateLibraryResource(
                 libraryPackagerLogger,
@@ -62,7 +58,7 @@ internal class ResourcePackager(
                 assemblyBinary,
                 GetCSharpSourceCodeByName(),
                 librarySet,
-                resourceCanonicalRootUrl,
+                resourceCanonicalBuilder,
                 localOverrideDate);
 
             IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
@@ -70,9 +66,25 @@ internal class ResourcePackager(
                 yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
             }
 
-            MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
+            MeasurePackager.TryCreateMeasure(
+                elmLibrary,
+                fhirLibrary,
+                out var fhirMeasure,
+                resourceCanonicalBuilder,
+                localOverrideDate);
             return (versionedIdentifier, fhirLibrary, fhirMeasure);
         }
+    }
+
+    internal static string BuildResourceUrl(
+        string resourceCanonicalRootUrl,
+        string resourceType,
+        string name,
+        string? version = null)
+    {
+        string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
+        string includeIdMaybeVersion = $"{resourceCanonicalRootUrl}{resourceType}/{name}{includeVersionString}";
+        return includeIdMaybeVersion;
     }
 }
 
@@ -82,7 +94,7 @@ file static class MeasurePackager
         ElmLibrary elmLibrary,
         FhirLibrary fhirLibrary,
         [NotNullWhen(true)] out FhirMeasure? fhirMeasure,
-        string resourceCanonicalRootUrl,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
     {
         var tags = elmLibrary.statements?
@@ -97,8 +109,13 @@ file static class MeasurePackager
             && !string.IsNullOrWhiteSpace(yearAnnotation.value)
             && int.TryParse(yearAnnotation.value, out var measureYear))
         {
-            fhirMeasure = MeasurePackager.CreateMeasureResource(fhirLibrary, measureAnnotation, measureYear, elmLibrary, resourceCanonicalRootUrl,
-                                                                overrideDate);
+            fhirMeasure = CreateMeasureResource(
+                fhirLibrary,
+                measureAnnotation,
+                measureYear,
+                elmLibrary,
+                resourceCanonicalBuilder,
+                overrideDate);
             return true;
         }
 
@@ -111,15 +128,18 @@ file static class MeasurePackager
         Tag measureAnnotation,
         int measureYear,
         ElmLibrary elmLibrary,
-        string resourceCanonicalRootUrl,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
     {
         var measure = new FhirMeasure();
-        measure.Id = elmLibrary.identifier?.id!;
-        measure.Version = elmLibrary.identifier?.version!;
-        measure.Name = elmLibrary.identifier?.id!;
+        var libName = fhirLibrary.Name;
+        var libVer = elmLibrary.identifier?.version!;
+
+        measure.Id = fhirLibrary.Id; // was elmLibrary.identifier?.id
+        measure.Version = libVer;
+        measure.Name = libName;
         measure.Title = measureAnnotation.value;
-        measure.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{measure.TypeName}/{elmLibrary.identifier?.id!}";
+        measure.Url = resourceCanonicalBuilder(measure.TypeName, libName);
 
         measure.Status = PublicationStatus.Active;
         measure.Date = new DateTimeIso8601(overrideDate, Iso8601DateTimePrecision.Millisecond).ToString();
@@ -131,7 +151,8 @@ file static class MeasurePackager
         measure.Group = [];
 
         AnnotateMeasurePopulations(measure, elmLibrary);
-        measure.Library = new List<string> { fhirLibrary!.Url };
+        string[] library = [resourceCanonicalBuilder("Library", libName, libVer)];
+        measure.Library = library;
         return measure;
     }
 
@@ -251,7 +272,7 @@ internal static class LibraryPackager
         byte[]? assemblyBytes,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
         ElmLibrarySet elmLibrarySet,
-        string? resourceCanonicalRootUrl = null,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime? elmFileLastWriteTimeUtc = null)
     {
         switch (elmLibrary, elmBytes)
@@ -266,14 +287,14 @@ internal static class LibraryPackager
                 break;
         }
 
-        var fhirLibrary = CreateFhirLibrary(logger, elmLibrary, resourceCanonicalRootUrl, elmFileLastWriteTimeUtc ?? SysDateTime.Now);
+        var fhirLibrary = CreateFhirLibrary(elmLibrary, resourceCanonicalBuilder, elmFileLastWriteTimeUtc ?? SysDateTime.Now);
         AddElmAttachment(elmLibrary, fhirLibrary, elmBytes);
         var parameters = new List<ParameterDefinition>();
         AddInParameters(elmLibrary, parameters, typeCrosswalk);
         AddOutParameters(elmLibrary, parameters, typeCrosswalk);
         fhirLibrary.Parameter = parameters.Count > 0 ? parameters : null!;
 
-        AddRelatedArtefacts(elmLibrary, fhirLibrary, elmLibrarySet, resourceCanonicalRootUrl);
+        AddRelatedArtefacts(elmLibrary, fhirLibrary, elmLibrarySet, resourceCanonicalBuilder);
         AddDataRequirements(elmLibrary, fhirLibrary, elmLibrarySet);
 
         var fhirParameters = CreateFhirParameters(elmLibrary);
@@ -301,7 +322,7 @@ internal static class LibraryPackager
         var bytes = elmBytes;
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.GetVersionedIdentifier()}+elm",
+            ElementId = $"{elmLibrary.VersionedLibraryIdentifier}+elm",
             ContentType = ElmLibrary.JsonMimeType,
             Data = bytes,
         };
@@ -309,31 +330,28 @@ internal static class LibraryPackager
     }
 
     private static FhirLibrary CreateFhirLibrary(
-        ILogger logger,
         ElmLibrary elmLibrary,
-        string? resourceCanonicalRootUrl,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime date)
     {
+        // https://hl7.org/fhir/uv/cql/STU1/StructureDefinition-cql-library.html
         var fhirLibrary = new FhirLibrary();
         fhirLibrary.Type = LogicLibraryCodeableConcept;
-        // Remove setting the ID for now until https://github.com/FirelyTeam/firely-cql-sdk/issues/714
-        //fhirLibrary.Id = // The only time that a resource does not have an id is when it is being submitted to the server using a create operation. https://hl7.org/fhir/R4/resource-definitions.html#Resource.id
-        fhirLibrary.Id = elmLibrary.GetVersionedIdentifier()!;
-        if (fhirLibrary.Id is {Length:>64})
-            logger.LogWarning($"The FHIR Library resource ID '{fhirLibrary.Id}' is longer than the 64 character limit. This may cause problems later during deserializatation.");
-
+        fhirLibrary.Id = FhirIdGenerator.GenerateFhirId(elmLibrary.VersionedLibraryIdentifier);
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
-        fhirLibrary.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{fhirLibrary.TypeName}/{elmLibrary.identifier?.id!}";
-
+        fhirLibrary.Url = resourceCanonicalBuilder(fhirLibrary.TypeName, elmLibrary.identifier?.id!); // NOTE: We do NOT include the version
         fhirLibrary.Title = fhirLibrary.Name;
         fhirLibrary.Status = PublicationStatus.Active;
-        fhirLibrary.Date = new DateTimeIso8601(date, Iso8601DateTimePrecision.Millisecond).ToString();
+        fhirLibrary.Date = new DateTimeIso8601(date.ToLocalTime(), Iso8601DateTimePrecision.Millisecond).ToString();
 
-        if (fhirLibrary.Meta is { } meta)
+        if (elmLibrary.contexts?.Any(context => nameof(ResourceType.Patient).Equals(context?.name)) ?? false)
         {
-            meta.LastUpdated = date;
+            fhirLibrary.Subject = new CodeableConcept("http://hl7.org/fhir/resource-types", nameof(ResourceType.Patient));
         }
+
+        if (fhirLibrary.Meta is {} meta)
+            meta.LastUpdated = date;
 
         return fhirLibrary;
     }
@@ -342,8 +360,7 @@ internal static class LibraryPackager
         ElmLibrary elmLibrary,
         FhirLibrary library,
         ElmLibrarySet elmLibrarySet,
-        string? resourceCanonicalRootUrl
-        )
+        ResourceCanonicalBuilder resourceCanonicalBuilder)
     {
         List<RelatedArtifact> result = [];
         var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
@@ -351,15 +368,12 @@ internal static class LibraryPackager
         {
             foreach (IncludeDef include in dependency?.includes ?? [])
             {
-                string includeVersionString = string.IsNullOrEmpty(include.version) ? string.Empty : $"|{include.version}";
-                string includeIdMaybeVersion =
-                    $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}Library/{include.path}{includeVersionString}";
-
+                var resourceUrl = resourceCanonicalBuilder("Library", include.path, include.version);
                 var ra = new RelatedArtifact
                 {
                     Display = $"Library {include.localIdentifier}",
                     Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                    Resource = includeIdMaybeVersion,
+                    Resource = resourceUrl,
                 };
                 if (!result.Any(r => r.IsExactly(ra)))
                     result.Add(ra);
@@ -398,9 +412,9 @@ internal static class LibraryPackager
     }
 
     private static void AddOutParameters(
-    ElmLibrary elmLibrary,
-    List<ParameterDefinition> parameters,
-    CqlTypeToFhirTypeMapper typeCrosswalk)
+        ElmLibrary elmLibrary,
+        List<ParameterDefinition> parameters,
+        CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var outParams = elmLibrary.statements?
                                   .Where(def => def.name != "Patient" && def is not FunctionDef)
@@ -430,7 +444,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+cql",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+cql",
             ContentType = "text/cql",
             Data = cqlBytes,
         };
@@ -483,7 +497,7 @@ internal static class LibraryPackager
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+dll",
+            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+dll",
             ContentType = "application/octet-stream",
             Data = assemblyBytes,
         };

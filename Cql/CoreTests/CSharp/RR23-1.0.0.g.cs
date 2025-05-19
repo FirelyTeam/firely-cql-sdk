@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -28,53 +28,49 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Injury due to falling rock")]
-    [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-    public CqlValueSet Injury_due_to_falling_rock(CqlContext context) =>
-        new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
+    [CqlValueSetDefinition("Injury due to falling rock", valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", valueSetVersion: null)]
+    public CqlValueSet Injury_due_to_falling_rock(CqlContext _) => _Injury_due_to_falling_rock;
+    private static readonly CqlValueSet _Injury_due_to_falling_rock = new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", null);
 
+    [CqlValueSetDefinition("Roadrunners Syndrome Indicators", valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", valueSetVersion: null)]
+    public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext _) => _Roadrunners_Syndrome_Indicators;
+    private static readonly CqlValueSet _Roadrunners_Syndrome_Indicators = new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", null);
 
-    [CqlDeclaration("Roadrunners Syndrome Indicators")]
-    [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
-    public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) =>
-        new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("Tiny Umbrella")]
-    public CqlCode Tiny_Umbrella(CqlContext context) =>
-        new CqlCode("U707", "http://acme.org/product-catalog", default, default);
+    [CqlCodeDefinition("Tiny Umbrella", codeId: "U707", codeSystem: "http://acme.org/product-catalog")]
+    public CqlCode Tiny_Umbrella(CqlContext _) => _Tiny_Umbrella;
+    private static readonly CqlCode _Tiny_Umbrella = new CqlCode("U707", "http://acme.org/product-catalog");
 
+    [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
+    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
+    private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
-    [CqlDeclaration("entered-in-error")]
-    public CqlCode entered_in_error(CqlContext context) =>
-        new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
+    #endregion Codes
 
+    #region CodeSystems
 
-    [CqlDeclaration("ACME Product Catalog")]
-    public CqlCode[] ACME_Product_Catalog(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("U707", "http://acme.org/product-catalog", default, default),
-        ];
+    [CqlCodeSystemDefinition("ACME Product Catalog", codeSystemId: "http://acme.org/product-catalog", codeSystemVersion: null)]
+    public CqlCodeSystem ACME_Product_Catalog(CqlContext _) => _ACME_Product_Catalog;
+    private static readonly CqlCodeSystem _ACME_Product_Catalog =
+      new CqlCodeSystem("http://acme.org/product-catalog", null, [
+          _Tiny_Umbrella]);
 
-        return a_;
-    }
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
+    public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
+    private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
+          _entered_in_error]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("ConditionVerificationStatusCodes")]
-    public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
-        ];
+    #region Parameters
 
-        return a_;
-    }
-
-
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context)
     {
         CqlDate a_ = context.Operators.Date(2023, 1, 1);
@@ -86,7 +82,11 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -96,7 +96,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-    [CqlDeclaration("Injury due to falling rock within measurement period")]
+    [CqlExpressionDefinition("Injury due to falling rock within measurement period")]
     [CqlTag("description", "Conditions of type 'Injury due to falling rock' within the measurement period")]
     [CqlTag("fhirquery", "akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]")]
     [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
@@ -127,7 +127,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-    [CqlDeclaration("Latest injury due to falling rock")]
+    [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context)
     {
         IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
@@ -145,7 +145,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-    [CqlDeclaration("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
+    [CqlExpressionDefinition("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
     [CqlTag("description", "\"recording of the (latest) rock fall condition within the measurement period\"")]
     [CqlTag("fhirquery", "akin to /SupplyDelivery?supplied-item=http://acme.org/product-catalog|U707&ocurrence-datetime=lt[Condition onset date+7 days]")]
     [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
@@ -195,6 +195,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

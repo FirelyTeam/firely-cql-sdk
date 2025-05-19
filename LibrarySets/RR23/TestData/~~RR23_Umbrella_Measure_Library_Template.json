@@ -1,0 +1,119 @@
+{
+  "resourceType" : "Library",
+  "id" : "RR23",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>RR23-Umbrella Measure.</h2><ul><li>Purpose: proportional measure, proportion of patients who were injured due to rockfall, and who received a tiny umbrella within 7 days after the date of diagnosis.</li><li>Initial population: Patients aged 16 and older who have sustained an injury due to falling rock.</li><li>Denominator: Initial Population</li><li>Numerator: Supply of 'ACME Umbrella' within 7 days of 'recording of the (latestmost recent) rock fall condition within the measurement period'.</li></ul>  </div>"
+  },
+  "url" : "http://moh.alpha.alp/Library/RR23",
+  "identifier" : [{
+    "use" : "official",
+    "system" : "http://moh.alpha.alp/Library/Identifier",
+    "value" : "RR23"
+  }],
+  "version" : "VERSIONPLACEHOLDER",
+  "name" : "RR23",
+  "title" : "Roadrunners Syndrome - RR23-Umbrella Measure",
+  "status" : "active",
+  "experimental" : true,
+  "type" : {
+    "coding" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/library-type",
+      "code" : "logic-library"
+    }]
+  },
+  "date" : "2023-11-23",
+  "publisher" : "MOH Alpha",
+  "description" : "Library used to validate guidance related to Roadrunners Syndrome",
+  "approvalDate" : "2023-11-23",
+  "lastReviewDate" : "2023-11-23",
+  "relatedArtifact" : [{
+    "type" : "depends-on",
+    "display" : "FHIR model information",
+    "resource" : "http://fhir.org/guides/cqf/common/Library/FHIR-ModelInfo|4.0.1"
+  },
+  {
+    "type" : "depends-on",
+    "display" : "Library FHIRHelpers",
+    "resource" : "http://fhir.org/guides/cqf/common/Library/FHIRHelpers|4.0.1"
+  },
+  {
+    "type" : "depends-on",
+    "display" : "Code system ACME Product Catalog",
+    "resource" : "http://acme.org/product-catalog"
+  },
+  {
+    "type" : "depends-on",
+    "display" : "Value set Injury due to falling rock",
+    "resource" : "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock"
+  },
+  {
+    "type" : "depends-on",
+    "display" : "Value set Roadrunners Syndrome Indicators",
+    "resource" : "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome"
+  }],
+  "parameter" : [{
+    "name" : "Measurement Period",
+    "use" : "in",
+    "min" : 0,
+    "max" : "1",
+    "type" : "Period"
+  },
+  {
+    "name" : "Patient",
+    "use" : "out",
+    "min" : 0,
+    "max" : "1",
+    "type" : "Patient"
+  },
+  {
+    "name" : "Initial Population",
+    "use" : "out",
+    "min" : 0,
+    "max" : "*",
+    "type" : "boolean"
+  },
+  {
+    "name" : "Deniminator",
+    "use" : "out",
+    "min" : 0,
+    "max" : "*",
+    "type" : "boolean"
+  },
+  {
+    "name" : "Numerator",
+    "use" : "out",
+    "min" : 0,
+    "max" : "*",
+    "type" : "boolean"
+  }],
+  "dataRequirement" : [{
+    "type" : "Patient",
+    "profile" : ["http://hl7.org/fhir/StructureDefinition/Patient"]
+  },
+  {
+    "type" : "Condition",
+    "profile" : ["http://hl7.org/fhir/StructureDefinition/Condition"],
+    "mustSupport" : ["code", "onset", "onset.value"],
+    "codeFilter" : [{
+      "path" : "code",
+      "valueSet" : "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock"
+    }]
+  },
+  {
+    "type" : "SupplyDelivery",
+    "profile" : ["http://hl7.org/fhir/StructureDefinition/SupplyDelivery"],
+    "mustSupport" : ["suppliedItem", "suppliedItem.item", "occurrence", "occurrence.value"],
+    "codeFilter" : [{
+      "path" : "item",
+      "code" : [{
+          "system" : "http://acme.org/product-catalog",
+          "code" : "U707"
+        }]
+    }]
+  }],
+  "content" : [{
+    "contentType" : "text/cql",
+    "data" : "CQLPLACEHOLDER"
+  }]
+}
