@@ -20,6 +20,7 @@
   },
   "Elm": {
     "JsonPretty": false,
+    "OutputCSharpFilesToTempDirectory": false,
     "SkipFiles": [
 
       // These contain a union between incompatible tuples,

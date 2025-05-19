@@ -1,1 +1,0 @@
-dotnet build Cql-Sdk-All.sln -c Debug -p:ElmToCSharpEnabled=true
