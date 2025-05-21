@@ -31,7 +31,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
     {
         var result = new List<DataRequirement>();
         Visit(focusLibrary, result);
-
+        result = Combine(result);
         return result;
     }
 
@@ -106,6 +106,47 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
             result.Add(dr);
 
         return true;
+    }
+
+    private List<DataRequirement> Combine(List<DataRequirement> initialDataRequirements)
+    {
+        var result = new List<DataRequirement>();
+        var grouped = initialDataRequirements.GroupBy(r => r.Type);
+        foreach (var group in grouped)
+        {
+            var dr = group.First();
+            dr.MustSupportElement = [..group.SelectMany(g => g.MustSupportElement)];
+            dr.MustSupportElement = dr.MustSupportElement.Aggregate(new List<FhirString>(), (acc, current) =>
+            {
+                if (!acc.Any(e => e.IsExactly(current))) acc.Add(current);
+                return acc;
+            }).ToList();
+
+            dr.CodeFilter = [..group.SelectMany(g => g.CodeFilter)];
+            dr.CodeFilter = dr.CodeFilter.Aggregate(new List<DataRequirement.CodeFilterComponent>(), (acc, current) =>
+            {
+                if (!acc.Any(e => e.IsExactly(current))) acc.Add(current);
+                return acc;
+            }).ToList();
+
+            dr.ProfileElement = [..group.SelectMany(g => g.ProfileElement)];
+            dr.ProfileElement = dr.ProfileElement.Aggregate(new List<Canonical>(), (acc, current) =>
+            {
+                if (!acc.Any(e => e.IsExactly(current))) acc.Add(current);
+                return acc;
+            }).ToList();
+
+            dr.DateFilter = [..group.SelectMany(g => g.DateFilter)];
+            dr.DateFilter = dr.DateFilter.Aggregate(new List<DataRequirement.DateFilterComponent>(), (acc, current) =>
+            {
+                if (!acc.Any(e => e.IsExactly(current))) acc.Add(current);
+                return acc;
+            }).ToList();
+
+            result.Add(dr);
+        }
+
+        return result;
     }
 
     private static string ToReference(Elm.ValueSetDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
