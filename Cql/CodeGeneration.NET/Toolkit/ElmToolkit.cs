@@ -205,6 +205,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
                 debugInformationFormat,
+                Config.OutputCSharpFilesToTempDirectory,
                 errorStrategy => errorStrategy
                                  .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(

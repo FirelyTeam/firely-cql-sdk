@@ -28,6 +28,7 @@ Hl7.Cql.Packaging.ResourceFileName.Identifier.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.ResourceFileName() -> void
 Hl7.Cql.Packaging.ResourceFileName.Type.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.Version.get -> string?
+Hl7.Cql.Packaging.Toolkit.Extensions.CqlToolkitPackagingExtensions
 Hl7.Cql.Packaging.Toolkit.Extensions.ElmToolkitPackagingExtensions
 Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions
 Hl7.Cql.Packaging.Toolkit.PackagingToolkit
@@ -113,6 +114,8 @@ static Hl7.Cql.Packaging.ResourceFileName.operator !=(Hl7.Cql.Packaging.Resource
 static Hl7.Cql.Packaging.ResourceFileName.operator ==(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.Parse(string! s, System.IFormatProvider? provider) -> Hl7.Cql.Packaging.ResourceFileName
 static Hl7.Cql.Packaging.ResourceFileName.TryParse(string? s, System.IFormatProvider? provider, out Hl7.Cql.Packaging.ResourceFileName result) -> bool
+static Hl7.Cql.Packaging.Toolkit.Extensions.CqlToolkitPackagingExtensions.CreatePackagingToolkit(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? packagingToolkitConfig = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+static Hl7.Cql.Packaging.Toolkit.Extensions.CqlToolkitPackagingExtensions.PackageToFhirResources(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? packagingToolkitConfig = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
 static Hl7.Cql.Packaging.Toolkit.Extensions.ElmToolkitPackagingExtensions.CreatePackagingToolkit(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? packagingToolkitConfig = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
 static Hl7.Cql.Packaging.Toolkit.Extensions.ElmToolkitPackagingExtensions.PackageToFhirResources(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? packagingToolkitConfig = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
 static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.AddPackagingInputs(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!

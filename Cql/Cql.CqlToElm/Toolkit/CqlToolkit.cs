@@ -134,7 +134,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(BatchProcessExceptionContinuation.Continue)
+                                     .SetContinuation(BatchProcessExceptionContinuation)
                                      .AddLoggerExceptionHandler(_services.Logger,
                                                                 (conversion, messageBuilder) =>
                                                                     messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))

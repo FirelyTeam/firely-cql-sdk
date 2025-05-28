@@ -29,6 +29,7 @@ public static partial class PackagingToolkitExtensions
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
+        elmToolkit.CompileToAssemblies();
         var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
         var compilations = elmToolkit.Conversions.Values.SelectWhere(o => o switch
         {
