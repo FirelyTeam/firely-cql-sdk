@@ -1,9 +1,11 @@
 $cqlInDir = "input/cql"
-$elmOutDir = "output/elm"
+$csOutDir = "output/cs"
+$dllOutDir = "output/dll"
 
 cql-package cql `
     --cql "$cqlInDir" `
-    --elm "$elmOutDir"
+    --cs "$csOutDir" `
+    --dll "$dllOutDir"
 
 Write-Host "Press any key to delete the output folder..."
 [void][System.Console]::ReadKey($true)
