@@ -25,11 +25,11 @@
 		</None>
 	</ItemGroup>
 
-	<UsingTask
-		Condition="'$(Configuration)'=='Debug'"
-		TaskName="UpdateCurrentDirectoryInSource"
-		TaskFactory="CodeTaskFactory" 
-		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Using Namespace="System" />
@@ -88,11 +88,7 @@
 	</UsingTask>
 
 
-	<UsingTask 
-		Condition="'$(Configuration)'=='Debug'"
-		TaskName="UpdateLaunchSettingsInSource"
-		TaskFactory="CodeTaskFactory"
-		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Reference Include="System.Memory" />
@@ -197,9 +193,7 @@
 		</Task>
 	</UsingTask>
 
-	<Target Name="ModifySources"
-	        Condition="'$(Configuration)'=='Debug'"
-	        BeforeTargets="CoreCompile">
+	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug'" BeforeTargets="CoreCompile">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>

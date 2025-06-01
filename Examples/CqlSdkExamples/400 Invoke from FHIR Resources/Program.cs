@@ -10,7 +10,7 @@ using Hl7.Cql.Toolkit;
 
 partial class Program
 {
-    void GetResults()
+    void InvokingFromFhirResources()
     {
         // This example first packages CQL libraries into FHIR resources,
         // then loads the packaged resources and invokes them.
@@ -53,13 +53,7 @@ partial class Program
                       .SelectResults(
                           cqlContext,
                           selectResultsOptions:new SelectResultsOptions(
-                              InvocationExceptionCallback: (
-                                  definition,
-                                  exception,
-                                  _) =>
-                              {
-                                  errors.Add((definition,exception));
-                              }))
+                              InvocationExceptionCallback: (definition, exception, _) => errors.Add((definition,exception))))
                       .ToList();
 
         if (errors.Count > 0)
