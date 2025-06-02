@@ -624,7 +624,7 @@ internal static class LibraryPackager
             parameterDefinition.Extension.Add(new Extension
             {
                 Value = new FhirModelCode("private"),
-                Url = Constants.Hl7FhirStructureDefinitionCqlAccessLevel,
+                Url = Constants.Hl7FhirStructureDefinitionCqlAccessModifier,
             });
         }
 
