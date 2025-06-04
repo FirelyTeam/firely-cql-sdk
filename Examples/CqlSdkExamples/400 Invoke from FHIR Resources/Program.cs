@@ -6,6 +6,8 @@ using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Toolkit;
 
 partial class Program
@@ -14,7 +16,9 @@ partial class Program
     {
         // This example first packages CQL libraries into FHIR resources,
         // then loads the packaged resources and invokes them.
-        var ignoreErrors = true; // Try setting this to true
+
+        var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
+        var ignoreErrors = true;    // This ignores errors and tries to continue processing other definitions
 
         Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources");
 
@@ -28,7 +32,8 @@ partial class Program
         cqlToolkit.AddCqlLibrariesFromDirectory(cqlDirectory);
 
         // Package into FHIR Resources (Translate CQL to ELM, then compile ELM to C# and DLLs)
-        var packagingToolkit = cqlToolkit.PackageToFhirResources();
+        var packagingToolkit = cqlToolkit.PackageToFhirResources(
+            elmToolkitConfig: enableDebugging ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded) : null);
 
         // Save packaged resources
         packagingToolkit.SaveFhirResourcesToDirectory(new DirectoryInfo("output/fhir"));
@@ -50,6 +55,7 @@ partial class Program
 
         var results = librarySetInvoker
                       .SelectExpressions()
+                      .ToList()
                       .SelectResults(
                           cqlContext,
                           selectResultsOptions:new SelectResultsOptions(
@@ -58,6 +64,7 @@ partial class Program
 
         if (errors.Count > 0)
             Console.WriteLine($"There were {errors.Count} definition result(s) that failed.");
+        
         Console.WriteLine($"There were {results.Count} definition result(s) that succeeded.");
     }
 }
