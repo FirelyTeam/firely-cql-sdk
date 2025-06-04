@@ -13,7 +13,7 @@ partial class Program
 {
     void InvokingCqlHelloWorldWithFunctionArgument()
     {
-        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
+        var enableDebugging = true; // Try setting this to true, then step through InvokeLibraryDefinition
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);

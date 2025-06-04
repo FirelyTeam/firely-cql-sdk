@@ -8,11 +8,11 @@
 	</PropertyGroup>
 
 	<!-- <ItemGroup> -->
-	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202505142054" /> -->
+		<!-- <PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202506041535" /> -->
 	<!-- </ItemGroup> -->
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -23,10 +23,6 @@
 		<None Include="**\input\**\*.g.cs">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
