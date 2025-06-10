@@ -35,7 +35,7 @@ partial class Program
         object? result = librarySetInvoker.InvokeLibraryDefinition(
             cqlContext: cqlContext,
             libraryIdentifier: cql.LibraryIdentifier,
-            definitionSignature: "Hello World");
+            definitionSignature: "HelloWorld");
 
         Console.WriteLine(result);
     }

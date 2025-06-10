@@ -7,10 +7,17 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<!-- Use NuGet Package from the public Nuget feed -->
 	<!-- <ItemGroup> -->
-		<!-- <PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202506041535" /> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-alpha.18" /> -->
 	<!-- </ItemGroup> -->
 
+	<!-- OR, Use NuGet Package from the local build build-local-nuget.ps1, you'll need to update the version accordingly -->
+	<!-- <ItemGroup> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202506041535" /> -->
+	<!-- </ItemGroup> -->
+
+	<!-- OR, Use a direct project reference to the Cql.Invocation project, this is useful for debugging the library -->
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
 	</ItemGroup>
