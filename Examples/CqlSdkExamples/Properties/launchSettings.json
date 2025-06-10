@@ -35,6 +35,10 @@
     "400 Invoke from FHIR Resources": {
       "commandName": "Project",
       "commandLineArgs": "400"
+    },
+    "500 Extending Functionality - Log Statements per Library": {
+      "commandName": "Project",
+      "commandLineArgs": "500"
     }
   }
 }

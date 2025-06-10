@@ -11,10 +11,6 @@ The HL7 CQL Packager performs the following steps:
 3. **C# to .NET DLL Compilation**: Compiles the generated C# code into a single assembly per ELM file.
 4. **Packaging to FHIR Libraries/Measures**: Packages the assembly (and optionally the original CQL, ELM, and C# source code) into a FHIR Library resource, creating one resource per original ELM file. Where applicable, FHIR Measure resources are also generated.
 
-### Limitations
-
-The tool does not convert CQL into ELM yet. You need to use the existing Java-based tooling for this conversion.
-
 ## Getting Started
 
 ### Installation
