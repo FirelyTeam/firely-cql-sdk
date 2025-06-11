@@ -10,7 +10,7 @@ namespace Hl7.Cql.Packaging
 {
     internal static class Constants
     {
-        public const string Hl7FhirStructureDefinitionCqlAccessLevel = "http://hl7.org/fhir/StructureDefinition/cqf-cqlAccessLevel";
+        public const string Hl7FhirStructureDefinitionCqlAccessModifier = "http://hl7.org/fhir/StructureDefinition/cqf-cqlAccessModifier";
         public const string Hl7FhirStructureDefinitionCqlType = "http://hl7.org/fhir/StructureDefinition/cqf-cqlType";
     }
 }
