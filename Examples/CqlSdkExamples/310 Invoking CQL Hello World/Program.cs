@@ -13,7 +13,7 @@ partial class Program
 {
     void InvokingCqlHelloWorld()
     {
-        var enableDebugging = false; // Try setting this to true, then step through InvokeLibraryDefinition
+        var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         CqlToolkit cqlToolkit = new(loggerFactory);
@@ -23,6 +23,7 @@ partial class Program
 
                                     define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
                                     """;
+
         using LibrarySetInvoker librarySetInvoker =
             cqlToolkit
                 .AddCqlLibraries(cql)
@@ -34,7 +35,7 @@ partial class Program
         object? result = librarySetInvoker.InvokeLibraryDefinition(
             cqlContext: cqlContext,
             libraryIdentifier: cql.LibraryIdentifier,
-            definitionSignature: "Hello World");
+            definitionSignature: "HelloWorld");
 
         Console.WriteLine(result);
     }
