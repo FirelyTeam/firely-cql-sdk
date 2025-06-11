@@ -23,8 +23,9 @@
 			## Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			Keep this in sync between cql-sdk.props and cql-demo.props
 		-->
-		<VersionPrefix>2.0.16</VersionPrefix>
-		<VersionSuffix>alpha</VersionSuffix>
+		<VersionPrefix>2.1.0</VersionPrefix>
+		<VersionSuffix>beta.1</VersionSuffix>
+
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>

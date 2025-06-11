@@ -345,6 +345,11 @@ internal static class LibraryPackager
         fhirLibrary.Status = PublicationStatus.Active;
         fhirLibrary.Date = new DateTimeIso8601(date.ToLocalTime(), Iso8601DateTimePrecision.Millisecond).ToString();
 
+        if (elmLibrary.contexts?.Any(context => nameof(ResourceType.Patient).Equals(context?.name)) ?? false)
+        {
+            fhirLibrary.Subject = new CodeableConcept("http://hl7.org/fhir/resource-types", nameof(ResourceType.Patient));
+        }
+
         if (fhirLibrary.Meta is {} meta)
             meta.LastUpdated = date;
 
@@ -619,7 +624,7 @@ internal static class LibraryPackager
             parameterDefinition.Extension.Add(new Extension
             {
                 Value = new FhirModelCode("private"),
-                Url = Constants.Hl7FhirStructureDefinitionCqlAccessLevel,
+                Url = Constants.Hl7FhirStructureDefinitionCqlAccessModifier,
             });
         }
 

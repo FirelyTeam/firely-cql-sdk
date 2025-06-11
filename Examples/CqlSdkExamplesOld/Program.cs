@@ -28,6 +28,9 @@ internal static class Program
 
     private static void Main(string[] args)
     {
+        // Confirm that the CqlToolkitConfig is set to use these models by default
+        Debug.Assert(CqlToolkitConfig.DefaultCqlModels.SetEquals([CqlModel.ElmR1, CqlModel.Fhir401]));
+
         // Create a logger factory via the Microsoft.Extensions.Logging API
         using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
@@ -116,8 +119,7 @@ internal static class Program
     private static void PackageFromExamplesFolder(ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
 
         // "Directories" is not a part of the API, but a helper class for this example
         var dirs = Directories.Create("Demo");
@@ -137,8 +139,7 @@ internal static class Program
         ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
 
         var cqlLibraryString = CqlLibraryString.Parse(
             """
@@ -218,8 +219,7 @@ internal static class Program
         var dirs = Directories.Create("Tests");
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
 
         // We can write extensions to make it even easier to change exception handling
         var cqlContext = FhirCqlContext.ForBundle();
@@ -229,10 +229,33 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
 
-        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
+        //logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
+
+        // Calling invocations individually
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
         Trace.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
+
+        // Invoking all expressions in a library
+        var results = librarySetInvoker
+                      .SelectExpressions()
+                      .SelectResults(
+                          cqlContext,
+                          SelectResultsOptions.Default with
+                          {
+                              PreInvokeDefinitionCallback = (
+                                      invoker,
+                                      context,
+                                      arguments) =>
+                                  logger.LogInformation("Invoking definition {definition} with arguments [{arguments}]", invoker, arguments),
+                              PostInvokeDefinitionCallback = (
+                                      invoker,
+                                      context,
+                                      arguments,
+                                      result) =>
+                                  logger.LogInformation("Invoked definition {definition} with result {result}", invoker, result),
+                          })
+                      .ToList(); // Important to enumerate the results here, otherwise nothing will be invoked
 
         object? Invoke(string libraryName, string declarationName)
         {
@@ -254,8 +277,7 @@ internal static class Program
         dirs.GeneratedDirectory.Delete(recursive: true);
 
         // Create fluent cql toolkit
-        var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        var cqlToolkit = new CqlToolkit(loggerFactory, config);
+        var cqlToolkit = new CqlToolkit(loggerFactory);
         _ =
             cqlToolkit
                 .SetIgnoreEnumerationExceptions()
@@ -306,9 +328,8 @@ internal static class Program
         dirs.GeneratedDirectory.Delete(recursive: true);
 
         // Create fluent cql toolkit
-        var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit =
-            new CqlToolkit(loggerFactory, config)
+            new CqlToolkit(loggerFactory)
                 .SetIgnoreEnumerationExceptions()
                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory);
 
@@ -345,8 +366,7 @@ internal static class Program
         ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit
@@ -403,7 +423,7 @@ file static class Extensions
                   .Select(definitionInvoker => (definitionInvoker, default(object)))
                 : librarySetInvoker
                   .SelectExpressions()
-                  .SelectResults(cqlContext, null);
+                  .SelectResults(cqlContext);
 
         foreach (var groupedByLibrary in
                  definitions.GroupBy(o => o.definitionInvoker.LibraryIdentifier))

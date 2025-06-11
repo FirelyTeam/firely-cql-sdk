@@ -5,6 +5,7 @@
   },
   "Elm": {
     "JsonPretty": true,
+    "OutputCSharpFilesToTempDirectory": true,
     "AssemblyCompilerDebugInformationFormat": "PortablePdb"
   },
   "Packaging": {

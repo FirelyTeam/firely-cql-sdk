@@ -135,6 +135,11 @@ public record CqlToolkitConfig(
     )
 {
     /// <summary>
+    /// Gets or sets the default set of CQL models to use when translating CQL to ELM.
+    /// </summary>
+    public static ImmutableHashSet<CqlModel> DefaultCqlModels { get; set; } = [CqlModel.ElmR1, CqlModel.Fhir401];
+
+    /// <summary>
     /// The default configuration for the CQL toolkit.
     /// </summary>
     public static CqlToolkitConfig Default { get; } = new();
@@ -142,7 +147,7 @@ public record CqlToolkitConfig(
     /// <summary>
     /// The model information to use when translating CQL to ELM.
     /// </summary>
-    public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
+    public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? DefaultCqlModels;
 
     /// <summary>
     /// The model information to use when translating CQL to ELM.

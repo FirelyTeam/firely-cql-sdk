@@ -56,7 +56,11 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     /// <summary>
     /// Gets the dictionary of library invokers.
     /// </summary>
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     [EditorBrowsable(EditorBrowsableState.Advanced)]
