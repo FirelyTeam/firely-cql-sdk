@@ -34,7 +34,7 @@ public readonly record struct ResourceFileName : IParsable<ResourceFileName>
         string type,
         string identifier,
         string? version = null) =>
-        (Type, Identifier, Version) = (type, identifier, version);
+        (Type, Identifier, Version) = (type ?? throw new ArgumentNullException(nameof(type)), identifier ?? throw new ArgumentNullException(nameof(identifier)), version);
 
     /// <summary>
     /// Creates a new instance of <see cref="ResourceFileName"/>.

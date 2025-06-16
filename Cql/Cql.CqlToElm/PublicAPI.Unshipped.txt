@@ -127,6 +127,7 @@ static Hl7.Cql.CqlToElm.CqlLibraryString.implicit operator string!(Hl7.Cql.CqlTo
 static Hl7.Cql.CqlToElm.CqlLibraryString.operator !=(Hl7.Cql.CqlToElm.CqlLibraryString left, Hl7.Cql.CqlToElm.CqlLibraryString right) -> bool
 static Hl7.Cql.CqlToElm.CqlLibraryString.operator ==(Hl7.Cql.CqlToElm.CqlLibraryString left, Hl7.Cql.CqlToElm.CqlLibraryString right) -> bool
 static Hl7.Cql.CqlToElm.CqlLibraryString.Parse(string! cqlContent) -> Hl7.Cql.CqlToElm.CqlLibraryString
+static Hl7.Cql.CqlToElm.CqlLibraryString.TryParse(string! cqlContent, out Hl7.Cql.CqlToElm.CqlLibraryString? result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
 static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
 static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromName(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ChoiceTypeSpecifier! cts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ChoiceTypeSpecifier!

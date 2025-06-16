@@ -26,7 +26,7 @@ internal static class ResourceCanonicalBuilderFactory
             string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
             var resultCanonical = fixedLibraryCanonicals is { Count: > 0 }
                                   && CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier)
-                                  && fixedLibraryCanonicals.TryGetValue(cqlLibraryIdentifier, out var canonical)
+                                  && fixedLibraryCanonicals.TryGetValue(cqlLibraryIdentifier.Value, out var canonical)
                                       ? $"{canonical}{includeVersionString}"
                                       : $"{rootUrl}{resourceType}/{identifier}{includeVersionString}";
             return resultCanonical;

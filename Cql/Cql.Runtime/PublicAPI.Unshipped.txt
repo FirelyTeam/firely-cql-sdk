@@ -1,5 +1,13 @@
 ﻿#nullable enable
-const Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.IdentifierVersionDelimiter = "-" -> string!
+const Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.IdentifierVersionDelimiter = '-' -> char
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.CannotSplitIdentifierAndVersionByDash = "Cannot split identifier and version by dash." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.ExpectedTokenNotFound_1 = "Expected {0} token not found." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.MoreTokensAfterEndOfInput = "More tokens after expected end of input." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.MultipleQualifiersNotSupported = "Multiple qualifiers not supported." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.NullOrEmpty = "Input is null or empty." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.SyntaxErrorFound = "Syntax error found." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.SyntaxError_1 = "Syntax error: {0}." -> string!
+const Hl7.Cql.Runtime.Parsing.CqlParseErrors.TextOpenedButNotClosed = "Text is opened with a special character, but not closed." -> string!
 Hl7.Cql.Conversion.ITypeConverterEntry
 Hl7.Cql.Conversion.ITypeConverterEntry.Convert(object? instance, System.Type! to) -> object?
 Hl7.Cql.Conversion.ITypeConverterEntry.Handles(System.Type! from, System.Type! to) -> bool
@@ -579,6 +587,17 @@ Hl7.Cql.Runtime.DefinitionSignature.Name.get -> string!
 Hl7.Cql.Runtime.DefinitionSignature.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Runtime.IO.DirectoryInfoHandler
 Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy
+Hl7.Cql.Runtime.Parsing.CqlParseError
+Hl7.Cql.Runtime.Parsing.CqlParseError.Arguments.get -> object?[]!
+Hl7.Cql.Runtime.Parsing.CqlParseError.CqlParseError() -> void
+Hl7.Cql.Runtime.Parsing.CqlParseError.CqlParseError(System.FormattableString! FormattableString) -> void
+Hl7.Cql.Runtime.Parsing.CqlParseError.Deconstruct(out System.FormattableString! FormattableString) -> void
+Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(Hl7.Cql.Runtime.Parsing.CqlParseError other) -> bool
+Hl7.Cql.Runtime.Parsing.CqlParseError.Format.get -> string!
+Hl7.Cql.Runtime.Parsing.CqlParseError.FormattableString.get -> System.FormattableString!
+Hl7.Cql.Runtime.Parsing.CqlParseError.FormattableString.init -> void
+Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler
+Hl7.Cql.Runtime.Parsing.CqlParseErrors
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.CqlValueTupleJsonConverter() -> void
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
@@ -628,6 +647,8 @@ override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
 override Hl7.Cql.Runtime.DefinitionSignature.Equals(object? other) -> bool
 override Hl7.Cql.Runtime.DefinitionSignature.GetHashCode() -> int
+override Hl7.Cql.Runtime.Parsing.CqlParseError.GetHashCode() -> int
+override Hl7.Cql.Runtime.Parsing.CqlParseError.ToString() -> string!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Runtime.CompilerServices.ITuple!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, System.Runtime.CompilerServices.ITuple! value, System.Text.Json.JsonSerializerOptions! options) -> void
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
@@ -642,14 +663,14 @@ static Hl7.Cql.Runtime.CqlLibraryIdentifier.implicit operator string!(Hl7.Cql.Ru
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
-static Hl7.Cql.Runtime.CqlLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryIdentifier? result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.explicit operator Hl7.Cql.Runtime.CqlLibraryVersion(string! version) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.implicit operator string!(Hl7.Cql.Runtime.CqlLibraryVersion version) -> string!
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator !=(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
-static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
-static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.BuildString(string! identifier, string? version = null, string! delimiter = "-") -> string?
+static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion? result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.BuildString(string! identifier, string? version = null, char delimiter = '-') -> string?
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
@@ -658,13 +679,20 @@ static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator !=(Hl7.Cql.Runtime
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
 static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature!(string! name) -> Hl7.Cql.Runtime.DefinitionSignature!
 static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
 static Hl7.Cql.Runtime.DefinitionSignature.operator ==(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
+static Hl7.Cql.Runtime.Parsing.CqlParseError.implicit operator Hl7.Cql.Runtime.Parsing.CqlParseError((string! format, object! arg) message) -> Hl7.Cql.Runtime.Parsing.CqlParseError
+static Hl7.Cql.Runtime.Parsing.CqlParseError.implicit operator Hl7.Cql.Runtime.Parsing.CqlParseError((string! format, object! arg1, object! args2) message) -> Hl7.Cql.Runtime.Parsing.CqlParseError
+static Hl7.Cql.Runtime.Parsing.CqlParseError.implicit operator Hl7.Cql.Runtime.Parsing.CqlParseError((string! format, object![]! args) message) -> Hl7.Cql.Runtime.Parsing.CqlParseError
+static Hl7.Cql.Runtime.Parsing.CqlParseError.implicit operator Hl7.Cql.Runtime.Parsing.CqlParseError(string! message) -> Hl7.Cql.Runtime.Parsing.CqlParseError
+static Hl7.Cql.Runtime.Parsing.CqlParseError.implicit operator Hl7.Cql.Runtime.Parsing.CqlParseError(System.FormattableString! message) -> Hl7.Cql.Runtime.Parsing.CqlParseError
+static Hl7.Cql.Runtime.Parsing.CqlParseError.operator !=(Hl7.Cql.Runtime.Parsing.CqlParseError left, Hl7.Cql.Runtime.Parsing.CqlParseError right) -> bool
+static Hl7.Cql.Runtime.Parsing.CqlParseError.operator ==(Hl7.Cql.Runtime.Parsing.CqlParseError left, Hl7.Cql.Runtime.Parsing.CqlParseError right) -> bool
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetIgnoreEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit, bool breakAfterFirstException = false) -> TSelf
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetThrowEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit) -> TSelf
@@ -678,7 +706,9 @@ virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrievePa
 virtual Hl7.Cql.Operators.RetrieveParameters.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
+virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Parsing.CqlParseError parseError) -> void
 virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
+~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool

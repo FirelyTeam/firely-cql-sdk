@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime.Parsing;
 using Hl7.Cql.Runtime.Serialization;
 
 namespace Hl7.Cql.Runtime;
@@ -40,11 +41,7 @@ public readonly record struct CqlLibraryIdentifier :
     /// Initializes a new instance of the <see cref="CqlLibraryIdentifier"/> struct.
     /// </summary>
     /// <param name="value">The string value of the identifier.</param>
-    private CqlLibraryIdentifier(string value) => _value = value; // TryParse will already do validation
-
-    internal static bool IsValid([NotNullWhen(true)]string? value) =>
-        value is not null
-        && !value.Contains('_');
+    private CqlLibraryIdentifier(string value) => _value = value ?? throw new ArgumentNullException(nameof(value)); // TryParse will already do validation
 
     /// <summary>
     /// Returns the string representation of the identifier.
@@ -53,6 +50,8 @@ public readonly record struct CqlLibraryIdentifier :
     public override string ToString() => _value;
 
     #region Parsing
+
+    private static readonly CqlParseErrorHandler OnErrorThrowException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlLibraryIdentifier));
 
     /// <summary>
     /// Parses the specified string to a <see cref="CqlLibraryIdentifier"/>.
@@ -73,9 +72,8 @@ public readonly record struct CqlLibraryIdentifier :
     /// <exception cref="FormatException">Thrown when the string is not a valid identifier.</exception>
     public static CqlLibraryIdentifier Parse(string s)
     {
-        return TryParse(s, out var result)
-                   ? result
-                   : throw new FormatException($"Not a valid {nameof(CqlLibraryIdentifier)}");
+        TryParse(s, out var nresult, OnErrorThrowException);
+        return nresult!.Value;
     }
 
     /// <summary>
@@ -90,7 +88,14 @@ public readonly record struct CqlLibraryIdentifier :
         IFormatProvider? provider,
         out CqlLibraryIdentifier result)
     {
-        return TryParse(s, out result);
+        if (TryParse(s, out var nresult))
+        {
+            result = nresult.Value;
+            return true;
+        }
+
+        result = default;
+        return false;
     }
 
     /// <summary>
@@ -98,17 +103,25 @@ public readonly record struct CqlLibraryIdentifier :
     /// </summary>
     /// <param name="s">The string to parse.</param>
     /// <param name="result">The parsed <see cref="CqlLibraryIdentifier"/>.</param>
+    /// <param name="onError">An optional callback containing details about a failed parse attempt.</param>
     /// <returns><c>true</c> if the string was successfully parsed; otherwise, <c>false</c>.</returns>
-    public static bool TryParse(string? s, out CqlLibraryIdentifier result)
+    public static bool TryParse(
+        string? s,
+        [NotNullWhen(true)] out CqlLibraryIdentifier? result,
+        CqlParseErrorHandler? onError = null)
+
     {
-        if (IsValid(s))
+        result = default(CqlLibraryIdentifier);
+
+        if (string.IsNullOrEmpty(s))
         {
-            result = new CqlLibraryIdentifier(s);
-            return true;
+            onError?.Invoke(CqlParseErrors.NullOrEmpty);
+            return false;
         }
 
-        result = default;
-        return false;
+
+        result = NewVerbatim(s);
+        return true;
     }
 
     #endregion
@@ -141,4 +154,6 @@ public readonly record struct CqlLibraryIdentifier :
     }
 
     #endregion
+
+    internal static CqlLibraryIdentifier NewVerbatim(string value) => new(value);
 }

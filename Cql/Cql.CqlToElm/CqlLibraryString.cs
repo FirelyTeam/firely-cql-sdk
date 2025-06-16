@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Parsing;
 
 namespace Hl7.Cql.CqlToElm;
 
@@ -14,7 +15,8 @@ namespace Hl7.Cql.CqlToElm;
 /// Represents a CQL library with its content as a string
 /// as well as its library identifier, extracted from the content.
 /// </summary>
-public readonly partial record struct CqlLibraryString
+public readonly record struct CqlLibraryString
+    : IParsable<CqlLibraryString>
 {
     /// <summary>
     /// Creates a new instance of <see cref="CqlLibraryString"/> from the given identifier and content.
@@ -29,36 +31,12 @@ public readonly partial record struct CqlLibraryString
         return new CqlLibraryString(libraryIdentifier, cqlContent);
     }
 
-    /// <summary>
-    /// Regex to extract the library name and optional version from a CQL string.
-    /// The CQL specification for it can be found at https://cql.hl7.org/19-l-cqlsyntaxdiagrams.html#library
-    /// under libraryDefinition.
-    /// </summary>
-    /// <returns>A <see cref="Regex"/> to extract the library name and version.</returns>
-    [GeneratedRegex("""
-                         \A
-                         (?:                # Non-capturing group for block comments, line comments and whitespace
-                           /\*              #   Start of block comment
-                           [\s\S]*?         #   Match any characters (including newlines) non-greedily
-                           \*/              #   End of block comment
-                         |                  # OR
-                           //               #   Start of line comment
-                           [^\r\n]*         #   Match any characters except newlines
-                         |                  # OR
-                           \s               #   Match any whitespace character
-                         )*                 # Zero or more occurrences of the above
-                         library            # until "library" is found
-                         \s+                # at least one space
-                         (?<lib>\S+)        # The name of the library
-                         (?:
-                           \s+              # at least one space
-                           version          # version keyword
-                           \s*              # optional spaces
-                           '(?<ver>[^']+)'  # The version of the library between single quotes
-                         )?                 # Version is optional
-                         """,
-                    RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
-    private static partial Regex LibraryNameAndVersionRegex();
+    #region Parsing
+
+    private static readonly CqlParseErrorHandler OnErrorThrowException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlLibraryIdentifier));
+
+    static CqlLibraryString IParsable<CqlLibraryString>.Parse(string s, IFormatProvider? provider) =>
+        Parse(s);
 
     /// <summary>
     /// Parses a CQL string to create a <see cref="CqlLibraryString"/> instance.
@@ -68,15 +46,72 @@ public readonly partial record struct CqlLibraryString
     /// <exception cref="FormatException">Thrown when the library identifier and version cannot be extracted from the provided CQL string.</exception>
     public static CqlLibraryString Parse(string cqlContent)
     {
-        var match = LibraryNameAndVersionRegex().Match(cqlContent);
-        if (!match.Success)
-            throw new FormatException("Could not get library identifier and version from provided cql string.");
-
-        var lib = match.Groups["lib"].Value;
-        var ver = match.Groups["ver"].Value.NullIfEmpty();
-        var libVer = CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, ver);
-        return new CqlLibraryString(libVer, cqlContent);
+        TryParse(cqlContent, out var result, OnErrorThrowException);
+        return result!.Value;
     }
+
+    static bool IParsable<CqlLibraryString>.TryParse(
+        [NotNullWhen(true)] string? s,
+        IFormatProvider? provider,
+        out CqlLibraryString result)
+    {
+        if (!string.IsNullOrEmpty(s) && TryParse(s, out var nresult))
+        {
+            result = nresult.Value;
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Attempts to parse the provided CQL content into a <see cref="CqlLibraryString"/> instance.
+    /// </summary>
+    /// <param name="cqlContent">
+    /// The CQL content to parse. This must be a valid CQL library definition.
+    /// </param>
+    /// <param name="result">
+    /// When this method returns, contains the parsed <see cref="CqlLibraryString"/> instance if the parsing succeeded;
+    /// otherwise, <c>null</c>.
+    /// </param>
+    /// <param name="onError">
+    /// An optional delegate to handle parse errors. If provided, this delegate will be invoked for each error encountered
+    /// during parsing.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the parsing succeeded; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool TryParse(
+        string cqlContent,
+        [NotNullWhen(true)]out CqlLibraryString? result,
+        CqlParseErrorHandler? onError = null)
+    {
+        if (!cqlContent.TryParseCqlLibraryDefinition(out var ntuple, onError))
+        {
+            result = null;
+            return false;
+        }
+
+        var tuple = ntuple.Value;
+        var qualifiedIdentifier = tuple switch
+        {
+            ({ Length: > 0 } q, { } i, _) => CqlLibraryIdentifier.NewVerbatim($"{q}.{i}"),
+            var (_, i, _)                 => CqlLibraryIdentifier.NewVerbatim(i),
+        };
+
+        CqlLibraryVersion? version = tuple.version switch
+        {
+            ({ Length: > 0 } v) => CqlLibraryVersion.NewVerbatim(v),
+            _                   => null
+        };
+
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(qualifiedIdentifier, version);
+        result = new CqlLibraryString(libVer, cqlContent);
+        return true;
+    }
+
+    #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlLibraryString"/> struct.
