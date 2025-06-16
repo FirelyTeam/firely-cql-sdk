@@ -1,9 +1,9 @@
 ﻿#nullable enable
 const Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.IdentifierVersionDelimiter = '-' -> char
+const Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter = '.' -> char
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.CannotSplitIdentifierAndVersionByDash = "Cannot split identifier and version by dash." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.ExpectedTokenNotFound_1 = "Expected {0} token not found." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.MoreTokensAfterEndOfInput = "More tokens after expected end of input." -> string!
-const Hl7.Cql.Runtime.Parsing.CqlParseErrors.MultipleQualifiersNotSupported = "Multiple qualifiers not supported." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.NullOrEmpty = "Input is null or empty." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.SyntaxErrorFound = "Syntax error found." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.SyntaxError_1 = "Syntax error: {0}." -> string!
@@ -671,14 +671,15 @@ static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryV
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion? result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.BuildString(string! identifier, string? version = null, char delimiter = '-') -> string?
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.BuildString(string! system, string! identifier, string? version = null, char systemDelimiter = '.', char versionDelimiter = '-') -> string?
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromIdentifierAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier versionedIdentifier) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
 static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature!(string! name) -> Hl7.Cql.Runtime.DefinitionSignature!
 static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
