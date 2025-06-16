@@ -17,13 +17,8 @@ public readonly record struct ResourceFileName : IParsable<ResourceFileName>
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url
     // !! Special handling around hyphens as it is used to delimit between resource type, identifier and version
 
-    internal const bool AllowUnderscores = false; // Allowed for now, since NCQA cql files use underscores
-
 #pragma warning disable CS0162 // Unreachable code detected
-    private static readonly char[] InvalidChars =
-        AllowUnderscores
-            ? (char[])['-'/*, '_'*/]
-            : (char[])['-', '_'];
+    private static readonly char[] InvalidChars = ['-'];
 #pragma warning restore CS0162 // Unreachable code detected
 
     private static readonly ArgValidator<string> ValidateType = Arg.IsRequired().And(Arg.ShouldNotContain(InvalidChars));

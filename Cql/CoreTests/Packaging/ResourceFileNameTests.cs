@@ -67,16 +67,6 @@ public class ResourceFileNameTests
     }
 
     [TestMethod]
-    public void Parse_InvalidString_ShouldThrowFormatException()
-    {
-        if (ResourceFileName.AllowUnderscores)
-            return;
-
-        Action act = () => ResourceFileName.Parse("Invalid-Str_ing", null);
-        act.Should().Throw<FormatException>();
-    }
-
-    [TestMethod]
     public void TryParse_ValidStringWithExtension_ShouldReturnTrueAndResourceFileName()
     {
         var result = ResourceFileName.TryParse("Type-Identifier-1.0.0.json", null, out var resourceFileName);
@@ -94,16 +84,5 @@ public class ResourceFileNameTests
         resourceFileName.Type.Should().Be("Type");
         resourceFileName.Identifier.Should().Be("Identifier");
         resourceFileName.Version.Should().Be("1.0.0");
-    }
-
-    [TestMethod]
-    public void TryParse_InvalidString_ShouldReturnFalse()
-    {
-        if (ResourceFileName.AllowUnderscores)
-            return;
-
-        var result = ResourceFileName.TryParse("Invalid-Str_ing", null, out var resourceFileName);
-        result.Should().BeFalse();
-        resourceFileName.Should().Be(default(ResourceFileName));
     }
 }
