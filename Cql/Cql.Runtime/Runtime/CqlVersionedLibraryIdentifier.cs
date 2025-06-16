@@ -24,6 +24,11 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     private static readonly CqlParseErrorHandler OnErrorThrowFormatException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlVersionedLibraryIdentifier));
 
     /// <summary>
+    /// The delimiter to use between the qualifier and identifier part in the string representation.
+    /// </summary>
+    [UsedImplicitly] public const char SystemIdentifierDelimiter = '.';
+
+    /// <summary>
     /// The delimiter to use between the identifier and version part in the string representation.
     /// </summary>
     [UsedImplicitly] public const char IdentifierVersionDelimiter = '-';
@@ -49,11 +54,11 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// <param name="identifier">The identifier string.</param>
     /// <param name="version">The version string (optional).</param>
     /// <returns>A <see cref="CqlVersionedLibraryIdentifier"/> instance.</returns>
-    public static CqlVersionedLibraryIdentifier ParseFromNameAndVersion(string identifier, string? version = null)
+    public static CqlVersionedLibraryIdentifier ParseFromIdentifierAndVersion(string identifier, string? version = null)
     {
         CqlLibraryIdentifier cqlLibraryIdentifier = (CqlLibraryIdentifier)identifier;
         CqlLibraryVersion? cqlLibraryVersion = version is null ? null : (CqlLibraryVersion?)version;
-        return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
+        return FromIdentifierAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
     /// <summary>
@@ -62,7 +67,7 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// <param name="identifier">The CQL library identifier.</param>
     /// <param name="version">The CQL library version (optional).</param>
     /// <returns>A <see cref="CqlVersionedLibraryIdentifier"/> instance.</returns>
-    public static CqlVersionedLibraryIdentifier FromNameAndVersion(CqlLibraryIdentifier identifier, CqlLibraryVersion? version = null)
+    public static CqlVersionedLibraryIdentifier FromIdentifierAndVersion(CqlLibraryIdentifier identifier, CqlLibraryVersion? version = null)
     {
         return new CqlVersionedLibraryIdentifier(identifier, version);
     }
@@ -80,9 +85,9 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// Returns a string representation of the CQL versioned library identifier.
     /// </summary>
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
-    internal string ToString(char delimiter)
+    internal string ToString(char identifierVersionDelimiter)
     {
-        return BuildString(Identifier, Version, delimiter)!;
+        return BuildString(Identifier, Version, identifierVersionDelimiter)!;
     }
 
     /// <summary>
@@ -100,9 +105,33 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
         char delimiter = IdentifierVersionDelimiter) =>
         (identifier, version) switch
         {
-            ({ Length:>0 } id, { Length: > 0 } ver) => $"{id}{delimiter}{ver}",
-            ({ Length: > 0 } id, _)     => id,
+            ({ Length: > 0 } id, { Length: > 0 } ver) => $"{id}{delimiter}{ver}",
+            ({ Length: > 0 } id, _)                   => id,
             _ => null
+        };
+
+    /// <summary>
+    /// Constructs a string representation of a CQL versioned library identifier.
+    /// </summary>
+    /// <param name="system">The system of the CQL library.</param>
+    /// <param name="identifier">The identifier of the CQL library.</param>
+    /// <param name="version">The version of the CQL library. This parameter is optional.</param>
+    /// <param name="systemDelimiter">The delimiter used to separate the system and identifier. Defaults to '.'.</param>
+    /// <param name="versionDelimiter">The delimiter used to separate the identifier and version. Defaults to '-'.</param>
+    /// <returns>A string combining the system, identifier and version, separated by the specified delimiters.</returns>
+    public static string? BuildString(
+        string system,
+        string identifier,
+        string? version = null,
+        char systemDelimiter = SystemIdentifierDelimiter,
+        char versionDelimiter = IdentifierVersionDelimiter) =>
+        (system, identifier, version) switch
+        {
+            ({ Length: > 0 } sys, { Length: > 0 } id, { Length: > 0 } ver) => $"{sys}{systemDelimiter}{id}{versionDelimiter}{ver}",
+            ({ Length: > 0 } sys, { Length: > 0 } id, _)                   => $"{sys}{systemDelimiter}{id}",
+            (_, { Length: > 0 } id, { Length: > 0 } ver)                   => $"{id}{versionDelimiter}{ver}",
+            (_, { Length: > 0 } id, _)                                     => id,
+            _                                                              => null
         };
 
     #region Parsing
@@ -170,14 +199,14 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
                 if (string.IsNullOrEmpty(versionPart)
                     && CqlLibraryIdentifier.TryParse(identifierPart, out var nidentifier))
                 {
-                    result = FromNameAndVersion(nidentifier.Value);
+                    result = FromIdentifierAndVersion(nidentifier.Value);
                     return true;
                 }
 
                 if (CqlLibraryIdentifier.TryParse(identifierPart, out nidentifier)
                     && CqlLibraryVersion.TryParse(versionPart, out var nversion))
                 {
-                    result = FromNameAndVersion(nidentifier.Value, nversion.Value);
+                    result = FromIdentifierAndVersion(nidentifier.Value, nversion.Value);
                     return true;
                 }
             }
@@ -293,7 +322,7 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// Implicitly converts a <see cref="CqlLibraryIdentifier"/> to a <see cref="CqlVersionedLibraryIdentifier"/>.
     /// </summary>
     /// <param name="identifier">The CQL library identifier.</param>
-    public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryIdentifier identifier) => FromNameAndVersion(identifier);
+    public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryIdentifier identifier) => FromIdentifierAndVersion(identifier);
 
     #endregion
 

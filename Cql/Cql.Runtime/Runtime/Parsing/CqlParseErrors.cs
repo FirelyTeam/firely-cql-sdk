@@ -23,11 +23,6 @@ public static class CqlParseErrors
     /// <summary>
     /// Represents an error message indicating that a specific token was expected but not found, with a suggestion to use a different token.
     /// </summary>
-    public const string MultipleQualifiersNotSupported = "Multiple qualifiers not supported.";
-
-    /// <summary>
-    /// Represents an error message indicating that a specific token was expected but not found, with a suggestion to use a different token.
-    /// </summary>
     public const string SyntaxErrorFound = "Syntax error found.";
 
     /// <summary>

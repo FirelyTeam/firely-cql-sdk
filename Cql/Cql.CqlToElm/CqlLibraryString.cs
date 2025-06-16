@@ -33,7 +33,7 @@ public readonly record struct CqlLibraryString
 
     #region Parsing
 
-    private static readonly CqlParseErrorHandler OnErrorThrowException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlLibraryIdentifier));
+    private static readonly CqlParseErrorHandler OnErrorThrowException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlLibraryString));
 
     static CqlLibraryString IParsable<CqlLibraryString>.Parse(string s, IFormatProvider? provider) =>
         Parse(s);
@@ -106,7 +106,7 @@ public readonly record struct CqlLibraryString
             _                   => null
         };
 
-        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(qualifiedIdentifier, version);
+        var libVer = CqlVersionedLibraryIdentifier.FromIdentifierAndVersion(qualifiedIdentifier, version);
         result = new CqlLibraryString(libVer, cqlContent);
         return true;
     }

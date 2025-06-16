@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime.Tree;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -139,15 +140,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
 
-            if (qualifiers.Any())
-            {
-                if (qualifiers.Length > 1)
-                    throw new InvalidOperationException($"Multiple qualifiers not supported.");
-
-                return (qualifiers.Single(), context.identifier().Parse()!);
-            }
-            else
-                return (string.Empty, context.identifier().Parse()!);
+             return (string.Join(CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter, qualifiers), context.identifier().Parse()!);
         }
 
         // : (libraryIdentifier '.')? identifier

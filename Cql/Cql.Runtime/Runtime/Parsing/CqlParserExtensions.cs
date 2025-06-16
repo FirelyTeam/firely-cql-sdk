@@ -30,17 +30,24 @@ internal static class CqlParserExtensions
                 onError((CqlParseErrors.ExpectedTokenNotFound_1, "qualifier"));
                 return false;
 
-            case { Length: > 1 }:
-                onError(CqlParseErrors.MultipleQualifiersNotSupported);
-                return false;
-
-            case [{} qualifier]:
+            case {} qualifiers:
             {
-                var qualifierText = qualifier.identifier().GetText();
-                if (!TryUnquote(qualifierText, out qualifierPart, onError, '\"', '`'))
+                StringBuilder sbQualifierPart = new StringBuilder();
+                for (int i = 0; i < qualifiers.Length; i++)
                 {
-                    return false;
+                    var qualifier = qualifiers[i];
+                    var qualifierText = qualifier.identifier().GetText();
+                    if (!TryUnquote(qualifierText, out qualifierPart, onError, '\"', '`'))
+                    {
+                        return false;
+                    }
+
+                    if (sbQualifierPart.Length > 0)
+                        sbQualifierPart.Append(CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter);
+
+                    sbQualifierPart.Append(qualifierPart);
                 }
+                qualifierPart = sbQualifierPart.ToString();
                 break;
             }
         }
@@ -51,6 +58,7 @@ internal static class CqlParserExtensions
             case null:
                 onError((CqlParseErrors.ExpectedTokenNotFound_1, "identifier"));
                 return false;
+            
             case { } text:
                 identifierText = text;
                 break;

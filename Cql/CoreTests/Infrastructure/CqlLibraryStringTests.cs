@@ -85,8 +85,8 @@ namespace CoreTests.Infrastructure
         public void Parse_ValidQualifierIdentifierAndVersion_ReturnsCqlLibraryString()
         {
             // Arrange
-            string cqlContent = "library Namespace.TestLibrary version '1.0.0'";
-            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"Namespace.TestLibrary-1.0.0";
+            string cqlContent = "library NamespaceA.NamespaceB.TestLibrary version '1.0.0'";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"NamespaceA.NamespaceB.TestLibrary-1.0.0";
 
             // Act
             var result = CqlLibraryString.Parse(cqlContent);
@@ -138,7 +138,7 @@ namespace CoreTests.Infrastructure
 
             // Assert
             var e = Assert.ThrowsException<FormatException>(act);
-            Assert.AreEqual("Not a valid Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier: Syntax error: extraneous input '<EOF>' expecting {QUOTEDIDENTIFIER, IDENTIFIER, DELIMITEDIDENTIFIER}.", e.Message);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: extraneous input '<EOF>' expecting {QUOTEDIDENTIFIER, IDENTIFIER, DELIMITEDIDENTIFIER}.", e.Message);
         }
 
         [TestMethod]
@@ -167,7 +167,7 @@ namespace CoreTests.Infrastructure
 
             // Assert
             var e = Assert.ThrowsException<FormatException>(act);
-            Assert.AreEqual("Not a valid Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier: Syntax error: missing 'library' at 'invalid'.", e.Message);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: missing 'library' at 'invalid'.", e.Message);
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ namespace CoreTests.Infrastructure
 
             // Assert
             var e = Assert.ThrowsException<FormatException>(act);
-            Assert.AreEqual("Not a valid Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier: Syntax error: mismatched input '<EOF>' expecting 'library'.", e.Message);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: mismatched input '<EOF>' expecting 'library'.", e.Message);
         }
     }
 }
