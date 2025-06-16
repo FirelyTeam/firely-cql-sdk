@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -19,7 +18,7 @@ namespace Hl7.Cql.ValueSets
     {
         private const string NullCodeSystem = "\0";
 
-        private static readonly ICqlComparer<CqlCode> DefaultComparer = CqlCodeCqlComparer.DefaultCqlComparer;
+        private static readonly ICqlComparer<CqlCode> DefaultComparer = CqlCodeCqlComparer.OrdinalIgnoreCase;
 
         internal static readonly InMemoryValueSet Empty = new([]);
 
@@ -33,7 +32,7 @@ namespace Hl7.Cql.ValueSets
 
         /// <summary>
         /// Creates a new <see cref="InMemoryValueSet"/> with the given <paramref name="contents"/>.
-        /// If will use the default <see cref="CqlCodeCqlComparer.DefaultCqlComparer"/>.
+        /// If will use the default <see cref="CqlCodeCqlComparer.OrdinalIgnoreCase"/>.
         /// </summary>
         public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, DefaultComparer)
         {

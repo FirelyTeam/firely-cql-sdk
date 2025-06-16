@@ -41,43 +41,35 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
-
-            { "ExpandPerHour", "The expectation does not match the same example as published in the specification." },
-            { "ExpandPer1", "The expectation should have decimal values, not integers; the test does not compile in reference cql-to-elm." },
-            { "ProperContainsTimeNull", "There is no spec language justifying null instead of false." },
-            { "ProperInTimeNull", "There is no spec language justifying null instead of false." },
-            { "SortDatesAsc", "Sort tests shouldn't contain differing precision." },
-            { "SortDatesDesc", "Sort tests shouldn't contain differing precision." },
-
-            { "DecimalMinValue", "Our implementation returns a smaller value." },
-            { "DecimalMaxValue", "Our implementation returns a larger value." },
-            { "Power2ToNeg2", "Power returns integers, not decimals." },
-            { "DecimalOneStep", "Power returns integers, not decimals." },
-            { "DecimalPosOneStep", "Power returns integers, not decimals." },
-            { "DecimalTwoStep", "Power returns integers, not decimals." },
-            { "DecimalPosTwoStep", "Power returns integers, not decimals." },
-            { "DecimalNegTwoStep", "Power returns integers, not decimals." },
-            { "DecimalTenStep", "Power returns integers, not decimals." },
-            { "DecimalPosTenStep", "Power returns integers, not decimals." },
-            { "DecimalNegTenStep", "Power returns integers, not decimals." },
-            { "DecimalNegOneStep", "Power returns integers, not decimals." },
-
-            { "RoundNeg0D5", "This rounding test doesn't behave like the others." },
-            { "RoundNeg1D5", "This rounding test doesn't behave like the others." },
-
-            { "DateTimeDurationBetweenYear", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenUncertainInterval", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenUncertainInterval2", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenUncertainSubtract", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenUncertainMultiply", "We don't support uncertainty." },
+            { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
+            { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },
-            { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty." },
-            { "DateTimeUncertain", "We don't support uncertainty." },
-
-
-
-
+            { "DateTimeDurationBetweenUncertainInterval", "We don't support uncertainty" },
+            { "DateTimeDurationBetweenUncertainInterval2", "We don't support uncertainty" },
+            { "DateTimeDurationBetweenUncertainMultiply", "We don't support uncertainty" },
+            { "DateTimeDurationBetweenUncertainSubtract", "We don't support uncertainty" },
+            { "DateTimeDurationBetweenYear", "We don't support uncertainty" },
+            { "DateTimeUncertain", "We don't support uncertainty" },
+            { "DecimalMaxValue", "Our implementation returns a larger value" },
+            { "DecimalMinValue", "Our implementation returns a smaller value" },
+            { "DecimalNegOneStep", "Power returns integers, not decimals" },
+            { "DecimalNegTenStep", "Power returns integers, not decimals" },
+            { "DecimalNegTwoStep", "Power returns integers, not decimals" },
+            { "DecimalOneStep", "Power returns integers, not decimals" },
+            { "DecimalPosOneStep", "Power returns integers, not decimals" },
+            { "DecimalPosTenStep", "Power returns integers, not decimals" },
+            { "DecimalPosTwoStep", "Power returns integers, not decimals" },
+            { "DecimalTenStep", "Power returns integers, not decimals" },
+            { "DecimalTwoStep", "Power returns integers, not decimals" },
+            { "ExpandPer1", "The expectation should have decimal values, not integers; the test does not compile in reference cql-to-elm" },
+            { "ExpandPerHour", "The expectation does not match the same example as published in the specification" },
+            { "Power2ToNeg2", "Power returns integers, not decimals" },
+            { "ProperContainsTimeNull", "There is no spec language justifying null instead of false" },
+            { "ProperInTimeNull", "There is no spec language justifying null instead of false" },
+            { "RoundNeg0D5", "This rounding test doesn't behave like the others" },
+            { "RoundNeg1D5", "This rounding test doesn't behave like the others" },
+            { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
+            { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
         };
     }
 

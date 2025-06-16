@@ -1,7 +1,6 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -118,13 +117,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static T? Run<T>(Library library, string member, Hl7.Fhir.Model.Bundle? bundle = null)
         {
-            var lambdas = CreateElmToolkit().ProcessLibrary(library);
-            var delegates = lambdas.CompileAll();
-            var dg = delegates[library.GetVersionedIdentifier()!, member];
-            var ctx = FhirCqlContext.ForBundle(bundle, delegates: delegates);
-            var result = dg.DynamicInvoke(ctx);
-            Assert.IsInstanceOfType(result, typeof(T));
-            return (T?)result;
+            T? result = default;
+            CreateElmToolkit()
+                .AddElmLibraries(library)
+                .UseLibrarySetInvoker(librarySetInvoker =>
+                {
+                    var ctx = FhirCqlContext.ForBundle(bundle);
+                    var resultObj = (T?)librarySetInvoker.InvokeLibraryDefinition(
+                        ctx,
+                        library.VersionedLibraryIdentifier!,
+                        member);
+                    Assert.IsInstanceOfType(resultObj, typeof(T));
+                    result = (T?)resultObj;
+                });
+            return result;
         }
 
 

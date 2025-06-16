@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Elm;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
@@ -18,28 +17,25 @@ internal class LibraryExpressionBuilder(
     ILogger<LibraryExpressionBuilder> logger,
     ExpressionBuilder expressionBuilder)
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilder _expressionBuilder = expressionBuilder;
-
-    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
+    public CqlDefinitionDictionary ProcessLibrary(
         Library library,
-        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        CqlDefinitionDictionary? libraryDefinitions = null,
         LibrarySetExpressionBuilderContext? libsCtx = null) =>
         NewLibraryExpressionBuilderContext(library, libraryDefinitions, libsCtx)
             .ProcessLibrary();
 
     public LibraryExpressionBuilderContext NewLibraryExpressionBuilderContext(
         Library library,
-        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        CqlDefinitionDictionary? libraryDefinitions = null,
         LibrarySetExpressionBuilderContext? libsCtx = null) =>
-        new(_logger, _expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
+        new(logger, expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,
-        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        CqlDefinitionDictionary? libraryDefinitions = null,
         Dictionary<string, ParameterExpression>? operands = null)
     {
         var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
-        return _expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);
+        return expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);
     }
 }

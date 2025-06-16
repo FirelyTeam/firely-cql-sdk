@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ModelProvider = services.GetRequiredService<IModelProvider>();
             CoercionProvider = services.GetRequiredService<CoercionProvider>();
             ElmFactory = services.GetRequiredService<ElmFactory>();
-            Messaging = services.GetRequiredService<MessageProvider>(); 
+            Messaging = services.GetRequiredService<MessageProvider>();
             Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
             TypeSpecifierVisitor = new TypeSpecifierVisitor(services, builder);
             InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // When enabled, allow Interval<Any> to be created for Interval[null, null].
             // This is normally disabled.
             if ((Options.AllowNullIntervals ?? false)
-                && low is Null 
+                && low is Null
                 && low.resultTypeSpecifier == SystemTypes.AnyType
                 && high is Null
                 && high.resultTypeSpecifier == SystemTypes.AnyType)
@@ -70,14 +70,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType.ToIntervalType());
             }
 
-            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval, 
-                low, 
-                high, 
+            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval,
+                low,
+                high,
                 ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
 
             if (intervalSelector.Compatible)
             {
-                
                 var interval = InvocationBuilder.Invoke(intervalSelector);
                 // TODO: this should be incorporated in the validation framework
                 // The validation framework is static and can't accept configuration options :(
@@ -186,6 +185,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => null
             };
 
+            if (terminology is CodeRef)
+            {
+                codeComparator = "~";
+                codePath = "code";
+                terminology = new ToList
+                {
+                    operand = terminology
+                };
+            }
+
             var retrieve = new Retrieve
             {
                 dataType = type.name,
@@ -204,7 +213,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var qie = context.qualifiedIdentifierExpression();
             var e = context.expression();
             if (e is not null)
-                throw new NotImplementedException();
+                Visit(e);
             return Visit(qie);
         }
 

@@ -1,0 +1,44 @@
+{
+  "profiles": {
+    "210 Load CQL from dir, Save ELM to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "210"
+    },
+    "220 Load ELM from dir, Save C#,DLL to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "220"
+    },
+    "230 Package CQL\u002BELM\u002BC#\u002BDLL from dirs, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "230"
+    },
+    "240 Package via CQL and ELM Toolkits, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "240"
+    },
+    "250 Package via CQL Toolkit, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "250"
+    },
+    "310 Invoking CQL Hello World": {
+      "commandName": "Project",
+      "commandLineArgs": "310"
+    },
+    "320 Invoking CQL Hello World with Parameter": {
+      "commandName": "Project",
+      "commandLineArgs": "320"
+    },
+    "330 Invoking CQL Hello World function with Argument": {
+      "commandName": "Project",
+      "commandLineArgs": "330"
+    },
+    "400 Invoke from FHIR Resources": {
+      "commandName": "Project",
+      "commandLineArgs": "400"
+    },
+    "500 Extending Functionality - Log Statements per Library": {
+      "commandName": "Project",
+      "commandLineArgs": "500"
+    }
+  }
+}

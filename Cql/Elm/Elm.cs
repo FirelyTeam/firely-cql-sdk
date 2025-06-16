@@ -18,30 +18,23 @@ namespace Hl7.Cql.Elm;
 internal static class IGetVersionedIdentifierExtensions
 {
     /// <summary>
-    /// Gets the identifier with the version, or just the identifier if no version exists.
+    /// Retrieves the versioned library identifier string from the specified
+    /// <see cref="IGetVersionedIdentifier"/> instance. This string represents the
+    /// name and version of the library in a formatted manner.
     /// </summary>
-    /// <param name="getVersionedIdentifier">The instance to get the versioned identifier string from.</param>
-    /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
-    /// <returns>The identifier with version, or just the identifier if no version exists.</returns>
-    /// <remarks>The identifier and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
-    public static string? GetVersionedIdentifier(
-        this IGetVersionedIdentifier getVersionedIdentifier,
-        bool throwError = true) =>
+    /// <param name="getVersionedIdentifier">
+    /// The <see cref="IGetVersionedIdentifier"/> instance from which to retrieve the versioned library identifier string.
+    /// </param>
+    /// <returns>
+    /// A string representing the versioned library identifier if available; otherwise, <c>null</c>.
+    /// </returns>
+    public static string? GetVersionedLibraryIdentifierString(
+        this IGetVersionedIdentifier getVersionedIdentifier) =>
         getVersionedIdentifier.VersionedIdentifier switch
         {
-            ({ } result, _)                => result.GetVersionedIdentifier(throwError),
-            (_, { } error) when throwError => throw error,
-            _                              => null
+            ({ } result, _) => result.GetVersionedLibraryIdentifierString(),
+            _               => null
         };
-
-    public static CqlVersionedLibraryIdentifier ToCqlVersionedLibraryIdentifier(this VersionedIdentifier identifier)
-    {
-        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
-        ArgumentNullException.ThrowIfNull(identifier);
-        ArgumentNullException.ThrowIfNull(identifier.id);
-
-        return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
-    }
 }
 
 /// <summary>
@@ -54,6 +47,13 @@ internal interface IGetVersionedIdentifier
     /// </summary>
     /// <value>The versioned identifier, or error if the identifier is missing.</value>
     (VersionedIdentifier? Result, Exception? Error) VersionedIdentifier { get; }
+
+    /// <summary>
+    /// Gets the versioned library identifier.
+    /// </summary>
+    [JsonIgnore]
+    [XmlIgnore]
+    CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -79,7 +79,20 @@ partial class Library : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifier(false);
+    [JsonIgnore]
+    [XmlIgnore]
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (identifier is not { id.Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
+        }
+    }
+
+    /// <inheritdoc />
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString();
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
@@ -93,34 +106,48 @@ partial class IncludeDef : IGetVersionedIdentifier
             _               => (null, new MissingIdentifierError(this).ToException())
         };
 
+
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifier(false);
+    [JsonIgnore]
+    [XmlIgnore]
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (path is not { Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(path, version);
+        }
+    }
+
+    /// <inheritdoc />
+    public override string? ToString() => this.GetVersionedLibraryIdentifierString();
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class VersionedIdentifier : IGetVersionedIdentifier
 {
-    internal string? GetVersionedIdentifier(bool throwError = true)
-    {
-        if (string.IsNullOrEmpty(id))
-        {
-            if (throwError) throw new MissingNameError(this).ToException();
-            return null;
-        }
-
-        if (string.IsNullOrEmpty(version))
-        {
-            return id;
-        }
-
-        return $"{id}-{version}";
-    }
+    internal string? GetVersionedLibraryIdentifierString() =>
+        CqlVersionedLibraryIdentifier.BuildString(id, version);
 
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
 
     /// <inheritdoc />
-    public override string? ToString() => GetVersionedIdentifier(false);
+    [JsonIgnore]
+    [XmlIgnore]
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
+    {
+        get
+        {
+            if (id is not { Length: > 0 })
+                throw new MissingIdentifierError(this).ToException();
+            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(id, version);
+        }
+    }
+
+    /// <inheritdoc />
+    public override string? ToString() => GetVersionedLibraryIdentifierString();
 }
 
 #endregion

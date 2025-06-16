@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("ALARACTOQRFHIR", "0.4.000")]
 public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHIR_0_4_000>
 {
@@ -28,37 +28,40 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Encounter Inpatient")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
+    [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
+    #endregion ValueSets
 
-    [CqlDeclaration("CT dose and image quality category")]
-    public CqlCode CT_dose_and_image_quality_category(CqlContext context) =>
-        new CqlCode("96914-7", "http://loinc.org", default, default);
+    #region Codes
 
+    [CqlCodeDefinition("CT dose and image quality category", codeId: "96914-7", codeSystem: "http://loinc.org")]
+    public CqlCode CT_dose_and_image_quality_category(CqlContext _) => _CT_dose_and_image_quality_category;
+    private static readonly CqlCode _CT_dose_and_image_quality_category = new CqlCode("96914-7", "http://loinc.org");
 
-    [CqlDeclaration("Full Body")]
-    public CqlCode Full_Body(CqlContext context) =>
-        new CqlCode("LA31771-1", "http://loinc.org", default, default);
+    [CqlCodeDefinition("Full Body", codeId: "LA31771-1", codeSystem: "http://loinc.org")]
+    public CqlCode Full_Body(CqlContext _) => _Full_Body;
+    private static readonly CqlCode _Full_Body = new CqlCode("LA31771-1", "http://loinc.org");
 
+    #endregion Codes
 
-    [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("96914-7", "http://loinc.org", default, default),
-            new CqlCode("LA31771-1", "http://loinc.org", default, default),
-        ];
+    #region CodeSystems
 
-        return a_;
-    }
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null, [
+          _CT_dose_and_image_quality_category,
+          _Full_Body]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("Measurement Period")]
+    #region Parameters
+
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
@@ -70,7 +73,11 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -80,7 +87,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Qualified Scan")]
+    [CqlExpressionDefinition("Qualified Scan")]
     public IEnumerable<Observation> Qualified_Scan(CqlContext context)
     {
         CqlCode a_ = this.CT_dose_and_image_quality_category(context);
@@ -112,7 +119,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Qualified Scan without Inpatient Encounter")]
+    [CqlExpressionDefinition("Qualified Scan without Inpatient Encounter")]
     public IEnumerable<Observation> Qualified_Scan_without_Inpatient_Encounter(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan(context);
@@ -147,7 +154,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Qualified Scan with Values")]
+    [CqlExpressionDefinition("Qualified Scan with Values")]
     public IEnumerable<Observation> Qualified_Scan_with_Values(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan_without_Inpatient_Encounter(context);
@@ -171,7 +178,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Observation> Denominator(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan_with_Values(context);
@@ -180,7 +187,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Denominator Exclusion")]
+    [CqlExpressionDefinition("Denominator Exclusion")]
     public IEnumerable<Observation> Denominator_Exclusion(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan_with_Values(context);
@@ -188,7 +195,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         {
             DataType d_ = CTScan?.Value;
             object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            CqlCode[] f_ = (e_ as CqlConcept)?.codes;
+            IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
             CqlCode g_ = this.Full_Body(context);
             bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
 
@@ -200,7 +207,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Initial Population")]
+    [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Observation> Initial_Population(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan_without_Inpatient_Encounter(context);
@@ -209,7 +216,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Observation> Numerator(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Qualified_Scan_with_Values(context);
@@ -225,7 +232,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
@@ -234,7 +241,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
@@ -243,7 +250,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
@@ -252,7 +259,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    [CqlDeclaration("SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
         CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
@@ -261,6 +268,6 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

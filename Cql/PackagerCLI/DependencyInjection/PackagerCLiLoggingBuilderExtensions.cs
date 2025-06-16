@@ -1,11 +1,12 @@
 ﻿/*
- *Copyright(c) 2024, NCQA and contributors
+ *Copyright(c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Logging;
 using Serilog;
 using Serilog.Events;
@@ -22,23 +23,15 @@ internal static class PackagerCLiLoggingBuilderExtensions
     {
         logging.ClearProviders();
 
-         // If we debugging, keep the existing console logger
-         bool enableDebugLogging = false;//Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>("--log-debug");
-        var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
+        var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
+        loggingOptions ??= LoggingOptions.Default;
 
-        if (enableDebugLogging) logging.AddDebug();
-
-        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>("--log-dont-clear");
-
+        LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel);
         logging.AddFilter(level => level >= minLogLevel);
-        logging.AddProvider(new ColorConsoleLoggerProvider());
 
-        var logFile = Path.Combine(".", "build.log");
-
-        if (shouldClearLog)
+        var logFile = "build.log";
+        if (!loggingOptions.Append)
             File.WriteAllText(logFile, ""); // Create or clear the log file
-        //File.Delete(logFile);
         else
             File.OpenText(logFile).Close(); // Touch the file
 
@@ -51,6 +44,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
                          formatProvider: CultureInfo.InvariantCulture)
                      .CreateLogger();
 
+        logging.AddProvider(new ColorConsoleLoggerProvider(minLogLevel: loggingOptions.ConsoleLogLevel));
         return logging.AddSerilog();
     }
 

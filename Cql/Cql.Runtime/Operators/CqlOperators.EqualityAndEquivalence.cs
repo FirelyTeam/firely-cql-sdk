@@ -1,6 +1,4 @@
-﻿using Hl7.Cql.Comparers;
-
-namespace Hl7.Cql.Runtime;
+﻿namespace Hl7.Cql.Operators;
 
 internal partial class CqlOperators
 {
@@ -18,16 +16,28 @@ internal partial class CqlOperators
      *
      */
 
-    internal IEqualityComparer<object> EqualityComparer { get; }
+    private EqualityComparerBridge EqualityComparer { get; }
 
-    public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
+    public bool? Equal(object? left, object? right)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#equal
+        // Spec:If either argument is null, the result is null.
+        if (left is null || right is null)
+            return null;
 
-    public bool? Equal(object? x, object? y) => x == null || y == null ? null : Equals(x, y, null);
+        return Comparer.EqualsValues(left!, right!, null);
+    }
 
     public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
-        if (left == null || right == null)
+        if (left is null || right is null)
             return null;
+
+        // If their sizes are different, they are not equal.
+        if (left.TryGetNonEnumeratedCount(out var leftCount)
+            && right.TryGetNonEnumeratedCount(out var rightCount)
+            && leftCount != rightCount)
+            return false;
 
         var onlyNull = true;
         var notEmpty = false;
@@ -41,18 +51,21 @@ internal partial class CqlOperators
         {
             if (!rit.MoveNext())
                 return false;
+
             notEmpty = true;
             var lv = lit.Current;
             var rv = rit.Current;
-            if (lv == null)
+            switch ((lv, rv))
             {
-                if (rv != null) return false;
-            }
-            else if (rv == null) return false;
-            else
-            {
-                onlyNull = false;
-                if (Compare(lv!, rv!, null) != 0)
+                case (null, null):
+                    continue;
+
+                case (null, not null)
+                    or (not null, null):
+                    return false;
+
+                case (not null, not null) when Comparer.Equals(lv!, rv!, null) is false:
+                    onlyNull = false;
                     return false;
             }
         }
@@ -65,13 +78,12 @@ internal partial class CqlOperators
             return true;
     }
 
-    public bool? NotEqual(object? left, object? right) =>
-        Equal(left, right) switch
-        {
-            null  => null,
-            true  => false,
-            false => true
-        };
+    public bool? NotEqual(object? left, object? right)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#not-equal
+
+        return !Equal(left, right);
+    }
 
     public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEqual(left, right);
 
@@ -79,29 +91,42 @@ internal partial class CqlOperators
 
     #region Equivalence
 
-    /*
-     *
-     * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
-     *
-     * Spec: The Equivalent operator returns:
-     * - true if the arguments are the same value, or if they are both null;
-     * - and false otherwise.
-     *
-     * Spec: With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
-     */
+    public bool Equivalent(object? left, object? right, string? precision)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+        // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
+        return (left, right) switch
+        {
+            (null, null)           => true,
+            (null, _) or (_, null) => false,
+            _                      => Comparer.EquivalentValues(left, right, precision)
+        };
+    }
 
-    public bool Equivalent(object? x, object? y, string? precision) =>
-        CqlComparers.EquivalentOnNullsOnly(x, y)
-        ?? Comparer.Equivalent(x, y, precision);
-
-    public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
+    public bool? Equivalent(object? left, object? right) =>
+        Equivalent(left!, right!, null);
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
+        // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+        // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
+        return (left, right) switch
+        {
+            (null, null)                  => true,
+            (null, _) or (_, null)        => false,
+            (string, string) => Comparer.EquivalentValues(left, right, null),
+            _                             => ListEquivalent(left, right)
+        };
+    }
 
-        if (CqlComparers.EquivalentOnNullsOnly(left, right) is {} r)
-            return r;
+    private bool? ListEquivalent<T>(IEnumerable<T> left, IEnumerable<T> right)
+    {
+        // If their sizes are different, they are not equivalent.
+        if (left.TryGetNonEnumeratedCount(out var leftCount)
+            && right.TryGetNonEnumeratedCount(out var rightCount)
+            && leftCount != rightCount)
+            return false;
 
         var lit = left!.GetEnumerator();
         using var litd = lit as IDisposable;
@@ -116,20 +141,31 @@ internal partial class CqlOperators
 
             var lv = lit.Current;
             var rv = rit.Current;
-            if (lv == null)
+            switch ((lv, rv))
             {
-                if (rv != null) return false;
+                case (null, null):
+                    continue;
+
+                case (null, not null)
+                    or (not null, null):
+                    return false;
+
+                case (not null, not null) when Comparer.Equivalent(lv!, rv!, null) is false:
+                    return false;
             }
-            else if (rv == null) return false;
-            else if (Equivalent(lv!, rv!, null) == false)
-                return false;
         }
+
         if (rit.MoveNext()) // the 2nd list is longer than the 1st.
             return false;
+
         return true;
     }
 
-    public bool? NotEquivalent(object? left, object? right) => !Equivalent(left, right);
+    public bool? NotEquivalent(object? left, object? right)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#not-equivalent
+        return !Equivalent(left, right);
+    }
 
     public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
 

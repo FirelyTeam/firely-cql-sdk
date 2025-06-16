@@ -10,7 +10,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
@@ -137,7 +137,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (Primitives.CqlQuantity.TryParse(s, out CqlQuantity? value))
+            else if (CqlQuantity.TryParse(s, out CqlQuantity? value))
                 return value;
             else return null;
         }
@@ -175,14 +175,14 @@ namespace Hl7.Cql.Runtime
         public CqlDate? ConvertDateTimeToDate(CqlDateTime? d) => d == null ? null : new CqlDate(d!);
 
 
-        public string? ConvertTimeToString(CqlTime? t) => t == null ? null : t.ToString();
+        public string? ConvertTimeToString(CqlTime? t) => t?.ToString();
 
-        public CqlConcept? ConvertCodeToConcept(CqlCode? c) => c == null ? null : new CqlConcept(new[] { c }, c.display);
+        public CqlConcept? ConvertCodeToConcept(CqlCode? c) => c == null ? null : new CqlConcept([c], c.display);
 
-        public IEnumerable<CqlCode>? ConvertConceptToListOfCodes(CqlConcept? c) => c == null ? null : c.codes;
+        public IEnumerable<CqlCode>? ConvertConceptToListOfCodes(CqlConcept? c) => c?.codes;
 
 
-        public CqlConcept? ConvertConceptToListOfCodes(IEnumerable<CqlCode>? c) => c == null ? null : new CqlConcept(c, null);
+        public CqlConcept? ConvertConceptToListOfCodes(IEnumerable<CqlCode>? c) => c == null ? null : new CqlConcept([.. c], null);
 
         #endregion
 

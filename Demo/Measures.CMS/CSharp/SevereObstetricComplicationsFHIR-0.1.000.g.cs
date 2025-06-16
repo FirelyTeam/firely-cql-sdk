@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("SevereObstetricComplicationsFHIR", "0.1.000")]
 public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingleton<SevereObstetricComplicationsFHIR_0_1_000>
 {
@@ -28,479 +28,333 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
+
+    [CqlValueSetDefinition("20 to 42 Plus Weeks Gestation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", valueSetVersion: null)]
+    public CqlValueSet _20_to_42_Plus_Weeks_Gestation(CqlContext _) => __20_to_42_Plus_Weeks_Gestation;
+    private static readonly CqlValueSet __20_to_42_Plus_Weeks_Gestation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", null);
+
+    [CqlValueSetDefinition("Acute Heart Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", valueSetVersion: null)]
+    public CqlValueSet Acute_Heart_Failure(CqlContext _) => _Acute_Heart_Failure;
+    private static readonly CqlValueSet _Acute_Heart_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", null);
+
+    [CqlValueSetDefinition("Acute Myocardial Infarction", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", valueSetVersion: null)]
+    public CqlValueSet Acute_Myocardial_Infarction(CqlContext _) => _Acute_Myocardial_Infarction;
+    private static readonly CqlValueSet _Acute_Myocardial_Infarction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", null);
+
+    [CqlValueSetDefinition("Acute or Persistent Asthma", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", valueSetVersion: null)]
+    public CqlValueSet Acute_or_Persistent_Asthma(CqlContext _) => _Acute_or_Persistent_Asthma;
+    private static readonly CqlValueSet _Acute_or_Persistent_Asthma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", null);
+
+    [CqlValueSetDefinition("Acute Renal Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", valueSetVersion: null)]
+    public CqlValueSet Acute_Renal_Failure(CqlContext _) => _Acute_Renal_Failure;
+    private static readonly CqlValueSet _Acute_Renal_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", null);
+
+    [CqlValueSetDefinition("Acute Respiratory Distress Syndrome", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", valueSetVersion: null)]
+    public CqlValueSet Acute_Respiratory_Distress_Syndrome(CqlContext _) => _Acute_Respiratory_Distress_Syndrome;
+    private static readonly CqlValueSet _Acute_Respiratory_Distress_Syndrome = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", null);
+
+    [CqlValueSetDefinition("Air and Thrombotic Embolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", valueSetVersion: null)]
+    public CqlValueSet Air_and_Thrombotic_Embolism(CqlContext _) => _Air_and_Thrombotic_Embolism;
+    private static readonly CqlValueSet _Air_and_Thrombotic_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", null);
+
+    [CqlValueSetDefinition("Amniotic Fluid Embolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", valueSetVersion: null)]
+    public CqlValueSet Amniotic_Fluid_Embolism(CqlContext _) => _Amniotic_Fluid_Embolism;
+    private static readonly CqlValueSet _Amniotic_Fluid_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", null);
+
+    [CqlValueSetDefinition("Anemia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", valueSetVersion: null)]
+    public CqlValueSet Anemia(CqlContext _) => _Anemia;
+    private static readonly CqlValueSet _Anemia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", null);
+
+    [CqlValueSetDefinition("Aortic Aneurysm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", valueSetVersion: null)]
+    public CqlValueSet Aortic_Aneurysm(CqlContext _) => _Aortic_Aneurysm;
+    private static readonly CqlValueSet _Aortic_Aneurysm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", null);
+
+    [CqlValueSetDefinition("Autoimmune Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", valueSetVersion: null)]
+    public CqlValueSet Autoimmune_Disease(CqlContext _) => _Autoimmune_Disease;
+    private static readonly CqlValueSet _Autoimmune_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", null);
+
+    [CqlValueSetDefinition("Bariatric Surgery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", valueSetVersion: null)]
+    public CqlValueSet Bariatric_Surgery(CqlContext _) => _Bariatric_Surgery;
+    private static readonly CqlValueSet _Bariatric_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", null);
+
+    [CqlValueSetDefinition("Bleeding Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", valueSetVersion: null)]
+    public CqlValueSet Bleeding_Disorder(CqlContext _) => _Bleeding_Disorder;
+    private static readonly CqlValueSet _Bleeding_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", null);
+
+    [CqlValueSetDefinition("Blood Transfusion", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", valueSetVersion: null)]
+    public CqlValueSet Blood_Transfusion(CqlContext _) => _Blood_Transfusion;
+    private static readonly CqlValueSet _Blood_Transfusion = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", null);
+
+    [CqlValueSetDefinition("Cardiac Arrest Ventricular Fibrillation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", valueSetVersion: null)]
+    public CqlValueSet Cardiac_Arrest_Ventricular_Fibrillation(CqlContext _) => _Cardiac_Arrest_Ventricular_Fibrillation;
+    private static readonly CqlValueSet _Cardiac_Arrest_Ventricular_Fibrillation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", null);
+
+    [CqlValueSetDefinition("Cardiac Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", valueSetVersion: null)]
+    public CqlValueSet Cardiac_Disease(CqlContext _) => _Cardiac_Disease;
+    private static readonly CqlValueSet _Cardiac_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", null);
+
+    [CqlValueSetDefinition("Conversion of Cardiac Rhythm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", valueSetVersion: null)]
+    public CqlValueSet Conversion_of_Cardiac_Rhythm(CqlContext _) => _Conversion_of_Cardiac_Rhythm;
+    private static readonly CqlValueSet _Conversion_of_Cardiac_Rhythm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", null);
+
+    [CqlValueSetDefinition("COVID 19 Confirmed", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", valueSetVersion: null)]
+    public CqlValueSet COVID_19_Confirmed(CqlContext _) => _COVID_19_Confirmed;
+    private static readonly CqlValueSet _COVID_19_Confirmed = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", null);
+
+    [CqlValueSetDefinition("Delivery Procedures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", valueSetVersion: null)]
+    public CqlValueSet Delivery_Procedures(CqlContext _) => _Delivery_Procedures;
+    private static readonly CqlValueSet _Delivery_Procedures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", null);
+
+    [CqlValueSetDefinition("Disseminated Intravascular Coagulation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", valueSetVersion: null)]
+    public CqlValueSet Disseminated_Intravascular_Coagulation(CqlContext _) => _Disseminated_Intravascular_Coagulation;
+    private static readonly CqlValueSet _Disseminated_Intravascular_Coagulation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", null);
+
+    [CqlValueSetDefinition("Eclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", valueSetVersion: null)]
+    public CqlValueSet Eclampsia(CqlContext _) => _Eclampsia;
+    private static readonly CqlValueSet _Eclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", null);
+
+    [CqlValueSetDefinition("Economic Housing Instability", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", valueSetVersion: null)]
+    public CqlValueSet Economic_Housing_Instability(CqlContext _) => _Economic_Housing_Instability;
+    private static readonly CqlValueSet _Economic_Housing_Instability = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", null);
+
+    [CqlValueSetDefinition("ED Visit and OB Triage", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", valueSetVersion: null)]
+    public CqlValueSet ED_Visit_and_OB_Triage(CqlContext _) => _ED_Visit_and_OB_Triage;
+    private static readonly CqlValueSet _ED_Visit_and_OB_Triage = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", null);
+
+    [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+
+    [CqlValueSetDefinition("Estimated Gestational Age at Delivery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", valueSetVersion: null)]
+    public CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext _) => _Estimated_Gestational_Age_at_Delivery;
+    private static readonly CqlValueSet _Estimated_Gestational_Age_at_Delivery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", null);
+
+    [CqlValueSetDefinition("Ethnicity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", valueSetVersion: null)]
+    public CqlValueSet Ethnicity(CqlContext _) => _Ethnicity;
+    private static readonly CqlValueSet _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+
+    [CqlValueSetDefinition("Gastrointestinal Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", valueSetVersion: null)]
+    public CqlValueSet Gastrointestinal_Disease(CqlContext _) => _Gastrointestinal_Disease;
+    private static readonly CqlValueSet _Gastrointestinal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", null);
+
+    [CqlValueSetDefinition("Gestational Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", valueSetVersion: null)]
+    public CqlValueSet Gestational_Diabetes(CqlContext _) => _Gestational_Diabetes;
+    private static readonly CqlValueSet _Gestational_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", null);
+
+    [CqlValueSetDefinition("Heart Failure Cardiac Arrest Related to Procedure or Surgery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", valueSetVersion: null)]
+    public CqlValueSet Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(CqlContext _) => _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery;
+    private static readonly CqlValueSet _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", null);
+
+    [CqlValueSetDefinition("Hematocrit lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", valueSetVersion: null)]
+    public CqlValueSet Hematocrit_lab_test(CqlContext _) => _Hematocrit_lab_test;
+    private static readonly CqlValueSet _Hematocrit_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
+
+    [CqlValueSetDefinition("HIV in Pregnancy Childbirth and Puerperium", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", valueSetVersion: null)]
+    public CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext _) => _HIV_in_Pregnancy_Childbirth_and_Puerperium;
+    private static readonly CqlValueSet _HIV_in_Pregnancy_Childbirth_and_Puerperium = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", null);
+
+    [CqlValueSetDefinition("Hypertension", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", valueSetVersion: null)]
+    public CqlValueSet Hypertension(CqlContext _) => _Hypertension;
+    private static readonly CqlValueSet _Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", null);
+
+    [CqlValueSetDefinition("Hysterectomy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", valueSetVersion: null)]
+    public CqlValueSet Hysterectomy(CqlContext _) => _Hysterectomy;
+    private static readonly CqlValueSet _Hysterectomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", null);
+
+    [CqlValueSetDefinition("Long Term Anticoagulant Use", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", valueSetVersion: null)]
+    public CqlValueSet Long_Term_Anticoagulant_Use(CqlContext _) => _Long_Term_Anticoagulant_Use;
+    private static readonly CqlValueSet _Long_Term_Anticoagulant_Use = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", null);
+
+    [CqlValueSetDefinition("Mental Health Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", valueSetVersion: null)]
+    public CqlValueSet Mental_Health_Disorder(CqlContext _) => _Mental_Health_Disorder;
+    private static readonly CqlValueSet _Mental_Health_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", null);
+
+    [CqlValueSetDefinition("Mild or Moderate Preeclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", valueSetVersion: null)]
+    public CqlValueSet Mild_or_Moderate_Preeclampsia(CqlContext _) => _Mild_or_Moderate_Preeclampsia;
+    private static readonly CqlValueSet _Mild_or_Moderate_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", null);
+
+    [CqlValueSetDefinition("Morbid or Severe Obesity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", valueSetVersion: null)]
+    public CqlValueSet Morbid_or_Severe_Obesity(CqlContext _) => _Morbid_or_Severe_Obesity;
+    private static readonly CqlValueSet _Morbid_or_Severe_Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", null);
+
+    [CqlValueSetDefinition("Multiple Pregnancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", valueSetVersion: null)]
+    public CqlValueSet Multiple_Pregnancy(CqlContext _) => _Multiple_Pregnancy;
+    private static readonly CqlValueSet _Multiple_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", null);
+
+    [CqlValueSetDefinition("Neuromuscular Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", valueSetVersion: null)]
+    public CqlValueSet Neuromuscular_Disease(CqlContext _) => _Neuromuscular_Disease;
+    private static readonly CqlValueSet _Neuromuscular_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", null);
+
+    [CqlValueSetDefinition("Observation Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", valueSetVersion: null)]
+    public CqlValueSet Observation_Services(CqlContext _) => _Observation_Services;
+    private static readonly CqlValueSet _Observation_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+
+    [CqlValueSetDefinition("ONC Administrative Sex", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", valueSetVersion: null)]
+    public CqlValueSet ONC_Administrative_Sex(CqlContext _) => _ONC_Administrative_Sex;
+    private static readonly CqlValueSet _ONC_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+
+    [CqlValueSetDefinition("Patient Expired", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", valueSetVersion: null)]
+    public CqlValueSet Patient_Expired(CqlContext _) => _Patient_Expired;
+    private static readonly CqlValueSet _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+
+    [CqlValueSetDefinition("Payer Type", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", valueSetVersion: null)]
+    public CqlValueSet Payer_Type(CqlContext _) => _Payer_Type;
+    private static readonly CqlValueSet _Payer_Type = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+
+    [CqlValueSetDefinition("Placenta Accreta", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", valueSetVersion: null)]
+    public CqlValueSet Placenta_Accreta(CqlContext _) => _Placenta_Accreta;
+    private static readonly CqlValueSet _Placenta_Accreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", null);
+
+    [CqlValueSetDefinition("Placenta Increta or Percreta", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", valueSetVersion: null)]
+    public CqlValueSet Placenta_Increta_or_Percreta(CqlContext _) => _Placenta_Increta_or_Percreta;
+    private static readonly CqlValueSet _Placenta_Increta_or_Percreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", null);
+
+    [CqlValueSetDefinition("Placenta Previa", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", valueSetVersion: null)]
+    public CqlValueSet Placenta_Previa(CqlContext _) => _Placenta_Previa;
+    private static readonly CqlValueSet _Placenta_Previa = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", null);
+
+    [CqlValueSetDefinition("Placental Abruption", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", valueSetVersion: null)]
+    public CqlValueSet Placental_Abruption(CqlContext _) => _Placental_Abruption;
+    private static readonly CqlValueSet _Placental_Abruption = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", null);
+
+    [CqlValueSetDefinition("Placental Accreta Spectrum", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", valueSetVersion: null)]
+    public CqlValueSet Placental_Accreta_Spectrum(CqlContext _) => _Placental_Accreta_Spectrum;
+    private static readonly CqlValueSet _Placental_Accreta_Spectrum = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", null);
+
+    [CqlValueSetDefinition("Preexisting Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", valueSetVersion: null)]
+    public CqlValueSet Preexisting_Diabetes(CqlContext _) => _Preexisting_Diabetes;
+    private static readonly CqlValueSet _Preexisting_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", null);
 
-    [CqlDeclaration("20 to 42 Plus Weeks Gestation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67")]
-    public CqlValueSet _20_to_42_Plus_Weeks_Gestation(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", default);
+    [CqlValueSetDefinition("Present on Admission is No or Unable To Determine", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", valueSetVersion: null)]
+    public CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext _) => _Present_on_Admission_is_No_or_Unable_To_Determine;
+    private static readonly CqlValueSet _Present_on_Admission_is_No_or_Unable_To_Determine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", null);
 
+    [CqlValueSetDefinition("Present On Admission is Yes or Exempt", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", valueSetVersion: null)]
+    public CqlValueSet Present_On_Admission_is_Yes_or_Exempt(CqlContext _) => _Present_On_Admission_is_Yes_or_Exempt;
+    private static readonly CqlValueSet _Present_On_Admission_is_Yes_or_Exempt = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", null);
 
-    [CqlDeclaration("Acute Heart Failure")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233")]
-    public CqlValueSet Acute_Heart_Failure(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", default);
+    [CqlValueSetDefinition("Preterm Birth", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", valueSetVersion: null)]
+    public CqlValueSet Preterm_Birth(CqlContext _) => _Preterm_Birth;
+    private static readonly CqlValueSet _Preterm_Birth = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", null);
 
+    [CqlValueSetDefinition("Previous Cesarean", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", valueSetVersion: null)]
+    public CqlValueSet Previous_Cesarean(CqlContext _) => _Previous_Cesarean;
+    private static readonly CqlValueSet _Previous_Cesarean = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", null);
 
-    [CqlDeclaration("Acute Myocardial Infarction")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623")]
-    public CqlValueSet Acute_Myocardial_Infarction(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", default);
+    [CqlValueSetDefinition("Puerperal Cerebrovascular Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", valueSetVersion: null)]
+    public CqlValueSet Puerperal_Cerebrovascular_Disorder(CqlContext _) => _Puerperal_Cerebrovascular_Disorder;
+    private static readonly CqlValueSet _Puerperal_Cerebrovascular_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", null);
 
+    [CqlValueSetDefinition("Pulmonary Edema", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", valueSetVersion: null)]
+    public CqlValueSet Pulmonary_Edema(CqlContext _) => _Pulmonary_Edema;
+    private static readonly CqlValueSet _Pulmonary_Edema = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", null);
 
-    [CqlDeclaration("Acute or Persistent Asthma")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271")]
-    public CqlValueSet Acute_or_Persistent_Asthma(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", default);
+    [CqlValueSetDefinition("Pulmonary Hypertension", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", valueSetVersion: null)]
+    public CqlValueSet Pulmonary_Hypertension(CqlContext _) => _Pulmonary_Hypertension;
+    private static readonly CqlValueSet _Pulmonary_Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", null);
 
+    [CqlValueSetDefinition("Race", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", valueSetVersion: null)]
+    public CqlValueSet Race(CqlContext _) => _Race;
+    private static readonly CqlValueSet _Race = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
 
-    [CqlDeclaration("Acute Renal Failure")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53")]
-    public CqlValueSet Acute_Renal_Failure(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", default);
+    [CqlValueSetDefinition("Renal Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", valueSetVersion: null)]
+    public CqlValueSet Renal_Disease(CqlContext _) => _Renal_Disease;
+    private static readonly CqlValueSet _Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", null);
 
+    [CqlValueSetDefinition("Respiratory Conditions Related to COVID 19", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", valueSetVersion: null)]
+    public CqlValueSet Respiratory_Conditions_Related_to_COVID_19(CqlContext _) => _Respiratory_Conditions_Related_to_COVID_19;
+    private static readonly CqlValueSet _Respiratory_Conditions_Related_to_COVID_19 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", null);
 
-    [CqlDeclaration("Acute Respiratory Distress Syndrome")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214")]
-    public CqlValueSet Acute_Respiratory_Distress_Syndrome(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", default);
+    [CqlValueSetDefinition("Respiratory Support Procedures Related to COVID 19", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", valueSetVersion: null)]
+    public CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19(CqlContext _) => _Respiratory_Support_Procedures_Related_to_COVID_19;
+    private static readonly CqlValueSet _Respiratory_Support_Procedures_Related_to_COVID_19 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", null);
 
+    [CqlValueSetDefinition("Sepsis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", valueSetVersion: null)]
+    public CqlValueSet Sepsis(CqlContext _) => _Sepsis;
+    private static readonly CqlValueSet _Sepsis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", null);
 
-    [CqlDeclaration("Air and Thrombotic Embolism")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243")]
-    public CqlValueSet Air_and_Thrombotic_Embolism(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", default);
+    [CqlValueSetDefinition("Severe Anesthesia Complications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", valueSetVersion: null)]
+    public CqlValueSet Severe_Anesthesia_Complications(CqlContext _) => _Severe_Anesthesia_Complications;
+    private static readonly CqlValueSet _Severe_Anesthesia_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", null);
 
+    [CqlValueSetDefinition("Severe Maternal Morbidity Diagnoses", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", valueSetVersion: null)]
+    public CqlValueSet Severe_Maternal_Morbidity_Diagnoses(CqlContext _) => _Severe_Maternal_Morbidity_Diagnoses;
+    private static readonly CqlValueSet _Severe_Maternal_Morbidity_Diagnoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", null);
 
-    [CqlDeclaration("Amniotic Fluid Embolism")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217")]
-    public CqlValueSet Amniotic_Fluid_Embolism(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", default);
+    [CqlValueSetDefinition("Severe Maternal Morbidity Procedures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", valueSetVersion: null)]
+    public CqlValueSet Severe_Maternal_Morbidity_Procedures(CqlContext _) => _Severe_Maternal_Morbidity_Procedures;
+    private static readonly CqlValueSet _Severe_Maternal_Morbidity_Procedures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", null);
 
+    [CqlValueSetDefinition("Severe Preeclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", valueSetVersion: null)]
+    public CqlValueSet Severe_Preeclampsia(CqlContext _) => _Severe_Preeclampsia;
+    private static readonly CqlValueSet _Severe_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", null);
 
-    [CqlDeclaration("Anemia")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323")]
-    public CqlValueSet Anemia(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", default);
+    [CqlValueSetDefinition("Shock", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", valueSetVersion: null)]
+    public CqlValueSet Shock(CqlContext _) => _Shock;
+    private static readonly CqlValueSet _Shock = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", null);
 
+    [CqlValueSetDefinition("Sickle Cell Disease with Crisis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", valueSetVersion: null)]
+    public CqlValueSet Sickle_Cell_Disease_with_Crisis(CqlContext _) => _Sickle_Cell_Disease_with_Crisis;
+    private static readonly CqlValueSet _Sickle_Cell_Disease_with_Crisis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", null);
 
-    [CqlDeclaration("Aortic Aneurysm")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219")]
-    public CqlValueSet Aortic_Aneurysm(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", default);
+    [CqlValueSetDefinition("Substance Abuse", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", valueSetVersion: null)]
+    public CqlValueSet Substance_Abuse(CqlContext _) => _Substance_Abuse;
+    private static readonly CqlValueSet _Substance_Abuse = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", null);
 
+    [CqlValueSetDefinition("Thyrotoxicosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", valueSetVersion: null)]
+    public CqlValueSet Thyrotoxicosis(CqlContext _) => _Thyrotoxicosis;
+    private static readonly CqlValueSet _Thyrotoxicosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", null);
 
-    [CqlDeclaration("Autoimmune Disease")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311")]
-    public CqlValueSet Autoimmune_Disease(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", default);
+    [CqlValueSetDefinition("Tracheostomy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", valueSetVersion: null)]
+    public CqlValueSet Tracheostomy(CqlContext _) => _Tracheostomy;
+    private static readonly CqlValueSet _Tracheostomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", null);
 
+    [CqlValueSetDefinition("Venous Thromboembolism in Pregnancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", valueSetVersion: null)]
+    public CqlValueSet Venous_Thromboembolism_in_Pregnancy(CqlContext _) => _Venous_Thromboembolism_in_Pregnancy;
+    private static readonly CqlValueSet _Venous_Thromboembolism_in_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", null);
 
-    [CqlDeclaration("Bariatric Surgery")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317")]
-    public CqlValueSet Bariatric_Surgery(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", default);
+    [CqlValueSetDefinition("Ventilation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", valueSetVersion: null)]
+    public CqlValueSet Ventilation(CqlContext _) => _Ventilation;
+    private static readonly CqlValueSet _Ventilation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", null);
 
+    [CqlValueSetDefinition("White blood cells count lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", valueSetVersion: null)]
+    public CqlValueSet White_blood_cells_count_lab_test(CqlContext _) => _White_blood_cells_count_lab_test;
+    private static readonly CqlValueSet _White_blood_cells_count_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
 
-    [CqlDeclaration("Bleeding Disorder")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287")]
-    public CqlValueSet Bleeding_Disorder(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", default);
+    #endregion ValueSets
 
+    #region Codes
 
-    [CqlDeclaration("Blood Transfusion")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213")]
-    public CqlValueSet Blood_Transfusion(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", default);
+    [CqlCodeDefinition("Heart rate", codeId: "8867-4", codeSystem: "http://loinc.org")]
+    public CqlCode Heart_rate(CqlContext _) => _Heart_rate;
+    private static readonly CqlCode _Heart_rate = new CqlCode("8867-4", "http://loinc.org");
 
+    [CqlCodeDefinition("Systolic blood pressure", codeId: "8480-6", codeSystem: "http://loinc.org")]
+    public CqlCode Systolic_blood_pressure(CqlContext _) => _Systolic_blood_pressure;
+    private static readonly CqlCode _Systolic_blood_pressure = new CqlCode("8480-6", "http://loinc.org");
 
-    [CqlDeclaration("Cardiac Arrest Ventricular Fibrillation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221")]
-    public CqlValueSet Cardiac_Arrest_Ventricular_Fibrillation(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", default);
+    #endregion Codes
 
+    #region CodeSystems
 
-    [CqlDeclaration("Cardiac Disease")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341")]
-    public CqlValueSet Cardiac_Disease(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", default);
+    [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
+      new CqlCodeSystem("http://loinc.org", null, [
+          _Heart_rate,
+          _Systolic_blood_pressure]);
 
+    [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
+      new CqlCodeSystem("http://snomed.info/sct", null, []);
 
-    [CqlDeclaration("Conversion of Cardiac Rhythm")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357")]
-    public CqlValueSet Conversion_of_Cardiac_Rhythm(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", default);
+    #endregion CodeSystems
 
+    #region Parameters
 
-    [CqlDeclaration("COVID 19 Confirmed")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373")]
-    public CqlValueSet COVID_19_Confirmed(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", default);
-
-
-    [CqlDeclaration("Delivery Procedures")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-    public CqlValueSet Delivery_Procedures(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
-
-
-    [CqlDeclaration("Disseminated Intravascular Coagulation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223")]
-    public CqlValueSet Disseminated_Intravascular_Coagulation(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", default);
-
-
-    [CqlDeclaration("Eclampsia")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225")]
-    public CqlValueSet Eclampsia(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", default);
-
-
-    [CqlDeclaration("Economic Housing Instability")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292")]
-    public CqlValueSet Economic_Housing_Instability(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", default);
-
-
-    [CqlDeclaration("ED Visit and OB Triage")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
-    public CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
-
-
-    [CqlDeclaration("Encounter Inpatient")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
-
-
-    [CqlDeclaration("Estimated Gestational Age at Delivery")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26")]
-    public CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default);
-
-
-    [CqlDeclaration("Ethnicity")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-    public CqlValueSet Ethnicity(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
-
-
-    [CqlDeclaration("Gastrointestinal Disease")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338")]
-    public CqlValueSet Gastrointestinal_Disease(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", default);
-
-
-    [CqlDeclaration("Gestational Diabetes")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269")]
-    public CqlValueSet Gestational_Diabetes(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", default);
-
-
-    [CqlDeclaration("Heart Failure Cardiac Arrest Related to Procedure or Surgery")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227")]
-    public CqlValueSet Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", default);
-
-
-    [CqlDeclaration("Hematocrit lab test")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
-    public CqlValueSet Hematocrit_lab_test(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
-
-
-    [CqlDeclaration("HIV in Pregnancy Childbirth and Puerperium")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272")]
-    public CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", default);
-
-
-    [CqlDeclaration("Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332")]
-    public CqlValueSet Hypertension(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", default);
-
-
-    [CqlDeclaration("Hysterectomy")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358")]
-    public CqlValueSet Hysterectomy(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", default);
-
-
-    [CqlDeclaration("Long Term Anticoagulant Use")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366")]
-    public CqlValueSet Long_Term_Anticoagulant_Use(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", default);
-
-
-    [CqlDeclaration("Mental Health Disorder")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314")]
-    public CqlValueSet Mental_Health_Disorder(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", default);
-
-
-    [CqlDeclaration("Mild or Moderate Preeclampsia")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329")]
-    public CqlValueSet Mild_or_Moderate_Preeclampsia(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", default);
-
-
-    [CqlDeclaration("Morbid or Severe Obesity")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290")]
-    public CqlValueSet Morbid_or_Severe_Obesity(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", default);
-
-
-    [CqlDeclaration("Multiple Pregnancy")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284")]
-    public CqlValueSet Multiple_Pregnancy(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", default);
-
-
-    [CqlDeclaration("Neuromuscular Disease")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308")]
-    public CqlValueSet Neuromuscular_Disease(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", default);
-
-
-    [CqlDeclaration("Observation Services")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-    public CqlValueSet Observation_Services(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
-
-
-    [CqlDeclaration("ONC Administrative Sex")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-    public CqlValueSet ONC_Administrative_Sex(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
-
-
-    [CqlDeclaration("Patient Expired")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-    public CqlValueSet Patient_Expired(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
-
-
-    [CqlDeclaration("Payer Type")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-    public CqlValueSet Payer_Type(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
-
-
-    [CqlDeclaration("Placenta Accreta")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302")]
-    public CqlValueSet Placenta_Accreta(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", default);
-
-
-    [CqlDeclaration("Placenta Increta or Percreta")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388")]
-    public CqlValueSet Placenta_Increta_or_Percreta(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", default);
-
-
-    [CqlDeclaration("Placenta Previa")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78")]
-    public CqlValueSet Placenta_Previa(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", default);
-
-
-    [CqlDeclaration("Placental Abruption")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305")]
-    public CqlValueSet Placental_Abruption(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", default);
-
-
-    [CqlDeclaration("Placental Accreta Spectrum")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302")]
-    public CqlValueSet Placental_Accreta_Spectrum(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", default);
-
-
-    [CqlDeclaration("Preexisting Diabetes")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275")]
-    public CqlValueSet Preexisting_Diabetes(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", default);
-
-
-    [CqlDeclaration("Present on Admission is No or Unable To Determine")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370")]
-    public CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", default);
-
-
-    [CqlDeclaration("Present On Admission is Yes or Exempt")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63")]
-    public CqlValueSet Present_On_Admission_is_Yes_or_Exempt(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", default);
-
-
-    [CqlDeclaration("Preterm Birth")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299")]
-    public CqlValueSet Preterm_Birth(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", default);
-
-
-    [CqlDeclaration("Previous Cesarean")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278")]
-    public CqlValueSet Previous_Cesarean(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", default);
-
-
-    [CqlDeclaration("Puerperal Cerebrovascular Disorder")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229")]
-    public CqlValueSet Puerperal_Cerebrovascular_Disorder(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", default);
-
-
-    [CqlDeclaration("Pulmonary Edema")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231")]
-    public CqlValueSet Pulmonary_Edema(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", default);
-
-
-    [CqlDeclaration("Pulmonary Hypertension")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281")]
-    public CqlValueSet Pulmonary_Hypertension(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", default);
-
-
-    [CqlDeclaration("Race")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-    public CqlValueSet Race(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
-
-
-    [CqlDeclaration("Renal Disease")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335")]
-    public CqlValueSet Renal_Disease(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", default);
-
-
-    [CqlDeclaration("Respiratory Conditions Related to COVID 19")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376")]
-    public CqlValueSet Respiratory_Conditions_Related_to_COVID_19(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", default);
-
-
-    [CqlDeclaration("Respiratory Support Procedures Related to COVID 19")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379")]
-    public CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", default);
-
-
-    [CqlDeclaration("Sepsis")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237")]
-    public CqlValueSet Sepsis(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", default);
-
-
-    [CqlDeclaration("Severe Anesthesia Complications")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235")]
-    public CqlValueSet Severe_Anesthesia_Complications(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", default);
-
-
-    [CqlDeclaration("Severe Maternal Morbidity Diagnoses")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255")]
-    public CqlValueSet Severe_Maternal_Morbidity_Diagnoses(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", default);
-
-
-    [CqlDeclaration("Severe Maternal Morbidity Procedures")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256")]
-    public CqlValueSet Severe_Maternal_Morbidity_Procedures(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", default);
-
-
-    [CqlDeclaration("Severe Preeclampsia")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327")]
-    public CqlValueSet Severe_Preeclampsia(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", default);
-
-
-    [CqlDeclaration("Shock")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239")]
-    public CqlValueSet Shock(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", default);
-
-
-    [CqlDeclaration("Sickle Cell Disease with Crisis")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241")]
-    public CqlValueSet Sickle_Cell_Disease_with_Crisis(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", default);
-
-
-    [CqlDeclaration("Substance Abuse")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320")]
-    public CqlValueSet Substance_Abuse(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", default);
-
-
-    [CqlDeclaration("Thyrotoxicosis")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296")]
-    public CqlValueSet Thyrotoxicosis(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", default);
-
-
-    [CqlDeclaration("Tracheostomy")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359")]
-    public CqlValueSet Tracheostomy(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", default);
-
-
-    [CqlDeclaration("Venous Thromboembolism in Pregnancy")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363")]
-    public CqlValueSet Venous_Thromboembolism_in_Pregnancy(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", default);
-
-
-    [CqlDeclaration("Ventilation")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360")]
-    public CqlValueSet Ventilation(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", default);
-
-
-    [CqlDeclaration("White blood cells count lab test")]
-    [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
-    public CqlValueSet White_blood_cells_count_lab_test(CqlContext context) =>
-        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
-
-
-    [CqlDeclaration("Heart rate")]
-    public CqlCode Heart_rate(CqlContext context) =>
-        new CqlCode("8867-4", "http://loinc.org", default, default);
-
-
-    [CqlDeclaration("Systolic blood pressure")]
-    public CqlCode Systolic_blood_pressure(CqlContext context) =>
-        new CqlCode("8480-6", "http://loinc.org", default, default);
-
-
-    [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("8867-4", "http://loinc.org", default, default),
-            new CqlCode("8480-6", "http://loinc.org", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("SNOMEDCT")]
-    public CqlCode[] SNOMEDCT(CqlContext context)
-    {
-        CqlCode[] a_ = []
-;
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
@@ -512,7 +366,11 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -522,7 +380,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Initial Population")]
+    [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
         IEnumerable<Encounter> a_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
@@ -531,7 +389,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Ethnicity")]
+    [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
@@ -540,7 +398,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Payer")]
+    [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
@@ -549,7 +407,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Race")]
+    [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
@@ -558,7 +416,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Sex")]
+    [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
         CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
@@ -567,7 +425,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Calculated Gestational Age Greater than or Equal to 20 Weeks")]
+    [CqlExpressionDefinition("Delivery Encounters with Calculated Gestational Age Greater than or Equal to 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
     {
         IEnumerable<Encounter> a_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
@@ -584,7 +442,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Estimated Gestational Age Assessment Greater than or Equal to 20 Weeks")]
+    [CqlExpressionDefinition("Delivery Encounters with Estimated Gestational Age Assessment Greater than or Equal to 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
     {
         IEnumerable<Encounter> a_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
@@ -604,7 +462,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Gestational Age Greater than or Equal to 20 Weeks Based on Coding")]
+    [CqlExpressionDefinition("Delivery Encounters with Gestational Age Greater than or Equal to 20 Weeks Based on Coding")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Gestational_Age_Greater_than_or_Equal_to_20_Weeks_Based_on_Coding(CqlContext context)
     {
         IEnumerable<Encounter> a_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
@@ -635,7 +493,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters At Greater than or Equal to 20 Weeks Gestation")]
+    [CqlExpressionDefinition("Delivery Encounters At Greater than or Equal to 20 Weeks Gestation")]
     public IEnumerable<Encounter> Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks(context);
@@ -648,6 +506,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+    [CqlExpressionDefinition("pOAIsNoOrUTD")]
     public IEnumerable<CqlConcept> pOAIsNoOrUTD(CqlContext context, Encounter TheEncounter)
     {
         List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
@@ -696,7 +555,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications Diagnosis or Procedure Excluding Blood Transfusion")]
+    [CqlExpressionDefinition("Delivery Encounters with Severe Obstetric Complications Diagnosis or Procedure Excluding Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -735,7 +594,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Expiration")]
+    [CqlExpressionDefinition("Delivery Encounters with Expiration")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Expiration(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -755,7 +614,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Blood Transfusion")]
+    [CqlExpressionDefinition("Delivery Encounters with Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Blood_Transfusion(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -792,7 +651,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications")]
+    [CqlExpressionDefinition("Delivery Encounters with Severe Obstetric Complications")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(context);
@@ -805,7 +664,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Hysterectomy")]
+    [CqlExpressionDefinition("Delivery Encounters with Hysterectomy")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Hysterectomy(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -842,7 +701,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Cardiac Conversion, Tracheostomy or Ventilation Procedures")]
+    [CqlExpressionDefinition("Cardiac Conversion, Tracheostomy or Ventilation Procedures")]
     public IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_or_Ventilation_Procedures(CqlContext context)
     {
         CqlValueSet a_ = this.Conversion_of_Cardiac_Rhythm(context);
@@ -858,7 +717,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Cardiac Conversion, Tracheostomy or Ventilation Procedures")]
+    [CqlExpressionDefinition("Delivery Encounters with Cardiac Conversion, Tracheostomy or Ventilation Procedures")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Cardiac_Conversion__Tracheostomy_or_Ventilation_Procedures(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -894,7 +753,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SOC with Hysterectomy or Blood Transfusion with Placenta Increta or Placenta Percreta Without Additional SOC")]
+    [CqlExpressionDefinition("SOC with Hysterectomy or Blood Transfusion with Placenta Increta or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_with_Hysterectomy_or_Blood_Transfusion_with_Placenta_Increta_or_Placenta_Percreta_Without_Additional_SOC(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
@@ -941,7 +800,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Delivery Encounters with Severe Obstetric Complication Diagnosis")]
+    [CqlExpressionDefinition("SDE Delivery Encounters with Severe Obstetric Complication Diagnosis")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_with_Severe_Obstetric_Complication_Diagnosis(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
@@ -961,7 +820,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Delivery Encounters with Severe Obstetric Complication Procedures")]
+    [CqlExpressionDefinition("SDE Delivery Encounters with Severe Obstetric Complication Procedures")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_with_Severe_Obstetric_Complication_Procedures(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
@@ -1001,6 +860,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+    [CqlExpressionDefinition("sOCDxCategory")]
     public string sOCDxCategory(CqlContext context, CqlConcept Dx)
     {
         string a_()
@@ -1202,7 +1062,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE SOC Diagnoses Detail")]
+    [CqlExpressionDefinition("SDE SOC Diagnoses Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.SDE_Delivery_Encounters_with_Severe_Obstetric_Complication_Diagnosis(context);
@@ -1239,6 +1099,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+    [CqlExpressionDefinition("sOCProcedures")]
     public IEnumerable<Procedure> sOCProcedures(CqlContext context, Encounter TheEncounter)
     {
         CqlValueSet a_ = this.Severe_Maternal_Morbidity_Procedures(context);
@@ -1268,6 +1129,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+    [CqlExpressionDefinition("sOCProcedureCategory")]
     public string sOCProcedureCategory(CqlContext context, Procedure TheProcedure)
     {
         string a_()
@@ -1347,7 +1209,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE SOC Procedure Detail")]
+    [CqlExpressionDefinition("SDE SOC Procedure Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.SDE_Delivery_Encounters_with_Severe_Obstetric_Complication_Procedures(context);
@@ -1376,7 +1238,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Numerator")]
+    [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
@@ -1385,7 +1247,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with COVID and Respiratory Condition or Procedure")]
+    [CqlExpressionDefinition("Delivery Encounters with COVID and Respiratory Condition or Procedure")]
     public IEnumerable<Encounter> Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1445,7 +1307,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Denominator Exclusion")]
+    [CqlExpressionDefinition("Denominator Exclusion")]
     public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(context);
@@ -1454,7 +1316,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Stratification Encounter")]
+    [CqlExpressionDefinition("Stratification Encounter")]
     public IEnumerable<Encounter> Stratification_Encounter(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Numerator(context);
@@ -1465,7 +1327,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions")]
+    [CqlExpressionDefinition("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(context);
@@ -1476,7 +1338,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Stratum 1")]
+    [CqlExpressionDefinition("Stratum 1")]
     public IEnumerable<Encounter> Stratum_1(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Stratification_Encounter(context);
@@ -1487,7 +1349,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SDE Variable Calculated Gestational Age")]
+    [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> a_ = PCMaternal_5_19_000.Instance.Variable_Calculated_Gestational_Age(context);
@@ -1496,7 +1358,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1505,7 +1367,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions Only")]
+    [CqlExpressionDefinition("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions Only")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
@@ -1516,7 +1378,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("SOC Excluding Blood Transfusions Only with Hysterectomy or Blood Transfusion with Placenta Increta or Placenta Percreta Without Additional SOC")]
+    [CqlExpressionDefinition("SOC Excluding Blood Transfusions Only with Hysterectomy or Blood Transfusion with Placenta Increta or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_with_Hysterectomy_or_Blood_Transfusion_with_Placenta_Increta_or_Placenta_Percreta_Without_Additional_SOC(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(context);
@@ -1563,6 +1425,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+    [CqlExpressionDefinition("pOAIsYesOrExempt")]
     public IEnumerable<CqlConcept> pOAIsYesOrExempt(CqlContext context, Encounter TheEncounter)
     {
         List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
@@ -1611,7 +1474,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Anemia")]
+    [CqlExpressionDefinition("Risk Variable Anemia")]
     public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1629,7 +1492,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Asthma")]
+    [CqlExpressionDefinition("Risk Variable Asthma")]
     public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1647,7 +1510,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Autoimmune Disease")]
+    [CqlExpressionDefinition("Risk Variable Autoimmune Disease")]
     public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1665,7 +1528,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Bariatric Surgery")]
+    [CqlExpressionDefinition("Risk Variable Bariatric Surgery")]
     public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1683,7 +1546,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Bleeding Disorder")]
+    [CqlExpressionDefinition("Risk Variable Bleeding Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1701,7 +1564,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Morbid Obesity")]
+    [CqlExpressionDefinition("Risk Variable Morbid Obesity")]
     public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1719,7 +1582,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Cardiac Disease")]
+    [CqlExpressionDefinition("Risk Variable Cardiac Disease")]
     public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1737,7 +1600,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Economic Housing Instability")]
+    [CqlExpressionDefinition("Risk Variable Economic Housing Instability")]
     public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1755,7 +1618,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Gastrointestinal Disease")]
+    [CqlExpressionDefinition("Risk Variable Gastrointestinal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1773,7 +1636,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Gestational Diabetes")]
+    [CqlExpressionDefinition("Risk Variable Gestational Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1791,7 +1654,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable HIV")]
+    [CqlExpressionDefinition("Risk Variable HIV")]
     public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1809,7 +1672,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Hypertension")]
+    [CqlExpressionDefinition("Risk Variable Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1827,7 +1690,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Long Term Anticoagulant Use")]
+    [CqlExpressionDefinition("Risk Variable Long Term Anticoagulant Use")]
     public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1845,7 +1708,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlDeclaration("Risk Variable Maternal Age")]
+    [CqlExpressionDefinition("Risk Variable Maternal Age")]
     public IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1862,7 +1725,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             object[] n_ = [
                 TwentyWeeksPlusEncounter,
-m_ ?? default(int),
+    m_ ?? default(int),
             ];
 
             return n_ as IEnumerable<object>;
@@ -1874,7 +1737,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Mental Health Disorder")]
+    [CqlExpressionDefinition("Risk Variable Mental Health Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1892,7 +1755,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Multiple Pregnancy")]
+    [CqlExpressionDefinition("Risk Variable Multiple Pregnancy")]
     public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1910,7 +1773,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Neuromuscular")]
+    [CqlExpressionDefinition("Risk Variable Neuromuscular")]
     public IEnumerable<Encounter> Risk_Variable_Neuromuscular(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1928,7 +1791,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Obstetrical VTE")]
+    [CqlExpressionDefinition("Risk Variable Obstetrical VTE")]
     public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1946,7 +1809,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Placenta Previa")]
+    [CqlExpressionDefinition("Risk Variable Placenta Previa")]
     public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1964,7 +1827,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Placental Abruption")]
+    [CqlExpressionDefinition("Risk Variable Placental Abruption")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -1982,7 +1845,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Placental Accreta Spectrum")]
+    [CqlExpressionDefinition("Risk Variable Placental Accreta Spectrum")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2003,7 +1866,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Preexisting Diabetes")]
+    [CqlExpressionDefinition("Risk Variable Preexisting Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2021,7 +1884,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Previous Cesarean")]
+    [CqlExpressionDefinition("Risk Variable Previous Cesarean")]
     public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2039,7 +1902,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Pulmonary Hypertension")]
+    [CqlExpressionDefinition("Risk Variable Pulmonary Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2057,7 +1920,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Renal Disease")]
+    [CqlExpressionDefinition("Risk Variable Renal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2075,7 +1938,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Severe Preeclampsia")]
+    [CqlExpressionDefinition("Risk Variable Severe Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2093,7 +1956,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Substance Abuse")]
+    [CqlExpressionDefinition("Risk Variable Substance Abuse")]
     public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2111,7 +1974,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Thyrotoxicosis")]
+    [CqlExpressionDefinition("Risk Variable Thyrotoxicosis")]
     public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2129,7 +1992,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Other Preeclampsia")]
+    [CqlExpressionDefinition("Risk Variable Other Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2147,7 +2010,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Preterm Birth")]
+    [CqlExpressionDefinition("Risk Variable Preterm Birth")]
     public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context)
     {
         IEnumerable<Encounter> a_ = PCMaternal_5_19_000.Instance.Delivery_Encounter_with_Age_Range(context);
@@ -2187,7 +2050,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable First Hematocrit Lab Test")]
+    [CqlExpressionDefinition("Risk Variable First Hematocrit Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2296,7 +2159,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable First White Blood Cell Count Lab Test")]
+    [CqlExpressionDefinition("Risk Variable First White Blood Cell Count Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2405,7 +2268,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Heart Rate")]
+    [CqlExpressionDefinition("Risk Variable Heart Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2502,7 +2365,7 @@ m_ ?? default(int),
     }
 
 
-    [CqlDeclaration("Risk Variable Systolic Blood Pressure")]
+    [CqlExpressionDefinition("Risk Variable Systolic Blood Pressure")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
@@ -2658,41 +2521,41 @@ m_ ?? default(int),
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
-        ["id", "procedures"]);
+      [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
+      ["id", "procedures"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHematocritResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWBCResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstWBCResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
-        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSBPResult", "Timing"]);
+      [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
+      ["EncounterId", "FirstSBPResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
-        [typeof(Procedure), typeof(string)],
-        ["code", "SOCProcedureCategory"]);
+      [typeof(Procedure), typeof(string)],
+      ["code", "SOCProcedureCategory"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
-        [typeof(CqlConcept), typeof(string)],
-        ["code", "SOCDxCategory"]);
+      [typeof(CqlConcept), typeof(string)],
+      ["code", "SOCDxCategory"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHRResult", "Timing"]);
+      [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+      ["EncounterId", "FirstHRResult", "Timing"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
-        ["id", "complications"]);
+      [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
+      ["id", "complications"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -53,9 +53,9 @@ namespace CoreTests
             Type[] drSig = [typeof(DomainResource)];
             Type[] claimSig = [typeof(Claim)];
 
-            dd.Add(lib, def, drSig, nameof(DomainResource));
-            Assert.IsFalse(dd.ContainsKey(lib, def, claimSig));
-            dd.Add(lib, def, claimSig, nameof(Claim));
+            dd.AddDefinition(lib, new(def, drSig), nameof(DomainResource));
+            Assert.IsFalse(dd.ContainsDefinition(lib, new(def, claimSig)));
+            dd.AddDefinition(lib, new(def, claimSig), nameof(Claim));
 
             dd.TryGetDefinitionsForLibrary(lib, out var defs);
             var dict = defs.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -76,9 +76,9 @@ namespace CoreTests
             Type[] drSig = [typeof(DomainResource)];
             Type[] claimSig = [typeof(Claim)];
 
-            dd.Add(lib, def, drSig, nameof(DomainResource));
-            Assert.IsFalse(dd.ContainsKey(lib, def, claimSig));
-            Assert.IsTrue(dd.TryGetValue(lib, def, claimSig, out var match));
+            dd.AddDefinition(lib, new(def, drSig), nameof(DomainResource));
+            Assert.IsFalse(dd.ContainsDefinition(lib, new(def, claimSig)));
+            Assert.IsTrue(dd.TryGetDefinition(lib, new DefinitionSignature(def, claimSig), out var match));
             Assert.AreEqual(nameof(DomainResource), match);
         }
 

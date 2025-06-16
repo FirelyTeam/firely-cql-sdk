@@ -105,7 +105,7 @@ namespace Hl7.Cql.Runtime
                 var properties = type.GetProperties();
                 foreach (var prop in properties)
                 {
-                    var cqlDeclaration = prop.GetCustomAttribute<CqlDeclarationAttribute>();
+                    var cqlDeclaration = prop.GetCustomAttribute<CqlDefinitionAttribute>();
                     if (cqlDeclaration != null && cqlDeclaration.Name == propertyName)
                         return prop;
                 }
@@ -162,7 +162,7 @@ namespace Hl7.Cql.Runtime
                     return type.GetGenericArguments()[0];
 
                 // handle LINQ cast iterators, where iterators, selects, etc.
-                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))
+                if (genericTypeDefinition.GetInterfaces().Contains(typeof(IEnumerable))
                     && genericTypeDefinition.Namespace == "System.Linq"
                     && type.GenericTypeArguments.Length == 1)
                     return type.GetGenericArguments()[0];

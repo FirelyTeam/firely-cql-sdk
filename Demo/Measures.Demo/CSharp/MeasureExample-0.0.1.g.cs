@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
@@ -28,9 +28,9 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Expressions
 
-    [CqlDeclaration("Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -40,7 +40,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
-    [CqlDeclaration("Initial population")]
+    [CqlExpressionDefinition("Initial population")]
     [CqlTag("measure", "Measure Resource Example")]
     [CqlTag("year", "2024")]
     [CqlTag("domain", "Testing Measures")]
@@ -52,7 +52,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
-    [CqlDeclaration("Exclusion")]
+    [CqlExpressionDefinition("Exclusion")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
@@ -60,7 +60,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         false;
 
 
-    [CqlDeclaration("Denominator")]
+    [CqlExpressionDefinition("Denominator")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
@@ -75,20 +75,20 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
-    [CqlDeclaration("Numerator 1")]
+    [CqlExpressionDefinition("Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
         true;
 
 
-    [CqlDeclaration("Numerator 2")]
+    [CqlExpressionDefinition("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
         false;
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

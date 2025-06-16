@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -32,7 +31,8 @@ namespace Hl7.Cql.Fhir
         /// <exception cref="ArgumentNullException"></exception>
         public BundleDataSource(Bundle bundle,
             IValueSetDictionary valueSets,
-            ICqlComparer? codeComparer = null, ICqlComparer? systemComparer = null)
+            ICqlComparer<string>? codeComparer = null,
+            ICqlComparer<string>? systemComparer = null)
         {
             ValueSets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
             _codeComparer = codeComparer ?? DefaultStringComparer.Value;
@@ -40,14 +40,14 @@ namespace Hl7.Cql.Fhir
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
         }
 
-        private static readonly Lazy<ICqlComparer> DefaultStringComparer = new(() =>
+        private static readonly Lazy<ICqlComparer<string>> DefaultStringComparer = new(() =>
             new StringCqlComparer(StringComparer.OrdinalIgnoreCase));
 
         private IndexedBundle Bundle { get; init; }
         private IValueSetDictionary ValueSets { get; }
 
-        private readonly ICqlComparer _codeComparer;
-        private readonly ICqlComparer _systemComparer;
+        private readonly ICqlComparer<string> _codeComparer;
+        private readonly ICqlComparer<string> _systemComparer;
 
 #if VNEXT
         /// <inheritdoc/>

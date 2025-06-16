@@ -98,26 +98,52 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (string.IsNullOrEmpty(identifier))
                 return null;
 
-            if (identifier.StartsWith('$'))
-                identifier = identifier[1..];
+            ReadOnlySpan<char> span = identifier.AsSpan();
 
-            identifier = identifier.Replace("\"",string.Empty);
-            identifier = identifier.Replace("'",string.Empty);
-            identifier = identifier.Replace("&","and");
+            int leadingUnderscoreCount = 0;
+            while (leadingUnderscoreCount < span.Length && span[leadingUnderscoreCount] == '_')
+                leadingUnderscoreCount++;
 
-            // If we start with an invalid character for the start position, add an underscore
-            if (!SyntaxFacts.IsIdentifierStartCharacter(identifier[0]) &&
-                SyntaxFacts.IsIdentifierPartCharacter(identifier[0]))
-                identifier = "_" + identifier;
+            if (leadingUnderscoreCount > 0)
+                span = span[leadingUnderscoreCount..];
 
-            // go over the string and replace all characters that are not allowed in an identifier
-            var replaced = identifier.Select(c => SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_');
-            identifier = string.Concat(replaced);
+            if (span.Length > 0 && span[0] == '$')
+                span = span[1..];
 
-            if (SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None)
-                identifier = $"@{identifier}";
+            Span<char> buffer = stackalloc char[span.Length+2];
+            int bufferIndex = 0;
 
-            return identifier;
+            foreach (var c in span)
+            {
+                switch (c)
+                {
+                    case '"':
+                    case '\'':
+                        continue;
+                    case '&':
+                        buffer[bufferIndex++] = 'a';
+                        buffer[bufferIndex++] = 'n';
+                        buffer[bufferIndex++] = 'd';
+                        continue;
+                    default:
+                        buffer[bufferIndex++] = SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_';
+                        break;
+                }
+            }
+
+            var normalized = buffer[..bufferIndex].ToString();
+
+            if (normalized.Length > 0 && !SyntaxFacts.IsIdentifierStartCharacter(normalized[0]))
+                //normalized = "_" + normalized;
+                leadingUnderscoreCount++;
+
+            if (leadingUnderscoreCount > 0)
+                normalized = new string('_', leadingUnderscoreCount) + normalized;
+
+            if (SyntaxFacts.GetKeywordKind(normalized) != SyntaxKind.None)
+                normalized = $"@{normalized}";
+
+            return normalized;
         }
 
     }

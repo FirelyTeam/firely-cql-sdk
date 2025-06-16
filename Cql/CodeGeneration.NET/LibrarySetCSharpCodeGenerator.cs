@@ -8,12 +8,15 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Operators;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -70,7 +73,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             typeof(ICollection<>).Namespace!, // System.Collections.Generic
             typeof(CqlContext).Namespace!,
             typeof(CqlPrimitiveType).Namespace!,
-            typeof(CqlDeclarationAttribute).Namespace!,
+            typeof(CqlDefinitionAttribute).Namespace!,
             typeof(IValueSetFacade).Namespace!,
             typeof(Iso8601.DateIso8601).Namespace!,
             typeof(PropertyInfo).Namespace!,
@@ -85,7 +88,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions,
+        CqlDefinitionDictionary definitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
         Action<Library>? onBeforeProcessLibrary = null)
     {
@@ -99,7 +102,7 @@ internal partial class LibrarySetCSharpCodeGenerator
     (
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
-        DefinitionDictionary<LambdaExpression> Definitions)
+        CqlDefinitionDictionary Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
@@ -111,7 +114,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
             Action<Library>? onBeforeProcessLibrary = null) =>
             LibrarySet
-                .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
+                .Where(library => Definitions.Libraries.Contains(library.VersionedLibraryIdentifier))
                 .TrySelect(
                     library =>
                     {
@@ -127,7 +130,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                     buildExceptionHandlingStrategy);
     }
 
-    private record LibraryWriter(
+    private record LibraryWriter
+    (
         LibrarySetWriter LibrarySetWriter,
         Library Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
@@ -138,9 +142,9 @@ internal partial class LibrarySetCSharpCodeGenerator
             TextWriter textWriter,
             int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
 
-        private VersionedIdentifier LibraryVersionedIdentifier => ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
-        public string LibraryName { get; } = Library.GetVersionedIdentifier()!;
-        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.GetVersionedIdentifier()!)!;
+        private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
+        public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
+        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.VersionedLibraryIdentifier)!;
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -164,41 +168,52 @@ internal partial class LibrarySetCSharpCodeGenerator
             {
                 if (first)
                 {
-                    IndentedTextWriter.WriteLine("#region CqlTupleMetadata Properties");
-                    IndentedTextWriter.WriteLine();
+                    IndentedTextWriter.WriteLine("""
+                        #region CqlTupleMetadata Properties
+
+                        """);
                     first = false;
                 }
 
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
-                IndentedTextWriter.WriteLine($"private static CqlTupleMetadata {propertyName} = new(");
-                IndentedTextWriter.WriteLine(1, $"[{types}],");
-                IndentedTextWriter.WriteLine(1, $"[{names}]);");
-                IndentedTextWriter.WriteLine();
+                IndentedTextWriter.WriteLine($"""
+                                              private static CqlTupleMetadata {propertyName} = new(
+                                                [{types}],
+                                                [{names}]);
+
+                                              """);
             }
 
             if (!first)
             {
-                IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
-                IndentedTextWriter.WriteLine();
+                IndentedTextWriter.WriteLine(
+                    """
+                    #endregion CqlTupleMetadata Properties
+
+                    """);
             }
         }
 
         private void WriteLibraryInterfaceImplementation()
         {
-            IndentedTextWriter.WriteLine("#region ILibrary Implementation");
-            IndentedTextWriter.WriteLine();
-            IndentedTextWriter.WriteLine($"public string Name => {LibraryVersionedIdentifier.id.QuoteString()};");
-            IndentedTextWriter.WriteLine($"public string Version => {LibraryVersionedIdentifier.version.QuoteString()};");
+            IndentedTextWriter.WriteLine($"""
+                                          #region ILibrary Implementation
+
+                                          public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
+                                          public string Version => {LibraryVersionedIdentifier.Version?.ToString().QuoteOrNullString()};
+                                          """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
+                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
-            IndentedTextWriter.WriteLine($"public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];");
-            IndentedTextWriter.WriteLine();
-            IndentedTextWriter.WriteLine("#endregion ILibrary Implementation");
-            IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine($"""
+                                          public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
+
+                                          #endregion ILibrary Implementation
+
+                                          """);
         }
 
         private void WriteUsings()
@@ -221,34 +236,66 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
         }
 
+        private CqlDefinition[]? definitions;
+
+        public CqlDefinition[] Definitions =>
+            LazyInitializer.EnsureInitialized(
+                ref definitions,
+                () => LibrarySetWriter
+                      .Definitions
+                      .SelectDefinitionsByLibraryName(LibraryName)
+                      .Select(t => t.definition)
+                      .ToArray());
+
+        private CqlCodeDefinition[]? codeDefinitions;
+
+        public CqlCodeDefinition[] CodeDefinitions =>
+            LazyInitializer.EnsureInitialized(
+                ref codeDefinitions,
+                () => Definitions
+                      .OfType<CqlCodeDefinition>()
+                      .ToArray());
+
         private void WriteMethods()
         {
-            var definitions = LibrarySetWriter.Definitions;
-            var libraryName = LibraryName;
-            bool first = true;
+            string lastDefinitionType = "";
 
-            foreach (var (definition, overloads) in definitions.DefinitionsForLibrary(libraryName))
+            // Assumption: definitions are already sorted by definition type
+            foreach (var definition in Definitions)
             {
-                foreach (var (signature, expression) in overloads)
+                // Assumption: type name will be Cql....Definition
+                Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
+                string definitionType = definition.GetType().Name["Cql".Length..^"Definition".Length];
+
+                if (lastDefinitionType != definitionType)
                 {
-                    if (first)
+                    if (lastDefinitionType != "")
                     {
-                        IndentedTextWriter.WriteLine("#region Definition Methods");
-                        IndentedTextWriter.WriteLine();
-                        first = false;
+                        IndentedTextWriter.WriteLine($"""
+                                                      #endregion {lastDefinitionType}s
+
+                                                      """);
                     }
 
-                    definitions.TryGetTags(libraryName, definition, signature, out var tags);
-                    var methodWriter = CreateMethodWriter(definition, expression, tags);
-                    methodWriter.WriteMethod();
-                    IndentedTextWriter.WriteLine();
+                    IndentedTextWriter.WriteLine($"""
+                                                  #region {definitionType}s
+
+                                                  """);
                 }
+
+                lastDefinitionType = definitionType;
+
+                var methodWriter = new DefinitionWriter(this, definition);
+                methodWriter.WriteDefinition();
+                IndentedTextWriter.WriteLine();
             }
 
-            if (!first)
+            if (lastDefinitionType != "")
             {
-                IndentedTextWriter.WriteLine("#endregion Definition Methods");
-                IndentedTextWriter.WriteLine();
+                IndentedTextWriter.WriteLine($"""
+                                              #endregion {lastDefinitionType}s
+
+                                              """);
             }
         }
 
@@ -258,12 +305,14 @@ internal partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             IndentedTextWriter.WriteLine(
-                LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryVersionedIdentifier.id.QuoteString()}, {version.QuoteString()})]"
-                    : $"[CqlLibrary({LibraryVersionedIdentifier.id.QuoteString()})]");
+                LibraryVersionedIdentifier.Version is { } version && Version.TryParse(version, out _)
+                    ? $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
+                    : $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()})]");
 
-            IndentedTextWriter.WriteLine($"public partial class {ClassName} : ILibrary, ISingleton<{ClassName}>");
-            IndentedTextWriter.WriteLine("{");
+            IndentedTextWriter.WriteLine($$"""
+                                           public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
+                                           {
+                                           """);
             {
                 var classBlockContext = AddIndent();
                 classBlockContext.WriteClassConstructor();
@@ -277,105 +326,153 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private void WriteSingletonInstanceProperty()
         {
-            IndentedTextWriter.WriteLine($"public static {ClassName} Instance {{ get; }} = new();");
-            IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine($$"""
+                                           public static {{ClassName}} Instance { get; } = new();
+
+                                           """);
         }
 
         private void WriteClassConstructor()
         {
-            IndentedTextWriter.WriteLine($"private {ClassName}() {{}}");
-            IndentedTextWriter.WriteLine();
-        }
+            IndentedTextWriter.WriteLine($$"""
+                                           private {{ClassName}}() {}
 
-        private MethodWriter CreateMethodWriter(
-            string definition,
-            LambdaExpression expression,
-            ILookup<string, string>? tags)
-        {
-            return new MethodWriter(this, definition, expression, tags);
+                                           """);
         }
     }
 
-    private record MethodWriter
+    private record DefinitionWriter
     (
         LibraryWriter LibraryWriter,
-        string CqlName,
-        LambdaExpression Overload,
-        ILookup<string, string>? Tags) : IAddIndentMutable<MethodWriter>
+        CqlDefinition CqlDefinition) : IAddIndentMutable<DefinitionWriter>
     {
-        private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlName)!;
+        public DefinitionWriter AddIndent(int addIndent = 1) =>
+            this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
-        public MethodWriter AddIndent(int addIndent = 1)
+        private IndentedTextWriter tw => LibraryWriter.IndentedTextWriter;
+
+        public void WriteDefinition()
         {
-            return this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
-        }
+            var name = CqlDefinition.Name;
+            string quotedName = name.QuoteString();
+            string methodName = VariableNameGenerator.NormalizeIdentifier(name)!;
+            string fieldName = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
+            var definitionAttributeTypeName = CqlDefinition.GetType().Name;
 
-        private IndentedTextWriter IndentedTextWriter => LibraryWriter.IndentedTextWriter;
+            switch (CqlDefinition)
+            {
+                case CqlValueSetDefinition vsd:
+                {
+                    string quotedValueSetId = vsd.ValueSetId.QuoteString();
+                    string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
+                    tw.WriteLine(
+                        $$"""
+                          [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
+                          public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
+                          """);
+                } return;
 
-        public void WriteMethod()
-        {
-            string libraryName = LibraryWriter.LibraryName;
-            LambdaExpression overload = Overload;
-            TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
-            var isDef = IsDefinition(overload);
+                case CqlConceptDefinition ccd:
+                {
+                    string quotedConceptDisplay = ccd.Display.QuoteOrNullString();
+                    string arrayOfCodes = string.Join(
+                        ",",
+                        ccd.Codes.Select(code =>
+                        {
+                            var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
+                            var codeField = cqlCodeDefinition is not null
+                                                ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                                : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
+                            return $"""
 
-            var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
+                                          {codeField}
+                                    """;
+                        }));
+                    tw.WriteLine(
+                        $$"""
+                          [CqlConceptDefinition({{quotedName}})]
+                          public CqlConcept {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlConcept {{fieldName}} =
+                            new CqlConcept([{{arrayOfCodes}}],
+                                {{quotedConceptDisplay}});
+                          """);
+                    } return;
+
+                case CqlCodeSystemDefinition csd:
+                {
+                    string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
+                    string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
+                    string arrayOfCodes = string.Join(
+                        ",",
+                        csd.CodeSystem.codes.Select(code =>
+                        {
+                            var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
+                            var codeField = cqlCodeDefinition is not null
+                                       ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                       : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
+                            return $"""
+
+                                          {codeField}
+                                    """;
+                        }));
+                    tw.WriteLine(
+                        $$"""
+                          [CqlCodeSystemDefinition({{quotedName}}, codeSystemId: {{quotedCodeSystemId}}, codeSystemVersion: {{quotedCodeSystemVersion}})]
+                          public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlCodeSystem {{fieldName}} =
+                            new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}, [{{arrayOfCodes}}]);
+                          """);
+                } return;
+
+                case CqlCodeDefinition cd:
+                {
+                    var quotedCodeId = cd.Code.code!.QuoteString();
+                    var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
+                    tw.WriteLine(
+                        $$"""
+                          [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
+                          public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
+                          private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}});
+                          """);
+                } return;
+            }
+
+            if (CqlDefinition is not CqlLambdaDefinition ld)
+                throw new NotSupportedException($"No support for {CqlDefinition.GetType()}");
+
+            tw.WriteLine(
+                $"""
+                 [{definitionAttributeTypeName}({quotedName})]
+                 """);
+
+            if (CqlDefinition is CqlExpressionDefinition ed)
+                foreach (var tag in ed.Tags)
+                    foreach (var tagValue in tag.Values)
+                        tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
+
+            VariableNameGenerator variableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
 
             var visitedBody = Transform(
-                overload.Body,
+                ld.LambdaExpression.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(vng),
+                new RenameVariablesVisitor(variableNameGenerator),
                 new LocalVariableDeduper(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter)
             );
 
             // Skip CqlContext
-            var parameters = overload.Parameters.Skip(1);
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
+                LibraryWriter.LibrarySetWriter.TupleMetadataBuilder,
+                LibraryWriter.LibraryName,
+                LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
+                0);
 
-            overload = Expression.Lambda(visitedBody, parameters);
-
-            if (isDef)
-            {
-                IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
-                WriteTags();
-
-                if (overload.ReturnType == typeof(CqlValueSet))
-                {
-                    if (overload.Body is NewExpression @new)
-                    {
-                        var arg = @new.Arguments[0];
-                        if (arg is ConstantExpression { Value: string valueSetId })
-                        {
-                            IndentedTextWriter.WriteLine($"[CqlValueSet({valueSetId.QuoteString()})]");
-                        }
-                    }
-                }
-            }
-
-            var definitionToCSharpCodeProcessor =
-                new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
-                                                         IndentedTextWriter.Indent);
-            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
-            IndentedTextWriter.WriteLine(definition);
+            var parameters = ld.LambdaExpression.Parameters.Skip(1);
+            var transformedLambda = Expression.Lambda(visitedBody, parameters);
+            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public");
+            tw.WriteLine(definitionWithBody);
         }
-
-        private void WriteTags()
-        {
-            if (Tags == null)
-                return;
-
-            foreach (var group in Tags)
-            {
-                foreach (var tag in group)
-                {
-                    IndentedTextWriter.WriteLine($"[CqlTag({group.Key.QuoteString()}, {tag.QuoteString()})]");
-                }
-            }
-        }
-
-        private static bool IsDefinition(LambdaExpression overload) =>
-            overload.Parameters.Count == 1
-            && overload.Parameters[0].Type == typeof(CqlContext);
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {

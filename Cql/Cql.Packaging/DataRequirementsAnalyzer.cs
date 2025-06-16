@@ -31,7 +31,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
     {
         var result = new List<DataRequirement>();
         Visit(focusLibrary, result);
-
+        result = Combine(result);
         return result;
     }
 
@@ -108,6 +108,32 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         return true;
     }
 
+    private static EqualityComparer<T> GetComparer<T>() where T:Base =>
+        EqualityComparer<T>.Create((a, b) => a!.IsExactly(b), _ => 0);
+
+    internal static List<DataRequirement> Combine(List<DataRequirement> initialDataRequirements)
+    {
+        var result = new List<DataRequirement>();
+        var grouped = initialDataRequirements.GroupBy(r => r.Type);
+
+        foreach (var group in grouped)
+        {
+            var dr = group.First();
+            dr.MustSupportElement = group.SelectMany(g => g.MustSupportElement).ToList();
+            dr.MustSupportElement = dr.MustSupportElement.Distinct(GetComparer<FhirString>()).ToList();
+            dr.CodeFilter = group.SelectMany(g => g.CodeFilter).ToList();
+            dr.CodeFilter = dr.CodeFilter.Distinct(GetComparer<DataRequirement.CodeFilterComponent>()).ToList();
+            dr.ProfileElement = group.SelectMany(g => g.ProfileElement).ToList();
+            dr.ProfileElement = dr.ProfileElement.Distinct(GetComparer<Canonical>()).ToList();
+            dr.DateFilter = group.SelectMany(g => g.DateFilter).ToList();
+            dr.DateFilter = dr.DateFilter.Distinct(GetComparer<DataRequirement.DateFilterComponent>()).ToList();
+
+            result.Add(dr);
+        }
+
+        return result;
+    }
+    
     private static string ToReference(Elm.ValueSetDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
     //   private static string ToReference(Elm.CodeSystemDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
 

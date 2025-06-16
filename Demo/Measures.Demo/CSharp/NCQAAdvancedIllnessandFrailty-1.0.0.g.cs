@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
@@ -28,87 +28,65 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region ValueSets
 
-    [CqlDeclaration("Acute Inpatient")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810")]
-    public CqlValueSet Acute_Inpatient(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", default);
+    [CqlValueSetDefinition("Acute Inpatient", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", valueSetVersion: null)]
+    public CqlValueSet Acute_Inpatient(CqlContext _) => _Acute_Inpatient;
+    private static readonly CqlValueSet _Acute_Inpatient = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", null);
 
+    [CqlValueSetDefinition("Advanced Illness", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", valueSetVersion: null)]
+    public CqlValueSet Advanced_Illness(CqlContext _) => _Advanced_Illness;
+    private static readonly CqlValueSet _Advanced_Illness = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", null);
 
-    [CqlDeclaration("Advanced Illness")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465")]
-    public CqlValueSet Advanced_Illness(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", default);
+    [CqlValueSetDefinition("Dementia Medications", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", valueSetVersion: null)]
+    public CqlValueSet Dementia_Medications(CqlContext _) => _Dementia_Medications;
+    private static readonly CqlValueSet _Dementia_Medications = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", null);
 
+    [CqlValueSetDefinition("ED", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", valueSetVersion: null)]
+    public CqlValueSet ED(CqlContext _) => _ED;
+    private static readonly CqlValueSet _ED = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", null);
 
-    [CqlDeclaration("Dementia Medications")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729")]
-    public CqlValueSet Dementia_Medications(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", default);
+    [CqlValueSetDefinition("Frailty Device", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", valueSetVersion: null)]
+    public CqlValueSet Frailty_Device(CqlContext _) => _Frailty_Device;
+    private static readonly CqlValueSet _Frailty_Device = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", null);
 
+    [CqlValueSetDefinition("Frailty Diagnosis", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", valueSetVersion: null)]
+    public CqlValueSet Frailty_Diagnosis(CqlContext _) => _Frailty_Diagnosis;
+    private static readonly CqlValueSet _Frailty_Diagnosis = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", null);
 
-    [CqlDeclaration("ED")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086")]
-    public CqlValueSet ED(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", default);
+    [CqlValueSetDefinition("Frailty Encounter", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", valueSetVersion: null)]
+    public CqlValueSet Frailty_Encounter(CqlContext _) => _Frailty_Encounter;
+    private static readonly CqlValueSet _Frailty_Encounter = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", null);
 
+    [CqlValueSetDefinition("Frailty Symptom", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", valueSetVersion: null)]
+    public CqlValueSet Frailty_Symptom(CqlContext _) => _Frailty_Symptom;
+    private static readonly CqlValueSet _Frailty_Symptom = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", null);
 
-    [CqlDeclaration("Frailty Device")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530")]
-    public CqlValueSet Frailty_Device(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", default);
+    [CqlValueSetDefinition("Nonacute Inpatient", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", valueSetVersion: null)]
+    public CqlValueSet Nonacute_Inpatient(CqlContext _) => _Nonacute_Inpatient;
+    private static readonly CqlValueSet _Nonacute_Inpatient = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", null);
 
+    [CqlValueSetDefinition("Observation", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", valueSetVersion: null)]
+    public CqlValueSet Observation(CqlContext _) => _Observation;
+    private static readonly CqlValueSet _Observation = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", null);
 
-    [CqlDeclaration("Frailty Diagnosis")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531")]
-    public CqlValueSet Frailty_Diagnosis(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", default);
+    [CqlValueSetDefinition("Online Assessments", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", valueSetVersion: null)]
+    public CqlValueSet Online_Assessments(CqlContext _) => _Online_Assessments;
+    private static readonly CqlValueSet _Online_Assessments = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", null);
 
+    [CqlValueSetDefinition("Outpatient", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", valueSetVersion: null)]
+    public CqlValueSet Outpatient(CqlContext _) => _Outpatient;
+    private static readonly CqlValueSet _Outpatient = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", null);
 
-    [CqlDeclaration("Frailty Encounter")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532")]
-    public CqlValueSet Frailty_Encounter(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", default);
+    [CqlValueSetDefinition("Telephone Visits", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", valueSetVersion: null)]
+    public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
+    private static readonly CqlValueSet _Telephone_Visits = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", null);
 
+    #endregion ValueSets
 
-    [CqlDeclaration("Frailty Symptom")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533")]
-    public CqlValueSet Frailty_Symptom(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", default);
+    #region Parameters
 
-
-    [CqlDeclaration("Nonacute Inpatient")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189")]
-    public CqlValueSet Nonacute_Inpatient(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", default);
-
-
-    [CqlDeclaration("Observation")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191")]
-    public CqlValueSet Observation(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", default);
-
-
-    [CqlDeclaration("Online Assessments")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446")]
-    public CqlValueSet Online_Assessments(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", default);
-
-
-    [CqlDeclaration("Outpatient")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202")]
-    public CqlValueSet Outpatient(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", default);
-
-
-    [CqlDeclaration("Telephone Visits")]
-    [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246")]
-    public CqlValueSet Telephone_Visits(CqlContext context) =>
-        new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", default);
-
-
-    [CqlDeclaration("Measurement Period")]
+    [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
         object a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", null);
@@ -117,7 +95,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Patient")]
+    #endregion Parameters
+
+    #region Expressions
+
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
@@ -127,7 +109,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Has Criteria Indicating Frailty")]
+    [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context)
     {
         CqlValueSet a_ = this.Frailty_Device(context);
@@ -191,7 +173,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
+    [CqlExpressionDefinition("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness(CqlContext context)
     {
         CqlValueSet a_ = this.Outpatient(context);
@@ -251,7 +233,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Nonacute Inpatient Discharge with Advanced Illness")]
+    [CqlExpressionDefinition("Nonacute Inpatient Discharge with Advanced Illness")]
     public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
     {
         IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
@@ -292,7 +274,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Outpatient Encounters or Discharges with Advanced Illness")]
+    [CqlExpressionDefinition("Outpatient Encounters or Discharges with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness(CqlContext context)
     {
         IEnumerable<CqlDate> a_()
@@ -336,7 +318,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
+    [CqlExpressionDefinition("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
     public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context)
     {
         IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness(context);
@@ -367,7 +349,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Acute Inpatient Encounter with Advanced Illness")]
+    [CqlExpressionDefinition("Acute Inpatient Encounter with Advanced Illness")]
     public bool? Acute_Inpatient_Encounter_with_Advanced_Illness(CqlContext context)
     {
         CqlValueSet a_ = this.Acute_Inpatient(context);
@@ -402,7 +384,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Acute Inpatient Discharge with Advanced Illness")]
+    [CqlExpressionDefinition("Acute Inpatient Discharge with Advanced Illness")]
     public bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
     {
         IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
@@ -435,7 +417,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
+    [CqlExpressionDefinition("Dementia Medications In Year Before or During Measurement Period")]
     public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context)
     {
         CqlValueSet a_ = this.Dementia_Medications(context);
@@ -468,7 +450,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
+    [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -505,7 +487,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
+    [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context)
     {
         Patient a_ = this.Patient(context);
@@ -532,13 +514,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["OutpatientVisit1", "OutpatientVisit2"]);
+      [typeof(CqlDate), typeof(CqlDate)],
+      ["OutpatientVisit1", "OutpatientVisit2"]);
 
     #endregion CqlTupleMetadata Properties
 

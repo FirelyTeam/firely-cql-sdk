@@ -95,24 +95,24 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Decimal_Errors()
+        public void DecimalErrors()
         {
             CreateCqlToolkit().MakeLibrary("""
-                library Decimal_Errors_1 version '1.0.0'
+                library DecimalErrors1 version '1.0.0'
 
                 define private Decimal_Literal: 0.123456789
                 """, "Decimal literals cannot have a mantissa longer than 8 digits.");
 
             // exactly 28 digits
             CreateCqlToolkit().MakeLibrary("""
-                library Decimal_Errors_2 version '1.0.0'
+                library DecimalErrors2 version '1.0.0'
 
                 define private Decimal_Literal: -12345678901234567890.12345678
                 """).ShouldSucceed();
 
             // 29 digits
             CreateCqlToolkit().MakeLibrary("""
-                library Decimal_Errors_3 version '1.0.0'
+                library DecimalErrors3 version '1.0.0'
 
                 define private Decimal_Literal: -123456789012345678901.12345678
                 """, "Decimal literals cannot be longer than 28 digits.");
@@ -178,17 +178,17 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Integer_Overflows()
+        public void IntegerOverflows()
         {
             // minimum long is -9,223,372,036,854,775,808
             CreateCqlToolkit().MakeLibrary("""
-                library Decimal_Errors_1 version '1.0.0'
+                library IntegerOverflows version '1.0.0'
 
                 define private Overflow_Literal: -9223372036854775809
                 """, "Unparseable numeric literal*.");
 
             CreateCqlToolkit().MakeLibrary("""
-                library Decimal_Errors_1 version '1.0.0'
+                library IntegerOverflows version '1.0.0'
 
                 define private Overflow_Literal: 9223372036854775808
                 """, "Unparseable numeric literal*.");

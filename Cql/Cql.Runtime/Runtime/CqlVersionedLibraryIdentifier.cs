@@ -16,11 +16,15 @@ namespace Hl7.Cql.Runtime;
 /// <param name="Identifier">The identifier of the CQL library.</param>
 /// <param name="Version">The version of the CQL library.</param>
 [JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlVersionedLibraryIdentifier>))]
-public readonly partial record struct CqlVersionedLibraryIdentifier(
+public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryIdentifier Identifier,
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
-    internal partial class JsonConverter { }
+    /// <summary>
+    /// The delimiter to use between the identifier and version part in the string representation.
+    /// </summary>
+    [UsedImplicitly]
+    public const string IdentifierVersionDelimiter = "-";
 
     /// <summary>
     /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
@@ -67,20 +71,36 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return FormatString(Identifier, Version);
+        return ToString(IdentifierVersionDelimiter);
     }
 
     /// <summary>
     /// Returns a string representation of the CQL versioned library identifier.
     /// </summary>
-    /// <param name="identifier">The identifier string.</param>
-    /// <param name="version">The version string (optional).</param>
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
-    public static string FormatString(string identifier, string? version = null) =>
-        version switch
+    internal string ToString(string delimiter)
+    {
+        return BuildString(Identifier, Version, delimiter)!;
+    }
+
+    /// <summary>
+    /// Constructs a string representation of a CQL versioned library identifier.
+    /// </summary>
+    /// <param name="identifier">The identifier of the CQL library.</param>
+    /// <param name="version">The version of the CQL library. This parameter is optional.</param>
+    /// <param name="delimiter">The delimiter used to separate the identifier and version. Defaults to "-".</param>
+    /// <returns>A string combining the identifier and version, separated by the specified delimiter.
+    /// If the version is not provided, only the identifier is returned.
+    /// If the identifier is not provided, null is returned.</returns>
+    public static string? BuildString(
+        string identifier,
+        string? version = null,
+        string delimiter = IdentifierVersionDelimiter) =>
+        (identifier, version) switch
         {
-            not null => $"{identifier}-{version}",
-            _ => identifier,
+            ({ Length:>0 } id, { Length: > 0 } ver) => $"{id}{delimiter}{ver}",
+            ({ Length: > 0 } id, _)     => id,
+            _ => null
         };
 
     #region Parsing
@@ -165,4 +185,5 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryIdentifier identifier) => FromNameAndVersion(identifier);
 
     #endregion
+
 }

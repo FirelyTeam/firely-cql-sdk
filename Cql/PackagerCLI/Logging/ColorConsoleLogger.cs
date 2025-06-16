@@ -6,10 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Concurrent;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging.Abstractions;
-
 namespace Hl7.Cql.Packager.Logging;
 
 /// <remarks>
@@ -17,16 +13,20 @@ namespace Hl7.Cql.Packager.Logging;
 /// It will be moved to the PackagerCLI once the prototype is complete,
 /// and then it will move to the PackagerCLI and made internal.
 /// </remarks>
-public sealed partial class ColorConsoleLogger(string categoryName, ColorConsoleLoggerProvider provider) : ILogger
+public sealed partial class ColorConsoleLogger(
+    string categoryName,
+    ColorConsoleLoggerProvider provider) : ILogger
 {
-    private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
-    private readonly ColorConsoleLoggerProvider _provider = provider;
+    private readonly string _categoryName =
+        categoryName.Length == 0 || provider.MinLogLevel >= LogLevel.Information
+            ? "" : $"{categoryName}: ";
 
     public IDisposable BeginScope<TState>(TState state)
         where TState : notnull =>
         throw new NotSupportedException();
 
-    public bool IsEnabled(LogLevel logLevel) => true;
+    public bool IsEnabled(LogLevel logLevel) =>
+        logLevel >= provider.MinLogLevel;
 
     public void Log<TState>(
         LogLevel logLevel,
@@ -99,7 +99,7 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
                 return finalFormat;
             });
 
-    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""", RegexOptions.Compiled)]
+    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""")]
     private static partial Regex ExtractTagsRegex();
 
 

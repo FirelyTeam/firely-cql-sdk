@@ -22,7 +22,7 @@ internal static class Extensions
     {
         methodCSharpFormatOptions ??= Defaults.MethodCSharpFormat;
         var methodCSharpFormatContext = new MethodExpressionsContext((methodName, methodArguments, genericTypeArguments), methodCSharpFormatOptions);
-        var formattableString = methodCSharpFormatOptions.MethodFormat(methodCSharpFormatContext);
+        var formattableString = methodCSharpFormatOptions.Format(methodCSharpFormatContext);
         var sbAdapter = new BasicStringBuilderAdapter(sb);
         formattableString.WriteTo(sbAdapter);
         return sb;

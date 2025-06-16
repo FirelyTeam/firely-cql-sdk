@@ -511,7 +511,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var parameters = lambda.Parameters.Select(p => $"{TypeToCSharpConverter.ToCSharp(p.Type)} {p.Name!.EscapeKeywords()}").ToList();
             // inserts the context parameter in the start of the lambda expression
-            if (Indent == 1)
+            if (Indent == 0)
                 parameters.Insert(0, "CqlContext context");
 
             var lambdaParameters = $"({string.Join(", ", parameters)})";

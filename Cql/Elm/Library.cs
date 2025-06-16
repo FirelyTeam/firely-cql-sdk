@@ -10,7 +10,7 @@
 
 
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Comparers;
 
 namespace Hl7.Cql.Elm;
 
@@ -28,13 +28,13 @@ public partial class Library
         if (IsValidated)
             return;
 
-        _ = this.GetVersionedIdentifier(throwError: true);
+        _ = VersionedLibraryIdentifier;
 
         if (includes is { Length: > 0 } includeDefs)
         {
             foreach (var includeDef in includeDefs)
             {
-                if (includeDef.GetVersionedIdentifier(throwError: false) == null)
+                if (includeDef.GetVersionedLibraryIdentifierString() == null)
                     throw new LibraryMissingIncludeDefPathError(this, includeDef).ToException();
             }
         }
@@ -43,7 +43,7 @@ public partial class Library
     }
 
     public static IEqualityComparer<Library> EqualityComparerByVersionedIdentifier { get; } =
-        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.GetVersionedIdentifier(true)!);
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.VersionedLibraryIdentifier);
 
     internal string? OriginalFilePath { get; private set; }
 }

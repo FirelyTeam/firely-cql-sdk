@@ -74,7 +74,7 @@ internal partial class CqlOperatorsBinder
                             ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
                             {
                                 // Show the parameter type, and conversion method
-                                ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
+                                Format = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
                             }
                         };
 

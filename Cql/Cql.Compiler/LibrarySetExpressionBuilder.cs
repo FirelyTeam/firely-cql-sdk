@@ -13,9 +13,9 @@ namespace Hl7.Cql.Compiler;
 
 internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpressionBuilder)
 {
-    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
+    public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+        CqlDefinitionDictionary librarySetDefinitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? errorStrategyBuilder = null,
         Action<Library>? onNextLibrary = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
@@ -23,6 +23,6 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
+        CqlDefinitionDictionary librarySetDefinitions) =>
         new(libraryExpressionBuilder, librarySet, librarySetDefinitions);
 }

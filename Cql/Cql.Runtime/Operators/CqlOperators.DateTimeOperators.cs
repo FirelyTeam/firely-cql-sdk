@@ -11,7 +11,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
@@ -43,7 +43,7 @@ namespace Hl7.Cql.Runtime
 
         public bool? After(object? left, object? right, string? precision)
         {
-            var result = Compare(left!, right!, precision);
+            var result = Comparer.Compare(left!, right!, precision);
             if (result == null)
                 return null;
             else if (result > 0)
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Runtime
 
         public bool? Before(object? left, object? right, string? precision)
         {
-            var result = Compare(left!, right!, precision);
+            var result = Comparer.Compare(left!, right!, precision);
             if (result == null)
                 return null;
             else if (result < 0)
@@ -204,7 +204,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else 
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -217,7 +217,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -229,7 +229,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -245,7 +245,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else 
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -257,7 +257,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -269,7 +269,7 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -283,7 +283,7 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     0 => true,
@@ -294,7 +294,7 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
             {
                 null => null,
                 0 => true,
@@ -305,7 +305,7 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
             {
                 null => null,
                 0 => true,

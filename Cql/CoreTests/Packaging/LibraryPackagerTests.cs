@@ -21,7 +21,6 @@ public class LibraryPackagerTests
     public void ElmParameterToFhir_ParameterTypeCanBeDerivedFromDifferentSources(string filename, FHIRAllTypes expectedType)
     {
         // Arrange
-        var elmFile = new FileInfo(filename);
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         // Act
         var library = LibraryPackager.CreateLibraryResource(
@@ -32,12 +31,39 @@ public class LibraryPackagerTests
             cqlBytes: [],
             assemblyBytes: [],
             elmLibrarySet: new LibrarySet("", [elmLibrary] ),
-            cSharpSourceCodeById: []);
+            cSharpSourceCodeById: [],
+            resourceCanonicalBuilder: (_,_,_) => "");
 
         // Assert
         Assert.IsNotNull(library);
         var inputParameter = library.Parameter.Single(pd => pd.Use == OperationParameterUse.In);
         Assert.AreEqual("param", inputParameter.Name);
         Assert.AreEqual(expectedType, inputParameter.Type);
+    }
+
+    [DataTestMethod]
+    [DataRow("Input/ELM/Test/ParameterTest_ResultTypeSpecifier.json", false)]
+    [DataRow("Input/ELM/HL7/ConceptDefTest.json", true)]
+    public void ElmContextToFhir_LibraryTypeIsBasedOnContext(string filename, bool contextExpected)
+    {
+        // Arrange
+        var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
+        var fhirHelpers = Library.LoadFromJson(new FileInfo("Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
+        // Act
+        var library = LibraryPackager.CreateLibraryResource(
+            NullLoggerFactory.Instance.CreateLogger("Dummy"),
+            typeCrosswalk: _mapper,
+            elmLibrary: elmLibrary,
+            elmBytes: File.ReadAllBytes(filename),
+            cqlBytes: [],
+            assemblyBytes: [],
+            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ),
+            cSharpSourceCodeById: [],
+            resourceCanonicalBuilder: (_,_,_) => "");
+
+        // Assert
+        Assert.IsNotNull(library);
+        var subjectType = library.Subject as CodeableConcept;
+        subjectType?.Coding?.Any(coding => "http://hl7.org/fhir/resource-types".Equals(coding.System) && "Patient".Equals(coding.Code)).Should().Be(contextExpected);
     }
 }

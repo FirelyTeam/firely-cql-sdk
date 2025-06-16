@@ -30,12 +30,11 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DefinitionDictionary<Delegate>? delegates = null,
             FhirCqlContextOptions? options = null)
         {
             options ??= FhirCqlContextOptions.Default;
             ICqlOperators cqlOperators = CreateOperators(dataSource, valueSets, now, options);
-            CqlContext cqlContext = new CqlContext(cqlOperators, parameters, delegates);
+            CqlContext cqlContext = new CqlContext(cqlOperators, parameters);
             return cqlContext;
         }
 
@@ -86,11 +85,10 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DefinitionDictionary<Delegate>? delegates = null,
             FhirCqlContextOptions? options = null)
         {
             IDataSource source = CreateDataSource(bundle, valueSets);
-            CqlContext result = WithDataSource(source, parameters, valueSets, now, delegates, options);
+            CqlContext result = WithDataSource(source, parameters, valueSets, now, options);
             return result;
         }
 
@@ -107,10 +105,9 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DefinitionDictionary<Delegate>? delegates = null,
             FhirCqlContextOptions? options = null)
         {
-            CqlContext result = CreateContext(source, parameters, valueSets, now, delegates, options);
+            CqlContext result = CreateContext(source, parameters, valueSets, now, options);
             return result;
         }
     }

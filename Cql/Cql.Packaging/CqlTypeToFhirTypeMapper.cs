@@ -238,7 +238,7 @@ namespace Hl7.Cql.Packaging
                 }
                 return TypeEntryFor(cqlPrimitiveAttribute.Type);
             }
-            if (IsOrImplementsIEnumerableOfT(type))
+            if (type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>)))
             {
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType is null)

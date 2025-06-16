@@ -115,7 +115,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// <summary>
     /// Translates the CQL libraries to ELM libraries.
     /// </summary>
-    public CqlToolkit ConvertCqlToElm()
+    public CqlToolkit TranslateToElm()
     {
         CqlToolkitConversionDictionary.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
@@ -134,7 +134,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(BatchProcessExceptionContinuation.Continue)
+                                     .SetContinuation(BatchProcessExceptionContinuation)
                                      .AddLoggerExceptionHandler(_services.Logger,
                                                                 (conversion, messageBuilder) =>
                                                                     messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))

@@ -1,0 +1,1151 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-transaction",
+  "type": "transaction",
+  "entry": [
+        {
+      "fullUrl": "Patient/P23JOH",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "P23JOH",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Patient:</b> Amy JOHNSON, F, 16-Feb-1966, Cit.id 1122334455, AlphaId 622883245 \r\n        <ul><li>Previous name: Adam JONES</li><li>Address: 62, Anystreet, 59450 Alphatown. Home phone: 020 7422 3666</li></ul></div>"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/patient-birthPlace",
+            "valueAddress": {
+              "city": "Portsmouth",
+              "country": "UK"
+            }
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/patient-disability",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "95859009",
+                  "display": "Amputation of foot"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "http://www.miniaf.alp/citreg",
+            "value": "1122334455"
+          },
+          {
+            "system": "http://www.alpha-hospital.alp/patient-id",
+            "value": "622883245"
+          }
+        ],
+        "name": [
+          {
+            "family": "Johnson",
+            "given": [
+              "Amy"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "020 7422 3666",
+            "use": "home"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1966-02-16",
+        "address": [
+          {
+            "line": [
+              "62, Anystreet"
+            ],
+            "city": "Alphatown",
+            "postalCode": "59450"
+          }
+        ],
+        "communication": [
+          {
+            "language": {
+              "coding": [
+                {
+                  "system": "urn:ietf:bcp:47",
+                  "code": "en",
+                  "display": "English"
+                }
+              ]
+            }
+          },
+          {
+            "language": {
+              "coding": [
+                {
+                  "system": "urn:ietf:bcp:47",
+                  "code": "fr",
+                  "display": "French"
+                }
+              ]
+            },
+            "preferred": true
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/P23JOH"
+      }
+    },
+    {
+      "fullUrl": "Practitioner/P23JOH04121321",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "P23JOH04121321",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Practitioner:</b> Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421\r\n              <ul><li>Work phone: 555-555-1003</li></ul></div>"
+        },
+        "identifier": [
+          {
+            "system": "http://www.alpha-hospital.alp/practitioner-id",
+            "value": "9865421"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Hippocrates",
+            "given": [
+              "Harold"
+            ],
+            "prefix": [
+              "Dr."
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "555-555-1003",
+            "use": "work"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "1003 Healthcare Drive"
+            ]
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/P23JOH04121321"
+      }
+    },
+    {
+      "fullUrl": "Organization/P23JOHed3aab1caaaa",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "P23JOHed3aab1caaaa",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Organization:</b> Alpha Hospital, Hospital, Id = 17-0362278\r\n              <ul><li>Address: 101 Any Avenue, 59931 Alphatown</li></ul></div>"
+        },
+        "identifier": [
+          {
+            "system": "http://www.minhealth.alp/hospitals",
+            "value": "17-0362278"
+          }
+        ],
+        "name": "Alpha Hospital",
+        "address": [
+          {
+            "line": [
+              "101 Any Avenue"
+            ],
+            "city": "Alphatown",
+            "postalCode": "59931"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/P23JOHed3aab1caaaa"
+      }
+    },
+    {
+      "fullUrl": "Location/P23JOHed3aabfafafa",
+      "resource": {
+        "resourceType": "Location",
+        "id": "P23JOHed3aabfafafa",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Location:</b> Outpatient Clinic of the Alpha Hospital\r\n          </div>"
+        },
+        "status": "active",
+        "name": "Outpatient Clinic",
+        "mode": "kind",
+        "managingOrganization": {
+          "reference": "Organization/P23JOHed3aab1caaaa",
+          "display": "Alpha Hospital"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/P23JOHed3aabfafafa"
+      }
+    },
+    {
+      "fullUrl": "Encounter/P23JOHed3aab1caae1",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "P23JOHed3aab1caae1",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Encounter:</b> Ambulatory encounter, on June 14th, 2016, Outpatient Clinic - Alpha Hospital. Id = 180750\r\n              <ul><li>Clinician: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.alpha.alp/encounter",
+            "value": "180750"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "participant": [
+          {
+            "individual": {
+              "reference": "Practitioner/P23JOed3aab1c349d",
+              "display": "Dr. Harold Hippocrates"
+            }
+          }
+        ],
+        "period": {
+          "start": "2018-06-14T15:00:00+00:00",
+          "end": "2018-06-14T15:30:00+00:00"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/P23JOHed3aabfafafa",
+              "display": "Outpatient Clinic - Alpha Hospital"
+            },
+            "status": "completed",
+            "period": {
+              "start": "2018-06-14T15:00:00+01:00",
+              "end": "2018-06-14T15:10:00+01:00"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/P23JOHed3aab1caae1"
+      }
+    },
+    {
+      "fullUrl": "Encounter/P23JOHed3aab1caae2",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "P23JOHed3aab1caae2",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Encounter:</b> Ambulatory encounter, on June 16th, 2016, Outpatient Clinic - Alpha Hospital. Id = 189364\r\n              <ul><li>Clinician: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.alpha.alp/encounter",
+            "value": "189364"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "participant": [
+          {
+            "individual": {
+              "reference": "Practitioner/P23JOed3aab1c349d",
+              "display": "Dr. Harold Hippocrates"
+            }
+          }
+        ],
+        "period": {
+          "start": "2018-06-16T09:30:00+01:00",
+          "end": "2018-06-16T09:40:00+01:00"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/P23JOHed3aabfafafa",
+              "display": "Outpatient Clinic - Alpha Hospital"
+            },
+            "status": "completed",
+            "period": {
+              "start": "2018-06-16T09:30:00+00:00",
+              "end": "2018-06-16T10:00:00+00:00"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/P23JOHed3aab1caae2"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOH0d40e312a601",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOH0d40e312a601",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Body temperature: Elevated temperature. June 14, 2018.\r\n       </div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ],
+            "text": "Vital Signs"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1",
+          "display": "Initial encounter"
+        },
+        "effectiveDateTime": "2018-06-14",
+        "performer": [
+          {
+            "reference": "Patient/P23JOH"
+          }
+        ],
+        "valueString": "Elevated temperature"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOH0d40e312a601"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHb8db55aba702",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHb8db55aba702",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Inflamed right eardrum, Right Ear. June 14, 2018.\r\n              <ul><li>Observer: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "status": "final",
+        "code": {
+          "text": "Ear examination"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1",
+          "display": "Initial encounter"
+        },
+        "effectiveDateTime": "2018-06-14T15:05:00+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/P23JOHed3aab1c349d",
+            "display": "Dr. Harold Hippocrates"
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "301470001",
+              "display": "Inflamed eardrum"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "25577004",
+              "display": "Right ear"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHb8db55aba702"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHd21ca20f3b03",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHd21ca20f3b03",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Body temperature: 38 degrees C. June 14, 2018.\r\n              <ul><li>Observer: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ],
+            "text": "Vital Signs"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1"
+        },
+        "effectiveDateTime": "2018-06-14T15:05:00+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/P23JOHed3aab1c349d",
+            "display": "Dr. Harold Hippocrates"
+          }
+        ],
+        "valueQuantity": {
+          "value": 38,
+          "unit": "C",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHd21ca20f3b03"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHf1265d472204",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHf1265d472204",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> On examination - urticarial rash present, both forearms. June 16, 2018.\r\n              <ul><li>Observer: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "status": "final",
+        "code": {
+          "text": "Physical examination"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae2",
+          "display": "Follow up encounter"
+        },
+        "effectiveDateTime": "2018-06-16T09:35:00+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/P23JOHed3aab1c349d",
+            "display": "Dr. Harold Hippocrates"
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "164361006",
+              "display": "On examination - urticarial rash present"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "9055004",
+              "display": "Both forearms"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHf1265d472204"
+      }
+    },
+    {
+      "fullUrl": "Condition/P23JOHf1265d4722c1",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "P23JOHf1265d4722c1",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Condition:</b> No breathing difficulties (resolved). June 28, 2018.\r\n           </div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "resolved"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "22803001",
+              "display": "Normal breathing"
+            }
+          ],
+          "text": "No breathing difficulties"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae2"
+        },
+        "recordedDate": "2018-06-28",
+        "asserter": {
+          "reference": "Patient/P23JOH"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/P23JOHf1265d4722c1"
+      }
+    },
+    {
+      "fullUrl": "Condition/P23JOHf1265d4722c2",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "P23JOHf1265d4722c2",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Condition:</b> Pain in the right ear (resolved). June 28, 2018.\r\n              </div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "resolved"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "16001004",
+              "display": "Pain in ear"
+            }
+          ]
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "25577004",
+                "display": "Right ear"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1"
+        },
+        "onsetDateTime": "2018-06-11",
+        "recordedDate": "2018-06-28",
+        "asserter": {
+          "reference": "Patient/P23JOH"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/P23JOHf1265d4722c2"
+      }
+    },
+    {
+      "fullUrl": "Condition/P23JOHf1265d4722c3",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "P23JOHf1265d4722c3",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Condition:</b> Itchy skin rash (resolved). June 28, 2018.\r\n             </div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "resolved"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "64144002",
+              "display": "Itchy skin eruption"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae2"
+        },
+        "recordedDate": "2019-11-28",
+        "asserter": {
+          "reference": "Patient/P23JOH"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/P23JOHf1265d4722c3"
+      }
+    },
+    {
+      "fullUrl": "Condition/P23JOHf1265d4722c4",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "P23JOHf1265d4722c4",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Condition:</b> Otitis media, inflamed right eardrum (resolved). June 28, 2018.\r\n        </div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "resolved"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "65363002",
+              "display": "Otitis Media"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1"
+        },
+        "recordedDate": "2018-10-05",
+        "asserter": {
+          "reference": "Practitioner/P23JOed3aab1c349d",
+          "display": "Dr. Harold Hippocrates"
+        },
+        "evidence": [
+          {
+            "detail": [
+              {
+                "reference": "Observation/P23JOHb8db55aba702",
+                "display": "Inflamed right eardrum"
+              }
+            ]
+          },
+          {
+            "detail": [
+              {
+                "reference": "Observation/P23JOHd21ca20f3b03",
+                "display": "Body temperature of 38 degrees Celsius"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/P23JOHf1265d4722c4"
+      }
+    },
+    {
+      "fullUrl": "Medication/P23JOHab0c0e8c1111",
+      "resource": {
+        "resourceType": "Medication",
+        "id": "P23JOHab0c0e8c1111",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Medication:</b> Amoxicillin 250 MG Oral Capsule\r\n          </div>"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "308182",
+              "display": "Amoxicillin 250 MG Oral Capsule"
+            }
+          ],
+          "text": "Amoxicillin 250 MG Oral Capsule"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Medication/P23JOHab0c0e8c1111"
+      }
+    },
+    {
+      "fullUrl": "Medication/P23JOHab0c0e8c1112",
+      "resource": {
+        "resourceType": "Medication",
+        "id": "P23JOHab0c0e8c1112",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Medication:</b> Erythromycin 250 MG Oral Tablet\r\n          </div>"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "598006",
+              "display": "Erythromycin 250 MG Oral Tablet"
+            }
+          ],
+          "text": "Erythromycin 250 MG Oral Tablet"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Medication/P23JOHab0c0e8c1112"
+      }
+    },
+    {
+      "fullUrl": "MedicationRequest/P23JOHab0c0e8c8801",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "P23JOHab0c0e8c8801",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Prescription:</b> Prescription (stopped) for Amoxicillin 250 MG Oral Capsule, June 14th, 2018\r\n            <ul><li>Instructions: 250 mg 3 times per day for 7 days</li><li>Prescriber: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "status": "stopped",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "Medication/P23JOHab0c0e8c1111",
+          "display": "Amoxicillin 250 MG Oral Capsule"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae1",
+          "display": "Initial encounter"
+        },
+        "authoredOn": "2018-06-14",
+        "requester": {
+          "reference": "Practitioner/P23JOed3aab1c349d",
+          "display": "Dr. Harold Hippocrates"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/P23JOHf1265d4722c4",
+            "display": "Otitis Media"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "250 mg 3 times per day for 7 days",
+            "timing": {
+              "repeat": {
+                "boundsDuration": {
+                  "value": 7,
+                  "unit": "day",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                },
+                "frequency": 3,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 250,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/P23JOHab0c0e8c8801"
+      }
+    },
+    {
+      "fullUrl": "MedicationRequest/P23JOHab0c0e8c8802",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "P23JOHab0c0e8c8802",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Prescription:</b> Prescription (completed) for Erythromycin 250 MG Oral Tablet, June 16th, 2018\r\n              <ul><li>Instructions: 250 mg 4 times per day for 10 days</li><li>Prescriber: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "status": "completed",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "Medication/P23JOHab0c0e8c1112",
+          "display": "Erythromycin 250 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "encounter": {
+          "reference": "Encounter/P23JOHed3aab1caae2",
+          "display": "Follow up encounter"
+        },
+        "authoredOn": "2018-06-16",
+        "requester": {
+          "reference": "Practitioner/P23JOed3aab1c349d",
+          "display": "Dr. Harold Hippocrates"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/P23JOHf1265d4722c4",
+            "display": "Otitis Media"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "250 mg 4 times per day for 10 days",
+            "timing": {
+              "repeat": {
+                "boundsDuration": {
+                  "value": 10,
+                  "unit": "day",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "d"
+                },
+                "frequency": 4,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 250,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "priorPrescription": {
+          "reference": "MedicationRequest/P23JOHab0c0e8c8801",
+          "display": "Amoxicillin prescription"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/P23JOHab0c0e8c8802"
+      }
+    },
+    {
+      "fullUrl": "AllergyIntolerance/P23JOHab0c0e8c9901",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "P23JOHab0c0e8c9901",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Allergy:</b> Penicillin Allergy (active)\r\n            <ul><li>Criticality: High</li><li>Recorder: Dr. Harold HIPPOCRATES, M, Alpha Hospital, Id: 9865421</li></ul></div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "unconfirmed"
+            }
+          ]
+        },
+        "category": [
+          "medication"
+        ],
+        "criticality": "high",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "70618",
+              "display": "Penicillin"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/P23JOH"
+        },
+        "recordedDate": "2018-06-16",
+        "recorder": {
+          "reference": "Practitioner/P23JOed3aab1c349d",
+          "display": "Dr. Harold Hippocrates"
+        },
+        "reaction": [
+          {
+            "manifestation": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "64144002",
+                    "display": "Itchy skin eruption"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/P23JOHab0c0e8c9901"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHed631fe4fc57a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHed631fe4fc57a",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Body weight, 92 Kg\r\n            <ul><li>Observed by patient on 2018-03-01.</li></ul></div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ],
+            "text": "Vital Signs"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7",
+              "display": "Body weight"
+            }
+          ],
+          "text": "Body weigth"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "effectiveDateTime": "2018-03-01",
+        "performer": [
+          {
+            "reference": "Patient/P23JOH"
+          }
+        ],
+        "valueQuantity": {
+          "value": 92,
+          "unit": "Kg",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHed631fe4fc57a"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHed631fe4fc57",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHed631fe4fc57",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Body weight, 96 Kg\r\n            <ul><li>Observed by patient on 2021-05-17.</li></ul></div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ],
+            "text": "Vital Signs"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7",
+              "display": "Body weight"
+            }
+          ],
+          "text": "Body weigth"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "effectiveDateTime": "2021-05-17",
+        "performer": [
+          {
+            "reference": "Patient/P23JOH"
+          }
+        ],
+        "valueQuantity": {
+          "value": 96,
+          "unit": "Kg",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHed631fe4fc57"
+      }
+    },
+    {
+      "fullUrl": "Observation/P23JOHed631fe4fc57c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "P23JOHed631fe4fc57c",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><b>Observation:</b> Body weight, 73 Kg\r\n            <ul><li>Observed by patient on 2014-06-22.</li></ul></div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ],
+            "text": "Vital Signs"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7",
+              "display": "Body weight"
+            }
+          ],
+          "text": "Body weigth"
+        },
+        "subject": {
+          "reference": "Patient/P23JOH"
+        },
+        "effectiveDateTime": "2014-06-22",
+        "performer": [
+          {
+            "reference": "Patient/P23JOH"
+          }
+        ],
+        "valueQuantity": {
+          "value": 73,
+          "unit": "Kg",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/P23JOHed631fe4fc57c"
+      }
+    }
+  ]
+}

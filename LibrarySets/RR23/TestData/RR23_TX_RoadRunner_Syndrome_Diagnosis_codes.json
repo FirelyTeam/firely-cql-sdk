@@ -1,0 +1,93 @@
+{
+  "resourceType": "ValueSet",
+  "url": "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome",
+  "version": "1.0.0",
+  "title": "RoadRunner Syndrome Diagnosis codes",
+  "status": "active",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "21902005",
+            "display": "Struck by falling rock or stone"
+          },
+          {
+            "code": "71893005",
+            "display": "Struck by falling object"
+          },
+          {
+            "code": "242982004",
+            "display": "Injury of unknown intent due to fall from cliff"
+          },
+          {
+            "code": "242981006",
+            "display": "Injury of unkown intent due to fall from high natural feature"
+          },
+          {
+            "code": "397996002",
+            "display": "Injury due to explosion"
+          },
+          {
+            "code": "243033007",
+            "display": "Injury due to accidental explosion of munitions"
+          },
+          {
+            "code": "243032002",
+            "display": "Injury due to blast from improvised bomb"
+          }
+        ]
+      }
+    ]
+  },
+  "description": "Diagnosis codes that are an indication for the presence of Roadrunners Syndrome",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>RoadRunner Syndrome Diagnisis codes</h2><tt>http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome</tt><p>Diagnosis codes that are an indication for the presence of Roadrunners Syndrome</p></div>"
+  },
+  "name": "RoadRunner_Syndrome_Diagnosis_codes",
+  "date": "2023-06-21T00:00:00.000Z",
+  "publisher": "MOH Alpha",
+  "expansion": {
+    "identifier": "20231205",
+    "timestamp": "2023-12-05T20:57:46+01:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "21902005",
+        "display": "Struck by falling rock or stone"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "71893005",
+        "display": "Struck by falling object"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "242982004",
+        "display": "Injury of unknown intent due to fall from cliff"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "242981006",
+        "display": "Injury of unkown intent due to fall from high natural feature"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "397996002",
+        "display": "Injury due to explosion"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "243033007",
+        "display": "Injury due to accidental explosion of munitions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "243032002",
+        "display": "Injury due to blast from improvised bomb"
+      }
+    ]
+  }
+}

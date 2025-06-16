@@ -1,0 +1,45 @@
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Microsoft.Extensions.Logging;
+
+partial class Program
+{
+    void ExtendingFunctionalityLogLibraryStatements()
+    {
+        // This example first packages CQL libraries into FHIR resources,
+        // then loads the packaged resources and invokes them.
+
+        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "500 Extending Functionality - Log Statements per Library");
+
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
+        // Add CQL libraries from directory
+        var cqlDirectory = new DirectoryInfo("input/cql");
+        var cqlToolkit = new CqlToolkit(loggerFactory);
+
+        cqlToolkit.AddCqlLibrariesFromDirectory(cqlDirectory);
+
+        // Translate CQL to ELM0
+        cqlToolkit.TranslateToElm();
+
+        // Log the statements per library
+        cqlToolkit.LogLibrariesAndDefinitions();
+    }
+}
+
+internal static class CqlToolkitExampleExtensions
+{
+    public static CqlToolkit LogLibrariesAndDefinitions(
+        this CqlToolkit cqlToolkit)
+    {
+        var logger = cqlToolkit.LoggerFactory.CreateLogger(typeof(CqlToolkitExampleExtensions));
+
+        foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
+        {
+            string[] statements = elmLibrary.statements.Select(s => s.name).Distinct().ToArray();
+            logger.LogInformation("Library {library} has statements [{statements}]", libraryIdentifier, statements);
+        }
+
+        return cqlToolkit;
+    }
+}

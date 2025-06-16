@@ -166,7 +166,7 @@
   </data>
   <data name="IdentifierAlreadyInScope" xml:space="preserve">
     <value>Identifier {0} is already in use in this scope.</value>
-    <comment>{0} = identifer name unquoted</comment>
+    <comment>{0} = identifier name unquoted</comment>
   </data>
   <data name="IdentifierAlreadyInUse" xml:space="preserve">
     <value>Identifier {0} is already in use in this library.</value>

@@ -9,7 +9,7 @@
 
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Runtime
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -66,7 +66,7 @@ namespace Hl7.Cql.Runtime
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -75,7 +75,7 @@ namespace Hl7.Cql.Runtime
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -84,7 +84,7 @@ namespace Hl7.Cql.Runtime
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -94,12 +94,18 @@ namespace Hl7.Cql.Runtime
 
         public bool? Greater(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
-            if (result == null)
+            // https://cql.hl7.org/09-b-cqlreference.html#greater
+            // Spec:If either argument is null, the result is null.
+            if (left is null || right is null)
                 return null;
-            else if (result > 0)
-                return true;
-            else return false;
+
+            var result = Comparer.Compare(left!, right!, null);
+            return result switch
+            {
+                null => null,
+                > 0  => true,
+                _    => false
+            };
         }
 
         #endregion
@@ -107,31 +113,48 @@ namespace Hl7.Cql.Runtime
         #region  Greater Or Equal
         public bool? GreaterOrEqual(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
-            if (result == null)
+            // https://cql.hl7.org/09-b-cqlreference.html#greater-or-equal
+            // Spec:If either argument is null, the result is null.
+            if (left is null || right is null)
                 return null;
-            else if (result >= 0)
-                return true;
-            else return false;
+
+            var result = Comparer.Compare(left!, right!, null);
+            return result switch
+            {
+                null => null,
+                >= 0 => true,
+                _    => false
+            };
         }
         #endregion
 
         #region Less
         public bool? Less(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
-            if (result == null)
+            // https://cql.hl7.org/09-b-cqlreference.html#less
+            // Spec:If either argument is null, the result is null.
+            if (left is null || right is null)
                 return null;
-            else if (result < 0)
-                return true;
-            else return false;
+
+            var result = Comparer.Compare(left!, right!, null);
+            return result switch
+            {
+                null => null,
+                < 0  => true,
+                _    => false
+            };
         }
         #endregion
 
         #region Less Or Equal
         public bool? LessOrEqual(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
+            // https://cql.hl7.org/09-b-cqlreference.html#less-or-equal
+            // Spec:If either argument is null, the result is null.
+            if (left is null || right is null)
+                return null;
+
+            var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
             else if (result <= 0)
@@ -139,19 +162,6 @@ namespace Hl7.Cql.Runtime
             else return false;
         }
         #endregion
-
-        #region  Not Equal
-
-        // bool? NotEqual(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
-
-        #endregion
-
-        #region  Not Equivalent
-
-        // bool? NotEquivalent(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
-
-        #endregion
-
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

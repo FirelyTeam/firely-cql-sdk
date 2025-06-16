@@ -1,45 +1,57 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager.Commands.Logging;
+using Hl7.Cql.Packager.Options;
+using Hl7.Cql.Packaging.Toolkit;
+using Hl7.Cql.Runtime;
+
 namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
-    IOptions<PackagerCliOptions> packagerCliProgramOptions)
+    IConsole console,
+    IOptions<CqlOptions> cqlOptions,
+    IOptions<ElmOptions> elmOptions,
+    IOptions<PackagingOptions> packagingOptions,
+    IOptions<LoggingOptions> loggingOptions)
 {
-    private readonly PackagerCliOptions _packagerCliOptions = packagerCliProgramOptions.Value;
-
     public void DumpToConsole()
     {
         StringBuilder? sb = logger.IsEnabled(LogLevel.Information) ? new() : null;
 
-        WriteLine("PackageCLI");
-        WriteLine("- Environment -----------------------------------");
-        WriteLine($"{"Time",-45} : {DateTimeOffset.Now}");
-        WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
-        WriteLine($"{"DOTNET_ENVIRONMENT",-45} : {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}");
-        WriteLine("- Arguments Provided ----------------------------");
-        (string name, object? value)[] values = new[]
-        {
-            // ArgFor("Logging, KeepLog", _cqlToResourcePackagingOptions.DontLogClear),
-            // ArgFor("Logging, IncludeDebug",_cqlToResourcePackagingOptions.LogDebugEnabled),
-            ArgFor("Cql, InDir", _packagerCliOptions.CqlFromDirectory),
-            ArgFor("Elm, InDir", _packagerCliOptions.ElmFromDirectory),
-            ArgFor("CSharp, OutDir", _packagerCliOptions.CSharpOutDirectory),
-            ArgFor("Assembly, OutDir", _packagerCliOptions.AssemblyOutDirectory),
-            ArgFor("Fhir, OutDir", _packagerCliOptions.FhirOutDirectory),
-            ArgFor("Fhir, CanonicalRootUrl", _packagerCliOptions.FhirCanonicalRootUrl),
-            ArgFor("Fhir, OverrideDate", _packagerCliOptions.FhirOverrideDate),
-        }.Where(t => t.value is not null)
-        .ToArray();
+        var assembly = typeof(Program).Assembly;
+        //var attr = assembly.GetCustomAttributes();
 
-        foreach (var (name, value) in values)
-            WriteLine($"{name,-45} : {value}");
+        WriteLine("- PackageCLI ------------------------------------");
+        WriteLine($"{"Path",-20} : {assembly.Location}");
+        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', Environment.GetCommandLineArgs()[1..])}");
+        WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
+        WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
+        WriteLine("- Environment -----------------------------------");
+        WriteLine($"{"Current Time",-20} : {DateTimeOffset.Now:O}");
+        WriteLine($"{"Current Directory",-20} : {Environment.CurrentDirectory}");
+        WriteLine("- Configuration ---------------------------------");
+        JsonSerializerOptions jsonOpt = new();
+        jsonOpt.WriteIndented = true;
+        jsonOpt.Converters.Add(new JsonStringEnumConverter());
+        jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
+        jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
+        jsonOpt.Converters.Add(new KeyToStringDictionaryJsonConverter<CqlLibraryIdentifier, string>());
+        var root = new
+        {
+            Cql = cqlOptions.Value,
+            Elm = elmOptions.Value,
+            Packaging = packagingOptions.Value,
+            Logging = loggingOptions.Value,
+        };
+
+        WriteLine(JsonSerializer.Serialize(root, jsonOpt));
 
         if (sb is not null)
             logger.LogInformation("{options}", sb.ToString());
@@ -49,11 +61,56 @@ internal class OptionsConsoleDumper(
             if (sb is not null)
                 sb.AppendLine(s);
             else
-                Console.WriteLine(s);
+                console.WriteLine(s);
         }
     }
+}
 
-    static (string name, object? value) ArgFor(object? value, [CallerArgumentExpression(nameof(value))] string name = "") => (name.Split('.').Last(), value);
-    static (string name, object? value) ArgFor(string prepend, object? value, [CallerArgumentExpression(nameof(value))] string name = "") => (prepend + name.Split('.').Last(), value);
+file class FileSystemInfoJsonConverter<TFileSystemInfo > : JsonConverter<TFileSystemInfo >
+    where TFileSystemInfo : FileSystemInfo
+{
+    public override TFileSystemInfo? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options) =>
+        throw new NotImplementedException("Deserialization is not implemented.");
 
+    public override void Write(
+        Utf8JsonWriter writer,
+        TFileSystemInfo  value,
+        JsonSerializerOptions options)
+    {
+        if (value.FullName is {} fn)
+            writer.WriteStringValue(fn);
+        else
+            writer.WriteNullValue();
+    }
+}
+
+
+/// <remarks>For serializing <see cref="PackagingToolkitConfig.FixedLibraryCanonicals"/></remarks>
+file class KeyToStringDictionaryJsonConverter<TKey, TValue> :
+    JsonConverter<IReadOnlyDictionary<TKey, TValue>>
+{
+    public override IReadOnlyDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+        throw new NotImplementedException("Deserialization is not implemented.");
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IReadOnlyDictionary<TKey, TValue> value,
+        JsonSerializerOptions options)
+    {
+        writer.WriteStartObject();
+        foreach (var kvp in value)
+        {
+            var propertyName = kvp.Key?.ToString();
+            if (propertyName is { })
+            {
+                writer.WritePropertyName(propertyName ?? "");
+                // Serialize the key as a string
+                JsonSerializer.Serialize(writer, kvp.Value, options);
+            }
+        }
+        writer.WriteEndObject();
+    }
 }

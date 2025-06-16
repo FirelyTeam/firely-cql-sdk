@@ -13,6 +13,27 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 /// </summary>
 public static partial class InvocationToolkitExtensions
 {
+    /// <summary>
+    /// Configures and utilizes a <see cref="LibrarySetInvoker"/> for the specified <see cref="InvocationToolkit"/> instance.
+    /// </summary>
+    /// <param name="invocationToolkit">
+    /// The <see cref="InvocationToolkit"/> instance to configure and use the <see cref="LibrarySetInvoker"/>.
+    /// </param>
+    /// <param name="useLibrarySetInvoker">
+    /// An action to perform with the configured <see cref="LibrarySetInvoker"/>.
+    /// </param>
+    /// <param name="librarySetName">
+    /// The name of the library set to be invoked. Defaults to an empty string.
+    /// </param>
+    public static void UseLibrarySetInvoker(
+        this InvocationToolkit invocationToolkit,
+        Action<LibrarySetInvoker> useLibrarySetInvoker,
+        string librarySetName = "")
+    {
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(librarySetName);
+        useLibrarySetInvoker(librarySetInvoker);
+    }
+
     private static ILogger CreateLogger(this InvocationToolkit invocationToolkit)
     {
         return invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));

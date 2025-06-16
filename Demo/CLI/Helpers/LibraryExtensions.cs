@@ -6,12 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using FhirLibrary=Hl7.Fhir.Model.Library;
 
@@ -58,7 +56,7 @@ internal static class LibraryExtensions
                     break;
             }
 
-            for (int i = 2; i >= 1; i--)
+            for (int i = arr.Length; i >= 1; i--)
             {
                 var resourceFileName = i switch
                 {
@@ -96,63 +94,4 @@ internal static class LibraryExtensions
                          .AddAssemblyBinaries(assemblyBinaries)
                          .CreateLibrarySetInvoker();
     }
-
-    private static Dictionary<string, List<string>> GetValueSets(Type libraryType)
-    {
-        var valueSets = new Dictionary<string, List<string>>();
-        CollectValueSets(libraryType, valueSets);
-        return valueSets;
-    }
-
-    private static void CollectValueSets(Type libraryType, Dictionary<string, List<string>> valueSets)
-    {
-        var libAttribute = libraryType.GetCustomAttribute<CqlLibraryAttribute>();
-        if (libAttribute is null) return;
-
-        var id = $"{libAttribute.Identifier}-{libAttribute.Version}";
-        if (!valueSets.TryGetValue(id, out var forLib))
-        {
-            forLib = new List<string>();
-            valueSets[id] = forLib;
-        }
-
-        var methodInfos = libraryType.GetMethods();
-
-        var valueSetAttributes = methodInfos
-                                 .Select(m => m.GetCustomAttribute<CqlValueSetAttribute>())
-                                 .Where(attr => attr is not null)
-                                 .Select(attr => attr!.Id);
-
-        forLib.AddRange(valueSetAttributes);
-        if (forLib.Count == 0)
-        {
-            valueSets.Remove(id);
-        }
-
-        var nestedLibraryTypes = libraryType.GetProperties()
-            .Select(p => p.PropertyType)
-            .Distinct(); // Avoid processing the same type multiple times
-
-        foreach (var nestedType in nestedLibraryTypes)
-        {
-            CollectValueSets(nestedType, valueSets);
-        }
-    }
-
-    private static Dictionary<string, List<string>> MissingValueSets(Type libraryType, IValueSetDictionary loadedValueSets, Dictionary<string, List<string>> libraryValueSets)
-    {
-        return libraryValueSets
-            .Where(lib => lib.Value.Any(vs => !loadedValueSets.TryGetCodesInValueSet(vs, out _)))
-            .ToDictionary(
-                lib => lib.Key,
-                lib => lib.Value.Where(vs => !loadedValueSets.TryGetCodesInValueSet(vs, out _)).ToList()
-     );
-    }
-
-    public static Dictionary<string, List<string>> MissingValueSets(this Type libraryType, IValueSetDictionary loadedValueSets)
-    {
-        var libraryValueSets = GetValueSets(libraryType);
-        return MissingValueSets(libraryType, loadedValueSets, libraryValueSets);
-    }
-
 }

@@ -92,16 +92,16 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <summary>
     /// Creates a new instance of <see cref="LibrarySetInvoker"/>.
     /// </summary>
-    /// <param name="name">The name of the AssemblyLoadContext.</param>
+    /// <param name="librarySetName">The name of the library set which is used in the AssemblyLoadContext.</param>
     /// <returns>A new instance of <see cref="LibrarySetInvoker"/>
     /// which must be disposed when no longer in use,
     /// so that the loaded assemblies may unload from the
     /// application domain.</returns>
-    public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
+    public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "")
     {
-        _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", name);
+        _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", librarySetName);
 
-        var alc = new AssemblyLoadContext(name, true);
+        var alc = new AssemblyLoadContext(librarySetName, true);
 
         AssemblyBinaries
             .TryForEach(t =>
@@ -118,7 +118,8 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
         return new LibrarySetInvoker(
             alc,
-            this.LoggerFactory,
-            this.BatchProcessExceptionContinuation);
+            LoggerFactory,
+            BatchProcessExceptionContinuation,
+            librarySetName);
     }
 }

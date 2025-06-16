@@ -131,7 +131,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (!typeSpecifier.IsOrderedType())
                 expression.AddError($"Can only determine {extent} for types that are ordered.");
-            
+
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithLocator(context.Locator());
         }
 
-        //   expression ('is' | 'as') typeSpecifier  
+        //   expression ('is' | 'as') typeSpecifier
         public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
         {
             var operand = Visit(context.expression());
@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = operand,
                     isTypeSpecifier = typeSpecifier,
                     isType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null
-                }.WithResultType(SystemTypes.BooleanType);                
+                }.WithResultType(SystemTypes.BooleanType);
             }
             else if (@operator == "as")
             {
@@ -251,14 +251,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 var unit = context.unit();
-                DateTimePrecision dtp;
+                Literal literal;
                 if (unit.dateTimePrecision() is { } dtpc)
-                    dtp = dtpc.Parse();
+                {
+                    var parsedDtpc = dtpc.Parse();
+                    literal = ElmFactory.Literal(parsedDtpc);
+                }
                 else if (unit.pluralDateTimePrecision() is { } pdtpc)
-                    dtp = pdtpc.Parse();
+                {
+                    var parsedPdtpc = pdtpc.Parse();
+                    literal = ElmFactory.Literal(parsedPdtpc);
+                }
+                else if (unit.STRING() is { } unitString)
+                {
+                    var parsedUnitString = unitString.ParseString() ?? unitString.GetText();
+                    literal = ElmFactory.Literal(parsedUnitString);
+                }
                 else
                     throw new InvalidOperationException("Syntax error; expected unit.");
-                var literal = ElmFactory.Literal(dtp);
                 return new ConvertQuantity { operand = [expression, literal] }
                     .WithId()
                     .WithLocator(context.Locator())

@@ -19,7 +19,7 @@ internal static class Defaults
         new(
             UseKeywords:true,
             NoNamespaces:true,
-            TypeFormat:t => $"{t.Type}{GetClassKind(t.TypeInfo)}");
+            Format:t => $"{t.Type}{GetClassKind(t.TypeInfo)}");
 
     private static string GetClassKind(Type t) =>
         t switch

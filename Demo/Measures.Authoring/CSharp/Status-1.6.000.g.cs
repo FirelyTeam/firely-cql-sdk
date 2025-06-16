@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
 [CqlLibrary("Status", "1.6.000")]
 public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 {
@@ -28,59 +28,52 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     #endregion ILibrary Implementation
 
-    #region Definition Methods
+    #region Codes
 
-    [CqlDeclaration("laboratory")]
-    public CqlCode laboratory(CqlContext context) =>
-        new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+    [CqlCodeDefinition("laboratory", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode laboratory(CqlContext _) => _laboratory;
+    private static readonly CqlCode _laboratory = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category");
 
+    [CqlCodeDefinition("exam", codeId: "exam", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode exam(CqlContext _) => _exam;
+    private static readonly CqlCode _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category");
 
-    [CqlDeclaration("exam")]
-    public CqlCode exam(CqlContext context) =>
-        new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+    [CqlCodeDefinition("survey", codeId: "survey", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode survey(CqlContext _) => _survey;
+    private static readonly CqlCode _survey = new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category");
 
+    [CqlCodeDefinition("vital-signs", codeId: "vital-signs", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
+    public CqlCode vital_signs(CqlContext _) => _vital_signs;
+    private static readonly CqlCode _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
 
-    [CqlDeclaration("survey")]
-    public CqlCode survey(CqlContext context) =>
-        new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+    [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
+    public CqlCode active(CqlContext _) => _active;
+    private static readonly CqlCode _active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical");
 
+    #endregion Codes
 
-    [CqlDeclaration("vital-signs")]
-    public CqlCode vital_signs(CqlContext context) =>
-        new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+    #region CodeSystems
 
+    [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
+    public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
+    private static readonly CqlCodeSystem _ObservationCategoryCodes =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
+          _laboratory,
+          _exam,
+          _survey,
+          _vital_signs]);
 
-    [CqlDeclaration("active")]
-    public CqlCode active(CqlContext context) =>
-        new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
+    [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
+    public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
+    private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
+          _active]);
 
+    #endregion CodeSystems
 
-    [CqlDeclaration("ObservationCategoryCodes")]
-    public CqlCode[] ObservationCategoryCodes(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-            new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
-        ];
+    #region Expressions
 
-        return a_;
-    }
-
-
-    [CqlDeclaration("ConditionClinicalStatusCodes")]
-    public CqlCode[] ConditionClinicalStatusCodes(CqlContext context)
-    {
-        CqlCode[] a_ = [
-            new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
-        ];
-
-        return a_;
-    }
-
-
-    [CqlDeclaration("Patient")]
+    [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
     {
         IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
@@ -90,6 +83,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Final Survey Observation")]
     public IEnumerable<Observation> Final_Survey_Observation(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -132,6 +126,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isAssessmentPerformed")]
     public IEnumerable<Observation> isAssessmentPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -174,6 +169,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Active Condition")]
     public IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
     {
         bool? a_(Condition C)
@@ -192,6 +188,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isActiveOnly")]
     public IEnumerable<Condition> isActiveOnly(CqlContext context, IEnumerable<Condition> Condition)
     {
         bool? a_(Condition C)
@@ -210,6 +207,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Completed or Ongoing Device Request")]
     public IEnumerable<DeviceRequest> Completed_or_Ongoing_Device_Request(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
     {
         bool? a_(DeviceRequest D)
@@ -237,6 +235,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isDeviceOrder")]
     public IEnumerable<DeviceRequest> isDeviceOrder(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
     {
         bool? a_(DeviceRequest D)
@@ -264,6 +263,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Completed or Ongoing Service Request")]
     public IEnumerable<ServiceRequest> Completed_or_Ongoing_Service_Request(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -291,6 +291,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isDiagnosticStudyOrder")]
     public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -318,6 +319,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isInterventionOrder")]
     public IEnumerable<ServiceRequest> isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -345,6 +347,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isLaboratoryTestOrder")]
     public IEnumerable<ServiceRequest> isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -372,6 +375,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Final Observation")]
     public IEnumerable<Observation> Final_Observation(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -395,6 +399,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isDiagnosticStudyPerformed")]
     public IEnumerable<Observation> isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -418,6 +423,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Finished Encounter")]
     public IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
     {
         bool? a_(Encounter E)
@@ -443,6 +449,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isEncounterPerformed")]
     public IEnumerable<Encounter> isEncounterPerformed(CqlContext context, IEnumerable<Encounter> Enc)
     {
         bool? a_(Encounter E)
@@ -468,6 +475,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Completed Immunization")]
     public IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
     {
         bool? a_(Immunization I)
@@ -485,6 +493,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isImmunizationAdministered")]
     public IEnumerable<Immunization> isImmunizationAdministered(CqlContext context, IEnumerable<Immunization> Immunization)
     {
         bool? a_(Immunization I)
@@ -502,6 +511,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Completed Procedure")]
     public IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -519,6 +529,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isInterventionPerformed")]
     public IEnumerable<Procedure> isInterventionPerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -536,6 +547,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isProcedurePerformed")]
     public IEnumerable<Procedure> isProcedurePerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -553,6 +565,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Final Lab Observation")]
     public IEnumerable<Observation> Final_Lab_Observation(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -595,6 +608,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isLaboratoryTestPerformed")]
     public IEnumerable<Observation> isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -637,6 +651,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Active Medication")]
     public IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -659,6 +674,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isMedicationActive")]
     public IEnumerable<MedicationRequest> isMedicationActive(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -681,6 +697,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Dispensed Medication")]
     public IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
         bool? a_(MedicationDispense M)
@@ -704,6 +721,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isMedicationDispensed")]
     public IEnumerable<MedicationDispense> isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
         bool? a_(MedicationDispense M)
@@ -727,6 +745,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Active or Completed Medication Request")]
     public IEnumerable<MedicationRequest> Active_or_Completed_Medication_Request(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -753,6 +772,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isMedicationOrder")]
     public IEnumerable<MedicationRequest> isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -779,6 +799,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Final Exam Observation")]
     public IEnumerable<Observation> Final_Exam_Observation(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -821,6 +842,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isPhysicalExamPerformed")]
     public IEnumerable<Observation> isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -863,6 +885,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("BloodPressure")]
     public IEnumerable<Observation> BloodPressure(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -885,6 +908,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("BodyHeight")]
     public IEnumerable<Observation> BodyHeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -907,6 +931,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("BodyWeight")]
     public IEnumerable<Observation> BodyWeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -929,6 +954,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("BMI")]
     public IEnumerable<Observation> BMI(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -951,6 +977,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isObservationBP")]
     public IEnumerable<Observation> isObservationBP(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -973,6 +1000,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isObservationBodyHeight")]
     public IEnumerable<Observation> isObservationBodyHeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -995,6 +1023,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isObservationBodyWeight")]
     public IEnumerable<Observation> isObservationBodyWeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -1017,6 +1046,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isObservationBMI")]
     public IEnumerable<Observation> isObservationBMI(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -1039,6 +1069,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("Initial or Final Observation")]
     public IEnumerable<Observation> Initial_or_Final_Observation(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -1063,6 +1094,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
+    [CqlExpressionDefinition("isSymptom")]
     public IEnumerable<Observation> isSymptom(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -1087,6 +1119,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
-    #endregion Definition Methods
+    #endregion Expressions
 
 }

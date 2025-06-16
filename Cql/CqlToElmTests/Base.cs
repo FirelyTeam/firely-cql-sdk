@@ -5,10 +5,9 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Model;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -31,12 +30,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             ctx ??= DefaultCqlContext;
             var elmToolkit = CreateElmToolkit();
-            var lambda = elmToolkit.Lambda(expression);
             var expressionName = "TempExpression";
+            var definition = new CqlExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
-            DefinitionDictionary<LambdaExpression> definitions = new();
-            definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+            CqlDefinitionDictionary definitions = new();
+            definitions.AddDefinition(library.VersionedLibraryIdentifier, expressionName, definition);
 
             var generateCSharp =
                 elmToolkitServices
@@ -57,8 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
                     .CreateLibrarySetInvoker();
 
-            var result = librarySetInvoker
-                .GetLibraryDefinitionResult(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
+            var result = librarySetInvoker.InvokeLibraryDefinition(ctx!, library.VersionedLibraryIdentifier, expressionName);
             return result;
         }
 
@@ -188,7 +186,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var array = ((IEnumerable<T?>)result).ToArray();
             Assert.AreEqual(expectedValues.Length, array.Length);
             for (int i = 0; i < expectedValues.Length; i++)
-                Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
+                Assert.AreEqual(
+                    true,
+                    (expectedValues[i], array[i]) switch
+                    {
+                        (null, null) => true, // #REVIEW: This is overriding the spec which says that nulls are not equal
+                        _            => ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision)
+                    });
         }
 
         private static ILoggerFactory LoggerFactory { get; } =
@@ -202,18 +206,21 @@ namespace Hl7.Cql.CqlToElm.Test
             bool EnableListDemotion = false,
             bool EnableIntervalPromotion = false,
             bool EnableIntervalDemotion = false,
-            bool AllowNullIntervals = false) =>
-            new(LoggerFactory,
-                new CqlToolkitConfig(
-                    Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
-                    ModelInfos: ModelInfos,
-                    AmbiguousTypeBehavior: AmbiguousTypeBehavior,
-                    EnableListDemotion: EnableListDemotion,
-                    EnableListPromotion: EnableListPromotion,
-                    EnableIntervalDemotion: EnableIntervalDemotion,
-                    EnableIntervalPromotion: EnableIntervalPromotion,
-                    AllowNullIntervals: AllowNullIntervals
-                ));
+            bool AllowNullIntervals = false)
+        {
+            Debug.Assert(CqlToolkitConfig.DefaultCqlModels.SetEquals([CqlModel.ElmR1, CqlModel.Fhir401]));
+            return new CqlToolkit(LoggerFactory,
+                                  new CqlToolkitConfig(
+                                      Models: Models,
+                                      ModelInfos: ModelInfos,
+                                      AmbiguousTypeBehavior: AmbiguousTypeBehavior,
+                                      EnableListDemotion: EnableListDemotion,
+                                      EnableListPromotion: EnableListPromotion,
+                                      EnableIntervalDemotion: EnableIntervalDemotion,
+                                      EnableIntervalPromotion: EnableIntervalPromotion,
+                                      AllowNullIntervals: AllowNullIntervals
+                                  ));
+        }
 
         internal static ElmToolkit CreateElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
