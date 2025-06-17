@@ -128,7 +128,7 @@ partial class IncludeDef : IGetVersionedIdentifier
 partial class VersionedIdentifier : IGetVersionedIdentifier
 {
     internal string? GetVersionedLibraryIdentifierString() =>
-        CqlVersionedLibraryIdentifier.BuildString(system, id, version);
+        CqlVersionedLibraryIdentifierFormatting.FormatSystemIdentifierVersion(system, id, version);
 
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
@@ -144,7 +144,7 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
                 throw new MissingIdentifierError(this).ToException();
 
             if (system is { Length: > 0 } sys)
-                qualifiedIdentifier = $"{sys}{CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter}{qualifiedIdentifier}";
+                qualifiedIdentifier = $"{sys}{CqlVersionedLibraryIdentifierFormatting.SystemIdentifierDelimiter}{qualifiedIdentifier}";
 
             return CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(qualifiedIdentifier, version);
         }

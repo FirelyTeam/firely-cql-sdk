@@ -43,7 +43,7 @@ internal static class CqlParserExtensions
                     }
 
                     if (sbQualifierPart.Length > 0)
-                        sbQualifierPart.Append(CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter);
+                        sbQualifierPart.Append(CqlVersionedLibraryIdentifierFormatting.SystemIdentifierDelimiter);
 
                     sbQualifierPart.Append(qualifierPart);
                 }

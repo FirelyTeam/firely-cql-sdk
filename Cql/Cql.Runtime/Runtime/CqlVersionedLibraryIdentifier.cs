@@ -24,16 +24,6 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     private static readonly CqlParseErrorHandler OnErrorThrowFormatException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlVersionedLibraryIdentifier));
 
     /// <summary>
-    /// The delimiter to use between the qualifier and identifier part in the string representation.
-    /// </summary>
-    [UsedImplicitly] public const char SystemIdentifierDelimiter = '.';
-
-    /// <summary>
-    /// The delimiter to use between the identifier and version part in the string representation.
-    /// </summary>
-    [UsedImplicitly] public const char IdentifierVersionDelimiter = '-';
-
-    /// <summary>
     /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
     /// </summary>
     /// <param name="versionedIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> to convert.</param>
@@ -78,61 +68,17 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return ToString(IdentifierVersionDelimiter);
+        return FormatDelimited(CqlVersionedLibraryIdentifierFormatting.IdentifierVersionDelimiter);
     }
 
     /// <summary>
     /// Returns a string representation of the CQL versioned library identifier.
     /// </summary>
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
-    internal string ToString(char identifierVersionDelimiter)
+    internal string FormatDelimited(char identifierVersionDelimiter)
     {
-        return BuildString(Identifier, Version, identifierVersionDelimiter)!;
+        return CqlVersionedLibraryIdentifierFormatting.FormatIdentifierVersion(Identifier, Version, identifierVersionDelimiter)!;
     }
-
-    /// <summary>
-    /// Constructs a string representation of a CQL versioned library identifier.
-    /// </summary>
-    /// <param name="identifier">The identifier of the CQL library.</param>
-    /// <param name="version">The version of the CQL library. This parameter is optional.</param>
-    /// <param name="delimiter">The delimiter used to separate the identifier and version. Defaults to "-".</param>
-    /// <returns>A string combining the identifier and version, separated by the specified delimiter.
-    /// If the version is not provided, only the identifier is returned.
-    /// If the identifier is not provided, null is returned.</returns>
-    public static string? BuildString(
-        string identifier,
-        string? version = null,
-        char delimiter = IdentifierVersionDelimiter) =>
-        (identifier, version) switch
-        {
-            ({ Length: > 0 } id, { Length: > 0 } ver) => $"{id}{delimiter}{ver}",
-            ({ Length: > 0 } id, _)                   => id,
-            _ => null
-        };
-
-    /// <summary>
-    /// Constructs a string representation of a CQL versioned library identifier.
-    /// </summary>
-    /// <param name="system">The system of the CQL library.</param>
-    /// <param name="identifier">The identifier of the CQL library.</param>
-    /// <param name="version">The version of the CQL library. This parameter is optional.</param>
-    /// <param name="systemDelimiter">The delimiter used to separate the system and identifier. Defaults to '.'.</param>
-    /// <param name="versionDelimiter">The delimiter used to separate the identifier and version. Defaults to '-'.</param>
-    /// <returns>A string combining the system, identifier and version, separated by the specified delimiters.</returns>
-    public static string? BuildString(
-        string system,
-        string identifier,
-        string? version = null,
-        char systemDelimiter = SystemIdentifierDelimiter,
-        char versionDelimiter = IdentifierVersionDelimiter) =>
-        (system, identifier, version) switch
-        {
-            ({ Length: > 0 } sys, { Length: > 0 } id, { Length: > 0 } ver) => $"{sys}{systemDelimiter}{id}{versionDelimiter}{ver}",
-            ({ Length: > 0 } sys, { Length: > 0 } id, _)                   => $"{sys}{systemDelimiter}{id}",
-            (_, { Length: > 0 } id, { Length: > 0 } ver)                   => $"{id}{versionDelimiter}{ver}",
-            (_, { Length: > 0 } id, _)                                     => id,
-            _                                                              => null
-        };
 
     #region Parsing
 
@@ -232,7 +178,7 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
 
         for (int i = span.Length - 1; i >= 0; i--)
         {
-            if (span[i] == IdentifierVersionDelimiter)
+            if (span[i] == CqlVersionedLibraryIdentifierFormatting.IdentifierVersionDelimiter)
             {
                 indices[indicesCount] = i;
                 indicesCount++;
@@ -292,6 +238,7 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
         onError?.Invoke(CqlParseErrors.CannotSplitIdentifierAndVersionByDash);
         return false;
     }
+
     [GeneratedRegex(
         """
         -          # Match a literal hyphen before the version

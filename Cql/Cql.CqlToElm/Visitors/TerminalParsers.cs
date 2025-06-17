@@ -139,8 +139,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public static (string qualifier, string id) Parse(this cqlParser.QualifiedIdentifierContext context)
         {
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
-
-             return (string.Join(CqlVersionedLibraryIdentifier.SystemIdentifierDelimiter, qualifiers), context.identifier().Parse()!);
+            var qualifier = CqlVersionedLibraryIdentifierFormatting.FormatSystem(qualifiers) ?? "";
+            return (qualifier, context.identifier().Parse()!);
         }
 
         // : (libraryIdentifier '.')? identifier

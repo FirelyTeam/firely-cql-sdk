@@ -74,7 +74,7 @@ internal static partial class FhirIdGenerator
 
     private static string GetMd5Hash(CqlVersionedLibraryIdentifier input)
     {
-        var text = input.ToString('*');
+        var text = input.FormatDelimited('*');
         byte[] hashBytes = MD5.ComputeHash(Encoding.UTF8.GetBytes(text));
         StringBuilder sb = new StringBuilder();
         foreach (byte b in hashBytes)
