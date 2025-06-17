@@ -15,8 +15,6 @@ using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-//using Hl7.Fhir.Model;
-//using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Compiler;
 

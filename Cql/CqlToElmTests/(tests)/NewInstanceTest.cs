@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hl7.Cql.CodeGeneration.NET;
+﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
@@ -11,18 +6,11 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-    // define "SDE Sex":
-    // case
-    //     when Patient.gender = 'male' then Code { code: 'M', system: 'http://hl7.org/fhir/v3/AdministrativeGender', display: 'Male' }
-    //     when Patient.gender = 'female' then Code { code: 'F', system: 'http://hl7.org/fhir/v3/AdministrativeGender', display: 'Female' }
-    //     else null
-    //   end
-
     [TestClass]
-    public class CodeTest : Base
+    public class NewInstanceTest : Base
     {
         [TestMethod]
-        public void CreatedCodeByPropertyNames()
+        public void NewCode()
         {
             // This test checks that the code is returned as expected using the correct values as per the property names,
             // instead of just using the positions the parameters in the constructor.
