@@ -567,7 +567,7 @@ partial class ExpressionBuilderContext
                             // is not assignable from the provided value by name or type
                             // when the parameter has no default value.
                             int[] ctorPositionToParameterPositionMap = new int[ctorParameters.Length];
-                            bool[] isParameterNameValuePairMapped = new bool[parameterNameValuePairs.Length];
+                            Span<bool> isParameterNameValuePairMapped = stackalloc bool[parameterNameValuePairs.Length];
                             for (var i = 0; i < ctorParameters.Length; i++)
                             {
                                 var ctorParameter = ctorParameters[i];
@@ -591,7 +591,7 @@ partial class ExpressionBuilderContext
                             }
 
                             // Make sure there are no provided values that are not mapped to a constructor parameter
-                            if (isParameterNameValuePairMapped.Any(isMapped => !isMapped))
+                            if (isParameterNameValuePairMapped.Contains(false))
                                 return default;
 
                             return (true, (ctor, ctorParameters, ctorPositionToParameterPositionMap));
