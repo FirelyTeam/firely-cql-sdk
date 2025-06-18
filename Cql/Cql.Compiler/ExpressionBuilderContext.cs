@@ -551,7 +551,6 @@ partial class ExpressionBuilderContext
 
         // Find a constructor that matches the provided parameters.
         const int NOT_MAPPED_HAS_DEFAULT_VALUE = int.MaxValue;
-        const byte B_FALSE = 0x0, B_TRUE = 0x1;
         var (ctor, ctorParameters, ctorPositionToParameterPositionMap) =
             // Prefer constructors with more parameters, and
             instanceType.GetConstructors()
@@ -568,7 +567,7 @@ partial class ExpressionBuilderContext
                             // is not assignable from the provided value by name or type
                             // when the parameter has no default value.
                             int[] ctorPositionToParameterPositionMap = new int[ctorParameters.Length];
-                            Span<byte> isParameterNameValuePairMapped = stackalloc byte[parameterNameValuePairs.Length];
+                            bool[] isParameterNameValuePairMapped = new bool[parameterNameValuePairs.Length];
                             for (var i = 0; i < ctorParameters.Length; i++)
                             {
                                 var ctorParameter = ctorParameters[i];
@@ -586,13 +585,13 @@ partial class ExpressionBuilderContext
                                         return default; // Exit immediately if we cannot map this parameter
                                     case { } p:
                                         ctorPositionToParameterPositionMap[i] = p;
-                                        isParameterNameValuePairMapped[parameterPosition] = B_TRUE;
+                                        isParameterNameValuePairMapped[parameterPosition] = true;
                                         break;
                                 }
                             }
 
                             // Make sure there are no provided values that are not mapped to a constructor parameter
-                            if (isParameterNameValuePairMapped.Contains(B_FALSE))
+                            if (Array.IndexOf(isParameterNameValuePairMapped, false) >= 0)
                                 return default;
 
                             return (true, (ctor, ctorParameters, ctorPositionToParameterPositionMap));
