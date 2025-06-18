@@ -390,7 +390,7 @@ internal static class Program
         // Execute CQL
         var threePlusTwo = librarySetInvoker.InvokeLibraryDefinition(
             FhirCqlContext.ForBundle(),
-            CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
+            CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Add3and2", "1.0.0"),
             "ThreePlusTwo");
 
         Trace.Assert(threePlusTwo is 5);

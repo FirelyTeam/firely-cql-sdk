@@ -7,7 +7,7 @@ namespace CoreTests.Infrastructure
     public class CqlLibraryStringTests
     {
         [TestMethod]
-        public void FromCql_ValidCqlContentWithoutVersion_ReturnsCqlLibraryString()
+        public void Parse_ValidCqlContentWithoutVersion_ReturnsCqlLibraryString()
         {
             // Arrange
             string cqlContent = "library TestLibrary";
@@ -22,7 +22,7 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
-        public void FromCql_ValidCqlContentSkipCommentsAndWithoutVersion_ReturnsCqlLibraryString()
+        public void Parse_ValidCqlContentSkipCommentsAndWithoutVersion_ReturnsCqlLibraryString()
         {
             // Arrange
             string cqlContent = """
@@ -41,8 +41,7 @@ namespace CoreTests.Infrastructure
 
                 library TestLibrary
                 """;
-            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
-                CqlLibraryIdentifier.Parse("TestLibrary"));
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"TestLibrary";
 
             // Act
             var result = CqlLibraryString.Parse(cqlContent);
@@ -53,7 +52,7 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
-        public void FromCql_ValidCqlContentWithEmptyLines_ReturnsCqlLibraryString()
+        public void Parse_ValidCqlContentWithEmptyLines_ReturnsCqlLibraryString()
         {
             // Arrange
             string cqlContent = "library TestLibrary version '1.0.0'";
@@ -68,7 +67,7 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
-        public void FromCql_ValidCqlContent_ReturnsCqlLibraryString()
+        public void Parse_ValidCqlContent_ReturnsCqlLibraryString()
         {
             // Arrange
             string cqlContent = "library TestLibrary version '1.0.0'";
@@ -83,26 +82,106 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
-        public void FromCql_InvalidCqlContent_ThrowsFormatException()
+        public void Parse_ValidQualifierIdentifierAndVersion_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = "library NamespaceA.NamespaceB.TestLibrary version '1.0.0'";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"NamespaceA.NamespaceB.TestLibrary-1.0.0";
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
+        public void Parse_ValidQualifierQuotedIdentifierAndVersion_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = """library Namespace."Test Library" version '1.0.0-alpha'""";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"""Namespace.Test Library-1.0.0-alpha""";
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
+        public void Parse_ValidQualifierDelimitedIdentifierAndVersion_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = """library Namespace.`Test Library` version '1.0.0-alpha'""";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"""Namespace.Test Library-1.0.0-alpha""";
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
+        public void Parse_ValidQualifierDelimitedIdentifierAndVersionUnbalancedQuote_ThrowFormatException()
+        {
+            // Arrange
+            string cqlContent = """library Namespace.`Test Library version '1.0.0-alpha'""";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"""Namespace.Test Library-1.0.0-alpha""";
+
+            // Act
+            Action act = () => CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            var e = Assert.ThrowsException<FormatException>(act);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: extraneous input '<EOF>' expecting {QUOTEDIDENTIFIER, IDENTIFIER, DELIMITEDIDENTIFIER}.", e.Message);
+        }
+
+        [TestMethod]
+        public void Parse_ValidQualifierDelimitedIdentifierAndVersionWithSpaces_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = """library `Name space`.`Test Library` version '1.0.0-alpha'""";
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"""Name space.Test Library-1.0.0-alpha""";
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
+        public void Parse_InvalidCqlContent_ThrowsFormatException()
         {
             // Arrange
             string cqlContent = "invalid content";
 
             // Act
-            CqlLibraryString.Parse(cqlContent);
+            Action act = () => CqlLibraryString.Parse(cqlContent);
 
-            // Assert is handled by ExpectedException
+            // Assert
+            var e = Assert.ThrowsException<FormatException>(act);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: missing 'library' at 'invalid'.", e.Message);
         }
 
         [TestMethod]
-        public void FromCql_EmptyCqlContent_ThrowsFormatException()
+        public void Parse_EmptyCqlContent_ThrowsFormatException()
         {
             // Arrange
             string cqlContent = "";
 
-            // Act & Assert
-            Assert.ThrowsException<FormatException>(() => CqlLibraryString.Parse(cqlContent));
+            // Act
+            Action act = () => CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            var e = Assert.ThrowsException<FormatException>(act);
+            Assert.AreEqual("Not a valid Hl7.Cql.CqlToElm.CqlLibraryString: Syntax error: mismatched input '<EOF>' expecting 'library'.", e.Message);
         }
     }
 }

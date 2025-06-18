@@ -87,7 +87,7 @@ partial class Library : IGetVersionedIdentifier
         {
             if (identifier is not { id.Length: > 0 })
                 throw new MissingIdentifierError(this).ToException();
-            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
+            return CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(identifier.id, identifier.version);
         }
     }
 
@@ -116,7 +116,7 @@ partial class IncludeDef : IGetVersionedIdentifier
         {
             if (path is not { Length: > 0 })
                 throw new MissingIdentifierError(this).ToException();
-            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(path, version);
+            return CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(path, version);
         }
     }
 
@@ -128,7 +128,7 @@ partial class IncludeDef : IGetVersionedIdentifier
 partial class VersionedIdentifier : IGetVersionedIdentifier
 {
     internal string? GetVersionedLibraryIdentifierString() =>
-        CqlVersionedLibraryIdentifier.BuildString(id, version);
+        CqlVersionedLibraryIdentifierFormatting.FormatSystemIdentifierVersion(system, id, version);
 
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
@@ -140,9 +140,13 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     {
         get
         {
-            if (id is not { Length: > 0 })
+            if (id is not { Length: > 0 } qualifiedIdentifier)
                 throw new MissingIdentifierError(this).ToException();
-            return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(id, version);
+
+            if (system is { Length: > 0 } sys)
+                qualifiedIdentifier = $"{sys}{CqlVersionedLibraryIdentifierFormatting.SystemIdentifierDelimiter}{qualifiedIdentifier}";
+
+            return CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(qualifiedIdentifier, version);
         }
     }
 

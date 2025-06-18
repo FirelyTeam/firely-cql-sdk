@@ -27,7 +27,7 @@ internal sealed class LibraryBuilderProvider(
         string libraryName,
         string? version,
         [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
-        out string? error) => TryResolveLibrary(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(libraryName, version), out libraryBuilder, out error);
+        out string? error) => TryResolveLibrary(CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, version), out libraryBuilder, out error);
 
     public bool TryResolveLibrary(
         CqlVersionedLibraryIdentifier libVer,

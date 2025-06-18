@@ -1,5 +1,7 @@
+using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 
 partial class Program
@@ -14,10 +16,13 @@ partial class Program
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         // Add CQL libraries from directory
-        var cqlDirectory = new DirectoryInfo("input/cql");
+        //var cqlDirectory = new DirectoryInfo("input/cql");
+        var cql = """
+                  library System.Identifier version 'Version'
+                  """;
         var cqlToolkit = new CqlToolkit(loggerFactory);
-
-        cqlToolkit.AddCqlLibrariesFromDirectory(cqlDirectory);
+        var cqlLibraryString = CqlLibraryString.Parse(cql);
+        cqlToolkit.AddCqlLibraries(cqlLibraryString);
 
         // Translate CQL to ELM0
         cqlToolkit.TranslateToElm();

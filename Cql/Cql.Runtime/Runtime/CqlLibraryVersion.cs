@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime.Parsing;
 using Hl7.Cql.Runtime.Serialization;
 
 namespace Hl7.Cql.Runtime;
@@ -48,6 +49,9 @@ public readonly record struct CqlLibraryVersion :
 
     #region Parsing
 
+    private static readonly CqlParseErrorHandler OnErrorThrowException = CqlParseErrorHandlerStrategies.OnErrorThrowException(typeof(CqlLibraryVersion));
+
+
     /// <summary>
     /// Parses the specified string to a <see cref="CqlLibraryVersion"/>.
     /// </summary>
@@ -64,12 +68,11 @@ public readonly record struct CqlLibraryVersion :
     /// </summary>
     /// <param name="s">The string to parse.</param>
     /// <returns>The parsed <see cref="CqlLibraryVersion"/>.</returns>
-    /// <exception cref="FormatException">Thrown when the string is not a valid CQL library version.</exception>
+    /// <exception cref="FormatException">Thrown when the string is not a valid identifier.</exception>
     public static CqlLibraryVersion Parse(string s)
     {
-        return TryParse(s, out var result)
-                   ? result
-                   : throw new FormatException("Not a valid ElmLibraryVersion");
+        TryParse(s, out var nresult, OnErrorThrowException);
+        return nresult!.Value;
     }
 
     /// <summary>
@@ -84,7 +87,14 @@ public readonly record struct CqlLibraryVersion :
         IFormatProvider? provider,
         out CqlLibraryVersion result)
     {
-        return TryParse(s, out result);
+        if (TryParse(s, out var nresult))
+        {
+            result = nresult.Value;
+            return true;
+        }
+
+        result = default;
+        return false;
     }
 
     /// <summary>
@@ -92,18 +102,28 @@ public readonly record struct CqlLibraryVersion :
     /// </summary>
     /// <param name="s">The string to parse.</param>
     /// <param name="result">The parsed <see cref="CqlLibraryVersion"/>.</param>
+    /// <param name="onError">An optional callback containing details about a failed parse attempt.</param>
     /// <returns><c>true</c> if the string was successfully parsed; otherwise, <c>false</c>.</returns>
-    public static bool TryParse(string? s, out CqlLibraryVersion result)
+    public static bool TryParse(
+        string? s,
+        [NotNullWhen(true)] out CqlLibraryVersion? result,
+        CqlParseErrorHandler? onError = null)
+
     {
+        result = default(CqlLibraryVersion);
+
         if (string.IsNullOrEmpty(s))
         {
-            result = default;
+            onError?.Invoke(CqlParseErrors.NullOrEmpty);
             return false;
         }
 
-        result = new CqlLibraryVersion(s);
+
+        result = NewVerbatim(s);
         return true;
     }
 
     #endregion
+
+    internal static CqlLibraryVersion NewVerbatim(string value) => new(value);
 }

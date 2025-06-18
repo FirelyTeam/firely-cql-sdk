@@ -11,6 +11,8 @@ public class FhirIdGeneratorTests
     [DataRow("Status-1.8.000", "c91484f7-status-1.8.000")]
     [DataRow("Status-1.6.000", "ad01ce35-status-1.6.000")]
     [DataRow("FHIR347-0.1.021", "d333e5c3-fhir347-0.1.021")]
+    [DataRow("Namespace.FHIR Helpers-4.0.1-alpha", "33456ffb-namespace-fhir-helpers-4.0.1-alpha")]
+    [DataRow("Namespace.FHIR Helpers-4.3.0-alpha", "b8f5ea8d-namespace-fhir-helpers-4.3.0-alpha")]
     [DataRow("FHIRHelpers-4.0.001", "edde5879-fhir-helpers-4.0.001")]
     [DataRow("FHIRHelpers-4.3.000", "1e1cb65c-fhir-helpers-4.3.000")]
     [DataRow("POAGOpticNerveEvaluationFHIR-0.1.000", "f60da446-poag-optic-nerve-evaluation-fhir-0.1.000")]
