@@ -22,6 +22,9 @@ public class Program
     {
         var rootCommand =
             new RootCommand(Description)
+                {
+                    Name = Process.GetCurrentProcess().ProcessName, // Use the name of the executable as the command name
+            }
                 //.AddOptions(ElmToFhirCommand.Options)
                 .AddGlobalOptions(LoggingCommand.Options)
                 //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
