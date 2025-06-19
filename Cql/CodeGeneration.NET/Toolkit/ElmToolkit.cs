@@ -261,3 +261,20 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         return librarySetDefinitions;
     }
 }
+
+internal enum CompileToAssemblyStage
+{
+    GenerateDefinitions = 1,
+    GenerateCSharp = 2,
+    GenerateAssembly = 3
+}
+
+internal record CompileToAssembliesOptions(
+    Action<(
+        CompileToAssemblyStage stage,
+        object input)>? preProcessCallback,
+    Action<(
+        CompileToAssemblyStage stage,
+        object input,
+        object output)>? postProcessCallback,
+    ValueExceptionHandler<(CompileToAssemblyStage stage, object input)>)
