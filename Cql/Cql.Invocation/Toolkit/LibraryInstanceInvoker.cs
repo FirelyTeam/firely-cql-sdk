@@ -29,11 +29,11 @@ public abstract class LibraryInstanceInvoker(
     /// Gets the versioned identifier of the CQL library.
     /// </summary>
     public override CqlVersionedLibraryIdentifier LibraryIdentifier { get; } =
-        CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(library.Name, library.Version);
+        CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
 
     /// <inheritdoc />
     public override IReadOnlyCollection<CqlVersionedLibraryIdentifier> DependencyLibraryIdentifiers { get; } =
         library.Dependencies
-               .Select(dep => CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(dep.Name, dep.Version))
+               .Select(dep => CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(dep.Name, dep.Version))
                .ToList();
 }

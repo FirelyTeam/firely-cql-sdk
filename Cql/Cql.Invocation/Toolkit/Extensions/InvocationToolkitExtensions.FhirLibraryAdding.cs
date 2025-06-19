@@ -48,7 +48,7 @@ partial class InvocationToolkitExtensions
                                             logger,
                                             (fhirLibrary, logMessage) =>
                                                 logMessage("Could not extract assembly binary from FHIR library resource: {id}",
-                                                           CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(fhirLibrary.Name, fhirLibrary.Version))))
+                                                           CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(fhirLibrary.Name, fhirLibrary.Version))))
                                .ToList()
             ;
 

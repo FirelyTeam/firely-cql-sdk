@@ -36,7 +36,7 @@ internal static class PackagerCliServiceCollectionExtensions
         var asmDirName = asmFileInfo.DirectoryName!;
         var asmFileNameNoExt = asmFileInfo.Name[..^4]; // Trim ".dll"
 
-        config.AddEnvironmentVariables("CQLPACKAGER");
+        config.AddEnvironmentVariables("CQLPACKAGE");
 
         IEnumerable<string> files =
         [
