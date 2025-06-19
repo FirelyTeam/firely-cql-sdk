@@ -6,7 +6,7 @@ using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
-internal static class CqlToolkitExtensions
+internal static class CqlToolkitTestExtensions
 {
     private static TService GetCqlRequiredService<TService>(this CqlToolkit cqlToolkit) where TService : notnull =>
         cqlToolkit.ServiceProvider.GetRequiredService<TService>();

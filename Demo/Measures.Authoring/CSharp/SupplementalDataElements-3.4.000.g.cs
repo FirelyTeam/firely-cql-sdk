@@ -357,11 +357,11 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             };
             if (b_())
             {
-                return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", "Male", default);
+                return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
             }
             else if (c_())
             {
-                return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", "Female", default);
+                return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Female");
             }
             else
             {
