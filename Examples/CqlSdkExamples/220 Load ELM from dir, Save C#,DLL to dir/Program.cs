@@ -7,7 +7,7 @@ partial class Program
 {
     void LoadElmFromDirSaveCSharpAndDllToDir()
     {
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "220 Load ELM from dir, Save C#,DLL to dir");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "220 Load ELM from dir, Save C#,DLL to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
         var elmToolkit = new ElmToolkit(loggerFactory);

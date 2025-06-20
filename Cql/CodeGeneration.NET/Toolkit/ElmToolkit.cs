@@ -262,19 +262,23 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     }
 }
 
-internal enum CompileToAssemblyStage
+internal enum CompileToAssemblyStage // REVIEW: This should be removed before a PR
 {
     GenerateDefinitions = 1,
     GenerateCSharp = 2,
     GenerateAssembly = 3
 }
 
-internal record CompileToAssembliesOptions(
+internal record CompileToAssembliesOptions // REVIEW: This should be removed before a PR
+(
     Action<(
         CompileToAssemblyStage stage,
-        object input)>? preProcessCallback,
+        object input)>? PreProcessCallback,
     Action<(
         CompileToAssemblyStage stage,
         object input,
-        object output)>? postProcessCallback,
-    ValueExceptionHandler<(CompileToAssemblyStage stage, object input)>)
+        object output)>? PostProcessCallback,
+    ValueExceptionHandler<(CompileToAssemblyStage stage, object input)> OnException)
+{
+
+}

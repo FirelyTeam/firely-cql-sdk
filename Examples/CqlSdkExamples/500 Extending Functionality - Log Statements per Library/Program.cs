@@ -11,7 +11,7 @@ partial class Program
         // This example first packages CQL libraries into FHIR resources,
         // then loads the packaged resources and invokes them.
 
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "500 Extending Functionality - Log Statements per Library");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "500 Extending Functionality - Log Statements per Library"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
