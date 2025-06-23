@@ -1,10 +1,9 @@
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
-using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 partial class Program
 {
@@ -23,13 +22,21 @@ partial class Program
             filePredicate: f => f.Name is "CumulativeMedicationDurationFHIR4.cql" or "FHIRHelpers.cql");
         cqlToolkit.TranslateToElm();
 
+        // Save ELM to directory
+        var outputDirectory = new DirectoryInfo("output/elm");
+        cqlToolkit.SaveElmFilesToDirectory(outputDirectory, writeIndented:true);
+
+
         // Generate binaries from the ELM libraries
         var elmToolkit = cqlToolkit.CreateElmToolkit();
-        elmToolkit.SetThrowEnumerationExceptions();
+        // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();
 
         // Save the generated C# code and binaries to directory
-        var outputDirectory = new DirectoryInfo("output/cs");
+        outputDirectory = new DirectoryInfo("output/cs");
         elmToolkit.SaveCSharpFilesToDirectory(outputDirectory);
+
+        // Open Explorer to the output directory
+        _ = Process.Start("explorer.exe", "output");
     }
 }

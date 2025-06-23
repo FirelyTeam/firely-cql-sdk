@@ -33,7 +33,8 @@ internal static class EnumerableExceptionHandlingExtensions
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
         Func<T, TReturn> selector,
-        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null)
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null,
+        YieldValueWhenExceptionIgnoredHandler<T, TReturn>? yieldReturnWhenExceptionIgnored = null)
     {
         bool firstException = true;
         BatchProcessExceptionHandlingStrategy<T> strategy = default;
@@ -55,12 +56,16 @@ internal static class EnumerableExceptionHandlingExtensions
                 }
 
                 strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
-                switch (strategy.ExceptionContinuation)
+                switch (strategy.ExceptionContinuation, yieldReturnWhenExceptionIgnored)
                 {
-                    case BatchProcessExceptionContinuation.Continue: continue;
-                    case BatchProcessExceptionContinuation.Break: yield break;
+                    case (BatchProcessExceptionContinuation.Continue or BatchProcessExceptionContinuation.Break, { } getYieldValue)
+                        when getYieldValue(input) is (shouldYieldValue: true, {} yieldedValue):
+                        next = yieldedValue;
+                        break;
+                    case (BatchProcessExceptionContinuation.Continue, null): continue;
+                    case (BatchProcessExceptionContinuation.Break, null): yield break;
+                    default: throw;
                 }
-                throw;
             }
 
             yield return next;

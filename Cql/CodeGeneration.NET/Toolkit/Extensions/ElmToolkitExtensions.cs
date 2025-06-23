@@ -19,8 +19,25 @@ public static partial class ElmToolkitExtensions
     /// Gets the results of ELM to assembly conversions.
     /// </summary>
     /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>An enumerable of <see cref="ElmToolkitResultRecord"/> containing the conversion results.</returns>
-    public static IEnumerable<ElmToolkitResultRecord> GetElmToAssemblyResults(
+    /// <returns>An enumerable of <see cref="ElmToolkitCSharpResultRecord"/> containing the conversion results.</returns>
+    public static IEnumerable<ElmToolkitCSharpResultRecord> GetElmToCSharpResults(
+        this ElmToolkit elmToolkit) =>
+        elmToolkit.Conversions.Values
+                  .SelectWhere(t => t switch
+                  {
+                      {
+                          LibraryIdentifier: { } libId,
+                          ResultCSharpSourceCode: { } csharp
+                      } => (true, new ElmToolkitCSharpResultRecord(libId, csharp)),
+                      _ => default,
+                  });
+
+    /// <summary>
+    /// Gets the results of ELM to assembly conversions.
+    /// </summary>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>
+    /// <returns>An enumerable of <see cref="ElmToolkitAssemblyResultRecord"/> containing the conversion results.</returns>
+    public static IEnumerable<ElmToolkitAssemblyResultRecord> GetElmToAssemblyResults(
         this ElmToolkit elmToolkit) =>
         elmToolkit.Conversions.Values
                   .SelectWhere(t => t switch
@@ -30,7 +47,7 @@ public static partial class ElmToolkitExtensions
                           ResultCSharpSourceCode: { } csharp,
                           ResultAssemblyBinary: { } asm,
                           ResultDebugSymbolsBinary: var dbg
-                      } => (true, new ElmToolkitResultRecord(libId, csharp, asm, dbg)),
+                      } => (true, new ElmToolkitAssemblyResultRecord(libId, csharp, asm, dbg)),
                       _ => default,
                   });
 

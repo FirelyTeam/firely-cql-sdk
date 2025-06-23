@@ -278,7 +278,7 @@ internal record CompileToAssembliesOptions // REVIEW: This should be removed bef
         CompileToAssemblyStage stage,
         object input,
         object output)>? PostProcessCallback,
-    ValueExceptionHandler<(CompileToAssemblyStage stage, object input)> OnException)
+    BatchProcessExceptionHandler<(CompileToAssemblyStage stage, object input)> OnException)
 {
 
 }

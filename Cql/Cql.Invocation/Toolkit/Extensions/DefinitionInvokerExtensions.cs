@@ -186,7 +186,7 @@ public record SelectResultsOptions(
     DefinitionArgumentsProvider? ProviderArgumentsCallback = null,
     PreInvokeDefinitionHandler? PreInvokeDefinitionCallback = null,
     PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null,
-    ValueExceptionHandler<DefinitionInvoker>? InvocationExceptionCallback = null)
+    BatchProcessExceptionHandler<DefinitionInvoker>? InvocationExceptionCallback = null)
 {
     /// <summary>
     /// Gets the default instance of <see cref="SelectResultsOptions"/> with no custom callbacks or exception handlers.

@@ -40,9 +40,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                         return conversion.Update(nested.Update(reducedOperandOfNestedConversion));
                 }
 
-                var removeCast = true;
-                if (conversion.Type.IsAssignableFrom(conversion.Operand.Type) == false)
-                    removeCast = false;
+                bool removeCast = conversion.Type.IsAssignableFrom(conversion.Operand.Type);
 
                 if (conversion.Method != null)
                     removeCast = false;
@@ -78,7 +76,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                     return reducedOperand;
                 }
 
-                return conversion.Update(reducedOperand);
+                try
+                {
+                    return conversion.Update(reducedOperand);
+                }
+                catch
+                {
+                    return node;
+                }
             }
 
             return base.VisitUnary(node);
