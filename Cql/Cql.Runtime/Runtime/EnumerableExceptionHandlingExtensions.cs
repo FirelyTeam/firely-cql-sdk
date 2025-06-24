@@ -59,8 +59,8 @@ internal static class EnumerableExceptionHandlingExtensions
                 switch (strategy.ExceptionContinuation, yieldReturnWhenExceptionIgnored)
                 {
                     case (BatchProcessExceptionContinuation.Continue or BatchProcessExceptionContinuation.Break, { } getYieldValue)
-                        when getYieldValue(input) is (shouldYieldValue: true, {} yieldedValue):
-                        next = yieldedValue;
+                        when getYieldValue(input) is (shouldYield: true, {} yieldValue):
+                        next = yieldValue;
                         break;
                     case (BatchProcessExceptionContinuation.Continue, null): continue;
                     case (BatchProcessExceptionContinuation.Break, null): yield break;

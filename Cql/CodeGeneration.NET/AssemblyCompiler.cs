@@ -78,7 +78,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
-            bool outputCSharpToTempFolder = false,
+            bool allowInvalidCSharp = false,
             BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
@@ -88,21 +88,22 @@ namespace Hl7.Cql.CodeGeneration.NET
                     t =>
                     {
                         var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat, outputCSharpToTempFolder);
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
                         results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
                     buildExceptionHandlingStrategy,
-                    t =>
-                        (
-                            shouldYieldValue: true,
-                            yieldedValue: (
-                                              library: t.library,
-                                              assemblyBinaryWithSourceCode: new AssemblyBinaryWithSourceCode(
-                                                  null, sourceCode: t.csharp, sourceCodeFileName: BuildFileName(t.library.VersionedLibraryIdentifier))
-                                          )
-                        )
-                    );
+                    allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
+
+            ShouldYieldValue<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> YieldWithoutAssemblyBinary(
+                (Library library, string csharp) t) =>
+                (
+                    t.library,
+                    assemblyBinaryWithSourceCode: new AssemblyBinaryWithSourceCode(
+                        assemblyBytes: null,
+                        sourceCode: t.csharp,
+                        sourceCodeFileName: BuildFileName(t.library.VersionedLibraryIdentifier))
+                );
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
@@ -120,21 +121,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat,
-            bool outputCSharpToTempFolder)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
             EmbeddedText[]? embeddedTexts = []; // For embedding C# when enabling debug information
             string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
             var fileName = BuildFileName(libraryVersionedIdentifier);
-
-            if (outputCSharpToTempFolder)
-            {
-                // Write the C# source code to a temporary directory for debugging or inspection purposes.
-                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", fileName);
-                DirectoryPreparationStrategy.CreateIfNotExists(new DirectoryInfo(tempDir));
-                var tempSourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
-                File.WriteAllText(tempSourcePath, librarySourceString);
-            }
 
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {

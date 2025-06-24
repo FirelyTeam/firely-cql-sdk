@@ -205,13 +205,12 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
                 debugInformationFormat,
-                Config.OutputCSharpFilesToTempDirectory,
-                errorStrategy => errorStrategy
-                                 .SetContinuation(BatchProcessExceptionContinuation)
-                                 .AddLoggerExceptionHandler(
-                                     _services.Logger,
-                                     (pair, logMessage) =>
-                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
+                Config.AllowInvalidCSharp, errorStrategy => errorStrategy
+                                                            .SetContinuation(BatchProcessExceptionContinuation)
+                                                            .AddLoggerExceptionHandler(
+                                                                _services.Logger,
+                                                                (pair, logMessage) =>
+                                                                    logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -260,25 +259,4 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }
-}
-
-internal enum CompileToAssemblyStage // REVIEW: This should be removed before a PR
-{
-    GenerateDefinitions = 1,
-    GenerateCSharp = 2,
-    GenerateAssembly = 3
-}
-
-internal record CompileToAssembliesOptions // REVIEW: This should be removed before a PR
-(
-    Action<(
-        CompileToAssemblyStage stage,
-        object input)>? PreProcessCallback,
-    Action<(
-        CompileToAssemblyStage stage,
-        object input,
-        object output)>? PostProcessCallback,
-    BatchProcessExceptionHandler<(CompileToAssemblyStage stage, object input)> OnException)
-{
-
 }

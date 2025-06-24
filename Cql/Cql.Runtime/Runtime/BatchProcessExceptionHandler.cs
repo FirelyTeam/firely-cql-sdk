@@ -39,4 +39,25 @@ public delegate void BatchProcessExceptionHandler<in T>(
 /// </list>
 /// </returns>
 /// <remarks>Implementations of this callback must avoid throwing exceptions.</remarks>
-internal delegate (bool shouldYieldValue, TReturn yieldedValue) YieldValueWhenExceptionIgnoredHandler<in T, TReturn>(T value);
+internal delegate ShouldYieldValue<TReturn> YieldValueWhenExceptionIgnoredHandler<in T, TReturn>(T value);
+
+internal readonly record struct ShouldYieldValue<TReturn>
+{
+    public static implicit operator ShouldYieldValue<TReturn>(TReturn value) => new(true, value);
+
+    private ShouldYieldValue(bool ShouldYield, TReturn Value)
+    {
+        this.ShouldYield = ShouldYield;
+        this.Value = Value;
+    }
+
+    public bool ShouldYield { get; }
+
+    public TReturn Value { get; }
+
+    public void Deconstruct(out bool shouldYield, out TReturn value)
+    {
+        shouldYield = this.ShouldYield;
+        value = this.Value;
+    }
+}
