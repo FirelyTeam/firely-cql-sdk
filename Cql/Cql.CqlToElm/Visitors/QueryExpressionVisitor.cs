@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 source = source,
             };
             TypeSpecifier returnType;
-            using (var scope = LibraryBuilder.EnterScope($"Query {context.Locator()}"))
+            using (var scope = libraryBuilder.EnterScope($"Query {context.Locator()}"))
             {
                 foreach (var qs in source)
                 {
@@ -117,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         if (withClause is not null)
                         {
                             Expression? suchThat = null;
-                            using (var scope = LibraryBuilder.EnterScope($"With {withClause.Locator()}"))
+                            using (var scope = libraryBuilder.EnterScope($"With {withClause.Locator()}"))
                             {
                                 // add the with alias to scope while visiting the such that.
                                 if (scope.TryAdd(aqs))
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     {
                                         alias = aqs.alias,
                                         expression = aqs.expression,
-                                    }.AddError(Messaging.IdentifierAlreadyInScope(aqs.alias));
+                                    }.AddError(messagingProvider.IdentifierAlreadyInScope(aqs.alias));
                                 }
                             }
 
@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     items = sortClauseCtx.sortByItem()?.Select(ctx =>
                     {
-                        using (var scope = LibraryBuilder.EnterScope($"Sort {ctx.Locator()}"))
+                        using (var scope = libraryBuilder.EnterScope($"Sort {ctx.Locator()}"))
                         {
                             var thisType = returnType switch
                             {

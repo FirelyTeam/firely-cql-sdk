@@ -14,12 +14,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (qualifiers.Length > 0)
             {
                 var term = qualifiers[0].referentialIdentifier().Parse();
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                if (libraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
                     expression = symbol.ToRef(null);
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(Messaging.CouldNotResolveInCurrent(term));
+                }.AddError(messagingProvider.CouldNotResolveInCurrent(term));
 
                 for(int i = 1; i < qualifiers.Length; i++)
                 {
@@ -33,12 +33,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 var term = context.referentialIdentifier().Parse();
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                if (libraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
                     return symbol.ToRef(null);
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(Messaging.CouldNotResolveInCurrent(term));
+                }.AddError(messagingProvider.CouldNotResolveInCurrent(term));
             }
         }
 
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
             else if (term is IncludeRef ir)
-                return ir.AddError(Messaging.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
+                return ir.AddError(messagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(context.Locator());
             else if (term is null)
             {
@@ -58,7 +58,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return new Message()
                 {
                     source = new Null().WithResultType(SystemTypes.AnyType),
-                    message = ElmFactory.Literal(message),
+                    message = elmFactory.Literal(message),
                 }
                 .AddError(message)
                 .WithLocator(context.Locator())
@@ -69,10 +69,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitInstanceSelector([NotNull] cqlParser.InstanceSelectorContext context)
         {
-            var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+            var type = _typeSpecifierVisitor.Visit(context.namedTypeSpecifier());
             if (type is Elm.NamedTypeSpecifier namedType)
             {
-                var modelType = ModelProvider.FindTypeInfoByNamedType(namedType);
+                var modelType = modelProvider.FindTypeInfoByNamedType(namedType);
                 if (modelType != null)
                 {
                     if (modelType.Type is ClassInfo @class)
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         for (int i = 0; i < instanceElementContexts.Length; i++)
                         {
                             var elementName = instanceElementContexts[i].referentialIdentifier().Parse();
-                            if (!ModelProvider.TryGetElement(@class, elementName, out var classElement) || classElement is null)
+                            if (!modelProvider.TryGetElement(@class, elementName, out var classElement) || classElement is null)
                             {
                                 return new Instance()
                                     .AddError($"Member {elementName} not found for type {namedType.name.Name}.")
@@ -93,10 +93,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             {
                                 Elm.TypeSpecifier elementType;
                                 if (classElement.typeSpecifier is not null)
-                                    elementType = classElement.typeSpecifier.ToElm(ModelProvider);
+                                    elementType = classElement.typeSpecifier.ToElm(modelProvider);
                                 else if (classElement.type is not null)
                                 {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.type, out var ent))
+                                    if (modelProvider.TryGetTypeSpecifierForQualifiedName(classElement.type, out var ent))
                                         elementType = ent!;
                                     else
                                         return new Instance()
@@ -106,7 +106,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 }
                                 else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
                                 {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
+                                    if (modelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
                                         elementType = elt.ToListType();
                                     else
                                         return new Instance()
@@ -116,12 +116,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 }
                                 else if (classElement.elementTypeSpecifier is Model.ChoiceTypeSpecifier { } choiceTypeSpecifier)
                                 {
-                                    var ct = choiceTypeSpecifier.choice.Select(c => c.ToElm(ModelProvider)).ToArray();
+                                    var ct = choiceTypeSpecifier.choice.Select(c => c.ToElm(modelProvider)).ToArray();
                                     elementType = new Elm.ChoiceTypeSpecifier { choice = ct };
                                 }
                                 else if (classElement.elementType is not null)
                                 {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
+                                    if (modelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
                                         elementType = ent!;
                                     else
                                         return new Instance()
@@ -137,7 +137,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         .WithResultType(type);
                                 }
                                 var elementExpression = Visit(instanceElementContexts[i]);
-                                var conversionResult = CoercionProvider.Coerce(elementExpression, elementType);
+                                var conversionResult = coercionProvider.Coerce(elementExpression, elementType);
                                 if (conversionResult.Success)
                                 {
                                     var instanceElement = new InstanceElement()
@@ -205,9 +205,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (left is IncludeRef ir)
                 {
                     var libraryName = ir.IncludeDef.localIdentifier;
-                    return LibraryBuilder.CurrentScope
-                        .Ref(Messaging, libraryName, memberName)
-                        .WithLocator(context.Locator());
+                    return libraryBuilder.CurrentScope
+                                         .Ref(messagingProvider, libraryName, memberName)
+                                         .WithLocator(context.Locator());
                 }
                 else
                 {
@@ -331,13 +331,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Property navigateIntoNamedType(Expression source, Elm.NamedTypeSpecifier nts, string memberName)
         {
-            var (_, type) = ModelProvider.FindTypeInfoByNamedType(nts);
+            var (_, type) = modelProvider.FindTypeInfoByNamedType(nts);
 
             var prop = makeProp(source, memberName);
 
-            if (type is ClassInfo ci && ModelProvider.TryGetElement(ci, memberName, out var elementInfo))
+            if (type is ClassInfo ci && modelProvider.TryGetElement(ci, memberName, out var elementInfo))
             {
-                return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(ModelProvider));
+                return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(modelProvider));
             }
             else
             {
@@ -353,25 +353,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
-            if (!LibraryBuilder.CurrentScope.TryResolveSymbol(null, identifier, out var def))
+            if (!libraryBuilder.CurrentScope.TryResolveSymbol(null, identifier, out var def))
             {
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(null, "$this", out var @this))
+                if (libraryBuilder.CurrentScope.TryResolveSymbol(null, "$this", out var @this))
                 {
                     var propertyExpression = navigateIntoType(@this!.ToRef(null), identifier);
                     // in a query context, when a property doesn't exist on $this, a could not resolve
                     // error is issued instead of a "member not found" error.
                     if (@this.Name == "$this" && propertyExpression.GetErrors()?.Length > 0)
                         return new AliasRef { name = identifier }
-                            .AddError(Messaging.CouldNotResolveInCurrent(identifier))
+                            .AddError(messagingProvider.CouldNotResolveInCurrent(identifier))
                             .WithLocator(context.Locator())
                             .WithResultType(SystemTypes.AnyType);
                     else
                         return propertyExpression;
                 }
             }
-            var @ref = LibraryBuilder.CurrentScope!
-                .Ref(Messaging, null, identifier)
-                .WithLocator(context.Locator());
+            var @ref = libraryBuilder.CurrentScope!
+                                     .Ref(messagingProvider, null, identifier)
+                                     .WithLocator(context.Locator());
             if (def is Element element)
             {
                 var errors = element.GetErrors()
@@ -401,16 +401,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             //
             // we have to test the existence of $this.foo() first.
             // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
-            if (LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
+            if (libraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
-                if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                if (libraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
                 {
                     var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
                     var result = symbolDef switch
                     {
-                        IHasSignature ihs => InvocationBuilder.MatchSignature(ihs, fluentParams),
-                        OverloadedFunctionDef ov => InvocationBuilder.MatchSignature(ov, fluentParams),
-                        _ => null
+                        IHasSignature ihs        => invocationBuilder.MatchSignature(ihs, fluentParams),
+                        OverloadedFunctionDef ov => invocationBuilder.MatchSignature(ov, fluentParams),
+                        _                        => null
                     };
                     if (result?.Compatible ?? false)
                         return invoke(result.Function, null, fluentParams, true);
@@ -418,18 +418,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             if (fluent)
             {
-                if (!LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                if (!libraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
                     return unresolved();
             }
             else if (libraryName is null)
             {
-                if (!LibraryBuilder.CurrentScope.TryResolveFunction(funcName, out symbolDef))
+                if (!libraryBuilder.CurrentScope.TryResolveFunction(funcName, out symbolDef))
                     return unresolved();
 
             }
             else if (libraryName is not null)
             {
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(libraryName, out var usingSymbol))
+                if (libraryBuilder.CurrentScope.TryResolveSymbol(libraryName, out var usingSymbol))
                 {
                     if (usingSymbol is ReferencedLibrary refLib)
                     {
@@ -444,10 +444,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
                     .WithLocator(locator)
-                    .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
+                    .AddError(messagingProvider.CouldNotResolveFunction(funcName, paramList));
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
             {
-                var funcRef = InvocationBuilder.Invoke(funcDef, libraryName, arguments);
+                var funcRef = invocationBuilder.Invoke(funcDef, libraryName, arguments);
                 if (funcRef is FunctionRef fr)
                     fr.libraryName = libraryName;
                 if (fluent && !funcDef.fluent)
@@ -458,10 +458,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             Expression initializeOverload(OverloadedFunctionDef function, string? libraryName, Expression[] arguments, bool fluent)
             {
-                var result = InvocationBuilder.MatchSignature(function, arguments);
+                var result = invocationBuilder.MatchSignature(function, arguments);
                 if (result.Compatible)
                 {
-                    var expression = InvocationBuilder.Invoke(result.Function, libraryName, arguments);
+                    var expression = invocationBuilder.Invoke(result.Function, libraryName, arguments);
                     if (fluent && !result.Function.Fluent)
                         expression.AddError($"Function '{result.Function.Name}' is called fluently, but its definition is not marked as fluent.");
                     return expression.WithLocator(locator);
@@ -500,21 +500,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context) =>
-            LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+            libraryBuilder.CurrentScope
+                          .Ref(messagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
 
         // | '$index'                          #indexInvocation
         public override Expression VisitIndexInvocation([NotNull] cqlParser.IndexInvocationContext context) =>
-            LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+            libraryBuilder.CurrentScope
+                          .Ref(messagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
 
         // | '$total'                          #totalInvocation
         public override Expression VisitTotalInvocation([NotNull] cqlParser.TotalInvocationContext context) =>
-            LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+            libraryBuilder.CurrentScope
+                          .Ref(messagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
     }
 
 }

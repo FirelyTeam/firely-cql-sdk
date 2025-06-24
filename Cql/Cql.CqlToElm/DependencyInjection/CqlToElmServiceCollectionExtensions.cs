@@ -88,16 +88,43 @@ internal static class CqlToElmServiceCollectionExtensions
     public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
-            .AddSingleton<Func<LibraryBuilder, LibraryVisitor.DefinitionVisitor>>(sp => libraryBuilder => ActivatorUtilities.CreateInstance<LibraryVisitor.DefinitionVisitor>(sp, libraryBuilder))
             .AddSingleton<CoercionProvider>()
             .AddSingleton<ElmFactory>()
             .AddSingleton<SystemLibrary>()
             .AddSingleton<StreamInspector>()
             .AddSingleton<InvocationBuilder>()
-            .AddTransient<LocalIdentifierProvider>();
+            .AddTransient<LocalIdentifierProvider>()
+            .AddScoped<LibraryVisitor>()
+            .AddFactory<LibraryVisitor.DefinitionVisitor, TypeSpecifierVisitor>()
+            .AddFactory<ExpressionVisitor, TypeSpecifierVisitor>()
+            .AddFactory<TypeSpecifierVisitor, TypeSpecifierVisitor>()
+            ;
 
     public static IServiceCollection AddCqlToElmMessaging(
         this IServiceCollection services,
         CultureInfo? culture = null) =>
         services.AddSingleton(_ => new MessageProvider(culture ?? CultureInfo.InvariantCulture));
+}
+
+file static class ServiceCollectionExtensions
+{
+    /// <summary>
+    /// Adds a factory delegate to the service collection that creates instances of <typeparamref name="TService"/>
+    /// using a single dependency of type <typeparamref name="TDep1"/>.
+    /// </summary>
+    /// <remarks>This method registers a factory delegate of type <see cref="Func{TDep1, TService}"/> as a
+    /// singleton in the  service collection. The factory uses <see cref="ActivatorUtilities.CreateInstance{T}"/> to
+    /// create instances  of <typeparamref name="TService"/> dynamically, resolving its dependencies from the service
+    /// provider.</remarks>
+    /// <typeparam name="TService">The type of the service to be created by the factory.</typeparam>
+    /// <typeparam name="TDep1">The type of the dependency required to create <typeparamref name="TService"/>.</typeparam>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which the factory delegate is added.</param>
+    /// <returns>The updated <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddFactory<TService, TDep1>(this IServiceCollection services)
+        where TService : class
+        where TDep1 : class =>
+        services.AddSingleton<Func<TDep1, TService>>(
+            serviceProvider =>
+                dependency1 =>
+                    ActivatorUtilities.CreateInstance<TService>(serviceProvider, dependency1));
 }

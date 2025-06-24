@@ -4,34 +4,22 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal partial class ExpressionVisitor : Visitor<Expression>
+    internal partial class ExpressionVisitor(
+        // Owning LibraryBuilder
+        LibraryBuilder libraryBuilder,
+        // Services
+        IModelProvider modelProvider,
+        CoercionProvider coercionProvider,
+        ElmFactory elmFactory,
+        MessageProvider messagingProvider,
+        InvocationBuilder invocationBuilder,
+        IOptions<CqlToElmOptions> cqlToElmOptions,
+        Func<LibraryBuilder, TypeSpecifierVisitor> typeSpecifierVisitorFactory) : Visitor<Expression>
     {
-        public ExpressionVisitor(IServiceProvider services, LibraryBuilder builder)
-        {
-            LibraryBuilder = builder;
-            ModelProvider = services.GetRequiredService<IModelProvider>();
-            CoercionProvider = services.GetRequiredService<CoercionProvider>();
-            ElmFactory = services.GetRequiredService<ElmFactory>();
-            Messaging = services.GetRequiredService<MessageProvider>();
-            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-            TypeSpecifierVisitor = new TypeSpecifierVisitor(services, builder);
-            InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
-        }
+        private readonly CqlToElmOptions _cqlToElmOptions = cqlToElmOptions.Value;
+        private readonly TypeSpecifierVisitor _typeSpecifierVisitor = typeSpecifierVisitorFactory(libraryBuilder);
 
-
-        #region Privates
-        private IModelProvider ModelProvider { get; }
-        private CqlToElmOptions Options { get; }
-        private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-        private LibraryBuilder LibraryBuilder { get; }
-        private CoercionProvider CoercionProvider { get; }
-        private ElmFactory ElmFactory { get; }
-        private MessageProvider Messaging { get; }
-        private InvocationBuilder InvocationBuilder { get; }
-
-        #endregion
-
-        internal string NextId() => LibraryBuilder.NextId();
+        private string NextId() => libraryBuilder.NextId();
 
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -59,7 +47,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // When enabled, allow Interval<Any> to be created for Interval[null, null].
             // This is normally disabled.
-            if ((Options.AllowNullIntervals ?? false)
+            if ((_cqlToElmOptions.AllowNullIntervals ?? false)
                 && low is Null
                 && low.resultTypeSpecifier == SystemTypes.AnyType
                 && high is Null
@@ -70,17 +58,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType.ToIntervalType());
             }
 
-            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval,
-                low,
-                high,
-                ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
+            var intervalSelector = invocationBuilder.MatchSignature(SystemLibrary.Interval,
+                                                                    low,
+                                                                    high,
+                                                                    elmFactory.Literal(lowClosed), elmFactory.Literal(highClosed));
 
             if (intervalSelector.Compatible)
             {
-                var interval = InvocationBuilder.Invoke(intervalSelector);
+                var interval = invocationBuilder.Invoke(intervalSelector);
                 // TODO: this should be incorporated in the validation framework
                 // The validation framework is static and can't accept configuration options :(
-                if (Options.ValidateIntervals ?? false)
+                if (_cqlToElmOptions.ValidateIntervals ?? false)
                 {
                     if (intervalSelector.Function.ResultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
@@ -101,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
                 return new Interval()
-                    .AddError(Messaging.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
+                    .AddError(messagingProvider.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
                     .WithLocator(context.Locator())
                     .WithResultType(low.resultTypeSpecifier.ToIntervalType());
         }
@@ -109,7 +97,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
         public override Expression VisitListSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.ListSelectorContext context)
         {
-            var typeSpecifier = context.typeSpecifier() is { } tsContext ? TypeSpecifierVisitor.Visit(tsContext) : null;
+            var typeSpecifier = context.typeSpecifier() is { } tsContext ? _typeSpecifierVisitor.Visit(tsContext) : null;
             var elements = context
                 .expression()
                 .Select(Visit)
@@ -150,7 +138,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (int i = 0; i < elements.Length; i++)
                 {
                     var ei = elements[i];
-                    var result = CoercionProvider.Coerce(ei, elementType);
+                    var result = coercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
                     else
@@ -177,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var codeComparator = context.codeComparator()?.GetText();
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
-            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+            var type = (NamedTypeSpecifier)_typeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
             var contextExpressionRef = contextName switch
             {
@@ -198,7 +186,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var retrieve = new Retrieve
             {
                 dataType = type.name,
-                templateId = ModelProvider.GetDefaultProfileUriForType(type),
+                templateId = modelProvider.GetDefaultProfileUriForType(type),
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
@@ -222,7 +210,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             return new Message()
             {
-                message = ElmFactory.Literal(message),
+                message = elmFactory.Literal(message),
                 source = new Null().WithResultType(SystemTypes.AnyType)
             }
             .AddError(message)
@@ -241,8 +229,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = precision switch
             {
-                { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
-                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
+                { } => invocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
+                _   => invocationBuilder.Invoke(systemFunction, lhs, rhs),
             };
             return expression
                 .WithId()
@@ -258,7 +246,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(context.Parse());
                 if (name is null)
                     return null;
-                else return ElmFactory.Literal(name);
+                else return elmFactory.Literal(name);
             }
         }
         private Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
@@ -271,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(dtp.Parse());
                 if (name is null)
                     return null;
-                else return ElmFactory.Literal(name);
+                else return elmFactory.Literal(name);
             }
         }
 
@@ -285,7 +273,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(dtp.Parse());
                 if (name is null)
                     return null;
-                else return ElmFactory.Literal(name);
+                else return elmFactory.Literal(name);
             }
         }
 
