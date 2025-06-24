@@ -76,14 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                     return reducedOperand;
                 }
 
-                try
-                {
-                    return conversion.Update(reducedOperand);
-                }
-                catch
-                {
-                    return node;
-                }
+                return conversion.Update(reducedOperand);
             }
 
             return base.VisitUnary(node);
