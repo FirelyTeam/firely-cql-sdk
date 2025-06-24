@@ -7,11 +7,11 @@ partial class Program
 {
     void LoadCqlFromDirSaveElmToDir()
     {
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "210 Load CQL from dir, Save ELM to dir");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "210 Load CQL from dir, Save ELM to dir"));
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var cqlToolkit = new CqlToolkit(loggerFactory);
 
         // Add CQL libraries from a directory
+        var cqlToolkit = new CqlToolkit(loggerFactory);
         var cqlDirectory = new DirectoryInfo("input/cql");
         cqlToolkit.AddCqlLibrariesFromDirectory(cqlDirectory);
 

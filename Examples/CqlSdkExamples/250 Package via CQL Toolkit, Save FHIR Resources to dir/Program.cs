@@ -8,7 +8,7 @@ partial class Program
 {
     void PackageViaCqlToolkitsSaveFhirResourcesToDir()
     {
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "250 Package via CQL Toolkit, Save FHIR Resources to dir");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "250 Package via CQL Toolkit, Save FHIR Resources to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 

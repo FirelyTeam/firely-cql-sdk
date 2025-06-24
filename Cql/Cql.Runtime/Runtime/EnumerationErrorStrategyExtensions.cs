@@ -23,7 +23,7 @@ internal static class EnumerationErrorStrategyExtensions
 
     public static BatchProcessExceptionHandlingStrategy<T> AddExceptionHandler<T>(
         this BatchProcessExceptionHandlingStrategy<T> strategy,
-        ValueExceptionHandler<T>? exceptionHandler)
+        BatchProcessExceptionHandler<T>? exceptionHandler)
     {
         return
             exceptionHandler is null
@@ -31,7 +31,7 @@ internal static class EnumerationErrorStrategyExtensions
             : strategy with { ExceptionHandler = strategy.ExceptionHandler + exceptionHandler };
     }
 
-    private static ValueExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
+    private static BatchProcessExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
         this ILogger logger,
         LogMessageBuilder<TCurrent> logMessageBuilder) =>
         (current,

@@ -21,15 +21,18 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in customImplementations.
 /// The default value is <see langword="true"/>.
 /// </param>
-/// <param name="OutputCSharpFilesToTempDirectory">
-/// When <see langword="true"/>, the generated C# files will be written to a temporary directory under a subdirectory "CqlCompiler".
+/// <param name="AllowInvalidCSharp">
+/// Gets a value indicating whether invalid C# code is allowed.
+/// Invalid C# code is code that does not compile.
+/// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
+/// but may be useful for debugging or testing purposes.
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
 public record ElmToolkitConfig(
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
-    bool OutputCSharpFilesToTempDirectory = false,
+    bool AllowInvalidCSharp = false,
     int LRUCacheSize = 0)
 {
     /// <summary>
