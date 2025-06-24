@@ -42,18 +42,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             lhs = kw0 switch
             {
-                "starts" => invocationBuilder.Invoke(SystemLibrary.Start, lhs),
-                "ends"   => invocationBuilder.Invoke(SystemLibrary.End, lhs),
+                "starts" => InvocationBuilder.Invoke(SystemLibrary.Start, lhs),
+                "ends"   => InvocationBuilder.Invoke(SystemLibrary.End, lhs),
                 "occurs" => throw new NotImplementedException("Occurs is not supported yet"),
                 _        => lhs
             };
             var (value, unit) = context.quantity().Parse();
 
-            var quantity = elmFactory.Quantity(value, unit);
+            var quantity = ElmFactory.Quantity(value, unit);
 
             var kwLast = context.children[^1].GetText();
 
-            var rhsClosed = properly ? elmFactory.Literal(false) : elmFactory.Literal(true);
+            var rhsClosed = properly ? ElmFactory.Literal(false) : ElmFactory.Literal(true);
 
             if (rhs.resultTypeSpecifier is IntervalTypeSpecifier)
             {
@@ -63,50 +63,50 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         "start" => new[]
                         {
-                        invocationBuilder.Invoke(SystemLibrary.Subtract,
-                                                 [invocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
-                        invocationBuilder.Invoke(SystemLibrary.Add,
-                                                 [invocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
                         rhsClosed,
                         rhsClosed,
                     },
                         "end" => new[]
                         {
-                        invocationBuilder.Invoke(SystemLibrary.Subtract,
-                                                 [invocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
-                        invocationBuilder.Invoke(SystemLibrary.Add,
-                                                 [invocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
                         rhsClosed,
                         rhsClosed,
                     },
                         _ => null // impossible
                     };
-                    rhs = invocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
+                    rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
                 }
                 else
                 {
                     var intervalArgs = new[]
                     {
-                        invocationBuilder.Invoke(SystemLibrary.Subtract,
-                                                 [invocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
-                        invocationBuilder.Invoke(SystemLibrary.Add,
-                                                 [invocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                                                 [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
                         rhsClosed,
                         rhsClosed,
                 };
-                    rhs = invocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
+                    rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
                 }
             }
             else
             {
                 var intervalArgs = new[]
                 {
-                    rhs, rhs, elmFactory.Literal(true), elmFactory.Literal(true),
+                    rhs, rhs, ElmFactory.Literal(true), ElmFactory.Literal(true),
                 };
-                rhs = invocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
+                rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
             }
 
-            var @in = (In)invocationBuilder.Invoke(SystemLibrary.In, lhs, rhs);
+            var @in = (In)InvocationBuilder.Invoke(SystemLibrary.In, lhs, rhs);
             return @in
                 .WithId()
                 .WithLocator(context.Locator());
@@ -124,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         .WithLocator(context.Locator())
                         .WithId()
                         .WithResultType(SystemTypes.BooleanType)
-                        .AddError(messagingProvider.CouldNotResolveFunction("Start", lhs.resultTypeSpecifier));
+                        .AddError(MessagingProvider.CouldNotResolveFunction("Start", lhs.resultTypeSpecifier));
             }
             else if (firstToken == "ends")
             {
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         .WithLocator(context.Locator())
                         .WithId()
                         .WithResultType(SystemTypes.BooleanType)
-                        .AddError(messagingProvider.CouldNotResolveFunction("End", lhs.resultTypeSpecifier));
+                        .AddError(MessagingProvider.CouldNotResolveFunction("End", lhs.resultTypeSpecifier));
             }
             else if (firstToken == "properly")
                 properly = true;
@@ -159,8 +159,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 expression = lhs.resultTypeSpecifier switch
                 {
-                    IntervalTypeSpecifier or ListTypeSpecifier => invocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args),
-                    _                                          => invocationBuilder.Invoke(SystemLibrary.ProperIn, args)
+                    IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args),
+                    _                                          => InvocationBuilder.Invoke(SystemLibrary.ProperIn, args)
                 };
                 Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
                 return expression
@@ -171,8 +171,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 expression = lhs.resultTypeSpecifier switch
                 {
-                    IntervalTypeSpecifier or ListTypeSpecifier => invocationBuilder.Invoke(SystemLibrary.IncludedIn, args),
-                    _                                          => invocationBuilder.Invoke(SystemLibrary.In, args),
+                    IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.IncludedIn, args),
+                    _                                          => InvocationBuilder.Invoke(SystemLibrary.In, args),
 
                 };
                 Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
@@ -196,7 +196,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "after" => SystemLibrary.OverlapsAfter,
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{boa}' in an overlaps interval expression.")
             };
-            var expression = invocationBuilder.Invoke(function, args);
+            var expression = InvocationBuilder.Invoke(function, args);
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
@@ -263,7 +263,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => (lhs, rhs)
             };
             var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
-            var expression = invocationBuilder.Invoke(SystemLibrary.SameOrBefore, args);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args);
             return expression
                 .WithResultType(SystemTypes.BooleanType)
                 .WithLocator(context.Locator());
@@ -381,7 +381,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => (lhs, rhs)
             };
             var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
-            var expression = invocationBuilder.Invoke(SystemLibrary.SameOrAfter, args);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args);
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
@@ -428,14 +428,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var dtp = context.dateTimePrecisionSpecifier();
             Expression expression;
             if (dtp is null)
-                expression = invocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs);
+                expression = InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs);
             else
             {
                 var precision = Precision(dtp);
                 expression = precision switch
                 {
-                    { } => invocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs, precision),
-                    _   => invocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs),
+                    { } => InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs, precision),
+                    _   => InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs),
                 };
             }
             return expression
@@ -451,14 +451,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var dtp = context.dateTimePrecisionSpecifier();
             Expression expression;
             if (dtp is null)
-                expression = invocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs);
+                expression = InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs);
             else
             {
                 var precision = Precision(dtp);
                 expression = precision switch
                 {
-                    { } => invocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs, precision),
-                    _   => invocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs),
+                    { } => InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs, precision),
+                    _   => InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs),
                 };
             }
             return expression
@@ -500,11 +500,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
 
             if (properly)
-                return invocationBuilder.Invoke(SystemLibrary.ProperIncludes, args)
+                return InvocationBuilder.Invoke(SystemLibrary.ProperIncludes, args)
                                         .WithId()
                                         .WithLocator(context.Locator());
             else
-                return invocationBuilder.Invoke(SystemLibrary.Includes, args)
+                return InvocationBuilder.Invoke(SystemLibrary.Includes, args)
                                         .WithId()
                                         .WithLocator(context.Locator());
         }

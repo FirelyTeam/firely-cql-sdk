@@ -11,7 +11,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         MessageProvider messageProvider)
         : Visitor<TypeSpecifier>
     {
-        private readonly CqlToElmOptions _cqlToElmOptions = cqlToElmOptions.Value;
+        private MessageProvider MessageProvider => messageProvider;
+        private LibraryBuilder LibraryBuilder => libraryBuilder;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
@@ -68,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var libraryName = qualifiers.FirstOrDefault();
             var typeName = string.Join(".", qualifiers.Skip(1).Append(context.referentialOrTypeNameIdentifier().Parse()));
 
-            TryResolveNamedTypeSpecifier(libraryBuilder.SymbolTable,
+            TryResolveNamedTypeSpecifier(LibraryBuilder.SymbolTable,
                 libraryName, typeName, out var result, out var error);
 
             //TODO: Might need ErrorTypeSpecifier here
@@ -127,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
                 else
-                    (result, error) = (null, messageProvider.CouldNotResolveModel(libraryName));
+                    (result, error) = (null, MessageProvider.CouldNotResolveModel(libraryName));
 
                 return error is null;
             }
@@ -150,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else if (matches.Count == 2)
             {
-                var behavior = _cqlToElmOptions.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
+                var behavior = CqlToElmOptions.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
                 if (behavior == AmbiguousTypeBehavior.PreferSystem)
                 {
                     var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
@@ -172,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
                 result = null;
-                error = messageProvider.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
+                error = MessageProvider.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
                 return false;
 
             }
@@ -197,7 +199,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 result = null;
-                error = messageProvider.NamedTypeRequiredInContext();
+                error = MessageProvider.NamedTypeRequiredInContext();
                 return false;
             }
         }

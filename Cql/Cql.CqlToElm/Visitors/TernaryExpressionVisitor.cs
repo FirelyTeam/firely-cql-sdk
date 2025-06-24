@@ -19,9 +19,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression expression;
             if (proper)
-                expression = invocationBuilder.Invoke(SystemLibrary.ProperBetween, operand, floor, ceiling);
+                expression = InvocationBuilder.Invoke(SystemLibrary.ProperBetween, operand, floor, ceiling);
             else
-                expression = invocationBuilder.Invoke(SystemLibrary.Between, operand, floor, ceiling);
+                expression = InvocationBuilder.Invoke(SystemLibrary.Between, operand, floor, ceiling);
             return expression
                 .WithId()
                 .WithLocator(context.Locator());

@@ -6,14 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
 /// <summary>
 /// Provides the implementation for <seealso cref="ILibraryProvider"/>
-/// which resolves a <seealso cref="TypeSpecifierVisitor"/> given a library name and version on a <seealso cref="CqlToolkitConversionDictionary.Builder"/>.
+/// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="CqlToolkitConversionDictionary.Builder"/>.
 /// </summary>
 /// <param name="conversionsBuilder"></param>
 internal sealed class LibraryBuilderProvider(

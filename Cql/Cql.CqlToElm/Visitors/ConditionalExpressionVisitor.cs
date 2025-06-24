@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var then = Visit(context.expression(1));
             var @else = Visit(context.expression(2));
 
-            var @if = elmFactory.If(condition, then, @else);
+            var @if = ElmFactory.If(condition, then, @else);
             return @if
                 .WithId()
                 .WithLocator(context.Locator());
@@ -57,11 +57,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                         var when = Visit(item.expression(0));
                         var whenExpectedType = comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType;
-                        var whenCastResult = coercionProvider.Coerce(when, whenExpectedType);
+                        var whenCastResult = CoercionProvider.Coerce(when, whenExpectedType);
                         if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
                         else 
-                            caseItem.AddError(messagingProvider.TypeFoundIsNotExpected(when.resultTypeSpecifier, whenExpectedType));
+                            caseItem.AddError(MessagingProvider.TypeFoundIsNotExpected(when.resultTypeSpecifier, whenExpectedType));
 
                         caseItem.then = Visit(item.expression(1));
 
@@ -87,23 +87,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
             foreach (var item in caseItems)
             {
                 var then = item.then;
-                var thenCastResult = coercionProvider.Coerce(then, returnType);
+                var thenCastResult = CoercionProvider.Coerce(then, returnType);
                 if (thenCastResult.Success)
                 {
                     item.then = thenCastResult.Result;
                     item.resultTypeSpecifier = item.then.resultTypeSpecifier;
                 }
                 else
-                    item.AddError(messagingProvider.TypeFoundIsNotExpected(then.resultTypeSpecifier, returnType));
+                    item.AddError(MessagingProvider.TypeFoundIsNotExpected(then.resultTypeSpecifier, returnType));
             }
-            var elseCastResult = coercionProvider.Coerce(@else, returnType);
+            var elseCastResult = CoercionProvider.Coerce(@else, returnType);
             if (elseCastResult.Success)
                 @else = elseCastResult.Result;
             else
-                @else.AddError(messagingProvider.TypeFoundIsNotExpected(@else.resultTypeSpecifier, returnType));
+                @else.AddError(MessagingProvider.TypeFoundIsNotExpected(@else.resultTypeSpecifier, returnType));
 
 
-            return elmFactory.Case(comparand, caseItems, @else)
+            return ElmFactory.Case(comparand, caseItems, @else)
                              .WithId()
                              .WithLocator(context.Locator());
         }

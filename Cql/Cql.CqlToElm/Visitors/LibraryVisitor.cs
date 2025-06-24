@@ -12,17 +12,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
         Func<LibraryBuilder, LibraryVisitor.DefinitionVisitor> definitionVisitorFactory)
         : Visitor<LibraryBuilder>
     {
-        private readonly CqlToElmOptions _cqlToElmOptions = cqlToElmOptions.Value;
+        private Func<LibraryBuilder, DefinitionVisitor> DefinitionVisitorFactory => definitionVisitorFactory;
+        private LocalIdentifierProvider LocalIdentifierProvider => localIdentifierProvider;
+        private IModelProvider ModelProvider => modelProvider;
+        private SystemLibrary SystemLibrary => systemLibrary;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
-            var systemUri = _cqlToElmOptions.SystemElmModelUri;
-            var systemVersion = _cqlToElmOptions.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
+            var systemUri = CqlToElmOptions.SystemElmModelUri;
+            var systemVersion = CqlToElmOptions.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
 
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            return modelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
+            return ModelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
                 new UsingDefSymbol("System", systemVersion, model)
                 : null;
         }
@@ -35,12 +39,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var identifier = context.libraryDefinition()?.Parse()
                 ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
-            var libraryBuilder = new LibraryBuilder(identifier, systemLibrary, localIdentifierProvider);
+            var libraryBuilder = new LibraryBuilder(identifier, SystemLibrary, LocalIdentifierProvider);
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
                 libraryBuilder.CurrentScope.TryAdd(systemModel);
 
-            var defVisitor = definitionVisitorFactory(libraryBuilder);
+            var defVisitor = DefinitionVisitorFactory(libraryBuilder);
 
             // Parse the definitions, this function will insert the visited definitions into the current scope.
             defVisitor.VisitDefinitions(context.definition());
@@ -66,8 +70,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Func<LibraryBuilder, ExpressionVisitor> expressionVisitorFactory,
             Func<LibraryBuilder, TypeSpecifierVisitor> typeSpecifierVisitorFactory) : Visitor<IDefinitionElement>
         {
-            private readonly ExpressionVisitor _expressionVisitor = expressionVisitorFactory(libraryBuilder);
-            private readonly TypeSpecifierVisitor _typeSpecifierVisitor = typeSpecifierVisitorFactory(libraryBuilder);
+            private InvocationBuilder InvocationBuilder => invocationBuilder;
+            private MessageProvider MessagingProvider => messaging;
+            private CoercionProvider CoercionProvider => coercionProvider;
+            private ILibraryProvider LibraryProvider => libraryProvider;
+            private IModelProvider ModelProvider => modelProvider;
+            private LibraryBuilder LibraryBuilder => libraryBuilder;
+            private ExpressionVisitor ExpressionVisitor => expressionVisitorFactory(libraryBuilder);
+            private TypeSpecifierVisitor TypeSpecifierVisitor => typeSpecifierVisitorFactory(libraryBuilder);
 
 
             //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
@@ -79,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? id;
                 var vi = new VersionedIdentifier { id = libraryName, version = version };
 
-                var resolveSuccess = libraryProvider.TryResolveLibrary(libraryName, version, out var includedLibraryBuilder, out var error);
+                var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var includedLibraryBuilder, out var error);
                 if (resolveSuccess && includedLibraryBuilder is not null)
                 {
                     return new ReferencedLibrary(localIdentifier, vi, includedLibraryBuilder.SymbolTable)
@@ -87,7 +97,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 else
                 {
-                    error ??= messaging.UnableToResolveLibrary(libraryName, version);
+                    error ??= MessagingProvider.UnableToResolveLibrary(libraryName, version);
                     var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.SymbolTable(vi.ToString()!, null));
                     return errorInclude
                         .AddError(error!)
@@ -105,7 +115,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var modelVersion = context.versionSpecifier()?.STRING().ParseString();
                 var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
-                var success = modelProvider.TryGetModelFromName(modelName, out var model, modelVersion);
+                var success = ModelProvider.TryGetModelFromName(modelName, out var model, modelVersion);
 
                 if (success)
                     return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
@@ -187,8 +197,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     name = context.identifier().Parse(),
                 }.WithLocator(context.Locator());
 
-                var defaultExpr = context.expression() is { } expr ? _expressionVisitor.Visit(expr) : null;
-                var typeSpec = context.typeSpecifier() is { } ts ? _typeSpecifierVisitor.Visit(ts) : null;
+                var defaultExpr = context.expression() is { } expr ? ExpressionVisitor.Visit(expr) : null;
+                var typeSpec = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
 
                 var coercedDefault = (typeSpec, defaultExpr) switch
                 {
@@ -214,7 +224,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 Expression coerceDefault(TypeSpecifier type, Expression defaultExpr)
                 {
-                    var result = coercionProvider.Coerce(defaultExpr, type);
+                    var result = CoercionProvider.Coerce(defaultExpr, type);
 
                     if (result.Success)
                         return result.Result;
@@ -227,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             public override IDefinitionElement VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context)
             {
                 var name = context.identifier().Parse();
-                var expression = _expressionVisitor.Visit(context.expression());
+                var expression = ExpressionVisitor.Visit(context.expression());
                 if (expression is null)
                 {
                     var msg = $"Expression type {context.expression().GetType()} is not implemented.";
@@ -259,7 +269,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             public override IDefinitionElement VisitOperandDefinition([NotNull] cqlParser.OperandDefinitionContext context)
             {
                 var identifier = context.referentialIdentifier().Parse();
-                var type = _typeSpecifierVisitor.Visit(context.typeSpecifier());
+                var type = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
                 var od = new OperandDef() { name = identifier, operandTypeSpecifier = type };
                 return od.WithLocator(context.Locator()).WithResultType(type);
@@ -280,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 ContextDef? activeContext = null;
                 List<string> definedContexts = new();
 
-                var table = libraryBuilder.SymbolTable;
+                var table = LibraryBuilder.SymbolTable;
 
 
 
@@ -305,7 +315,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return ed;
                             });
                         if (!table.TryAdd(dd))
-                            libraryBuilder.AddError(messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
@@ -324,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return fd;
                             });
                         if (!table.TryAdd(dd))
-                            libraryBuilder.AddError(messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)
                     {
@@ -365,26 +375,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = signature,
                     }.WithLocator(context.Locator());
 
-                    var returnType = context.typeSpecifier() is { } ts ? _typeSpecifierVisitor.Visit(ts) : null;
+                    var returnType = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
                     var functionBody = context.functionBody();
                     if (functionBody is not null)
                     {
                         var scopeName = $"{name}({signature.Select(op => op.resultTypeSpecifier.ToString())})";
                         // Enter a new scope for the function body, so that the operands are visible
-                        using (var scope = libraryBuilder.EnterStatementScope(scopeName))
+                        using (var scope = LibraryBuilder.EnterStatementScope(scopeName))
                         {
                             foreach (var operand in signature)
                                 scope.TryAdd(operand);
 
                             // Visit the function body, which will add the expression to the functionDef
-                            functionDef.expression = _expressionVisitor.Visit(functionBody.expression());
+                            functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
                         }
 
                         // If the function has a return type, make sure the expression is of that type.
                         var expressionType = functionDef.expression.resultTypeSpecifier;
                         if (returnType is not null)
                         {
-                            var result = coercionProvider.Coerce(functionDef.expression, returnType);
+                            var result = CoercionProvider.Coerce(functionDef.expression, returnType);
                             if (!result.Success)
                                 functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
                                     $"the function body returns incompatible type {expressionType}.");
@@ -416,8 +426,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             private void add(IDefinitionElement s)
             {
-                if (!libraryBuilder.CurrentScope.TryAdd(s))
-                    libraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic);
+                if (!LibraryBuilder.CurrentScope.TryAdd(s))
+                    LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic);
             }
 
             private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)
@@ -428,10 +438,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var retrieve = new Retrieve
                 {
                     dataType = resultType.name,
-                    templateId = modelProvider.GetDefaultProfileUriForType(resultType),
+                    templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
                 }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
-                var singleton = invocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
+                var singleton = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
                 var (_, exprName) = resultType;
                 var exprDef = new ExpressionDef
                 {
@@ -461,11 +471,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     TypeSpecifier? resultType = null;
                     if (modelIdentifier is not null) // two terms
                     {
-                        if (libraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var symbol))
+                        if (LibraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var symbol))
                         {
                             if (symbol is UsingDefSymbol ud)
                             {
-                                var type = _typeSpecifierVisitor.GetModelType(ud, identifier);
+                                var type = TypeSpecifierVisitor.GetModelType(ud, identifier);
                                 if (type is not null)
                                     resultType = type.ToNamedType();
                                 else
@@ -473,7 +483,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     // library UsingTeest version '1.0.0'
                                     // using FHIR
                                     // context FHIR.doesnotexist
-                                    error = messaging.CouldNotResolveContextName(identifier, modelIdentifier);
+                                    error = MessagingProvider.CouldNotResolveContextName(identifier, modelIdentifier);
                                 }
                             }
                             else
@@ -481,7 +491,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 // library UsingTeest version '1.0.0'
                                 // define derp: false
                                 // context derp.herp
-                                error = messaging.CouldNotResolveModel(modelIdentifier);
+                                error = MessagingProvider.CouldNotResolveModel(modelIdentifier);
                             }
 
                         }
@@ -489,13 +499,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         {
                             // library UsingTeest version '1.0.0'
                             // context doesnot.exist
-                            error = messaging.CouldNotResolveModel(modelIdentifier);
+                            error = MessagingProvider.CouldNotResolveModel(modelIdentifier);
                         }
                     }
                     else
                     {
-                        var usings = libraryBuilder.SymbolTable.OfType<UsingDefSymbol>();
-                        if (_typeSpecifierVisitor.TryGetMatchingTypes(usings, identifier, out var modelType, out var _))
+                        var usings = LibraryBuilder.SymbolTable.OfType<UsingDefSymbol>();
+                        if (TypeSpecifierVisitor.TryGetMatchingTypes(usings, identifier, out var modelType, out var _))
                             resultType = modelType.ToNamedType();
                         else
                         {
@@ -503,7 +513,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 .Select(ud => ud.localIdentifier)
                                 .Where(li => li != "System")
                                 .ToArray();
-                            error = messaging.CouldNotResolveContextName(identifier, models);
+                            error = MessagingProvider.CouldNotResolveContextName(identifier, models);
                         }
                     }
                     cd = cd.WithResultType(resultType);

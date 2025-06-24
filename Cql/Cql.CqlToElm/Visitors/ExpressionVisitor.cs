@@ -16,10 +16,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
         IOptions<CqlToElmOptions> cqlToElmOptions,
         Func<LibraryBuilder, TypeSpecifierVisitor> typeSpecifierVisitorFactory) : Visitor<Expression>
     {
-        private readonly CqlToElmOptions _cqlToElmOptions = cqlToElmOptions.Value;
-        private readonly TypeSpecifierVisitor _typeSpecifierVisitor = typeSpecifierVisitorFactory(libraryBuilder);
+        private InvocationBuilder InvocationBuilder => invocationBuilder;
+        private MessageProvider MessagingProvider => messagingProvider;
+        private ElmFactory ElmFactory => elmFactory;
+        private CoercionProvider CoercionProvider => coercionProvider;
+        private IModelProvider ModelProvider => modelProvider;
+        private LibraryBuilder LibraryBuilder => libraryBuilder;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
+        private TypeSpecifierVisitor TypeSpecifierVisitor { get; } = typeSpecifierVisitorFactory(libraryBuilder);
 
-        private string NextId() => libraryBuilder.NextId();
+        private string NextId() => LibraryBuilder.NextId();
 
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -47,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // When enabled, allow Interval<Any> to be created for Interval[null, null].
             // This is normally disabled.
-            if ((_cqlToElmOptions.AllowNullIntervals ?? false)
+            if ((CqlToElmOptions.AllowNullIntervals ?? false)
                 && low is Null
                 && low.resultTypeSpecifier == SystemTypes.AnyType
                 && high is Null
@@ -58,17 +64,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType.ToIntervalType());
             }
 
-            var intervalSelector = invocationBuilder.MatchSignature(SystemLibrary.Interval,
+            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval,
                                                                     low,
                                                                     high,
-                                                                    elmFactory.Literal(lowClosed), elmFactory.Literal(highClosed));
+                                                                    ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
 
             if (intervalSelector.Compatible)
             {
-                var interval = invocationBuilder.Invoke(intervalSelector);
+                var interval = InvocationBuilder.Invoke(intervalSelector);
                 // TODO: this should be incorporated in the validation framework
                 // The validation framework is static and can't accept configuration options :(
-                if (_cqlToElmOptions.ValidateIntervals ?? false)
+                if (CqlToElmOptions.ValidateIntervals ?? false)
                 {
                     if (intervalSelector.Function.ResultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
@@ -89,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
                 return new Interval()
-                    .AddError(messagingProvider.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
+                    .AddError(MessagingProvider.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
                     .WithLocator(context.Locator())
                     .WithResultType(low.resultTypeSpecifier.ToIntervalType());
         }
@@ -97,7 +103,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
         public override Expression VisitListSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.ListSelectorContext context)
         {
-            var typeSpecifier = context.typeSpecifier() is { } tsContext ? _typeSpecifierVisitor.Visit(tsContext) : null;
+            var typeSpecifier = context.typeSpecifier() is { } tsContext ? TypeSpecifierVisitor.Visit(tsContext) : null;
             var elements = context
                 .expression()
                 .Select(Visit)
@@ -138,7 +144,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (int i = 0; i < elements.Length; i++)
                 {
                     var ei = elements[i];
-                    var result = coercionProvider.Coerce(ei, elementType);
+                    var result = CoercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
                     else
@@ -165,7 +171,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var codeComparator = context.codeComparator()?.GetText();
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
-            var type = (NamedTypeSpecifier)_typeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
             var contextExpressionRef = contextName switch
             {
@@ -186,7 +192,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var retrieve = new Retrieve
             {
                 dataType = type.name,
-                templateId = modelProvider.GetDefaultProfileUriForType(type),
+                templateId = ModelProvider.GetDefaultProfileUriForType(type),
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
@@ -210,7 +216,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             return new Message()
             {
-                message = elmFactory.Literal(message),
+                message = ElmFactory.Literal(message),
                 source = new Null().WithResultType(SystemTypes.AnyType)
             }
             .AddError(message)
@@ -229,8 +235,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = precision switch
             {
-                { } => invocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
-                _   => invocationBuilder.Invoke(systemFunction, lhs, rhs),
+                { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
+                _   => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
             };
             return expression
                 .WithId()
@@ -246,7 +252,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(context.Parse());
                 if (name is null)
                     return null;
-                else return elmFactory.Literal(name);
+                else return ElmFactory.Literal(name);
             }
         }
         private Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
@@ -259,7 +265,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(dtp.Parse());
                 if (name is null)
                     return null;
-                else return elmFactory.Literal(name);
+                else return ElmFactory.Literal(name);
             }
         }
 
@@ -273,7 +279,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var name = Enum.GetName(dtp.Parse());
                 if (name is null)
                     return null;
-                else return elmFactory.Literal(name);
+                else return ElmFactory.Literal(name);
             }
         }
 

@@ -13,9 +13,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var value = context.GetText();
             Literal literal;
             if (bool.TryParse(value, out var bv))
-                literal = elmFactory.Literal(bv);
+                literal = ElmFactory.Literal(bv);
             else 
-                literal = elmFactory.Literal(value)
+                literal = ElmFactory.Literal(value)
                                     .AddError($"Unable to parse '{value}' as a boolean value.");
             return literal
                 .WithLocator(context.Locator());
@@ -36,18 +36,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
 
-                dateLiteral.year = elmFactory.Literal(date!.Year)
+                dateLiteral.year = ElmFactory.Literal(date!.Year)
                                              .WithLocator(FormatLocator(startLine, startCol, startLine, startCol + 4));
 
                 if (date.Precision > Iso8601.DateTimePrecision.Year && date.Month is not null)
                 {
-                    dateLiteral.month = elmFactory.Literal(date.Month.Value)
+                    dateLiteral.month = ElmFactory.Literal(date.Month.Value)
                                                   .WithLocator(FormatLocator(startLine + 5, startCol, startLine, startCol + 7));
                 }
 
                 if (date.Precision > Iso8601.DateTimePrecision.Month && date.Day is not null)
                 {
-                    dateLiteral.day = elmFactory.Literal(date.Day.Value)
+                    dateLiteral.day = ElmFactory.Literal(date.Day.Value)
                                                 .WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10));
                 }
                 return dateLiteral;
@@ -171,13 +171,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Literal literal;
             if (long.TryParse(valueText, out long longValue))
-                literal = elmFactory.Literal(longValue);
+                literal = ElmFactory.Literal(longValue);
             else
             {
-                literal = elmFactory.Literal(valueText)
+                literal = ElmFactory.Literal(valueText)
                                     .WithResultType(SystemTypes.LongType);
                 literal.valueType = SystemTypes.LongType.name;
-                if (_cqlToElmOptions.ValidateLiterals ?? true)
+                if (CqlToElmOptions.ValidateLiterals ?? true)
                     literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
             }
             return literal
@@ -218,7 +218,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     abs = abs[1..];
                 var parts = abs.Split('.');
 
-                if (_cqlToElmOptions.ValidateLiterals ?? true)
+                if (CqlToElmOptions.ValidateLiterals ?? true)
                 {
                     if (parts.Sum(p => p.Length) > 28)
                     {
@@ -233,11 +233,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else if (int.TryParse(value, out var i))
                 typeSpecifier = SystemTypes.IntegerType;
-            else if (long.TryParse(value, out var l) && !(_cqlToElmOptions.LongsRequireSuffix ?? true))
+            else if (long.TryParse(value, out var l) && !(CqlToElmOptions.LongsRequireSuffix ?? true))
             {
                 typeSpecifier = SystemTypes.LongType;
             }
-            else if (_cqlToElmOptions.ValidateLiterals ?? true)
+            else if (CqlToElmOptions.ValidateLiterals ?? true)
                 return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             else
             {
@@ -256,13 +256,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var text = context.GetText();
             if (text == "-2147483648")
-                return elmFactory.Literal(-2147483648)
+                return ElmFactory.Literal(-2147483648)
                                  .WithLocator(context.Locator());
             else if (text == "-9223372036854775808L")
-                return elmFactory.Literal(-9223372036854775808L)
+                return ElmFactory.Literal(-9223372036854775808L)
                                  .WithLocator(context.Locator());
             else if (text == "-99999999999999999999.99999999")
-                return elmFactory.Literal(-99999999999999999999.99999999m)
+                return ElmFactory.Literal(-99999999999999999999.99999999m)
                                  .WithLocator(context.Locator());
             else
             {
