@@ -95,9 +95,9 @@ internal static class CqlToElmServiceCollectionExtensions
             .AddSingleton<InvocationBuilder>()
             .AddTransient<LocalIdentifierProvider>()
             .AddScoped<LibraryVisitor>()
-            .AddFactory<LibraryVisitor.DefinitionVisitor, TypeSpecifierVisitor>()
-            .AddFactory<ExpressionVisitor, TypeSpecifierVisitor>()
-            .AddFactory<TypeSpecifierVisitor, TypeSpecifierVisitor>()
+            .AddFactory<LibraryVisitor.DefinitionVisitor, LibraryBuilder>()
+            .AddFactory<ExpressionVisitor, LibraryBuilder>()
+            .AddFactory<TypeSpecifierVisitor, LibraryBuilder>()
             ;
 
     public static IServiceCollection AddCqlToElmMessaging(
