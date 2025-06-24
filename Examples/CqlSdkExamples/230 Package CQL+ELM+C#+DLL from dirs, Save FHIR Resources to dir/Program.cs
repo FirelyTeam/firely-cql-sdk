@@ -9,7 +9,7 @@ partial class Program
 {
     void PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir()
     {
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "230 Package CQL+ELM+C#+DLL from dirs, Save FHIR Resources to dir");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "230 Package CQL+ELM+C#+DLL from dirs, Save FHIR Resources to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
         var packagingToolkit = new PackagingToolkit(loggerFactory);

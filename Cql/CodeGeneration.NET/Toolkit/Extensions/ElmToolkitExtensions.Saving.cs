@@ -31,7 +31,7 @@ public static partial class ElmToolkitExtensions
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryIdentifier, csharpSourceCode, _, _) in elmToolkit.GetElmToAssemblyResults())
+        foreach (var (libraryIdentifier, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.g.cs");
             File.WriteAllText(fileName, csharpSourceCode);

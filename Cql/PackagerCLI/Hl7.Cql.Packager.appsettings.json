@@ -19,6 +19,7 @@
     "ValidateLiterals": true
   },
   "Elm": {
+    "AllowInvalidCSharp": true,
     "JsonPretty": false,
     "OutputCSharpFilesToTempDirectory": false,
     "SkipFiles": [

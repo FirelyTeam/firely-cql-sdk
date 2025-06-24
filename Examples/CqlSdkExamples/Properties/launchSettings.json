@@ -8,6 +8,10 @@
       "commandName": "Project",
       "commandLineArgs": "220"
     },
+    "221 Load CQL from Demo dir, Save C# to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "221"
+    },
     "230 Package CQL\u002BELM\u002BC#\u002BDLL from dirs, Save FHIR Resources to dir": {
       "commandName": "Project",
       "commandLineArgs": "230"

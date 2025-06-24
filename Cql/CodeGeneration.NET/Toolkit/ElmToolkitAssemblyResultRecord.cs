@@ -21,7 +21,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// This is only emitted if <seealso cref="ElmToolkitConfig.AssemblyCompilerDebugInformationFormat"/>
 /// is set to <seealso cref="AssemblyCompilerDebugInformationFormat.PortablePdb"/>.
 /// </param>
-public readonly record struct ElmToolkitResultRecord(
+public readonly record struct ElmToolkitAssemblyResultRecord(
     CqlVersionedLibraryIdentifier LibraryIdentifier,
     string CSharpSourceCode,
     byte[] AssemblyBinary,

@@ -20,7 +20,7 @@ partial class Program
         var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
         var ignoreErrors = true;    // This ignores errors and tries to continue processing other definitions
 
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 

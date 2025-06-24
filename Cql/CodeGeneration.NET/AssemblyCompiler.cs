@@ -8,8 +8,9 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -77,7 +78,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
-            bool outputCSharpToTempFolder = false,
+            bool allowInvalidCSharp = false,
             BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
@@ -87,11 +88,22 @@ namespace Hl7.Cql.CodeGeneration.NET
                     t =>
                     {
                         var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat, outputCSharpToTempFolder);
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
                         results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
-                    buildExceptionHandlingStrategy);
+                    buildExceptionHandlingStrategy,
+                    allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
+
+            ShouldYieldValue<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> YieldWithoutAssemblyBinary(
+                (Library library, string csharp) t) =>
+                (
+                    t.library,
+                    assemblyBinaryWithSourceCode: new AssemblyBinaryWithSourceCode(
+                        assemblyBytes: null,
+                        sourceCode: t.csharp,
+                        sourceCodeFileName: BuildFileName(t.library.VersionedLibraryIdentifier))
+                );
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
@@ -109,31 +121,21 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat,
-            bool outputCSharpToTempFolder)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
             EmbeddedText[]? embeddedTexts = []; // For embedding C# when enabling debug information
             string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
-            var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
+            var fileName = BuildFileName(libraryVersionedIdentifier);
 
-            if (outputCSharpToTempFolder)
-            {
-                // Write the C# source code to a temporary directory for debugging or inspection purposes.
-                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
-                Directory.CreateDirectory(tempDir);
-                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
-                File.WriteAllText(librarySourcePath, librarySourceString);
-            }
-            
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
                 // Embed C# source code
                 var sourceText = SourceText.From(librarySourceString, Encoding.UTF8);
-                var embeddedText = EmbeddedText.FromSource($"{libraryVersionedIdentifier}.cs", sourceText);
+                var embeddedText = EmbeddedText.FromSource(fileName, sourceText);
                 embeddedTexts = [embeddedText];
             }
 
-            var librarySyntaxTree = ParseSyntaxTree(librarySourceString, librarySourcePath);
+            var librarySyntaxTree = ParseSyntaxTree(librarySourceString, fileName);
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
             foreach (var asm in assemblyReferences)
@@ -196,6 +198,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             var asmData = new AssemblyBinaryWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
         }
+
+        private static string BuildFileName(string libraryVersionedIdentifier) =>
+            $"{libraryVersionedIdentifier}.cs";
 
         private static EmitOptions CreateEmitOptions(AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
