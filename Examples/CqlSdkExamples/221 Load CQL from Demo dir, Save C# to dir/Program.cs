@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 partial class Program
 {
@@ -28,7 +29,9 @@ partial class Program
 
 
         // Generate binaries from the ELM libraries
-        var elmToolkit = cqlToolkit.CreateElmToolkit();
+        var allowInvalidCSharp = true;
+        var elmToolkitConfig = new ElmToolkitConfig(AllowInvalidCSharp: allowInvalidCSharp);
+        var elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfig);
         // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();
 
