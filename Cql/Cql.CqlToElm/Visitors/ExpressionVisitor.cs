@@ -4,34 +4,28 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal partial class ExpressionVisitor : Visitor<Expression>
+    internal partial class ExpressionVisitor(
+        // Owning LibraryBuilder
+        LibraryBuilder libraryBuilder,
+        // Services
+        IModelProvider modelProvider,
+        CoercionProvider coercionProvider,
+        ElmFactory elmFactory,
+        MessageProvider messagingProvider,
+        InvocationBuilder invocationBuilder,
+        IOptions<CqlToElmOptions> cqlToElmOptions,
+        Func<LibraryBuilder, TypeSpecifierVisitor> typeSpecifierVisitorFactory) : Visitor<Expression>
     {
-        public ExpressionVisitor(IServiceProvider services, LibraryBuilder builder)
-        {
-            LibraryBuilder = builder;
-            ModelProvider = services.GetRequiredService<IModelProvider>();
-            CoercionProvider = services.GetRequiredService<CoercionProvider>();
-            ElmFactory = services.GetRequiredService<ElmFactory>();
-            Messaging = services.GetRequiredService<MessageProvider>();
-            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-            TypeSpecifierVisitor = new TypeSpecifierVisitor(services, builder);
-            InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
-        }
+        private InvocationBuilder InvocationBuilder => invocationBuilder;
+        private MessageProvider MessagingProvider => messagingProvider;
+        private ElmFactory ElmFactory => elmFactory;
+        private CoercionProvider CoercionProvider => coercionProvider;
+        private IModelProvider ModelProvider => modelProvider;
+        private LibraryBuilder LibraryBuilder => libraryBuilder;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
+        private TypeSpecifierVisitor TypeSpecifierVisitor { get; } = typeSpecifierVisitorFactory(libraryBuilder);
 
-
-        #region Privates
-        private IModelProvider ModelProvider { get; }
-        private CqlToElmOptions Options { get; }
-        private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-        private LibraryBuilder LibraryBuilder { get; }
-        private CoercionProvider CoercionProvider { get; }
-        private ElmFactory ElmFactory { get; }
-        private MessageProvider Messaging { get; }
-        private InvocationBuilder InvocationBuilder { get; }
-
-        #endregion
-
-        internal string NextId() => LibraryBuilder.NextId();
+        private string NextId() => LibraryBuilder.NextId();
 
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -59,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // When enabled, allow Interval<Any> to be created for Interval[null, null].
             // This is normally disabled.
-            if ((Options.AllowNullIntervals ?? false)
+            if ((CqlToElmOptions.AllowNullIntervals ?? false)
                 && low is Null
                 && low.resultTypeSpecifier == SystemTypes.AnyType
                 && high is Null
@@ -71,16 +65,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
 
             var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval,
-                low,
-                high,
-                ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
+                                                                    low,
+                                                                    high,
+                                                                    ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
 
             if (intervalSelector.Compatible)
             {
                 var interval = InvocationBuilder.Invoke(intervalSelector);
                 // TODO: this should be incorporated in the validation framework
                 // The validation framework is static and can't accept configuration options :(
-                if (Options.ValidateIntervals ?? false)
+                if (CqlToElmOptions.ValidateIntervals ?? false)
                 {
                     if (intervalSelector.Function.ResultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
@@ -101,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
                 return new Interval()
-                    .AddError(Messaging.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
+                    .AddError(MessagingProvider.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
                     .WithLocator(context.Locator())
                     .WithResultType(low.resultTypeSpecifier.ToIntervalType());
         }
@@ -242,7 +236,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = precision switch
             {
                 { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
-                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
+                _   => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
             };
             return expression
                 .WithId()

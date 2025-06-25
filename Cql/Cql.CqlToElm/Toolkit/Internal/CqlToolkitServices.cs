@@ -56,7 +56,7 @@ internal record CqlToolkitServices(
             Get<CqlToElmConverter>(serviceProvider),
             libraryBuilderProvider,
             serviceScope,
-            CqlToElmConverter.GetLibraryVisitorScoped(serviceScope));
+            serviceScope.GetLibraryVisitorScoped());
 
         libraryBuilderProvider.CqlToElmTranslatorServices = cqlToElmTranslatorServices;
 

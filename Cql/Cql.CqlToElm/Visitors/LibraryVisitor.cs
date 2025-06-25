@@ -4,25 +4,29 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class LibraryVisitor(
+    internal sealed class LibraryVisitor(
         SystemLibrary systemLibrary,
-        IOptions<CqlToElmOptions> configuration,
+        IOptions<CqlToElmOptions> cqlToElmOptions,
         IModelProvider modelProvider,
         LocalIdentifierProvider localIdentifierProvider,
         Func<LibraryBuilder, LibraryVisitor.DefinitionVisitor> definitionVisitorFactory)
         : Visitor<LibraryBuilder>
     {
-        private readonly CqlToElmOptions configuration = configuration.Value;
+        private Func<LibraryBuilder, DefinitionVisitor> DefinitionVisitorFactory => definitionVisitorFactory;
+        private LocalIdentifierProvider LocalIdentifierProvider => localIdentifierProvider;
+        private IModelProvider ModelProvider => modelProvider;
+        private SystemLibrary SystemLibrary => systemLibrary;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
-            var systemUri = configuration.SystemElmModelUri;
-            var systemVersion = configuration.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
+            var systemUri = CqlToElmOptions.SystemElmModelUri;
+            var systemVersion = CqlToElmOptions.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
 
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            return modelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
+            return ModelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
                 new UsingDefSymbol("System", systemVersion, model)
                 : null;
         }
@@ -35,12 +39,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var identifier = context.libraryDefinition()?.Parse()
                 ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
-            var builder = new LibraryBuilder(identifier, systemLibrary, localIdentifierProvider);
+            var libraryBuilder = new LibraryBuilder(identifier, SystemLibrary, LocalIdentifierProvider);
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
-                builder.CurrentScope.TryAdd(systemModel);
+                libraryBuilder.CurrentScope.TryAdd(systemModel);
 
-            var defVisitor = definitionVisitorFactory(builder);
+            var defVisitor = DefinitionVisitorFactory(libraryBuilder);
 
             // Parse the definitions, this function will insert the visited definitions into the current scope.
             defVisitor.VisitDefinitions(context.definition());
@@ -50,37 +54,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // to make sure we change the context when we encounter one.
             defVisitor.VisitStatements(context.statement());
 
-            return builder;
+            return libraryBuilder;
         }
 
-        internal class DefinitionVisitor : Visitor<IDefinitionElement>
+
+        internal sealed class DefinitionVisitor(
+            // Owning LibraryBuilder
+            LibraryBuilder libraryBuilder,
+            // Services
+            IModelProvider modelProvider,
+            ILibraryProvider libraryProvider,
+            CoercionProvider coercionProvider,
+            MessageProvider messaging,
+            InvocationBuilder invocationBuilder,
+            Func<LibraryBuilder, ExpressionVisitor> expressionVisitorFactory,
+            Func<LibraryBuilder, TypeSpecifierVisitor> typeSpecifierVisitorFactory) : Visitor<IDefinitionElement>
         {
-            public DefinitionVisitor(LibraryBuilder libraryBuilder, IServiceProvider services)
-            {
-                LibraryBuilder = libraryBuilder;
-                Services = services;
-                ExpressionVisitor = new ExpressionVisitor(services, libraryBuilder);
-                TypeSpecifierVisitor = new TypeSpecifierVisitor(services, libraryBuilder);
-                InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
-
-            }
-
-            public LibraryBuilder LibraryBuilder { get; }
-            public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-
-            #region Services
-            public IServiceProvider Services { get; }
-
-            public IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-            public ILibraryProvider LibraryProvider => Services.GetRequiredService<ILibraryProvider>();
-            public CoercionProvider CoercionProvider => Services.GetRequiredService<CoercionProvider>();
-            public MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
-            private InvocationBuilder InvocationBuilder { get; }
-
-            #endregion
-
-            public ExpressionVisitor ExpressionVisitor { get; }
-
+            private InvocationBuilder InvocationBuilder => invocationBuilder;
+            private MessageProvider MessagingProvider => messaging;
+            private CoercionProvider CoercionProvider => coercionProvider;
+            private ILibraryProvider LibraryProvider => libraryProvider;
+            private IModelProvider ModelProvider => modelProvider;
+            private LibraryBuilder LibraryBuilder => libraryBuilder;
+            private ExpressionVisitor ExpressionVisitor => expressionVisitorFactory(libraryBuilder);
+            private TypeSpecifierVisitor TypeSpecifierVisitor => typeSpecifierVisitorFactory(libraryBuilder);
 
 
             //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
@@ -100,7 +97,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 else
                 {
-                    error ??= Messaging.UnableToResolveLibrary(libraryName, version);
+                    error ??= MessagingProvider.UnableToResolveLibrary(libraryName, version);
                     var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.SymbolTable(vi.ToString()!, null));
                     return errorInclude
                         .AddError(error!)
@@ -318,7 +315,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return ed;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(Messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
@@ -337,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return fd;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(Messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)
                     {
@@ -486,7 +483,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     // library UsingTeest version '1.0.0'
                                     // using FHIR
                                     // context FHIR.doesnotexist
-                                    error = Messaging.CouldNotResolveContextName(identifier, modelIdentifier);
+                                    error = MessagingProvider.CouldNotResolveContextName(identifier, modelIdentifier);
                                 }
                             }
                             else
@@ -494,7 +491,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 // library UsingTeest version '1.0.0'
                                 // define derp: false
                                 // context derp.herp
-                                error = Messaging.CouldNotResolveModel(modelIdentifier);
+                                error = MessagingProvider.CouldNotResolveModel(modelIdentifier);
                             }
 
                         }
@@ -502,7 +499,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         {
                             // library UsingTeest version '1.0.0'
                             // context doesnot.exist
-                            error = Messaging.CouldNotResolveModel(modelIdentifier);
+                            error = MessagingProvider.CouldNotResolveModel(modelIdentifier);
                         }
                     }
                     else
@@ -516,7 +513,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 .Select(ud => ud.localIdentifier)
                                 .Where(li => li != "System")
                                 .ToArray();
-                            error = Messaging.CouldNotResolveContextName(identifier, models);
+                            error = MessagingProvider.CouldNotResolveContextName(identifier, models);
                         }
                     }
                     cd = cd.WithResultType(resultType);

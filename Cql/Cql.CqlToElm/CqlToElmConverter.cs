@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm
         public Library ConvertLibrary(string cql)
         {
             using var scope = Services.CreateScope();
-            var libraryVisitorScoped = GetLibraryVisitorScoped(scope);
+            var libraryVisitorScoped = scope.GetLibraryVisitorScoped();
             var libraryBuilder = GetBuilder(libraryVisitorScoped, cql);
             var lib = libraryBuilder.Build();
            if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
@@ -74,12 +74,6 @@ namespace Hl7.Cql.CqlToElm
             var libraryContext = ParseLibrary(cqlReader);
             var libraryBuilder = libraryVisitor.Visit(libraryContext);
             return libraryBuilder;
-        }
-
-        internal static LibraryVisitor GetLibraryVisitorScoped(IServiceScope scope)
-        {
-            var visitor = ActivatorUtilities.CreateInstance<LibraryVisitor>(scope.ServiceProvider);
-            return visitor;
         }
 
 

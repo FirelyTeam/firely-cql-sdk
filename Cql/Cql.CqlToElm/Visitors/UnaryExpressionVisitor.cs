@@ -15,10 +15,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression boolean = lastChild switch
             {
-                "null" => InvocationBuilder.Invoke(SystemLibrary.IsNull, operand),
-                "true" => InvocationBuilder.Invoke(SystemLibrary.IsTrue, operand),
+                "null"  => InvocationBuilder.Invoke(SystemLibrary.IsNull, operand),
+                "true"  => InvocationBuilder.Invoke(SystemLibrary.IsTrue, operand),
                 "false" => InvocationBuilder.Invoke(SystemLibrary.IsFalse, operand),
-                _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
+                _       => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
             if (isNot)
@@ -108,8 +108,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = startOrEnd switch
             {
                 "start" => InvocationBuilder.Invoke(SystemLibrary.Start, operand),
-                "end" => InvocationBuilder.Invoke(SystemLibrary.End, operand),
-                _ => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
+                "end"   => InvocationBuilder.Invoke(SystemLibrary.End, operand),
+                _       => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
             };
             return expression
                 .WithId()
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "minimum" => ElmFactory.MinValue(typeSpecifier),
                 "maximum" => ElmFactory.MaxValue(typeSpecifier),
-                _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
+                _         => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
             };
 
             if (!typeSpecifier.IsOrderedType())
@@ -178,7 +178,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }.WithResultType(typeSpecifier);
                 if (!CoercionProvider.CanBeExplicitlyCast(operand.resultTypeSpecifier, typeSpecifier))
                     expression
-                        .AddError(Messaging.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
+                        .AddError(MessagingProvider.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
             }
             else throw new InvalidOperationException($"Unexpected term {@operator}.  Expected 'is' or 'as'.");
 
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpecifier);
             if (cost > CoercionCost.Cast)
                 expression
-                    .AddError(Messaging.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
+                    .AddError(MessagingProvider.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
@@ -316,8 +316,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = context.GetChild(0).GetText() switch
             {
                 "distinct" => InvocationBuilder.Invoke(SystemLibrary.Distinct, operand),
-                "flatten" => handleFlatten(operand),
-                _ => throw new NotImplementedException(),
+                "flatten"  => handleFlatten(operand),
+                _          => throw new NotImplementedException(),
             };
             return expression
                 .WithId()
