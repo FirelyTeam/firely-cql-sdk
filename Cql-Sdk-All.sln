@@ -75,9 +75,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.Authoring", "Demo\
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20 Cql to Elm", "20 Cql to Elm", "{A2259B13-A115-4EA3-9DFB-5411DB88EA6F}"
-	ProjectSection(SolutionItems) = preProject
-		README-CqlToElm.md = README-CqlToElm.md
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Grammar", "Cql\Cql.Grammar\Cql.Grammar.csproj", "{AF223BDF-576D-45FD-9A33-483BAFE1BB75}"
 EndProject
