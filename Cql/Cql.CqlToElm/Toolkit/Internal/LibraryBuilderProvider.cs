@@ -23,26 +23,20 @@ internal sealed class LibraryBuilderProvider(
 
     public CqlToolkitConversionDictionary.Builder ConversionsBuilder { get; set; } = conversionsBuilder;
 
-    bool ILibraryProvider.TryResolveLibrary(
-        string libraryName,
-        string? version,
-        [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
-        out string? error) => TryResolveLibrary(CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, version), out libraryBuilder, out error);
-
-    public bool TryResolveLibrary(
+    public bool TryResolveCqlToolkitConversionRecordWithLibraryBuilder(
         CqlVersionedLibraryIdentifier libVer,
-        [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
+        [NotNullWhen(true)] out CqlToolkitConversionRecord? cqlToolkitConversionRecord,
         out string? error)
     {
         error = null;
-        libraryBuilder = null;
+        cqlToolkitConversionRecord = null;
 
-        if (!ConversionsBuilder.TryGetValue(libVer, out var elmTranslation))
+        if (!ConversionsBuilder.TryGetValue(libVer, out CqlToolkitConversionRecord record))
             return false;
 
-        if (elmTranslation.LibraryBuilder is { } lb)
+        if (record.LibraryBuilder is not null)
         {
-            libraryBuilder = lb;
+            cqlToolkitConversionRecord = record;
             return true;
         }
 
@@ -51,8 +45,10 @@ internal sealed class LibraryBuilderProvider(
         {
             var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
             logger.LogInformation("Parsing CQL for {id}", libVer);
-            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.SourceCqlLibrary.Cql);
-            ConversionsBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
+            var libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, record.SourceCqlLibrary.Cql);
+            var newRecord = record with { LibraryBuilder = libraryBuilder };
+            ConversionsBuilder[libVer] = newRecord;
+            cqlToolkitConversionRecord = newRecord;
             return true;
         }
 

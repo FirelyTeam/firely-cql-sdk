@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -88,8 +89,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var version = context.versionSpecifier()?.STRING().ParseString();
                 var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? id;
                 var vi = new VersionedIdentifier { id = libraryName, version = version };
-
-                var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var includedLibraryBuilder, out var error);
+                var libVer = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, version);
+                var resolveSuccess = LibraryProvider.TryResolveLibraryBuilder(
+                    libVer,
+                    out var includedLibraryBuilder,
+                    out var error);
                 if (resolveSuccess && includedLibraryBuilder is not null)
                 {
                     return new ReferencedLibrary(localIdentifier, vi, includedLibraryBuilder.SymbolTable)

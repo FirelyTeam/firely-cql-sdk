@@ -31,10 +31,14 @@
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
-		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+			<ItemGroup>
 		<Compile Update="Messages.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>

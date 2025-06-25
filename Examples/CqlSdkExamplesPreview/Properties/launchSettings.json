@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "221 Load CQL from Demo dir, Save C# to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "221"
+    }
+  }
+}

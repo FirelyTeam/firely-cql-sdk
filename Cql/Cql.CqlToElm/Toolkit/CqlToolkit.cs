@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.CqlToElm.Toolkit;
 
+#pragma warning disable FirelyCqlSdkPreview
+
 /// <summary>
 /// Translates CQL libraries to ELM libraries.
 /// </summary>
@@ -27,28 +29,33 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
         CqlToolkitConfig? config = null,
-        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw) : this(loggerFactory, config, batchProcessExceptionContinuation, null)
+    {}
+
+    [Experimental("FirelyCqlSdkPreview")]
+    internal CqlToolkit(
+        ILoggerFactory? loggerFactory,
+        CqlToolkitConfig? config,
+        BatchProcessExceptionContinuation? batchProcessExceptionContinuation,
+        CqlToolkitCallbacks? callbacks)
     {
-        config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
+        config ??= CqlToolkitConfig.Default;
+        _callbacks = callbacks;
         LoggerFactory = loggerFactory;
         _conversions = CqlToolkitConversionDictionary.Empty;
         Config = config;
-        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation ?? BatchProcessExceptionContinuation.Throw;
         _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
     }
 
     private CqlToolkitConversionDictionary _conversions;
     private readonly CqlToolkitServices _services;
+    private readonly CqlToolkitCallbacks? _callbacks;
 
     /// <inheritdoc/>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public ILoggerFactory LoggerFactory { get; }
-
-    /// <summary>
-    /// Gets the service provider used by tests.
-    /// </summary>
-    internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
     /// Gets the configuration used by the toolkit.
@@ -126,19 +133,35 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                 .TryForEach(
                     r =>
                     {
-                        if (!_services.LibraryBuilderProvider.TryResolveLibrary(r.LibraryIdentifier, out var libraryBuilder, out var error))
+                        _callbacks?.BeforeTranslate?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary);
+
+                        if (!_services.LibraryBuilderProvider.TryResolveCqlToolkitConversionRecordWithLibraryBuilder(r.LibraryIdentifier, out var nNewConversionRecord, out var error))
                             throw new InvalidOperationException($"Could not resolve CQL library: {r.LibraryIdentifier} with error {error}.");
 
+                        var newConversionRecord = nNewConversionRecord.Value;
+                        var libraryBuilder = newConversionRecord.LibraryBuilder!;
                         var elmLibrary = libraryBuilder.Build();
-                        var newConversionRecord = r with { ResultElmLibrary = elmLibrary };
+
+                        newConversionRecord = newConversionRecord with { ResultElmLibrary = elmLibrary };
                         conversions[r.LibraryIdentifier] = newConversionRecord;
+
+                        _callbacks?.AfterTranslate?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary, elmLibrary);
                     },
-                    errorStrategy => errorStrategy
-                                     .SetContinuation(BatchProcessExceptionContinuation)
-                                     .AddLoggerExceptionHandler(_services.Logger,
-                                                                (conversion, messageBuilder) =>
-                                                                    messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))
-                );
+                    errorStrategy =>
+                    {
+                        errorStrategy = errorStrategy
+                                        .SetContinuation(BatchProcessExceptionContinuation)
+                                        .AddLoggerExceptionHandler(_services.Logger,
+                                                                   (conversion, messageBuilder) =>
+                                                                       messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier));
+                        if (_callbacks?.TranslateError is { } fn)
+                        {
+                            errorStrategy = errorStrategy.AddExceptionHandler(
+                                (conversion, exception, _) =>
+                                    fn(conversion.LibraryIdentifier, conversion.SourceCqlLibrary, exception));
+                        }
+                        return errorStrategy;
+                    });
 
         if (count > 0)
             ReplaceConversions(conversions: conversions.ToImmutable());
