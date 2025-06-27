@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.Toolkit;
 
 partial class Program
 {
@@ -64,7 +65,8 @@ partial class Program
             }
         );
         var elmToolkitConfig = new ElmToolkitConfig(AllowInvalidCSharp: allowInvalidCSharp);
-        var elmToolkit = cqlToolkit.CreateElmToolkit2(elmToolkitConfig, elmToolkitCallbacks);
+        var elmToolkit = cqlToolkit.CreateElmToolkit2(elmToolkitConfig, elmToolkitCallbacks)
+                                   .SetIgnoreEnumerationExceptions();
         // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();
 

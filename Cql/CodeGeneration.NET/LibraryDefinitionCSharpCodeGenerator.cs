@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET.Visitors;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -62,6 +63,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     FunctionCallExpression fce            => ConvertFunctionCallExpression(fce),
                     DefinitionCallExpression dce          => ConvertDefinitionCallExpression(dce),
                     ElmAsExpression ea                    => ConvertExpression(ea.Reduce()),
+                    CodeCommentExpression cce             => ConvertCodeCommentExpression(cce),
                     _                                     => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
                 };
                 return result;
@@ -83,6 +85,24 @@ namespace Hl7.Cql.CodeGeneration.NET
                       */
                       """;
             }
+        }
+
+        private string ConvertCodeCommentExpression(CodeCommentExpression cce)
+        {
+            var commentedExpression = $"/* CodeGen-{cce.LogLevel}: {EscapeComment(cce.CommentBefore)} */ {ConvertExpression(cce.Expression)}";
+            return commentedExpression;
+        }
+
+        private static string EscapeComment(string comment)
+        {
+            // Escape ~* .. *~ to ~~* .. *~~
+            // Escape /* .. */ to ~* .. *~
+            var escapeComment = comment
+                                .Replace("~*", "~~*")
+                                .Replace("*~", "*~~")
+                                .Replace("/*", "~*")
+                                .Replace("*/", "*~");
+            return escapeComment;
         }
 
         private string ConvertDefinitionCallExpression(

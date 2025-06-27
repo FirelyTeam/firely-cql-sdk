@@ -309,7 +309,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
 #if DEBUG
                     //var statementJsonText = libraryBuilder.ToJson(statementContext);
-                    var html = libraryBuilder.ToHtml(statementContext);
+                    //var html = libraryBuilder.ToHtml(statementContext);
 #endif
                     if (statementContext.expressionDefinition() is { } edCtx)
                     {

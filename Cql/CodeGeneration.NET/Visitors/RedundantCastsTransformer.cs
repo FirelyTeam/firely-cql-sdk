@@ -8,6 +8,30 @@
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
+    internal class CodeCommentExpression(
+        string commentBefore,
+        Expression expression,
+        LogLevel logLevel = LogLevel.Error) : Expression
+    {
+        public string CommentBefore { get; } = commentBefore;
+
+        public Expression Expression { get; } = expression;
+        public LogLevel LogLevel { get; } = logLevel;
+
+        public override ExpressionType NodeType =>
+            (ExpressionType)(-1);
+
+        public override Type Type =>
+            Expression.Type;
+
+        protected override Expression VisitChildren(ExpressionVisitor visitor)
+        {
+            var visited = visitor.Visit(Expression);
+            var codeCommentExpression = new CodeCommentExpression(CommentBefore, visited);
+            return codeCommentExpression;
+        }
+    }
+
     internal class RedundantCastsTransformer : ExpressionVisitor
     {
         protected override Expression VisitConditional(ConditionalExpression node)
@@ -76,7 +100,17 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                     return reducedOperand;
                 }
 
-                return conversion.Update(reducedOperand);
+                try
+                {
+                    return conversion.Update(reducedOperand);
+                }
+                catch (Exception e)
+                {
+                    //var visitUnary = base.VisitUnary(node); // This fails if the conversion is invalid
+                    var visitUnary = node; // This fails if the conversion is invalid
+                    var codeComment = new CodeCommentExpression(e.Message, visitUnary);
+                    return codeComment;
+                }
             }
 
             return base.VisitUnary(node);
