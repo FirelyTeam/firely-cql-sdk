@@ -1,7 +1,13 @@
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Iso8601;
+using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -905,11 +911,11 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 bool g_()
                 {
                     DataType h_ = Administration?.Effective;
-                    CqlInterval<CqlDate> i_ = (CqlInterval<CqlDate>)((object)h_);
+                    CqlInterval<CqlDate> i_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate]'. */ (CqlInterval<CqlDate>)((object)h_);
                     CqlDate j_ = context.Operators.Start(i_);
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
                     DataType l_ = Administration?.Medication;
-                    CqlConcept m_ = (CqlConcept)((object)l_);
+                    CqlConcept m_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlConcept'. */ (CqlConcept)((object)l_);
                     CqlQuantity n_ = this.TherapeuticDuration(context, m_);
                     bool? o_ = context.Operators.Not((bool?)((n_ as object) is null));
                     bool? p_ = context.Operators.And(k_, o_);
@@ -920,12 +926,11 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 if (g_())
                 {
                     DataType q_ = Administration?.Effective;
-                    CqlInterval<CqlDate> r_ = (CqlInterval<CqlDate>)((object)q_);
+                    CqlInterval<CqlDate> r_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate]'. */ (CqlInterval<CqlDate>)((object)q_);
                     CqlDate s_ = context.Operators.Start(r_);
-                    CqlInterval<CqlDate> u_ = (CqlInterval<CqlDate>)((object)q_);
-                    CqlDate v_ = context.Operators.Start(u_);
+                    CqlDate v_ = context.Operators.Start(r_);
                     DataType w_ = Administration?.Medication;
-                    CqlConcept x_ = (CqlConcept)((object)w_);
+                    CqlConcept x_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlConcept'. */ (CqlConcept)((object)w_);
                     CqlQuantity y_ = this.TherapeuticDuration(context, x_);
                     CqlQuantity z_ = context.Operators.Add(v_ as CqlQuantity, y_);
                     CqlInterval<CqlQuantity> aa_ = context.Operators.Interval(s_ as CqlQuantity, z_, true, true);
