@@ -46,6 +46,15 @@ partial class Program
             {
                 ;
             },
+            GenerateCSharpBefore: (
+                identifier,
+                library) =>
+            {
+                if (identifier.ToString() == "CumulativeMedicationDurationFHIR4-1.0.000")
+                {
+                    ;
+                }
+            },
             GenerateCSharpError: (
                 identifier,
                 library,

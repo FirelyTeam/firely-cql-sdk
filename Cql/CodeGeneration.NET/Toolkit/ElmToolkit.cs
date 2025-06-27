@@ -23,19 +23,19 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 [Experimental("FirelyCqlSdkPreview")]
 internal record ElmToolkitCallbacks(
-    ElmToolkitCallbacks.BeforeBuildDefinitionsCallback? BeforeBuildDefinitions = null,
-    ElmToolkitCallbacks.AfterBuildDefinitionsCallback? AfterBuildDefinitions = null,
+    ElmToolkitCallbacks.BuildDefinitionsBeforeCallback? BuildDefinitionsBefore = null,
+    ElmToolkitCallbacks.BuildDefinitionsSuccessCallback? BuildDefinitionsSuccess = null,
     ElmToolkitCallbacks.BuildDefinitionsErrorCallback? BuildDefinitionsError = null,
-    ElmToolkitCallbacks.BeforeGenerateCSharpCallback? BeforeGenerateCSharp = null,
-    ElmToolkitCallbacks.AfterGenerateCSharpCallback? AfterGenerateCSharp = null,
-    ElmToolkitCallbacks.BuildGenerateCSharpCallback? GenerateCSharpError = null)
+    ElmToolkitCallbacks.GenerateCSharpBeforeCallback? GenerateCSharpBefore = null,
+    ElmToolkitCallbacks.GenerateCSharpSuccessCallback? GenerateCSharpSuccess = null,
+    ElmToolkitCallbacks.GenerateCSharpErrorCallback? GenerateCSharpError = null)
 {
-    public delegate void BeforeBuildDefinitionsCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
-    public delegate void AfterBuildDefinitionsCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, CqlDefinitionDictionary definitions);
+    public delegate void BuildDefinitionsBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
+    public delegate void BuildDefinitionsSuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, CqlDefinitionDictionary definitions);
     public delegate void BuildDefinitionsErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, Exception exception);
-    public delegate void BeforeGenerateCSharpCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
-    public delegate void AfterGenerateCSharpCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp);
-    public delegate void BuildGenerateCSharpCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, Exception exception);
+    public delegate void GenerateCSharpBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
+    public delegate void GenerateCSharpSuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp);
+    public delegate void GenerateCSharpErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, Exception exception);
 }
 
     /// <summary>
@@ -278,9 +278,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 library =>
                 {
                     _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier);
-                    _callbacks?.BeforeGenerateCSharp?.Invoke(library.VersionedLibraryIdentifier, library);
+                    _callbacks?.GenerateCSharpBefore?.Invoke(library.VersionedLibraryIdentifier, library);
                 })
-            .WithEach(t => _callbacks?.AfterGenerateCSharp?.Invoke(t.library.VersionedLibraryIdentifier, t.library, t.cSharp));
+            .WithEach(t => _callbacks?.GenerateCSharpSuccess?.Invoke(t.library.VersionedLibraryIdentifier, t.library, t.cSharp));
 
     /// <summary>
     /// Builds the library set definitions.
@@ -316,11 +316,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 library =>
                 {
                     _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier);
-                    _callbacks?.BeforeBuildDefinitions?.Invoke(library.VersionedLibraryIdentifier, library);
+                    _callbacks?.BuildDefinitionsBefore?.Invoke(library.VersionedLibraryIdentifier, library);
                 })
             .WithEach(result =>
             {
-                _callbacks?.AfterBuildDefinitions?.Invoke(result.library.VersionedLibraryIdentifier, result.library, result.libraryDefinitions);
+                _callbacks?.BuildDefinitionsSuccess?.Invoke(result.library.VersionedLibraryIdentifier, result.library, result.libraryDefinitions);
             })
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;

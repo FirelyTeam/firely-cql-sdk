@@ -12,11 +12,11 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 
 [Experimental("FirelyCqlSdkPreview")]
 internal record CqlToolkitCallbacks(
-    CqlToolkitCallbacks.BeforeTranslateCallback? BeforeTranslate = null,
-    CqlToolkitCallbacks.AfterTranslateCallback? AfterTranslate = null,
+    CqlToolkitCallbacks.TranslateBeforeCallback? TranslateBefore = null,
+    CqlToolkitCallbacks.TranslateSuccessCallback? TranslateSuccess = null,
     CqlToolkitCallbacks.TranslateErrorCallback? TranslateError = null)
 {
-    public delegate void BeforeTranslateCallback(CqlVersionedLibraryIdentifier libraryIdentifier, CqlLibraryString cqlLibraryString);
-    public delegate void AfterTranslateCallback(CqlVersionedLibraryIdentifier libraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary);
+    public delegate void TranslateBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, CqlLibraryString cqlLibraryString);
+    public delegate void TranslateSuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary);
     public delegate void TranslateErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, CqlLibraryString cqlLibraryString, Exception exception);
 }

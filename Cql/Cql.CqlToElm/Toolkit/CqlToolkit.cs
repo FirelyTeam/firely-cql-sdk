@@ -133,7 +133,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                 .TryForEach(
                     r =>
                     {
-                        _callbacks?.BeforeTranslate?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary);
+                        _callbacks?.TranslateBefore?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary);
 
                         if (!_services.LibraryBuilderProvider.TryResolveCqlToolkitConversionRecordWithLibraryBuilder(r.LibraryIdentifier, out var nNewConversionRecord, out var error))
                             throw new InvalidOperationException($"Could not resolve CQL library: {r.LibraryIdentifier} with error {error}.");
@@ -145,7 +145,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                         newConversionRecord = newConversionRecord with { ResultElmLibrary = elmLibrary };
                         conversions[r.LibraryIdentifier] = newConversionRecord;
 
-                        _callbacks?.AfterTranslate?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary, elmLibrary);
+                        _callbacks?.TranslateSuccess?.Invoke(r.LibraryIdentifier, r.SourceCqlLibrary, elmLibrary);
                     },
                     errorStrategy =>
                     {
