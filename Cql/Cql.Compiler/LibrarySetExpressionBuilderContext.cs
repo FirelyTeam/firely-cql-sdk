@@ -38,12 +38,12 @@ internal partial class LibrarySetExpressionBuilderContext
 
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
-        Action<Library>? prebuildLibraryHandler = null) =>
+        Action<Library>? beforeBuild = null) =>
         LibrarySet
             .TrySelect(
                 library =>
                 {
-                    prebuildLibraryHandler?.Invoke(library);
+                    beforeBuild?.Invoke(library);
                     return this.CatchRethrowExpressionBuildingException(_ =>
                     {
                         var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);

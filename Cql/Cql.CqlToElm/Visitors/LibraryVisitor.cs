@@ -18,6 +18,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private IModelProvider ModelProvider => modelProvider;
         private SystemLibrary SystemLibrary => systemLibrary;
         private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
+        public cqlParser? Parser { get; set; }
+
+        public cqlLexer? Lexer { get; set; }
+
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
@@ -39,8 +43,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
 
             var identifier = context.libraryDefinition()?.Parse()
-                ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
+                             ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
+
             var libraryBuilder = new LibraryBuilder(identifier, SystemLibrary, LocalIdentifierProvider);
+            (libraryBuilder.Parser, libraryBuilder.Lexer) = (Parser, Lexer);
+
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
                 libraryBuilder.CurrentScope.TryAdd(systemModel);
@@ -296,14 +303,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 var table = LibraryBuilder.SymbolTable;
 
-
-
                 // Go over the statements in order, since they can be interleaved
                 // with context statements, which become active immediately.
                 foreach (var statementContext in context)
                 {
 #if DEBUG
-                    var statementText = statementContext.GetText();
+                    //var statementJsonText = libraryBuilder.ToJson(statementContext);
+                    var html = libraryBuilder.ToHtml(statementContext);
 #endif
                     if (statementContext.expressionDefinition() is { } edCtx)
                     {

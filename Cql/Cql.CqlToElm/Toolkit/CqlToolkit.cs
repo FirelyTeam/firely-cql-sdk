@@ -155,11 +155,10 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                                                                    (conversion, messageBuilder) =>
                                                                        messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier));
                         if (_callbacks?.TranslateError is { } fn)
-                        {
                             errorStrategy = errorStrategy.AddExceptionHandler(
                                 (conversion, exception, _) =>
                                     fn(conversion.LibraryIdentifier, conversion.SourceCqlLibrary, exception));
-                        }
+
                         return errorStrategy;
                     });
 

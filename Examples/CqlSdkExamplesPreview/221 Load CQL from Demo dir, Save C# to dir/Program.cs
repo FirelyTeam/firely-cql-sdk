@@ -17,17 +17,13 @@ partial class Program
         // Add CQL libraries from directory
         var cqlDirectory = new DirectoryInfo(Path.Combine(LibrarySetsDirectory, "Demo/Cql"));
         var cqlToolkitCallbacks = new CqlToolkitCallbacks(
-            BeforeTranslate: (
-                identifier,
-                libraryString) => { },
-            AfterTranslate: (
-                identifier,
-                libraryString,
-                library) => { },
             TranslateError: (
                 identifier,
                 libraryString,
-                exception) => { });
+                exception) =>
+            {
+                ;
+            });
         var cqlToolkit = new CqlToolkit(loggerFactory, null, null, cqlToolkitCallbacks);
         //cqlToolkit.SetIgnoreEnumerationExceptions();
         cqlToolkit.AddCqlLibrariesFromDirectory(
@@ -42,8 +38,24 @@ partial class Program
 
         // Generate binaries from the ELM libraries
         var allowInvalidCSharp = true;
+        var elmToolkitCallbacks = new ElmToolkitCallbacks(
+            BuildDefinitionsError: (
+                identifier,
+                library,
+                exception) =>
+            {
+                ;
+            },
+            GenerateCSharpError: (
+                identifier,
+                library,
+                exception) =>
+            {
+                ;
+            }
+        );
         var elmToolkitConfig = new ElmToolkitConfig(AllowInvalidCSharp: allowInvalidCSharp);
-        var elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfig);
+        var elmToolkit = cqlToolkit.CreateElmToolkit2(elmToolkitConfig, elmToolkitCallbacks);
         // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();
 

@@ -90,10 +90,10 @@ internal partial class LibrarySetCSharpCodeGenerator
         LibrarySet librarySet,
         CqlDefinitionDictionary definitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
-        Action<Library>? onBeforeProcessLibrary = null)
+        Action<Library>? beforeGenerateCSharp = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
+        return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, beforeGenerateCSharp);
     }
 
     #region Nested Types
@@ -112,13 +112,13 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
             BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
-            Action<Library>? onBeforeProcessLibrary = null) =>
+            Action<Library>? beforeGenerateCSharp = null) =>
             LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.VersionedLibraryIdentifier))
                 .TrySelect(
                     library =>
                     {
-                        onBeforeProcessLibrary?.Invoke(library);
+                        beforeGenerateCSharp?.Invoke(library);
 
                         using var cSharpWriter = new StringWriter();
                         var libraryWriter = new LibraryWriter(this, library, cSharpWriter);

@@ -13,7 +13,8 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Converts CQL To ELM.
         /// </summary>
-        public CqlToElmConverter(IServiceProvider services,
+        public CqlToElmConverter(
+            IServiceProvider services,
             ILogger<CqlToElmConverter> logger)
         {
             Services = services;
@@ -63,21 +64,31 @@ namespace Hl7.Cql.CqlToElm
             return lib;
         }
 
-        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, string cql)
+        internal LibraryBuilder GetBuilder(
+            LibraryVisitor libraryVisitor,
+            string cql)
         {
             using var cqlLibrary = new StringReader(cql);
             return GetBuilder(libraryVisitor, cqlLibrary);
         }
 
-        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, TextReader cqlReader)
+        internal LibraryBuilder GetBuilder(
+            LibraryVisitor libraryVisitor,
+            TextReader cqlReader)
         {
-            var libraryContext = ParseLibrary(cqlReader);
+            var (parser, lexer)  = ParseLibrary2(cqlReader);
+            (libraryVisitor.Parser, libraryVisitor.Lexer) = (parser, lexer);
+            var libraryContext = parser.library();
             var libraryBuilder = libraryVisitor.Visit(libraryContext);
             return libraryBuilder;
         }
 
+        internal static cqlParser.LibraryContext ParseLibrary(TextReader cqlLibrary) =>
+            ParseLibrary2(cqlLibrary).parser.library();
 
-        internal static cqlParser.LibraryContext ParseLibrary(TextReader cqlLibrary)
+
+        internal static (cqlParser parser, cqlLexer lexer) ParseLibrary2(
+            TextReader cqlLibrary)
         {
             if (cqlLibrary.Peek() < 0)
                 throw new ArgumentException(@"The provided text reader is empty and cannot be read.", nameof(cqlLibrary));
@@ -93,7 +104,8 @@ namespace Hl7.Cql.CqlToElm
             parser.RemoveErrorListeners();
             parser.AddErrorListener(errorListener);
 
-            return parser.library();
+            return (parser, lexer);
+            //return parser.library();
         }
 
 

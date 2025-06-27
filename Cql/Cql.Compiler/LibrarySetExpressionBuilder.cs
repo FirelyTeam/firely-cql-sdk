@@ -17,9 +17,9 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? errorStrategyBuilder = null,
-        Action<Library>? onNextLibrary = null) =>
+        Action<Library>? beforeBuild = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .BuildEachLibraryDefinitions(errorStrategyBuilder, onNextLibrary);
+            .BuildEachLibraryDefinitions(errorStrategyBuilder, beforeBuild);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,

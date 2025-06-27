@@ -37,6 +37,19 @@ public static class CqlToolkitElmExtensions
         new ElmToolkit(cqlToolkit.LoggerFactory, elmToolkitConfig, cqlToolkit.BatchProcessExceptionContinuation)
             .AddElmFromCqlToolkit(cqlToolkit, libraryPredicate);
 
+    [Experimental("FirelyCqlSdkPreview")]
+    internal static ElmToolkit CreateElmToolkit2(
+        this CqlToolkit cqlToolkit,
+        ElmToolkitConfig? elmToolkitConfig = null,
+        ElmToolkitCallbacks? elmToolkitCallbacks = null,
+        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) =>
+        new ElmToolkit(
+                loggerFactory: cqlToolkit.LoggerFactory,
+                config: elmToolkitConfig,
+                batchProcessExceptionContinuation: cqlToolkit.BatchProcessExceptionContinuation,
+                callbacks: elmToolkitCallbacks)
+            .AddElmFromCqlToolkit(cqlToolkit, libraryPredicate);
+
     /// <summary>
     /// Compiles CQL to assemblies using the provided <see cref="CqlToolkit"/>.
     /// </summary>

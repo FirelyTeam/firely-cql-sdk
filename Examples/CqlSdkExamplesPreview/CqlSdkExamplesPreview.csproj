@@ -35,7 +35,7 @@
 		</None>
 	</ItemGroup>
 
-	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+	<!--<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Using Namespace="System" />
@@ -202,6 +202,6 @@
 	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug'" BeforeTargets="CoreCompile">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
-	</Target>
+	</Target>-->
 
 </Project>
