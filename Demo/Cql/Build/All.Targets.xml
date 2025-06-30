@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Project>
+
+	<PropertyGroup>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<CqlToElmEnabled>true</CqlToElmEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
+		<EmbedDebugSymbolsEnable>false</EmbedDebugSymbolsEnable>
+		<JsonPretty>true</JsonPretty>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' != 'Release'">
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
+		<EmbedDebugSymbolsEnable>true</EmbedDebugSymbolsEnable>
+		<JsonPretty>true</JsonPretty>
+	</PropertyGroup>
+
+	<Import Project="Mvn.Targets.xml" />
+	<Import Project="CqlToElm.Targets.xml" />
+	<Import Project="ElmToCSharp.Targets.xml" />
+	<ItemGroup>
+		<Resource Include="pom.xml" />
+	</ItemGroup>
+</Project>

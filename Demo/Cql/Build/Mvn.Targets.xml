@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Project>
 
 	<!-- Download MVN Dependencies -->
@@ -13,7 +12,7 @@
 
 		After that, build the Cql project in Visual Studio, which will download the tooling again into target/dependency.
 		-->
-		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+		<CqlToElmCliVersion>3.21.0</CqlToElmCliVersion>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
 		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
@@ -22,9 +21,17 @@
 		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 	</PropertyGroup>
 
+	<Target Name="DisplayConfig"
+	        BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, LibrarySet=$(LibrarySet)))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, Configuration=$(Configuration)))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, CqlToElmEnabled=$(CqlToElmEnabled)))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, ElmToCSharpEnabled=$(ElmToCSharpEnabled)))" Importance="High" />
+	</Target>
+
 	<Target Name="DisplayMessages"
-					Condition="'$(CqlToElmEnabled)'=='true'"
-			BeforeTargets="PreBuildEvent">
+	        Condition="'$(CqlToElmEnabled)'=='true'"
+	        BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, Starting MVN))" Importance="High" />
 	</Target>
 

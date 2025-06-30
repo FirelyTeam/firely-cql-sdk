@@ -38,10 +38,10 @@
 			<ElmFiles Include="$(ElmDirectory)/*.json"/>
 		</ItemGroup>
 
-		<!--~1~ Delete old ELM files @1@
+		<!-- Delete old ELM files -->
 		<Message Text="$(Box.Replace({Text}, Deleting ELM files))" Importance="High" />
 
-		<Delete Files="@(ElmFiles)" />-->
+		<Delete Files="@(ElmFiles)" />
 
 		<!-- Generate ELM files -->
 		<Message

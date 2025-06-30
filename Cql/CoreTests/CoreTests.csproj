@@ -46,14 +46,9 @@
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
 		<DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory>
-		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
-		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
+	<Import Project="../../Demo/Cql/Build\All.Targets.xml" />
 
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
