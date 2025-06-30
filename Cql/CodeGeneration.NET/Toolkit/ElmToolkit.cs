@@ -26,21 +26,32 @@ internal record ElmToolkitCallbacks(
     ElmToolkitCallbacks.BuildDefinitionsBeforeCallback? BuildDefinitionsBefore = null,
     ElmToolkitCallbacks.BuildDefinitionsSuccessCallback? BuildDefinitionsSuccess = null,
     ElmToolkitCallbacks.BuildDefinitionsErrorCallback? BuildDefinitionsError = null,
+
     ElmToolkitCallbacks.GenerateCSharpBeforeCallback? GenerateCSharpBefore = null,
     ElmToolkitCallbacks.GenerateCSharpSuccessCallback? GenerateCSharpSuccess = null,
-    ElmToolkitCallbacks.GenerateCSharpErrorCallback? GenerateCSharpError = null)
+    ElmToolkitCallbacks.GenerateCSharpErrorCallback? GenerateCSharpError = null,
+
+    ElmToolkitCallbacks.CompileAssemblyBeforeCallback?  CompileAssemblyBefore = null,
+    ElmToolkitCallbacks.CompileAssemblySuccessCallback? CompileAssemblySuccess = null,
+    ElmToolkitCallbacks.CompileAssemblyErrorCallback?   CompileAssemblyError = null)
 {
     public delegate void BuildDefinitionsBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
     public delegate void BuildDefinitionsSuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, CqlDefinitionDictionary definitions);
     public delegate void BuildDefinitionsErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, Exception exception);
+
     public delegate void GenerateCSharpBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary);
     public delegate void GenerateCSharpSuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp);
     public delegate void GenerateCSharpErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, Exception exception);
+
+    public delegate void CompileAssemblyBeforeCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp);
+    public delegate void CompileAssemblySuccessCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp, byte[] assembly);
+    public delegate void CompileAssemblyErrorCallback(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary, string cSharp, Exception exception);
+
 }
 
-    /// <summary>
-    /// Compiles ELM (Expression Logical Model) into .NET assemblies.
-    /// </summary>
+/// <summary>
+/// Compiles ELM (Expression Logical Model) into .NET assemblies.
+/// </summary>
 public sealed class ElmToolkit : IToolkit<ElmToolkit>
 {
     /// <summary>
@@ -235,15 +246,37 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
-                cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
+                cSharps.WithEach(t =>
+                {
+                    _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier);
+                    _callbacks?.CompileAssemblyBefore?.Invoke(t.library.VersionedLibraryIdentifier, t.library, t.cSharp);
+                }),
                 librarySet,
                 debugInformationFormat,
-                Config.AllowInvalidCSharp, errorStrategy => errorStrategy
-                                                            .SetContinuation(BatchProcessExceptionContinuation)
-                                                            .AddLoggerExceptionHandler(
-                                                                _services.Logger,
-                                                                (pair, logMessage) =>
-                                                                    logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
+                Config.AllowInvalidCSharp, errorStrategy =>
+                {
+                    errorStrategy = errorStrategy
+                        .SetContinuation(BatchProcessExceptionContinuation)
+                        .AddLoggerExceptionHandler(
+                            _services.Logger,
+                            (pair, logMessage) =>
+                                logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier));
+
+                    if (_callbacks?.CompileAssemblyError is { } fn)
+                        errorStrategy = errorStrategy.AddExceptionHandler(
+                            (t, exception, _) =>
+                                fn(t.library.VersionedLibraryIdentifier, t.library, t.csharp, exception));
+
+                    return errorStrategy;
+                })
+            .WithEach(t =>
+            {
+                _callbacks?.CompileAssemblySuccess?.Invoke(
+                    t.library.VersionedLibraryIdentifier,
+                    t.library,
+                    t.assemblyBinaryWithSourceCode.SourceCode!.Single().Value,
+                    t.assemblyBinaryWithSourceCode.AssemblyBytes!);
+            });
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -278,9 +311,18 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 library =>
                 {
                     _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier);
-                    _callbacks?.GenerateCSharpBefore?.Invoke(library.VersionedLibraryIdentifier, library);
+
+                    _callbacks?.GenerateCSharpBefore?.Invoke(
+                        library.VersionedLibraryIdentifier,
+                        library);
                 })
-            .WithEach(t => _callbacks?.GenerateCSharpSuccess?.Invoke(t.library.VersionedLibraryIdentifier, t.library, t.cSharp));
+            .WithEach(t =>
+            {
+                _callbacks?.GenerateCSharpSuccess?.Invoke(
+                    t.library.VersionedLibraryIdentifier,
+                    t.library,
+                    t.cSharp);
+            });
 
     /// <summary>
     /// Builds the library set definitions.
@@ -300,29 +342,36 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 errorStrategy =>
                 {
                     errorStrategy = errorStrategy
-                        .SetContinuation(BatchProcessExceptionContinuation)
-                        .AddLoggerExceptionHandler(
-                            _services.Logger,
-                            (library, logMessage) =>
-                                logMessage("Could not convert ELM into definitions for {id}", library.VersionedLibraryIdentifier));
+                                    .SetContinuation(BatchProcessExceptionContinuation)
+                                    .AddLoggerExceptionHandler(
+                                        _services.Logger,
+                                        (library, logMessage) =>
+                                            logMessage("Could not convert ELM into definitions for {id}", library.VersionedLibraryIdentifier));
 
-                    if (_callbacks?.BuildDefinitionsError is {} fn)
-                        errorStrategy = errorStrategy.AddExceptionHandler(
-                            (library, exception, _) =>
-                                fn(library.VersionedLibraryIdentifier, library, exception));
+                    if (_callbacks?.BuildDefinitionsError is { } fn)
+                        errorStrategy = errorStrategy.AddExceptionHandler((
+                                                                                  library,
+                                                                                  exception,
+                                                                                  _) =>
+                                                                              fn(library.VersionedLibraryIdentifier, library, exception));
 
                     return errorStrategy;
                 },
                 library =>
                 {
                     _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier);
-                    _callbacks?.BuildDefinitionsBefore?.Invoke(library.VersionedLibraryIdentifier, library);
+
+                    _callbacks?.BuildDefinitionsBefore?.Invoke(
+                        library.VersionedLibraryIdentifier,
+                        library);
                 })
-            .WithEach(result =>
+            .ForEach(result =>
             {
-                _callbacks?.BuildDefinitionsSuccess?.Invoke(result.library.VersionedLibraryIdentifier, result.library, result.libraryDefinitions);
-            })
-            .ForEach(); // Important to enumerate
+                _callbacks?.BuildDefinitionsSuccess?.Invoke(
+                    result.library.VersionedLibraryIdentifier,
+                    result.library,
+                    result.libraryDefinitions);
+            });
         return librarySetDefinitions;
     }
 }
