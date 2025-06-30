@@ -11,13 +11,13 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
 /// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/>
+/// Provides the implementation for <seealso cref="ILibraryBuilderProvider"/>
 /// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="CqlToolkitConversionDictionary.Builder"/>.
 /// </summary>
 /// <param name="conversionsBuilder"></param>
 internal sealed class LibraryBuilderProvider(
     CqlToolkitConversionDictionary.Builder conversionsBuilder)
-    : ILibraryProvider
+    : ILibraryBuilderProvider
 {
     public CqlToolkitServices? CqlToElmTranslatorServices { get; set; }
 

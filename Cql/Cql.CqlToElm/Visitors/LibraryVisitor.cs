@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
@@ -71,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder libraryBuilder,
             // Services
             IModelProvider modelProvider,
-            ILibraryProvider libraryProvider,
+            ILibraryBuilderProvider libraryBuilderProvider,
             CoercionProvider coercionProvider,
             MessageProvider messaging,
             InvocationBuilder invocationBuilder,
@@ -81,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             private InvocationBuilder InvocationBuilder => invocationBuilder;
             private MessageProvider MessagingProvider => messaging;
             private CoercionProvider CoercionProvider => coercionProvider;
-            private ILibraryProvider LibraryProvider => libraryProvider;
+            private ILibraryBuilderProvider LibraryBuilderProvider => libraryBuilderProvider;
             private IModelProvider ModelProvider => modelProvider;
             private LibraryBuilder LibraryBuilder => libraryBuilder;
             private ExpressionVisitor ExpressionVisitor => expressionVisitorFactory(libraryBuilder);
@@ -97,23 +98,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? id;
                 var vi = new VersionedIdentifier { id = libraryName, version = version };
                 var libVer = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, version);
-                var resolveSuccess = LibraryProvider.TryResolveLibraryBuilder(
-                    libVer,
-                    out var includedLibraryBuilder,
-                    out var error);
-                if (resolveSuccess && includedLibraryBuilder is not null)
+                try
                 {
-                    return new ReferencedLibrary(localIdentifier, vi, includedLibraryBuilder.SymbolTable)
-                        .WithLocator(context.Locator());
+                    if (LibraryBuilderProvider.TryResolveCqlToolkitConversionRecordWithLibraryBuilder(
+                            libVer,
+                            out CqlToolkitConversionRecord? cqlToolkitConversionRecord,
+                            out string? err))
+                    {
+                        var resolvedLibraryBuilder = cqlToolkitConversionRecord.Value.LibraryBuilder!;
+                        return new ReferencedLibrary(localIdentifier, vi, resolvedLibraryBuilder.SymbolTable)
+                            .WithLocator(context.Locator());
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    error ??= MessagingProvider.UnableToResolveLibrary(libraryName, version);
-                    var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.SymbolTable(vi.ToString()!, null));
-                    return errorInclude
-                        .AddError(error!)
-                        .WithLocator(context.Locator());
+                    _ = ex;
                 }
+
+                string error = MessagingProvider.UnableToResolveLibrary(libraryName, version);
+                var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.SymbolTable(vi.ToString()!, null));
+                return errorInclude
+                       .AddError(error)
+                       .WithLocator(context.Locator());
             }
 
             // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?

@@ -69,11 +69,11 @@ internal record CqlToolkitServices(
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="config">The configuration for the translator.</param>
-    /// <param name="libraryProvider">The library provider.</param>
+    /// <param name="libraryBuilderProvider">The library provider.</param>
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
         CqlToolkitConfig config,
-        ILibraryProvider libraryProvider)
+        ILibraryBuilderProvider libraryBuilderProvider)
     {
         SuppressCqlDebugAssertions();
 
@@ -81,7 +81,7 @@ internal record CqlToolkitServices(
             .AddCqlToElmServices()
             .AddCqlToElmModels(ConfigureModelProvider())
             .AddCqlToElmOptions(ConfigureCqlToElmOptions())
-            .AddSingleton(libraryProvider)
+            .AddSingleton(libraryBuilderProvider)
             .AddCqlToElmMessaging();
         return;
 
