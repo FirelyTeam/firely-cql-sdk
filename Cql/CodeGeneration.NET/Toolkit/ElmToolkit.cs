@@ -69,7 +69,15 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     }
 
     [Experimental("FirelyCqlSdkPreview")]
-    internal ElmToolkit(
+    internal static ElmToolkit Create( // We need this method until we can remove the public constructor for the private one.
+        ILoggerFactory? loggerFactory = null,
+        ElmToolkitConfig? config = null,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw,
+        ElmToolkitCallbacks? callbacks = null) =>
+        new(loggerFactory, config, batchProcessExceptionContinuation, callbacks);
+
+    [Experimental("FirelyCqlSdkPreview")]
+    private ElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToolkitConfig? config = null,
         BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw,

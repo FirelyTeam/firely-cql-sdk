@@ -23,7 +23,10 @@ partial class Program
                 libraryString,
                 exception) =>
             {
-                ;
+                if (identifier.ToString() == "CumulativeMedicationDurationFHIR4-1.0.000")
+                {
+                    ;
+                }
             });
         var cqlToolkit = new CqlToolkit(loggerFactory, null, null, cqlToolkitCallbacks);
         //cqlToolkit.SetIgnoreEnumerationExceptions();
@@ -61,8 +64,23 @@ partial class Program
                 library,
                 exception) =>
             {
-                ;
+                if (identifier.ToString() == "CumulativeMedicationDurationFHIR4-1.0.000")
+                {
+                    ;
+                }
+            },
+            CompileAssemblyError: (
+                identifier,
+                library,
+                cSharp,
+                exception) =>
+            {
+                if (identifier.ToString() == "CumulativeMedicationDurationFHIR4-1.0.000")
+                {
+                    ;
+                }
             }
+
         );
         var elmToolkitConfig = new ElmToolkitConfig(AllowInvalidCSharp: allowInvalidCSharp);
         var elmToolkit = cqlToolkit.CreateElmToolkit2(elmToolkitConfig, elmToolkitCallbacks)
