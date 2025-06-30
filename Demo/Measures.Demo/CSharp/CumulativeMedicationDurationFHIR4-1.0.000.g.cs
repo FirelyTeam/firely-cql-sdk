@@ -594,7 +594,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 string gr_ = this.ErrorLevel(context);
                 string gs_ = period?.unit;
-                string gt_ = context.Operators.Concatenate("Unknown unit ", gs_);
+                string gt_ = context.Operators.Concatenate("Unknown unit ", gs_ ?? "");
                 object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
 
                 return gu_ as decimal?;
@@ -625,7 +625,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 string e_ = this.ErrorLevel(context);
                 string f_ = frequency?.code;
-                string g_ = context.Operators.Concatenate("Unknown frequency code ", f_);
+                string g_ = context.Operators.Concatenate("Unknown frequency code ", f_ ?? "");
                 object h_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", e_, g_);
 
                 return h_ as decimal?;
@@ -663,7 +663,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     CqlDateTime u_ = context.Operators.End(t_);
                     CqlDateTime v_ = context.Operators.MaxValue<CqlDateTime>();
                     bool? w_ = context.Operators.Equal(u_, v_);
-                    bool? x_ = context.Operators.Or((bool?)((n_ as object) is null), w_);
+                    bool? x_ = context.Operators.Or((bool?)(n_ is null), w_);
                     bool? y_ = context.Operators.Not(x_);
 
                     return y_ ?? false;
@@ -864,32 +864,32 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     [CqlExpressionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
-        CqlQuantity a_ = context.Operators.Quantity(14m, "d");
+        CqlQuantity a_ = context.Operators.Quantity(14m, "days");
 
         return a_;
     }
 
 
     [CqlExpressionDefinition("MedicationAdministrationPeriod")]
-    public CqlInterval<CqlQuantity> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
+    public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
             Administration,
         ];
-        CqlInterval<CqlQuantity> b_(MedicationAdministration M)
+        CqlInterval<CqlDateTime> b_(MedicationAdministration M)
         {
-            CqlInterval<CqlQuantity> f_()
+            CqlInterval<CqlDateTime> f_()
             {
                 bool g_()
                 {
                     DataType h_ = Administration?.Effective;
-                    CqlInterval<CqlDate> i_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate]'. */ (CqlInterval<CqlDate>)((object)h_);
-                    CqlDate j_ = context.Operators.Start(i_);
+                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_ as Period);
+                    CqlDateTime j_ = context.Operators.Start(i_);
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
                     DataType l_ = Administration?.Medication;
-                    CqlConcept m_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlConcept'. */ (CqlConcept)((object)l_);
+                    CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l_ as CodeableConcept);
                     CqlQuantity n_ = this.TherapeuticDuration(context, m_);
-                    bool? o_ = context.Operators.Not((bool?)((n_ as object) is null));
+                    bool? o_ = context.Operators.Not((bool?)(n_ is null));
                     bool? p_ = context.Operators.And(k_, o_);
 
                     return p_ ?? false;
@@ -897,28 +897,29 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 if (g_())
                 {
                     DataType q_ = Administration?.Effective;
-                    CqlInterval<CqlDate> r_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate]'. */ (CqlInterval<CqlDate>)((object)q_);
-                    CqlDate s_ = context.Operators.Start(r_);
-                    CqlDate v_ = context.Operators.Start(r_);
+                    CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, q_ as Period);
+                    CqlDateTime s_ = context.Operators.Start(r_);
+                    CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, q_ as Period);
+                    CqlDateTime v_ = context.Operators.Start(u_);
                     DataType w_ = Administration?.Medication;
-                    CqlConcept x_ = /* CodeGen-Error: No coercion operator is defined between types 'Hl7.Fhir.Model.DataType' and 'Hl7.Cql.Primitives.CqlConcept'. */ (CqlConcept)((object)w_);
+                    CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_ as CodeableConcept);
                     CqlQuantity y_ = this.TherapeuticDuration(context, x_);
-                    CqlQuantity z_ = context.Operators.Add(v_ as CqlQuantity, y_);
-                    CqlInterval<CqlQuantity> aa_ = context.Operators.Interval(s_ as CqlQuantity, z_, true, true);
+                    CqlDateTime z_ = context.Operators.Add(v_, y_);
+                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(s_, z_, true, true);
 
                     return aa_;
                 }
                 else
                 {
-                    return null as CqlInterval<CqlQuantity>;
+                    return null as CqlInterval<CqlDateTime>;
                 }
             };
 
             return f_();
         };
-        IEnumerable<CqlInterval<CqlQuantity>> c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlQuantity>>((IEnumerable<MedicationAdministration>)a_, b_);
-        IEnumerable<CqlInterval<CqlQuantity>> d_ = context.Operators.Distinct<CqlInterval<CqlQuantity>>(c_);
-        CqlInterval<CqlQuantity> e_ = context.Operators.SingletonFrom<CqlInterval<CqlQuantity>>(d_);
+        IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlDateTime>>((IEnumerable<MedicationAdministration>)a_, b_);
+        IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
+        CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
         return e_;
     }
@@ -930,17 +931,16 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
         IEnumerable<CqlInterval<CqlDateTime>> a_ = context.Operators.Collapse(Intervals, "day");
         int? b_(CqlInterval<CqlDateTime> X)
         {
-            CqlDateTime f_ = context.Operators.Start(X);
-            CqlDateTime g_ = context.Operators.End(X);
-            int? h_ = context.Operators.DifferenceBetween(f_, g_, "day");
+            CqlDateTime e_ = context.Operators.Start(X);
+            CqlDateTime f_ = context.Operators.End(X);
+            int? g_ = context.Operators.DifferenceBetween(e_, f_, "day");
 
-            return h_;
+            return g_;
         };
         IEnumerable<int?> c_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(a_, b_);
-        IEnumerable<int?> d_ = context.Operators.Distinct<int?>(c_);
-        int? e_ = context.Operators.Sum(d_);
+        int? d_ = context.Operators.Sum(c_);
 
-        return e_;
+        return d_;
     }
 
 
@@ -956,7 +956,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 CqlInterval<CqlDateTime> j_ = context.Operators.Last<CqlInterval<CqlDateTime>>(R);
                 CqlDateTime k_ = context.Operators.End(j_);
-                CqlQuantity l_ = context.Operators.Quantity(1m, "d");
+                CqlQuantity l_ = context.Operators.Quantity(1m, "day");
                 CqlDateTime m_ = context.Operators.Add(k_, l_);
                 CqlDateTime n_ = context.Operators.Start(X);
                 CqlDateTime[] o_ = [
@@ -996,31 +996,31 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
 
     [CqlExpressionDefinition("MedicationPeriod")]
-    public object MedicationPeriod(CqlContext context, object medication)
+    public CqlInterval<CqlDateTime> MedicationPeriod(CqlContext context, object medication)
     {
-        object a_()
+        CqlInterval<CqlDateTime> a_()
         {
             if (medication is MedicationRequest)
             {
                 CqlInterval<CqlDateTime> b_ = this.MedicationRequestPeriod(context, medication as MedicationRequest);
 
-                return b_ as object;
+                return b_;
             }
             else if (medication is MedicationDispense)
             {
                 CqlInterval<CqlDateTime> c_ = this.MedicationDispensePeriod(context, medication as MedicationDispense);
 
-                return c_ as object;
+                return c_;
             }
             else if (medication is MedicationAdministration)
             {
-                CqlInterval<CqlQuantity> d_ = this.MedicationAdministrationPeriod(context, medication as MedicationAdministration);
+                CqlInterval<CqlDateTime> d_ = this.MedicationAdministrationPeriod(context, medication as MedicationAdministration);
 
-                return d_ as object;
+                return d_;
             }
             else
             {
-                return null as object;
+                return null as CqlInterval<CqlDateTime>;
             }
         };
 
@@ -1033,48 +1033,41 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     {
         bool? a_(object M)
         {
-            bool t_ = M is MedicationRequest;
+            bool n_ = M is MedicationRequest;
 
-            return t_ as bool?;
+            return n_ as bool?;
         };
         IEnumerable<object> b_ = context.Operators.Where<object>(Medications, a_);
-        object c_(object M)
+        CqlInterval<CqlDateTime> c_(object M)
         {
-            object u_ = this.MedicationPeriod(context, M);
+            CqlInterval<CqlDateTime> o_ = this.MedicationPeriod(context, M);
 
-            return u_;
+            return o_;
         };
-        IEnumerable<object> d_ = context.Operators.Select<object, object>(b_, c_);
-        IEnumerable<object> e_ = context.Operators.Distinct<object>(d_);
+        IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(b_, c_);
+        IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(d_);
         bool? f_(object M)
         {
-            bool v_ = M is MedicationDispense;
-            bool w_ = M is MedicationAdministration;
-            bool? x_ = context.Operators.Or(v_ as bool?, w_ as bool?);
+            bool p_ = M is MedicationDispense;
+            bool q_ = M is MedicationAdministration;
+            bool? r_ = context.Operators.Or(p_ as bool?, q_ as bool?);
 
-            return x_;
+            return r_;
         };
         IEnumerable<object> g_ = context.Operators.Where<object>(Medications, f_);
-        object h_(object M)
+        CqlInterval<CqlDateTime> h_(object M)
         {
-            object y_ = this.MedicationPeriod(context, M);
+            CqlInterval<CqlDateTime> s_ = this.MedicationPeriod(context, M);
 
-            return y_;
+            return s_;
         };
-        IEnumerable<object> i_ = context.Operators.Select<object, object>(g_, h_);
-        IEnumerable<object> j_ = context.Operators.Distinct<object>(i_);
-        CqlInterval<CqlDateTime> k_(object X) =>
-            X as CqlInterval<CqlDateTime>;
-        IEnumerable<CqlInterval<CqlDateTime>> l_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(j_, k_);
-        IEnumerable<CqlInterval<CqlDateTime>> m_ = this.RolloutIntervals(context, l_);
-        object n_(CqlInterval<CqlDateTime> X) =>
-            X as object;
-        IEnumerable<object> o_ = context.Operators.Select<CqlInterval<CqlDateTime>, object>(m_, n_);
-        IEnumerable<object> p_ = context.Operators.Union<object>(e_, o_);
-        IEnumerable<CqlInterval<CqlDateTime>> r_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(p_, k_);
-        int? s_ = this.CumulativeDuration(context, r_);
+        IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(g_, h_);
+        IEnumerable<CqlInterval<CqlDateTime>> j_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(i_);
+        IEnumerable<CqlInterval<CqlDateTime>> k_ = this.RolloutIntervals(context, j_);
+        IEnumerable<CqlInterval<CqlDateTime>> l_ = context.Operators.Union<CqlInterval<CqlDateTime>>(e_, k_);
+        int? m_ = this.CumulativeDuration(context, l_);
 
-        return s_;
+        return m_;
     }
 
 
