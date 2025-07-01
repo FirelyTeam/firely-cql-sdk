@@ -43,20 +43,18 @@
 
 	<PropertyGroup>
 		<LibrarySet>CoreTests.HL7</LibrarySet>
-		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
-		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
-		<DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory>
-		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
+		<CqlDir>$(MSBuildProjectDirectory)/input/HL7/cql</CqlDir>
+		<ElmDir>$(MSBuildProjectDirectory)/input/HL7/elm</ElmDir>
+		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
+		<DllDir>$(MSBuildProjectDirectory)/Dlls</DllDir>
+		<!-- <FhirDir>$(MSBuildProjectDirectory)/Resources</FhirDir> -->
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
+	<Import Project="$(CqlSolutionDir)/tools/cql/cql-tooling.targets" />
 
 	<ItemGroup>
-		<None Include="Input\ELM\HL7\*.json">
+		<None Include="Input\HL7\elm\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Include="Input\ELM\Libs\*.json">
@@ -74,6 +72,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Input\ELM\HL7\ValueSetExprExample-1.0.0.cql" />
-	</ItemGroup>
+	  <Folder Include="Input\HL7\elm\" />
+	</ItemGroup>         
 </Project>

@@ -7,12 +7,12 @@ namespace CoreTests
     public class ElmPreprocessorTest
     {
         private Library FHIRHelpers() =>
-            Library.LoadFromJson(new FileInfo(@"..\..\..\..\..\LibrarySets\Demo\Elm\FHIRHelpers.json"));
+            Library.LoadFromJson(new FileInfo(@"..\..\..\..\..\Demo\Measures.Demo\Elm\FHIRHelpers.json"));
 
         [TestMethod]
         public void MATGlobal_Add_ResultTypeSpecifier()
         {
-            var file = new FileInfo(@"..\..\..\..\..\LibrarySets\Demo\Elm\MATGlobalCommonFunctionsFHIR4.json");
+            var file = new FileInfo(@"..\..\..\..\..\Demo\Measures.Demo\Elm\MATGlobalCommonFunctionsFHIR4.json");
             file.Exists.Should().BeTrue();
 
             var lib = Library.LoadFromJson(file);

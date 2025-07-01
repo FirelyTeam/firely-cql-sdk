@@ -36,7 +36,7 @@ namespace CoreTests
         {
             using var serviceProvider = BuildServiceProvider();
             using var servicesScope = serviceProvider.CreateScope();
-            var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
+            var elm = new FileInfo(@"Input/HL7/elm/FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);

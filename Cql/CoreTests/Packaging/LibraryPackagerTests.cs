@@ -43,12 +43,12 @@ public class LibraryPackagerTests
 
     [DataTestMethod]
     [DataRow("Input/ELM/Test/ParameterTest_ResultTypeSpecifier.json", false)]
-    [DataRow("Input/ELM/HL7/ConceptDefTest.json", true)]
+    [DataRow("Input/HL7/elm/ConceptDefTest.json", true)]
     public void ElmContextToFhir_LibraryTypeIsBasedOnContext(string filename, bool contextExpected)
     {
         // Arrange
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
-        var fhirHelpers = Library.LoadFromJson(new FileInfo("Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
+        var fhirHelpers = Library.LoadFromJson(new FileInfo("Input/HL7/elm/FHIRHelpers-4.0.1.json"));
         // Act
         var library = LibraryPackager.CreateLibraryResource(
             NullLoggerFactory.Instance.CreateLogger("Dummy"),

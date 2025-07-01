@@ -24,7 +24,7 @@ public class TestElmResolution
     private static (LibrarySet,Library) LoadTestLibrarySet()
     {
         var lset = new LibrarySet();
-        lset.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "TestRetrieve" );
+        lset.LoadLibraryAndDependencies(new DirectoryInfo("Input/HL7/elm"), "TestRetrieve" );
         var main = lset.GetLibrary("TestRetrieve-1.0.1");
         return (lset, main);
     }
