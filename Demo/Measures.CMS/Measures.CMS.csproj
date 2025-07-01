@@ -20,11 +20,14 @@
 		<!-- <LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot> -->
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CSharpDirectory>$(LibrarySetRoot)/CSharp</CSharpDirectory>
 		<!-- Copy resources to IntegrationRunner -->
 		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/All.Targets.xml" />
+	<Import Project="../Cql/Common.props" />
+	<Import Project="../Cql/CqlToElm.Targets.xml" />
+	<Import Project="../Cql/ElmToCSharp.Targets.xml" />
 
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
@@ -53,6 +56,9 @@
 		<Content Include="input/**">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
-		<Content Remove="input/tests/results" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="CSharp\" />
 	</ItemGroup>
 </Project>

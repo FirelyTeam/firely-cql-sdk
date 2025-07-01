@@ -17,11 +17,14 @@
 		<LibrarySet>Measures.Authoring</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/All.Targets.xml" />
+	<Import Project="../Cql/Common.props" />
+	<Import Project="../Cql/CqlToElm.Targets.xml" />
+	<Import Project="../Cql/ElmToCSharp.Targets.xml" />
 
 	<ItemGroup>
 		<Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
@@ -48,8 +51,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="CSharp\" />
-	  <Folder Include="Elm\" />
 	  <Folder Include="Input\cql\" />
 	</ItemGroup>
 

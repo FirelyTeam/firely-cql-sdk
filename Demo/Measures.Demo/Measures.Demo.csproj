@@ -18,11 +18,14 @@
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/All.Targets.xml" />
+	<Import Project="../Cql/Common.props" />
+	<Import Project="../Cql/CqlToElm.Targets.xml" />
+	<Import Project="../Cql/ElmToCSharp.Targets.xml" />
 
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
@@ -51,6 +54,44 @@
 		<Content Include="input/**">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\AdultOutpatientEncountersFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\AdvancedIllnessandFrailtyExclusionECQMFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\BCSEHEDISMY2022.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\BreastCancerScreeningsFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\CervicalCancerScreeningFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\ColorectalCancerScreeningsFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\CumulativeMedicationDurationFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\DevDays-2023.0.0.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\DiabetesHemoglobinA1cHbA1cPoorControl9FHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\DischargedonAntithromboticTherapyFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\DRCommunicationWithPhysicianManagingDiabetesFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\Exam125FHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\Exam130FHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\FHIR347.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\FHIRHelpers.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\HospiceFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\HospitalHarmHyperglycemiainHospitalizedPatientsFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\HospitalHarmSevereHypoglycemiaFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\HybridHWMFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\HybridHWRFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\MATGlobalCommonFunctionsFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\MeasureExample.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAAdvancedIllnessandFrailty.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAClaims.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQACQLBase.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAEncounter.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAFHIRBase.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAHealthPlanEnrollment.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAHospice.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAPalliativeCare.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQAStatus.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\NCQATerminology.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\PalliativeCareFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\SafeUseofOpioidsConcurrentPrescribingFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\SupplementalDataElementsFHIR4.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\TJCOverallFHIR.json" />
+		<Content Remove="D:\firely-cql-sdk,j\Demo\..\LibrarySets\Demo\Elm\VTEFHIR4.json" />
 		<Content Remove="input/tests/results" />
 	</ItemGroup>
 </Project>

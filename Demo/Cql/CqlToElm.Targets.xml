@@ -6,9 +6,11 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<BoxHeader>CQL to ELM: </BoxHeader>
-		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
-		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<BoxLine>______________________________</BoxLine>
+		<Box> $(BoxLine)&#10;/&#10;| {BoxHeader}: {Text}&#10;\$(BoxLine)</Box>
 	</PropertyGroup>
 
 	<!-- CQL to ELM -->
@@ -32,20 +34,20 @@
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
 	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!=''"
-	        BeforeTargets="PreBuildEvent">
+	        BeforeTargets="Build">
 
 		<ItemGroup>
 			<ElmFiles Include="$(ElmDirectory)/*.json"/>
 		</ItemGroup>
 
 		<!-- Delete old ELM files -->
-		<Message Text="$(Box.Replace({Text}, Deleting ELM files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, CQL-to-ELM for $(LibrarySet)).Replace({Text}, Deleting ELM files))" Importance="High" />
 
 		<Delete Files="@(ElmFiles)" />
 
 		<!-- Generate ELM files -->
 		<Message
-			Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
+			Text="$(Box.Replace({BoxHeader}, CQL-to-ELM for $(LibrarySet)).Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
 
 		<Exec
 			Command="$(JavaCLI)"
@@ -73,7 +75,7 @@
 		<ItemGroup>
 			<ElmFiles Include="$(ElmDirectory)/*.json"/>
 		</ItemGroup>
-		<Message Text="$(Box.Replace({Text}, Deleting ELM files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, CQL-to-ELM for $(LibrarySet)).Replace({Text}, Deleting ELM files))" Importance="High" />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
 

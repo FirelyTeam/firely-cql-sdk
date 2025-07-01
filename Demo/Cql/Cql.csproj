@@ -4,4 +4,24 @@
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+	</PropertyGroup>
+
+	<Import Project="Common.props" />
+	<Import Project="Mvn.Targets.xml" />
+
+	<Target Name="EnsureJavaTooling" DependsOnTargets="Download CQL to ELM CLI via Maven">
+		<Message Text="Ensuring Java tooling is available..." Importance="Low" />
+	</Target>
+
+	<Target Name="BeforeBuild" DependsOnTargets="EnsureJavaTooling" />
+
+	<ItemGroup>
+	  <Compile Remove="target\**" />
+	  <EmbeddedResource Remove="target\**" />
+	  <None Remove="target\**" />
+	</ItemGroup>
+
 </Project>

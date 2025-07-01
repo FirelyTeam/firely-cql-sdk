@@ -7,9 +7,11 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<BoxHeader>ELM to C#: </BoxHeader>
-		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
-		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<BoxLine>______________________________</BoxLine>
+		<Box> $(BoxLine)&#10;/&#10;| {BoxHeader}: {Text}&#10;\$(BoxLine)</Box>
 	</PropertyGroup>
 
 	<!-- ELM to CSharp -->
@@ -21,11 +23,9 @@
 
 	<Target Name="GenerateCSharp"
 	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)')"
-	        BeforeTargets="PreBuildEvent">
+	        BeforeTargets="Build">
 
 		<PropertyGroup>
-			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
-
 			<!-- Comment out these if you don't need them -->
 			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
 
@@ -45,7 +45,7 @@
 
 		<!-- 1. Remove old C# and Resource files to avoid duplicates when editing/renaming CQL files -->
 
-		<Message Text="$(Box.Replace({Text}, Deleting C# and Resource files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, ELM-to-C# for $(LibrarySet)).Replace({Text}, Deleting C# and Resource files))" Importance="High" />
 
 		<ItemGroup>
 			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
@@ -57,7 +57,7 @@
 		<Delete Files="@(ResourceFiles)" />
 
 		<!-- Generate C# and Resource files -->
-		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, ELM-to-C# for $(LibrarySet)).Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
 		<ItemGroup>
@@ -86,7 +86,7 @@
 	<Target Name="Delete CSharp"
 					Condition="'$(ElmToCSharpEnabled)'=='true'"
 					AfterTargets="Clean">
-		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, ELM-to-C# for $(LibrarySet)).Replace({Text}, Deleting C# files))" Importance="High" />
 		<Delete Files="@(CSharpFiles)" />
 	</Target>
 
@@ -97,7 +97,7 @@
 	<Target Name="Delete Resources"
 					Condition="'$(ElmToCSharpEnabled)'=='true'"
 					AfterTargets="Clean">
-		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, ELM-to-C# for $(LibrarySet)).Replace({Text}, Deleting Resource files))" Importance="High" />
 		<Delete Files="@(ResourceFiles)" />
 	</Target>
 
@@ -112,7 +112,7 @@
 	<Target Name="Delete Results"
 					Condition="'$(ElmToCSharpEnabled)'=='true'"
 					AfterTargets="Clean">
-		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
+		<Message Text="$(Box.Replace({BoxHeader}, ELM-to-C# for $(LibrarySet)).Replace({Text}, Deleting Test Results files))" Importance="High" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
 	</Target>
 </Project>

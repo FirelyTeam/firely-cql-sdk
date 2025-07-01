@@ -1,0 +1,55 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
+		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
+		<MvnBuildLog>$(MSBuildProjectDirectory)/mvn-build.log</MvnBuildLog>
+		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
+		<ToolingMarkerFile>$(TargetDependencies)\.tooling_installed_$(CqlToElmCliVersion)</ToolingMarkerFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<BoxLine>______________________________</BoxLine>
+		<Box> $(BoxLine)&#10;/&#10;| {BoxHeader}: {Text}&#10;\$(BoxLine)</Box>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="$(TargetDependencies)" />
+		<JarDependencies Include="$(TargetDependencies)/*.jar" />
+	</ItemGroup>
+
+	<Target Name="Download CQL to ELM CLI via Maven"
+	        Condition="'$(CqlToElmEnabled)'=='true' and !Exists('$(ToolingMarkerFile)')"
+	        Inputs="$(PomXmlPath)"
+	        Outputs="$(ToolingMarkerFile)"
+	        BeforeTargets="Build">
+		<Message Text="$(Box.Replace({BoxHeader}, Java Tooling Installer).Replace({Text}, Downloading CQL to ELM CLI via Maven))" Importance="High" />
+		<Exec Command="mvn -f $(PomXmlPath) dependency:copy-dependencies" ConsoleToMSBuild="true" EchoOff="true">
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
+		</Exec>
+
+		<WriteLinesToFile File="$(MvnBuildLog)" Lines="@(OutputOfExec)" Overwrite="true" Encoding="Unicode" />
+
+		<!-- Create marker file -->
+		<WriteLinesToFile
+			File="$(ToolingMarkerFile)"
+			Lines="Tooling installed on $(Today)"
+			Overwrite="true" />
+
+	</Target>
+
+	<ItemGroup>
+		<JarDependencies Include="$(TargetDependencies)/*.jar" />
+	</ItemGroup>
+
+	<!--<Target Name="Delete JAR Dependencies"
+	        Condition="'$(CqlToElmEnabled)'=='true'"
+					Outputs="@(JarDependencies)"
+	        AfterTargets="Clean">
+		<Message Text="$(Box.Replace({BoxHeader}, Java Tooling Installer).Replace({Text}, Deleting JAR Dependencies...))" Importance="High" />
+		<Exec Command="mvn clean -f $(PomXmlPath)" />
+		<Delete Files="@(JarDependencies)" />
+	</Target>-->
+
+</Project>
