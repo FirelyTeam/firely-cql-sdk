@@ -35,21 +35,36 @@
 		<Touch Files="$(CqlMarkerFile)" AlwaysCreate="true" />
 	</Target>
 
+	<ItemGroup>
+		<CqlFiles Include="$(CqlDir)\*.cql" />
+		<CompiledElm Include="$(ElmDir)\*.json" />
+	</ItemGroup>
+
 	<Target Name="CompileCql"
-          BeforeTargets="BeforeBuild"
-          Condition="Exists('$(CqlDir)')">
+					BeforeTargets="BeforeBuild"
+					Inputs="@(CqlFiles)"
+					Outputs="@(CompiledElm)"
+					Condition="Exists('$(CqlDir)')">
 		<Message Text="### Checking for CQL changes in $(CqlDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
-             Targets="CompileCqlFiles"
-             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+						 Targets="CompileCqlFiles"
+						 Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
 	</Target>
 
+	<ItemGroup>
+		<ElmFiles Include="$(ElmDir)\*.json" />
+		<GeneratedFiles Include="$(CSharpDir)\*.g.cs" Condition="$(CSharpDir)!=''" />
+	</ItemGroup>
+
+	<!-- BeforeTargets="CoreCompile" -->
 	<Target Name="ConvertElmToResources"
 	        AfterTargets="CompileCql"
+	        Inputs="@(ElmFiles)"
+	        Outputs="@(GeneratedFiles)"
 	        Condition="Exists('$(ElmDir)')">
 		<Message Text="### Checking for ELM changes in $(ElmDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
-		         Targets="ElmToResources"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+						 Targets="ElmToResources"
+						 Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
 	</Target>
 </Project>
