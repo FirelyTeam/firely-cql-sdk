@@ -17,9 +17,10 @@
 		<LibrarySet>CMS</LibrarySet>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
-		<CqlDir>$(MSBuildProjectDirectory)/Cql</CqlDir>
+		<CqlDir>$(LibrarySetRoot)/Cql</CqlDir>
 		<ElmDir>$(MSBuildProjectDirectory)/Elm</ElmDir>
 		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
+		<FhirDir>$(MSBuildProjectDirectory)/Resources</FhirDir>
 		<!-- Copy dll's to IntegrationRunner -->
 		<FhirDir>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</FhirDir>
 	</PropertyGroup>

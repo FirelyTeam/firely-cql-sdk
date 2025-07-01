@@ -35,23 +35,4 @@
 		<Content Remove="input/tests/results" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="Resources/*.*">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Resources\**" />
-	  <Content Remove="Resources\**" />
-	  <EmbeddedResource Remove="Resources\**" />
-	  <None Remove="Resources\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="CSharp\" />
-	  <Folder Include="Elm\" />
-	  <Folder Include="Input\cql\" />
-	</ItemGroup>
-
 </Project>

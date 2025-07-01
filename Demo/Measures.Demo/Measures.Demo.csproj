@@ -16,7 +16,7 @@
 		<LibrarySet>Demo</LibrarySet>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
-		<CqlDir>$(MSBuildProjectDirectory)/Cql</CqlDir>
+		<CqlDir>$(LibrarySetRoot)/Cql</CqlDir>
 		<ElmDir>$(MSBuildProjectDirectory)/Elm</ElmDir>
 		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
 		<FhirDir>$(MSBuildProjectDirectory)/Resources</FhirDir>
@@ -28,25 +28,6 @@
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
   </ItemGroup>
-
-	<ItemGroup>
-		<Content Include="$(CqlDir)/*">
-			<Link>input/cql/%(Filename)%(Extension)</Link>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="$(ElmDir)/*">
-			<Link>Elm/%(Filename)%(Extension)</Link>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="$(ResourcesDirectory)/*">
-			<Link>Resources/%(Filename)%(Extension)</Link>
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="input/**">
