@@ -9,6 +9,10 @@
 		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
+	</ItemGroup>
+
 	<Import Project="Common.props" />
 	<Import Project="Mvn.Targets.xml" />
 

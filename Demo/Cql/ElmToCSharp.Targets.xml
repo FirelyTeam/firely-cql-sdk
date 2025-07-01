@@ -11,14 +11,14 @@
 
 	<PropertyGroup>
 		<BoxLine>______________________________</BoxLine>
-		<Box> $(BoxLine)&#10;/&#10;| {BoxHeader}: {Text}&#10;\$(BoxLine)</Box>
+		<Box> $(BoxLine)&#10;/&#10;| {BoxHeader}: {Text}&#10;| $(ElmToCSharpEnabled)&#10;\$(BoxLine)</Box>
 	</PropertyGroup>
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<JsonPretty>true</JsonPretty>
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
-		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+		<PackagerCLI>$(MSBuildThisFileDirectory)../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
