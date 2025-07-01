@@ -16,11 +16,10 @@
 		<LibrarySet>Demo</LibrarySet>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
-		<CqlDir>$(LibrarySetRoot)/Cql</CqlDir>
-		<ElmDir>$(LibrarySetRoot)/Elm</ElmDir>
-		<!-- <CSharpDir>$(LibrarySetRoot)/CSharp</CSharpDir> -->
-		<!-- <DllDir>$(LibrarySetRoot)/Dll</DllDir> -->
-		<FhirDir>$(LibrarySetRoot)/Resources</FhirDir>
+		<CqlDir>$(MSBuildProjectDirectory)/Cql</CqlDir>
+		<ElmDir>$(MSBuildProjectDirectory)/Elm</ElmDir>
+		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
+		<FhirDir>$(MSBuildProjectDirectory)/Resources</FhirDir>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 

@@ -17,37 +17,21 @@
 		<LibrarySet>CMS</LibrarySet>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
-		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
-		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CqlDir>$(MSBuildProjectDirectory)/Cql</CqlDir>
+		<ElmDir>$(MSBuildProjectDirectory)/Elm</ElmDir>
+		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
 		<!-- Copy dll's to IntegrationRunner -->
-		<!-- <DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory> -->
-		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
-		<!-- <ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory> -->
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<FhirDir>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</FhirDir>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
+	<Import Project="$(CqlSolutionDir)/tools/cql/cql-tooling.targets" />
 
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
   </ItemGroup>
 
 	<ItemGroup>
-		<Content Include="$(CqlDirectory)/*">
-			<Link>input/cql/%(Filename)%(Extension)</Link>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="$(ElmDirectory)/*">
-			<Link>Elm/%(Filename)%(Extension)</Link>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="$(ResourcesDirectory)/*">
+		<Content Include="$(FhirDir)/*">
 			<Link>Resources/%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>

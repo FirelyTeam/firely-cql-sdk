@@ -15,14 +15,14 @@
 
 	<PropertyGroup>
 		<LibrarySet>Measures.Authoring</LibrarySet>
-		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
-		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
-		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
+		<CqlDir>$(MSBuildProjectDirectory)/input/cql</CqlDir>
+		<ElmDir>$(MSBuildProjectDirectory)/Elm</ElmDir>
+		<CSharpDir>$(MSBuildProjectDirectory)/CSharp</CSharpDir>
+		<FhirDir>$(MSBuildProjectDirectory)/Resources</FhirDir>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
+	<Import Project="$(CqlSolutionDir)/tools/cql/cql-tooling.targets" />
 
 	<ItemGroup>
 		<Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
