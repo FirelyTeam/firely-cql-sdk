@@ -29,7 +29,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
         LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel);
         logging.AddFilter(level => level >= minLogLevel);
 
-        var logFile = "build.log";
+        var logFile = "package-build.log";
         if (!loggingOptions.Append)
             File.WriteAllText(logFile, ""); // Create or clear the log file
         else

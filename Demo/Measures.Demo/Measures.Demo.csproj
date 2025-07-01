@@ -18,7 +18,9 @@
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDir>$(LibrarySetRoot)/Cql</CqlDir>
 		<ElmDir>$(LibrarySetRoot)/Elm</ElmDir>
-		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+		<CSharpDir>$(LibrarySetRoot)/CSharp</CSharpDir>
+		<DllDir>$(LibrarySetRoot)/Dll</DllDir>
+		<FhirDir>$(LibrarySetRoot)/Resources</FhirDir>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 

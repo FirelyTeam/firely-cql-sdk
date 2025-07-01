@@ -1,0 +1,38 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<CqlDir>$(CqlDir)</CqlDir>
+		<ElmDir>$(ElmDir)</ElmDir>
+		<CSharpDir>$(CSharpDir)</CSharpDir>
+		<DllDir>$(DllDir)</DllDir>
+		<FhirDir>$(FhirDir)</FhirDir>
+		<PackagerExe>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<CqlFiles Include="$(CqlDir)\*.cql" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ElmFiles Include="$(ElmDir)\*.json" />
+	</ItemGroup>
+
+	<Target Name="ElmToResources"
+	        Inputs="@(CqlFiles);@(ElmFiles)"
+	        Outputs="$(CSharpDir)\done.marker"
+	        DependsOnTargets="EnsureOutputDirs">
+
+		<Message Text="### Converting ELM files in $(ElmDir) to C#, DLL, and/or FHIR resources..." Importance="High" />
+
+		<Exec Command='"$(PackagerExe)" elm --cql "$(CqlDir)" --elm "$(ElmDir)" --cs "$(CSharpDir)" --dll "$(DllDir)" --fhir "$(FhirDir)"' />
+
+		<Touch Files="$(CSharpDir)\done.marker" />
+	</Target>
+
+	<Target Name="EnsureOutputDirs">
+		<MakeDir Directories="$(CSharpDir);$(DllDir);$(FhirDir)" />
+	</Target>
+</Project>

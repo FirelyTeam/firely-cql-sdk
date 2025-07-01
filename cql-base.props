@@ -21,14 +21,14 @@
 	<PropertyGroup>
 		<!-- ## CQL-related properties (also in BuildArtifacts.csproj, cql-base.props, cql-demo.props)  -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
-		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
-		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
-		<JsonPretty>true</JsonPretty>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass -->
-		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
-		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<!-- <EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable> -->
+		<!-- <EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable> -->
+		<!-- <JsonPretty>true</JsonPretty> -->
+		<!-- ~1~ <CqlToElmEnabled>true</CqlToElmEnabled> @1@ -->
+		<!-- ~1~ ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass @1@ -->
+		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
+		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled> -->
+		<!-- ~1~ <ElmToCSharpEnabled>true</ElmToCSharpEnabled> @1@ -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

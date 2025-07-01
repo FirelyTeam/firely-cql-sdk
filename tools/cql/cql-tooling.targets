@@ -41,6 +41,14 @@
 		<Message Text="### Checking for CQL changes in $(CqlDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
              Targets="CompileCqlFiles"
-             Properties="CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+	</Target>
+
+	<Target Name="ConvertElmToResources"
+	        AfterTargets="CompileCql"
+	        Condition="Exists('$(ElmDir)')">
+		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
+		         Targets="ElmToResources"
+		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
 	</Target>
 </Project>

@@ -146,6 +146,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cql", "cql", "{5C069646-AA8
 	ProjectSection(SolutionItems) = preProject
 		tools\cql\cql-to-elm.proj = tools\cql\cql-to-elm.proj
 		tools\cql\cql-tooling.targets = tools\cql\cql-tooling.targets
+		tools\cql\elm-to-resource.proj = tools\cql\elm-to-resource.proj
 		tools\cql\pom.xml = tools\cql\pom.xml
 	EndProjectSection
 EndProject
