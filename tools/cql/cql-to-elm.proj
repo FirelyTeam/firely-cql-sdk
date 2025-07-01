@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<InputDir>$(CqlDir)</InputDir>
+		<OutputDir>$(ElmDir)</OutputDir>
+		<JavaClasspath>$(MSBuildThisFileDirectory)target\dependency\*</JavaClasspath>
+		<MainClass>org.cqframework.cql.cql2elm.cli.Main</MainClass>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<CqlFile Include="$(InputDir)\*.cql">
+			<OutputPath>$(OutputDir)\%(Filename).json</OutputPath>
+		</CqlFile>
+	</ItemGroup>
+
+	<Target Name="CompileCqlFiles"
+	        Inputs="@(CqlFile)"
+	        Outputs="@(CqlFile->'%(OutputPath)')"
+	        BeforeTargets="PreBuildEvent">
+		<Message Text="### Compiling CQL files (tooling version: $(CqlVersion)) from $(InputDir) to $(OutputDir)..." Importance="High" />
+		<Exec Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(InputDir)" -output "$(OutputDir)" -f JSON -locators true -result-types true -signatures All' />
+	</Target>
+</Project>
