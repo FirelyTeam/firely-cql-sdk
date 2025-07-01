@@ -37,7 +37,7 @@
 
 	<Target Name="CompileCql"
           BeforeTargets="BeforeBuild"
-          Condition="Exists('$(CqlDir)') and Exists('$(ElmDir)')">
+          Condition="Exists('$(CqlDir)')">
 		<Message Text="### Checking for CQL changes in $(CqlDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
              Targets="CompileCqlFiles"
@@ -47,6 +47,7 @@
 	<Target Name="ConvertElmToResources"
 	        AfterTargets="CompileCql"
 	        Condition="Exists('$(ElmDir)')">
+		<Message Text="### Checking for ELM changes in $(ElmDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
 		         Targets="ElmToResources"
 		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />

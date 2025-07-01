@@ -8,6 +8,14 @@
 		<PackagerExe>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- Rebuild PackagerExe from scratch if not set manually -->
+		<PackagerExe
+			Condition=" '$(PackagerExe)' == '' and '$(CSharpDir)' != '' and '$(DllDir)' != '' and '$(FhirDir)' != '' ">
+			$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe
+		</PackagerExe>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
@@ -20,14 +28,16 @@
 		<ElmFiles Include="$(ElmDir)\*.json" />
 	</ItemGroup>
 
-	<Target Name="ElmToResources"
-	        Inputs="@(CqlFiles);@(ElmFiles)"
-	        Outputs="$(CSharpDir)\done.marker"
-	        DependsOnTargets="EnsureOutputDirs">
+	<Target Name="ElmToResources">
+		<Error Condition="!Exists('$(PackagerExe)')" Text="Required packager executable not found: $(PackagerExe)" />
 
-		<Message Text="### Converting ELM files in $(ElmDir) to C#, DLL, and/or FHIR resources..." Importance="High" />
+		<ItemGroup>
+			<PackagerArgs Include="--cs &quot;$(CSharpDir)&quot;" Condition=" '$(CSharpDir)' != '' " />
+			<PackagerArgs Include="--dll &quot;$(DllDir)&quot;" Condition=" '$(DllDir)' != '' " />
+			<PackagerArgs Include="--fhir &quot;$(FhirDir)&quot;" Condition=" '$(FhirDir)' != '' " />
+		</ItemGroup>
 
-		<Exec Command='"$(PackagerExe)" elm --cql "$(CqlDir)" --elm "$(ElmDir)" --cs "$(CSharpDir)" --dll "$(DllDir)" --fhir "$(FhirDir)"' />
+		<Exec Command="&quot;$(PackagerExe)&quot; elm --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs-&gt;'%(Identity)', ' ')" />
 
 		<Touch Files="$(CSharpDir)\done.marker" />
 	</Target>
