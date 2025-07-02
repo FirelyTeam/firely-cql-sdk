@@ -1,47 +1,72 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
 		<CqlToolsDir Condition="'$(CqlToolsDir)' == ''">$(CqlSolutionDir)tools\cql\</CqlToolsDir>
-		<CqlToElmProject Condition="'$(CqlToElmProject)' == ''">$(CqlToolsDir)cql-to-elm.proj</CqlToElmProject>
-		<ElmToResourceProject Condition="'$(ElmToResourceProject)' == ''">$(CqlToolsDir)elm-to-resource.proj</ElmToResourceProject>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
 		<ElmFiles Include="$(ElmDir)\*.json" />
-		<GeneratedFiles Include="$(CSharpDir)\*.g.cs" />
+		<CSharpFiles Include="$(CSharpDir)\*.g.cs" />
+		<DllFiles Include="$(DllDir)\*.dll" />
+		<FhirFiles Include="$(FhirDir)\*.json" />
 	</ItemGroup>
 
-	<Target Name="CompileCql"
-	      BeforeTargets="BeforeBuild"
-	      Outputs="@(ElmFiles)"
-				Condition="Exists('$(CqlDir)')">
-		<Message Text="[tooling] CompileCql - CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
-		<MSBuild Projects="$(CqlToElmProject)"
-		         Targets="CompileCqlFiles"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+	<PropertyGroup>
+		<JavaClasspath>$(CqlToolsDir)target\dependency\*</JavaClasspath>
+		<MainClass>org.cqframework.cql.cql2elm.cli.Main</MainClass>
+		<PackagerExe Condition=" '$(PackagerExe)' == ''">$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
+	</PropertyGroup>
+
+	<Target Name="EnsureCqlTooling"
+	        Inputs="$(CqlToolsDir)pom.xml"
+	        Outputs="$(CqlToolsDir)target\dependency\cql-to-elm-cli-$(CqlVersion).jar">
+		<Message Text="[>>>EnsureCqlTooling] Ensuring Java dependencies via Maven..." Importance="High" />
+		<Exec WorkingDirectory="$(CqlToolsDir)"
+		      Command="mvn dependency:copy-dependencies" />
 	</Target>
 
-	<!-- Inputs="@(ElmFiles)" -->
+	<Target Name="CompileCql"
+        BeforeTargets="CoreCompile"
+        Inputs="@(CqlFiles)"
+        Outputs="@(CqlFiles->'$(ElmDir)\%(Filename).json')"
+        Condition="'@(CqlFiles)' != ''">
+		<MakeDir Directories="$(ElmDir)" Condition="!Exists('$(ElmDir)')" />
+		<Message Text="[>>>CompileCql] CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
+		<CallTarget Targets="EnsureCqlTooling" />
+		<Exec Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(CqlDir)" -output "$(ElmDir)" -f JSON -locators true -result-types true -signatures All' />
+	</Target>
+
 	<Target Name="ConvertElmToResources"
+	        AfterTargets="CompileCql"
         BeforeTargets="CoreCompile"
         Inputs="@(ElmFiles)"
-        Outputs="@(ElmFiles->'$(CSharpDir)\%(Filename).g.cs');@(ElmFiles->'$(DllDir)\%(Filename).dll');@(ElmFiles->'$(FhirDir)\%(Filename).xml')"
-	        Condition="Exists('$(ElmDir)')">
-		<Message Text="[tooling] ConvertElmToResources - ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)" Importance="High" />
-		<MSBuild Projects="$(ElmToResourceProject)"
-		         Targets="ElmToResources"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+        Outputs="@(ElmFiles->'$(CSharpDir)\%(Filename).g.cs');@(ElmFiles->'$(DllDir)\%(Filename).dll');@(ElmFiles->'$(FhirDir)\%(Filename).json')"
+        Condition="'@(ElmFiles)' != ''">
+		<Message Text="[>>>ConvertElmToResources] ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)" Importance="High" />
+		<Error Condition="!Exists('$(PackagerExe)')" Text="Required packager executable not found: $(PackagerExe)" />
+		<ItemGroup>
+			<PackagerArgs Include="--cs &quot;$(CSharpDir)&quot;" Condition=" '$(CSharpDir)' != '' " />
+			<PackagerArgs Include="--dll &quot;$(DllDir)&quot;" Condition=" '$(DllDir)' != '' " />
+			<PackagerArgs Include="--fhir &quot;$(FhirDir)&quot;" Condition=" '$(FhirDir)' != '' " />
+		</ItemGroup>
+		<Message Text="[>>>ConvertElmToResources] PackagerExe: $(PackagerExe)" Importance="High" />
+		<Exec Command="&quot;$(PackagerExe)&quot; elm --file-log-level None --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')"
+					WorkingDirectory="$(MSBuildProjectDirectory)"/>
 	</Target>
 
-	<Target Name="CleanCqlToolingArtifacts"
-	      AfterTargets="Clean;Rebuild"
-	      Condition="Exists('$(ElmDir)') Or Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
-		<Message Text="[tooling] CleanCqlToolingArtifacts - ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)" Importance="High" />
-		<MSBuild Projects="$(CqlToElmProject)"
-		        Targets="CleanCqlToElm"
-		        Properties="ElmDir=$(ElmDir)" />
-		<MSBuild Projects="$(ElmToResourceProject)"
-		         Targets="CleanElmToResources"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+	<Target Name="CleanCqlToElm"
+	        AfterTargets="Clean;Rebuild"
+	        Condition="'@(ElmFiles)' != ''">
+		<Message Text="[>>>CleanCqlToElm] ElmDir: $(ElmDir)" Importance="High" />
+		<RemoveDir Directories="$(ElmDir)" Condition="Exists('$(ElmDir)')" />
+	</Target>
+
+	<Target Name="CleanElmToResources"
+        AfterTargets="Clean;Rebuild"
+        Condition="'@(CSharpFiles)' != '' Or '@(DllFiles)' != '' Or '@(FhirFiles)' != ''">
+		<Message Text="[>>>CleanElmToResources] Cleaning output directories..." Importance="High" />
+		<RemoveDir Directories="$(CSharpDir)" Condition="Exists('$(CSharpDir)')" />
+		<RemoveDir Directories="$(DllDir)" Condition="Exists('$(DllDir)')" />
+		<RemoveDir Directories="$(FhirDir)" Condition="Exists('$(FhirDir)')" />
 	</Target>
 </Project>
