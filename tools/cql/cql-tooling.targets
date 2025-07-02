@@ -6,9 +6,10 @@
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
 		<ElmFiles Include="$(ElmDir)\*.json" />
-		<CSharpFiles Include="$(CSharpDir)\*.g.cs" />
-		<DllFiles Include="$(DllDir)\*.dll" />
-		<FhirFiles Include="$(FhirDir)\*.json" />
+		<GeneratedElmFiles Include="@(CqlFiles->'$(ElmDir)\%(Filename).json')" />
+		<GeneratedCSharpFiles Include="@(ElmFiles->'$(CSharpDir)\%(Filename).g.cs')" />
+		<GeneratedDllFiles Include="@(ElmFiles->'$(DllDir)\%(Filename).dll')" />
+		<GeneratedFhirFiles Include="@(ElmFiles->'$(FhirDir)\%(Filename).json')" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -26,23 +27,29 @@
 	</Target>
 
 	<Target Name="CompileCql"
-        BeforeTargets="CoreCompile"
-        Inputs="@(CqlFiles)"
-        Outputs="@(CqlFiles->'$(ElmDir)\%(Filename).json')"
-        Condition="'@(CqlFiles)' != ''">
+	        BeforeTargets="CoreCompile"
+	        Inputs="@(CqlFiles)"
+	        Outputs="@(GeneratedElmFiles')"
+	        Condition="'@(CqlFiles)' != ''">
 		<MakeDir Directories="$(ElmDir)" Condition="!Exists('$(ElmDir)')" />
 		<Message Text="[>>>CompileCql] CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
 		<CallTarget Targets="EnsureCqlTooling" />
-		<Exec Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(CqlDir)" -output "$(ElmDir)" -f JSON -locators true -result-types true -signatures All' />
+		<Exec
+			Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(CqlDir)" -output "$(ElmDir)" -f JSON -locators true -result-types true -signatures All' />
 	</Target>
 
 	<Target Name="ConvertElmToResources"
 	        AfterTargets="CompileCql"
-        BeforeTargets="CoreCompile"
-        Inputs="@(ElmFiles)"
-        Outputs="@(ElmFiles->'$(CSharpDir)\%(Filename).g.cs');@(ElmFiles->'$(DllDir)\%(Filename).dll');@(ElmFiles->'$(FhirDir)\%(Filename).json')"
-        Condition="'@(ElmFiles)' != ''">
-		<Message Text="[>>>ConvertElmToResources] ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)" Importance="High" />
+	        BeforeTargets="CoreCompile"
+	        Inputs="@(ElmFiles)"
+	        Outputs="@(GeneratedCSharpFiles);@(GeneratedDllFiles);@(GeneratedFhirFiles)"
+	        Condition="'@(ElmFiles)' != ''">
+		<MakeDir Directories="$(CSharpDir)" Condition="!Exists('$(CSharpDir)')" />
+		<MakeDir Directories="$(DllDir)" Condition="!Exists('$(DllDir)')" />
+		<MakeDir Directories="$(FhirDir)" Condition="!Exists('$(FhirDir)')" />
+		<Message
+			Text="[>>>ConvertElmToResources] ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)"
+			Importance="High" />
 		<Error Condition="!Exists('$(PackagerExe)')" Text="Required packager executable not found: $(PackagerExe)" />
 		<ItemGroup>
 			<PackagerArgs Include="--cs &quot;$(CSharpDir)&quot;" Condition=" '$(CSharpDir)' != '' " />
@@ -50,8 +57,9 @@
 			<PackagerArgs Include="--fhir &quot;$(FhirDir)&quot;" Condition=" '$(FhirDir)' != '' " />
 		</ItemGroup>
 		<Message Text="[>>>ConvertElmToResources] PackagerExe: $(PackagerExe)" Importance="High" />
-		<Exec Command="&quot;$(PackagerExe)&quot; elm --file-log-level None --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')"
-					WorkingDirectory="$(MSBuildProjectDirectory)"/>
+		<Exec
+			Command="&quot;$(PackagerExe)&quot; elm --file-log-level None --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')"
+			WorkingDirectory="$(MSBuildProjectDirectory)" />
 	</Target>
 
 	<Target Name="CleanCqlToElm"
@@ -59,14 +67,18 @@
 	        Condition="'@(ElmFiles)' != ''">
 		<Message Text="[>>>CleanCqlToElm] ElmDir: $(ElmDir)" Importance="High" />
 		<RemoveDir Directories="$(ElmDir)" Condition="Exists('$(ElmDir)')" />
+		<MakeDir Directories="$(ElmDir)" Condition="!Exists('$(ElmDir)')" />
 	</Target>
 
 	<Target Name="CleanElmToResources"
-        AfterTargets="Clean;Rebuild"
-        Condition="'@(CSharpFiles)' != '' Or '@(DllFiles)' != '' Or '@(FhirFiles)' != ''">
+	        AfterTargets="Clean;Rebuild"
+	        Condition="'@(CSharpFiles)' != '' Or '@(DllFiles)' != '' Or '@(FhirFiles)' != ''">
 		<Message Text="[>>>CleanElmToResources] Cleaning output directories..." Importance="High" />
 		<RemoveDir Directories="$(CSharpDir)" Condition="Exists('$(CSharpDir)')" />
 		<RemoveDir Directories="$(DllDir)" Condition="Exists('$(DllDir)')" />
 		<RemoveDir Directories="$(FhirDir)" Condition="Exists('$(FhirDir)')" />
+		<MakeDir Directories="$(CSharpDir)" Condition="!Exists('$(CSharpDir)')" />
+		<MakeDir Directories="$(DllDir)" Condition="!Exists('$(DllDir)')" />
+		<MakeDir Directories="$(FhirDir)" Condition="!Exists('$(FhirDir)')" />
 	</Target>
 </Project>
