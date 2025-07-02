@@ -6,18 +6,39 @@
 		<ElmDir>$(ElmDir)</ElmDir>
 	</PropertyGroup>
 	<ItemGroup>
-		<CqlFiles Include="$(CqlDir)\*.cql"/>
+		<CqlFiles Include="$(CqlDir)\*.cql">
+			<OutputPath>$(ElmDir)\%(Filename).json</OutputPath>
+		</CqlFiles>
 	</ItemGroup>
+
+	<Target Name="EnsureCqlTooling"
+	        Outputs="$(MSBuildThisFileDirectory).java_tooling_downloaded.marker">
+		<Message Text="[cql-to-elm] Ensuring Java dependencies via Maven..." Importance="High" />
+		<Exec WorkingDirectory="$(MSBuildThisFileDirectory)"
+		      Command="mvn dependency:copy-dependencies" />
+		<Touch Files="$(MSBuildThisFileDirectory).java_tooling_downloaded.marker" AlwaysCreate="true" />
+	</Target>
+
 	<Target Name="CompileCqlFiles"
+	        DependsOnTargets="EnsureCqlTooling"
 	        Inputs="@(CqlFiles)"
-	        Outputs="$(ElmDir)\.elm-generated.marker"
-	        BeforeTargets="PreBuildEvent">
+	        Outputs="@(CqlFiles->'%(OutputPath)')"
+	        BeforeTargets="BeforeBuild">
+		<Message Text="[cql-to-elm] JavaClasspath: $(JavaClasspath)" Importance="High" />
+		<Message Text="[cql-to-elm] MainClass: $(MainClass)" Importance="High" />
+		<Message Text="[cql-to-elm] CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
 		<Message Text="### Compiling CQL files (tooling version: $(CqlVersion)) from $(CqlDir) to $(ElmDir)..." Importance="High" />
 		<Exec Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(CqlDir)" -output "$(ElmDir)" -f JSON -locators true -result-types true -signatures All' />
-		<Touch Files="$(ElmDir)\.elm-generated.marker" AlwaysCreate="true" Condition="Exists('$(ElmDir)')" />
 	</Target>
-	<Target Name="CleanElmFiles">
-		<Delete Files="$(ElmDir)\.elm-generated.marker" Condition="Exists('$(ElmDir)\.elm-generated.marker')" />
+
+	<Target Name="CleanCqlToElm">
+		<Message Text="[cql-to-elm] Cleaning ElmDir: $(ElmDir)" Importance="High" />
 		<RemoveDir Directories="$(ElmDir)" Condition="Exists('$(ElmDir)')" />
+	</Target>
+
+	<Target Name="CleanElmArtifacts" AfterTargets="Clean" Condition="Exists('$(ElmDir)')">
+		<MSBuild Projects="$(MSBuildThisFileFullPath)"
+		         Targets="CleanCqlToElm"
+		         Properties="ElmDir=$(ElmDir)" />
 	</Target>
 </Project>
