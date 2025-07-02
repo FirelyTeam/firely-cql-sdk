@@ -397,8 +397,8 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 
 # Ignore CQL tooling Maven JARs
 /tools/cql/target/
-/tools/cql/*.marker
-/tools/cql/*.log
+.*.marker
+.log
 
 # We don't include Resources, because compiling the same C# code does not generate a deterministic binary, so it becomes very noise when they are included in the Resources
 *.bak

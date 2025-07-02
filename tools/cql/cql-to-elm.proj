@@ -5,13 +5,11 @@
 		<CqlDir>$(CqlDir)</CqlDir>
 		<ElmDir>$(ElmDir)</ElmDir>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql">
 			<OutputPath>$(ElmDir)\%(Filename).json</OutputPath>
 		</CqlFiles>
 	</ItemGroup>
-
 	<Target Name="CompileCqlFiles"
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(CqlFiles->'%(OutputPath)')"

@@ -7,59 +7,46 @@
 		<FhirDir>$(FhirDir)</FhirDir>
 		<PackagerExe>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
 	</PropertyGroup>
-
 	<PropertyGroup>
-		<!-- Rebuild PackagerExe from scratch if not set manually -->
-		<PackagerExe
-			Condition=" '$(PackagerExe)' == '' and '$(CSharpDir)' != '' and '$(DllDir)' != '' and '$(FhirDir)' != '' ">
+		<PackagerExe Condition=" '$(PackagerExe)' == '' and '$(CSharpDir)' != '' and '$(DllDir)' != '' and '$(FhirDir)' != '' ">
 			$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe
 		</PackagerExe>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<ElmFiles Include="$(ElmDir)\*.json" />
 	</ItemGroup>
-
 	<Target Name="ElmToResources"
-        Inputs="@(ElmFiles)"
-        Outputs="$(CSharpDir);$(DllDir);$(FhirDir)">
-
+          Inputs="@(ElmFiles)"
+          Outputs="$(CSharpDir)\.cs-generated.marker;$(DllDir)\.dll-generated.marker;$(FhirDir)\.fhir-generated.marker">
 		<Error Condition="!Exists('$(PackagerExe)')" Text="Required packager executable not found: $(PackagerExe)" />
-
 		<ItemGroup>
 			<PackagerArgs Include="--cs &quot;$(CSharpDir)&quot;" Condition=" '$(CSharpDir)' != '' " />
 			<PackagerArgs Include="--dll &quot;$(DllDir)&quot;" Condition=" '$(DllDir)' != '' " />
 			<PackagerArgs Include="--fhir &quot;$(FhirDir)&quot;" Condition=" '$(FhirDir)' != '' " />
 		</ItemGroup>
-
-		<Exec Command="&quot;$(PackagerExe)&quot; elm --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs-&gt;'%(Identity)', ' ')" />
-
-
+		<Exec Command="&quot;$(PackagerExe)&quot; elm --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')" />
+		<Touch Files="$(CSharpDir)\.cs-generated.marker" AlwaysCreate="true" Condition="Exists('$(CSharpDir)')" />
+		<Touch Files="$(DllDir)\.dll-generated.marker" AlwaysCreate="true" Condition="Exists('$(DllDir)')" />
+		<Touch Files="$(FhirDir)\.fhir-generated.marker" AlwaysCreate="true" Condition="Exists('$(FhirDir)')" />
 	</Target>
-
 	<Target Name="EnsureOutputDirs">
 		<MakeDir Directories="$(CSharpDir);$(DllDir);$(FhirDir)" />
 	</Target>
-
 	<Target Name="CleanElmToResources">
+		<Delete Files="$(CSharpDir)\.cs-generated.marker" Condition="Exists('$(CSharpDir)\.cs-generated.marker')" />
+		<Delete Files="$(DllDir)\.dll-generated.marker" Condition="Exists('$(DllDir)\.dll-generated.marker')" />
+		<Delete Files="$(FhirDir)\.fhir-generated.marker" Condition="Exists('$(FhirDir)\.fhir-generated.marker')" />
 		<RemoveDir Directories="$(CSharpDir)" Condition="Exists('$(CSharpDir)')" />
 		<RemoveDir Directories="$(DllDir)" Condition="Exists('$(DllDir)')" />
 		<RemoveDir Directories="$(FhirDir)" Condition="Exists('$(FhirDir)')" />
 	</Target>
-
-	<Target Name="CleanElmArtifacts"
-          AfterTargets="Clean"
-          Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
-		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
-             Targets="CleanElmToResources"
-             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+	<Target Name="CleanElmArtifacts" AfterTargets="Clean" Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
+		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj" Targets="CleanElmToResources" Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
 	</Target>
 </Project>

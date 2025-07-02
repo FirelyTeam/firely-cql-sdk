@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<CqlToolsDir Condition="'$(CqlToolsDir)' == ''">$(MSBuildThisFileDirectory)</CqlToolsDir>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
 		<ElmFiles Include="$(ElmDir)\*.json" />
@@ -10,32 +9,34 @@
 	</ItemGroup>
 
 	<Target Name="CompileCql"
-	        BeforeTargets="BeforeBuild"
-	        Inputs="@(CqlFiles)"
-	        Outputs="@(ElmFiles)"
-	        Condition="Exists('$(CqlDir)')">
+          BeforeTargets="BeforeBuild"
+          Inputs="@(CqlFiles)"
+          Outputs="@(ElmFiles)"
+          Condition="Exists('$(CqlDir)')">
 		<Message Text="### Checking for CQL changes in $(CqlDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
-		         Targets="CompileCqlFiles"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+             Targets="CompileCqlFiles"
+             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
 	</Target>
 
 	<Target Name="ConvertElmToResources"
-	        BeforeTargets="CoreCompile"
-	        Inputs="@(ElmFiles)"
-	        Outputs="@(GeneratedFiles)"
-	        Condition="Exists('$(ElmDir)')">
+          BeforeTargets="CoreCompile"
+          Inputs="@(ElmFiles)"
+          Outputs="$(CSharpDir)\.cs-generated.marker;$(DllDir)\.dll-generated.marker;$(FhirDir)\.fhir-generated.marker"
+          Condition="Exists('$(ElmDir)')">
 		<Message Text="### Checking for ELM changes in $(ElmDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
-		         Targets="ElmToResources"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+             Targets="ElmToResources"
+             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+		<Touch Files="$(ElmDir)\.elm-generated.marker" AlwaysCreate="true" />
 	</Target>
 
 	<Target Name="CleanCqlToolingArtifacts"
-	        AfterTargets="Clean"
-	        Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
+          AfterTargets="Clean;Rebuild"
+          Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
+		<Message Text="### Cleaning generated resource output directories..." Importance="High" />
 		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
-		         Targets="CleanElmToResources"
-		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+             Targets="CleanElmToResources"
+             Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
 	</Target>
 </Project>
