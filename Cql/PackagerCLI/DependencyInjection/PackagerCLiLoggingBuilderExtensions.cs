@@ -29,20 +29,23 @@ internal static class PackagerCLiLoggingBuilderExtensions
         LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel);
         logging.AddFilter(level => level >= minLogLevel);
 
-        var logFile = "package-build.log";
-        if (!loggingOptions.Append)
-            File.WriteAllText(logFile, ""); // Create or clear the log file
-        else
-            File.OpenText(logFile).Close(); // Touch the file
+        if (loggingOptions.FileLogLevel != LogLevel.None)
+        {
+            var logFile = "package-build.log";
+            if (!loggingOptions.Append)
+                File.WriteAllText(logFile, ""); // Create or clear the log file
+            else
+                File.OpenText(logFile).Close(); // Touch the file
 
-        Log.Logger = new LoggerConfiguration()
-                     .Enrich.FromLogContext()
-                     .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
-                     .WriteTo.File(
-                         logFile,
-                         outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
-                         formatProvider: CultureInfo.InvariantCulture)
-                     .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                         .Enrich.FromLogContext()
+                         .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
+                         .WriteTo.File(
+                             logFile,
+                             outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                             formatProvider: CultureInfo.InvariantCulture)
+                         .CreateLogger();
+        }
 
         logging.AddProvider(new ColorConsoleLoggerProvider(minLogLevel: loggingOptions.ConsoleLogLevel));
         return logging.AddSerilog();

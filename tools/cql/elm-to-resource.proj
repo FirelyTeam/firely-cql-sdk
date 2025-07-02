@@ -30,7 +30,9 @@
 			<PackagerArgs Include="--dll &quot;$(DllDir)&quot;" Condition=" '$(DllDir)' != '' " />
 			<PackagerArgs Include="--fhir &quot;$(FhirDir)&quot;" Condition=" '$(FhirDir)' != '' " />
 		</ItemGroup>
-		<Exec Command="&quot;$(PackagerExe)&quot; elm --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')" />
+		<Exec
+				Command="&quot;$(PackagerExe)&quot; elm --file-log-level None --json-pretty --cql &quot;$(CqlDir)&quot; --elm &quot;$(ElmDir)&quot; @(PackagerArgs->'%(Identity)', ' ')"
+				WorkingDirectory="$(MSBuildProjectDirectory)"/>
 		<Touch Files="$(CSharpDir)\.cs-generated.marker" AlwaysCreate="true" Condition="Exists('$(CSharpDir)')" />
 		<Touch Files="$(DllDir)\.dll-generated.marker" AlwaysCreate="true" Condition="Exists('$(DllDir)')" />
 		<Touch Files="$(FhirDir)\.fhir-generated.marker" AlwaysCreate="true" Condition="Exists('$(FhirDir)')" />
