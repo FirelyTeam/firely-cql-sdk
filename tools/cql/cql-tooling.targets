@@ -1,6 +1,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
+		<RunningOnBuildServer>$(ContinuousIntegrationBuild)</RunningOnBuildServer>
 		<CqlToolsDir Condition="'$(CqlToolsDir)' == ''">$(CqlSolutionDir)tools\cql\</CqlToolsDir>
+		<JavaClasspath>$(CqlToolsDir)target\dependency\*</JavaClasspath>
+		<MainClass>org.cqframework.cql.cql2elm.cli.Main</MainClass>
+		<PackagerExe Condition=" '$(PackagerExe)' == ''">$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -11,12 +15,6 @@
 		<GeneratedDllFiles Include="@(ElmFiles->'$(DllDir)\%(Filename).dll')" />
 		<GeneratedFhirFiles Include="@(ElmFiles->'$(FhirDir)\%(Filename).json')" />
 	</ItemGroup>
-
-	<PropertyGroup>
-		<JavaClasspath>$(CqlToolsDir)target\dependency\*</JavaClasspath>
-		<MainClass>org.cqframework.cql.cql2elm.cli.Main</MainClass>
-		<PackagerExe Condition=" '$(PackagerExe)' == ''">$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerExe>
-	</PropertyGroup>
 
 	<Target Name="EnsureCqlTooling"
 	        Inputs="$(CqlToolsDir)pom.xml"
@@ -30,7 +28,7 @@
 	        BeforeTargets="CoreCompile"
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(GeneratedElmFiles')"
-	        Condition="'@(CqlFiles)' != ''">
+	        Condition="'@(CqlFiles)' != '' And '$(RunningOnBuildServer)' == ''">
 		<MakeDir Directories="$(ElmDir)" Condition="!Exists('$(ElmDir)')" />
 		<Message Text="[>>>CompileCql] CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
 		<CallTarget Targets="EnsureCqlTooling" />
