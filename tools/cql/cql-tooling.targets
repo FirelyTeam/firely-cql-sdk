@@ -31,7 +31,16 @@
 		<Touch Files="$(ElmDir)\.elm-generated.marker" AlwaysCreate="true" />
 	</Target>
 
-	<Target Name="CleanCqlToolingArtifacts"
+	<Target Name="CleanCqlToElmArtifacts"
+	        AfterTargets="Clean;Rebuild"
+	        Condition="Exists('$(ElmDir)')">
+		<Message Text="### Cleaning generated elm output directories..." Importance="High" />
+		<MSBuild Projects="$(CqlToolsDir)cql-to-elm.proj"
+		         Targets="CleanElmFiles"
+		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);ElmDir=$(ElmDir)" />
+	</Target>
+
+	<Target Name="CleanElmToResourceArtifacts"
           AfterTargets="Clean;Rebuild"
           Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
 		<Message Text="### Cleaning generated resource output directories..." Importance="High" />

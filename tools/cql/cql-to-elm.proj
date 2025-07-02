@@ -6,15 +6,18 @@
 		<ElmDir>$(ElmDir)</ElmDir>
 	</PropertyGroup>
 	<ItemGroup>
-		<CqlFiles Include="$(CqlDir)\*.cql">
-			<OutputPath>$(ElmDir)\%(Filename).json</OutputPath>
-		</CqlFiles>
+		<CqlFiles Include="$(CqlDir)\*.cql"/>
 	</ItemGroup>
 	<Target Name="CompileCqlFiles"
 	        Inputs="@(CqlFiles)"
-	        Outputs="@(CqlFiles->'%(OutputPath)')"
+	        Outputs="$(ElmDir)\.elm-generated.marker"
 	        BeforeTargets="PreBuildEvent">
 		<Message Text="### Compiling CQL files (tooling version: $(CqlVersion)) from $(CqlDir) to $(ElmDir)..." Importance="High" />
 		<Exec Command='java -cp "$(JavaClasspath)" $(MainClass) -input "$(CqlDir)" -output "$(ElmDir)" -f JSON -locators true -result-types true -signatures All' />
+		<Touch Files="$(ElmDir)\.elm-generated.marker" AlwaysCreate="true" Condition="Exists('$(ElmDir)')" />
+	</Target>
+	<Target Name="CleanElmFiles">
+		<Delete Files="$(ElmDir)\.elm-generated.marker" Condition="Exists('$(ElmDir)\.elm-generated.marker')" />
+		<RemoveDir Directories="$(ElmDir)" Condition="Exists('$(ElmDir)')" />
 	</Target>
 </Project>

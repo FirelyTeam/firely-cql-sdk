@@ -48,7 +48,4 @@
 		<RemoveDir Directories="$(DllDir)" Condition="Exists('$(DllDir)')" />
 		<RemoveDir Directories="$(FhirDir)" Condition="Exists('$(FhirDir)')" />
 	</Target>
-	<Target Name="CleanElmArtifacts" AfterTargets="Clean" Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
-		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj" Targets="CleanElmToResources" Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
-	</Target>
 </Project>
