@@ -1,70 +1,41 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<!--
-		If you change the version here, you also need to update it in the pom.xml and cql-tooling.csproj files
-		The latest version number can be found under the releases tab of the CQL to ELM CLI repository
-		see: https://github.com/cqframework/clinical_quality_language/releases
-
-		The Java tooling is cached in the target/dependency folder and must be manually removed if the version is changed
-
-		After that, build the Cql project in Visual Studio, which will download the tooling again into target/dependency.
-		-->
-		<CqlVersion>3.1.0</CqlVersion>
-		<CqlToolsDir>$(MSBuildThisFileDirectory)</CqlToolsDir>
-		<CqlTargetDir>$(CqlToolsDir)target\dependency</CqlTargetDir>
-		<CqlPomFile>$(CqlToolsDir)pom.xml</CqlPomFile>
-		<CqlMarkerFile>$(CqlToolsDir)cql_tooling_downloaded.marker</CqlMarkerFile>
-		<CqlToElmProject>$(CqlToolsDir)cql-to-elm.proj</CqlToElmProject>
-		<MvnBuildLog>$(MSBuildProjectDirectory)/mvn-build.log</MvnBuildLog>
+		<CqlToolsDir Condition="'$(CqlToolsDir)' == ''">$(MSBuildThisFileDirectory)</CqlToolsDir>
 	</PropertyGroup>
-
-	<Target Name="EnsureCqlTooling"
-          BeforeTargets="CompileCql"
-          Condition="!Exists('$(CqlMarkerFile)')">
-		<Message Text="### Downloading CQL tooling version $(CqlVersion) via Maven..." Importance="High" />
-		<Exec WorkingDirectory="$(CqlToolsDir)"
-          Command="mvn dependency:copy-dependencies"
-          ConsoleToMSBuild="true"
-          EchoOff="true">
-			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
-		</Exec>
-		<WriteLinesToFile File="$(MvnBuildLog)"
-                      Lines="@(OutputOfExec)"
-                      Overwrite="true"
-                      Encoding="Unicode" />
-		<Touch Files="$(CqlMarkerFile)" AlwaysCreate="true" />
-	</Target>
 
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
-		<CompiledElm Include="$(ElmDir)\*.json" />
+		<ElmFiles Include="$(ElmDir)\*.json" />
+		<GeneratedFiles Include="$(CSharpDir)\*.g.cs" />
 	</ItemGroup>
 
 	<Target Name="CompileCql"
-					BeforeTargets="BeforeBuild"
-					Inputs="@(CqlFiles)"
-					Outputs="@(CompiledElm)"
-					Condition="Exists('$(CqlDir)')">
+	        BeforeTargets="BeforeBuild"
+	        Inputs="@(CqlFiles)"
+	        Outputs="@(ElmFiles)"
+	        Condition="Exists('$(CqlDir)')">
 		<Message Text="### Checking for CQL changes in $(CqlDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
-						 Targets="CompileCqlFiles"
-						 Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
+		         Targets="CompileCqlFiles"
+		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
 	</Target>
 
-	<ItemGroup>
-		<ElmFiles Include="$(ElmDir)\*.json" />
-		<GeneratedFiles Include="$(CSharpDir)\*.g.cs" Condition="$(CSharpDir)!=''" />
-	</ItemGroup>
-
-	<!-- BeforeTargets="CoreCompile" -->
 	<Target Name="ConvertElmToResources"
-	        AfterTargets="CompileCql"
+	        BeforeTargets="CoreCompile"
 	        Inputs="@(ElmFiles)"
 	        Outputs="@(GeneratedFiles)"
 	        Condition="Exists('$(ElmDir)')">
 		<Message Text="### Checking for ELM changes in $(ElmDir)..." Importance="High" />
 		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
-						 Targets="ElmToResources"
-						 Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+		         Targets="ElmToResources"
+		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
+	</Target>
+
+	<Target Name="CleanCqlToolingArtifacts"
+	        AfterTargets="Clean"
+	        Condition="Exists('$(CSharpDir)') Or Exists('$(DllDir)') Or Exists('$(FhirDir)')">
+		<MSBuild Projects="$(CqlToolsDir)elm-to-resource.proj"
+		         Targets="CleanElmToResources"
+		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
 	</Target>
 </Project>
