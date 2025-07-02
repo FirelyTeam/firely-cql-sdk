@@ -4,6 +4,7 @@
 		<CqlToElmProject Condition="'$(CqlToElmProject)' == ''">$(CqlToolsDir)cql-to-elm.proj</CqlToElmProject>
 		<ElmToResourceProject Condition="'$(ElmToResourceProject)' == ''">$(CqlToolsDir)elm-to-resource.proj</ElmToResourceProject>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDir)\*.cql" />
 		<ElmFiles Include="$(ElmDir)\*.json" />
@@ -12,25 +13,24 @@
 
 	<Target Name="CompileCql"
 	      BeforeTargets="BeforeBuild"
-	      Inputs="@(CqlFiles)"
 	      Outputs="@(ElmFiles)"
-	      Condition="Exists('$(CqlDir)')">
+				Condition="Exists('$(CqlDir)')">
 		<Message Text="[tooling] CompileCql - CqlDir: $(CqlDir), ElmDir: $(ElmDir)" Importance="High" />
 		<MSBuild Projects="$(CqlToElmProject)"
 		         Targets="CompileCqlFiles"
 		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CqlVersion=$(CqlVersion)" />
 	</Target>
 
+	<!-- Inputs="@(ElmFiles)" -->
 	<Target Name="ConvertElmToResources"
-	      BeforeTargets="CoreCompile"
-	      Inputs="@(ElmFiles)"
-	      Outputs="$(CSharpDir)\.cs-generated.marker;$(DllDir)\.dll-generated.marker;$(FhirDir)\.fhir-generated.marker"
-	      Condition="Exists('$(ElmDir)')">
+        BeforeTargets="CoreCompile"
+        Inputs="@(ElmFiles)"
+        Outputs="@(ElmFiles->'$(CSharpDir)\%(Filename).g.cs');@(ElmFiles->'$(DllDir)\%(Filename).dll');@(ElmFiles->'$(FhirDir)\%(Filename).xml')"
+	        Condition="Exists('$(ElmDir)')">
 		<Message Text="[tooling] ConvertElmToResources - ElmDir: $(ElmDir), CSharpDir: $(CSharpDir), DllDir: $(DllDir), FhirDir: $(FhirDir)" Importance="High" />
 		<MSBuild Projects="$(ElmToResourceProject)"
 		         Targets="ElmToResources"
 		         Properties="CqlSolutionDir=$(CqlSolutionDir);Configuration=$(Configuration);TargetFramework=$(TargetFramework);CqlDir=$(CqlDir);ElmDir=$(ElmDir);CSharpDir=$(CSharpDir);DllDir=$(DllDir);FhirDir=$(FhirDir)" />
-		<Touch Files="$(ElmDir)\.elm-generated.marker" AlwaysCreate="true" />
 	</Target>
 
 	<Target Name="CleanCqlToolingArtifacts"

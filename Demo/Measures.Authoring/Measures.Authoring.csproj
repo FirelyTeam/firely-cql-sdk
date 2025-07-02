@@ -22,8 +22,6 @@
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="$(CqlSolutionDir)/tools/cql/cql-tooling.targets" />
-
 	<ItemGroup>
 		<Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
 	</ItemGroup>
@@ -34,5 +32,7 @@
 		</Content>
 		<Content Remove="input/tests/results" />
 	</ItemGroup>
+
+	<Import Project="$(CqlSolutionDir)/tools/cql/cql-tooling.targets" />
 
 </Project>

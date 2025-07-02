@@ -12,11 +12,10 @@
 	</ItemGroup>
 
 	<Target Name="EnsureCqlTooling"
-	        Outputs="$(MSBuildThisFileDirectory).java_tooling_downloaded.marker">
+	        Outputs="$(MSBuildThisFileDirectory)target\dependency\cql-to-elm-cli-$(CqlVersion).jar">
 		<Message Text="[cql-to-elm] Ensuring Java dependencies via Maven..." Importance="High" />
 		<Exec WorkingDirectory="$(MSBuildThisFileDirectory)"
 		      Command="mvn dependency:copy-dependencies" />
-		<Touch Files="$(MSBuildThisFileDirectory).java_tooling_downloaded.marker" AlwaysCreate="true" />
 	</Target>
 
 	<Target Name="CompileCqlFiles"
