@@ -11,13 +11,13 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
-/// Represents the sources for the <see cref="PackagingToolkit"/>
+/// Represents the inputs for the <see cref="PackagingToolkit"/>
 /// </summary>
-/// <param name="CqlLibrary">The source CQL library.</param>
-/// <param name="ElmLibrary">The source ELM library.</param>
-/// <param name="CSharpSourceCode">The source C# source code.</param>
-/// <param name="AssemblyBinary">The source .NET assembly bytes.</param>
-public readonly record struct PackagingToolkitSourceRecord(
+/// <param name="CqlLibrary">The input CQL library.</param>
+/// <param name="ElmLibrary">The input ELM library.</param>
+/// <param name="CSharpSourceCode">The input C# source code.</param>
+/// <param name="AssemblyBinary">The input .NET assembly bytes.</param>
+public readonly record struct PackagingToolkitInputRecord(
     CqlLibraryString CqlLibrary,
     ElmLibrary ElmLibrary,
     string CSharpSourceCode,

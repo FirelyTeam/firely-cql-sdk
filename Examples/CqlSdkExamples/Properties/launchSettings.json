@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "250"
     },
+    "251 Package incl debug symbols via CQL Toolkit, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "251"
+    },
     "310 Invoking CQL Hello World": {
       "commandName": "Project",
       "commandLineArgs": "310"

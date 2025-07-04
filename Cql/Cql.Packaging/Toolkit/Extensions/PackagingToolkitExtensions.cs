@@ -40,7 +40,7 @@ public static partial class PackagingToolkitExtensions
             cqlLibraries
                 .Join(compilations,
                       l => l.LibraryIdentifier, r => r.LibraryIdentifier,
-                      (l, r) => new PackagingToolkitSourceRecord(l, r.SourceElmLibrary, r.ResultCSharpSourceCode, r.ResultAssemblyBinary));
+                      (l, r) => new PackagingToolkitInputRecord(l, r.SourceElmLibrary, r.ResultCSharpSourceCode, r.ResultAssemblyBinary));
         return packagingToolkit.AddPackagingInputs(inputs);
     }
 }

@@ -83,7 +83,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitSourceRecord> inputRecords)
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputRecord> inputRecords)
     {
         var conversions = _conversions.ToBuilder();
         var logger = _services.Logger;
@@ -92,7 +92,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.VersionedLibraryIdentifier);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.InputElmLibrary.VersionedLibraryIdentifier);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
@@ -120,7 +120,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     {
         var builder = _conversions.ToBuilder();
 
-        var libraries = builder.Values.Select(o => o.SourceElmLibrary);
+        var libraries = builder.Values.Select(o => o.InputElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -179,10 +179,10 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
 
     private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
         o.LibraryIdentifier,
-        o.SourceCqlLibrary.Cql,
-        o.SourceElmLibrary,
-        o.SourceCSharpSourceCode,
-        o.SourceAssemblyBinary);
+        o.InputCqlLibrary.Cql,
+        o.InputElmLibrary,
+        o.InputCSharpSourceCode,
+        o.InputAssemblyBinary);
 
     /// <summary>
     /// A utility method that serializes FHIR resources to JSON format.

@@ -12,34 +12,34 @@ namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
 /// Represents a state record by the <see cref="PackagingToolkit"/>
-/// to convert the sources <see cref="SourceCqlLibrary"/>, <see cref="SourceElmLibrary"/>,
-/// <see cref="SourceCSharpSourceCode"/> and <see cref="SourceAssemblyBinary"/>
+/// to convert the inputs <see cref="InputCqlLibrary"/>, <see cref="InputElmLibrary"/>,
+/// <see cref="InputCSharpSourceCode"/> and <see cref="InputAssemblyBinary"/>
 /// to the results <see cref="ResultFhirLibrary"/>, <see cref="ResultFhirMeasure"/>.
 /// </summary>
-/// <param name="SourceCqlLibrary">The source CQL library.</param>
-/// <param name="SourceElmLibrary">The source ELM library.</param>
-/// <param name="SourceCSharpSourceCode">The source C# source code.</param>
-/// <param name="SourceAssemblyBinary">The source .NET assembly bytes.</param>
+/// <param name="InputCqlLibrary">The input CQL library.</param>
+/// <param name="InputElmLibrary">The input ELM library.</param>
+/// <param name="InputCSharpSourceCode">The input C# source code.</param>
+/// <param name="InputAssemblyBinary">The input .NET assembly bytes.</param>
 /// <param name="ResultFhirLibrary">The result FHIR library.</param>
 /// <param name="ResultFhirMeasure">The result FHIR measure.</param>
 public readonly record struct PackagingToolkitConversionRecord(
-    CqlLibraryString SourceCqlLibrary,
-    ElmLibrary SourceElmLibrary,
-    string SourceCSharpSourceCode,
-    byte[] SourceAssemblyBinary,
+    CqlLibraryString InputCqlLibrary,
+    ElmLibrary InputElmLibrary,
+    string InputCSharpSourceCode,
+    byte[] InputAssemblyBinary,
     FhirLibrary? ResultFhirLibrary = null,
     FhirMeasure? ResultFhirMeasure = null)
 {
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier => SourceCqlLibrary.LibraryIdentifier;
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => InputCqlLibrary.LibraryIdentifier;
 
     /// <nodoc/>
-    public PackagingToolkitConversionRecord(PackagingToolkitSourceRecord sourceRecord) :
+    public PackagingToolkitConversionRecord(PackagingToolkitInputRecord inputRecord) :
         this(
-            sourceRecord.CqlLibrary,
-            sourceRecord.ElmLibrary,
-            sourceRecord.CSharpSourceCode,
-            sourceRecord.AssemblyBinary) { }
+            inputRecord.CqlLibrary,
+            inputRecord.ElmLibrary,
+            inputRecord.CSharpSourceCode,
+            inputRecord.AssemblyBinary) { }
 }
