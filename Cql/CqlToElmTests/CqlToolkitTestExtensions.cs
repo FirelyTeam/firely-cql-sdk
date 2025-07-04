@@ -43,7 +43,7 @@ internal static class CqlToolkitTestExtensions
         var library = cqlToolkit
                       .AddCqlLibraries(cqlLibraryString)
                       .TranslateToElm()
-                      .ArtifactsByIds[cqlLibraryString]
+                      .ArtifactsById[cqlLibraryString]
                       .ResultElmLibrary!;
 
         if (expectedErrors.Any())

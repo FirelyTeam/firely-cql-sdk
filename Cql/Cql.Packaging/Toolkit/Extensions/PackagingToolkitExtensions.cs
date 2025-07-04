@@ -31,7 +31,7 @@ public static partial class PackagingToolkitExtensions
         ElmToolkit elmToolkit)
     {
         elmToolkit.CompileToAssemblies();
-        var cqlLibraries = cqlToolkit.ArtifactsByIds.Values.Select(o => o.SourceCqlLibrary);
+        var cqlLibraries = cqlToolkit.ArtifactsById.Values.Select(o => o.SourceCqlLibrary);
         var inputArtifacts = elmToolkit.GetElmToAssemblyResults();
         var inputs =
             cqlLibraries

@@ -74,7 +74,7 @@ internal static class Program
                 Trace.Assert(e is not null);
             }
 
-            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 0);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 0);
         }
 
         void AddCqlDifferentValuesContinue()
@@ -93,7 +93,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 2);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 2);
         }
 
         void AddCqlDifferentValuesBreak()
@@ -112,7 +112,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 1);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 1);
         }
     }
 

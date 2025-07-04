@@ -32,13 +32,13 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _artifactsByIds = CqlToolkitArtifactsById.Empty;
+        _artifactsById = CqlToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
-        _services = CqlToolkitServices.Create(loggerFactory, config, _artifactsByIds);
+        _services = CqlToolkitServices.Create(loggerFactory, config, _artifactsById);
     }
 
-    private CqlToolkitArtifactsById _artifactsByIds;
+    private CqlToolkitArtifactsById _artifactsById;
     private readonly CqlToolkitServices _services;
 
     /// <inheritdoc/>
@@ -72,7 +72,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// This collection contains the CQL libraries and their corresponding ELM libraries
     /// that have been added to the toolkit.
     /// </remarks>
-    public CqlToolkitArtifactsByIdReadOnly ArtifactsByIds => _artifactsByIds;
+    public CqlToolkitArtifactsByIdReadOnly ArtifactsById => _artifactsById;
 
     /// <summary>
     /// Replaces the current set of artifacts with the specified artifacts, identified by their IDs.
@@ -84,7 +84,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     private void ReplaceArtifactsById(
         CqlToolkitArtifactsById artifactsById)
     {
-        _artifactsByIds = artifactsById;
+        _artifactsById = artifactsById;
         _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder = artifactsById.ToBuilder();
     }
 
@@ -127,7 +127,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         CqlToolkitArtifactsById.Builder builder = _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder;
 
         var count =
-            _artifactsByIds
+            _artifactsById
                 .Values
                 .Where(conversion => conversion.ResultElmLibrary is null)
                 .TryForEach(

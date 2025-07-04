@@ -31,7 +31,7 @@ public static partial class CqlToolkitExtensions
     /// representing the library identifier and an <see cref="ElmLibrary"/> representing the corresponding ELM library.</returns>
     public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary)> GetCqlToolkitResults(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.ArtifactsByIds.Values
+        cqlToolkit.ArtifactsById.Values
                   .SelectWhere(conversionRecord => conversionRecord switch
                   {
                       { LibraryIdentifier: {} id, ResultElmLibrary: { } elmLib } => (true, (id, elmLib)),
