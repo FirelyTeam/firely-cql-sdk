@@ -22,7 +22,7 @@ public class LibraryPackagerTests
     private static readonly byte[] ElmBytes = [0xff, 0x00, 0x00, 0x01];
     private static readonly byte[] CqlBytes = [0xff, 0x00, 0x00, 0x10];
     private static readonly byte[] AssemblyBytes = [0xff, 0x00, 0x01, 0x00];
-    private static readonly byte[] DebugSymbolBytes = [0xff, 0x00, 0x10, 0x00];
+    private static readonly byte[] DebugSymbolBytes = [0xff, 0x01, 0x00, 0x00];
     private static readonly DateTime Date = new(2001, 2, 3, 4, 5, 6, DateTimeKind.Local);
     private static readonly string TestUrl = "test.firely";
     private static readonly string CSharpString = "namespace Test {}";
@@ -43,7 +43,7 @@ public class LibraryPackagerTests
         Assert.AreEqual(VersionedIdentifier.version, library.Version);
         var expectedDate = new DateTimeIso8601(Date.ToLocalTime(), Hl7.Cql.Iso8601.DateTimePrecision.Millisecond).ToString();
         Assert.AreEqual(expectedDate, library.Date);
-        Assert.AreEqual(expectedDate, library.Url);
+        Assert.AreEqual(TestUrl, library.Url);
     }
 
     [TestMethod]
