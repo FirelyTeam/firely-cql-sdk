@@ -16,6 +16,15 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 /// </summary>
 public static partial class ElmToolkitExtensions
 {
+    /// <summary>
+    /// Retrieves a collection of results containing Elm libraries and their corresponding C# source code.
+    /// </summary>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance used to access the artifacts and their associated results.</param>
+    /// <returns>An enumerable collection of tuples, where each tuple contains: <list type="bullet"> <item><description>The
+    /// library identifier (<see cref="CqlVersionedLibraryIdentifier"/>).</description></item> <item><description>The
+    /// input Elm library (<see cref="ElmLibrary"/>).</description></item> <item><description>The generated C# source
+    /// code as a string.</description></item> </list> The collection will only include entries where C# source code is
+    /// available.</returns>
     public static IEnumerable<(
         CqlVersionedLibraryIdentifier libraryIdentifier,
         ElmLibrary elmLibrary,
@@ -28,6 +37,21 @@ public static partial class ElmToolkitExtensions
                       _ => default
                   });
 
+    /// <summary>
+    /// Retrieves a collection of results containing ELM libraries, their associated CQL identifiers,  generated C#
+    /// source code, compiled assembly binaries, and optional debug symbols.
+    /// </summary>
+    /// <remarks>This method filters and transforms the artifacts stored in the <paramref name="elmToolkit"/>
+    /// instance  to produce the results. Only artifacts with valid C# source code, assembly binaries, and optionally 
+    /// debug symbols are included in the output.</remarks>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance used to access the artifacts and their associated results.</param>
+    /// <returns>An enumerable collection of tuples, where each tuple contains: <list type="bullet"> <item> <description>The <see
+    /// cref="CqlVersionedLibraryIdentifier"/> representing the library identifier.</description> </item> <item>
+    /// <description>The <see cref="ElmLibrary"/> representing the input ELM library.</description> </item> <item>
+    /// <description>A <see cref="string"/> containing the generated C# source code.</description> </item> <item>
+    /// <description>A <see cref="byte"/> array containing the compiled assembly binary.</description> </item> <item>
+    /// <description>An optional <see cref="byte"/> array containing the debug symbols, or <see langword="null"/> if not
+    /// available.</description> </item> </list></returns>
     public static IEnumerable<(
         CqlVersionedLibraryIdentifier libraryIdentifier,
         ElmLibrary elmLibrary,

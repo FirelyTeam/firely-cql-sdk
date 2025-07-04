@@ -29,8 +29,16 @@ public readonly record struct PackagingToolkitInputArtifacts
     byte[] AssemblyBinary,
     byte[]? DebugSymbolsBinary)
 {
+    /// <summary>
+    /// Gets the identifier for the versioned CQL library associated with this instance.
+    /// </summary>
     public CqlVersionedLibraryIdentifier LibraryIdentifier { get; } = CqlLibrary.LibraryIdentifier;
 
+    /// <summary>
+    /// Converts the current instance into a <see cref="ResourcePackager.InputArtifacts"/> object.
+    /// </summary>
+    /// <returns>A <see cref="ResourcePackager.InputArtifacts"/> object containing the CQL library, ELM library,  C# source code,
+    /// assembly binary, and debug symbols binary from the current instance.</returns>
     internal ResourcePackager.InputArtifacts ToResourcePackagerInputArtifacts() =>
         new(CqlLibrary, ElmLibrary, CSharpSourceCode, AssemblyBinary, DebugSymbolsBinary);
 }

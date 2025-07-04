@@ -11,18 +11,15 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
-/// Represents an item within the packaging toolkit, encapsulating a versioned library identifier,
-/// input artifacts, and optionally result artifacts.
+/// Represents the artifacts used and produced by the packaging toolkit in the CQL packaging process.
 /// </summary>
-/// <remarks>
-/// This record is used to manage and process CQL libraries and their associated artifacts
-/// within the packaging toolkit.
-/// </remarks>
 /// <param name="Input">
-/// The input artifacts required for processing the CQL library, such as CQL, ELM, and assembly binaries.
+/// The input artifacts required for the packaging process, including the CQL library, ELM library, 
+/// C# source code, assembly binary, and optional debug symbols.
 /// </param>
 /// <param name="Result">
-/// The optional result artifacts generated after processing the CQL library, such as FHIR libraries or measures.
+/// The optional result artifacts produced by the packaging process, including the FHIR library 
+/// and an optional FHIR measure.
 /// </param>
 public readonly record struct PackagingToolkitArtifacts
 (
@@ -30,8 +27,18 @@ public readonly record struct PackagingToolkitArtifacts
     PackagingToolkitResultArtifacts? Result = null
 )
 {
+    /// <summary>
+    /// Gets the identifier for the versioned library associated with the current input.
+    /// </summary>
     public CqlVersionedLibraryIdentifier LibraryIdentifier => Input.LibraryIdentifier;
-    
+
+    /// <summary>
+    /// Creates a new instance of <see cref="PackagingToolkitArtifacts"/> with updated result artifacts.
+    /// </summary>
+    /// <param name="fhirLibrary">The <see cref="FhirLibrary"/> instance representing the library of FHIR resources to include in the result.</param>
+    /// <param name="fhirMeasure">An optional <see cref="FhirMeasure"/> instance representing the measure to include in the result. If not
+    /// provided, the result will only include the <paramref name="fhirLibrary"/>.</param>
+    /// <returns>A new <see cref="PackagingToolkitArtifacts"/> instance with the specified result artifacts.</returns>
     public PackagingToolkitArtifacts WithResultArtifacts(
         FhirLibrary fhirLibrary,
         FhirMeasure? fhirMeasure = null) =>

@@ -57,13 +57,23 @@ Hl7.Cql.CqlToElm.Toolkit.CqlModel.ElmR1 = 1 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
 Hl7.Cql.CqlToElm.Toolkit.CqlModel.Fhir401 = 2 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.AddCqlLibraries(System.Collections.Generic.IEnumerable<Hl7.Cql.CqlToElm.CqlLibraryString>! cqlLibraries) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.ArtifactsByIds.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Config.get -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Conversions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.CqlToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? config = null, Hl7.Cql.Runtime.BatchProcessExceptionContinuation batchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.TranslateToElm() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.CqlToolkitArtifacts() -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.CqlToolkitArtifacts(Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, Hl7.Cql.Elm.Library? ResultElmLibrary = null) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.Deconstruct(out Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, out Hl7.Cql.Elm.Library? ResultElmLibrary) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts other) -> bool
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.ResultElmLibrary.get -> Hl7.Cql.Elm.Library?
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.ResultElmLibrary.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.SourceCqlLibrary.get -> Hl7.Cql.CqlToElm.CqlLibraryString
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.SourceCqlLibrary.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.init -> void
@@ -94,32 +104,12 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateIntervals.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateLiterals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateLiterals.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.CqlToolkitConversionRecord() -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.CqlToolkitConversionRecord(Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, Hl7.Cql.Elm.Library? ResultElmLibrary = null) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.Deconstruct(out Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, out Hl7.Cql.Elm.Library? ResultElmLibrary) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord other) -> bool
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.ResultElmLibrary.get -> Hl7.Cql.Elm.Library?
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.ResultElmLibrary.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.SourceCqlLibrary.get -> Hl7.Cql.CqlToElm.CqlLibraryString
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.SourceCqlLibrary.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.CqlToolkitResultRecord() -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.CqlToolkitResultRecord(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, Hl7.Cql.Elm.Library! ElmLibrary) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.Deconstruct(out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, out Hl7.Cql.Elm.Library! ElmLibrary) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.ElmLibrary.get -> Hl7.Cql.Elm.Library!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.ElmLibrary.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord other) -> bool
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.LibraryIdentifier.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions
 override Hl7.Cql.CqlToElm.CqlLibraryString.GetHashCode() -> int
+override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.GetHashCode() -> int
 override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Equals(object? obj) -> bool
 override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.GetHashCode() -> int
 override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ToString() -> string!
-override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.GetHashCode() -> int
-override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.GetHashCode() -> int
 static Hl7.Cql.CqlToElm.CqlLibraryString.explicit operator Hl7.Cql.CqlToElm.CqlLibraryString(string! cqlLibraryString) -> Hl7.Cql.CqlToElm.CqlLibraryString
 static Hl7.Cql.CqlToElm.CqlLibraryString.FromIdentifierAndString(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, string! cqlContent) -> Hl7.Cql.CqlToElm.CqlLibraryString
 static Hl7.Cql.CqlToElm.CqlLibraryString.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.CqlToElm.CqlLibraryString cqlLibraryString) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
@@ -139,19 +129,17 @@ static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifie
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifierElement! ttse, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleElementDefinition!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TypeSpecifier! ts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TypeSpecifier!
 static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool
+static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.operator !=(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts right) -> bool
+static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.operator ==(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Default.get -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.DefaultCqlModels.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>!
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.DefaultCqlModels.set -> void
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.operator !=(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.operator ==(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? right) -> bool
-static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.operator !=(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord right) -> bool
-static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.operator ==(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord right) -> bool
-static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.operator !=(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord right) -> bool
-static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.operator ==(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibraries(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, params Hl7.Cql.CqlToElm.CqlLibraryString[]! cqlLibraries) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesFromDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, System.IO.EnumerationOptions? options = null, System.Func<System.IO.FileInfo!, bool>? filePredicate = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibraryFiles(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.Collections.Generic.IEnumerable<System.IO.FileInfo!>! files) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
-static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.GetCqlToolkitResults(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit) -> System.Collections.Generic.IEnumerable<Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord>!
+static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.GetCqlToolkitResults(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Elm.Library! elmLibrary)>!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, bool writeIndented = false, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
 virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.<Clone>$() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
@@ -160,7 +148,5 @@ virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Equals(Hl7.Cql.CqlToElm.Toolki
 virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.PrintMembers(System.Text.StringBuilder! builder) -> bool
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.Equals(object obj) -> bool
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.ToString() -> string
-~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.Equals(object obj) -> bool
-~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.ToString() -> string
-~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.Equals(object obj) -> bool
-~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord.ToString() -> string
+~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.Equals(object obj) -> bool
+~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.ToString() -> string

@@ -10,11 +10,6 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
-/// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/>
-/// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="System.Collections.Immutable.ImmutableDictionary{Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier,Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord}.Builder"/>.
-/// </summary>
-/// <param name="conversionsBuilder"></param>
 internal sealed class LibraryBuilderProvider(
     CqlToolkitArtifactsById.Builder conversionsBuilder)
     : ILibraryProvider

@@ -20,6 +20,15 @@ public static partial class CqlToolkitExtensions
     private static ILogger CreateLogger(this CqlToolkit cqlToolkit) =>
         cqlToolkit.CreateLogger(typeof(CqlToolkitExtensions));
 
+    /// <summary>
+    /// Retrieves the results from the specified <see cref="CqlToolkit"/> instance,  providing a collection of tuples
+    /// containing library identifiers and their corresponding ELM libraries.
+    /// </summary>
+    /// <remarks>This method filters and transforms the artifacts stored in the <paramref name="cqlToolkit"/>
+    /// instance,  returning only those with valid library identifiers and ELM libraries.</remarks>
+    /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> instance from which to retrieve the results.</param>
+    /// <returns>An enumerable collection of tuples, where each tuple contains a <see cref="CqlVersionedLibraryIdentifier"/>
+    /// representing the library identifier and an <see cref="ElmLibrary"/> representing the corresponding ELM library.</returns>
     public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary)> GetCqlToolkitResults(
         this CqlToolkit cqlToolkit) =>
         cqlToolkit.ArtifactsByIds.Values
