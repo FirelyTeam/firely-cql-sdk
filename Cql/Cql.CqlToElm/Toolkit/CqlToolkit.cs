@@ -124,7 +124,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// </summary>
     public CqlToolkit TranslateToElm()
     {
-        CqlToolkitArtifactsById.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
+        CqlToolkitArtifactsById.Builder builder = _services.LibraryBuilderProvider.ConversionsBuilder;
 
         var count =
             _artifactsByIds
@@ -138,7 +138,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
 
                         var elmLibrary = libraryBuilder.Build();
                         var newConversionRecord = r with { ResultElmLibrary = elmLibrary };
-                        conversions[r.LibraryIdentifier] = newConversionRecord;
+                        builder[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
@@ -148,7 +148,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                 );
 
         if (count > 0)
-            ReplaceArtifactsById(artifactsById: conversions.ToImmutable());
+            ReplaceArtifactsById(artifactsById: builder.ToImmutable());
 
         return this;
     }

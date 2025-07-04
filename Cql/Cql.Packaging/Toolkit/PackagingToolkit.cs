@@ -81,9 +81,6 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Replaces the current collection of artifacts with the specified collection, identified by their IDs.
     /// </summary>
-    /// <remarks>This method updates the internal state to use the provided collection of artifacts.  Ensure
-    /// that <paramref name="artifactsById"/> contains valid data before calling this method.</remarks>
-    /// <param name="artifactsById">The collection of artifacts, indexed by their IDs, to replace the existing artifacts.  Cannot be null.</param>
     private void ReplaceArtifactsById(PackagingToolkitArtifactsById artifactsById) =>
         _artifactsById = artifactsById;
 
@@ -100,7 +97,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <exception cref="InvalidOperationException">Thrown if a library identifier mismatch is detected between the CQL and ELM representations of an artifact.</exception>
     public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputArtifacts> inputArtifactsItems)
     {
-        var items = _artifactsById.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
         var logger = _services.Logger;
         var count = inputArtifactsItems
                     .Select(inputArtifactsItem => new PackagingToolkitArtifacts(inputArtifactsItem))
@@ -112,7 +109,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
                         logger.LogInformation("Adding CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}", libIdFromCql);
-                        items.Add(libIdFromCql, conversionRecord);
+                        builder.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
@@ -122,7 +119,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                                              logMessage("Could not add CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            _artifactsById = items.ToImmutable();
+            _artifactsById = builder.ToImmutable();
 
         return this;
     }
@@ -157,7 +154,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                  .ToArray();
         ElmLibrarySet librarySet = new ElmLibrarySet("", librariesToPackage);
 
-        var sourceArtifactsById =
+        var inputArtifactsById =
             builder.Values.ToDictionary(
                 o => o.LibraryIdentifier.ToString(),
                 o => o.Input.ToResourcePackagerInputArtifacts());
@@ -166,7 +163,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
             _services.ResourcePackager
                      .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
-                         inputsById: id => sourceArtifactsById[id],
+                         inputsById: id => inputArtifactsById[id],
                          overrideDate: Config.OverrideDate,
                          errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
@@ -175,10 +172,10 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);
-                         var conversionRecord = builder[versionedLibraryIdentifier];
-                         if (conversionRecord.Result is null)
+                         var artifacts = builder[versionedLibraryIdentifier];
+                         if (artifacts.Result is null)
                          {
-                             builder[versionedLibraryIdentifier] = conversionRecord.WithResultArtifacts(o.fhirLibrary, o.fhirMeasure);
+                             builder[versionedLibraryIdentifier] = artifacts.WithResultArtifacts(o.fhirLibrary, o.fhirMeasure);
                              return (true, o);
                          }
 

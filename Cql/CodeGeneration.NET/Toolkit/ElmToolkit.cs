@@ -94,7 +94,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="elmLibraries">The libraries to add.</param>
     public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> elmLibraries)
     {
-        var conversions = _artifactsById.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
         var logger = _services.Logger;
         var count = elmLibraries
                     .Select(elmLibrary => new ElmToolkitArtifacts(elmLibrary))
@@ -102,7 +102,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                 {
                                     var libId = conversionRecord.LibraryIdentifier;
                                     logger.LogInformation("Adding ELM library to ElmToolkit: {lib}", libId);
-                                    conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                                    builder.Add(libId, conversionRecord); // This fails on duplicate key and value
                                 },
                                 errorStrategy => errorStrategy
                                                  .SetContinuation(BatchProcessExceptionContinuation)
@@ -112,7 +112,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                          logMessage("Could not add ELM library to ElmToolkit: {lib}", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceArtifactsById(artifactsById: conversions.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }
@@ -122,8 +122,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// </summary>
     public ElmToolkit CompileToAssemblies()
     {
-        var entries = _artifactsById;
-        if (entries.Values.All(predicate: lc => lc is { Results.AssemblyBinary: not null }))
+        if (_artifactsById.Values.All(predicate: lc => lc is { Results.AssemblyBinary: not null }))
             return this;
 
         var logger = _services.Logger;
@@ -134,7 +133,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.InputElmLibrary).ToArray();
+        ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -145,10 +144,10 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
-        var entriesBuilder = entries.ToBuilder();
-        var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, logger);
+        var entriesBuilder = _artifactsById.ToBuilder();
+        var hasChanged = UpdateArtifacts(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
-            ReplaceArtifactsById(artifactsById: entriesBuilder.ToImmutable());
+            ReplaceArtifactsById(entriesBuilder.ToImmutable());
 
         return this;
     }
@@ -160,7 +159,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="conversions">The builder for the entries dictionary.</param>
     /// <param name="logger">The logger to use for logging.</param>
     /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
-    private static bool UpdateConversions(
+    private static bool UpdateArtifacts(
         IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
         ElmToolkitArtifactsById.Builder conversions,
         ILogger<ElmToolkit> logger)

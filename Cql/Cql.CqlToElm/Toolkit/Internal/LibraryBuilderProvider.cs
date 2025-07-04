@@ -10,6 +10,13 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
+/// <summary>
+/// Provides functionality to resolve and manage library builders for CQL (Clinical Quality Language) artifacts.
+/// </summary>
+/// <remarks>This class implements <see cref="ILibraryProvider"/> to facilitate the resolution of library builders
+/// based on CQL versioned library identifiers. It supports both direct retrieval of pre-existing library builders and
+/// dynamic creation of new ones using CQL translation services.</remarks>
+/// <param name="conversionsBuilder"></param>
 internal sealed class LibraryBuilderProvider(
     CqlToolkitArtifactsById.Builder conversionsBuilder)
     : ILibraryProvider
