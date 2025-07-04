@@ -4,7 +4,7 @@
       "commandName": "Project",
       "commandLineArgs": "210"
     },
-    "220 Load ELM from dir, Save C#,DLL to dir": {
+    "220 Load ELM from dir, Save C#,DLL,PDB to dir": {
       "commandName": "Project",
       "commandLineArgs": "220"
     },

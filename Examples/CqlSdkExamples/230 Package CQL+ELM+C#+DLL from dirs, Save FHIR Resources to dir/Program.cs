@@ -21,6 +21,7 @@ partial class Program
         var csDirectory = new DirectoryInfo("input/cs");
         var dllDirectory = new DirectoryInfo("input/dll");
         var pdbDirectory = new DirectoryInfo("input/pdb");
+        var fhirDirectory = new DirectoryInfo("output/fhir");
 
         var inputs =
             new[]
@@ -30,14 +31,14 @@ partial class Program
                     elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.json")),
                     cs:csDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.g.cs"),
                     dll:dllDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.dll"),
-                    pdb:default(byte[]) // REVIEW-TODO: Add PDB files to input
+                    pdb:pdbDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.pdb")
                 ),
                 (
-                    (CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
-                    Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
-                    csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
-                    dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
-                    null
+                    cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
+                    elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
+                    cs:csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
+                    dll:dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
+                    pdb:pdbDirectory.ReadBytesFromFile("DevDays-2025.0.0.pdb")
                 )
             }
             .Select(t => new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb));
@@ -48,7 +49,7 @@ partial class Program
         packagingToolkit.ConvertToFhirResources();
 
         // Save packaged resources
-        packagingToolkit.SaveFhirResourcesToDirectory(new DirectoryInfo("output/fhir"));
+        packagingToolkit.SaveFhirResourcesToDirectory(fhirDirectory);
 
         // Open Explorer to the output directory
         _ = Process.Start("explorer.exe", "output");

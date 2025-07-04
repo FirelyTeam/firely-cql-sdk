@@ -10,7 +10,7 @@ internal partial class Program
         switch (code)
         {
             case "210": LoadCqlFromDirSaveElmToDir(); return;
-            case "220": LoadElmFromDirSaveCSharpAndDllToDir(); return;
+            case "220": LoadElmFromDirSaveCSharpDllAndPdbToDir(); return;
             case "221": LoadCqlFromDemoDirSaveCSharpToDir(); return;
             case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); return;
             case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); return;
