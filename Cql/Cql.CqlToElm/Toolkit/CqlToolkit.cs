@@ -85,7 +85,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         CqlToolkitArtifactsById artifactsById)
     {
         _artifactsByIds = artifactsById;
-        _services.LibraryBuilderProvider.ConversionsBuilder = artifactsById.ToBuilder();
+        _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder = artifactsById.ToBuilder();
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     public CqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _services.Logger;
-        var conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
+        var builder = _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder;
 
         var count = cqlLibraries
                     .Select(lib => new CqlToolkitArtifacts(lib))
@@ -104,7 +104,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                         {
                             var libId = conversionRecord.LibraryIdentifier;
                             logger.LogInformation("Adding CQL library to CqlToolkit: {lib}", libId);
-                            conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                            builder.Add(libId, conversionRecord); // This fails on duplicate key and value
                         },
                         errorStrategy => errorStrategy
                                          .SetContinuation(BatchProcessExceptionContinuation)
@@ -114,7 +114,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                                                  logMessage("Could not add CQL library to CqlToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceArtifactsById(conversions.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }
@@ -124,7 +124,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// </summary>
     public CqlToolkit TranslateToElm()
     {
-        CqlToolkitArtifactsById.Builder builder = _services.LibraryBuilderProvider.ConversionsBuilder;
+        CqlToolkitArtifactsById.Builder builder = _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder;
 
         var count =
             _artifactsByIds
