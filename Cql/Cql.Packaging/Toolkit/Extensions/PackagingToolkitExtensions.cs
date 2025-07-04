@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
@@ -31,22 +32,14 @@ public static partial class PackagingToolkitExtensions
     {
         elmToolkit.CompileToAssemblies();
         var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
-        var inputArtifacts =
-            elmToolkit.Conversions.Values
-                      .SelectWhere(o => o switch
-                      {
-                          {
-                              ResultCSharpSourceCode: { } csharpSourceCode,
-                              ResultAssemblyBinary: { } assemblyBinary,
-                              ResultDebugSymbolsBinary: var debugSymbolsBinary,
-                          } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, csharpSourceCode, assemblyBinary, debugSymbolsBinary)),
-                          _ => default
-                      });
+        var inputArtifacts = elmToolkit.GetElmToAssemblyResults();
         var inputs =
             cqlLibraries
-                .Join(inputArtifacts,
-                      l => l.LibraryIdentifier, r => r.LibraryIdentifier,
-                      (l, r) => new PackagingToolkitInputArtifacts(l, r.SourceElmLibrary, r.csharpSourceCode, r.assemblyBinary, r.debugSymbolsBinary));
+                .Join(
+                    inputArtifacts,
+                    cqlLibraryString => cqlLibraryString.LibraryIdentifier,
+                    r => r.libraryIdentifier,
+                    (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbols));
 
         return packagingToolkit.AddPackagingInputs(inputs);
     }

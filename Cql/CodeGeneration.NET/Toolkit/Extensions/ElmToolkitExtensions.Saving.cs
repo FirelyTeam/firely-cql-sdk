@@ -27,12 +27,16 @@ public static partial class ElmToolkitExtensions
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
-
+        var prepCsDir = true;
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryIdentifier, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
+        foreach (var (libraryIdentifier, _, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
         {
+            if (prepCsDir)
+            {
+                prepCsDir = false;
+                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+            }
             var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.g.cs");
             File.WriteAllText(fileName, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
@@ -71,7 +75,7 @@ public static partial class ElmToolkitExtensions
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
         var (prepDllDir, prepPdbDir) = (true, dllDirectory.FullName != pdbDirectory.FullName);
 
-        foreach (var (libraryIdentifier, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetElmToAssemblyResults())
+        foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetElmToAssemblyResults())
         {
             if (prepDllDir)
             {

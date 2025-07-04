@@ -36,13 +36,13 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         config ??= ElmToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = ElmToolkitConversionDictionary.Empty;
+        _artifactsById = ElmToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
-    private ElmToolkitConversionDictionary _conversions;
+    private ElmToolkitArtifactsById _artifactsById;
     private readonly ElmToolkitServices _services;
 
     /// <inheritdoc />
@@ -72,16 +72,16 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Gets the dictionary of ELM to assembly compilations.
     /// </summary>
-    public ElmToolkitConversionReadOnlyDictionary Conversions => _conversions;
+    public ReadOnlyElmToolkitArtifactsById ArtifactsById => _artifactsById;
 
     /// <summary>
     /// Sets the conversions for the ELM to assembly compilations.
     /// </summary>
     /// <param name="conversions">The dictionary of ELM to assembly compilations.</param>
     private void ReplaceConversions(
-        ElmToolkitConversionDictionary conversions)
+        ElmToolkitArtifactsById conversions)
     {
-        _conversions = conversions;
+        _artifactsById = conversions;
     }
 
     /// <summary>
@@ -90,10 +90,10 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="elmLibraries">The libraries to add.</param>
     public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> elmLibraries)
     {
-        var conversions = _conversions.ToBuilder();
+        var conversions = _artifactsById.ToBuilder();
         var logger = _services.Logger;
         var count = elmLibraries
-                    .Select(elmLibrary => new ElmToolkitConversionRecord(elmLibrary))
+                    .Select(elmLibrary => new ElmToolkitArtifacts(elmLibrary))
                     .TryForEach(conversionRecord =>
                                 {
                                     var libId = conversionRecord.LibraryIdentifier;
@@ -118,8 +118,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// </summary>
     public ElmToolkit CompileToAssemblies()
     {
-        var entries = _conversions;
-        if (entries.Values.All(predicate: lc => lc is { ResultAssemblyBinary: not null }))
+        var entries = _artifactsById;
+        if (entries.Values.All(predicate: lc => lc is { Results.AssemblyBinary: not null }))
             return this;
 
         var logger = _services.Logger;
@@ -130,7 +130,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.SourceElmLibrary).ToArray();
+        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.InputElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -158,7 +158,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
     private static bool UpdateConversions(
         IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
-        ElmToolkitConversionDictionary.Builder conversions,
+        ElmToolkitArtifactsById.Builder conversions,
         ILogger<ElmToolkit> logger)
     {
         bool hasChanged = false;
@@ -166,20 +166,14 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         {
             var elmVersionedIdentifier = library.VersionedLibraryIdentifier;
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
-            if (libraryCompilation.ResultCSharpSourceCode is not null
-                || libraryCompilation.ResultAssemblyBinary is not null)
+            if (libraryCompilation.Results is not null)
             {
                 logger.LogInformation(message: "Library already compiled: {lib}", args: elmVersionedIdentifier);
                 continue;
             }
 
             var cSharpSourceCode = sourceCodePerName!.Values.Single(); // We always expect a single source file
-            libraryCompilation = libraryCompilation with
-            {
-                ResultCSharpSourceCode = cSharpSourceCode,
-                ResultAssemblyBinary = assemblyBinary,
-                ResultDebugSymbolsBinary = debugSymbols,
-            };
+            libraryCompilation = libraryCompilation.WithResultArtifacts(cSharpSourceCode, assemblyBinary, debugSymbols);
             conversions[key: elmVersionedIdentifier] = libraryCompilation;
             hasChanged = true;
         }

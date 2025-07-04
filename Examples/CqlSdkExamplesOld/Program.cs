@@ -523,8 +523,8 @@ file static class Extensions
         multilineString.SplitLines().Take(count).JoinLines();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string CSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
-        elmToolkit.GetElmToAssemblyResults()
-                  .Select(t => (t.LibraryIdentifier, t.CSharpSourceCode))
+        elmToolkit.GetElmToCSharpResults()
+                  .Select(t => (t.libraryIdentifier, t.cSharp))
                   .FirstOrNull();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string ElmLibraryJson)? TryGetFirstElmFileLines(

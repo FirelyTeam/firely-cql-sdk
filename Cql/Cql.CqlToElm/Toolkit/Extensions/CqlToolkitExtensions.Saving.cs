@@ -29,12 +29,16 @@ public static partial class CqlToolkitExtensions
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
-
+        var prepElmDir = true;
         var logger = cqlToolkit.CreateLogger();
 
         foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
         {
+            if (prepElmDir)
+            {
+                prepElmDir = false;
+                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+            }
             var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);

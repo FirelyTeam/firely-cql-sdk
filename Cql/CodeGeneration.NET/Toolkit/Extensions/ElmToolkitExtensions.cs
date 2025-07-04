@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -15,44 +16,36 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 /// </summary>
 public static partial class ElmToolkitExtensions
 {
-    /// <summary>
-    /// Gets the results of ELM to assembly conversions.
-    /// </summary>
-    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>An enumerable of <see cref="ElmToolkitCSharpResultRecord"/> containing the conversion results.</returns>
-    public static IEnumerable<ElmToolkitCSharpResultRecord> GetElmToCSharpResults(
+    public static IEnumerable<(
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        ElmLibrary elmLibrary,
+        string cSharp)> GetElmToCSharpResults(
         this ElmToolkit elmToolkit) =>
-        elmToolkit.Conversions.Values
-                  .SelectWhere(t => t switch
+        elmToolkit.ArtifactsById
+                  .SelectWhere(kv => kv.Value.Results switch
                   {
-                      {
-                          LibraryIdentifier: { } libId,
-                          ResultCSharpSourceCode: { } csharp
-                      } => (true, new ElmToolkitCSharpResultRecord(libId, csharp)),
-                      _ => default,
+                      { CSharpSourceCode: {} cSharp } => (true, (kv.Key, kv.Value.InputElmLibrary, cSharp)),
+                      _ => default
                   });
 
-    /// <summary>
-    /// Gets the results of ELM to assembly conversions.
-    /// </summary>
-    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>An enumerable of <see cref="ElmToolkitAssemblyResultRecord"/> containing the conversion results.</returns>
-    public static IEnumerable<ElmToolkitAssemblyResultRecord> GetElmToAssemblyResults(
+    public static IEnumerable<(
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        ElmLibrary elmLibrary,
+        string cSharp,
+        byte[] assemblyBinary,
+        byte[]? debugSymbols)> GetElmToAssemblyResults(
         this ElmToolkit elmToolkit) =>
-        elmToolkit.Conversions.Values
-                  .SelectWhere(t => t switch
+        elmToolkit.ArtifactsById
+                  .SelectWhere(kv => kv.Value.Results switch
                   {
                       {
-                          LibraryIdentifier: { } libId,
-                          ResultCSharpSourceCode: { } csharp,
-                          ResultAssemblyBinary: { } asm,
-                          ResultDebugSymbolsBinary: var dbg
-                      } => (true, new ElmToolkitAssemblyResultRecord(libId, csharp, asm, dbg)),
-                      _ => default,
+                              CSharpSourceCode: { } cSharp,
+                              AssemblyBinary: {} assembly,
+                              DebugSymbolsBinary: var debugSymbols
+                      } => (true, (kv.Key, kv.Value.InputElmLibrary, cSharp, assembly, debugSymbols)),
+                      _                                                                         => default
                   });
 
-    private static ILogger CreateLogger(ElmToolkit elmToolkit)
-    {
-        return elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
-    }
+    private static ILogger CreateLogger(this ElmToolkit elmToolkit) =>
+        elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 }

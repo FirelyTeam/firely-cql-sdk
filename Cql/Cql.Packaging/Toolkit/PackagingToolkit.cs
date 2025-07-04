@@ -36,13 +36,13 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _items = PackagingToolkitItemsById.Empty;
+        _artifactsById = PackagingToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = PackagingToolkitServices.Create(loggerFactory, config);
     }
 
-    private PackagingToolkitItemsById _items;
+    private PackagingToolkitArtifactsById _artifactsById;
     private readonly PackagingToolkitServices _services;
 
     /// <inheritdoc />
@@ -72,27 +72,32 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Gets the dictionary of conversions.
     /// </summary>
-    public ReadOnlyPackagingToolkitItemsById Items => _items;
+    public ReadOnlyPackagingToolkitArtifactsById ArtifactsById => _artifactsById;
 
-    private void ReplaceConversions(PackagingToolkitItemsById conversions) =>
-        _items = conversions;
+    private void ReplaceConversions(PackagingToolkitArtifactsById conversions) =>
+        _artifactsById = conversions;
 
     /// <summary>
-    /// Adds FHIR resource packaging inputs to the packager.
+    /// Adds a collection of input artifacts to the packaging toolkit.
     /// </summary>
-    /// <param name="inputItems">The collection of FHIR resource packaging inputs to add.</param>
-    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputArtifacts> inputItems)
+    /// <remarks>This method processes the provided input artifacts and adds them to the toolkit. If a
+    /// mismatch is detected  between the library identifiers of the CQL and ELM representations of an artifact, an <see
+    /// cref="InvalidOperationException"/>  is thrown. The method logs information about successfully added artifacts
+    /// and handles errors using a defined  error strategy.</remarks>
+    /// <param name="inputArtifactsItems">A collection of <see cref="PackagingToolkitInputArtifacts"/> representing the input artifacts to be added. Each
+    /// artifact must have matching library identifiers between its CQL and ELM representations.</param>
+    /// <returns>The current instance of <see cref="PackagingToolkit"/> with the added artifacts.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if a library identifier mismatch is detected between the CQL and ELM representations of an artifact.</exception>
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputArtifacts> inputArtifactsItems)
     {
-        var items = _items.ToBuilder();
+        var items = _artifactsById.ToBuilder();
         var logger = _services.Logger;
-        var count = inputItems
-                    .Select(inputArtifacts => new PackagingToolkitItem(inputArtifacts))
+        var count = inputArtifactsItems
+                    .Select(inputArtifactsItem => new PackagingToolkitArtifacts(inputArtifactsItem))
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.InputArtifacts.ElmLibrary.VersionedLibraryIdentifier);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.Input.ElmLibrary.VersionedLibraryIdentifier);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
@@ -107,7 +112,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                                              logMessage("Could not add CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            _items = items.ToImmutable();
+            _artifactsById = items.ToImmutable();
 
         return this;
     }
@@ -118,9 +123,9 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit ConvertToFhirResources()
     {
-        var builder = _items.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
 
-        var libraries = builder.Values.Select(conversionRecord => conversionRecord.InputArtifacts.ElmLibrary);
+        var libraries = builder.Values.Select(conversionRecord => conversionRecord.Input.ElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -145,7 +150,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         var sourceArtifactsById =
             builder.Values.ToDictionary(
                 o => o.LibraryIdentifier.ToString(),
-                o => o.InputArtifacts.ToResourcePackagerInputArtifacts());
+                o => o.Input.ToResourcePackagerInputArtifacts());
 
         var count =
             _services.ResourcePackager
@@ -161,7 +166,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);
                          var conversionRecord = builder[versionedLibraryIdentifier];
-                         if (conversionRecord.ResultArtifacts is null)
+                         if (conversionRecord.Result is null)
                          {
                              builder[versionedLibraryIdentifier] = conversionRecord.WithResultArtifacts(o.fhirLibrary, o.fhirMeasure);
                              return (true, o);

@@ -81,7 +81,7 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         IEnumerable<FileInfo> files)
     {
-        var logger = CreateLogger(elmToolkit);
+        var logger = elmToolkit.CreateLogger();
         var libraries = files
             .TrySelect(f =>
             {
