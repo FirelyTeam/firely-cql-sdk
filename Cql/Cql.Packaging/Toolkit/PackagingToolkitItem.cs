@@ -18,9 +18,6 @@ namespace Hl7.Cql.Packaging.Toolkit;
 /// This record is used to manage and process CQL libraries and their associated artifacts
 /// within the packaging toolkit.
 /// </remarks>
-/// <param name="LibraryIdentifier">
-/// The versioned identifier of the CQL library associated with this toolkit item.
-/// </param>
 /// <param name="InputArtifacts">
 /// The input artifacts required for processing the CQL library, such as CQL, ELM, and assembly binaries.
 /// </param>
@@ -29,11 +26,12 @@ namespace Hl7.Cql.Packaging.Toolkit;
 /// </param>
 public readonly record struct PackagingToolkitItem
 (
-    CqlVersionedLibraryIdentifier LibraryIdentifier,
     PackagingToolkitInputArtifacts InputArtifacts,
     PackagingToolkitResultArtifacts? ResultArtifacts = null
 )
 {
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => InputArtifacts.LibraryIdentifier;
+    
     public PackagingToolkitItem WithResultArtifacts(
         FhirLibrary fhirLibrary,
         FhirMeasure? fhirMeasure = null) =>

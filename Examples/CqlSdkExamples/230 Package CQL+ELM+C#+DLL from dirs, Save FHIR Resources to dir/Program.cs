@@ -40,7 +40,7 @@ partial class Program
                     null
                 )
             }
-            .Select(t => (t.cql.LibraryIdentifier, new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb)));
+            .Select(t => new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb));
 
         packagingToolkit.AddPackagingInputs(inputs);
 

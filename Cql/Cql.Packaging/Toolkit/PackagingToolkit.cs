@@ -83,12 +83,12 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <param name="inputItems">The collection of FHIR resource packaging inputs to add.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitInputArtifacts inputArtifacts)> inputItems)
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputArtifacts> inputItems)
     {
         var items = _items.ToBuilder();
         var logger = _services.Logger;
         var count = inputItems
-                    .Select(t => new PackagingToolkitItem(t.libraryIdentifier, t.inputArtifacts))
+                    .Select(inputArtifacts => new PackagingToolkitItem(inputArtifacts))
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;

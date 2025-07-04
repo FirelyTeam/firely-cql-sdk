@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
+
 namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
@@ -27,6 +29,8 @@ public readonly record struct PackagingToolkitInputArtifacts
     byte[] AssemblyBinary,
     byte[]? DebugSymbolsBinary)
 {
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; } = CqlLibrary.LibraryIdentifier;
+
     internal ResourcePackager.InputArtifacts ToResourcePackagerInputArtifacts() =>
         new(CqlLibrary, ElmLibrary, CSharpSourceCode, AssemblyBinary, DebugSymbolsBinary);
 }

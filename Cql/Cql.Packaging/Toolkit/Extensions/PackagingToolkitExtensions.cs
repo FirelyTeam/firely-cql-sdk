@@ -46,7 +46,7 @@ public static partial class PackagingToolkitExtensions
             cqlLibraries
                 .Join(inputArtifacts,
                       l => l.LibraryIdentifier, r => r.LibraryIdentifier,
-                      (l, r) => (l.LibraryIdentifier, new PackagingToolkitInputArtifacts(l, r.SourceElmLibrary, r.csharpSourceCode, r.assemblyBinary, r.debugSymbolsBinary)));
+                      (l, r) => new PackagingToolkitInputArtifacts(l, r.SourceElmLibrary, r.csharpSourceCode, r.assemblyBinary, r.debugSymbolsBinary));
 
         return packagingToolkit.AddPackagingInputs(inputs);
     }
