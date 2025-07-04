@@ -36,13 +36,13 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = PackagingToolkitConversionsDictionary.Empty;
+        _items = PackagingToolkitItemsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = PackagingToolkitServices.Create(loggerFactory, config);
     }
 
-    private PackagingToolkitConversionsDictionary _conversions;
+    private PackagingToolkitItemsById _items;
     private readonly PackagingToolkitServices _services;
 
     /// <inheritdoc />
@@ -72,23 +72,23 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Gets the dictionary of conversions.
     /// </summary>
-    public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
+    public ReadOnlyPackagingToolkitItemsById Items => _items;
 
-    private void ReplaceConversions(PackagingToolkitConversionsDictionary conversions) =>
-        _conversions = conversions;
+    private void ReplaceConversions(PackagingToolkitItemsById conversions) =>
+        _items = conversions;
 
     /// <summary>
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
-    /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
+    /// <param name="inputItems">The collection of FHIR resource packaging inputs to add.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitInputArtifacts inputArtifacts)> inputRecords)
+    public PackagingToolkit AddPackagingInputs(IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitInputArtifacts inputArtifacts)> inputItems)
     {
-        var conversions = _conversions.ToBuilder();
+        var items = _items.ToBuilder();
         var logger = _services.Logger;
-        var count = inputRecords
-                    .Select(t => new PackagingToolkitConversionRecord(t.libraryIdentifier, t.inputArtifacts))
+        var count = inputItems
+                    .Select(t => new PackagingToolkitItem(t.libraryIdentifier, t.inputArtifacts))
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
@@ -97,7 +97,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
                         logger.LogInformation("Adding CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}", libIdFromCql);
-                        conversions.Add(libIdFromCql, conversionRecord);
+                        items.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
@@ -107,7 +107,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                                              logMessage("Could not add CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            _conversions = conversions.ToImmutable();
+            _items = items.ToImmutable();
 
         return this;
     }
@@ -118,7 +118,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit ConvertToFhirResources()
     {
-        var builder = _conversions.ToBuilder();
+        var builder = _items.ToBuilder();
 
         var libraries = builder.Values.Select(conversionRecord => conversionRecord.InputArtifacts.ElmLibrary);
 

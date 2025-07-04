@@ -129,7 +129,7 @@ internal static class Program
         var elmToolkit = cqlToolkit.CompileToAssemblies();
         var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig);
         var results = packagingToolkit.GetPackagingResults().ToList();
-        var fhirHelpersResult = results.FirstOrDefault(r => r.LibraryIdentifier.Identifier == "FHIRHelpers");
+        var fhirHelpersResult = results.FirstOrDefault(r => r.libraryIdentifier.Identifier == "FHIRHelpers");
     }
 
     /// <summary>
@@ -537,8 +537,8 @@ file static class Extensions
         this PackagingToolkit packagingToolkit) =>
         packagingToolkit.GetPackagingResults()
                         .Select(t => (
-                                         t.LibraryIdentifier,
-                                         packagingToolkit.SerializeFhirResourcesToJson([t.FhirLibrary], writeIndented: true).First().resourceJson
+                                         t.libraryIdentifier,
+                                         packagingToolkit.SerializeFhirResourcesToJson([t.resultArtifacts.FhirLibrary], writeIndented: true).First().resourceJson
                                      ))
                         .FirstOrNull();
 

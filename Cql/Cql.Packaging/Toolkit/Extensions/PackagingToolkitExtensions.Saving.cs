@@ -57,7 +57,7 @@ public static partial class PackagingToolkitExtensions
     public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitResultArtifacts resultArtifacts)> GetPackagingResults(
         this PackagingToolkit packagingToolkit) =>
         packagingToolkit
-            .Conversions
+            .Items
             .SelectWhere(kv => kv.Value switch
             {
                 { ResultArtifacts: {} resultArtifacts } => (true, (kv.Key, resultArtifacts)),
