@@ -57,7 +57,7 @@ Hl7.Cql.CqlToElm.Toolkit.CqlModel.ElmR1 = 1 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
 Hl7.Cql.CqlToElm.Toolkit.CqlModel.Fhir401 = 2 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.AddCqlLibraries(System.Collections.Generic.IEnumerable<Hl7.Cql.CqlToElm.CqlLibraryString>! cqlLibraries) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.ArtifactsByIds.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts>!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.ArtifactsById.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Config.get -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.CqlToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? config = null, Hl7.Cql.Runtime.BatchProcessExceptionContinuation batchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
