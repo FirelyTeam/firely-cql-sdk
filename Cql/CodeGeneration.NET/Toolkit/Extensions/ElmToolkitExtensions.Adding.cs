@@ -34,14 +34,19 @@ public static partial class ElmToolkitExtensions
     public static ElmToolkit AddElmFromCqlToolkit(
         this ElmToolkit elmToolkit,
         CqlToolkit cqlToolkit,
-        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) =>
-        elmToolkit.AddElmLibraries(
-            cqlToolkit
-                .GetCqlToolkitResults()
-                .Where(libraryPredicate is not null
-                           ? result => libraryPredicate(result.LibraryIdentifier)
-                           : _ => true)
-                .Select(t => t.ElmLibrary));
+        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null)
+    {
+        var cqlToolkitResults = cqlToolkit.GetCqlToolkitResults();
+
+        if (libraryPredicate is {} fn)
+            cqlToolkitResults = cqlToolkitResults
+                .Where(t => fn(t.libraryIdentifier));
+
+        var elmLibraries = cqlToolkitResults
+            .Select(t => t.elmLibrary);
+
+        return elmToolkit.AddElmLibraries(elmLibraries);
+    }
 
     /// <summary>
     /// Adds an ELM file from a specified directory to the ELM toolkit.

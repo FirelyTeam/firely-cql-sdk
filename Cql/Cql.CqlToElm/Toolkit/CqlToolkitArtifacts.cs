@@ -18,7 +18,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// </summary>
 /// <param name="SourceCqlLibrary">The source CQL library string.</param>
 /// <param name="ResultElmLibrary">The result ELM library.</param>
-public readonly record struct CqlToolkitConversionRecord(
+public readonly record struct CqlToolkitArtifacts(
     CqlLibraryString SourceCqlLibrary,
     ElmLibrary? ResultElmLibrary = null) {
 

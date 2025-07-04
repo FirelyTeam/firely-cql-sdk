@@ -60,12 +60,12 @@ public class CqlToFhirProgram
                                     .SetIgnoreEnumerationExceptions()
                                     .AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
-            if (cqlToolkit.Conversions.Count == 0)
+            if (cqlToolkit.ArtifactsByIds.Count == 0)
             {
                 logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                 return ExitCode.NoCqlLibsInDir;
             }
-            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
+            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsByIds.Count} CQL libraries from directory {opt.CqlInDir}."));
 
             var cqlToolkitResultRecords = cqlToolkit.TranslateToElm()
                       .GetCqlToolkitResults()

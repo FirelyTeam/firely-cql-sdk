@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -19,17 +20,12 @@ public static partial class CqlToolkitExtensions
     private static ILogger CreateLogger(this CqlToolkit cqlToolkit) =>
         cqlToolkit.CreateLogger(typeof(CqlToolkitExtensions));
 
-    /// <summary>
-    /// Gets the CQL toolkit results.
-    /// </summary>
-    /// <param name="cqlToolkit">The CQL toolkit instance.</param>
-    /// <returns>An enumerable collection of <see cref="CqlToolkitResultRecord"/>.</returns>
-    public static IEnumerable<CqlToolkitResultRecord> GetCqlToolkitResults(
+    public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary)> GetCqlToolkitResults(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.Conversions.Values
+        cqlToolkit.ArtifactsByIds.Values
                   .SelectWhere(conversionRecord => conversionRecord switch
                   {
-                      { LibraryIdentifier: { } id, ResultElmLibrary: { } elmLib } => (true, new CqlToolkitResultRecord(id, elmLib)),
+                      { LibraryIdentifier: {} id, ResultElmLibrary: { } elmLib } => (true, (id, elmLib)),
                       _ => default
                   });
 }

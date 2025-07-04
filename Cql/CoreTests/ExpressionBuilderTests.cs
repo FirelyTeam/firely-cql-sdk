@@ -156,7 +156,7 @@ namespace CoreTests
             var cqlToolkit = new CqlToolkit(config: cqlToolkitConfig)
                              .AddCqlLibraries([libraryString])
                              .TranslateToElm();
-            var elmLibrary = cqlToolkit.GetCqlToolkitResults().First().ElmLibrary;
+            var elmLibrary = cqlToolkit.GetCqlToolkitResults().First().elmLibrary;
 
             return elmLibrary;
         }

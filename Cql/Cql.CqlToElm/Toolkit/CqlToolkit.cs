@@ -32,13 +32,13 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = CqlToolkitConversionDictionary.Empty;
+        _artifactsByIds = CqlToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
-        _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
+        _services = CqlToolkitServices.Create(loggerFactory, config, _artifactsByIds);
     }
 
-    private CqlToolkitConversionDictionary _conversions;
+    private CqlToolkitArtifactsById _artifactsByIds;
     private readonly CqlToolkitServices _services;
 
     /// <inheritdoc/>
@@ -68,16 +68,16 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// <summary>
     /// Gets the dictionary of CQL to ELM translations.
     /// </summary>
-    public CqlToolkitConversionReadOnlyDictionary Conversions => _conversions;
+    public CqlToolkitArtifactsByIdReadOnly ArtifactsByIds => _artifactsByIds;
 
     /// <summary>
     /// Replaces the CQL to ELM conversions.
     /// </summary>
     /// <param name="conversions">The dictionary of translations to set.</param>
     private void ReplaceConversions(
-        CqlToolkitConversionDictionary conversions)
+        CqlToolkitArtifactsById conversions)
     {
-        _conversions = conversions;
+        _artifactsByIds = conversions;
         _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
     }
 
@@ -91,7 +91,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         var conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
         var count = cqlLibraries
-                    .Select(lib => new CqlToolkitConversionRecord(lib))
+                    .Select(lib => new CqlToolkitArtifacts(lib))
                     .TryForEach(
                         conversionRecord =>
                         {
@@ -117,10 +117,10 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// </summary>
     public CqlToolkit TranslateToElm()
     {
-        CqlToolkitConversionDictionary.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
+        CqlToolkitArtifactsById.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
         var count =
-            _conversions
+            _artifactsByIds
                 .Values
                 .Where(conversion => conversion.ResultElmLibrary is null)
                 .TryForEach(

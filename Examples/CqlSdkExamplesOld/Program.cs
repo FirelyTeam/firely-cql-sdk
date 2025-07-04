@@ -74,7 +74,7 @@ internal static class Program
                 Trace.Assert(e is not null);
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 0);
+            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 0);
         }
 
         void AddCqlDifferentValuesContinue()
@@ -93,7 +93,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 2);
+            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 2);
         }
 
         void AddCqlDifferentValuesBreak()
@@ -112,7 +112,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 1);
+            Trace.Assert(cqlToolkit.ArtifactsByIds.Count is 1);
         }
     }
 
@@ -530,7 +530,7 @@ file static class Extensions
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string ElmLibraryJson)? TryGetFirstElmFileLines(
         this CqlToolkit cqlToolkit) =>
         cqlToolkit.GetCqlToolkitResults()
-                  .Select(t => (t.LibraryIdentifier, t.ElmLibrary.SerializeToJson()))
+                  .Select(t => (t.libraryIdentifier, t.elmLibrary.SerializeToJson()))
                   .FirstOrNull();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string FhirLibraryJson)? TryGetFirstPackageFileLines(

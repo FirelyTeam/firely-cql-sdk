@@ -39,7 +39,7 @@ internal record CqlToolkitServices(
     public static CqlToolkitServices Create(
         ILoggerFactory loggerFactory,
         CqlToolkitConfig config,
-        CqlToolkitConversionDictionary translations)
+        CqlToolkitArtifactsById translations)
     {
         var translationsBuilder = translations.ToBuilder();
         var libraryBuilderProvider = new LibraryBuilderProvider(translationsBuilder);
