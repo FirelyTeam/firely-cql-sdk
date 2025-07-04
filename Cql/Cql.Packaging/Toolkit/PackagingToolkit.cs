@@ -70,12 +70,22 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     public PackagingToolkitConfig Config { get; }
 
     /// <summary>
-    /// Gets the dictionary of conversions.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
+    /// <remarks>
+    /// This collection contains all artifacts (C#, ELM, CQL, .NET assembly binaries and debug symbols)
+    /// that have been added to the packaging toolkit, indexed by their IDs.
+    /// </remarks>
     public ReadOnlyPackagingToolkitArtifactsById ArtifactsById => _artifactsById;
 
-    private void ReplaceConversions(PackagingToolkitArtifactsById conversions) =>
-        _artifactsById = conversions;
+    /// <summary>
+    /// Replaces the current collection of artifacts with the specified collection, identified by their IDs.
+    /// </summary>
+    /// <remarks>This method updates the internal state to use the provided collection of artifacts.  Ensure
+    /// that <paramref name="artifactsById"/> contains valid data before calling this method.</remarks>
+    /// <param name="artifactsById">The collection of artifacts, indexed by their IDs, to replace the existing artifacts.  Cannot be null.</param>
+    private void ReplaceArtifactsById(PackagingToolkitArtifactsById artifactsById) =>
+        _artifactsById = artifactsById;
 
     /// <summary>
     /// Adds a collection of input artifacts to the packaging toolkit.
@@ -178,7 +188,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .Count();
 
         if (count > 0)
-            ReplaceConversions(builder.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }

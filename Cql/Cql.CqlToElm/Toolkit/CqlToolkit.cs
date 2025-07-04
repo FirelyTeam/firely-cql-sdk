@@ -66,19 +66,26 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     }
 
     /// <summary>
-    /// Gets the dictionary of CQL to ELM translations.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
+    /// <remarks>
+    /// This collection contains the CQL libraries and their corresponding ELM libraries
+    /// that have been added to the toolkit.
+    /// </remarks>
     public CqlToolkitArtifactsByIdReadOnly ArtifactsByIds => _artifactsByIds;
 
     /// <summary>
-    /// Replaces the CQL to ELM conversions.
+    /// Replaces the current set of artifacts with the specified artifacts, identified by their IDs.
     /// </summary>
-    /// <param name="conversions">The dictionary of translations to set.</param>
-    private void ReplaceConversions(
-        CqlToolkitArtifactsById conversions)
+    /// <remarks>This method updates the internal state to use the provided artifacts and configures the
+    /// associated services to reflect the new artifacts.</remarks>
+    /// <param name="artifactsById">The collection of artifacts, indexed by their IDs, to replace the existing artifacts. This parameter cannot be
+    /// null.</param>
+    private void ReplaceArtifactsById(
+        CqlToolkitArtifactsById artifactsById)
     {
-        _artifactsByIds = conversions;
-        _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
+        _artifactsByIds = artifactsById;
+        _services.LibraryBuilderProvider.ConversionsBuilder = artifactsById.ToBuilder();
     }
 
     /// <summary>
@@ -107,7 +114,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                                                  logMessage("Could not add CQL library to CqlToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceConversions(conversions.ToImmutable());
+            ReplaceArtifactsById(conversions.ToImmutable());
 
         return this;
     }
@@ -141,7 +148,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                 );
 
         if (count > 0)
-            ReplaceConversions(conversions: conversions.ToImmutable());
+            ReplaceArtifactsById(artifactsById: conversions.ToImmutable());
 
         return this;
     }

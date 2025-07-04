@@ -70,19 +70,23 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     }
 
     /// <summary>
-    /// Gets the dictionary of ELM to assembly compilations.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
+    /// <remarks>
+    /// This collection contains the artifacts produced by the toolkit,
+    /// such as compiled assemblies and source code.
+    /// </remarks>
     public ReadOnlyElmToolkitArtifactsById ArtifactsById => _artifactsById;
 
     /// <summary>
-    /// Sets the conversions for the ELM to assembly compilations.
+    /// Replaces the current collection of artifacts with the specified collection.
     /// </summary>
-    /// <param name="conversions">The dictionary of ELM to assembly compilations.</param>
-    private void ReplaceConversions(
-        ElmToolkitArtifactsById conversions)
-    {
-        _artifactsById = conversions;
-    }
+    /// <remarks>This method updates the internal state to use the provided collection of artifacts. Ensure
+    /// that <paramref name="artifactsById"/> contains valid data before calling this method.</remarks>
+    /// <param name="artifactsById">The collection of artifacts to replace the current collection.  This parameter cannot be null.</param>
+    private void ReplaceArtifactsById(
+        ElmToolkitArtifactsById artifactsById) =>
+        _artifactsById = artifactsById;
 
     /// <summary>
     /// Adds ELM libraries to the compiler.
@@ -108,7 +112,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                          logMessage("Could not add ELM library to ElmToolkit: {lib}", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceConversions(conversions: conversions.ToImmutable());
+            ReplaceArtifactsById(artifactsById: conversions.ToImmutable());
 
         return this;
     }
@@ -144,7 +148,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var entriesBuilder = entries.ToBuilder();
         var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
-            ReplaceConversions(conversions: entriesBuilder.ToImmutable());
+            ReplaceArtifactsById(artifactsById: entriesBuilder.ToImmutable());
 
         return this;
     }
