@@ -22,16 +22,16 @@ internal class ResourcePackager(
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
-    public readonly record struct SourceArtefacts(
-        string LibraryIdentifier,
+    public readonly record struct InputArtifacts(
         string CqlString,
         ElmLibrary ElmLibrary,
         string CSharpSourceCode,
-        byte[] AssemblyBinary);
+        byte[] AssemblyBinary,
+        byte[]? DebugSymbols);
 
     public IEnumerable<(string libraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
-        Func<string, SourceArtefacts> inputsById,
+        Func<string, InputArtifacts> inputsById,
         SysDateTime? overrideDate = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null)
@@ -46,7 +46,7 @@ internal class ResourcePackager(
 
             string versionedIdentifier = elmLibrary.VersionedLibraryIdentifier;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;
-            var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
+            var (cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary, debugSymbols) = inputsById(versionedIdentifier);
             if (versionedIdentifier != elmLibraryInput.VersionedLibraryIdentifier) throw new InvalidOperationException("Versioned identifiers do not match.");
 
             var fhirLibrary = LibraryPackager.CreateLibraryResource(
@@ -56,6 +56,7 @@ internal class ResourcePackager(
                 null,
                 Encoding.Default.GetBytes(cqlString),
                 assemblyBinary,
+                debugSymbols,
                 GetCSharpSourceCodeByName(),
                 librarySet,
                 resourceCanonicalBuilder,
@@ -270,6 +271,7 @@ internal static class LibraryPackager
         byte[]? elmBytes,
         byte[]? cqlBytes,
         byte[]? assemblyBytes,
+        byte[]? debugSymbols,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
         ElmLibrarySet elmLibrarySet,
         ResourceCanonicalBuilder resourceCanonicalBuilder,
@@ -302,10 +304,13 @@ internal static class LibraryPackager
             AddCqlOptions(fhirLibrary, fhirParameters);
 
         if (cqlBytes != null)
-            AddCqlAttachment(elmLibrary, fhirLibrary, cqlBytes);
+            AddCqlAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, cqlBytes);
 
-        if (assemblyBytes != null)
-            AddDllAttachment(elmLibrary, fhirLibrary, assemblyBytes);
+        if (assemblyBytes is {Length:>0} dll)
+            AddDllAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, dll);
+
+        if (debugSymbols is {Length:>0} pdb)
+            AddPdbAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, pdb);
 
         if (cSharpSourceCodeById != null)
             foreach (var kvp in cSharpSourceCodeById)
@@ -438,13 +443,13 @@ internal static class LibraryPackager
     }
 
     private static void AddCqlAttachment(
-        ElmLibrary? elmLibrary,
         FhirLibrary fhirLibrary,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
         byte[] cqlBytes)
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+cql",
+            ElementId = $"{libraryIdentifier}+cql",
             ContentType = "text/cql",
             Data = cqlBytes,
         };
@@ -491,17 +496,30 @@ internal static class LibraryPackager
     }
 
     private static void AddDllAttachment(
-        ElmLibrary? elmLibrary,
         FhirLibrary library,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
         byte[] assemblyBytes)
     {
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary!.VersionedLibraryIdentifier}+dll",
+            ElementId = $"{libraryIdentifier}+dll",
             ContentType = "application/octet-stream",
             Data = assemblyBytes,
         };
-        // TODO: Add extension indicating dll includes debug symbols
+        library.Content.Add(attachment);
+    }
+
+    private static void AddPdbAttachment(
+        FhirLibrary library,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        byte[] debugSymbols)
+    {
+        var attachment = new Attachment
+        {
+            ElementId = $"{libraryIdentifier}+pdb",
+            ContentType = "application/octet-stream",
+            Data = debugSymbols,
+        };
         library.Content.Add(attachment);
     }
 

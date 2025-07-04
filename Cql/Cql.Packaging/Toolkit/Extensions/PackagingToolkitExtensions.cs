@@ -31,16 +31,23 @@ public static partial class PackagingToolkitExtensions
     {
         elmToolkit.CompileToAssemblies();
         var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
-        var compilations = elmToolkit.Conversions.Values.SelectWhere(o => o switch
-        {
-            { ResultCSharpSourceCode: { } csharpSourceCode, ResultAssemblyBinary: { } assemblyBinary } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, ResultCSharpSourceCode: csharpSourceCode, ResultAssemblyBinary: assemblyBinary)),
-            _                                                                                                      => default
-        });
+        var inputArtifacts =
+            elmToolkit.Conversions.Values
+                      .SelectWhere(o => o switch
+                      {
+                          {
+                              ResultCSharpSourceCode: { } csharpSourceCode,
+                              ResultAssemblyBinary: { } assemblyBinary,
+                              ResultDebugSymbolsBinary: var debugSymbolsBinary,
+                          } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, csharpSourceCode, assemblyBinary, debugSymbolsBinary)),
+                          _ => default
+                      });
         var inputs =
             cqlLibraries
-                .Join(compilations,
+                .Join(inputArtifacts,
                       l => l.LibraryIdentifier, r => r.LibraryIdentifier,
-                      (l, r) => new PackagingToolkitInputRecord(l, r.SourceElmLibrary, r.ResultCSharpSourceCode, r.ResultAssemblyBinary));
+                      (l, r) => (l.LibraryIdentifier, new PackagingToolkitInputArtifacts(l, r.SourceElmLibrary, r.csharpSourceCode, r.assemblyBinary, r.debugSymbolsBinary)));
+
         return packagingToolkit.AddPackagingInputs(inputs);
     }
 }

@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 
 partial class Program
 {
@@ -19,20 +20,29 @@ partial class Program
         var elmDirectory = new DirectoryInfo("input/elm");
         var csDirectory = new DirectoryInfo("input/cs");
         var dllDirectory = new DirectoryInfo("input/dll");
-        packagingToolkit.AddPackagingInputs([
-            new PackagingToolkitInputRecord(
-                (CqlLibraryString)cqlDirectory.ReadTextFromFile("FHIRHelpers.cql"),
-                Library.ParseFromJson(elmDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.json")),
-                csDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.g.cs"),
-                dllDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.dll")
-            ),
-            new PackagingToolkitInputRecord(
-                (CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
-                Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
-                csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
-                dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll")
-            ),
-        ]);
+        var pdbDirectory = new DirectoryInfo("input/pdb");
+
+        var inputs =
+            new[]
+            {
+                (
+                    cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("FHIRHelpers.cql"),
+                    elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.json")),
+                    cs:csDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.g.cs"),
+                    dll:dllDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.dll"),
+                    pdb:default(byte[]) // REVIEW-TODO: Add PDB files to input
+                ),
+                (
+                    (CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
+                    Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
+                    csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
+                    dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
+                    null
+                )
+            }
+            .Select(t => (t.cql.LibraryIdentifier, new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb)));
+
+        packagingToolkit.AddPackagingInputs(inputs);
 
         // Package into FHIR Resources
         packagingToolkit.ConvertToFhirResources();

@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
@@ -35,7 +36,7 @@ public static partial class PackagingToolkitExtensions
         ILogger? logger = null;
         var fhirResources = packagingToolkit
                             .GetPackagingResults()
-                            .SelectMany(t => t.GetFhirResources());
+                            .SelectMany(t => t.resultArtifacts.GetFhirResources());
         foreach (var (resourceFileName, resourceJson) in
                  packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
         {
@@ -53,13 +54,13 @@ public static partial class PackagingToolkitExtensions
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>
     /// <returns>An enumerable of packaging toolkit result records.</returns>
-    public static IEnumerable<PackagingToolkitResultRecord> GetPackagingResults(
+    public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitResultArtifacts resultArtifacts)> GetPackagingResults(
         this PackagingToolkit packagingToolkit) =>
         packagingToolkit
             .Conversions
             .SelectWhere(kv => kv.Value switch
             {
-                { ResultFhirLibrary: null } => (false, default(PackagingToolkitResultRecord)),
-                var val => (true, new(kv.Key, val.ResultFhirLibrary, val.ResultFhirMeasure))
+                { ResultArtifacts: {} resultArtifacts } => (true, (kv.Key, resultArtifacts)),
+                _ => default,
             });
 }

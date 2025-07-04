@@ -30,9 +30,9 @@ public class LibraryPackagerTests
             elmBytes: File.ReadAllBytes(filename),
             cqlBytes: [],
             assemblyBytes: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
+            debugSymbols: [],
             cSharpSourceCodeById: [],
-            resourceCanonicalBuilder: (_,_,_) => "");
+            elmLibrarySet: new LibrarySet("", [elmLibrary] ), resourceCanonicalBuilder: (_,_,_) => "");
 
         // Assert
         Assert.IsNotNull(library);
@@ -57,9 +57,9 @@ public class LibraryPackagerTests
             elmBytes: File.ReadAllBytes(filename),
             cqlBytes: [],
             assemblyBytes: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ),
+            debugSymbols: [],
             cSharpSourceCodeById: [],
-            resourceCanonicalBuilder: (_,_,_) => "");
+            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ), resourceCanonicalBuilder: (_,_,_) => "");
 
         // Assert
         Assert.IsNotNull(library);

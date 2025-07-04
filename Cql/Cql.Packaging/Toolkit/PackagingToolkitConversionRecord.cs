@@ -11,35 +11,27 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
-/// Represents a state record by the <see cref="PackagingToolkit"/>
-/// to convert the inputs <see cref="InputCqlLibrary"/>, <see cref="InputElmLibrary"/>,
-/// <see cref="InputCSharpSourceCode"/> and <see cref="InputAssemblyBinary"/>
-/// to the results <see cref="ResultFhirLibrary"/>, <see cref="ResultFhirMeasure"/>.
+/// Represents a conversion record used by the <see cref="PackagingToolkit"/> to transform input artifacts, such as CQL
+/// and ELM libraries, C# source code, and .NET assembly binaries, into corresponding FHIR-based outputs.
 /// </summary>
-/// <param name="InputCqlLibrary">The input CQL library.</param>
-/// <param name="InputElmLibrary">The input ELM library.</param>
-/// <param name="InputCSharpSourceCode">The input C# source code.</param>
-/// <param name="InputAssemblyBinary">The input .NET assembly bytes.</param>
-/// <param name="ResultFhirLibrary">The result FHIR library.</param>
-/// <param name="ResultFhirMeasure">The result FHIR measure.</param>
-public readonly record struct PackagingToolkitConversionRecord(
-    CqlLibraryString InputCqlLibrary,
-    ElmLibrary InputElmLibrary,
-    string InputCSharpSourceCode,
-    byte[] InputAssemblyBinary,
-    FhirLibrary? ResultFhirLibrary = null,
-    FhirMeasure? ResultFhirMeasure = null)
+/// <remarks>This record encapsulates both the input artifacts required for the conversion process and the
+/// resulting outputs. It is designed to facilitate the transformation of clinical quality language (CQL) and related
+/// resources into FHIR-compliant libraries and measures.</remarks>
+/// <param name="LibraryIdentifier">The identifier of the input CQL library, including its version.</param>
+/// <param name="InputArtifacts">The input artifacts required for the conversion process.</param>
+/// <param name="ResultArtifacts">The result artifacts produced by the conversion process. Defaults to an empty result record.</param>
+public readonly record struct PackagingToolkitConversionRecord
+(
+    CqlVersionedLibraryIdentifier LibraryIdentifier,
+    PackagingToolkitInputArtifacts InputArtifacts,
+    PackagingToolkitResultArtifacts? ResultArtifacts = null
+)
 {
-    /// <summary>
-    /// The library identifier of the input CQL library.
-    /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier => InputCqlLibrary.LibraryIdentifier;
-
-    /// <nodoc/>
-    public PackagingToolkitConversionRecord(PackagingToolkitInputRecord inputRecord) :
-        this(
-            inputRecord.CqlLibrary,
-            inputRecord.ElmLibrary,
-            inputRecord.CSharpSourceCode,
-            inputRecord.AssemblyBinary) { }
+    public PackagingToolkitConversionRecord WithResultArtifacts(
+        FhirLibrary fhirLibrary,
+        FhirMeasure? fhirMeasure = null) =>
+        this with
+        {
+            ResultArtifacts = new(fhirLibrary, fhirMeasure)
+        };
 }
