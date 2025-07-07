@@ -74,7 +74,7 @@ internal static class Program
                 Trace.Assert(e is not null);
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 0);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 0);
         }
 
         void AddCqlDifferentValuesContinue()
@@ -93,7 +93,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 2);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 2);
         }
 
         void AddCqlDifferentValuesBreak()
@@ -112,7 +112,7 @@ internal static class Program
                 Trace.Fail("No exception expected");
             }
 
-            Trace.Assert(cqlToolkit.Conversions.Count is 1);
+            Trace.Assert(cqlToolkit.ArtifactsById.Count is 1);
         }
     }
 
@@ -129,7 +129,7 @@ internal static class Program
         var elmToolkit = cqlToolkit.CompileToAssemblies();
         var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig);
         var results = packagingToolkit.GetPackagingResults().ToList();
-        var fhirHelpersResult = results.FirstOrDefault(r => r.LibraryIdentifier.Identifier == "FHIRHelpers");
+        var fhirHelpersResult = results.FirstOrDefault(r => r.libraryIdentifier.Identifier == "FHIRHelpers");
     }
 
     /// <summary>
@@ -523,22 +523,22 @@ file static class Extensions
         multilineString.SplitLines().Take(count).JoinLines();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string CSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
-        elmToolkit.GetElmToAssemblyResults()
-                  .Select(t => (t.LibraryIdentifier, t.CSharpSourceCode))
+        elmToolkit.GetElmToCSharpResults()
+                  .Select(t => (t.libraryIdentifier, t.cSharp))
                   .FirstOrNull();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string ElmLibraryJson)? TryGetFirstElmFileLines(
         this CqlToolkit cqlToolkit) =>
         cqlToolkit.GetCqlToolkitResults()
-                  .Select(t => (t.LibraryIdentifier, t.ElmLibrary.SerializeToJson()))
+                  .Select(t => (t.libraryIdentifier, t.elmLibrary.SerializeToJson()))
                   .FirstOrNull();
 
     public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string FhirLibraryJson)? TryGetFirstPackageFileLines(
         this PackagingToolkit packagingToolkit) =>
         packagingToolkit.GetPackagingResults()
                         .Select(t => (
-                                         t.LibraryIdentifier,
-                                         packagingToolkit.SerializeFhirResourcesToJson([t.FhirLibrary], writeIndented: true).First().resourceJson
+                                         t.libraryIdentifier,
+                                         packagingToolkit.SerializeFhirResourcesToJson([t.resultArtifacts.FhirLibrary], writeIndented: true).First().resourceJson
                                      ))
                         .FirstOrNull();
 

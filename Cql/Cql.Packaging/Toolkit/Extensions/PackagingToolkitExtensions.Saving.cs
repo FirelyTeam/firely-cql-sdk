@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
@@ -30,15 +31,20 @@ public static partial class PackagingToolkitExtensions
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
-
+        bool prepFhirDir = true;
         ILogger? logger = null;
         var fhirResources = packagingToolkit
                             .GetPackagingResults()
-                            .SelectMany(t => t.GetFhirResources());
+                            .SelectMany(t => t.resultArtifacts.GetFhirResources());
         foreach (var (resourceFileName, resourceJson) in
                  packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
         {
+            if (prepFhirDir)
+            {
+                prepFhirDir = false;
+                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
+            }
+
             logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
             var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
             logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
@@ -53,13 +59,13 @@ public static partial class PackagingToolkitExtensions
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>
     /// <returns>An enumerable of packaging toolkit result records.</returns>
-    public static IEnumerable<PackagingToolkitResultRecord> GetPackagingResults(
+    public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, PackagingToolkitResultArtifacts resultArtifacts)> GetPackagingResults(
         this PackagingToolkit packagingToolkit) =>
         packagingToolkit
-            .Conversions
+            .ArtifactsById
             .SelectWhere(kv => kv.Value switch
             {
-                { ResultFhirLibrary: null } => (false, default(PackagingToolkitResultRecord)),
-                var val => (true, new(kv.Key, val.ResultFhirLibrary, val.ResultFhirMeasure))
+                { Result: {} resultArtifacts } => (true, (kv.Key, resultArtifacts)),
+                _ => default,
             });
 }

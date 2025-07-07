@@ -23,5 +23,5 @@ global using TypeInfo = Hl7.Cql.Model.TypeInfo;
 
 global using ElmLibrary = Hl7.Cql.Elm.Library;
 
-global using CqlToolkitConversionDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord>;
-global using CqlToolkitConversionReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord>;
+global using CqlToolkitArtifactsById = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts>;
+global using CqlToolkitArtifactsByIdReadOnly = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts>;

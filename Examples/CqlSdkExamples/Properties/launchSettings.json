@@ -4,7 +4,7 @@
       "commandName": "Project",
       "commandLineArgs": "210"
     },
-    "220 Load ELM from dir, Save C#,DLL to dir": {
+    "220 Load ELM from dir, Save C#,DLL,PDB to dir": {
       "commandName": "Project",
       "commandLineArgs": "220"
     },
@@ -23,6 +23,10 @@
     "250 Package via CQL Toolkit, Save FHIR Resources to dir": {
       "commandName": "Project",
       "commandLineArgs": "250"
+    },
+    "251 Package incl debug symbols via CQL Toolkit, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "251"
     },
     "310 Invoking CQL Hello World": {
       "commandName": "Project",

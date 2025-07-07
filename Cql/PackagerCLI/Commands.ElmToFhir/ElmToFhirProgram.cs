@@ -54,12 +54,12 @@ internal sealed class ElmToFhirProgram
                                     .AddElmFilesFromDirectory(
                                         opt.ElmInDir,
                                         filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
-            if (elmToolkit.Conversions.Count == 0)
+            if (elmToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
                 return ExitCode.NoElmLibsInDir;
             }
-            sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.Conversions.Count} ELM libraries from directory {opt.ElmInDir}."));
+            sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.ArtifactsById.Count} ELM libraries from directory {opt.ElmInDir}."));
 
             var elmToolkitResultRecords = elmToolkit
                                           .CompileToAssemblies()
@@ -93,17 +93,17 @@ internal sealed class ElmToFhirProgram
                                         .SetIgnoreEnumerationExceptions()
                                         .AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
-                if (cqlToolkit.Conversions.Count == 0)
+                if (cqlToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                     return ExitCode.NoCqlLibsInDir;
                 }
-                sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
+                sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsById.Count} CQL libraries from directory {opt.CqlInDir}."));
 
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
-                if (packagingToolkit.Conversions.Count == 0)
+                if (packagingToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
                     return ExitCode.CantPackageNoCqlElmMatches;
@@ -119,7 +119,7 @@ internal sealed class ElmToFhirProgram
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
-                var measuresCount = packagingResults.Count(r => r.FhirMeasure is { });
+                var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
                 sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries and {measuresCount} measures to directory {opt.FhirOutDir}."));
             }
 

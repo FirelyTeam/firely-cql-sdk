@@ -23,6 +23,6 @@ global using CqlDefinitionDictionary = Hl7.Cql.Runtime.DefinitionDictionary<Hl7.
 global using Expression = System.Linq.Expressions.Expression;
 global using UnaryExpression = System.Linq.Expressions.UnaryExpression;
 global using ElmLibrary = Hl7.Cql.Elm.Library;
-global using ElmToolkitConversionDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConversionRecord>;
-global using ElmToolkitConversionReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConversionRecord>;
+global using ElmToolkitArtifactsById = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts>;
+global using ReadOnlyElmToolkitArtifactsById = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts>;
 

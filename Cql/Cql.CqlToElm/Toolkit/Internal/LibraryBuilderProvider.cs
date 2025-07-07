@@ -11,17 +11,19 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
 /// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/>
-/// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="CqlToolkitConversionDictionary.Builder"/>.
+/// Provides functionality for resolving and building libraries based on CQL (Clinical Quality Language) identifiers.
 /// </summary>
-/// <param name="conversionsBuilder"></param>
+/// <remarks>This class implements <see cref="ILibraryProvider"/> to facilitate the resolution of libraries by
+/// their name and version. It supports both pre-existing library builders and dynamic creation of library builders
+/// using CQL translation services.</remarks>
+/// <param name="cqlToolkitArtifactsByIdBuilder"></param>
 internal sealed class LibraryBuilderProvider(
-    CqlToolkitConversionDictionary.Builder conversionsBuilder)
+    CqlToolkitArtifactsById.Builder cqlToolkitArtifactsByIdBuilder)
     : ILibraryProvider
 {
     public CqlToolkitServices? CqlToElmTranslatorServices { get; set; }
 
-    public CqlToolkitConversionDictionary.Builder ConversionsBuilder { get; set; } = conversionsBuilder;
+    public CqlToolkitArtifactsById.Builder CqlToolkitArtifactsByIdBuilder { get; set; } = cqlToolkitArtifactsByIdBuilder;
 
     bool ILibraryProvider.TryResolveLibrary(
         string libraryName,
@@ -37,7 +39,7 @@ internal sealed class LibraryBuilderProvider(
         error = null;
         libraryBuilder = null;
 
-        if (!ConversionsBuilder.TryGetValue(libVer, out var elmTranslation))
+        if (!CqlToolkitArtifactsByIdBuilder.TryGetValue(libVer, out var elmTranslation))
             return false;
 
         if (elmTranslation.LibraryBuilder is { } lb)
@@ -52,7 +54,7 @@ internal sealed class LibraryBuilderProvider(
             var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
             logger.LogInformation("Parsing CQL for {id}", libVer);
             libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.SourceCqlLibrary.Cql);
-            ConversionsBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
+            CqlToolkitArtifactsByIdBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
             return true;
         }
 

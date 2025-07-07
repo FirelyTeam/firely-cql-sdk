@@ -24,6 +24,6 @@ global using FhirResource = Hl7.Fhir.Model.Resource;
 global using Iso8601DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 global using SysDateTime = System.DateTime;
 
-global using PackagingToolkitConversionsDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord>;
-global using PackagingToolkitConversionsReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord>;
+global using PackagingToolkitArtifactsById = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitArtifacts>;
+global using ReadOnlyPackagingToolkitArtifactsById = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitArtifacts>;
 

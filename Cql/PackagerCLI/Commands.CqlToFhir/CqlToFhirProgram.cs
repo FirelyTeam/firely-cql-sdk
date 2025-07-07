@@ -60,12 +60,12 @@ public class CqlToFhirProgram
                                     .SetIgnoreEnumerationExceptions()
                                     .AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
-            if (cqlToolkit.Conversions.Count == 0)
+            if (cqlToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                 return ExitCode.NoCqlLibsInDir;
             }
-            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
+            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsById.Count} CQL libraries from directory {opt.CqlInDir}."));
 
             var cqlToolkitResultRecords = cqlToolkit.TranslateToElm()
                       .GetCqlToolkitResults()
@@ -126,7 +126,7 @@ public class CqlToFhirProgram
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
-                if (packagingToolkit.Conversions.Count == 0)
+                if (packagingToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
                     return ExitCode.CantPackageNoCqlElmMatches;
@@ -142,7 +142,7 @@ public class CqlToFhirProgram
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
-                var measuresCount = packagingResults.Count(r => r.FhirMeasure is { });
+                var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
                 sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries and {measuresCount} measures to directory {opt.FhirOutDir}."));
             }
 
