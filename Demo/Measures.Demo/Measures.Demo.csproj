@@ -20,6 +20,9 @@
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
+
+		<!-- ElmToCSharpEnabled is needed, because Test.Measures.Demo relies on one generated resource in LibrarySets\Demo\Resources\Library-BCSEHEDISMY2022-1.0.0.json  -->
+		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
