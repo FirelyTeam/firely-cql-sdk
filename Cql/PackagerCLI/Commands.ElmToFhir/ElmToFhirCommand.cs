@@ -6,20 +6,24 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Options;
 
 namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
 [UsedImplicitly]
-internal record ElmToFhirCommand(
-    DirectoryInfo? Cql,
-    DirectoryInfo Elm,
-    DirectoryInfo? Cs,
-    DirectoryInfo? Dll,
-    DirectoryInfo? Fhir,
+internal record ElmToFhirCommand
+(
+    DirectoryInfo? CqlDir,
+    DirectoryInfo ElmDir,
+    DirectoryInfo? CSharpDir,
+    DirectoryInfo? DllDir,
+    DirectoryInfo? PdbDir,
+    DirectoryInfo? FhirDir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
-    bool? JsonPretty)
+    bool? JsonPretty,
+    AssemblyCompilerDebugInformationFormat DebugSymbols)
 {
     public const string Name =
         "elm";
@@ -29,16 +33,76 @@ internal record ElmToFhirCommand(
 
     public static readonly Option[] Options =
     [
-        Option<DirectoryInfo>("--cql", "CQL input directory. (REQUIRED when using --fhir)"),
-        Option<DirectoryInfo>("--elm", "ELM input directory")
+        Option<DirectoryInfo>(
+            "--cql",
+            """
+            CQL input directory containing CQL files "*.cql".
+            (REQUIRED with --fhir)
+            """),
+
+        Option<DirectoryInfo>(
+                "--elm",
+                """
+                ELM input directory containing ELM files in JSON format "*.json".
+                """)
             .IsRequired()
             .ExistingOnly(),
-        Option<DirectoryInfo>("--cs", "C# output directory"),
-        Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
-        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory"),
-        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library.  (used with --fhir)"),
-        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library.  (used with --fhir)"),
-        Option<bool>("--json-pretty", "Output JSON using multiline and indentation. (used with --fhir)"),
+
+        Option<DirectoryInfo>(
+            "--cs",
+            """
+            C# output directory containing the generated C# source code files "*.g.cs" for the .NET assembly libraries.
+            """),
+
+        Option<DirectoryInfo>(
+            "--dll",
+            """
+            DLL output directory which are .NET assembly libraries "*.dll" containing invokable CQL.
+            """),
+
+        Option<DirectoryInfo>(
+            "--pdb",
+            """
+            PDB output directory which contain the portable debug symbol files "*.pdb".
+            Allowed to be the same as DLL output directory.
+            (Used with --debug-symbols=PortablePdb, --dll is REQUIRED)
+            """),
+
+        Option<DirectoryInfo>(
+            "--fhir",
+            """
+            FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
+            """),
+
+        Option<string>(
+            "--canonical-root-url",
+            """
+            The root canonical url output in FHIR library.
+            (Used with --fhir)
+            """),
+
+        Option<DateTimeOffset>(
+            "--override-utc-date-time",
+            """
+            Override date output in FHIR library.
+            (Used with --fhir)
+            """),
+
+        Option<bool>(
+            "--json-pretty",
+            """
+            Output JSON using multiline and indentation.
+            (Used with --fhir)
+            """),
+
+        Option<AssemblyCompilerDebugInformationFormat>(
+            "--debug-symbols",
+            """
+            The way debug symbols are emitted when generating .NET assemblies. Options are:
+            - None (DEFAULT) = No debug symbols are generated and .NET assemblies are compiled with optimizations enabled.
+            - PortablePdb = .NET assemblies are compiled with no optimizations and debug symbols are written as a separate Portable PDB format. Will be emitted to the --pdb directory.
+            - Embedded = .NET assemblies are compiled with no optimizations and debug symbols are embedded in the DLL itself, together with the C# source code.
+            """)
     ];
 
     public static Command CreateCommand() =>
@@ -48,13 +112,15 @@ internal record ElmToFhirCommand(
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
-        (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
-        (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
-        (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
-        (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (CqlDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
+        (ElmDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
+        (CSharpDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
+        (DllDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
+        (PdbDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
+        (FhirDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
+        (DebugSymbols, [PackagingOptions.ConfigSection, nameof(ElmToFhirOptions.DebugSymbols)]),
     ];
 }
