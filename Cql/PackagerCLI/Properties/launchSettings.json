@@ -34,15 +34,15 @@
     },
     "PackageCLI (Demo CQL->DLL with PDB in separate folder->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debugSymbols PortablePdb"
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
     },
     "PackageCLI (Demo CQL->DLL with PDB in DLL folder->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\"  --debugSymbols PortablePdb"
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
     },
     "PackageCLI (Demo CQL->DLL with embedded PDB->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\"  --debugSymbols Embedded"
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols Embedded"
     },
     "PackageCLI (Demo ELM->FHIR)": {
       "commandName": "Project",

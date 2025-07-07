@@ -14,16 +14,17 @@ namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 [UsedImplicitly]
 internal record ElmToFhirCommand
 (
-    DirectoryInfo? CqlDir,
-    DirectoryInfo ElmDir,
-    DirectoryInfo? CSharpDir,
-    DirectoryInfo? DllDir,
-    DirectoryInfo? PdbDir,
-    DirectoryInfo? FhirDir,
+    // Do not rename these properties, they must match the command line options e.g. --cql maps to Cql, etc
+    DirectoryInfo? Cql,
+    DirectoryInfo Elm,
+    DirectoryInfo? CSharp,
+    DirectoryInfo? Dll,
+    DirectoryInfo? Pdb,
+    DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     bool? JsonPretty,
-    AssemblyCompilerDebugInformationFormat DebugSymbols)
+    AssemblyCompilerDebugInformationFormat? DebugSymbols)
 {
     public const string Name =
         "elm";
@@ -112,15 +113,15 @@ internal record ElmToFhirCommand
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        (CqlDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
-        (ElmDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
-        (CSharpDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
-        (DllDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
-        (PdbDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
-        (FhirDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
+        (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
+        (CSharp, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
+        (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
+        (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
+        (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (DebugSymbols, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DebugSymbols)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (DebugSymbols, [PackagingOptions.ConfigSection, nameof(ElmToFhirOptions.DebugSymbols)]),
     ];
 }
