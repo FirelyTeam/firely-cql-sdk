@@ -76,7 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         public IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
+            DebugSymbolsFormat debugSymbolsFormat = DebugSymbolsFormat.None,
             bool allowInvalidCSharp = false,
             BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
@@ -87,7 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     t =>
                     {
                         var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugSymbolsFormat);
                         results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
@@ -106,10 +106,10 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
-            AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
+            DebugSymbolsFormat debugSymbolsFormat) =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                optimizationLevel: debugInformationFormat == AssemblyCompilerDebugInformationFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
+                optimizationLevel: debugSymbolsFormat == DebugSymbolsFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
@@ -120,13 +120,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat)
+            DebugSymbolsFormat debugSymbolsFormat)
         {
             EmbeddedText[]? embeddedTexts = []; // For embedding C# when enabling debug information
             string libraryVersionedIdentifier = library.VersionedLibraryIdentifier;
             var fileName = BuildFileName(libraryVersionedIdentifier);
 
-            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+            if (debugSymbolsFormat != DebugSymbolsFormat.None)
             {
                 // Embed C# source code
                 var sourceText = SourceText.From(librarySourceString, Encoding.UTF8);
@@ -149,7 +149,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
 
             var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
-                                               .WithOptions(CreateCSharpCompilationOptions(debugInformationFormat))
+                                               .WithOptions(CreateCSharpCompilationOptions(debugSymbolsFormat))
                                                .WithReferences(metadataReferences)
                                                .AddSyntaxTrees(
                                                    librarySyntaxTree,
@@ -157,10 +157,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                                                );
 
             using var codeStream = new MemoryStream();
-            MemoryStream? pdbStream = debugInformationFormat == AssemblyCompilerDebugInformationFormat.PortablePdb ? new MemoryStream() : null;
+            MemoryStream? pdbStream = debugSymbolsFormat == DebugSymbolsFormat.PortablePdb ? new MemoryStream() : null;
             using var pdbStreamDisposable = pdbStream as IDisposable;
 
-            var emitOptions = CreateEmitOptions(debugInformationFormat);
+            var emitOptions = CreateEmitOptions(debugSymbolsFormat);
             var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions, embeddedTexts: embeddedTexts);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
@@ -201,11 +201,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static string BuildFileName(string libraryVersionedIdentifier) =>
             $"{libraryVersionedIdentifier}.cs";
 
-        private static EmitOptions CreateEmitOptions(AssemblyCompilerDebugInformationFormat debugInformationFormat)
+        private static EmitOptions CreateEmitOptions(DebugSymbolsFormat debugSymbolsFormat)
         {
             var emitOptions = DefaultEmitOptions;
-            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
-                emitOptions = emitOptions.WithDebugInformationFormat((DebugInformationFormat)debugInformationFormat);
+            if (debugSymbolsFormat != DebugSymbolsFormat.None)
+                emitOptions = emitOptions.WithDebugInformationFormat((DebugInformationFormat)debugSymbolsFormat);
             return emitOptions;
         }
 

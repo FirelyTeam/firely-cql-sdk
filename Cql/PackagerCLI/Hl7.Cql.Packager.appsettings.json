@@ -21,7 +21,7 @@
   "Elm": {
     "AllowInvalidCSharp": true,
     "JsonPretty": false, // --json-pretty
-    "AssemblyCompilerDebugInformationFormat": "None", // --debug-symbols : "None", "PortablePdb", "EmbeddedPdb"
+    "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "EmbeddedPdb"
     "SkipFiles": [
 
       // These contain a union between incompatible tuples,

@@ -15,8 +15,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <param name="AssemblyBinary">The result compiled assembly binary.</param>
 /// <param name="DebugSymbolsBinary">
 /// The result debug symbols binary for the compiled assembly.
-/// This is only emitted if <seealso cref="ElmToolkitConfig.AssemblyCompilerDebugInformationFormat"/>
-/// is set to <seealso cref="AssemblyCompilerDebugInformationFormat.PortablePdb"/>.
+/// This is only emitted if <seealso cref="ElmToolkitConfig.DebugSymbolsFormat"/>
+/// is set to <seealso cref="DebugSymbolsFormat.PortablePdb"/>.
 /// </param>
 public readonly record struct ElmToolkitResultArtifacts(
     string CSharpSourceCode,

@@ -24,7 +24,7 @@ public record CqlToFhirCommand
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     bool? JsonPretty,
-    AssemblyCompilerDebugInformationFormat? DebugSymbols)
+    DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
         "cql";
@@ -102,7 +102,7 @@ public record CqlToFhirCommand
             (Used with --fhir or -elm)
             """),
 
-        Option<AssemblyCompilerDebugInformationFormat>(
+        Option<DebugSymbolsFormat>(
             "--debug-symbols",
             """
             The way debug symbols are emitted when generating .NET assemblies. Options are:
@@ -120,7 +120,7 @@ public record CqlToFhirCommand
         (Dll, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DllOutDir)]),
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
-        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.AssemblyCompilerDebugInformationFormat)]),
+        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [ElmOptions.ConfigSection, nameof(ElmOptions.JsonPretty)]),

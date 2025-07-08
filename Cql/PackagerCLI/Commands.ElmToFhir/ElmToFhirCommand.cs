@@ -24,7 +24,7 @@ internal record ElmToFhirCommand
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     bool? JsonPretty,
-    AssemblyCompilerDebugInformationFormat? DebugSymbols)
+    DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
         "elm";
@@ -96,7 +96,7 @@ internal record ElmToFhirCommand
             (Used with --fhir)
             """),
 
-        Option<AssemblyCompilerDebugInformationFormat>(
+        Option<DebugSymbolsFormat>(
             "--debug-symbols",
             """
             The way debug symbols are emitted when generating .NET assemblies. Options are:
@@ -119,7 +119,7 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
-        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.AssemblyCompilerDebugInformationFormat)]),
+        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),

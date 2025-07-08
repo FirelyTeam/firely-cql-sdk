@@ -50,7 +50,7 @@ internal sealed class ElmToFhirProgram
                     return ExitCode.NoCqlDirRequiredForFhir;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.AssemblyCompilerDebugInformationFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
             {
                 return exitCode;
             }

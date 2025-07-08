@@ -129,7 +129,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var debugInformationFormat = Config.AssemblyCompilerDebugInformationFormat;
+        var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
@@ -190,18 +190,18 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="assemblyCompiler">The assembly compiler to use.</param>
     /// <param name="librarySet">The set of libraries to compile.</param>
     /// <param name="cSharps">The C# code to compile.</param>
-    /// <param name="debugInformationFormat">The format for debug information.</param>
+    /// <param name="debugSymbolsFormat">The format for debug information.</param>
     /// <returns>The compiled assemblies.</returns>
     private IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
         IEnumerable<(ElmLibrary library, string cSharp)> cSharps,
-        AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
+        DebugSymbolsFormat debugSymbolsFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
                 cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
-                debugInformationFormat,
+                debugSymbolsFormat,
                 Config.AllowInvalidCSharp, errorStrategy => errorStrategy
                                                             .SetContinuation(BatchProcessExceptionContinuation)
                                                             .AddLoggerExceptionHandler(

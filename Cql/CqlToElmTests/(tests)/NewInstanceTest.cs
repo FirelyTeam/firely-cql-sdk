@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                                     Code { code: 'F', display: 'Female', system: 'http://hl7.org/fhir/v3/AdministrativeGender' }
                                                 """)
                           .CreateLibrarySetInvoker(
-                              new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat: AssemblyCompilerDebugInformationFormat.Embedded));
+                              new ElmToolkitConfig(DebugSymbolsFormat: DebugSymbolsFormat.Embedded));
 
             var ctx = FhirCqlContext.CreateContext();
 
