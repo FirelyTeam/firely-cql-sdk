@@ -9,6 +9,7 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
 
@@ -38,7 +39,7 @@ public static partial class PackagingToolkitExtensions
                     inputArtifacts,
                     cqlLibraryString => cqlLibraryString.LibraryIdentifier,
                     r => r.libraryIdentifier,
-                    (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbols));
+                    (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbolsBinary));
 
         return packagingToolkit.AddPackagingInputs(inputs);
     }

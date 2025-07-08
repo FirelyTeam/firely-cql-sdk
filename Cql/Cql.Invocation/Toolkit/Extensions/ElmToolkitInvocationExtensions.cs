@@ -29,7 +29,7 @@ public static class ElmToolkitInvocationExtensions
             elmToolkit
                 .CompileToAssemblies()
                 .GetElmToAssemblyResults()
-                .Select(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbols));
+                .Select(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbolsBinary));
 
         var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.BatchProcessExceptionContinuation)
             .AddAssemblyBinaries(assemblyBinaries);

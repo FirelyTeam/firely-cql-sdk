@@ -57,7 +57,7 @@ public static partial class ElmToolkitExtensions
         ElmLibrary elmLibrary,
         string cSharp,
         byte[] assemblyBinary,
-        byte[]? debugSymbols)> GetElmToAssemblyResults(
+        byte[]? debugSymbolsBinary)> GetElmToAssemblyResults(
         this ElmToolkit elmToolkit) =>
         elmToolkit.ArtifactsById
                   .SelectWhere(kv => kv.Value.Results switch

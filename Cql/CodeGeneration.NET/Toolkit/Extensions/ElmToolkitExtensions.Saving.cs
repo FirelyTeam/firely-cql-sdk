@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
@@ -75,38 +76,44 @@ public static partial class ElmToolkitExtensions
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null)
     {
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
-        var (prepDllDir, prepPdbDir) = (true, true);
 
-        foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetElmToAssemblyResults())
+        var elmToAssemblyResults = elmToolkit.GetElmToAssemblyResults().ToList();
+        if (elmToAssemblyResults.Count == 0)
         {
-            if (prepDllDir)
+            // No results to save, return the toolkit as is
+            return elmToolkit;
+        }
+
+        // Prepare the directories
+        (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(dllDirectory);
+
+        bool hasAnyDebugSymbols = elmToAssemblyResults.Any(t => t.debugSymbolsBinary is { Length: > 0 });
+        if (hasAnyDebugSymbols)
+        {
+            if (dllDirectory.FullName == pdbDirectory.FullName
+                && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
             {
-                prepDllDir = false;
-                (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(dllDirectory);
-                if (dllDirectory.FullName == pdbDirectory.FullName
-                    && pdbDirectoryPreparationStrategy == DirectoryPreparationStrategy.Recreate)
-                {
-                    // We do not want to recreate the pdb directory if it is the same as the dll directory
-                    prepPdbDir = false;
-                }
+                // We do not want to recreate the pdb directory if it is the same as the dll directory
             }
+            else
+            {
+                (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(pdbDirectory);
+            }
+        }
+
+
+        foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
+        {
+            var dllFileName = Path.Combine(dllDirectory.FullName, $"{libraryIdentifier}.dll");
+            File.WriteAllBytes(dllFileName, assemblyBytes);
+            logger.LogInformation("Saved assembly to file: {file}", dllFileName);
 
             if (debugSymbolsBytes is { Length: > 0 } pdb)
             {
-                if (prepPdbDir)
-                {
-                    prepPdbDir = false;
-                    (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(pdbDirectory);
-                }
-                
                 var pdbFileName = Path.Combine(pdbDirectory.FullName, $"{libraryIdentifier}.pdb");
                 File.WriteAllBytes(pdbFileName, pdb);
                 logger.LogInformation("Saved debug symbols to file: {file}", pdbFileName);
             }
-
-            var dllFileName = Path.Combine(dllDirectory.FullName, $"{libraryIdentifier}.dll");
-            File.WriteAllBytes(dllFileName, assemblyBytes);
-            logger.LogInformation("Saved assembly to file: {file}", dllFileName);
         }
 
         return elmToolkit;

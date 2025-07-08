@@ -6,15 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Windows.Markup;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
@@ -50,8 +51,6 @@ public class CqlToFhirProgram
             var cqlOpt = cqlOptions.Value;
             var elmOpt = elmOptions.Value;
             var packOpt = packagingOptions.Value;
-
-            var ds2 = elmOpt.AssemblyCompilerDebugInformationFormat;
 
             switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
@@ -104,9 +103,9 @@ public class CqlToFhirProgram
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
 
             var elmToolkitResults = elmToolkit
-                                          .CompileToAssemblies()
-                                          .GetElmToAssemblyResults()
-                                          .ToList();
+                                    .CompileToAssemblies()
+                                    .GetElmToAssemblyResults()
+                                    .ToList();
             if (elmToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No ELM libraries compiled to C#/DLL.");
