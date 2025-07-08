@@ -9,7 +9,6 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
 

@@ -17,7 +17,7 @@ internal record ElmToFhirCommand
     // Do not rename these properties, they must match the command line options e.g. --cql maps to Cql, etc
     DirectoryInfo? Cql,
     DirectoryInfo Elm,
-    DirectoryInfo? CSharp,
+    DirectoryInfo? Cs,
     DirectoryInfo? Dll,
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
@@ -115,7 +115,7 @@ internal record ElmToFhirCommand
     [
         (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
         (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
-        (CSharp, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
+        (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
