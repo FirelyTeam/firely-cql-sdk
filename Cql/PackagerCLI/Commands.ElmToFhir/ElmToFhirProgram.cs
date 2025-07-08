@@ -26,7 +26,8 @@ internal sealed class ElmToFhirProgram
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
+    IOptions<ElmToFhirOptions> elmToFhirOptions,
+    PdbOptionsValidator pdbOptionsValidator) : IProgram
 {
     public int Run()
     {
@@ -49,6 +50,11 @@ internal sealed class ElmToFhirProgram
                     return ExitCode.NoCqlDirRequiredForFhir;
             }
 
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.AssemblyCompilerDebugInformationFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
+            {
+                return exitCode;
+            }
+
             ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
                                     .SetIgnoreEnumerationExceptions()
                                     .AddElmFilesFromDirectory(
@@ -61,11 +67,11 @@ internal sealed class ElmToFhirProgram
             }
             sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.ArtifactsById.Count} ELM libraries from directory {opt.ElmInDir}."));
 
-            var elmToolkitResultRecords = elmToolkit
+            var elmToolkitResults = elmToolkit
                                           .CompileToAssemblies()
                                           .GetElmToAssemblyResults()
                                           .ToList();
-            if (elmToolkitResultRecords.Count == 0)
+            if (elmToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No ELM libraries compiled.");
                 return ExitCode.NoElmLibsCompiled;
@@ -77,14 +83,21 @@ internal sealed class ElmToFhirProgram
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
-                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} C# files to directory {opt.CSharpOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
             }
 
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
-                    .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
-                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} DLLs files to directory {opt.DllOutDir}."));
+                    .SaveAssemblyBinariesToDirectory(
+                        opt.DllOutDir,
+                        opt.PdbOutDir ?? opt.DllOutDir,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
+                if (opt.PdbOutDir is not null)
+                    sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
             }
 
             if ((opt.CqlInDir, opt.FhirOutDir) is (not null, not null))
@@ -120,7 +133,7 @@ internal sealed class ElmToFhirProgram
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
                 var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
-                sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries and {measuresCount} measures to directory {opt.FhirOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
             return ExitCode.Normal;

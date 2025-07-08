@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
-
 namespace Hl7.Cql.Packager.Commands.CqlToFhir;
 
 public class CqlToFhirOptions : IBindOptions
@@ -21,5 +19,4 @@ public class CqlToFhirOptions : IBindOptions
     public DirectoryInfo? DllOutDir { get; set; }
     public DirectoryInfo? PdbOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
-    public AssemblyCompilerDebugInformationFormat? DebugSymbols { get; set; }
 }

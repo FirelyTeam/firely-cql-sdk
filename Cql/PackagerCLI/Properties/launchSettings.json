@@ -38,7 +38,7 @@
     },
     "PackageCLI (Demo CQL->DLL with PDB in DLL folder->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
     },
     "PackageCLI (Demo CQL->DLL with embedded PDB->FHIR)": {
       "commandName": "Project",
@@ -51,6 +51,18 @@
     "PackageCLI (Demo ELM->FHIR, Command Line Args overriding AppSettings)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" "
+    },
+    "PackageCLI (Demo ExitCode:PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols None"
+    },
+    "PackageCLI (Demo ExitCode:PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
+    },
+    "PackageCLI (Demo ExitCode:DllDirIsRequiredWhenPdbDirIsSpecified)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb"
     },
     "PackageCLI (clinical_quality_language/Examples CQL->FHIR)": {
       "commandName": "Project",

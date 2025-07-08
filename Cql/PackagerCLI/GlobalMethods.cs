@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Packager.Commands.Logging;
+using Hl7.Cql.Packager.Options;
 
 namespace Hl7.Cql.Packager;
 
@@ -29,6 +30,7 @@ internal static class GlobalMethods
                     services
                         .AddPackagerCliOptions()
                         .AddSingleton<OptionsConsoleDumper>()
+                        .AddSingleton<PdbOptionsValidator>()
                         .AddSingleton(console))
             .UseConsoleLifetime();
 

@@ -30,7 +30,7 @@ internal record ElmToFhirCommand
         "elm";
 
     public const string Description =
-        "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL/PDB, FHIR Resources";
+        "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources";
 
     public static readonly Option[] Options =
     [
@@ -119,7 +119,7 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
-        (DebugSymbols, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DebugSymbols)]),
+        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.AssemblyCompilerDebugInformationFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),

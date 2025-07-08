@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Packager.Commands.ElmToFhir;
 using Hl7.Cql.Packager.Options;
 
 namespace Hl7.Cql.Packager.Commands.CqlToFhir;
@@ -31,7 +30,7 @@ public record CqlToFhirCommand
         "cql";
 
     public const string Description =
-        "Start from ELM and convert to one or more of the following outputs: C#, DLL/PDB, FHIR Resources. " +
+        "Start from ELM and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources. " +
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
         "identifier must be supplied as well.";
 
@@ -121,9 +120,10 @@ public record CqlToFhirCommand
         (Dll, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DllOutDir)]),
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
-        (DebugSymbols, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DebugSymbols)]),
+        (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.AssemblyCompilerDebugInformationFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [ElmOptions.ConfigSection, nameof(ElmOptions.JsonPretty)]),
+        (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
     ];
 }

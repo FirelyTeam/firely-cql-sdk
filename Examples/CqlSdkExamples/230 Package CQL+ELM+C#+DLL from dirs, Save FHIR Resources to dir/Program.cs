@@ -4,7 +4,6 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
-using Hl7.Cql.Runtime;
 
 partial class Program
 {
