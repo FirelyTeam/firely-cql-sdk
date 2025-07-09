@@ -14,6 +14,8 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
+    private const string JavaToolVersion = "3.1.0";
+
     private static string Description =
         "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
         "Pick from a command listed below, or type [command] --help for more information on it." +
@@ -23,7 +25,7 @@ public class Program
         Environment.NewLine +
         "The cql command is a very early addition and only supports basic cql translation. " +
         "It is not yet production ready. " +
-        "If you find issues, please start from the ELM produced by the Java v3.1.0 tooling instead " +
+        $"If you find issues, please start from the ELM produced by the Java v{JavaToolVersion} tooling instead " +
         "as input for the elm command.";
 
 
