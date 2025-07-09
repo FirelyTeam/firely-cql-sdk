@@ -13,7 +13,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <summary>
 /// Configuration settings for the <see cref="ElmToolkit"/>.
 /// </summary>
-/// <param name="AssemblyCompilerDebugInformationFormat">The format of the debug information emitted by the compiler.</param>
+/// <param name="DebugSymbolsFormat">The format of the debug information emitted by the compiler.</param>
 /// <param name="AllowScopeRedefinition">Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.</param>
 /// <param name="AllowUnresolvedExternals">
 /// When <see langword="true"/>, functions declared external will throw <see cref="NotImplementedException"/> at runtime
@@ -29,7 +29,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
 public record ElmToolkitConfig(
-    AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
+    DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
     bool AllowInvalidCSharp = false,

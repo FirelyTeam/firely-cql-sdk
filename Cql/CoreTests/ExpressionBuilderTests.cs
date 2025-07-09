@@ -10,7 +10,6 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Library = Hl7.Cql.Elm.Library;
 

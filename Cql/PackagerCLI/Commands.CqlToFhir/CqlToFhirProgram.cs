@@ -26,7 +26,8 @@ public class CqlToFhirProgram
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    IOptions<CqlToFhirOptions> cqlToElmOptions) : IProgram
+    IOptions<CqlToFhirOptions> cqlToElmOptions,
+    PdbOptionsValidator pdbOptionsValidator) : IProgram
 {
     public static int CommandHandler(
         IConsole console,
@@ -56,6 +57,11 @@ public class CqlToFhirProgram
                     return ExitCode.NoOutputDirs;
             }
 
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
+            {
+                return exitCode;
+            }
+
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                     .SetIgnoreEnumerationExceptions()
                                     .AddCqlLibrariesFromDirectory(opt.CqlInDir);
@@ -67,11 +73,11 @@ public class CqlToFhirProgram
             }
             sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsById.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-            var cqlToolkitResultRecords = cqlToolkit.TranslateToElm()
+            var cqlToolkitResults = cqlToolkit.TranslateToElm()
                       .GetCqlToolkitResults()
                       .ToList();
 
-            if (cqlToolkitResultRecords.Count == 0)
+            if (cqlToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No CQL libraries converted to ELM.");
                 return ExitCode.NoElmLibsCompiled;
@@ -83,7 +89,7 @@ public class CqlToFhirProgram
                     opt.ElmOutDir,
                     writeIndented: elmOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
-                sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResultRecords.Count} ELM files to directory {opt.ElmOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
@@ -94,11 +100,11 @@ public class CqlToFhirProgram
 
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
 
-            var elmToolkitResultRecords = elmToolkit
-                                          .CompileToAssemblies()
-                                          .GetElmToAssemblyResults()
-                                          .ToList();
-            if (elmToolkitResultRecords.Count == 0)
+            var elmToolkitResults = elmToolkit
+                                    .CompileToAssemblies()
+                                    .GetElmToAssemblyResults()
+                                    .ToList();
+            if (elmToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No ELM libraries compiled to C#/DLL.");
                 return ExitCode.NoElmLibsCompiled;
@@ -110,15 +116,22 @@ public class CqlToFhirProgram
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
-                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} C# files to directory {opt.CSharpOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
             }
 
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
                     .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
-                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} DLLs files to directory {opt.DllOutDir}."));
+                    .SaveAssemblyBinariesToDirectory(
+                        opt.DllOutDir,
+                        opt.PdbOutDir ?? opt.DllOutDir,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
+                if (opt.PdbOutDir is not null)
+                    sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
             }
 
             if (opt.FhirOutDir is not null)
@@ -137,13 +150,13 @@ public class CqlToFhirProgram
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
-                        elmOpt.JsonPretty,
+                        packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
                 var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
-                sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries and {measuresCount} measures to directory {opt.FhirOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
             return ExitCode.Normal;

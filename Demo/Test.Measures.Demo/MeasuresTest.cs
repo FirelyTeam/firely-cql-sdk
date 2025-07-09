@@ -156,7 +156,7 @@ namespace Test
                 config = config with { LRUCacheSize = cacheSize };
 
             if (Debugger.IsAttached)
-                config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
+                config = config with { DebugSymbolsFormat = DebugSymbolsFormat.Embedded };
 
             var elmToolkit = new ElmToolkit(loggerFactory, config);
 

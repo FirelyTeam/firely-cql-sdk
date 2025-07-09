@@ -33,7 +33,7 @@ partial class Program
 
         // Package into FHIR Resources (Translate CQL to ELM, then compile ELM to C# and DLLs)
         var packagingToolkit = cqlToolkit.PackageToFhirResources(
-            elmToolkitConfig: enableDebugging ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded) : null);
+            elmToolkitConfig: enableDebugging ? new ElmToolkitConfig(DebugSymbolsFormat.Embedded) : null);
 
         // Save packaged resources
         packagingToolkit.SaveFhirResourcesToDirectory(new DirectoryInfo("output/fhir"));

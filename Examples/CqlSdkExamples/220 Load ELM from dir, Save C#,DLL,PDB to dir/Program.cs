@@ -11,7 +11,7 @@ partial class Program
         SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "220 Load ELM from dir, Save C#,DLL,PDB to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var elmToolkitConfig = new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.PortablePdb);
+        var elmToolkitConfig = new ElmToolkitConfig(DebugSymbolsFormat.PortablePdb);
         var elmToolkit = new ElmToolkit(loggerFactory, elmToolkitConfig);
 
         // Add CQL libraries from a directory

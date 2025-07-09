@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -39,7 +38,7 @@ public static partial class PackagingToolkitExtensions
                     inputArtifacts,
                     cqlLibraryString => cqlLibraryString.LibraryIdentifier,
                     r => r.libraryIdentifier,
-                    (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbols));
+                    (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbolsBinary));
 
         return packagingToolkit.AddPackagingInputs(inputs);
     }

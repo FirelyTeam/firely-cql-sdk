@@ -8,10 +8,10 @@ Hl7.Cql.CodeGeneration.NET.AssemblyBinary.DebugSymbolsBytes.get -> byte[]?
 Hl7.Cql.CodeGeneration.NET.AssemblyBinary.DebugSymbolsBytes.init -> void
 Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Deconstruct(out byte[]? AssemblyBytes, out byte[]? DebugSymbolsBytes) -> void
 Hl7.Cql.CodeGeneration.NET.AssemblyBinaryExtensions
-Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
-Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.Embedded = 3 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
-Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None = 0 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
-Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.PortablePdb = 2 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
+Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.Embedded = 3 -> Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
+Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None = 0 -> Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
+Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.PortablePdb = 2 -> Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.AddElmLibraries(System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.Library!>! elmLibraries) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ArtifactsById.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts>!
@@ -39,10 +39,10 @@ Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.get -
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.init -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.get -> bool
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AssemblyCompilerDebugInformationFormat.get -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AssemblyCompilerDebugInformationFormat.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out int LRUCacheSize) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, int LRUCacheSize = 0) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.DebugSymbolsFormat.get -> Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.DebugSymbolsFormat.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out int LRUCacheSize) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, int LRUCacheSize = 0) -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig! original) -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.get -> int
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.init -> void
@@ -88,10 +88,10 @@ static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElm
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElmFilesFromDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, System.IO.EnumerationOptions? options = null, System.Func<System.IO.FileInfo!, bool>? filePredicate = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElmFromCqlToolkit(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.Func<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElmLibraries(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, params Hl7.Cql.Elm.Library![]! elmLibraries) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.GetElmToAssemblyResults(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Elm.Library! elmLibrary, string! cSharp, byte[]! assemblyBinary, byte[]? debugSymbols)>!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.GetElmToAssemblyResults(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Elm.Library! elmLibrary, string! cSharp, byte[]! assemblyBinary, byte[]? debugSymbolsBinary)>!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.GetElmToCSharpResults(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Elm.Library! elmLibrary, string! cSharp)>!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! dllDirectory, System.IO.DirectoryInfo! pdbDirectory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! dllDirectory, System.IO.DirectoryInfo! pdbDirectory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? dllDirectoryPreparationStrategy = null, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveCSharpFilesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.EqualityContract.get -> System.Type!
