@@ -29,9 +29,10 @@ public record CqlToFhirCommand
     public const string Name =
         "cql";
 
-    public const string Description =
+    public static readonly string Description =
         "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources. " +
-        "Take note of the disclaimer above.";
+        "Take note of the disclaimer above." +
+        Program.Disclaimer;
     
     public static Command CreateCommand() =>
         new Command(Name, Description)

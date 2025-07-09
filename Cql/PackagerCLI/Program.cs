@@ -16,9 +16,7 @@ public class Program
 {
     private const string JavaToolVersion = "3.1.0";
 
-    private static string Description =
-        "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
-        "Pick from a command listed below, or type [command] --help for more information on it." +
+    internal static readonly string Disclaimer =
         Environment.NewLine +
         Environment.NewLine +
         "DISCLAIMER:" +
@@ -28,6 +26,10 @@ public class Program
         $"If you find issues, please start from the ELM produced by the Java v{JavaToolVersion} tooling instead " +
         "as input for the elm command.";
 
+    private static readonly string Description =
+        "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
+        "Pick from a command listed below, or type [command] --help for more information on it." +
+        Disclaimer;
 
 
     public static int Main(string[] args)

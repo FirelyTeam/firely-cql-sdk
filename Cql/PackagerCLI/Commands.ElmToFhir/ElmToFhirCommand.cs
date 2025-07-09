@@ -29,11 +29,11 @@ internal record ElmToFhirCommand
     public const string Name =
         "elm";
 
-    public const string Description =
+    public static readonly string Description =
         "Start from ELM and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources. " +
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
-        "identifier must be supplied as well. " +
-        "Take note of the disclaimer above."; 
+        "identifier must be supplied as well." +
+        Program.Disclaimer;
 
     public static readonly Option[] Options =
     [
