@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\cql-demo.props" />
+
+	<PropertyGroup>
+		<CqlToElmEnabled>true</CqlToElmEnabled>
+	</PropertyGroup>
+	
 	<Import Project="Build\Mvn.Targets.xml" />      
 
 	<ItemGroup>
