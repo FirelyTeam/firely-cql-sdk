@@ -14,9 +14,19 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
-    private const string Description =
+    private static string Description =
         "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
-        "Pick from a command listed below, or type [command] --help for more information on it.";
+        "Pick from a command listed below, or type [command] --help for more information on it." +
+        Environment.NewLine +
+        Environment.NewLine +
+        "DISCLAIMER:" +
+        Environment.NewLine +
+        "The cql command is a very early addition and only supports basic cql translation. " +
+        "It is not yet production ready. " +
+        "If you find issues, please start from the ELM produced by the Java v3.1.0 tooling instead " +
+        "as input for the elm command.";
+
+
 
     public static int Main(string[] args)
     {

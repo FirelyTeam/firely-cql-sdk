@@ -30,10 +30,9 @@ public record CqlToFhirCommand
         "cql";
 
     public const string Description =
-        "Start from ELM and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources. " +
-        "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
-        "identifier must be supplied as well.";
-
+        "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources. " +
+        "Take note of the disclaimer above.";
+    
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
