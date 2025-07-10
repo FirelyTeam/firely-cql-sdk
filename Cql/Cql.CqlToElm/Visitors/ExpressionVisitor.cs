@@ -249,6 +249,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithLocator(context.Locator());
         }
 
+
+        private Literal Precision(cqlParser.DateTimePrecisionContext context)
+        {
+            return ElmFactory.Literal(Enum.GetName(context.Parse())!);
+        }
+
         private Literal? Precision(cqlParser.PluralDateTimePrecisionContext context)
         {
             if (context is null)
@@ -274,6 +280,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return ElmFactory.Literal(name);
             }
         }
+
 
         private Literal? Precision(cqlParser.DateTimeComponentContext context)
         {

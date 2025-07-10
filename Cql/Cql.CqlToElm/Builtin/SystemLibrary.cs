@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -243,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Median = aggregate<Median>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Message = nary<Message>(new TypeSpecifier[] { T, BooleanType, StringType, StringType, StringType }, 5, T)
             .Combine(
-                nary<Message>(new TypeSpecifier[] { T.ToListType(), BooleanType, StringType, StringType, StringType }, 5, T.ToListType()), 
+                nary<Message>(new TypeSpecifier[] { T.ToListType(), BooleanType, StringType, StringType, StringType }, 5, T.ToListType()),
                 nary<Message>(new TypeSpecifier[] { T.ToIntervalType(), BooleanType, StringType, StringType, StringType }, 5, T.ToIntervalType()));
         public static OverloadedFunctionDef Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MinValue> MinValue = nullary<MinValue>(T);
@@ -269,7 +269,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef ProperIn = OverloadedFunctionDef.Create(binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType), binaryWithPrecision<ProperIn>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludedIn = OverloadedFunctionDef.Create(binary<ProperIncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<ProperIncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludes = OverloadedFunctionDef.Create(
-            binary<ProperContains>(T.ToListType(), T, BooleanType, nameof(Elm.ProperIncludes)), 
+            binary<ProperContains>(T.ToListType(), T, BooleanType, nameof(Elm.ProperIncludes)),
             binary<ProperIncludes>(T.ToListType(), T.ToListType(), BooleanType),
             binaryWithPrecision<ProperContains>(T.ToIntervalType(), T, BooleanType, nameof(Elm.ProperIncludes)),
             binaryWithPrecision<ProperIncludes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
@@ -281,6 +281,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .Combine(binaryWithPrecision<SameOrAfter>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef SameOrBefore = binaryWithPrecision<SameOrBefore>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
             .Combine(binaryWithPrecision<SameOrBefore>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef Before = binaryWithPrecision<Before>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+            .Combine(binaryWithPrecision<Before>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef After = binaryWithPrecision<After>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+            .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
