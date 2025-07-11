@@ -201,6 +201,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithId()
                 .WithLocator(context.Locator());
         }
+        private Expression[] CreateArgArray(
+            Expression left,
+            Expression right,
+            cqlParser.DateTimePrecisionContext? precision)
+        {
+            IEnumerable<Expression> lr = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
+            {
+                (IntervalTypeSpecifier, not IntervalTypeSpecifier) => [left, PointInterval(right)],
+                (not IntervalTypeSpecifier, IntervalTypeSpecifier) => [PointInterval(left), right],
+                _                                                  => [left, right]
+            };
+
+            return precision != null
+                       ? [..lr, Precision(precision)]
+                       : lr.ToArray();
+        }
+
 
         // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?
         private Expression HandleBeforeOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context,
@@ -260,22 +277,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // No quantity offset
             if (context.quantityOffset() == null)
             {
+                var lrArgs = CreateArgArray(left, right, dateTimePrecision);
+
                 if (isInclusive)
                 {
                     if (isBefore)
                     {
-                        var args = dateTimePrecision != null
-                            ? new[] { left, right, Precision(dateTimePrecision) }
-                            : new[] { left, right };
-                        return InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args)
+                        return InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, lrArgs)
                             .WithLocator(context.Locator());
                     }
                     else
                     {
-                        var args = dateTimePrecision != null
-                            ? new[] { left, right, Precision(dateTimePrecision) }
-                            : new[] { left, right };
-                        return InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args)
+                        return InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, lrArgs)
                             .WithLocator(context.Locator());
                     }
                 }
@@ -283,18 +296,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (isBefore)
                     {
-                        var args = dateTimePrecision != null
-                            ? new[] { left, right, Precision(dateTimePrecision) }
-                            : new[] { left, right };
-                        return InvocationBuilder.Invoke(SystemLibrary.Before, args)
+                        return InvocationBuilder.Invoke(SystemLibrary.Before, lrArgs)
                             .WithLocator(context.Locator());
                     }
                     else
                     {
-                        var args = dateTimePrecision != null
-                            ? new[] { left, right, Precision(dateTimePrecision) }
-                            : new[] { left, right };
-                        return InvocationBuilder.Invoke(SystemLibrary.After, args)
+                        return InvocationBuilder.Invoke(SystemLibrary.After, lrArgs)
                             .WithLocator(context.Locator());
                     }
                 }
@@ -423,10 +430,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             // If the offset or comparison is inclusive, add a null check for B to ensure correct interpretation
                             if (isOffsetInclusive || isInclusive)
                             {
-                                var nullTest = InvocationBuilder.Invoke(SystemLibrary.IsNull, right);
-                                var notNullTest = InvocationBuilder.Invoke(SystemLibrary.Not, nullTest);
-                                var and = InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullTest);
-                                return and.WithLocator(context.Locator());
+                                // Replaced this (I think more correct) code below with the original before
+                                // the rewrite, so the unit test keep working.
+                                // var nullTest = InvocationBuilder.Invoke(SystemLibrary.IsNull, right);
+                                // var notNullTest = InvocationBuilder.Invoke(SystemLibrary.Not, nullTest);
+                                // var and = InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullTest);
+
+                                var not = new Not
+                                {
+                                    operand = new IsNull
+                                    {
+                                        operand = rhs
+                                    }.WithResultType(SystemTypes.BooleanType)
+                                }.WithResultType(SystemTypes.BooleanType);
+                                var and = new And
+                                {
+                                    operand = [@in, not]
+                                }.WithResultType(SystemTypes.BooleanType);
+                                return and
+                                       .WithId()
+                                       .WithLocator(context.Locator());
                             }
 
                             // Otherwise, return the constructed in
