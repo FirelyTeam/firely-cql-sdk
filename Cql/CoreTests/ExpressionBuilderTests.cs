@@ -1,3 +1,4 @@
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
@@ -154,7 +155,7 @@ namespace CoreTests
             var cqlToolkit = new CqlToolkit(config: cqlToolkitConfig)
                              .AddCqlLibraries([libraryString])
                              .TranslateToElm();
-            var elmLibrary = cqlToolkit.GetCqlToolkitResults().First().ElmLibrary;
+            var elmLibrary = cqlToolkit.GetCqlToolkitResults().First().elmLibrary;
 
             return elmLibrary;
         }
@@ -165,7 +166,8 @@ namespace CoreTests
                             .AddElmLibraries([elmLibrary])
                             .CompileToAssemblies();
 
-            var assembly = elmToolkit.GetElmToAssemblyResults().First().GetAssemblyBinary();
+            var (libraryIdentifier, _, _, assemblyBinary, debugSymbols) = elmToolkit.GetElmToAssemblyResults().First();
+            var assembly = new AssemblyBinary(assemblyBinary, debugSymbols);
 
             var invoker = new InvocationToolkit()
                            .AddAssemblyBinaries([assembly])
@@ -173,7 +175,7 @@ namespace CoreTests
 
             var result = invoker.InvokeLibraryDefinition(
                 FhirCqlContext.ForBundle(),
-                elmLibrary.VersionedLibraryIdentifier,
+                libraryIdentifier,
                 definition);
 
             return result;

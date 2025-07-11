@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -28,7 +29,7 @@ public static class ElmToolkitInvocationExtensions
             elmToolkit
                 .CompileToAssemblies()
                 .GetElmToAssemblyResults()
-                .Select(t => t.GetAssemblyBinary());
+                .Select(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbolsBinary));
 
         var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.BatchProcessExceptionContinuation)
             .AddAssemblyBinaries(assemblyBinaries);

@@ -36,13 +36,13 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         config ??= ElmToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = ElmToolkitConversionDictionary.Empty;
+        _artifactsById = ElmToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
-    private ElmToolkitConversionDictionary _conversions;
+    private ElmToolkitArtifactsById _artifactsById;
     private readonly ElmToolkitServices _services;
 
     /// <inheritdoc />
@@ -70,19 +70,23 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     }
 
     /// <summary>
-    /// Gets the dictionary of ELM to assembly compilations.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
-    public ElmToolkitConversionReadOnlyDictionary Conversions => _conversions;
+    /// <remarks>
+    /// This collection contains the artifacts produced by the toolkit,
+    /// such as compiled assemblies and source code.
+    /// </remarks>
+    public ReadOnlyElmToolkitArtifactsById ArtifactsById => _artifactsById;
 
     /// <summary>
-    /// Sets the conversions for the ELM to assembly compilations.
+    /// Replaces the current collection of artifacts with the specified collection.
     /// </summary>
-    /// <param name="conversions">The dictionary of ELM to assembly compilations.</param>
-    private void ReplaceConversions(
-        ElmToolkitConversionDictionary conversions)
-    {
-        _conversions = conversions;
-    }
+    /// <remarks>This method updates the internal state to use the provided collection of artifacts. Ensure
+    /// that <paramref name="artifactsById"/> contains valid data before calling this method.</remarks>
+    /// <param name="artifactsById">The collection of artifacts to replace the current collection.  This parameter cannot be null.</param>
+    private void ReplaceArtifactsById(
+        ElmToolkitArtifactsById artifactsById) =>
+        _artifactsById = artifactsById;
 
     /// <summary>
     /// Adds ELM libraries to the compiler.
@@ -90,15 +94,15 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="elmLibraries">The libraries to add.</param>
     public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> elmLibraries)
     {
-        var conversions = _conversions.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
         var logger = _services.Logger;
         var count = elmLibraries
-                    .Select(elmLibrary => new ElmToolkitConversionRecord(elmLibrary))
+                    .Select(elmLibrary => new ElmToolkitArtifacts(elmLibrary))
                     .TryForEach(conversionRecord =>
                                 {
                                     var libId = conversionRecord.LibraryIdentifier;
                                     logger.LogInformation("Adding ELM library to ElmToolkit: {lib}", libId);
-                                    conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                                    builder.Add(libId, conversionRecord); // This fails on duplicate key and value
                                 },
                                 errorStrategy => errorStrategy
                                                  .SetContinuation(BatchProcessExceptionContinuation)
@@ -108,7 +112,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                          logMessage("Could not add ELM library to ElmToolkit: {lib}", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceConversions(conversions: conversions.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }
@@ -118,19 +122,18 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// </summary>
     public ElmToolkit CompileToAssemblies()
     {
-        var entries = _conversions;
-        if (entries.Values.All(predicate: lc => lc is { ResultAssemblyBinary: not null }))
+        if (_artifactsById.Values.All(predicate: lc => lc is { Results.AssemblyBinary: not null }))
             return this;
 
         var logger = _services.Logger;
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var debugInformationFormat = Config.AssemblyCompilerDebugInformationFormat;
+        var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.SourceElmLibrary).ToArray();
+        ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -141,10 +144,10 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
-        var entriesBuilder = entries.ToBuilder();
-        var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, logger);
+        var entriesBuilder = _artifactsById.ToBuilder();
+        var hasChanged = UpdateArtifacts(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
-            ReplaceConversions(conversions: entriesBuilder.ToImmutable());
+            ReplaceArtifactsById(entriesBuilder.ToImmutable());
 
         return this;
     }
@@ -156,9 +159,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="conversions">The builder for the entries dictionary.</param>
     /// <param name="logger">The logger to use for logging.</param>
     /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
-    private static bool UpdateConversions(
+    private static bool UpdateArtifacts(
         IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
-        ElmToolkitConversionDictionary.Builder conversions,
+        ElmToolkitArtifactsById.Builder conversions,
         ILogger<ElmToolkit> logger)
     {
         bool hasChanged = false;
@@ -166,20 +169,14 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         {
             var elmVersionedIdentifier = library.VersionedLibraryIdentifier;
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
-            if (libraryCompilation.ResultCSharpSourceCode is not null
-                || libraryCompilation.ResultAssemblyBinary is not null)
+            if (libraryCompilation.Results is not null)
             {
                 logger.LogInformation(message: "Library already compiled: {lib}", args: elmVersionedIdentifier);
                 continue;
             }
 
             var cSharpSourceCode = sourceCodePerName!.Values.Single(); // We always expect a single source file
-            libraryCompilation = libraryCompilation with
-            {
-                ResultCSharpSourceCode = cSharpSourceCode,
-                ResultAssemblyBinary = assemblyBinary,
-                ResultDebugSymbolsBinary = debugSymbols,
-            };
+            libraryCompilation = libraryCompilation.WithResultArtifacts(cSharpSourceCode, assemblyBinary, debugSymbols);
             conversions[key: elmVersionedIdentifier] = libraryCompilation;
             hasChanged = true;
         }
@@ -193,25 +190,24 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="assemblyCompiler">The assembly compiler to use.</param>
     /// <param name="librarySet">The set of libraries to compile.</param>
     /// <param name="cSharps">The C# code to compile.</param>
-    /// <param name="debugInformationFormat">The format for debug information.</param>
+    /// <param name="debugSymbolsFormat">The format for debug information.</param>
     /// <returns>The compiled assemblies.</returns>
     private IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
         IEnumerable<(ElmLibrary library, string cSharp)> cSharps,
-        AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
+        DebugSymbolsFormat debugSymbolsFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
                 cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
-                debugInformationFormat,
-                Config.OutputCSharpFilesToTempDirectory,
-                errorStrategy => errorStrategy
-                                 .SetContinuation(BatchProcessExceptionContinuation)
-                                 .AddLoggerExceptionHandler(
-                                     _services.Logger,
-                                     (pair, logMessage) =>
-                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
+                debugSymbolsFormat,
+                Config.AllowInvalidCSharp, errorStrategy => errorStrategy
+                                                            .SetContinuation(BatchProcessExceptionContinuation)
+                                                            .AddLoggerExceptionHandler(
+                                                                _services.Logger,
+                                                                (pair, logMessage) =>
+                                                                    logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
 
     /// <summary>
     /// Generates the C# code for the libraries.

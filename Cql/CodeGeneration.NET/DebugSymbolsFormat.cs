@@ -8,24 +8,24 @@
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Represents the format of the debug information emitted by the compiler.
+/// Represents the format of the debug symbols emitted by the compiler.
 /// </summary>
-public enum AssemblyCompilerDebugInformationFormat
+public enum DebugSymbolsFormat
 {
     /// <summary>
-    /// No debug information is emitted in the assembly or as a separate PDB files.
+    /// No debug symbols.
     /// </summary>
     None = 0,
 
     /// <summary>
     /// This format represents the portable PDB format, which is designed to be cross-platform and efficient.
-    /// A portable PDB will be generated alongside the DLL, which contains the debug information for the associated assembly.
+    /// A portable PDB will be generated alongside the DLL, which contains the debug symbols for the associated assembly.
     /// </summary>
     PortablePdb = 2,
 
     /// <summary>
-    /// This format embeds the debugging information directly within the assembly, making it self-contained,
-    /// thus no PDB file will be generated.
+    /// This format embeds the debugging information and the related c# source directly within the assembly,
+    /// making it self-contained, thus no PDB file will be generated.
     /// </summary>
     Embedded = 3,
 }

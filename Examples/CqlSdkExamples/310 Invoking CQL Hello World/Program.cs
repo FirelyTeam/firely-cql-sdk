@@ -28,7 +28,7 @@ partial class Program
             cqlToolkit
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker(
-                    enableDebugging ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded) : null);
+                    enableDebugging ? new ElmToolkitConfig(DebugSymbolsFormat.Embedded) : null);
 
         CqlContext cqlContext = FhirCqlContext.WithDataSource();
 

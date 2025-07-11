@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "+" => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
                 "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
                 "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
+                _   => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
             };
             return invocation
                 .WithId()
@@ -77,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = precision switch
             {
                 { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
-                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
+                _   => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
             };
             return expression
                 .WithId();
@@ -97,11 +97,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = @operator switch
             {
-                "=" => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
+                "="  => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
                 "!=" => InvocationBuilder.Invoke(SystemLibrary.NotEqual, lhs, rhs),
-                "~" => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
+                "~"  => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
                 "!~" => NotEquivalent(lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
+                _    => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
             };
             return expression
                 .WithId()
@@ -123,8 +123,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var rhs = Visit(expressions[1]);
 
             return InvocationBuilder.Invoke(SystemLibrary.Implies, lhs, rhs)
-                .WithId()
-                .WithLocator(context.Locator());
+                                    .WithId()
+                                    .WithLocator(context.Locator());
         }
 
         //    | expression ('<=' | '<' | '>' | '>=') expression                                               #inequalityExpression
@@ -137,11 +137,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => InvocationBuilder.Invoke(SystemLibrary.Greater, lhs, rhs),
+                ">"  => InvocationBuilder.Invoke(SystemLibrary.Greater, lhs, rhs),
                 ">=" => InvocationBuilder.Invoke(SystemLibrary.GreaterOrEqual, lhs, rhs),
-                "<" => InvocationBuilder.Invoke(SystemLibrary.Less, lhs, rhs),
+                "<"  => InvocationBuilder.Invoke(SystemLibrary.Less, lhs, rhs),
                 "<=" => InvocationBuilder.Invoke(SystemLibrary.LessOrEqual, lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
+                _    => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
             return result
@@ -159,11 +159,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = @operator switch
             {
-                "*" => InvocationBuilder.Invoke(SystemLibrary.Multiply, lhs, rhs),
-                "/" => InvocationBuilder.Invoke(SystemLibrary.Divide, lhs, rhs),
+                "*"   => InvocationBuilder.Invoke(SystemLibrary.Multiply, lhs, rhs),
+                "/"   => InvocationBuilder.Invoke(SystemLibrary.Divide, lhs, rhs),
                 "div" => InvocationBuilder.Invoke(SystemLibrary.TruncatedDivide, lhs, rhs),
                 "mod" => InvocationBuilder.Invoke(SystemLibrary.Modulo, lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression.")
+                _     => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression.")
             };
             return expression
                 .WithId()
@@ -181,9 +181,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => InvocationBuilder.Invoke(SystemLibrary.Or, lhs, rhs),
+                "or"  => InvocationBuilder.Invoke(SystemLibrary.Or, lhs, rhs),
                 "xor" => InvocationBuilder.Invoke(SystemLibrary.Xor, lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
+                _     => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 
             return result
@@ -199,8 +199,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var rhs = Visit(terms[1]);
 
             return InvocationBuilder.Invoke(SystemLibrary.Power, lhs, rhs)
-                .WithId()
-                .WithLocator(context.Locator());
+                                    .WithId()
+                                    .WithLocator(context.Locator());
         }
 
         public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
@@ -251,7 +251,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     return lhs.resultTypeSpecifier switch
                     {
                         ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.AnyInValueSet, lhs, rhs),
-                        _ => InvocationBuilder.Invoke(SystemLibrary.InValueSet, lhs, rhs),
+                        _                 => InvocationBuilder.Invoke(SystemLibrary.InValueSet, lhs, rhs),
                     };
                 }
                 else
@@ -261,7 +261,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         expression = InvocationBuilder.Invoke(match);
                     else
                         expression = new In { operand = new[] { lhs, rhs } }
-                            .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.In.Name, lhs, rhs))
+                            .AddError(MessagingProvider.CouldNotResolveFunction(SystemLibrary.In.Name, lhs, rhs))
                             .WithResultType(SystemTypes.BooleanType);
                 }
             }
@@ -272,7 +272,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     expression = InvocationBuilder.Invoke(match);
                 else
                     expression = new Contains { operand = new[] { lhs, rhs } }
-                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Contains.Name, lhs, rhs))
+                        .AddError(MessagingProvider.CouldNotResolveFunction(SystemLibrary.Contains.Name, lhs, rhs))
                         .WithResultType(SystemTypes.BooleanType);
             }
             return expression
@@ -314,14 +314,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             var arguments = dtp switch
             {
-                { } units => [.. expressions, ElmFactory.Quantity(1, units)],
+                { } units                      => [.. expressions, ElmFactory.Quantity(1, units)],
                 _ when expressions.Length is 1 => [.. expressions, ElmFactory.Null(SystemTypes.QuantityType)],
                 _ when expressions.Length is 2 => expressions,
-                _ => throw new InvalidOperationException($"Expecting 1 or 2 arguments, but found {expressions.Length}")
+                _                              => throw new InvalidOperationException($"Expecting 1 or 2 arguments, but found {expressions.Length}")
             };
             return InvocationBuilder.Invoke(function, arguments)
-                .WithId()
-                .WithLocator(context.Locator());
+                                    .WithId()
+                                    .WithLocator(context.Locator());
         }
 
     }

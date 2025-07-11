@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     {
                                         alias = aqs.alias,
                                         expression = aqs.expression,
-                                    }.AddError(Messaging.IdentifierAlreadyInScope(aqs.alias));
+                                    }.AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
                                 }
                             }
 

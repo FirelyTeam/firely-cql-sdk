@@ -20,7 +20,7 @@ partial class Program
         var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
         var ignoreErrors = true;    // This ignores errors and tries to continue processing other definitions
 
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
@@ -33,7 +33,7 @@ partial class Program
 
         // Package into FHIR Resources (Translate CQL to ELM, then compile ELM to C# and DLLs)
         var packagingToolkit = cqlToolkit.PackageToFhirResources(
-            elmToolkitConfig: enableDebugging ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded) : null);
+            elmToolkitConfig: enableDebugging ? new ElmToolkitConfig(DebugSymbolsFormat.Embedded) : null);
 
         // Save packaged resources
         packagingToolkit.SaveFhirResourcesToDirectory(new DirectoryInfo("output/fhir"));

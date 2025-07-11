@@ -2,15 +2,17 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Hl7.Cql.CodeGeneration.NET;
 
 partial class Program
 {
-    void LoadElmFromDirSaveCSharpAndDllToDir()
+    void LoadElmFromDirSaveCSharpDllAndPdbToDir()
     {
-        Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, "220 Load ELM from dir, Save C#,DLL to dir");
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "220 Load ELM from dir, Save C#,DLL,PDB to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var elmToolkit = new ElmToolkit(loggerFactory);
+        var elmToolkitConfig = new ElmToolkitConfig(DebugSymbolsFormat.PortablePdb);
+        var elmToolkit = new ElmToolkit(loggerFactory, elmToolkitConfig);
 
         // Add CQL libraries from a directory
         var elmDirectory = new DirectoryInfo("input/elm");
@@ -21,7 +23,7 @@ partial class Program
 
         // Save compiled assemblies and C# files
         elmToolkit.SaveCSharpFilesToDirectory(new DirectoryInfo("output/cs"));
-        elmToolkit.SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/dll"));
+        elmToolkit.SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/dll"), new DirectoryInfo("output/pdb"));
 
         // Open Explorer to the output directory
         _ = Process.Start("explorer.exe", "output");

@@ -77,8 +77,8 @@
 	            var dir = programCsFile.Directory.Name;
 	            var csNew = Regex.Replace(
 	                cs,
-	                "Environment.CurrentDirectory\\s*=.*?;",
-	                "Environment.CurrentDirectory = Path.Combine(InitialCurrentDirectory, \"" + dir + "\");");
+	                "SetCurrentDirectory\\s*\\(.*;",
+	                "SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, \"" + dir + "\"));");
 	            if (cs != csNew)
 	            {
 	                File.WriteAllText(programCsFile.FullName, csNew);

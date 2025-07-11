@@ -38,6 +38,3 @@ global using FhirModelInfo = Hl7.Fhir.Model.ModelInfo;
 global using AssemblyBinaryHashSet = System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
 global using AssemblyBinaryReadOnlyHashSet = System.Collections.Generic.IReadOnlySet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
 
-global using PackagingToolkitConversionsDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord>;
-global using PackagingToolkitConversionsReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord>;
-

@@ -67,7 +67,7 @@ public class InvocationToolkitTests
                 .TranslateToElm();
 
         // WORKAROUND: The cql to elm toolkit doesn't support annotations yet.
-        var resultElmLibrary = cqlToolkit.Conversions[cqlMeasuresExample].ResultElmLibrary;
+        var resultElmLibrary = cqlToolkit.ArtifactsById[cqlMeasuresExample].ResultElmLibrary;
         resultElmLibrary.Should().NotBeNull();
         var stmtInitialPopulation = resultElmLibrary!.statements.Single(s => s.Name == "Initial population");
         stmtInitialPopulation.annotation.Should().BeNull(

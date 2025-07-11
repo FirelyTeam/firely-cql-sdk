@@ -17,4 +17,7 @@ internal static class ExitCode
     public const int CantPackageNoCqlElmMatches = 4;
     public const int NoOutputDirs = 5;
     public const int NoCqlDirRequiredForFhir = 6;
+    public const int PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb = 7;
+    public const int DllDirIsRequiredWhenPdbDirIsSpecified = 8;
+    public const int PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb = 9;
 }

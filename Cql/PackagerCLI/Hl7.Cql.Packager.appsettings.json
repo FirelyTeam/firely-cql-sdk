@@ -1,8 +1,8 @@
 {
   "Logging": {
-    "ConsoleLogLevel": "Information", // "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
-    "FileLogLevel": "Information", // "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
-    "Append": false
+    "ConsoleLogLevel": "Information", // --console-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
+    "FileLogLevel": "Information", // --file-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
+    "Append": false // --log-append
   },
   "Cql": {
     "Models": [ "ElmR1", "Fhir401" ],
@@ -19,8 +19,9 @@
     "ValidateLiterals": true
   },
   "Elm": {
-    "JsonPretty": false,
-    "OutputCSharpFilesToTempDirectory": false,
+    "AllowInvalidCSharp": true,
+    "JsonPretty": false, // --json-pretty
+    "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "Embedded"
     "SkipFiles": [
 
       // These contain a union between incompatible tuples,
@@ -46,9 +47,9 @@
     ]
   },
   "Packaging": {
-    "JsonPretty": false,
-    "CanonicalRootUrl": "https://fire.ly/fhir/",
-    "OverrideDate": null, // eg. "2023-10-01T00:00:00Z",
+    "JsonPretty": false, // --json-pretty
+    "CanonicalRootUrl": "https://fire.ly/fhir/", // --canonical-root-url
+    "OverrideDate": null, // --override-utc-date-time eg. "2023-10-01T00:00:00Z",
     "FixedLibraryCanonicals": {
       "FHIRHelpers": "https://fhir.org/guides/cqf/common/Library/FHIRHelpers"
     }

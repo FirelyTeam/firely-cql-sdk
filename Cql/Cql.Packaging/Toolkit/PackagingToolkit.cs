@@ -36,13 +36,13 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = PackagingToolkitConversionsDictionary.Empty;
+        _artifactsById = PackagingToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = PackagingToolkitServices.Create(loggerFactory, config);
     }
 
-    private PackagingToolkitConversionsDictionary _conversions;
+    private PackagingToolkitArtifactsById _artifactsById;
     private readonly PackagingToolkitServices _services;
 
     /// <inheritdoc />
@@ -70,34 +70,46 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     public PackagingToolkitConfig Config { get; }
 
     /// <summary>
-    /// Gets the dictionary of conversions.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
-    public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
-
-    private void ReplaceConversions(PackagingToolkitConversionsDictionary conversions) =>
-        _conversions = conversions;
+    /// <remarks>
+    /// This collection contains all artifacts (C#, ELM, CQL, .NET assembly binaries and debug symbols)
+    /// that have been added to the packaging toolkit, indexed by their IDs.
+    /// </remarks>
+    public ReadOnlyPackagingToolkitArtifactsById ArtifactsById => _artifactsById;
 
     /// <summary>
-    /// Adds FHIR resource packaging inputs to the packager.
+    /// Replaces the current collection of artifacts with the specified collection, identified by their IDs.
     /// </summary>
-    /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
-    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitSourceRecord> inputRecords)
+    private void ReplaceArtifactsById(PackagingToolkitArtifactsById artifactsById) =>
+        _artifactsById = artifactsById;
+
+    /// <summary>
+    /// Adds a collection of input artifacts to the packaging toolkit.
+    /// </summary>
+    /// <remarks>This method processes the provided input artifacts and adds them to the toolkit. If a
+    /// mismatch is detected  between the library identifiers of the CQL and ELM representations of an artifact, an <see
+    /// cref="InvalidOperationException"/>  is thrown. The method logs information about successfully added artifacts
+    /// and handles errors using a defined  error strategy.</remarks>
+    /// <param name="inputArtifactsItems">A collection of <see cref="PackagingToolkitInputArtifacts"/> representing the input artifacts to be added. Each
+    /// artifact must have matching library identifiers between its CQL and ELM representations.</param>
+    /// <returns>The current instance of <see cref="PackagingToolkit"/> with the added artifacts.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if a library identifier mismatch is detected between the CQL and ELM representations of an artifact.</exception>
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputArtifacts> inputArtifactsItems)
     {
-        var conversions = _conversions.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
         var logger = _services.Logger;
-        var count = inputRecords
-                    .Select(rec => new PackagingToolkitConversionRecord(rec))
+        var count = inputArtifactsItems
+                    .Select(inputArtifactsItem => new PackagingToolkitArtifacts(inputArtifactsItem))
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.VersionedLibraryIdentifier);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.Input.ElmLibrary.VersionedLibraryIdentifier);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
                         logger.LogInformation("Adding CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}", libIdFromCql);
-                        conversions.Add(libIdFromCql, conversionRecord);
+                        builder.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
@@ -107,7 +119,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                                              logMessage("Could not add CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            _conversions = conversions.ToImmutable();
+            _artifactsById = builder.ToImmutable();
 
         return this;
     }
@@ -118,9 +130,9 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit ConvertToFhirResources()
     {
-        var builder = _conversions.ToBuilder();
+        var builder = _artifactsById.ToBuilder();
 
-        var libraries = builder.Values.Select(o => o.SourceElmLibrary);
+        var libraries = builder.Values.Select(conversionRecord => conversionRecord.Input.ElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -142,15 +154,16 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                  .ToArray();
         ElmLibrarySet librarySet = new ElmLibrarySet("", librariesToPackage);
 
-        var inputsById = builder.Values
-                                .Select(ToResourcePackagerInput)
-                                .ToDictionary(o => o.LibraryIdentifier);
+        var inputArtifactsById =
+            builder.Values.ToDictionary(
+                o => o.LibraryIdentifier.ToString(),
+                o => o.Input.ToResourcePackagerInputArtifacts());
 
         var count =
             _services.ResourcePackager
                      .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
-                         inputsById: id => inputsById[id],
+                         inputsById: id => inputArtifactsById[id],
                          overrideDate: Config.OverrideDate,
                          errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
@@ -159,10 +172,10 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);
-                         var fhirResourcePackaging = builder[versionedLibraryIdentifier];
-                         if (fhirResourcePackaging.ResultFhirLibrary is null)
+                         var artifacts = builder[versionedLibraryIdentifier];
+                         if (artifacts.Result is null)
                          {
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { ResultFhirLibrary = o.fhirLibrary, ResultFhirMeasure = o.fhirMeasure };
+                             builder[versionedLibraryIdentifier] = artifacts.WithResultArtifacts(o.fhirLibrary, o.fhirMeasure);
                              return (true, o);
                          }
 
@@ -172,17 +185,10 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .Count();
 
         if (count > 0)
-            ReplaceConversions(builder.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }
-
-    private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
-        o.LibraryIdentifier,
-        o.SourceCqlLibrary.Cql,
-        o.SourceElmLibrary,
-        o.SourceCSharpSourceCode,
-        o.SourceAssemblyBinary);
 
     /// <summary>
     /// A utility method that serializes FHIR resources to JSON format.

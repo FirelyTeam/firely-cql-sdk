@@ -540,6 +540,7 @@ Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Break = 2 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Continue = 1 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw = 0 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
+Hl7.Cql.Runtime.BatchProcessExceptionHandler<T>
 Hl7.Cql.Runtime.ContextEventArgs
 Hl7.Cql.Runtime.ContextEventArgs.ContextEventArgs(object? state = null) -> void
 Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
@@ -600,7 +601,6 @@ Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.CqlValueTupleJsonConverter() -> void
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CqlValueTupleJsonConverterFactory() -> void
-Hl7.Cql.Runtime.ValueExceptionHandler<T>
 Hl7.Cql.Toolkit.IToolkit
 Hl7.Cql.Toolkit.IToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Toolkit.IToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
@@ -702,9 +702,9 @@ virtual Hl7.Cql.Operators.RetrieveParameters.EqualityContract.get -> System.Type
 virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrieveParameters? other) -> bool
 virtual Hl7.Cql.Operators.RetrieveParameters.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
+virtual Hl7.Cql.Runtime.BatchProcessExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
 virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Parsing.CqlParseError parseError) -> void
-virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool

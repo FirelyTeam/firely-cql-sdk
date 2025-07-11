@@ -17,5 +17,6 @@ public class CqlToFhirOptions : IBindOptions
     public DirectoryInfo? ElmOutDir { get; set; }
     public DirectoryInfo? CSharpOutDir { get; set; }
     public DirectoryInfo? DllOutDir { get; set; }
+    public DirectoryInfo? PdbOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
 }

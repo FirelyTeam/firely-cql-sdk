@@ -39,7 +39,7 @@ internal record CqlToolkitServices(
     public static CqlToolkitServices Create(
         ILoggerFactory loggerFactory,
         CqlToolkitConfig config,
-        CqlToolkitConversionDictionary translations)
+        CqlToolkitArtifactsById translations)
     {
         var translationsBuilder = translations.ToBuilder();
         var libraryBuilderProvider = new LibraryBuilderProvider(translationsBuilder);
@@ -56,7 +56,7 @@ internal record CqlToolkitServices(
             Get<CqlToElmConverter>(serviceProvider),
             libraryBuilderProvider,
             serviceScope,
-            CqlToElmConverter.GetLibraryVisitorScoped(serviceScope));
+            serviceScope.GetLibraryVisitorScoped());
 
         libraryBuilderProvider.CqlToElmTranslatorServices = cqlToElmTranslatorServices;
 

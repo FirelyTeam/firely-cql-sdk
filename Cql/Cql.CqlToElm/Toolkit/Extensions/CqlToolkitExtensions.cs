@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -20,16 +21,20 @@ public static partial class CqlToolkitExtensions
         cqlToolkit.CreateLogger(typeof(CqlToolkitExtensions));
 
     /// <summary>
-    /// Gets the CQL toolkit results.
+    /// Retrieves the results from the specified <see cref="CqlToolkit"/> instance,  providing a collection of tuples
+    /// containing library identifiers and their corresponding ELM libraries.
     /// </summary>
-    /// <param name="cqlToolkit">The CQL toolkit instance.</param>
-    /// <returns>An enumerable collection of <see cref="CqlToolkitResultRecord"/>.</returns>
-    public static IEnumerable<CqlToolkitResultRecord> GetCqlToolkitResults(
+    /// <remarks>This method filters and transforms the artifacts stored in the <paramref name="cqlToolkit"/>
+    /// instance,  returning only those with valid library identifiers and ELM libraries.</remarks>
+    /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> instance from which to retrieve the results.</param>
+    /// <returns>An enumerable collection of tuples, where each tuple contains a <see cref="CqlVersionedLibraryIdentifier"/>
+    /// representing the library identifier and an <see cref="ElmLibrary"/> representing the corresponding ELM library.</returns>
+    public static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, ElmLibrary elmLibrary)> GetCqlToolkitResults(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.Conversions.Values
+        cqlToolkit.ArtifactsById.Values
                   .SelectWhere(conversionRecord => conversionRecord switch
                   {
-                      { LibraryIdentifier: { } id, ResultElmLibrary: { } elmLib } => (true, new CqlToolkitResultRecord(id, elmLib)),
+                      { LibraryIdentifier: {} id, ResultElmLibrary: { } elmLib } => (true, (id, elmLib)),
                       _ => default
                   });
 }

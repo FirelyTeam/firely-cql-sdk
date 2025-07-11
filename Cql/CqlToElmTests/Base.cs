@@ -46,7 +46,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile =
                 elmToolkitServices
                     .GetAssemblyCompiler()
-                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.Config.AssemblyCompilerDebugInformationFormat)
+                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.Config.DebugSymbolsFormat)
                     .ToList();
 
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static readonly ElmToolkitConfig ElmToolkitConfig =
             Debugger.IsAttached
-            ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat: AssemblyCompilerDebugInformationFormat.Embedded)
+            ? new ElmToolkitConfig(DebugSymbolsFormat: DebugSymbolsFormat.Embedded)
             : ElmToolkitConfig.Default;
 
         internal static T? Run<T>(

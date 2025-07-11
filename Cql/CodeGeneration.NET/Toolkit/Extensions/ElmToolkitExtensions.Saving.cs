@@ -27,12 +27,16 @@ public static partial class ElmToolkitExtensions
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
-
+        var prepCsDir = true;
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryIdentifier, csharpSourceCode, _, _) in elmToolkit.GetElmToAssemblyResults())
+        foreach (var (libraryIdentifier, _, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
         {
+            if (prepCsDir)
+            {
+                prepCsDir = false;
+                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+            }
             var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.g.cs");
             File.WriteAllText(fileName, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
@@ -45,29 +49,69 @@ public static partial class ElmToolkitExtensions
     /// Saves the generated assembly binaries and debug symbols to the specified directory.
     /// </summary>
     /// <param name="elmToolkit">The ElmToolkit instance containing the generated assembly binaries and debug symbols.</param>
-    /// <param name="directory">The directory where the assembly binaries and debug symbols will be saved.</param>
+    /// <param name="directory">The directory where the assembly binaries and debug symbols (if provided) will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        DirectoryInfoHandler? directoryPreparationStrategy = null)
-    {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        SaveAssemblyBinariesToDirectory(elmToolkit, directory, directory, directoryPreparationStrategy, directoryPreparationStrategy);
 
+    /// <summary>
+    /// Saves the generated assembly binaries and debug symbols to the specified directory.
+    /// </summary>
+    /// <param name="elmToolkit">The ElmToolkit instance containing the generated assembly binaries and debug symbols.</param>
+    /// <param name="dllDirectory">The directory where the assembly binaries will be saved.</param>
+    /// <param name="pdbDirectory">The directory where the debug symbol binaries (if provided) will be saved.</param>
+    /// <param name="dllDirectoryPreparationStrategy">Optional strategy for preparing the dll directory.</param>
+    /// <param name="pdbDirectoryPreparationStrategy">Optional strategy for preparing the pdb directory.</param>
+    /// <returns>The ElmToolkit instance.</returns>
+    public static ElmToolkit SaveAssemblyBinariesToDirectory(
+        this ElmToolkit elmToolkit,
+        DirectoryInfo dllDirectory,
+        DirectoryInfo pdbDirectory,
+        DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
+        DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null)
+    {
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryIdentifier, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetElmToAssemblyResults())
+        var elmToAssemblyResults = elmToolkit.GetElmToAssemblyResults().ToList();
+        if (elmToAssemblyResults.Count == 0)
         {
-            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.dll");
-            File.WriteAllBytes(fileName, assemblyBytes);
-            logger.LogInformation("Saved assembly to file: {file}", fileName);
+            // No results to save, return the toolkit as is
+            return elmToolkit;
+        }
 
-            if (debugSymbolsBytes is { Length: > 0 } dsb)
+        // Prepare the directories
+        (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(dllDirectory);
+
+        bool hasAnyDebugSymbols = elmToAssemblyResults.Any(t => t.debugSymbolsBinary is { Length: > 0 });
+        if (hasAnyDebugSymbols)
+        {
+            if (dllDirectory.FullName == pdbDirectory.FullName
+                && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
             {
-                fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.pdb");
-                File.WriteAllBytes(fileName, dsb);
-                logger.LogInformation("Saved debug symbols to file: {file}", fileName);
+                // We do not want to recreate the pdb directory if it is the same as the dll directory
+            }
+            else
+            {
+                (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(pdbDirectory);
+            }
+        }
+
+
+        foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
+        {
+            var dllFileName = Path.Combine(dllDirectory.FullName, $"{libraryIdentifier}.dll");
+            File.WriteAllBytes(dllFileName, assemblyBytes);
+            logger.LogInformation("Saved assembly to file: {file}", dllFileName);
+
+            if (debugSymbolsBytes is { Length: > 0 } pdb)
+            {
+                var pdbFileName = Path.Combine(pdbDirectory.FullName, $"{libraryIdentifier}.pdb");
+                File.WriteAllBytes(pdbFileName, pdb);
+                logger.LogInformation("Saved debug symbols to file: {file}", pdbFileName);
             }
         }
 

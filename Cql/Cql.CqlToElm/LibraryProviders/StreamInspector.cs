@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 case '{' when FromJson(stream) is { identifier: not null } lib:
                     {
                         // From ELM in json format - read the info straight from the ELM
-                        libraryInfo = new LibraryInfo(lib.identifier, 
+                        libraryInfo = new LibraryInfo(lib.identifier,
                             LibraryBuilder.CreateFromExisting(lib),
                             LibraryInfo.ElmJsonMimeType);
                         return true;
@@ -24,8 +24,8 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 case '<' when FromXml(stream) is { identifier: not null } lib:
                     {
                         // From ELM in XML format - read the info straight from the ELM
-                        libraryInfo = new LibraryInfo(lib.identifier, 
-                            LibraryBuilder.CreateFromExisting(lib),
+                        libraryInfo = new LibraryInfo(lib.identifier,
+                                                      LibraryBuilder.CreateFromExisting(lib),
                             LibraryInfo.ElmXmlMimeType);
                         return true;
                     }
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 if (lib is { identifier: not null })
                 {
                     libraryInfo = new LibraryInfo(lib.identifier,
-                        LibraryBuilder.CreateFromExisting(lib), 
+                        LibraryBuilder.CreateFromExisting(lib),
                         LibraryInfo.ElmJsonMimeType);
                     return true;
                 }
@@ -87,7 +87,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 var lib = FromXml(stream);
                 if (lib is { identifier: not null })
                 {
-                    libraryInfo = new LibraryInfo(lib.identifier, 
+                    libraryInfo = new LibraryInfo(lib.identifier,
                         LibraryBuilder.CreateFromExisting(lib),
                         LibraryInfo.ElmXmlMimeType);
                     return true;

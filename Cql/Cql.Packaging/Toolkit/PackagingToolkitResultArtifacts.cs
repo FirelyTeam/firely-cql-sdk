@@ -6,18 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Runtime;
-
 namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
 /// Represents a result record for the <see cref="PackagingToolkit"/>.
 /// </summary>
-/// <param name="LibraryIdentifier">The library identifier of the input library.</param>
 /// <param name="FhirLibrary">The result FHIR library.</param>
 /// <param name="FhirMeasure">The result FHIR measure.</param>
-public readonly record struct PackagingToolkitResultRecord(
-    CqlVersionedLibraryIdentifier LibraryIdentifier,
+public readonly record struct PackagingToolkitResultArtifacts(
     FhirLibrary FhirLibrary,
     FhirMeasure? FhirMeasure = null)
 {

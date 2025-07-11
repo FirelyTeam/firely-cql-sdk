@@ -14,7 +14,7 @@ Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterTypes.get -> System.Type![
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>!
 Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions
-Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProviderCallback
+Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProvider
 Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionInvokerExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitInvocationExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.InvocationToolkitExtensions
@@ -23,16 +23,16 @@ Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler
 Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions
-Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.Deconstruct(out Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProviderCallback? ProviderArgumentsCallback, out Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler? PreInvokeDefinitionCallback, out Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler? PostInvokeDefinitionCallback, out Hl7.Cql.Runtime.ValueExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>? InvocationExceptionCallback) -> void
-Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.InvocationExceptionCallback.get -> Hl7.Cql.Runtime.ValueExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>?
+Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.Deconstruct(out Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProvider? ProviderArgumentsCallback, out Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler? PreInvokeDefinitionCallback, out Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler? PostInvokeDefinitionCallback, out Hl7.Cql.Runtime.BatchProcessExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>? InvocationExceptionCallback) -> void
+Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.InvocationExceptionCallback.get -> Hl7.Cql.Runtime.BatchProcessExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>?
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.InvocationExceptionCallback.init -> void
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PostInvokeDefinitionCallback.get -> Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler?
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PostInvokeDefinitionCallback.init -> void
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PreInvokeDefinitionCallback.get -> Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler?
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PreInvokeDefinitionCallback.init -> void
-Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.ProviderArgumentsCallback.get -> Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProviderCallback?
+Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.ProviderArgumentsCallback.get -> Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProvider?
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.ProviderArgumentsCallback.init -> void
-Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.SelectResultsOptions(Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProviderCallback? ProviderArgumentsCallback = null, Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler? PreInvokeDefinitionCallback = null, Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null, Hl7.Cql.Runtime.ValueExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>? InvocationExceptionCallback = null) -> void
+Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.SelectResultsOptions(Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProvider? ProviderArgumentsCallback = null, Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler? PreInvokeDefinitionCallback = null, Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null, Hl7.Cql.Runtime.BatchProcessExceptionHandler<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>? InvocationExceptionCallback = null) -> void
 Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.SelectResultsOptions(Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions! original) -> void
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.AddAssemblyBinaries(System.Collections.Generic.IEnumerable<Hl7.Cql.CodeGeneration.NET.AssemblyBinary!>! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
@@ -86,7 +86,7 @@ static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.SelectF
 static Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.Default.get -> Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions!
 static Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.operator !=(Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? left, Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.operator ==(Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? left, Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? right) -> bool
-virtual Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProviderCallback.Invoke(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext) -> object?[]!
+virtual Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionArgumentsProvider.Invoke(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext) -> object?[]!
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.PostInvokeDefinitionHandler.Invoke(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, object?[]! definitionArguments, object? definitionResult) -> void
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.PreInvokeDefinitionHandler.Invoke(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, object?[]! definitionArguments) -> void
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.<Clone>$() -> Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions!

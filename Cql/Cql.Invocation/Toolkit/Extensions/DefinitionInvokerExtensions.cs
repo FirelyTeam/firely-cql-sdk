@@ -128,7 +128,7 @@ public delegate void PreInvokeDefinitionHandler(
 /// <returns>
 /// An array of objects representing the arguments to be passed to the CQL definition.
 /// </returns>
-public delegate object?[] DefinitionArgumentsProviderCallback(
+public delegate object?[] DefinitionArgumentsProvider(
     DefinitionInvoker definitionInvoker,
     CqlContext cqlContext);
 
@@ -183,10 +183,10 @@ public delegate void PostInvokeDefinitionHandler(
 /// It takes the <see cref="DefinitionInvoker"/>, the exception, and a continuation strategy as parameters.
 /// </param>
 public record SelectResultsOptions(
-    DefinitionArgumentsProviderCallback? ProviderArgumentsCallback = null,
+    DefinitionArgumentsProvider? ProviderArgumentsCallback = null,
     PreInvokeDefinitionHandler? PreInvokeDefinitionCallback = null,
     PostInvokeDefinitionHandler? PostInvokeDefinitionCallback = null,
-    ValueExceptionHandler<DefinitionInvoker>? InvocationExceptionCallback = null)
+    BatchProcessExceptionHandler<DefinitionInvoker>? InvocationExceptionCallback = null)
 {
     /// <summary>
     /// Gets the default instance of <see cref="SelectResultsOptions"/> with no custom callbacks or exception handlers.

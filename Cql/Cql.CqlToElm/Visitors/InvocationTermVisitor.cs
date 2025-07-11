@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(Messaging.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
 
                 for(int i = 1; i < qualifiers.Length; i++)
                 {
@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(Messaging.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
             }
         }
 
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
             else if (term is IncludeRef ir)
-                return ir.AddError(Messaging.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
+                return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(context.Locator());
             else if (term is null)
             {
@@ -206,8 +206,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     var libraryName = ir.IncludeDef.localIdentifier;
                     return LibraryBuilder.CurrentScope
-                        .Ref(Messaging, libraryName, memberName)
-                        .WithLocator(context.Locator());
+                                         .Ref(MessagingProvider, libraryName, memberName)
+                                         .WithLocator(context.Locator());
                 }
                 else
                 {
@@ -362,7 +362,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     // error is issued instead of a "member not found" error.
                     if (@this.Name == "$this" && propertyExpression.GetErrors()?.Length > 0)
                         return new AliasRef { name = identifier }
-                            .AddError(Messaging.CouldNotResolveInCurrent(identifier))
+                            .AddError(MessagingProvider.CouldNotResolveInCurrent(identifier))
                             .WithLocator(context.Locator())
                             .WithResultType(SystemTypes.AnyType);
                     else
@@ -370,8 +370,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
             }
             var @ref = LibraryBuilder.CurrentScope!
-                .Ref(Messaging, null, identifier)
-                .WithLocator(context.Locator());
+                                     .Ref(MessagingProvider, null, identifier)
+                                     .WithLocator(context.Locator());
             if (def is Element element)
             {
                 var errors = element.GetErrors()
@@ -408,9 +408,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
                     var result = symbolDef switch
                     {
-                        IHasSignature ihs => InvocationBuilder.MatchSignature(ihs, fluentParams),
+                        IHasSignature ihs        => InvocationBuilder.MatchSignature(ihs, fluentParams),
                         OverloadedFunctionDef ov => InvocationBuilder.MatchSignature(ov, fluentParams),
-                        _ => null
+                        _                        => null
                     };
                     if (result?.Compatible ?? false)
                         return invoke(result.Function, null, fluentParams, true);
@@ -444,7 +444,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
                     .WithLocator(locator)
-                    .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
+                    .AddError(MessagingProvider.CouldNotResolveFunction(funcName, paramList));
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
             {
                 var funcRef = InvocationBuilder.Invoke(funcDef, libraryName, arguments);
@@ -501,20 +501,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+                          .Ref(MessagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
 
         // | '$index'                          #indexInvocation
         public override Expression VisitIndexInvocation([NotNull] cqlParser.IndexInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+                          .Ref(MessagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
 
         // | '$total'                          #totalInvocation
         public override Expression VisitTotalInvocation([NotNull] cqlParser.TotalInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
-                .WithLocator(context.Locator());
+                          .Ref(MessagingProvider, null, context.GetText())
+                          .WithLocator(context.Locator());
     }
 
 }

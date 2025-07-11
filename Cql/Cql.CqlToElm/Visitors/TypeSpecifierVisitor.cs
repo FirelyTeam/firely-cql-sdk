@@ -3,19 +3,17 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
+    internal sealed class TypeSpecifierVisitor(
+        // Owning LibraryBuilder
+        LibraryBuilder libraryBuilder,
+        // Services
+        IOptions<CqlToElmOptions> cqlToElmOptions,
+        MessageProvider messageProvider)
+        : Visitor<TypeSpecifier>
     {
-        public LibraryBuilder LibraryBuilder { get; }
-        public MessageProvider Messaging { get; }
-        public CqlToElmOptions Options { get; }
-
-        public TypeSpecifierVisitor(IServiceProvider services,
-            LibraryBuilder libraryBuilder)
-        {
-            LibraryBuilder = libraryBuilder;
-            Messaging = services.GetRequiredService<MessageProvider>();
-            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-        }
+        private MessageProvider MessageProvider => messageProvider;
+        private LibraryBuilder LibraryBuilder => libraryBuilder;
+        private CqlToElmOptions CqlToElmOptions { get; } = cqlToElmOptions.Value;
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
@@ -72,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var libraryName = qualifiers.FirstOrDefault();
             var typeName = string.Join(".", qualifiers.Skip(1).Append(context.referentialOrTypeNameIdentifier().Parse()));
 
-            TryResolveNamedTypeSpecifier(LibraryBuilder.SymbolTable, 
+            TryResolveNamedTypeSpecifier(LibraryBuilder.SymbolTable,
                 libraryName, typeName, out var result, out var error);
 
             //TODO: Might need ErrorTypeSpecifier here
@@ -87,7 +85,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (error is not null)
                 result.AddError(error);
-            
+
             return result.WithLocator(context.Locator());
         }
 
@@ -103,8 +101,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         internal ModelType? GetModelType(UsingDefSymbol s, string name) =>
-            s.Model.TryGetTypeInfoFor(name, out var typeInfo) 
-            ? new ModelType(s.Model, typeInfo!) 
+            s.Model.TryGetTypeInfoFor(name, out var typeInfo)
+            ? new ModelType(s.Model, typeInfo!)
             : null;
 
         private bool TryResolveType(ISymbolScope scope,
@@ -131,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
                 else
-                    (result, error) = (null, Messaging.CouldNotResolveModel(libraryName));
+                    (result, error) = (null, MessageProvider.CouldNotResolveModel(libraryName));
 
                 return error is null;
             }
@@ -141,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return TryGetMatchingTypes(usings, typeName, out result, out error);
         }
 
-        internal bool TryGetMatchingTypes(IEnumerable<UsingDefSymbol> usingDefs, 
+        internal bool TryGetMatchingTypes(IEnumerable<UsingDefSymbol> usingDefs,
             string typeName, [NotNullWhen(true)] out ModelType? result, out string? error)
         {
             var matches = usingDefs.Select(include => (include, modelType: GetModelType(include, typeName)))
@@ -154,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else if (matches.Count == 2)
             {
-                var behavior = Options.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
+                var behavior = CqlToElmOptions.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
                 if (behavior == AmbiguousTypeBehavior.PreferSystem)
                 {
                     var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
@@ -176,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
                 result = null;
-                error = Messaging.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
+                error = MessageProvider.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
                 return false;
 
             }
@@ -201,7 +199,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 result = null;
-                error = Messaging.NamedTypeRequiredInContext();
+                error = MessageProvider.NamedTypeRequiredInContext();
                 return false;
             }
         }

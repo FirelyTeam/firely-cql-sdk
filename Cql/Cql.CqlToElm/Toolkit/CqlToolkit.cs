@@ -32,13 +32,13 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _conversions = CqlToolkitConversionDictionary.Empty;
+        _artifactsById = CqlToolkitArtifactsById.Empty;
         Config = config;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
-        _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
+        _services = CqlToolkitServices.Create(loggerFactory, config, _artifactsById);
     }
 
-    private CqlToolkitConversionDictionary _conversions;
+    private CqlToolkitArtifactsById _artifactsById;
     private readonly CqlToolkitServices _services;
 
     /// <inheritdoc/>
@@ -66,19 +66,26 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     }
 
     /// <summary>
-    /// Gets the dictionary of CQL to ELM translations.
+    /// Gets a read-only collection of artifacts indexed by their unique identifiers.
     /// </summary>
-    public CqlToolkitConversionReadOnlyDictionary Conversions => _conversions;
+    /// <remarks>
+    /// This collection contains the CQL libraries and their corresponding ELM libraries
+    /// that have been added to the toolkit.
+    /// </remarks>
+    public CqlToolkitArtifactsByIdReadOnly ArtifactsById => _artifactsById;
 
     /// <summary>
-    /// Replaces the CQL to ELM conversions.
+    /// Replaces the current set of artifacts with the specified artifacts, identified by their IDs.
     /// </summary>
-    /// <param name="conversions">The dictionary of translations to set.</param>
-    private void ReplaceConversions(
-        CqlToolkitConversionDictionary conversions)
+    /// <remarks>This method updates the internal state to use the provided artifacts and configures the
+    /// associated services to reflect the new artifacts.</remarks>
+    /// <param name="artifactsById">The collection of artifacts, indexed by their IDs, to replace the existing artifacts. This parameter cannot be
+    /// null.</param>
+    private void ReplaceArtifactsById(
+        CqlToolkitArtifactsById artifactsById)
     {
-        _conversions = conversions;
-        _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
+        _artifactsById = artifactsById;
+        _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder = artifactsById.ToBuilder();
     }
 
     /// <summary>
@@ -88,16 +95,16 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     public CqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _services.Logger;
-        var conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
+        var builder = _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder;
 
         var count = cqlLibraries
-                    .Select(lib => new CqlToolkitConversionRecord(lib))
+                    .Select(lib => new CqlToolkitArtifacts(lib))
                     .TryForEach(
                         conversionRecord =>
                         {
                             var libId = conversionRecord.LibraryIdentifier;
                             logger.LogInformation("Adding CQL library to CqlToolkit: {lib}", libId);
-                            conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                            builder.Add(libId, conversionRecord); // This fails on duplicate key and value
                         },
                         errorStrategy => errorStrategy
                                          .SetContinuation(BatchProcessExceptionContinuation)
@@ -107,7 +114,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                                                  logMessage("Could not add CQL library to CqlToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
-            ReplaceConversions(conversions.ToImmutable());
+            ReplaceArtifactsById(builder.ToImmutable());
 
         return this;
     }
@@ -117,10 +124,10 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// </summary>
     public CqlToolkit TranslateToElm()
     {
-        CqlToolkitConversionDictionary.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
+        CqlToolkitArtifactsById.Builder builder = _services.LibraryBuilderProvider.CqlToolkitArtifactsByIdBuilder;
 
         var count =
-            _conversions
+            _artifactsById
                 .Values
                 .Where(conversion => conversion.ResultElmLibrary is null)
                 .TryForEach(
@@ -131,7 +138,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
 
                         var elmLibrary = libraryBuilder.Build();
                         var newConversionRecord = r with { ResultElmLibrary = elmLibrary };
-                        conversions[r.LibraryIdentifier] = newConversionRecord;
+                        builder[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
@@ -141,7 +148,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                 );
 
         if (count > 0)
-            ReplaceConversions(conversions: conversions.ToImmutable());
+            ReplaceArtifactsById(artifactsById: builder.ToImmutable());
 
         return this;
     }

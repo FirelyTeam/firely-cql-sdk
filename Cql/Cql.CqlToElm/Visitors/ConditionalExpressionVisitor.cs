@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
                         else 
-                            caseItem.AddError(Messaging.TypeFoundIsNotExpected(when.resultTypeSpecifier, whenExpectedType));
+                            caseItem.AddError(MessagingProvider.TypeFoundIsNotExpected(when.resultTypeSpecifier, whenExpectedType));
 
                         caseItem.then = Visit(item.expression(1));
 
@@ -94,18 +94,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     item.resultTypeSpecifier = item.then.resultTypeSpecifier;
                 }
                 else
-                    item.AddError(Messaging.TypeFoundIsNotExpected(then.resultTypeSpecifier, returnType));
+                    item.AddError(MessagingProvider.TypeFoundIsNotExpected(then.resultTypeSpecifier, returnType));
             }
             var elseCastResult = CoercionProvider.Coerce(@else, returnType);
             if (elseCastResult.Success)
                 @else = elseCastResult.Result;
             else
-                @else.AddError(Messaging.TypeFoundIsNotExpected(@else.resultTypeSpecifier, returnType));
+                @else.AddError(MessagingProvider.TypeFoundIsNotExpected(@else.resultTypeSpecifier, returnType));
 
 
             return ElmFactory.Case(comparand, caseItems, @else)
-                .WithId()
-                .WithLocator(context.Locator());
+                             .WithId()
+                             .WithLocator(context.Locator());
         }
     }
 }
