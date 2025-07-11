@@ -28,6 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Issue32: Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00] starts 1 day or less on or after day of start of Interval[@2017-12-20T11:00:00, @2017-12-21T21:00:00]
                 """);
+
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -168,6 +169,128 @@ namespace Hl7.Cql.CqlToElm.Test
             var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
             var result = Run<bool?>(sameOrBefore, library);
             result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void TestOnOrBeforeWithRelativeQuantity()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-11 7 days or less before @2025-07-18");
+            var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
+            var result = Run<bool?>(sameOrBefore, library);
+            result.Should().BeTrue();
+
+            library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-11 7 days or less before @2025-07-19");
+            sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
+            result = Run<bool?>(sameOrBefore, library);
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void TestBeforeExclusive()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-10 before @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Before>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestBeforeInclusive()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-10 on or before @2025-07-10");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterExclusive()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-12 after @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<After>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterInclusive()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-11 on or after @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestBeforeWithQuantityOffset()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-10 1 day before @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameAs>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterWithQuantityOffset()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-12 1 day after @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameAs>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestBeforeWithMoreThan()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-09 more than 1 day before @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Before>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterWithMoreThan()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-13 more than 1 day after @2025-07-11");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<After>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestBeforeWithLessThan()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-11 less than 2 days before @2025-07-12");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterWithLessThan()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-11 less than 2 days after @2025-07-10");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestBeforeWithOrLess()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-10 2 days or less before @2025-07-12");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAfterWithOrLess()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2025-07-12 2 days or less after @2025-07-10");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>();
+            var result = Run<bool?>(expr, library);
+            Assert.IsTrue(result);
         }
 
     }

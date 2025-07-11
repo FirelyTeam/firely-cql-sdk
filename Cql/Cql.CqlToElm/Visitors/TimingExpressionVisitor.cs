@@ -201,156 +201,193 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithId()
                 .WithLocator(context.Locator());
         }
+        private Expression[] CreateArgArray(
+            Expression left,
+            Expression right,
+            cqlParser.DateTimePrecisionContext? precision) =>
+            precision != null
+                ? [left, right, Precision(precision)]
+                : [left, right];
 
-        // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')? 
+
+        // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?
         private Expression HandleBeforeOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context,
             Expression lhs,
             Expression rhs)
         {
-            var relationship = context.temporalRelationship();
-            if (relationship.ChildCount == 1)
-            {
-                var keyword = Keyword.Parse(relationship.GetChild(0));
-                return keyword switch
-                {
-                    CqlKeyword.After => HandleAfter(context, lhs, rhs),
-                    CqlKeyword.Before => HandleBefore(context, lhs, rhs),
-                    _ => throw new NotImplementedException()
-                };
-            }
-            else
-            {
-                var keyword1 = Keyword.Parse(relationship.GetChild(0));
-                var keyword2 = Keyword.Parse(relationship.GetChild(1));
-                return keyword1 switch
-                {
-                    CqlKeyword.On_Or when keyword2 is CqlKeyword.After => HandleOnOrAfter(context, lhs, rhs),
-                    CqlKeyword.On_Or when keyword2 is CqlKeyword.Before => HandleOnOrBefore(context, lhs, rhs),
-                    CqlKeyword.After when keyword2 is CqlKeyword.On_Or => throw new NotImplementedException(),
-                    CqlKeyword.Before when keyword2 is CqlKeyword.On_Or => throw new NotImplementedException(),
-                    _ => throw new NotImplementedException()
-                };
-            }
-        }
+            // This is a straight port from
+            // https://github.com/cqframework/clinical_quality_language/blob/67145e3444eb126c3d4ae44c7e98c0ed222bc0c5/Src/java/cql-to-elm/src/main/java/org/cqframework/cql/cql2elm/Cql2ElmVisitor.java#L2169
+            // with some restructuring to to fit the C# style and conventions.
+            // Written with the help of GTP-4.1, using the following prompt:
+            // "Here is some Java code that parses the BeforeOrAfterIntervalOperatorPhrase: <insert Java code here>.
+            // Port this code to C# and replace the current HandleBeforeOrAfter. Where Java creates Elm nodes (e.g. in Java of.createSameOrBefore),
+            // use the equivalent C# call with the InvocationBuilder, for example InvocationBuilder.Invoke(SystemLibrary.SameOrBefore) is the same as the Java above."
+            // Note that I added a conversion to Point Intervals for the left and right operands, which is something that
+            // the original Java code does in the method resolution, but we do not - so I added it here.
+            Expression left = lhs;
+            Expression right = rhs;
 
-        private Expression HandleBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
-        {
-            DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
-            var before = new Before()
-            {
-                operand = new Expression[] { lhs, rhs },
-            };
-            if (precision.HasValue)
-            {
-                before.precision = precision.Value;
-                before.precisionSpecified = true;
-            }
-            else
-            {
-                before.precisionSpecified = false;
-            }
-            return before
-                .WithResultType(SystemTypes.BooleanType)
-                .WithLocator(context.Locator());
-        }
-        private Expression HandleOnOrBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
-        {
-            var precision = Precision(context.dateTimePrecisionSpecifier());
-            (lhs, rhs) = (lhs.resultTypeSpecifier, rhs.resultTypeSpecifier) switch
-            {
-                (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (lhs, PointInterval(rhs)),
-                (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(lhs), rhs),
-                _ => (lhs, rhs)
-            };
-            var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
-            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args);
-            return expression
-                .WithResultType(SystemTypes.BooleanType)
-                .WithLocator(context.Locator());
-        }
-        private Expression HandleAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
-        {
-            DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
-            var after = new After()
-            {
-                operand = new Expression[] { lhs, rhs },
-            };
-            if (precision.HasValue)
-            {
-                after.precision = precision.Value;
-                after.precisionSpecified = true;
-            }
-            else
-            {
-                after.precisionSpecified = false;
-            }
-            return after
-                .WithResultType(SystemTypes.BooleanType)
-                .WithLocator(context.Locator());
-        }
-        private Expression HandleOnOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
-        {
-            var precision = Precision(context.dateTimePrecisionSpecifier());
+            bool isBefore = false;
+            bool isInclusive = false;
 
-            // These timing phrases have complicated operand setups.
-            // Depending on the phrase, setup lhs and rhs operands.
-            cqlParser.QuantityOffsetContext? offset;
-            if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval
-                && (offset = context.quantityOffset()) != null)
+            // Handle point selectors (starts/ends/start/end)
+            foreach (var child in context.children)
             {
-                var quantity = Visit(offset.quantity());
-                // or more | or less
-                var offsetRelative = offset.offsetRelativeQualifier()?.GetText();
-                if (offsetRelative is not null)
+                switch (child.GetText())
                 {
-                    if (offsetRelative == "or more")
+                    case "starts":
+                        left = InvocationBuilder.Invoke(SystemLibrary.Start, left);
+                        continue;
+                    case "ends":
+                        left = InvocationBuilder.Invoke(SystemLibrary.End, left);
+                        continue;
+                    case "start":
+                        right = InvocationBuilder.Invoke(SystemLibrary.Start, right);
+                        continue;
+                    case "end":
+                        right = InvocationBuilder.Invoke(SystemLibrary.End, right);
+                        continue;
+                }
+            }
+
+            // Parse temporal relationship
+            foreach (var child in context.temporalRelationship().children)
+            {
+                switch (child.GetText())
+                {
+                    case "before":
+                        isBefore = true;
+                        continue;
+                    case "on or":
+                    case "or on":
+                        isInclusive = true;
+                        continue;
+                }
+            }
+
+            var dateTimePrecision = context.dateTimePrecisionSpecifier()?.dateTimePrecision();
+
+            // No quantity offset, so a simple "a is before/after (or on) b"
+            if (context.quantityOffset() == null)
+            {
+                // Make sure both left and right are intervals by turning points into Point Intervals.
+                (left,right) = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
+                {
+                    (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (left, PointInterval(right)),
+                    (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(left), right),
+                    _                                                  => (left, right)
+                };
+
+                var lrArgs = CreateArgArray(left, right, dateTimePrecision);
+                var result = (isInclusive, isBefore) switch
+                {
+                    (true, true)   => InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, lrArgs),
+                    (true, false)  => InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, lrArgs),
+                    (false, true)  => InvocationBuilder.Invoke(SystemLibrary.Before, lrArgs),
+                    (false, false) => InvocationBuilder.Invoke(SystemLibrary.After, lrArgs)
+                };
+
+                return result.WithLocator(context.Locator());
+            }
+
+            // Otherwise, deal with a quantity offset, so something like "a is 7 days before/after b".
+            var quantity = Visit(context.quantityOffset().quantity());
+
+            // Adjust left/right for interval types - left and right are points from here on.
+            if (left.resultTypeSpecifier is IntervalTypeSpecifier)
+            {
+                left = isBefore
+                           ? InvocationBuilder.Invoke(SystemLibrary.End, left)
+                           : InvocationBuilder.Invoke(SystemLibrary.Start, left);
+            }
+            if (right.resultTypeSpecifier is IntervalTypeSpecifier)
+            {
+                right = isBefore
+                            ? InvocationBuilder.Invoke(SystemLibrary.Start, right)
+                            : InvocationBuilder.Invoke(SystemLibrary.End, right);
+            }
+
+            var offsetRel = context.quantityOffset().offsetRelativeQualifier();
+            var exclRel = context.quantityOffset().exclusiveRelativeQualifier();
+
+            // If the offset has no relative qualifier (less than, more than), so looks
+            // like "x 7 days before y", we're comparing points, so use a SameAs and return.
+            if (offsetRel == null && exclRel == null)
+            {
+                // Use SameAs
+                // For a Before, subtract the quantity from the right operand
+                // For an After, add the quantity to the right operand
+                right = InvocationBuilder.Invoke(isBefore ? SystemLibrary.Subtract : SystemLibrary.Add, right, quantity);
+                return InvocationBuilder.Invoke(SystemLibrary.SameAs, CreateArgArray(left, right,dateTimePrecision))
+                                        .WithLocator(context.Locator());
+            }
+
+            // Otherwise, we have a relative qualifier, so we need to handle the more complex cases.
+            // Expressions like "x 7 days more than before y" or "x 7 days less than after y".
+            var isOffsetInclusive = offsetRel != null;
+            var qualifier = offsetRel?.GetText() ?? exclRel.GetText();
+
+            switch (qualifier)
+            {
+                case "more than":
+                case "or more":
+                    // For More Than/Or More, Use a Before/After/SameOrBefore/SameOrAfter
+                    if (isBefore)
                     {
-                        if (rhs.resultTypeSpecifier is IntervalTypeSpecifier rhsInterval)
-                        {
-                            rhs = new Start
-                            {
-                                operand = rhs
-                            }.WithResultType(rhsInterval.pointType);
-                        }
-                        lhs = new Start { operand = lhs, }
-                            .WithResultType(lhsInterval.pointType);
+                        right = InvocationBuilder.Invoke(SystemLibrary.Subtract, right, quantity);
+                        var args = CreateArgArray(left, right, dateTimePrecision);
 
-                        rhs = new Add { operand = new Expression[] { rhs, quantity, } }
-                            .WithResultType(rhs.resultTypeSpecifier);
+                        return !isOffsetInclusive
+                                   ? InvocationBuilder.Invoke(SystemLibrary.Before, args)
+                                                      .WithLocator(context.Locator())
+                                   : InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args)
+                                                      .WithLocator(context.Locator());
                     }
-                    else if (offsetRelative == "or less")
+                    else
                     {
-                        // this case is an exception.
-                        // this mirrors the generation done for this operator by the reference cql-to-elm implementation
-                        // it's weird
-                        var @in = new In
-                        {
-                            operand = new Expression[]
-                            {
-                                    new Start { operand = lhs }.WithResultType(lhsInterval.pointType),
-                                    new Elm.Interval
-                                    {
-                                        low = rhs,
-                                        high = new Add
-                                        {
-                                            operand = new[]
-                                            {
-                                                rhs,
-                                                quantity
-                                            }
-                                        }.WithResultType(rhs.resultTypeSpecifier)
-                                    }.WithResultType(lhsInterval.resultTypeSpecifier)
-                            }
-                        }.WithResultType(SystemTypes.BooleanType);
-                        if (precision != null)
-                        {
-                            if (Enum.TryParse<DateTimePrecision>(precision.value, out var dtp))
-                            {
-                                @in.precisionSpecified = true;
-                                @in.precision = dtp;
-                            }
-                            else @in.AddError($"Unknown precision '{precision.value}'.");
-                        }
+                        right = InvocationBuilder.Invoke(SystemLibrary.Add, right, quantity);
+                        var args = CreateArgArray(left, right, dateTimePrecision);
+
+                        return !isOffsetInclusive
+                                   ? InvocationBuilder.Invoke(SystemLibrary.After, args)
+                                                      .WithLocator(context.Locator())
+                                   : InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args)
+                                                      .WithLocator(context.Locator());
+                    }
+
+                case "less than":
+                case "or less":
+                    // For Less Than/Or Less, Use an In
+                    var (lowerBound,upperBound) = isBefore
+                        ? (InvocationBuilder.Invoke(SystemLibrary.Subtract, right, quantity),
+                           right)
+                        : (right,
+                           InvocationBuilder.Invoke(SystemLibrary.Add, right, quantity));
+
+                    // 3 days or less before -> [B - 3 days, B)
+                    // less than 3 days before -> (B - 3 days, B)
+                    // 3 days or less after -> (B, B + 3 days]
+                    // less than 3 days after -> (B, B + 3 days)
+                    var interval = isBefore
+                                       ? InvocationBuilder.Invoke(
+                                           SystemLibrary.Interval,
+                                           lowerBound, upperBound, ElmFactory.Literal(isOffsetInclusive), ElmFactory.Literal(isInclusive)) :
+                                       InvocationBuilder.Invoke(
+                                           SystemLibrary.Interval,
+                                           lowerBound, upperBound, ElmFactory.Literal(isInclusive), ElmFactory.Literal(isOffsetInclusive));
+
+                    var inArgs = CreateArgArray(left, interval, dateTimePrecision);
+                    var @in = InvocationBuilder.Invoke(SystemLibrary.In, inArgs).WithLocator(context.Locator());
+
+                    // If the offset or comparison is inclusive, add a null check for B to ensure correct interpretation
+                    if (isOffsetInclusive || isInclusive)
+                    {
+                        // Replaced this (I think more correct) code below with the original before
+                        // the rewrite, so the unit test keep working.
+                        // var nullTest = InvocationBuilder.Invoke(SystemLibrary.IsNull, right);
+                        // var notNullTest = InvocationBuilder.Invoke(SystemLibrary.Not, nullTest);
+                        // var and = InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullTest);
+
                         var not = new Not
                         {
                             operand = new IsNull
@@ -360,31 +397,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         }.WithResultType(SystemTypes.BooleanType);
                         var and = new And
                         {
-                            operand = new Expression[] { @in, not }
+                            operand = [@in, not]
                         }.WithResultType(SystemTypes.BooleanType);
                         return and
-                            .WithId()
-                            .WithLocator(context.Locator());
+                               .WithId()
+                               .WithLocator(context.Locator());
                     }
-                }
-                // less than | more than
-                var exclusiveRelative = offset.exclusiveRelativeQualifier();
-                if (exclusiveRelative is not null)
-                {
-                    throw new NotImplementedException();
-                }
+
+                    // Otherwise, return the constructed in
+                    return @in;
             }
-            (lhs, rhs) = (lhs.resultTypeSpecifier, rhs.resultTypeSpecifier) switch
-            {
-                (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (lhs, PointInterval(rhs)),
-                (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(lhs), rhs),
-                _ => (lhs, rhs)
-            };
-            var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
-            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args);
-            return expression
-                .WithId()
-                .WithLocator(context.Locator());
+
+            throw new InvalidOperationException("Unable to resolve interval operator phrase.");
         }
 
         // | 'meets'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                             #meetsIntervalOperatorPhrase
