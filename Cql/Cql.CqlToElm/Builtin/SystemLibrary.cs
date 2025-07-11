@@ -275,7 +275,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             binaryWithPrecision<ProperIncludes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<ReplaceMatches> ReplaceMatches = nary<ReplaceMatches>(new[] { StringType, StringType, StringType }, 3, StringType);
         public static SystemFunction<Round> Round = nary<Round>(new[] { DecimalType, IntegerType }, 1, DecimalType);
-        public static OverloadedFunctionDef Same = binaryWithPrecision<SameAs>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+        public static OverloadedFunctionDef SameAs = binaryWithPrecision<SameAs>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
             .Combine(binaryWithPrecision<SameAs>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef SameOrAfter = binaryWithPrecision<SameOrAfter>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
             .Combine(binaryWithPrecision<SameOrAfter>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
