@@ -209,7 +209,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 ? [left, right, Precision(precision)]
                 : [left, right];
 
-
         // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?
         private Expression HandleBeforeOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context,
             Expression lhs,
@@ -270,14 +269,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // No quantity offset, so a simple "a is before/after (or on) b"
             if (context.quantityOffset() == null)
             {
-                // Make sure both left and right are intervals by turning points into Point Intervals.
-                (left,right) = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
-                {
-                    (IntervalTypeSpecifier, not IntervalTypeSpecifier) => (left, PointInterval(right)),
-                    (not IntervalTypeSpecifier, IntervalTypeSpecifier) => (PointInterval(left), right),
-                    _                                                  => (left, right)
-                };
-
                 var lrArgs = CreateArgArray(left, right, dateTimePrecision);
                 var result = (isInclusive, isBefore) switch
                 {
