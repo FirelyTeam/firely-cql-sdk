@@ -162,6 +162,39 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     }
 
 
+    [CqlExpressionDefinition("getStagingProcedure")]
+    public IEnumerable<Procedure> getStagingProcedure(CqlContext context, Observation StagingObservation)
+    {
+        List<ResourceReference> a_ = StagingObservation?.PartOf;
+        Procedure b_(ResourceReference StagingReference)
+        {
+            Procedure e_ = this.First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(context);
+            Procedure[] f_ = [
+                e_,
+            ];
+            bool? g_(Procedure FirstBladderCancerStagingMP)
+            {
+                Id j_ = FirstBladderCancerStagingMP?.IdElement;
+                string k_ = j_?.Value;
+                FhirString l_ = StagingReference?.ReferenceElement;
+                string m_ = l_?.Value;
+                string n_ = QICoreCommon_2_1_000.Instance.getId(context, m_);
+                bool? o_ = context.Operators.Equal(k_, n_);
+
+                return o_;
+            };
+            IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)f_, g_);
+            Procedure i_ = context.Operators.SingletonFrom<Procedure>(h_);
+
+            return i_;
+        };
+        IEnumerable<Procedure> c_ = context.Operators.Select<ResourceReference, Procedure>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<Procedure> d_ = context.Operators.Distinct<Procedure>(c_);
+
+        return d_;
+    }
+
+
     [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition Condition)
     {
@@ -305,39 +338,6 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         Procedure e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
         return e_;
-    }
-
-
-    [CqlExpressionDefinition("getStagingProcedure")]
-    public IEnumerable<Procedure> getStagingProcedure(CqlContext context, Observation StagingObservation)
-    {
-        List<ResourceReference> a_ = StagingObservation?.PartOf;
-        Procedure b_(ResourceReference StagingReference)
-        {
-            Procedure e_ = this.First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(context);
-            Procedure[] f_ = [
-                e_,
-            ];
-            bool? g_(Procedure FirstBladderCancerStagingMP)
-            {
-                Id j_ = FirstBladderCancerStagingMP?.IdElement;
-                string k_ = j_?.Value;
-                FhirString l_ = StagingReference?.ReferenceElement;
-                string m_ = l_?.Value;
-                string n_ = QICoreCommon_2_1_000.Instance.getId(context, m_);
-                bool? o_ = context.Operators.Equal(k_, n_);
-
-                return o_;
-            };
-            IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)f_, g_);
-            Procedure i_ = context.Operators.SingletonFrom<Procedure>(h_);
-
-            return i_;
-        };
-        IEnumerable<Procedure> c_ = context.Operators.Select<ResourceReference, Procedure>((IEnumerable<ResourceReference>)a_, b_);
-        IEnumerable<Procedure> d_ = context.Operators.Distinct<Procedure>(c_);
-
-        return d_;
     }
 
 
@@ -489,148 +489,187 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     {
         CqlValueSet a_ = this.Immunosuppressive_Drugs_for_Urology_Care(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        IEnumerable<MedicationRequest> f_(MedicationRequest ImmunosuppressiveDrugs)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure(context);
-            Procedure[] k_ = [
-                j_,
-            ];
-            bool? l_(Procedure FirstBladderCancerStaging)
+            IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? l_(Medication M)
             {
-                List<Dosage> p_ = ImmunosuppressiveDrugs?.DosageInstruction;
-                bool? q_(Dosage @this)
-                {
-                    Timing ba_ = @this?.Timing;
-                    bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
+                object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(p_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Immunosuppressive_Drugs_for_Urology_Care(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
 
-                    return bb_;
-                };
-                IEnumerable<Dosage> r_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)p_, q_);
-                Timing s_(Dosage @this)
-                {
-                    Timing bc_ = @this?.Timing;
-
-                    return bc_;
-                };
-                IEnumerable<Timing> t_ = context.Operators.Select<Dosage, Timing>(r_, s_);
-                CqlDateTime u_(Timing dosageTiming)
-                {
-                    List<FhirDateTime> bd_ = dosageTiming?.EventElement;
-                    IEnumerable<CqlDateTime> be_ = context.Operators.LateBoundProperty<IEnumerable<CqlDateTime>>(bd_, "value");
-                    IEnumerable<CqlDateTime> bf_ = context.Operators.ListSort<CqlDateTime>(be_, System.ComponentModel.ListSortDirection.Ascending);
-                    CqlDateTime bg_ = context.Operators.First<CqlDateTime>(bf_);
-
-                    return bg_;
-                };
-                IEnumerable<CqlDateTime> v_ = context.Operators.Select<Timing, CqlDateTime>(t_, u_);
-                IEnumerable<CqlDateTime> w_ = context.Operators.Distinct<CqlDateTime>(v_);
-                IEnumerable<CqlDateTime> x_ = context.Operators.ListSort<CqlDateTime>(w_, System.ComponentModel.ListSortDirection.Ascending);
-                CqlDateTime y_ = context.Operators.First<CqlDateTime>(x_);
-                CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
-                bool? ab_(Dosage @this)
-                {
-                    Timing bh_ = @this?.Timing;
-                    bool? bi_ = context.Operators.Not((bool?)(bh_ is null));
-
-                    return bi_;
-                };
-                IEnumerable<Dosage> ac_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)p_, ab_);
-                Timing ad_(Dosage @this)
-                {
-                    Timing bj_ = @this?.Timing;
-
-                    return bj_;
-                };
-                IEnumerable<Timing> ae_ = context.Operators.Select<Dosage, Timing>(ac_, ad_);
-                bool? af_(Timing @this)
-                {
-                    Timing.RepeatComponent bk_ = @this?.Repeat;
-                    bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
-
-                    return bl_;
-                };
-                IEnumerable<Timing> ag_ = context.Operators.Where<Timing>(ae_, af_);
-                Timing.RepeatComponent ah_(Timing @this)
-                {
-                    Timing.RepeatComponent bm_ = @this?.Repeat;
-
-                    return bm_;
-                };
-                IEnumerable<Timing.RepeatComponent> ai_ = context.Operators.Select<Timing, Timing.RepeatComponent>(ag_, ah_);
-                bool? aj_(Timing.RepeatComponent @this)
-                {
-                    DataType bn_ = @this?.Bounds;
-                    object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool? bp_ = context.Operators.Not((bool?)(bo_ is null));
-
-                    return bp_;
-                };
-                IEnumerable<Timing.RepeatComponent> ak_ = context.Operators.Where<Timing.RepeatComponent>(ai_, aj_);
-                object al_(Timing.RepeatComponent @this)
-                {
-                    DataType bq_ = @this?.Bounds;
-                    object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-
-                    return br_;
-                };
-                IEnumerable<object> am_ = context.Operators.Select<Timing.RepeatComponent, object>(ak_, al_);
-                CqlInterval<CqlDateTime> an_(object DoseTime)
-                {
-                    CqlInterval<CqlDateTime> bs_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
-
-                    return bs_;
-                };
-                IEnumerable<CqlInterval<CqlDateTime>> ao_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(am_, an_);
-                IEnumerable<CqlInterval<CqlDateTime>> ap_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ao_);
-                IEnumerable<CqlInterval<CqlDateTime>> aq_ = context.Operators.Collapse(ap_, default);
-                object ar_(CqlInterval<CqlDateTime> @this)
-                {
-                    CqlDateTime bt_ = context.Operators.Start(@this);
-
-                    return bt_;
-                };
-                IEnumerable<CqlInterval<CqlDateTime>> as_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(aq_, ar_, System.ComponentModel.ListSortDirection.Ascending);
-                CqlInterval<CqlDateTime> at_ = context.Operators.First<CqlInterval<CqlDateTime>>(as_);
-                CqlDateTime au_ = context.Operators.Start(z_ ?? at_);
-                DataType av_ = FirstBladderCancerStaging?.Performed;
-                object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                CqlInterval<CqlDateTime> ax_ = QICoreCommon_2_1_000.Instance.toInterval(context, aw_);
-                CqlDateTime ay_ = context.Operators.Start(ax_);
-                bool? az_ = context.Operators.SameOrBefore(au_, ay_, "day");
-
-                return az_;
+                return y_;
             };
-            IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
-            MedicationRequest n_(Procedure FirstBladderCancerStaging) =>
-                ImmunosuppressiveDrugs;
-            IEnumerable<MedicationRequest> o_ = context.Operators.Select<Procedure, MedicationRequest>(m_, n_);
+            IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
+            MedicationRequest n_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
         };
-        IEnumerable<MedicationRequest> g_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
-        bool? h_(MedicationRequest ImmunosuppressiveDrugs)
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        IEnumerable<MedicationRequest> g_(MedicationRequest ImmunosuppressiveDrugs)
         {
-            Code<MedicationRequest.MedicationrequestStatus> bu_ = ImmunosuppressiveDrugs?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? bv_ = bu_?.Value;
-            string bw_ = context.Operators.Convert<string>(bv_);
-            string[] bx_ = [
+            Procedure z_ = this.First_Bladder_Cancer_Staging_Procedure(context);
+            Procedure[] aa_ = [
+                z_,
+            ];
+            bool? ab_(Procedure FirstBladderCancerStaging)
+            {
+                List<Dosage> af_ = ImmunosuppressiveDrugs?.DosageInstruction;
+                bool? ag_(Dosage @this)
+                {
+                    Timing bq_ = @this?.Timing;
+                    bool? br_ = context.Operators.Not((bool?)(bq_ is null));
+
+                    return br_;
+                };
+                IEnumerable<Dosage> ah_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)af_, ag_);
+                Timing ai_(Dosage @this)
+                {
+                    Timing bs_ = @this?.Timing;
+
+                    return bs_;
+                };
+                IEnumerable<Timing> aj_ = context.Operators.Select<Dosage, Timing>(ah_, ai_);
+                CqlDateTime ak_(Timing dosageTiming)
+                {
+                    List<FhirDateTime> bt_ = dosageTiming?.EventElement;
+                    string bu_(FhirDateTime @this)
+                    {
+                        string ca_ = @this?.Value;
+
+                        return ca_;
+                    };
+                    IEnumerable<string> bv_ = context.Operators.Select<FhirDateTime, string>((IEnumerable<FhirDateTime>)bt_, bu_);
+                    CqlDateTime bw_(string @string)
+                    {
+                        CqlDateTime cb_ = context.Operators.ConvertStringToDateTime(@string);
+
+                        return cb_;
+                    };
+                    IEnumerable<CqlDateTime> bx_ = context.Operators.Select<string, CqlDateTime>(bv_, bw_);
+                    IEnumerable<CqlDateTime> by_ = context.Operators.ListSort<CqlDateTime>(bx_, System.ComponentModel.ListSortDirection.Ascending);
+                    CqlDateTime bz_ = context.Operators.First<CqlDateTime>(by_);
+
+                    return bz_;
+                };
+                IEnumerable<CqlDateTime> al_ = context.Operators.Select<Timing, CqlDateTime>(aj_, ak_);
+                IEnumerable<CqlDateTime> am_ = context.Operators.Distinct<CqlDateTime>(al_);
+                IEnumerable<CqlDateTime> an_ = context.Operators.ListSort<CqlDateTime>(am_, System.ComponentModel.ListSortDirection.Ascending);
+                CqlDateTime ao_ = context.Operators.First<CqlDateTime>(an_);
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_1_000.Instance.toInterval(context, ao_ as object);
+                bool? ar_(Dosage @this)
+                {
+                    Timing cc_ = @this?.Timing;
+                    bool? cd_ = context.Operators.Not((bool?)(cc_ is null));
+
+                    return cd_;
+                };
+                IEnumerable<Dosage> as_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)af_, ar_);
+                Timing at_(Dosage @this)
+                {
+                    Timing ce_ = @this?.Timing;
+
+                    return ce_;
+                };
+                IEnumerable<Timing> au_ = context.Operators.Select<Dosage, Timing>(as_, at_);
+                bool? av_(Timing @this)
+                {
+                    Timing.RepeatComponent cf_ = @this?.Repeat;
+                    bool? cg_ = context.Operators.Not((bool?)(cf_ is null));
+
+                    return cg_;
+                };
+                IEnumerable<Timing> aw_ = context.Operators.Where<Timing>(au_, av_);
+                Timing.RepeatComponent ax_(Timing @this)
+                {
+                    Timing.RepeatComponent ch_ = @this?.Repeat;
+
+                    return ch_;
+                };
+                IEnumerable<Timing.RepeatComponent> ay_ = context.Operators.Select<Timing, Timing.RepeatComponent>(aw_, ax_);
+                bool? az_(Timing.RepeatComponent @this)
+                {
+                    DataType ci_ = @this?.Bounds;
+                    object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
+                    bool? ck_ = context.Operators.Not((bool?)(cj_ is null));
+
+                    return ck_;
+                };
+                IEnumerable<Timing.RepeatComponent> ba_ = context.Operators.Where<Timing.RepeatComponent>(ay_, az_);
+                object bb_(Timing.RepeatComponent @this)
+                {
+                    DataType cl_ = @this?.Bounds;
+                    object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
+
+                    return cm_;
+                };
+                IEnumerable<object> bc_ = context.Operators.Select<Timing.RepeatComponent, object>(ba_, bb_);
+                CqlInterval<CqlDateTime> bd_(object DoseTime)
+                {
+                    CqlInterval<CqlDateTime> cn_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
+
+                    return cn_;
+                };
+                IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bc_, bd_);
+                IEnumerable<CqlInterval<CqlDateTime>> bf_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(be_);
+                IEnumerable<CqlInterval<CqlDateTime>> bg_ = context.Operators.Collapse(bf_, default);
+                object bh_(CqlInterval<CqlDateTime> @this)
+                {
+                    CqlDateTime co_ = context.Operators.Start(@this);
+
+                    return co_;
+                };
+                IEnumerable<CqlInterval<CqlDateTime>> bi_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
+                CqlInterval<CqlDateTime> bj_ = context.Operators.First<CqlInterval<CqlDateTime>>(bi_);
+                CqlDateTime bk_ = context.Operators.Start(ap_ ?? bj_);
+                DataType bl_ = FirstBladderCancerStaging?.Performed;
+                object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
+                CqlInterval<CqlDateTime> bn_ = QICoreCommon_2_1_000.Instance.toInterval(context, bm_);
+                CqlDateTime bo_ = context.Operators.Start(bn_);
+                bool? bp_ = context.Operators.SameOrBefore(bk_, bo_, "day");
+
+                return bp_;
+            };
+            IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aa_, ab_);
+            MedicationRequest ad_(Procedure FirstBladderCancerStaging) =>
+                ImmunosuppressiveDrugs;
+            IEnumerable<MedicationRequest> ae_ = context.Operators.Select<Procedure, MedicationRequest>(ac_, ad_);
+
+            return ae_;
+        };
+        IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
+        bool? i_(MedicationRequest ImmunosuppressiveDrugs)
+        {
+            Code<MedicationRequest.MedicationrequestStatus> cp_ = ImmunosuppressiveDrugs?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? cq_ = cp_?.Value;
+            string cr_ = context.Operators.Convert<string>(cq_);
+            string[] cs_ = [
                 "active",
                 "completed",
             ];
-            bool? by_ = context.Operators.In<string>(bw_, bx_ as IEnumerable<string>);
-            Code<MedicationRequest.MedicationRequestIntent> bz_ = ImmunosuppressiveDrugs?.IntentElement;
-            MedicationRequest.MedicationRequestIntent? ca_ = bz_?.Value;
-            string cb_ = context.Operators.Convert<string>(ca_);
-            bool? cc_ = context.Operators.Equal(cb_, "order");
-            bool? cd_ = context.Operators.And(by_, cc_);
+            bool? ct_ = context.Operators.In<string>(cr_, cs_ as IEnumerable<string>);
+            Code<MedicationRequest.MedicationRequestIntent> cu_ = ImmunosuppressiveDrugs?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? cv_ = cu_?.Value;
+            string cw_ = context.Operators.Convert<string>(cv_);
+            bool? cx_ = context.Operators.Equal(cw_, "order");
+            bool? cy_ = context.Operators.And(ct_, cx_);
 
-            return cd_;
+            return cy_;
         };
-        IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
+        IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
 
-        return i_;
+        return j_;
     }
 
 
@@ -748,184 +787,210 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     {
         CqlValueSet a_ = this.Chemotherapy_Agents_for_Advanced_Cancer(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        IEnumerable<MedicationRequest> f_(MedicationRequest ExclusionMed)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            Procedure s_ = this.First_Bladder_Cancer_Staging_Procedure(context);
-            Procedure[] t_ = [
-                s_,
-            ];
-            bool? u_(Procedure FirstBladderCancerStaging)
+            IEnumerable<Medication> t_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? u_(Medication M)
             {
-                List<Dosage> y_ = ExclusionMed?.DosageInstruction;
-                bool? z_(Dosage @this)
-                {
-                    Timing bl_ = @this?.Timing;
-                    bool? bm_ = context.Operators.Not((bool?)(bl_ is null));
+                object y_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object z_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> aa_ = context.Operators.Split((string)z_, "/");
+                string ab_ = context.Operators.Last<string>(aa_);
+                bool? ac_ = context.Operators.Equal(y_, ab_);
+                CodeableConcept ad_ = M?.Code;
+                CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
+                CqlValueSet af_ = this.Chemotherapy_Agents_for_Advanced_Cancer(context);
+                bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+                bool? ah_ = context.Operators.And(ac_, ag_);
 
-                    return bm_;
-                };
-                IEnumerable<Dosage> aa_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)y_, z_);
-                Timing ab_(Dosage @this)
-                {
-                    Timing bn_ = @this?.Timing;
-
-                    return bn_;
-                };
-                IEnumerable<Timing> ac_ = context.Operators.Select<Dosage, Timing>(aa_, ab_);
-                bool? ad_(Timing @this)
-                {
-                    Timing.RepeatComponent bo_ = @this?.Repeat;
-                    bool? bp_ = context.Operators.Not((bool?)(bo_ is null));
-
-                    return bp_;
-                };
-                IEnumerable<Timing> ae_ = context.Operators.Where<Timing>(ac_, ad_);
-                Timing.RepeatComponent af_(Timing @this)
-                {
-                    Timing.RepeatComponent bq_ = @this?.Repeat;
-
-                    return bq_;
-                };
-                IEnumerable<Timing.RepeatComponent> ag_ = context.Operators.Select<Timing, Timing.RepeatComponent>(ae_, af_);
-                bool? ah_(Timing.RepeatComponent @this)
-                {
-                    DataType br_ = @this?.Bounds;
-                    object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                    bool? bt_ = context.Operators.Not((bool?)(bs_ is null));
-
-                    return bt_;
-                };
-                IEnumerable<Timing.RepeatComponent> ai_ = context.Operators.Where<Timing.RepeatComponent>(ag_, ah_);
-                object aj_(Timing.RepeatComponent @this)
-                {
-                    DataType bu_ = @this?.Bounds;
-                    object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-
-                    return bv_;
-                };
-                IEnumerable<object> ak_ = context.Operators.Select<Timing.RepeatComponent, object>(ai_, aj_);
-                CqlInterval<CqlDateTime> al_(object DoseTime)
-                {
-                    CqlInterval<CqlDateTime> bw_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
-
-                    return bw_;
-                };
-                IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(ak_, al_);
-                IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(am_);
-                IEnumerable<CqlInterval<CqlDateTime>> ao_ = context.Operators.Collapse(an_, default);
-                object ap_(CqlInterval<CqlDateTime> @this)
-                {
-                    CqlDateTime bx_ = context.Operators.Start(@this);
-
-                    return bx_;
-                };
-                IEnumerable<CqlInterval<CqlDateTime>> aq_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(ao_, ap_, System.ComponentModel.ListSortDirection.Ascending);
-                CqlInterval<CqlDateTime> ar_ = context.Operators.First<CqlInterval<CqlDateTime>>(aq_);
-                CqlDateTime as_ = context.Operators.Start(ar_);
-                DataType at_ = FirstBladderCancerStaging?.Performed;
-                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                CqlInterval<CqlDateTime> av_ = QICoreCommon_2_1_000.Instance.toInterval(context, au_);
-                CqlDateTime aw_ = context.Operators.Start(av_);
-                CqlQuantity ax_ = context.Operators.Quantity(6m, "months");
-                CqlDateTime ay_ = context.Operators.Subtract(aw_, ax_);
-                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_1_000.Instance.toInterval(context, ba_);
-                CqlDateTime bc_ = context.Operators.Start(bb_);
-                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, bc_, true, false);
-                bool? be_ = context.Operators.In<CqlDateTime>(as_, bd_, default);
-                object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                CqlInterval<CqlDateTime> bh_ = QICoreCommon_2_1_000.Instance.toInterval(context, bg_);
-                CqlDateTime bi_ = context.Operators.Start(bh_);
-                bool? bj_ = context.Operators.Not((bool?)(bi_ is null));
-                bool? bk_ = context.Operators.And(be_, bj_);
-
-                return bk_;
+                return ah_;
             };
-            IEnumerable<Procedure> v_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)t_, u_);
-            MedicationRequest w_(Procedure FirstBladderCancerStaging) =>
-                ExclusionMed;
-            IEnumerable<MedicationRequest> x_ = context.Operators.Select<Procedure, MedicationRequest>(v_, w_);
+            IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
+            MedicationRequest w_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> x_ = context.Operators.Select<Medication, MedicationRequest>(v_, w_);
 
             return x_;
         };
-        IEnumerable<MedicationRequest> g_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
-        bool? h_(MedicationRequest ExclusionMed)
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        IEnumerable<MedicationRequest> g_(MedicationRequest ExclusionMed)
         {
-            Code<MedicationRequest.MedicationrequestStatus> by_ = ExclusionMed?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? bz_ = by_?.Value;
-            string ca_ = context.Operators.Convert<string>(bz_);
-            string[] cb_ = [
+            Procedure ai_ = this.First_Bladder_Cancer_Staging_Procedure(context);
+            Procedure[] aj_ = [
+                ai_,
+            ];
+            bool? ak_(Procedure FirstBladderCancerStaging)
+            {
+                List<Dosage> ao_ = ExclusionMed?.DosageInstruction;
+                bool? ap_(Dosage @this)
+                {
+                    Timing cb_ = @this?.Timing;
+                    bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+
+                    return cc_;
+                };
+                IEnumerable<Dosage> aq_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)ao_, ap_);
+                Timing ar_(Dosage @this)
+                {
+                    Timing cd_ = @this?.Timing;
+
+                    return cd_;
+                };
+                IEnumerable<Timing> as_ = context.Operators.Select<Dosage, Timing>(aq_, ar_);
+                bool? at_(Timing @this)
+                {
+                    Timing.RepeatComponent ce_ = @this?.Repeat;
+                    bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
+
+                    return cf_;
+                };
+                IEnumerable<Timing> au_ = context.Operators.Where<Timing>(as_, at_);
+                Timing.RepeatComponent av_(Timing @this)
+                {
+                    Timing.RepeatComponent cg_ = @this?.Repeat;
+
+                    return cg_;
+                };
+                IEnumerable<Timing.RepeatComponent> aw_ = context.Operators.Select<Timing, Timing.RepeatComponent>(au_, av_);
+                bool? ax_(Timing.RepeatComponent @this)
+                {
+                    DataType ch_ = @this?.Bounds;
+                    object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
+                    bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
+
+                    return cj_;
+                };
+                IEnumerable<Timing.RepeatComponent> ay_ = context.Operators.Where<Timing.RepeatComponent>(aw_, ax_);
+                object az_(Timing.RepeatComponent @this)
+                {
+                    DataType ck_ = @this?.Bounds;
+                    object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
+
+                    return cl_;
+                };
+                IEnumerable<object> ba_ = context.Operators.Select<Timing.RepeatComponent, object>(ay_, az_);
+                CqlInterval<CqlDateTime> bb_(object DoseTime)
+                {
+                    CqlInterval<CqlDateTime> cm_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
+
+                    return cm_;
+                };
+                IEnumerable<CqlInterval<CqlDateTime>> bc_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(ba_, bb_);
+                IEnumerable<CqlInterval<CqlDateTime>> bd_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bc_);
+                IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Collapse(bd_, default);
+                object bf_(CqlInterval<CqlDateTime> @this)
+                {
+                    CqlDateTime cn_ = context.Operators.Start(@this);
+
+                    return cn_;
+                };
+                IEnumerable<CqlInterval<CqlDateTime>> bg_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(be_, bf_, System.ComponentModel.ListSortDirection.Ascending);
+                CqlInterval<CqlDateTime> bh_ = context.Operators.First<CqlInterval<CqlDateTime>>(bg_);
+                CqlDateTime bi_ = context.Operators.Start(bh_);
+                DataType bj_ = FirstBladderCancerStaging?.Performed;
+                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_1_000.Instance.toInterval(context, bk_);
+                CqlDateTime bm_ = context.Operators.Start(bl_);
+                CqlQuantity bn_ = context.Operators.Quantity(6m, "months");
+                CqlDateTime bo_ = context.Operators.Subtract(bm_, bn_);
+                object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                CqlInterval<CqlDateTime> br_ = QICoreCommon_2_1_000.Instance.toInterval(context, bq_);
+                CqlDateTime bs_ = context.Operators.Start(br_);
+                CqlInterval<CqlDateTime> bt_ = context.Operators.Interval(bo_, bs_, true, false);
+                bool? bu_ = context.Operators.In<CqlDateTime>(bi_, bt_, default);
+                object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                CqlInterval<CqlDateTime> bx_ = QICoreCommon_2_1_000.Instance.toInterval(context, bw_);
+                CqlDateTime by_ = context.Operators.Start(bx_);
+                bool? bz_ = context.Operators.Not((bool?)(by_ is null));
+                bool? ca_ = context.Operators.And(bu_, bz_);
+
+                return ca_;
+            };
+            IEnumerable<Procedure> al_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aj_, ak_);
+            MedicationRequest am_(Procedure FirstBladderCancerStaging) =>
+                ExclusionMed;
+            IEnumerable<MedicationRequest> an_ = context.Operators.Select<Procedure, MedicationRequest>(al_, am_);
+
+            return an_;
+        };
+        IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
+        bool? i_(MedicationRequest ExclusionMed)
+        {
+            Code<MedicationRequest.MedicationrequestStatus> co_ = ExclusionMed?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? cp_ = co_?.Value;
+            string cq_ = context.Operators.Convert<string>(cp_);
+            string[] cr_ = [
                 "active",
                 "completed",
             ];
-            bool? cc_ = context.Operators.In<string>(ca_, cb_ as IEnumerable<string>);
-            Code<MedicationRequest.MedicationRequestIntent> cd_ = ExclusionMed?.IntentElement;
-            MedicationRequest.MedicationRequestIntent? ce_ = cd_?.Value;
-            string cf_ = context.Operators.Convert<string>(ce_);
-            bool? cg_ = context.Operators.Equal(cf_, "order");
-            bool? ch_ = context.Operators.And(cc_, cg_);
+            bool? cs_ = context.Operators.In<string>(cq_, cr_ as IEnumerable<string>);
+            Code<MedicationRequest.MedicationRequestIntent> ct_ = ExclusionMed?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? cu_ = ct_?.Value;
+            string cv_ = context.Operators.Convert<string>(cu_);
+            bool? cw_ = context.Operators.Equal(cv_, "order");
+            bool? cx_ = context.Operators.And(cs_, cw_);
 
-            return ch_;
+            return cx_;
         };
-        IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
-        CqlCode j_ = this.Combined_radiotherapy__procedure_(context);
-        IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
-        IEnumerable<Procedure> l_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
+        IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
+        CqlCode k_ = this.Combined_radiotherapy__procedure_(context);
+        IEnumerable<CqlCode> l_ = context.Operators.ToList<CqlCode>(k_);
+        IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, l_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> n_(Procedure ExclusionProcedure)
         {
-            Procedure ci_ = this.First_Bladder_Cancer_Staging_Procedure(context);
-            Procedure[] cj_ = [
-                ci_,
+            Procedure cy_ = this.First_Bladder_Cancer_Staging_Procedure(context);
+            Procedure[] cz_ = [
+                cy_,
             ];
-            bool? ck_(Procedure FirstBladderCancerStaging)
+            bool? da_(Procedure FirstBladderCancerStaging)
             {
-                DataType co_ = ExclusionProcedure?.Performed;
-                object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                CqlInterval<CqlDateTime> cq_ = QICoreCommon_2_1_000.Instance.toInterval(context, cp_);
-                CqlDateTime cr_ = context.Operators.Start(cq_);
-                DataType cs_ = FirstBladderCancerStaging?.Performed;
-                object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                CqlInterval<CqlDateTime> cu_ = QICoreCommon_2_1_000.Instance.toInterval(context, ct_);
-                CqlDateTime cv_ = context.Operators.Start(cu_);
-                CqlQuantity cw_ = context.Operators.Quantity(6m, "months");
-                CqlDateTime cx_ = context.Operators.Subtract(cv_, cw_);
-                object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                CqlInterval<CqlDateTime> da_ = QICoreCommon_2_1_000.Instance.toInterval(context, cz_);
-                CqlDateTime db_ = context.Operators.Start(da_);
-                CqlInterval<CqlDateTime> dc_ = context.Operators.Interval(cx_, db_, true, false);
-                bool? dd_ = context.Operators.In<CqlDateTime>(cr_, dc_, default);
-                object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
+                DataType de_ = ExclusionProcedure?.Performed;
+                object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
                 CqlInterval<CqlDateTime> dg_ = QICoreCommon_2_1_000.Instance.toInterval(context, df_);
                 CqlDateTime dh_ = context.Operators.Start(dg_);
-                bool? di_ = context.Operators.Not((bool?)(dh_ is null));
-                bool? dj_ = context.Operators.And(dd_, di_);
+                DataType di_ = FirstBladderCancerStaging?.Performed;
+                object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+                CqlInterval<CqlDateTime> dk_ = QICoreCommon_2_1_000.Instance.toInterval(context, dj_);
+                CqlDateTime dl_ = context.Operators.Start(dk_);
+                CqlQuantity dm_ = context.Operators.Quantity(6m, "months");
+                CqlDateTime dn_ = context.Operators.Subtract(dl_, dm_);
+                object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+                CqlInterval<CqlDateTime> dq_ = QICoreCommon_2_1_000.Instance.toInterval(context, dp_);
+                CqlDateTime dr_ = context.Operators.Start(dq_);
+                CqlInterval<CqlDateTime> ds_ = context.Operators.Interval(dn_, dr_, true, false);
+                bool? dt_ = context.Operators.In<CqlDateTime>(dh_, ds_, default);
+                object dv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+                CqlInterval<CqlDateTime> dw_ = QICoreCommon_2_1_000.Instance.toInterval(context, dv_);
+                CqlDateTime dx_ = context.Operators.Start(dw_);
+                bool? dy_ = context.Operators.Not((bool?)(dx_ is null));
+                bool? dz_ = context.Operators.And(dt_, dy_);
 
-                return dj_;
+                return dz_;
             };
-            IEnumerable<Procedure> cl_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)cj_, ck_);
-            Procedure cm_(Procedure FirstBladderCancerStaging) =>
+            IEnumerable<Procedure> db_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)cz_, da_);
+            Procedure dc_(Procedure FirstBladderCancerStaging) =>
                 ExclusionProcedure;
-            IEnumerable<Procedure> cn_ = context.Operators.Select<Procedure, Procedure>(cl_, cm_);
+            IEnumerable<Procedure> dd_ = context.Operators.Select<Procedure, Procedure>(db_, dc_);
 
-            return cn_;
+            return dd_;
         };
-        IEnumerable<Procedure> n_ = context.Operators.SelectMany<Procedure, Procedure>(l_, m_);
-        bool? o_(Procedure ExclusionProcedure)
+        IEnumerable<Procedure> o_ = context.Operators.SelectMany<Procedure, Procedure>(m_, n_);
+        bool? p_(Procedure ExclusionProcedure)
         {
-            Code<EventStatus> dk_ = ExclusionProcedure?.StatusElement;
-            EventStatus? dl_ = dk_?.Value;
-            string dm_ = context.Operators.Convert<string>(dl_);
-            bool? dn_ = context.Operators.Equal(dm_, "completed");
+            Code<EventStatus> ea_ = ExclusionProcedure?.StatusElement;
+            EventStatus? eb_ = ea_?.Value;
+            string ec_ = context.Operators.Convert<string>(eb_);
+            bool? ed_ = context.Operators.Equal(ec_, "completed");
 
-            return dn_;
+            return ed_;
         };
-        IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
-        IEnumerable<object> q_ = context.Operators.Union<object>(i_ as IEnumerable<object>, p_ as IEnumerable<object>);
-        bool? r_ = context.Operators.Exists<object>(q_);
+        IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
+        IEnumerable<object> r_ = context.Operators.Union<object>(j_ as IEnumerable<object>, q_ as IEnumerable<object>);
+        bool? s_ = context.Operators.Exists<object>(r_);
 
-        return r_;
+        return s_;
     }
 
 
@@ -961,81 +1026,107 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     {
         CqlValueSet a_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
-        IEnumerable<MedicationAdministration> f_(MedicationAdministration BCG)
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> d_(MedicationAdministration MR)
         {
-            Procedure m_ = this.First_Bladder_Cancer_Staging_Procedure(context);
-            Procedure[] n_ = [
-                m_,
-            ];
-            bool? o_(Procedure FirstBladderCancerStaging)
+            IEnumerable<Medication> n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? o_(Medication M)
             {
-                DataType s_ = BCG?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_);
-                CqlDateTime v_ = context.Operators.Start(u_);
-                DataType w_ = FirstBladderCancerStaging?.Performed;
-                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
-                CqlDateTime z_ = context.Operators.Start(y_);
-                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_1_000.Instance.toInterval(context, ab_);
-                CqlDateTime ad_ = context.Operators.Start(ac_);
-                CqlQuantity ae_ = context.Operators.Quantity(6m, "months");
-                CqlDateTime af_ = context.Operators.Add(ad_, ae_);
-                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(z_, af_, false, true);
-                bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, default);
-                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_);
-                CqlDateTime al_ = context.Operators.Start(ak_);
-                bool? am_ = context.Operators.Not((bool?)(al_ is null));
-                bool? an_ = context.Operators.And(ah_, am_);
-                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_1_000.Instance.toInterval(context, ap_);
-                CqlDateTime ar_ = context.Operators.Start(aq_);
-                CqlInterval<CqlDateTime> as_ = this.Measurement_Period(context);
-                bool? at_ = context.Operators.In<CqlDateTime>(ar_, as_, default);
-                bool? au_ = context.Operators.And(an_, at_);
+                object s_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object t_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
+                string v_ = context.Operators.Last<string>(u_);
+                bool? w_ = context.Operators.Equal(s_, v_);
+                CodeableConcept x_ = M?.Code;
+                CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                CqlValueSet z_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care(context);
+                bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+                bool? ab_ = context.Operators.And(w_, aa_);
 
-                return au_;
+                return ab_;
             };
-            IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
-            MedicationAdministration q_(Procedure FirstBladderCancerStaging) =>
-                BCG;
-            IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Procedure, MedicationAdministration>(p_, q_);
+            IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
+            MedicationAdministration q_(Medication M) =>
+                MR;
+            IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
             return r_;
         };
-        IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
-        bool? h_(MedicationAdministration BCG)
+        IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        IEnumerable<MedicationAdministration> g_(MedicationAdministration BCG)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> av_ = BCG?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? aw_ = av_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> ax_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(aw_);
-            string ay_ = context.Operators.Convert<string>(ax_);
-            string[] az_ = [
+            Procedure ac_ = this.First_Bladder_Cancer_Staging_Procedure(context);
+            Procedure[] ad_ = [
+                ac_,
+            ];
+            bool? ae_(Procedure FirstBladderCancerStaging)
+            {
+                DataType ai_ = BCG?.Effective;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_);
+                CqlDateTime al_ = context.Operators.Start(ak_);
+                DataType am_ = FirstBladderCancerStaging?.Performed;
+                object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_1_000.Instance.toInterval(context, an_);
+                CqlDateTime ap_ = context.Operators.Start(ao_);
+                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                CqlInterval<CqlDateTime> as_ = QICoreCommon_2_1_000.Instance.toInterval(context, ar_);
+                CqlDateTime at_ = context.Operators.Start(as_);
+                CqlQuantity au_ = context.Operators.Quantity(6m, "months");
+                CqlDateTime av_ = context.Operators.Add(at_, au_);
+                CqlInterval<CqlDateTime> aw_ = context.Operators.Interval(ap_, av_, false, true);
+                bool? ax_ = context.Operators.In<CqlDateTime>(al_, aw_, default);
+                object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_1_000.Instance.toInterval(context, az_);
+                CqlDateTime bb_ = context.Operators.Start(ba_);
+                bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
+                bool? bd_ = context.Operators.And(ax_, bc_);
+                object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_1_000.Instance.toInterval(context, bf_);
+                CqlDateTime bh_ = context.Operators.Start(bg_);
+                CqlInterval<CqlDateTime> bi_ = this.Measurement_Period(context);
+                bool? bj_ = context.Operators.In<CqlDateTime>(bh_, bi_, default);
+                bool? bk_ = context.Operators.And(bd_, bj_);
+
+                return bk_;
+            };
+            IEnumerable<Procedure> af_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)ad_, ae_);
+            MedicationAdministration ag_(Procedure FirstBladderCancerStaging) =>
+                BCG;
+            IEnumerable<MedicationAdministration> ah_ = context.Operators.Select<Procedure, MedicationAdministration>(af_, ag_);
+
+            return ah_;
+        };
+        IEnumerable<MedicationAdministration> h_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(f_, g_);
+        bool? i_(MedicationAdministration BCG)
+        {
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> bl_ = BCG?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? bm_ = bl_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> bn_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(bm_);
+            string bo_ = context.Operators.Convert<string>(bn_);
+            string[] bp_ = [
                 "in-progress",
                 "completed",
             ];
-            bool? ba_ = context.Operators.In<string>(ay_, az_ as IEnumerable<string>);
+            bool? bq_ = context.Operators.In<string>(bo_, bp_ as IEnumerable<string>);
 
-            return ba_;
+            return bq_;
         };
-        IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
-        object j_(MedicationAdministration @this)
+        IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
+        object k_(MedicationAdministration @this)
         {
-            DataType bb_ = @this?.Effective;
-            object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-            CqlInterval<CqlDateTime> bd_ = QICoreCommon_2_1_000.Instance.toInterval(context, bc_);
-            CqlDateTime be_ = context.Operators.Start(bd_);
+            DataType br_ = @this?.Effective;
+            object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
+            CqlInterval<CqlDateTime> bt_ = QICoreCommon_2_1_000.Instance.toInterval(context, bs_);
+            CqlDateTime bu_ = context.Operators.Start(bt_);
 
-            return be_;
+            return bu_;
         };
-        IEnumerable<MedicationAdministration> k_ = context.Operators.SortBy<MedicationAdministration>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
-        MedicationAdministration l_ = context.Operators.First<MedicationAdministration>(k_);
+        IEnumerable<MedicationAdministration> l_ = context.Operators.SortBy<MedicationAdministration>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+        MedicationAdministration m_ = context.Operators.First<MedicationAdministration>(l_);
 
-        return l_;
+        return m_;
     }
 
 

@@ -171,18 +171,44 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        bool? f_(MedicationRequest BetaBlockerOrdered)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            bool? i_ = AHAOverall_2_8_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, BetaBlockerOrdered);
+            IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? k_(Medication M)
+            {
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Beta_Blocker_Therapy_for_LVSD(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
 
-            return i_;
+                return x_;
+            };
+            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
+            MedicationRequest m_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
+
+            return n_;
         };
-        IEnumerable<MedicationRequest> g_ = context.Operators.Where<MedicationRequest>(e_, f_);
-        bool? h_ = context.Operators.Exists<MedicationRequest>(g_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        bool? g_(MedicationRequest BetaBlockerOrdered)
+        {
+            bool? y_ = AHAOverall_2_8_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, BetaBlockerOrdered);
 
-        return h_;
+            return y_;
+        };
+        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
+
+        return i_;
     }
 
 
@@ -191,18 +217,44 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        bool? f_(MedicationRequest ActiveBetaBlocker)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            bool? i_ = AHAOverall_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
+            IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? k_(Medication M)
+            {
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Beta_Blocker_Therapy_for_LVSD(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
 
-            return i_;
+                return x_;
+            };
+            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
+            MedicationRequest m_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
+
+            return n_;
         };
-        IEnumerable<MedicationRequest> g_ = context.Operators.Where<MedicationRequest>(e_, f_);
-        bool? h_ = context.Operators.Exists<MedicationRequest>(g_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        bool? g_(MedicationRequest ActiveBetaBlocker)
+        {
+            bool? y_ = AHAOverall_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
 
-        return h_;
+            return y_;
+        };
+        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
+
+        return i_;
     }
 
 

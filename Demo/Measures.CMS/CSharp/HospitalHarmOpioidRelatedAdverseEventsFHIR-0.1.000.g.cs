@@ -152,25 +152,51 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
     {
         CqlValueSet a_ = this.Opioids__All(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
-        bool? f_(MedicationAdministration Opioids)
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> d_(MedicationAdministration MR)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = Opioids?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> j_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(i_);
-            bool? k_ = context.Operators.Equal(j_, "completed");
-            MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> n_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(m_);
-            bool? o_ = context.Operators.Equal(n_, "not-done");
-            bool? p_ = context.Operators.Not(o_);
-            bool? q_ = context.Operators.And(k_, p_);
+            IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? j_(Medication M)
+            {
+                object n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(n_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Opioids__All(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
 
-            return q_;
+                return w_;
+            };
+            IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
+            MedicationAdministration l_(Medication M) =>
+                MR;
+            IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
+
+            return m_;
         };
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        bool? g_(MedicationAdministration Opioids)
+        {
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = Opioids?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(y_);
+            bool? aa_ = context.Operators.Equal(z_, "completed");
+            MedicationAdministration.MedicationAdministrationStatusCodes? ac_ = x_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> ad_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(ac_);
+            bool? ae_ = context.Operators.Equal(ad_, "not-done");
+            bool? af_ = context.Operators.Not(ae_);
+            bool? ag_ = context.Operators.And(aa_, af_);
 
-        return g_;
+            return ag_;
+        };
+        IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
+
+        return h_;
     }
 
 
@@ -258,25 +284,51 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
     {
         CqlValueSet a_ = this.Opioid_Antagonist(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
-        bool? f_(MedicationAdministration AntagonistGiven)
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> d_(MedicationAdministration MR)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = AntagonistGiven?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> j_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(i_);
-            bool? k_ = context.Operators.Equal(j_, "completed");
-            MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_?.Value;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> n_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(m_);
-            bool? o_ = context.Operators.Equal(n_, "not-done");
-            bool? p_ = context.Operators.Not(o_);
-            bool? q_ = context.Operators.And(k_, p_);
+            IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? j_(Medication M)
+            {
+                object n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(n_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Opioid_Antagonist(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
 
-            return q_;
+                return w_;
+            };
+            IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
+            MedicationAdministration l_(Medication M) =>
+                MR;
+            IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
+
+            return m_;
         };
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        bool? g_(MedicationAdministration AntagonistGiven)
+        {
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = AntagonistGiven?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(y_);
+            bool? aa_ = context.Operators.Equal(z_, "completed");
+            MedicationAdministration.MedicationAdministrationStatusCodes? ac_ = x_?.Value;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> ad_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(ac_);
+            bool? ae_ = context.Operators.Equal(ad_, "not-done");
+            bool? af_ = context.Operators.Not(ae_);
+            bool? ag_ = context.Operators.And(aa_, af_);
 
-        return g_;
+            return ag_;
+        };
+        IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
+
+        return h_;
     }
 
 

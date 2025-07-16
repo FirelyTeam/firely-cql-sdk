@@ -399,6 +399,19 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
+    [CqlExpressionDefinition("calculatedGestationalAge")]
+    public int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
+    {
+        CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
+        CqlDateTime b_ = this.lastEstimatedDeliveryDate(context, TheEncounter);
+        int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
+        int? d_ = context.Operators.Subtract(280, c_);
+        int? e_ = context.Operators.TruncatedDivide(d_, 7);
+
+        return e_;
+    }
+
+
     [CqlExpressionDefinition("lastTimeOfDelivery")]
     public CqlDateTime lastTimeOfDelivery(CqlContext context, Encounter TheEncounter)
     {
@@ -702,19 +715,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
         object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
 
         return j_ as CqlDateTime;
-    }
-
-
-    [CqlExpressionDefinition("calculatedGestationalAge")]
-    public int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
-    {
-        CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
-        CqlDateTime b_ = this.lastEstimatedDeliveryDate(context, TheEncounter);
-        int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
-        int? d_ = context.Operators.Subtract(280, c_);
-        int? e_ = context.Operators.TruncatedDivide(d_, 7);
-
-        return e_;
     }
 
 

@@ -110,10 +110,33 @@ public partial class Library
             case JsonObject jo:
                 reorder(jo);
                 fixType(jo);
-                foreach (var child in jo.Select(o => o.Value).Where(o => o != null)) CorrectLegacyConstructs(child!);
+                foreach (var (key, value) in jo.ToList())
+                {
+                    if (value != null)
+                    {
+                        CorrectLegacyConstructs(value);
+
+                        if (IsEmpty(value))
+                        {
+                            jo.Remove(key);
+                        }
+                    }
+                }
                 break;
             case JsonArray ja:
-                foreach(var element in ja.Where(o => o != null)) CorrectLegacyConstructs(element!);
+                for (int i = ja.Count - 1; i >= 0; i--)
+                {
+                    var item = ja[i];
+                    if (item != null)
+                    {
+                        CorrectLegacyConstructs(item);
+                    }
+
+                    if (IsEmpty(item))
+                    {
+                        ja.RemoveAt(i);
+                    }
+                }
                 break;
         }
 
@@ -135,6 +158,10 @@ public partial class Library
             if (typeProp!.GetValueKind() == JsonValueKind.Object)
                 o.Remove("type");
         }
+
+        static bool IsEmpty(JsonNode? node) =>
+        node is JsonObject obj && obj.Count == 0 ||
+        node is JsonArray arr && arr.Count == 0;
 
     }
 
