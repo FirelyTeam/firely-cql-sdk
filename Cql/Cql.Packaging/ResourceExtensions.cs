@@ -15,8 +15,8 @@ internal static class ResourceExtensions
     {
         ResourceFileName resourceFileName = resource switch
         {
-            Library l => ResourceFileName.Create(nameof(Library), l.Name, l.Version),
-            Measure m => ResourceFileName.Create(nameof(Measure), m.Name, m.Version),
+            Library l => ResourceFileName.Create(nameof(Library), l.Name ?? "", l.Version),
+            Measure m => ResourceFileName.Create(nameof(Measure), m.Name ?? "", m.Version),
             _ => throw new UnreachableException("Only expecting Library or Measure.")
         };
         return resourceFileName;
