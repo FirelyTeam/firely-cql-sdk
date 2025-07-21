@@ -112,14 +112,13 @@ public partial class Library
                 fixType(jo);
                 foreach (var (key, value) in jo.ToList())
                 {
-                    if (value != null)
-                    {
-                        CorrectLegacyConstructs(value);
+                    if (value == null) continue;
+                    
+                    CorrectLegacyConstructs(value);
 
-                        if (IsEmpty(value))
-                        {
-                            jo.Remove(key);
-                        }
+                    if (IsEmptyObjectOrArray(value))
+                    {
+                        jo.Remove(key);
                     }
                 }
                 break;
@@ -127,12 +126,11 @@ public partial class Library
                 for (int i = ja.Count - 1; i >= 0; i--)
                 {
                     var item = ja[i];
-                    if (item != null)
-                    {
-                        CorrectLegacyConstructs(item);
-                    }
+                    if (item == null) continue;
+                    
+                    CorrectLegacyConstructs(item);
 
-                    if (IsEmpty(item))
+                    if (IsEmptyObjectOrArray(item))
                     {
                         ja.RemoveAt(i);
                     }
@@ -159,9 +157,8 @@ public partial class Library
                 o.Remove("type");
         }
 
-        static bool IsEmpty(JsonNode? node) =>
-        node is JsonObject obj && obj.Count == 0 ||
-        node is JsonArray arr && arr.Count == 0;
+        static bool IsEmptyObjectOrArray(JsonNode node) =>
+            node is JsonObject { Count: 0 } or JsonArray { Count: 0 };
 
     }
 
