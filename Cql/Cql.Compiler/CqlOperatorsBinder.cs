@@ -55,30 +55,31 @@ namespace Hl7.Cql.Compiler
         public virtual Expression BindToMethod(
             string methodName,
             Expression[] args,
-            Type[] typeArgs)
+            Type[] typeArgs
+            )
         {
-            var result = (methodName, args.Length) switch
+            var result = (methodName, typeArgs.Length, args.Length) switch
             {
                 // @formatter:off
-                ("Convert"          , >= 2) => BindConvert(args[0], args[1]),
-                ("Aggregate"        , _) => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
-                ("CrossJoin"        , _) => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
-                ("Message"          , _) => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
-                ("Coalesce"         , >=1) => Coalesce(args[0]),
-                ("Flatten"          , >=1) => Flatten(args[0]),
-                ("InList"           , >=2) => InList(args[0], args[1]),
-                ("LateBoundProperty", >=3) => LateBoundProperty(args[0], args[1], args[2]),
-                ("ListUnion"        , >=2) => Union(args[0], args[1]),
-                ("ResolveValueSet"  , >=1) => ResolveValueSet(args[0]),
-                ("Retrieve"         , >=3) => Retrieve(args[0], args[1], args[2], args[3]),
-                ("Select"           , >=2) => Select(args[0], args[1]),
-                ("SelectMany"       , >=2) => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
-                ("SelectManyResults", >=3) => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
-                ("SortBy"           , >=3) => SortBy(args[0], args[1], args[2]),
-                ("Where"            , >=2) => Where(args[0], args[1]),
-                ("ToList"           , _) => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
-                ("Width"            , _) => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
-                _                                  => BindToBestMethodOverload(methodName, args, typeArgs)!,
+                ("Convert"          ,0 , >= 2) => BindConvert(args[0], args[1]),
+                ("Aggregate"        ,0 , _)    => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
+                ("CrossJoin"        ,0 , _)    => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
+                ("Message"          ,0 , _)    => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
+                ("Coalesce"         ,0 , >=1)  => Coalesce(args[0]),
+                ("Flatten"          ,0 , >=1)  => Flatten(args[0]),
+                ("InList"           ,0 , >=2)  => InList(args[0], args[1]),
+                ("LateBoundProperty",0 , >=3)  => LateBoundProperty(args[0], args[1], args[2]),
+                ("ListUnion"        ,0 , >=2)  => Union(args[0], args[1]),
+                ("ResolveValueSet"  ,0 , >=1)  => ResolveValueSet(args[0]),
+                ("Retrieve"         ,0 , >=3)  => Retrieve(args[0], args[1], args[2], args[3]),
+                ("Select"           ,0 , >=2)  => Select(args[0], args[1]),
+                ("SelectMany"       ,0 , >=2)  => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
+                ("SelectManyResults",0 , >=3)  => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
+                ("SortBy"           ,0 , >=3)  => SortBy(args[0], args[1], args[2]),
+                ("Where"            ,0 , >=2)  => Where(args[0], args[1]),
+                ("ToList"           ,_ , _)    => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                ("Width"            ,_ , _)    => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                _                                        => BindToBestMethodOverload(methodName, args, typeArgs)!,
                 // @formatter:om
             };
             return result;
