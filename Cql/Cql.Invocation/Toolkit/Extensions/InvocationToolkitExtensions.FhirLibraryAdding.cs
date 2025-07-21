@@ -48,7 +48,7 @@ partial class InvocationToolkitExtensions
                                             logger,
                                             (fhirLibrary, logMessage) =>
                                                 logMessage("Could not extract assembly binary from FHIR library resource: {id}",
-                                                           CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(fhirLibrary.Name, fhirLibrary.Version))))
+                                                           CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(fhirLibrary.Name ?? "Unknown", fhirLibrary.Version))))
                                .ToList()
             ;
 
@@ -70,7 +70,7 @@ file static class FhirLibraryUtilities
     {
         configureJsonSerializerOptions += opt =>
         {
-            opt.Ignoring([CodedValidationException.ID_LITERAL_INVALID_CODE]);
+            opt.Ignoring([CodedValidationException.LITERAL_INVALID_CODE]);
             return opt;
         };
         using var fs = file.OpenRead();
