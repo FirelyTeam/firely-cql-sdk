@@ -54,31 +54,24 @@ namespace Hl7.Cql.Fhir
         protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
             PropertyInfo? result = null;
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
+            var cm = Inspector.FindClassMapping(type);
+            if (cm != null)
             {
-                result = type.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-            }
-            else
-            {
-                var cm = Inspector.FindClassMapping(type);
-                if (cm != null)
+                if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
                 {
-                    if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
-                    {
-                        result = valueProp.NativeProperty;
-                    }
-                    else
-                    {
-                        var propMapping = cm.FindMappedElementByName(propertyName);
-                        if (propMapping is not null && propMapping.NativeProperty is not null)
-                            result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
-                    }
+                    result = valueProp.NativeProperty;
                 }
                 else
                 {
-                    var @base = base.GetPropertyCore(type, propertyName);
-                    result = @base;
+                    var propMapping = cm.FindMappedElementByName(propertyName);
+                    if (propMapping is not null && propMapping.NativeProperty is not null)
+                        result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
                 }
+            }
+            else
+            {
+                var @base = base.GetPropertyCore(type, propertyName);
+                result = @base;
             }
 
             return result;
@@ -129,11 +122,7 @@ namespace Hl7.Cql.Fhir
             static string getTypeSpecFromMapping(ClassMapping cm)
             {
                 string fhirPrefix = "{http://hl7.org/fhir}";
-                return cm.IsBackboneType switch
-                {
-                    false => fhirPrefix + cm.Name,
-                    true => fhirPrefix + cm.Canonical
-                };
+                return fhirPrefix + cm.Name;
             }
 
             // Ignore the valuesets, we have to resolve via bindings for now.
