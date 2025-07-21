@@ -186,23 +186,51 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     {
         CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
-        bool? f_(MedicationAdministration HypoMedication)
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+        IEnumerable<MedicationAdministration> d_(MedicationAdministration MR)
         {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = HypoMedication?.StatusElement;
-            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            bool? j_ = context.Operators.Equal(i_, "completed");
-            string l_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            bool? m_ = context.Operators.Equal(l_, "not-done");
-            bool? n_ = context.Operators.Not(m_);
-            bool? o_ = context.Operators.And(j_, n_);
+            IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            bool? j_(Medication M)
+            {
+                Id n_ = M?.IdElement;
+                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
+                string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_ as FhirString);
+                IEnumerable<string> r_ = context.Operators.Split(q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(o_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
 
-            return o_;
+                return y_;
+            };
+            IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
+            MedicationAdministration l_(Medication M) =>
+                MR;
+            IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
+
+            return m_;
         };
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        bool? g_(MedicationAdministration HypoMedication)
+        {
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = HypoMedication?.StatusElement;
+            string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
+            bool? ab_ = context.Operators.Equal(aa_, "completed");
+            string ad_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
+            bool? ae_ = context.Operators.Equal(ad_, "not-done");
+            bool? af_ = context.Operators.Not(ae_);
+            bool? ag_ = context.Operators.And(ab_, af_);
 
-        return g_;
+            return ag_;
+        };
+        IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
+
+        return h_;
     }
 
 

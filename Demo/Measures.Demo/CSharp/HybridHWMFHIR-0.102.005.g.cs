@@ -555,8 +555,8 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     [CqlExpressionDefinition("CalendarAgeInYearsAt")]
     public int? CalendarAgeInYearsAt(CqlContext context, CqlDateTime BirthDateTime, CqlDateTime AsOf)
     {
-        CqlDate a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
-        CqlDate b_ = context.Operators.ConvertDateTimeToDate(AsOf);
+        CqlDateTime a_ = this.ToDate(context, BirthDateTime);
+        CqlDateTime b_ = this.ToDate(context, AsOf);
         int? c_ = context.Operators.DurationBetween(a_, b_, "year");
 
         return c_;

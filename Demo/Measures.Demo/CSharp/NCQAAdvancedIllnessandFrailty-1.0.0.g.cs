@@ -422,31 +422,59 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     {
         CqlValueSet a_ = this.Dementia_Medications(context);
         IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
-        IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
-        IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
-        IEnumerable<MedicationDispense> f_ = NCQAStatus_1_0_0.Instance.Dispensed_Medication(context, e_);
-        bool? g_(MedicationDispense DementiaMedDispensed)
+        IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
+        IEnumerable<MedicationDispense> d_(MedicationDispense MR)
         {
-            FhirDateTime j_ = DementiaMedDispensed?.WhenHandedOverElement;
-            CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, j_ as object);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlDate m_ = context.Operators.DateFrom(l_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            CqlDateTime o_ = context.Operators.Start(n_);
-            CqlDate p_ = context.Operators.DateFrom(o_);
-            CqlQuantity q_ = context.Operators.Quantity(1m, "year");
-            CqlDate r_ = context.Operators.Subtract(p_, q_);
-            CqlDateTime t_ = context.Operators.End(n_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = context.Operators.Interval(r_, u_, true, true);
-            bool? w_ = context.Operators.In<CqlDate>(m_, v_, default);
+            IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            bool? l_(Medication M)
+            {
+                Id p_ = M?.IdElement;
+                string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+                object r_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
+                string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_ as FhirString);
+                IEnumerable<string> t_ = context.Operators.Split(s_, "/");
+                string u_ = context.Operators.Last<string>(t_);
+                bool? v_ = context.Operators.Equal(q_, u_);
+                CodeableConcept w_ = M?.Code;
+                CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_);
+                CqlValueSet y_ = this.Dementia_Medications(context);
+                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                bool? aa_ = context.Operators.And(v_, z_);
 
-            return w_;
+                return aa_;
+            };
+            IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
+            MedicationDispense n_(Medication M) =>
+                MR;
+            IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
+
+            return o_;
         };
-        IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
-        bool? i_ = context.Operators.Exists<MedicationDispense>(h_);
+        IEnumerable<MedicationDispense> e_ = context.Operators.SelectMany<MedicationDispense, MedicationDispense>(c_, d_);
+        IEnumerable<MedicationDispense> f_ = context.Operators.Union<MedicationDispense>(b_, e_);
+        IEnumerable<MedicationDispense> g_ = NCQAStatus_1_0_0.Instance.Dispensed_Medication(context, f_);
+        bool? h_(MedicationDispense DementiaMedDispensed)
+        {
+            FhirDateTime ab_ = DementiaMedDispensed?.WhenHandedOverElement;
+            CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_ as object);
+            CqlDateTime ad_ = context.Operators.Start(ac_);
+            CqlDate ae_ = context.Operators.DateFrom(ad_);
+            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
+            CqlDateTime ag_ = context.Operators.Start(af_);
+            CqlDate ah_ = context.Operators.DateFrom(ag_);
+            CqlQuantity ai_ = context.Operators.Quantity(1m, "year");
+            CqlDate aj_ = context.Operators.Subtract(ah_, ai_);
+            CqlDateTime al_ = context.Operators.End(af_);
+            CqlDate am_ = context.Operators.DateFrom(al_);
+            CqlInterval<CqlDate> an_ = context.Operators.Interval(aj_, am_, true, true);
+            bool? ao_ = context.Operators.In<CqlDate>(ae_, an_, default);
 
-        return i_;
+            return ao_;
+        };
+        IEnumerable<MedicationDispense> i_ = context.Operators.Where<MedicationDispense>(g_, h_);
+        bool? j_ = context.Operators.Exists<MedicationDispense>(i_);
+
+        return j_;
     }
 
 

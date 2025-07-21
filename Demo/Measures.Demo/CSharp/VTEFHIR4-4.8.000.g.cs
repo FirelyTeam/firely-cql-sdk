@@ -64,6 +64,27 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
+    [CqlExpressionDefinition("StartOfFirstICU")]
+    public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
+    {
+        Period a_ = this.FirstICULocationPeriod(context, Encounter);
+        CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
+        CqlDateTime c_ = context.Operators.Start(b_);
+
+        return c_;
+    }
+
+
+    [CqlExpressionDefinition("FirstICULocationPeriod")]
+    public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
+    {
+        Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
+        Period b_ = a_?.Period;
+
+        return b_;
+    }
+
+
     [CqlExpressionDefinition("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
     {
@@ -104,27 +125,6 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
 
         return f_;
-    }
-
-
-    [CqlExpressionDefinition("FirstICULocationPeriod")]
-    public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
-    {
-        Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
-        Period b_ = a_?.Period;
-
-        return b_;
-    }
-
-
-    [CqlExpressionDefinition("StartOfFirstICU")]
-    public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
-    {
-        Period a_ = this.FirstICULocationPeriod(context, Encounter);
-        CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
-        CqlDateTime c_ = context.Operators.Start(b_);
-
-        return c_;
     }
 
 

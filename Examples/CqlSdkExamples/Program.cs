@@ -9,6 +9,7 @@ internal partial class Program
         // <codegen-switch>
         switch (code)
         {
+            case "000": RunAll(); return;
             case "210": LoadCqlFromDirSaveElmToDir(); return;
             case "220": LoadElmFromDirSaveCSharpDllAndPdbToDir(); return;
             case "221": LoadCqlFromDemoDirSaveCSharpToDir(); return;

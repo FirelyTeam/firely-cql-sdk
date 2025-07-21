@@ -96,9 +96,11 @@ partial class ExpressionBuilderContext
     private Type TranslateType<TType>(TType? arg) =>
         arg switch
         {
-            Type type                         => type,
-            XmlQualifiedName xmlQualifiedName => _typeResolver.ResolveType(xmlQualifiedName.Name)!,
-            _                                 => null!,
+            Type type                             => type,
+            XmlQualifiedName xmlQualifiedName     => _typeResolver.ResolveType(xmlQualifiedName.Name)!,
+            NamedTypeSpecifier namedTypeSpecifier => TranslateType(namedTypeSpecifier.name)!,
+            null                                  => throw this.NewExpressionBuildingException("Cannot translate null to a type"),
+            _                                     => throw this.NewExpressionBuildingException($"Cannot translate '{arg}' to a type"),
         };
 
     [DebuggerStepThrough]
@@ -221,6 +223,7 @@ partial class ExpressionBuilderContext
         {
             MinValue e => [e.valueType],
             MaxValue e => [e.valueType],
+            Elm.Convert e => [e.resultTypeSpecifier],
             _          => NoTypes,
         };
         // ReSharper restore CoVariantArrayConversion
@@ -1232,8 +1235,10 @@ partial class ExpressionBuilderContext
         var valueSet =
             (valueSetRef, valueSetExpression) switch
             {
+                // If valueSetExpression is not null, use it (even if valueSetRef also exists)
+                (_, { } e) => TranslateElement(e),
+                // If only valueSetRef is not null
                 ({ } r, null) => InvokeDefinitionThroughRuntimeContext(r.name!, r.libraryName, typeof(CqlValueSet)),
-                (null, { } e) => TranslateElement(e),
                 _             => throw this.NewExpressionBuildingException("Expected either a ValueSetRef or a ValueSetExpression")
             };
         return valueSet;

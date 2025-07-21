@@ -1,4 +1,7 @@
 ﻿using Hl7.Cql.Elm;
+using Hl7.Fhir.Model;
+using Library = Hl7.Cql.Elm.Library;
+using Annotation = Hl7.Cql.Elm.Annotation;
 
 namespace CoreTests
 {
@@ -21,7 +24,14 @@ namespace CoreTests
             var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
             cts.choice.Should().HaveCount(1);
         }
-
+        private static readonly HashSet<string> AcceptableErrors = new()
+        {
+            // Although it seems enums are *always* serialized (even when they are set to the default
+            // value), sometimes they are not for accessLevel. That's acceptable.
+            "Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.",
+            //now removing empty values due to JAVA ELM having many empty arrays in the output
+            @"Expected key 'relationship' (value '[]') not found in actual object. At $.library.statements.def[6].expression.else.element[0].value."
+        };
         [TestMethod]
         public void Elm_Deserialize_FhirHelpers()
         {
@@ -38,10 +48,10 @@ namespace CoreTests
 
             static bool acceptable(string s)
             {
-                // Although it seems enums are *always* serialized (even when they are set to the default
-                // value), sometimes they are not for accessLevel. That's acceptable.
-                return s.Contains("Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.");
+                
+                return AcceptableErrors.Any(s.Contains);
             }
+            
         }
 
         [TestMethod]
