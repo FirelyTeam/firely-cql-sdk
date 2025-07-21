@@ -56,7 +56,7 @@ namespace Hl7.Cql.Fhir
             PropertyInfo? result = null;
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
-                result = type.GetProperty("Value");
+                result = type.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
             }
             else
             {
