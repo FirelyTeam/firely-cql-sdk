@@ -57,28 +57,28 @@ namespace Hl7.Cql.Compiler
             Expression[] args,
             Type[] typeArgs)
         {
-            var result = methodName switch
+            var result = (methodName, args.Length) switch
             {
                 // @formatter:off
-                "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
-                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
-                "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
-                "Coalesce"          => Coalesce(args[0]),
-                "Flatten"           => Flatten(args[0]),
-                "InList"            => InList(args[0], args[1]),
-                "LateBoundProperty" => LateBoundProperty(args[0], args[1], args[2]),
-                "ListUnion"         => Union(args[0], args[1]),
-                "ResolveValueSet"   => ResolveValueSet(args[0]),
-                "Retrieve"          => Retrieve(args[0], args[1], args[2], args[3]),
-                "Select"            => Select(args[0], args[1]),
-                "SelectMany"        => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
-                "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
-                "SortBy"            => SortBy(args[0], args[1], args[2]),
-                "Where"             => Where(args[0], args[1]),
-                "ToList"            => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
-                "Width"             => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
-                _                   => BindToBestMethodOverload(methodName, args, typeArgs)!,
+                ("Convert"          , >= 2) => BindConvert(args[0], args[1]),
+                ("Aggregate"        , _) => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
+                ("CrossJoin"        , _) => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
+                ("Message"          , _) => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
+                ("Coalesce"         , >=1) => Coalesce(args[0]),
+                ("Flatten"          , >=1) => Flatten(args[0]),
+                ("InList"           , >=2) => InList(args[0], args[1]),
+                ("LateBoundProperty", >=3) => LateBoundProperty(args[0], args[1], args[2]),
+                ("ListUnion"        , >=2) => Union(args[0], args[1]),
+                ("ResolveValueSet"  , >=1) => ResolveValueSet(args[0]),
+                ("Retrieve"         , >=3) => Retrieve(args[0], args[1], args[2], args[3]),
+                ("Select"           , >=2) => Select(args[0], args[1]),
+                ("SelectMany"       , >=2) => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
+                ("SelectManyResults", >=3) => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
+                ("SortBy"           , >=3) => SortBy(args[0], args[1], args[2]),
+                ("Where"            , >=2) => Where(args[0], args[1]),
+                ("ToList"           , _) => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                ("Width"            , _) => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                _                                  => BindToBestMethodOverload(methodName, args, typeArgs)!,
                 // @formatter:om
             };
             return result;
