@@ -56,7 +56,7 @@ namespace Hl7.Cql.Fhir
             PropertyInfo? result = null;
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
-                result = ReflectionHelper.FindProperty(type, "Value");
+                result = type.GetProperty("Value");
             }
             else
             {
@@ -70,7 +70,7 @@ namespace Hl7.Cql.Fhir
                     else
                     {
                         var propMapping = cm.FindMappedElementByName(propertyName);
-                        if (propMapping is not null)
+                        if (propMapping is not null && propMapping.NativeProperty is not null)
                             result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
                     }
                 }
@@ -132,7 +132,7 @@ namespace Hl7.Cql.Fhir
                 return cm.IsBackboneType switch
                 {
                     false => fhirPrefix + cm.Name,
-                    true => fhirPrefix + cm.DefinitionPath
+                    true => fhirPrefix + cm.Canonical
                 };
             }
 

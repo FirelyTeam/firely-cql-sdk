@@ -113,7 +113,10 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<M.Quantity, M.Age>(q =>
             {
                 var a = new M.Age();
-                q.CopyTo(a);
+                a.Value = q.Value;
+                a.Unit = q.Unit;
+                a.System = q.System;
+                a.Code = q.Code;
                 return a;
             });
             return converter;
@@ -140,10 +143,10 @@ namespace Hl7.Cql.Fhir
             add((M.Integer c) => new M.UnsignedInt(c.Value));
             add((M.Integer c) => new M.PositiveInt(c.Value));
             add((M.Code c) => c.Value);
-            add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
-            add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
+            add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
+            add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
-            add((M.Time f) => f.TryToTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
+            add((M.Time f) => f.TryToSystemTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
             add((M.Time f) => f.ToString());
             add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f));
             add((M.FhirDateTime f) => f.ToString());
@@ -192,8 +195,8 @@ namespace Hl7.Cql.Fhir
                 return dt switch
                 {
                     M.FhirString fs => fs.Value,
-                    M.PrimitiveType { ObjectValue: string os } => os,
-                    M.PrimitiveType pt => pt.ObjectValue?.ToString(),
+                    M.PrimitiveType { JsonValue: string os } => os,
+                    M.PrimitiveType pt => pt.JsonValue?.ToString(),
                     _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")
                 };
             }
@@ -206,7 +209,7 @@ namespace Hl7.Cql.Fhir
                 if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                     return datetime;
 
-                if (!f.TryToDateTime(out var dt))
+                if (!f.TryToSystemDateTime(out var dt))
                     return null;
 
                 var cqlDateTime = new CqlDateTime(
@@ -399,7 +402,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
             converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
-            converter.AddConversion<M.FhirUri, string>(uri => uri.Value);
+            converter.AddConversion<M.FhirUri, string>(uri => uri.Value ?? "");
 
             return converter;
         }
@@ -427,14 +430,16 @@ namespace Hl7.Cql.Fhir
 
                 converter.AddConversion(codeOfEnumType, typeof(CqlCode), (code) =>
                 {
-                    var systemAndCode = (M.ISystemAndCode)code;
-                    return new CqlCode(systemAndCode.Code, systemAndCode.System);
+                    var coded = (M.ICoded)code;
+                    var codings = coded.ToCodings().FirstOrDefault();
+                    return new CqlCode(codings?.Code, codings?.System);
                 });
-                converter.AddConversion(codeOfEnumType, nullableEnumType, (code) => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+                converter.AddConversion(codeOfEnumType, nullableEnumType, (code) => code.GetType().GetProperty("JsonValue")!.GetValue(code)!);
                 converter.AddConversion(codeOfEnumType, typeof(string), (code) =>
                 {
-                    var systemAndCode = (M.ISystemAndCode)code;
-                    return systemAndCode.Code;
+                    var coded = (M.ICoded)code;
+                    var codings = coded.ToCodings().FirstOrDefault();
+                    return codings?.Code ?? "";
                 });
 
 

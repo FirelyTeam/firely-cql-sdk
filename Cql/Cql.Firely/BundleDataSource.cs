@@ -71,7 +71,7 @@ namespace Hl7.Cql.Fhir
         private IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?> allowedCodes, PropertyInfo? codeProperty = null) where T : class
         {
             Predicate<Coding> filter = allowedCodes is IValueSetFacade valueSet ?
-                c => valueSet.IsCodeInValueSet(c.Code, c.System) == true
+                c => valueSet.IsCodeInValueSet(c.Code ?? "", c.System) == true
                 : listFilter;
 
             return ExecuteFilter<T>(filter, codeProperty);
@@ -86,7 +86,7 @@ namespace Hl7.Cql.Fhir
         private IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet, PropertyInfo? codeProperty = null) where T : class
         {
             return valueSet.id != null ?
-                       ExecuteFilter<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code, c.System), codeProperty) :
+                       ExecuteFilter<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code ?? "", c.System), codeProperty) :
                        Bundle.FilterByType<T>();
         }
 

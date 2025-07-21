@@ -19,7 +19,7 @@ namespace Hl7.Cql.Fhir
 
             foreach (var entry in entries)
             {
-                var type = entry.Resource.GetType();
+                var type = entry.Resource?.GetType();
                 while (type != typeof(object) && type != null)
                 {
                     if (!_byType.TryGetValue(type, out var resources))
@@ -27,7 +27,8 @@ namespace Hl7.Cql.Fhir
                         resources = new List<Resource>();
                         _byType.Add(type, resources);
                     }
-                    resources.Add(entry.Resource);
+                    if (entry.Resource is not null)
+                        resources.Add(entry.Resource);
                     type = type.BaseType;
                 }
             }

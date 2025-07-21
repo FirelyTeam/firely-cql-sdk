@@ -68,7 +68,7 @@ namespace Hl7.Cql.Fhir
 
         // Override to call the mappings GetValue, which is a fast ILEmitted getter
         public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture) =>
-            obj is not null ? Mapping.GetValue(obj) : null;
+            obj is not null && obj is Hl7.Fhir.Model.Base baseObj ? Mapping.GetValue(baseObj) : null;
 
         public override bool IsDefined(Type attributeType, bool inherit)
         {
@@ -78,8 +78,8 @@ namespace Hl7.Cql.Fhir
         // Override to call the mappings SetValue, which is a fast ILEmitted setter
         public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
         {
-            if (obj is not null)
-                Mapping.SetValue(obj, value);
+            if (obj is not null && obj is Hl7.Fhir.Model.Base baseObj)
+                Mapping.SetValue(baseObj, value);
         }
     }
 }
