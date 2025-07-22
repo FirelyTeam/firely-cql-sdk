@@ -262,6 +262,16 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     }
 
 
+    [CqlExpressionDefinition("GetModifierExtension")]
+    public Extension GetModifierExtension(CqlContext context, DomainResource domainResource, string url)
+    {
+        IEnumerable<Extension> a_ = this.GetModifierExtensions(context, domainResource, url);
+        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
+
+        return b_;
+    }
+
+
     [CqlExpressionDefinition("GetModifierExtensions")]
     public IEnumerable<Extension> GetModifierExtensions(CqlContext context, DomainResource domainResource, string url)
     {
@@ -286,16 +296,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     }
 
 
-    [CqlExpressionDefinition("GetModifierExtension")]
-    public Extension GetModifierExtension(CqlContext context, DomainResource domainResource, string url)
-    {
-        IEnumerable<Extension> a_ = this.GetModifierExtensions(context, domainResource, url);
-        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
-        return b_;
-    }
-
-
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context)
     {
@@ -307,14 +307,50 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             IEnumerable<Encounter> h_ = this.Diabetic_Retinopathy_Encounter(context);
             bool? i_(Encounter EncounterDiabeticRetinopathy)
             {
-                Period m_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
-                Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, LevelOfSeverityNotCommunicated, "qicore-recorded");
-                DataType p_ = o_?.Value;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_ as Period);
-                bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
+                CqlDateTime m_()
+                {
+                    bool q_()
+                    {
+                        Extension s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, LevelOfSeverityNotCommunicated, "qicore-recorded");
+                        DataType t_ = s_?.Value;
+                        bool u_ = t_ is FhirDateTime;
 
-                return r_;
+                        return u_;
+                    };
+                    bool r_()
+                    {
+                        Extension v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, LevelOfSeverityNotCommunicated, "qicore-recorded");
+                        DataType w_ = v_?.Value;
+                        bool x_ = w_ is Instant;
+
+                        return x_;
+                    };
+                    if (q_())
+                    {
+                        Extension y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, LevelOfSeverityNotCommunicated, "qicore-recorded");
+                        DataType z_ = y_?.Value;
+                        CqlDateTime aa_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, z_ as FhirDateTime);
+
+                        return aa_;
+                    }
+                    else if (r_())
+                    {
+                        Extension ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, LevelOfSeverityNotCommunicated, "qicore-recorded");
+                        DataType ac_ = ab_?.Value;
+                        CqlDateTime ad_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ac_ as Instant);
+
+                        return ad_;
+                    }
+                    else
+                    {
+                        return default;
+                    }
+                };
+                Period n_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
+                bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, default);
+
+                return p_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Communication k_(Encounter EncounterDiabeticRetinopathy) =>
@@ -326,25 +362,25 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> e_ = context.Operators.SelectMany<Communication, Communication>(c_, d_);
         bool? f_(Communication LevelOfSeverityNotCommunicated)
         {
-            Code<EventStatus> s_ = LevelOfSeverityNotCommunicated?.StatusElement;
-            string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
-            bool? u_ = context.Operators.Equal(t_, "not-done");
-            Extension v_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
-            DataType w_ = v_?.Value;
-            bool? x_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, w_ as FhirBoolean);
-            bool? y_ = context.Operators.IsTrue(x_);
-            bool? z_ = context.Operators.And(u_, y_);
-            CodeableConcept aa_ = LevelOfSeverityNotCommunicated?.StatusReason;
-            CqlConcept ab_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aa_);
-            CqlValueSet ac_ = this.Medical_Reason(context);
-            bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-            CqlConcept af_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aa_);
-            CqlValueSet ag_ = this.Patient_Reason(context);
-            bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
-            bool? ai_ = context.Operators.Or(ad_, ah_);
-            bool? aj_ = context.Operators.And(z_, ai_);
+            Code<EventStatus> ae_ = LevelOfSeverityNotCommunicated?.StatusElement;
+            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_);
+            bool? ag_ = context.Operators.Equal(af_, "not-done");
+            Extension ah_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
+            DataType ai_ = ah_?.Value;
+            bool? aj_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ai_ as FhirBoolean);
+            bool? ak_ = context.Operators.IsTrue(aj_);
+            bool? al_ = context.Operators.And(ag_, ak_);
+            CodeableConcept am_ = LevelOfSeverityNotCommunicated?.StatusReason;
+            CqlConcept an_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
+            CqlValueSet ao_ = this.Medical_Reason(context);
+            bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
+            CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
+            CqlValueSet as_ = this.Patient_Reason(context);
+            bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+            bool? au_ = context.Operators.Or(ap_, at_);
+            bool? av_ = context.Operators.And(al_, au_);
 
-            return aj_;
+            return av_;
         };
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);
 
@@ -364,14 +400,50 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             IEnumerable<Encounter> i_ = this.Diabetic_Retinopathy_Encounter(context);
             bool? j_(Encounter EncounterDiabeticRetinopathy)
             {
-                Period n_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-                Extension p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-recorded");
-                DataType q_ = p_?.Value;
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, q_ as Period);
-                bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                CqlDateTime n_()
+                {
+                    bool r_()
+                    {
+                        Extension t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+                        DataType u_ = t_?.Value;
+                        bool v_ = u_ is FhirDateTime;
 
-                return s_;
+                        return v_;
+                    };
+                    bool s_()
+                    {
+                        Extension w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+                        DataType x_ = w_?.Value;
+                        bool y_ = x_ is Instant;
+
+                        return y_;
+                    };
+                    if (r_())
+                    {
+                        Extension z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+                        DataType aa_ = z_?.Value;
+                        CqlDateTime ab_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, aa_ as FhirDateTime);
+
+                        return ab_;
+                    }
+                    else if (s_())
+                    {
+                        Extension ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+                        DataType ad_ = ac_?.Value;
+                        CqlDateTime ae_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ad_ as Instant);
+
+                        return ae_;
+                    }
+                    else
+                    {
+                        return default;
+                    }
+                };
+                Period o_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
+                bool? q_ = context.Operators.In<CqlDateTime>(n_(), p_, default);
+
+                return q_;
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Communication l_(Encounter EncounterDiabeticRetinopathy) =>
@@ -383,25 +455,25 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> f_ = context.Operators.SelectMany<Communication, Communication>(d_, e_);
         bool? g_(Communication MacularEdemaAbsentNotCommunicated)
         {
-            Code<EventStatus> t_ = MacularEdemaAbsentNotCommunicated?.StatusElement;
-            string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
-            bool? v_ = context.Operators.Equal(u_, "not-done");
-            Extension w_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
-            DataType x_ = w_?.Value;
-            bool? y_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, x_ as FhirBoolean);
-            bool? z_ = context.Operators.IsTrue(y_);
-            bool? aa_ = context.Operators.And(v_, z_);
-            CodeableConcept ab_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-            CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-            CqlValueSet ad_ = this.Medical_Reason(context);
-            bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-            CqlConcept ag_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-            CqlValueSet ah_ = this.Patient_Reason(context);
-            bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
-            bool? aj_ = context.Operators.Or(ae_, ai_);
-            bool? ak_ = context.Operators.And(aa_, aj_);
+            Code<EventStatus> af_ = MacularEdemaAbsentNotCommunicated?.StatusElement;
+            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_);
+            bool? ah_ = context.Operators.Equal(ag_, "not-done");
+            Extension ai_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
+            DataType aj_ = ai_?.Value;
+            bool? ak_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, aj_ as FhirBoolean);
+            bool? al_ = context.Operators.IsTrue(ak_);
+            bool? am_ = context.Operators.And(ah_, al_);
+            CodeableConcept an_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+            CqlConcept ao_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, an_);
+            CqlValueSet ap_ = this.Medical_Reason(context);
+            bool? aq_ = context.Operators.ConceptInValueSet(ao_, ap_);
+            CqlConcept as_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, an_);
+            CqlValueSet at_ = this.Patient_Reason(context);
+            bool? au_ = context.Operators.ConceptInValueSet(as_, at_);
+            bool? av_ = context.Operators.Or(aq_, au_);
+            bool? aw_ = context.Operators.And(am_, av_);
 
-            return ak_;
+            return aw_;
         };
         IEnumerable<Communication> h_ = context.Operators.Where<Communication>(f_, g_);
 
@@ -420,14 +492,50 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             IEnumerable<Encounter> h_ = this.Diabetic_Retinopathy_Encounter(context);
             bool? i_(Encounter EncounterDiabeticRetinopathy)
             {
-                Period m_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
-                Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaPresentNotCommunicated, "qicore-recorded");
-                DataType p_ = o_?.Value;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_ as Period);
-                bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
+                CqlDateTime m_()
+                {
+                    bool q_()
+                    {
+                        Extension s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaPresentNotCommunicated, "qicore-recorded");
+                        DataType t_ = s_?.Value;
+                        bool u_ = t_ is FhirDateTime;
 
-                return r_;
+                        return u_;
+                    };
+                    bool r_()
+                    {
+                        Extension v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaPresentNotCommunicated, "qicore-recorded");
+                        DataType w_ = v_?.Value;
+                        bool x_ = w_ is Instant;
+
+                        return x_;
+                    };
+                    if (q_())
+                    {
+                        Extension y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaPresentNotCommunicated, "qicore-recorded");
+                        DataType z_ = y_?.Value;
+                        CqlDateTime aa_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, z_ as FhirDateTime);
+
+                        return aa_;
+                    }
+                    else if (r_())
+                    {
+                        Extension ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetExtension(context, MacularEdemaPresentNotCommunicated, "qicore-recorded");
+                        DataType ac_ = ab_?.Value;
+                        CqlDateTime ad_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ac_ as Instant);
+
+                        return ad_;
+                    }
+                    else
+                    {
+                        return default;
+                    }
+                };
+                Period n_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
+                bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, default);
+
+                return p_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Communication k_(Encounter EncounterDiabeticRetinopathy) =>
@@ -439,25 +547,25 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> e_ = context.Operators.SelectMany<Communication, Communication>(c_, d_);
         bool? f_(Communication MacularEdemaPresentNotCommunicated)
         {
-            Code<EventStatus> s_ = MacularEdemaPresentNotCommunicated?.StatusElement;
-            string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
-            bool? u_ = context.Operators.Equal(t_, "not-done");
-            Extension v_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
-            DataType w_ = v_?.Value;
-            bool? x_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, w_ as FhirBoolean);
-            bool? y_ = context.Operators.IsTrue(x_);
-            bool? z_ = context.Operators.And(u_, y_);
-            CodeableConcept aa_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-            CqlConcept ab_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aa_);
-            CqlValueSet ac_ = this.Medical_Reason(context);
-            bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-            CqlConcept af_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aa_);
-            CqlValueSet ag_ = this.Patient_Reason(context);
-            bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
-            bool? ai_ = context.Operators.Or(ad_, ah_);
-            bool? aj_ = context.Operators.And(z_, ai_);
+            Code<EventStatus> ae_ = MacularEdemaPresentNotCommunicated?.StatusElement;
+            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_);
+            bool? ag_ = context.Operators.Equal(af_, "not-done");
+            Extension ah_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
+            DataType ai_ = ah_?.Value;
+            bool? aj_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ai_ as FhirBoolean);
+            bool? ak_ = context.Operators.IsTrue(aj_);
+            bool? al_ = context.Operators.And(ag_, ak_);
+            CodeableConcept am_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+            CqlConcept an_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
+            CqlValueSet ao_ = this.Medical_Reason(context);
+            bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
+            CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
+            CqlValueSet as_ = this.Patient_Reason(context);
+            bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+            bool? au_ = context.Operators.Or(ap_, at_);
+            bool? av_ = context.Operators.And(al_, au_);
 
-            return aj_;
+            return av_;
         };
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);
 

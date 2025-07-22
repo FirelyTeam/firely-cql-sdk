@@ -1,5 +1,9 @@
 {
   "profiles": {
+    "000 Run All": {
+      "commandName": "Project",
+      "commandLineArgs": "000"
+    },
     "210 Load CQL from dir, Save ELM to dir": {
       "commandName": "Project",
       "commandLineArgs": "210"

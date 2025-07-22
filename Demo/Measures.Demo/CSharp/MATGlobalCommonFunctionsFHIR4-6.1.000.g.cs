@@ -1158,6 +1158,36 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
+    [CqlExpressionDefinition("PresentOnAdmissionIndicator")]
+    public CodeableConcept PresentOnAdmissionIndicator(CqlContext context, Element element)
+    {
+        Extension a_ = this.GetExtension(context, element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+        DataType b_ = a_?.Value;
+
+        return b_ as CodeableConcept;
+    }
+
+
+    [CqlExpressionDefinition("GetExtension")]
+    public Extension GetExtension(CqlContext context, DomainResource domainResource, string url)
+    {
+        IEnumerable<Extension> a_ = this.GetExtensions(context, domainResource, url);
+        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
+
+        return b_;
+    }
+
+
+    [CqlExpressionDefinition("GetExtension")]
+    public Extension GetExtension(CqlContext context, Element element, string url)
+    {
+        IEnumerable<Extension> a_ = this.GetExtensions(context, element, url);
+        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
+
+        return b_;
+    }
+
+
     [CqlExpressionDefinition("GetExtensions")]
     public IEnumerable<Extension> GetExtensions(CqlContext context, DomainResource domainResource, string url)
     {
@@ -1202,36 +1232,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
 
         return f_;
-    }
-
-
-    [CqlExpressionDefinition("GetExtension")]
-    public Extension GetExtension(CqlContext context, DomainResource domainResource, string url)
-    {
-        IEnumerable<Extension> a_ = this.GetExtensions(context, domainResource, url);
-        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
-        return b_;
-    }
-
-
-    [CqlExpressionDefinition("GetExtension")]
-    public Extension GetExtension(CqlContext context, Element element, string url)
-    {
-        IEnumerable<Extension> a_ = this.GetExtensions(context, element, url);
-        Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
-        return b_;
-    }
-
-
-    [CqlExpressionDefinition("PresentOnAdmissionIndicator")]
-    public CodeableConcept PresentOnAdmissionIndicator(CqlContext context, Element element)
-    {
-        Extension a_ = this.GetExtension(context, element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
-        DataType b_ = a_?.Value;
-
-        return b_ as CodeableConcept;
     }
 
 

@@ -602,30 +602,6 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("GetLocation")]
-    [CqlTag("description", "Returns the Location resource specified by the given reference")]
-    [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getLocation()` instead.")]
-    public Location GetLocation(CqlContext context, ResourceReference reference)
-    {
-        IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
-        bool? b_(Location L)
-        {
-            Id e_ = L?.IdElement;
-            string f_ = e_?.Value;
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = g_?.Value;
-            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
-
-            return j_;
-        };
-        IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
-        Location d_ = context.Operators.SingletonFrom<Location>(c_);
-
-        return d_;
-    }
-
-
     [CqlExpressionDefinition("Emergency Department Arrival Time")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
     public CqlDateTime Emergency_Department_Arrival_Time(CqlContext context, Encounter TheEncounter)
@@ -655,6 +631,30 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
         CqlDateTime g_ = context.Operators.Start(f_);
 
         return g_;
+    }
+
+
+    [CqlExpressionDefinition("GetLocation")]
+    [CqlTag("description", "Returns the Location resource specified by the given reference")]
+    [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getLocation()` instead.")]
+    public Location GetLocation(CqlContext context, ResourceReference reference)
+    {
+        IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
+        bool? b_(Location L)
+        {
+            Id e_ = L?.IdElement;
+            string f_ = e_?.Value;
+            FhirString g_ = reference?.ReferenceElement;
+            string h_ = g_?.Value;
+            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
+            bool? j_ = context.Operators.Equal(f_, i_);
+
+            return j_;
+        };
+        IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
+        Location d_ = context.Operators.SingletonFrom<Location>(c_);
+
+        return d_;
     }
 
 

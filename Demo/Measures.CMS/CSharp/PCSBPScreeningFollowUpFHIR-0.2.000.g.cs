@@ -1997,28 +1997,54 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
         {
             CqlValueSet ap_ = this.Pharmacologic_Therapy_for_Hypertension(context);
             IEnumerable<MedicationRequest> aq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
-            bool? au_(MedicationRequest Medications)
+            IEnumerable<MedicationRequest> ar_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> as_(MedicationRequest MR)
             {
-                FhirDateTime ay_ = Medications?.AuthoredOnElement;
-                CqlDateTime az_ = context.Operators.Convert<CqlDateTime>(ay_);
-                CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
-                bool? bb_ = context.Operators.In<CqlDateTime>(az_, ba_, "day");
-                Code<MedicationRequest.MedicationrequestStatus> bc_ = Medications?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? bd_ = bc_?.Value;
-                string be_ = context.Operators.Convert<string>(bd_);
-                bool? bf_ = context.Operators.Equivalent(be_, "active");
-                bool? bg_ = context.Operators.And(bb_, bf_);
+                IEnumerable<Medication> az_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+                bool? ba_(Medication M)
+                {
+                    object be_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                    object bf_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                    IEnumerable<string> bg_ = context.Operators.Split((string)bf_, "/");
+                    string bh_ = context.Operators.Last<string>(bg_);
+                    bool? bi_ = context.Operators.Equal(be_, bh_);
+                    CodeableConcept bj_ = M?.Code;
+                    CqlConcept bk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bj_);
+                    CqlValueSet bl_ = this.Pharmacologic_Therapy_for_Hypertension(context);
+                    bool? bm_ = context.Operators.ConceptInValueSet(bk_, bl_);
+                    bool? bn_ = context.Operators.And(bi_, bm_);
 
-                return bg_;
+                    return bn_;
+                };
+                IEnumerable<Medication> bb_ = context.Operators.Where<Medication>(az_, ba_);
+                MedicationRequest bc_(Medication M) =>
+                    MR;
+                IEnumerable<MedicationRequest> bd_ = context.Operators.Select<Medication, MedicationRequest>(bb_, bc_);
+
+                return bd_;
             };
-            IEnumerable<MedicationRequest> av_ = context.Operators.Where<MedicationRequest>(at_, au_);
-            ServiceRequest aw_(MedicationRequest Medications) =>
-                WeeksRescreen;
-            IEnumerable<ServiceRequest> ax_ = context.Operators.Select<MedicationRequest, ServiceRequest>(av_, aw_);
+            IEnumerable<MedicationRequest> at_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(ar_, as_);
+            IEnumerable<MedicationRequest> au_ = context.Operators.Union<MedicationRequest>(aq_, at_);
+            bool? av_(MedicationRequest Medications)
+            {
+                FhirDateTime bo_ = Medications?.AuthoredOnElement;
+                CqlDateTime bp_ = context.Operators.Convert<CqlDateTime>(bo_);
+                CqlInterval<CqlDateTime> bq_ = this.Measurement_Period(context);
+                bool? br_ = context.Operators.In<CqlDateTime>(bp_, bq_, "day");
+                Code<MedicationRequest.MedicationrequestStatus> bs_ = Medications?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bt_ = bs_?.Value;
+                string bu_ = context.Operators.Convert<string>(bt_);
+                bool? bv_ = context.Operators.Equivalent(bu_, "active");
+                bool? bw_ = context.Operators.And(br_, bv_);
 
-            return ax_;
+                return bw_;
+            };
+            IEnumerable<MedicationRequest> aw_ = context.Operators.Where<MedicationRequest>(au_, av_);
+            ServiceRequest ax_(MedicationRequest Medications) =>
+                WeeksRescreen;
+            IEnumerable<ServiceRequest> ay_ = context.Operators.Select<MedicationRequest, ServiceRequest>(aw_, ax_);
+
+            return ay_;
         };
         IEnumerable<ServiceRequest> h_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(f_, g_);
 

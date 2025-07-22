@@ -616,26 +616,52 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     {
         CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        IEnumerable<MedicationRequest> f_ = Status_1_8_000.Instance.isMedicationOrder(context, e_);
-        bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            FhirDateTime i_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
-            CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlQuantity m_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-            CqlDateTime p_ = context.Operators.End(k_);
-            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-            bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
+            IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? k_(Medication M)
+            {
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
 
-            return r_;
+                return x_;
+            };
+            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
+            MedicationRequest m_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
+
+            return n_;
         };
-        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, f_);
+        bool? h_(MedicationRequest CessationPharmacotherapyOrdered)
+        {
+            FhirDateTime y_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
+            CqlDateTime z_ = context.Operators.Convert<CqlDateTime>(y_);
+            CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+            CqlDateTime ab_ = context.Operators.Start(aa_);
+            CqlQuantity ac_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
+            CqlDateTime af_ = context.Operators.End(aa_);
+            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
+            bool? ah_ = context.Operators.In<CqlDateTime>(z_, ag_, "day");
 
-        return h_;
+            return ah_;
+        };
+        IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
+
+        return i_;
     }
 
 
@@ -644,32 +670,58 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     {
         CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-        IEnumerable<MedicationRequest> f_ = Status_1_8_000.Instance.isMedicationActive(context, e_);
-        bool? g_(MedicationRequest TakingCessationPharmacotherapy)
+        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> d_(MedicationRequest MR)
         {
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            CqlDateTime j_ = context.Operators.Start(i_);
-            CqlQuantity k_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime l_ = context.Operators.Subtract(j_, k_);
-            CqlDateTime n_ = context.Operators.End(i_);
-            CqlInterval<CqlDateTime> o_ = context.Operators.Interval(l_, n_, true, true);
-            CqlInterval<CqlDate> p_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
-            CqlDate q_ = p_?.low;
-            CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
-            CqlDate t_ = p_?.high;
-            CqlDateTime u_ = context.Operators.ConvertDateToDateTime(t_);
-            bool? w_ = p_?.lowClosed;
-            bool? y_ = p_?.highClosed;
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(r_, u_, w_, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, z_, "day");
+            IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? k_(Medication M)
+            {
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
 
-            return aa_;
+                return x_;
+            };
+            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
+            MedicationRequest m_(Medication M) =>
+                MR;
+            IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
+
+            return n_;
         };
-        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationActive(context, f_);
+        bool? h_(MedicationRequest TakingCessationPharmacotherapy)
+        {
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlQuantity aa_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+            CqlDateTime ad_ = context.Operators.End(y_);
+            CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
+            CqlInterval<CqlDate> af_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
+            CqlDate ag_ = af_?.low;
+            CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);
+            CqlDate aj_ = af_?.high;
+            CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(aj_);
+            bool? am_ = af_?.lowClosed;
+            bool? ao_ = af_?.highClosed;
+            CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ah_, ak_, am_, ao_);
+            bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ap_, "day");
 
-        return h_;
+            return aq_;
+        };
+        IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
+
+        return i_;
     }
 
 
