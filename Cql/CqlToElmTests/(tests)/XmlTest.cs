@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static IEnumerable<object[]> GetTests()
         {
-            var dir = new DirectoryInfo(@"Input\DQIC");
+            var dir = new DirectoryInfo(Path.Combine("Input", "DQIC"));
             foreach (var xml in dir.GetFiles("*.xml"))
             {
                 using var file = xml.OpenRead();

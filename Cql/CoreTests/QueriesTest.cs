@@ -19,8 +19,8 @@ namespace CoreTests
         {
             _librarySetInvoker = new ElmToolkit()
                                  .AddElmFiles((FileInfo[])[
-                                     new(@"Input\ELM\Test\QueriesTest-1.0.0.json"),
-                                     new(@"Input\ELM\Test\Aggregates-1.0.0.json")])
+                                     new(Path.Combine("Input", "ELM", "Test", "QueriesTest-1.0.0.json")),
+                                     new(Path.Combine("Input", "ELM", "Test", "Aggregates-1.0.0.json"))])
                                  .CreateLibrarySetInvoker();
 
             QueriesDefinitions = _librarySetInvoker.LibraryInvokers[(CqlVersionedLibraryIdentifier)"QueriesTest-1.0.0"]!;

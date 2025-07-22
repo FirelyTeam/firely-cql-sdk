@@ -11,11 +11,13 @@ The CQL SDK uses Azure Pipelines for CI/CD with multiple stages. For complete te
 3. **Run all test projects**
 4. **Build demo projects** that depend on the SDK
 
-## Required .NET Version
+## Required .NET and Java Versions
 
 - **.NET SDK**: 8.0.x (as specified in build/variables.yml)
+- **Java**: OpenJDK 17+ (required for CQL-to-ELM generation via Maven)
+- **Maven**: 3.9+ (required for downloading Java CQL tooling)
 - **Build Configuration**: Release
-- **Target Platform**: Windows (vmImage: windows-latest)
+- **Target Platform**: Cross-platform (Windows/Linux/macOS)
 
 ## Critical Test Projects
 
@@ -54,44 +56,83 @@ The repository includes git submodules that must also build:
 submodules/Ncqa.DQIC/ (various projects)
 ```
 
+## Java Tooling and ELM Generation
+
+The CQL SDK uses Java-based tooling for converting CQL files to ELM (Expression Logical Model) format. This is essential for full testing coverage.
+
+### Java Setup Verification
+```bash
+# Verify Java and Maven are available
+java -version    # Should be Java 17+
+mvn -version     # Should be Maven 3.9+
+```
+
+### ELM Generation Process
+```bash
+# Download Java CQL tooling via Maven (executed in Demo/Cql/Build/)
+cd Demo/Cql/Build
+mvn dependency:copy-dependencies
+
+# Build projects with ELM generation enabled
+dotnet build Demo/Measures.Authoring/Measures.Authoring.csproj --configuration Release
+```
+
+The ELM generation uses:
+- **Maven POM**: `Demo/Cql/Build/pom.xml` - Defines CQL-to-ELM CLI version (currently 3.27.0)
+- **Maven Targets**: `Demo/Cql/Build/Mvn.Targets.xml` - MSBuild integration for Maven
+- **CQL to ELM**: `Demo/Cql/Build/CqlToElm.Targets.xml` - Converts .cql files to .json ELM
+- **ELM to C#**: `Demo/Cql/Build/ElmToCSharp.Targets.xml` - Generates C# from ELM
+
+### Common ELM Issues
+
+1. **Missing Generated Files**: If tests fail with "Source file '*.g.cs' could not be found"
+   - Check if Maven downloaded dependencies: `Demo/Cql/Build/target/dependency/`
+   - Rebuild with ELM generation: `dotnet build -p:ElmToCSharpEnabled=true`
+
+2. **Java Version Conflicts**: CQL tooling requires Java 17+
+3. **Path Issues**: Some test files use Windows-style paths (`Input\Path`) that fail on Linux
+
 ## Step-by-Step Testing Process
 
 ### 1. Initial Setup
 ```bash
-# Ensure .NET 8.0 is available
+# Ensure .NET 8.0 and Java 17+ are available
 dotnet --version
+java -version
+mvn -version
 
-# Restore all dependencies (with submodules)
-dotnet restore Cql-Sdk-All.sln --source https://nuget.pkg.github.com/FirelyTeam/index.json
+# Restore all dependencies (without GitHub packages for public builds)
+dotnet restore Cql-Sdk.slnf
 ```
 
-### 2. Build Core SDK
+### 2. Download Java CQL Tooling
+```bash
+# Download Maven dependencies for CQL-to-ELM conversion
+cd Demo/Cql/Build
+mvn dependency:copy-dependencies
+cd ../../..
+```
+
+### 3. Build Core SDK
 ```bash
 # Build the main solution in Release configuration
-dotnet build Cql-Sdk-All.sln --configuration Release --no-restore
+dotnet build Cql-Sdk.slnf --configuration Release --no-restore
 ```
 
-### 3. Run Core Tests
+### 4. Run Core Tests (Expected: Some failures due to cross-platform path issues)
 ```bash
 # Run all test projects individually to isolate failures
 dotnet test Cql/CoreTests/CoreTests.csproj --configuration Release --no-build
 dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --configuration Release --no-build
-dotnet test Demo/Test.Measures.Demo/Test.Measures.Demo.csproj --configuration Release --no-build
 ```
 
-### 4. Test Demo Projects
+### 5. Test Demo Projects with ELM Generation
 ```bash
-# Build demo projects that are commonly affected by SDK changes
+# Build demo projects that generate ELM and C# files
+dotnet build Demo/Measures.Authoring/Measures.Authoring.csproj --configuration Release --no-restore
 dotnet build Demo/CLI/CLI.csproj --configuration Release --no-restore
 dotnet build Demo/Measures.Demo/Measures.Demo.csproj --configuration Release --no-restore
 dotnet build Demo/Measures.CMS/Measures.CMS.csproj --configuration Release --no-restore
-dotnet build Demo/Measures.Authoring/Measures.Authoring.csproj --configuration Release --no-restore
-```
-
-### 5. Test Integration Runner
-```bash
-# Test the integration runner if available
-dotnet test submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj --configuration Release
 ```
 
 ### 6. Package Validation
@@ -118,12 +159,17 @@ When upgrading to FHIR SDK6, pay attention to these common failure patterns:
 - Missing BindingFlags.DeclaredOnly in reflection calls
 - ReflectionHelper class changes
 
-### 4. **Null Reference Issues**
+### 4. **Cross-Platform Path Issues**
+- Hardcoded Windows paths like `@"Input\ELM\Libs\file.json"` fail on Linux/macOS
+- Use `Path.Combine()` or forward slashes for cross-platform compatibility
+- Common in test files that reference Input directories
+
+### 5. **Null Reference Issues**
 - SDK6 has stricter null checking
 - Add null-conditional operators where needed
 - Check for nullable reference warnings
 
-### 5. **Code Generation Issues**
+### 6. **Code Generation Issues**
 - PackagerCLI dependency on updated SDK methods
 - Generated C# files may fail to compile if templates aren't updated
 
@@ -159,6 +205,20 @@ When upgrading to FHIR SDK6, pay attention to these common failure patterns:
 3. **Test packaging tools**: PackagerCLI
 4. **Validate demos**: CLI, Measures projects
 5. **Run integration tests**: Test projects
+
+### Submodule and Authentication Issues
+
+**Note for Copilot Users**: This repository includes NCQA copyrighted submodules that may not be accessible in all environments:
+
+```
+submodules/Ncqa.DQIC/             # NCQA proprietary code
+submodules/Firely.Cql.Sdk.Integration.Runner/  # May require GitHub auth
+```
+
+If submodules are empty or inaccessible:
+- Focus testing on core projects: `Cql-Sdk.slnf` (filtered solution)
+- Avoid building `Cql-Sdk-All.sln` which includes submodules
+- Use public NuGet feeds only: `dotnet restore Cql-Sdk.slnf`
 
 ## Files to Monitor During SDK Upgrades
 
