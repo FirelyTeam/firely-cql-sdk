@@ -44,6 +44,9 @@ internal static class LibraryExtensions
             // First split out the version part
             // Second split out the Name part after Library/
 
+            if (string.IsNullOrEmpty(relatedArtifact.Resource))
+                return false;
+
             var arr = relatedArtifact.Resource.Split('|', 2);
             string name = arr[0];
             const string LibrarySplit = "Library/";

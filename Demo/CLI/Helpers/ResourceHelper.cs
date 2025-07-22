@@ -24,11 +24,7 @@ internal class ResourceHelper
         FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector);
 
     private static readonly JsonSerializerOptions JsonSerializerOptions =
-        new JsonSerializerOptions()
-            .ForFhir(new FhirJsonPocoDeserializerSettings
-            {
-                Validator = null
-            });
+        new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
 
     public static Bundle LoadBundle(string bundleFile)
     {
@@ -110,10 +106,12 @@ internal class ResourceHelper
 
         foreach ( var parameter in parametersResource.Parameter)
         {
+            if (parameter.Value == null) continue;
+            
             var cqltype = parameter.Value.GetType();
             var typeEntry = crosswalk.TypeEntryFor(cqltype);
             var converted = ConvertParameterToCqlModel(parameter, typeEntry);
-            parametersConverted.Add(parameter.Name, converted!);
+            parametersConverted.Add(parameter.Name ?? "", converted!);
         }
 
         parametersConverted.DumpConsole("Input Parameters");
