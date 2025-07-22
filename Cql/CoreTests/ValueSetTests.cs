@@ -85,7 +85,7 @@ public class ValueSetTests
     [TestMethod]
     public void Intensional_Value_Set()
     {
-        var resolver = new DirectorySource(@"Input\ValueSets");
+        var resolver = new DirectorySource(Path.Combine("Input", "ValueSets"));
         var vsd = new ValueSetSource(resolver);
 
         Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
@@ -101,7 +101,7 @@ public class ValueSetTests
     [TestMethod]
     public void Intensional_Value_Set_2_Levels()
     {
-        var resolver = new DirectorySource(@"Input\ValueSets");
+        var resolver = new DirectorySource(Path.Combine("Input", "ValueSets"));
         var vsd = new ValueSetSource(resolver);
 
         Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
@@ -122,7 +122,7 @@ public class ValueSetTests
     [TestMethod]
     public void Intensional_Value_Set_Cycle()
     {
-        var resolver = new DirectorySource(@"Input\ValueSets");
+        var resolver = new DirectorySource(Path.Combine("Input", "ValueSets"));
         var vsd = new ValueSetSource(resolver);
 
         Assert.ThrowsException<TerminologyServiceException>(() => vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-3", out _));
