@@ -1,10 +1,10 @@
 # Hl7.Cql.CodeGeneration.NET
 
-A support package for HL7.Cql that converts .NET lambda expressions into C# source code.
+A support package for HL7.Cql that converts .NET lambda expressions into C# source code and supports compiling the C# to .NET assemblies.
 
 ## Overview
 
-This package provides functionality to generate readable C# source code from .NET Expression objects. It's used in the CQL compilation pipeline to produce human-readable C# code from the compiled CQL expressions.
+This package provides functionality to generate readable C# source code from .NET Expression objects. It's used in the CQL compilation pipeline to produce human-readable C# code from the compiled CQL expressions and can also generate .NET assemblies from that generated C#.
 
 ## Key Features
 
@@ -12,11 +12,11 @@ This package provides functionality to generate readable C# source code from .NE
 - **Code Formatting**: Generates well-formatted, readable C# code
 - **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp for syntax tree generation
 - **Lambda Expression Support**: Full support for converting lambda expressions
-- **Debugging Support**: Generated code includes debugging information
+- **Debugging Support**: Generated code includes debugging information, and debugging information is included in the .NET assemblies based on the DebugSymbolsFormat setting
 
 ## Usage
 
-This package is used internally by the CQL packaging pipeline to generate C# source code that can be included in FHIR Library resources or used for debugging purposes.
+This package is used internally by the CQL packaging pipeline to generate C# source code that can be included in FHIR Library resources or used for debugging purposes, and can generate .NET assemblies.
 
 ```csharp
 // Used internally by packaging tools to generate
