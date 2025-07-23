@@ -7,9 +7,198 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<!-- Use direct project references to access internal members of the SDK projects -->
+	<!-- Use NuGet Package from the public Nuget feed -->
+	<!-- <ItemGroup> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-alpha.18" /> -->
+	<!-- </ItemGroup> -->
+
+	<!-- OR, Use NuGet Package from the local build build-local-nuget.ps1, you'll need to update the version accordingly -->
+	<!-- <ItemGroup> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202506041535" /> -->
+	<!-- </ItemGroup> -->
+
+	<!-- OR, Use a direct project reference to the Cql.Invocation project, this is useful for debugging the library -->
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="**\input\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<Compile Remove="**\input\**\*.g.cs" />
+		<None Include="**\input\**\*.g.cs">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<Task>
+			<Reference Include="System.Core" />
+			<Using Namespace="System" />
+			<Using Namespace="System.IO" />
+			<Using Namespace="System.Text.RegularExpressions" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+	        // Find project directory
+	        DirectoryInfo currentDir = new DirectoryInfo(Environment.CurrentDirectory);
+	        DirectoryInfo projectDir = currentDir;
+	        while (projectDir != null)
+	        {
+	            bool isInProjectDir = projectDir.EnumerateFiles("*.csproj", SearchOption.TopDirectoryOnly).Any();
+	            if (isInProjectDir)
+	                break;
+
+	            projectDir = projectDir.Parent;
+	        }
+
+	        if (projectDir == null)
+	        {
+	            Log.LogMessage(MessageImportance.High, "Project directory not found.");
+	            return false;
+	        }
+
+	        // Find all the Program.cs files in the project directory
+	        var programCsFiles =
+	            projectDir
+	                .EnumerateFiles("Program.cs", SearchOption.AllDirectories)
+	                .Where(fi => fi.Directory.FullName != projectDir.FullName)
+	                .ToArray();
+	        if (programCsFiles.Length == 0)
+	        {
+	            Log.LogMessage(MessageImportance.High, "No Program.cs files found in the project directory.");
+	            return false;
+	        }
+
+	        // Update the "Environment.CurrentDirectory = " with the directory name
+	        foreach (var programCsFile in programCsFiles)
+	        {
+	            var cs = File.ReadAllText(programCsFile.FullName);
+	            var dir = programCsFile.Directory.Name;
+	            var csNew = Regex.Replace(
+	                cs,
+	                "SetCurrentDirectory\\s*\\(.*;",
+	                "SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, \"" + dir + "\"));");
+	            if (cs != csNew)
+	            {
+	                File.WriteAllText(programCsFile.FullName, csNew);
+	                Log.LogMessage(MessageImportance.High, "Updated CurrentDirectory in " + programCsFile.FullName);
+	            }
+	        }
+					]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+
+	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<Task>
+			<Reference Include="System.Core" />
+			<Reference Include="System.Memory" />
+			<Reference Include="System.Text.Json" />
+			<Reference Include="Microsoft.Bcl.AsyncInterfaces" />
+			<Using Namespace="System" />
+			<Using Namespace="System.Text.Json" />
+			<Using Namespace="System.Text.Json.Nodes" />
+			<Using Namespace="System.Text.RegularExpressions" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+					// Find project directory
+					DirectoryInfo currentDir = new DirectoryInfo(Environment.CurrentDirectory);
+					DirectoryInfo projectDir = currentDir;
+					while (projectDir != null)
+					{
+						bool isInProjectDir = projectDir.EnumerateFiles("*.csproj", SearchOption.TopDirectoryOnly).Any();
+						if (isInProjectDir)
+							break;
+
+						projectDir = projectDir.Parent;
+					}
+
+					if (projectDir == null)
+					{
+						Log.LogMessage(MessageImportance.High, "Project directory not found.");
+						return false;
+					}
+
+					var mainProgramText = File.ReadAllText(Path.Combine(projectDir.FullName, "Program.cs"));
+					var regexIndent = new Regex(
+						@"//\s<codegen-switch>.*?(?<indent>(\r?\n)[ \t]+)//\s</codegen-switch>",
+						RegexOptions.Singleline);
+
+					var matchIndent = regexIndent.Match(mainProgramText);
+					string indent = matchIndent.Groups["indent"].Value;
+					StringBuilder sb = new StringBuilder();
+					sb.Append("// <codegen-switch>");
+					sb.Append(indent + "switch (code)");
+					sb.Append(indent + "{");
+
+					// Find all the folders in the project directory, starting with a number
+					var exampleDirs =
+						projectDir
+							.EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
+							.Where(di => Char.IsNumber(di.Name[0]))
+							.ToArray();
+					if (exampleDirs.Length == 0)
+					{
+						Log.LogMessage(MessageImportance.High, "No example dirs found in the project directory.");
+						return false;
+					}
+
+					var launchSettingsJsonPath = Path.Combine(projectDir.FullName, @"Properties\launchSettings.json");
+					var launchSettingsJsonText = File.ReadAllText(launchSettingsJsonPath);
+					var launchSettingsJsonRoot = JsonSerializer.Deserialize<JsonObject>(launchSettingsJsonText);
+					var profiles = launchSettingsJsonRoot["profiles"].AsObject();
+					profiles.Clear();
+					foreach (var exampleDir in exampleDirs)
+					{
+						var tokens = exampleDir.Name.Split(' ');
+						if (tokens.Length <= 1)
+							continue;
+						var code = tokens[0];
+
+						string programFilePath = Path.Combine(exampleDir.FullName, "Program.cs");
+						if (!File.Exists(programFilePath))
+							continue;
+
+						var programFile = File.ReadAllText(programFilePath);
+						var match = Regex.Match(
+							programFile,
+							@"(?:partial\s+class\s+Program\s+{\s+void\s+)(?<method>\w+)(?:\s*\()");
+						if (!match.Success)
+							continue;
+
+						var methodName = match.Groups["method"].Value;
+
+						sb.Append(indent + @"    case """ + code + @""": " + methodName + "(); return;");
+
+						var profile = new JsonObject();
+						profile.Add("commandName", "Project");
+						profile.Add("commandLineArgs", code);
+						profiles.Add(exampleDir.Name, profile);
+					}
+
+					sb.Append(indent + "}");
+					sb.Append(indent + "// </codegen-switch>");
+					var mainProgramTextNew = regexIndent.Replace(mainProgramText, sb.ToString());
+					if (mainProgramText != mainProgramTextNew)
+						File.WriteAllText(Path.Combine(projectDir.FullName, "Program.cs"), mainProgramTextNew);
+
+					var launchSettingsJsonTextNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
+					if (launchSettingsJsonText != launchSettingsJsonTextNew)
+						File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonTextNew);
+
+
+      ]]>
+
+			</Code>
+
+		</Task>
+	</UsingTask>
+
+	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug'" BeforeTargets="CoreCompile">
+		<UpdateCurrentDirectoryInSource />
+		<UpdateLaunchSettingsInSource />
+	</Target>
 
 </Project>

@@ -1,9 +1,11 @@
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Microsoft.Extensions.Logging;
+
+namespace CqlSdkExamples;
 
 partial class Program
 {
@@ -24,23 +26,23 @@ partial class Program
 
         var inputs =
             new[]
-            {
-                (
-                    cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("FHIRHelpers.cql"),
-                    elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.json")),
-                    cs:csDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.g.cs"),
-                    dll:dllDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.dll"),
-                    pdb:pdbDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.pdb")
-                ),
-                (
-                    cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
-                    elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
-                    cs:csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
-                    dll:dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
-                    pdb:pdbDirectory.ReadBytesFromFile("DevDays-2025.0.0.pdb")
-                )
-            }
-            .Select(t => new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb));
+                {
+                    (
+                        cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("FHIRHelpers.cql"),
+                        elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.json")),
+                        cs:csDirectory.ReadTextFromFile("FHIRHelpers-4.0.001.g.cs"),
+                        dll:dllDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.dll"),
+                        pdb:pdbDirectory.ReadBytesFromFile("FHIRHelpers-4.0.001.pdb")
+                    ),
+                    (
+                        cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("DevDays-2025.0.0.cql"),
+                        elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("DevDays-2025.0.0.json")),
+                        cs:csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
+                        dll:dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
+                        pdb:pdbDirectory.ReadBytesFromFile("DevDays-2025.0.0.pdb")
+                    )
+                }
+                .Select(t => new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb));
 
         packagingToolkit.AddPackagingInputs(inputs);
 

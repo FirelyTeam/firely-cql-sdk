@@ -1,63 +1,53 @@
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.CqlToElm.Toolkit.Extensions;
-using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.IO;
 
-Console.WriteLine("CQL SDK Examples Preview");
-Console.WriteLine("=======================");
-Console.WriteLine();
+namespace CqlSdkExamplesPreview;
 
-// This is a basic example copied from the main CqlSdkExamples project
-// This preview version can access internal members of the SDK projects for experimental features
-
-var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
-var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-
-CqlToolkit cqlToolkit = new(loggerFactory);
-
-var cql = (CqlLibraryString)"""
-                            library HelloWorldLib version '1.0.0'
-
-                            define "HelloWorld" : 'CQL Says: "Hello, DevDays!"'
-                            """;
-
-using LibrarySetInvoker librarySetInvoker =
-    cqlToolkit
-        .AddCqlLibraries(cql)
-        .CreateLibrarySetInvoker(
-            enableDebugging ? new ElmToolkitConfig(DebugSymbolsFormat.Embedded) : null);
-
-CqlContext cqlContext = FhirCqlContext.WithDataSource();
-
-object? result = librarySetInvoker.InvokeLibraryDefinition(
-    cqlContext: cqlContext,
-    libraryIdentifier: cql.LibraryIdentifier,
-    definitionSignature: "HelloWorld");
-
-Console.WriteLine($"Result: {result}");
-Console.WriteLine();
-
-// Demonstrate access to internal members - this would not be available to regular projects
-Console.WriteLine("Demonstrating internal access:");
-try
+internal partial class Program
 {
-    // Access internal StringBuilderExtensions class from Cql.Invocation
-    // This internal extension method is not available to external projects
-    var sb = new System.Text.StringBuilder();
-    sb.AppendMember("test value", "TestProperty");
-    var output = sb.ToString();
-    Console.WriteLine($"✓ Successfully used internal StringBuilderExtensions.AppendMember: {output}");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"✗ Failed to access internal types: {ex.Message}");
+    public void PickExample(string? code)
+    {
+        // <codegen-switch>
+        switch (code)
+        {
+            case "000": RunAll(); return;
+        }
+        // </codegen-switch>
+    }
+
+    private void SetCurrentDirectory(string path)
+    {
+        DirectoryPreparationStrategy.CreateIfNotExists(new DirectoryInfo(path));
+        Environment.CurrentDirectory = path;
+    }
+
+    private static readonly string InitialCurrentDirectory = Environment.CurrentDirectory;
+
+    private static readonly string LibrarySetsDirectory =
+        (new DirectoryInfo(Environment.CurrentDirectory)
+             .FindParentDirectoryContaining("LibrarySets")
+         ?? throw new DirectoryNotFoundException("Could not find LibrarySets directory in any of the parent directories.")
+        )
+        .CreateSubdirectory("LibrarySets")
+        .FullName;
 }
 
-Console.WriteLine();
-Console.WriteLine("This preview project has internal access to SDK projects for experimental features.");
+file static class DirectoryInfoExtensions
+{
+    public static IEnumerable<DirectoryInfo> SelfAndParents(
+        this DirectoryInfo dir)
+    {
+        var current = dir;
+        while (current != null)
+        {
+            yield return current;
+            current = current.Parent;
+        }
+    }
+
+    public static DirectoryInfo? FindParentDirectoryContaining(
+        this DirectoryInfo dir,
+        string searchPattern,
+        SearchOption searchOption = SearchOption.TopDirectoryOnly) =>
+        dir.SelfAndParents()
+           .FirstOrDefault(d => d.EnumerateFileSystemInfos(searchPattern, searchOption).Any());
+}

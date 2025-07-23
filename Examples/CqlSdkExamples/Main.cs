@@ -1,0 +1,1 @@
+﻿new CqlSdkExamples.Program().PickExample(args.ElementAtOrDefault(0));

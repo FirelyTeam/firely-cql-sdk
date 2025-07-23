@@ -1,10 +1,10 @@
 using Hl7.Cql.Runtime.IO;
 
-new Program().PickExample(args.ElementAtOrDefault(0));
+namespace CqlSdkExamples;
 
 internal partial class Program
 {
-    void PickExample(string? code)
+    public void PickExample(string? code)
     {
         // <codegen-switch>
         switch (code)
