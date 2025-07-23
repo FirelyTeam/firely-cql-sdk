@@ -45,6 +45,32 @@ Core SDK projects are located in the `Cql/` directory:
 
 ## Development Guidelines
 
+### File Headers
+**IMPORTANT**: Copyright header requirements for C# source files (*.cs, excluding *.g.cs generated files):
+
+#### For NEW Files (files being created)
+Use this header format with "Firely, NCQA":
+```csharp
+/*
+ * Copyright (c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+```
+
+#### For EXISTING Files
+- **DO NOT modify existing copyright headers** in files that already have them
+- Leave existing headers exactly as they are (e.g., "NCQA and contributors" should remain unchanged)
+
+#### Header Guidelines
+- Use the current year (2025) in the copyright notice for new files only
+- For new files, include "Firely, NCQA and contributors" in the copyright line
+- Place header at the very top of the file, after any `#pragma` directives if present
+- Generated files (*.g.cs) do not require headers
+- **Never update or modify existing copyright headers in existing files**
+
 ### Making Changes
 1. Use minimal, surgical changes - modify as few lines as possible
 2. Maintain existing code structure and patterns
