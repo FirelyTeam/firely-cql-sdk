@@ -214,8 +214,8 @@ namespace Hl7.Cql.CqlToElm.Test
                                       Models: Models,
                                       ModelInfos: ModelInfos,
                                       AmbiguousTypeBehavior: AmbiguousTypeBehavior,
-                                      EnableListDemotion: EnableListDemotion,
-                                      EnableListPromotion: EnableListPromotion,
+                                      DisableListDemotion: !EnableListDemotion,
+                                      DisableListPromotion: !EnableListPromotion,
                                       EnableIntervalDemotion: EnableIntervalDemotion,
                                       EnableIntervalPromotion: EnableIntervalPromotion,
                                       AllowNullIntervals: AllowNullIntervals

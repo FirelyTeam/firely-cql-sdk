@@ -115,40 +115,40 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
         /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-        /// The default value is <see langword="false"/>.
+        /// The default value is <see langword="true"/>.
         /// </summary>
-        public bool? EnableIntervalPromotion { get; set; } = false;
+        public bool? EnableIntervalPromotion { get; set; } = true;
 
         /// <summary>
-        /// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
-        /// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
-        /// The default value is <see langword="false"/>.
+        /// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
+        /// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
+        /// The default value is <see langword="true"/>.
         /// </summary>
         /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-        public bool? EnableListPromotion { get; set; } = false;
+        public bool? DisableListPromotion { get; set; } = true;
 
         /// <summary>
         /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
         /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-        /// The default value is <see langword="false"/>.
+        /// The default value is <see langword="true"/>.
         /// </summary>
         /// <remarks>
         /// Note that whether an interval is a point interval cannot be known at compile time.
         /// This type of conversion will issue a warning and could fail at runtime.
         /// </remarks>
-        public bool? EnableIntervalDemotion { get; set; } = false;
+        public bool? EnableIntervalDemotion { get; set; } = true;
 
         /// <summary>
-        /// When <see langword="true"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-        /// When <see langword="false"/>, an error will occur; authors will be required to access the single list value explicitly.
-        /// The default value is <see langword="false"/>.
+        /// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
+        /// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
+        /// The default value is <see langword="true"/>.
         /// </summary>
         /// <remarks>
         /// Note that whether a list has only one element cannot be known at compile time.
         /// This type of conversion will issue a warning and could fail at runtime.
         /// </remarks>
         /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-        public bool? EnableListDemotion { get; set; } = false;
+        public bool? DisableListDemotion { get; set; } = true;
 
         /// <summary>
         /// <para>
