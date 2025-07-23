@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 """, "Could not resolve call to operator Flatten with signature (List<Choice<Boolean, List<{http://hl7.org/fhir}Claim>>>).");
 
             // no errors
-            cqlToolkit = CreateCqlToolkit(EnableListPromotion:true);
+            cqlToolkit = CreateCqlToolkit(DisableListPromotion:false);
             library = cqlToolkit.MakeLibrary("""
                 library Test version '1.0.0'
 

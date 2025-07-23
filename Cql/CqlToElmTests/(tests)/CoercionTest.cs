@@ -11,8 +11,8 @@ namespace Hl7.Cql.CqlToElm.Test
         static CoercionTest()
         {
             var fluentCqlToolkit = CreateCqlToolkit(
-                EnableListPromotion: true,
-                EnableListDemotion: true,
+                DisableListPromotion: false,
+                DisableListDemotion: false,
                 EnableIntervalPromotion: true,
                 EnableIntervalDemotion: true);
             ElmFactory = fluentCqlToolkit.GetElmFactory();

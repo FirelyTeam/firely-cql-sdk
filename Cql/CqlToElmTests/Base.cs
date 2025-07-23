@@ -202,8 +202,8 @@ namespace Hl7.Cql.CqlToElm.Test
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
-            bool EnableListPromotion = false,
-            bool EnableListDemotion = false,
+            bool DisableListPromotion = true,
+            bool DisableListDemotion = true,
             bool EnableIntervalPromotion = true,
             bool EnableIntervalDemotion = true,
             bool AllowNullIntervals = false)
@@ -214,8 +214,8 @@ namespace Hl7.Cql.CqlToElm.Test
                                       Models: Models,
                                       ModelInfos: ModelInfos,
                                       AmbiguousTypeBehavior: AmbiguousTypeBehavior,
-                                      DisableListDemotion: !EnableListDemotion,
-                                      DisableListPromotion: !EnableListPromotion,
+                                      DisableListDemotion: DisableListDemotion,
+                                      DisableListPromotion: DisableListPromotion,
                                       EnableIntervalDemotion: EnableIntervalDemotion,
                                       EnableIntervalPromotion: EnableIntervalPromotion,
                                       AllowNullIntervals: AllowNullIntervals
@@ -226,8 +226,8 @@ namespace Hl7.Cql.CqlToElm.Test
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
-            bool enableListPromotion = false) =>
-            CreateCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+            bool disableListPromotion = true) =>
+            CreateCqlToolkit(models, modelInfos, ambiguousTypeBehavior, disableListPromotion)
                 .CreateElmToolkit(ElmToolkitConfig);
     }
 }

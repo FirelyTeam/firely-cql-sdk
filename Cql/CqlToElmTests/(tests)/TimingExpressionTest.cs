@@ -138,8 +138,8 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Overlaps()
         {
             var library = CreateCqlToolkit(
-                EnableListPromotion: true,
-                EnableListDemotion: true,
+                DisableListPromotion: false,
+                DisableListDemotion: false,
                 EnableIntervalPromotion: true,
                 EnableIntervalDemotion: true,
                 AllowNullIntervals: true
