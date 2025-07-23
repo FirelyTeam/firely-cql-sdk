@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Is_Ambiguous()
         {
-            var cqlToolkit = CreateCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.Error);
+            var cqlToolkit = CreateCqlToolkit();
             var lib = cqlToolkit.MakeLibrary("""
                                          library Test version '1.0.0'
 

@@ -39,7 +39,7 @@ namespace Hl7.Cql.CqlToElm.Test
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
                 Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
 
-            var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true, EnableIntervalPromotion: true);
+            var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true);
             var expression = cqlToolkit.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
