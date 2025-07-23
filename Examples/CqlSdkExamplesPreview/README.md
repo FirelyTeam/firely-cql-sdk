@@ -1,4 +1,4 @@
-# CQL SDK Example Preview
+# CQL SDK Examples Preview
 
 This project provides examples for internal and experimental features of the Firely CQL SDK that are not yet available to external projects.
 
@@ -23,7 +23,7 @@ This project has been granted internal access to the following SDK projects thro
 ## Running the Example
 
 ```bash
-cd Examples/CqlSdkExamplePreview
+cd Examples/CqlSdkExamplesPreview
 dotnet run
 ```
 

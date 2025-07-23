@@ -136,7 +136,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqlSdkExamples", "Examples\CqlSdkExamples\CqlSdkExamples.csproj", "{93532653-75AF-025F-00F7-1B34C75DF1C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqlSdkExamplePreview", "Examples\CqlSdkExamplePreview\CqlSdkExamplePreview.csproj", "{A1234567-89AB-CDEF-1234-567890ABCDEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqlSdkExamplesPreview", "Examples\CqlSdkExamplesPreview\CqlSdkExamplesPreview.csproj", "{A1234567-89AB-CDEF-1234-567890ABCDEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

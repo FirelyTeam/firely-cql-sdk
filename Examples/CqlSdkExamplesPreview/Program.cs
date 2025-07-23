@@ -9,7 +9,7 @@ using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 
-Console.WriteLine("CQL SDK Example Preview");
+Console.WriteLine("CQL SDK Examples Preview");
 Console.WriteLine("=======================");
 Console.WriteLine();
 
