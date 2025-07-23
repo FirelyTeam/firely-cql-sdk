@@ -1,0 +1,14 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=500_0020extending_0020functionality_0020_002D_0020log_0020statements_0020per_0020library/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=000_0020run_0020all/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=210_0020load_0020cql_0020from_0020dir_002C_0020save_0020elm_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=220_0020load_0020elm_0020from_0020dir_002C_0020save_0020c_0023_002Cdll_002Cpdb_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=221_0020load_0020cql_0020from_0020demo_0020dir_002C_0020save_0020c_0023_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=230_0020package_0020cql_002Belm_002Bc_0023_002Bdll_0020from_0020dirs_002C_0020save_0020fhir_0020resources_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=240_0020package_0020via_0020cql_0020and_0020elm_0020toolkits_002C_0020save_0020fhir_0020resources_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=250_0020package_0020via_0020cql_0020toolkit_002C_0020save_0020fhir_0020resources_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=251_0020package_0020incl_0020debug_0020symbols_0020via_0020cql_0020toolkit_002C_0020save_0020fhir_0020resources_0020to_0020dir/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=310_0020invoking_0020cql_0020hello_0020world/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=320_0020invoking_0020cql_0020hello_0020world_0020with_0020parameter/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=330_0020invoking_0020cql_0020hello_0020world_0020function_0020with_0020argument/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=400_0020invoke_0020from_0020fhir_0020resources/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

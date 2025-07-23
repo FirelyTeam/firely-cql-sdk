@@ -30,6 +30,18 @@
 		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
+	<!-- Debug configuration InternalsVisibleTo without public key -->
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<InternalsVisibleTo Include="CqlSdkExamplesPreview" />
+		<InternalsVisibleTo Include="CoreTests" />
+	</ItemGroup>
+
+	<!-- Release configuration InternalsVisibleTo with public key -->
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<Compile Update="Operators\CqlOperators.*.cs">
 			<DependentUpon>Operators\CqlOperators.cs</DependentUpon>
@@ -40,4 +52,4 @@
 		</Compile>
 	</ItemGroup>
 
- </Project>
+</Project>

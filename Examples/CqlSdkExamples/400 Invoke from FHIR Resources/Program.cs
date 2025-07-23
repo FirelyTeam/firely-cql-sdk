@@ -1,14 +1,16 @@
+using System.Diagnostics;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Toolkit;
+using Microsoft.Extensions.Logging;
+
+namespace CqlSdkExamples;
 
 partial class Program
 {

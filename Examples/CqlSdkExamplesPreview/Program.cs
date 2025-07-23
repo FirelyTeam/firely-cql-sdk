@@ -1,6 +1,6 @@
 using Hl7.Cql.Runtime.IO;
 
-namespace CqlSdkExamples;
+namespace CqlSdkExamplesPreview;
 
 internal partial class Program
 {
@@ -10,18 +10,6 @@ internal partial class Program
         switch (code)
         {
             case "000": RunAll(); return;
-            case "210": LoadCqlFromDirSaveElmToDir(); return;
-            case "220": LoadElmFromDirSaveCSharpDllAndPdbToDir(); return;
-            case "221": LoadCqlFromDemoDirSaveCSharpToDir(); return;
-            case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); return;
-            case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); return;
-            case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); return;
-            case "251": PackageInclDebugSymbolsViaCqlToolkitsSaveFhirResourcesToDir(); return;
-            case "310": InvokingCqlHelloWorld(); return;
-            case "320": InvokingCqlHelloWorldWithParameter(); return;
-            case "330": InvokingCqlHelloWorldWithFunctionArgument(); return;
-            case "400": InvokingFromFhirResources(); return;
-            case "500": ExtendingFunctionalityLogLibraryStatements(); return;
         }
         // </codegen-switch>
     }
