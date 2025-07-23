@@ -243,7 +243,7 @@ namespace Hl7.Cql.CqlToElm
                 && from is not IntervalTypeSpecifier
                 && CanBePromoted(from, promotableInterval))
                 return CoercionCost.IntervalPromotion;
-            else if (!(Options.DisableListDemotion ?? false)
+            else if (!(Options.DisableListDemotion ?? true)
                 && from is ListTypeSpecifier listType && CanBeDemoted(listType, to))
                 return CoercionCost.ListDemotion;
             else if ((Options.EnableIntervalDemotion ?? false)
@@ -251,7 +251,7 @@ namespace Hl7.Cql.CqlToElm
                 && to is not IntervalTypeSpecifier
                 && CanBeDemoted(demotableInterval, to))
                 return CoercionCost.IntervalDemotion;
-            else if (!(Options.DisableListPromotion ?? false)
+            else if (!(Options.DisableListPromotion ?? true)
                 && to is ListTypeSpecifier promotableListType && CanBePromoted(from, promotableListType))
                 return CoercionCost.ListPromotion;
             else
