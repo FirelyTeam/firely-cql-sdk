@@ -10,10 +10,8 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Concept_Instance()
         {
             var library = CreateCqlToolkit(
-                EnableListDemotion:true,
-                EnableListPromotion:true,
-                EnableIntervalDemotion: true,
-                EnableIntervalPromotion: true
+                DisableListDemotion:false,
+                DisableListPromotion:false
                 ).MakeLibraryFromExpression("Concept { codes: Code { code: '8480-6' } }");
             var instance = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Instance>();
             instance.element.Should().HaveCount(1);

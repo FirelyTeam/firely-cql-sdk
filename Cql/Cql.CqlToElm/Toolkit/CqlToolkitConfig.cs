@@ -66,28 +66,28 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// </para>
 /// </param>
 ///
-/// <param name="EnableListDemotion">
-/// When <see langword="true"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-/// When <see langword="false"/>, an error will occur; authors will be required to access the single list value explicitly.
-/// The default value is <see langword="false"/>.
+/// <param name="DisableListDemotion">
+/// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
+/// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
+/// The default value is <see langword="true"/>.
 /// </param>
 ///
-/// <param name="EnableListPromotion">
-/// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
-/// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
-/// The default value is <see langword="false"/>.
+/// <param name="DisableListPromotion">
+/// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
+/// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
+/// The default value is <see langword="true"/>.
 /// </param>
 ///
 /// <param name="EnableIntervalPromotion">
 /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
 /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-/// The default value is <see langword="false"/>.
+/// The default value is <see langword="true"/>.
 /// </param>
 ///
 /// <param name="EnableIntervalDemotion">
 /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
 /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-/// The default value is <see langword="false"/>.
+/// The default value is <see langword="true"/>.
 /// </param>
 ///
 /// <param name="AllowNullIntervals">
@@ -121,11 +121,11 @@ public record CqlToolkitConfig(
     string? SystemElmModelUri = "urn:hl7-org:elm-types:r1",
     string? SystemElmModelVersion = "1.0.0",
     // Lists
-    bool EnableListDemotion = false,
-    bool EnableListPromotion = false,
+    bool DisableListDemotion = true,
+    bool DisableListPromotion = true,
     // Intervals
-    bool EnableIntervalDemotion = false,
-    bool EnableIntervalPromotion = false,
+    bool EnableIntervalDemotion = true,
+    bool EnableIntervalPromotion = true,
     bool AllowNullIntervals = false,
     bool ValidateIntervals = true,
     // Longs
@@ -231,22 +231,22 @@ public record CqlToolkitConfig(
     /// <summary>
     /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
     /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-    /// The default value is <see langword="false"/>.
+    /// The default value is <see langword="true"/>.
     /// </summary>
     public bool EnableIntervalPromotion { get; init; } = EnableIntervalPromotion;
 
     /// <summary>
-    /// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
-    /// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
-    /// The default value is <see langword="false"/>.
+    /// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
+    /// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
+    /// The default value is <see langword="true"/>.
     /// </summary>
     /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-    public bool EnableListPromotion { get; init; } = EnableListPromotion;
+    public bool DisableListPromotion { get; init; } = DisableListPromotion;
 
     /// <summary>
     /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
     /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-    /// The default value is <see langword="false"/>.
+    /// The default value is <see langword="true"/>.
     /// </summary>
     /// <remarks>
     /// Note that whether an interval is a point interval cannot be known at compile time.
@@ -255,16 +255,16 @@ public record CqlToolkitConfig(
     public bool EnableIntervalDemotion { get; init; } = EnableIntervalDemotion;
 
     /// <summary>
-    /// When <see langword="true"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-    /// When <see langword="false"/>, an error will occur; authors will be required to access the single list value explicitly.
-    /// The default value is <see langword="false"/>.
+    /// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
+    /// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
+    /// The default value is <see langword="true"/>.
     /// </summary>
     /// <remarks>
     /// Note that whether a list has only one element cannot be known at compile time.
     /// This type of conversion will issue a warning and could fail at runtime.
     /// </remarks>
     /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-    public bool EnableListDemotion { get; init; } = EnableListDemotion;
+    public bool DisableListDemotion { get; init; } = DisableListDemotion;
 
     /// <summary>
     /// <para>
@@ -281,8 +281,8 @@ public record CqlToolkitConfig(
     internal void ApplyToCqlToElmOptions(CqlToElmOptions opt)
     {
         opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior;
-        opt.EnableListPromotion = EnableListPromotion;
-        opt.EnableListDemotion = EnableListDemotion;
+        opt.DisableListPromotion = DisableListPromotion;
+        opt.DisableListDemotion = DisableListDemotion;
         opt.EnableIntervalPromotion = EnableIntervalPromotion;
         opt.EnableIntervalDemotion = EnableIntervalDemotion;
         opt.AllowNullIntervals = AllowNullIntervals;

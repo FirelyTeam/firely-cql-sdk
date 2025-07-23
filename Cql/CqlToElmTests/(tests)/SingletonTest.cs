@@ -143,7 +143,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integer_With_List_Promotion()
         {
-            var library = CreateCqlToolkit(EnableListPromotion:true).MakeLibrary("""
+            var library = CreateCqlToolkit(DisableListPromotion:false).MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integer_With_List_Promotion: singleton from 1

@@ -97,7 +97,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TrueList_Is_True()
         {
-            var library = CreateCqlToolkit(EnableListDemotion:true ).MakeLibraryFromExpression("{true} is true");
+            var library = CreateCqlToolkit(DisableListDemotion:false ).MakeLibraryFromExpression("{true} is true");
             var isTrue = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<IsTrue>();
             var singleton = isTrue.operand.Should().BeOfType<SingletonFrom>().Subject;
             singleton.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
