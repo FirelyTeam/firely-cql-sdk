@@ -12,6 +12,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="..\..\README.md" />
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
             <_Parameter1>true</_Parameter1>

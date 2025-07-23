@@ -13,6 +13,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="README.md" />
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />
 	</ItemGroup>
 

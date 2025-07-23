@@ -11,6 +11,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="..\..\README.md" />
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />

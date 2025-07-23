@@ -13,6 +13,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="..\..\README.md" />
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 	</ItemGroup>
 

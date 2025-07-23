@@ -1,0 +1,36 @@
+# Hl7.Cql.CodeGeneration.NET
+
+A support package for HL7.Cql that converts .NET lambda expressions into C# source code.
+
+## Overview
+
+This package provides functionality to generate readable C# source code from .NET Expression objects. It's used in the CQL compilation pipeline to produce human-readable C# code from the compiled CQL expressions.
+
+## Key Features
+
+- **Expression to C# Conversion**: Transforms .NET Expression trees into readable C# source code
+- **Code Formatting**: Generates well-formatted, readable C# code
+- **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp for syntax tree generation
+- **Lambda Expression Support**: Full support for converting lambda expressions
+- **Debugging Support**: Generated code includes debugging information
+
+## Usage
+
+This package is used internally by the CQL packaging pipeline to generate C# source code that can be included in FHIR Library resources or used for debugging purposes.
+
+```csharp
+// Used internally by packaging tools to generate
+// C# source code from compiled CQL expressions
+```
+
+## Dependencies
+
+- **Hl7.Cql.Compiler**: CQL compilation services
+- **Hl7.Cql.CqlToElm**: CQL to ELM conversion
+- **Hl7.Cql.Runtime**: Runtime components
+- **Microsoft.CodeAnalysis.CSharp**: Roslyn C# compiler services
+- **Microsoft.Extensions.Logging**: Logging framework support
+
+## Further Reading
+
+This package is part of the [Firely CQL SDK](https://github.com/FirelyTeam/firely-cql-sdk). More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).

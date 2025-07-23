@@ -12,6 +12,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="..\..\README.md" />
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
   </ItemGroup>
 
