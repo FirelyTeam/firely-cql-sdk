@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2025, Firely and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -14,4 +14,3 @@ global using System.Threading.Tasks;
 global using System.Diagnostics;
 global using System.Reflection;
 global using System.Text.Json;
-

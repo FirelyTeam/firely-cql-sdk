@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2025, Firely and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -34,4 +34,3 @@ global using SysDateTime = System.DateTime;
 
 global using PackagingToolkitArtifactsById = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitArtifacts>;
 global using ReadOnlyPackagingToolkitArtifactsById = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitArtifacts>;
-
