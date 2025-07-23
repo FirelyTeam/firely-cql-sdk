@@ -204,8 +204,8 @@ namespace Hl7.Cql.CqlToElm.Test
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool EnableListPromotion = false,
             bool EnableListDemotion = false,
-            bool EnableIntervalPromotion = false,
-            bool EnableIntervalDemotion = false,
+            bool EnableIntervalPromotion = true,
+            bool EnableIntervalDemotion = true,
             bool AllowNullIntervals = false)
         {
             Debug.Assert(CqlToolkitConfig.DefaultCqlModels.SetEquals([CqlModel.ElmR1, CqlModel.Fhir401]));
