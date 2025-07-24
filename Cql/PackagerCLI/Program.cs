@@ -14,7 +14,12 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
-    private const string JavaToolVersion = "3.1.0";
+    /// <summary>
+    /// ** KEEP THIS IN SYNC WITH THE POM.XML FILE **
+    /// The version of the Java CQL to ELM tool that this packager is compatible with.
+    /// Keep this in sync with &lt;cql.version> in the pom.xml file in this repository.
+    /// </summary>
+    private const string JavaToolVersion = "3.27.0";
 
     internal static readonly string Disclaimer =
         Environment.NewLine +
