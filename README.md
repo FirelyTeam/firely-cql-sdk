@@ -15,32 +15,15 @@ so it is likely at this early stage that there will be deviations from other eng
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
 
-## Recent Changes ##
-
-### Translator Options Alignment (Issue #899)
-The .NET CQL translator options have been aligned with the Java stack naming conventions and default values to ensure cross-platform consistency:
-
-**Property Renames:**
-- `EnableListPromotion` → `DisableListPromotion` (with inverted semantics)
-- `EnableListDemotion` → `DisableListDemotion` (with inverted semantics)
-- `EnableIntervalPromotion` and `EnableIntervalDemotion` remain unchanged
-
-**Updated Default Values:**
-- `DisableListPromotion = true` (List promotion disabled by default)
-- `DisableListDemotion = true` (List demotion disabled by default)  
-- `EnableIntervalPromotion = true` (Interval promotion enabled by default)
-- `EnableIntervalDemotion = true` (Interval demotion enabled by default)
-
-These changes ensure the .NET SDK behaves consistently with the Java implementation and simplifies cross-platform test configuration sharing.
 
 ## Getting Started ##
 
 * Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [markdown document](Cql/CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
+* A [markdown document](docs/CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
 * A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
-* A [graphic](Cql/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+* A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
 
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
