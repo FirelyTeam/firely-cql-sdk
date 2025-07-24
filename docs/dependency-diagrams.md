@@ -1,7 +1,9 @@
-# PackagerCLI Diagrams
-The diagram is split into two, the first one showing the high-level dependencies for the application, and the second the detailed dependencies for expression building.
+# Hosted Services Dependency Diagram
+The diagram represents the internal dependencies of the CQL SDK services used.
+It uses mermaid syntax to visualize the relationships between various components of the CQL SDK.
+For the best viewing experience, it is recommended to view this diagram in the [online mermaid editor](https://www.mermaidchart.com/).
 
-### CQL SDK Service Dependencies
+### ELM to FHIR Dependency Diagram
 
 Remarks
 * Excl Logger and Options
@@ -38,7 +40,7 @@ classDiagram
 
     namespace Packaging {
         class ResourcePackager { }
-        class ResourceCanonicalBuilder {}
+        class ResourceCanonicalBuilder { }
     }
 
     namespace Abstraction {
