@@ -86,6 +86,10 @@ Use this header format with "Firely, NCQA":
 - Update README files when adding new projects or significant features
 - Document experimental features clearly in preview projects
 - Maintain clear separation between stable and experimental examples
+- **Do not add C# code samples in Usage sections for internal-only projects**
+  - If a project is primarily used internally or through higher-level APIs, avoid providing code examples
+  - Only include code samples for packages that have clear public usage patterns
+  - Remove any placeholder or comment-only code blocks from documentation
 
 ## Build and Test
 - Always run `dotnet build` to validate changes

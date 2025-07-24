@@ -11,9 +11,7 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath=""/>
-	</ItemGroup>
+
 
 	<ItemGroup>
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />

@@ -18,11 +18,6 @@ This package provides the compilation infrastructure that converts ELM (Expressi
 
 This package is primarily used by the CQL packager and other compilation tools to transform CQL logic into executable .NET code.
 
-```csharp
-// Typically used through higher-level packaging APIs
-// that handle the full compilation pipeline
-```
-
 ## Dependencies
 
 - **Hl7.Cql.Model**: CQL model definitions

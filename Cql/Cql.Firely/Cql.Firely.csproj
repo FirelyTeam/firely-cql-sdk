@@ -11,9 +11,7 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath=""/>
-	</ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
