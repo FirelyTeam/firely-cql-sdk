@@ -18,11 +18,6 @@ This package provides functionality to generate readable C# source code from .NE
 
 This package is used internally by the CQL packaging pipeline to generate C# source code that can be included in FHIR Library resources or used for debugging purposes, and can generate .NET assemblies.
 
-```csharp
-// Used internally by packaging tools to generate
-// C# source code from compiled CQL expressions
-```
-
 ## Dependencies
 
 - **Hl7.Cql.Compiler**: CQL compilation services
