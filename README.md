@@ -38,9 +38,9 @@ These changes ensure the .NET SDK behaves consistently with the Java implementat
 * Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+* A [markdown document](Cql/CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
 * A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
-* A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+* A [graphic](Cql/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
 
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.

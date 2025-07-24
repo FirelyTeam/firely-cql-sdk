@@ -43,10 +43,10 @@ take a look at the provided `"ELM to C#"` build target in the Elm project within
 
 ## The Demo folder
 
-* Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
+* Explore the Demo solution projects to see practical examples of the CQL engine in action.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+* A [markdown document](../Cql/CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
 so the names of the classes in the presentation will differ from the examples in the Demo project itself.
