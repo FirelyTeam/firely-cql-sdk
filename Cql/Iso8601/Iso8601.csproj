@@ -10,8 +10,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
-
 	<ItemGroup>
 		<InternalsVisibleTo Include="Cql.Primatives" Key="$(LibraryPKHash)" />
 	</ItemGroup>

@@ -10,8 +10,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
-
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />

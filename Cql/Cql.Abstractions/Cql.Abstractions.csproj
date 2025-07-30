@@ -11,8 +11,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
-
 	<ItemGroup>
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
   </ItemGroup>

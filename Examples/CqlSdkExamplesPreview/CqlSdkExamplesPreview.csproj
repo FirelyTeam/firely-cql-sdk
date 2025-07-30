@@ -90,7 +90,6 @@
 		</Task>
 	</UsingTask>
 
-
 	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
 		<Task>
 			<Reference Include="System.Core" />
@@ -187,7 +186,6 @@
 					var launchSettingsJsonTextNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
 					if (launchSettingsJsonText != launchSettingsJsonTextNew)
 						File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonTextNew);
-
 
       ]]>
 

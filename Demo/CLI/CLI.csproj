@@ -14,7 +14,6 @@
 		<ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
 	</ItemGroup>
 
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />

@@ -11,8 +11,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
-
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>

@@ -11,7 +11,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
