@@ -6,7 +6,7 @@ This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec
 and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 ## Release notes ##
-This is release version 2.0 (alpha) of the engine.
+This is release version 2.0 (beta) of the engine.
 We expect parts of the public interface can to change. 
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
 There is quite some variation in how CQL is written and interpreted, 
@@ -29,7 +29,7 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
 ## Dev Start
-During development, new alpha releases will appear on Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
+During development, new beta releases will appear on Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
  - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
 
