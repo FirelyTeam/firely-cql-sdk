@@ -23,12 +23,7 @@ This package provides the conversion functionality that transforms Clinical Qual
 
 ## Usage
 
-This package is used in the CQL compilation pipeline to convert CQL source to ELM:
-
-```csharp
-// Used by packaging tools and CLI to convert
-// CQL source files into ELM JSON representation
-```
+This package is used in the CQL compilation pipeline to convert CQL source to ELM.
 
 ## Dependencies
 

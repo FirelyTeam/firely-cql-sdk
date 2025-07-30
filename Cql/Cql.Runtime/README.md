@@ -18,11 +18,6 @@ This package provides the core runtime engine that executes CQL expressions and 
 
 This package is used by the CQL compiler and other runtime components to execute CQL logic. It provides the foundational runtime services needed for CQL evaluation.
 
-```csharp
-// Runtime components are typically used through higher-level APIs
-// provided by other CQL packages
-```
-
 ## Dependencies
 
 - **Hl7.Cql.Abstractions**: Core abstractions and interfaces
