@@ -18,11 +18,6 @@ This package provides functionality to package compiled CQL artifacts (assemblie
 
 This package is used by the CQL packager tool to create FHIR Library resources that can be distributed and used in FHIR-based systems.
 
-```csharp
-// Used through the CQL packaging pipeline
-// to create FHIR Library resources from compiled CQL
-```
-
 ## Dependencies
 
 - **CodeGeneration.NET**: .NET code generation utilities

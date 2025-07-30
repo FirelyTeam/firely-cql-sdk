@@ -18,11 +18,6 @@ This package provides the integration layer between the CQL runtime and Firely's
 
 This package enables CQL expressions to work with FHIR resources and data types using the familiar Firely .NET SDK object models.
 
-```csharp
-// CQL expressions can work directly with FHIR POCOs
-// when this binding package is used in the runtime
-```
-
 ## Dependencies
 
 - **Hl7.Cql.Runtime**: Core CQL runtime components

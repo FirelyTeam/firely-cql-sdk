@@ -19,11 +19,6 @@ This package provides ISO 8601 compliant date and time types that support the pr
 
 These types are used throughout the CQL engine to represent temporal values with appropriate precision semantics.
 
-```csharp
-// Used internally by CQL runtime for temporal operations
-// that require precision-aware date/time handling
-```
-
 ## Use Cases
 
 - Representing partial dates (year-month, year only)

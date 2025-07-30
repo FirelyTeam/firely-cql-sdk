@@ -31,12 +31,7 @@ This package includes all core CQL functionality by referencing:
 
 ## Usage
 
-This package provides everything needed to execute CQL in .NET applications:
-
-```csharp
-// This package includes all necessary components
-// for CQL compilation and execution
-```
+This package provides everything needed to execute CQL in .NET applications.
 
 ## Further Reading
 

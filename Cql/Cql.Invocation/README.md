@@ -18,11 +18,6 @@ This package provides high-level APIs for invoking CQL libraries and expressions
 
 This package provides the main entry point for applications that need to execute CQL logic programmatically.
 
-```csharp
-// High-level APIs for invoking CQL libraries
-// and executing CQL expressions in applications
-```
-
 ## Dependencies
 
 - **CodeGeneration.NET**: .NET code generation utilities

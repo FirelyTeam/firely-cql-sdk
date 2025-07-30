@@ -21,12 +21,7 @@ This package provides abstractions for CQL models and contains embedded model in
 
 ## Usage
 
-This package provides the foundational model information needed by the CQL engine to understand data structures:
-
-```csharp
-// Model information is automatically loaded and used
-// by CQL components during compilation and execution
-```
+This package provides the foundational model information needed by the CQL engine to understand data structures.
 
 ## Use Cases
 
