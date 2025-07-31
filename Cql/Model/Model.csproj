@@ -12,8 +12,7 @@
 		<Product>CQL Model</Product>
 	</PropertyGroup>
 
-	<ItemGroup>
-	</ItemGroup>
+
 
 	<ItemGroup>
 	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />

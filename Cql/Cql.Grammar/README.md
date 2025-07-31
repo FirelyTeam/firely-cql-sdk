@@ -20,12 +20,7 @@ https://github.com/cqframework/clinical_quality_language/blob/master/Src/grammar
 
 ## Usage
 
-This package provides the parsing infrastructure used by CQL-to-ELM conversion:
-
-```csharp
-// Used internally by CQL-to-ELM conversion pipeline
-// to parse CQL text into abstract syntax trees
-```
+This package provides the parsing infrastructure used by CQL-to-ELM conversion.
 
 ## Dependencies
 

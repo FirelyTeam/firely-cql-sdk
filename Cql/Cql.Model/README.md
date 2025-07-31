@@ -23,11 +23,6 @@ This package provides model definitions and metadata that enable the CQL runtime
 
 This package provides model metadata used by the CQL compiler and runtime to understand the structure of data being processed.
 
-```csharp
-// Model information is automatically loaded and used
-// by other CQL components during compilation and execution
-```
-
 ## Dependencies
 
 - **Hl7.Cql.Runtime**: Core CQL runtime components
