@@ -10,8 +10,6 @@
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
-
-
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
