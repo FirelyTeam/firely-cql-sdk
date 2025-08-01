@@ -7,6 +7,8 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Runtime.Serialization;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
@@ -20,13 +22,33 @@ public static class FhirDeserializationExtensions
     private static readonly JsonSerializerOptions Options = BuildJsonSerializerOptions();
 
     /// <summary>
-    /// Builds the JSON serializer options for FHIR serialization.
+    /// Builds the JSON serializer options for FHIR serialization with CQL tuple support.
     /// </summary>
     /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
     private static JsonSerializerOptions BuildJsonSerializerOptions()
     {
         var o = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
         o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        
+        // Add CQL tuple converter for automatic serialization of CQL tuples
+        o.Converters.Add(new CqlValueTupleJsonConverterFactory());
+        
+        return o;
+    }
+
+    /// <summary>
+    /// Creates JsonSerializerOptions configured for FHIR serialization with CQL tuple support.
+    /// </summary>
+    /// <param name="inspector">The model inspector to use for FHIR serialization.</param>
+    /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
+    public static JsonSerializerOptions CreateFhirJsonSerializerOptions(ModelInspector? inspector = null)
+    {
+        var o = new JsonSerializerOptions().ForFhir(inspector ?? ModelInfo.ModelInspector);
+        o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        
+        // Add CQL tuple converter for automatic serialization of CQL tuples
+        o.Converters.Add(new CqlValueTupleJsonConverterFactory());
+        
         return o;
     }
 

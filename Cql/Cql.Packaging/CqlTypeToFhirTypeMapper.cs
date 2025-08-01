@@ -203,6 +203,12 @@ namespace Hl7.Cql.Packaging
         /// <returns>the Type mapping, or null</returns>
         public CqlTypeToFhirMapping? TypeEntryFor(Type type)
         {
+            // Check if the type is a CQL value tuple first, before checking other value types
+            if (type.IsCqlValueTuple())
+            {
+                return TypeEntryFor(CqlPrimitiveType.Tuple);
+            }
+            
             if (type.IsPrimitive || type.IsValueType || type == typeof(string))
             {
                 var fhirType = PrimitiveToFhir(type);
@@ -238,6 +244,7 @@ namespace Hl7.Cql.Packaging
                 }
                 return TypeEntryFor(cqlPrimitiveAttribute.Type);
             }
+            
             if (type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>)))
             {
                 var elementType = TypeResolver.GetListElementType(type);

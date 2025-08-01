@@ -142,4 +142,42 @@ public class CqlTupleTests
             }
             """, str);
     }
+
+    [TestMethod]
+    public void CreateFhirJsonSerializerOptions_IncludesCqlTupleConverter()
+    {
+        // Arrange
+        (CqlTupleMetadata, string? Name, int? ID) person = (PersonProperties, "John Doe", 42);
+
+        // Act - Use the new CreateFhirJsonSerializerOptions method
+        var options = Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.CreateFhirJsonSerializerOptions();
+        var serializedJson = JsonSerializer.Serialize(person, options);
+
+        // Assert - The tuple should be serialized with property names, not Item1, Item2, etc.
+        Assert.IsTrue(serializedJson.Contains("\"Name\":\"John Doe\""));
+        Assert.IsTrue(serializedJson.Contains("\"ID\":42"));
+        Assert.IsFalse(serializedJson.Contains("Item1"));
+        Assert.IsFalse(serializedJson.Contains("Item2"));
+    }
+
+    [TestMethod]
+    public void FhirDeserializationExtensions_AutomaticallyIncludesCqlTupleConverter()
+    {
+        // Arrange
+        (CqlTupleMetadata, string? Name, int? ID) person = (PersonProperties, "Jane Smith", 123);
+
+        // Act - Use existing methods that should now automatically include the converter
+        var serializedViaStream = new MemoryStream();
+        JsonSerializer.Serialize(serializedViaStream, person, Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.CreateFhirJsonSerializerOptions());
+        serializedViaStream.Position = 0;
+        
+        using var reader = new StreamReader(serializedViaStream);
+        var serializedJson = reader.ReadToEnd();
+
+        // Assert - The tuple should be serialized with property names
+        Assert.IsTrue(serializedJson.Contains("\"Name\":\"Jane Smith\""));
+        Assert.IsTrue(serializedJson.Contains("\"ID\":123"));
+        Assert.IsFalse(serializedJson.Contains("Item1"));
+        Assert.IsFalse(serializedJson.Contains("Item2"));
+    }
 }
