@@ -14,7 +14,7 @@ Whenever making changes to the documentation, please ensure that you update the 
 
 The HL7 CQL Packager is a utility for converting CQL or ELM into other artifacts, such as C#, .NET assemblies, or FHIR Resources. It performs the following steps:
 
-1. **CQL to ELM Conversion** (optional): Converts CQL files into ELM JSON files. Please read the disclaimer in the help documentation.
+1. **CQL to ELM Conversion**: Converts CQL files into ELM JSON files. Please read the disclaimer in the help documentation.
 2. **ELM to C#**: Converts ELM JSON files into LINQ expressions, then translates those into C# code.
 3. **C# to .NET DLL Compilation**: Compiles the generated C# code into .NET assemblies.
 4. **Packaging to FHIR Libraries/Measures**: Packages the assembly 
