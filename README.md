@@ -6,7 +6,7 @@ This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec
 and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 ## Release notes ##
-This is release version 2.0 (alpha) of the engine.
+This is release version 2.0 of the engine.
 We expect parts of the public interface can to change. 
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
 There is quite some variation in how CQL is written and interpreted, 
@@ -15,38 +15,20 @@ so it is likely at this early stage that there will be deviations from other eng
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
 
-## Recent Changes ##
-
-### Translator Options Alignment (Issue #899)
-The .NET CQL translator options have been aligned with the Java stack naming conventions and default values to ensure cross-platform consistency:
-
-**Property Renames:**
-- `EnableListPromotion` → `DisableListPromotion` (with inverted semantics)
-- `EnableListDemotion` → `DisableListDemotion` (with inverted semantics)
-- `EnableIntervalPromotion` and `EnableIntervalDemotion` remain unchanged
-
-**Updated Default Values:**
-- `DisableListPromotion = true` (List promotion disabled by default)
-- `DisableListDemotion = true` (List demotion disabled by default)  
-- `EnableIntervalPromotion = true` (Interval promotion enabled by default)
-- `EnableIntervalDemotion = true` (Interval demotion enabled by default)
-
-These changes ensure the .NET SDK behaves consistently with the Java implementation and simplifies cross-platform test configuration sharing.
 
 ## Getting Started ##
 
 * Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
-* A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
-* A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+* The [CQL Engine Architecture](docs/CQL-Engine-Architecture.md) document with background documentation on the design.
+* The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
 
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
 ## Dev Start
-During development, new alpha releases will appear on Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
+During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
  - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
 

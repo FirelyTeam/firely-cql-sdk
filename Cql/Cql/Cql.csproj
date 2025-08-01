@@ -10,6 +10,7 @@
 		<Description>A platform for evaluating logic in the HL7 CQL language.</Description>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />

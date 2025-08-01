@@ -2,7 +2,6 @@
 
 	<Import Project="..\..\cql-sdk.props" />
 
-
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql.Packaging</AssemblyName>
