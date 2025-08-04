@@ -35,6 +35,44 @@ The SDK has dependencies on the following key external packages:
 - **Hl7.Fhir.Base**: Version 5.12.0 - Base classes and utilities for FHIR support
 - **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
 
+### Cql.Grammar
+- **Antlr4.Runtime.Standard**: Version 4.13.1 - ANTLR4 runtime for CQL grammar parsing
+
+### Cql.Runtime
+- **Microsoft.Extensions.Logging.Debug**: Version 8.0.0 - Debug logging provider
+- **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
+
+### Cql.CqlToElm
+- **Microsoft.Extensions.Configuration**: Version 9.0.3 - Configuration framework
+- **Microsoft.Extensions.DependencyInjection**: Version 8.0.0 - Dependency injection container
+- **Microsoft.Extensions.Logging**: Version 8.0.0 - Logging abstractions
+
+### CodeGeneration.NET
+- **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
+- **Microsoft.Extensions.Logging.Debug**: Version 8.0.0 - Debug logging provider
+- **Microsoft.Extensions.Logging.Console**: Version 8.0.1 - Console logging provider
+
+### Cql.Compiler
+- **Microsoft.Extensions.Logging.Abstractions**: Version 8.0.1 - Logging abstractions
+- **Microsoft.Extensions.Logging.Debug**: Version 8.0.0 - Debug logging provider
+
+### Elm
+- **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
+- **System.Text.Json**: Version 8.0.5 - High-performance JSON serialization
+
+### Cql.Packaging
+- **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
+
+### PackagerCLI (cql-package tool)
+- **Microsoft.Extensions.Hosting**: Version 8.0.0 - Generic host for .NET applications
+- **Microsoft.Extensions.Configuration**: Version 9.0.3 - Configuration framework
+- **Microsoft.Extensions.Logging.Console**: Version 8.0.1 - Console logging provider
+- **Serilog.Extensions.Logging**: Version 9.0.1 - Serilog integration with Microsoft.Extensions.Logging
+- **Serilog.Sinks.File**: Version 7.0.0 - Serilog file logging sink
+- **System.CommandLine**: Version 2.0.0-beta4.22272.1 - Command-line argument parsing
+- **System.CommandLine.NamingConventionBinder**: Version 2.0.0-beta4.22272.1 - Command-line binding support
+- **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
+
 ## Dev Start
 During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
