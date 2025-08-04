@@ -1,5 +1,4 @@
 ﻿#nullable enable
-Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions
 Hl7.Cql.Fhir.FhirCqlContext
 Hl7.Cql.Fhir.FhirCqlContextOptions
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
@@ -19,6 +18,10 @@ Hl7.Cql.Fhir.FhirCqlContextOptions.ResourceIdComparer.init -> void
 Hl7.Cql.Fhir.FhirTypeConverter
 Hl7.Cql.Fhir.FhirTypeResolver
 Hl7.Cql.Fhir.FhirTypeResolver.FhirTypeResolver(Hl7.Fhir.Introspection.ModelInspector! inspector) -> void
+Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions
+Hl7.Cql.Fhir.Serialization.Extensions.JsonSerializerOptionsFhirExtensions
+Hl7.Cql.Fhir.Serialization.Extensions.ModelInspectorFhirExtensions
+Hl7.Cql.Fhir.Serialization.FhirJsonDeserializationUtility
 Hl7.Cql.Fhir.ValueSetExtensions
 Hl7.Cql.Fhir.ValueSetSource
 Hl7.Cql.Fhir.ValueSetSource.Add(Hl7.Fhir.Model.ValueSet! vs) -> System.Threading.Tasks.Task<Hl7.Cql.ValueSets.IValueSetFacade!>!
@@ -32,12 +35,16 @@ Hl7.Cql.Fhir.ValueSetSource.Load(string! canonical) -> System.Threading.Tasks.Ta
 Hl7.Cql.Fhir.ValueSetSource.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
 Hl7.Cql.Fhir.ValueSetSource.ValueSetSource(Hl7.Fhir.Specification.Source.IAsyncResourceResolver? resourceResolver = null, Hl7.Fhir.Specification.Terminology.ICodeValidationTerminologyService? termService = null) -> void
 override Hl7.Cql.Fhir.FhirTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
-static Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this string! jsonString, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
-static Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.IO.Stream! jsonStream, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
-static Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.ReadOnlySpan<char> jsonCharSpan, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
 static Hl7.Cql.Fhir.FhirCqlContext.ForBundle(Hl7.Fhir.Model.Bundle? bundle = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Fhir.FhirCqlContext.WithDataSource(Hl7.Cql.Operators.IDataSource? source = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, int? cacheSize = null) -> Hl7.Cql.Conversion.TypeConverter!
+static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this string! jsonString, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
+static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.IO.Stream! jsonStream, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
+static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.ReadOnlySpan<char> jsonCharSpan, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
+static Hl7.Cql.Fhir.Serialization.Extensions.JsonSerializerOptionsFhirExtensions.AddCqlTupleDeserializationSupport(this System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.JsonSerializerOptions!
+static Hl7.Cql.Fhir.Serialization.Extensions.JsonSerializerOptionsFhirExtensions.Mutate(this System.Text.Json.JsonSerializerOptions! options, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions) -> System.Text.Json.JsonSerializerOptions!
+static Hl7.Cql.Fhir.Serialization.Extensions.ModelInspectorFhirExtensions.CreateJsonSerializerOptions(this Hl7.Fhir.Introspection.ModelInspector! modelInspector) -> System.Text.Json.JsonSerializerOptions!
+static Hl7.Cql.Fhir.Serialization.FhirJsonDeserializationUtility.CreateFhirJsonSerializerOptions(Hl7.Fhir.Introspection.ModelInspector? inspector = null) -> System.Text.Json.JsonSerializerOptions!
 static Hl7.Cql.Fhir.ValueSetExtensions.ToValueSetDictionary(this System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.ValueSet!>! values) -> Hl7.Cql.ValueSets.IValueSetDictionary!
 static Hl7.Cql.Fhir.ValueSetExtensions.ToValueSetDictionaryAsync(this System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.ValueSet!>! values) -> System.Threading.Tasks.Task<Hl7.Cql.ValueSets.IValueSetDictionary!>!
 static readonly Hl7.Cql.Fhir.FhirCqlContextOptions.Default -> Hl7.Cql.Fhir.FhirCqlContextOptions!

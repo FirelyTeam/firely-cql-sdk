@@ -7,177 +7,151 @@
  */
 
 #nullable enable
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Serialization;
 
 namespace CoreTests.Tuples;
+
 
 [TestClass]
 public class CqlTupleTests
 {
-    // Generated C# as part of Library
-    public static readonly CqlTupleMetadata PersonProperties = new([typeof(string), typeof(int?), typeof((CqlTupleMetadata, string?, string?, string?)[])], ["Name", "ID", "Addresses"]);
-    public static readonly CqlTupleMetadata AddressProperties = new ([typeof(string), typeof(string), typeof(string), typeof(string)], ["AddressType", "Street", "City", "Country"]);
+    private static readonly CqlTupleMetadata SimpleTupleMetadata = new([typeof(string), typeof(int)], ["Name", "Age"]);
+    private static readonly CqlTupleMetadata NestedTupleMetadata = new([typeof(string), typeof((CqlTupleMetadata, string, int))], ["Group", "Person"]);
+    private static readonly CqlTupleMetadata ArrayTupleMetadata = new([typeof(string[]), typeof(int[])], ["Names", "Ages"]);
+
+    private static JsonSerializerOptions JsonSerializerOptions =>
+        FhirDeserializationExtensions.JsonSerializerOptions
+                                     .Mutate(o =>
+                                     {
+                                         o.WriteIndented = true;
+                                         return o;
+                                     });
+
 
     [TestMethod]
-    public void TestCqlTupleMetadataEquality()
+    public void Tuple_CanBeCreatedAndAccessed()
     {
-        CqlTupleMetadata m1 = new CqlTupleMetadata([typeof(int?), typeof(string)], ["id", "name"]);
-        CqlTupleMetadata m2 = new CqlTupleMetadata([typeof(int?), typeof(string)], ["id", "name"]);
-        CqlTupleMetadata mOther = new CqlTupleMetadata([typeof(string)], ["name"]);
+        // Arrange
+        (CqlTupleMetadata, string Name, int Age) tuple = (SimpleTupleMetadata, "Alice", 30);
 
-        Assert.AreEqual(m1, m2);
-        Assert.IsFalse(m1.Equals(null));
-        Assert.IsTrue(m1.Equals(m2));
-        Assert.IsTrue(m1.Equals((object)m2));
-        Assert.IsTrue(m1 == m2);
-        Assert.IsFalse(m1 != m2);
-
-        Assert.AreNotEqual(m1, mOther);
-        Assert.IsFalse(m1.Equals(mOther));
-        Assert.IsFalse(m1.Equals((object)mOther));
-        Assert.IsFalse(m1 == mOther);
-        Assert.IsTrue(m1 != mOther);
+        // Act & Assert
+        Assert.AreEqual("Alice", tuple.Name);
+        Assert.AreEqual(30, tuple.Age);
+        Assert.AreEqual(SimpleTupleMetadata, tuple.Item1);
     }
 
     [TestMethod]
-    public void TestJsonSerializationNested()
+    public void Tuple_NestedTuple_CanBeCreatedAndAccessed()
     {
-        // Generated C# as part of Library
-        (CqlTupleMetadata, string? AddressType, string? Street, string? City, string? Country) homeAddr =
-            (AddressProperties, "Home", "Joe Street", "Springfield", "USA");
+        // Arrange
+        (CqlTupleMetadata, string Name, int Age) person = (SimpleTupleMetadata, "Bob", 25);
+        (CqlTupleMetadata, string Group, (CqlTupleMetadata, string Name, int Age) Person) group = (NestedTupleMetadata, "Developers", person);
 
-        (CqlTupleMetadata, string? AddressType, string? Street, string? City, string? Country) workAddr =
-            (AddressProperties, "Work", "Sue Street", "Jumpville", "Canada");
-
-        (CqlTupleMetadata, string? Name, int? ID, (CqlTupleMetadata, string? AddressType, string? Street, string? City, string? Country)[]? addressses) person =
-            (PersonProperties, "John", 10, [homeAddr, workAddr]);
-
-        var serializedJson = JsonSerializer.Serialize(person, new JsonSerializerOptions {
-            Converters = { new CqlValueTupleJsonConverterFactory() },
-            WriteIndented = true });
-
-
-        Assert.AreEqual(
-            """
-            {
-              "Name": "John",
-              "ID": 10,
-              "Addresses": [
-                {
-                  "AddressType": "Home",
-                  "Street": "Joe Street",
-                  "City": "Springfield",
-                  "Country": "USA"
-                },
-                {
-                  "AddressType": "Work",
-                  "Street": "Sue Street",
-                  "City": "Jumpville",
-                  "Country": "Canada"
-                }
-              ]
-            }
-            """, serializedJson);
+        // Act & Assert
+        Assert.AreEqual("Developers", group.Group);
+        Assert.AreEqual("Bob", group.Person.Name);
+        Assert.AreEqual(25, group.Person.Age);
+        Assert.AreEqual(NestedTupleMetadata, group.Item1);
     }
 
     [TestMethod]
-    public void ExpressionReturningNestedTuplesFromDirectLibraryInstance_ResultCanBeSerialized()
+    public void Tuple_ArrayTuple_CanBeCreatedAndAccessed()
     {
-        var ctx = FhirCqlContext.ForBundle();
-        var obj = CqlNestedTupleTest_1_0_0.Instance.Result(ctx);
-        Assert.IsNotNull(obj);
-        Assert.IsInstanceOfType(obj, typeof(ITuple));
+        // Arrange
+        (CqlTupleMetadata, string[] Names, int[] Ages) tuple = (ArrayTupleMetadata, ["Tom", "Jerry"], [5, 6]);
 
-        var str = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, Converters = { new CqlValueTupleJsonConverterFactory() }});
-        Assert.AreEqual(
-            """
-            {
-              "status": "success",
-              "result": {
-                "result1": "some first result",
-                "result2": "some second result"
-              }
-            }
-            """, str);
+        // Act & Assert
+        Assert.AreEqual(2, tuple.Names.Length);
+        Assert.AreEqual("Tom", tuple.Names[0]);
+        Assert.AreEqual(6, tuple.Ages[1]);
+        Assert.AreEqual(ArrayTupleMetadata, tuple.Item1);
     }
 
-    /// <seealso cref="InvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
-    public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
+    public void Tuple_WithSimpleTuple_SerializesToJson()
     {
-        var filePath = new DirectoryInfo(Directory.GetCurrentDirectory())
-                       .SelfAndParents()
-                       .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
-                       .First(File.Exists);
-        var ctx = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = new InvocationToolkit()
-                                    .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
-                                    .CreateLibrarySetInvoker();
+        // Arrange
+        (CqlTupleMetadata, string Name, int Age) tuple = (SimpleTupleMetadata, "Charlie", 40);
 
         // Act
-        var result = librarySetInvoker
-                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                     .SelectResults(ctx)
-                     .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
-        Assert.IsNotNull(result);
-        result.TryGetValue("Result", out var obj);
-        Assert.IsNotNull(obj);
-        Assert.IsInstanceOfType(obj, typeof(ITuple));
+        var json = JsonSerializer.Serialize(tuple, JsonSerializerOptions);
 
-        var str = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, Converters = { new CqlValueTupleJsonConverterFactory() }});
-        Assert.AreEqual(
+        // Assert
+        Assert.That.MultilinesAreEqual(
             """
             {
-              "status": "success",
-              "result": {
-                "result1": "some first result",
-                "result2": "some second result"
+              "Name": "Charlie",
+              "Age": 40
+            }
+            """,
+            json);
+    }
+
+    [TestMethod]
+    public void Tuple_WithNestedTuple_SerializesToJson()
+    {
+        // Arrange
+        (CqlTupleMetadata, string Name, int Age) person = (SimpleTupleMetadata, "Dana", 22);
+        (CqlTupleMetadata, string Group, (CqlTupleMetadata, string Name, int Age) Person) group =
+            (NestedTupleMetadata, "QA", person);
+
+        // Act
+        var json = JsonSerializer.Serialize(group, JsonSerializerOptions);
+
+        // Assert
+        Assert.That.MultilinesAreEqual(
+            """
+            {
+              "Group": "QA",
+              "Person": {
+                "Name": "Dana",
+                "Age": 22
               }
             }
-            """, str);
+            """,
+            json);
     }
 
     [TestMethod]
-    public void CreateFhirJsonSerializerOptions_IncludesCqlTupleConverter()
+    public void Tuple_WithArrayTuple_SerializesToJson()
     {
         // Arrange
-        (CqlTupleMetadata, string? Name, int? ID) person = (PersonProperties, "John Doe", 42);
+        (CqlTupleMetadata, string[] Names, int[] Ages) tuple = (ArrayTupleMetadata, ["Tom", "Jerry"], [5, 6]);
 
-        // Act - Use the new CreateFhirJsonSerializerOptions method
-        var options = Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.CreateFhirJsonSerializerOptions();
-        var serializedJson = JsonSerializer.Serialize(person, options);
+        // Act
+        var json = JsonSerializer.Serialize(tuple, JsonSerializerOptions);
 
-        // Assert - The tuple should be serialized with property names, not Item1, Item2, etc.
-        Assert.IsTrue(serializedJson.Contains("\"Name\":\"John Doe\""));
-        Assert.IsTrue(serializedJson.Contains("\"ID\":42"));
-        Assert.IsFalse(serializedJson.Contains("Item1"));
-        Assert.IsFalse(serializedJson.Contains("Item2"));
+        // Assert
+        Assert.That.MultilinesAreEqual(
+            """
+            {
+              "Names": [
+                "Tom",
+                "Jerry"
+              ],
+              "Ages": [
+                5,
+                6
+              ]
+            }
+            """,
+            json);
     }
 
     [TestMethod]
-    public void FhirDeserializationExtensions_AutomaticallyIncludesCqlTupleConverter()
+    public void Tuple_DeserializesFromJson_ThrowNotSupported()
     {
         // Arrange
-        (CqlTupleMetadata, string? Name, int? ID) person = (PersonProperties, "Jane Smith", 123);
+        var json = "{\"Name\":\"Frank\",\"Age\":33}";
 
-        // Act - Use existing methods that should now automatically include the converter
-        var serializedViaStream = new MemoryStream();
-        JsonSerializer.Serialize(serializedViaStream, person, Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions.CreateFhirJsonSerializerOptions());
-        serializedViaStream.Position = 0;
-        
-        using var reader = new StreamReader(serializedViaStream);
-        var serializedJson = reader.ReadToEnd();
+        // Act
+        Action act = () =>
+        {
+            var tuple = JsonSerializer.Deserialize<(CqlTupleMetadata, string Name, int Age)>(json, JsonSerializerOptions);
+        };
 
-        // Assert - The tuple should be serialized with property names
-        Assert.IsTrue(serializedJson.Contains("\"Name\":\"Jane Smith\""));
-        Assert.IsTrue(serializedJson.Contains("\"ID\":123"));
-        Assert.IsFalse(serializedJson.Contains("Item1"));
-        Assert.IsFalse(serializedJson.Contains("Item2"));
+        // Assert
+        Assert.Throws<NotSupportedException>(act);
     }
 }

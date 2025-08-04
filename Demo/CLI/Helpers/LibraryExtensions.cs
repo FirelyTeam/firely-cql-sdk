@@ -7,11 +7,11 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Fhir.Extensions;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using FhirLibrary=Hl7.Fhir.Model.Library;
+using FhirLibrary = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
 

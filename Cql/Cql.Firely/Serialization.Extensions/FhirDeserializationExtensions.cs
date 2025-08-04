@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2025, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -7,64 +7,30 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Runtime.Serialization;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
 
-namespace Hl7.Cql.Fhir.Extensions;
+namespace Hl7.Cql.Fhir.Serialization.Extensions;
 
 /// <summary>
 /// Provides extension methods for deserializing JSON to FHIR domain resources.
 /// </summary>
 public static class FhirDeserializationExtensions
 {
-    private static readonly JsonSerializerOptions Options = BuildJsonSerializerOptions();
-
-    /// <summary>
-    /// Builds the JSON serializer options for FHIR serialization with CQL tuple support.
-    /// </summary>
-    /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
-    private static JsonSerializerOptions BuildJsonSerializerOptions()
-    {
-        var o = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-        o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        
-        // Add CQL tuple converter for automatic serialization of CQL tuples
-        o.Converters.Add(new CqlValueTupleJsonConverterFactory());
-        
-        return o;
-    }
-
-    /// <summary>
-    /// Creates JsonSerializerOptions configured for FHIR serialization with CQL tuple support.
-    /// </summary>
-    /// <param name="inspector">The model inspector to use for FHIR serialization.</param>
-    /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
-    public static JsonSerializerOptions CreateFhirJsonSerializerOptions(ModelInspector? inspector = null)
-    {
-        var o = new JsonSerializerOptions().ForFhir(inspector ?? ModelInfo.ModelInspector);
-        o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        
-        // Add CQL tuple converter for automatic serialization of CQL tuples
-        o.Converters.Add(new CqlValueTupleJsonConverterFactory());
-        
-        return o;
-    }
+    internal static readonly JsonSerializerOptions JsonSerializerOptions = FhirJsonDeserializationUtility.CreateFhirJsonSerializerOptions();
 
     /// <summary>
     /// Deserializes a JSON stream to a FHIR domain resource.
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonStream">The JSON stream to deserialize.</param>
-    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="System.Text.Json.JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the stream cannot be deserialized to the specified type.</exception>
     public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
         this Stream jsonStream,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonStream, configureOptions == null ? Options : configureOptions(new (Options)))
+        JsonSerializer.Deserialize<TDomainResource>(jsonStream, JsonSerializerOptions.Mutate(configureOptions))
         ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(TDomainResource).Name}");
 
     /// <summary>
@@ -72,14 +38,14 @@ public static class FhirDeserializationExtensions
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonString">The JSON string to deserialize.</param>
-    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="System.Text.Json.JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the string cannot be deserialized to the specified type.</exception>
     public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
         this string jsonString,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonString, configureOptions == null ? Options : configureOptions(new(Options)))
+        JsonSerializer.Deserialize<TDomainResource>(jsonString, JsonSerializerOptions.Mutate(configureOptions))
         ?? throw new ArgumentException($"Unable to deserialize this string as {typeof(TDomainResource).Name}");
 
     /// <summary>
@@ -87,13 +53,13 @@ public static class FhirDeserializationExtensions
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonCharSpan">The JSON character span to deserialize.</param>
-    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="System.Text.Json.JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the character span cannot be deserialized to the specified type.</exception>
     public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
         this ReadOnlySpan<char> jsonCharSpan,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, configureOptions == null ? Options : configureOptions(new(Options)))
+        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, JsonSerializerOptions.Mutate(configureOptions))
         ?? throw new ArgumentException($"Unable to deserialize this character span as {typeof(TDomainResource).Name}");
 }

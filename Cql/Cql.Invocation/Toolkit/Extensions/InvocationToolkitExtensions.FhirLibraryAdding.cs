@@ -7,13 +7,13 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 using System.Text.Json;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
