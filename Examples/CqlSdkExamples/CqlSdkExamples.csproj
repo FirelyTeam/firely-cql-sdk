@@ -32,6 +32,10 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="bin\" />
+	</ItemGroup>
+
 	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<Task>
 			<Reference Include="System.Core" />
