@@ -17,7 +17,8 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Fhir.Extensions;
+using Hl7.Cql.Fhir.Serialization;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 
 namespace Test
 {

@@ -31,14 +31,20 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Determines if the specified type is a CqlValueTuple.
+    /// Determines whether the specified <see cref="Type"/> represents a CQL value tuple.
     /// </summary>
-    /// <param name="type">The type to check.</param>
-    /// <returns><c>true</c> if the type is a CqlValueTuple; otherwise, <c>false</c>.</returns>
+    ///
+    /// <param name="type">The <see cref="Type"/> to evaluate.</param>
+    ///
+    /// <returns>
+    /// <see langword="true"/> if the specified <see cref="Type"/> is a generic value type, implements <see cref="ITuple"/>,
+    /// and has a first generic type argument of <see cref="CqlTupleMetadata"/>;
+    /// otherwise, <see langword="false"/>.
+    /// </returns>
     public static bool IsCqlValueTuple(this Type type)
     {
         bool isCqlValueTuple =
-            type.IsGenericType
+            type is { IsValueType: true, IsGenericType: true }
             && type.IsAssignableTo(typeof(ITuple))
             && type.GenericTypeArguments.ElementAtOrDefault(0) == typeof(CqlTupleMetadata);
         return isCqlValueTuple;

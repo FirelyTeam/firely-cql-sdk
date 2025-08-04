@@ -73,4 +73,40 @@ public class CqlTypeToFhirTypeMapperTests
         Assert.AreEqual(CqlPrimitiveType.List, result.CqlType);
         Assert.AreEqual(elementType, result.ElementType);
     }
+
+    [TestMethod]
+    public void TypeEntryFor_CqlPrimitiveTypeTuple_ReturnsFhirBasic()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+
+        // Act
+        var result = mapper.TypeEntryFor(CqlPrimitiveType.Tuple);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(FHIRAllTypes.Basic, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Tuple, result.CqlType);
+    }
+
+    [TestMethod]
+    public void TypeEntryFor_CqlValueTupleType_ReturnsFhirBasic()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+        var tupleType = typeof((CqlTupleMetadata, string, int)); // A CQL value tuple type
+
+        // Verify the type is actually a CQL value tuple
+        Assert.IsTrue(tupleType.IsCqlValueTuple(), "The test type should be detected as a CQL value tuple");
+
+        // Act
+        var result = mapper.TypeEntryFor(tupleType);
+
+        // Assert
+        Assert.IsNotNull(result, "TypeEntryFor should return a non-null result for CQL value tuples");
+        Assert.AreEqual(FHIRAllTypes.Basic, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Tuple, result.CqlType);
+    }
 }
