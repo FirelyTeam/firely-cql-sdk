@@ -29,7 +29,7 @@ public static class LibraryInvokerExtensions
         libraryInvoker
             .Definitions.Values
             .Where(definitionInvoker =>
-                       definitionInvoker.ParameterTypes.Length == 0
+                       (includeDefinitionsWithParameters || definitionInvoker.ParameterTypes.Length == 0)
                        && definitionInvoker.CqlDefinitionAttribute.GetType() == typeof(CqlExpressionDefinitionAttribute));
 
     /// <summary>

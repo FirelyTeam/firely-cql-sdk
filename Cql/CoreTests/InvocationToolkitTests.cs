@@ -133,4 +133,49 @@ public class InvocationToolkitTests
 
         result.Should().Be(arg1 + arg2, "The function should return the sum of the two arguments.");
     }
+
+    [TestMethod]
+    public void TestSelectExpressionsIncludeDefinitionsWithParameters()
+    {
+        // Arrange: Create a CQL library with both parameterized and non-parameterized expressions
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library TestLib version '1.0.0'
+            using FHIR version '4.0.1'
+            
+            // Expression without parameters
+            define "SimpleExpression": 42
+            
+            // Function with parameters - in this case, it gets CqlExpressionDefinitionAttribute instead of CqlFunctionDefinitionAttribute
+            define function "Add"(a Integer, b Integer): a + b
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act & Assert: Test current behavior (includeDefinitionsWithParameters = false)
+        // Should only include expressions without parameters
+        var expressionsWithoutParams = libraryInvoker.SelectExpressions(includeDefinitionsWithParameters: false).ToList();
+        expressionsWithoutParams.Should().HaveCount(1, "Only non-parameterized expressions should be included");
+        expressionsWithoutParams[0].DefinitionName.Should().Be("SimpleExpression");
+        expressionsWithoutParams[0].ParameterTypes.Should().HaveCount(0);
+
+        // Act & Assert: Test fixed behavior (includeDefinitionsWithParameters = true)
+        // Should include all expressions, including parameterized ones
+        var allExpressions = libraryInvoker.SelectExpressions(includeDefinitionsWithParameters: true).ToList();
+        
+        // This should now work correctly with the fix
+        allExpressions.Should().HaveCount(2, "Should include expressions with and without parameters");
+        
+        var simpleExpr = allExpressions.FirstOrDefault(e => e.DefinitionName == "SimpleExpression");
+        simpleExpr.Should().NotBeNull();
+        simpleExpr!.ParameterTypes.Should().HaveCount(0);
+        
+        var addFunc = allExpressions.FirstOrDefault(e => e.DefinitionName == "Add");
+        addFunc.Should().NotBeNull();
+        addFunc!.ParameterTypes.Should().HaveCount(2);
+    }
 }
