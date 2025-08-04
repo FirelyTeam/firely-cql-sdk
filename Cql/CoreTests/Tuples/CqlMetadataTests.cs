@@ -65,8 +65,7 @@ public class CqlTupleMetadataTests
         var str = metadata.ToString();
 
         // Assert
-        Assert.IsTrue(str.Contains("Name"));
-        Assert.IsTrue(str.Contains("Age"));
+        Assert.AreEqual("[\"Name\", \"Age\"]", str);
     }
 
     [TestMethod]
@@ -79,9 +78,6 @@ public class CqlTupleMetadataTests
         var signature = CqlTupleMetadata.BuildSignatureHashString(props);
 
         // Assert
-        Assert.IsTrue(signature.Contains("Name"));
-        Assert.IsTrue(signature.Contains("Age"));
-        Assert.IsTrue(signature.Contains("System.String"));
-        Assert.IsTrue(signature.Contains("System.Int32"));
+        Assert.AreEqual("COYHiUGZgWUZAKEBBFZOcbQMe", signature);
     }
 }
