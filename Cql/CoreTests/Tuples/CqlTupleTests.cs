@@ -12,7 +12,6 @@ using Hl7.Cql.Primitives;
 
 namespace CoreTests.Tuples;
 
-
 [TestClass]
 public class CqlTupleTests
 {

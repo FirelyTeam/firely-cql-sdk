@@ -27,6 +27,14 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
+## Dependencies ##
+
+The SDK has dependencies on the following key external packages:
+
+### Cql.Firely
+- **Hl7.Fhir.Base**: Version 5.12.0 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
+
 ## Dev Start
 During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 

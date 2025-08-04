@@ -63,9 +63,11 @@ Use this header format with "Firely, NCQA":
 #### For EXISTING Files
 - **DO NOT modify existing copyright headers** in files that already have them
 - Leave existing headers exactly as they are (e.g., "NCQA and contributors" should remain unchanged)
+- **When making changes to a file and Firely is not listed as contributor, add it as "Firely, NCQA and contributors"**
 
 #### Header Guidelines
 - Use the current year (2025) in the copyright notice for new files only
+- **Never update or modify the copyright year in existing files**
 - For new files, include "Firely, NCQA and contributors" in the copyright line
 - Place header at the very top of the file, after any `#pragma` directives if present
 - Generated files (*.g.cs) do not require headers
@@ -84,6 +86,7 @@ Use this header format with "Firely, NCQA":
 
 ### Documentation
 - Update README files when adding new projects or significant features
+- **When adding dependencies, also update the README's Dependencies section**
 - Document experimental features clearly in preview projects
 - Maintain clear separation between stable and experimental examples
 - **IMPORTANT: Do not add C# code samples in Usage sections for internal-only projects**
