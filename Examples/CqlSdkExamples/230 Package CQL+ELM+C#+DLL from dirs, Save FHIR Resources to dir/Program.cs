@@ -48,6 +48,13 @@ partial class Program
                         cs:csDirectory.ReadTextFromFile("DevDays-2025.0.0.g.cs"),
                         dll:dllDirectory.ReadBytesFromFile("DevDays-2025.0.0.dll"),
                         pdb:pdbDirectory.ReadBytesFromFile("DevDays-2025.0.0.pdb")
+                    ),
+                    (
+                        cql:(CqlLibraryString)cqlDirectory.ReadTextFromFile("PeopleWithoutNoses.cql"),
+                        elm:Library.ParseFromJson(elmDirectory.ReadTextFromFile("PeopleWithoutNoses-1.0.0.json")),
+                        cs:csDirectory.ReadTextFromFile("PeopleWithoutNoses-1.0.0.g.cs"),
+                        dll:dllDirectory.ReadBytesFromFile("PeopleWithoutNoses-1.0.0.dll"),
+                        pdb:pdbDirectory.ReadBytesFromFile("PeopleWithoutNoses-1.0.0.pdb")
                     )
                 }
                 .Select(t => new PackagingToolkitInputArtifacts(t.cql, t.elm, t.cs, t.dll, t.pdb));
