@@ -176,7 +176,9 @@ partial class ExpressionBuilderContext
                                .ToArray();
                     }
 
-                    var def = new CqlExpressionDefinition(lambda, expressionDefName, tags);
+                    var def = function is not null
+                        ? new CqlFunctionDefinition(lambda, expressionDefName, tags)
+                        : new CqlExpressionDefinition(lambda, expressionDefName, tags);
                     Type[] signature = functionParameterTypes ?? [];
                     _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, signature), def);
                 }
