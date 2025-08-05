@@ -8,6 +8,8 @@
 
 #nullable enable
 using CoreTests.Tuples;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -168,5 +170,148 @@ public class InvocationToolkitTests
         functions[0].DefinitionName.Should().Be("Add");
         functions[0].ParameterTypes.Should().HaveCount(2);
         functions[0].ParameterTypes[0].ToString().Should().Be("System.Nullable`1[System.Int32]");
+    }
+
+    [TestMethod]
+    public void TestSelectExpressionsAndFunctions()
+    {
+        // Arrange: Create a CQL library with various definition types
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library TestExpressionsAndFunctions version '1.0.0'
+            using FHIR version '4.0.1'
+
+            context Patient
+
+            // Simple expression without parameters
+            define "SimpleExpression": true
+
+            // Expression with calculation
+            define "CalculatedExpression": 2 + 3
+
+            // Function with parameters
+            define function "AddIntegers"(a Integer, b Integer): a + b
+
+            // Function with single parameter
+            define function "Double"(x Integer): x * 2
+
+            // Function with no parameters (treated as function)
+            define function "ZeroFunction"(): 0
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act: Get expressions and functions using the new method
+        var expressionsAndFunctions = libraryInvoker.SelectExpressionsAndFunctions()
+            .Where(d => d.DefinitionName != "Patient") // Filter out the automatic Patient context definition
+            .ToList();
+
+        // Assert: Should include both expressions and functions
+        expressionsAndFunctions.Should().HaveCount(5, "Should include 2 expressions and 3 functions");
+
+        // Check that all expected definitions are present
+        var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionName).ToList();
+        definitionNames.Should().Contain(["SimpleExpression", "CalculatedExpression", "AddIntegers", "Double", "ZeroFunction"]);
+
+        // Verify expressions (no parameters)
+        var simpleExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "SimpleExpression");
+        simpleExpression.ParameterTypes.Should().BeEmpty();
+        simpleExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
+
+        var calculatedExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "CalculatedExpression");
+        calculatedExpression.ParameterTypes.Should().BeEmpty();
+        calculatedExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
+
+        // Verify functions (with parameters)
+        var addIntegers = expressionsAndFunctions.Single(d => d.DefinitionName == "AddIntegers");
+        addIntegers.ParameterTypes.Should().HaveCount(2);
+        addIntegers.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
+
+        var doubleFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "Double");
+        doubleFunction.ParameterTypes.Should().HaveCount(1);
+        doubleFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
+
+        var zeroFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "ZeroFunction");
+        zeroFunction.ParameterTypes.Should().BeEmpty();
+        zeroFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
+    }
+
+    [TestMethod]
+    public void TestSelectExpressionsAndFunctions_EmptyLibrary()
+    {
+        // Arrange: Use an existing simple library  
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library TestLib version '1.0.0'
+            using FHIR version '4.0.1'
+
+            // Expression without parameters
+            define "SimpleExpression": 42
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act: Get all definitions, then filter to check what we get
+        var allDefinitions = libraryInvoker.SelectExpressionsAndFunctions().ToList();
+        var expressionsAndFunctions = allDefinitions.Where(d => d.DefinitionName != "Patient").ToList();
+
+        // Assert - should have only our SimpleExpression
+        expressionsAndFunctions.Should().HaveCount(1, "Library has one user-defined expression");
+        expressionsAndFunctions[0].DefinitionName.Should().Be("SimpleExpression");
+    }
+
+    [TestMethod]
+    public void TestSelectExpressionsAndFunctions_ComparedToIndividualMethods()
+    {
+        // Arrange: Create a CQL library with mixed definition types
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library ComparisonTest version '1.0.0'
+            using FHIR version '4.0.1'
+
+            define "Expression1": 1
+            define "Expression2": 2
+            define function "Function1"(a Integer): a
+            define function "Function2"(a Integer, b Integer): a + b
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act
+        var expressionsAndFunctions = libraryInvoker.SelectExpressionsAndFunctions().ToList();
+        var expressions = libraryInvoker.SelectExpressions().ToList();
+        var functions = libraryInvoker.SelectFunctions().ToList();
+
+        // Assert: SelectExpressionsAndFunctions should return the union of expressions and functions
+        var expectedCount = expressions.Count + functions.Count;
+        expressionsAndFunctions.Should().HaveCount(expectedCount);
+
+        // All expressions should be in the combined result
+        foreach (var expression in expressions)
+        {
+            expressionsAndFunctions.Should().Contain(def => def.DefinitionName == expression.DefinitionName);
+        }
+
+        // All functions should be in the combined result
+        foreach (var function in functions)
+        {
+            expressionsAndFunctions.Should().Contain(def => def.DefinitionName == function.DefinitionName);
+        }
+
+        // Combined result should not have duplicates
+        var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionName).ToList();
+        definitionNames.Should().OnlyHaveUniqueItems();
     }
 }
