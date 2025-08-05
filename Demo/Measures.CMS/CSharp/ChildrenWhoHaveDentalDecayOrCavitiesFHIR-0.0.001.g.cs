@@ -106,7 +106,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -235,6 +235,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

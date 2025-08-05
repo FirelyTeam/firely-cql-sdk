@@ -86,7 +86,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -124,7 +124,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-    [CqlExpressionDefinition("NormalizeInterval")]
+    [CqlFunctionDefinition("NormalizeInterval")]
     public CqlInterval<CqlDateTime> NormalizeInterval(CqlContext context, CqlDateTime pointInTime, CqlInterval<CqlDateTime> dateTimeInterval)
     {
         CqlInterval<CqlDateTime> a_()
@@ -942,6 +942,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

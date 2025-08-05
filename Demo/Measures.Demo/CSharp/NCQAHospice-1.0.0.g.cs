@@ -53,7 +53,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -102,6 +102,6 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

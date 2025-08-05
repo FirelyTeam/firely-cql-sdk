@@ -40,9 +40,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
     #endregion ValueSets
 
-    #region Expressions
+    #region Functions and Expressions
 
-    [CqlExpressionDefinition("Professional or Institutional Claims")]
+    [CqlFunctionDefinition("Professional or Institutional Claims")]
     public IEnumerable<Claim> Professional_or_Institutional_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
         bool? a_(Claim MedicalClaim)
@@ -66,7 +66,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Pharmacy Claims")]
+    [CqlFunctionDefinition("Pharmacy Claims")]
     public IEnumerable<Claim> Pharmacy_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
         bool? a_(Claim PharmacyClaim)
@@ -85,7 +85,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Professional or Institutional Claims Response")]
+    [CqlFunctionDefinition("Professional or Institutional Claims Response")]
     public IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
         bool? a_(ClaimResponse MedicalResponse)
@@ -109,7 +109,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Pharmacy Claims Response")]
+    [CqlFunctionDefinition("Pharmacy Claims Response")]
     public IEnumerable<ClaimResponse> Pharmacy_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
         bool? a_(ClaimResponse PharmacyResponse)
@@ -128,7 +128,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Procedure and POS")]
+    [CqlFunctionDefinition("Medical Claims With Procedure and POS")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_and_POS(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -283,7 +283,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Procedure in Header or on Line Item")]
+    [CqlFunctionDefinition("Medical Claims With Procedure in Header or on Line Item")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -463,7 +463,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Diagnosis")]
+    [CqlFunctionDefinition("Medical Claims With Diagnosis")]
     public (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Medical_Claims_With_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -626,7 +626,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Pharmacy Claim With Medication")]
+    [CqlFunctionDefinition("Pharmacy Claim With Medication")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> Pharmacy_Claim_With_Medication(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
     {
         IEnumerable<Claim> a_ = this.Pharmacy_Claims(context, claim);
@@ -890,7 +890,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Diagnosis and Procedure")]
+    [CqlFunctionDefinition("Medical Claims With Diagnosis and Procedure")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -1174,7 +1174,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Principal Diagnosis and Procedure")]
+    [CqlFunctionDefinition("Medical Claims With Principal Diagnosis and Procedure")]
     public IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -1455,7 +1455,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Principal Diagnosis")]
+    [CqlFunctionDefinition("Medical Claims With Principal Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -1595,7 +1595,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Paid Claims for Provided Service and Condition")]
+    [CqlFunctionDefinition("Get Paid Claims for Provided Service and Condition")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Service_and_Condition(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
@@ -1649,7 +1649,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Professional and Institutional Claims and Claim Responses")]
+    [CqlFunctionDefinition("Get All Professional and Institutional Claims and Claim Responses")]
     public (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
         IEnumerable<ClaimResponse> a_ = this.Professional_or_Institutional_Claims_Response(context, claimResponse);
@@ -1660,7 +1660,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Corresponding Claim for Services and Conditions")]
+    [CqlFunctionDefinition("Get Corresponding Claim for Services and Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_and_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
@@ -1849,7 +1849,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Paid Claim Reponses")]
+    [CqlFunctionDefinition("Get All Paid Claim Reponses")]
     public IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> Get_All_Paid_Claim_Reponses(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
     {
         bool? a_(ClaimResponse ResponseItem)
@@ -1971,7 +1971,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Claims With Procedure and Diagnosis")]
+    [CqlFunctionDefinition("Get All Claims With Procedure and Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_and_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         bool? a_(Claim AllClaims)
@@ -2098,7 +2098,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Paid Claims for Provided Services or Conditions")]
+    [CqlFunctionDefinition("Get Paid Claims for Provided Services or Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
@@ -2141,7 +2141,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Corresponding Claim for Services or Conditions")]
+    [CqlFunctionDefinition("Get Corresponding Claim for Services or Conditions")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
@@ -2330,7 +2330,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Claims With Procedure or Diagnosis")]
+    [CqlFunctionDefinition("Get All Claims With Procedure or Diagnosis")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_or_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
     {
         bool? a_(Claim AllClaims)
@@ -2507,7 +2507,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Paid Claims for Provided Services Only")]
+    [CqlFunctionDefinition("Get Paid Claims for Provided Services Only")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         (CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
@@ -2550,7 +2550,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Corresponding Claim for Services Only")]
+    [CqlFunctionDefinition("Get Corresponding Claim for Services Only")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
@@ -2739,7 +2739,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Claims With Procedure Only")]
+    [CqlFunctionDefinition("Get All Claims With Procedure Only")]
     public IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_Only(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         bool? a_(Claim AllClaims)
@@ -2821,7 +2821,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Paid Claims for Pharmacy Services")]
+    [CqlFunctionDefinition("Get Paid Claims for Pharmacy Services")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Paid_Claims_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
@@ -2864,7 +2864,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get All Pharmacy Claims and Claim Responses")]
+    [CqlFunctionDefinition("Get All Pharmacy Claims and Claim Responses")]
     public (CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? Get_All_Pharmacy_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
         IEnumerable<ClaimResponse> a_ = this.Pharmacy_Claims_Response(context, claimResponse);
@@ -2875,7 +2875,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Corresponding Claim for Pharmacy Services")]
+    [CqlFunctionDefinition("Get Corresponding Claim for Pharmacy Services")]
     public (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Corresponding_Claim_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
     {
         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
@@ -3120,7 +3120,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Claim With Corresponding Claim Response")]
+    [CqlFunctionDefinition("Get Claim With Corresponding Claim Response")]
     public IEnumerable<(CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> Get_Claim_With_Corresponding_Claim_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
     {
         (CqlTupleMetadata, IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? a_(Claim Claim)
@@ -3204,7 +3204,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Medical Claims With Nonacute or Acute Inpatient Discharge")]
+    [CqlFunctionDefinition("Medical Claims With Nonacute or Acute Inpatient Discharge")]
     public (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(CqlContext context, IEnumerable<Claim> claim)
     {
         IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
@@ -3373,7 +3373,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Prescriber NPI from Claims")]
+    [CqlFunctionDefinition("Get Prescriber NPI from Claims")]
     public (CqlTupleMetadata, int? IdentifierCount)? Get_Prescriber_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
         (CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? a_(Claim C)
@@ -3670,7 +3670,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Get Pharmacy NPI from Claims")]
+    [CqlFunctionDefinition("Get Pharmacy NPI from Claims")]
     public (CqlTupleMetadata, int? IdentifierCount)? Get_Pharmacy_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
     {
         (CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? a_(Claim C)
@@ -3973,7 +3973,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

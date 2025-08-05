@@ -72,7 +72,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -1042,7 +1042,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

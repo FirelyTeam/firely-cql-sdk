@@ -95,7 +95,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -472,6 +472,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

@@ -141,7 +141,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -189,7 +189,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("LengthInDays")]
+    [CqlFunctionDefinition("LengthInDays")]
     public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
     {
         CqlDateTime a_ = context.Operators.Start(Value);
@@ -263,7 +263,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("FirstPhysicalExamWithEncounterId")]
+    [CqlFunctionDefinition("FirstPhysicalExamWithEncounterId")]
     public IEnumerable<string> FirstPhysicalExamWithEncounterId(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
     {
         IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
@@ -387,7 +387,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("FirstLabTestWithEncounterId")]
+    [CqlFunctionDefinition("FirstLabTestWithEncounterId")]
     public IEnumerable<string> FirstLabTestWithEncounterId(CqlContext context, IEnumerable<Observation> LabList, string CCDE)
     {
         IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
@@ -552,7 +552,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("CalendarAgeInYearsAt")]
+    [CqlFunctionDefinition("CalendarAgeInYearsAt")]
     public int? CalendarAgeInYearsAt(CqlContext context, CqlDateTime BirthDateTime, CqlDateTime AsOf)
     {
         CqlDateTime a_ = this.ToDate(context, BirthDateTime);
@@ -563,7 +563,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("ToDate")]
+    [CqlFunctionDefinition("ToDate")]
     public CqlDateTime ToDate(CqlContext context, CqlDateTime Value)
     {
         int? a_ = context.Operators.DateTimeComponentFrom(Value, "year");
@@ -576,7 +576,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("LengthOfStay")]
+    [CqlFunctionDefinition("LengthOfStay")]
     public int? LengthOfStay(CqlContext context, CqlInterval<CqlDateTime> Stay)
     {
         CqlDateTime a_ = context.Operators.Start(Stay);
@@ -587,7 +587,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservation")]
+    [CqlFunctionDefinition("HospitalizationWithObservation")]
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
@@ -795,7 +795,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservationLengthofStay")]
+    [CqlFunctionDefinition("HospitalizationWithObservationLengthofStay")]
     public int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(context, Encounter);
@@ -805,7 +805,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

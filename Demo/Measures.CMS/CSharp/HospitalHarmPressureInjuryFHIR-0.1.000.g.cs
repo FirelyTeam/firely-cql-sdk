@@ -106,7 +106,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -771,6 +771,6 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

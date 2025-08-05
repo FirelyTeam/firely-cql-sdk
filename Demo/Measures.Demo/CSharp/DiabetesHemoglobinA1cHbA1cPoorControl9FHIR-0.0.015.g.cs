@@ -111,7 +111,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -361,6 +361,6 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

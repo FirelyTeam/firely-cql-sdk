@@ -86,7 +86,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -408,7 +408,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    [CqlExpressionDefinition("Hospital Days Max 10")]
+    [CqlFunctionDefinition("Hospital Days Max 10")]
     public CqlInterval<CqlDateTime> Hospital_Days_Max_10(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         CqlDateTime a_ = context.Operators.Start(Period);
@@ -426,7 +426,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    [CqlExpressionDefinition("Days In Period")]
+    [CqlFunctionDefinition("Days In Period")]
     public IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(context, Period);
@@ -488,7 +488,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    [CqlExpressionDefinition("Interval To Day Numbers")]
+    [CqlFunctionDefinition("Interval To Day Numbers")]
     public IEnumerable<int?> Interval_To_Day_Numbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         CqlDateTime a_ = context.Operators.Start(Period);
@@ -1396,7 +1396,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    [CqlExpressionDefinition("Denominator Observations")]
+    [CqlFunctionDefinition("Denominator Observations")]
     public int? Denominator_Observations(CqlContext context, Encounter QualifyingEncounter)
     {
         int? a_()
@@ -1479,7 +1479,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    [CqlExpressionDefinition("Numerator Observations")]
+    [CqlFunctionDefinition("Numerator Observations")]
     public int? Numerator_Observations(CqlContext context, Encounter QualifyingEncounter)
     {
         int? a_()
@@ -1569,7 +1569,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

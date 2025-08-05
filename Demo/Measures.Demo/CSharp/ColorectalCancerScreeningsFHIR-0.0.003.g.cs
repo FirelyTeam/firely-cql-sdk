@@ -190,7 +190,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -1521,7 +1521,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

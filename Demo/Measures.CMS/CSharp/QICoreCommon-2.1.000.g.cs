@@ -396,7 +396,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     #endregion CodeSystems
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -408,7 +408,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isActive")]
+    [CqlFunctionDefinition("isActive")]
     [CqlTag("description", "Returns true if the given condition has a clinical status of active, recurrence, or relapse")]
     public bool? isActive(CqlContext context, Condition condition)
     {
@@ -432,7 +432,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("hasCategory")]
+    [CqlFunctionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given condition has the given category")]
     public bool? hasCategory(CqlContext context, Condition condition, CqlCode category)
     {
@@ -458,7 +458,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("hasCategory")]
+    [CqlFunctionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given observation has the given category")]
     public bool? hasCategory(CqlContext context, Observation observation, CqlCode category)
     {
@@ -484,7 +484,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isProblemListItem")]
+    [CqlFunctionDefinition("isProblemListItem")]
     [CqlTag("description", "Returns true if the given condition is a problem list item.")]
     public bool? isProblemListItem(CqlContext context, Condition condition)
     {
@@ -511,7 +511,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isEncounterDiagnosis")]
+    [CqlFunctionDefinition("isEncounterDiagnosis")]
     [CqlTag("description", "Returns true if the given condition is an encounter diagnosis")]
     public bool? isEncounterDiagnosis(CqlContext context, Condition condition)
     {
@@ -538,7 +538,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isHealthConcern")]
+    [CqlFunctionDefinition("isHealthConcern")]
     [CqlTag("description", "Returns true if the given condition is a health concern")]
     public bool? isHealthConcern(CqlContext context, Condition condition)
     {
@@ -565,7 +565,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isSocialHistory")]
+    [CqlFunctionDefinition("isSocialHistory")]
     [CqlTag("description", "Returns true if the given observation is a social history observation")]
     public bool? isSocialHistory(CqlContext context, Observation observation)
     {
@@ -592,7 +592,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isVitalSign")]
+    [CqlFunctionDefinition("isVitalSign")]
     [CqlTag("description", "Returns true if the given observation is a vital sign")]
     public bool? isVitalSign(CqlContext context, Observation observation)
     {
@@ -619,7 +619,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isImaging")]
+    [CqlFunctionDefinition("isImaging")]
     [CqlTag("description", "Returns true if the given observation is an imaging observation")]
     public bool? isImaging(CqlContext context, Observation observation)
     {
@@ -646,7 +646,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isLaboratory")]
+    [CqlFunctionDefinition("isLaboratory")]
     [CqlTag("description", "Returns true if the given observation is a laboratory observation")]
     public bool? isLaboratory(CqlContext context, Observation observation)
     {
@@ -673,7 +673,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isProcedure")]
+    [CqlFunctionDefinition("isProcedure")]
     [CqlTag("description", "REturns true if the given observation is a procedure observation")]
     public bool? isProcedure(CqlContext context, Observation observation)
     {
@@ -700,7 +700,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isSurvey")]
+    [CqlFunctionDefinition("isSurvey")]
     [CqlTag("description", "Returns true if the given observation is a survey observation")]
     public bool? isSurvey(CqlContext context, Observation observation)
     {
@@ -727,7 +727,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isExam")]
+    [CqlFunctionDefinition("isExam")]
     [CqlTag("description", "Returns true if the given observation is an exam observation")]
     public bool? isExam(CqlContext context, Observation observation)
     {
@@ -754,7 +754,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isTherapy")]
+    [CqlFunctionDefinition("isTherapy")]
     [CqlTag("description", "Returns true if the given observation is a therapy observation")]
     public bool? isTherapy(CqlContext context, Observation observation)
     {
@@ -781,7 +781,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isActivity")]
+    [CqlFunctionDefinition("isActivity")]
     [CqlTag("description", "Returns true if the given observation is an activity observation")]
     public bool? isActivity(CqlContext context, Observation observation)
     {
@@ -808,7 +808,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isCommunity")]
+    [CqlFunctionDefinition("isCommunity")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Community")]
     public bool? isCommunity(CqlContext context, MedicationRequest medicationRequest)
     {
@@ -835,7 +835,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("isDischarge")]
+    [CqlFunctionDefinition("isDischarge")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Discharge")]
     public bool? isDischarge(CqlContext context, MedicationRequest medicationRequest)
     {
@@ -862,7 +862,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("doNotPerform")]
+    [CqlFunctionDefinition("doNotPerform")]
     [CqlTag("description", "Returns true if the given DeviceRequest is a negation (i.e. do not perform this order)")]
     public bool? doNotPerform(CqlContext context, DeviceRequest deviceRequest)
     {
@@ -893,7 +893,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("ToInterval")]
+    [CqlFunctionDefinition("ToInterval")]
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types\nto an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible\nrepresentations for timing-valued elements in QICore, allowing this function to be used across any resource.\nThe input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>.\nThe intent of this function is to provide a clear and concise mechanism to treat single\nelements that have multiple possible representations as intervals so that logic doesn't have to account\nfor the variability. More complex calculations (such as medication request period or dispense period\ncalculation) need specific guidance and consideration. That guidance may make use of this function, but\nthe focus of this function is on single element calculations where the semantics are unambiguous.\nIf the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime.\nIf the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age,\nand the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later.\nIf the input is a DateTime Interval, the result is the input.\nIf the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result\nis a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending\nimmediately before one year later than the date the patient turned the age given as the end of the quantity interval.\nIf the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toInterval()` instead")]
@@ -1037,7 +1037,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("toInterval")]
+    [CqlFunctionDefinition("toInterval")]
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types\nto an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible\nrepresentations for timing-valued elements in QICore, allowing this function to be used across any resource.\nThe input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>.\nThe intent of this function is to provide a clear and concise mechanism to treat single\nelements that have multiple possible representations as intervals so that logic doesn't have to account\nfor the variability. More complex calculations (such as medication request period or dispense period\ncalculation) need specific guidance and consideration. That guidance may make use of this function, but\nthe focus of this function is on single element calculations where the semantics are unambiguous.\nIf the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime.\nIf the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age,\nand the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later.\nIf the input is a DateTime Interval, the result is the input.\nIf the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result\nis a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending\nimmediately before one year later than the date the patient turned the age given as the end of the quantity interval.\nIf the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
@@ -1180,7 +1180,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("ToAbatementInterval")]
+    [CqlFunctionDefinition("ToAbatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `abatementInterval()` instead.")]
@@ -1384,7 +1384,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("abatementInterval")]
+    [CqlFunctionDefinition("abatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
     public CqlInterval<CqlDateTime> abatementInterval(CqlContext context, Condition condition)
@@ -1587,7 +1587,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("ToPrevalenceInterval")]
+    [CqlFunctionDefinition("ToPrevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     [CqlTag("deprecated", "This function is deprecated. Use the `prevalenceInterval()` fluent function instead")]
@@ -1674,7 +1674,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("prevalenceInterval")]
+    [CqlFunctionDefinition("prevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     public CqlInterval<CqlDateTime> prevalenceInterval(CqlContext context, Condition condition)
@@ -1760,7 +1760,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("GetId")]
+    [CqlFunctionDefinition("GetId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getId()` instead")]
@@ -1773,7 +1773,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("getId")]
+    [CqlFunctionDefinition("getId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     public string getId(CqlContext context, string uri)
@@ -1785,7 +1785,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("HasStart")]
+    [CqlFunctionDefinition("HasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified\n(i.e. the start of the interval is not null and not the minimum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Uee the fluent function `hasStart()` instead")]
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
@@ -1800,7 +1800,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("hasStart")]
+    [CqlFunctionDefinition("hasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified\n(i.e. the start of the interval is not null and not the minimum DateTime value)")]
     public bool? hasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
@@ -1814,7 +1814,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("HasEnd")]
+    [CqlFunctionDefinition("HasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified\n(i.e. the end of the interval is not null and not the maximum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hasEnd()` instead")]
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
@@ -1829,7 +1829,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("hasEnd")]
+    [CqlFunctionDefinition("hasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified\n(i.e. the end of the interval is not null and not the maximum DateTime value)")]
     public bool? hasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
@@ -1843,7 +1843,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("Latest")]
+    [CqlFunctionDefinition("Latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified,\notherwise, returns the starting point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `latest()` instead")]
     public CqlDateTime Latest(CqlContext context, object choice)
@@ -1880,7 +1880,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("latest")]
+    [CqlFunctionDefinition("latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified,\notherwise, returns the starting point")]
     public CqlDateTime latest(CqlContext context, object choice)
     {
@@ -1916,7 +1916,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("Earliest")]
+    [CqlFunctionDefinition("Earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified,\notherwise, return the ending point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `earliest()` instead")]
     public CqlDateTime Earliest(CqlContext context, object choice)
@@ -1953,7 +1953,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("earliest")]
+    [CqlFunctionDefinition("earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified,\notherwise, return the ending point")]
     public CqlDateTime earliest(CqlContext context, object choice)
     {
@@ -1989,7 +1989,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("Interval To Day Numbers")]
+    [CqlFunctionDefinition("Interval To Day Numbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for\nthe final day if it is less than 24 hours. This also includes the first 24 hour period.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toDayNumbers()` instead")]
     public IEnumerable<int?> Interval_To_Day_Numbers(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2015,7 +2015,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("toDayNumbers")]
+    [CqlFunctionDefinition("toDayNumbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for\nthe final day if it is less than 24 hours. This also includes the first 24 hour period.")]
     public IEnumerable<int?> toDayNumbers(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
@@ -2040,7 +2040,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("Days In Period")]
+    [CqlFunctionDefinition("Days In Period")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is.\nNote that the result will include intervals that are closed at the beginning and open at the end")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `daysInPeriod()` instead")]
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2104,7 +2104,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    [CqlExpressionDefinition("daysInPeriod")]
+    [CqlFunctionDefinition("daysInPeriod")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is.\nNote that the result will include intervals that are closed at the beginning and open at the end")]
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
@@ -2167,7 +2167,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

@@ -6,8 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -17,61 +18,81 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibrarySetInvokerExtensions
 {
     /// <summary>
-    /// 
+    /// Retrieves definitions from the specified library set based on the provided filter criteria.
     /// </summary>
-    /// <param name="librarySetInvoker"></param>
-    /// <param name="includeDefinitionsWithParameters"></param>
-    /// <returns></returns>
+    ///
+    /// <remarks>
+    /// <para>
+    /// This method filters definitions based on the specified <paramref name="filter"/> function:
+    /// </para>
+    /// <list type="bullet">
+    /// <item><description><see cref="DefinitionPredicates.ExpressionsOnly"/> (default): Performs an exact type match on <see cref="CqlExpressionDefinitionAttribute"/>, excluding derived types such as <c>CqlFunctionDefinitionAttribute</c>.</description></item>
+    /// <item><description><see cref="DefinitionPredicates.FunctionsOnly"/>: Selects definitions where the associated <see cref="CqlDefinitionAttribute"/> is of type <see cref="CqlFunctionDefinitionAttribute"/>.</description></item>
+    /// <item><description><see cref="DefinitionPredicates.ExpressionsAndFunctions"/>: Selects definitions where the associated <see cref="CqlDefinitionAttribute"/> is of type <see cref="CqlExpressionDefinitionAttribute"/> or any derived type.</description></item>
+    /// </list>
+    /// <para>
+    /// When using <see cref="DefinitionPredicates.FunctionsOnly"/> or <see cref="DefinitionPredicates.ExpressionsAndFunctions"/>,
+    /// note that functions may have zero or more parameters, so special handling is needed when getting results by providing values to them in
+    /// <see cref="DefinitionInvokerExtensions.SelectResults"/>.
+    /// </para>
+    /// <para>
+    /// You can also provide a custom filter function to implement your own filtering logic.
+    /// </para>
+    /// </remarks>
+    ///
+    /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions to filter.</param>
+    /// <param name="filter">The filter function to apply. Defaults to <see cref="DefinitionPredicates.ExpressionsOnly"/> if not provided.</param>
+    ///
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects that match the specified filter criteria.
+    /// </returns>
     public static IEnumerable<DefinitionInvoker> SelectExpressions(
         this LibrarySetInvoker librarySetInvoker,
-        bool includeDefinitionsWithParameters = false) =>
+        DefinitionPredicate? filter = null) =>
         librarySetInvoker
             .LibraryInvokers.Values
-            .SelectMany(libraryInvoker => libraryInvoker.SelectExpressions(includeDefinitionsWithParameters));
+            .SelectMany(libraryInvoker => libraryInvoker.SelectExpressions(filter));
 
     /// <summary>
-    /// Retrieves all function definitions from the libraries within the specified <see cref="LibrarySetInvoker"/>.
+    /// Retrieves definitions from a particular library in the specified library set, matching its <paramref name="libraryIdentifier"/> and based on the provided filter criteria.
     /// </summary>
-    /// <param name="librarySetInvoker">
-    /// The <see cref="LibrarySetInvoker"/> instance containing the libraries to search for function definitions.
-    /// </param>
+    ///
+    /// <remarks>
+    /// <para>
+    /// This method filters definitions based on the specified <paramref name="filter"/> function:
+    /// </para>
+    /// <list type="bullet">
+    /// <item><description><see cref="DefinitionPredicates.ExpressionsOnly"/> (default): Performs an exact type match on <see cref="CqlExpressionDefinitionAttribute"/>, excluding derived types such as <c>CqlFunctionDefinitionAttribute</c>.</description></item>
+    /// <item><description><see cref="DefinitionPredicates.FunctionsOnly"/>: Selects definitions where the associated <see cref="CqlDefinitionAttribute"/> is of type <see cref="CqlFunctionDefinitionAttribute"/>.</description></item>
+    /// <item><description><see cref="DefinitionPredicates.ExpressionsAndFunctions"/>: Selects definitions where the associated <see cref="CqlDefinitionAttribute"/> is of type <see cref="CqlExpressionDefinitionAttribute"/> or any derived type.</description></item>
+    /// </list>
+    /// <para>
+    /// When using <see cref="DefinitionPredicates.FunctionsOnly"/> or <see cref="DefinitionPredicates.ExpressionsAndFunctions"/>,
+    /// note that functions may have zero or more parameters, so special handling is needed when getting results by providing values to them in
+    /// <see cref="DefinitionInvokerExtensions.SelectResults"/>.
+    /// </para>
+    /// <para>
+    /// You can also provide a custom filter function to implement your own filtering logic.
+    /// </para>
+    /// </remarks>
+    ///
+    /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions to filter.</param>
+    /// <param name="libraryIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> with the name of the library to select from the library set.</param>
+    /// <param name="filter">The filter function to apply. Defaults to <see cref="DefinitionPredicates.ExpressionsOnly"/> if not provided.</param>
+    ///
     /// <returns>
-    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> representing the function definitions
-    /// found in the libraries.
-    /// </returns>
-    public static IEnumerable<DefinitionInvoker> SelectFunctions(
-        this LibrarySetInvoker librarySetInvoker) =>
-        librarySetInvoker
-            .LibraryInvokers.Values
-            .SelectMany(libraryInvoker => libraryInvoker.SelectFunctions());
-
-    /// <summary>
-    /// Selects the expressions defined in the specified library from the <see cref="LibrarySetInvoker"/>.
-    /// </summary>
-    /// <param name="librarySetInvoker">
-    /// The <see cref="LibrarySetInvoker"/> containing the library invokers.
-    /// </param>
-    /// <param name="libraryIdentifier">
-    /// The identifier of the library whose expressions are to be selected.
-    /// </param>
-    /// <param name="includeDefinitionsWithParameters">
-    /// A boolean value indicating whether to include definitions that have parameters.
-    /// Defaults to <c>false</c>.
-    /// </param>
-    /// <returns>
-    /// A collection of <see cref="DefinitionInvoker"/> instances representing the selected expressions.
-    /// If the specified library is not found, an empty collection is returned.
+    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects that match the specified filter criteria.
     /// </returns>
     public static IEnumerable<DefinitionInvoker> SelectExpressionsForLibrary(
         this LibrarySetInvoker librarySetInvoker,
         CqlVersionedLibraryIdentifier libraryIdentifier,
-        bool includeDefinitionsWithParameters = false) =>
+        DefinitionPredicate? filter = null) =>
         librarySetInvoker.LibraryInvokers.TryGetValue(libraryIdentifier, out var libraryInvoker)
-            ? libraryInvoker.SelectExpressions(includeDefinitionsWithParameters)
+            ? libraryInvoker.SelectExpressions(filter)
             : [];
 
     /// <summary>
-    /// Invokes a library definition within the specified library set using the provided context, library identifier, 
+    /// Invokes a library definition within the specified library set using the provided context, library identifier,
     /// definition signature, and arguments.
     /// </summary>
     /// <param name="librarySetInvoker">

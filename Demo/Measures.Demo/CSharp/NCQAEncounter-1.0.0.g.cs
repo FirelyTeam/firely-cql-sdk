@@ -28,9 +28,9 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
     #endregion ILibrary Implementation
 
-    #region Expressions
+    #region Functions and Expressions
 
-    [CqlExpressionDefinition("Encounter Has Diagnosis")]
+    [CqlFunctionDefinition("Encounter Has Diagnosis")]
     public bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
@@ -68,7 +68,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    [CqlExpressionDefinition("Encounter Has Principal Diagnosis")]
+    [CqlFunctionDefinition("Encounter Has Principal Diagnosis")]
     public bool? Encounter_Has_Principal_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
@@ -113,7 +113,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    [CqlExpressionDefinition("Encounter Completed during Period")]
+    [CqlFunctionDefinition("Encounter Completed during Period")]
     public bool? Encounter_Completed_during_Period(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
     {
         IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Enc);
@@ -133,7 +133,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    [CqlExpressionDefinition("Finished Encounter with Telehealth POS")]
+    [CqlFunctionDefinition("Finished Encounter with Telehealth POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(CqlContext context, IEnumerable<Encounter> Encounter)
     {
         IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
@@ -154,7 +154,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    [CqlExpressionDefinition("Finished Encounter with Outpatient POS")]
+    [CqlFunctionDefinition("Finished Encounter with Outpatient POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(CqlContext context, IEnumerable<Encounter> Encounter)
     {
         IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
@@ -179,7 +179,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    [CqlExpressionDefinition("Finished Encounter with Ambulatory POS")]
+    [CqlFunctionDefinition("Finished Encounter with Ambulatory POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(CqlContext context, IEnumerable<Encounter> Encounter)
     {
         IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
@@ -200,6 +200,6 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

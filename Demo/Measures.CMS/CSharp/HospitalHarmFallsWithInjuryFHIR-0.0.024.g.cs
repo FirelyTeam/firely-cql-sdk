@@ -178,7 +178,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -2270,7 +2270,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Denominator Observation")]
+    [CqlFunctionDefinition("Denominator Observation")]
     public int? Denominator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
@@ -2282,7 +2282,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Numerator Observation")]
+    [CqlFunctionDefinition("Numerator Observation")]
     public int? Numerator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
         IEnumerable<Encounter> a_ = this.Encounter_where_a_Fall_and_Major_Injury_Occurred(context);
@@ -2303,7 +2303,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

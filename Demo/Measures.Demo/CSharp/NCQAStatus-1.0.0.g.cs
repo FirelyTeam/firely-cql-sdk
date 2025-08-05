@@ -28,7 +28,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
 
     #endregion ILibrary Implementation
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -40,7 +40,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Active Allergy")]
+    [CqlFunctionDefinition("Active Allergy")]
     public IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
     {
         bool? a_(AllergyIntolerance A)
@@ -59,7 +59,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Active Condition")]
+    [CqlFunctionDefinition("Active Condition")]
     public IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
     {
         bool? a_(Condition C)
@@ -78,7 +78,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Finished Encounter")]
+    [CqlFunctionDefinition("Finished Encounter")]
     public IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
     {
         bool? a_(Encounter E)
@@ -95,7 +95,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Completed Immunization")]
+    [CqlFunctionDefinition("Completed Immunization")]
     public IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
     {
         bool? a_(Immunization I)
@@ -112,7 +112,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Dispensed Medication")]
+    [CqlFunctionDefinition("Dispensed Medication")]
     public IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
         bool? a_(MedicationDispense M)
@@ -129,7 +129,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Active Medication")]
+    [CqlFunctionDefinition("Active Medication")]
     public IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
     {
         bool? a_(MedicationRequest M)
@@ -149,7 +149,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Completed Procedure")]
+    [CqlFunctionDefinition("Completed Procedure")]
     public IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -166,7 +166,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    [CqlExpressionDefinition("Completed or Ongoing Procedure")]
+    [CqlFunctionDefinition("Completed or Ongoing Procedure")]
     public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -187,6 +187,6 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

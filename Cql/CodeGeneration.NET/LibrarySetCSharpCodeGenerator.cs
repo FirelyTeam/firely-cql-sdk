@@ -258,42 +258,51 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private void WriteMethods()
         {
-            string lastDefinitionType = "";
+            string lastDefinitionRegion = "";
 
             // Assumption: definitions are already sorted by definition type
             foreach (var definition in Definitions)
             {
                 // Assumption: type name will be Cql....Definition
                 Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
-                string definitionType = definition.GetType().Name["Cql".Length..^"Definition".Length];
+                string definitionRegion =
+                    definition switch
+                    {
+                        // CqlFunctionDefinition is a CqlExpressionDefinition
+                        // We combine them into one region otherwise we would have too many segments switching between Function and Expression
+                        CqlExpressionDefinition => "Functions and Expressions",
 
-                if (lastDefinitionType != definitionType)
+                        // Extract the region name from the definition type name e.g. Cql[Parameter]Definition => Parameters
+                        _ => $"{definition.GetType().Name["Cql".Length..^"Definition".Length]}s"
+                    };
+
+                if (lastDefinitionRegion != definitionRegion)
                 {
-                    if (lastDefinitionType != "")
+                    if (lastDefinitionRegion != "")
                     {
                         IndentedTextWriter.WriteLine($"""
-                                                      #endregion {lastDefinitionType}s
+                                                      #endregion {lastDefinitionRegion}
 
                                                       """);
                     }
 
                     IndentedTextWriter.WriteLine($"""
-                                                  #region {definitionType}s
+                                                  #region {definitionRegion}
 
                                                   """);
                 }
 
-                lastDefinitionType = definitionType;
+                lastDefinitionRegion = definitionRegion;
 
                 var methodWriter = new DefinitionWriter(this, definition);
                 methodWriter.WriteDefinition();
                 IndentedTextWriter.WriteLine();
             }
 
-            if (lastDefinitionType != "")
+            if (lastDefinitionRegion != "")
             {
                 IndentedTextWriter.WriteLine($"""
-                                              #endregion {lastDefinitionType}s
+                                              #endregion {lastDefinitionRegion}
 
                                               """);
             }

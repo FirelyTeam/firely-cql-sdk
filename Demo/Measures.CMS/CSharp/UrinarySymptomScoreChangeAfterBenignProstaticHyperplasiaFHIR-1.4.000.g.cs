@@ -117,7 +117,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -174,7 +174,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
+    [CqlFunctionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
         bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, condition);
@@ -1079,7 +1079,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

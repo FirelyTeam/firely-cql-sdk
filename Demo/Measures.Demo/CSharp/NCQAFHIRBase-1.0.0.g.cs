@@ -28,7 +28,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
     #endregion ILibrary Implementation
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -40,7 +40,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("Normalize Onset")]
+    [CqlFunctionDefinition("Normalize Onset")]
     public CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
     {
         CqlInterval<CqlDateTime> a_()
@@ -254,7 +254,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("Normalize Abatement")]
+    [CqlFunctionDefinition("Normalize Abatement")]
     public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
     {
         CqlInterval<CqlDateTime> a_()
@@ -468,7 +468,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("Prevalence Period")]
+    [CqlFunctionDefinition("Prevalence Period")]
     public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
     {
         DataType a_ = condition?.Onset;
@@ -483,7 +483,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("Normalize Interval")]
+    [CqlFunctionDefinition("Normalize Interval")]
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_()
@@ -646,7 +646,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("GetId")]
+    [CqlFunctionDefinition("GetId")]
     public string GetId(CqlContext context, string uri)
     {
         string a_()
@@ -675,12 +675,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    [CqlExpressionDefinition("VS Cast Function")]
+    [CqlFunctionDefinition("VS Cast Function")]
     public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) =>
         VSet;
 
 
-    [CqlExpressionDefinition("First Dates per 31 Day Periods")]
+    [CqlFunctionDefinition("First Dates per 31 Day Periods")]
     public (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
     {
         CqlDate a_(CqlDate d) =>
@@ -1330,7 +1330,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

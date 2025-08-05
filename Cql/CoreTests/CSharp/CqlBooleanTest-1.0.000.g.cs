@@ -28,7 +28,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #endregion ILibrary Implementation
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context)
@@ -40,6 +40,6 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

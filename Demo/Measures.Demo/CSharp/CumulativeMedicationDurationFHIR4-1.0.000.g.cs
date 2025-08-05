@@ -189,7 +189,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -201,7 +201,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("ToDaily")]
+    [CqlFunctionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         decimal? a_()
@@ -605,7 +605,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("ToDaily")]
+    [CqlFunctionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         decimal? a_()
@@ -636,7 +636,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("MedicationRequestPeriod")]
+    [CqlFunctionDefinition("MedicationRequestPeriod")]
     public CqlInterval<CqlDateTime> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -788,7 +788,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("MedicationDispensePeriod")]
+    [CqlFunctionDefinition("MedicationDispensePeriod")]
     public CqlInterval<CqlDateTime> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -861,7 +861,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("TherapeuticDuration")]
+    [CqlFunctionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
         CqlQuantity a_ = context.Operators.Quantity(14m, "days");
@@ -870,7 +870,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("MedicationAdministrationPeriod")]
+    [CqlFunctionDefinition("MedicationAdministrationPeriod")]
     public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -925,7 +925,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("CumulativeDuration")]
+    [CqlFunctionDefinition("CumulativeDuration")]
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> Intervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_ = context.Operators.Collapse(Intervals, "day");
@@ -944,7 +944,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("RolloutIntervals")]
+    [CqlFunctionDefinition("RolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
@@ -995,7 +995,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("MedicationPeriod")]
+    [CqlFunctionDefinition("MedicationPeriod")]
     public CqlInterval<CqlDateTime> MedicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1028,7 +1028,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    [CqlExpressionDefinition("CumulativeMedicationDuration")]
+    [CqlFunctionDefinition("CumulativeMedicationDuration")]
     public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -1071,6 +1071,6 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

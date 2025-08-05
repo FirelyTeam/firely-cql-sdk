@@ -70,7 +70,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context)
@@ -193,6 +193,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

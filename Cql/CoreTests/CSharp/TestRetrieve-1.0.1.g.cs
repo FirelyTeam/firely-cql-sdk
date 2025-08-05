@@ -110,7 +110,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -144,6 +144,6 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

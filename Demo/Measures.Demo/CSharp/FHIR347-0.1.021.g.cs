@@ -203,7 +203,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -1121,6 +1121,6 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

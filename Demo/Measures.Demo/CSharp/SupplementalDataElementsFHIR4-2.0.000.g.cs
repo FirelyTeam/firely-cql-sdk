@@ -48,7 +48,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     #endregion ValueSets
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -259,7 +259,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

@@ -64,7 +64,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -482,6 +482,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

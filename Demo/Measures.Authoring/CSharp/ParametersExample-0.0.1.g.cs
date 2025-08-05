@@ -49,7 +49,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -138,6 +138,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

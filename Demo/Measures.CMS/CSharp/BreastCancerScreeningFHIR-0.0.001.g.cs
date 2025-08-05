@@ -118,7 +118,7 @@ public partial class BreastCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<Br
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -464,6 +464,6 @@ public partial class BreastCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<Br
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

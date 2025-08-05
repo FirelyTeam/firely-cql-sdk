@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
@@ -164,9 +163,9 @@ public delegate void PostInvokeDefinitionHandler(
 ///
 /// <param name="ProviderArgumentsCallback">
 /// A callback function that provides arguments for each <see cref="DefinitionInvoker"/>
-/// that have more than one parameter. When selecting definitions from SelectExpressions, the
-/// default behavior is to not include definitions with parameters, unless includeDefinitionsWithParameters
-/// was set to <c>true</c>. If this is the case, you must provide a callback to supply the arguments,
+/// that have more than one parameter. When selecting definitions using <see cref="DefinitionPredicates.ExpressionsOnly"/>, the
+/// default behavior is to not include definitions with parameters, unless <see cref="DefinitionPredicates.FunctionsOnly"/> or
+/// <see cref="DefinitionPredicates.ExpressionsAndFunctions"/> was specified. If this is the case, you must provide a callback to supply the arguments,
 /// otherwise it is not needed.
 /// </param>
 ///

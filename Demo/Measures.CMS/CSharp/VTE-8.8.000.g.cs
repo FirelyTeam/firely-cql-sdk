@@ -57,7 +57,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -141,7 +141,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
-    [CqlExpressionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
+    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);
@@ -159,7 +159,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
-    [CqlExpressionDefinition("StartOfFirstICU")]
+    [CqlFunctionDefinition("StartOfFirstICU")]
     public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
     {
         Encounter.LocationComponent a_ = CQMCommon_2_2_000.Instance.firstInpatientIntensiveCareUnit(context, Encounter);
@@ -171,7 +171,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
-    [CqlExpressionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
+    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);
@@ -187,6 +187,6 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

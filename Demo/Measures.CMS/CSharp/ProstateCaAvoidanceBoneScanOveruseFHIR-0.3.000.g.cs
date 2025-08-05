@@ -130,7 +130,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -698,6 +698,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

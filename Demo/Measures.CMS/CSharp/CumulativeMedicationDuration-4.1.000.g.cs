@@ -277,7 +277,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -289,7 +289,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("ToDaily")]
+    [CqlFunctionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         decimal? a_()
@@ -693,7 +693,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("ToDaily")]
+    [CqlFunctionDefinition("ToDaily")]
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         decimal? a_()
@@ -1282,7 +1282,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("MedicationRequestPeriod")]
+    [CqlFunctionDefinition("MedicationRequestPeriod")]
     public CqlInterval<CqlDate> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1568,14 +1568,14 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("Quantity")]
+    [CqlFunctionDefinition("Quantity")]
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) =>
         ((context.Operators.Not((bool?)(value is null))) ?? false
             ? new CqlQuantity(value, unit)
             : default);
 
 
-    [CqlExpressionDefinition("medicationRequestPeriod")]
+    [CqlFunctionDefinition("medicationRequestPeriod")]
     public CqlInterval<CqlDate> medicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1861,7 +1861,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("MedicationDispensePeriod")]
+    [CqlFunctionDefinition("MedicationDispensePeriod")]
     public CqlInterval<CqlDate> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2051,7 +2051,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("medicationDispensePeriod")]
+    [CqlFunctionDefinition("medicationDispensePeriod")]
     public CqlInterval<CqlDate> medicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
     {
         MedicationDispense[] a_ = [
@@ -2241,7 +2241,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("TherapeuticDuration")]
+    [CqlFunctionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
         CqlQuantity a_ = context.Operators.Quantity(14m, "days");
@@ -2250,7 +2250,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("MedicationAdministrationPeriod")]
+    [CqlFunctionDefinition("MedicationAdministrationPeriod")]
     public CqlInterval<CqlDate> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2310,7 +2310,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("medicationAdministrationPeriod")]
+    [CqlFunctionDefinition("medicationAdministrationPeriod")]
     public CqlInterval<CqlDate> medicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
     {
         MedicationAdministration[] a_ = [
@@ -2370,7 +2370,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("CumulativeDuration")]
+    [CqlFunctionDefinition("CumulativeDuration")]
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2402,7 +2402,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("cumulativeDuration")]
+    [CqlFunctionDefinition("cumulativeDuration")]
     public int? cumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         int? a_()
@@ -2434,7 +2434,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("RolloutIntervals")]
+    [CqlFunctionDefinition("RolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDate>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2486,7 +2486,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("rolloutIntervals")]
+    [CqlFunctionDefinition("rolloutIntervals")]
     public IEnumerable<CqlInterval<CqlDate>> rolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
@@ -2538,7 +2538,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("MedicationPeriod")]
+    [CqlFunctionDefinition("MedicationPeriod")]
     public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2565,7 +2565,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("medicationPeriod")]
+    [CqlFunctionDefinition("medicationPeriod")]
     public CqlInterval<CqlDate> medicationPeriod(CqlContext context, object medication)
     {
         CqlInterval<CqlDate> a_()
@@ -2592,7 +2592,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("CumulativeMedicationDuration")]
+    [CqlFunctionDefinition("CumulativeMedicationDuration")]
     public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -2633,7 +2633,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    [CqlExpressionDefinition("cumulativeMedicationDuration")]
+    [CqlFunctionDefinition("cumulativeMedicationDuration")]
     public int? cumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
     {
         bool? a_(object M)
@@ -2674,6 +2674,6 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

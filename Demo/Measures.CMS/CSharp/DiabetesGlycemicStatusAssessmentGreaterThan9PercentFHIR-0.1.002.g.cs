@@ -74,7 +74,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -468,7 +468,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

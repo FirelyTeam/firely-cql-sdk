@@ -126,7 +126,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -435,7 +435,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("TaskGetRequestID")]
+    [CqlFunctionDefinition("TaskGetRequestID")]
     public IEnumerable<string> TaskGetRequestID(CqlContext context, Task task)
     {
         List<ResourceReference> a_ = task?.BasedOn;
@@ -512,7 +512,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

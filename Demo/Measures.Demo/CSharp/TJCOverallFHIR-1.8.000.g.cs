@@ -118,7 +118,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -370,7 +370,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     }
 
 
-    [CqlExpressionDefinition("CalendarDayOfOrDayAfter")]
+    [CqlFunctionDefinition("CalendarDayOfOrDayAfter")]
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
@@ -383,6 +383,6 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

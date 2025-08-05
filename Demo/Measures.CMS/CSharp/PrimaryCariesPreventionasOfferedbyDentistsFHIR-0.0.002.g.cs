@@ -68,7 +68,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -267,6 +267,6 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

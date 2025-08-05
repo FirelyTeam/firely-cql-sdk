@@ -65,7 +65,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -113,6 +113,6 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

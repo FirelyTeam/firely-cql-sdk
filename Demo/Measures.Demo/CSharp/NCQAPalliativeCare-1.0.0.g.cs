@@ -62,9 +62,9 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 
     #endregion CodeSystems
 
-    #region Expressions
+    #region Functions and Expressions
 
-    [CqlExpressionDefinition("Palliative Care Overlapping Period")]
+    [CqlFunctionDefinition("Palliative Care Overlapping Period")]
     public bool? Palliative_Care_Overlapping_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
     {
         CqlValueSet a_ = this.Palliative_Care_Assessment(context);
@@ -169,6 +169,6 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

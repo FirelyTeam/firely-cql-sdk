@@ -111,7 +111,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -283,7 +283,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("getEncounter")]
+    [CqlFunctionDefinition("getEncounter")]
     public Encounter getEncounter(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Encounter> a_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -596,6 +596,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

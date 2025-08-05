@@ -132,7 +132,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -387,6 +387,6 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

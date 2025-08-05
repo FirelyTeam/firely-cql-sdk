@@ -130,7 +130,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -2639,7 +2639,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 
