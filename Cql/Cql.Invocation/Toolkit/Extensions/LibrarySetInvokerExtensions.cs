@@ -23,7 +23,7 @@ public static class LibrarySetInvokerExtensions
     ///
     /// <remarks>
     /// <para>
-    /// This method filters definitions based on the specified <paramref name="filter"/>:
+    /// This method filters definitions based on the specified <paramref name="filter"/> function:
     /// </para>
     /// <list type="bullet">
     /// <item><description><see cref="DefinitionFilter.ExpressionsOnly"/> (default): Performs an exact type match on <see cref="CqlExpressionDefinitionAttribute"/>, excluding derived types such as <c>CqlFunctionDefinitionAttribute</c>.</description></item>
@@ -35,17 +35,20 @@ public static class LibrarySetInvokerExtensions
     /// note that functions may have zero or more parameters, so special handling is needed when getting results by providing values to them in
     /// <see cref="DefinitionInvokerExtensions.SelectResults"/>.
     /// </para>
+    /// <para>
+    /// You can also provide a custom filter function to implement your own filtering logic.
+    /// </para>
     /// </remarks>
     ///
     /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions to filter.</param>
-    /// <param name="filter">The filter criteria to apply. Defaults to <see cref="DefinitionFilter.ExpressionsOnly"/>.</param>
+    /// <param name="filter">The filter function to apply. Defaults to <see cref="DefinitionFilter.ExpressionsOnly"/> if not provided.</param>
     ///
     /// <returns>
     /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects that match the specified filter criteria.
     /// </returns>
     public static IEnumerable<DefinitionInvoker> SelectExpressions(
         this LibrarySetInvoker librarySetInvoker,
-        DefinitionFilter filter = DefinitionFilter.ExpressionsOnly) =>
+        Func<DefinitionInvoker, bool>? filter = null) =>
         librarySetInvoker
             .LibraryInvokers.Values
             .SelectMany(libraryInvoker => libraryInvoker.SelectExpressions(filter));
@@ -56,7 +59,7 @@ public static class LibrarySetInvokerExtensions
     ///
     /// <remarks>
     /// <para>
-    /// This method filters definitions based on the specified <paramref name="filter"/>:
+    /// This method filters definitions based on the specified <paramref name="filter"/> function:
     /// </para>
     /// <list type="bullet">
     /// <item><description><see cref="DefinitionFilter.ExpressionsOnly"/> (default): Performs an exact type match on <see cref="CqlExpressionDefinitionAttribute"/>, excluding derived types such as <c>CqlFunctionDefinitionAttribute</c>.</description></item>
@@ -68,11 +71,14 @@ public static class LibrarySetInvokerExtensions
     /// note that functions may have zero or more parameters, so special handling is needed when getting results by providing values to them in
     /// <see cref="DefinitionInvokerExtensions.SelectResults"/>.
     /// </para>
+    /// <para>
+    /// You can also provide a custom filter function to implement your own filtering logic.
+    /// </para>
     /// </remarks>
     ///
     /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions to filter.</param>
     /// <param name="libraryIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> with the name of the library to select from the library set.</param>
-    /// <param name="filter">The filter criteria to apply. Defaults to <see cref="DefinitionFilter.ExpressionsOnly"/>.</param>
+    /// <param name="filter">The filter function to apply. Defaults to <see cref="DefinitionFilter.ExpressionsOnly"/> if not provided.</param>
     ///
     /// <returns>
     /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects that match the specified filter criteria.
@@ -80,7 +86,7 @@ public static class LibrarySetInvokerExtensions
     public static IEnumerable<DefinitionInvoker> SelectExpressionsForLibrary(
         this LibrarySetInvoker librarySetInvoker,
         CqlVersionedLibraryIdentifier libraryIdentifier,
-        DefinitionFilter filter = DefinitionFilter.ExpressionsOnly) =>
+        Func<DefinitionInvoker, bool>? filter = null) =>
         librarySetInvoker.LibraryInvokers.TryGetValue(libraryIdentifier, out var libraryInvoker)
             ? libraryInvoker.SelectExpressions(filter)
             : [];
