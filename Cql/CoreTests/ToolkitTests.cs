@@ -23,7 +23,6 @@ namespace CoreTests;
 [TestClass]
 public class InvocationToolkitTests
 {
-    /// <seealso cref="CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized"/>
     [TestMethod]
     public void TestRuntimeScopeAgainstLibraryDefinitionResults()
     {
@@ -142,10 +141,10 @@ public class InvocationToolkitTests
             """
             library TestLib version '1.0.0'
             using FHIR version '4.0.1'
-            
+
             // Expression without parameters
             define "SimpleExpression": 42
-            
+
             // Function with parameters - in this case, it gets CqlExpressionDefinitionAttribute instead of CqlFunctionDefinitionAttribute
             define function "Add"(a Integer, b Integer): a + b
             """);
@@ -156,26 +155,18 @@ public class InvocationToolkitTests
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
-        // Act & Assert: Test current behavior (includeDefinitionsWithParameters = false)
-        // Should only include expressions without parameters
-        var expressionsWithoutParams = libraryInvoker.SelectExpressions(includeDefinitionsWithParameters: false).ToList();
-        expressionsWithoutParams.Should().HaveCount(1, "Only non-parameterized expressions should be included");
-        expressionsWithoutParams[0].DefinitionName.Should().Be("SimpleExpression");
-        expressionsWithoutParams[0].ParameterTypes.Should().HaveCount(0);
+        // Act & Assert: Test for expressions
+        var expressions = libraryInvoker.SelectExpressions().ToList();
+        expressions.Should().HaveCount(1, "Only expressions should be included");
+        expressions[0].DefinitionName.Should().Be("SimpleExpression");
+        expressions[0].ParameterTypes.Should().BeEmpty();
 
-        // Act & Assert: Test fixed behavior (includeDefinitionsWithParameters = true)
+        // Act & Assert: Test for functions
         // Should include all expressions, including parameterized ones
-        var allExpressions = libraryInvoker.SelectExpressions(includeDefinitionsWithParameters: true).ToList();
-        
-        // This should now work correctly with the fix
-        allExpressions.Should().HaveCount(2, "Should include expressions with and without parameters");
-        
-        var simpleExpr = allExpressions.FirstOrDefault(e => e.DefinitionName == "SimpleExpression");
-        simpleExpr.Should().NotBeNull();
-        simpleExpr!.ParameterTypes.Should().HaveCount(0);
-        
-        var addFunc = allExpressions.FirstOrDefault(e => e.DefinitionName == "Add");
-        addFunc.Should().NotBeNull();
-        addFunc!.ParameterTypes.Should().HaveCount(2);
+        var functions = libraryInvoker.SelectFunctions().ToList();
+        functions.Should().HaveCount(1, "Only expressions should be included");
+        functions[0].DefinitionName.Should().Be("Add");
+        functions[0].ParameterTypes.Should().HaveCount(2);
+        functions[0].ParameterTypes[0].ToString().Should().Be("System.Nullable`1[System.Int32]");
     }
 }
