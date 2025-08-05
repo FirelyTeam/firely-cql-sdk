@@ -10,6 +10,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
@@ -80,14 +81,15 @@ partial class ExpressionBuilderContext
         });
 
     public void ProcessExpressionDef(
-        ExpressionDef expressionDef) =>
+        ExpressionDef expressionDef)
+    {
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            if (_operands is null)
-                throw new InvalidOperationException("Operands dictionary is null.");
-
             using (PushElement(expressionDef))
             {
+                if (_operands is null)
+                    throw new InvalidOperationException("Operands dictionary is null.");
+
                 var expressionDefName = expressionDef.name;
                 if (string.IsNullOrWhiteSpace(expressionDefName))
                 {
@@ -97,93 +99,121 @@ partial class ExpressionBuilderContext
                 }
 
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
-                Type[] functionParameterTypes = Type.EmptyTypes;
-                var parameters = new[] { CqlExpressions.ParameterExpression };
-                var function = expressionDef as FunctionDef;
-                if (function is { operand: not null })
+                Type[] parameterTypes = [];
+                ParameterExpression[] parameters = [CqlExpressions.ParameterExpression];
+
+                // Handle function definitions
+                if (expressionDef is FunctionDef { operand: { } operands, external: var isExternalFunction } functionDef)
                 {
-                    functionParameterTypes = new Type[function.operand!.Length];
-                    int i = 0;
-                    foreach (var operand in function.operand!)
+                    parameterTypes = BuildParameterTypes(operands, expressionDefName);
+                    parameters = [.. parameters, .. _operands.Values];
+
+                    if (isExternalFunction)
                     {
-                        if (operand.operandTypeSpecifier != null)
+                        HandleExternalFunction(expressionKey, functionDef, parameterTypes, expressionDefName);
+                        return;
+                    }
+
+                    // Check for duplicate function signatures
+                    var isDuplicate = _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes));
+                    if (isDuplicate)
+                    {
+                        if (_logger.IsEnabled(LogLevel.Warning))
                         {
-                            var operandType = TypeFor(operand.operandTypeSpecifier)!;
-                            var opName = NormalizeIdentifier(operand.name);
-                            var parameter = Expression.Parameter(operandType, opName);
-                            _operands.Add(operand.name, parameter);
-                            functionParameterTypes[i] = parameter.Type;
-                            i += 1;
+                            IEnumerable<string> ops = operands
+                                                      .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
+                                                      .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
+                            _logger.LogWarning(
+                                FormatMessage($"Function {expressionDefName}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
                         }
-                        else
-                            throw this.NewExpressionBuildingException(
-                                $"Operand for function {expressionDefName} is missing its {nameof(operand.operandTypeSpecifier)} property",
-                                null);
-                    }
-
-                    parameters = [..parameters, .._operands.Values];
-
-                    if (function?.external ?? false)
-                    {
-                        if (_expressionBuilderSettings.AllowUnresolvedExternals)
-                        {
-                            var returnType = TypeFor(expressionDef)!;
-                            var funcOps = function.operand ?? [];
-                            var @params = new (string name, Type type)[funcOps.Length + 1];
-                            @params[0] = ("context", CqlExpressions.ParameterExpression.Type);
-                            for (int o = 0; o < funcOps.Length; o++)
-                                @params[o + 1] = (funcOps[o].name, functionParameterTypes[o]);
-                            var notImplemented = NotImplemented(expressionKey, @params, returnType);
-                            var paramTypes = @params.Select(p => p.type).ToArray();
-                            var definition = new CqlFunctionDefinition(notImplemented, expressionDefName);
-                            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, paramTypes), definition);
-                            _logger.LogWarning(FormatMessage(
-                                                   $"Function '{expressionDefName}' is declared external, but it was not defined in the expression scope. " +
-                                                   "A stub has been created that throws a NotImplemented exception."), expressionDef);
-                            return;
-                        }
-
-                        throw this.NewExpressionBuildingException(
-                            $"{expressionKey} is declared external, but it was not defined in the expression scope.");
+                        return;
                     }
                 }
 
-                if (function?.operand != null &&
-                    _libraryContext.LibraryDefinitions.ContainsDefinition(_libraryContext.LibraryVersionedIdentifier,
-                                                                          new(expressionDefName, functionParameterTypes)))
-                {
-                    var ops = function.operand
-                                      .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
-                                      .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-                    _logger.LogWarning(
-                        FormatMessage(
-                            $"Function {expressionDefName}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
-                }
-                else
-                {
-                    var bodyExpression = TranslateArg(expressionDef.expression);
-                    var lambda = Expression.Lambda(bodyExpression, parameters);
-
-                    (string name, string[] values)[] tags = [];
-                    if (expressionDef.annotation is { Length: > 0 } annotations)
-                    {
-                        tags = annotations
-                               .OfType<Annotation>()
-                               .SelectMany(a => a.t ?? [])
-                               .SelectWhere(tag => string.IsNullOrWhiteSpace(tag?.name)
-                                                       ? default
-                                                       : (true, (name: tag.name!, values: (string[]) [tag.value ?? ""])))
-                               .ToArray();
-                    }
-
-                    var def = function is not null
-                        ? new CqlFunctionDefinition(lambda, expressionDefName, tags)
-                        : new CqlExpressionDefinition(lambda, expressionDefName, tags);
-                    Type[] signature = functionParameterTypes ?? [];
-                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, signature), def);
-                }
+                CreateAndAddDefinition(expressionDefName, parameters, parameterTypes);
             }
         });
+
+        (string name, string[] values)[] BuildTags()
+        {
+            (string name, string[] values)[] valueTuples = [];
+            if (expressionDef.annotation is { Length: > 0 } annotations)
+            {
+                valueTuples = annotations
+                              .OfType<Annotation>()
+                              .SelectMany(a => a.t ?? [])
+                              .SelectWhere(tag => string.IsNullOrWhiteSpace(tag?.name)
+                                                      ? default
+                                                      : (true, (name: tag.name!, values: (string[])[tag.value ?? ""])))
+                              .ToArray();
+            }
+            return valueTuples;
+        }
+
+        void HandleExternalFunction(
+            string expressionKey,
+            FunctionDef function,
+            Type[] parameterTypes,
+            string expressionDefName)
+        {
+            if (!_expressionBuilderSettings.AllowUnresolvedExternals)
+                throw this.NewExpressionBuildingException(
+                    $"{expressionKey} is declared external, but it was not defined in the expression scope.");
+
+            var returnType = TypeFor(expressionDef)!;
+            var operands = function.operand ?? [];
+            (string name, Type type)[] paramNamesAndTypes = new (string name, Type type)[operands.Length + 1];
+            paramNamesAndTypes[0] = ("context", CqlExpressions.ParameterExpression.Type);
+            for (int o = 0; o < operands.Length; o++)
+                paramNamesAndTypes[o + 1] = (operands[o].name, parameterTypes[o]);
+            var notImplemented = NotImplemented(expressionKey, paramNamesAndTypes, returnType);
+            var paramTypes = paramNamesAndTypes.Select(p => p.type).ToArray();
+            var definition = new CqlFunctionDefinition(notImplemented, expressionDefName);
+            var definitionSignature = new DefinitionSignature(expressionDefName, paramTypes);
+            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, definitionSignature, definition);
+
+            if (_logger.IsEnabled(LogLevel.Warning))
+                _logger.LogWarning(
+                    FormatMessage(
+                        $"Function '{expressionDefName}' is declared external, but it was not defined in the expression scope. " +
+                        "A stub has been created that throws a NotImplemented exception."), expressionDef);
+        }
+
+        Type[] BuildParameterTypes(OperandDef[] operandDefs, string expressionDefName)
+        {
+            var parameterTypes = new Type[operandDefs.Length];
+            int i = 0;
+            foreach (var operandDef in operandDefs)
+            {
+                if (operandDef.operandTypeSpecifier is null)
+                    throw this.NewExpressionBuildingException(
+                        $"Operand for function {expressionDefName} is missing its {nameof(operandDef.operandTypeSpecifier)} property",
+                        null);
+
+                var operandType = TypeFor(operandDef.operandTypeSpecifier)!;
+                var opName = NormalizeIdentifier(operandDef.name);
+                var parameter = Expression.Parameter(operandType, opName);
+                _operands.Add(operandDef.name, parameter);
+                parameterTypes[i++] = parameter.Type;
+            }
+
+            return parameterTypes;
+        }
+
+        void CreateAndAddDefinition(
+            string expressionDefName,
+            ParameterExpression[] parameters,
+            Type[] parameterTypes)
+        {
+            var bodyExpression = TranslateArg(expressionDef.expression);
+            var lambda = Expression.Lambda(bodyExpression, parameters);
+            var tags = BuildTags();
+            var def = expressionDef is FunctionDef
+                          ? new CqlFunctionDefinition(lambda, expressionDefName, tags)
+                          : new CqlExpressionDefinition(lambda, expressionDefName, tags);
+            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
+        }
+    }
 
     public void ProcessIncludes(
         IncludeDef includeDef) =>
