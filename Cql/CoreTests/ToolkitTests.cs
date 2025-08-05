@@ -165,15 +165,15 @@ public class InvocationToolkitTests
 
         // Act & Assert: Test for functions
         // Should include all expressions, including parameterized ones
-        var functions = libraryInvoker.SelectFunctions().ToList();
-        functions.Should().HaveCount(1, "Only expressions should be included");
+        var functions = libraryInvoker.SelectExpressions(DefinitionFilter.FunctionsOnly).ToList();
+        functions.Should().HaveCount(1, "Only functions should be included");
         functions[0].DefinitionName.Should().Be("Add");
         functions[0].ParameterTypes.Should().HaveCount(2);
         functions[0].ParameterTypes[0].ToString().Should().Be("System.Nullable`1[System.Int32]");
     }
 
     [TestMethod]
-    public void TestSelectExpressionsAndFunctions()
+    public void TestSelectExpressions_DefinitionFilter()
     {
         // Arrange: Create a CQL library with various definition types
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -206,7 +206,7 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get expressions and functions using the new method
-        var expressionsAndFunctions = libraryInvoker.SelectExpressionsAndFunctions()
+        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions)
             .Where(d => d.DefinitionName != "Patient") // Filter out the automatic Patient context definition
             .ToList();
 
@@ -241,7 +241,7 @@ public class InvocationToolkitTests
     }
 
     [TestMethod]
-    public void TestSelectExpressionsAndFunctions_EmptyLibrary()
+    public void TestSelectExpressions_EmptyLibrary()
     {
         // Arrange: Use an existing simple library  
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -260,7 +260,7 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get all definitions, then filter to check what we get
-        var allDefinitions = libraryInvoker.SelectExpressionsAndFunctions().ToList();
+        var allDefinitions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions).ToList();
         var expressionsAndFunctions = allDefinitions.Where(d => d.DefinitionName != "Patient").ToList();
 
         // Assert - should have only our SimpleExpression
@@ -269,7 +269,7 @@ public class InvocationToolkitTests
     }
 
     [TestMethod]
-    public void TestSelectExpressionsAndFunctions_ComparedToIndividualMethods()
+    public void TestSelectExpressions_ComparedToIndividualFilters()
     {
         // Arrange: Create a CQL library with mixed definition types
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -290,9 +290,9 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act
-        var expressionsAndFunctions = libraryInvoker.SelectExpressionsAndFunctions().ToList();
+        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions).ToList();
         var expressions = libraryInvoker.SelectExpressions().ToList();
-        var functions = libraryInvoker.SelectFunctions().ToList();
+        var functions = libraryInvoker.SelectExpressions(DefinitionFilter.FunctionsOnly).ToList();
 
         // Assert: SelectExpressionsAndFunctions should return the union of expressions and functions
         var expectedCount = expressions.Count + functions.Count;
