@@ -165,7 +165,7 @@ public class InvocationToolkitTests
 
         // Act & Assert: Test for functions
         // Should include all expressions, including parameterized ones
-        var functions = libraryInvoker.SelectExpressions(DefinitionFilter.FunctionsOnly).ToList();
+        var functions = libraryInvoker.SelectExpressions(DefinitionPredicates.FunctionsOnly).ToList();
         functions.Should().HaveCount(1, "Only functions should be included");
         functions[0].DefinitionName.Should().Be("Add");
         functions[0].ParameterTypes.Should().HaveCount(2);
@@ -206,7 +206,7 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get expressions and functions using the new method
-        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions)
+        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions)
             .Where(d => d.DefinitionName != "Patient") // Filter out the automatic Patient context definition
             .ToList();
 
@@ -260,7 +260,7 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get all definitions, then filter to check what we get
-        var allDefinitions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions).ToList();
+        var allDefinitions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions).ToList();
         var expressionsAndFunctions = allDefinitions.Where(d => d.DefinitionName != "Patient").ToList();
 
         // Assert - should have only our SimpleExpression
@@ -290,9 +290,9 @@ public class InvocationToolkitTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act
-        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionFilter.ExpressionsAndFunctions).ToList();
+        var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions).ToList();
         var expressions = libraryInvoker.SelectExpressions().ToList();
-        var functions = libraryInvoker.SelectExpressions(DefinitionFilter.FunctionsOnly).ToList();
+        var functions = libraryInvoker.SelectExpressions(DefinitionPredicates.FunctionsOnly).ToList();
 
         // Assert: SelectExpressionsAndFunctions should return the union of expressions and functions
         var expectedCount = expressions.Count + functions.Count;
