@@ -141,7 +141,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
     #endregion CodeSystems
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -153,7 +153,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    [CqlExpressionDefinition("CT Scan Qualifies")]
+    [CqlFunctionDefinition("CT Scan Qualifies")]
     public bool? CT_Scan_Qualifies(CqlContext context, Observation Obs)
     {
         CqlCode a_ = this.Abdomen_and_Pelvis_Low_Dose(context);
@@ -237,7 +237,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    [CqlExpressionDefinition("Qualifies")]
+    [CqlFunctionDefinition("Qualifies")]
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
     {
         DataType a_ = Obs?.Value;
@@ -255,7 +255,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    [CqlExpressionDefinition("Global Noise Value")]
+    [CqlFunctionDefinition("Global Noise Value")]
     public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
     {
         List<Observation.ComponentComponent> a_ = Obs?.Component;
@@ -291,7 +291,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    [CqlExpressionDefinition("Size Adjusted Value")]
+    [CqlFunctionDefinition("Size Adjusted Value")]
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
     {
         List<Observation.ComponentComponent> a_ = Obs?.Component;
@@ -327,6 +327,6 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

@@ -311,7 +311,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -440,7 +440,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    [CqlExpressionDefinition("moreThanOneOrder")]
+    [CqlFunctionDefinition("moreThanOneOrder")]
     public IEnumerable<MedicationRequest> moreThanOneOrder(CqlContext context, IEnumerable<MedicationRequest> Medication)
     {
         IEnumerable<MedicationRequest> a_ = Status_1_8_000.Instance.isMedicationOrder(context, Medication);
@@ -1088,7 +1088,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    [CqlExpressionDefinition("MedicationRequestPeriodInDays")]
+    [CqlFunctionDefinition("MedicationRequestPeriodInDays")]
     public decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -1227,7 +1227,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    [CqlExpressionDefinition("averageDailyDose")]
+    [CqlFunctionDefinition("averageDailyDose")]
     public CqlQuantity averageDailyDose(CqlContext context, MedicationRequest MedicationRequest)
     {
         MedicationRequest[] a_ = [
@@ -1288,7 +1288,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    [CqlExpressionDefinition("MedicationStrengthPerUnit")]
+    [CqlFunctionDefinition("MedicationStrengthPerUnit")]
     public CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
     {
         CqlQuantity a_()
@@ -1930,6 +1930,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

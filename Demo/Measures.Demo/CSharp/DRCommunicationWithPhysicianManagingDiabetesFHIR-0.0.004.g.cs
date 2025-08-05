@@ -142,7 +142,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -262,7 +262,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     }
 
 
-    [CqlExpressionDefinition("GetModifierExtension")]
+    [CqlFunctionDefinition("GetModifierExtension")]
     public Extension GetModifierExtension(CqlContext context, DomainResource domainResource, string url)
     {
         IEnumerable<Extension> a_ = this.GetModifierExtensions(context, domainResource, url);
@@ -272,7 +272,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     }
 
 
-    [CqlExpressionDefinition("GetModifierExtensions")]
+    [CqlFunctionDefinition("GetModifierExtensions")]
     public IEnumerable<Extension> GetModifierExtensions(CqlContext context, DomainResource domainResource, string url)
     {
         List<Extension> a_ = domainResource?.ModifierExtension;
@@ -827,6 +827,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

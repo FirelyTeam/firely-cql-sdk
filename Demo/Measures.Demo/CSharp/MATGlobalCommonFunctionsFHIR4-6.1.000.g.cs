@@ -242,7 +242,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -254,7 +254,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("LengthInDays")]
+    [CqlFunctionDefinition("LengthInDays")]
     public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
     {
         CqlDateTime a_ = context.Operators.Start(Value);
@@ -294,7 +294,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("ED Visit")]
+    [CqlFunctionDefinition("ED Visit")]
     public Encounter ED_Visit(CqlContext context, Encounter TheEncounter)
     {
         CqlValueSet a_ = this.Emergency_Department_Visit(context);
@@ -340,7 +340,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospitalization")]
+    [CqlFunctionDefinition("Hospitalization")]
     public CqlInterval<CqlDateTime> Hospitalization(CqlContext context, Encounter TheEncounter)
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
@@ -382,7 +382,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospitalization Locations")]
+    [CqlFunctionDefinition("Hospitalization Locations")]
     public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(CqlContext context, Encounter TheEncounter)
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
@@ -423,7 +423,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospitalization Length of Stay")]
+    [CqlFunctionDefinition("Hospitalization Length of Stay")]
     public int? Hospitalization_Length_of_Stay(CqlContext context, Encounter TheEncounter)
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
@@ -433,7 +433,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospital Admission Time")]
+    [CqlFunctionDefinition("Hospital Admission Time")]
     public CqlDateTime Hospital_Admission_Time(CqlContext context, Encounter TheEncounter)
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
@@ -443,7 +443,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospital Discharge Time")]
+    [CqlFunctionDefinition("Hospital Discharge Time")]
     public CqlDateTime Hospital_Discharge_Time(CqlContext context, Encounter TheEncounter)
     {
         Period a_ = TheEncounter?.Period;
@@ -454,7 +454,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Hospital Arrival Time")]
+    [CqlFunctionDefinition("Hospital Arrival Time")]
     public CqlDateTime Hospital_Arrival_Time(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
@@ -476,7 +476,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservation")]
+    [CqlFunctionDefinition("HospitalizationWithObservation")]
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
@@ -684,7 +684,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Normalize Interval")]
+    [CqlFunctionDefinition("Normalize Interval")]
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_()
@@ -834,7 +834,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Normalize Abatement")]
+    [CqlFunctionDefinition("Normalize Abatement")]
     public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1042,7 +1042,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Prevalence Period")]
+    [CqlFunctionDefinition("Prevalence Period")]
     public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
     {
         CqlInterval<CqlDateTime> a_()
@@ -1095,7 +1095,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetId")]
+    [CqlFunctionDefinition("GetId")]
     public string GetId(CqlContext context, string uri)
     {
         IEnumerable<string> a_ = context.Operators.Split(uri, "/");
@@ -1105,7 +1105,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("EncounterDiagnosis")]
+    [CqlFunctionDefinition("EncounterDiagnosis")]
     public IEnumerable<Condition> EncounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
@@ -1136,7 +1136,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetCondition")]
+    [CqlFunctionDefinition("GetCondition")]
     public Condition GetCondition(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -1158,7 +1158,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("PresentOnAdmissionIndicator")]
+    [CqlFunctionDefinition("PresentOnAdmissionIndicator")]
     public CodeableConcept PresentOnAdmissionIndicator(CqlContext context, Element element)
     {
         Extension a_ = this.GetExtension(context, element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -1168,7 +1168,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetExtension")]
+    [CqlFunctionDefinition("GetExtension")]
     public Extension GetExtension(CqlContext context, DomainResource domainResource, string url)
     {
         IEnumerable<Extension> a_ = this.GetExtensions(context, domainResource, url);
@@ -1178,7 +1178,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetExtension")]
+    [CqlFunctionDefinition("GetExtension")]
     public Extension GetExtension(CqlContext context, Element element, string url)
     {
         IEnumerable<Extension> a_ = this.GetExtensions(context, element, url);
@@ -1188,7 +1188,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetExtensions")]
+    [CqlFunctionDefinition("GetExtensions")]
     public IEnumerable<Extension> GetExtensions(CqlContext context, DomainResource domainResource, string url)
     {
         List<Extension> a_ = domainResource?.Extension;
@@ -1212,7 +1212,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetExtensions")]
+    [CqlFunctionDefinition("GetExtensions")]
     public IEnumerable<Extension> GetExtensions(CqlContext context, Element element, string url)
     {
         List<Extension> a_ = element?.Extension;
@@ -1235,7 +1235,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("PrincipalDiagnosis")]
+    [CqlFunctionDefinition("PrincipalDiagnosis")]
     public Condition PrincipalDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
@@ -1281,7 +1281,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetLocation")]
+    [CqlFunctionDefinition("GetLocation")]
     public Location GetLocation(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
@@ -1303,7 +1303,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetBaseExtensions")]
+    [CqlFunctionDefinition("GetBaseExtensions")]
     public IEnumerable<Extension> GetBaseExtensions(CqlContext context, DomainResource domainResource, string url)
     {
         List<Extension> a_ = domainResource?.Extension;
@@ -1327,7 +1327,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetBaseExtension")]
+    [CqlFunctionDefinition("GetBaseExtension")]
     public Extension GetBaseExtension(CqlContext context, DomainResource domainResource, string url)
     {
         IEnumerable<Extension> a_ = this.GetBaseExtensions(context, domainResource, url);
@@ -1337,7 +1337,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("BaseExtensions")]
+    [CqlFunctionDefinition("BaseExtensions")]
     [CqlTag("description", "Returns any base-FHIR extensions defined on the given element with the specified id.")]
     [CqlTag("comment", "NOTE: Extensions are not the preferred approach, but are used as a way to access\ncontent that is defined by extensions but not yet surfaced in the CQL model info.")]
     public IEnumerable<Extension> BaseExtensions(CqlContext context, Element element, string id)
@@ -1363,7 +1363,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("BaseExtension")]
+    [CqlFunctionDefinition("BaseExtension")]
     [CqlTag("description", "Returns the single base-FHIR extension (if present) on the given element with the specified id.")]
     [CqlTag("comment", "This function uses singleton from to ensure that a run-time exception is thrown if there\nis more than one extension on the given resource with the specified url.")]
     public Extension BaseExtension(CqlContext context, Element element, string id)
@@ -1375,7 +1375,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("GetMedicationCode")]
+    [CqlFunctionDefinition("GetMedicationCode")]
     public CodeableConcept GetMedicationCode(CqlContext context, MedicationRequest request)
     {
         CodeableConcept a_()
@@ -1420,7 +1420,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("HasStart")]
+    [CqlFunctionDefinition("HasStart")]
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
@@ -1433,7 +1433,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("HasEnd")]
+    [CqlFunctionDefinition("HasEnd")]
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
@@ -1446,7 +1446,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Latest")]
+    [CqlFunctionDefinition("Latest")]
     public CqlDateTime Latest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(context, choice);
@@ -1481,7 +1481,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    [CqlExpressionDefinition("Earliest")]
+    [CqlFunctionDefinition("Earliest")]
     public CqlDateTime Earliest(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(context, choice);
@@ -1516,6 +1516,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

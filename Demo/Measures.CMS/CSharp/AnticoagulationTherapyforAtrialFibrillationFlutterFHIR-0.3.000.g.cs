@@ -92,7 +92,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -626,6 +626,6 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

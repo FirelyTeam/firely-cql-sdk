@@ -90,7 +90,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -128,7 +128,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("ToDateInterval")]
+    [CqlFunctionDefinition("ToDateInterval")]
     [CqlTag("description", "Returns an interval of date values extracted from the input interval of date-time values")]
     [CqlTag("comment", "This function returns an interval constructed using the `date from` extractor on the start\nand end values of the input date-time interval. Note that using a precision specifier such as `day of`\nas part of a timing phrase is preferred to communicate intent to perform day-level comparison, as well\nas for general readability.")]
     public CqlInterval<CqlDate> ToDateInterval(CqlContext context, CqlInterval<CqlDateTime> period)
@@ -143,7 +143,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("LengthInDays")]
+    [CqlFunctionDefinition("LengthInDays")]
     [CqlTag("description", "Calculates the difference in calendar days between the start and end of the given interval.")]
     [CqlTag("deprecated", "This function in deprecated. Use the fluent function `lengthInDays()` instead.")]
     public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
@@ -156,7 +156,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("lengthInDays")]
+    [CqlFunctionDefinition("lengthInDays")]
     [CqlTag("description", "Calculates the difference in calendar days between the start and end of the given interval.")]
     public int? lengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
     {
@@ -168,7 +168,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("ED Visit")]
+    [CqlFunctionDefinition("ED Visit")]
     [CqlTag("description", "Returns the most recent emergency department visit, if any, that occurs 1 hour or less prior to the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `edVisit()` instead.")]
     public Encounter ED_Visit(CqlContext context, Encounter TheEncounter)
@@ -217,7 +217,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("edVisit")]
+    [CqlFunctionDefinition("edVisit")]
     [CqlTag("description", "Returns the most recent emergency department visit, if any, that occurs 1 hour or less prior to the given encounter.")]
     public Encounter edVisit(CqlContext context, Encounter TheEncounter)
     {
@@ -265,7 +265,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospitalization")]
+    [CqlFunctionDefinition("Hospitalization")]
     [CqlTag("description", "Hospitalization returns the total interval for admission to discharge for the given encounter, or for the admission of any immediately prior emergency department visit to the discharge of the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalization()` instead.")]
     public CqlInterval<CqlDateTime> Hospitalization(CqlContext context, Encounter TheEncounter)
@@ -309,7 +309,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalization")]
+    [CqlFunctionDefinition("hospitalization")]
     [CqlTag("description", "Hospitalization returns the total interval for admission to discharge for the given encounter, or for the admission of any immediately prior emergency department visit to the discharge of the given encounter.")]
     public CqlInterval<CqlDateTime> hospitalization(CqlContext context, Encounter TheEncounter)
     {
@@ -352,7 +352,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospitalization Locations")]
+    [CqlFunctionDefinition("Hospitalization Locations")]
     [CqlTag("description", "Returns list of all locations within an encounter, including locations for immediately prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationLocations()` instead.")]
     public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(CqlContext context, Encounter TheEncounter)
@@ -395,7 +395,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalizationLocations")]
+    [CqlFunctionDefinition("hospitalizationLocations")]
     [CqlTag("description", "Returns list of all locations within an encounter, including locations for immediately prior ED visit.")]
     public IEnumerable<Encounter.LocationComponent> hospitalizationLocations(CqlContext context, Encounter TheEncounter)
     {
@@ -437,7 +437,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospitalization Length of Stay")]
+    [CqlFunctionDefinition("Hospitalization Length of Stay")]
     [CqlTag("description", "Returns the length of stay in days (i.e. the number of days between admission and discharge) for the given encounter, or from the admission of any immediately prior emergency department visit to the discharge of the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationLengthOfStay()` instead.")]
     public int? Hospitalization_Length_of_Stay(CqlContext context, Encounter TheEncounter)
@@ -449,7 +449,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalizationLengthOfStay")]
+    [CqlFunctionDefinition("hospitalizationLengthOfStay")]
     [CqlTag("description", "Returns the length of stay in days (i.e. the number of days between admission and discharge) for the given encounter, or from the admission of any immediately prior emergency department visit to the discharge of the encounter")]
     public int? hospitalizationLengthOfStay(CqlContext context, Encounter TheEncounter)
     {
@@ -460,7 +460,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospital Admission Time")]
+    [CqlFunctionDefinition("Hospital Admission Time")]
     [CqlTag("description", "Returns admission time for an encounter or for immediately prior emergency department visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalAdmissionTime()` instead.")]
     public CqlDateTime Hospital_Admission_Time(CqlContext context, Encounter TheEncounter)
@@ -472,7 +472,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalAdmissionTime")]
+    [CqlFunctionDefinition("hospitalAdmissionTime")]
     [CqlTag("description", "Returns admission time for an encounter or for immediately prior emergency department visit.")]
     public CqlDateTime hospitalAdmissionTime(CqlContext context, Encounter TheEncounter)
     {
@@ -483,7 +483,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospital Discharge Time")]
+    [CqlFunctionDefinition("Hospital Discharge Time")]
     [CqlTag("description", "Hospital Discharge Time returns the discharge time for an encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalDischargeTime()` instead.")]
     public CqlDateTime Hospital_Discharge_Time(CqlContext context, Encounter TheEncounter)
@@ -496,7 +496,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalDischargeTime")]
+    [CqlFunctionDefinition("hospitalDischargeTime")]
     [CqlTag("description", "Hospital Discharge Time returns the discharge time for an encounter")]
     public CqlDateTime hospitalDischargeTime(CqlContext context, Encounter TheEncounter)
     {
@@ -508,7 +508,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospital Arrival Time")]
+    [CqlFunctionDefinition("Hospital Arrival Time")]
     [CqlTag("description", "Returns earliest arrival time for an encounter including any prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalArrivalTime()` instead.")]
     public CqlDateTime Hospital_Arrival_Time(CqlContext context, Encounter TheEncounter)
@@ -532,7 +532,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalArrivalTime")]
+    [CqlFunctionDefinition("hospitalArrivalTime")]
     [CqlTag("description", "Returns earliest arrival time for an encounter including any prior ED visit.")]
     public CqlDateTime hospitalArrivalTime(CqlContext context, Encounter TheEncounter)
     {
@@ -555,7 +555,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Hospital Departure Time")]
+    [CqlFunctionDefinition("Hospital Departure Time")]
     [CqlTag("description", "Returns the latest departure time for encounter including any prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalDepartureTime()` instead.")]
     public CqlDateTime Hospital_Departure_Time(CqlContext context, Encounter TheEncounter)
@@ -579,7 +579,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalDepartureTime")]
+    [CqlFunctionDefinition("hospitalDepartureTime")]
     [CqlTag("description", "Returns the latest departure time for encounter including any prior ED visit.")]
     public CqlDateTime hospitalDepartureTime(CqlContext context, Encounter TheEncounter)
     {
@@ -602,7 +602,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("Emergency Department Arrival Time")]
+    [CqlFunctionDefinition("Emergency Department Arrival Time")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
     public CqlDateTime Emergency_Department_Arrival_Time(CqlContext context, Encounter TheEncounter)
     {
@@ -634,7 +634,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("GetLocation")]
+    [CqlFunctionDefinition("GetLocation")]
     [CqlTag("description", "Returns the Location resource specified by the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getLocation()` instead.")]
     public Location GetLocation(CqlContext context, ResourceReference reference)
@@ -658,7 +658,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("emergencyDepartmentArrivalTime")]
+    [CqlFunctionDefinition("emergencyDepartmentArrivalTime")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
     public CqlDateTime emergencyDepartmentArrivalTime(CqlContext context, Encounter TheEncounter)
     {
@@ -690,7 +690,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservationAndOutpatientSurgeryService")]
+    [CqlFunctionDefinition("HospitalizationWithObservationAndOutpatientSurgeryService")]
     [CqlTag("description", "Hospitalization with Observation and Outpatient Surgery Service returns the total interval from the start of any immediately prior emergency department visit, outpatient surgery visit or observation visit to the discharge of the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservationAndOutpatientSurgeryService()` instead.")]
     public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
@@ -1582,7 +1582,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalizationWithObservationAndOutpatientSurgeryService")]
+    [CqlFunctionDefinition("hospitalizationWithObservationAndOutpatientSurgeryService")]
     [CqlTag("description", "Hospitalization with Observation and Outpatient Surgery Service returns the total interval from the start of any immediately prior emergency department visit, outpatient surgery visit or observation visit to the discharge of the given encounter.")]
     public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
     {
@@ -2473,7 +2473,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservation")]
+    [CqlFunctionDefinition("HospitalizationWithObservation")]
     [CqlTag("description", "Hospitalization with Observation returns the total interval from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservation()` instead.")]
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
@@ -2708,7 +2708,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalizationWithObservation")]
+    [CqlFunctionDefinition("hospitalizationWithObservation")]
     [CqlTag("description", "Hospitalization with Observation returns the total interval from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     public CqlInterval<CqlDateTime> hospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
@@ -2942,7 +2942,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("HospitalizationWithObservationLengthofStay")]
+    [CqlFunctionDefinition("HospitalizationWithObservationLengthofStay")]
     [CqlTag("description", "Hospitalization with Observation Length of Stay returns the length in days from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservationLengthofStay()` instead.")]
     public int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter TheEncounter)
@@ -2954,7 +2954,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("hospitalizationWithObservationLengthofStay")]
+    [CqlFunctionDefinition("hospitalizationWithObservationLengthofStay")]
     [CqlTag("description", "Hospitalization with Observation Length of Stay returns the length in days from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     public int? hospitalizationWithObservationLengthofStay(CqlContext context, Encounter TheEncounter)
     {
@@ -2965,7 +2965,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("FirstInpatientIntensiveCareUnit")]
+    [CqlFunctionDefinition("FirstInpatientIntensiveCareUnit")]
     [CqlTag("description", "First Inpatient Intensive Care Unit returns the first intensive care unit for the given encounter, without considering any immediately prior emergency department visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `firstInpatientIntensiveCareUnit()` instead.")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
@@ -3010,7 +3010,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("firstInpatientIntensiveCareUnit")]
+    [CqlFunctionDefinition("firstInpatientIntensiveCareUnit")]
     [CqlTag("description", "First Inpatient Intensive Care Unit returns the first intensive care unit for the given encounter, without considering any immediately prior emergency department visit.")]
     public Encounter.LocationComponent firstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
     {
@@ -3054,7 +3054,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("EncounterDiagnosis")]
+    [CqlFunctionDefinition("EncounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resource referenced by the `diagnosis.condition` element of the Encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `encounterDiagnosis()` instead.")]
     public IEnumerable<Condition> EncounterDiagnosis(CqlContext context, Encounter Encounter)
@@ -3087,7 +3087,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("encounterDiagnosis")]
+    [CqlFunctionDefinition("encounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resources referenced by the diagnosis element of the Encounter")]
     public IEnumerable<Condition> encounterDiagnosis(CqlContext context, Encounter Encounter)
     {
@@ -3119,7 +3119,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("GetCondition")]
+    [CqlFunctionDefinition("GetCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getCondition()` instead")]
     public Condition GetCondition(CqlContext context, ResourceReference reference)
@@ -3143,7 +3143,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("getCondition")]
+    [CqlFunctionDefinition("getCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
     public Condition getCondition(CqlContext context, ResourceReference reference)
     {
@@ -3166,7 +3166,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("PrincipalDiagnosis")]
+    [CqlFunctionDefinition("PrincipalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `principalDiagnosis()` instead.")]
     public Condition PrincipalDiagnosis(CqlContext context, Encounter Encounter)
@@ -3215,7 +3215,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("principalDiagnosis")]
+    [CqlFunctionDefinition("principalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
     public Condition principalDiagnosis(CqlContext context, Encounter Encounter)
     {
@@ -3263,7 +3263,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("getLocation")]
+    [CqlFunctionDefinition("getLocation")]
     [CqlTag("description", "Returns the Location resource specified by the given reference.")]
     public Location getLocation(CqlContext context, ResourceReference reference)
     {
@@ -3286,7 +3286,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("GetMedicationCode")]
+    [CqlFunctionDefinition("GetMedicationCode")]
     [CqlTag("description", "Returns the medication code for the given MedicationRequest")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getMedicationCode()` instead.")]
     public CqlConcept GetMedicationCode(CqlContext context, MedicationRequest request)
@@ -3337,7 +3337,7 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    [CqlExpressionDefinition("getMedicationCode")]
+    [CqlFunctionDefinition("getMedicationCode")]
     [CqlTag("description", "Returns the medication code for the given MedicationRequest")]
     public CqlConcept getMedicationCode(CqlContext context, MedicationRequest request)
     {
@@ -3387,6 +3387,6 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

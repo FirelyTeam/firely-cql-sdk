@@ -142,7 +142,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_001 : ILibrary, IS
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -648,7 +648,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_001 : ILibrary, IS
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

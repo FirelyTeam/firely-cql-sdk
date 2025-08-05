@@ -119,7 +119,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -131,7 +131,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
+    [CqlFunctionDefinition("isConfirmedActiveDiagnosis")]
     [CqlTag("description", "Returns true if the given Condition is confirmed as active")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
@@ -147,7 +147,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("isFinished")]
+    [CqlFunctionDefinition("isFinished")]
     [CqlTag("description", "Returns true if the given Encounter is finished")]
     public bool? isFinished(CqlContext context, Encounter Encounter)
     {
@@ -571,7 +571,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("isOrderedDuringHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("isOrderedDuringHeartFailureOutpatientEncounter")]
     [CqlTag("description", "Returns true if the given MedicationRequest is ordered during the heart failure outpatient encounter with history of moderate or severe LVSD at any point")]
     public bool? isOrderedDuringHeartFailureOutpatientEncounter(CqlContext context, MedicationRequest MedicationRequest)
     {
@@ -614,7 +614,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsHeartFailureOutpatientEncounter")]
     [CqlTag("description", "Returns true if the given Condition overlaps the heart failure outpatient encounter with history of moderate or severe LVSD at any point")]
     public bool? overlapsHeartFailureOutpatientEncounter(CqlContext context, Condition Condition)
     {
@@ -637,7 +637,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
     [CqlTag("overloaded", "")]
     [CqlTag("description", "Returns true if the given Condition overlaps after the day of the heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, Condition Condition)
@@ -661,7 +661,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
     [CqlTag("overloaded", "")]
     [CqlTag("description", "Returns true if the given Procedure overlaps after the day of the heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, Procedure Procedure)
@@ -690,7 +690,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
     [CqlTag("overloaded", "")]
     [CqlTag("description", "Returns true if the given AllergyIntolerance overlaps after the day of the heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, AllergyIntolerance AllergyIntolerance)
@@ -730,7 +730,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
     [CqlTag("overloaded", "")]
     [CqlTag("description", "Returns true if the given MedicationRequest overlaps after the day of the heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, MedicationRequest MedicationRequest)
@@ -837,7 +837,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    [CqlExpressionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
+    [CqlFunctionDefinition("overlapsAfterHeartFailureOutpatientEncounter")]
     [CqlTag("overloaded", "")]
     [CqlTag("description", "Returns true if the given HeartRateObservation overlaps after the day of the heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, Observation HeartRateObservation)
@@ -871,6 +871,6 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

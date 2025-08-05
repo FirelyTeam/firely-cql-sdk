@@ -118,7 +118,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -238,7 +238,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
-    [CqlExpressionDefinition("lastGravida")]
+    [CqlFunctionDefinition("lastGravida")]
     public int? lastGravida(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Pregnancies(context);
@@ -392,7 +392,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
-    [CqlExpressionDefinition("lastParity")]
+    [CqlFunctionDefinition("lastParity")]
     public int? lastParity(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Parity(context);
@@ -546,7 +546,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
-    [CqlExpressionDefinition("lastHistoryPretermBirth")]
+    [CqlFunctionDefinition("lastHistoryPretermBirth")]
     public int? lastHistoryPretermBirth(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Births_preterm(context);
@@ -700,7 +700,7 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
-    [CqlExpressionDefinition("lastHistoryTermBirth")]
+    [CqlFunctionDefinition("lastHistoryTermBirth")]
     public int? lastHistoryTermBirth(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.____Births_term(context);
@@ -1929,6 +1929,6 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

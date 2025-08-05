@@ -368,7 +368,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -506,7 +506,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("pOAIsNoOrUTD")]
+    [CqlFunctionDefinition("pOAIsNoOrUTD")]
     public IEnumerable<CqlConcept> pOAIsNoOrUTD(CqlContext context, Encounter TheEncounter)
     {
         List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
@@ -860,7 +860,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("sOCDxCategory")]
+    [CqlFunctionDefinition("sOCDxCategory")]
     public string sOCDxCategory(CqlContext context, CqlConcept Dx)
     {
         string a_()
@@ -1099,7 +1099,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("sOCProcedures")]
+    [CqlFunctionDefinition("sOCProcedures")]
     public IEnumerable<Procedure> sOCProcedures(CqlContext context, Encounter TheEncounter)
     {
         CqlValueSet a_ = this.Severe_Maternal_Morbidity_Procedures(context);
@@ -1129,7 +1129,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("sOCProcedureCategory")]
+    [CqlFunctionDefinition("sOCProcedureCategory")]
     public string sOCProcedureCategory(CqlContext context, Procedure TheProcedure)
     {
         string a_()
@@ -1425,7 +1425,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("pOAIsYesOrExempt")]
+    [CqlFunctionDefinition("pOAIsYesOrExempt")]
     public IEnumerable<CqlConcept> pOAIsYesOrExempt(CqlContext context, Encounter TheEncounter)
     {
         List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
@@ -2521,7 +2521,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

@@ -127,7 +127,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -324,6 +324,6 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

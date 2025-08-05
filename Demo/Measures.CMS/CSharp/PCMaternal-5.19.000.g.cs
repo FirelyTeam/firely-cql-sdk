@@ -91,7 +91,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -129,7 +129,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    [CqlExpressionDefinition("hospitalizationWithEDOBTriageObservation")]
+    [CqlFunctionDefinition("hospitalizationWithEDOBTriageObservation")]
     public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
@@ -399,7 +399,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    [CqlExpressionDefinition("calculatedGestationalAge")]
+    [CqlFunctionDefinition("calculatedGestationalAge")]
     public int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
     {
         CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
@@ -412,7 +412,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    [CqlExpressionDefinition("lastTimeOfDelivery")]
+    [CqlFunctionDefinition("lastTimeOfDelivery")]
     public CqlDateTime lastTimeOfDelivery(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.Date_and_time_of_obstetric_delivery(context);
@@ -564,7 +564,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    [CqlExpressionDefinition("lastEstimatedDeliveryDate")]
+    [CqlFunctionDefinition("lastEstimatedDeliveryDate")]
     public CqlDateTime lastEstimatedDeliveryDate(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.Delivery_date_Estimated(context);
@@ -738,7 +738,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    [CqlExpressionDefinition("lastEstimatedGestationalAge")]
+    [CqlFunctionDefinition("lastEstimatedGestationalAge")]
     public CqlQuantity lastEstimatedGestationalAge(CqlContext context, Encounter TheEncounter)
     {
         CqlValueSet a_ = this.Estimated_Gestational_Age_at_Delivery(context);
@@ -1005,7 +1005,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

@@ -106,7 +106,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -410,7 +410,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-    [CqlExpressionDefinition("isComplete")]
+    [CqlFunctionDefinition("isComplete")]
     public bool? isComplete(CqlContext context, Observation observation)
     {
         Code<ObservationStatus> a_ = observation?.StatusElement;
@@ -426,7 +426,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-    [CqlExpressionDefinition("isLaboratoryTest")]
+    [CqlFunctionDefinition("isLaboratoryTest")]
     public bool? isLaboratoryTest(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
@@ -446,7 +446,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-    [CqlExpressionDefinition("latest")]
+    [CqlFunctionDefinition("latest")]
     public CqlDateTime latest(CqlContext context, object choice)
     {
         CqlDateTime a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, choice);
@@ -490,7 +490,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-    [CqlExpressionDefinition("toInterval")]
+    [CqlFunctionDefinition("toInterval")]
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, choice);
@@ -544,6 +544,6 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

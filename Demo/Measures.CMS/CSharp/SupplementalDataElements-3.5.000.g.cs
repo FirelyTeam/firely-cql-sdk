@@ -71,7 +71,7 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
     #endregion CodeSystems
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -400,7 +400,7 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

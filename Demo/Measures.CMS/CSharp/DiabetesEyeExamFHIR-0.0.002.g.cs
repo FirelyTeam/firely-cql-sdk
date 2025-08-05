@@ -88,7 +88,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -320,6 +320,6 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

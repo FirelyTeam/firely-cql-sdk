@@ -56,7 +56,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion ValueSets
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context)
@@ -67,6 +67,6 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

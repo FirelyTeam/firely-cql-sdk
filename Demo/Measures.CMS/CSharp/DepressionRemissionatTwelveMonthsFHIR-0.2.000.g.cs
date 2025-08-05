@@ -160,7 +160,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -202,7 +202,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
-    [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
+    [CqlFunctionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
         bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, condition);
@@ -880,6 +880,6 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

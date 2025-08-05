@@ -52,7 +52,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -64,7 +64,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("StartOfFirstICU")]
+    [CqlFunctionDefinition("StartOfFirstICU")]
     public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
     {
         Period a_ = this.FirstICULocationPeriod(context, Encounter);
@@ -75,7 +75,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("FirstICULocationPeriod")]
+    [CqlFunctionDefinition("FirstICULocationPeriod")]
     public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
     {
         Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
@@ -85,7 +85,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("FirstInpatientIntensiveCareUnit")]
+    [CqlFunctionDefinition("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
     {
         List<Encounter.LocationComponent> a_ = Encounter?.Location;
@@ -128,7 +128,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("CalendarDayOfOrDayAfter")]
+    [CqlFunctionDefinition("CalendarDayOfOrDayAfter")]
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
@@ -140,7 +140,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
+    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
@@ -158,7 +158,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    [CqlExpressionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
+    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
         CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
@@ -174,6 +174,6 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

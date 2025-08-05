@@ -28,7 +28,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     #endregion ILibrary Implementation
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -89,6 +89,6 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         false;
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

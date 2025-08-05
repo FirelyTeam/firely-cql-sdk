@@ -144,7 +144,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -796,14 +796,14 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Measure Observation 1")]
+    [CqlFunctionDefinition("Measure Observation 1")]
     public int? Measure_Observation_1(CqlContext context, Encounter MalnutritionRiskScreening) =>
         ((context.Operators.Contains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
             ? 1
             : 0);
 
 
-    [CqlExpressionDefinition("Measure Observation 2")]
+    [CqlFunctionDefinition("Measure Observation 2")]
     public int? Measure_Observation_2(CqlContext context, Encounter NutritionAssessment)
     {
         int? a_()
@@ -842,7 +842,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Measure Observation 3")]
+    [CqlFunctionDefinition("Measure Observation 3")]
     public int? Measure_Observation_3(CqlContext context, Encounter MalnutritionDiagonsis)
     {
         int? a_()
@@ -928,7 +928,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Measure Observation 4")]
+    [CqlFunctionDefinition("Measure Observation 4")]
     public int? Measure_Observation_4(CqlContext context, Encounter NutritionCarePlan)
     {
         int? a_()
@@ -1014,7 +1014,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Measure Observation Total Malnutrition Components Score")]
+    [CqlFunctionDefinition("Measure Observation Total Malnutrition Components Score")]
     public int? Measure_Observation_Total_Malnutrition_Components_Score(CqlContext context, Encounter QualifyingEncounter)
     {
         int? a_ = this.Measure_Observation_1(context, QualifyingEncounter);
@@ -1033,7 +1033,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Total Malnutrition Composite Score Eligible Occurrences")]
+    [CqlFunctionDefinition("Total Malnutrition Composite Score Eligible Occurrences")]
     public int? Total_Malnutrition_Composite_Score_Eligible_Occurrences(CqlContext context, Encounter QualifyingEncounter)
     {
         int? a_()
@@ -1090,7 +1090,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    [CqlExpressionDefinition("Measure Observation Total Malnutrition Composite Score as Percentage")]
+    [CqlFunctionDefinition("Measure Observation Total Malnutrition Composite Score as Percentage")]
     public decimal? Measure_Observation_Total_Malnutrition_Composite_Score_as_Percentage(CqlContext context, Encounter QualifyingEncounter)
     {
         decimal? a_ = context.Operators.ConvertIntegerToDecimal(100);
@@ -1105,7 +1105,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
     #region CqlTupleMetadata Properties
 

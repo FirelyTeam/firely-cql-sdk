@@ -58,7 +58,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #endregion CodeSystems
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -114,6 +114,6 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

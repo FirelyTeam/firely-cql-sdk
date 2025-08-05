@@ -75,7 +75,7 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -156,6 +156,6 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

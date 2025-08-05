@@ -112,7 +112,7 @@ public partial class FallsScreeningForFutureFallRiskFHIR_0_2_001 : ILibrary, ISi
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -285,6 +285,6 @@ public partial class FallsScreeningForFutureFallRiskFHIR_0_2_001 : ILibrary, ISi
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

@@ -294,7 +294,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -808,7 +808,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-    [CqlExpressionDefinition("diagnosisInPatientHistory")]
+    [CqlFunctionDefinition("diagnosisInPatientHistory")]
     public IEnumerable<Condition> diagnosisInPatientHistory(CqlContext context, IEnumerable<Condition> Condition)
     {
         bool? a_(Condition Dx)
@@ -827,7 +827,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-    [CqlExpressionDefinition("procedureInPatientHistory")]
+    [CqlFunctionDefinition("procedureInPatientHistory")]
     public IEnumerable<Procedure> procedureInPatientHistory(CqlContext context, IEnumerable<Procedure> Procedure)
     {
         IEnumerable<Procedure> a_ = Status_1_8_000.Instance.isProcedurePerformed(context, Procedure);
@@ -1171,6 +1171,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }

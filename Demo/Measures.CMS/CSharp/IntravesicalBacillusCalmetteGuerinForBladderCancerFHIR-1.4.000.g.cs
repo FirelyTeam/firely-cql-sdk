@@ -150,7 +150,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context)
@@ -162,7 +162,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     }
 
 
-    [CqlExpressionDefinition("getStagingProcedure")]
+    [CqlFunctionDefinition("getStagingProcedure")]
     public IEnumerable<Procedure> getStagingProcedure(CqlContext context, Observation StagingObservation)
     {
         List<ResourceReference> a_ = StagingObservation?.PartOf;
@@ -195,7 +195,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     }
 
 
-    [CqlExpressionDefinition("isConfirmedActiveDiagnosis")]
+    [CqlFunctionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition Condition)
     {
         bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, Condition);
@@ -1260,6 +1260,6 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
 
 }
