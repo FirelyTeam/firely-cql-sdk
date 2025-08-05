@@ -7,9 +7,7 @@
  */
 
 #nullable enable
-using CoreTests.Tuples;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -23,7 +21,7 @@ using Hl7.Cql.Elm;
 namespace CoreTests;
 
 [TestClass]
-public class InvocationToolkitTests
+public class ToolkitTests
 {
     [TestMethod]
     public void TestRuntimeScopeAgainstLibraryDefinitionResults()
