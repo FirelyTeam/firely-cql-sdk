@@ -96,6 +96,7 @@ Use this header format with "Firely, NCQA":
   - Internal packages should describe what they do but not show how to use them directly
 
 ## Build and Test
+- **Always use `Cql-Sdk.slnf` to build the solution** - This is because `Cql-Sdk-All.sln` contains submodules to which you do not have access to
 - Always run `dotnet build` to validate changes
 - Run relevant tests after modifications
 - Check that new projects are included in solution files (`*.sln`)
