@@ -101,11 +101,12 @@ partial class ExpressionBuilderContext
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
                 Type[] parameterTypes = [];
                 ParameterExpression[] parameters = [CqlExpressions.ParameterExpression];
+                IReadOnlyDictionary<string, string> originalParameterNames = new Dictionary<string, string>();
 
                 // Handle function definitions
                 if (expressionDef is FunctionDef { operand: { } operands, external: var isExternalFunction } functionDef)
                 {
-                    parameterTypes = BuildParameterTypes(operands, expressionDefName);
+                    (parameterTypes, originalParameterNames) = BuildParameterTypes(operands, expressionDefName);
                     parameters = [.. parameters, .. _operands.Values];
 
                     if (isExternalFunction)
@@ -130,7 +131,7 @@ partial class ExpressionBuilderContext
                     }
                 }
 
-                CreateAndAddDefinition(expressionDefName, parameters, parameterTypes);
+                CreateAndAddDefinition(expressionDefName, parameters, parameterTypes, originalParameterNames);
             }
         });
 
@@ -179,9 +180,10 @@ partial class ExpressionBuilderContext
                         "A stub has been created that throws a NotImplemented exception."), expressionDef);
         }
 
-        Type[] BuildParameterTypes(OperandDef[] operandDefs, string expressionDefName)
+        (Type[] parameterTypes, IReadOnlyDictionary<string, string> originalParameterNames) BuildParameterTypes(OperandDef[] operandDefs, string expressionDefName)
         {
             var parameterTypes = new Type[operandDefs.Length];
+            var originalNames = new Dictionary<string, string>();
             int i = 0;
             foreach (var operandDef in operandDefs)
             {
@@ -191,25 +193,32 @@ partial class ExpressionBuilderContext
                         null);
 
                 var operandType = TypeFor(operandDef.operandTypeSpecifier)!;
-                var opName = NormalizeIdentifier(operandDef.name);
-                var parameter = Expression.Parameter(operandType, opName);
+                var normalizedName = NormalizeIdentifier(operandDef.name);
+                var parameter = Expression.Parameter(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
                 parameterTypes[i++] = parameter.Type;
+                
+                // Store original name if it differs from the normalized name
+                if (normalizedName != operandDef.name)
+                {
+                    originalNames[normalizedName] = operandDef.name;
+                }
             }
 
-            return parameterTypes;
+            return (parameterTypes, originalNames);
         }
 
         void CreateAndAddDefinition(
             string expressionDefName,
             ParameterExpression[] parameters,
-            Type[] parameterTypes)
+            Type[] parameterTypes,
+            IReadOnlyDictionary<string, string> originalParameterNames)
         {
             var bodyExpression = TranslateArg(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
             var tags = BuildTags();
             var def = expressionDef is FunctionDef
-                          ? new CqlFunctionDefinition(lambda, expressionDefName, tags)
+                          ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
                           : new CqlExpressionDefinition(lambda, expressionDefName, tags);
             _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
         }

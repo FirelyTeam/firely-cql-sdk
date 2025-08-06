@@ -16,4 +16,12 @@ namespace Hl7.Cql.Compiler.Expressions;
 internal class CqlFunctionDefinition(
     LambdaExpression lambdaExpression,
     string name,
-    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambdaExpression, name, tags);
+    IReadOnlyDictionary<string, string>? originalParameterNames = null,
+    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambdaExpression, name, tags)
+{
+    /// <summary>
+    /// Gets a dictionary mapping normalized C# parameter names to their original CQL parameter names.
+    /// Only contains entries where the normalized name differs from the original name.
+    /// </summary>
+    public IReadOnlyDictionary<string, string> OriginalParameterNames { get; } = originalParameterNames ?? new Dictionary<string, string>();
+}

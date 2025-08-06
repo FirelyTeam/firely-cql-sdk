@@ -479,7 +479,15 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             var parameters = ld.LambdaExpression.Parameters.Skip(1);
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
-            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public");
+            
+            // Extract original parameter names if this is a CqlFunctionDefinition
+            IReadOnlyDictionary<string, string>? originalParameterNames = null;
+            if (CqlDefinition is CqlFunctionDefinition functionDef && functionDef.OriginalParameterNames.Count > 0)
+            {
+                originalParameterNames = functionDef.OriginalParameterNames;
+            }
+            
+            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public", originalParameterNames);
             tw.WriteLine(definitionWithBody);
         }
 
