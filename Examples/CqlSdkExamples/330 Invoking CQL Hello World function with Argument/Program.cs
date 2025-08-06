@@ -16,6 +16,7 @@ using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace CqlSdkExamples;
 
@@ -48,5 +49,17 @@ partial class Program
             args: "Hello World");
 
         Console.WriteLine(result);
+
+        // Demonstrate parameter names functionality (added in fix for issue #923)
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cql.LibraryIdentifier];
+        var helloWorldFunction = libraryInvoker.Definitions.Values
+            .FirstOrDefault(d => d.DefinitionName == "HelloWorld");
+        
+        if (helloWorldFunction != null)
+        {
+            Console.WriteLine($"\nFunction: {helloWorldFunction.DefinitionName}");
+            Console.WriteLine($"Parameter Types: [{string.Join(", ", helloWorldFunction.ParameterTypes.Select(t => t.Name))}]");
+            Console.WriteLine($"Parameter Names: [{string.Join(", ", helloWorldFunction.ParameterNames)}]");
+        }
     }
 }

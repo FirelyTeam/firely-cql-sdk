@@ -18,6 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
 /// <param name="returnType">The return type of the CQL definition.</param>
 /// <param name="parameterTypes">The parameter types required by the CQL definition.</param>
+/// <param name="parameterNames">The parameter names required by the CQL definition.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
@@ -35,6 +36,7 @@ public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
     Type returnType,
     Type[] parameterTypes,
+    string[] parameterNames,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -78,6 +80,11 @@ public abstract class DefinitionInvoker(
     /// Gets the parameter types of the method.
     /// </summary>
     public Type[] ParameterTypes { get; } = parameterTypes;
+
+    /// <summary>
+    /// Gets the parameter names of the method.
+    /// </summary>
+    public string[] ParameterNames { get; } = parameterNames;
 
     /// <summary>
     /// Gets the return type of the method.

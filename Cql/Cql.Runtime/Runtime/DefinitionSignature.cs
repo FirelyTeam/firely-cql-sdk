@@ -9,12 +9,36 @@
     namespace Hl7.Cql.Runtime;
 
     /// <summary>
-    /// Represents the signature of a definition, including its name and parameter types.
+    /// Represents the signature of a definition, including its name, parameter types, and parameter names.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
     /// <param name="parameterTypes">The types of the parameters for the definition.</param>
-    public sealed class DefinitionSignature(string name, params Type[] parameterTypes) : IEquatable<DefinitionSignature>
+    /// <param name="parameterNames">The names of the parameters for the definition. If null, default names will be generated.</param>
+    public sealed class DefinitionSignature : IEquatable<DefinitionSignature>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefinitionSignature"/> class with parameter names.
+        /// </summary>
+        /// <param name="name">The name of the definition.</param>
+        /// <param name="parameterTypes">The types of the parameters for the definition.</param>
+        /// <param name="parameterNames">The names of the parameters for the definition. If null, default names will be generated.</param>
+        public DefinitionSignature(string name, Type[] parameterTypes, string[]? parameterNames = null)
+        {
+            Name = name;
+            ParameterTypes = CalcParameterTypes(parameterTypes);
+            ParameterNames = CalcParameterNames(parameterNames, ParameterTypes);
+            _hashCode = CalcHashCode(name, ParameterTypes);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefinitionSignature"/> class with parameter types only.
+        /// </summary>
+        /// <param name="name">The name of the definition.</param>
+        /// <param name="parameterTypes">The types of the parameters for the definition.</param>
+        public DefinitionSignature(string name, params Type[] parameterTypes) : this(name, parameterTypes, null)
+        {
+        }
+
         /// <summary>
         /// Determines whether two <see cref="DefinitionSignature"/> instances are equal.
         /// </summary>
@@ -31,17 +55,22 @@
         /// <returns><c>true</c> if the instances are not equal; otherwise, <c>false</c>.</returns>
         public static bool operator !=(DefinitionSignature? left, DefinitionSignature? right) => !Equals(left, right);
 
-        private readonly int _hashCode = CalcHashCode(name, CalcParameterTypes(parameterTypes));
+        private readonly int _hashCode;
 
         /// <summary>
         /// Gets the name of the definition.
         /// </summary>
-        public string Name { get; } = name;
+        public string Name { get; }
 
         /// <summary>
         /// Gets the types of the parameters for the definition.
         /// </summary>
-        public Type[] ParameterTypes { get; } = CalcParameterTypes(parameterTypes);
+        public Type[] ParameterTypes { get; }
+
+        /// <summary>
+        /// Gets the names of the parameters for the definition.
+        /// </summary>
+        public string[] ParameterNames { get; }
 
         /// <summary>
         /// Ensures that the parameter types array is not null and returns an empty array if it is null or empty.
@@ -50,6 +79,26 @@
         /// <returns>A non-null array of parameter types.</returns>
         private static Type[] CalcParameterTypes(Type[] parameterTypes) =>
             parameterTypes is { Length: > 0 } ? parameterTypes : [];
+
+        /// <summary>
+        /// Ensures that the parameter names array matches the parameter types array length.
+        /// If parameter names is null, generates default names.
+        /// </summary>
+        /// <param name="parameterNames">The parameter names array to process.</param>
+        /// <param name="parameterTypes">The parameter types array for length reference.</param>
+        /// <returns>A non-null array of parameter names matching the length of parameter types.</returns>
+        private static string[] CalcParameterNames(string[]? parameterNames, Type[] parameterTypes)
+        {
+            if (parameterNames is { Length: > 0 })
+            {
+                if (parameterNames.Length != parameterTypes.Length)
+                    throw new ArgumentException("Parameter names array length must match parameter types array length.", nameof(parameterNames));
+                return parameterNames;
+            }
+            
+            // Generate default parameter names
+            return parameterTypes.Select((_, i) => $"param{i}").ToArray();
+        }
 
         /// <summary>
         /// Calculates a hash code for the <see cref="DefinitionSignature"/> instance based on its name and parameter types.
@@ -123,5 +172,18 @@
         {
             name = Name;
             parameterTypes = ParameterTypes;
+        }
+
+        /// <summary>
+        /// Deconstructs the <see cref="DefinitionSignature"/> instance into its components including parameter names.
+        /// </summary>
+        /// <param name="name">The name of the definition.</param>
+        /// <param name="parameterTypes">The types of the parameters for the definition.</param>
+        /// <param name="parameterNames">The names of the parameters for the definition.</param>
+        public void Deconstruct(out string name, out Type[] parameterTypes, out string[] parameterNames)
+        {
+            name = Name;
+            parameterTypes = ParameterTypes;
+            parameterNames = ParameterNames;
         }
     }

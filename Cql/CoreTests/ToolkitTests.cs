@@ -312,4 +312,41 @@ public class ToolkitTests
         var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionName).ToList();
         definitionNames.Should().OnlyHaveUniqueItems();
     }
+
+    [TestMethod]
+    public void TestParameterNamesAvailableInDefinitionSignature()
+    {
+        // Arrange: Create a CQL function with named parameters similar to the issue
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library TestParameterNamesLib version '1.0.0'
+
+            define function "testFunction"(RichsTestArgument String, SecondParameter Integer):
+            'Hello ' + RichsTestArgument + ' with ' + ToString(SecondParameter)
+            """);
+
+        using var librarySetInvoker = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString)
+            .CreateLibrarySetInvoker();
+
+        // Act: Get the library invoker and find our function
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString.LibraryIdentifier];
+        var testFunction = libraryInvoker.Definitions.Values
+            .FirstOrDefault(d => d.DefinitionName == "testFunction");
+
+        // Assert: Verify parameter names are available
+        testFunction.Should().NotBeNull("Function should be found");
+        testFunction!.ParameterNames.Should().HaveCount(2, "Function should have 2 parameters");
+        testFunction.ParameterNames[0].Should().Be("RichsTestArgument", "First parameter name should match CQL definition");
+        testFunction.ParameterNames[1].Should().Be("SecondParameter", "Second parameter name should match CQL definition");
+
+        // Also verify that the DefinitionSignature has the parameter names
+        var definitionSignature = libraryInvoker.Definitions.Keys
+            .FirstOrDefault(sig => sig.Name == "testFunction");
+        
+        definitionSignature.Should().NotBeNull("DefinitionSignature should be found");
+        definitionSignature!.ParameterNames.Should().HaveCount(2, "DefinitionSignature should have 2 parameter names");
+        definitionSignature.ParameterNames[0].Should().Be("RichsTestArgument", "First parameter name in signature should match");
+        definitionSignature.ParameterNames[1].Should().Be("SecondParameter", "Second parameter name in signature should match");
+    }
 }
