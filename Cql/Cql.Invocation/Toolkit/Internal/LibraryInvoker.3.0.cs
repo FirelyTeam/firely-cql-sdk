@@ -20,15 +20,24 @@ internal sealed class LibraryInstanceInvoker_3_0 : LibraryInstanceInvoker
         LibrarySetInvoker librarySetInvoker,
         ILibrary library) : base(librarySetInvoker, library)
     {
-        Definitions = library
-                      .GetType()
-                      .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                      .SelectWhere(methodInfo => DefinitionInvoker_3_0.TryCreate(Library, this, methodInfo))
-                      .ToFrozenDictionary(o => new DefinitionSignature(o.DefinitionName, o.ParameterTypes, o.ParameterNames), o => o)
-                      .AsReadOnly();
+        var definitionInvokers = library
+                                .GetType()
+                                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                                .SelectWhere(methodInfo => DefinitionInvoker_3_0.TryCreate(Library, this, methodInfo))
+                                .ToArray();
+
+        Definitions = definitionInvokers
+                     .ToFrozenDictionary(o => new DefinitionSignature(o.DefinitionName, o.ParameterTypes), o => o)
+                     .AsReadOnly();
+
+        NamedDefinitions = definitionInvokers
+                          .ToFrozenDictionary(o => new DefinitionNamedSignature(o.DefinitionName, o.ParameterTypes, o.ParameterNames), o => o)
+                          .AsReadOnly();
     }
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
+
+    public override IReadOnlyDictionary<DefinitionNamedSignature, DefinitionInvoker> NamedDefinitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType) =>
         libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)

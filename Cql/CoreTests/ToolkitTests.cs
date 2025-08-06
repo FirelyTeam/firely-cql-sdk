@@ -334,19 +334,98 @@ public class ToolkitTests
         var testFunction = libraryInvoker.Definitions.Values
             .FirstOrDefault(d => d.DefinitionName == "testFunction");
 
-        // Assert: Verify parameter names are available
+        // Assert: Verify parameter names are available via DefinitionInvoker
         testFunction.Should().NotBeNull("Function should be found");
         testFunction!.ParameterNames.Should().HaveCount(2, "Function should have 2 parameters");
         testFunction.ParameterNames[0].Should().Be("RichsTestArgument", "First parameter name should match CQL definition");
         testFunction.ParameterNames[1].Should().Be("SecondParameter", "Second parameter name should match CQL definition");
 
-        // Also verify that the DefinitionSignature has the parameter names
+        // Verify that regular DefinitionSignature does NOT have parameter names
         var definitionSignature = libraryInvoker.Definitions.Keys
             .FirstOrDefault(sig => sig.Name == "testFunction");
         
         definitionSignature.Should().NotBeNull("DefinitionSignature should be found");
-        definitionSignature!.ParameterNames.Should().HaveCount(2, "DefinitionSignature should have 2 parameter names");
-        definitionSignature.ParameterNames[0].Should().Be("RichsTestArgument", "First parameter name in signature should match");
-        definitionSignature.ParameterNames[1].Should().Be("SecondParameter", "Second parameter name in signature should match");
+        definitionSignature.Should().BeOfType<DefinitionSignature>("Should be regular DefinitionSignature without parameter names");
+
+        // Verify that NamedDefinitions provides access to parameter names via DefinitionNamedSignature
+        var namedDefinitionSignature = libraryInvoker.NamedDefinitions.Keys
+            .FirstOrDefault(sig => sig.Name == "testFunction");
+        
+        namedDefinitionSignature.Should().NotBeNull("DefinitionNamedSignature should be found");
+        namedDefinitionSignature!.ParameterNames.Should().HaveCount(2, "DefinitionNamedSignature should have 2 parameter names");
+        namedDefinitionSignature.ParameterNames[0].Should().Be("RichsTestArgument", "First parameter name in named signature should match");
+        namedDefinitionSignature.ParameterNames[1].Should().Be("SecondParameter", "Second parameter name in named signature should match");
+
+        // Verify both dictionaries reference the same DefinitionInvoker instance
+        var namedInvoker = libraryInvoker.NamedDefinitions[namedDefinitionSignature];
+        namedInvoker.Should().BeSameAs(testFunction, "Both dictionaries should reference the same invoker instance");
+    }
+
+    [TestMethod]
+    public void TestDefinitionQuerySearchFunctionality()
+    {
+        // Arrange: Create a CQL library with multiple functions
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library TestSearchLib version '1.0.0'
+
+            define function "testFunction"(RichsTestArgument String, SecondParameter Integer):
+            'Hello ' + RichsTestArgument + ' with ' + ToString(SecondParameter)
+
+            define function "anotherFunction"(FirstArg Boolean):
+            FirstArg
+
+            define function "overloadedFunction"(Input String):
+            'String: ' + Input
+
+            define function "overloadedFunction"(Input Integer):
+            'Integer: ' + ToString(Input)
+            """);
+
+        using var librarySetInvoker = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString)
+            .CreateLibrarySetInvoker();
+
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString.LibraryIdentifier];
+
+        // Test searching by name only
+        var byNameResults = libraryInvoker.NamedDefinitions.SearchByName("testFunction").ToArray();
+        byNameResults.Should().HaveCount(1, "Should find exactly one function named 'testFunction'");
+        byNameResults[0].Key.Name.Should().Be("testFunction");
+
+        // Test searching by name and parameter types
+        var byNameAndTypesResults = libraryInvoker.NamedDefinitions
+            .SearchByNameAndTypes("overloadedFunction", typeof(string)).ToArray();
+        byNameAndTypesResults.Should().HaveCount(1, "Should find the string overload");
+        byNameAndTypesResults[0].Key.ParameterTypes.Should().Equal(typeof(string));
+
+        // Test searching by name and parameter names
+        var byNameAndParameterNamesResults = libraryInvoker.NamedDefinitions
+            .SearchByNameAndParameterNames("testFunction", "RichsTestArgument", "SecondParameter").ToArray();
+        byNameAndParameterNamesResults.Should().HaveCount(1, "Should find function with specific parameter names");
+        byNameAndParameterNamesResults[0].Key.ParameterNames.Should().Equal("RichsTestArgument", "SecondParameter");
+
+        // Test custom query with wildcards
+        var customQuery = new DefinitionQuery
+        {
+            Name = "*", // Wildcard - match any name
+            ParameterTypes = new Type?[] { typeof(string) }, // Must have one string parameter
+            ParameterNames = null // Don't care about parameter names
+        };
+        var customResults = libraryInvoker.NamedDefinitions.Search(customQuery).ToArray();
+        customResults.Should().HaveCount(1, "Should find string overload of 'overloadedFunction' (testFunction has 2 parameters)");
+        customResults.Should().OnlyContain(kvp => 
+            kvp.Key.ParameterTypes.Length == 1 && kvp.Key.ParameterTypes[0] == typeof(string),
+            "All results should have exactly one string parameter");
+
+        // Test query with partial wildcards in parameter names
+        var partialWildcardQuery = new DefinitionQuery
+        {
+            Name = "testFunction",
+            ParameterNames = new string?[] { "RichsTestArgument", "*" } // Second parameter name is wildcard
+        };
+        var partialWildcardResults = libraryInvoker.NamedDefinitions.Search(partialWildcardQuery).ToArray();
+        partialWildcardResults.Should().HaveCount(1, "Should find testFunction with first parameter matching");
+        partialWildcardResults[0].Key.ParameterNames[0].Should().Be("RichsTestArgument");
     }
 }

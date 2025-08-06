@@ -61,5 +61,30 @@ partial class Program
             Console.WriteLine($"Parameter Types: [{string.Join(", ", helloWorldFunction.ParameterTypes.Select(t => t.Name))}]");
             Console.WriteLine($"Parameter Names: [{string.Join(", ", helloWorldFunction.ParameterNames)}]");
         }
+
+        // Demonstrate NamedDefinitions and search capabilities
+        Console.WriteLine("\n=== Named Definitions and Search ===");
+        
+        // Access via NamedDefinitions (includes parameter names in signature)
+        var namedSignature = libraryInvoker.NamedDefinitions.Keys
+            .FirstOrDefault(sig => sig.Name == "HelloWorld");
+        
+        if (namedSignature != null)
+        {
+            Console.WriteLine($"Named Signature: {namedSignature.Name}");
+            Console.WriteLine($"Parameter Names in Signature: [{string.Join(", ", namedSignature.ParameterNames)}]");
+        }
+
+        // Search functionality examples
+        var searchResults = libraryInvoker.NamedDefinitions.SearchByName("HelloWorld").ToArray();
+        Console.WriteLine($"Search by name 'HelloWorld': Found {searchResults.Length} functions");
+
+        var searchByTypeResults = libraryInvoker.NamedDefinitions
+            .SearchByNameAndTypes("HelloWorld", typeof(string)).ToArray();
+        Console.WriteLine($"Search by name and types: Found {searchByTypeResults.Length} functions");
+
+        var searchByParameterNamesResults = libraryInvoker.NamedDefinitions
+            .SearchByNameAndParameterNames("HelloWorld", "greeting").ToArray();
+        Console.WriteLine($"Search by parameter name 'greeting': Found {searchByParameterNamesResults.Length} functions");
     }
 }

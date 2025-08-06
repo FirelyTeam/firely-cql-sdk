@@ -112,6 +112,12 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     /// <summary>
+    /// Gets the dictionary of named definition invokers for the CQL library.
+    /// This allows access to both parameter types and parameter names for each definition.
+    /// </summary>
+    public abstract IReadOnlyDictionary<DefinitionNamedSignature, DefinitionInvoker> NamedDefinitions { get; }
+
+    /// <summary>
     /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker that created the <see cref="LibraryInvoker"/>.</param>

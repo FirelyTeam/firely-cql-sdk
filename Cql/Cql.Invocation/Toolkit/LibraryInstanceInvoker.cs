@@ -36,4 +36,9 @@ public abstract class LibraryInstanceInvoker(
         library.Dependencies
                .Select(dep => CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(dep.Name, dep.Version))
                .ToList();
+
+    /// <summary>
+    /// Gets the dictionary of named definition invokers for the CQL library.
+    /// </summary>
+    public abstract override IReadOnlyDictionary<DefinitionNamedSignature, DefinitionInvoker> NamedDefinitions { get; }
 }
