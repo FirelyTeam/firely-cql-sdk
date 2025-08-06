@@ -102,6 +102,14 @@ Use this header format with "Firely, NCQA":
 - Run relevant tests after modifications
 - Check that new projects are included in solution files (`*.sln`)
 
+### Generating ELM Files from CQL
+When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
+
+1. **Enable CQL to ELM conversion**: Find the commented out property `CqlToElmEnabled` in the csproj (e.g., `<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->`) and uncomment it to set `CqlToElmEnabled` to `true`
+2. **Build the project**: Build that particular csproj, which will generate the ELM files
+3. **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
+4. **Restore setting**: Roll back step 1 by commenting out `CqlToElmEnabled=true`
+
 ## Naming Conventions
 - Use `CqlSdk` prefix for SDK-related example projects
 - Use `Hl7.Cql` namespace prefix for core SDK assemblies
