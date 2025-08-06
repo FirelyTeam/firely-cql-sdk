@@ -46,6 +46,7 @@
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
 		<DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory>
+		<!-- <CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory> -->
 		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
@@ -73,7 +74,4 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Include="Input\ELM\HL7\ValueSetExprExample-1.0.0.cql" />
-	</ItemGroup>
 </Project>

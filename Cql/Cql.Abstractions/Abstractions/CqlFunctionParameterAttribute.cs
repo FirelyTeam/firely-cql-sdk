@@ -10,7 +10,7 @@ namespace Hl7.Cql.Abstractions;
 
 /// <summary>
 /// Declares the original CQL parameter name for a generated C# method parameter.
-/// This attribute is used when the CQL parameter name contains characters that are not valid 
+/// This attribute is used when the CQL parameter name contains characters that are not valid
 /// in C# parameter names and thus had to be normalized during code generation.
 /// </summary>
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]

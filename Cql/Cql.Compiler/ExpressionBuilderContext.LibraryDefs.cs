@@ -197,12 +197,11 @@ partial class ExpressionBuilderContext
                 var parameter = Expression.Parameter(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
                 parameterTypes[i++] = parameter.Type;
-                
-                // Store original name if it differs from the normalized name
-                if (normalizedName != operandDef.name)
-                {
+
+                // Store original name if it differs from the normalized name.
+                var isSameCSharpAndCqlName = (normalizedName.StartsWith('@') ? normalizedName[1..] : normalizedName) == operandDef.name;
+                if (!isSameCSharpAndCqlName)
                     originalNames[normalizedName] = operandDef.name;
-                }
             }
 
             return (parameterTypes, originalNames);
