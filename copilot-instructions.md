@@ -78,6 +78,7 @@ Use this header format with "Firely, NCQA":
 2. Maintain existing code structure and patterns
 3. Run builds and tests to validate changes
 4. Use existing project conventions and naming patterns
+5. **Always ensure blank lines contain no spaces** - blank lines must be completely empty
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage
