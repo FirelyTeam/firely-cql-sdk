@@ -12,12 +12,13 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Represents the signature of a definition, including its name and parameter types.
+/// Represents the signature of a definition with parameter names, including its name, parameter types, and parameter names.
 /// </summary>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
+/// <param name="ParameterNames">The names of the parameters for the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionSignature(string Name, params Type[] ParameterTypes)
+public readonly record struct DefinitionSignatureWithNames(string Name, Type[] ParameterTypes, params string[] ParameterNames)
 {
     /// <summary>
     /// Gets the name of the definition.
@@ -30,42 +31,53 @@ public readonly record struct DefinitionSignature(string Name, params Type[] Par
     public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
 
     /// <summary>
-    /// Cached hash code for performance optimization.
+    /// Gets the names of the parameters for the definition.
     /// </summary>
-    private readonly int _hashCode = CalculateHashCode(Name, ParameterTypes);
+    public string[] ParameterNames { get; } = ParameterNames is { Length: > 0 } ? ParameterNames : [];
 
     /// <summary>
-    /// Calculates the hash code for the given name and parameter types.
+    /// Cached hash code for performance optimization.
+    /// </summary>
+    private readonly int _hashCode = CalculateHashCode(Name, ParameterTypes, ParameterNames);
+
+    /// <summary>
+    /// Calculates the hash code for the given name, parameter types, and parameter names.
     /// </summary>
     /// <param name="name">The name to include in the hash code calculation.</param>
     /// <param name="parameterTypes">The parameter types to include in the hash code calculation.</param>
+    /// <param name="parameterNames">The parameter names to include in the hash code calculation.</param>
     /// <returns>The calculated hash code.</returns>
-    private static int CalculateHashCode(string name, Type[] parameterTypes)
+    private static int CalculateHashCode(string name, Type[] parameterTypes, string[] parameterNames)
     {
         var hashCode = new HashCode();
         hashCode.Add(name);
         if (parameterTypes is { Length: > 0})
             foreach (var type in parameterTypes)
                 hashCode.Add(type);
+        if (parameterNames is { Length: > 0})
+            foreach (var paramName in parameterNames)
+                hashCode.Add(paramName);
         return hashCode.ToHashCode();
     }
 
     /// <summary>
-    /// Determines whether the current instance is equal to another <see cref="DefinitionSignature"/> instance.
+    /// Determines whether the current instance is equal to another <see cref="DefinitionSignatureWithNames"/> instance.
     /// </summary>
-    /// <param name="other">The other <see cref="DefinitionSignature"/> instance to compare.</param>
+    /// <param name="other">The other <see cref="DefinitionSignatureWithNames"/> instance to compare.</param>
     /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
-    public bool Equals(DefinitionSignature other)
+    public bool Equals(DefinitionSignatureWithNames other)
     {
         if (_hashCode != other._hashCode) return false;
         if (Name != other.Name) return false;
-        return ParameterTypes.SequenceEqual(other.ParameterTypes);
+        if (!ParameterTypes.SequenceEqual(other.ParameterTypes)) return false;
+        return ParameterNames.SequenceEqual(other.ParameterNames);
     }
 
     /// <inheritdoc />
     public override string ToString()
     {
-        return $"{Name}({string.Join(", ", ParameterTypes.Select(t => t.ToCSharpString()))})";
+        var parameters = ParameterTypes.Zip(ParameterNames, (type, name) => $"{type.ToCSharpString()} {name}");
+        return $"{Name}({string.Join(", ", parameters)})";
     }
 
     /// <summary>
@@ -75,8 +87,8 @@ public readonly record struct DefinitionSignature(string Name, params Type[] Par
     public override int GetHashCode() => _hashCode;
 
     /// <summary>
-    /// Implicitly converts a string to a <see cref="DefinitionSignature"/> instance.
+    /// Implicitly converts a string to a <see cref="DefinitionSignatureWithNames"/> instance.
     /// </summary>
-    /// <param name="name">The string value to be converted into a <see cref="DefinitionSignature"/>.</param>
-    public static implicit operator DefinitionSignature(string name) => new(name);
+    /// <param name="name">The string value to be converted into a <see cref="DefinitionSignatureWithNames"/>.</param>
+    public static implicit operator DefinitionSignatureWithNames(string name) => new(name, [], []);
 }
