@@ -646,6 +646,7 @@ override Hl7.Cql.Runtime.CqlLibraryVersion.ToString() -> string!
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
 override Hl7.Cql.Runtime.DefinitionSignature.GetHashCode() -> int
+override Hl7.Cql.Runtime.DefinitionSignature.ToString() -> string!
 override Hl7.Cql.Runtime.Parsing.CqlParseError.GetHashCode() -> int
 override Hl7.Cql.Runtime.Parsing.CqlParseError.ToString() -> string!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Runtime.CompilerServices.ITuple!
@@ -710,5 +711,4 @@ virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Pars
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.DefinitionSignature.Equals(object obj) -> bool
-~override Hl7.Cql.Runtime.DefinitionSignature.ToString() -> string
 ~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool

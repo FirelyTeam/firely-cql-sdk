@@ -6,6 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+
+using Hl7.Cql.Abstractions.Infrastructure;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
@@ -13,6 +16,7 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
+[DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
 public readonly record struct DefinitionSignature(string Name, params Type[] ParameterTypes)
 {
     /// <summary>
@@ -53,9 +57,15 @@ public readonly record struct DefinitionSignature(string Name, params Type[] Par
     /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
     public bool Equals(DefinitionSignature other)
     {
-        if (GetHashCode() != other.GetHashCode()) return false;
+        if (_hashCode != other._hashCode) return false;
         if (Name != other.Name) return false;
         return ParameterTypes.SequenceEqual(other.ParameterTypes);
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"{Name}({string.Join(", ", ParameterTypes.Select(t => t.ToCSharpString()))})";
     }
 
     /// <summary>
