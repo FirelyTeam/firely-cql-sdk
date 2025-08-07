@@ -193,7 +193,7 @@ partial class ExpressionBuilderContext
                         null);
 
                 var operandType = TypeFor(operandDef.operandTypeSpecifier)!;
-                var normalizedName = NormalizeIdentifier(operandDef.name);
+                var normalizedName = IdentifierNormalizer.Normalize(operandDef.name);
                 var parameter = Expression.Parameter(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
                 parameterTypes[i++] = parameter.Type;

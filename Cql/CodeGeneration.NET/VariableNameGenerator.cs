@@ -8,16 +8,15 @@
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class VariableNameGenerator
+    internal sealed class VariableNameGenerator
     {
-        private readonly object SyncRoot = new();
-        public string Postfix { get; }
+        private readonly object _syncRoot = new();
+        private readonly List<char> _letters = [(char)('a' - 1)];
+        private readonly string _prefix = string.Empty;
+
+        private string Postfix { get; }
 
         private List<string> Reserved { get; }
-
-        private readonly List<char> Letters = [(char)('a' - 1)];
-        private readonly string Prefix = string.Empty;
-
 
         /// <summary>
         /// Create a new VariableNameGenerator with an (optional) set of extra reserved variable names
@@ -30,9 +29,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         /// <inheritdoc cref="ForNewScope(IEnumerable{ParameterExpression}?)"/>
-        public VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
+        private VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
         {
-            var newGenerator = new VariableNameGenerator(Letters, Reserved.Concat(scopeNames ?? []), Postfix);
+            var newGenerator = new VariableNameGenerator(_letters, Reserved.Concat(scopeNames ?? []), Postfix);
             return newGenerator;
         }
 
@@ -42,50 +41,44 @@ namespace Hl7.Cql.CodeGeneration.NET
             Postfix = postfix;
         }
 
-        public VariableNameGenerator(IEnumerable<ParameterExpression> reserved, string postfix = "") :
-            this(reserved.Where(p => p.Name is not null).Select(p => p.Name!), postfix)
-        {
-            // Nothing
-        }
-
-        internal VariableNameGenerator(List<char> state, IEnumerable<string>? reserved = null, string postfix = "")
+        private VariableNameGenerator(List<char> state, IEnumerable<string>? reserved = null, string postfix = "")
         {
             Reserved = reserved?.ToList() ?? [];
             Postfix = postfix;
-            Letters = state;
+            _letters = state;
         }
 
-        public virtual string Next()
+        public string Next()
         {
-            lock (SyncRoot)
+            lock (_syncRoot)
             {
                 string vn = "";
                 do
                 {
-                    var lastIndex = Letters.Count - 1;
-                    var next = (char)(Letters[lastIndex] + 1);
+                    var lastIndex = _letters.Count - 1;
+                    var next = (char)(_letters[lastIndex] + 1);
                     if (next > 'z')
                     {
                         next = 'a';
-                        Letters[lastIndex] = next;
-                        if (Letters.Count > 1)
+                        _letters[lastIndex] = next;
+                        if (_letters.Count > 1)
                         {
-                            if (Letters[0] == 'z')
+                            if (_letters[0] == 'z')
                             {
-                                Letters.Insert(0, 'a');
+                                _letters.Insert(0, 'a');
                             }
                             else
                             {
-                                Letters[0] = (char)(Letters[0] + 1);
+                                _letters[0] = (char)(_letters[0] + 1);
                             }
                         }
-                        else Letters.Insert(0, 'a');
+                        else _letters.Insert(0, 'a');
                     }
                     else
                     {
-                        Letters[lastIndex] = next;
+                        _letters[lastIndex] = next;
                     }
-                    vn = $"{Prefix}{new string(Letters.ToArray())}{Postfix}";
+                    vn = $"{_prefix}{new string(_letters.ToArray())}{Postfix}";
                 }
                 while (Reserved.Contains(vn) || SyntaxFacts.GetKeywordKind(vn) != SyntaxKind.None);
 

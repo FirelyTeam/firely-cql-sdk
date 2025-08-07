@@ -6,21 +6,19 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Utility methods for C# identifier normalization.
 /// </summary>
-public static class IdentifierNormalizer
+internal static class IdentifierNormalizer
 {
     /// <summary>
     /// Normalizes a string to be a valid C# identifier.
     /// </summary>
     /// <param name="identifier">The input string to normalize</param>
     /// <returns>A valid C# identifier</returns>
-    public static string NormalizeIdentifier(string identifier)
+    public static string Normalize(string identifier)
     {
         if (string.IsNullOrEmpty(identifier))
             return "_"; // Return a valid identifier for empty input

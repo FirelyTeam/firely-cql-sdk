@@ -48,9 +48,6 @@ partial class ExpressionBuilderContext
         return lambda;
     }
 
-    internal static string NormalizeIdentifier(string identifier) =>
-        IdentifierNormalizer.NormalizeIdentifier(identifier);
-
     private static Expression HandleNullable(Expression expression, Type targetType) =>
         (
                 exprNullTypeArg: Nullable.GetUnderlyingType(expression.Type),
@@ -103,7 +100,7 @@ partial class ExpressionBuilderContext
             typeName = uniqueTypeName;
         }
 
-        return NormalizeIdentifier(typeName!)!;
+        return IdentifierNormalizer.Normalize(typeName!)!;
     }
 
     protected interface IPopToken : IDisposable

@@ -77,7 +77,7 @@ internal class TupleBuilderCache : IDisposable
             tupleProps
             .Select(tupleProp =>
             {
-                var propName = ExpressionBuilderContext.NormalizeIdentifier(tupleProp.cqlName);
+                var propName = IdentifierNormalizer.Normalize(tupleProp.cqlName);
                 if (!propNameDuplicates.Add(propName))
                     throw new ArgumentException($"Duplicate property name {propName} in tuple.", nameof(tupleProps));
                 return (tupleProp.propType, propName, tupleProp.cqlName);

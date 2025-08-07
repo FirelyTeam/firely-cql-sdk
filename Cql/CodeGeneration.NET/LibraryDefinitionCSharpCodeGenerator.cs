@@ -112,8 +112,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             string targetName,
             string memberName)
         {
-            var target = targetName == LibraryName ? "this" : $"{IdentifierNormalizer.NormalizeIdentifier(targetName)}.Instance";
-            var member = IdentifierNormalizer.NormalizeIdentifier(memberName);
+            var target = targetName == LibraryName ? "this" : $"{IdentifierNormalizer.Normalize(targetName)}.Instance";
+            var member = IdentifierNormalizer.Normalize(memberName);
             return $"{target}.{member}";
         }
 
