@@ -18,12 +18,34 @@ namespace Hl7.Cql.Runtime;
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionSignatureWithNames(string Name, Type[] ParameterTypes, params string[] ParameterNames)
-{
+public readonly record struct DefinitionSignatureWithNames(string Name, string[] ParameterNames, Type[] ParameterTypes)
+    {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DefinitionSignatureWithNames"/> struct with the specified name
+    /// and a collection of parameter type-name pairs.
+    /// </summary>
+    /// <param name="name">The name of the definition.</param>
+    /// <param name="parameterTypeNamePairs">
+    /// A collection of key-value pairs, where each key represents the name of a parameter,
+    /// and each value represents the type of the corresponding parameter.
+    /// </param>
+    public DefinitionSignatureWithNames(string name, params KeyValuePair<string, Type>[] parameterTypeNamePairs)
+        : this(
+            name,
+            parameterTypeNamePairs.SelectToArray(p => p.Key),
+            parameterTypeNamePairs.SelectToArray(p => p.Value))
+    {
+    }
+
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
     public string Name { get; } = Name ?? throw new ArgumentNullException(nameof(Name));
+
+    /// <summary>
+    /// Gets the names of the parameters for the definition.
+    /// </summary>
+    public string[] ParameterNames { get; } = ParameterNames is { Length: > 0 } ? ParameterNames : [];
 
     /// <summary>
     /// Gets the types of the parameters for the definition.
@@ -31,9 +53,17 @@ public readonly record struct DefinitionSignatureWithNames(string Name, Type[] P
     public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
 
     /// <summary>
-    /// Gets the names of the parameters for the definition.
+    /// Gets a collection of key-value pairs representing the parameter names and their corresponding types.
     /// </summary>
-    public string[] ParameterNames { get; } = ParameterNames is { Length: > 0 } ? ParameterNames : [];
+    /// <remarks>
+    /// Each key in the collection represents the name of a parameter, and each value represents the type of the corresponding parameter.
+    /// </remarks>
+    /// <returns>
+    ///     An array of <see cref="KeyValuePair{TKey, TValue}"/> where the key is a <see cref="string"/> representing the parameter name,
+    ///     and the value is a <see cref="Type"/> representing the parameter type.
+    /// </returns>
+    public KeyValuePair<string, Type>[] GetParameterTypeNamePairs() =>
+        ParameterTypes.Zip(ParameterNames, (type, name) => new KeyValuePair<string, Type>(name, type)).ToArray();
 
     /// <summary>
     /// Cached hash code for performance optimization.
@@ -49,14 +79,20 @@ public readonly record struct DefinitionSignatureWithNames(string Name, Type[] P
     /// <returns>The calculated hash code.</returns>
     private static int CalculateHashCode(string name, Type[] parameterTypes, string[] parameterNames)
     {
+        var parameterTypesLength = parameterTypes?.Length ?? 0;
+        var parameterNamesLength = parameterNames?.Length ?? 0;
+        if (parameterTypesLength != parameterNamesLength)
+            throw new ArgumentException("Parameter types and parameter names must have the same length.");
+
         var hashCode = new HashCode();
         hashCode.Add(name);
-        if (parameterTypes is { Length: > 0})
-            foreach (var type in parameterTypes)
+        if (parameterTypesLength > 0)
+        {
+            foreach (var type in parameterTypes!)
                 hashCode.Add(type);
-        if (parameterNames is { Length: > 0})
-            foreach (var paramName in parameterNames)
+            foreach (var paramName in parameterNames!)
                 hashCode.Add(paramName);
+        }
         return hashCode.ToHashCode();
     }
 
@@ -90,5 +126,11 @@ public readonly record struct DefinitionSignatureWithNames(string Name, Type[] P
     /// Implicitly converts a string to a <see cref="DefinitionSignatureWithNames"/> instance.
     /// </summary>
     /// <param name="name">The string value to be converted into a <see cref="DefinitionSignatureWithNames"/>.</param>
-    public static implicit operator DefinitionSignatureWithNames(string name) => new(name, [], []);
+    public static implicit operator DefinitionSignatureWithNames(string name) => new(name);
+
+    /// <summary>
+    /// Implicitly converts a <see cref="DefinitionSignatureWithNames"/> to a <see cref="DefinitionSignature"/> instance.
+    /// </summary>
+    /// <param name="signature">The <see cref="DefinitionSignatureWithNames"/> value to be converted into a <see cref="DefinitionSignature"/>.</param>
+    public static implicit operator DefinitionSignature(DefinitionSignatureWithNames signature) => new (signature.Name, signature.ParameterTypes);
 }
