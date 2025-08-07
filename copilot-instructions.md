@@ -79,6 +79,8 @@ Use this header format with "Firely, NCQA":
 3. Run builds and tests to validate changes
 4. Use existing project conventions and naming patterns
 5. **Always ensure blank lines contain no spaces** - blank lines must be completely empty
+6. **When adding new utility files or functionality that are only used internally, keep those types as `internal`, not `public`** - Only expose public APIs when they are intended for external consumption
+7. **When creating new files or modifying existing ones, always remove unused usings at the top of the file** - Keep using statements clean and only include what is actually used
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage

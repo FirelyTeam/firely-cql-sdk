@@ -11,7 +11,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Utility methods for C# identifier normalization.
 /// </summary>
-public static class IdentifierNormalizer
+internal static class IdentifierNormalizer
 {
     /// <summary>
     /// Normalizes a string to be a valid C# identifier.
