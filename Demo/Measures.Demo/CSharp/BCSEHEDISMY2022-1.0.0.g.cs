@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
-public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
+public partial class BCSEHEDISMY2022_minus_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_minus_1_0_0>
 {
-    private BCSEHEDISMY2022_1_0_0() {}
+    private BCSEHEDISMY2022_minus_1_0_0() {}
 
-    public static BCSEHEDISMY2022_1_0_0 Instance { get; } = new();
+    public static BCSEHEDISMY2022_minus_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "BCSEHEDISMY2022";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAHealthPlanEnrollment_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAHospice_1_0_0.Instance, NCQAAdvancedIllnessandFrailty_1_0_0.Instance, NCQAPalliativeCare_1_0_0.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, NCQAHealthPlanEnrollment_minus_1_0_0.Instance, NCQAStatus_minus_1_0_0.Instance, NCQAFHIRBase_minus_1_0_0.Instance, NCQAHospice_minus_1_0_0.Instance, NCQAAdvancedIllnessandFrailty_minus_1_0_0.Instance, NCQAPalliativeCare_minus_1_0_0.Instance];
 
     #endregion ILibrary Implementation
 
@@ -150,7 +150,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         bool? b_(Coverage C)
         {
             Period d_ = C?.Period;
-            CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, d_ as object);
+            CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, d_ as object);
             CqlInterval<CqlDateTime> f_ = this.Participation_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, default);
 
@@ -176,7 +176,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlQuantity j_ = context.Operators.Quantity(2m, "years");
         CqlDate k_ = context.Operators.Subtract(i_, j_);
         CqlInterval<CqlDate> l_ = context.Operators.Interval(f_, k_, true, true);
-        bool? m_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, l_, 0);
+        bool? m_ = NCQAHealthPlanEnrollment_minus_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, l_, 0);
         CqlDateTime p_ = context.Operators.End(b_);
         CqlDate q_ = context.Operators.DateFrom(p_);
         CqlDateTime s_ = context.Operators.Start(b_);
@@ -187,7 +187,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlDate y_ = context.Operators.DateFrom(x_);
         CqlDate aa_ = context.Operators.Subtract(y_, u_);
         CqlInterval<CqlDate> ab_ = context.Operators.Interval(v_, aa_, true, true);
-        bool? ac_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, q_, ab_, 45);
+        bool? ac_ = NCQAHealthPlanEnrollment_minus_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, q_, ab_, 45);
         bool? ad_ = context.Operators.And(m_, ac_);
         CqlDateTime ag_ = context.Operators.End(b_);
         CqlDate ah_ = context.Operators.DateFrom(ag_);
@@ -196,7 +196,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlDateTime am_ = context.Operators.End(b_);
         CqlDate an_ = context.Operators.DateFrom(am_);
         CqlInterval<CqlDate> ao_ = context.Operators.Interval(ak_, an_, true, true);
-        bool? ap_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, ah_, ao_, 45);
+        bool? ap_ = NCQAHealthPlanEnrollment_minus_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, ah_, ao_, 45);
         bool? aq_ = context.Operators.And(ad_, ap_);
 
         return aq_;
@@ -242,10 +242,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.Absence_of_Right_Breast(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
+        IEnumerable<Condition> c_ = NCQAStatus_minus_1_0_0.Instance.Active_Condition(context, b_);
         bool? d_(Condition RightMastectomyDiagnosis)
         {
-            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, RightMastectomyDiagnosis);
+            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_minus_1_0_0.Instance.Prevalence_Period(context, RightMastectomyDiagnosis);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.End(h_);
@@ -264,16 +264,16 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.Unilateral_Mastectomy_Right(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
+        IEnumerable<Procedure> c_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, b_);
         CqlValueSet d_ = this.Unilateral_Mastectomy(context);
         IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
+        IEnumerable<Procedure> f_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, e_);
         bool? g_(Procedure UnilateralMastectomyProcedure)
         {
             List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
             CqlConcept s_(CodeableConcept X)
             {
-                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept w_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return w_;
             };
@@ -287,13 +287,13 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
         CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
         IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
+        IEnumerable<Procedure> l_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, k_);
         bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
         {
             List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
             CqlConcept y_(CodeableConcept X)
             {
-                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept ac_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return ac_;
             };
@@ -308,7 +308,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         bool? p_(Procedure RightMastectomyProcedure)
         {
             DataType ad_ = RightMastectomyProcedure?.Performed;
-            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ad_);
+            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ad_);
             CqlDateTime af_ = context.Operators.End(ae_);
             CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
             CqlDateTime ah_ = context.Operators.End(ag_);
@@ -327,10 +327,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.Absence_of_Left_Breast(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
+        IEnumerable<Condition> c_ = NCQAStatus_minus_1_0_0.Instance.Active_Condition(context, b_);
         bool? d_(Condition LeftMastectomyDiagnosis)
         {
-            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, LeftMastectomyDiagnosis);
+            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_minus_1_0_0.Instance.Prevalence_Period(context, LeftMastectomyDiagnosis);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.End(h_);
@@ -349,16 +349,16 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.Unilateral_Mastectomy_Left(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
+        IEnumerable<Procedure> c_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, b_);
         CqlValueSet d_ = this.Unilateral_Mastectomy(context);
         IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
+        IEnumerable<Procedure> f_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, e_);
         bool? g_(Procedure UnilateralMastectomyProcedure)
         {
             List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
             CqlConcept s_(CodeableConcept X)
             {
-                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept w_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return w_;
             };
@@ -372,13 +372,13 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
         CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
         IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
+        IEnumerable<Procedure> l_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, k_);
         bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
         {
             List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
             CqlConcept y_(CodeableConcept X)
             {
-                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept ac_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return ac_;
             };
@@ -393,7 +393,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         bool? p_(Procedure LeftMastectomyProcedure)
         {
             DataType ad_ = LeftMastectomyProcedure?.Performed;
-            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ad_);
+            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ad_);
             CqlDateTime af_ = context.Operators.End(ae_);
             CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
             CqlDateTime ah_ = context.Operators.End(ag_);
@@ -412,10 +412,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.History_of_Bilateral_Mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
+        IEnumerable<Condition> c_ = NCQAStatus_minus_1_0_0.Instance.Active_Condition(context, b_);
         bool? d_(Condition BilateralMastectomyHistory)
         {
-            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, BilateralMastectomyHistory);
+            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_minus_1_0_0.Instance.Prevalence_Period(context, BilateralMastectomyHistory);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.End(h_);
@@ -434,16 +434,16 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         CqlValueSet a_ = this.Bilateral_Mastectomy(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
+        IEnumerable<Procedure> c_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, b_);
         CqlValueSet d_ = this.Unilateral_Mastectomy(context);
         IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
+        IEnumerable<Procedure> f_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, e_);
         bool? g_(Procedure UnilateralMastectomyProcedure)
         {
             List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
             CqlConcept s_(CodeableConcept X)
             {
-                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept w_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return w_;
             };
@@ -457,13 +457,13 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
         CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
         IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
+        IEnumerable<Procedure> l_ = NCQAStatus_minus_1_0_0.Instance.Completed_Procedure(context, k_);
         bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
         {
             List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
             CqlConcept y_(CodeableConcept X)
             {
-                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept ac_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return ac_;
             };
@@ -478,7 +478,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         bool? p_(Procedure BilateralMastectomyPerformed)
         {
             DataType ad_ = BilateralMastectomyPerformed?.Performed;
-            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ad_);
+            CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ad_);
             CqlDateTime af_ = context.Operators.End(ae_);
             CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
             CqlDateTime ah_ = context.Operators.End(ag_);
@@ -520,13 +520,13 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     [CqlExpressionDefinition("Exclusions")]
     public bool? Exclusions(CqlContext context)
     {
-        bool? a_ = NCQAHospice_1_0_0.Instance.Hospice_Intervention_or_Encounter(context);
+        bool? a_ = NCQAHospice_minus_1_0_0.Instance.Hospice_Intervention_or_Encounter(context);
         bool? b_ = this.Mastectomy_Exclusion(context);
         bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+        bool? d_ = NCQAAdvancedIllnessandFrailty_minus_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
         bool? e_ = context.Operators.Or(c_, d_);
         CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-        bool? g_ = NCQAPalliativeCare_1_0_0.Instance.Palliative_Care_Overlapping_Period(context, f_);
+        bool? g_ = NCQAPalliativeCare_minus_1_0_0.Instance.Palliative_Care_Overlapping_Period(context, f_);
         bool? h_ = context.Operators.Or(e_, g_);
 
         return h_;
@@ -541,7 +541,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         bool? c_(Observation Mammogram)
         {
             DataType f_ = Mammogram?.Effective;
-            CqlInterval<CqlDateTime> g_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, f_);
+            CqlInterval<CqlDateTime> g_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, f_);
             CqlDateTime h_ = context.Operators.End(g_);
             CqlInterval<CqlDateTime> i_ = this.Participation_Period(context);
             bool? j_ = context.Operators.In<CqlDateTime>(h_, i_, default);

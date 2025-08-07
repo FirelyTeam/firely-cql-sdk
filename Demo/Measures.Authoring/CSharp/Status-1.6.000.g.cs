@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("Status", "1.6.000")]
-public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
+public partial class Status_minus_1_6_000 : ILibrary, ISingleton<Status_minus_1_6_000>
 {
-    private Status_1_6_000() {}
+    private Status_minus_1_6_000() {}
 
-    public static Status_1_6_000 Instance { get; } = new();
+    public static Status_minus_1_6_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "Status";
     public string Version => "1.6.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -43,8 +43,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     private static readonly CqlCode _survey = new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("vital-signs", codeId: "vital-signs", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode vital_signs(CqlContext _) => _vital_signs;
-    private static readonly CqlCode _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode vital_minus_signs(CqlContext _) => _vital_minus_signs;
+    private static readonly CqlCode _vital_minus_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
     public CqlCode active(CqlContext _) => _active;
@@ -61,7 +61,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
           _laboratory,
           _exam,
           _survey,
-          _vital_signs]);
+          _vital_minus_signs]);
 
     [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
     public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
@@ -101,7 +101,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };
@@ -144,7 +144,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };
@@ -175,7 +175,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         bool? a_(Condition C)
         {
             CodeableConcept c_ = C?.ClinicalStatus;
-            CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
             CqlCode e_ = this.active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
@@ -194,7 +194,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         bool? a_(Condition C)
         {
             CodeableConcept c_ = C?.ClinicalStatus;
-            CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
             CqlCode e_ = this.active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
@@ -583,7 +583,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };
@@ -626,7 +626,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };
@@ -817,7 +817,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };
@@ -860,7 +860,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
             {
-                CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                CqlConcept p_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
 
                 return p_;
             };

@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
-public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
+public partial class NCQAClaims_minus_1_0_0 : ILibrary, ISingleton<NCQAClaims_minus_1_0_0>
 {
-    private NCQAClaims_1_0_0() {}
+    private NCQAClaims_minus_1_0_0() {}
 
-    public static NCQAClaims_1_0_0 Instance { get; } = new();
+    public static NCQAClaims_minus_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "NCQAClaims";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQATerminology_1_0_0.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, NCQAFHIRBase_minus_1_0_0.Instance, NCQATerminology_minus_1_0_0.Instance];
 
     #endregion ILibrary Implementation
 
@@ -48,13 +48,13 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         bool? a_(Claim MedicalClaim)
         {
             CodeableConcept c_ = MedicalClaim?.Type;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> e_ = d_?.codes;
-            CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
+            CqlCode f_ = NCQATerminology_minus_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-            CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept i_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> j_ = i_?.codes;
-            CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+            CqlCode k_ = NCQATerminology_minus_1_0_0.Instance.Institutional(context);
             bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
             bool? m_ = context.Operators.Or(g_, l_);
 
@@ -72,9 +72,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         bool? a_(Claim PharmacyClaim)
         {
             CodeableConcept c_ = PharmacyClaim?.Type;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> e_ = d_?.codes;
-            CqlCode f_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
+            CqlCode f_ = NCQATerminology_minus_1_0_0.Instance.Pharmacy(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
             return g_;
@@ -91,13 +91,13 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         bool? a_(ClaimResponse MedicalResponse)
         {
             CodeableConcept c_ = MedicalResponse?.Type;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> e_ = d_?.codes;
-            CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
+            CqlCode f_ = NCQATerminology_minus_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-            CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept i_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> j_ = i_?.codes;
-            CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+            CqlCode k_ = NCQATerminology_minus_1_0_0.Instance.Institutional(context);
             bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
             bool? m_ = context.Operators.Or(g_, l_);
 
@@ -115,9 +115,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         bool? a_(ClaimResponse PharmacyResponse)
         {
             CodeableConcept c_ = PharmacyResponse?.Type;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
+            CqlConcept d_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, c_);
             IReadOnlyList<CqlCode> e_ = d_?.codes;
-            CqlCode f_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
+            CqlCode f_ = NCQATerminology_minus_1_0_0.Instance.Pharmacy(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
             return g_;
@@ -169,7 +169,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         bool? ad_(Claim.ItemComponent ItemOnLine)
                         {
                             CodeableConcept af_ = ItemOnLine?.ProductOrService;
-                            CqlConcept ag_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, af_);
+                            CqlConcept ag_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, af_);
                             IReadOnlyList<CqlCode> ah_ = ag_?.codes;
                             bool? ai_(CqlCode LineCode)
                             {
@@ -182,7 +182,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<CqlCode> aj_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ah_, ai_);
                             bool? ak_ = context.Operators.Exists<CqlCode>(aj_);
                             DataType al_ = ItemOnLine?.Location;
-                            CqlConcept am_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_ as CodeableConcept);
+                            CqlConcept am_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, al_ as CodeableConcept);
                             IReadOnlyList<CqlCode> an_ = am_?.codes;
                             bool? ao_(CqlCode PosCode)
                             {
@@ -239,7 +239,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<object> bh_ = context.Operators.Select<Claim.ItemComponent, object>(bf_, bg_);
                             CqlInterval<CqlDateTime> bi_(object NormalDate)
                             {
-                                CqlInterval<CqlDateTime> bp_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                CqlInterval<CqlDateTime> bp_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
                                 return bp_;
                             };
@@ -316,7 +316,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         bool? z_(Claim.ItemComponent ItemOnLine)
                         {
                             CodeableConcept ab_ = ItemOnLine?.ProductOrService;
-                            CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
+                            CqlConcept ac_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, ab_);
                             IReadOnlyList<CqlCode> ad_ = ac_?.codes;
                             bool? ae_(CqlCode LineCode)
                             {
@@ -419,7 +419,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<object> bt_ = context.Operators.Select<Claim.ItemComponent, object>(br_, bs_);
                             CqlInterval<CqlDateTime> bu_(object NormalDate)
                             {
-                                CqlInterval<CqlDateTime> cb_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                CqlInterval<CqlDateTime> cb_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
                                 return cb_;
                             };
@@ -583,7 +583,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         CqlInterval<CqlDateTime> bj_(Claim.ItemComponent NormalDate)
                         {
                             DataType bq_ = NormalDate?.Serviced;
-                            CqlInterval<CqlDateTime> br_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bq_);
+                            CqlInterval<CqlDateTime> br_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bq_);
 
                             return br_;
                         };
@@ -651,7 +651,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 bool? q_(Claim.ItemComponent ItemOnLine)
                 {
                     CodeableConcept x_ = ItemOnLine?.ProductOrService;
-                    CqlConcept y_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, x_);
+                    CqlConcept y_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, x_);
                     IReadOnlyList<CqlCode> z_ = y_?.codes;
                     bool? aa_(CqlCode LineCode)
                     {
@@ -683,7 +683,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         bool? am_(Claim.ItemComponent i)
                         {
                             CodeableConcept av_ = i?.ProductOrService;
-                            CqlConcept aw_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, av_);
+                            CqlConcept aw_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, av_);
                             IReadOnlyList<CqlCode> ax_ = aw_?.codes;
                             bool? ay_(CqlCode LineCode)
                             {
@@ -724,13 +724,13 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                         if (bk_())
                                         {
                                             DataType bn_ = i?.Serviced;
-                                            CqlInterval<CqlDateTime> bo_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bn_);
+                                            CqlInterval<CqlDateTime> bo_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bn_);
                                             CqlDateTime bp_ = context.Operators.Start(bo_);
-                                            CqlInterval<CqlDateTime> br_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bn_);
+                                            CqlInterval<CqlDateTime> br_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bn_);
                                             CqlDateTime bs_ = context.Operators.Start(br_);
                                             Quantity bt_ = i?.Quantity;
                                             FhirDecimal bu_ = bt_?.ValueElement;
-                                            decimal? bv_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, bu_);
+                                            decimal? bv_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, bu_);
                                             CqlDateTime bw_ = context.Operators.Add(bs_, new CqlQuantity(bv_, "day"));
                                             CqlQuantity bx_ = context.Operators.Quantity(1m, "day");
                                             CqlDateTime by_ = context.Operators.Subtract(bw_, bx_);
@@ -741,38 +741,38 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                         else
                                         {
                                             DataType ca_ = i?.Serviced;
-                                            CqlDate cb_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
-                                            CqlDate cd_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate cb_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate cd_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
                                             Quantity ce_ = i?.Quantity;
                                             FhirDecimal cf_ = ce_?.ValueElement;
-                                            decimal? cg_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, cf_);
+                                            decimal? cg_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, cf_);
                                             CqlDate ch_ = context.Operators.Add(cd_, new CqlQuantity(cg_, "day"));
                                             CqlQuantity ci_ = context.Operators.Quantity(1m, "day");
                                             CqlDate cj_ = context.Operators.Subtract(ch_, ci_);
                                             CqlInterval<CqlDate> ck_ = context.Operators.Interval(cb_, cj_, true, true);
                                             CqlDate cl_ = ck_?.low;
                                             CqlDateTime cm_ = context.Operators.ConvertDateToDateTime(cl_);
-                                            CqlDate co_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
-                                            CqlDate cq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate co_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate cq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
                                             FhirDecimal cs_ = ce_?.ValueElement;
-                                            decimal? ct_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, cs_);
+                                            decimal? ct_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, cs_);
                                             CqlDate cu_ = context.Operators.Add(cq_, new CqlQuantity(ct_, "day"));
                                             CqlDate cw_ = context.Operators.Subtract(cu_, ci_);
                                             CqlInterval<CqlDate> cx_ = context.Operators.Interval(co_, cw_, true, true);
                                             CqlDate cy_ = cx_?.high;
                                             CqlDateTime cz_ = context.Operators.ConvertDateToDateTime(cy_);
-                                            CqlDate db_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
-                                            CqlDate dd_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate db_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate dd_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
                                             FhirDecimal df_ = ce_?.ValueElement;
-                                            decimal? dg_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, df_);
+                                            decimal? dg_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, df_);
                                             CqlDate dh_ = context.Operators.Add(dd_, new CqlQuantity(dg_, "day"));
                                             CqlDate dj_ = context.Operators.Subtract(dh_, ci_);
                                             CqlInterval<CqlDate> dk_ = context.Operators.Interval(db_, dj_, true, true);
                                             bool? dl_ = dk_?.lowClosed;
-                                            CqlDate dn_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
-                                            CqlDate dp_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate dn_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
+                                            CqlDate dp_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_ as Date);
                                             FhirDecimal dr_ = ce_?.ValueElement;
-                                            decimal? ds_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, dr_);
+                                            decimal? ds_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, dr_);
                                             CqlDate dt_ = context.Operators.Add(dp_, new CqlQuantity(ds_, "day"));
                                             CqlDate dv_ = context.Operators.Subtract(dt_, ci_);
                                             CqlInterval<CqlDate> dw_ = context.Operators.Interval(dn_, dv_, true, true);
@@ -831,7 +831,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     IEnumerable<object> ej_ = context.Operators.Select<Claim.ItemComponent, object>(eh_, ei_);
                                     CqlInterval<CqlDateTime> ek_(object NormalDate)
                                     {
-                                        CqlInterval<CqlDateTime> eu_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                        CqlInterval<CqlDateTime> eu_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
                                         return eu_;
                                     };
@@ -1124,7 +1124,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 CqlInterval<CqlDateTime> dt_(Claim.ItemComponent NormalDate)
                                 {
                                     DataType dx_ = NormalDate?.Serviced;
-                                    CqlInterval<CqlDateTime> dy_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, dx_);
+                                    CqlInterval<CqlDateTime> dy_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, dx_);
 
                                     return dy_;
                                 };
@@ -1346,7 +1346,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     {
                                         PositiveInt cz_ = RightDiagnosis?.SequenceElement;
                                         Integer da_ = context.Operators.Convert<Integer>(cz_);
-                                        int? db_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, da_);
+                                        int? db_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, da_);
                                         bool? dc_ = context.Operators.Equal(db_, 1);
                                         DataType dd_ = RightDiagnosis?.Diagnosis;
                                         IEnumerable<Coding> de_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(dd_, "coding");
@@ -1400,7 +1400,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     CqlInterval<CqlDateTime> dw_(Claim.ItemComponent NormalDate)
                                     {
                                         DataType dz_ = NormalDate?.Serviced;
-                                        CqlInterval<CqlDateTime> ea_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, dz_);
+                                        CqlInterval<CqlDateTime> ea_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, dz_);
 
                                         return ea_;
                                     };
@@ -1489,7 +1489,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         {
                             PositiveInt z_ = RightDiagnosis?.SequenceElement;
                             Integer aa_ = context.Operators.Convert<Integer>(z_);
-                            int? ab_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, aa_);
+                            int? ab_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, aa_);
                             bool? ac_ = context.Operators.Equal(ab_, 1);
                             DataType ad_ = RightDiagnosis?.Diagnosis;
                             IEnumerable<Coding> ae_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(ad_, "coding");
@@ -1551,7 +1551,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             CqlInterval<CqlDateTime> bb_(Claim.ItemComponent NormalDate)
                             {
                                 DataType bi_ = NormalDate?.Serviced;
-                                CqlInterval<CqlDateTime> bj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bi_);
+                                CqlInterval<CqlDateTime> bj_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bi_);
 
                                 return bj_;
                             };
@@ -1703,12 +1703,12 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     return default;
                                 }
                             };
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
+                            string ag_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, af_());
                             ClaimResponse ah_ = pClaim?.Response;
                             ResourceReference ai_ = ah_?.Request;
                             FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
+                            string ak_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aj_);
+                            string al_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, ak_);
                             bool? am_ = context.Operators.Equal(ag_, al_);
                             PositiveInt an_ = medClaimLineItem?.SequenceElement;
                             Integer ao_ = context.Operators.Convert<Integer>(an_);
@@ -1806,7 +1806,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem)
                         {
                             DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
+                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ci_);
 
                             return cj_;
                         };
@@ -1855,7 +1855,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         bool? a_(ClaimResponse ResponseItem)
         {
             Code<ClaimProcessingCodes> i_ = ResponseItem?.OutcomeElement;
-            string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+            string j_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, i_);
             string[] k_ = [
                 "complete",
                 "partial",
@@ -1876,8 +1876,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             {
                 ResourceReference q_ = ClmResp?.Request;
                 FhirString r_ = q_?.ReferenceElement;
-                string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
-                string t_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, s_);
+                string s_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, r_);
+                string t_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, s_);
                 List<ClaimResponse.ItemComponent> u_ = ClmResp?.Item;
                 bool? v_(ClaimResponse.ItemComponent ResponseItem)
                 {
@@ -1941,7 +1941,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     bool? aq_(Money DollarAmount)
                     {
                         FhirDecimal bg_ = DollarAmount?.ValueElement;
-                        decimal? bh_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, bg_);
+                        decimal? bh_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, bg_);
                         decimal? bi_ = context.Operators.ConvertIntegerToDecimal(0);
                         bool? bj_ = context.Operators.Greater(bh_, bi_);
 
@@ -2010,7 +2010,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<Coding> o_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)n_);
             bool? p_(Coding ProductOrServiceCode)
             {
-                CqlCode ao_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                CqlCode ao_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                 bool? ap_ = context.Operators.In<CqlCode>(ao_, ProductOrServiceValueSet);
 
                 return ap_;
@@ -2054,7 +2054,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<Coding> ad_ = context.Operators.Select<object, Coding>(ab_, ac_);
             bool? ae_(Coding DiagnosisCode)
             {
-                CqlCode aw_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
+                CqlCode aw_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, DiagnosisCode);
                 bool? ax_ = context.Operators.In<CqlCode>(aw_, DiagnosisValueSet);
 
                 return ax_;
@@ -2076,7 +2076,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 List<Coding> be_ = bd_?.Coding;
                 bool? bf_(Coding ProductOrServiceCode)
                 {
-                    CqlCode bi_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                    CqlCode bi_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                     bool? bj_ = context.Operators.In<CqlCode>(bi_, ProductOrServiceValueSet);
 
                     return bj_;
@@ -2184,12 +2184,12 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     return default;
                                 }
                             };
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
+                            string ag_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, af_());
                             ClaimResponse ah_ = pClaim?.Response;
                             ResourceReference ai_ = ah_?.Request;
                             FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
+                            string ak_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aj_);
+                            string al_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, ak_);
                             bool? am_ = context.Operators.Equal(ag_, al_);
                             PositiveInt an_ = medClaimLineItem?.SequenceElement;
                             Integer ao_ = context.Operators.Convert<Integer>(an_);
@@ -2287,7 +2287,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem)
                         {
                             DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
+                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ci_);
 
                             return cj_;
                         };
@@ -2369,7 +2369,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<Coding> o_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)n_);
             bool? p_(Coding ProductOrServiceCode)
             {
-                CqlCode ao_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                CqlCode ao_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                 bool? ap_ = context.Operators.In<CqlCode>(ao_, ProductOrServiceValueSet);
 
                 return ap_;
@@ -2413,7 +2413,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<Coding> ad_ = context.Operators.Select<object, Coding>(ab_, ac_);
             bool? ae_(Coding DiagnosisCode)
             {
-                CqlCode aw_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
+                CqlCode aw_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, DiagnosisCode);
                 bool? ax_ = context.Operators.In<CqlCode>(aw_, DiagnosisValueSet);
 
                 return ax_;
@@ -2438,7 +2438,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         List<Coding> bf_ = be_?.Coding;
                         bool? bg_(Coding ProductOrServiceCode)
                         {
-                            CqlCode bj_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                            CqlCode bj_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                             bool? bk_ = context.Operators.In<CqlCode>(bj_, ProductOrServiceValueSet);
 
                             return bk_;
@@ -2463,7 +2463,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         List<Coding> br_ = bq_?.Coding;
                         bool? bs_(Coding ProductOrServiceCode)
                         {
-                            CqlCode bv_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                            CqlCode bv_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                             bool? bw_ = context.Operators.In<CqlCode>(bv_, ProductOrServiceValueSet);
 
                             return bw_;
@@ -2593,12 +2593,12 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     return default;
                                 }
                             };
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
+                            string ag_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, af_());
                             ClaimResponse ah_ = pClaim?.Response;
                             ResourceReference ai_ = ah_?.Request;
                             FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
+                            string ak_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aj_);
+                            string al_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, ak_);
                             bool? am_ = context.Operators.Equal(ag_, al_);
                             PositiveInt an_ = medClaimLineItem?.SequenceElement;
                             Integer ao_ = context.Operators.Convert<Integer>(an_);
@@ -2696,7 +2696,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem)
                         {
                             DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
+                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ci_);
 
                             return cj_;
                         };
@@ -2778,7 +2778,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<Coding> o_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)n_);
             bool? p_(Coding ProductOrServiceCode)
             {
-                CqlCode y_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                CqlCode y_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                 bool? z_ = context.Operators.In<CqlCode>(y_, ProductOrServiceValueSet);
 
                 return z_;
@@ -2799,7 +2799,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 List<Coding> ag_ = af_?.Coding;
                 bool? ah_(Coding ProductOrServiceCode)
                 {
-                    CqlCode ak_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
+                    CqlCode ak_ = FHIRHelpers_minus_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
                     bool? al_ = context.Operators.In<CqlCode>(ak_, ProductOrServiceValueSet);
 
                     return al_;
@@ -2918,12 +2918,12 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     return default;
                                 }
                             };
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
+                            string ag_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, af_());
                             ClaimResponse ah_ = pClaim?.Response;
                             ResourceReference ai_ = ah_?.Request;
                             FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
+                            string ak_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aj_);
+                            string al_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, ak_);
                             bool? am_ = context.Operators.Equal(ag_, al_);
                             PositiveInt an_ = medClaimLineItem?.SequenceElement;
                             Integer ao_ = context.Operators.Convert<Integer>(an_);
@@ -3021,7 +3021,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem)
                         {
                             DataType cr_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cs_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, cr_);
+                            CqlInterval<CqlDateTime> cs_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, cr_);
 
                             return cs_;
                         };
@@ -3057,14 +3057,14 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 if (cx_())
                                 {
                                     DataType da_ = i?.Serviced;
-                                    CqlInterval<CqlDateTime> db_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, da_);
+                                    CqlInterval<CqlDateTime> db_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, da_);
                                     CqlDateTime dc_ = context.Operators.Start(db_);
                                     CqlDate dd_ = context.Operators.ConvertDateTimeToDate(dc_);
-                                    CqlInterval<CqlDateTime> df_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, da_);
+                                    CqlInterval<CqlDateTime> df_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, da_);
                                     CqlDateTime dg_ = context.Operators.Start(df_);
                                     Quantity dh_ = i?.Quantity;
                                     FhirDecimal di_ = dh_?.ValueElement;
-                                    decimal? dj_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, di_);
+                                    decimal? dj_ = FHIRHelpers_minus_4_0_001.Instance.ToDecimal(context, di_);
                                     CqlDateTime dk_ = context.Operators.Add(dg_, new CqlQuantity(dj_, "day"));
                                     CqlQuantity dl_ = context.Operators.Quantity(1m, "day");
                                     CqlDateTime dm_ = context.Operators.Subtract(dk_, dl_);
@@ -3128,11 +3128,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             bool? d_(ClaimResponse CR)
             {
                 Id i_ = Claim?.IdElement;
-                string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+                string j_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, i_);
                 ResourceReference k_ = CR?.Request;
                 FhirString l_ = k_?.ReferenceElement;
-                string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-                string n_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, m_);
+                string m_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, l_);
+                string n_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, m_);
                 bool? o_ = context.Operators.Equal(j_, n_);
 
                 return o_;
@@ -3141,15 +3141,15 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             bool? f_(Claim C)
             {
                 Id p_ = Claim?.IdElement;
-                string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+                string q_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, p_);
                 bool? r_(ClaimResponse CR)
                 {
                     Id af_ = Claim?.IdElement;
-                    string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_);
+                    string ag_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, af_);
                     ResourceReference ah_ = CR?.Request;
                     FhirString ai_ = ah_?.ReferenceElement;
-                    string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
-                    string ak_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aj_);
+                    string aj_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ai_);
+                    string ak_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, aj_);
                     bool? al_ = context.Operators.Equal(ag_, ak_);
 
                     return al_;
@@ -3186,8 +3186,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 };
                 IEnumerable<FhirString> aa_ = context.Operators.Select<ResourceReference, FhirString>(y_, z_);
                 FhirString ab_ = context.Operators.SingletonFrom<FhirString>(aa_);
-                string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
-                string ad_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ac_);
+                string ac_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ab_);
+                string ad_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, ac_);
                 bool? ae_ = context.Operators.Equal(q_, ad_);
 
                 return ae_;
@@ -3229,7 +3229,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         bool? t_(Claim.ItemComponent i)
                         {
                             CodeableConcept w_ = i?.Revenue;
-                            CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_);
+                            CqlConcept x_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, w_);
                             IReadOnlyList<CqlCode> y_ = x_?.codes;
                             bool? z_(CqlCode rev)
                             {
@@ -3269,7 +3269,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         bool? aj_(Claim.ItemComponent i)
                         {
                             CodeableConcept as_ = i?.Revenue;
-                            CqlConcept at_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, as_);
+                            CqlConcept at_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, as_);
                             IReadOnlyList<CqlCode> au_ = at_?.codes;
                             bool? av_(CqlCode rev)
                             {
@@ -3383,7 +3383,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             {
                 PositiveInt aa_ = ct?.SequenceElement;
                 Integer ab_ = context.Operators.Convert<Integer>(aa_);
-                int? ac_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ab_);
+                int? ac_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, ab_);
                 bool? ad_ = context.Operators.Equal(ac_, 1);
 
                 return ad_;
@@ -3408,7 +3408,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             {
                 PositiveInt ah_ = ct?.SequenceElement;
                 Integer ai_ = context.Operators.Convert<Integer>(ah_);
-                int? aj_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ai_);
+                int? aj_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, ai_);
                 bool? ak_ = context.Operators.Equal(aj_, 1);
 
                 return ak_;
@@ -3437,8 +3437,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 ];
                 string aq_(FhirString r)
                 {
-                    string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
-                    string au_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, at_);
+                    string at_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, r);
+                    string au_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, at_);
 
                     return au_;
                 };
@@ -3464,7 +3464,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             bool? aw_(Practitioner p)
             {
                 Id be_ = p?.IdElement;
-                string bf_ = FHIRHelpers_4_0_001.Instance.ToString(context, be_);
+                string bf_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, be_);
                 IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> bg_ = ClaimProperties?.CareTeams;
                 bool? bh_((CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
                 {
@@ -3510,8 +3510,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string cp_ = co_?.Value;
                         bool? cq_ = context.Operators.Equal(cp_, "http://hl7.org/fhir/sid/us-npi");
                         CodeableConcept cr_ = l?.Type;
-                        CqlConcept cs_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cr_);
-                        CqlCode ct_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept cs_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, cr_);
+                        CqlCode ct_ = NCQATerminology_minus_1_0_0.Instance.Provider_number(context);
                         CqlConcept cu_ = context.Operators.ConvertCodeToConcept(ct_);
                         bool? cv_ = context.Operators.Equivalent(cs_, cu_);
                         bool? cw_ = context.Operators.And(cq_, cv_);
@@ -3537,8 +3537,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string dd_ = dc_?.Value;
                         bool? de_ = context.Operators.Equal(dd_, "http://hl7.org/fhir/sid/us-npi");
                         CodeableConcept df_ = l?.Type;
-                        CqlConcept dg_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, df_);
-                        CqlCode dh_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept dg_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, df_);
+                        CqlCode dh_ = NCQATerminology_minus_1_0_0.Instance.Provider_number(context);
                         CqlConcept di_ = context.Operators.ConvertCodeToConcept(dh_);
                         bool? dj_ = context.Operators.Equivalent(dg_, di_);
                         bool? dk_ = context.Operators.And(de_, dj_);
@@ -3680,7 +3680,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             {
                 PositiveInt ad_ = i?.SequenceElement;
                 Integer ae_ = context.Operators.Convert<Integer>(ad_);
-                int? af_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ae_);
+                int? af_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, ae_);
                 bool? ag_ = context.Operators.Equal(af_, 1);
 
                 return ag_;
@@ -3708,7 +3708,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             {
                 PositiveInt ak_ = i?.SequenceElement;
                 Integer al_ = context.Operators.Convert<Integer>(ak_);
-                int? am_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, al_);
+                int? am_ = FHIRHelpers_minus_4_0_001.Instance.ToInteger(context, al_);
                 bool? an_ = context.Operators.Equal(am_, 1);
 
                 return an_;
@@ -3737,8 +3737,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 ];
                 string at_(FhirString r)
                 {
-                    string aw_ = FHIRHelpers_4_0_001.Instance.ToString(context, r);
-                    string ax_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aw_);
+                    string aw_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, r);
+                    string ax_ = NCQAFHIRBase_minus_1_0_0.Instance.GetId(context, aw_);
 
                     return ax_;
                 };
@@ -3764,7 +3764,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             bool? az_(Location l)
             {
                 Id bh_ = l?.IdElement;
-                string bi_ = FHIRHelpers_4_0_001.Instance.ToString(context, bh_);
+                string bi_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bh_);
                 IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bj_ = ClaimProperties?.ItemsLocationReferences;
                 bool? bk_((CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
                 {
@@ -3810,8 +3810,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string cs_ = cr_?.Value;
                         bool? ct_ = context.Operators.Equal(cs_, "http://hl7.org/fhir/sid/us-npi");
                         CodeableConcept cu_ = l?.Type;
-                        CqlConcept cv_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cu_);
-                        CqlCode cw_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept cv_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, cu_);
+                        CqlCode cw_ = NCQATerminology_minus_1_0_0.Instance.Provider_number(context);
                         CqlConcept cx_ = context.Operators.ConvertCodeToConcept(cw_);
                         bool? cy_ = context.Operators.Equivalent(cv_, cx_);
                         bool? cz_ = context.Operators.And(ct_, cy_);
@@ -3837,8 +3837,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string dg_ = df_?.Value;
                         bool? dh_ = context.Operators.Equal(dg_, "http://hl7.org/fhir/sid/us-npi");
                         CodeableConcept di_ = l?.Type;
-                        CqlConcept dj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, di_);
-                        CqlCode dk_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
+                        CqlConcept dj_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, di_);
+                        CqlCode dk_ = NCQATerminology_minus_1_0_0.Instance.Provider_number(context);
                         CqlConcept dl_ = context.Operators.ConvertCodeToConcept(dk_);
                         bool? dm_ = context.Operators.Equivalent(dj_, dl_);
                         bool? dn_ = context.Operators.And(dh_, dm_);

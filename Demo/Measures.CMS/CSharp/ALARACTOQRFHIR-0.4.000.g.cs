@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ALARACTOQRFHIR", "0.4.000")]
-public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHIR_0_4_000>
+public partial class ALARACTOQRFHIR_minus_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHIR_minus_0_4_000>
 {
-    private ALARACTOQRFHIR_0_4_000() {}
+    private ALARACTOQRFHIR_minus_0_4_000() {}
 
-    public static ALARACTOQRFHIR_0_4_000 Instance { get; } = new();
+    public static ALARACTOQRFHIR_minus_0_4_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ALARACTOQRFHIR";
     public string Version => "0.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, CQMCommon_minus_2_2_000.Instance, QICoreCommon_minus_2_1_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, AlaraCommonFunctions_minus_1_5_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -96,8 +96,8 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         bool? d_(Observation CTScan)
         {
             DataType f_ = CTScan?.Effective;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.ToInterval(context, g_);
+            object g_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.ToInterval(context, g_);
             CqlDateTime i_ = context.Operators.End(h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
@@ -130,12 +130,12 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
             bool? h_(Encounter InpatientEncounter)
             {
                 DataType l_ = QualifiedCTScan?.Effective;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.ToInterval(context, m_);
+                object m_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, l_);
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_minus_2_1_000.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 Period p_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.ToInterval(context, q_ as object);
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, p_);
+                CqlInterval<CqlDateTime> r_ = QICoreCommon_minus_2_1_000.Instance.ToInterval(context, q_ as object);
                 bool? s_ = context.Operators.In<CqlDateTime>(o_, r_, default);
 
                 return s_;
@@ -160,13 +160,13 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         IEnumerable<Observation> a_ = this.Qualified_Scan_without_Inpatient_Encounter(context);
         bool? b_(Observation CTScan)
         {
-            decimal? d_ = AlaraCommonFunctions_1_5_000.Instance.Global_Noise_Value(context, CTScan);
+            decimal? d_ = AlaraCommonFunctions_minus_1_5_000.Instance.Global_Noise_Value(context, CTScan);
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            decimal? f_ = AlaraCommonFunctions_1_5_000.Instance.Size_Adjusted_Value(context, CTScan);
+            decimal? f_ = AlaraCommonFunctions_minus_1_5_000.Instance.Size_Adjusted_Value(context, CTScan);
             bool? g_ = context.Operators.Not((bool?)(f_ is null));
             bool? h_ = context.Operators.And(e_, g_);
             DataType i_ = CTScan?.Value;
-            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
             bool? k_ = context.Operators.Not((bool?)(j_ is null));
             bool? l_ = context.Operators.And(h_, k_);
 
@@ -194,7 +194,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         bool? b_(Observation CTScan)
         {
             DataType d_ = CTScan?.Value;
-            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
+            object e_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, d_);
             IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
             CqlCode g_ = this.Full_Body(context);
             bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
@@ -222,7 +222,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
         IEnumerable<Observation> a_ = this.Qualified_Scan_with_Values(context);
         bool? b_(Observation CTScan)
         {
-            bool? d_ = AlaraCommonFunctions_1_5_000.Instance.CT_Scan_Qualifies(context, CTScan);
+            bool? d_ = AlaraCommonFunctions_minus_1_5_000.Instance.CT_Scan_Qualifies(context, CTScan);
 
             return d_;
         };
@@ -235,7 +235,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -244,7 +244,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -253,7 +253,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -262,7 +262,7 @@ public partial class ALARACTOQRFHIR_0_4_000 : ILibrary, ISingleton<ALARACTOQRFHI
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

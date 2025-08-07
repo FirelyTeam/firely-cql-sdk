@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.2.001")]
-public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_2_001>
+public partial class AppropriateDXAScansForWomenUnder65FHIR_minus_0_2_001 : ILibrary, ISingleton<AppropriateDXAScansForWomenUnder65FHIR_minus_0_2_001>
 {
-    private AppropriateDXAScansForWomenUnder65FHIR_0_2_001() {}
+    private AppropriateDXAScansForWomenUnder65FHIR_minus_0_2_001() {}
 
-    public static AppropriateDXAScansForWomenUnder65FHIR_0_2_001 Instance { get; } = new();
+    public static AppropriateDXAScansForWomenUnder65FHIR_minus_0_2_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "AppropriateDXAScansForWomenUnder65FHIR";
     public string Version => "0.2.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Hospice_6_12_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, Status_minus_1_8_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance, Hospice_minus_6_12_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -219,8 +219,8 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     private static readonly CqlCode _Left__qualifier_value_ = new CqlCode("7771000", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment", codeId: "90265-0", codeSystem: "http://loinc.org")]
-    public CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment(CqlContext _) => _Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment;
-    private static readonly CqlCode _Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment = new CqlCode("90265-0", "http://loinc.org");
+    public CqlCode Major_osteoporotic_fracture_10_minus_year_probability__Likelihood__Fracture_Risk_Assessment(CqlContext _) => _Major_osteoporotic_fracture_10_minus_year_probability__Likelihood__Fracture_Risk_Assessment;
+    private static readonly CqlCode _Major_osteoporotic_fracture_10_minus_year_probability__Likelihood__Fracture_Risk_Assessment = new CqlCode("90265-0", "http://loinc.org");
 
     [CqlCodeDefinition("Osteoporosis Index of Risk panel", codeId: "98133-2", codeSystem: "http://loinc.org")]
     public CqlCode Osteoporosis_Index_of_Risk_panel(CqlContext _) => _Osteoporosis_Index_of_Risk_panel;
@@ -231,8 +231,8 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     private static readonly CqlCode _Osteoporosis_Risk_Assessment_Instrument = new CqlCode("98139-9", "http://loinc.org");
 
     [CqlCodeDefinition("Osteoporosis Self-Assessment Tool", codeId: "98146-4", codeSystem: "http://loinc.org")]
-    public CqlCode Osteoporosis_Self_Assessment_Tool(CqlContext _) => _Osteoporosis_Self_Assessment_Tool;
-    private static readonly CqlCode _Osteoporosis_Self_Assessment_Tool = new CqlCode("98146-4", "http://loinc.org");
+    public CqlCode Osteoporosis_Self_minus_Assessment_Tool(CqlContext _) => _Osteoporosis_Self_minus_Assessment_Tool;
+    private static readonly CqlCode _Osteoporosis_Self_minus_Assessment_Tool = new CqlCode("98146-4", "http://loinc.org");
 
     [CqlCodeDefinition("Right (qualifier value)", codeId: "24028007", codeSystem: "http://snomed.info/sct")]
     public CqlCode Right__qualifier_value_(CqlContext _) => _Right__qualifier_value_;
@@ -252,10 +252,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
       new CqlCodeSystem("http://loinc.org", null, [
           _Alcoholic_drinks_per_day,
           _Body_mass_index__BMI___Ratio_,
-          _Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment,
+          _Major_osteoporotic_fracture_10_minus_year_probability__Likelihood__Fracture_Risk_Assessment,
           _Osteoporosis_Index_of_Risk_panel,
           _Osteoporosis_Risk_Assessment_Instrument,
-          _Osteoporosis_Self_Assessment_Tool]);
+          _Osteoporosis_Self_minus_Assessment_Tool]);
 
     [CqlCodeSystemDefinition("AdministrativeGender", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", codeSystemVersion: null)]
     public CqlCodeSystem AdministrativeGender(CqlContext _) => _AdministrativeGender;
@@ -309,7 +309,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -318,7 +318,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -327,7 +327,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -336,7 +336,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -356,7 +356,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
             List<CodeableConcept> y_ = E?.Type;
             CqlConcept z_(CodeableConcept @this)
             {
-                CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ae_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return ae_;
             };
@@ -388,13 +388,13 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         CqlValueSet s_ = this.Telephone_Visits(context);
         IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(r_, t_);
-        IEnumerable<Encounter> v_ = Status_1_8_000.Instance.isEncounterPerformed(context, u_);
+        IEnumerable<Encounter> v_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, u_);
         bool? w_(Encounter ValidEncounters)
         {
             CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
             Period aj_ = ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ak_ as object);
             bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
             return am_;
@@ -444,16 +444,16 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     public Observation First_BMI_in_Measurement_Period(CqlContext context)
     {
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bmi"));
-        IEnumerable<Observation> b_ = Status_1_8_000.Instance.isObservationBMI(context, a_);
+        IEnumerable<Observation> b_ = Status_minus_1_8_000.Instance.isObservationBMI(context, a_);
         bool? c_(Observation BMIRatio)
         {
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             DataType i_ = BMIRatio?.Effective;
-            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_);
+            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, j_);
             bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, default);
             DataType m_ = BMIRatio?.Value;
-            CqlQuantity n_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, m_ as Quantity);
+            CqlQuantity n_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, m_ as Quantity);
             bool? o_ = context.Operators.Not((bool?)((n_ as CqlQuantity) is null));
             bool? p_ = context.Operators.And(l_, o_);
 
@@ -463,8 +463,8 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         object e_(Observation @this)
         {
             DataType q_ = @this?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
+            object r_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, q_);
+            CqlInterval<CqlDateTime> s_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, r_);
             CqlDateTime t_ = context.Operators.Start(s_);
 
             return t_;
@@ -486,7 +486,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         bool? c_(Observation FirstBMI)
         {
             DataType f_ = FirstBMI?.Value;
-            CqlQuantity g_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, f_ as Quantity);
+            CqlQuantity g_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, f_ as Quantity);
             CqlQuantity h_ = context.Operators.Quantity(20m, "kg/m2");
             bool? i_ = context.Operators.LessOrEqual(g_ as CqlQuantity, h_);
 
@@ -505,17 +505,17 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         CqlCode a_ = this.Alcoholic_drinks_per_day(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> d_ = Status_1_8_000.Instance.isAssessmentPerformed(context, c_);
+        IEnumerable<Observation> d_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, c_);
         bool? e_(Observation AverageDrinks)
         {
             DataType j_ = AverageDrinks?.Effective;
-            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.toInterval(context, k_);
+            object k_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, j_);
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, k_);
             CqlDateTime m_ = context.Operators.Start(l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
             DataType p_ = AverageDrinks?.Value;
-            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+            object q_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, p_);
             CqlQuantity r_ = context.Operators.Quantity(2m, "{drinks}/d");
             bool? s_ = context.Operators.Greater(q_ as CqlQuantity, r_);
             bool? t_ = context.Operators.And(o_, s_);
@@ -526,8 +526,8 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         object g_(Observation @this)
         {
             DataType u_ = @this?.Effective;
-            object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-            CqlInterval<CqlDateTime> w_ = QICoreCommon_2_1_000.Instance.toInterval(context, v_);
+            object v_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, u_);
+            CqlInterval<CqlDateTime> w_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
 
             return x_;
@@ -559,7 +559,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition OsteoporosisDiagnosis)
         {
-            CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, OsteoporosisDiagnosis);
+            CqlInterval<CqlDateTime> aq_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, OsteoporosisDiagnosis);
             CqlDateTime ar_ = context.Operators.Start(aq_);
             CqlInterval<CqlDateTime> as_ = this.Measurement_Period(context);
             CqlDateTime at_ = context.Operators.Start(as_);
@@ -572,7 +572,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? g_(Condition OsteopeniaDiagnosis)
         {
-            CqlInterval<CqlDateTime> av_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, OsteopeniaDiagnosis);
+            CqlInterval<CqlDateTime> av_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, OsteopeniaDiagnosis);
             CqlDateTime aw_ = context.Operators.Start(av_);
             CqlInterval<CqlDateTime> ax_ = this.Measurement_Period(context);
             CqlDateTime ay_ = context.Operators.Start(ax_);
@@ -584,12 +584,12 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<Condition> i_ = context.Operators.Union<Condition>(d_, h_);
         CqlValueSet j_ = this.Gastric_Bypass_Surgery(context);
         IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> l_ = Status_1_8_000.Instance.isProcedurePerformed(context, k_);
+        IEnumerable<Procedure> l_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, k_);
         bool? m_(Procedure GastricBypass)
         {
             DataType ba_ = GastricBypass?.Performed;
-            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-            CqlInterval<CqlDateTime> bc_ = QICoreCommon_2_1_000.Instance.toInterval(context, bb_);
+            object bb_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ba_);
+            CqlInterval<CqlDateTime> bc_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, bb_);
             CqlDateTime bd_ = context.Operators.End(bc_);
             CqlInterval<CqlDateTime> be_ = this.Measurement_Period(context);
             CqlDateTime bf_ = context.Operators.Start(be_);
@@ -612,7 +612,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
                 string bp_ = context.Operators.Last<string>(bo_);
                 bool? bq_ = context.Operators.Equal(bm_, bp_);
                 CodeableConcept br_ = M?.Code;
-                CqlConcept bs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, br_);
+                CqlConcept bs_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, br_);
                 CqlValueSet bt_ = this.Aromatase_Inhibitors(context);
                 bool? bu_ = context.Operators.ConceptInValueSet(bs_, bt_);
                 bool? bv_ = context.Operators.And(bq_, bu_);
@@ -628,10 +628,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         };
         IEnumerable<MedicationRequest> s_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(q_, r_);
         IEnumerable<MedicationRequest> t_ = context.Operators.Union<MedicationRequest>(p_, s_);
-        IEnumerable<MedicationRequest> u_ = Status_1_8_000.Instance.isMedicationActive(context, t_);
+        IEnumerable<MedicationRequest> u_ = Status_minus_1_8_000.Instance.isMedicationActive(context, t_);
         bool? v_(MedicationRequest AromataseInhibitorActive)
         {
-            CqlInterval<CqlDate> bw_ = CumulativeMedicationDuration_4_1_000.Instance.MedicationRequestPeriod(context, AromataseInhibitorActive);
+            CqlInterval<CqlDate> bw_ = CumulativeMedicationDuration_minus_4_1_000.Instance.MedicationRequestPeriod(context, AromataseInhibitorActive);
             CqlDate bx_ = context.Operators.Start(bw_);
             CqlDateTime by_ = context.Operators.ConvertDateToDateTime(bx_);
             CqlInterval<CqlDateTime> bz_ = this.Measurement_Period(context);
@@ -654,7 +654,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
                 string ck_ = context.Operators.Last<string>(cj_);
                 bool? cl_ = context.Operators.Equal(ch_, ck_);
                 CodeableConcept cm_ = M?.Code;
-                CqlConcept cn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cm_);
+                CqlConcept cn_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, cm_);
                 CqlValueSet co_ = this.Aromatase_Inhibitors(context);
                 bool? cp_ = context.Operators.ConceptInValueSet(cn_, co_);
                 bool? cq_ = context.Operators.And(cl_, cp_);
@@ -670,12 +670,12 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         };
         IEnumerable<MedicationRequest> ac_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(q_, ab_);
         IEnumerable<MedicationRequest> ad_ = context.Operators.Union<MedicationRequest>(z_, ac_);
-        IEnumerable<MedicationRequest> ae_ = Status_1_8_000.Instance.isMedicationOrder(context, ad_);
+        IEnumerable<MedicationRequest> ae_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, ad_);
         bool? af_(MedicationRequest AromataseInhibitorOrder)
         {
             FhirDateTime cr_ = AromataseInhibitorOrder?.AuthoredOnElement;
             CqlDateTime cs_ = context.Operators.Convert<CqlDateTime>(cr_);
-            CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_1_000.Instance.toInterval(context, cs_ as object);
+            CqlInterval<CqlDateTime> ct_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, cs_ as object);
             CqlInterval<CqlDateTime> cu_()
             {
                 bool cw_()
@@ -707,12 +707,12 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<object> ah_ = context.Operators.Union<object>(x_ as IEnumerable<object>, ag_ as IEnumerable<object>);
         CqlValueSet ai_ = this.History_of_hip_fracture_in_parent(context);
         IEnumerable<Observation> aj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> ak_ = Status_1_8_000.Instance.isAssessmentPerformed(context, aj_);
+        IEnumerable<Observation> ak_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, aj_);
         bool? al_(Observation ParentFractureHistory)
         {
             DataType de_ = ParentFractureHistory?.Effective;
-            object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-            CqlInterval<CqlDateTime> dg_ = QICoreCommon_2_1_000.Instance.toInterval(context, df_);
+            object df_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, de_);
+            CqlInterval<CqlDateTime> dg_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, df_);
             CqlDateTime dh_ = context.Operators.Start(dg_);
             CqlInterval<CqlDateTime> di_ = this.Measurement_Period(context);
             CqlDateTime dj_ = context.Operators.Start(di_);
@@ -746,7 +746,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
                 string v_ = context.Operators.Last<string>(u_);
                 bool? w_ = context.Operators.Equal(s_, v_);
                 CodeableConcept x_ = M?.Code;
-                CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                CqlConcept y_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, x_);
                 CqlValueSet z_ = this.Glucocorticoids__oral_only_(context);
                 bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
                 bool? ab_ = context.Operators.And(w_, aa_);
@@ -762,10 +762,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationActive(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationActive(context, f_);
         bool? h_(MedicationRequest OralGlucocorticoid)
         {
-            CqlInterval<CqlDate> ac_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, OralGlucocorticoid);
+            CqlInterval<CqlDate> ac_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, OralGlucocorticoid);
             CqlDate ad_ = context.Operators.Start(ac_);
             CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
             CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
@@ -777,7 +777,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
         CqlInterval<CqlDate> j_(MedicationRequest Glucocorticoid)
         {
-            CqlInterval<CqlDate> ai_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, Glucocorticoid);
+            CqlInterval<CqlDate> ai_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, Glucocorticoid);
             Patient aj_ = this.Patient(context);
             Date ak_ = aj_?.BirthDateElement;
             string al_ = ak_?.Value;
@@ -792,7 +792,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         };
         IEnumerable<CqlInterval<CqlDate>> k_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(i_, j_);
         IEnumerable<CqlInterval<CqlDate>> l_ = context.Operators.Distinct<CqlInterval<CqlDate>>(k_);
-        int? m_ = CumulativeMedicationDuration_4_1_000.Instance.cumulativeDuration(context, l_);
+        int? m_ = CumulativeMedicationDuration_minus_4_1_000.Instance.cumulativeDuration(context, l_);
 
         return m_;
     }
@@ -813,7 +813,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     {
         bool? a_(Condition Dx)
         {
-            CqlInterval<CqlDateTime> c_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Dx);
+            CqlInterval<CqlDateTime> c_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Dx);
             CqlDateTime d_ = context.Operators.Start(c_);
             CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
             CqlDateTime f_ = context.Operators.End(e_);
@@ -830,12 +830,12 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlFunctionDefinition("procedureInPatientHistory")]
     public IEnumerable<Procedure> procedureInPatientHistory(CqlContext context, IEnumerable<Procedure> Procedure)
     {
-        IEnumerable<Procedure> a_ = Status_1_8_000.Instance.isProcedurePerformed(context, Procedure);
+        IEnumerable<Procedure> a_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, Procedure);
         bool? b_(Procedure Proc)
         {
             DataType d_ = Proc?.Performed;
-            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.toInterval(context, e_);
+            object e_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, d_);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, e_);
             CqlDateTime g_ = context.Operators.End(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.End(h_);
@@ -868,7 +868,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
             List<CodeableConcept> ad_ = UnilateralOophorectomy?.BodySite;
             CqlConcept ae_(CodeableConcept @this)
             {
-                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept aj_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return aj_;
             };
@@ -898,7 +898,7 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
             List<CodeableConcept> an_ = UnilateralOophorectomy?.BodySite;
             CqlConcept ao_(CodeableConcept @this)
             {
-                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept at_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return at_;
             };
@@ -1045,13 +1045,13 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     {
         CqlValueSet a_ = this.DXA__Dual_energy_Xray_Absorptiometry__Scan(context);
         IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> c_ = Status_1_8_000.Instance.isDiagnosticStudyOrder(context, b_);
+        IEnumerable<ServiceRequest> c_ = Status_minus_1_8_000.Instance.isDiagnosticStudyOrder(context, b_);
         bool? d_(ServiceRequest DXA)
         {
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             FhirDateTime i_ = DXA?.AuthoredOnElement;
             CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_ as object);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, j_ as object);
             bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, default);
 
             return l_;
@@ -1083,14 +1083,14 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     [CqlExpressionDefinition("Osteoporosis Fracture Risk Assessment Prior to First DXA Scan")]
     public IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan(CqlContext context)
     {
-        CqlCode a_ = this.Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment(context);
+        CqlCode a_ = this.Major_osteoporotic_fracture_10_minus_year_probability__Likelihood__Fracture_Risk_Assessment(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> d_ = Status_1_8_000.Instance.isAssessmentPerformed(context, c_);
+        IEnumerable<Observation> d_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, c_);
         bool? e_(Observation FRAX)
         {
             DataType ad_ = FRAX?.Value;
-            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ad_);
             CqlQuantity af_ = context.Operators.Quantity(8.4m, "%");
             bool? ag_ = context.Operators.GreaterOrEqual(ae_ as CqlQuantity, af_);
 
@@ -1100,11 +1100,11 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         CqlCode g_ = this.Osteoporosis_Risk_Assessment_Instrument(context);
         IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
         IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> j_ = Status_1_8_000.Instance.isAssessmentPerformed(context, i_);
+        IEnumerable<Observation> j_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, i_);
         bool? k_(Observation ORAI)
         {
             DataType ah_ = ORAI?.Value;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
             bool? aj_ = context.Operators.GreaterOrEqual(ai_ as int?, 9);
 
             return aj_;
@@ -1114,25 +1114,25 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         CqlCode n_ = this.Osteoporosis_Index_of_Risk_panel(context);
         IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
         IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, o_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> q_ = Status_1_8_000.Instance.isAssessmentPerformed(context, p_);
+        IEnumerable<Observation> q_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, p_);
         bool? r_(Observation OSIRIS)
         {
             DataType ak_ = OSIRIS?.Value;
-            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            object al_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ak_);
             CqlQuantity am_ = context.Operators.ConvertDecimalToQuantity(1.0m);
             bool? an_ = context.Operators.Less(al_ as CqlQuantity, am_);
 
             return an_;
         };
         IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
-        CqlCode t_ = this.Osteoporosis_Self_Assessment_Tool(context);
+        CqlCode t_ = this.Osteoporosis_Self_minus_Assessment_Tool(context);
         IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
         IEnumerable<Observation> v_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, u_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> w_ = Status_1_8_000.Instance.isAssessmentPerformed(context, v_);
+        IEnumerable<Observation> w_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, v_);
         bool? x_(Observation OST)
         {
             DataType ao_ = OST?.Value;
-            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+            object ap_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ao_);
             CqlQuantity aq_ = context.Operators.ConvertDecimalToQuantity(2.0m);
             bool? ar_ = context.Operators.Less(ap_ as CqlQuantity, aq_);
 
@@ -1144,8 +1144,8 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         bool? ab_(Observation RiskAssessment)
         {
             DataType as_ = RiskAssessment?.Effective;
-            object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-            CqlInterval<CqlDateTime> au_ = QICoreCommon_2_1_000.Instance.toInterval(context, at_);
+            object at_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, as_);
+            CqlInterval<CqlDateTime> au_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, at_);
             CqlDateTime av_ = context.Operators.Start(au_);
             IEnumerable<ServiceRequest> aw_ = this.DXA_Scan_Order_During_Measurement_Period(context);
             ServiceRequest ax_ = context.Operators.First<ServiceRequest>(aw_);

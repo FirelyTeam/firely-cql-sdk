@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR", "0.0.001")]
-public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 : ILibrary, ISingleton<PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001>
+public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_minus_0_0_001 : ILibrary, ISingleton<PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_minus_0_0_001>
 {
-    private PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001() {}
+    private PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_minus_0_0_001() {}
 
-    public static PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 Instance { get; } = new();
+    public static PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR_minus_0_0_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "PreventiveCareAndTobaccoUseScreeningAndCessationInterventionFHIR";
     public string Version => "0.0.001";
-    public ILibrary[] Dependencies => [Status_1_8_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
+    public ILibrary[] Dependencies => [Status_minus_1_8_000.Instance, FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, Hospice_minus_6_12_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -139,16 +139,16 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     #region Codes
 
     [CqlCodeDefinition("Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)", codeId: "96156", codeSystem: "http://www.ama-assn.org/go/cpt")]
-    public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext _) => _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_;
-    private static readonly CqlCode _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_ = new CqlCode("96156", "http://www.ama-assn.org/go/cpt");
+    public CqlCode Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext _) => _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_;
+    private static readonly CqlCode _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_ = new CqlCode("96156", "http://www.ama-assn.org/go/cpt");
 
     [CqlCodeDefinition("Health behavior intervention, individual, face-to-face; initial 30 minutes", codeId: "96158", codeSystem: "http://www.ama-assn.org/go/cpt")]
-    public CqlCode Health_behavior_intervention__individual__face_to_face__initial_30_minutes(CqlContext _) => _Health_behavior_intervention__individual__face_to_face__initial_30_minutes;
-    private static readonly CqlCode _Health_behavior_intervention__individual__face_to_face__initial_30_minutes = new CqlCode("96158", "http://www.ama-assn.org/go/cpt");
+    public CqlCode Health_behavior_intervention__individual__face_minus_to_minus_face__initial_30_minutes(CqlContext _) => _Health_behavior_intervention__individual__face_minus_to_minus_face__initial_30_minutes;
+    private static readonly CqlCode _Health_behavior_intervention__individual__face_minus_to_minus_face__initial_30_minutes = new CqlCode("96158", "http://www.ama-assn.org/go/cpt");
 
     [CqlCodeDefinition("Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure", codeId: "99024", codeSystem: "http://www.ama-assn.org/go/cpt")]
-    public CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(CqlContext _) => _Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure;
-    private static readonly CqlCode _Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure = new CqlCode("99024", "http://www.ama-assn.org/go/cpt");
+    public CqlCode Postoperative_follow_minus_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(CqlContext _) => _Postoperative_follow_minus_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure;
+    private static readonly CqlCode _Postoperative_follow_minus_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure = new CqlCode("99024", "http://www.ama-assn.org/go/cpt");
 
     [CqlCodeDefinition("Tobacco abuse counseling", codeId: "Z71.6", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
     public CqlCode Tobacco_abuse_counseling(CqlContext _) => _Tobacco_abuse_counseling;
@@ -166,9 +166,9 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     public CqlCodeSystem CPT(CqlContext _) => _CPT;
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [
-          _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_,
-          _Health_behavior_intervention__individual__face_to_face__initial_30_minutes,
-          _Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure,
+          _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_,
+          _Health_behavior_intervention__individual__face_minus_to_minus_face__initial_30_minutes,
+          _Postoperative_follow_minus_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure,
           _Unlisted_preventive_medicine_service]);
 
     [CqlCodeSystemDefinition("ICD10CM", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
@@ -216,14 +216,14 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             List<CodeableConcept> ar_ = E?.Type;
             CqlConcept as_(CodeableConcept @this)
             {
-                CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ax_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return ax_;
             };
             IEnumerable<CqlConcept> at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_, as_);
             bool? au_(CqlConcept T)
             {
-                CqlCode ay_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes(context);
+                CqlCode ay_ = this.Health_behavior_intervention__individual__face_minus_to_minus_face__initial_30_minutes(context);
                 CqlConcept az_ = context.Operators.ConvertCodeToConcept(ay_);
                 bool? ba_ = context.Operators.Equivalent(T, az_);
 
@@ -240,14 +240,14 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             List<CodeableConcept> bb_ = E?.Type;
             CqlConcept bc_(CodeableConcept @this)
             {
-                CqlConcept bh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept bh_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return bh_;
             };
             IEnumerable<CqlConcept> bd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
             bool? be_(CqlConcept T)
             {
-                CqlCode bi_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
+                CqlCode bi_ = this.Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
                 CqlConcept bj_ = context.Operators.ConvertCodeToConcept(bi_);
                 bool? bk_ = context.Operators.Equivalent(T, bj_);
 
@@ -293,13 +293,13 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         CqlValueSet al_ = this.Virtual_Encounter(context);
         IEnumerable<Encounter> am_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
-        IEnumerable<Encounter> ao_ = Status_1_8_000.Instance.isEncounterPerformed(context, an_);
+        IEnumerable<Encounter> ao_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, an_);
         bool? ap_(Encounter OfficeBasedEncounter)
         {
             CqlInterval<CqlDateTime> bl_ = this.Measurement_Period(context);
             Period bm_ = OfficeBasedEncounter?.Period;
-            CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bm_);
-            CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_1_000.Instance.toInterval(context, bn_ as object);
+            CqlInterval<CqlDateTime> bn_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bm_);
+            CqlInterval<CqlDateTime> bo_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, bn_ as object);
             bool? bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, "day");
 
             return bp_;
@@ -338,7 +338,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             List<CodeableConcept> ai_ = E?.Type;
             CqlConcept aj_(CodeableConcept @this)
             {
-                CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ao_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return ao_;
             };
@@ -364,14 +364,14 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             List<CodeableConcept> as_ = E?.Type;
             CqlConcept at_(CodeableConcept @this)
             {
-                CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ay_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return ay_;
             };
             IEnumerable<CqlConcept> au_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)as_, at_);
             bool? av_(CqlConcept T)
             {
-                CqlCode az_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
+                CqlCode az_ = this.Postoperative_follow_minus_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
                 CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
                 bool? bb_ = context.Operators.Equivalent(T, ba_);
 
@@ -387,13 +387,13 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         IEnumerable<Encounter> ac_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(aa_, ac_);
         IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(x_, ad_);
-        IEnumerable<Encounter> af_ = Status_1_8_000.Instance.isEncounterPerformed(context, ae_);
+        IEnumerable<Encounter> af_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, ae_);
         bool? ag_(Encounter PreventiveEncounter)
         {
             CqlInterval<CqlDateTime> bc_ = this.Measurement_Period(context);
             Period bd_ = PreventiveEncounter?.Period;
-            CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-            CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_1_000.Instance.toInterval(context, be_ as object);
+            CqlInterval<CqlDateTime> be_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bd_);
+            CqlInterval<CqlDateTime> bf_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, be_ as object);
             bool? bg_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bc_, bf_, "day");
 
             return bg_;
@@ -442,13 +442,13 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     {
         CqlValueSet a_ = this.Tobacco_Use_Screening(context);
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> c_ = Status_1_8_000.Instance.isAssessmentPerformed(context, b_);
+        IEnumerable<Observation> c_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, b_);
         bool? d_(Observation TobaccoUseScreening)
         {
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             DataType n_ = TobaccoUseScreening?.Effective;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_);
+            object o_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, o_);
             bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
             return q_;
@@ -457,8 +457,8 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         object f_(Observation @this)
         {
             DataType r_ = @this?.Effective;
-            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            object s_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, s_);
             CqlDateTime u_ = context.Operators.Start(t_);
 
             return u_;
@@ -471,7 +471,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         bool? j_(Observation MostRecentTobaccoUseScreening)
         {
             DataType v_ = MostRecentTobaccoUseScreening?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            object w_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, v_);
             CqlValueSet x_ = this.Tobacco_User(context);
             bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
 
@@ -510,13 +510,13 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     {
         CqlValueSet a_ = this.Tobacco_Use_Screening(context);
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> c_ = Status_1_8_000.Instance.isAssessmentPerformed(context, b_);
+        IEnumerable<Observation> c_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, b_);
         bool? d_(Observation TobaccoUseScreening)
         {
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             DataType n_ = TobaccoUseScreening?.Effective;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_);
+            object o_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, o_);
             bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
             return q_;
@@ -525,8 +525,8 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         object f_(Observation @this)
         {
             DataType r_ = @this?.Effective;
-            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            object s_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, s_);
             CqlDateTime u_ = context.Operators.Start(t_);
 
             return u_;
@@ -539,7 +539,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         bool? j_(Observation MostRecentTobaccoUseScreening)
         {
             DataType v_ = MostRecentTobaccoUseScreening?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            object w_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, v_);
             CqlValueSet x_ = this.Tobacco_Non_User(context);
             bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
 
@@ -570,7 +570,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     {
         CqlValueSet a_ = this.Tobacco_Use_Cessation_Counseling(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> c_ = Status_1_8_000.Instance.isInterventionPerformed(context, b_);
+        IEnumerable<Procedure> c_ = Status_minus_1_8_000.Instance.isInterventionPerformed(context, b_);
         bool? d_(Procedure TobaccoCessationCounseling)
         {
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
@@ -580,8 +580,8 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             CqlDateTime q_ = context.Operators.End(l_);
             CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
             DataType s_ = TobaccoCessationCounseling?.Performed;
-            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-            CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_);
+            object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
+            CqlInterval<CqlDateTime> u_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, t_);
             bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
 
             return v_;
@@ -592,7 +592,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? i_(Condition TobaccoCounseling)
         {
-            CqlInterval<CqlDateTime> w_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, TobaccoCounseling);
+            CqlInterval<CqlDateTime> w_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, TobaccoCounseling);
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
             CqlDateTime z_ = context.Operators.Start(y_);
@@ -628,7 +628,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
                 string r_ = context.Operators.Last<string>(q_);
                 bool? s_ = context.Operators.Equal(o_, r_);
                 CodeableConcept t_ = M?.Code;
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlConcept u_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, t_);
                 CqlValueSet v_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
                 bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
                 bool? x_ = context.Operators.And(s_, w_);
@@ -644,7 +644,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, f_);
         bool? h_(MedicationRequest CessationPharmacotherapyOrdered)
         {
             FhirDateTime y_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
@@ -682,7 +682,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
                 string r_ = context.Operators.Last<string>(q_);
                 bool? s_ = context.Operators.Equal(o_, r_);
                 CodeableConcept t_ = M?.Code;
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlConcept u_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, t_);
                 CqlValueSet v_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
                 bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
                 bool? x_ = context.Operators.And(s_, w_);
@@ -698,7 +698,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationActive(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationActive(context, f_);
         bool? h_(MedicationRequest TakingCessationPharmacotherapy)
         {
             CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
@@ -707,7 +707,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
             CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
             CqlDateTime ad_ = context.Operators.End(y_);
             CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
-            CqlInterval<CqlDate> af_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
+            CqlInterval<CqlDate> af_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
             CqlDate ag_ = af_?.low;
             CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);
             CqlDate aj_ = af_?.high;
@@ -766,7 +766,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     [CqlExpressionDefinition("Denominator Exclusion")]
     public bool? Denominator_Exclusion(CqlContext context)
     {
-        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
 
         return a_;
     }
@@ -775,7 +775,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -784,7 +784,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -793,7 +793,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -802,7 +802,7 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

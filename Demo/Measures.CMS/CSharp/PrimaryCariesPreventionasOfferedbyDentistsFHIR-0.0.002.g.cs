@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
-public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>
+public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_minus_0_0_002 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_minus_0_0_002>
 {
-    private PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002() {}
+    private PrimaryCariesPreventionasOfferedbyDentistsFHIR_minus_0_0_002() {}
 
-    public static PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 Instance { get; } = new();
+    public static PrimaryCariesPreventionasOfferedbyDentistsFHIR_minus_0_0_002 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "PrimaryCariesPreventionasOfferedbyDentistsFHIR";
     public string Version => "0.0.002";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, Hospice_minus_6_12_000.Instance, Status_minus_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -85,12 +85,12 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     {
         CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
+        IEnumerable<Encounter> c_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter ValidEncounter)
         {
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             Period g_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
+            CqlInterval<CqlDateTime> h_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
             return i_;
@@ -134,7 +134,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
 
         return a_;
     }
@@ -145,12 +145,12 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     {
         CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> c_ = Status_1_8_000.Instance.isProcedurePerformed(context, b_);
+        IEnumerable<Procedure> c_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, b_);
         bool? d_(Procedure FluorideApplication)
         {
             DataType k_ = FluorideApplication?.Performed;
-            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.toInterval(context, l_);
+            object l_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, k_);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, l_);
             CqlDateTime n_ = context.Operators.End(m_);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
@@ -161,8 +161,8 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
         CqlDate f_(Procedure FluorideApplication)
         {
             DataType q_ = FluorideApplication?.Performed;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
+            object r_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, q_);
+            CqlInterval<CqlDateTime> s_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, r_);
             CqlDateTime t_ = context.Operators.End(s_);
             CqlDate u_ = context.Operators.DateFrom(t_);
 
@@ -234,7 +234,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -243,7 +243,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -252,7 +252,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -261,7 +261,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

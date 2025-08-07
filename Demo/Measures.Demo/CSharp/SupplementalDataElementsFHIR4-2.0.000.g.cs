@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
-public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
+public partial class SupplementalDataElementsFHIR4_minus_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_minus_2_0_000>
 {
-    private SupplementalDataElementsFHIR4_2_0_000() {}
+    private SupplementalDataElementsFHIR4_minus_2_0_000() {}
 
-    public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
+    public static SupplementalDataElementsFHIR4_minus_2_0_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "SupplementalDataElementsFHIR4";
     public string Version => "2.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 
@@ -87,7 +87,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         {
             string q_ = Extension?.Url;
             FhirUri r_ = context.Operators.Convert<FhirUri>(q_);
-            string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
+            string s_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, r_);
             bool? t_ = context.Operators.Equal(s_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
             return t_;
@@ -106,10 +106,10 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         {
             string v_ = E?.Url;
             FhirUri w_ = context.Operators.Convert<FhirUri>(v_);
-            string x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_);
+            string x_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, w_);
             bool? y_ = context.Operators.Equal(x_, "ombCategory");
             FhirUri aa_ = context.Operators.Convert<FhirUri>(v_);
-            string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
+            string ab_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aa_);
             bool? ac_ = context.Operators.Equal(ab_, "detailed");
             bool? ad_ = context.Operators.Or(y_, ac_);
 
@@ -176,7 +176,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         {
             string q_ = Extension?.Url;
             FhirUri r_ = context.Operators.Convert<FhirUri>(q_);
-            string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
+            string s_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, r_);
             bool? t_ = context.Operators.Equal(s_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
             return t_;
@@ -195,10 +195,10 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         {
             string v_ = E?.Url;
             FhirUri w_ = context.Operators.Convert<FhirUri>(v_);
-            string x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_);
+            string x_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, w_);
             bool? y_ = context.Operators.Equal(x_, "ombCategory");
             FhirUri aa_ = context.Operators.Convert<FhirUri>(v_);
-            string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
+            string ab_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, aa_);
             bool? ac_ = context.Operators.Equal(ab_, "detailed");
             bool? ad_ = context.Operators.Or(y_, ac_);
 
@@ -227,7 +227,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             {
                 Patient d_ = this.Patient(context);
                 Code<AdministrativeGender> e_ = d_?.GenderElement;
-                string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
+                string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
                 bool? g_ = context.Operators.Equal(f_, "male");
 
                 return g_ ?? false;
@@ -236,7 +236,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             {
                 Patient h_ = this.Patient(context);
                 Code<AdministrativeGender> i_ = h_?.GenderElement;
-                string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+                string j_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, i_);
                 bool? k_ = context.Operators.Equal(j_, "female");
 
                 return k_ ?? false;

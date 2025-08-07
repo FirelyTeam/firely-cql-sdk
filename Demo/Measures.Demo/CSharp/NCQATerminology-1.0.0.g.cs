@@ -12,31 +12,31 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("NCQATerminology", "1.0.0")]
-public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminology_1_0_0>
+public partial class NCQATerminology_minus_1_0_0 : ILibrary, ISingleton<NCQATerminology_minus_1_0_0>
 {
-    private NCQATerminology_1_0_0() {}
+    private NCQATerminology_minus_1_0_0() {}
 
-    public static NCQATerminology_1_0_0 Instance { get; } = new();
+    public static NCQATerminology_minus_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "NCQATerminology";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 
     #region Codes
 
     [CqlCodeDefinition("problem-list-item", codeId: "problem-list-item", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode problem_list_item(CqlContext _) => _problem_list_item;
-    private static readonly CqlCode _problem_list_item = new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category");
+    public CqlCode problem_minus_list_minus_item(CqlContext _) => _problem_minus_list_minus_item;
+    private static readonly CqlCode _problem_minus_list_minus_item = new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category");
 
     [CqlCodeDefinition("encounter-diagnosis", codeId: "encounter-diagnosis", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode encounter_diagnosis(CqlContext _) => _encounter_diagnosis;
-    private static readonly CqlCode _encounter_diagnosis = new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category");
+    public CqlCode encounter_minus_diagnosis(CqlContext _) => _encounter_minus_diagnosis;
+    private static readonly CqlCode _encounter_minus_diagnosis = new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category");
 
     [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
     public CqlCode active(CqlContext _) => _active;
@@ -83,32 +83,32 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     private static readonly CqlCode _refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-verification");
 
     [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-verification")]
-    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
-    private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-verification");
+    public CqlCode entered_minus_in_minus_error(CqlContext _) => _entered_minus_in_minus_error;
+    private static readonly CqlCode _entered_minus_in_minus_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-verification");
 
     [CqlCodeDefinition("allergy-active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_active(CqlContext _) => _allergy_active;
-    private static readonly CqlCode _allergy_active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_minus_active(CqlContext _) => _allergy_minus_active;
+    private static readonly CqlCode _allergy_minus_active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-inactive", codeId: "inactive", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_inactive(CqlContext _) => _allergy_inactive;
-    private static readonly CqlCode _allergy_inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_minus_inactive(CqlContext _) => _allergy_minus_inactive;
+    private static readonly CqlCode _allergy_minus_inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-resolved", codeId: "resolved", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_resolved(CqlContext _) => _allergy_resolved;
-    private static readonly CqlCode _allergy_resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_minus_resolved(CqlContext _) => _allergy_minus_resolved;
+    private static readonly CqlCode _allergy_minus_resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_unconfirmed(CqlContext _) => _allergy_unconfirmed;
-    private static readonly CqlCode _allergy_unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_minus_unconfirmed(CqlContext _) => _allergy_minus_unconfirmed;
+    private static readonly CqlCode _allergy_minus_unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("allergy-confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_confirmed(CqlContext _) => _allergy_confirmed;
-    private static readonly CqlCode _allergy_confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_minus_confirmed(CqlContext _) => _allergy_minus_confirmed;
+    private static readonly CqlCode _allergy_minus_confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("allergy-refuted", codeId: "refuted", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_refuted(CqlContext _) => _allergy_refuted;
-    private static readonly CqlCode _allergy_refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_minus_refuted(CqlContext _) => _allergy_minus_refuted;
+    private static readonly CqlCode _allergy_minus_refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("food", codeId: "food", codeSystem: "http://hl7.org/fhir/allergy-intolerance-category")]
     public CqlCode food(CqlContext _) => _food;
@@ -183,8 +183,8 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     private static readonly CqlCode _home_health = new CqlCode("HH", "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode");
 
     [CqlCodeDefinition("inpatient non-acute", codeId: "NONAC", codeSystem: "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode")]
-    public CqlCode inpatient_non_acute(CqlContext _) => _inpatient_non_acute;
-    private static readonly CqlCode _inpatient_non_acute = new CqlCode("NONAC", "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode");
+    public CqlCode inpatient_non_minus_acute(CqlContext _) => _inpatient_non_minus_acute;
+    private static readonly CqlCode _inpatient_non_minus_acute = new CqlCode("NONAC", "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode");
 
     [CqlCodeDefinition("emergency", codeId: "EMER", codeSystem: "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode")]
     public CqlCode emergency(CqlContext _) => _emergency;
@@ -280,23 +280,23 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _differential,
           _confirmed,
           _refuted,
-          _entered_in_error]);
+          _entered_minus_in_minus_error]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
-          _allergy_active,
-          _allergy_inactive,
-          _allergy_resolved]);
+          _allergy_minus_active,
+          _allergy_minus_inactive,
+          _allergy_minus_resolved]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
-          _allergy_unconfirmed,
-          _allergy_confirmed,
-          _allergy_refuted]);
+          _allergy_minus_unconfirmed,
+          _allergy_minus_confirmed,
+          _allergy_minus_refuted]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceType", codeSystemId: "http://hl7.org/fhir/allergy-intolerance-type", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceType(CqlContext _) => _AllergyIntoleranceType;
@@ -318,12 +318,12 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     public CqlCodeSystem ConditionCategoryCodes(CqlContext _) => _ConditionCategoryCodes;
     private static readonly CqlCodeSystem _ConditionCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null, [
-          _problem_list_item,
-          _encounter_diagnosis]);
+          _problem_minus_list_minus_item,
+          _encounter_minus_diagnosis]);
 
     [CqlCodeSystemDefinition("claim-type", codeSystemId: "http://terminology.hl7.org/CodeSystem/claim-type", codeSystemVersion: null)]
-    public CqlCodeSystem claim_type(CqlContext _) => _claim_type;
-    private static readonly CqlCodeSystem _claim_type =
+    public CqlCodeSystem claim_minus_type(CqlContext _) => _claim_minus_type;
+    private static readonly CqlCodeSystem _claim_minus_type =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/claim-type", null, [
           _Pharmacy,
           _Institutional,
@@ -338,13 +338,13 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
           _virtual,
           _ambulatory,
           _home_health,
-          _inpatient_non_acute,
+          _inpatient_non_minus_acute,
           _emergency,
           _inpatient_acute]);
 
     [CqlCodeSystemDefinition("coverage-type", codeSystemId: "http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", codeSystemVersion: null)]
-    public CqlCodeSystem coverage_type(CqlContext _) => _coverage_type;
-    private static readonly CqlCodeSystem _coverage_type =
+    public CqlCodeSystem coverage_minus_type(CqlContext _) => _coverage_minus_type;
+    private static readonly CqlCodeSystem _coverage_minus_type =
       new CqlCodeSystem("http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", null, [
           _drug_policy,
           _mental_health_policy,

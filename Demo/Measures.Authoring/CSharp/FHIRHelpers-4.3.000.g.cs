@@ -12,13 +12,13 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("FHIRHelpers", "4.3.000")]
-public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_000>
+public partial class FHIRHelpers_minus_4_3_000 : ILibrary, ISingleton<FHIRHelpers_minus_4_3_000>
 {
-    private FHIRHelpers_4_3_000() {}
+    private FHIRHelpers_minus_4_3_000() {}
 
-    public static FHIRHelpers_4_3_000 Instance { get; } = new();
+    public static FHIRHelpers_minus_4_3_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 

@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
-public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
+public partial class VTEFHIR4_minus_4_8_000 : ILibrary, ISingleton<VTEFHIR4_minus_4_8_000>
 {
-    private VTEFHIR4_4_8_000() {}
+    private VTEFHIR4_minus_4_8_000() {}
 
-    public static VTEFHIR4_4_8_000 Instance { get; } = new();
+    public static VTEFHIR4_minus_4_8_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "VTEFHIR4";
     public string Version => "4.8.000";
-    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance, FHIRHelpers_minus_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 
@@ -68,7 +68,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
     {
         Period a_ = this.FirstICULocationPeriod(context, Encounter);
-        CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
+        CqlInterval<CqlDateTime> b_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, a_);
         CqlDateTime c_ = context.Operators.Start(b_);
 
         return c_;
@@ -92,11 +92,11 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         bool? b_(Encounter.LocationComponent HospitalLocation)
         {
             ResourceReference g_ = HospitalLocation?.Location;
-            Location h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetLocation(context, g_);
+            Location h_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.GetLocation(context, g_);
             List<CodeableConcept> i_ = h_?.Type;
             CqlConcept j_(CodeableConcept X)
             {
-                CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                CqlConcept t_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, X);
 
                 return t_;
             };
@@ -104,9 +104,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
             Period n_ = Encounter?.Period;
-            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, n_);
             Period p_ = HospitalLocation?.Period;
-            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
+            CqlInterval<CqlDateTime> q_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, p_);
             bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
             bool? s_ = context.Operators.And(m_, r_);
 
@@ -116,7 +116,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         object d_(Encounter.LocationComponent @this)
         {
             Period u_ = @this?.Period;
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
+            CqlInterval<CqlDateTime> v_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, u_);
             CqlDateTime w_ = context.Operators.Start(v_);
 
             return w_;
@@ -143,11 +143,11 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
     {
-        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
+        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
         CqlDateTime b_ = context.Operators.Start(a_);
         CqlDate c_ = context.Operators.DateFrom(b_);
         Period d_ = Encounter?.Period;
-        CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, d_);
+        CqlInterval<CqlDateTime> e_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, d_);
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         CqlQuantity h_ = context.Operators.Quantity(1m, "day");
@@ -161,7 +161,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
-        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
+        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
         CqlDateTime b_ = context.Operators.Start(a_);
         CqlDate c_ = context.Operators.DateFrom(b_);
         CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);

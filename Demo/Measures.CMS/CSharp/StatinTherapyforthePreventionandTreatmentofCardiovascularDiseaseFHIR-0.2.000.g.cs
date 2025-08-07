@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR", "0.2.000")]
-public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_0_2_000 : ILibrary, ISingleton<StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_0_2_000>
+public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_minus_0_2_000 : ILibrary, ISingleton<StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_minus_0_2_000>
 {
-    private StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_0_2_000() {}
+    private StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_minus_0_2_000() {}
 
-    public static StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_0_2_000 Instance { get; } = new();
+    public static StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_minus_0_2_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR";
     public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, Hospice_minus_6_12_000.Instance, PalliativeCare_minus_1_11_000.Instance, QICoreCommon_minus_2_1_000.Instance, SupplementalDataElements_minus_3_5_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -167,12 +167,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     private static readonly CqlCode _Cardiovascular_disease_10Y_risk__Likelihood_ = new CqlCode("99055-6", "http://loinc.org");
 
     [CqlCodeDefinition("Cardiovascular disease 10Y risk [Likelihood] ACC-AHA Pooled Cohort by Goff 2013", codeId: "79423-0", codeSystem: "http://loinc.org")]
-    public CqlCode Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013(CqlContext _) => _Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013;
-    private static readonly CqlCode _Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013 = new CqlCode("79423-0", "http://loinc.org");
+    public CqlCode Cardiovascular_disease_10Y_risk__Likelihood__ACC_minus_AHA_Pooled_Cohort_by_Goff_2013(CqlContext _) => _Cardiovascular_disease_10Y_risk__Likelihood__ACC_minus_AHA_Pooled_Cohort_by_Goff_2013;
+    private static readonly CqlCode _Cardiovascular_disease_10Y_risk__Likelihood__ACC_minus_AHA_Pooled_Cohort_by_Goff_2013 = new CqlCode("79423-0", "http://loinc.org");
 
     [CqlCodeDefinition("Subsequent non-ST elevation (NSTEMI) myocardial infarction", codeId: "I22.2", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction(CqlContext _) => _Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction;
-    private static readonly CqlCode _Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction = new CqlCode("I22.2", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Subsequent_non_minus_ST_elevation__NSTEMI__myocardial_infarction(CqlContext _) => _Subsequent_non_minus_ST_elevation__NSTEMI__myocardial_infarction;
+    private static readonly CqlCode _Subsequent_non_minus_ST_elevation__NSTEMI__myocardial_infarction = new CqlCode("I22.2", "http://hl7.org/fhir/sid/icd-10-cm");
 
     #endregion Codes
 
@@ -187,14 +187,14 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     public CqlCodeSystem ICD10CM(CqlContext _) => _ICD10CM;
     private static readonly CqlCodeSystem _ICD10CM =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
-          _Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction]);
+          _Subsequent_non_minus_ST_elevation__NSTEMI__myocardial_infarction]);
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Cardiovascular_disease_10Y_risk__Likelihood_,
-          _Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013]);
+          _Cardiovascular_disease_10Y_risk__Likelihood__ACC_minus_AHA_Pooled_Cohort_by_Goff_2013]);
 
     [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
     public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
@@ -260,10 +260,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> n_ = context.Operators.Union<Condition>(k_, m_);
         bool? o_(Condition ASCVDDiagnosis)
         {
-            bool? ae_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ASCVDDiagnosis);
-            bool? af_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ASCVDDiagnosis);
+            bool? ae_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, ASCVDDiagnosis);
+            bool? af_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, ASCVDDiagnosis);
             bool? ag_ = context.Operators.Or(ae_, af_);
-            CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ASCVDDiagnosis);
+            CqlInterval<CqlDateTime> ah_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ASCVDDiagnosis);
             CqlDateTime ai_ = context.Operators.Start(ah_);
             CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
             CqlDateTime ak_ = context.Operators.End(aj_);
@@ -287,8 +287,8 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         bool? ab_(Procedure ASCVDProcedure)
         {
             DataType an_ = ASCVDProcedure?.Performed;
-            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-            CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_1_000.Instance.toInterval(context, ao_);
+            object ao_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, an_);
+            CqlInterval<CqlDateTime> ap_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ao_);
             CqlDateTime aq_ = context.Operators.Start(ap_);
             CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
             CqlDateTime as_ = context.Operators.End(ar_);
@@ -311,15 +311,15 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     [CqlExpressionDefinition("Myocardial Infarction before End of Measurement Period")]
     public IEnumerable<Condition> Myocardial_Infarction_before_End_of_Measurement_Period(CqlContext context)
     {
-        CqlCode a_ = this.Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction(context);
+        CqlCode a_ = this.Subsequent_non_minus_ST_elevation__NSTEMI__myocardial_infarction(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition SubsequentMI)
         {
-            bool? f_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, SubsequentMI);
-            bool? g_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, SubsequentMI);
+            bool? f_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, SubsequentMI);
+            bool? g_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, SubsequentMI);
             bool? h_ = context.Operators.Or(f_, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, SubsequentMI);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, SubsequentMI);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -364,7 +364,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         {
             CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
             Period aa_ = QualifyingEncounter?.Period;
-            CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
+            CqlInterval<CqlDateTime> ab_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, aa_);
             bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, "day");
             Code<Encounter.EncounterStatus> ad_ = QualifyingEncounter?.StatusElement;
             Encounter.EncounterStatus? ae_ = ad_?.Value;
@@ -421,12 +421,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         bool? c_(Observation LDL190)
         {
             DataType e_ = LDL190?.Value;
-            object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
+            object f_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, e_);
             CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
             bool? h_ = context.Operators.GreaterOrEqual(f_ as CqlQuantity, g_);
             DataType i_ = LDL190?.Effective;
-            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_);
+            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, j_);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             CqlDateTime n_ = context.Operators.End(m_);
@@ -460,10 +460,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition Hypercholesterolemia)
         {
-            bool? e_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, Hypercholesterolemia);
-            bool? f_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, Hypercholesterolemia);
+            bool? e_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, Hypercholesterolemia);
+            bool? f_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, Hypercholesterolemia);
             bool? g_ = context.Operators.Or(e_, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Hypercholesterolemia);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Hypercholesterolemia);
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.End(j_);
@@ -515,10 +515,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition Diabetes)
         {
-            bool? f_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, Diabetes);
-            bool? g_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, Diabetes);
+            bool? f_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, Diabetes);
+            bool? g_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, Diabetes);
             bool? h_ = context.Operators.Or(f_, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Diabetes);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Diabetes);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.Overlaps(i_, j_, "day");
             bool? l_ = context.Operators.And(h_, k_);
@@ -589,20 +589,20 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         CqlCode a_ = this.Cardiovascular_disease_10Y_risk__Likelihood_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        CqlCode d_ = this.Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013(context);
+        CqlCode d_ = this.Cardiovascular_disease_10Y_risk__Likelihood__ACC_minus_AHA_Pooled_Cohort_by_Goff_2013(context);
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
         IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
         IEnumerable<Observation> g_ = context.Operators.Union<Observation>(c_, f_);
         bool? h_(Observation AtRiskCVD)
         {
             DataType k_ = AtRiskCVD?.Value;
-            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            object l_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, k_);
             CqlQuantity m_ = context.Operators.Quantity(20m, "%");
             bool? n_ = context.Operators.GreaterOrEqual(l_ as CqlQuantity, m_);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             DataType p_ = AtRiskCVD?.Effective;
-            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-            CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.toInterval(context, q_);
+            object q_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, p_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, q_);
             bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, "day");
             bool? t_ = context.Operators.And(n_, s_);
 
@@ -705,10 +705,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         bool? f_(Condition ExclusionDiagnosis)
         {
-            bool? i_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ExclusionDiagnosis);
-            bool? j_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ExclusionDiagnosis);
+            bool? i_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, ExclusionDiagnosis);
+            bool? j_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, ExclusionDiagnosis);
             bool? k_ = context.Operators.Or(i_, j_);
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             bool? n_ = context.Operators.Overlaps(l_, m_, "day");
             bool? o_ = context.Operators.And(k_, n_);
@@ -730,13 +730,13 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         bool? c_(AllergyIntolerance StatinAllergy)
         {
             DataType f_ = StatinAllergy?.Onset;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.toInterval(context, g_);
+            object g_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             bool? j_ = context.Operators.Overlaps(h_, i_, "day");
             CodeableConcept k_ = StatinAllergy?.ClinicalStatus;
-            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-            CqlCode m_ = QICoreCommon_2_1_000.Instance.allergy_active(context);
+            CqlConcept l_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, k_);
+            CqlCode m_ = QICoreCommon_minus_2_1_000.Instance.allergy_minus_active(context);
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(l_, n_);
             bool? p_ = context.Operators.And(j_, o_);
@@ -763,10 +763,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
         bool? i_(Condition HepatitisLiverDisease)
         {
-            bool? l_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, HepatitisLiverDisease);
-            bool? m_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, HepatitisLiverDisease);
+            bool? l_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, HepatitisLiverDisease);
+            bool? m_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, HepatitisLiverDisease);
             bool? n_ = context.Operators.Or(l_, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HepatitisLiverDisease);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HepatitisLiverDisease);
             CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
             bool? q_ = context.Operators.Overlaps(o_, p_, "day");
             bool? r_ = context.Operators.And(n_, q_);
@@ -787,10 +787,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition StatinMuscleSymptom)
         {
-            bool? f_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, StatinMuscleSymptom);
-            bool? g_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, StatinMuscleSymptom);
+            bool? f_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, StatinMuscleSymptom);
+            bool? g_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, StatinMuscleSymptom);
             bool? h_ = context.Operators.Or(f_, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, StatinMuscleSymptom);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, StatinMuscleSymptom);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.Overlaps(i_, j_, "day");
             bool? l_ = context.Operators.And(h_, k_);
@@ -811,10 +811,10 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition ESRD)
         {
-            bool? f_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ESRD);
-            bool? g_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ESRD);
+            bool? f_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, ESRD);
+            bool? g_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, ESRD);
             bool? h_ = context.Operators.Or(f_, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ESRD);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ESRD);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.Overlaps(i_, j_, "day");
             bool? l_ = context.Operators.And(h_, k_);
@@ -874,7 +874,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 FhirDateTime z_ = NoStatinTherapyOrdered?.AuthoredOnElement;
                 CqlDateTime aa_ = context.Operators.Convert<CqlDateTime>(z_);
                 Period ab_ = QualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
+                CqlInterval<CqlDateTime> ac_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ab_);
                 bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, default);
                 Code<MedicationRequest.MedicationrequestStatus> ae_ = NoStatinTherapyOrdered?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? af_ = ae_?.Value;
@@ -884,7 +884,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 List<CodeableConcept> aj_ = NoStatinTherapyOrdered?.ReasonCode;
                 CqlConcept ak_(CodeableConcept @this)
                 {
-                    CqlConcept ap_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    CqlConcept ap_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                     return ap_;
                 };
@@ -913,9 +913,9 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     public bool? Denominator_Exceptions(CqlContext context)
     {
         bool? a_ = this.Has_Allergy_to_Statin(context);
-        bool? b_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? b_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
         bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? d_ = PalliativeCare_minus_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
         bool? e_ = context.Operators.Or(c_, d_);
         bool? f_ = this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context);
         bool? g_ = context.Operators.Or(e_, f_);
@@ -949,7 +949,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 string ae_ = context.Operators.Last<string>(ad_);
                 bool? af_ = context.Operators.Equal(ab_, ae_);
                 CodeableConcept ag_ = M?.Code;
-                CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_);
+                CqlConcept ah_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ag_);
                 CqlValueSet ai_ = this.Low_Intensity_Statin_Therapy(context);
                 bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
                 bool? ak_ = context.Operators.And(af_, aj_);
@@ -978,7 +978,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 string at_ = context.Operators.Last<string>(as_);
                 bool? au_ = context.Operators.Equal(aq_, at_);
                 CodeableConcept av_ = M?.Code;
-                CqlConcept aw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, av_);
+                CqlConcept aw_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, av_);
                 CqlValueSet ax_ = this.Moderate_Intensity_Statin_Therapy(context);
                 bool? ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
                 bool? az_ = context.Operators.And(au_, ay_);
@@ -1008,7 +1008,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 string bi_ = context.Operators.Last<string>(bh_);
                 bool? bj_ = context.Operators.Equal(bf_, bi_);
                 CodeableConcept bk_ = M?.Code;
-                CqlConcept bl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bk_);
+                CqlConcept bl_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, bk_);
                 CqlValueSet bm_ = this.High_Intensity_Statin_Therapy(context);
                 bool? bn_ = context.Operators.ConceptInValueSet(bl_, bm_);
                 bool? bo_ = context.Operators.And(bj_, bn_);
@@ -1064,8 +1064,8 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
             {
                 Timing.RepeatComponent cq_ = T?.Repeat;
                 DataType cr_ = cq_?.Bounds;
-                object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_1_000.Instance.toInterval(context, cs_);
+                object cs_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, cr_);
+                CqlInterval<CqlDateTime> ct_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, cs_);
                 CqlInterval<CqlDateTime> cu_ = this.Measurement_Period(context);
                 bool? cv_ = context.Operators.Overlaps(ct_, cu_, "day");
 
@@ -1097,7 +1097,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -1106,7 +1106,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -1115,7 +1115,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -1124,7 +1124,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

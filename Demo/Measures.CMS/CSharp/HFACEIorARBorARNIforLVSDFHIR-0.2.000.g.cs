@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("HFACEIorARBorARNIforLVSDFHIR", "0.2.000")]
-public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton<HFACEIorARBorARNIforLVSDFHIR_0_2_000>
+public partial class HFACEIorARBorARNIforLVSDFHIR_minus_0_2_000 : ILibrary, ISingleton<HFACEIorARBorARNIforLVSDFHIR_minus_0_2_000>
 {
-    private HFACEIorARBorARNIforLVSDFHIR_0_2_000() {}
+    private HFACEIorARBorARNIforLVSDFHIR_minus_0_2_000() {}
 
-    public static HFACEIorARBorARNIforLVSDFHIR_0_2_000 Instance { get; } = new();
+    public static HFACEIorARBorARNIforLVSDFHIR_minus_0_2_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "HFACEIorARBorARNIforLVSDFHIR";
     public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, AHAOverall_minus_2_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -71,16 +71,16 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     #region Codes
 
     [CqlCodeDefinition("Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)", codeId: "422593004", codeSystem: "http://snomed.info/sct")]
-    public CqlCode Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_(CqlContext _) => _Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_;
-    private static readonly CqlCode _Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_ = new CqlCode("422593004", "http://snomed.info/sct");
+    public CqlCode Acute_renal_failure_caused_by_angiotensin_minus_converting_minus_enzyme_inhibitor__disorder_(CqlContext _) => _Acute_renal_failure_caused_by_angiotensin_minus_converting_minus_enzyme_inhibitor__disorder_;
+    private static readonly CqlCode _Acute_renal_failure_caused_by_angiotensin_minus_converting_minus_enzyme_inhibitor__disorder_ = new CqlCode("422593004", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Substance with angiotensin II receptor antagonist mechanism of action (substance)", codeId: "372913009", codeSystem: "http://snomed.info/sct")]
     public CqlCode Substance_with_angiotensin_II_receptor_antagonist_mechanism_of_action__substance_(CqlContext _) => _Substance_with_angiotensin_II_receptor_antagonist_mechanism_of_action__substance_;
     private static readonly CqlCode _Substance_with_angiotensin_II_receptor_antagonist_mechanism_of_action__substance_ = new CqlCode("372913009", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)", codeId: "372733002", codeSystem: "http://snomed.info/sct")]
-    public CqlCode Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_(CqlContext _) => _Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_;
-    private static readonly CqlCode _Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_ = new CqlCode("372733002", "http://snomed.info/sct");
+    public CqlCode Substance_with_angiotensin_minus_converting_enzyme_inhibitor_mechanism_of_action__substance_(CqlContext _) => _Substance_with_angiotensin_minus_converting_enzyme_inhibitor_mechanism_of_action__substance_;
+    private static readonly CqlCode _Substance_with_angiotensin_minus_converting_enzyme_inhibitor_mechanism_of_action__substance_ = new CqlCode("372733002", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Substance with neprilysin inhibitor mechanism of action (substance)", codeId: "786886009", codeSystem: "http://snomed.info/sct")]
     public CqlCode Substance_with_neprilysin_inhibitor_mechanism_of_action__substance_(CqlContext _) => _Substance_with_neprilysin_inhibitor_mechanism_of_action__substance_;
@@ -94,9 +94,9 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
-          _Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_,
+          _Acute_renal_failure_caused_by_angiotensin_minus_converting_minus_enzyme_inhibitor__disorder_,
           _Substance_with_angiotensin_II_receptor_antagonist_mechanism_of_action__substance_,
-          _Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_,
+          _Substance_with_angiotensin_minus_converting_enzyme_inhibitor_mechanism_of_action__substance_,
           _Substance_with_neprilysin_inhibitor_mechanism_of_action__substance_]);
 
     #endregion CodeSystems
@@ -132,7 +132,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
-        bool? a_ = AHAOverall_2_8_000.Instance.Is_Adults_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(context);
+        bool? a_ = AHAOverall_minus_2_8_000.Instance.Is_Adults_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(context);
 
         return a_;
     }
@@ -142,7 +142,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     public bool? Denominator(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
-        IEnumerable<Encounter> b_ = AHAOverall_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
+        IEnumerable<Encounter> b_ = AHAOverall_minus_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
         bool? c_ = context.Operators.Exists<Encounter>(b_);
         bool? d_ = context.Operators.And(a_, c_);
 
@@ -153,12 +153,12 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = AHAOverall_2_8_000.Instance.Has_Heart_Transplant(context);
-        bool? b_ = AHAOverall_2_8_000.Instance.Has_Heart_Transplant_Complications(context);
+        bool? a_ = AHAOverall_minus_2_8_000.Instance.Has_Heart_Transplant(context);
+        bool? b_ = AHAOverall_minus_2_8_000.Instance.Has_Heart_Transplant_Complications(context);
         bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = AHAOverall_2_8_000.Instance.Has_Left_Ventricular_Assist_Device(context);
+        bool? d_ = AHAOverall_minus_2_8_000.Instance.Has_Left_Ventricular_Assist_Device(context);
         bool? e_ = context.Operators.Or(c_, d_);
-        bool? f_ = AHAOverall_2_8_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context);
+        bool? f_ = AHAOverall_minus_2_8_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context);
         bool? g_ = context.Operators.Or(e_, f_);
 
         return g_;
@@ -172,7 +172,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         bool? c_(MedicationRequest ACEIOrARBOrARNIOrdered)
         {
-            bool? f_ = AHAOverall_2_8_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIOrdered);
+            bool? f_ = AHAOverall_minus_2_8_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIOrdered);
 
             return f_;
         };
@@ -190,7 +190,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         bool? c_(MedicationRequest ActiveACEIOrARBOrARNI)
         {
-            bool? f_ = AHAOverall_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveACEIOrARBOrARNI);
+            bool? f_ = AHAOverall_minus_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveACEIOrARBOrARNI);
 
             return f_;
         };
@@ -217,7 +217,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     {
         CqlValueSet a_ = this.ACE_Inhibitor_or_ARB_or_ARNI_Ingredient(context);
         IEnumerable<AllergyIntolerance> b_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
-        CqlCode c_ = this.Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_(context);
+        CqlCode c_ = this.Substance_with_angiotensin_minus_converting_enzyme_inhibitor_mechanism_of_action__substance_(context);
         IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
         IEnumerable<AllergyIntolerance> e_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
         IEnumerable<AllergyIntolerance> f_ = context.Operators.Union<AllergyIntolerance>(b_, e_);
@@ -231,7 +231,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<AllergyIntolerance> n_ = context.Operators.Union<AllergyIntolerance>(f_, m_);
         bool? o_(AllergyIntolerance ACEIOrARBOrARNIAllergyIntolerance)
         {
-            bool? r_ = AHAOverall_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIAllergyIntolerance);
+            bool? r_ = AHAOverall_minus_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIAllergyIntolerance);
 
             return r_;
         };
@@ -252,7 +252,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         bool? f_(Condition ACEIOrARBAllergyOrIntoleranceDiagnosis)
         {
-            bool? i_ = AHAOverall_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBAllergyOrIntoleranceDiagnosis);
+            bool? i_ = AHAOverall_minus_2_8_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBAllergyOrIntoleranceDiagnosis);
 
             return i_;
         };
@@ -270,21 +270,21 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         IEnumerable<Condition> c_(Condition PregnancyDiagnosis)
         {
-            IEnumerable<Encounter> f_ = AHAOverall_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
+            IEnumerable<Encounter> f_ = AHAOverall_minus_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
             bool? g_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
             {
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
                 CqlDateTime l_ = context.Operators.Start(k_);
                 Period m_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 CqlQuantity p_ = context.Operators.Quantity(9m, "months");
                 CqlDateTime q_ = context.Operators.Subtract(o_, p_);
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> s_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime t_ = context.Operators.Start(s_);
                 CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, true, true);
                 bool? v_ = context.Operators.In<CqlDateTime>(l_, u_, default);
-                CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> x_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime y_ = context.Operators.Start(x_);
                 bool? z_ = context.Operators.Not((bool?)(y_ is null));
                 bool? aa_ = context.Operators.And(v_, z_);
@@ -308,12 +308,12 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("Has Diagnosis of Renal Failure Due to ACEI")]
     public bool? Has_Diagnosis_of_Renal_Failure_Due_to_ACEI(CqlContext context)
     {
-        CqlCode a_ = this.Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_(context);
+        CqlCode a_ = this.Acute_renal_failure_caused_by_angiotensin_minus_converting_minus_enzyme_inhibitor__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition RenalFailureDueToACEI)
         {
-            bool? g_ = AHAOverall_2_8_000.Instance.overlapsHeartFailureOutpatientEncounter(context, RenalFailureDueToACEI);
+            bool? g_ = AHAOverall_minus_2_8_000.Instance.overlapsHeartFailureOutpatientEncounter(context, RenalFailureDueToACEI);
 
             return g_;
         };
@@ -344,7 +344,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -353,7 +353,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -362,7 +362,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -371,7 +371,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -384,13 +384,13 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested"));
         IEnumerable<MedicationRequest> c_(MedicationRequest NoACEIOrARBOrARNIOrdered)
         {
-            IEnumerable<Encounter> h_ = AHAOverall_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
+            IEnumerable<Encounter> h_ = AHAOverall_minus_2_8_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
             bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
             {
                 FhirDateTime m_ = NoACEIOrARBOrARNIOrdered?.AuthoredOnElement;
                 CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
                 Period o_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
                 bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
 
                 return q_;
@@ -424,7 +424,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
             List<CodeableConcept> ab_ = NoACEIOrARBOrARNIOrdered?.ReasonCode;
             CqlConcept ac_(CodeableConcept @this)
             {
-                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept at_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return at_;
             };
@@ -433,7 +433,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
             bool? af_ = context.Operators.ConceptsInValueSet(ad_, ae_);
             CqlConcept ah_(CodeableConcept @this)
             {
-                CqlConcept au_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept au_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return au_;
             };
@@ -443,7 +443,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
             bool? al_ = context.Operators.Or(af_, ak_);
             CqlConcept an_(CodeableConcept @this)
             {
-                CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept av_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return av_;
             };

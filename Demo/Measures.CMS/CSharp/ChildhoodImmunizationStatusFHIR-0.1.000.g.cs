@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ChildhoodImmunizationStatusFHIR", "0.1.000")]
-public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingleton<ChildhoodImmunizationStatusFHIR_0_1_000>
+public partial class ChildhoodImmunizationStatusFHIR_minus_0_1_000 : ILibrary, ISingleton<ChildhoodImmunizationStatusFHIR_minus_0_1_000>
 {
-    private ChildhoodImmunizationStatusFHIR_0_1_000() {}
+    private ChildhoodImmunizationStatusFHIR_minus_0_1_000() {}
 
-    public static ChildhoodImmunizationStatusFHIR_0_1_000 Instance { get; } = new();
+    public static ChildhoodImmunizationStatusFHIR_minus_0_1_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ChildhoodImmunizationStatusFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Hospice_minus_6_12_000.Instance, Status_minus_1_8_000.Instance, QICoreCommon_minus_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -352,7 +352,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
             List<CodeableConcept> y_ = E?.Type;
             CqlConcept z_(CodeableConcept @this)
             {
-                CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ae_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
 
                 return ae_;
             };
@@ -378,13 +378,13 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlValueSet s_ = this.Telephone_Visits(context);
         IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(r_, t_);
-        IEnumerable<Encounter> v_ = Status_1_8_000.Instance.isEncounterPerformed(context, u_);
+        IEnumerable<Encounter> v_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, u_);
         bool? w_(Encounter ValidEncounters)
         {
             CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
             Period aj_ = ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ak_ as object);
             bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
             return am_;
@@ -461,7 +461,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition SevereImmuneDisorder)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, SevereImmuneDisorder);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, SevereImmuneDisorder);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -483,7 +483,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition ImmuneDisorder)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ImmuneDisorder);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ImmuneDisorder);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -505,7 +505,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition HIV)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HIV);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HIV);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -527,7 +527,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition LymphaticMalignantNeoplasm)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, LymphaticMalignantNeoplasm);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, LymphaticMalignantNeoplasm);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -549,7 +549,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition IntussusceptionDisorder)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, IntussusceptionDisorder);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, IntussusceptionDisorder);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -567,7 +567,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
         bool? b_ = this.Has_Severe_Combined_Immunodeficiency(context);
         bool? c_ = context.Operators.Or(a_, b_);
         bool? d_ = this.Has_Immunodeficiency(context);
@@ -584,7 +584,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
 
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
-    public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(CqlContext context)
+    public CqlInterval<CqlDate> Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(CqlContext context)
     {
         Patient a_ = this.Patient(context);
         Date b_ = a_?.BirthDateElement;
@@ -606,14 +606,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.DTaP_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization DTaPVaccination)
         {
             DataType r_ = DTaPVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -623,7 +623,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = DTaPVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -632,14 +632,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.DTaP_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure DTaPProcedure)
         {
             DataType ab_ = DTaPProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -648,8 +648,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure DTaPProcedure)
         {
             DataType ah_ = DTaPProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -677,27 +677,27 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? h_((CqlTupleMetadata, CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? tuple_emdhflcfhwveravvnflazyxji)
         {
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2 as CqlDate);
-            CqlDateTime n_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime n_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate o_ = context.Operators.DateFrom(n_);
             CqlDateTime p_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination1 as CqlDate);
-            CqlDateTime q_ = QICoreCommon_2_1_000.Instance.earliest(context, p_);
+            CqlDateTime q_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, p_);
             CqlDate r_ = context.Operators.DateFrom(q_);
             CqlQuantity s_ = context.Operators.Quantity(1m, "day");
             CqlDate t_ = context.Operators.Add(r_, s_);
             bool? u_ = context.Operators.SameOrAfter(o_, t_, "day");
             CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3 as CqlDate);
-            CqlDateTime w_ = QICoreCommon_2_1_000.Instance.earliest(context, v_);
+            CqlDateTime w_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, v_);
             CqlDate x_ = context.Operators.DateFrom(w_);
             CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
-            CqlDateTime aa_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime aa_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDateTime ac_ = context.Operators.Add(aa_, s_);
             bool? ad_ = context.Operators.SameOrAfter(y_, ac_, "day");
             bool? ae_ = context.Operators.And(u_, ad_);
             CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4 as CqlDate);
-            CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, af_);
+            CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, af_);
             CqlDate ah_ = context.Operators.DateFrom(ag_);
             CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
-            CqlDateTime ak_ = QICoreCommon_2_1_000.Instance.earliest(context, v_);
+            CqlDateTime ak_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, v_);
             CqlDateTime am_ = context.Operators.Add(ak_, s_);
             bool? an_ = context.Operators.SameOrAfter(ai_, am_, "day");
             bool? ao_ = context.Operators.And(ae_, an_);
@@ -723,7 +723,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         bool? f_(Condition DTaPConditions)
         {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, DTaPConditions);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, DTaPConditions);
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlDate j_ = context.Operators.DateFrom(i_);
             CqlInterval<CqlDate> k_ = this.First_Two_Years(context);
@@ -742,14 +742,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Inactivated_Polio_Vaccine__IPV_(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization PolioVaccination)
         {
             DataType r_ = PolioVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -759,8 +759,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = PolioVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
-            CqlDateTime aa_ = QICoreCommon_2_1_000.Instance.Earliest(context, z_ as object);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = QICoreCommon_minus_2_1_000.Instance.Earliest(context, z_ as object);
             CqlDate ab_ = context.Operators.DateFrom(aa_);
 
             return ab_;
@@ -769,14 +769,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Inactivated_Polio_Vaccine__IPV__Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure PolioProcedure)
         {
             DataType ac_ = PolioProcedure?.Performed;
-            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-            CqlDateTime ae_ = QICoreCommon_2_1_000.Instance.earliest(context, ad_);
+            object ad_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ac_);
+            CqlDateTime ae_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ad_);
             CqlDate af_ = context.Operators.DateFrom(ae_);
-            CqlInterval<CqlDate> ag_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> ag_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ah_ = context.Operators.In<CqlDate>(af_, ag_, "day");
 
             return ah_;
@@ -785,8 +785,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure PolioProcedure)
         {
             DataType ai_ = PolioProcedure?.Performed;
-            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-            CqlDateTime ak_ = QICoreCommon_2_1_000.Instance.earliest(context, aj_);
+            object aj_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ai_);
+            CqlDateTime ak_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, aj_);
             CqlDate al_ = context.Operators.DateFrom(ak_);
 
             return al_;
@@ -814,18 +814,18 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? g_((CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv)
         {
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2 as CqlDate);
-            CqlDateTime n_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime n_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate o_ = context.Operators.DateFrom(n_);
             CqlDateTime p_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1 as CqlDate);
-            CqlDateTime q_ = QICoreCommon_2_1_000.Instance.earliest(context, p_);
+            CqlDateTime q_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, p_);
             CqlDate r_ = context.Operators.DateFrom(q_);
             CqlQuantity s_ = context.Operators.Quantity(1m, "day");
             CqlDate t_ = context.Operators.Add(r_, s_);
             bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
             CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3 as CqlDate);
-            CqlDateTime w_ = QICoreCommon_2_1_000.Instance.earliest(context, v_);
+            CqlDateTime w_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, v_);
             CqlDate x_ = context.Operators.DateFrom(w_);
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate aa_ = context.Operators.DateFrom(z_);
             CqlDate ac_ = context.Operators.Add(aa_, s_);
             bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
@@ -837,7 +837,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate i_((CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv)
         {
             CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1 as CqlDate);
-            CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, af_);
+            CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, af_);
             CqlDate ah_ = context.Operators.DateFrom(ag_);
 
             return ah_;
@@ -857,7 +857,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition PolioConditions)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PolioConditions);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PolioConditions);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -903,12 +903,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization MMRVaccination)
         {
             DataType r_ = MMRVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
             CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
@@ -920,7 +920,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = MMRVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -929,12 +929,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure MMRProcedure)
         {
             DataType ab_ = MMRProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
             CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
@@ -945,8 +945,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure MMRProcedure)
         {
             DataType ah_ = MMRProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -967,7 +967,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition MMRConditions)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, MMRConditions);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, MMRConditions);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -988,7 +988,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition MeaslesDiagnosis)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, MeaslesDiagnosis);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, MeaslesDiagnosis);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             CqlInterval<CqlDate> h_ = this.First_Two_Years(context);
@@ -1009,7 +1009,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition MumpsDiagnosis)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, MumpsDiagnosis);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, MumpsDiagnosis);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             CqlInterval<CqlDate> h_ = this.First_Two_Years(context);
@@ -1030,7 +1030,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition RubellaDiagnosis)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, RubellaDiagnosis);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, RubellaDiagnosis);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             CqlInterval<CqlDate> h_ = this.First_Two_Years(context);
@@ -1049,14 +1049,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Hib_Vaccine__3_dose_schedule_(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization ThreeDoseHibVaccine)
         {
             DataType r_ = ThreeDoseHibVaccine?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -1066,7 +1066,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = ThreeDoseHibVaccine?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1075,14 +1075,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Hib_Vaccine__3_dose_schedule__Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure ThreeDoseHibProcedure)
         {
             DataType ab_ = ThreeDoseHibProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -1091,8 +1091,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure ThreeDoseHibProcedure)
         {
             DataType ah_ = ThreeDoseHibProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1110,14 +1110,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Hib_Vaccine__4_dose_schedule_(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization HibVaccine)
         {
             DataType r_ = HibVaccine?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -1127,7 +1127,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = HibVaccine?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1136,14 +1136,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Hib_Vaccine__4_dose_schedule__Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure HibProcedure)
         {
             DataType ab_ = HibProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -1152,8 +1152,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure HibProcedure)
         {
             DataType ah_ = HibProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1190,7 +1190,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
             CqlDate i_(CqlDate HibVaccinations)
             {
                 CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(HibVaccinations as CqlDate);
-                CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+                CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
                 CqlDate ae_ = context.Operators.DateFrom(ad_);
 
                 return ae_;
@@ -1207,7 +1207,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
             CqlDate u_(CqlDate HibVaccinations)
             {
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(HibVaccinations as CqlDate);
-                CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, af_);
+                CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, af_);
                 CqlDate ah_ = context.Operators.DateFrom(ag_);
 
                 return ah_;
@@ -1237,7 +1237,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition HibReaction)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HibReaction);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HibReaction);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -1256,12 +1256,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Hepatitis_B_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization HepatitisBVaccination)
         {
             DataType r_ = HepatitisBVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
             CqlInterval<CqlDate> v_ = this.First_Two_Years(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
@@ -1273,7 +1273,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = HepatitisBVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1282,12 +1282,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Hepatitis_B_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure HepatitisBProcedure)
         {
             DataType ab_ = HepatitisBProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
             CqlInterval<CqlDate> af_ = this.First_Two_Years(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
@@ -1298,8 +1298,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure HepatitisBProcedure)
         {
             DataType ah_ = HepatitisBProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1327,18 +1327,18 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? g_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw)
         {
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2 as CqlDate);
-            CqlDateTime n_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime n_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate o_ = context.Operators.DateFrom(n_);
             CqlDateTime p_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime q_ = QICoreCommon_2_1_000.Instance.earliest(context, p_);
+            CqlDateTime q_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, p_);
             CqlDate r_ = context.Operators.DateFrom(q_);
             CqlQuantity s_ = context.Operators.Quantity(1m, "day");
             CqlDate t_ = context.Operators.Add(r_, s_);
             bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
             CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3 as CqlDate);
-            CqlDateTime w_ = QICoreCommon_2_1_000.Instance.earliest(context, v_);
+            CqlDateTime w_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, v_);
             CqlDate x_ = context.Operators.DateFrom(w_);
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate aa_ = context.Operators.DateFrom(z_);
             CqlDate ac_ = context.Operators.Add(aa_, s_);
             bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
@@ -1350,7 +1350,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate i_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw)
         {
             CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, af_);
+            CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, af_);
             CqlDate ah_ = context.Operators.DateFrom(ag_);
 
             return ah_;
@@ -1368,12 +1368,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlCode a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> d_ = Status_1_8_000.Instance.isProcedurePerformed(context, c_);
+        IEnumerable<Procedure> d_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, c_);
         bool? e_(Procedure NewBornVaccine)
         {
             DataType j_ = NewBornVaccine?.Performed;
-            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-            CqlDateTime l_ = QICoreCommon_2_1_000.Instance.earliest(context, k_);
+            object k_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, j_);
+            CqlDateTime l_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
             Patient n_ = this.Patient(context);
             Date o_ = n_?.BirthDateElement;
@@ -1397,8 +1397,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate g_(Procedure NewBornVaccine)
         {
             DataType ad_ = NewBornVaccine?.Performed;
-            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-            CqlDateTime af_ = QICoreCommon_2_1_000.Instance.earliest(context, ae_);
+            object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ad_);
+            CqlDateTime af_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ae_);
             CqlDate ag_ = context.Operators.DateFrom(af_);
 
             return ag_;
@@ -1426,25 +1426,25 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? g_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg)
         {
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2 as CqlDate);
-            CqlDateTime n_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime n_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate o_ = context.Operators.DateFrom(n_);
             CqlDateTime p_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime q_ = QICoreCommon_2_1_000.Instance.earliest(context, p_);
+            CqlDateTime q_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, p_);
             CqlDate r_ = context.Operators.DateFrom(q_);
             CqlQuantity s_ = context.Operators.Quantity(1m, "day");
             CqlDate t_ = context.Operators.Add(r_, s_);
             bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
-            CqlDateTime w_ = QICoreCommon_2_1_000.Instance.earliest(context, p_);
+            CqlDateTime w_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, p_);
             CqlDate x_ = context.Operators.DateFrom(w_);
             CqlDateTime y_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_);
             CqlDate aa_ = context.Operators.DateFrom(z_);
             CqlDate ac_ = context.Operators.Add(aa_, s_);
             bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
             bool? ae_ = context.Operators.And(u_, ad_);
-            CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, m_);
+            CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, m_);
             CqlDate ah_ = context.Operators.DateFrom(ag_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, y_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
             CqlDate am_ = context.Operators.Add(ak_, s_);
             bool? an_ = context.Operators.SameOrAfter(ah_, am_, default);
@@ -1456,7 +1456,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate i_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg)
         {
             CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime aq_ = QICoreCommon_2_1_000.Instance.earliest(context, ap_);
+            CqlDateTime aq_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ap_);
             CqlDate ar_ = context.Operators.DateFrom(aq_);
 
             return ar_;
@@ -1479,7 +1479,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
         bool? g_(Condition HepBConditions)
         {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HepBConditions);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HepBConditions);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             CqlInterval<CqlDate> l_ = this.First_Two_Years(context);
@@ -1498,12 +1498,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Varicella_Zoster_Vaccine__VZV_(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization ChickenPoxVaccination)
         {
             DataType r_ = ChickenPoxVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
             CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
@@ -1515,7 +1515,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = ChickenPoxVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1524,12 +1524,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Varicella_Zoster_Vaccine__VZV__Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure ChickenPoxProcedure)
         {
             DataType ab_ = ChickenPoxProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
             CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
@@ -1540,8 +1540,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure ChickenPoxProcedure)
         {
             DataType ah_ = ChickenPoxProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1565,7 +1565,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
         bool? g_(Condition VaricellaZoster)
         {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, VaricellaZoster);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, VaricellaZoster);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             CqlInterval<CqlDate> l_ = this.First_Two_Years(context);
@@ -1584,14 +1584,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Pneumococcal_Conjugate_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization PneumococcalVaccination)
         {
             DataType r_ = PneumococcalVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -1601,7 +1601,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = PneumococcalVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1610,14 +1610,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Pneumococcal_Conjugate_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure PneumococcalProcedure)
         {
             DataType ab_ = PneumococcalProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -1626,8 +1626,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure PneumococcalProcedure)
         {
             DataType ah_ = PneumococcalProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1655,26 +1655,26 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? h_((CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp)
         {
             CqlDateTime n_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2 as CqlDate);
-            CqlDateTime o_ = QICoreCommon_2_1_000.Instance.earliest(context, n_);
+            CqlDateTime o_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, n_);
             CqlDate p_ = context.Operators.DateFrom(o_);
             CqlDateTime q_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1 as CqlDate);
-            CqlDateTime r_ = QICoreCommon_2_1_000.Instance.earliest(context, q_);
+            CqlDateTime r_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, q_);
             CqlDate s_ = context.Operators.DateFrom(r_);
             CqlQuantity t_ = context.Operators.Quantity(1m, "day");
             CqlDate u_ = context.Operators.Add(s_, t_);
             bool? v_ = context.Operators.SameOrAfter(p_, u_, default);
             CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3 as CqlDate);
-            CqlDateTime x_ = QICoreCommon_2_1_000.Instance.earliest(context, w_);
+            CqlDateTime x_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
-            CqlDateTime aa_ = QICoreCommon_2_1_000.Instance.earliest(context, n_);
+            CqlDateTime aa_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, n_);
             CqlDate ab_ = context.Operators.DateFrom(aa_);
             CqlDate ad_ = context.Operators.Add(ab_, t_);
             bool? ae_ = context.Operators.SameOrAfter(y_, ad_, default);
             bool? af_ = context.Operators.And(v_, ae_);
             CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4 as CqlDate);
-            CqlDateTime ah_ = QICoreCommon_2_1_000.Instance.earliest(context, ag_);
+            CqlDateTime ah_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ag_);
             CqlDate ai_ = context.Operators.DateFrom(ah_);
-            CqlDateTime ak_ = QICoreCommon_2_1_000.Instance.earliest(context, w_);
+            CqlDateTime ak_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, w_);
             CqlDate al_ = context.Operators.DateFrom(ak_);
             CqlDate an_ = context.Operators.Add(al_, t_);
             bool? ao_ = context.Operators.SameOrAfter(ai_, an_, default);
@@ -1686,7 +1686,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate j_((CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp)
         {
             CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1 as CqlDate);
-            CqlDateTime ar_ = QICoreCommon_2_1_000.Instance.earliest(context, aq_);
+            CqlDateTime ar_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, aq_);
             CqlDate as_ = context.Operators.DateFrom(ar_);
 
             return as_;
@@ -1706,7 +1706,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition PneumococcalReaction)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PneumococcalReaction);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PneumococcalReaction);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -1725,12 +1725,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Hepatitis_A_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization HepatitisAVaccination)
         {
             DataType r_ = HepatitisAVaccination?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
             CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
@@ -1742,7 +1742,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = HepatitisAVaccination?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1751,12 +1751,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Hepatitis_A_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure HepatitisAProcedure)
         {
             DataType ab_ = HepatitisAProcedure?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
             CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
@@ -1767,8 +1767,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure HepatitisAProcedure)
         {
             DataType ah_ = HepatitisAProcedure?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1792,7 +1792,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
         bool? g_(Condition HepatitisADiagnosis)
         {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HepatitisADiagnosis);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HepatitisADiagnosis);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             CqlInterval<CqlDate> l_ = this.First_Two_Years(context);
@@ -1812,14 +1812,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlCode a_ = this.rotavirus__live__monovalent_vaccine(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Immunization> c_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> d_ = Status_1_8_000.Instance.isImmunizationAdministered(context, c_);
+        IEnumerable<Immunization> d_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, c_);
         bool? e_(Immunization TwoDoseRotavirusVaccine)
         {
             DataType s_ = TwoDoseRotavirusVaccine?.Occurrence;
             CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-            CqlDateTime u_ = QICoreCommon_2_1_000.Instance.earliest(context, t_ as object);
+            CqlDateTime u_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, t_ as object);
             CqlDate v_ = context.Operators.DateFrom(u_);
-            CqlInterval<CqlDate> w_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> w_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? x_ = context.Operators.In<CqlDate>(v_, w_, "day");
 
             return x_;
@@ -1829,7 +1829,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType y_ = TwoDoseRotavirusVaccine?.Occurrence;
             CqlDateTime z_ = context.Operators.LateBoundProperty<CqlDateTime>(y_, "value");
-            CqlDateTime aa_ = QICoreCommon_2_1_000.Instance.earliest(context, z_ as object);
+            CqlDateTime aa_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, z_ as object);
             CqlDate ab_ = context.Operators.DateFrom(aa_);
 
             return ab_;
@@ -1838,14 +1838,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> i_ = context.Operators.Distinct<CqlDate>(h_);
         CqlValueSet j_ = this.Rotavirus_Vaccine__2_dose_schedule__Administered(context);
         IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> l_ = Status_1_8_000.Instance.isProcedurePerformed(context, k_);
+        IEnumerable<Procedure> l_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, k_);
         bool? m_(Procedure TwoDoseRotavirusProcedure)
         {
             DataType ac_ = TwoDoseRotavirusProcedure?.Performed;
-            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-            CqlDateTime ae_ = QICoreCommon_2_1_000.Instance.earliest(context, ad_);
+            object ad_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ac_);
+            CqlDateTime ae_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ad_);
             CqlDate af_ = context.Operators.DateFrom(ae_);
-            CqlInterval<CqlDate> ag_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> ag_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ah_ = context.Operators.In<CqlDate>(af_, ag_, "day");
 
             return ah_;
@@ -1854,8 +1854,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate o_(Procedure TwoDoseRotavirusProcedure)
         {
             DataType ai_ = TwoDoseRotavirusProcedure?.Performed;
-            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-            CqlDateTime ak_ = QICoreCommon_2_1_000.Instance.earliest(context, aj_);
+            object aj_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ai_);
+            CqlDateTime ak_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, aj_);
             CqlDate al_ = context.Operators.DateFrom(ak_);
 
             return al_;
@@ -1873,14 +1873,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Rotavirus_Vaccine__3_dose_schedule_(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization ThreeDoseRotavirusVaccine)
         {
             DataType r_ = ThreeDoseRotavirusVaccine?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -1890,7 +1890,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = ThreeDoseRotavirusVaccine?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -1899,14 +1899,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Rotavirus_Vaccine__3_dose_schedule__Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure ThreeDoseRotavirusAdministered)
         {
             DataType ab_ = ThreeDoseRotavirusAdministered?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -1915,8 +1915,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure ThreeDoseRotavirusAdministered)
         {
             DataType ah_ = ThreeDoseRotavirusAdministered?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -1953,7 +1953,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
             CqlDate i_(CqlDate RotavirusVaccinations)
             {
                 CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(RotavirusVaccinations as CqlDate);
-                CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+                CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
                 CqlDate ae_ = context.Operators.DateFrom(ad_);
 
                 return ae_;
@@ -1970,7 +1970,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
             CqlDate u_(CqlDate RotavirusVaccinations)
             {
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(RotavirusVaccinations as CqlDate);
-                CqlDateTime ag_ = QICoreCommon_2_1_000.Instance.earliest(context, af_);
+                CqlDateTime ag_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, af_);
                 CqlDate ah_ = context.Operators.DateFrom(ag_);
 
                 return ah_;
@@ -2000,7 +2000,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition RotavirusConditions)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, RotavirusConditions);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, RotavirusConditions);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -2015,7 +2015,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
 
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
-    public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(CqlContext context)
+    public CqlInterval<CqlDate> Vaccine_Administration_Interval__minus__180_Days_up_to_2_Years_Old(CqlContext context)
     {
         Patient a_ = this.Patient(context);
         Date b_ = a_?.BirthDateElement;
@@ -2037,14 +2037,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Child_Influenza_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization InfluenzaVaccine)
         {
             DataType r_ = InfluenzaVaccine?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
-            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> v_ = this.Vaccine_Administration_Interval__minus__42_Days_up_to_2_Years_Old(context);
             bool? w_ = context.Operators.In<CqlDate>(u_, v_, "day");
 
             return w_;
@@ -2054,7 +2054,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType x_ = InfluenzaVaccine?.Occurrence;
             CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-            CqlDateTime z_ = QICoreCommon_2_1_000.Instance.earliest(context, y_ as object);
+            CqlDateTime z_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, y_ as object);
             CqlDate aa_ = context.Operators.DateFrom(z_);
 
             return aa_;
@@ -2063,14 +2063,14 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Child_Influenza_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure InfluenzaAdministration)
         {
             DataType ab_ = InfluenzaAdministration?.Performed;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_2_1_000.Instance.earliest(context, ac_);
+            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(context);
+            CqlInterval<CqlDate> af_ = this.Vaccine_Administration_Interval__minus__180_Days_up_to_2_Years_Old(context);
             bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, "day");
 
             return ag_;
@@ -2079,8 +2079,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure InfluenzaAdministration)
         {
             DataType ah_ = InfluenzaAdministration?.Performed;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            CqlDateTime aj_ = QICoreCommon_2_1_000.Instance.earliest(context, ai_);
+            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            CqlDateTime aj_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
 
             return ak_;
@@ -2108,10 +2108,10 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         bool? f_((CqlTupleMetadata, CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq)
         {
             CqlDateTime l_ = context.Operators.ConvertDateToDateTime(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination2 as CqlDate);
-            CqlDateTime m_ = QICoreCommon_2_1_000.Instance.earliest(context, l_);
+            CqlDateTime m_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, l_);
             CqlDate n_ = context.Operators.DateFrom(m_);
             CqlDateTime o_ = context.Operators.ConvertDateToDateTime(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1 as CqlDate);
-            CqlDateTime p_ = QICoreCommon_2_1_000.Instance.earliest(context, o_);
+            CqlDateTime p_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, o_);
             CqlDate q_ = context.Operators.DateFrom(p_);
             CqlQuantity r_ = context.Operators.Quantity(1m, "day");
             CqlDate s_ = context.Operators.Add(q_, r_);
@@ -2123,7 +2123,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate h_((CqlTupleMetadata, CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq)
         {
             CqlDateTime u_ = context.Operators.ConvertDateToDateTime(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1 as CqlDate);
-            CqlDateTime v_ = QICoreCommon_2_1_000.Instance.earliest(context, u_);
+            CqlDateTime v_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, u_);
             CqlDate w_ = context.Operators.DateFrom(v_);
 
             return w_;
@@ -2140,12 +2140,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Influenza_Virus_LAIV_Vaccine(context);
         IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
-        IEnumerable<Immunization> c_ = Status_1_8_000.Instance.isImmunizationAdministered(context, b_);
+        IEnumerable<Immunization> c_ = Status_minus_1_8_000.Instance.isImmunizationAdministered(context, b_);
         bool? d_(Immunization LAIVVaccine)
         {
             DataType r_ = LAIVVaccine?.Occurrence;
             CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-            CqlDateTime t_ = QICoreCommon_2_1_000.Instance.earliest(context, s_ as object);
+            CqlDateTime t_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, s_ as object);
             CqlDate u_ = context.Operators.DateFrom(t_);
             CqlDate v_ = this.Date_of_Second_Birthday(context);
             CqlInterval<CqlDate> x_ = context.Operators.Interval(v_, v_, true, true);
@@ -2158,7 +2158,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         {
             DataType z_ = LAIVVaccine?.Occurrence;
             CqlDateTime aa_ = context.Operators.LateBoundProperty<CqlDateTime>(z_, "value");
-            CqlDateTime ab_ = QICoreCommon_2_1_000.Instance.earliest(context, aa_ as object);
+            CqlDateTime ab_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, aa_ as object);
             CqlDate ac_ = context.Operators.DateFrom(ab_);
 
             return ac_;
@@ -2167,12 +2167,12 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
         CqlValueSet i_ = this.Influenza_Virus_LAIV_Vaccine_Administered(context);
         IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> k_ = Status_1_8_000.Instance.isProcedurePerformed(context, j_);
+        IEnumerable<Procedure> k_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, j_);
         bool? l_(Procedure InfluenzaAdministration)
         {
             DataType ad_ = InfluenzaAdministration?.Performed;
-            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-            CqlDateTime af_ = QICoreCommon_2_1_000.Instance.earliest(context, ae_);
+            object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ad_);
+            CqlDateTime af_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, ae_);
             CqlDate ag_ = context.Operators.DateFrom(af_);
             CqlDate ah_ = this.Date_of_Second_Birthday(context);
             CqlInterval<CqlDate> aj_ = context.Operators.Interval(ah_, ah_, true, true);
@@ -2184,8 +2184,8 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         CqlDate n_(Procedure InfluenzaAdministration)
         {
             DataType al_ = InfluenzaAdministration?.Performed;
-            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-            CqlDateTime an_ = QICoreCommon_2_1_000.Instance.earliest(context, am_);
+            object am_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, al_);
+            CqlDateTime an_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, am_);
             CqlDate ao_ = context.Operators.DateFrom(an_);
 
             return ao_;
@@ -2219,7 +2219,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? d_(Condition InfluenzaConditions)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, InfluenzaConditions);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, InfluenzaConditions);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDate h_ = context.Operators.DateFrom(g_);
             CqlInterval<CqlDate> i_ = this.First_Two_Years(context);
@@ -2315,7 +2315,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -2324,7 +2324,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -2333,7 +2333,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -2342,7 +2342,7 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

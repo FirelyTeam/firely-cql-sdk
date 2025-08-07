@@ -12,19 +12,19 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR", "1.4.000")]
-public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000 : ILibrary, ISingleton<BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000>
+public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_minus_1_4_000 : ILibrary, ISingleton<BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_minus_1_4_000>
 {
-    private BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000() {}
+    private BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_minus_1_4_000() {}
 
-    public static BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000 Instance { get; } = new();
+    public static BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_minus_1_4_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR";
     public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -107,7 +107,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
         {
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             Period g_ = OfficeVisit?.Period;
-            CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
+            CqlInterval<CqlDateTime> h_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, default);
             Code<Encounter.EncounterStatus> j_ = OfficeVisit?.StatusElement;
             Encounter.EncounterStatus? k_ = j_?.Value;
@@ -166,7 +166,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 string t_ = context.Operators.Last<string>(s_);
                 bool? u_ = context.Operators.Equal(q_, t_);
                 CodeableConcept v_ = M?.Code;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                CqlConcept w_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, v_);
                 CqlValueSet x_ = this.Androgen_deprivation_therapy_for_Urology_Care(context);
                 bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
                 bool? z_ = context.Operators.And(u_, y_);
@@ -285,7 +285,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             bool? be_(Timing.RepeatComponent @this)
             {
                 DataType cj_ = @this?.Bounds;
-                object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
+                object ck_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, cj_);
                 bool? cl_ = context.Operators.Not((bool?)(ck_ is null));
 
                 return cl_;
@@ -294,14 +294,14 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             object bg_(Timing.RepeatComponent @this)
             {
                 DataType cm_ = @this?.Bounds;
-                object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                object cn_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, cm_);
 
                 return cn_;
             };
             IEnumerable<object> bh_ = context.Operators.Select<Timing.RepeatComponent, object>(bf_, bg_);
             CqlInterval<CqlDateTime> bi_(object DoseTime)
             {
-                CqlInterval<CqlDateTime> co_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
+                CqlInterval<CqlDateTime> co_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, DoseTime);
 
                 return co_;
             };
@@ -317,7 +317,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             IEnumerable<CqlInterval<CqlDateTime>> bn_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(bl_, bm_, System.ComponentModel.ListSortDirection.Ascending);
             CqlInterval<CqlDateTime> bo_ = context.Operators.First<CqlInterval<CqlDateTime>>(bn_);
             CqlInterval<CqlDateTime> bp_ = this.NormalizeInterval(context, au_, bo_);
-            CqlDateTime bq_ = QICoreCommon_2_1_000.Instance.earliest(context, bp_ as object);
+            CqlDateTime bq_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, bp_ as object);
 
             return bq_;
         };
@@ -345,7 +345,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 string t_ = context.Operators.Last<string>(s_);
                 bool? u_ = context.Operators.Equal(q_, t_);
                 CodeableConcept v_ = M?.Code;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                CqlConcept w_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, v_);
                 CqlValueSet x_ = this.Androgen_deprivation_therapy_for_Urology_Care(context);
                 bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
                 bool? z_ = context.Operators.And(u_, y_);
@@ -425,7 +425,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             bool? aw_(Timing.RepeatComponent @this)
             {
                 DataType bp_ = @this?.Bounds;
-                object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
+                object bq_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, bp_);
                 bool? br_ = context.Operators.Not((bool?)(bq_ is null));
 
                 return br_;
@@ -434,14 +434,14 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             object ay_(Timing.RepeatComponent @this)
             {
                 DataType bs_ = @this?.Bounds;
-                object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                object bt_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, bs_);
 
                 return bt_;
             };
             IEnumerable<object> az_ = context.Operators.Select<Timing.RepeatComponent, object>(ax_, ay_);
             CqlInterval<CqlDateTime> ba_(object DoseTime)
             {
-                CqlInterval<CqlDateTime> bu_ = QICoreCommon_2_1_000.Instance.toInterval(context, DoseTime);
+                CqlInterval<CqlDateTime> bu_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, DoseTime);
 
                 return bu_;
             };
@@ -457,7 +457,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             IEnumerable<CqlInterval<CqlDateTime>> bf_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(bd_, be_, System.ComponentModel.ListSortDirection.Ascending);
             CqlInterval<CqlDateTime> bg_ = context.Operators.First<CqlInterval<CqlDateTime>>(bf_);
             CqlInterval<CqlDateTime> bh_ = this.NormalizeInterval(context, am_, bg_);
-            CqlDateTime bi_ = QICoreCommon_2_1_000.Instance.earliest(context, bh_ as object);
+            CqlDateTime bi_ = QICoreCommon_minus_2_1_000.Instance.earliest(context, bh_ as object);
 
             return bi_;
         };
@@ -475,18 +475,18 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition ProstateCancer)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, default);
             CodeableConcept h_ = ProstateCancer?.ClinicalStatus;
-            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
-            CqlCode j_ = QICoreCommon_2_1_000.Instance.active(context);
+            CqlConcept i_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = QICoreCommon_minus_2_1_000.Instance.active(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
             bool? m_ = context.Operators.And(g_, l_);
             CodeableConcept n_ = ProstateCancer?.VerificationStatus;
-            CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-            CqlCode p_ = QICoreCommon_2_1_000.Instance.confirmed(context);
+            CqlConcept o_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, n_);
+            CqlCode p_ = QICoreCommon_minus_2_1_000.Instance.confirmed(context);
             CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
             bool? r_ = context.Operators.Equivalent(o_, q_);
             bool? s_ = context.Operators.And(m_, r_);
@@ -510,7 +510,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             IEnumerable<Condition> h_ = this.Prostate_Cancer_Diagnosis(context);
             bool? i_(Condition ProstateCancer)
             {
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
+                CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
                 bool? n_ = context.Operators.In<CqlDateTime>(ADTDateTime, m_, "day");
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                 CqlDateTime p_ = context.Operators.Start(o_);
@@ -701,8 +701,8 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
             bool? bn_(ServiceRequest OrderTwelveMonthsADT)
             {
                 DataType br_ = DEXAPerformed?.Effective;
-                object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                CqlInterval<CqlDateTime> bt_ = QICoreCommon_2_1_000.Instance.toInterval(context, bs_);
+                object bs_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, br_);
+                CqlInterval<CqlDateTime> bt_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, bs_);
                 CqlDateTime bu_ = context.Operators.Start(bt_);
                 FhirDateTime bv_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                 CqlDateTime bw_ = context.Operators.Convert<CqlDateTime>(bv_);
@@ -714,8 +714,8 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 CqlDateTime ce_ = context.Operators.Convert<CqlDateTime>(bv_);
                 bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
                 bool? cg_ = context.Operators.And(cc_, cf_);
-                object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_1_000.Instance.toInterval(context, ci_);
+                object ci_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, br_);
+                CqlInterval<CqlDateTime> cj_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ci_);
                 CqlDateTime ck_ = context.Operators.End(cj_);
                 CqlDateTime cm_ = context.Operators.Convert<CqlDateTime>(bv_);
                 CqlQuantity cn_ = context.Operators.Quantity(2m, "years");
@@ -780,7 +780,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -789,7 +789,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -798,7 +798,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -807,7 +807,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -841,7 +841,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 {
                     string aj_ = @this?.Url;
                     FhirString ak_ = context.Operators.Convert<FhirString>(aj_);
-                    string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                    string al_ = FHIRHelpers_minus_4_4_000.Instance.ToString(context, ak_);
                     bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
                     return am_;
@@ -857,7 +857,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 };
                 IEnumerable<object> ad_ = context.Operators.Select<Extension, object>(ab_, ac_);
                 object ae_ = context.Operators.SingletonFrom<object>(ad_);
-                CqlConcept af_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ae_ as CodeableConcept);
+                CqlConcept af_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ae_ as CodeableConcept);
                 CqlValueSet ag_ = this.Patient_Declined(context);
                 bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
                 bool? ai_ = context.Operators.And(z_, ah_);
@@ -906,7 +906,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 {
                     string ak_ = @this?.Url;
                     FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-                    string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
+                    string am_ = FHIRHelpers_minus_4_4_000.Instance.ToString(context, al_);
                     bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
                     return an_;
@@ -922,7 +922,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 };
                 IEnumerable<object> ae_ = context.Operators.Select<Extension, object>(ac_, ad_);
                 object af_ = context.Operators.SingletonFrom<object>(ae_);
-                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
+                CqlConcept ag_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
                 CqlValueSet ah_ = this.Patient_Declined(context);
                 bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
                 bool? aj_ = context.Operators.And(aa_, ai_);
