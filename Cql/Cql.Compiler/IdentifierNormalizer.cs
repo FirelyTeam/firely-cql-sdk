@@ -11,7 +11,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Utility methods for C# identifier normalization.
 /// </summary>
-internal static class IdentifierNormalizer
+public static class IdentifierNormalizer
 {
     /// <summary>
     /// Normalizes a string to be a valid C# identifier.
@@ -35,7 +35,7 @@ internal static class IdentifierNormalizer
         if (span.Length > 0 && span[0] == '$')
             span = span[1..];
 
-        Span<char> buffer = stackalloc char[span.Length + 2];
+        Span<char> buffer = stackalloc char[span.Length * 5]; // Allow for expansions like + -> plus
         int bufferIndex = 0;
 
         foreach (var c in span)
@@ -49,6 +49,19 @@ internal static class IdentifierNormalizer
                     buffer[bufferIndex++] = 'a';
                     buffer[bufferIndex++] = 'n';
                     buffer[bufferIndex++] = 'd';
+                    continue;
+                case '+':
+                    buffer[bufferIndex++] = 'p';
+                    buffer[bufferIndex++] = 'l';
+                    buffer[bufferIndex++] = 'u';
+                    buffer[bufferIndex++] = 's';
+                    continue;
+                case '-':
+                    buffer[bufferIndex++] = 'm';
+                    buffer[bufferIndex++] = 'i';
+                    buffer[bufferIndex++] = 'n';
+                    buffer[bufferIndex++] = 'u';
+                    buffer[bufferIndex++] = 's';
                     continue;
                 default:
                     buffer[bufferIndex++] = SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_';
