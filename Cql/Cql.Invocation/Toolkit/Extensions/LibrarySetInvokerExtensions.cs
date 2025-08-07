@@ -135,7 +135,13 @@ public static class LibrarySetInvokerExtensions
             var signature = args.SelectToArray(a => a!.GetType().MakeNullable() );
             definitionSignature = new DefinitionSignature(definitionSignature.Name, signature);
         }
-        var definitionInvoker = libraryInvoker.Definitions[definitionSignature];
+        var definitionInvoker = libraryInvoker.Definitions
+            .FirstOrDefault(kvp => kvp.Key.Name == definitionSignature.Name && 
+                                   kvp.Key.ParameterTypes.SequenceEqual(definitionSignature.ParameterTypes))
+            .Value;
+            
+        if (definitionInvoker == null)
+            throw new InvalidOperationException($"No definition found with name '{definitionSignature.Name}' and parameter types [{string.Join(", ", definitionSignature.ParameterTypes.Select(t => t.Name))}]");
         var result = definitionInvoker.Invoke(cqlContext, args);
         return result;
     }

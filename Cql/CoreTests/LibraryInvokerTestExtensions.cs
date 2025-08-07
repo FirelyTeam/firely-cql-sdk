@@ -30,8 +30,16 @@ internal static class LibraryInvokerTestExtensions
         params object[] parameters)
     {
         var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
-        var definitionSignature = new DefinitionSignature(define, parameterTypes);
-        var definition = libraryInvoker.Definitions[definitionSignature];
+        
+        // Find the definition that matches the name and parameter types
+        var definition = libraryInvoker.Definitions
+            .FirstOrDefault(kvp => kvp.Key.Name == define && 
+                                   kvp.Key.ParameterTypes.SequenceEqual(parameterTypes))
+            .Value;
+            
+        if (definition == null)
+            throw new InvalidOperationException($"No definition found with name '{define}' and parameter types [{string.Join(", ", parameterTypes.Select(t => t.Name))}]");
+            
         var resultObj = definition.Invoke(rtx, parameters);
         var result = (T?)resultObj;
         return result;
