@@ -41,10 +41,10 @@ public class ParameterNameAttributeTests
             .First(m => m.Name.Contains("Test_Function"));
 
         var parameters = testFunction.GetParameters();
-        
+
         // Should have context parameter + 2 function parameters
         parameters.Length.Should().Be(3);
-        
+
         // Find the parameter that was normalized from "param with spaces"
         var paramWithSpaces = parameters.FirstOrDefault(p => p.Name.Contains("param_with_spaces"));
         paramWithSpaces.Should().NotBeNull("Parameter 'param with spaces' should be normalized to contain underscores");
@@ -57,7 +57,7 @@ public class ParameterNameAttributeTests
         // The normalParam parameter should NOT have the attribute (no normalization needed)
         var normalParam = parameters.FirstOrDefault(p => p.Name == "normalParam");
         normalParam.Should().NotBeNull("normalParam should exist without normalization");
-        
+
         var normalAttribute = normalParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         normalAttribute.Should().BeNull("normalParam should not have CqlFunctionParameterAttribute since no normalization was needed");
 
@@ -86,19 +86,19 @@ public class ParameterNameAttributeTests
         // because the parameter name is the same as the original CQL name
         var intParam = keywordParams.FirstOrDefault(p => p.Name == "@int");
         intParam.Should().NotBeNull("int parameter should be escaped with @");
-        
+
         var intAttribute = intParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         intAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
 
         var refParam = keywordParams.FirstOrDefault(p => p.Name == "@ref");
         refParam.Should().NotBeNull("ref parameter should be escaped with @");
-        
+
         var refAttribute = refParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         refAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
 
         var classParam = keywordParams.FirstOrDefault(p => p.Name == "@class");
         classParam.Should().NotBeNull("class parameter should be escaped with @");
-        
+
         var classAttribute = classParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         classAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
     }
