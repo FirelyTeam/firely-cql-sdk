@@ -144,7 +144,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
-        private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier.FormatDelimited('_'));
+        private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -206,7 +206,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => IdentifierNormalizer.Normalize(dep.VersionedLibraryIdentifier.FormatDelimited('_')))
+                                .Select(dep => IdentifierNormalizer.Normalize(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
