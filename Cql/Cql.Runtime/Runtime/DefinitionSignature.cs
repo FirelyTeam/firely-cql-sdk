@@ -21,6 +21,11 @@
         public Type[] ParameterTypes { get; } = CalcParameterTypes(ParameterTypes);
 
         /// <summary>
+        /// Cached hash code for performance optimization.
+        /// </summary>
+        private int? _hashCode;
+
+        /// <summary>
         /// Ensures that the parameter types array is not null and returns an empty array if it is null or empty.
         /// </summary>
         /// <param name="parameterTypes">The parameter types array to process.</param>
@@ -38,6 +43,7 @@
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
             if (Name != other.Name) return false;
+            if (GetHashCode() != other.GetHashCode()) return false;
             return ParameterTypes.SequenceEqual(other.ParameterTypes);
         }
 
@@ -47,12 +53,17 @@
         /// <returns>The hash code for the current instance.</returns>
         public override int GetHashCode()
         {
+            if (_hashCode.HasValue)
+                return _hashCode.Value;
+
             var hashCode = new HashCode();
             hashCode.Add(Name);
             if (ParameterTypes.Length > 0)
                 foreach (var type in ParameterTypes)
                     hashCode.Add(type);
-            return hashCode.ToHashCode();
+            
+            _hashCode = hashCode.ToHashCode();
+            return _hashCode.Value;
         }
 
         /// <summary>
