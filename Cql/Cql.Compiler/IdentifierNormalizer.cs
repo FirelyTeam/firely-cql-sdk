@@ -55,25 +55,25 @@ internal static class IdentifierNormalizer
                     buffer[bufferIndex++] = 'd';
                     buffer[bufferIndex++] = '_';
                     continue;
-                case '+':
-                    EnsureBufferCapacity(ref buffer, bufferIndex + 6);
-                    buffer[bufferIndex++] = '_';
-                    buffer[bufferIndex++] = 'p';
-                    buffer[bufferIndex++] = 'l';
-                    buffer[bufferIndex++] = 'u';
-                    buffer[bufferIndex++] = 's';
-                    buffer[bufferIndex++] = '_';
-                    continue;
-                case '-':
-                    EnsureBufferCapacity(ref buffer, bufferIndex + 7);
-                    buffer[bufferIndex++] = '_';
-                    buffer[bufferIndex++] = 'm';
-                    buffer[bufferIndex++] = 'i';
-                    buffer[bufferIndex++] = 'n';
-                    buffer[bufferIndex++] = 'u';
-                    buffer[bufferIndex++] = 's';
-                    buffer[bufferIndex++] = '_';
-                    continue;
+                // case '+':
+                //     EnsureBufferCapacity(ref buffer, bufferIndex + 6);
+                //     buffer[bufferIndex++] = '_';
+                //     buffer[bufferIndex++] = 'p';
+                //     buffer[bufferIndex++] = 'l';
+                //     buffer[bufferIndex++] = 'u';
+                //     buffer[bufferIndex++] = 's';
+                //     buffer[bufferIndex++] = '_';
+                //     continue;
+                // case '-':
+                //     EnsureBufferCapacity(ref buffer, bufferIndex + 7);
+                //     buffer[bufferIndex++] = '_';
+                //     buffer[bufferIndex++] = 'm';
+                //     buffer[bufferIndex++] = 'i';
+                //     buffer[bufferIndex++] = 'n';
+                //     buffer[bufferIndex++] = 'u';
+                //     buffer[bufferIndex++] = 's';
+                //     buffer[bufferIndex++] = '_';
+                //     continue;
                 default:
                     EnsureBufferCapacity(ref buffer, bufferIndex + 1);
                     buffer[bufferIndex++] = SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_';

@@ -39,7 +39,7 @@ public class ParameterNameAttributeTests
         var libraryType = assembly.GetTypes().First(t => t.Name.Contains("ParameterNameTest"));
 
         // Test 1: "Test Function" with "param with spaces" parameter
-        var testFunction = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+        var testFunction = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
             .First(m => m.Name.Contains("Test_Function"));
 
         var parameters = testFunction.GetParameters();
@@ -64,13 +64,13 @@ public class ParameterNameAttributeTests
         normalAttribute.Should().BeNull("normalParam should not have CqlFunctionParameterAttribute since no normalization was needed");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
-        var anotherTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+        var anotherTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
             .First(m => m.Name.Contains("Another_Test"));
 
         var dashParams = anotherTest.GetParameters();
         dashParams.Length.Should().Be(2); // context + 1 function parameter
 
-        var paramWithDashes = dashParams.FirstOrDefault(p => p.Name.Contains("param_minus_with_minus_dashes"));
+        var paramWithDashes = dashParams.FirstOrDefault(p => p.Name.Contains("param_with_dashes"));
         paramWithDashes.Should().NotBeNull("Parameter with dashes should be normalized");
 
         var dashAttribute = paramWithDashes!.GetCustomAttribute<CqlFunctionParameterAttribute>();
@@ -78,7 +78,7 @@ public class ParameterNameAttributeTests
         dashAttribute!.CqlParameterName.Should().Be("param-with-dashes", "Attribute should preserve original CQL parameter name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
-        var keywordTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+        var keywordTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
             .First(m => m.Name.Contains("Keyword_Test"));
 
         var keywordParams = keywordTest.GetParameters();
@@ -86,19 +86,19 @@ public class ParameterNameAttributeTests
 
         // C# keywords should be escaped with @ but should NOT have CqlFunctionParameterAttribute
         // because the parameter name is the same as the original CQL name
-        var intParam = keywordParams.FirstOrDefault(p => p.Name == "@int");
+        var intParam = keywordParams.FirstOrDefault(p => p.Name == "int");
         intParam.Should().NotBeNull("int parameter should be escaped with @");
 
         var intAttribute = intParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         intAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
 
-        var refParam = keywordParams.FirstOrDefault(p => p.Name == "@ref");
+        var refParam = keywordParams.FirstOrDefault(p => p.Name == "ref");
         refParam.Should().NotBeNull("ref parameter should be escaped with @");
 
         var refAttribute = refParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
         refAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
 
-        var classParam = keywordParams.FirstOrDefault(p => p.Name == "@class");
+        var classParam = keywordParams.FirstOrDefault(p => p.Name == "class");
         classParam.Should().NotBeNull("class parameter should be escaped with @");
 
         var classAttribute = classParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();

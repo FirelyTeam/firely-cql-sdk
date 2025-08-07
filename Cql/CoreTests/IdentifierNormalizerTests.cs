@@ -46,15 +46,6 @@ public class IdentifierNormalizerTests
     }
 
     [TestMethod]
-    public void Normalize_PlusAndMinus_ReplacedWithWords()
-    {
-        // Updated to use underscore delimited format: + -> _plus_, - -> _minus_
-        IdentifierNormalizer.Normalize("param+test").Should().Be("param_plus_test");
-        IdentifierNormalizer.Normalize("param-test").Should().Be("param_minus_test");
-        IdentifierNormalizer.Normalize("add+subtract-multiply").Should().Be("add_plus_subtract_minus_multiply");
-    }
-
-    [TestMethod]
     public void Normalize_Quotes_Removed()
     {
         // Based on old behavior:
@@ -107,8 +98,8 @@ public class IdentifierNormalizerTests
     public void Normalize_ComplexExamples_MatchOldBehavior()
     {
         // Updated complex test cases with new character mappings
-        IdentifierNormalizer.Normalize("\"param with spaces+and-dashes\"").Should().Be("param_with_spaces_plus__and__minus_dashes");
-        IdentifierNormalizer.Normalize("$test.param&value+sum").Should().Be("test_param_and_value_plus_sum");
+        IdentifierNormalizer.Normalize("\"param with spaces+and-dashes\"").Should().Be("param_with_spaces_and_dashes");
+        IdentifierNormalizer.Normalize("$test.param&value+sum").Should().Be("test_param_and_value_sum");
         IdentifierNormalizer.Normalize("function(param1,param2)").Should().Be("function_param1_param2_");
     }
 
@@ -116,8 +107,8 @@ public class IdentifierNormalizerTests
     public void Normalize_BufferGrowth_HandlesLargeExpansions()
     {
         // Test that buffer growth works correctly when many character expansions occur
-        var input = new string('+', 100); // 100 plus signs
-        var expected = string.Join("", Enumerable.Repeat("_plus_", 100));
+        var input = new string('&', 100); // 100 plus signs
+        var expected = string.Join("", Enumerable.Repeat("_and_", 100));
         IdentifierNormalizer.Normalize(input).Should().Be(expected);
     }
 
@@ -126,8 +117,8 @@ public class IdentifierNormalizerTests
     {
         // Test with input that will definitely require buffer growth
         // Each + becomes _plus_ (6 chars), so 5 chars becomes 30 chars
-        var input = "+++++";
-        var expected = "_plus__plus__plus__plus__plus_";
+        var input = "&&&&&";
+        var expected = string.Join("", Enumerable.Repeat("_and_", 5));
         IdentifierNormalizer.Normalize(input).Should().Be(expected);
     }
 
@@ -136,7 +127,7 @@ public class IdentifierNormalizerTests
     {
         // Test buffer growth with mixed character types requiring different expansion lengths
         var input = "a+b&c-d";
-        var expected = "a_plus_b_and_c_minus_d";
+        var expected = "a_b_and_c_d";
         IdentifierNormalizer.Normalize(input).Should().Be(expected);
     }
 
@@ -151,8 +142,6 @@ public class IdentifierNormalizerTests
     public void Normalize_BufferGrowth_SingleCharacterExpansions()
     {
         // Test each special character individually
-        IdentifierNormalizer.Normalize("+").Should().Be("_plus_");
-        IdentifierNormalizer.Normalize("-").Should().Be("_minus_");
         IdentifierNormalizer.Normalize("&").Should().Be("_and_");
     }
 }
