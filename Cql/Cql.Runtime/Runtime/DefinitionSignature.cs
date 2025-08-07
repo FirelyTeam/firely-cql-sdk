@@ -13,7 +13,7 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
-public sealed record DefinitionSignature(string Name, params Type[] ParameterTypes)
+public readonly record struct DefinitionSignature(string Name, params Type[] ParameterTypes)
 {
     /// <summary>
     /// Gets the name of the definition.
@@ -51,10 +51,8 @@ public sealed record DefinitionSignature(string Name, params Type[] ParameterTyp
     /// </summary>
     /// <param name="other">The other <see cref="DefinitionSignature"/> instance to compare.</param>
     /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
-    public bool Equals(DefinitionSignature? other)
+    public bool Equals(DefinitionSignature other)
     {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
         if (GetHashCode() != other.GetHashCode()) return false;
         if (Name != other.Name) return false;
         return ParameterTypes.SequenceEqual(other.ParameterTypes);

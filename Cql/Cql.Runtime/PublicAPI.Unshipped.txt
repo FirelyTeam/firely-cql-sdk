@@ -570,18 +570,20 @@ Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.init -> void
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.get -> Hl7.Cql.Runtime.CqlLibraryVersion?
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.init -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>
-Hl7.Cql.Runtime.DefinitionDictionary<T>.AddDefinition(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition) -> void
-Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.AddDefinition(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature, T! definition) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionDictionary() -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
-Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitions() -> System.Collections.Generic.IEnumerable<(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition)>!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitionsByLibraryName(string? libraryName) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, T! definition)>!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature].get -> T!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature! definitionSignature, out T? definition) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitions() -> System.Collections.Generic.IEnumerable<(string! libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature, T! definition)>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitionsByLibraryName(string? libraryName) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.DefinitionSignature definitionSignature, T! definition)>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature].get -> T!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature, out T? definition) -> bool
 Hl7.Cql.Runtime.DefinitionSignature
-Hl7.Cql.Runtime.DefinitionSignature.Deconstruct(out string! name, out System.Type![]! parameterTypes) -> void
-Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature(string! name, params System.Type![]! parameterTypes) -> void
+Hl7.Cql.Runtime.DefinitionSignature.Deconstruct(out string! Name, out System.Type![]! ParameterTypes) -> void
+Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature() -> void
+Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature(string! Name, params System.Type![]! ParameterTypes) -> void
+Hl7.Cql.Runtime.DefinitionSignature.Equals(Hl7.Cql.Runtime.DefinitionSignature other) -> bool
 Hl7.Cql.Runtime.DefinitionSignature.Name.get -> string!
 Hl7.Cql.Runtime.DefinitionSignature.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Runtime.IO.DirectoryInfoHandler
@@ -643,7 +645,6 @@ override Hl7.Cql.Runtime.CqlLibraryVersion.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlLibraryVersion.ToString() -> string!
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
-override Hl7.Cql.Runtime.DefinitionSignature.Equals(object? other) -> bool
 override Hl7.Cql.Runtime.DefinitionSignature.GetHashCode() -> int
 override Hl7.Cql.Runtime.Parsing.CqlParseError.GetHashCode() -> int
 override Hl7.Cql.Runtime.Parsing.CqlParseError.ToString() -> string!
@@ -677,9 +678,9 @@ static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
-static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature!(string! name) -> Hl7.Cql.Runtime.DefinitionSignature!
-static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
-static Hl7.Cql.Runtime.DefinitionSignature.operator ==(Hl7.Cql.Runtime.DefinitionSignature? left, Hl7.Cql.Runtime.DefinitionSignature? right) -> bool
+static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature(string! name) -> Hl7.Cql.Runtime.DefinitionSignature
+static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature left, Hl7.Cql.Runtime.DefinitionSignature right) -> bool
+static Hl7.Cql.Runtime.DefinitionSignature.operator ==(Hl7.Cql.Runtime.DefinitionSignature left, Hl7.Cql.Runtime.DefinitionSignature right) -> bool
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
@@ -708,4 +709,6 @@ virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Pars
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
+~override Hl7.Cql.Runtime.DefinitionSignature.Equals(object obj) -> bool
+~override Hl7.Cql.Runtime.DefinitionSignature.ToString() -> string
 ~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool
