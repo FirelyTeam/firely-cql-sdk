@@ -8,6 +8,8 @@
 
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -111,8 +113,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             string targetName,
             string memberName)
         {
-            var target = targetName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(targetName)}.Instance";
-            var member = VariableNameGenerator.NormalizeIdentifier(memberName);
+            var target = targetName == LibraryName
+                             ? "this"
+                             : $"{IdentifierNormalizer.Normalize(targetName)}.Instance";
+            var member = IdentifierNormalizer.Normalize(memberName);
             return $"{target}.{member}";
         }
 
@@ -505,11 +509,26 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertLambdaExpression(
             LambdaExpression lambda,
-            bool functionMode = false)
+            bool functionMode = false,
+            IReadOnlyDictionary<string, string>? originalParameterNames = null)
         {
             var lambdaSb = new StringBuilder();
 
-            var parameters = lambda.Parameters.Select(p => $"{TypeToCSharpConverter.ToCSharp(p.Type)} {p.Name!.EscapeKeywords()}").ToList();
+            var parameters = lambda.Parameters.Select(p =>
+            {
+                var typeDeclaration = TypeToCSharpConverter.ToCSharp(p.Type);
+                var parameterName = p.Name!.EscapeKeywords();
+
+                // Add attribute if original name differs from normalized name
+                var attributePrefix = "";
+                if (originalParameterNames?.TryGetValue(p.Name!, out var originalName) == true)
+                {
+                    attributePrefix = $"[CqlFunctionParameter({originalName.QuoteString()})] ";
+                }
+
+                return $"{attributePrefix}{typeDeclaration} {parameterName}";
+            }).ToList();
+
             // inserts the context parameter in the start of the lambda expression
             if (Indent == 0)
                 parameters.Insert(0, "CqlContext context");
@@ -555,7 +574,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         public string ProcessDefinition(
             LambdaExpression function,
             string name,
-            string specifiers)
+            string specifiers,
+            IReadOnlyDictionary<string, string>? originalParameterNames = null)
         {
             var funcSb = new StringBuilder();
 
@@ -563,7 +583,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             funcSb.Append(TypeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
-            var lambda = ConvertLambdaExpression(function, functionMode: true);
+            var lambda = ConvertLambdaExpression(function, functionMode: true, originalParameterNames: originalParameterNames);
             funcSb.Append(lambda);
 
             if (function.Body is not BlockExpression)

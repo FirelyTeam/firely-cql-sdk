@@ -395,7 +395,7 @@ partial class ExpressionBuilderContext
                      .SelectToArray(element =>
                      {
                          var value = TranslateArg(element.value!);
-                         var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
+                         var propInfo = GetProperty(tupleType, IdentifierNormalizer.Normalize(element.name!), _typeResolver)
                                         ?? throw this.NewExpressionBuildingException(
                                             $"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                          var binding = Binding(value, propInfo);
@@ -1604,7 +1604,7 @@ internal partial class ExpressionBuilderContext
             if (sources.Length == 1)
             {
                 var source0 = sources[0];
-                var sourceParameterName = NormalizeIdentifier(source0.alias);
+                var sourceParameterName = IdentifierNormalizer.Normalize(source0.alias);
                 scopeParameter = Expression.Parameter(returnElementType, sourceParameterName);
                 PushScopes(ImpliedAlias, KeyValuePair.Create(source0.alias, ((Expression)scopeParameter, (Element)source0.expression)));
             }
