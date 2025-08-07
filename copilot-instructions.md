@@ -81,6 +81,7 @@ Use this header format with "Firely, NCQA":
 5. **Always ensure blank lines contain no spaces** - blank lines must be completely empty
 6. **When adding new utility files or functionality that are only used internally, keep those types as `internal`, not `public`** - Only expose public APIs when they are intended for external consumption
 7. **When creating new files or modifying existing ones, always remove unused usings at the top of the file** - Keep using statements clean and only include what is actually used
+8. **Do not add duplicate usings in files where the using is already included globally in `GlobalUsings.cs`** - Check GlobalUsings.cs first to avoid redundant using statements
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage
