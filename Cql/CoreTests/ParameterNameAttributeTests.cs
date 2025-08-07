@@ -9,6 +9,7 @@
 using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 
 namespace CoreTests;
@@ -25,13 +26,14 @@ public class ParameterNameAttributeTests
 
         // Act: Generate C# code and compile to assembly using ElmToolkit
         var elmToolkit = new ElmToolkit()
-            .AddElmLibraries(elmLibrary)
+            .AddElmLibraries([elmLibrary])
             .CompileToAssemblies();
 
-        var assemblyBinary = elmToolkit.ArtifactsById.Values.First().Results.AssemblyBinary;
+        var assemblyResult = elmToolkit.GetElmToAssemblyResults().First();
+        var assemblyBinary = assemblyResult.assemblyBinary;
         assemblyBinary.Should().NotBeNull("Assembly should be compiled successfully");
 
-        var assembly = assemblyBinary!.ToAssembly();
+        var assembly = Assembly.Load(assemblyBinary);
 
         // Assert: Check that the generated methods have the correct attributes
         var libraryType = assembly.GetTypes().First(t => t.Name.Contains("ParameterNameTest"));

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.ObjectModel;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 
@@ -23,5 +24,5 @@ internal class CqlFunctionDefinition(
     /// Gets a dictionary mapping normalized C# parameter names to their original CQL parameter names.
     /// Only contains entries where the normalized name differs from the original name.
     /// </summary>
-    public IReadOnlyDictionary<string, string> OriginalParameterNames { get; } = originalParameterNames ?? new Dictionary<string, string>();
+    public IReadOnlyDictionary<string, string> OriginalParameterNames { get; } = originalParameterNames ?? ReadOnlyDictionary<string, string>.Empty;
 }
