@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
-public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_0_1_021>
+public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
-    private FHIR347_minus_0_1_021() {}
+    private FHIR347_0_1_021() {}
 
-    public static FHIR347_minus_0_1_021 Instance { get; } = new();
+    public static FHIR347_0_1_021 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "FHIR347";
     public string Version => "0.1.021";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, SupplementalDataElementsFHIR4_minus_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -139,20 +139,20 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
     private static readonly CqlValueSet _Pregnancy_or_Other_Related_Diagnoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1623", null);
 
     [CqlValueSetDefinition("Preventive Care Services - Established Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services___Established_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services___Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlValueSetDefinition("Preventive Care Services - Other", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services__minus__Other(CqlContext _) => _Preventive_Care_Services__minus__Other;
-    private static readonly CqlValueSet _Preventive_Care_Services__minus__Other = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030", null);
+    public CqlValueSet Preventive_Care_Services___Other(CqlContext _) => _Preventive_Care_Services___Other;
+    private static readonly CqlValueSet _Preventive_Care_Services___Other = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030", null);
 
     [CqlValueSetDefinition("Preventive Care Services-Individual Counseling", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services_minus_Individual_Counseling(CqlContext _) => _Preventive_Care_Services_minus_Individual_Counseling;
-    private static readonly CqlValueSet _Preventive_Care_Services_minus_Individual_Counseling = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", null);
+    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext _) => _Preventive_Care_Services_Individual_Counseling;
+    private static readonly CqlValueSet _Preventive_Care_Services_Individual_Counseling = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", null);
 
     [CqlValueSetDefinition("Preventive Care Services-Initial Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlValueSetDefinition("Rhabdomyolysis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102", valueSetVersion: null)]
     public CqlValueSet Rhabdomyolysis(CqlContext _) => _Rhabdomyolysis;
@@ -234,7 +234,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> n_ = context.Operators.Union<Condition>(k_, m_);
         bool? o_(Condition ASCVDDiagnosis)
         {
-            CqlInterval<CqlDateTime> ae_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, ASCVDDiagnosis);
+            CqlInterval<CqlDateTime> ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ASCVDDiagnosis);
             CqlDateTime af_ = context.Operators.Start(ae_);
             CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
             CqlDateTime ah_ = context.Operators.End(ag_);
@@ -257,13 +257,13 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? ab_(Procedure ASCVDProcedure)
         {
             DataType aj_ = ASCVDProcedure?.Performed;
-            CqlInterval<CqlDateTime> ak_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, aj_);
+            CqlInterval<CqlDateTime> ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aj_);
             CqlDateTime al_ = context.Operators.Start(ak_);
             CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
             CqlDateTime an_ = context.Operators.End(am_);
             bool? ao_ = context.Operators.Before(al_, an_, default);
             Code<EventStatus> ap_ = ASCVDProcedure?.StatusElement;
-            string aq_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ap_);
+            string aq_ = FHIRHelpers_4_0_001.Instance.ToString(context, ap_);
             bool? ar_ = context.Operators.Equal(aq_, "completed");
             bool? as_ = context.Operators.And(ao_, ar_);
 
@@ -290,15 +290,15 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
         IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up(context);
+        CqlValueSet l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
         IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        CqlValueSet n_ = this.Preventive_Care_Services__minus__Other(context);
+        CqlValueSet n_ = this.Preventive_Care_Services___Other(context);
         IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
         IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
         IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-        CqlValueSet r_ = this.Preventive_Care_Services_minus_Individual_Counseling(context);
+        CqlValueSet r_ = this.Preventive_Care_Services_Individual_Counseling(context);
         IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        CqlValueSet t_ = this.Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up(context);
+        CqlValueSet t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
         IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
         IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
         IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
@@ -306,10 +306,10 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         {
             CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
             Period aa_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> ab_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, aa_);
+            CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aa_);
             bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, default);
             Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
-            string ae_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ad_);
+            string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
             bool? af_ = context.Operators.Equal(ae_, "finished");
             bool? ag_ = context.Operators.And(ac_, af_);
 
@@ -367,18 +367,18 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? c_(Observation LDL)
         {
             DataType e_ = LDL?.Value;
-            CqlQuantity f_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, e_ as Quantity);
+            CqlQuantity f_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, e_ as Quantity);
             CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
             bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
             DataType i_ = LDL?.Effective;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlDateTime m_ = context.Operators.End(l_);
             bool? n_ = context.Operators.Before(k_, m_, default);
             bool? o_ = context.Operators.And(h_, n_);
             Code<ObservationStatus> p_ = LDL?.StatusElement;
-            string q_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, p_);
+            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
             string[] r_ = [
                 "final",
                 "amended",
@@ -403,7 +403,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition Hypercholesterolemia)
         {
-            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, Hypercholesterolemia);
+            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Hypercholesterolemia);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
@@ -463,7 +463,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition Diabetes)
         {
-            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, Diabetes);
+            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
@@ -531,7 +531,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Ethnicity(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -540,7 +540,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -549,7 +549,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Race(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -558,7 +558,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -572,7 +572,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? c_(AllergyIntolerance StatinAllergy)
         {
             DataType f_ = StatinAllergy?.Onset;
-            CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, f_);
+            CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, f_);
             CqlDateTime h_ = context.Operators.Start(g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             CqlDateTime j_ = context.Operators.End(i_);
@@ -598,12 +598,12 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? f_(ServiceRequest PalliativeOrHospiceCareOrder)
         {
             FhirDateTime y_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
-            CqlDateTime z_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, y_);
+            CqlDateTime z_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, y_);
             CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
             CqlDateTime ab_ = context.Operators.End(aa_);
             bool? ac_ = context.Operators.SameOrBefore(z_, ab_, default);
             Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder?.StatusElement;
-            string ae_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ad_);
+            string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
             string[] af_ = [
                 "active",
                 "on-hold",
@@ -612,7 +612,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
             bool? ah_ = context.Operators.And(ac_, ag_);
             Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
-            string aj_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ai_);
+            string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
             bool? ak_ = context.Operators.Equal(aj_, "order");
             bool? al_ = context.Operators.And(ah_, ak_);
 
@@ -626,13 +626,13 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? n_(Procedure PalliativeOrHospiceCarePerformed)
         {
             DataType am_ = PalliativeOrHospiceCarePerformed?.Performed;
-            CqlInterval<CqlDateTime> an_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, am_);
+            CqlInterval<CqlDateTime> an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, am_);
             CqlDateTime ao_ = context.Operators.Start(an_);
             CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
             CqlDateTime aq_ = context.Operators.End(ap_);
             bool? ar_ = context.Operators.SameOrBefore(ao_, aq_, default);
             Code<EventStatus> as_ = PalliativeOrHospiceCarePerformed?.StatusElement;
-            string at_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, as_);
+            string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
             bool? au_ = context.Operators.Equal(at_, "completed");
             bool? av_ = context.Operators.And(ar_, au_);
 
@@ -647,13 +647,13 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? u_(Encounter PalliativeEncounter)
         {
             Period aw_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> ax_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, aw_);
+            CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aw_);
             CqlDateTime ay_ = context.Operators.Start(ax_);
             CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
             CqlDateTime ba_ = context.Operators.End(az_);
             bool? bb_ = context.Operators.SameOrBefore(ay_, ba_, default);
             Code<Encounter.EncounterStatus> bc_ = PalliativeEncounter?.StatusElement;
-            string bd_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bc_);
+            string bd_ = FHIRHelpers_4_0_001.Instance.ToString(context, bc_);
             bool? be_ = context.Operators.Equal(bd_, "finished");
             bool? bf_ = context.Operators.And(bb_, be_);
 
@@ -680,7 +680,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
         bool? i_(Condition HepatitisLiverDisease)
         {
-            CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, HepatitisLiverDisease);
+            CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, HepatitisLiverDisease);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             bool? n_ = context.Operators.Overlaps(l_, m_, default);
 
@@ -700,7 +700,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition StatinMuscleSymptom)
         {
-            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, StatinMuscleSymptom);
+            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, StatinMuscleSymptom);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.End(h_);
@@ -722,7 +722,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition ESRD)
         {
-            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, ESRD);
+            CqlInterval<CqlDateTime> f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ESRD);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
@@ -743,7 +743,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? c_(AdverseEvent StatinReaction)
         {
             FhirDateTime f_ = StatinReaction?.DateElement;
-            CqlDateTime g_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, f_);
+            CqlDateTime g_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
 
@@ -788,7 +788,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
         bool? i_(Condition ExclusionDiagnosis)
         {
-            CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, ExclusionDiagnosis);
+            CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ExclusionDiagnosis);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             bool? n_ = context.Operators.Overlaps(l_, m_, default);
 
@@ -813,14 +813,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? x_(Medication M)
             {
                 Id ab_ = M?.IdElement;
-                string ac_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ab_);
+                string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
                 object ad_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string ae_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ad_ as FhirString);
+                string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_ as FhirString);
                 IEnumerable<string> af_ = context.Operators.Split(ae_, "/");
                 string ag_ = context.Operators.Last<string>(af_);
                 bool? ah_ = context.Operators.Equal(ac_, ag_);
                 CodeableConcept ai_ = M?.Code;
-                CqlConcept aj_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, ai_);
+                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
                 CqlValueSet ak_ = this.Low_Intensity_Statin_Therapy(context);
                 bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
                 bool? am_ = context.Operators.And(ah_, al_);
@@ -844,14 +844,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? ao_(Medication M)
             {
                 Id as_ = M?.IdElement;
-                string at_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, as_);
+                string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
                 object au_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string av_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, au_ as FhirString);
+                string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_ as FhirString);
                 IEnumerable<string> aw_ = context.Operators.Split(av_, "/");
                 string ax_ = context.Operators.Last<string>(aw_);
                 bool? ay_ = context.Operators.Equal(at_, ax_);
                 CodeableConcept az_ = M?.Code;
-                CqlConcept ba_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, az_);
+                CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, az_);
                 CqlValueSet bb_ = this.Moderate_Intensity_Statin_Therapy(context);
                 bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
                 bool? bd_ = context.Operators.And(ay_, bc_);
@@ -876,14 +876,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? bf_(Medication M)
             {
                 Id bj_ = M?.IdElement;
-                string bk_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bj_);
+                string bk_ = FHIRHelpers_4_0_001.Instance.ToString(context, bj_);
                 object bl_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string bm_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bl_ as FhirString);
+                string bm_ = FHIRHelpers_4_0_001.Instance.ToString(context, bl_ as FhirString);
                 IEnumerable<string> bn_ = context.Operators.Split(bm_, "/");
                 string bo_ = context.Operators.Last<string>(bn_);
                 bool? bp_ = context.Operators.Equal(bk_, bo_);
                 CodeableConcept bq_ = M?.Code;
-                CqlConcept br_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, bq_);
+                CqlConcept br_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bq_);
                 CqlValueSet bs_ = this.High_Intensity_Statin_Therapy(context);
                 bool? bt_ = context.Operators.ConceptInValueSet(br_, bs_);
                 bool? bu_ = context.Operators.And(bp_, bt_);
@@ -903,11 +903,11 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
         bool? u_(MedicationRequest StatinOrdered)
         {
             FhirDateTime bv_ = StatinOrdered?.AuthoredOnElement;
-            CqlDateTime bw_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, bv_);
+            CqlDateTime bw_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bv_);
             CqlInterval<CqlDateTime> bx_ = this.Measurement_Period(context);
             bool? by_ = context.Operators.In<CqlDateTime>(bw_, bx_, default);
             Code<MedicationRequest.MedicationrequestStatus> bz_ = StatinOrdered?.StatusElement;
-            string ca_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bz_);
+            string ca_ = FHIRHelpers_4_0_001.Instance.ToString(context, bz_);
             string[] cb_ = [
                 "active",
                 "completed",
@@ -915,7 +915,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? cc_ = context.Operators.In<string>(ca_, cb_ as IEnumerable<string>);
             bool? cd_ = context.Operators.And(by_, cc_);
             Code<MedicationRequest.MedicationRequestIntent> ce_ = StatinOrdered?.IntentElement;
-            string cf_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ce_);
+            string cf_ = FHIRHelpers_4_0_001.Instance.ToString(context, ce_);
             bool? cg_ = context.Operators.Equal(cf_, "order");
             bool? ch_ = context.Operators.And(cd_, cg_);
 
@@ -939,14 +939,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? x_(Medication M)
             {
                 Id ab_ = M?.IdElement;
-                string ac_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ab_);
+                string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
                 object ad_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string ae_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, ad_ as FhirString);
+                string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_ as FhirString);
                 IEnumerable<string> af_ = context.Operators.Split(ae_, "/");
                 string ag_ = context.Operators.Last<string>(af_);
                 bool? ah_ = context.Operators.Equal(ac_, ag_);
                 CodeableConcept ai_ = M?.Code;
-                CqlConcept aj_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, ai_);
+                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
                 CqlValueSet ak_ = this.Low_Intensity_Statin_Therapy(context);
                 bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
                 bool? am_ = context.Operators.And(ah_, al_);
@@ -970,14 +970,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? ao_(Medication M)
             {
                 Id as_ = M?.IdElement;
-                string at_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, as_);
+                string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
                 object au_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string av_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, au_ as FhirString);
+                string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_ as FhirString);
                 IEnumerable<string> aw_ = context.Operators.Split(av_, "/");
                 string ax_ = context.Operators.Last<string>(aw_);
                 bool? ay_ = context.Operators.Equal(at_, ax_);
                 CodeableConcept az_ = M?.Code;
-                CqlConcept ba_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, az_);
+                CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, az_);
                 CqlValueSet bb_ = this.Moderate_Intensity_Statin_Therapy(context);
                 bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
                 bool? bd_ = context.Operators.And(ay_, bc_);
@@ -1002,14 +1002,14 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             bool? bf_(Medication M)
             {
                 Id bj_ = M?.IdElement;
-                string bk_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bj_);
+                string bk_ = FHIRHelpers_4_0_001.Instance.ToString(context, bj_);
                 object bl_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                string bm_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, bl_ as FhirString);
+                string bm_ = FHIRHelpers_4_0_001.Instance.ToString(context, bl_ as FhirString);
                 IEnumerable<string> bn_ = context.Operators.Split(bm_, "/");
                 string bo_ = context.Operators.Last<string>(bn_);
                 bool? bp_ = context.Operators.Equal(bk_, bo_);
                 CodeableConcept bq_ = M?.Code;
-                CqlConcept br_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, bq_);
+                CqlConcept br_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bq_);
                 CqlValueSet bs_ = this.High_Intensity_Statin_Therapy(context);
                 bool? bt_ = context.Operators.ConceptInValueSet(br_, bs_);
                 bool? bu_ = context.Operators.And(bp_, bt_);
@@ -1083,7 +1083,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
                         return null;
                     }
                 };
-                CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, cl_());
+                CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cl_());
                 CqlInterval<CqlDateTime> cn_ = this.Measurement_Period(context);
                 bool? co_ = context.Operators.Overlaps(cm_, cn_, default);
 
@@ -1092,7 +1092,7 @@ public partial class FHIR347_minus_0_1_021 : ILibrary, ISingleton<FHIR347_minus_
             IEnumerable<Timing> cb_ = context.Operators.Where<Timing>(bz_, ca_);
             bool? cc_ = context.Operators.Exists<Timing>(cb_);
             Code<MedicationRequest.MedicationrequestStatus> cd_ = ActiveStatin?.StatusElement;
-            string ce_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, cd_);
+            string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
             string[] cf_ = [
                 "active",
                 "completed",

@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.3.000")]
-public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, ISingleton<CRLReceiptofSpecialistReportFHIR_minus_0_3_000>
+public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingleton<CRLReceiptofSpecialistReportFHIR_0_3_000>
 {
-    private CRLReceiptofSpecialistReportFHIR_minus_0_3_000() {}
+    private CRLReceiptofSpecialistReportFHIR_0_3_000() {}
 
-    public static CRLReceiptofSpecialistReportFHIR_minus_0_3_000 Instance { get; } = new();
+    public static CRLReceiptofSpecialistReportFHIR_0_3_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "CRLReceiptofSpecialistReportFHIR";
     public string Version => "0.3.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -79,8 +79,8 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     private static readonly CqlCode _Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour = new CqlCode("96112", "http://www.ama-assn.org/go/cpt");
 
     [CqlCodeDefinition("Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)", codeId: "96156", codeSystem: "http://www.ama-assn.org/go/cpt")]
-    public CqlCode Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext _) => _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_;
-    private static readonly CqlCode _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_ = new CqlCode("96156", "http://www.ama-assn.org/go/cpt");
+    public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext _) => _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_;
+    private static readonly CqlCode _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_ = new CqlCode("96156", "http://www.ama-assn.org/go/cpt");
 
     [CqlCodeDefinition("Psychological or neuropsychological test administration and scoring by physician or other qualified health care professional, two or more tests, any method; first 30 minutes", codeId: "96136", codeSystem: "http://www.ama-assn.org/go/cpt")]
     public CqlCode Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes(CqlContext _) => _Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes;
@@ -103,7 +103,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     private static readonly CqlCodeSystem _CPT =
       new CqlCodeSystem("http://www.ama-assn.org/go/cpt", null, [
           _Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour,
-          _Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_,
+          _Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_,
           _Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes,
           _Psychological_or_neuropsychological_test_administration_and_scoring_by_technician__two_or_more_tests__any_method__first_30_minutes,
           _Psychotherapy_for_crisis__first_60_minutes]);
@@ -172,7 +172,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? ad_ = context.Operators.Equal(ac_, "finished");
             CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
             Period af_ = Encounter?.Period;
-            CqlInterval<CqlDateTime> ag_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, af_);
+            CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, af_);
             bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, "day");
             bool? ai_ = context.Operators.And(ad_, ah_);
 
@@ -194,7 +194,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             List<CodeableConcept> g_ = EncDRC?.Type;
             CqlConcept h_(CodeableConcept @this)
             {
-                CqlConcept ao_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return ao_;
             };
@@ -211,7 +211,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? l_ = context.Operators.Exists<CqlConcept>(k_);
             CqlConcept n_(CodeableConcept @this)
             {
-                CqlConcept as_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept as_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return as_;
             };
@@ -229,7 +229,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? s_ = context.Operators.Or(l_, r_);
             CqlConcept u_(CodeableConcept @this)
             {
-                CqlConcept aw_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept aw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return aw_;
             };
@@ -247,7 +247,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? z_ = context.Operators.Or(s_, y_);
             CqlConcept ab_(CodeableConcept @this)
             {
-                CqlConcept ba_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ba_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return ba_;
             };
@@ -265,14 +265,14 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? ag_ = context.Operators.Or(z_, af_);
             CqlConcept ai_(CodeableConcept @this)
             {
-                CqlConcept be_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return be_;
             };
             IEnumerable<CqlConcept> aj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, ai_);
             bool? ak_(CqlConcept T)
             {
-                CqlCode bf_ = this.Health_behavior_assessment__or_re_minus_assessment__ie__health_minus_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
+                CqlCode bf_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
                 CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
                 bool? bh_ = context.Operators.Equivalent(T, bg_);
 
@@ -293,7 +293,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
             bool? bl_ = context.Operators.Equal(bk_, "finished");
             CqlInterval<CqlDateTime> bm_ = this.Measurement_Period(context);
             Period bn_ = Encounter?.Period;
-            CqlInterval<CqlDateTime> bo_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bn_);
+            CqlInterval<CqlDateTime> bo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bn_);
             bool? bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bm_, bo_, "day");
             bool? bq_ = context.Operators.And(bl_, bp_);
 
@@ -402,7 +402,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -411,7 +411,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -420,7 +420,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -429,7 +429,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -443,7 +443,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
         {
             FhirString e_ = Task?.ReferenceElement;
             string f_ = e_?.Value;
-            string g_ = QICoreCommon_minus_2_1_000.Instance.GetId(context, f_);
+            string g_ = QICoreCommon_2_1_000.Instance.GetId(context, f_);
 
             return g_;
         };
@@ -471,7 +471,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
                 IEnumerable<string> m_ = this.TaskGetRequestID(context, ConsultantReportObtained);
                 bool? n_ = context.Operators.In<string>(l_, m_);
                 Period o_ = ConsultantReportObtained?.ExecutionPeriod;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                 CqlDateTime q_ = context.Operators.End(p_);
                 CqlDateTime r_ = FirstReferral?.AuthorDate;
                 bool? s_ = context.Operators.After(q_, r_, default);
@@ -481,7 +481,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_minus_0_3_000 : ILibrary, 
                 Code<Task.TaskStatus> w_ = context.Operators.Convert<Code<Task.TaskStatus>>(v_);
                 bool? x_ = context.Operators.Equal(w_, "completed");
                 bool? y_ = context.Operators.And(t_, x_);
-                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
+                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                 CqlDateTime ab_ = context.Operators.End(aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
                 bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");

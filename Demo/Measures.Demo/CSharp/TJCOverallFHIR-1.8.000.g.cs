@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
-public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_minus_1_8_000>
+public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
-    private TJCOverallFHIR_minus_1_8_000() {}
+    private TJCOverallFHIR_1_8_000() {}
 
-    public static TJCOverallFHIR_minus_1_8_000 Instance { get; } = new();
+    public static TJCOverallFHIR_1_8_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "TJCOverallFHIR";
     public string Version => "1.8.000";
-    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance, FHIRHelpers_minus_4_0_001.Instance];
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 
@@ -67,8 +67,8 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
     private static readonly CqlValueSet _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
 
     [CqlValueSetDefinition("Non-Elective Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", valueSetVersion: null)]
-    public CqlValueSet Non_minus_Elective_Inpatient(CqlContext _) => _Non_minus_Elective_Inpatient;
-    private static readonly CqlValueSet _Non_minus_Elective_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
+    public CqlValueSet Non_Elective_Inpatient(CqlContext _) => _Non_Elective_Inpatient;
+    private static readonly CqlValueSet _Non_Elective_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
 
     [CqlValueSetDefinition("Observation Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", valueSetVersion: null)]
     public CqlValueSet Observation_Services(CqlContext _) => _Observation_Services;
@@ -133,15 +133,15 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
     [CqlExpressionDefinition("Non Elective Inpatient Encounter")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context)
     {
-        CqlValueSet a_ = this.Non_minus_Elective_Inpatient(context);
+        CqlValueSet a_ = this.Non_Elective_Inpatient(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
         bool? c_(Encounter NonElectiveEncounter)
         {
             Period e_ = NonElectiveEncounter?.Period;
-            CqlInterval<CqlDateTime> f_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, e_);
-            int? g_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.LengthInDays(context, f_);
+            CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
+            int? g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.LengthInDays(context, f_);
             bool? h_ = context.Operators.LessOrEqual(g_, 120);
-            CqlInterval<CqlDateTime> j_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, e_);
+            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
@@ -161,13 +161,13 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
         IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter(context);
         bool? b_(Encounter NonElectiveEncounter)
         {
-            Condition d_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.PrincipalDiagnosis(context, NonElectiveEncounter);
+            Condition d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.PrincipalDiagnosis(context, NonElectiveEncounter);
             CodeableConcept e_ = d_?.Code;
-            CqlConcept f_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, e_);
+            CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Hemorrhagic_Stroke(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
             CodeableConcept j_ = d_?.Code;
-            CqlConcept k_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, j_);
+            CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
             CqlValueSet l_ = this.Ischemic_Stroke(context);
             bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
             bool? n_ = context.Operators.Or(h_, m_);
@@ -194,7 +194,7 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
                 string k_ = j_?.Value;
                 CqlDateTime l_ = context.Operators.ConvertStringToDateTime(k_);
                 Period m_ = AllStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_minus_4_0_001.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 int? p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
                 bool? q_ = context.Operators.GreaterOrEqual(p_, 18);
@@ -220,9 +220,9 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
         IEnumerable<Encounter> a_ = this.Encounter_with_Principal_Diagnosis_and_Age(context);
         bool? b_(Encounter EncounterWithAge)
         {
-            Condition d_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.PrincipalDiagnosis(context, EncounterWithAge);
+            Condition d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.PrincipalDiagnosis(context, EncounterWithAge);
             CodeableConcept e_ = d_?.Code;
-            CqlConcept f_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, e_);
+            CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Ischemic_Stroke(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
@@ -242,26 +242,26 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
         {
             Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter?.Hospitalization;
             CodeableConcept e_ = d_?.DischargeDisposition;
-            CqlConcept f_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, e_);
+            CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
             CodeableConcept j_ = d_?.DischargeDisposition;
-            CqlConcept k_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, j_);
+            CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
             CqlValueSet l_ = this.Left_Against_Medical_Advice(context);
             bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
             bool? n_ = context.Operators.Or(h_, m_);
             CodeableConcept p_ = d_?.DischargeDisposition;
-            CqlConcept q_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, p_);
+            CqlConcept q_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, p_);
             CqlValueSet r_ = this.Patient_Expired(context);
             bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
             bool? t_ = context.Operators.Or(n_, s_);
             CodeableConcept v_ = d_?.DischargeDisposition;
-            CqlConcept w_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, v_);
+            CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, v_);
             CqlValueSet x_ = this.Discharged_to_Home_for_Hospice_Care(context);
             bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
             bool? z_ = context.Operators.Or(t_, y_);
             CodeableConcept ab_ = d_?.DischargeDisposition;
-            CqlConcept ac_ = FHIRHelpers_minus_4_0_001.Instance.ToConcept(context, ab_);
+            CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
             CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
             bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
             bool? af_ = context.Operators.Or(z_, ae_);
@@ -282,7 +282,7 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
         bool? c_(ServiceRequest P)
         {
             Code<RequestIntent> j_ = P?.IntentElement;
-            string k_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, j_);
+            string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
             bool? l_ = context.Operators.Equal(k_, "order");
 
             return l_;
@@ -292,7 +292,7 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
         bool? g_(Procedure InterventionPerformed)
         {
             Code<EventStatus> m_ = InterventionPerformed?.StatusElement;
-            string n_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, m_);
+            string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
             string[] o_ = [
                 "completed",
                 "in-progress",
@@ -319,8 +319,8 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
             {
                 object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                 FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-                CqlDateTime k_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, (i_ as FhirDateTime) ?? j_);
-                CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (i_ as FhirDateTime) ?? j_);
+                CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                 bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
 
                 return m_;
@@ -348,11 +348,11 @@ public partial class TJCOverallFHIR_minus_1_8_000 : ILibrary, ISingleton<TJCOver
             bool? e_(object ComfortMeasure)
             {
                 object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_);
+                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-                CqlDateTime m_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, l_);
-                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_);
+                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                 bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
 
                 return o_;

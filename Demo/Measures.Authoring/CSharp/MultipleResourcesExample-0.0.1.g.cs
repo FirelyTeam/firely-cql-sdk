@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
-public partial class MultipleResourcesExample_minus_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_minus_0_0_1>
+public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
-    private MultipleResourcesExample_minus_0_0_1() {}
+    private MultipleResourcesExample_0_0_1() {}
 
-    public static MultipleResourcesExample_minus_0_0_1 Instance { get; } = new();
+    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "MultipleResourcesExample";
     public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_3_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -79,7 +79,7 @@ public partial class MultipleResourcesExample_minus_0_0_1 : ILibrary, ISingleton
         bool? d_(Observation O)
         {
             Code<ObservationStatus> f_ = O?.StatusElement;
-            string g_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, f_);
+            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             string[] h_ = [
                 "final",
                 "amended",
@@ -102,7 +102,7 @@ public partial class MultipleResourcesExample_minus_0_0_1 : ILibrary, ISingleton
         bool? c_(Condition C)
         {
             CodeableConcept e_ = C?.ClinicalStatus;
-            CqlConcept f_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, e_);
+            CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Condition_Clinical_Status(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 

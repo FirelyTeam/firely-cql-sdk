@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ParameterNameTest", "1.0.0")]
-public partial class ParameterNameTest_minus_1_0_0 : ILibrary, ISingleton<ParameterNameTest_minus_1_0_0>
+public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNameTest_1_0_0>
 {
-    private ParameterNameTest_minus_1_0_0() {}
+    private ParameterNameTest_1_0_0() {}
 
-    public static ParameterNameTest_minus_1_0_0 Instance { get; } = new();
+    public static ParameterNameTest_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
@@ -40,9 +40,9 @@ public partial class ParameterNameTest_minus_1_0_0 : ILibrary, ISingleton<Parame
 
 
     [CqlFunctionDefinition("Another Test")]
-    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_minus_with_minus_dashes)
+    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
     {
-        decimal? a_ = context.Operators.Multiply(param_minus_with_minus_dashes, 2.0m);
+        decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
 
         return a_;
     }

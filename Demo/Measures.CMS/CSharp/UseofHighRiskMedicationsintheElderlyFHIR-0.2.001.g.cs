@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("UseofHighRiskMedicationsintheElderlyFHIR", "0.2.001")]
-public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : ILibrary, ISingleton<UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001>
+public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary, ISingleton<UseofHighRiskMedicationsintheElderlyFHIR_0_2_001>
 {
-    private UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001() {}
+    private UseofHighRiskMedicationsintheElderlyFHIR_0_2_001() {}
 
-    public static UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 Instance { get; } = new();
+    public static UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "UseofHighRiskMedicationsintheElderlyFHIR";
     public string Version => "0.2.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, CQMCommon_minus_2_2_000.Instance, Hospice_minus_6_12_000.Instance, PalliativeCare_minus_1_11_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance, QICoreCommon_minus_2_1_000.Instance, Status_minus_1_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -363,7 +363,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
             List<CodeableConcept> an_ = E?.Type;
             CqlConcept ao_(CodeableConcept @this)
             {
-                CqlConcept at_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return at_;
             };
@@ -384,12 +384,12 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
         IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(ae_, ah_);
         IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ac_, ai_);
-        IEnumerable<Encounter> ak_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, aj_);
+        IEnumerable<Encounter> ak_ = Status_1_8_000.Instance.isEncounterPerformed(context, aj_);
         bool? al_(Encounter ValidEncounters)
         {
             CqlInterval<CqlDateTime> ax_ = this.Measurement_Period(context);
             Period ay_ = ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> az_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ay_);
+            CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ay_);
             bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ax_, az_, default);
 
             return ba_;
@@ -432,8 +432,8 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
-        bool? b_ = PalliativeCare_minus_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? b_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
         bool? c_ = context.Operators.Or(a_, b_);
 
         return c_;
@@ -443,10 +443,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlFunctionDefinition("moreThanOneOrder")]
     public IEnumerable<MedicationRequest> moreThanOneOrder(CqlContext context, IEnumerable<MedicationRequest> Medication)
     {
-        IEnumerable<MedicationRequest> a_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, Medication);
+        IEnumerable<MedicationRequest> a_ = Status_1_8_000.Instance.isMedicationOrder(context, Medication);
         IEnumerable<MedicationRequest> b_(MedicationRequest OrderMedication1)
         {
-            IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, Medication);
+            IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, Medication);
             bool? h_(MedicationRequest OrderMedication2)
             {
                 FhirDateTime l_ = OrderMedication1?.AuthoredOnElement;
@@ -480,11 +480,11 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(l_);
                 bool? ax_ = context.Operators.In<CqlDateTime>(av_, n_, default);
                 bool? ay_ = context.Operators.And(at_, ax_);
-                CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, OrderMedication1);
+                CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, OrderMedication1);
                 CqlDate ba_ = context.Operators.Start(az_);
                 CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(ba_);
                 CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlInterval<CqlDate> bd_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, OrderMedication2);
+                CqlInterval<CqlDate> bd_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, OrderMedication2);
                 CqlDate be_ = context.Operators.Start(bd_);
                 CqlDateTime bf_ = context.Operators.ConvertDateToDateTime(be_);
                 CqlDate bg_ = context.Operators.DateFrom(bf_);
@@ -537,7 +537,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ew_ = context.Operators.Last<string>(ev_);
                 bool? ex_ = context.Operators.Equal(et_, ew_);
                 CodeableConcept ey_ = M?.Code;
-                CqlConcept ez_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ey_);
+                CqlConcept ez_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ey_);
                 CqlValueSet fa_ = this.Potentially_Harmful_Antihistamines_for_Older_Adults(context);
                 bool? fb_ = context.Operators.ConceptInValueSet(ez_, fa_);
                 bool? fc_ = context.Operators.And(ex_, fb_);
@@ -567,7 +567,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string fl_ = context.Operators.Last<string>(fk_);
                 bool? fm_ = context.Operators.Equal(fi_, fl_);
                 CodeableConcept fn_ = M?.Code;
-                CqlConcept fo_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, fn_);
+                CqlConcept fo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fn_);
                 CqlValueSet fp_ = this.Potentially_Harmful_Antiparkinsonian_Agents_for_Older_Adults(context);
                 bool? fq_ = context.Operators.ConceptInValueSet(fo_, fp_);
                 bool? fr_ = context.Operators.And(fm_, fq_);
@@ -598,7 +598,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ga_ = context.Operators.Last<string>(fz_);
                 bool? gb_ = context.Operators.Equal(fx_, ga_);
                 CodeableConcept gc_ = M?.Code;
-                CqlConcept gd_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, gc_);
+                CqlConcept gd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gc_);
                 CqlValueSet ge_ = this.Potentially_Harmful_Gastrointestinal_Antispasmodics_for_Older_Adults(context);
                 bool? gf_ = context.Operators.ConceptInValueSet(gd_, ge_);
                 bool? gg_ = context.Operators.And(gb_, gf_);
@@ -628,7 +628,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string gp_ = context.Operators.Last<string>(go_);
                 bool? gq_ = context.Operators.Equal(gm_, gp_);
                 CodeableConcept gr_ = M?.Code;
-                CqlConcept gs_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, gr_);
+                CqlConcept gs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gr_);
                 CqlValueSet gt_ = this.Dipyridamole_Medications(context);
                 bool? gu_ = context.Operators.ConceptInValueSet(gs_, gt_);
                 bool? gv_ = context.Operators.And(gq_, gu_);
@@ -660,7 +660,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string he_ = context.Operators.Last<string>(hd_);
                 bool? hf_ = context.Operators.Equal(hb_, he_);
                 CodeableConcept hg_ = M?.Code;
-                CqlConcept hh_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, hg_);
+                CqlConcept hh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hg_);
                 CqlValueSet hi_ = this.Guanfacine_Medications(context);
                 bool? hj_ = context.Operators.ConceptInValueSet(hh_, hi_);
                 bool? hk_ = context.Operators.And(hf_, hj_);
@@ -690,7 +690,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ht_ = context.Operators.Last<string>(hs_);
                 bool? hu_ = context.Operators.Equal(hq_, ht_);
                 CodeableConcept hv_ = M?.Code;
-                CqlConcept hw_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, hv_);
+                CqlConcept hw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hv_);
                 CqlValueSet hx_ = this.Nifedipine_Medications(context);
                 bool? hy_ = context.Operators.ConceptInValueSet(hw_, hx_);
                 bool? hz_ = context.Operators.And(hu_, hy_);
@@ -722,7 +722,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ii_ = context.Operators.Last<string>(ih_);
                 bool? ij_ = context.Operators.Equal(if_, ii_);
                 CodeableConcept ik_ = M?.Code;
-                CqlConcept il_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ik_);
+                CqlConcept il_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ik_);
                 CqlValueSet im_ = this.Potentially_Harmful_Antidepressants_for_Older_Adults(context);
                 bool? in_ = context.Operators.ConceptInValueSet(il_, im_);
                 bool? io_ = context.Operators.And(ij_, in_);
@@ -752,7 +752,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ix_ = context.Operators.Last<string>(iw_);
                 bool? iy_ = context.Operators.Equal(iu_, ix_);
                 CodeableConcept iz_ = M?.Code;
-                CqlConcept ja_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, iz_);
+                CqlConcept ja_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, iz_);
                 CqlValueSet jb_ = this.Potentially_Harmful_Barbiturates_for_Older_Adults(context);
                 bool? jc_ = context.Operators.ConceptInValueSet(ja_, jb_);
                 bool? jd_ = context.Operators.And(iy_, jc_);
@@ -785,7 +785,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string jm_ = context.Operators.Last<string>(jl_);
                 bool? jn_ = context.Operators.Equal(jj_, jm_);
                 CodeableConcept jo_ = M?.Code;
-                CqlConcept jp_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, jo_);
+                CqlConcept jp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jo_);
                 CqlCode jq_ = this.ergoloid_mesylates__USP_1_MG_Oral_Tablet(context);
                 CqlConcept jr_ = context.Operators.ConvertCodeToConcept(jq_);
                 bool? js_ = context.Operators.Equivalent(jp_, jr_);
@@ -816,7 +816,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string kc_ = context.Operators.Last<string>(kb_);
                 bool? kd_ = context.Operators.Equal(jz_, kc_);
                 CodeableConcept ke_ = M?.Code;
-                CqlConcept kf_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ke_);
+                CqlConcept kf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ke_);
                 CqlValueSet kg_ = this.Meprobamate_Medications(context);
                 bool? kh_ = context.Operators.ConceptInValueSet(kf_, kg_);
                 bool? ki_ = context.Operators.And(kd_, kh_);
@@ -848,7 +848,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string kr_ = context.Operators.Last<string>(kq_);
                 bool? ks_ = context.Operators.Equal(ko_, kr_);
                 CodeableConcept kt_ = M?.Code;
-                CqlConcept ku_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, kt_);
+                CqlConcept ku_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kt_);
                 CqlValueSet kv_ = this.Potentially_Harmful_Estrogens_for_Older_Adults(context);
                 bool? kw_ = context.Operators.ConceptInValueSet(ku_, kv_);
                 bool? kx_ = context.Operators.And(ks_, kw_);
@@ -878,7 +878,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string lg_ = context.Operators.Last<string>(lf_);
                 bool? lh_ = context.Operators.Equal(ld_, lg_);
                 CodeableConcept li_ = M?.Code;
-                CqlConcept lj_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, li_);
+                CqlConcept lj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, li_);
                 CqlValueSet lk_ = this.Potentially_Harmful_Sulfonylureas_for_Older_Adults(context);
                 bool? ll_ = context.Operators.ConceptInValueSet(lj_, lk_);
                 bool? lm_ = context.Operators.And(lh_, ll_);
@@ -910,7 +910,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string lv_ = context.Operators.Last<string>(lu_);
                 bool? lw_ = context.Operators.Equal(ls_, lv_);
                 CodeableConcept lx_ = M?.Code;
-                CqlConcept ly_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, lx_);
+                CqlConcept ly_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lx_);
                 CqlValueSet lz_ = this.Desiccated_Thyroid_Medications(context);
                 bool? ma_ = context.Operators.ConceptInValueSet(ly_, lz_);
                 bool? mb_ = context.Operators.And(lw_, ma_);
@@ -940,7 +940,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string mk_ = context.Operators.Last<string>(mj_);
                 bool? ml_ = context.Operators.Equal(mh_, mk_);
                 CodeableConcept mm_ = M?.Code;
-                CqlConcept mn_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, mm_);
+                CqlConcept mn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mm_);
                 CqlValueSet mo_ = this.Potentially_Harmful_Nonbenzodiazepine_Hypnotics_for_Older_Adults(context);
                 bool? mp_ = context.Operators.ConceptInValueSet(mn_, mo_);
                 bool? mq_ = context.Operators.And(ml_, mp_);
@@ -972,7 +972,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string mz_ = context.Operators.Last<string>(my_);
                 bool? na_ = context.Operators.Equal(mw_, mz_);
                 CodeableConcept nb_ = M?.Code;
-                CqlConcept nc_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, nb_);
+                CqlConcept nc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nb_);
                 CqlValueSet nd_ = this.Potentially_Harmful_Skeletal_Muscle_Relaxants_for_Older_Adults(context);
                 bool? ne_ = context.Operators.ConceptInValueSet(nc_, nd_);
                 bool? nf_ = context.Operators.And(na_, ne_);
@@ -1002,7 +1002,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string no_ = context.Operators.Last<string>(nn_);
                 bool? np_ = context.Operators.Equal(nl_, no_);
                 CodeableConcept nq_ = M?.Code;
-                CqlConcept nr_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, nq_);
+                CqlConcept nr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nq_);
                 CqlValueSet ns_ = this.Potentially_Harmful_Pain_Medications_for_Older_Adults(context);
                 bool? nt_ = context.Operators.ConceptInValueSet(nr_, ns_);
                 bool? nu_ = context.Operators.And(np_, nt_);
@@ -1034,7 +1034,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string od_ = context.Operators.Last<string>(oc_);
                 bool? oe_ = context.Operators.Equal(oa_, od_);
                 CodeableConcept of_ = M?.Code;
-                CqlConcept og_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, of_);
+                CqlConcept og_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, of_);
                 CqlValueSet oh_ = this.Megestrol_Medications(context);
                 bool? oi_ = context.Operators.ConceptInValueSet(og_, oh_);
                 bool? oj_ = context.Operators.And(oe_, oi_);
@@ -1064,7 +1064,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string os_ = context.Operators.Last<string>(or_);
                 bool? ot_ = context.Operators.Equal(op_, os_);
                 CodeableConcept ou_ = M?.Code;
-                CqlConcept ov_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ou_);
+                CqlConcept ov_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ou_);
                 CqlValueSet ow_ = this.Meperidine_Medications(context);
                 bool? ox_ = context.Operators.ConceptInValueSet(ov_, ow_);
                 bool? oy_ = context.Operators.And(ot_, ox_);
@@ -1098,24 +1098,24 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         {
             MedicationRequest.DispenseRequestComponent f_ = R?.DispenseRequest;
             Duration g_ = f_?.ExpectedSupplyDuration;
-            CqlQuantity h_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, g_);
+            CqlQuantity h_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, g_);
             CqlQuantity i_ = context.Operators.ConvertQuantity(h_, "d");
             decimal? j_ = i_?.value;
             Quantity l_ = f_?.Quantity;
-            CqlQuantity m_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, l_);
+            CqlQuantity m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_);
             decimal? n_ = m_?.value;
             List<Dosage> o_ = R?.DosageInstruction;
             Dosage p_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)o_);
             List<Dosage.DoseAndRateComponent> q_ = p_?.DoseAndRate;
             Dosage.DoseAndRateComponent r_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)q_);
             DataType s_ = r_?.Dose;
-            object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlQuantity u_ = context.Operators.End(t_ as CqlInterval<CqlQuantity>);
             Dosage w_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)o_);
             List<Dosage.DoseAndRateComponent> x_ = w_?.DoseAndRate;
             Dosage.DoseAndRateComponent y_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)x_);
             DataType z_ = y_?.Dose;
-            object aa_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, z_);
+            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
             decimal? ab_ = (u_ ?? aa_ as CqlQuantity)?.value;
             Dosage ad_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)o_);
             Timing ae_ = ad_?.Timing;
@@ -1138,8 +1138,8 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
             Code<Timing.UnitsOfTime> ay_ = ax_?.PeriodUnitElement;
             Timing.UnitsOfTime? az_ = ay_?.Value;
             string ba_ = context.Operators.Convert<string>(az_);
-            CqlQuantity bb_ = CumulativeMedicationDuration_minus_4_1_000.Instance.Quantity(context, at_, ba_);
-            decimal? bc_ = CumulativeMedicationDuration_minus_4_1_000.Instance.ToDaily(context, ah_ ?? an_, bb_);
+            CqlQuantity bb_ = CumulativeMedicationDuration_4_1_000.Instance.Quantity(context, at_, ba_);
+            decimal? bc_ = CumulativeMedicationDuration_4_1_000.Instance.ToDaily(context, ah_ ?? an_, bb_);
             Dosage be_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)o_);
             Timing bf_ = be_?.Timing;
             Timing.RepeatComponent bg_ = bf_?.Repeat;
@@ -1195,7 +1195,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string u_ = context.Operators.Last<string>(t_);
                 bool? v_ = context.Operators.Equal(r_, u_);
                 CodeableConcept w_ = M?.Code;
-                CqlConcept x_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, w_);
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
                 CqlValueSet y_ = this.Potentially_Harmful_Antiinfectives_for_Older_Adults(context);
                 bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
                 bool? aa_ = context.Operators.And(v_, z_);
@@ -1241,7 +1241,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 {
                     decimal? h_ = this.MedicationRequestPeriodInDays(context, Order);
                     bool? i_ = context.Operators.Not((bool?)(h_ is null));
-                    CqlConcept j_ = CQMCommon_minus_2_2_000.Instance.getMedicationCode(context, Order);
+                    CqlConcept j_ = CQMCommon_2_2_000.Instance.getMedicationCode(context, Order);
                     CqlQuantity k_ = this.MedicationStrengthPerUnit(context, j_);
                     string l_ = k_?.unit;
                     bool? m_ = context.Operators.Equal(l_, "mg");
@@ -1250,7 +1250,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                     bool? q_ = context.Operators.Equal(p_, "mg/mL");
                     MedicationRequest.DispenseRequestComponent r_ = Order?.DispenseRequest;
                     Quantity s_ = r_?.Quantity;
-                    CqlQuantity t_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, s_);
+                    CqlQuantity t_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, s_);
                     string u_ = t_?.unit;
                     bool? v_ = context.Operators.Equal(u_, "mL");
                     bool? w_ = context.Operators.And(q_, v_);
@@ -1263,8 +1263,8 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 {
                     MedicationRequest.DispenseRequestComponent z_ = Order?.DispenseRequest;
                     Quantity aa_ = z_?.Quantity;
-                    CqlQuantity ab_ = FHIRHelpers_minus_4_4_000.Instance.ToQuantity(context, aa_);
-                    CqlConcept ac_ = CQMCommon_minus_2_2_000.Instance.getMedicationCode(context, Order);
+                    CqlQuantity ab_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aa_);
+                    CqlConcept ac_ = CQMCommon_2_2_000.Instance.getMedicationCode(context, Order);
                     CqlQuantity ad_ = this.MedicationStrengthPerUnit(context, ac_);
                     CqlQuantity ae_ = context.Operators.Multiply(ab_, ad_);
                     decimal? af_ = this.MedicationRequestPeriodInDays(context, Order);
@@ -1530,7 +1530,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string ad_ = context.Operators.Last<string>(ac_);
                 bool? ae_ = context.Operators.Equal(aa_, ad_);
                 CodeableConcept af_ = M?.Code;
-                CqlConcept ag_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, af_);
+                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
                 CqlValueSet ah_ = this.Digoxin_Medications(context);
                 bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
                 bool? aj_ = context.Operators.And(ae_, ai_);
@@ -1570,7 +1570,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string av_ = context.Operators.Last<string>(au_);
                 bool? aw_ = context.Operators.Equal(as_, av_);
                 CodeableConcept ax_ = M?.Code;
-                CqlConcept ay_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ax_);
+                CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
                 CqlValueSet az_ = this.Doxepin_Medications(context);
                 bool? ba_ = context.Operators.ConceptInValueSet(ay_, az_);
                 bool? bb_ = context.Operators.And(aw_, ba_);
@@ -1634,7 +1634,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(n_, q_);
                 CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, s_);
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
                 bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
                 bool? w_ = context.Operators.And(r_, v_);
@@ -1674,7 +1674,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string w_ = context.Operators.Last<string>(v_);
                 bool? x_ = context.Operators.Equal(t_, w_);
                 CodeableConcept y_ = M?.Code;
-                CqlConcept z_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, y_);
+                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
                 CqlValueSet aa_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
                 bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
                 bool? ac_ = context.Operators.And(x_, ab_);
@@ -1690,7 +1690,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, f_);
         bool? h_(MedicationRequest AntipsychoticMedication)
         {
             FhirDateTime ad_ = AntipsychoticMedication?.AuthoredOnElement;
@@ -1734,7 +1734,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(n_, q_);
                 CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, s_);
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
                 bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
                 bool? w_ = context.Operators.And(r_, v_);
@@ -1774,7 +1774,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
                 string w_ = context.Operators.Last<string>(v_);
                 bool? x_ = context.Operators.Equal(t_, w_);
                 CodeableConcept y_ = M?.Code;
-                CqlConcept z_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, y_);
+                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
                 CqlValueSet aa_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
                 bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
                 bool? ac_ = context.Operators.And(x_, ab_);
@@ -1790,7 +1790,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, f_);
         bool? h_(MedicationRequest BenzodiazepineMedication)
         {
             FhirDateTime ad_ = BenzodiazepineMedication?.AuthoredOnElement;
@@ -1828,7 +1828,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
         bool? g_(Condition AntipsychoticTreatedDiagnoses)
         {
-            CqlInterval<CqlDateTime> ag_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, AntipsychoticTreatedDiagnoses);
+            CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, AntipsychoticTreatedDiagnoses);
             CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
             CqlDateTime ai_ = context.Operators.Start(ah_);
             CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
@@ -1860,7 +1860,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
         IEnumerable<Condition> z_ = context.Operators.Union<Condition>(w_, y_);
         bool? aa_(Condition BenzodiazepineTreatedDiagnoses)
         {
-            CqlInterval<CqlDateTime> ao_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
+            CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
             CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
             CqlDateTime aq_ = context.Operators.Start(ap_);
             CqlQuantity ar_ = context.Operators.Quantity(1m, "year");
@@ -1897,7 +1897,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -1906,7 +1906,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -1915,7 +1915,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -1924,7 +1924,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_minus_0_2_001 : IL
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

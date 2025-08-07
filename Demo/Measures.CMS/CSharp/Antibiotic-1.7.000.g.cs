@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("Antibiotic", "1.7.000")]
-public partial class Antibiotic_minus_1_7_000 : ILibrary, ISingleton<Antibiotic_minus_1_7_000>
+public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_000>
 {
-    private Antibiotic_minus_1_7_000() {}
+    private Antibiotic_1_7_000() {}
 
-    public static Antibiotic_minus_1_7_000 Instance { get; } = new();
+    public static Antibiotic_1_7_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "Antibiotic";
     public string Version => "1.7.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, QICoreCommon_minus_2_1_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -60,18 +60,18 @@ public partial class Antibiotic_minus_1_7_000 : ILibrary, ISingleton<Antibiotic_
         {
             bool? f_(Condition comcondition)
             {
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, comcondition);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, comcondition);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlDate l_ = context.Operators.DateFrom(k_);
                 Period m_ = eDate?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, n_ as object);
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
                 CqlDateTime p_ = context.Operators.Start(o_);
                 CqlDate q_ = context.Operators.DateFrom(p_);
                 CqlQuantity r_ = context.Operators.Quantity(1m, "year");
                 CqlDate s_ = context.Operators.Subtract(q_, r_);
-                CqlInterval<CqlDateTime> u_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, m_);
-                CqlInterval<CqlDateTime> v_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, u_ as object);
+                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_ as object);
                 CqlDateTime w_ = context.Operators.Start(v_);
                 CqlDate x_ = context.Operators.DateFrom(w_);
                 CqlInterval<CqlDate> y_ = context.Operators.Interval(s_, x_, true, true);
@@ -103,18 +103,18 @@ public partial class Antibiotic_minus_1_7_000 : ILibrary, ISingleton<Antibiotic_
         {
             bool? f_(Condition competcondition)
             {
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, competcondition);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, competcondition);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 Period l_ = eDate?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, l_);
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime n_ = context.Operators.Start(m_);
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, l_);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlQuantity r_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime s_ = context.Operators.Add(q_, r_);
                 CqlInterval<CqlDateTime> t_ = context.Operators.Interval(n_, s_, true, true);
                 bool? u_ = context.Operators.In<CqlDateTime>(k_, t_, "day");
-                CqlInterval<CqlDateTime> w_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, l_);
+                CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime x_ = context.Operators.Start(w_);
                 bool? y_ = context.Operators.Not((bool?)(x_ is null));
                 bool? z_ = context.Operators.And(u_, y_);
@@ -145,16 +145,16 @@ public partial class Antibiotic_minus_1_7_000 : ILibrary, ISingleton<Antibiotic_
         {
             bool? c_(MedicationRequest ActiveMedication)
             {
-                CqlInterval<CqlDate> g_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ActiveMedication);
+                CqlInterval<CqlDate> g_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ActiveMedication);
                 Period h_ = DateOfEpisode?.Period;
-                CqlInterval<CqlDateTime> i_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, h_);
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, i_ as object);
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.toInterval(context, i_ as object);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlDate l_ = context.Operators.DateFrom(k_);
                 CqlQuantity m_ = context.Operators.Quantity(30m, "days");
                 CqlDate n_ = context.Operators.Subtract(l_, m_);
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, h_);
-                CqlInterval<CqlDateTime> q_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, p_ as object);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_2_1_000.Instance.toInterval(context, p_ as object);
                 CqlDateTime r_ = context.Operators.Start(q_);
                 CqlDate s_ = context.Operators.DateFrom(r_);
                 CqlQuantity t_ = context.Operators.Quantity(1m, "day");

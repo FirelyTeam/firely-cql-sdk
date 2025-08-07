@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
-public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, ISingleton<ColorectalCancerScreeningsFHIR_minus_0_0_003>
+public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISingleton<ColorectalCancerScreeningsFHIR_0_0_003>
 {
-    private ColorectalCancerScreeningsFHIR_minus_0_0_003() {}
+    private ColorectalCancerScreeningsFHIR_0_0_003() {}
 
-    public static ColorectalCancerScreeningsFHIR_minus_0_0_003 Instance { get; } = new();
+    public static ColorectalCancerScreeningsFHIR_0_0_003 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ColorectalCancerScreeningsFHIR";
     public string Version => "0.0.003";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, SupplementalDataElementsFHIR4_minus_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance, AdultOutpatientEncountersFHIR4_minus_2_2_000.Instance, HospiceFHIR4_minus_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance, PalliativeCareFHIR_minus_0_6_000.Instance, CumulativeMedicationDurationFHIR4_minus_1_0_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, AdultOutpatientEncountersFHIR4_2_2_000.Instance, HospiceFHIR4_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance, PalliativeCareFHIR_0_6_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -43,8 +43,8 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     private static readonly CqlValueSet _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
 
     [CqlValueSetDefinition("Care Services in Long-Term Residential Facility", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", valueSetVersion: null)]
-    public CqlValueSet Care_Services_in_Long_minus_Term_Residential_Facility(CqlContext _) => _Care_Services_in_Long_minus_Term_Residential_Facility;
-    private static readonly CqlValueSet _Care_Services_in_Long_minus_Term_Residential_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext _) => _Care_Services_in_Long_Term_Residential_Facility;
+    private static readonly CqlValueSet _Care_Services_in_Long_Term_Residential_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
 
     [CqlValueSetDefinition("Colonoscopy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", valueSetVersion: null)]
     public CqlValueSet Colonoscopy(CqlContext _) => _Colonoscopy;
@@ -135,12 +135,12 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     private static readonly CqlValueSet _Outpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", null);
 
     [CqlValueSetDefinition("Preventive Care Services - Established Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services___Established_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services___Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlValueSetDefinition("Preventive Care Services-Initial Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
     public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
@@ -205,7 +205,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Ethnicity(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -214,7 +214,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -223,7 +223,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Race(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -232,7 +232,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -249,11 +249,11 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? f_(Encounter TelehealthEncounter)
         {
             Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
-            string i_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, h_);
+            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             bool? j_ = context.Operators.Equal(i_, "finished");
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             Period l_ = TelehealthEncounter?.Period;
-            CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, l_ as object);
+            CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_ as object);
             bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
             bool? o_ = context.Operators.And(j_, n_);
 
@@ -294,7 +294,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, default);
-        IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_minus_2_2_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
         IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
         IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
         bool? n_ = context.Operators.Exists<Encounter>(m_);
@@ -320,7 +320,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition ColorectalCancer)
         {
-            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, ColorectalCancer);
+            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColorectalCancer);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
@@ -342,10 +342,10 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure Colectomy)
         {
             Code<EventStatus> e_ = Colectomy?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
             DataType h_ = Colectomy?.Performed;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -367,7 +367,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? c_(Condition ColectomyDx)
         {
-            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, ColectomyDx);
+            CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColectomyDx);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
@@ -384,7 +384,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = HospiceFHIR4_minus_2_3_000.Instance.Has_Hospice(context);
+        bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
         IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
         bool? c_ = context.Operators.Exists<Condition>(b_);
         bool? d_ = context.Operators.Or(a_, c_);
@@ -394,7 +394,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         IEnumerable<Condition> h_ = this.Total_Colectomy_Condition(context);
         bool? i_ = context.Operators.Exists<Condition>(h_);
         bool? j_ = context.Operators.Or(g_, i_);
-        bool? k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+        bool? k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
         bool? l_ = context.Operators.Or(j_, k_);
         Patient m_ = this.Patient(context);
         Date n_ = m_?.BirthDateElement;
@@ -405,10 +405,10 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         CqlDate s_ = context.Operators.DateFrom(r_);
         int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
         bool? u_ = context.Operators.GreaterOrEqual(t_, 65);
-        bool? v_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
+        bool? v_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
         bool? w_ = context.Operators.And(u_, v_);
         bool? x_ = context.Operators.Or(l_, w_);
-        bool? y_ = PalliativeCareFHIR_minus_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
+        bool? y_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
         bool? z_ = context.Operators.Or(x_, y_);
 
         return z_;
@@ -423,7 +423,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FecalOccult)
         {
             DataType h_ = FecalOccult?.Effective;
-            CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, h_);
+            CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlQuantity l_ = context.Operators.Quantity(1m, "year");
@@ -438,7 +438,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
         {
             DataType r_ = FecalOccult?.Effective;
-            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, r_);
+            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
             DataType t_ = FecalOccult?.Value;
             IEnumerable<Coding> u_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(t_, "coding");
             bool? v_(Coding @this)
@@ -523,7 +523,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FecalOccult)
         {
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -578,7 +578,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             bool? p_ = context.Operators.And(m_, o_);
             DataType q_ = FecalOccult?.Effective;
-            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, q_);
+            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
             CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
             bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, default);
             bool? u_ = context.Operators.And(p_, t_);
@@ -599,7 +599,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FecalOccult)
         {
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -654,7 +654,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             bool? p_ = context.Operators.And(m_, o_);
             DataType q_ = FecalOccult?.Effective;
-            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, q_);
+            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
             CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
             bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
             bool? u_ = context.Operators.And(p_, t_);
@@ -722,7 +722,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? j_ = context.Operators.Not((bool?)(i_ is null));
             bool? k_ = context.Operators.And(h_, j_);
             DataType l_ = FecalOccult?.Effective;
-            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, l_);
+            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
             bool? p_ = context.Operators.And(k_, o_);
@@ -743,7 +743,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FecalOccult)
         {
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -755,7 +755,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? k_ = context.Operators.Not((bool?)(j_ is null));
             bool? l_ = context.Operators.And(i_, k_);
             DataType m_ = FecalOccult?.Effective;
-            CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, m_);
+            CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, m_);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
             bool? q_ = context.Operators.And(l_, p_);
@@ -776,7 +776,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FitDNA)
         {
             DataType h_ = FitDNA?.Effective;
-            CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, h_);
+            CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlQuantity l_ = context.Operators.Quantity(4m, "years");
@@ -794,7 +794,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
         {
             DataType v_ = FitDNA?.Effective;
-            CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, v_);
+            CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
             DataType x_ = FitDNA?.Value;
             IEnumerable<Coding> y_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(x_, "coding");
             bool? z_(Coding @this)
@@ -879,7 +879,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FitDNA)
         {
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -934,7 +934,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             bool? p_ = context.Operators.And(m_, o_);
             DataType q_ = FitDNA?.Effective;
-            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, q_);
+            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
             CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
             CqlDateTime t_ = context.Operators.End(s_);
             CqlQuantity u_ = context.Operators.Quantity(3m, "years");
@@ -963,7 +963,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FitDNA)
         {
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -1018,7 +1018,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             bool? p_ = context.Operators.And(m_, o_);
             DataType q_ = FitDNA?.Effective;
-            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, q_);
+            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
             CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
             CqlDateTime t_ = context.Operators.End(s_);
             CqlQuantity u_ = context.Operators.Quantity(3m, "years");
@@ -1094,7 +1094,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? j_ = context.Operators.Not((bool?)(i_ is null));
             bool? k_ = context.Operators.And(h_, j_);
             DataType l_ = FitDNA?.Effective;
-            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, l_);
+            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             CqlDateTime o_ = context.Operators.End(n_);
             CqlQuantity p_ = context.Operators.Quantity(3m, "years");
@@ -1123,7 +1123,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation FitDNA)
         {
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -1135,7 +1135,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? k_ = context.Operators.Not((bool?)(j_ is null));
             bool? l_ = context.Operators.And(i_, k_);
             DataType m_ = FitDNA?.Effective;
-            CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, m_);
+            CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, m_);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             CqlDateTime p_ = context.Operators.End(o_);
             CqlQuantity q_ = context.Operators.Quantity(3m, "years");
@@ -1164,7 +1164,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation Colonography)
         {
             DataType h_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -1183,7 +1183,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         CqlDateTime e_(Observation Colonography)
         {
             DataType w_ = Colonography?.Effective;
-            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, w_);
+            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
 
             return x_;
         };
@@ -1202,7 +1202,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation Colonography)
         {
             Code<ObservationStatus> e_ = Colonography?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -1211,7 +1211,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             ];
             bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
             DataType i_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlDateTime m_ = context.Operators.End(l_);
@@ -1241,7 +1241,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Observation Colonography)
         {
             Code<ObservationStatus> e_ = Colonography?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
                 "final",
                 "amended",
@@ -1251,7 +1251,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
             bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
             bool? i_ = context.Operators.Not(h_);
             DataType j_ = Colonography?.Effective;
-            CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, j_);
+            CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
             CqlDateTime l_ = context.Operators.End(k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             CqlDateTime n_ = context.Operators.End(m_);
@@ -1281,7 +1281,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure FlexibleSigmoidoscopy)
         {
             DataType h_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -1300,7 +1300,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
         {
             DataType w_ = FlexibleSigmoidoscopy?.Performed;
-            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, w_);
+            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
 
             return x_;
         };
@@ -1319,10 +1319,10 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure FlexibleSigmoidoscopy)
         {
             Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
             DataType h_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -1352,11 +1352,11 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure FlexibleSigmoidoscopy)
         {
             Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
             bool? h_ = context.Operators.Not(g_);
             DataType i_ = FlexibleSigmoidoscopy?.Performed;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlDateTime m_ = context.Operators.End(l_);
@@ -1386,7 +1386,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure Colonoscopy)
         {
             DataType h_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -1405,7 +1405,7 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         CqlDateTime e_(Procedure Colonoscopy)
         {
             DataType w_ = Colonoscopy?.Performed;
-            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, w_);
+            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
 
             return x_;
         };
@@ -1424,10 +1424,10 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure Colonoscopy)
         {
             Code<EventStatus> e_ = Colonoscopy?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
             DataType h_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, h_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
             CqlDateTime j_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             CqlDateTime l_ = context.Operators.End(k_);
@@ -1457,11 +1457,11 @@ public partial class ColorectalCancerScreeningsFHIR_minus_0_0_003 : ILibrary, IS
         bool? c_(Procedure Colonoscopy)
         {
             Code<EventStatus> e_ = Colonoscopy?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
             bool? h_ = context.Operators.Not(g_);
             DataType i_ = Colonoscopy?.Performed;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlDateTime m_ = context.Operators.End(l_);

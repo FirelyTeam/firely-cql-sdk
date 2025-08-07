@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
-public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCommon_minus_2_0_000>
+public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
-    private QICoreCommon_minus_2_0_000() {}
+    private QICoreCommon_2_0_000() {}
 
-    public static QICoreCommon_minus_2_0_000 Instance { get; } = new();
+    public static QICoreCommon_2_0_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "QICoreCommon";
     public string Version => "2.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_3_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -75,16 +75,16 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     private static readonly CqlCode _inpatient_acute = new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("inpatient non-acute", codeId: "NONAC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode inpatient_non_minus_acute(CqlContext _) => _inpatient_non_minus_acute;
-    private static readonly CqlCode _inpatient_non_minus_acute = new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
+    public CqlCode inpatient_non_acute(CqlContext _) => _inpatient_non_acute;
+    private static readonly CqlCode _inpatient_non_acute = new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("observation encounter", codeId: "OBSENC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
     public CqlCode observation_encounter(CqlContext _) => _observation_encounter;
     private static readonly CqlCode _observation_encounter = new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("pre-admission", codeId: "PRENC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode pre_minus_admission(CqlContext _) => _pre_minus_admission;
-    private static readonly CqlCode _pre_minus_admission = new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
+    public CqlCode pre_admission(CqlContext _) => _pre_admission;
+    private static readonly CqlCode _pre_admission = new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("short stay", codeId: "SS", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
     public CqlCode short_stay(CqlContext _) => _short_stay;
@@ -95,16 +95,16 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     private static readonly CqlCode _virtual = new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("problem-list-item", codeId: "problem-list-item", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode problem_minus_list_minus_item(CqlContext _) => _problem_minus_list_minus_item;
-    private static readonly CqlCode _problem_minus_list_minus_item = new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category");
+    public CqlCode problem_list_item(CqlContext _) => _problem_list_item;
+    private static readonly CqlCode _problem_list_item = new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category");
 
     [CqlCodeDefinition("encounter-diagnosis", codeId: "encounter-diagnosis", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]
-    public CqlCode encounter_minus_diagnosis(CqlContext _) => _encounter_minus_diagnosis;
-    private static readonly CqlCode _encounter_minus_diagnosis = new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category");
+    public CqlCode encounter_diagnosis(CqlContext _) => _encounter_diagnosis;
+    private static readonly CqlCode _encounter_diagnosis = new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category");
 
     [CqlCodeDefinition("health-concern", codeId: "health-concern", codeSystem: "http://hl7.org/fhir/us/core/CodeSystem/condition-category")]
-    public CqlCode health_minus_concern(CqlContext _) => _health_minus_concern;
-    private static readonly CqlCode _health_minus_concern = new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category");
+    public CqlCode health_concern(CqlContext _) => _health_concern;
+    private static readonly CqlCode _health_concern = new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category");
 
     [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
     public CqlCode active(CqlContext _) => _active;
@@ -151,32 +151,32 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     private static readonly CqlCode _refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode entered_minus_in_minus_error(CqlContext _) => _entered_minus_in_minus_error;
-    private static readonly CqlCode _entered_minus_in_minus_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
+    private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("allergy-active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_minus_active(CqlContext _) => _allergy_minus_active;
-    private static readonly CqlCode _allergy_minus_active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_active(CqlContext _) => _allergy_active;
+    private static readonly CqlCode _allergy_active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-inactive", codeId: "inactive", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_minus_inactive(CqlContext _) => _allergy_minus_inactive;
-    private static readonly CqlCode _allergy_minus_inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_inactive(CqlContext _) => _allergy_inactive;
+    private static readonly CqlCode _allergy_inactive = new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-resolved", codeId: "resolved", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical")]
-    public CqlCode allergy_minus_resolved(CqlContext _) => _allergy_minus_resolved;
-    private static readonly CqlCode _allergy_minus_resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
+    public CqlCode allergy_resolved(CqlContext _) => _allergy_resolved;
+    private static readonly CqlCode _allergy_resolved = new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical");
 
     [CqlCodeDefinition("allergy-unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_minus_unconfirmed(CqlContext _) => _allergy_minus_unconfirmed;
-    private static readonly CqlCode _allergy_minus_unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_unconfirmed(CqlContext _) => _allergy_unconfirmed;
+    private static readonly CqlCode _allergy_unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("allergy-confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_minus_confirmed(CqlContext _) => _allergy_minus_confirmed;
-    private static readonly CqlCode _allergy_minus_confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_confirmed(CqlContext _) => _allergy_confirmed;
+    private static readonly CqlCode _allergy_confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("allergy-refuted", codeId: "refuted", codeSystem: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")]
-    public CqlCode allergy_minus_refuted(CqlContext _) => _allergy_minus_refuted;
-    private static readonly CqlCode _allergy_minus_refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
+    public CqlCode allergy_refuted(CqlContext _) => _allergy_refuted;
+    private static readonly CqlCode _allergy_refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification");
 
     [CqlCodeDefinition("Inpatient", codeId: "inpatient", codeSystem: "http://terminology.hl7.org/CodeSystem/medicationrequest-category")]
     public CqlCode Inpatient(CqlContext _) => _Inpatient;
@@ -211,24 +211,24 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     private static readonly CqlCode _CM = new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
     [CqlCodeDefinition("pre-op", codeId: "pre-op", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode pre_minus_op(CqlContext _) => _pre_minus_op;
-    private static readonly CqlCode _pre_minus_op = new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
+    public CqlCode pre_op(CqlContext _) => _pre_op;
+    private static readonly CqlCode _pre_op = new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
     [CqlCodeDefinition("post-op", codeId: "post-op", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode post_minus_op(CqlContext _) => _post_minus_op;
-    private static readonly CqlCode _post_minus_op = new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
+    public CqlCode post_op(CqlContext _) => _post_op;
+    private static readonly CqlCode _post_op = new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
     [CqlCodeDefinition("billing", codeId: "billing", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
     public CqlCode billing(CqlContext _) => _billing;
     private static readonly CqlCode _billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
     [CqlCodeDefinition("social-history", codeId: "social-history", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode social_minus_history(CqlContext _) => _social_minus_history;
-    private static readonly CqlCode _social_minus_history = new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode social_history(CqlContext _) => _social_history;
+    private static readonly CqlCode _social_history = new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("vital-signs", codeId: "vital-signs", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode vital_minus_signs(CqlContext _) => _vital_minus_signs;
-    private static readonly CqlCode _vital_minus_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode vital_signs(CqlContext _) => _vital_signs;
+    private static readonly CqlCode _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("imaging", codeId: "imaging", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
     public CqlCode imaging(CqlContext _) => _imaging;
@@ -259,8 +259,8 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     private static readonly CqlCode _activity = new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("clinical-test", codeId: "clinical-test", codeSystem: "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category")]
-    public CqlCode clinical_minus_test(CqlContext _) => _clinical_minus_test;
-    private static readonly CqlCode _clinical_minus_test = new CqlCode("clinical-test", "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category");
+    public CqlCode clinical_test(CqlContext _) => _clinical_test;
+    private static readonly CqlCode _clinical_test = new CqlCode("clinical-test", "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category");
 
     #endregion Codes
 
@@ -288,9 +288,9 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
           _home_health,
           _inpatient_encounter,
           _inpatient_acute,
-          _inpatient_non_minus_acute,
+          _inpatient_non_acute,
           _observation_encounter,
-          _pre_minus_admission,
+          _pre_admission,
           _short_stay,
           _virtual]);
 
@@ -310,8 +310,8 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
           _DD,
           _CC,
           _CM,
-          _pre_minus_op,
-          _post_minus_op,
+          _pre_op,
+          _post_op,
           _Billing]);
 
     [CqlCodeSystemDefinition("RequestIntent", codeSystemId: "http://hl7.org/fhir/request-intent", codeSystemVersion: null)]
@@ -348,30 +348,30 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
           _differential,
           _confirmed,
           _refuted,
-          _entered_minus_in_minus_error]);
+          _entered_in_error]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceClinicalStatusCodes(CqlContext _) => _AllergyIntoleranceClinicalStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, [
-          _allergy_minus_active,
-          _allergy_minus_inactive,
-          _allergy_minus_resolved]);
+          _allergy_active,
+          _allergy_inactive,
+          _allergy_resolved]);
 
     [CqlCodeSystemDefinition("AllergyIntoleranceVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", codeSystemVersion: null)]
     public CqlCodeSystem AllergyIntoleranceVerificationStatusCodes(CqlContext _) => _AllergyIntoleranceVerificationStatusCodes;
     private static readonly CqlCodeSystem _AllergyIntoleranceVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, [
-          _allergy_minus_unconfirmed,
-          _allergy_minus_confirmed,
-          _allergy_minus_refuted]);
+          _allergy_unconfirmed,
+          _allergy_confirmed,
+          _allergy_refuted]);
 
     [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
     public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
     private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
-          _social_minus_history,
-          _vital_minus_signs,
+          _social_history,
+          _vital_signs,
           _imaging,
           _laboratory,
           _procedure,
@@ -384,20 +384,20 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     public CqlCodeSystem USCoreObservationCategoryExtensionCodes(CqlContext _) => _USCoreObservationCategoryExtensionCodes;
     private static readonly CqlCodeSystem _USCoreObservationCategoryExtensionCodes =
       new CqlCodeSystem("http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", null, [
-          _clinical_minus_test]);
+          _clinical_test]);
 
     [CqlCodeSystemDefinition("ConditionCategory", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-category", codeSystemVersion: null)]
     public CqlCodeSystem ConditionCategory(CqlContext _) => _ConditionCategory;
     private static readonly CqlCodeSystem _ConditionCategory =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-category", null, [
-          _problem_minus_list_minus_item,
-          _encounter_minus_diagnosis]);
+          _problem_list_item,
+          _encounter_diagnosis]);
 
     [CqlCodeSystemDefinition("USCoreConditionCategoryExtensionCodes", codeSystemId: "http://hl7.org/fhir/us/core/CodeSystem/condition-category", codeSystemVersion: null)]
     public CqlCodeSystem USCoreConditionCategoryExtensionCodes(CqlContext _) => _USCoreConditionCategoryExtensionCodes;
     private static readonly CqlCodeSystem _USCoreConditionCategoryExtensionCodes =
       new CqlCodeSystem("http://hl7.org/fhir/us/core/CodeSystem/condition-category", null, [
-          _health_minus_concern]);
+          _health_concern]);
 
     #endregion CodeSystems
 
@@ -418,16 +418,16 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
     public bool? isActive(CqlContext context, Condition condition)
     {
         CodeableConcept a_ = condition?.ClinicalStatus;
-        CqlConcept b_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, a_);
+        CqlConcept b_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, a_);
+        CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode h_ = this.recurrence(context);
         CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
         bool? j_ = context.Operators.Equivalent(g_, i_);
         bool? k_ = context.Operators.Or(e_, j_);
-        CqlConcept m_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, a_);
+        CqlConcept m_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode n_ = this.relapse(context);
         CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
         bool? p_ = context.Operators.Equivalent(m_, o_);
@@ -444,7 +444,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = condition?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -470,7 +470,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -496,14 +496,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = condition?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.problem_minus_list_minus_item(context);
+            CqlCode h_ = this.problem_list_item(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -523,14 +523,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = condition?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.encounter_minus_diagnosis(context);
+            CqlCode h_ = this.encounter_diagnosis(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -550,14 +550,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = condition?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.health_minus_concern(context);
+            CqlCode h_ = this.health_concern(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -577,14 +577,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.social_minus_history(context);
+            CqlCode h_ = this.social_history(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -604,14 +604,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.vital_minus_signs(context);
+            CqlCode h_ = this.vital_signs(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -631,7 +631,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -658,7 +658,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -685,7 +685,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -712,7 +712,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -739,7 +739,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -766,7 +766,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -793,7 +793,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -820,14 +820,14 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = observation?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
-            CqlCode h_ = this.clinical_minus_test(context);
+            CqlCode h_ = this.clinical_test(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
 
@@ -847,7 +847,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = medicationRequest?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -874,7 +874,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         List<CodeableConcept> a_ = medicationRequest?.Category;
         CqlConcept b_(CodeableConcept @this)
         {
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, @this);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
             return g_;
         };
@@ -913,7 +913,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
         bool? c_(Extension E)
         {
             DataType k_ = E?.Value;
-            object l_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, k_);
+            object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
 
             return l_ as bool?;
         };
@@ -1223,7 +1223,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool b_()
             {
                 DataType f_ = condition?.Abatement;
-                object g_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, f_);
+                object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
 
                 return h_;
@@ -1231,7 +1231,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool c_()
             {
                 DataType i_ = condition?.Abatement;
-                object j_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, i_);
+                object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
 
                 return k_;
@@ -1239,7 +1239,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool d_()
             {
                 DataType l_ = condition?.Abatement;
-                object m_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, l_);
+                object m_ = FHIRHelpers_4_3_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
 
                 return n_;
@@ -1247,7 +1247,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool e_()
             {
                 DataType o_ = condition?.Abatement;
-                object p_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, o_);
+                object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
 
                 return q_;
@@ -1255,8 +1255,8 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             if (b_())
             {
                 DataType r_ = condition?.Abatement;
-                object s_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, r_);
-                object u_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, r_);
+                object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
+                object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
 
                 return v_;
@@ -1268,12 +1268,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 string y_ = x_?.Value;
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
                 DataType aa_ = condition?.Abatement;
-                object ab_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
                 Date ae_ = w_?.BirthDateElement;
                 string af_ = ae_?.Value;
                 CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
-                object ai_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
                 CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
                 CqlDate al_ = context.Operators.Add(aj_, ak_);
@@ -1283,12 +1283,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date aq_ = w_?.BirthDateElement;
                 string ar_ = aq_?.Value;
                 CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
-                object au_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object au_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate av_ = context.Operators.Add(as_, au_ as CqlQuantity);
                 Date ax_ = w_?.BirthDateElement;
                 string ay_ = ax_?.Value;
                 CqlDate az_ = context.Operators.ConvertStringToDate(ay_);
-                object bb_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bb_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
                 CqlDate be_ = context.Operators.Add(bc_, ak_);
                 CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
@@ -1297,12 +1297,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date bj_ = w_?.BirthDateElement;
                 string bk_ = bj_?.Value;
                 CqlDate bl_ = context.Operators.ConvertStringToDate(bk_);
-                object bn_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bo_ = context.Operators.Add(bl_, bn_ as CqlQuantity);
                 Date bq_ = w_?.BirthDateElement;
                 string br_ = bq_?.Value;
                 CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
-                object bu_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
                 CqlDate bx_ = context.Operators.Add(bv_, ak_);
                 CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
@@ -1310,12 +1310,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date cb_ = w_?.BirthDateElement;
                 string cc_ = cb_?.Value;
                 CqlDate cd_ = context.Operators.ConvertStringToDate(cc_);
-                object cf_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object cf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate cg_ = context.Operators.Add(cd_, cf_ as CqlQuantity);
                 Date ci_ = w_?.BirthDateElement;
                 string cj_ = ci_?.Value;
                 CqlDate ck_ = context.Operators.ConvertStringToDate(cj_);
-                object cm_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object cm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
                 CqlDate cp_ = context.Operators.Add(cn_, ak_);
                 CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
@@ -1331,13 +1331,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 string cv_ = cu_?.Value;
                 CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
                 DataType cx_ = condition?.Abatement;
-                object cy_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object cy_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
                 CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
                 Date dc_ = ct_?.BirthDateElement;
                 string dd_ = dc_?.Value;
                 CqlDate de_ = context.Operators.ConvertStringToDate(dd_);
-                object dg_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object dg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
                 CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
                 CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
@@ -1348,13 +1348,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date dp_ = ct_?.BirthDateElement;
                 string dq_ = dp_?.Value;
                 CqlDate dr_ = context.Operators.ConvertStringToDate(dq_);
-                object dt_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object dt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object du_ = context.Operators.LateBoundProperty<object>(dt_, "low");
                 CqlDate dv_ = context.Operators.Add(dr_, du_ as CqlQuantity);
                 Date dx_ = ct_?.BirthDateElement;
                 string dy_ = dx_?.Value;
                 CqlDate dz_ = context.Operators.ConvertStringToDate(dy_);
-                object eb_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object eb_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
                 CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
                 CqlDate ef_ = context.Operators.Add(ed_, dj_);
@@ -1364,13 +1364,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date ek_ = ct_?.BirthDateElement;
                 string el_ = ek_?.Value;
                 CqlDate em_ = context.Operators.ConvertStringToDate(el_);
-                object eo_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object eo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ep_ = context.Operators.LateBoundProperty<object>(eo_, "low");
                 CqlDate eq_ = context.Operators.Add(em_, ep_ as CqlQuantity);
                 Date es_ = ct_?.BirthDateElement;
                 string et_ = es_?.Value;
                 CqlDate eu_ = context.Operators.ConvertStringToDate(et_);
-                object ew_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object ew_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
                 CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
                 CqlDate fa_ = context.Operators.Add(ey_, dj_);
@@ -1379,13 +1379,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date fe_ = ct_?.BirthDateElement;
                 string ff_ = fe_?.Value;
                 CqlDate fg_ = context.Operators.ConvertStringToDate(ff_);
-                object fi_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object fi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object fj_ = context.Operators.LateBoundProperty<object>(fi_, "low");
                 CqlDate fk_ = context.Operators.Add(fg_, fj_ as CqlQuantity);
                 Date fm_ = ct_?.BirthDateElement;
                 string fn_ = fm_?.Value;
                 CqlDate fo_ = context.Operators.ConvertStringToDate(fn_);
-                object fq_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object fq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
                 CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
                 CqlDate fu_ = context.Operators.Add(fs_, dj_);
@@ -1398,9 +1398,9 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             else if (e_())
             {
                 DataType fy_ = condition?.Abatement;
-                object fz_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, fy_);
+                object fz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fy_);
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
-                object gc_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, fy_);
+                object gc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fy_);
                 object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
                 CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
 
@@ -1426,7 +1426,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool b_()
             {
                 DataType f_ = condition?.Abatement;
-                object g_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, f_);
+                object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
 
                 return h_;
@@ -1434,7 +1434,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool c_()
             {
                 DataType i_ = condition?.Abatement;
-                object j_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, i_);
+                object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
 
                 return k_;
@@ -1442,7 +1442,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool d_()
             {
                 DataType l_ = condition?.Abatement;
-                object m_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, l_);
+                object m_ = FHIRHelpers_4_3_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
 
                 return n_;
@@ -1450,7 +1450,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool e_()
             {
                 DataType o_ = condition?.Abatement;
-                object p_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, o_);
+                object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
 
                 return q_;
@@ -1458,8 +1458,8 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             if (b_())
             {
                 DataType r_ = condition?.Abatement;
-                object s_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, r_);
-                object u_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, r_);
+                object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
+                object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
 
                 return v_;
@@ -1471,12 +1471,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 string y_ = x_?.Value;
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
                 DataType aa_ = condition?.Abatement;
-                object ab_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
                 Date ae_ = w_?.BirthDateElement;
                 string af_ = ae_?.Value;
                 CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
-                object ai_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
                 CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
                 CqlDate al_ = context.Operators.Add(aj_, ak_);
@@ -1486,12 +1486,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date aq_ = w_?.BirthDateElement;
                 string ar_ = aq_?.Value;
                 CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
-                object au_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object au_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate av_ = context.Operators.Add(as_, au_ as CqlQuantity);
                 Date ax_ = w_?.BirthDateElement;
                 string ay_ = ax_?.Value;
                 CqlDate az_ = context.Operators.ConvertStringToDate(ay_);
-                object bb_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bb_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
                 CqlDate be_ = context.Operators.Add(bc_, ak_);
                 CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
@@ -1500,12 +1500,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date bj_ = w_?.BirthDateElement;
                 string bk_ = bj_?.Value;
                 CqlDate bl_ = context.Operators.ConvertStringToDate(bk_);
-                object bn_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bo_ = context.Operators.Add(bl_, bn_ as CqlQuantity);
                 Date bq_ = w_?.BirthDateElement;
                 string br_ = bq_?.Value;
                 CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
-                object bu_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object bu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
                 CqlDate bx_ = context.Operators.Add(bv_, ak_);
                 CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
@@ -1513,12 +1513,12 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date cb_ = w_?.BirthDateElement;
                 string cc_ = cb_?.Value;
                 CqlDate cd_ = context.Operators.ConvertStringToDate(cc_);
-                object cf_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object cf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate cg_ = context.Operators.Add(cd_, cf_ as CqlQuantity);
                 Date ci_ = w_?.BirthDateElement;
                 string cj_ = ci_?.Value;
                 CqlDate ck_ = context.Operators.ConvertStringToDate(cj_);
-                object cm_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, aa_);
+                object cm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
                 CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
                 CqlDate cp_ = context.Operators.Add(cn_, ak_);
                 CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
@@ -1534,13 +1534,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 string cv_ = cu_?.Value;
                 CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
                 DataType cx_ = condition?.Abatement;
-                object cy_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object cy_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
                 CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
                 Date dc_ = ct_?.BirthDateElement;
                 string dd_ = dc_?.Value;
                 CqlDate de_ = context.Operators.ConvertStringToDate(dd_);
-                object dg_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object dg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
                 CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
                 CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
@@ -1551,13 +1551,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date dp_ = ct_?.BirthDateElement;
                 string dq_ = dp_?.Value;
                 CqlDate dr_ = context.Operators.ConvertStringToDate(dq_);
-                object dt_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object dt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object du_ = context.Operators.LateBoundProperty<object>(dt_, "low");
                 CqlDate dv_ = context.Operators.Add(dr_, du_ as CqlQuantity);
                 Date dx_ = ct_?.BirthDateElement;
                 string dy_ = dx_?.Value;
                 CqlDate dz_ = context.Operators.ConvertStringToDate(dy_);
-                object eb_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object eb_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
                 CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
                 CqlDate ef_ = context.Operators.Add(ed_, dj_);
@@ -1567,13 +1567,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date ek_ = ct_?.BirthDateElement;
                 string el_ = ek_?.Value;
                 CqlDate em_ = context.Operators.ConvertStringToDate(el_);
-                object eo_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object eo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ep_ = context.Operators.LateBoundProperty<object>(eo_, "low");
                 CqlDate eq_ = context.Operators.Add(em_, ep_ as CqlQuantity);
                 Date es_ = ct_?.BirthDateElement;
                 string et_ = es_?.Value;
                 CqlDate eu_ = context.Operators.ConvertStringToDate(et_);
-                object ew_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object ew_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
                 CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
                 CqlDate fa_ = context.Operators.Add(ey_, dj_);
@@ -1582,13 +1582,13 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                 Date fe_ = ct_?.BirthDateElement;
                 string ff_ = fe_?.Value;
                 CqlDate fg_ = context.Operators.ConvertStringToDate(ff_);
-                object fi_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object fi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object fj_ = context.Operators.LateBoundProperty<object>(fi_, "low");
                 CqlDate fk_ = context.Operators.Add(fg_, fj_ as CqlQuantity);
                 Date fm_ = ct_?.BirthDateElement;
                 string fn_ = fm_?.Value;
                 CqlDate fo_ = context.Operators.ConvertStringToDate(fn_);
-                object fq_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, cx_);
+                object fq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cx_);
                 object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
                 CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
                 CqlDate fu_ = context.Operators.Add(fs_, dj_);
@@ -1601,9 +1601,9 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             else if (e_())
             {
                 DataType fy_ = condition?.Abatement;
-                object fz_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, fy_);
+                object fz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fy_);
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
-                object gc_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, fy_);
+                object gc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fy_);
                 object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
                 CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
 
@@ -1630,16 +1630,16 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool b_()
             {
                 CodeableConcept c_ = condition?.ClinicalStatus;
-                CqlConcept d_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode e_ = this.active(context);
                 CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
                 bool? g_ = context.Operators.Equivalent(d_, f_);
-                CqlConcept i_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept i_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode j_ = this.recurrence(context);
                 CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
                 bool? l_ = context.Operators.Equivalent(i_, k_);
                 bool? m_ = context.Operators.Or(g_, l_);
-                CqlConcept o_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept o_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode p_ = this.relapse(context);
                 CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1650,7 +1650,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             if (b_())
             {
                 DataType t_ = condition?.Onset;
-                object u_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, t_);
+                object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
                 CqlInterval<CqlDateTime> v_ = this.ToInterval(context, u_);
                 CqlDateTime w_ = context.Operators.Start(v_);
                 CqlInterval<CqlDateTime> x_ = this.ToAbatementInterval(context, condition);
@@ -1673,7 +1673,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                         if (abatementDate is null)
                         {
                             DataType ai_ = condition?.Onset;
-                            object aj_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, ai_);
+                            object aj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
                             CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
@@ -1683,7 +1683,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                         else
                         {
                             DataType an_ = condition?.Onset;
-                            object ao_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, an_);
+                            object ao_ = FHIRHelpers_4_3_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);
                             CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
@@ -1716,16 +1716,16 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             bool b_()
             {
                 CodeableConcept c_ = condition?.ClinicalStatus;
-                CqlConcept d_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode e_ = this.active(context);
                 CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
                 bool? g_ = context.Operators.Equivalent(d_, f_);
-                CqlConcept i_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept i_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode j_ = this.recurrence(context);
                 CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
                 bool? l_ = context.Operators.Equivalent(i_, k_);
                 bool? m_ = context.Operators.Or(g_, l_);
-                CqlConcept o_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, c_);
+                CqlConcept o_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
                 CqlCode p_ = this.relapse(context);
                 CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1736,7 +1736,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
             if (b_())
             {
                 DataType t_ = condition?.Onset;
-                object u_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, t_);
+                object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
                 CqlInterval<CqlDateTime> v_ = this.toInterval(context, u_);
                 CqlDateTime w_ = context.Operators.Start(v_);
                 CqlInterval<CqlDateTime> x_ = this.abatementInterval(context, condition);
@@ -1759,7 +1759,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                         if (abatementDate is null)
                         {
                             DataType ai_ = condition?.Onset;
-                            object aj_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, ai_);
+                            object aj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
                             CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
@@ -1769,7 +1769,7 @@ public partial class QICoreCommon_minus_2_0_000 : ILibrary, ISingleton<QICoreCom
                         else
                         {
                             DataType an_ = condition?.Onset;
-                            object ao_ = FHIRHelpers_minus_4_3_000.Instance.ToValue(context, an_);
+                            object ao_ = FHIRHelpers_4_3_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);
                             CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);

@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("NCQAPalliativeCare", "1.0.0")]
-public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAPalliativeCare_minus_1_0_0>
+public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliativeCare_1_0_0>
 {
-    private NCQAPalliativeCare_minus_1_0_0() {}
+    private NCQAPalliativeCare_1_0_0() {}
 
-    public static NCQAPalliativeCare_minus_1_0_0 Instance { get; } = new();
+    public static NCQAPalliativeCare_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "NCQAPalliativeCare";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, NCQAFHIRBase_minus_1_0_0.Instance, NCQAStatus_minus_1_0_0.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance];
 
     #endregion ILibrary Implementation
 
@@ -55,8 +55,8 @@ public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAP
     #region CodeSystems
 
     [CqlCodeSystemDefinition("ICD-10", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
-    public CqlCodeSystem ICD_minus_10(CqlContext _) => _ICD_minus_10;
-    private static readonly CqlCodeSystem _ICD_minus_10 =
+    public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
+    private static readonly CqlCodeSystem _ICD_10 =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
           _Encounter_for_palliative_care]);
 
@@ -72,10 +72,10 @@ public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAP
         bool? c_(Observation PalliativeAssessment)
         {
             DataType ab_ = PalliativeAssessment?.Effective;
-            CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ab_);
+            CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_);
             CqlDateTime ad_ = context.Operators.Start(ac_);
             CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDateTime> ag_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, ab_);
+            CqlInterval<CqlDateTime> ag_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_);
             CqlDateTime ah_ = context.Operators.End(ag_);
             CqlDate ai_ = context.Operators.DateFrom(ah_);
             CqlInterval<CqlDate> aj_ = context.Operators.Interval(ae_, ai_, true, true);
@@ -92,14 +92,14 @@ public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAP
         bool? e_ = context.Operators.Exists<Observation>(d_);
         CqlValueSet f_ = this.Palliative_Care_Encounter(context);
         IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        IEnumerable<Encounter> h_ = NCQAStatus_minus_1_0_0.Instance.Finished_Encounter(context, g_);
+        IEnumerable<Encounter> h_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, g_);
         bool? i_(Encounter PalliativeEncounter)
         {
             Period aq_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
+            CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
-            CqlInterval<CqlDateTime> av_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
+            CqlInterval<CqlDateTime> av_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
             CqlDateTime aw_ = context.Operators.End(av_);
             CqlDate ax_ = context.Operators.DateFrom(aw_);
             CqlInterval<CqlDate> ay_ = context.Operators.Interval(at_, ax_, true, true);
@@ -117,14 +117,14 @@ public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAP
         bool? l_ = context.Operators.Or(e_, k_);
         CqlValueSet m_ = this.Palliative_Care_Intervention(context);
         IEnumerable<Procedure> n_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-        IEnumerable<Procedure> o_ = NCQAStatus_minus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, n_);
+        IEnumerable<Procedure> o_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, n_);
         bool? p_(Procedure PalliativeIntervention)
         {
             DataType bf_ = PalliativeIntervention?.Performed;
-            CqlInterval<CqlDateTime> bg_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bf_);
+            CqlInterval<CqlDateTime> bg_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bf_);
             CqlDateTime bh_ = context.Operators.Start(bg_);
             CqlDate bi_ = context.Operators.DateFrom(bh_);
-            CqlInterval<CqlDateTime> bk_ = NCQAFHIRBase_minus_1_0_0.Instance.Normalize_Interval(context, bf_);
+            CqlInterval<CqlDateTime> bk_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bf_);
             CqlDateTime bl_ = context.Operators.End(bk_);
             CqlDate bm_ = context.Operators.DateFrom(bl_);
             CqlInterval<CqlDate> bn_ = context.Operators.Interval(bi_, bm_, true, true);
@@ -143,10 +143,10 @@ public partial class NCQAPalliativeCare_minus_1_0_0 : ILibrary, ISingleton<NCQAP
         CqlCode t_ = this.Encounter_for_palliative_care(context);
         IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
         IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, u_, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        IEnumerable<Condition> w_ = NCQAStatus_minus_1_0_0.Instance.Active_Condition(context, v_);
+        IEnumerable<Condition> w_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, v_);
         bool? x_(Condition PalliativeDiagnosis)
         {
-            CqlInterval<CqlDateTime> bu_ = NCQAFHIRBase_minus_1_0_0.Instance.Prevalence_Period(context, PalliativeDiagnosis);
+            CqlInterval<CqlDateTime> bu_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, PalliativeDiagnosis);
             CqlDateTime bv_ = context.Operators.Start(bu_);
             CqlDate bw_ = context.Operators.DateFrom(bv_);
             CqlDateTime by_ = context.Operators.End(bu_);

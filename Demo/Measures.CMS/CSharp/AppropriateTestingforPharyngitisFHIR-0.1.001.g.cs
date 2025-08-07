@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("AppropriateTestingforPharyngitisFHIR", "0.1.001")]
-public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibrary, ISingleton<AppropriateTestingforPharyngitisFHIR_minus_0_1_001>
+public partial class AppropriateTestingforPharyngitisFHIR_0_1_001 : ILibrary, ISingleton<AppropriateTestingforPharyngitisFHIR_0_1_001>
 {
-    private AppropriateTestingforPharyngitisFHIR_minus_0_1_001() {}
+    private AppropriateTestingforPharyngitisFHIR_0_1_001() {}
 
-    public static AppropriateTestingforPharyngitisFHIR_minus_0_1_001 Instance { get; } = new();
+    public static AppropriateTestingforPharyngitisFHIR_0_1_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "AppropriateTestingforPharyngitisFHIR";
     public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Hospice_minus_6_12_000.Instance, Antibiotic_minus_1_7_000.Instance, Status_minus_1_8_000.Instance, QICoreCommon_minus_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Antibiotic_1_7_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -157,7 +157,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -166,7 +166,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -175,7 +175,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -184,7 +184,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -224,7 +224,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
             List<CodeableConcept> at_ = E?.Type;
             CqlConcept au_(CodeableConcept @this)
             {
-                CqlConcept az_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return az_;
             };
@@ -257,12 +257,12 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(al_, an_);
         IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(aj_, ao_);
-        IEnumerable<Encounter> aq_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, ap_);
+        IEnumerable<Encounter> aq_ = Status_1_8_000.Instance.isEncounterPerformed(context, ap_);
         bool? ar_(Encounter ValidEncounter)
         {
             Period bd_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> be_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bd_);
-            CqlInterval<CqlDateTime> bf_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, be_ as object);
+            CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+            CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_1_000.Instance.toInterval(context, be_ as object);
             CqlDateTime bg_ = context.Operators.End(bf_);
             CqlInterval<CqlDateTime> bh_ = this.Measurement_Period(context);
             CqlDateTime bi_ = context.Operators.Start(bh_);
@@ -300,7 +300,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
                     string w_ = context.Operators.Last<string>(v_);
                     bool? x_ = context.Operators.Equal(t_, w_);
                     CodeableConcept y_ = M?.Code;
-                    CqlConcept z_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, y_);
+                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
                     CqlValueSet aa_ = this.Antibiotic_Medications_for_Pharyngitis(context);
                     bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
                     bool? ac_ = context.Operators.And(x_, ab_);
@@ -316,12 +316,12 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
             };
             IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
-            IEnumerable<MedicationRequest> j_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, i_);
+            IEnumerable<MedicationRequest> j_ = Status_1_8_000.Instance.isMedicationOrder(context, i_);
             bool? k_(MedicationRequest AntibioticOrdered)
             {
                 Period ad_ = EDOrAmbulatoryVisit?.Period;
-                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ad_);
-                CqlInterval<CqlDateTime> af_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ae_ as object);
+                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
+                CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
                 CqlDateTime ag_ = context.Operators.Start(af_);
                 FhirDateTime ah_ = AntibioticOrdered?.AuthoredOnElement;
                 CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
@@ -377,11 +377,11 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?> e_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?>(c_, d_);
         bool? f_((CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? tuple_ypyxedbbcqbdavhxvckuwmfh)
         {
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, tuple_ypyxedbbcqbdavhxvckuwmfh?.AcutePharyngitisTonsillitis);
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, tuple_ypyxedbbcqbdavhxvckuwmfh?.AcutePharyngitisTonsillitis);
             CqlDateTime m_ = context.Operators.Start(l_);
             Period n_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
-            CqlInterval<CqlDateTime> o_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, n_);
-            CqlInterval<CqlDateTime> p_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
             bool? q_ = context.Operators.In<CqlDateTime>(m_, p_, "day");
 
             return q_;
@@ -439,7 +439,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         IEnumerable<Encounter> a_ = this.Initial_Population(context);
         bool? b_(Encounter EligibleEncounters)
         {
-            bool? d_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
+            bool? d_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
 
             return d_;
         };
@@ -456,7 +456,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Encounter> e_ = Antibiotic_minus_1_7_000.Instance.Has_Comorbid_Condition_History(context, b_, d_);
+        IEnumerable<Encounter> e_ = Antibiotic_1_7_000.Instance.Has_Comorbid_Condition_History(context, b_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(a_, e_);
         CqlValueSet h_ = this.Antibiotic_Medications_for_Pharyngitis(context);
         IEnumerable<MedicationRequest> i_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -472,7 +472,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
                 string ad_ = context.Operators.Last<string>(ac_);
                 bool? ae_ = context.Operators.Equal(aa_, ad_);
                 CodeableConcept af_ = M?.Code;
-                CqlConcept ag_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, af_);
+                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
                 CqlValueSet ah_ = this.Antibiotic_Medications_for_Pharyngitis(context);
                 bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
                 bool? aj_ = context.Operators.And(ae_, ai_);
@@ -488,11 +488,11 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         };
         IEnumerable<MedicationRequest> l_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(j_, k_);
         IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(i_, l_);
-        IEnumerable<MedicationRequest> n_ = Status_minus_1_8_000.Instance.isMedicationActive(context, m_);
-        IEnumerable<Encounter> o_ = Antibiotic_minus_1_7_000.Instance.Has_Antibiotic_Medication_History(context, b_, n_);
+        IEnumerable<MedicationRequest> n_ = Status_1_8_000.Instance.isMedicationActive(context, m_);
+        IEnumerable<Encounter> o_ = Antibiotic_1_7_000.Instance.Has_Antibiotic_Medication_History(context, b_, n_);
         CqlValueSet q_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Encounter> s_ = Antibiotic_minus_1_7_000.Instance.Has_Competing_Diagnosis_History(context, b_, r_);
+        IEnumerable<Encounter> s_ = Antibiotic_1_7_000.Instance.Has_Competing_Diagnosis_History(context, b_, r_);
         IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(o_, s_);
         IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(f_, t_);
 
@@ -505,11 +505,11 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
     {
         CqlValueSet a_ = this.Group_A_Streptococcus_Test(context);
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> c_ = Status_minus_1_8_000.Instance.isLaboratoryTestPerformed(context, b_);
+        IEnumerable<Observation> c_ = Status_1_8_000.Instance.isLaboratoryTestPerformed(context, b_);
         bool? d_(Observation GroupAStreptococcusTest)
         {
             DataType f_ = GroupAStreptococcusTest?.Value;
-            object g_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             bool? h_ = context.Operators.Not((bool?)(g_ is null));
 
             return h_;
@@ -536,15 +536,15 @@ public partial class AppropriateTestingforPharyngitisFHIR_minus_0_1_001 : ILibra
         bool? f_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij)
         {
             DataType l_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest?.Effective;
-            object m_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, l_);
-            CqlInterval<CqlDateTime> n_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, m_);
+            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.toInterval(context, m_);
             CqlDateTime o_ = context.Operators.Start(n_);
             Period p_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
-            CqlInterval<CqlDateTime> q_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, p_);
+            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             CqlDateTime r_ = context.Operators.End(q_);
             CqlQuantity s_ = context.Operators.Quantity(3m, "days");
             CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, p_);
+            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             CqlDateTime w_ = context.Operators.End(v_);
             CqlDateTime y_ = context.Operators.Add(w_, s_);
             CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, true, true);

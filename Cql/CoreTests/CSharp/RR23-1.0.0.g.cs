@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("RR23", "1.0.0")]
-public partial class RR23_minus_1_0_0 : ILibrary, ISingleton<RR23_minus_1_0_0>
+public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
-    private RR23_minus_1_0_0() {}
+    private RR23_1_0_0() {}
 
-    public static RR23_minus_1_0_0 Instance { get; } = new();
+    public static RR23_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "RR23";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_1.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
 
     #endregion ILibrary Implementation
 
@@ -47,8 +47,8 @@ public partial class RR23_minus_1_0_0 : ILibrary, ISingleton<RR23_minus_1_0_0>
     private static readonly CqlCode _Tiny_Umbrella = new CqlCode("U707", "http://acme.org/product-catalog");
 
     [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode entered_minus_in_minus_error(CqlContext _) => _entered_minus_in_minus_error;
-    private static readonly CqlCode _entered_minus_in_minus_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
+    private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     #endregion Codes
 
@@ -64,7 +64,7 @@ public partial class RR23_minus_1_0_0 : ILibrary, ISingleton<RR23_minus_1_0_0>
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
-          _entered_minus_in_minus_error]);
+          _entered_in_error]);
 
     #endregion CodeSystems
 
@@ -157,7 +157,7 @@ public partial class RR23_minus_1_0_0 : ILibrary, ISingleton<RR23_minus_1_0_0>
         {
             SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
             DataType e_ = d_?.Item;
-            CqlConcept f_ = FHIRHelpers_minus_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
+            CqlConcept f_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
             CqlCode g_ = this.Tiny_Umbrella(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
             bool? i_ = context.Operators.Equivalent(f_, h_);

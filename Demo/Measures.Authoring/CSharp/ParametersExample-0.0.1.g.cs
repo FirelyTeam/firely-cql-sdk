@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
-public partial class ParametersExample_minus_0_0_1 : ILibrary, ISingleton<ParametersExample_minus_0_0_1>
+public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
-    private ParametersExample_minus_0_0_1() {}
+    private ParametersExample_0_0_1() {}
 
-    public static ParametersExample_minus_0_0_1 Instance { get; } = new();
+    public static ParametersExample_0_0_1 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ParametersExample";
     public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_3_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -80,18 +80,18 @@ public partial class ParametersExample_minus_0_0_1 : ILibrary, ISingleton<Parame
         bool? c_(Patient P)
         {
             Code<AdministrativeGender> f_ = P?.GenderElement;
-            string g_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, f_);
+            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             bool? h_ = context.Operators.Equal(g_, "male");
             FhirBoolean i_ = P?.ActiveElement;
-            bool? j_ = FHIRHelpers_minus_4_3_000.Instance.ToBoolean(context, i_);
+            bool? j_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, i_);
             bool? k_ = context.Operators.IsTrue(j_);
             bool? l_ = context.Operators.And(h_, k_);
             DataType m_ = P?.Deceased;
-            bool? n_ = FHIRHelpers_minus_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
+            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
             bool? o_ = context.Operators.Not(n_);
             bool? p_ = context.Operators.And(l_, o_);
             CodeableConcept q_ = P?.MaritalStatus;
-            CqlConcept r_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, q_);
+            CqlConcept r_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, q_);
             CqlValueSet s_ = this.Marital_Status(context);
             bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
             bool? u_ = context.Operators.And(p_, t_);
@@ -119,7 +119,7 @@ public partial class ParametersExample_minus_0_0_1 : ILibrary, ISingleton<Parame
     public int? Patient_Age_in_Years(CqlContext context)
     {
         Date a_ = this.Patient_Birthdate(context);
-        CqlDate b_ = FHIRHelpers_minus_4_3_000.Instance.ToDate(context, a_);
+        CqlDate b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
         CqlDate c_ = this.CurrentDate(context);
         int? d_ = context.Operators.DurationBetween(b_, c_, "year");
 

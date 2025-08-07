@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
-public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_minus_1_0_0>
+public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
-    private NCQAFHIRBase_minus_1_0_0() {}
+    private NCQAFHIRBase_1_0_0() {}
 
-    public static NCQAFHIRBase_minus_1_0_0 Instance { get; } = new();
+    public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "NCQAFHIRBase";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 
@@ -47,7 +47,7 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
         {
             if (onset is FhirDateTime)
             {
-                CqlDateTime b_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, onset as FhirDateTime);
+                CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, onset as FhirDateTime);
                 CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
                 return d_;
@@ -76,11 +76,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient v_ = this.Patient(context);
                         Date w_ = v_?.BirthDateElement;
-                        CqlDate x_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, w_);
-                        CqlQuantity y_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, onset as Age);
+                        CqlDate x_ = FHIRHelpers_4_0_001.Instance.ToDate(context, w_);
+                        CqlQuantity y_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, onset as Age);
                         CqlDate z_ = context.Operators.Add(x_, y_);
                         Date ab_ = v_?.BirthDateElement;
-                        CqlDate ac_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ab_);
+                        CqlDate ac_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ab_);
                         CqlDate ae_ = context.Operators.Add(ac_, y_);
                         CqlQuantity af_ = context.Operators.Quantity(1m, "year");
                         CqlDate ag_ = context.Operators.Add(ae_, af_);
@@ -92,14 +92,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient ai_ = this.Patient(context);
                         Date aj_ = ai_?.BirthDateElement;
-                        CqlDate ak_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, aj_);
+                        CqlDate ak_ = FHIRHelpers_4_0_001.Instance.ToDate(context, aj_);
                         Quantity al_ = (onset as Range)?.Low;
-                        CqlQuantity am_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, al_);
+                        CqlQuantity am_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, al_);
                         CqlDate an_ = context.Operators.Add(ak_, am_);
                         Date ap_ = ai_?.BirthDateElement;
-                        CqlDate aq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ap_);
+                        CqlDate aq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ap_);
                         Quantity ar_ = (onset as Range)?.High;
-                        CqlQuantity as_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ar_);
+                        CqlQuantity as_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ar_);
                         CqlDate at_ = context.Operators.Add(aq_, as_);
                         CqlQuantity au_ = context.Operators.Quantity(1m, "year");
                         CqlDate av_ = context.Operators.Add(at_, au_);
@@ -120,11 +120,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient ax_ = this.Patient(context);
                         Date ay_ = ax_?.BirthDateElement;
-                        CqlDate az_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ay_);
-                        CqlQuantity ba_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, onset as Age);
+                        CqlDate az_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ay_);
+                        CqlQuantity ba_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, onset as Age);
                         CqlDate bb_ = context.Operators.Add(az_, ba_);
                         Date bd_ = ax_?.BirthDateElement;
-                        CqlDate be_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bd_);
+                        CqlDate be_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bd_);
                         CqlDate bg_ = context.Operators.Add(be_, ba_);
                         CqlQuantity bh_ = context.Operators.Quantity(1m, "year");
                         CqlDate bi_ = context.Operators.Add(bg_, bh_);
@@ -136,14 +136,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient bk_ = this.Patient(context);
                         Date bl_ = bk_?.BirthDateElement;
-                        CqlDate bm_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bl_);
+                        CqlDate bm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bl_);
                         Quantity bn_ = (onset as Range)?.Low;
-                        CqlQuantity bo_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, bn_);
+                        CqlQuantity bo_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bn_);
                         CqlDate bp_ = context.Operators.Add(bm_, bo_);
                         Date br_ = bk_?.BirthDateElement;
-                        CqlDate bs_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, br_);
+                        CqlDate bs_ = FHIRHelpers_4_0_001.Instance.ToDate(context, br_);
                         Quantity bt_ = (onset as Range)?.High;
-                        CqlQuantity bu_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, bt_);
+                        CqlQuantity bu_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bt_);
                         CqlDate bv_ = context.Operators.Add(bs_, bu_);
                         CqlQuantity bw_ = context.Operators.Quantity(1m, "year");
                         CqlDate bx_ = context.Operators.Add(bv_, bw_);
@@ -164,11 +164,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient bz_ = this.Patient(context);
                         Date ca_ = bz_?.BirthDateElement;
-                        CqlDate cb_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_);
-                        CqlQuantity cc_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, onset as Age);
+                        CqlDate cb_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_);
+                        CqlQuantity cc_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, onset as Age);
                         CqlDate cd_ = context.Operators.Add(cb_, cc_);
                         Date cf_ = bz_?.BirthDateElement;
-                        CqlDate cg_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cf_);
+                        CqlDate cg_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cf_);
                         CqlDate ci_ = context.Operators.Add(cg_, cc_);
                         CqlQuantity cj_ = context.Operators.Quantity(1m, "year");
                         CqlDate ck_ = context.Operators.Add(ci_, cj_);
@@ -180,14 +180,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient cm_ = this.Patient(context);
                         Date cn_ = cm_?.BirthDateElement;
-                        CqlDate co_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cn_);
+                        CqlDate co_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cn_);
                         Quantity cp_ = (onset as Range)?.Low;
-                        CqlQuantity cq_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cp_);
+                        CqlQuantity cq_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cp_);
                         CqlDate cr_ = context.Operators.Add(co_, cq_);
                         Date ct_ = cm_?.BirthDateElement;
-                        CqlDate cu_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ct_);
+                        CqlDate cu_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ct_);
                         Quantity cv_ = (onset as Range)?.High;
-                        CqlQuantity cw_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cv_);
+                        CqlQuantity cw_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cv_);
                         CqlDate cx_ = context.Operators.Add(cu_, cw_);
                         CqlQuantity cy_ = context.Operators.Quantity(1m, "year");
                         CqlDate cz_ = context.Operators.Add(cx_, cy_);
@@ -207,11 +207,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient db_ = this.Patient(context);
                         Date dc_ = db_?.BirthDateElement;
-                        CqlDate dd_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dc_);
-                        CqlQuantity de_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, onset as Age);
+                        CqlDate dd_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dc_);
+                        CqlQuantity de_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, onset as Age);
                         CqlDate df_ = context.Operators.Add(dd_, de_);
                         Date dh_ = db_?.BirthDateElement;
-                        CqlDate di_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dh_);
+                        CqlDate di_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dh_);
                         CqlDate dk_ = context.Operators.Add(di_, de_);
                         CqlQuantity dl_ = context.Operators.Quantity(1m, "year");
                         CqlDate dm_ = context.Operators.Add(dk_, dl_);
@@ -223,14 +223,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient do_ = this.Patient(context);
                         Date dp_ = do_?.BirthDateElement;
-                        CqlDate dq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dp_);
+                        CqlDate dq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dp_);
                         Quantity dr_ = (onset as Range)?.Low;
-                        CqlQuantity ds_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, dr_);
+                        CqlQuantity ds_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dr_);
                         CqlDate dt_ = context.Operators.Add(dq_, ds_);
                         Date dv_ = do_?.BirthDateElement;
-                        CqlDate dw_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dv_);
+                        CqlDate dw_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dv_);
                         Quantity dx_ = (onset as Range)?.High;
-                        CqlQuantity dy_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, dx_);
+                        CqlQuantity dy_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dx_);
                         CqlDate dz_ = context.Operators.Add(dw_, dy_);
                         CqlQuantity ea_ = context.Operators.Quantity(1m, "year");
                         CqlDate eb_ = context.Operators.Add(dz_, ea_);
@@ -261,7 +261,7 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
         {
             if (abatement is FhirDateTime)
             {
-                CqlDateTime b_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, abatement as FhirDateTime);
+                CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, abatement as FhirDateTime);
                 CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
                 return d_;
@@ -290,11 +290,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient v_ = this.Patient(context);
                         Date w_ = v_?.BirthDateElement;
-                        CqlDate x_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, w_);
-                        CqlQuantity y_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, abatement as Age);
+                        CqlDate x_ = FHIRHelpers_4_0_001.Instance.ToDate(context, w_);
+                        CqlQuantity y_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, abatement as Age);
                         CqlDate z_ = context.Operators.Add(x_, y_);
                         Date ab_ = v_?.BirthDateElement;
-                        CqlDate ac_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ab_);
+                        CqlDate ac_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ab_);
                         CqlDate ae_ = context.Operators.Add(ac_, y_);
                         CqlQuantity af_ = context.Operators.Quantity(1m, "year");
                         CqlDate ag_ = context.Operators.Add(ae_, af_);
@@ -306,14 +306,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient ai_ = this.Patient(context);
                         Date aj_ = ai_?.BirthDateElement;
-                        CqlDate ak_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, aj_);
+                        CqlDate ak_ = FHIRHelpers_4_0_001.Instance.ToDate(context, aj_);
                         Quantity al_ = (abatement as Range)?.Low;
-                        CqlQuantity am_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, al_);
+                        CqlQuantity am_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, al_);
                         CqlDate an_ = context.Operators.Add(ak_, am_);
                         Date ap_ = ai_?.BirthDateElement;
-                        CqlDate aq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ap_);
+                        CqlDate aq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ap_);
                         Quantity ar_ = (abatement as Range)?.High;
-                        CqlQuantity as_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ar_);
+                        CqlQuantity as_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ar_);
                         CqlDate at_ = context.Operators.Add(aq_, as_);
                         CqlQuantity au_ = context.Operators.Quantity(1m, "year");
                         CqlDate av_ = context.Operators.Add(at_, au_);
@@ -334,11 +334,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient ax_ = this.Patient(context);
                         Date ay_ = ax_?.BirthDateElement;
-                        CqlDate az_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ay_);
-                        CqlQuantity ba_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, abatement as Age);
+                        CqlDate az_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ay_);
+                        CqlQuantity ba_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, abatement as Age);
                         CqlDate bb_ = context.Operators.Add(az_, ba_);
                         Date bd_ = ax_?.BirthDateElement;
-                        CqlDate be_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bd_);
+                        CqlDate be_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bd_);
                         CqlDate bg_ = context.Operators.Add(be_, ba_);
                         CqlQuantity bh_ = context.Operators.Quantity(1m, "year");
                         CqlDate bi_ = context.Operators.Add(bg_, bh_);
@@ -350,14 +350,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient bk_ = this.Patient(context);
                         Date bl_ = bk_?.BirthDateElement;
-                        CqlDate bm_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bl_);
+                        CqlDate bm_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bl_);
                         Quantity bn_ = (abatement as Range)?.Low;
-                        CqlQuantity bo_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, bn_);
+                        CqlQuantity bo_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bn_);
                         CqlDate bp_ = context.Operators.Add(bm_, bo_);
                         Date br_ = bk_?.BirthDateElement;
-                        CqlDate bs_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, br_);
+                        CqlDate bs_ = FHIRHelpers_4_0_001.Instance.ToDate(context, br_);
                         Quantity bt_ = (abatement as Range)?.High;
-                        CqlQuantity bu_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, bt_);
+                        CqlQuantity bu_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bt_);
                         CqlDate bv_ = context.Operators.Add(bs_, bu_);
                         CqlQuantity bw_ = context.Operators.Quantity(1m, "year");
                         CqlDate bx_ = context.Operators.Add(bv_, bw_);
@@ -378,11 +378,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient bz_ = this.Patient(context);
                         Date ca_ = bz_?.BirthDateElement;
-                        CqlDate cb_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ca_);
-                        CqlQuantity cc_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, abatement as Age);
+                        CqlDate cb_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_);
+                        CqlQuantity cc_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, abatement as Age);
                         CqlDate cd_ = context.Operators.Add(cb_, cc_);
                         Date cf_ = bz_?.BirthDateElement;
-                        CqlDate cg_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cf_);
+                        CqlDate cg_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cf_);
                         CqlDate ci_ = context.Operators.Add(cg_, cc_);
                         CqlQuantity cj_ = context.Operators.Quantity(1m, "year");
                         CqlDate ck_ = context.Operators.Add(ci_, cj_);
@@ -394,14 +394,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient cm_ = this.Patient(context);
                         Date cn_ = cm_?.BirthDateElement;
-                        CqlDate co_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cn_);
+                        CqlDate co_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cn_);
                         Quantity cp_ = (abatement as Range)?.Low;
-                        CqlQuantity cq_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cp_);
+                        CqlQuantity cq_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cp_);
                         CqlDate cr_ = context.Operators.Add(co_, cq_);
                         Date ct_ = cm_?.BirthDateElement;
-                        CqlDate cu_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ct_);
+                        CqlDate cu_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ct_);
                         Quantity cv_ = (abatement as Range)?.High;
-                        CqlQuantity cw_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cv_);
+                        CqlQuantity cw_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cv_);
                         CqlDate cx_ = context.Operators.Add(cu_, cw_);
                         CqlQuantity cy_ = context.Operators.Quantity(1m, "year");
                         CqlDate cz_ = context.Operators.Add(cx_, cy_);
@@ -421,11 +421,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient db_ = this.Patient(context);
                         Date dc_ = db_?.BirthDateElement;
-                        CqlDate dd_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dc_);
-                        CqlQuantity de_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, abatement as Age);
+                        CqlDate dd_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dc_);
+                        CqlQuantity de_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, abatement as Age);
                         CqlDate df_ = context.Operators.Add(dd_, de_);
                         Date dh_ = db_?.BirthDateElement;
-                        CqlDate di_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dh_);
+                        CqlDate di_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dh_);
                         CqlDate dk_ = context.Operators.Add(di_, de_);
                         CqlQuantity dl_ = context.Operators.Quantity(1m, "year");
                         CqlDate dm_ = context.Operators.Add(dk_, dl_);
@@ -437,14 +437,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                     {
                         Patient do_ = this.Patient(context);
                         Date dp_ = do_?.BirthDateElement;
-                        CqlDate dq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dp_);
+                        CqlDate dq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dp_);
                         Quantity dr_ = (abatement as Range)?.Low;
-                        CqlQuantity ds_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, dr_);
+                        CqlQuantity ds_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dr_);
                         CqlDate dt_ = context.Operators.Add(dq_, ds_);
                         Date dv_ = do_?.BirthDateElement;
-                        CqlDate dw_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dv_);
+                        CqlDate dw_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dv_);
                         Quantity dx_ = (abatement as Range)?.High;
-                        CqlQuantity dy_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, dx_);
+                        CqlQuantity dy_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dx_);
                         CqlDate dz_ = context.Operators.Add(dw_, dy_);
                         CqlQuantity ea_ = context.Operators.Quantity(1m, "year");
                         CqlDate eb_ = context.Operators.Add(dz_, ea_);
@@ -490,14 +490,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
         {
             if (choice is FhirDateTime)
             {
-                CqlDateTime b_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, choice as FhirDateTime);
+                CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as FhirDateTime);
                 CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
                 return d_;
             }
             else if (choice is Date)
             {
-                CqlDate e_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, choice as Date);
+                CqlDate e_ = FHIRHelpers_4_0_001.Instance.ToDate(context, choice as Date);
                 CqlDateTime f_ = context.Operators.ConvertDateToDateTime(e_);
                 CqlDateTime h_ = context.Operators.ConvertDateToDateTime(e_);
                 CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, true, true);
@@ -516,7 +516,7 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
             }
             else if (choice is Instant)
             {
-                CqlDateTime o_ = FHIRHelpers_minus_4_0_001.Instance.ToDateTime(context, choice as Instant);
+                CqlDateTime o_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as Instant);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, o_, true, true);
 
                 return q_;
@@ -525,11 +525,11 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
             {
                 Patient r_ = this.Patient(context);
                 Date s_ = r_?.BirthDateElement;
-                CqlDate t_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, s_);
-                CqlQuantity u_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, choice as Age);
+                CqlDate t_ = FHIRHelpers_4_0_001.Instance.ToDate(context, s_);
+                CqlQuantity u_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, choice as Age);
                 CqlDate v_ = context.Operators.Add(t_, u_);
                 Date x_ = r_?.BirthDateElement;
-                CqlDate y_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, x_);
+                CqlDate y_ = FHIRHelpers_4_0_001.Instance.ToDate(context, x_);
                 CqlDate aa_ = context.Operators.Add(y_, u_);
                 CqlQuantity ab_ = context.Operators.Quantity(1m, "year");
                 CqlDate ac_ = context.Operators.Add(aa_, ab_);
@@ -537,29 +537,29 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                 CqlDate ae_ = ad_?.low;
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
                 Date ah_ = r_?.BirthDateElement;
-                CqlDate ai_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ah_);
+                CqlDate ai_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ah_);
                 CqlDate ak_ = context.Operators.Add(ai_, u_);
                 Date am_ = r_?.BirthDateElement;
-                CqlDate an_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, am_);
+                CqlDate an_ = FHIRHelpers_4_0_001.Instance.ToDate(context, am_);
                 CqlDate ap_ = context.Operators.Add(an_, u_);
                 CqlDate ar_ = context.Operators.Add(ap_, ab_);
                 CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, true, false);
                 CqlDate at_ = as_?.high;
                 CqlDateTime au_ = context.Operators.ConvertDateToDateTime(at_);
                 Date aw_ = r_?.BirthDateElement;
-                CqlDate ax_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, aw_);
+                CqlDate ax_ = FHIRHelpers_4_0_001.Instance.ToDate(context, aw_);
                 CqlDate az_ = context.Operators.Add(ax_, u_);
                 Date bb_ = r_?.BirthDateElement;
-                CqlDate bc_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bb_);
+                CqlDate bc_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bb_);
                 CqlDate be_ = context.Operators.Add(bc_, u_);
                 CqlDate bg_ = context.Operators.Add(be_, ab_);
                 CqlInterval<CqlDate> bh_ = context.Operators.Interval(az_, bg_, true, false);
                 bool? bi_ = bh_?.lowClosed;
                 Date bk_ = r_?.BirthDateElement;
-                CqlDate bl_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bk_);
+                CqlDate bl_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bk_);
                 CqlDate bn_ = context.Operators.Add(bl_, u_);
                 Date bp_ = r_?.BirthDateElement;
-                CqlDate bq_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bp_);
+                CqlDate bq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bp_);
                 CqlDate bs_ = context.Operators.Add(bq_, u_);
                 CqlDate bu_ = context.Operators.Add(bs_, ab_);
                 CqlInterval<CqlDate> bv_ = context.Operators.Interval(bn_, bu_, true, false);
@@ -572,14 +572,14 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
             {
                 Patient by_ = this.Patient(context);
                 Date bz_ = by_?.BirthDateElement;
-                CqlDate ca_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, bz_);
+                CqlDate ca_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bz_);
                 Quantity cb_ = (choice as Range)?.Low;
-                CqlQuantity cc_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cb_);
+                CqlQuantity cc_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cb_);
                 CqlDate cd_ = context.Operators.Add(ca_, cc_);
                 Date cf_ = by_?.BirthDateElement;
-                CqlDate cg_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cf_);
+                CqlDate cg_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cf_);
                 Quantity ch_ = (choice as Range)?.High;
-                CqlQuantity ci_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ch_);
+                CqlQuantity ci_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate cj_ = context.Operators.Add(cg_, ci_);
                 CqlQuantity ck_ = context.Operators.Quantity(1m, "year");
                 CqlDate cl_ = context.Operators.Add(cj_, ck_);
@@ -587,35 +587,35 @@ public partial class NCQAFHIRBase_minus_1_0_0 : ILibrary, ISingleton<NCQAFHIRBas
                 CqlDate cn_ = cm_?.low;
                 CqlDateTime co_ = context.Operators.ConvertDateToDateTime(cn_);
                 Date cq_ = by_?.BirthDateElement;
-                CqlDate cr_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cq_);
-                CqlQuantity ct_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cb_);
+                CqlDate cr_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cq_);
+                CqlQuantity ct_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cb_);
                 CqlDate cu_ = context.Operators.Add(cr_, ct_);
                 Date cw_ = by_?.BirthDateElement;
-                CqlDate cx_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, cw_);
-                CqlQuantity cz_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ch_);
+                CqlDate cx_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cw_);
+                CqlQuantity cz_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate da_ = context.Operators.Add(cx_, cz_);
                 CqlDate dc_ = context.Operators.Add(da_, ck_);
                 CqlInterval<CqlDate> dd_ = context.Operators.Interval(cu_, dc_, true, false);
                 CqlDate de_ = dd_?.high;
                 CqlDateTime df_ = context.Operators.ConvertDateToDateTime(de_);
                 Date dh_ = by_?.BirthDateElement;
-                CqlDate di_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dh_);
-                CqlQuantity dk_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cb_);
+                CqlDate di_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dh_);
+                CqlQuantity dk_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cb_);
                 CqlDate dl_ = context.Operators.Add(di_, dk_);
                 Date dn_ = by_?.BirthDateElement;
-                CqlDate do_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dn_);
-                CqlQuantity dq_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ch_);
+                CqlDate do_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dn_);
+                CqlQuantity dq_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate dr_ = context.Operators.Add(do_, dq_);
                 CqlDate dt_ = context.Operators.Add(dr_, ck_);
                 CqlInterval<CqlDate> du_ = context.Operators.Interval(dl_, dt_, true, false);
                 bool? dv_ = du_?.lowClosed;
                 Date dx_ = by_?.BirthDateElement;
-                CqlDate dy_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, dx_);
-                CqlQuantity ea_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, cb_);
+                CqlDate dy_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dx_);
+                CqlQuantity ea_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cb_);
                 CqlDate eb_ = context.Operators.Add(dy_, ea_);
                 Date ed_ = by_?.BirthDateElement;
-                CqlDate ee_ = FHIRHelpers_minus_4_0_001.Instance.ToDate(context, ed_);
-                CqlQuantity eg_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, ch_);
+                CqlDate ee_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ed_);
+                CqlQuantity eg_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate eh_ = context.Operators.Add(ee_, eg_);
                 CqlDate ej_ = context.Operators.Add(eh_, ck_);
                 CqlInterval<CqlDate> ek_ = context.Operators.Interval(eb_, ej_, true, false);

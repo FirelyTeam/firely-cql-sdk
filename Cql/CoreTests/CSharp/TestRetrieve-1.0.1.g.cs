@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
-public partial class TestRetrieve_minus_1_0_1 : ILibrary, ISingleton<TestRetrieve_minus_1_0_1>
+public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
-    private TestRetrieve_minus_1_0_1() {}
+    private TestRetrieve_1_0_1() {}
 
-    public static TestRetrieve_minus_1_0_1 Instance { get; } = new();
+    public static TestRetrieve_1_0_1 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "TestRetrieve";
     public string Version => "1.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_1.Instance, TestRetrieveInclude_minus_1_0_1.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance, TestRetrieveInclude_1_0_1.Instance];
 
     #endregion ILibrary Implementation
 
@@ -87,8 +87,8 @@ public partial class TestRetrieve_minus_1_0_1 : ILibrary, ISingleton<TestRetriev
     #region CodeSystems
 
     [CqlCodeSystemDefinition("ICD-10", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
-    public CqlCodeSystem ICD_minus_10(CqlContext _) => _ICD_minus_10;
-    private static readonly CqlCodeSystem _ICD_minus_10 =
+    public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
+    private static readonly CqlCodeSystem _ICD_10 =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
           _Encounter_for_palliative_care]);
 

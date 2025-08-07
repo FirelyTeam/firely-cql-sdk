@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.001")]
-public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minus_0_1_001 : ILibrary, ISingleton<FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minus_0_1_001>
+public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001 : ILibrary, ISingleton<FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001>
 {
-    private FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minus_0_1_001() {}
+    private FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001() {}
 
-    public static FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minus_0_1_001 Instance { get; } = new();
+    public static FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR";
     public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, CQMCommon_minus_2_2_000.Instance, Hospice_minus_6_12_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance, Status_minus_1_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -236,7 +236,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string ed_ = context.Operators.Last<string>(ec_);
                 bool? ee_ = context.Operators.Equal(ea_, ed_);
                 CodeableConcept ef_ = M?.Code;
-                CqlConcept eg_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ef_);
+                CqlConcept eg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ef_);
                 CqlValueSet eh_ = this.Atomoxetine(context);
                 bool? ei_ = context.Operators.ConceptInValueSet(eg_, eh_);
                 bool? ej_ = context.Operators.And(ee_, ei_);
@@ -265,7 +265,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string es_ = context.Operators.Last<string>(er_);
                 bool? et_ = context.Operators.Equal(ep_, es_);
                 CodeableConcept eu_ = M?.Code;
-                CqlConcept ev_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, eu_);
+                CqlConcept ev_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, eu_);
                 CqlValueSet ew_ = this.Clonidine(context);
                 bool? ex_ = context.Operators.ConceptInValueSet(ev_, ew_);
                 bool? ey_ = context.Operators.And(et_, ex_);
@@ -295,7 +295,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string fh_ = context.Operators.Last<string>(fg_);
                 bool? fi_ = context.Operators.Equal(fe_, fh_);
                 CodeableConcept fj_ = M?.Code;
-                CqlConcept fk_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, fj_);
+                CqlConcept fk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fj_);
                 CqlValueSet fl_ = this.Dexmethylphenidate(context);
                 bool? fm_ = context.Operators.ConceptInValueSet(fk_, fl_);
                 bool? fn_ = context.Operators.And(fi_, fm_);
@@ -325,7 +325,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string fw_ = context.Operators.Last<string>(fv_);
                 bool? fx_ = context.Operators.Equal(ft_, fw_);
                 CodeableConcept fy_ = M?.Code;
-                CqlConcept fz_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, fy_);
+                CqlConcept fz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fy_);
                 CqlValueSet ga_ = this.Dextroamphetamine(context);
                 bool? gb_ = context.Operators.ConceptInValueSet(fz_, ga_);
                 bool? gc_ = context.Operators.And(fx_, gb_);
@@ -355,7 +355,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string gl_ = context.Operators.Last<string>(gk_);
                 bool? gm_ = context.Operators.Equal(gi_, gl_);
                 CodeableConcept gn_ = M?.Code;
-                CqlConcept go_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, gn_);
+                CqlConcept go_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gn_);
                 CqlValueSet gp_ = this.Lisdexamfetamine(context);
                 bool? gq_ = context.Operators.ConceptInValueSet(go_, gp_);
                 bool? gr_ = context.Operators.And(gm_, gq_);
@@ -386,7 +386,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string ha_ = context.Operators.Last<string>(gz_);
                 bool? hb_ = context.Operators.Equal(gx_, ha_);
                 CodeableConcept hc_ = M?.Code;
-                CqlConcept hd_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, hc_);
+                CqlConcept hd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hc_);
                 CqlCode he_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                 CqlConcept hf_ = context.Operators.ConvertCodeToConcept(he_);
                 bool? hg_ = context.Operators.Equivalent(hd_, hf_);
@@ -417,7 +417,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string hq_ = context.Operators.Last<string>(hp_);
                 bool? hr_ = context.Operators.Equal(hn_, hq_);
                 CodeableConcept hs_ = M?.Code;
-                CqlConcept ht_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, hs_);
+                CqlConcept ht_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hs_);
                 CqlValueSet hu_ = this.Methylphenidate(context);
                 bool? hv_ = context.Operators.ConceptInValueSet(ht_, hu_);
                 bool? hw_ = context.Operators.And(hr_, hv_);
@@ -447,7 +447,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string if_ = context.Operators.Last<string>(ie_);
                 bool? ig_ = context.Operators.Equal(ic_, if_);
                 CodeableConcept ih_ = M?.Code;
-                CqlConcept ii_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ih_);
+                CqlConcept ii_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ih_);
                 CqlValueSet ij_ = this.Guanfacine_Medications(context);
                 bool? ik_ = context.Operators.ConceptInValueSet(ii_, ij_);
                 bool? il_ = context.Operators.And(ig_, ik_);
@@ -464,10 +464,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         IEnumerable<MedicationRequest> bb_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, ba_);
         IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(ay_, bb_);
         IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(aw_, bc_);
-        IEnumerable<MedicationRequest> be_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, bd_);
+        IEnumerable<MedicationRequest> be_ = Status_1_8_000.Instance.isMedicationOrder(context, bd_);
         bool? bf_(MedicationRequest ADHDMedications)
         {
-            CqlInterval<CqlDate> im_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedications);
+            CqlInterval<CqlDate> im_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedications);
             CqlDate in_ = context.Operators.Start(im_);
             CqlDateTime io_ = context.Operators.ConvertDateToDateTime(in_);
             CqlInterval<CqlDateTime> ip_ = this.Intake_Period(context);
@@ -488,7 +488,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string iz_ = context.Operators.Last<string>(iy_);
                 bool? ja_ = context.Operators.Equal(iw_, iz_);
                 CodeableConcept jb_ = M?.Code;
-                CqlConcept jc_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, jb_);
+                CqlConcept jc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jb_);
                 CqlValueSet jd_ = this.Atomoxetine(context);
                 bool? je_ = context.Operators.ConceptInValueSet(jc_, jd_);
                 bool? jf_ = context.Operators.And(ja_, je_);
@@ -516,7 +516,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string jo_ = context.Operators.Last<string>(jn_);
                 bool? jp_ = context.Operators.Equal(jl_, jo_);
                 CodeableConcept jq_ = M?.Code;
-                CqlConcept jr_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, jq_);
+                CqlConcept jr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jq_);
                 CqlValueSet js_ = this.Clonidine(context);
                 bool? jt_ = context.Operators.ConceptInValueSet(jr_, js_);
                 bool? ju_ = context.Operators.And(jp_, jt_);
@@ -545,7 +545,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string kd_ = context.Operators.Last<string>(kc_);
                 bool? ke_ = context.Operators.Equal(ka_, kd_);
                 CodeableConcept kf_ = M?.Code;
-                CqlConcept kg_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, kf_);
+                CqlConcept kg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kf_);
                 CqlValueSet kh_ = this.Dexmethylphenidate(context);
                 bool? ki_ = context.Operators.ConceptInValueSet(kg_, kh_);
                 bool? kj_ = context.Operators.And(ke_, ki_);
@@ -574,7 +574,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string ks_ = context.Operators.Last<string>(kr_);
                 bool? kt_ = context.Operators.Equal(kp_, ks_);
                 CodeableConcept ku_ = M?.Code;
-                CqlConcept kv_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ku_);
+                CqlConcept kv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ku_);
                 CqlValueSet kw_ = this.Dextroamphetamine(context);
                 bool? kx_ = context.Operators.ConceptInValueSet(kv_, kw_);
                 bool? ky_ = context.Operators.And(kt_, kx_);
@@ -603,7 +603,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string lh_ = context.Operators.Last<string>(lg_);
                 bool? li_ = context.Operators.Equal(le_, lh_);
                 CodeableConcept lj_ = M?.Code;
-                CqlConcept lk_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, lj_);
+                CqlConcept lk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lj_);
                 CqlValueSet ll_ = this.Lisdexamfetamine(context);
                 bool? lm_ = context.Operators.ConceptInValueSet(lk_, ll_);
                 bool? ln_ = context.Operators.And(li_, lm_);
@@ -633,7 +633,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string lw_ = context.Operators.Last<string>(lv_);
                 bool? lx_ = context.Operators.Equal(lt_, lw_);
                 CodeableConcept ly_ = M?.Code;
-                CqlConcept lz_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ly_);
+                CqlConcept lz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ly_);
                 CqlCode ma_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                 CqlConcept mb_ = context.Operators.ConvertCodeToConcept(ma_);
                 bool? mc_ = context.Operators.Equivalent(lz_, mb_);
@@ -663,7 +663,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string mm_ = context.Operators.Last<string>(ml_);
                 bool? mn_ = context.Operators.Equal(mj_, mm_);
                 CodeableConcept mo_ = M?.Code;
-                CqlConcept mp_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, mo_);
+                CqlConcept mp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mo_);
                 CqlValueSet mq_ = this.Methylphenidate(context);
                 bool? mr_ = context.Operators.ConceptInValueSet(mp_, mq_);
                 bool? ms_ = context.Operators.And(mn_, mr_);
@@ -692,7 +692,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string nb_ = context.Operators.Last<string>(na_);
                 bool? nc_ = context.Operators.Equal(my_, nb_);
                 CodeableConcept nd_ = M?.Code;
-                CqlConcept ne_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, nd_);
+                CqlConcept ne_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, nd_);
                 CqlValueSet nf_ = this.Guanfacine_Medications(context);
                 bool? ng_ = context.Operators.ConceptInValueSet(ne_, nf_);
                 bool? nh_ = context.Operators.And(nc_, ng_);
@@ -709,10 +709,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         IEnumerable<MedicationRequest> di_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, dh_);
         IEnumerable<MedicationRequest> dj_ = context.Operators.Union<MedicationRequest>(df_, di_);
         IEnumerable<MedicationRequest> dk_ = context.Operators.Union<MedicationRequest>(dd_, dj_);
-        IEnumerable<MedicationRequest> dl_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, dk_);
+        IEnumerable<MedicationRequest> dl_ = Status_1_8_000.Instance.isMedicationOrder(context, dk_);
         bool? dm_(MedicationRequest ADHDMedications)
         {
-            CqlInterval<CqlDate> ni_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedications);
+            CqlInterval<CqlDate> ni_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedications);
             CqlDate nj_ = context.Operators.Start(ni_);
             CqlDateTime nk_ = context.Operators.ConvertDateToDateTime(nj_);
             CqlInterval<CqlDateTime> nl_ = this.Intake_Period(context);
@@ -737,7 +737,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string qe_ = context.Operators.Last<string>(qd_);
                     bool? qf_ = context.Operators.Equal(qb_, qe_);
                     CodeableConcept qg_ = M?.Code;
-                    CqlConcept qh_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, qg_);
+                    CqlConcept qh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, qg_);
                     CqlValueSet qi_ = this.Atomoxetine(context);
                     bool? qj_ = context.Operators.ConceptInValueSet(qh_, qi_);
                     bool? qk_ = context.Operators.And(qf_, qj_);
@@ -766,7 +766,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string qt_ = context.Operators.Last<string>(qs_);
                     bool? qu_ = context.Operators.Equal(qq_, qt_);
                     CodeableConcept qv_ = M?.Code;
-                    CqlConcept qw_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, qv_);
+                    CqlConcept qw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, qv_);
                     CqlValueSet qx_ = this.Clonidine(context);
                     bool? qy_ = context.Operators.ConceptInValueSet(qw_, qx_);
                     bool? qz_ = context.Operators.And(qu_, qy_);
@@ -796,7 +796,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string ri_ = context.Operators.Last<string>(rh_);
                     bool? rj_ = context.Operators.Equal(rf_, ri_);
                     CodeableConcept rk_ = M?.Code;
-                    CqlConcept rl_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, rk_);
+                    CqlConcept rl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rk_);
                     CqlValueSet rm_ = this.Dexmethylphenidate(context);
                     bool? rn_ = context.Operators.ConceptInValueSet(rl_, rm_);
                     bool? ro_ = context.Operators.And(rj_, rn_);
@@ -826,7 +826,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string rx_ = context.Operators.Last<string>(rw_);
                     bool? ry_ = context.Operators.Equal(ru_, rx_);
                     CodeableConcept rz_ = M?.Code;
-                    CqlConcept sa_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, rz_);
+                    CqlConcept sa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, rz_);
                     CqlValueSet sb_ = this.Dextroamphetamine(context);
                     bool? sc_ = context.Operators.ConceptInValueSet(sa_, sb_);
                     bool? sd_ = context.Operators.And(ry_, sc_);
@@ -856,7 +856,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string sm_ = context.Operators.Last<string>(sl_);
                     bool? sn_ = context.Operators.Equal(sj_, sm_);
                     CodeableConcept so_ = M?.Code;
-                    CqlConcept sp_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, so_);
+                    CqlConcept sp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, so_);
                     CqlValueSet sq_ = this.Lisdexamfetamine(context);
                     bool? sr_ = context.Operators.ConceptInValueSet(sp_, sq_);
                     bool? ss_ = context.Operators.And(sn_, sr_);
@@ -887,7 +887,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string tb_ = context.Operators.Last<string>(ta_);
                     bool? tc_ = context.Operators.Equal(sy_, tb_);
                     CodeableConcept td_ = M?.Code;
-                    CqlConcept te_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, td_);
+                    CqlConcept te_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, td_);
                     CqlCode tf_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                     CqlConcept tg_ = context.Operators.ConvertCodeToConcept(tf_);
                     bool? th_ = context.Operators.Equivalent(te_, tg_);
@@ -918,7 +918,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string tr_ = context.Operators.Last<string>(tq_);
                     bool? ts_ = context.Operators.Equal(to_, tr_);
                     CodeableConcept tt_ = M?.Code;
-                    CqlConcept tu_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, tt_);
+                    CqlConcept tu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, tt_);
                     CqlValueSet tv_ = this.Methylphenidate(context);
                     bool? tw_ = context.Operators.ConceptInValueSet(tu_, tv_);
                     bool? tx_ = context.Operators.And(ts_, tw_);
@@ -948,7 +948,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                     string ug_ = context.Operators.Last<string>(uf_);
                     bool? uh_ = context.Operators.Equal(ud_, ug_);
                     CodeableConcept ui_ = M?.Code;
-                    CqlConcept uj_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ui_);
+                    CqlConcept uj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ui_);
                     CqlValueSet uk_ = this.Guanfacine_Medications(context);
                     bool? ul_ = context.Operators.ConceptInValueSet(uj_, uk_);
                     bool? um_ = context.Operators.And(uh_, ul_);
@@ -965,11 +965,11 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             IEnumerable<MedicationRequest> po_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(np_, pn_);
             IEnumerable<MedicationRequest> pp_ = context.Operators.Union<MedicationRequest>(pl_, po_);
             IEnumerable<MedicationRequest> pq_ = context.Operators.Union<MedicationRequest>(pj_, pp_);
-            IEnumerable<MedicationRequest> pr_ = Status_minus_1_8_000.Instance.isMedicationActive(context, pq_);
+            IEnumerable<MedicationRequest> pr_ = Status_1_8_000.Instance.isMedicationActive(context, pq_);
             bool? ps_(MedicationRequest ActiveADHDMedication)
             {
-                CqlInterval<CqlDate> un_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ActiveADHDMedication);
-                CqlInterval<CqlDate> uo_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedicationOrder);
+                CqlInterval<CqlDate> un_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ActiveADHDMedication);
+                CqlInterval<CqlDate> uo_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ADHDMedicationOrder);
                 CqlDate up_ = context.Operators.Start(uo_);
                 CqlDateTime uq_ = context.Operators.ConvertDateToDateTime(up_);
                 CqlDate ur_ = context.Operators.DateFrom(uq_);
@@ -994,7 +994,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         IEnumerable<MedicationRequest> dq_ = context.Operators.Except<MedicationRequest>(bg_, dp_);
         (CqlTupleMetadata, CqlDate startDate)? dr_(MedicationRequest QualifyingMed)
         {
-            CqlInterval<CqlDate> va_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, QualifyingMed);
+            CqlInterval<CqlDate> va_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, QualifyingMed);
             CqlDate vb_ = context.Operators.Start(va_);
             (CqlTupleMetadata, CqlDate startDate)? vc_ = (CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW, vb_);
 
@@ -1061,7 +1061,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        IEnumerable<Encounter> l_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, k_);
+        IEnumerable<Encounter> l_ = Status_1_8_000.Instance.isEncounterPerformed(context, k_);
         bool? m_(Encounter ValidEncounters)
         {
             CqlDate o_ = this.IPSD(context);
@@ -1069,9 +1069,9 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             CqlDate q_ = context.Operators.Subtract(o_, p_);
             CqlInterval<CqlDate> s_ = context.Operators.Interval(q_, o_, true, true);
             Period t_ = ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> u_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, t_);
-            CqlInterval<CqlDateTime> v_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, u_ as object);
-            CqlInterval<CqlDate> w_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, v_);
+            CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+            CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_ as object);
+            CqlInterval<CqlDate> w_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, v_);
             bool? x_ = context.Operators.IntervalIncludesInterval<CqlDate>(s_, w_, "day");
 
             return x_;
@@ -1087,12 +1087,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     {
         CqlValueSet a_ = this.Encounter_Inpatient(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> c_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, b_);
+        IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter InpatientStay)
         {
-            Condition f_ = CQMCommon_minus_2_2_000.Instance.principalDiagnosis(context, InpatientStay);
+            Condition f_ = CQMCommon_2_2_000.Instance.principalDiagnosis(context, InpatientStay);
             CodeableConcept g_ = f_?.Code;
-            CqlConcept h_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, g_);
+            CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
             CqlValueSet i_ = this.Mental_Behavioral_and_Neurodevelopmental_Disorders(context);
             bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
 
@@ -1111,9 +1111,9 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         bool? b_(Encounter InpatientStay)
         {
             Period d_ = InpatientStay?.Period;
-            CqlInterval<CqlDateTime> e_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, d_);
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, e_ as object);
-            CqlInterval<CqlDate> g_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, f_);
+            CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, d_);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.toInterval(context, e_ as object);
+            CqlInterval<CqlDate> g_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, f_);
             CqlDate h_ = context.Operators.Start(g_);
             CqlDate i_ = this.IPSD(context);
             CqlQuantity k_ = context.Operators.Quantity(30m, "days");
@@ -1182,7 +1182,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition Narcolepsy)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Narcolepsy);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Narcolepsy);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
@@ -1199,7 +1199,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
         IEnumerable<Condition> b_ = this.Narcolepsy_Exclusion(context);
         bool? c_ = context.Operators.Exists<Condition>(b_);
         bool? d_ = context.Operators.Or(a_, c_);
@@ -1230,11 +1230,11 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             bool? am_(Encounter.LocationComponent Location)
             {
                 ResourceReference ap_ = Location?.Location;
-                Location aq_ = CQMCommon_minus_2_2_000.Instance.GetLocation(context, ap_);
+                Location aq_ = CQMCommon_2_2_000.Instance.GetLocation(context, ap_);
                 List<CodeableConcept> ar_ = aq_?.Type;
                 CqlConcept as_(CodeableConcept @this)
                 {
-                    CqlConcept aw_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                    CqlConcept aw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                     return aw_;
                 };
@@ -1281,13 +1281,13 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
-        IEnumerable<Encounter> b_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, a_);
+        IEnumerable<Encounter> b_ = Status_1_8_000.Instance.isEncounterPerformed(context, a_);
         bool? c_(Encounter ValidNumeratorEncounter)
         {
             Period e_ = ValidNumeratorEncounter?.Period;
-            CqlInterval<CqlDateTime> f_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, e_);
-            CqlInterval<CqlDateTime> g_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, f_ as object);
-            CqlInterval<CqlDate> h_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, g_);
+            CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
+            CqlInterval<CqlDateTime> g_ = QICoreCommon_2_1_000.Instance.toInterval(context, f_ as object);
+            CqlInterval<CqlDate> h_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, g_);
             CqlDate i_ = context.Operators.Start(h_);
             CqlDate j_ = this.IPSD(context);
             CqlQuantity l_ = context.Operators.Quantity(30m, "days");
@@ -1332,7 +1332,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string eq_ = context.Operators.Last<string>(ep_);
                 bool? er_ = context.Operators.Equal(en_, eq_);
                 CodeableConcept es_ = M?.Code;
-                CqlConcept et_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, es_);
+                CqlConcept et_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, es_);
                 CqlValueSet eu_ = this.Atomoxetine(context);
                 bool? ev_ = context.Operators.ConceptInValueSet(et_, eu_);
                 bool? ew_ = context.Operators.And(er_, ev_);
@@ -1348,10 +1348,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        IEnumerable<MedicationRequest> g_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, f_);
+        IEnumerable<MedicationRequest> g_ = Status_1_8_000.Instance.isMedicationOrder(context, f_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? h_(MedicationRequest AtomoxetineMed)
         {
-            CqlInterval<CqlDate> ex_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, AtomoxetineMed);
+            CqlInterval<CqlDate> ex_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, AtomoxetineMed);
             CqlDate ez_ = context.Operators.Start(ex_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? fa_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ex_, ez_);
 
@@ -1380,7 +1380,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return fe_;
         };
         IEnumerable<CqlInterval<CqlDate>> o_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(m_, n_);
-        IEnumerable<CqlInterval<CqlDate>> p_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, o_);
+        IEnumerable<CqlInterval<CqlDate>> p_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, o_);
         CqlValueSet q_ = this.Clonidine(context);
         IEnumerable<MedicationRequest> r_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> t_(MedicationRequest MR)
@@ -1394,7 +1394,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string fn_ = context.Operators.Last<string>(fm_);
                 bool? fo_ = context.Operators.Equal(fk_, fn_);
                 CodeableConcept fp_ = M?.Code;
-                CqlConcept fq_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, fp_);
+                CqlConcept fq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fp_);
                 CqlValueSet fr_ = this.Clonidine(context);
                 bool? fs_ = context.Operators.ConceptInValueSet(fq_, fr_);
                 bool? ft_ = context.Operators.And(fo_, fs_);
@@ -1410,10 +1410,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> u_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, t_);
         IEnumerable<MedicationRequest> v_ = context.Operators.Union<MedicationRequest>(r_, u_);
-        IEnumerable<MedicationRequest> w_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, v_);
+        IEnumerable<MedicationRequest> w_ = Status_1_8_000.Instance.isMedicationOrder(context, v_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? x_(MedicationRequest ClonidineMed)
         {
-            CqlInterval<CqlDate> fu_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, ClonidineMed);
+            CqlInterval<CqlDate> fu_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, ClonidineMed);
             CqlDate fw_ = context.Operators.Start(fu_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? fx_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, fu_, fw_);
 
@@ -1442,7 +1442,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return gb_;
         };
         IEnumerable<CqlInterval<CqlDate>> ae_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(ac_, ad_);
-        IEnumerable<CqlInterval<CqlDate>> af_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, ae_);
+        IEnumerable<CqlInterval<CqlDate>> af_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, ae_);
         IEnumerable<CqlInterval<CqlDate>> ag_ = context.Operators.Union<CqlInterval<CqlDate>>(p_, af_);
         CqlValueSet ah_ = this.Dexmethylphenidate(context);
         IEnumerable<MedicationRequest> ai_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1457,7 +1457,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string gk_ = context.Operators.Last<string>(gj_);
                 bool? gl_ = context.Operators.Equal(gh_, gk_);
                 CodeableConcept gm_ = M?.Code;
-                CqlConcept gn_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, gm_);
+                CqlConcept gn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gm_);
                 CqlValueSet go_ = this.Dexmethylphenidate(context);
                 bool? gp_ = context.Operators.ConceptInValueSet(gn_, go_);
                 bool? gq_ = context.Operators.And(gl_, gp_);
@@ -1473,10 +1473,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> al_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, ak_);
         IEnumerable<MedicationRequest> am_ = context.Operators.Union<MedicationRequest>(ai_, al_);
-        IEnumerable<MedicationRequest> an_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, am_);
+        IEnumerable<MedicationRequest> an_ = Status_1_8_000.Instance.isMedicationOrder(context, am_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ao_(MedicationRequest DexmethylphenidateMed)
         {
-            CqlInterval<CqlDate> gr_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, DexmethylphenidateMed);
+            CqlInterval<CqlDate> gr_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, DexmethylphenidateMed);
             CqlDate gt_ = context.Operators.Start(gr_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? gu_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, gr_, gt_);
 
@@ -1505,7 +1505,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return gy_;
         };
         IEnumerable<CqlInterval<CqlDate>> av_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(at_, au_);
-        IEnumerable<CqlInterval<CqlDate>> aw_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, av_);
+        IEnumerable<CqlInterval<CqlDate>> aw_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, av_);
         CqlValueSet ax_ = this.Dextroamphetamine(context);
         IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ba_(MedicationRequest MR)
@@ -1519,7 +1519,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string hh_ = context.Operators.Last<string>(hg_);
                 bool? hi_ = context.Operators.Equal(he_, hh_);
                 CodeableConcept hj_ = M?.Code;
-                CqlConcept hk_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, hj_);
+                CqlConcept hk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hj_);
                 CqlValueSet hl_ = this.Dextroamphetamine(context);
                 bool? hm_ = context.Operators.ConceptInValueSet(hk_, hl_);
                 bool? hn_ = context.Operators.And(hi_, hm_);
@@ -1535,10 +1535,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> bb_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, ba_);
         IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(ay_, bb_);
-        IEnumerable<MedicationRequest> bd_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, bc_);
+        IEnumerable<MedicationRequest> bd_ = Status_1_8_000.Instance.isMedicationOrder(context, bc_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? be_(MedicationRequest DextroamphetamineMed)
         {
-            CqlInterval<CqlDate> ho_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, DextroamphetamineMed);
+            CqlInterval<CqlDate> ho_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, DextroamphetamineMed);
             CqlDate hq_ = context.Operators.Start(ho_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? hr_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ho_, hq_);
 
@@ -1567,7 +1567,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return hv_;
         };
         IEnumerable<CqlInterval<CqlDate>> bl_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bj_, bk_);
-        IEnumerable<CqlInterval<CqlDate>> bm_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, bl_);
+        IEnumerable<CqlInterval<CqlDate>> bm_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, bl_);
         IEnumerable<CqlInterval<CqlDate>> bn_ = context.Operators.Union<CqlInterval<CqlDate>>(aw_, bm_);
         IEnumerable<CqlInterval<CqlDate>> bo_ = context.Operators.Union<CqlInterval<CqlDate>>(ag_, bn_);
         CqlValueSet bp_ = this.Lisdexamfetamine(context);
@@ -1583,7 +1583,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string ie_ = context.Operators.Last<string>(id_);
                 bool? if_ = context.Operators.Equal(ib_, ie_);
                 CodeableConcept ig_ = M?.Code;
-                CqlConcept ih_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ig_);
+                CqlConcept ih_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ig_);
                 CqlValueSet ii_ = this.Lisdexamfetamine(context);
                 bool? ij_ = context.Operators.ConceptInValueSet(ih_, ii_);
                 bool? ik_ = context.Operators.And(if_, ij_);
@@ -1599,10 +1599,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> bt_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, bs_);
         IEnumerable<MedicationRequest> bu_ = context.Operators.Union<MedicationRequest>(bq_, bt_);
-        IEnumerable<MedicationRequest> bv_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, bu_);
+        IEnumerable<MedicationRequest> bv_ = Status_1_8_000.Instance.isMedicationOrder(context, bu_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? bw_(MedicationRequest LisdexamfetamineMed)
         {
-            CqlInterval<CqlDate> il_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, LisdexamfetamineMed);
+            CqlInterval<CqlDate> il_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, LisdexamfetamineMed);
             CqlDate in_ = context.Operators.Start(il_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? io_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, il_, in_);
 
@@ -1631,7 +1631,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return is_;
         };
         IEnumerable<CqlInterval<CqlDate>> cd_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cb_, cc_);
-        IEnumerable<CqlInterval<CqlDate>> ce_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, cd_);
+        IEnumerable<CqlInterval<CqlDate>> ce_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, cd_);
         CqlValueSet cf_ = this.Methylphenidate(context);
         IEnumerable<MedicationRequest> cg_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ci_(MedicationRequest MR)
@@ -1645,7 +1645,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string jb_ = context.Operators.Last<string>(ja_);
                 bool? jc_ = context.Operators.Equal(iy_, jb_);
                 CodeableConcept jd_ = M?.Code;
-                CqlConcept je_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, jd_);
+                CqlConcept je_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jd_);
                 CqlValueSet jf_ = this.Methylphenidate(context);
                 bool? jg_ = context.Operators.ConceptInValueSet(je_, jf_);
                 bool? jh_ = context.Operators.And(jc_, jg_);
@@ -1661,10 +1661,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> cj_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, ci_);
         IEnumerable<MedicationRequest> ck_ = context.Operators.Union<MedicationRequest>(cg_, cj_);
-        IEnumerable<MedicationRequest> cl_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, ck_);
+        IEnumerable<MedicationRequest> cl_ = Status_1_8_000.Instance.isMedicationOrder(context, ck_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? cm_(MedicationRequest MethylphenidateMed)
         {
-            CqlInterval<CqlDate> ji_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, MethylphenidateMed);
+            CqlInterval<CqlDate> ji_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, MethylphenidateMed);
             CqlDate jk_ = context.Operators.Start(ji_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? jl_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ji_, jk_);
 
@@ -1693,7 +1693,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return jp_;
         };
         IEnumerable<CqlInterval<CqlDate>> ct_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cr_, cs_);
-        IEnumerable<CqlInterval<CqlDate>> cu_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, ct_);
+        IEnumerable<CqlInterval<CqlDate>> cu_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, ct_);
         IEnumerable<CqlInterval<CqlDate>> cv_ = context.Operators.Union<CqlInterval<CqlDate>>(ce_, cu_);
         IEnumerable<CqlInterval<CqlDate>> cw_ = context.Operators.Union<CqlInterval<CqlDate>>(bo_, cv_);
         CqlValueSet cx_ = this.Guanfacine_Medications(context);
@@ -1709,7 +1709,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string jy_ = context.Operators.Last<string>(jx_);
                 bool? jz_ = context.Operators.Equal(jv_, jy_);
                 CodeableConcept ka_ = M?.Code;
-                CqlConcept kb_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ka_);
+                CqlConcept kb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ka_);
                 CqlValueSet kc_ = this.Guanfacine_Medications(context);
                 bool? kd_ = context.Operators.ConceptInValueSet(kb_, kc_);
                 bool? ke_ = context.Operators.And(jz_, kd_);
@@ -1725,10 +1725,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> db_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, da_);
         IEnumerable<MedicationRequest> dc_ = context.Operators.Union<MedicationRequest>(cy_, db_);
-        IEnumerable<MedicationRequest> dd_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, dc_);
+        IEnumerable<MedicationRequest> dd_ = Status_1_8_000.Instance.isMedicationOrder(context, dc_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? de_(MedicationRequest GuanfacineMed)
         {
-            CqlInterval<CqlDate> kf_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, GuanfacineMed);
+            CqlInterval<CqlDate> kf_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, GuanfacineMed);
             CqlDate kh_ = context.Operators.Start(kf_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ki_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, kf_, kh_);
 
@@ -1757,7 +1757,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return km_;
         };
         IEnumerable<CqlInterval<CqlDate>> dl_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dj_, dk_);
-        IEnumerable<CqlInterval<CqlDate>> dm_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, dl_);
+        IEnumerable<CqlInterval<CqlDate>> dm_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, dl_);
         CqlCode dn_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
         IEnumerable<CqlCode> do_ = context.Operators.ToList<CqlCode>(dn_);
         IEnumerable<MedicationRequest> dp_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, do_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1772,7 +1772,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
                 string kv_ = context.Operators.Last<string>(ku_);
                 bool? kw_ = context.Operators.Equal(ks_, kv_);
                 CodeableConcept kx_ = M?.Code;
-                CqlConcept ky_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, kx_);
+                CqlConcept ky_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kx_);
                 CqlCode kz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                 CqlConcept la_ = context.Operators.ConvertCodeToConcept(kz_);
                 bool? lb_ = context.Operators.Equivalent(ky_, la_);
@@ -1789,10 +1789,10 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         };
         IEnumerable<MedicationRequest> ds_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, dr_);
         IEnumerable<MedicationRequest> dt_ = context.Operators.Union<MedicationRequest>(dp_, ds_);
-        IEnumerable<MedicationRequest> du_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, dt_);
+        IEnumerable<MedicationRequest> du_ = Status_1_8_000.Instance.isMedicationOrder(context, dt_);
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? dv_(MedicationRequest MethamphetamineMed)
         {
-            CqlInterval<CqlDate> ld_ = CumulativeMedicationDuration_minus_4_1_000.Instance.medicationRequestPeriod(context, MethamphetamineMed);
+            CqlInterval<CqlDate> ld_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, MethamphetamineMed);
             CqlDate lf_ = context.Operators.Start(ld_);
             (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? lg_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ld_, lf_);
 
@@ -1821,7 +1821,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
             return lk_;
         };
         IEnumerable<CqlInterval<CqlDate>> ec_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(ea_, eb_);
-        IEnumerable<CqlInterval<CqlDate>> ed_ = CumulativeMedicationDuration_minus_4_1_000.Instance.rolloutIntervals(context, ec_);
+        IEnumerable<CqlInterval<CqlDate>> ed_ = CumulativeMedicationDuration_4_1_000.Instance.rolloutIntervals(context, ec_);
         IEnumerable<CqlInterval<CqlDate>> ee_ = context.Operators.Union<CqlInterval<CqlDate>>(dm_, ed_);
         IEnumerable<CqlInterval<CqlDate>> ef_ = context.Operators.Union<CqlInterval<CqlDate>>(cw_, ee_);
         CqlInterval<CqlDate> eg_(CqlInterval<CqlDate> ADHDMedication)
@@ -1844,7 +1844,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context)
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(context);
-        int? b_ = CumulativeMedicationDuration_minus_4_1_000.Instance.cumulativeDuration(context, a_);
+        int? b_ = CumulativeMedicationDuration_4_1_000.Instance.cumulativeDuration(context, a_);
 
         return b_;
     }
@@ -1867,9 +1867,9 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         bool? b_(Encounter InpatientStay)
         {
             Period d_ = InpatientStay?.Period;
-            CqlInterval<CqlDateTime> e_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, d_);
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, e_ as object);
-            CqlInterval<CqlDate> g_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, f_);
+            CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, d_);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.toInterval(context, e_ as object);
+            CqlInterval<CqlDate> g_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, f_);
             CqlDate h_ = context.Operators.Start(g_);
             CqlDate i_ = this.IPSD(context);
             CqlQuantity k_ = context.Operators.Quantity(300m, "days");
@@ -1937,13 +1937,13 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
-        IEnumerable<Encounter> b_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, a_);
+        IEnumerable<Encounter> b_ = Status_1_8_000.Instance.isEncounterPerformed(context, a_);
         bool? c_(Encounter ValidNumeratorEncounter)
         {
             Period h_ = ValidNumeratorEncounter?.Period;
-            CqlInterval<CqlDateTime> i_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, h_);
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, i_ as object);
-            CqlInterval<CqlDate> k_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, j_);
+            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.toInterval(context, i_ as object);
+            CqlInterval<CqlDate> k_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, j_);
             CqlDate l_ = context.Operators.Start(k_);
             CqlDate m_ = this.IPSD(context);
             CqlQuantity n_ = context.Operators.Quantity(31m, "days");
@@ -1959,7 +1959,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         CqlDate e_(Encounter ValidNumeratorEncounter)
         {
             Period u_ = ValidNumeratorEncounter?.Period;
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, u_);
+            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
             CqlDateTime w_ = context.Operators.Start(v_);
             CqlDate x_ = context.Operators.DateFrom(w_);
 
@@ -1988,13 +1988,13 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     {
         CqlValueSet a_ = this.Virtual_Encounter(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> c_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, b_);
+        IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter VirtualEnc)
         {
             Period i_ = VirtualEnc?.Period;
-            CqlInterval<CqlDateTime> j_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, i_);
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, j_ as object);
-            CqlInterval<CqlDate> l_ = CQMCommon_minus_2_2_000.Instance.ToDateInterval(context, k_);
+            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_ as object);
+            CqlInterval<CqlDate> l_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, k_);
             CqlDate m_ = context.Operators.Start(l_);
             CqlDate n_ = this.IPSD(context);
             CqlQuantity o_ = context.Operators.Quantity(31m, "days");
@@ -2010,7 +2010,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
         CqlDate f_(Encounter VirtualEnc)
         {
             Period v_ = VirtualEnc?.Period;
-            CqlInterval<CqlDateTime> w_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, v_);
+            CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
 
@@ -2063,7 +2063,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -2072,7 +2072,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -2081,7 +2081,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -2090,7 +2090,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_minu
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

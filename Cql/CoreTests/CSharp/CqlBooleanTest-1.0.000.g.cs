@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
-public partial class CqlBooleanTest_minus_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_minus_1_0_000>
+public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
-    private CqlBooleanTest_minus_1_0_000() {}
+    private CqlBooleanTest_1_0_000() {}
 
-    public static CqlBooleanTest_minus_1_0_000 Instance { get; } = new();
+    public static CqlBooleanTest_1_0_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 

@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("PalliativeCare", "1.11.000")]
-public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<PalliativeCare_minus_1_11_000>
+public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCare_1_11_000>
 {
-    private PalliativeCare_minus_1_11_000() {}
+    private PalliativeCare_1_11_000() {}
 
-    public static PalliativeCare_minus_1_11_000 Instance { get; } = new();
+    public static PalliativeCare_1_11_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "PalliativeCare";
     public string Version => "1.11.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, QICoreCommon_minus_2_1_000.Instance, Status_minus_1_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -47,8 +47,8 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
     #region Codes
 
     [CqlCodeDefinition("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)", codeId: "71007-9", codeSystem: "http://loinc.org")]
-    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_;
-    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_ = new CqlCode("71007-9", "http://loinc.org");
+    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
+    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
 
     #endregion Codes
 
@@ -58,7 +58,7 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
-          _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_]);
+          _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_]);
 
     #endregion CodeSystems
 
@@ -90,15 +90,15 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
     [CqlExpressionDefinition("Has Palliative Care in the Measurement Period")]
     public bool? Has_Palliative_Care_in_the_Measurement_Period(CqlContext context)
     {
-        CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_(context);
+        CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-        IEnumerable<Observation> d_ = Status_minus_1_8_000.Instance.isAssessmentPerformed(context, c_);
+        IEnumerable<Observation> d_ = Status_1_8_000.Instance.isAssessmentPerformed(context, c_);
         bool? e_(Observation PalliativeAssessment)
         {
             DataType ab_ = PalliativeAssessment?.Effective;
-            object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
-            CqlInterval<CqlDateTime> ad_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ac_);
+            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+            CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_1_000.Instance.toInterval(context, ac_);
             CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
             bool? af_ = context.Operators.Overlaps(ad_, ae_, "day");
 
@@ -110,7 +110,7 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? j_(Condition PalliativeDiagnosis)
         {
-            CqlInterval<CqlDateTime> ag_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
+            CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
             CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
             bool? ai_ = context.Operators.Overlaps(ag_, ah_, "day");
 
@@ -121,12 +121,12 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
         bool? m_ = context.Operators.Or(g_, l_);
         CqlValueSet n_ = this.Palliative_Care_Encounter(context);
         IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> p_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, o_);
+        IEnumerable<Encounter> p_ = Status_1_8_000.Instance.isEncounterPerformed(context, o_);
         bool? q_(Encounter PalliativeEncounter)
         {
             Period aj_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
             CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
             bool? an_ = context.Operators.Overlaps(al_, am_, "day");
 
@@ -137,12 +137,12 @@ public partial class PalliativeCare_minus_1_11_000 : ILibrary, ISingleton<Pallia
         bool? t_ = context.Operators.Or(m_, s_);
         CqlValueSet u_ = this.Palliative_Care_Intervention(context);
         IEnumerable<Procedure> v_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> w_ = Status_minus_1_8_000.Instance.isInterventionPerformed(context, v_);
+        IEnumerable<Procedure> w_ = Status_1_8_000.Instance.isInterventionPerformed(context, v_);
         bool? x_(Procedure PalliativeIntervention)
         {
             DataType ao_ = PalliativeIntervention?.Performed;
-            object ap_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ao_);
-            CqlInterval<CqlDateTime> aq_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ap_);
+            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+            CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_1_000.Instance.toInterval(context, ap_);
             CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
             bool? as_ = context.Operators.Overlaps(aq_, ar_, "day");
 

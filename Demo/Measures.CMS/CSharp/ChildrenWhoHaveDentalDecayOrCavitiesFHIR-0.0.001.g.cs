@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ChildrenWhoHaveDentalDecayOrCavitiesFHIR", "0.0.001")]
-public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : ILibrary, ISingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001>
+public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary, ISingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>
 {
-    private ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001() {}
+    private ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001() {}
 
-    public static ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 Instance { get; } = new();
+    public static ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ChildrenWhoHaveDentalDecayOrCavitiesFHIR";
     public string Version => "0.0.001";
-    public ILibrary[] Dependencies => [QICoreCommon_minus_2_1_000.Instance, FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Hospice_minus_6_12_000.Instance, Status_minus_1_8_000.Instance];
+    public ILibrary[] Dependencies => [QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -123,13 +123,13 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     {
         CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> c_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, b_);
+        IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter ValidEncounter)
         {
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             Period g_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> h_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, h_ as object);
+            CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.toInterval(context, h_ as object);
             bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
             return j_;
@@ -173,7 +173,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
 
         return a_;
     }
@@ -186,7 +186,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition DentalCaries)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, DentalCaries);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, DentalCaries);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
@@ -202,7 +202,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -211,7 +211,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -220,7 +220,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -229,7 +229,7 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_minus_0_0_001 : IL
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

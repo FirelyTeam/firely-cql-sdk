@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("Cataracts2040BCVAwithin90DaysFHIR", "0.1.000")]
-public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary, ISingleton<Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000>
+public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>
 {
-    private Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000() {}
+    private Cataracts2040BCVAwithin90DaysFHIR_0_1_000() {}
 
-    public static Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 Instance { get; } = new();
+    public static Cataracts2040BCVAwithin90DaysFHIR_0_1_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "Cataracts2040BCVAwithin90DaysFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -319,11 +319,11 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
         {
             CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
             DataType f_ = CataractSurgery?.Performed;
-            object g_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, g_);
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, default);
-            object k_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, k_);
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.toInterval(context, k_);
             CqlDateTime m_ = context.Operators.Start(l_);
             CqlDateTime o_ = context.Operators.End(e_);
             CqlQuantity p_ = context.Operators.Quantity(92m, "days");
@@ -549,12 +549,12 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
             IEnumerable<Condition> fk_ = context.Operators.Union<Condition>(fh_, fj_);
             bool? fl_(Condition ComorbidDiagnosis)
             {
-                CqlInterval<CqlDateTime> fp_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ComorbidDiagnosis);
+                CqlInterval<CqlDateTime> fp_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ComorbidDiagnosis);
                 DataType fq_ = CataractSurgeryPerformed?.Performed;
-                object fr_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, fq_);
-                CqlInterval<CqlDateTime> fs_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, fr_);
+                object fr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fq_);
+                CqlInterval<CqlDateTime> fs_ = QICoreCommon_2_1_000.Instance.toInterval(context, fr_);
                 bool? ft_ = context.Operators.OverlapsBefore(fp_, fs_, default);
-                bool? fu_ = QICoreCommon_minus_2_1_000.Instance.isActive(context, ComorbidDiagnosis);
+                bool? fu_ = QICoreCommon_2_1_000.Instance.isActive(context, ComorbidDiagnosis);
                 bool? fv_ = context.Operators.And(ft_, fu_);
 
                 return fv_;
@@ -587,22 +587,22 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
             bool? j_(Observation VisualAcuityExamPerformed)
             {
                 DataType n_ = VisualAcuityExamPerformed?.Effective;
-                object o_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, o_);
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 DataType r_ = CataractSurgeryPerformed?.Performed;
-                object s_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> t_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, s_);
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
                 CqlDateTime u_ = context.Operators.End(t_);
-                object w_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, w_);
+                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
                 CqlDateTime y_ = context.Operators.End(x_);
                 CqlQuantity z_ = context.Operators.Quantity(90m, "days");
                 CqlDateTime aa_ = context.Operators.Add(y_, z_);
                 CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(u_, aa_, false, true);
                 bool? ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
-                object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> af_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ae_);
+                object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_);
                 CqlDateTime ag_ = context.Operators.End(af_);
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
                 bool? ai_ = context.Operators.And(ac_, ah_);
@@ -619,7 +619,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
                 bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
                 bool? ap_ = context.Operators.And(ai_, ao_);
                 DataType aq_ = VisualAcuityExamPerformed?.Value;
-                object ar_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aq_);
+                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                 CqlValueSet as_ = this.Visual_Acuity_20_40_or_Better(context);
                 bool? at_ = context.Operators.ConceptInValueSet(ar_ as CqlConcept, as_);
                 bool? au_ = context.Operators.And(ap_, at_);
@@ -642,7 +642,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -651,7 +651,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -660,7 +660,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -669,7 +669,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_minus_0_1_000 : ILibrary,
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

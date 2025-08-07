@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
-public partial class NCQACQLBase_minus_1_0_0 : ILibrary, ISingleton<NCQACQLBase_minus_1_0_0>
+public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 {
-    private NCQACQLBase_minus_1_0_0() {}
+    private NCQACQLBase_1_0_0() {}
 
-    public static NCQACQLBase_minus_1_0_0 Instance { get; } = new();
+    public static NCQACQLBase_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 

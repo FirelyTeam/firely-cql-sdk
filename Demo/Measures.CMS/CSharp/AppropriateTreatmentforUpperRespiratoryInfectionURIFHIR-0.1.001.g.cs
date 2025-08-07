@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR", "0.1.001")]
-public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_minus_0_1_001 : ILibrary, ISingleton<AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_minus_0_1_001>
+public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001 : ILibrary, ISingleton<AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001>
 {
-    private AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_minus_0_1_001() {}
+    private AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001() {}
 
-    public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_minus_0_1_001 Instance { get; } = new();
+    public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
     public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Hospice_minus_6_12_000.Instance, Status_minus_1_8_000.Instance, QICoreCommon_minus_2_1_000.Instance, Antibiotic_minus_1_7_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -157,7 +157,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -166,7 +166,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -175,7 +175,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -184,7 +184,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -236,7 +236,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
             List<CodeableConcept> at_ = E?.Type;
             CqlConcept au_(CodeableConcept @this)
             {
-                CqlConcept az_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return az_;
             };
@@ -257,12 +257,12 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         IEnumerable<Encounter> an_ = context.Operators.Where<Encounter>(al_, am_);
         IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(ak_, an_);
         IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(ai_, ao_);
-        IEnumerable<Encounter> aq_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, ap_);
+        IEnumerable<Encounter> aq_ = Status_1_8_000.Instance.isEncounterPerformed(context, ap_);
         bool? ar_(Encounter ValidEncounter)
         {
             Period bd_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> be_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bd_);
-            CqlInterval<CqlDateTime> bf_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, be_ as object);
+            CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+            CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_1_000.Instance.toInterval(context, be_ as object);
             CqlDateTime bg_ = context.Operators.End(bf_);
             CqlInterval<CqlDateTime> bh_ = this.Measurement_Period(context);
             CqlDateTime bi_ = context.Operators.Start(bh_);
@@ -296,14 +296,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce)
         {
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
             CqlDateTime n_ = context.Operators.Start(m_);
             Period o_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
-            CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
-            CqlInterval<CqlDateTime> q_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, p_ as object);
+            CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+            CqlInterval<CqlDateTime> q_ = QICoreCommon_2_1_000.Instance.toInterval(context, p_ as object);
             bool? r_ = context.Operators.In<CqlDateTime>(n_, q_, "day");
-            CqlInterval<CqlDateTime> u_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
-            CqlInterval<CqlDateTime> v_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, u_ as object);
+            CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+            CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_ as object);
             bool? w_ = context.Operators.OverlapsBefore(m_, v_, default);
             bool? x_ = context.Operators.Or(r_, w_);
 
@@ -353,7 +353,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         IEnumerable<Encounter> a_ = this.Initial_Population(context);
         bool? b_(Encounter EligibleEncounters)
         {
-            bool? d_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
+            bool? d_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
 
             return d_;
         };
@@ -379,7 +379,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         IEnumerable<Encounter> b_ = this.Encounter_with_Upper_Respiratory_Infection(context);
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        IEnumerable<Encounter> e_ = Antibiotic_minus_1_7_000.Instance.Has_Comorbid_Condition_History(context, b_, d_);
+        IEnumerable<Encounter> e_ = Antibiotic_1_7_000.Instance.Has_Comorbid_Condition_History(context, b_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(a_, e_);
         CqlValueSet h_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
         IEnumerable<MedicationRequest> i_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -395,7 +395,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
                 string ai_ = context.Operators.Last<string>(ah_);
                 bool? aj_ = context.Operators.Equal(af_, ai_);
                 CodeableConcept ak_ = M?.Code;
-                CqlConcept al_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ak_);
+                CqlConcept al_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ak_);
                 CqlValueSet am_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                 bool? an_ = context.Operators.ConceptInValueSet(al_, am_);
                 bool? ao_ = context.Operators.And(aj_, an_);
@@ -411,7 +411,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         };
         IEnumerable<MedicationRequest> l_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(j_, k_);
         IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(i_, l_);
-        IEnumerable<Encounter> n_ = Antibiotic_minus_1_7_000.Instance.Has_Antibiotic_Medication_History(context, b_, m_);
+        IEnumerable<Encounter> n_ = Antibiotic_1_7_000.Instance.Has_Antibiotic_Medication_History(context, b_, m_);
         CqlValueSet p_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         CqlValueSet r_ = this.Acute_Pharyngitis(context);
@@ -420,7 +420,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
         CqlValueSet u_ = this.Acute_Tonsillitis(context);
         IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         IEnumerable<Condition> w_ = context.Operators.Union<Condition>(t_, v_);
-        IEnumerable<Encounter> x_ = Antibiotic_minus_1_7_000.Instance.Has_Competing_Diagnosis_History(context, b_, w_);
+        IEnumerable<Encounter> x_ = Antibiotic_1_7_000.Instance.Has_Competing_Diagnosis_History(context, b_, w_);
         IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(n_, x_);
         IEnumerable<Encounter> z_ = context.Operators.Union<Encounter>(f_, y_);
 
@@ -448,7 +448,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
                     string ab_ = context.Operators.Last<string>(aa_);
                     bool? ac_ = context.Operators.Equal(y_, ab_);
                     CodeableConcept ad_ = M?.Code;
-                    CqlConcept ae_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ad_);
+                    CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
                     CqlValueSet af_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                     bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
                     bool? ah_ = context.Operators.And(ac_, ag_);
@@ -464,24 +464,24 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_min
             };
             IEnumerable<MedicationRequest> m_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(k_, l_);
             IEnumerable<MedicationRequest> n_ = context.Operators.Union<MedicationRequest>(j_, m_);
-            IEnumerable<MedicationRequest> o_ = Status_minus_1_8_000.Instance.isMedicationOrder(context, n_);
+            IEnumerable<MedicationRequest> o_ = Status_1_8_000.Instance.isMedicationOrder(context, n_);
             bool? p_(MedicationRequest OrderedAntibiotic)
             {
                 FhirDateTime ai_ = OrderedAntibiotic?.AuthoredOnElement;
                 CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
                 Period ak_ = EncounterWithURI?.Period;
-                CqlInterval<CqlDateTime> al_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ak_);
-                CqlInterval<CqlDateTime> am_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, al_ as object);
+                CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
+                CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_ as object);
                 CqlDateTime an_ = context.Operators.Start(am_);
-                CqlInterval<CqlDateTime> ap_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ak_);
-                CqlInterval<CqlDateTime> aq_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ap_ as object);
+                CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
+                CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_1_000.Instance.toInterval(context, ap_ as object);
                 CqlDateTime ar_ = context.Operators.Start(aq_);
                 CqlQuantity as_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime at_ = context.Operators.Add(ar_, as_);
                 CqlInterval<CqlDateTime> au_ = context.Operators.Interval(an_, at_, true, true);
                 bool? av_ = context.Operators.In<CqlDateTime>(aj_, au_, default);
-                CqlInterval<CqlDateTime> ax_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ak_);
-                CqlInterval<CqlDateTime> ay_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ax_ as object);
+                CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
+                CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_1_000.Instance.toInterval(context, ax_ as object);
                 CqlDateTime az_ = context.Operators.Start(ay_);
                 bool? ba_ = context.Operators.Not((bool?)(az_ is null));
                 bool? bb_ = context.Operators.And(av_, ba_);

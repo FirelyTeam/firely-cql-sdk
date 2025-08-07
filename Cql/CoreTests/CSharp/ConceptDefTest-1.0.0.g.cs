@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ConceptDefTest", "1.0.0")]
-public partial class ConceptDefTest_minus_1_0_0 : ILibrary, ISingleton<ConceptDefTest_minus_1_0_0>
+public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_1_0_0>
 {
-    private ConceptDefTest_minus_1_0_0() {}
+    private ConceptDefTest_1_0_0() {}
 
-    public static ConceptDefTest_minus_1_0_0 Instance { get; } = new();
+    public static ConceptDefTest_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ConceptDefTest";
     public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_1.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
 
     #endregion ILibrary Implementation
 

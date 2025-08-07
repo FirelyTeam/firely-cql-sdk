@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("CqlNestedTupleTest", "1.0.0")]
-public partial class CqlNestedTupleTest_minus_1_0_0 : ILibrary, ISingleton<CqlNestedTupleTest_minus_1_0_0>
+public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTupleTest_1_0_0>
 {
-    private CqlNestedTupleTest_minus_1_0_0() {}
+    private CqlNestedTupleTest_1_0_0() {}
 
-    public static CqlNestedTupleTest_minus_1_0_0 Instance { get; } = new();
+    public static CqlNestedTupleTest_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 

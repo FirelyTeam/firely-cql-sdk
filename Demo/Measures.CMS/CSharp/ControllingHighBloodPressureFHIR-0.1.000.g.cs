@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ControllingHighBloodPressureFHIR", "0.1.000")]
-public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, ISingleton<ControllingHighBloodPressureFHIR_minus_0_1_000>
+public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingleton<ControllingHighBloodPressureFHIR_0_1_000>
 {
-    private ControllingHighBloodPressureFHIR_minus_0_1_000() {}
+    private ControllingHighBloodPressureFHIR_0_1_000() {}
 
-    public static ControllingHighBloodPressureFHIR_minus_0_1_000 Instance { get; } = new();
+    public static ControllingHighBloodPressureFHIR_0_1_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ControllingHighBloodPressureFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, QICoreCommon_minus_2_1_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Status_minus_1_8_000.Instance, AdvancedIllnessandFrailty_minus_1_16_000.Instance, AdultOutpatientEncounters_minus_4_11_000.Instance, Hospice_minus_6_12_000.Instance, PalliativeCare_minus_1_11_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -130,7 +130,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition Hypertension)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Hypertension);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Hypertension);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlDateTime i_ = context.Operators.Start(f_);
@@ -163,7 +163,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         IEnumerable<Condition> k_ = this.Essential_Hypertension_Diagnosis(context);
         bool? l_ = context.Operators.Exists<Condition>(k_);
         bool? m_ = context.Operators.And(j_, l_);
-        IEnumerable<Encounter> n_ = AdultOutpatientEncounters_minus_4_11_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> n_ = AdultOutpatientEncounters_4_11_000.Instance.Qualifying_Encounters(context);
         bool? o_ = context.Operators.Exists<Encounter>(n_);
         bool? p_ = context.Operators.And(m_, o_);
 
@@ -196,7 +196,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         IEnumerable<Condition> k_ = context.Operators.Union<Condition>(e_, j_);
         bool? l_(Condition PregnancyESRDDiagnosis)
         {
-            CqlInterval<CqlDateTime> n_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             bool? p_ = context.Operators.Overlaps(n_, o_, default);
 
@@ -216,12 +216,12 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         CqlValueSet c_ = this.Dialysis_Services(context);
         IEnumerable<Procedure> d_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure> e_ = context.Operators.Union<Procedure>(b_, d_);
-        IEnumerable<Procedure> f_ = Status_minus_1_8_000.Instance.isProcedurePerformed(context, e_);
+        IEnumerable<Procedure> f_ = Status_1_8_000.Instance.isProcedurePerformed(context, e_);
         bool? g_(Procedure ESRDProcedure)
         {
             DataType i_ = ESRDProcedure?.Performed;
-            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, j_);
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_);
             CqlDateTime l_ = context.Operators.End(k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             CqlDateTime n_ = context.Operators.End(m_);
@@ -240,12 +240,12 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     {
         CqlValueSet a_ = this.ESRD_Monthly_Outpatient_Services(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> c_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, b_);
+        IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter ESRDEncounter)
         {
             Period f_ = ESRDEncounter?.Period;
-            CqlInterval<CqlDateTime> g_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, g_ as object);
+            CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.toInterval(context, g_ as object);
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.End(j_);
@@ -262,7 +262,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
         IEnumerable<Condition> b_ = this.Pregnancy_or_Renal_Diagnosis(context);
         bool? c_ = context.Operators.Exists<Condition>(b_);
         bool? d_ = context.Operators.Or(a_, c_);
@@ -272,11 +272,11 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         IEnumerable<Encounter> h_ = this.End_Stage_Renal_Disease_Encounter(context);
         bool? i_ = context.Operators.Exists<Encounter>(h_);
         bool? j_ = context.Operators.Or(g_, i_);
-        bool? k_ = AdvancedIllnessandFrailty_minus_1_16_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
+        bool? k_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
         bool? l_ = context.Operators.Or(j_, k_);
-        bool? m_ = AdvancedIllnessandFrailty_minus_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+        bool? m_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
         bool? n_ = context.Operators.Or(l_, m_);
-        bool? o_ = PalliativeCare_minus_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? o_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
         bool? p_ = context.Operators.Or(n_, o_);
 
         return p_;
@@ -293,7 +293,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             string f_ = e_?.Value;
             FhirString g_ = reference?.ReferenceElement;
             string h_ = g_?.Value;
-            string i_ = QICoreCommon_minus_2_1_000.Instance.getId(context, h_);
+            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
             bool? j_ = context.Operators.Equal(f_, i_);
 
             return j_;
@@ -309,13 +309,13 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     public IEnumerable<Observation> Qualifying_Systolic_Blood_Pressure_Reading(CqlContext context)
     {
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
-        IEnumerable<Observation> b_ = Status_minus_1_8_000.Instance.isObservationBP(context, a_);
+        IEnumerable<Observation> b_ = Status_1_8_000.Instance.isObservationBP(context, a_);
         bool? c_(Observation BloodPressure)
         {
             ResourceReference e_ = BloodPressure?.Encounter;
             Encounter f_ = this.getEncounter(context, e_);
             Coding g_ = f_?.Class;
-            CqlCode h_ = FHIRHelpers_minus_4_4_000.Instance.ToCode(context, g_);
+            CqlCode h_ = FHIRHelpers_4_4_000.Instance.ToCode(context, g_);
             string i_ = h_?.code;
             string[] j_ = [
                 "EMER",
@@ -328,8 +328,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
             bool? l_ = context.Operators.Not(k_);
             DataType m_ = BloodPressure?.Effective;
-            object n_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, m_);
-            CqlDateTime o_ = QICoreCommon_minus_2_1_000.Instance.latest(context, n_);
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlDateTime o_ = QICoreCommon_2_1_000.Instance.latest(context, n_);
             CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
             bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
             bool? r_ = context.Operators.And(l_, q_);
@@ -346,13 +346,13 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     public IEnumerable<Observation> Qualifying_Diastolic_Blood_Pressure_Reading(CqlContext context)
     {
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
-        IEnumerable<Observation> b_ = Status_minus_1_8_000.Instance.isObservationBP(context, a_);
+        IEnumerable<Observation> b_ = Status_1_8_000.Instance.isObservationBP(context, a_);
         bool? c_(Observation BloodPressure)
         {
             ResourceReference e_ = BloodPressure?.Encounter;
             Encounter f_ = this.getEncounter(context, e_);
             Coding g_ = f_?.Class;
-            CqlCode h_ = FHIRHelpers_minus_4_4_000.Instance.ToCode(context, g_);
+            CqlCode h_ = FHIRHelpers_4_4_000.Instance.ToCode(context, g_);
             string i_ = h_?.code;
             string[] j_ = [
                 "EMER",
@@ -365,8 +365,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
             bool? l_ = context.Operators.Not(k_);
             DataType m_ = BloodPressure?.Effective;
-            object n_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, m_);
-            CqlDateTime o_ = QICoreCommon_minus_2_1_000.Instance.latest(context, n_);
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlDateTime o_ = QICoreCommon_2_1_000.Instance.latest(context, n_);
             CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
             bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
             bool? r_ = context.Operators.And(l_, q_);
@@ -386,8 +386,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         CqlDate b_(Observation DBPExam)
         {
             DataType j_ = DBPExam?.Effective;
-            object k_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, j_);
-            CqlDateTime l_ = QICoreCommon_minus_2_1_000.Instance.latest(context, k_);
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            CqlDateTime l_ = QICoreCommon_2_1_000.Instance.latest(context, k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
 
             return m_;
@@ -398,8 +398,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         CqlDate f_(Observation SBPExam)
         {
             DataType n_ = SBPExam?.Effective;
-            object o_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, n_);
-            CqlDateTime p_ = QICoreCommon_minus_2_1_000.Instance.latest(context, o_);
+            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+            CqlDateTime p_ = QICoreCommon_2_1_000.Instance.latest(context, o_);
             CqlDate q_ = context.Operators.DateFrom(p_);
 
             return q_;
@@ -430,8 +430,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         bool? b_(Observation SBPReading)
         {
             DataType i_ = SBPReading?.Effective;
-            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
-            CqlDateTime k_ = QICoreCommon_minus_2_1_000.Instance.latest(context, j_);
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            CqlDateTime k_ = QICoreCommon_2_1_000.Instance.latest(context, j_);
             CqlDate l_ = this.Most_Recent_Blood_Pressure_Day(context);
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
             bool? n_ = context.Operators.SameAs(k_, m_, "day");
@@ -445,7 +445,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             bool? p_(Observation.ComponentComponent SBPComponent)
             {
                 CodeableConcept v_ = SBPComponent?.Code;
-                CqlConcept w_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, v_);
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = this.Systolic_blood_pressure(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
@@ -456,7 +456,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             CqlQuantity r_(Observation.ComponentComponent SBPComponent)
             {
                 DataType aa_ = SBPComponent?.Value;
-                object ab_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aa_);
+                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
 
                 return ab_ as CqlQuantity;
             };
@@ -493,8 +493,8 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
         bool? b_(Observation DBPReading)
         {
             DataType i_ = DBPReading?.Effective;
-            object j_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, i_);
-            CqlDateTime k_ = QICoreCommon_minus_2_1_000.Instance.latest(context, j_);
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            CqlDateTime k_ = QICoreCommon_2_1_000.Instance.latest(context, j_);
             CqlDate l_ = this.Most_Recent_Blood_Pressure_Day(context);
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
             bool? n_ = context.Operators.SameAs(k_, m_, "day");
@@ -508,7 +508,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             bool? p_(Observation.ComponentComponent DBPComponent)
             {
                 CodeableConcept v_ = DBPComponent?.Code;
-                CqlConcept w_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, v_);
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = this.Diastolic_blood_pressure(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
@@ -519,7 +519,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
             CqlQuantity r_(Observation.ComponentComponent DBPComponent)
             {
                 DataType aa_ = DBPComponent?.Value;
-                object ab_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aa_);
+                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
 
                 return ab_ as CqlQuantity;
             };
@@ -563,7 +563,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -572,7 +572,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -581,7 +581,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -590,7 +590,7 @@ public partial class ControllingHighBloodPressureFHIR_minus_0_1_000 : ILibrary, 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
-public partial class TestRetrieveInclude_minus_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_minus_1_0_1>
+public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
-    private TestRetrieveInclude_minus_1_0_1() {}
+    private TestRetrieveInclude_1_0_1() {}
 
-    public static TestRetrieveInclude_minus_1_0_1 Instance { get; } = new();
+    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
 
     #region ILibrary Implementation
 

@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
-public partial class ValueSetExprExample_minus_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_minus_1_0_0>
+public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
-    private ValueSetExprExample_minus_1_0_0() {}
+    private ValueSetExprExample_1_0_0() {}
 
-    public static ValueSetExprExample_minus_1_0_0 Instance { get; } = new();
+    public static ValueSetExprExample_1_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
@@ -31,20 +31,20 @@ public partial class ValueSetExprExample_minus_1_0_0 : ILibrary, ISingleton<Valu
     #region ValueSets
 
     [CqlValueSetDefinition("ValueSet-A-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-1", valueSetVersion: null)]
-    public CqlValueSet ValueSet_minus_A_minus_1(CqlContext _) => _ValueSet_minus_A_minus_1;
-    private static readonly CqlValueSet _ValueSet_minus_A_minus_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", null);
+    public CqlValueSet ValueSet_A_1(CqlContext _) => _ValueSet_A_1;
+    private static readonly CqlValueSet _ValueSet_A_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", null);
 
     [CqlValueSetDefinition("ValueSet-A-2", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-2", valueSetVersion: null)]
-    public CqlValueSet ValueSet_minus_A_minus_2(CqlContext _) => _ValueSet_minus_A_minus_2;
-    private static readonly CqlValueSet _ValueSet_minus_A_minus_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", null);
+    public CqlValueSet ValueSet_A_2(CqlContext _) => _ValueSet_A_2;
+    private static readonly CqlValueSet _ValueSet_A_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", null);
 
     [CqlValueSetDefinition("ValueSet-B-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-B-1", valueSetVersion: null)]
-    public CqlValueSet ValueSet_minus_B_minus_1(CqlContext _) => _ValueSet_minus_B_minus_1;
-    private static readonly CqlValueSet _ValueSet_minus_B_minus_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", null);
+    public CqlValueSet ValueSet_B_1(CqlContext _) => _ValueSet_B_1;
+    private static readonly CqlValueSet _ValueSet_B_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", null);
 
     [CqlValueSetDefinition("ValueSet-B-2", valueSetId: "http://fire.ly/ValueSet/ValueSet-B-2", valueSetVersion: null)]
-    public CqlValueSet ValueSet_minus_B_minus_2(CqlContext _) => _ValueSet_minus_B_minus_2;
-    private static readonly CqlValueSet _ValueSet_minus_B_minus_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", null);
+    public CqlValueSet ValueSet_B_2(CqlContext _) => _ValueSet_B_2;
+    private static readonly CqlValueSet _ValueSet_B_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", null);
 
     #endregion ValueSets
 
@@ -93,13 +93,13 @@ public partial class ValueSetExprExample_minus_1_0_0 : ILibrary, ISingleton<Valu
             };
             if (b_())
             {
-                CqlValueSet h_ = this.ValueSet_minus_A_minus_1(context);
+                CqlValueSet h_ = this.ValueSet_A_1(context);
 
                 return h_;
             }
             else if (c_())
             {
-                CqlValueSet i_ = this.ValueSet_minus_A_minus_2(context);
+                CqlValueSet i_ = this.ValueSet_A_2(context);
 
                 return i_;
             }
@@ -134,13 +134,13 @@ public partial class ValueSetExprExample_minus_1_0_0 : ILibrary, ISingleton<Valu
             };
             if (b_())
             {
-                CqlValueSet h_ = this.ValueSet_minus_B_minus_1(context);
+                CqlValueSet h_ = this.ValueSet_B_1(context);
 
                 return h_;
             }
             else if (c_())
             {
-                CqlValueSet i_ = this.ValueSet_minus_B_minus_2(context);
+                CqlValueSet i_ = this.ValueSet_B_2(context);
 
                 return i_;
             }

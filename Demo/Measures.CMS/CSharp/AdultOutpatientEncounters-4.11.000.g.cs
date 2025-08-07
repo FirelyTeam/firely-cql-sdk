@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("AdultOutpatientEncounters", "4.11.000")]
-public partial class AdultOutpatientEncounters_minus_4_11_000 : ILibrary, ISingleton<AdultOutpatientEncounters_minus_4_11_000>
+public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<AdultOutpatientEncounters_4_11_000>
 {
-    private AdultOutpatientEncounters_minus_4_11_000() {}
+    private AdultOutpatientEncounters_4_11_000() {}
 
-    public static AdultOutpatientEncounters_minus_4_11_000 Instance { get; } = new();
+    public static AdultOutpatientEncounters_4_11_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "AdultOutpatientEncounters";
     public string Version => "4.11.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, QICoreCommon_minus_2_1_000.Instance, Status_minus_1_8_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -108,13 +108,13 @@ public partial class AdultOutpatientEncounters_minus_4_11_000 : ILibrary, ISingl
         CqlValueSet r_ = this.Telephone_Visits(context);
         IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-        IEnumerable<Encounter> u_ = Status_minus_1_8_000.Instance.isEncounterPerformed(context, t_);
+        IEnumerable<Encounter> u_ = Status_1_8_000.Instance.isEncounterPerformed(context, t_);
         bool? v_(Encounter ValidEncounter)
         {
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             Period y_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> z_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, y_);
-            CqlInterval<CqlDateTime> aa_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, z_ as object);
+            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+            CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_1_000.Instance.toInterval(context, z_ as object);
             bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, "day");
 
             return ab_;

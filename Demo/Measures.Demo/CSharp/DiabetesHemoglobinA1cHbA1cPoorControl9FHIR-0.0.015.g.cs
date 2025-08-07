@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
-public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015>
+public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
-    private DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015() {}
+    private DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015() {}
 
-    public static DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 Instance { get; } = new();
+    public static DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "DiabetesHemoglobinA1cHbA1cPoorControl9FHIR";
     public string Version => "0.0.015";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_001.Instance, SupplementalDataElementsFHIR4_minus_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance, PalliativeCareFHIR_minus_0_6_000.Instance, AdultOutpatientEncountersFHIR4_minus_2_2_000.Instance, HospiceFHIR4_minus_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance, CumulativeMedicationDurationFHIR4_minus_1_0_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, PalliativeCareFHIR_0_6_000.Instance, AdultOutpatientEncountersFHIR4_2_2_000.Instance, HospiceFHIR4_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -67,12 +67,12 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Preventive Care Services - Established Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services__minus__Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services___Established_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services___Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlValueSetDefinition("Preventive Care Services-Initial Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", valueSetVersion: null)]
-    public CqlValueSet Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet _Preventive_Care_Services_minus_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
     public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
@@ -126,7 +126,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Ethnicity(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -135,7 +135,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -144,7 +144,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
-        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Race(context);
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -153,7 +153,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElementsFHIR4_minus_2_0_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -167,11 +167,11 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         bool? c_(Encounter TelehealthEncounter)
         {
             Code<Encounter.EncounterStatus> e_ = TelehealthEncounter?.StatusElement;
-            string f_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, e_);
+            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "finished");
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             Period i_ = TelehealthEncounter?.Period;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, i_ as object);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_ as object);
             bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, default);
             bool? l_ = context.Operators.And(g_, k_);
 
@@ -196,7 +196,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, default);
-        IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_minus_2_2_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
         IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
         IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
         bool? n_ = context.Operators.Exists<Encounter>(m_);
@@ -205,7 +205,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? r_(Condition Diabetes)
         {
-            CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Prevalence_Period(context, Diabetes);
+            CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
             CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
             bool? x_ = context.Operators.Overlaps(v_, w_, default);
 
@@ -236,7 +236,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         bool? c_(Observation RecentHbA1c)
         {
             Code<ObservationStatus> h_ = RecentHbA1c?.StatusElement;
-            string i_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, h_);
+            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             string[] j_ = [
                 "final",
                 "amended",
@@ -244,7 +244,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
             ];
             bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
             DataType l_ = RecentHbA1c?.Effective;
-            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, l_);
+            CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
             bool? p_ = context.Operators.And(k_, o_);
@@ -255,7 +255,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         object e_(Observation @this)
         {
             DataType q_ = @this?.Effective;
-            CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Normalize_Interval(context, q_);
+            CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
             CqlDateTime s_ = context.Operators.Start(r_);
 
             return s_;
@@ -284,7 +284,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     {
         Observation a_ = this.Most_Recent_HbA1c(context);
         DataType b_ = a_?.Value;
-        CqlQuantity c_ = FHIRHelpers_minus_4_0_001.Instance.ToQuantity(context, b_ as Quantity);
+        CqlQuantity c_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, b_ as Quantity);
         CqlQuantity d_ = context.Operators.Quantity(9m, "%");
         bool? e_ = context.Operators.Greater(c_, d_);
 
@@ -300,7 +300,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         bool? c_(Observation NoHbA1c)
         {
             Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;
-            string h_ = FHIRHelpers_minus_4_0_001.Instance.ToString(context, g_);
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string[] i_ = [
                 "final",
                 "amended",
@@ -308,7 +308,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
             ];
             bool? j_ = context.Operators.In<string>(h_, i_ as IEnumerable<string>);
             DataType k_ = NoHbA1c?.Effective;
-            CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_minus_6_1_000.Instance.Latest(context, k_);
+            CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
             bool? o_ = context.Operators.And(j_, n_);
@@ -339,8 +339,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = HospiceFHIR4_minus_2_3_000.Instance.Has_Hospice(context);
-        bool? b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+        bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
+        bool? b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
         bool? c_ = context.Operators.Or(a_, b_);
         Patient d_ = this.Patient(context);
         Date e_ = d_?.BirthDateElement;
@@ -351,10 +351,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_minus_0_0_015 : 
         CqlDate j_ = context.Operators.DateFrom(i_);
         int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
         bool? l_ = context.Operators.GreaterOrEqual(k_, 65);
-        bool? m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_minus_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
+        bool? m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
         bool? n_ = context.Operators.And(l_, m_);
         bool? o_ = context.Operators.Or(c_, n_);
-        bool? p_ = PalliativeCareFHIR_minus_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
+        bool? p_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
         bool? q_ = context.Operators.Or(o_, p_);
 
         return q_;

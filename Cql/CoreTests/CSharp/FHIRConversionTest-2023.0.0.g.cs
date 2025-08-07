@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
-public partial class FHIRConversionTest_minus_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_minus_2023_0_0>
+public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
-    private FHIRConversionTest_minus_2023_0_0() {}
+    private FHIRConversionTest_2023_0_0() {}
 
-    public static FHIRConversionTest_minus_2023_0_0 Instance { get; } = new();
+    public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "FHIRConversionTest";
     public string Version => "2023.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_0_1.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
 
     #endregion ILibrary Implementation
 

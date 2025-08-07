@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.5.000")]
-public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<AlaraCommonFunctions_minus_1_5_000>
+public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_5_000>
 {
-    private AlaraCommonFunctions_minus_1_5_000() {}
+    private AlaraCommonFunctions_1_5_000() {}
 
-    public static AlaraCommonFunctions_minus_1_5_000 Instance { get; } = new();
+    public static AlaraCommonFunctions_1_5_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "AlaraCommonFunctions";
     public string Version => "1.5.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -47,8 +47,8 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
     private static readonly CqlCode _Calculated_CT_global_noise = new CqlCode("96912-1", "http://loinc.org");
 
     [CqlCodeDefinition("Calculated CT size-adjusted dose", codeId: "96913-9", codeSystem: "http://loinc.org")]
-    public CqlCode Calculated_CT_size_minus_adjusted_dose(CqlContext _) => _Calculated_CT_size_minus_adjusted_dose;
-    private static readonly CqlCode _Calculated_CT_size_minus_adjusted_dose = new CqlCode("96913-9", "http://loinc.org");
+    public CqlCode Calculated_CT_size_adjusted_dose(CqlContext _) => _Calculated_CT_size_adjusted_dose;
+    private static readonly CqlCode _Calculated_CT_size_adjusted_dose = new CqlCode("96913-9", "http://loinc.org");
 
     [CqlCodeDefinition("Cardiac High Dose or Chest High Dose", codeId: "LA31761-2", codeSystem: "http://loinc.org")]
     public CqlCode Cardiac_High_Dose_or_Chest_High_Dose(CqlContext _) => _Cardiac_High_Dose_or_Chest_High_Dose;
@@ -122,7 +122,7 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
           _Abdomen_and_Pelvis_Low_Dose,
           _Abdomen_and_Pelvis_Routine_Dose,
           _Calculated_CT_global_noise,
-          _Calculated_CT_size_minus_adjusted_dose,
+          _Calculated_CT_size_adjusted_dose,
           _Cardiac_High_Dose_or_Chest_High_Dose,
           _Cardiac_Low_Dose,
           _Cardiac_Routine_Dose,
@@ -241,7 +241,7 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
     {
         DataType a_ = Obs?.Value;
-        object b_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, a_);
+        object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         IReadOnlyList<CqlCode> c_ = (b_ as CqlConcept)?.codes;
         bool? d_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)c_, code);
         decimal? e_ = this.Global_Noise_Value(context, Obs);
@@ -262,12 +262,12 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
         bool? b_(Observation.ComponentComponent C)
         {
             CodeableConcept h_ = C?.Code;
-            CqlConcept i_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, h_);
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.Calculated_CT_global_noise(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
             DataType m_ = C?.Value;
-            object n_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, m_);
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             string o_ = (n_ as CqlQuantity)?.unit;
             bool? p_ = context.Operators.Equal(o_, "[hnsf'U]");
             bool? q_ = context.Operators.And(l_, p_);
@@ -278,7 +278,7 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
         decimal? d_(Observation.ComponentComponent C)
         {
             DataType r_ = C?.Value;
-            object s_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
             decimal? t_ = (s_ as CqlQuantity)?.value;
 
             return t_;
@@ -298,12 +298,12 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
         bool? b_(Observation.ComponentComponent C)
         {
             CodeableConcept h_ = C?.Code;
-            CqlConcept i_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, h_);
-            CqlCode j_ = this.Calculated_CT_size_minus_adjusted_dose(context);
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.Calculated_CT_size_adjusted_dose(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
             DataType m_ = C?.Value;
-            object n_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, m_);
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             string o_ = (n_ as CqlQuantity)?.unit;
             bool? p_ = context.Operators.Equal(o_, "mGy.cm");
             bool? q_ = context.Operators.And(l_, p_);
@@ -314,7 +314,7 @@ public partial class AlaraCommonFunctions_minus_1_5_000 : ILibrary, ISingleton<A
         decimal? d_(Observation.ComponentComponent C)
         {
             DataType r_ = C?.Value;
-            object s_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, r_);
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
             decimal? t_ = (s_ as CqlQuantity)?.value;
 
             return t_;

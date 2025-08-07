@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
-public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISingleton<SupplementalDataElements_minus_3_4_000>
+public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<SupplementalDataElements_3_4_000>
 {
-    private SupplementalDataElements_minus_3_4_000() {}
+    private SupplementalDataElements_3_4_000() {}
 
-    public static SupplementalDataElements_minus_3_4_000 Instance { get; } = new();
+    public static SupplementalDataElements_3_4_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "SupplementalDataElements";
     public string Version => "3.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_3_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -87,7 +87,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
         {
             string n_ = @this?.Url;
             FhirString o_ = context.Operators.Convert<FhirString>(n_);
-            string p_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, o_);
+            string p_ = FHIRHelpers_4_3_000.Instance.ToString(context, o_);
             bool? q_ = context.Operators.Equal(p_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
             return q_;
@@ -103,7 +103,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string am_ = @this?.Url;
                 FhirString an_ = context.Operators.Convert<FhirString>(am_);
-                string ao_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, an_);
+                string ao_ = FHIRHelpers_4_3_000.Instance.ToString(context, an_);
                 bool? ap_ = context.Operators.Equal(ao_, "ombCategory");
 
                 return ap_;
@@ -119,7 +119,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             };
             IEnumerable<object> u_ = context.Operators.Select<Extension, object>(s_, t_);
             object v_ = context.Operators.SingletonFrom<object>(u_);
-            CqlCode w_ = FHIRHelpers_minus_4_3_000.Instance.ToCode(context, v_ as Coding);
+            CqlCode w_ = FHIRHelpers_4_3_000.Instance.ToCode(context, v_ as Coding);
             CqlCode[] x_ = [
                 w_,
             ];
@@ -127,7 +127,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string ar_ = @this?.Url;
                 FhirString as_ = context.Operators.Convert<FhirString>(ar_);
-                string at_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, as_);
+                string at_ = FHIRHelpers_4_3_000.Instance.ToString(context, as_);
                 bool? au_ = context.Operators.Equal(at_, "detailed");
 
                 return au_;
@@ -144,7 +144,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             IEnumerable<object> ab_ = context.Operators.Select<Extension, object>(z_, aa_);
             CqlCode ac_(object @this)
             {
-                CqlCode aw_ = FHIRHelpers_minus_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode aw_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
 
                 return aw_;
             };
@@ -154,7 +154,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string ax_ = @this?.Url;
                 FhirString ay_ = context.Operators.Convert<FhirString>(ax_);
-                string az_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, ay_);
+                string az_ = FHIRHelpers_4_3_000.Instance.ToString(context, ay_);
                 bool? ba_ = context.Operators.Equal(az_, "text");
 
                 return ba_;
@@ -191,9 +191,9 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
         (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
         {
             CodeableConcept f_ = Payer?.Type;
-            CqlConcept g_ = FHIRHelpers_minus_4_3_000.Instance.ToConcept(context, f_);
+            CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, f_);
             Period h_ = Payer?.Period;
-            CqlInterval<CqlDateTime> i_ = FHIRHelpers_minus_4_3_000.Instance.ToInterval(context, h_);
+            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, h_);
             (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? j_ = (CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ, g_, i_);
 
             return j_;
@@ -232,7 +232,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
         {
             string n_ = @this?.Url;
             FhirString o_ = context.Operators.Convert<FhirString>(n_);
-            string p_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, o_);
+            string p_ = FHIRHelpers_4_3_000.Instance.ToString(context, o_);
             bool? q_ = context.Operators.Equal(p_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
             return q_;
@@ -248,7 +248,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string al_ = @this?.Url;
                 FhirString am_ = context.Operators.Convert<FhirString>(al_);
-                string an_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, am_);
+                string an_ = FHIRHelpers_4_3_000.Instance.ToString(context, am_);
                 bool? ao_ = context.Operators.Equal(an_, "ombCategory");
 
                 return ao_;
@@ -265,7 +265,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             IEnumerable<object> u_ = context.Operators.Select<Extension, object>(s_, t_);
             CqlCode v_(object @this)
             {
-                CqlCode aq_ = FHIRHelpers_minus_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode aq_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
 
                 return aq_;
             };
@@ -274,7 +274,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string ar_ = @this?.Url;
                 FhirString as_ = context.Operators.Convert<FhirString>(ar_);
-                string at_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, as_);
+                string at_ = FHIRHelpers_4_3_000.Instance.ToString(context, as_);
                 bool? au_ = context.Operators.Equal(at_, "detailed");
 
                 return au_;
@@ -291,7 +291,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
             CqlCode ab_(object @this)
             {
-                CqlCode aw_ = FHIRHelpers_minus_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode aw_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
 
                 return aw_;
             };
@@ -301,7 +301,7 @@ public partial class SupplementalDataElements_minus_3_4_000 : ILibrary, ISinglet
             {
                 string ax_ = @this?.Url;
                 FhirString ay_ = context.Operators.Convert<FhirString>(ax_);
-                string az_ = FHIRHelpers_minus_4_3_000.Instance.ToString(context, ay_);
+                string az_ = FHIRHelpers_4_3_000.Instance.ToString(context, ay_);
                 bool? ba_ = context.Operators.Equal(az_, "text");
 
                 return ba_;

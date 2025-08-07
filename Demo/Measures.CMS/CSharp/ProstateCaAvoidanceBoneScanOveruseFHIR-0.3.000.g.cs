@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ProstateCaAvoidanceBoneScanOveruseFHIR", "0.3.000")]
-public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILibrary, ISingleton<ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000>
+public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, ISingleton<ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000>
 {
-    private ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000() {}
+    private ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000() {}
 
-    public static ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 Instance { get; } = new();
+    public static ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ProstateCaAvoidanceBoneScanOveruseFHIR";
     public string Version => "0.3.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -67,8 +67,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     private static readonly CqlCode _Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_ = new CqlCode("433351000124101", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)", codeId: "433361000124104", codeSystem: "http://snomed.info/sct")]
-    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_minus_half_of_one_lobe_or_less__finding_(CqlContext _) => _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_minus_half_of_one_lobe_or_less__finding_;
-    private static readonly CqlCode _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_minus_half_of_one_lobe_or_less__finding_ = new CqlCode("433361000124104", "http://snomed.info/sct");
+    public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext _) => _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_;
+    private static readonly CqlCode _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_ = new CqlCode("433361000124104", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Procedure reason record (record artifact)", codeId: "433611000124109", codeSystem: "http://snomed.info/sct")]
     public CqlCode Procedure_reason_record__record_artifact_(CqlContext _) => _Procedure_reason_record__record_artifact_;
@@ -101,7 +101,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_,
-          _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_minus_half_of_one_lobe_or_less__finding_,
+          _Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_,
           _Procedure_reason_record__record_artifact_,
           _T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_,
           _T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_,
@@ -145,7 +145,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -154,7 +154,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -163,7 +163,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -172,7 +172,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -185,11 +185,11 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition ProstateCancer)
         {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancer);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            bool? h_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, ProstateCancer);
-            bool? i_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, ProstateCancer);
+            bool? h_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancer);
+            bool? i_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancer);
             bool? j_ = context.Operators.Or(h_, i_);
             bool? k_ = context.Operators.And(g_, j_);
 
@@ -219,8 +219,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? c_(Procedure ProstateCancerTreatment)
         {
             DataType h_ = ProstateCancerTreatment?.Performed;
-            object i_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, h_);
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, i_);
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.toInterval(context, i_);
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
@@ -236,8 +236,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         object e_(Procedure @this)
         {
             DataType s_ = @this?.Performed;
-            object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
-            CqlInterval<CqlDateTime> u_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, t_);
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_);
             CqlDateTime v_ = context.Operators.Start(u_);
 
             return v_;
@@ -264,12 +264,12 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
             bool? o_(Procedure FirstProstateCancerTreatment)
             {
                 DataType s_ = ProstateCancerStaging?.Effective;
-                object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, t_);
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_);
                 CqlDateTime v_ = context.Operators.Start(u_);
                 DataType w_ = FirstProstateCancerTreatment?.Performed;
-                object x_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, w_);
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, x_);
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
                 CqlDateTime z_ = context.Operators.Start(y_);
                 bool? aa_ = context.Operators.Before(v_, z_, default);
                 Code<ObservationStatus> ab_ = ProstateCancerStaging?.StatusElement;
@@ -297,8 +297,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         object f_(Observation @this)
         {
             DataType ai_ = @this?.Effective;
-            object aj_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ai_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, aj_);
+            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_);
             CqlDateTime al_ = context.Operators.Start(ak_);
 
             return al_;
@@ -311,22 +311,22 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? j_(Observation LastProstateCancerStaging)
         {
             DataType am_ = LastProstateCancerStaging?.Value;
-            object an_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, am_);
+            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             CqlCode ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(context);
             CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
             bool? aq_ = context.Operators.Equivalent(an_ as CqlConcept, ap_);
-            object as_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, am_);
+            object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             CqlCode at_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(context);
             CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
             bool? av_ = context.Operators.Equivalent(as_ as CqlConcept, au_);
             bool? aw_ = context.Operators.Or(aq_, av_);
-            object ay_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, am_);
+            object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             CqlCode az_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(context);
             CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
             bool? bb_ = context.Operators.Equivalent(ay_ as CqlConcept, ba_);
             bool? bc_ = context.Operators.Or(aw_, bb_);
-            object be_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, am_);
-            CqlCode bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_minus_half_of_one_lobe_or_less__finding_(context);
+            object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+            CqlCode bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(context);
             CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
             bool? bh_ = context.Operators.Equivalent(be_ as CqlConcept, bg_);
             bool? bi_ = context.Operators.Or(bc_, bh_);
@@ -358,8 +358,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
                     bool ae_()
                     {
                         DataType af_ = PSATest?.Effective;
-                        object ag_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, af_);
-                        CqlInterval<CqlDateTime> ah_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ag_);
+                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                        CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_1_000.Instance.toInterval(context, ag_);
                         CqlDateTime ai_ = context.Operators.Start(ah_);
 
                         return ai_ is null;
@@ -371,11 +371,11 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
                     else
                     {
                         DataType aj_ = PSATest?.Effective;
-                        object ak_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aj_);
-                        CqlInterval<CqlDateTime> al_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ak_);
+                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                        CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
                         CqlDateTime am_ = context.Operators.Start(al_);
-                        object ao_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aj_);
-                        CqlInterval<CqlDateTime> ap_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ao_);
+                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                        CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_1_000.Instance.toInterval(context, ao_);
                         CqlDateTime aq_ = context.Operators.Start(ap_);
                         CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(am_, aq_, true, true);
 
@@ -383,8 +383,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
                     }
                 };
                 DataType t_ = MostRecentProstateCancerStaging?.Effective;
-                object u_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, t_);
-                CqlInterval<CqlDateTime> v_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, u_);
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_);
                 bool? w_ = context.Operators.Before(s_(), v_, default);
                 Code<ObservationStatus> x_ = PSATest?.StatusElement;
                 ObservationStatus? y_ = x_?.Value;
@@ -411,8 +411,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         object e_(Observation @this)
         {
             DataType as_ = @this?.Effective;
-            object at_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, as_);
-            CqlInterval<CqlDateTime> au_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, at_);
+            object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+            CqlInterval<CqlDateTime> au_ = QICoreCommon_2_1_000.Instance.toInterval(context, at_);
             CqlDateTime av_ = context.Operators.Start(au_);
 
             return av_;
@@ -425,7 +425,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? i_(Observation LastPSATest)
         {
             DataType aw_ = LastPSATest?.Value;
-            object ax_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aw_);
+            object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
             CqlQuantity ay_ = context.Operators.Quantity(10m, "ng/mL");
             bool? az_ = context.Operators.Less(ax_ as CqlQuantity, ay_);
 
@@ -454,12 +454,12 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
             bool? p_(Procedure FirstProstateCancerTreatment)
             {
                 DataType t_ = GleasonScore?.Effective;
-                object u_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, t_);
-                CqlInterval<CqlDateTime> v_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, u_);
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_);
                 CqlDateTime w_ = context.Operators.Start(v_);
                 DataType x_ = FirstProstateCancerTreatment?.Performed;
-                object y_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, x_);
-                CqlInterval<CqlDateTime> z_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, y_);
+                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_);
                 CqlDateTime aa_ = context.Operators.Start(z_);
                 bool? ab_ = context.Operators.Before(w_, aa_, default);
                 Code<ObservationStatus> ac_ = GleasonScore?.StatusElement;
@@ -487,8 +487,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         object f_(Observation @this)
         {
             DataType aj_ = @this?.Effective;
-            object ak_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ak_);
+            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
             CqlDateTime am_ = context.Operators.Start(al_);
 
             return am_;
@@ -501,7 +501,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? j_(Observation LastGleasonScore)
         {
             DataType an_ = LastGleasonScore?.Value;
-            object ao_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, an_);
+            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
             bool? ap_ = context.Operators.LessOrEqual(ao_ as int?, 6);
 
             return ap_;
@@ -544,10 +544,10 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
             bool? h_(Condition ActiveProstateCancer)
             {
                 DataType l_ = BoneScan?.Effective;
-                object m_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, m_);
+                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.toInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 bool? r_ = context.Operators.After(o_, q_, default);
 
@@ -564,8 +564,8 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? e_(Observation BoneScan)
         {
             DataType s_ = BoneScan?.Effective;
-            object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
-            CqlInterval<CqlDateTime> u_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, t_);
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_);
             CqlDateTime v_ = context.Operators.End(u_);
             CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
             bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
@@ -599,13 +599,13 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
             IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis(context);
             bool? g_(Condition ActiveProstateCancer)
             {
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ProstateCancerPain);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ProstateCancerPain);
                 CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime n_ = context.Operators.Start(m_);
                 bool? o_ = context.Operators.After(l_, n_, default);
-                bool? p_ = QICoreCommon_minus_2_1_000.Instance.isProblemListItem(context, ProstateCancerPain);
-                bool? q_ = QICoreCommon_minus_2_1_000.Instance.isHealthConcern(context, ProstateCancerPain);
+                bool? p_ = QICoreCommon_2_1_000.Instance.isProblemListItem(context, ProstateCancerPain);
+                bool? q_ = QICoreCommon_2_1_000.Instance.isHealthConcern(context, ProstateCancerPain);
                 bool? r_ = context.Operators.Or(p_, q_);
                 bool? s_ = context.Operators.And(o_, r_);
 
@@ -636,10 +636,10 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
             bool? g_(Condition ActiveProstateCancer)
             {
                 DataType k_ = SalvageTherapy?.Performed;
-                object l_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, k_);
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, l_);
+                object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+                CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.toInterval(context, l_);
                 CqlDateTime n_ = context.Operators.Start(m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime p_ = context.Operators.Start(o_);
                 bool? q_ = context.Operators.After(n_, p_, default);
                 Code<EventStatus> r_ = SalvageTherapy?.StatusElement;
@@ -671,7 +671,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_minus_0_3_000 : ILib
         bool? b_(Observation BoneScanAfterDiagnosis)
         {
             DataType e_ = BoneScanAfterDiagnosis?.Value;
-            object f_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, e_);
+            object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             CqlCode g_ = this.Procedure_reason_record__record_artifact_(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
             bool? i_ = context.Operators.Equivalent(f_ as CqlConcept, h_);

@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("DepressionRemissionatTwelveMonthsFHIR", "0.2.000")]
-public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibrary, ISingleton<DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000>
+public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, ISingleton<DepressionRemissionatTwelveMonthsFHIR_0_2_000>
 {
-    private DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000() {}
+    private DepressionRemissionatTwelveMonthsFHIR_0_2_000() {}
 
-    public static DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 Instance { get; } = new();
+    public static DepressionRemissionatTwelveMonthsFHIR_0_2_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "DepressionRemissionatTwelveMonthsFHIR";
     public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -107,8 +107,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     private static readonly CqlCode _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)", codeId: "71007-9", codeSystem: "http://loinc.org")]
-    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_;
-    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_ = new CqlCode("71007-9", "http://loinc.org");
+    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
+    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
 
     [CqlCodeDefinition("Hospice care [Minimum Data Set]", codeId: "45755-6", codeSystem: "http://loinc.org")]
     public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
@@ -126,7 +126,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
     private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
-          _Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_,
+          _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_,
           _Hospice_care__Minimum_Data_Set_]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
@@ -180,7 +180,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? c_(Observation DepressionAssessment)
         {
             DataType e_ = DepressionAssessment?.Value;
-            object f_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, e_);
+            object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             bool? g_ = context.Operators.Greater(f_ as int?, 9);
             Code<ObservationStatus> h_ = DepressionAssessment?.StatusElement;
             ObservationStatus? i_ = h_?.Value;
@@ -205,10 +205,10 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlFunctionDefinition("isConfirmedActiveDiagnosis")]
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
-        bool? a_ = QICoreCommon_minus_2_1_000.Instance.isActive(context, condition);
+        bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, condition);
         CodeableConcept b_ = condition?.VerificationStatus;
-        CqlConcept c_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, b_);
-        CqlCode d_ = QICoreCommon_minus_2_1_000.Instance.confirmed(context);
+        CqlConcept c_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, b_);
+        CqlCode d_ = QICoreCommon_2_1_000.Instance.confirmed(context);
         CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
         bool? f_ = context.Operators.Equivalent(c_, e_);
         bool? g_ = context.Operators.And(a_, f_);
@@ -264,10 +264,10 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
             bool? f_(Condition Depression)
             {
                 Period j_ = ValidEncounter?.Period;
-                CqlInterval<CqlDateTime> k_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, j_);
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Depression);
+                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
+                CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Depression);
                 bool? m_ = context.Operators.Overlaps(k_, l_, default);
-                CqlInterval<CqlDateTime> o_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, j_);
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
                 CqlDateTime p_ = context.Operators.End(o_);
                 CqlInterval<CqlDateTime> q_ = this.Denominator_Identification_Period(context);
                 bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, default);
@@ -303,18 +303,18 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
             bool? h_(Encounter DepressionEncounter)
             {
                 Period l_ = DepressionEncounter?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, l_);
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlQuantity o_ = context.Operators.Quantity(7m, "days");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDate q_ = context.Operators.ConvertDateTimeToDate(p_);
                 CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
-                CqlInterval<CqlDateTime> t_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, l_);
+                CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime u_ = context.Operators.End(t_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, true);
                 DataType w_ = DepressionAssessment?.Effective;
-                object x_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, w_);
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, x_);
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
                 bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(v_, y_, "day");
 
                 return z_;
@@ -330,8 +330,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         object d_(Observation @this)
         {
             DataType aa_ = @this?.Effective;
-            object ab_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, aa_);
-            CqlInterval<CqlDateTime> ac_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ab_);
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_1_000.Instance.toInterval(context, ab_);
             CqlDateTime ad_ = context.Operators.Start(ac_);
 
             return ad_;
@@ -352,8 +352,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
         Observation e_ = this.Index_Depression_Assessment(context);
         DataType f_ = e_?.Effective;
-        object g_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, f_);
-        CqlInterval<CqlDateTime> h_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, g_);
+        object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+        CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.toInterval(context, g_);
         CqlDateTime i_ = context.Operators.Start(h_);
         int? j_ = context.Operators.CalculateAgeAt(d_, i_, "year");
         bool? k_ = context.Operators.GreaterOrEqual(j_, 12);
@@ -381,16 +381,16 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         CqlInterval<CqlDate> c_(Observation FirstIndexAssessment)
         {
             DataType g_ = FirstIndexAssessment?.Effective;
-            object h_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, h_);
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.toInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             CqlQuantity l_ = context.Operators.Quantity(12m, "months");
             CqlDate m_ = context.Operators.Add(k_, l_);
             CqlQuantity n_ = context.Operators.Quantity(60m, "days");
             CqlDate o_ = context.Operators.Subtract(m_, n_);
-            object q_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> r_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, q_);
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.toInterval(context, q_);
             CqlDateTime s_ = context.Operators.Start(r_);
             CqlDate t_ = context.Operators.DateFrom(s_);
             CqlDate v_ = context.Operators.Add(t_, l_);
@@ -416,18 +416,18 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         {
             Encounter.HospitalizationComponent ak_ = InpatientEncounter?.Hospitalization;
             CodeableConcept al_ = ak_?.DischargeDisposition;
-            CqlConcept am_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, al_);
+            CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, al_);
             CqlCode an_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
             CqlConcept ao_ = context.Operators.ConvertCodeToConcept(an_);
             bool? ap_ = context.Operators.Equivalent(am_, ao_);
             CodeableConcept ar_ = ak_?.DischargeDisposition;
-            CqlConcept as_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, ar_);
+            CqlConcept as_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ar_);
             CqlCode at_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
             CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
             bool? av_ = context.Operators.Equivalent(as_, au_);
             bool? aw_ = context.Operators.Or(ap_, av_);
             Period ax_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> ay_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ax_);
+            CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ax_);
             CqlDateTime az_ = context.Operators.End(ay_);
             CqlInterval<CqlDateTime> ba_ = this.Denominator_Identification_Period(context);
             CqlDateTime bb_ = context.Operators.Start(ba_);
@@ -452,7 +452,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? h_(Encounter HospiceEncounter)
         {
             Period bn_ = HospiceEncounter?.Period;
-            CqlInterval<CqlDateTime> bo_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, bn_);
+            CqlInterval<CqlDateTime> bo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bn_);
             CqlInterval<CqlDateTime> bp_ = this.Denominator_Identification_Period(context);
             CqlDateTime bq_ = context.Operators.Start(bp_);
             CqlInterval<CqlDate> br_ = this.Measure_Assessment_Period(context);
@@ -484,13 +484,13 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? o_(Observation HospiceAssessment)
         {
             DataType ce_ = HospiceAssessment?.Value;
-            object cf_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ce_);
+            object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
             CqlCode cg_ = this.Yes__qualifier_value_(context);
             CqlConcept ch_ = context.Operators.ConvertCodeToConcept(cg_);
             bool? ci_ = context.Operators.Equivalent(cf_ as CqlConcept, ch_);
             DataType cj_ = HospiceAssessment?.Effective;
-            object ck_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, cj_);
-            CqlInterval<CqlDateTime> cl_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ck_);
+            object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
+            CqlInterval<CqlDateTime> cl_ = QICoreCommon_2_1_000.Instance.toInterval(context, ck_);
             CqlInterval<CqlDateTime> cm_ = this.Denominator_Identification_Period(context);
             CqlDateTime cn_ = context.Operators.Start(cm_);
             CqlInterval<CqlDate> co_ = this.Measure_Assessment_Period(context);
@@ -567,8 +567,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? aa_(Procedure HospicePerformed)
         {
             DataType ed_ = HospicePerformed?.Performed;
-            object ee_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ed_);
-            CqlInterval<CqlDateTime> ef_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, ee_);
+            object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
+            CqlInterval<CqlDateTime> ef_ = QICoreCommon_2_1_000.Instance.toInterval(context, ee_);
             CqlInterval<CqlDateTime> eg_ = this.Denominator_Identification_Period(context);
             CqlDateTime eh_ = context.Operators.Start(eg_);
             CqlInterval<CqlDate> ei_ = this.Measure_Assessment_Period(context);
@@ -597,7 +597,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         IEnumerable<Condition> af_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? ag_(Condition HospiceCareDiagnosis)
         {
-            CqlInterval<CqlDateTime> eu_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
+            CqlInterval<CqlDateTime> eu_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
             CqlInterval<CqlDateTime> ev_ = this.Denominator_Identification_Period(context);
             CqlDateTime ew_ = context.Operators.Start(ev_);
             CqlInterval<CqlDate> ex_ = this.Measure_Assessment_Period(context);
@@ -621,14 +621,14 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlExpressionDefinition("Has Palliative Care in the Measure Assessment Period")]
     public bool? Has_Palliative_Care_in_the_Measure_Assessment_Period(CqlContext context)
     {
-        CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy__minus__Palliative_Care_Questionnaire__FACIT_minus_Pal_(context);
+        CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
         bool? d_(Observation PalliativeAssessment)
         {
             DataType y_ = PalliativeAssessment?.Effective;
-            object z_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, y_);
-            CqlInterval<CqlDateTime> aa_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, z_);
+            object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+            CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_1_000.Instance.toInterval(context, z_);
             CqlInterval<CqlDateTime> ab_ = this.Denominator_Identification_Period(context);
             CqlDateTime ac_ = context.Operators.Start(ab_);
             CqlInterval<CqlDate> ad_ = this.Measure_Assessment_Period(context);
@@ -656,7 +656,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? i_(Condition PalliativeDiagnosis)
         {
-            CqlInterval<CqlDateTime> ap_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
+            CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
             CqlInterval<CqlDateTime> aq_ = this.Denominator_Identification_Period(context);
             CqlDateTime ar_ = context.Operators.Start(aq_);
             CqlInterval<CqlDate> as_ = this.Measure_Assessment_Period(context);
@@ -677,7 +677,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? o_(Encounter PalliativeEncounter)
         {
             Period az_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> ba_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, az_);
+            CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, az_);
             CqlInterval<CqlDateTime> bb_ = this.Denominator_Identification_Period(context);
             CqlDateTime bc_ = context.Operators.Start(bb_);
             CqlInterval<CqlDate> bd_ = this.Measure_Assessment_Period(context);
@@ -701,8 +701,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? u_(Procedure PalliativeIntervention)
         {
             DataType bn_ = PalliativeIntervention?.Performed;
-            object bo_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, bn_);
-            CqlInterval<CqlDateTime> bp_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, bo_);
+            object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
+            CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_1_000.Instance.toInterval(context, bo_);
             CqlInterval<CqlDateTime> bq_ = this.Denominator_Identification_Period(context);
             CqlDateTime br_ = context.Operators.Start(bq_);
             CqlInterval<CqlDate> bs_ = this.Measure_Assessment_Period(context);
@@ -737,7 +737,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     {
         Patient a_ = this.Patient(context);
         DataType b_ = a_?.Deceased;
-        object c_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, b_);
+        object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
         CqlInterval<CqlDate> d_ = this.Measure_Assessment_Period(context);
         CqlDate e_ = context.Operators.End(d_);
         CqlDateTime f_ = context.Operators.ConvertDateToDateTime(e_);
@@ -763,7 +763,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         IEnumerable<Condition> k_ = context.Operators.Union<Condition>(e_, j_);
         bool? l_(Condition MentalHealthDisorderDiagnoses)
         {
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, MentalHealthDisorderDiagnoses);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, MentalHealthDisorderDiagnoses);
             CqlDateTime p_ = context.Operators.Start(o_);
             CqlDate q_ = context.Operators.ConvertDateTimeToDate(p_);
             CqlInterval<CqlDate> r_ = this.Measure_Assessment_Period(context);
@@ -804,8 +804,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         bool? c_(Observation DepressionAssessment)
         {
             DataType k_ = DepressionAssessment?.Effective;
-            object l_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, k_);
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, l_);
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.toInterval(context, l_);
             CqlDateTime n_ = context.Operators.Start(m_);
             CqlDate o_ = context.Operators.ConvertDateTimeToDate(n_);
             CqlInterval<CqlDate> p_ = this.Measure_Assessment_Period(context);
@@ -828,8 +828,8 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         object e_(Observation @this)
         {
             DataType y_ = @this?.Effective;
-            object z_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, y_);
-            CqlInterval<CqlDateTime> aa_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, z_);
+            object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+            CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_1_000.Instance.toInterval(context, z_);
             CqlDateTime ab_ = context.Operators.Start(aa_);
 
             return ab_;
@@ -837,7 +837,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Observation g_ = context.Operators.Last<Observation>(f_);
         DataType h_ = g_?.Value;
-        object i_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, h_);
+        object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
         bool? j_ = context.Operators.Less(i_ as int?, 5);
 
         return j_;
@@ -847,7 +847,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -856,7 +856,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -865,7 +865,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -874,7 +874,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_minus_0_2_000 : ILibr
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

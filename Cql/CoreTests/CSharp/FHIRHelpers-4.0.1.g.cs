@@ -14,11 +14,11 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
-public partial class FHIRHelpers_minus_4_0_1 : ILibrary, ISingleton<FHIRHelpers_minus_4_0_1>
+public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
-    private FHIRHelpers_minus_4_0_1() {}
+    private FHIRHelpers_4_0_1() {}
 
-    public static FHIRHelpers_minus_4_0_1 Instance { get; } = new();
+    public static FHIRHelpers_4_0_1 Instance { get; } = new();
 
     #region ILibrary Implementation
 

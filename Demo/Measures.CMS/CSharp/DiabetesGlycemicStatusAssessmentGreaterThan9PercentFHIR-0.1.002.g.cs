@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR", "0.1.002")]
-public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_minus_0_1_002 : ILibrary, ISingleton<DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_minus_0_1_002>
+public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002 : ILibrary, ISingleton<DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002>
 {
-    private DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_minus_0_1_002() {}
+    private DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002() {}
 
-    public static DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_minus_0_1_002 Instance { get; } = new();
+    public static DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR";
     public string Version => "0.1.002";
-    public ILibrary[] Dependencies => [FHIRHelpers_minus_4_4_000.Instance, QICoreCommon_minus_2_1_000.Instance, SupplementalDataElements_minus_3_5_000.Instance, Status_minus_1_8_000.Instance, CumulativeMedicationDuration_minus_4_1_000.Instance, AdultOutpatientEncounters_minus_4_11_000.Instance, AdvancedIllnessandFrailty_minus_1_16_000.Instance, Hospice_minus_6_12_000.Instance, PalliativeCare_minus_1_11_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -89,7 +89,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -98,7 +98,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -107,7 +107,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -116,7 +116,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -135,14 +135,14 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, default);
-        IEnumerable<Encounter> k_ = AdultOutpatientEncounters_minus_4_11_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_11_000.Instance.Qualifying_Encounters(context);
         bool? l_ = context.Operators.Exists<Encounter>(k_);
         bool? m_ = context.Operators.And(j_, l_);
         CqlValueSet n_ = this.Diabetes(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? p_(Condition Diabetes)
         {
-            CqlInterval<CqlDateTime> t_ = QICoreCommon_minus_2_1_000.Instance.prevalenceInterval(context, Diabetes);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Diabetes);
             CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
             bool? v_ = context.Operators.Overlaps(t_, u_, "day");
 
@@ -168,12 +168,12 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
-        bool? a_ = Hospice_minus_6_12_000.Instance.Has_Hospice_Services(context);
-        bool? b_ = AdvancedIllnessandFrailty_minus_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+        bool? a_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
+        bool? b_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
         bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = AdvancedIllnessandFrailty_minus_1_16_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
+        bool? d_ = AdvancedIllnessandFrailty_1_16_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
         bool? e_ = context.Operators.Or(c_, d_);
-        bool? f_ = PalliativeCare_minus_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? f_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
         bool? g_ = context.Operators.Or(e_, f_);
 
         return g_;
@@ -189,7 +189,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
         IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
         IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
         IEnumerable<Observation> f_ = context.Operators.Union<Observation>(b_, e_);
-        IEnumerable<Observation> g_ = Status_minus_1_8_000.Instance.isLaboratoryTestPerformed(context, f_);
+        IEnumerable<Observation> g_ = Status_1_8_000.Instance.isLaboratoryTestPerformed(context, f_);
         bool? h_(Observation GlycemicStatus)
         {
             object j_()
@@ -197,7 +197,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool n_()
                 {
                     DataType q_ = GlycemicStatus?.Effective;
-                    object r_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, q_);
+                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                     bool s_ = r_ is CqlDateTime;
 
                     return s_;
@@ -205,7 +205,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool o_()
                 {
                     DataType t_ = GlycemicStatus?.Effective;
-                    object u_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, t_);
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     bool v_ = u_ is CqlInterval<CqlDateTime>;
 
                     return v_;
@@ -213,7 +213,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool p_()
                 {
                     DataType w_ = GlycemicStatus?.Effective;
-                    object x_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, w_);
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
                     bool y_ = x_ is CqlDateTime;
 
                     return y_;
@@ -221,21 +221,21 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 if (n_())
                 {
                     DataType z_ = GlycemicStatus?.Effective;
-                    object aa_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, z_);
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
 
                     return (aa_ as CqlDateTime) as object;
                 }
                 else if (o_())
                 {
                     DataType ab_ = GlycemicStatus?.Effective;
-                    object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
 
                     return (ac_ as CqlInterval<CqlDateTime>) as object;
                 }
                 else if (p_())
                 {
                     DataType ad_ = GlycemicStatus?.Effective;
-                    object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ad_);
+                    object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
 
                     return (ae_ as CqlDateTime) as object;
                 }
@@ -244,7 +244,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                     return null;
                 }
             };
-            CqlDateTime k_ = QICoreCommon_minus_2_1_000.Instance.latest(context, j_());
+            CqlDateTime k_ = QICoreCommon_2_1_000.Instance.latest(context, j_());
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
 
@@ -267,7 +267,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool j_()
                 {
                     DataType m_ = QualifyingGlycemicStatus?.Effective;
-                    object n_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, m_);
+                    object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                     bool o_ = n_ is CqlDateTime;
 
                     return o_;
@@ -275,7 +275,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool k_()
                 {
                     DataType p_ = QualifyingGlycemicStatus?.Effective;
-                    object q_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, p_);
+                    object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     bool r_ = q_ is CqlInterval<CqlDateTime>;
 
                     return r_;
@@ -283,7 +283,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool l_()
                 {
                     DataType s_ = QualifyingGlycemicStatus?.Effective;
-                    object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
+                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                     bool u_ = t_ is CqlDateTime;
 
                     return u_;
@@ -291,21 +291,21 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 if (j_())
                 {
                     DataType v_ = QualifyingGlycemicStatus?.Effective;
-                    object w_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, v_);
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
 
                     return (w_ as CqlDateTime) as object;
                 }
                 else if (k_())
                 {
                     DataType x_ = QualifyingGlycemicStatus?.Effective;
-                    object y_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, x_);
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
 
                     return (y_ as CqlInterval<CqlDateTime>) as object;
                 }
                 else if (l_())
                 {
                     DataType z_ = QualifyingGlycemicStatus?.Effective;
-                    object aa_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, z_);
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
 
                     return (aa_ as CqlDateTime) as object;
                 }
@@ -314,7 +314,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                     return null;
                 }
             };
-            CqlDateTime h_ = QICoreCommon_minus_2_1_000.Instance.latest(context, g_());
+            CqlDateTime h_ = QICoreCommon_2_1_000.Instance.latest(context, g_());
             CqlDate i_ = context.Operators.DateFrom(h_);
 
             return i_;
@@ -339,7 +339,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool p_()
                 {
                     DataType s_ = QualifyingGlycemicStatus?.Effective;
-                    object t_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, s_);
+                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                     bool u_ = t_ is CqlDateTime;
 
                     return u_;
@@ -347,7 +347,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool q_()
                 {
                     DataType v_ = QualifyingGlycemicStatus?.Effective;
-                    object w_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, v_);
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlInterval<CqlDateTime>;
 
                     return x_;
@@ -355,7 +355,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 bool r_()
                 {
                     DataType y_ = QualifyingGlycemicStatus?.Effective;
-                    object z_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, y_);
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                     bool aa_ = z_ is CqlDateTime;
 
                     return aa_;
@@ -363,21 +363,21 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                 if (p_())
                 {
                     DataType ab_ = QualifyingGlycemicStatus?.Effective;
-                    object ac_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ab_);
+                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
 
                     return (ac_ as CqlDateTime) as object;
                 }
                 else if (q_())
                 {
                     DataType ad_ = QualifyingGlycemicStatus?.Effective;
-                    object ae_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ad_);
+                    object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
 
                     return (ae_ as CqlInterval<CqlDateTime>) as object;
                 }
                 else if (r_())
                 {
                     DataType af_ = QualifyingGlycemicStatus?.Effective;
-                    object ag_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, af_);
+                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
 
                     return (ag_ as CqlDateTime) as object;
                 }
@@ -386,7 +386,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
                     return null;
                 }
             };
-            CqlDateTime l_ = QICoreCommon_minus_2_1_000.Instance.latest(context, k_());
+            CqlDateTime l_ = QICoreCommon_2_1_000.Instance.latest(context, k_());
             CqlDate m_ = this.Most_Recent_Glycemic_Status_Date(context);
             CqlDateTime n_ = context.Operators.ConvertDateToDateTime(m_);
             bool? o_ = context.Operators.SameAs(l_, n_, "day");
@@ -397,7 +397,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
         (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? d_(Observation QualifyingGlycemicStatus)
         {
             DataType ah_ = QualifyingGlycemicStatus?.Value;
-            object ai_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, ah_);
+            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
             (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? aj_ = (CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF, ai_ as CqlQuantity, QualifyingGlycemicStatus);
 
             return aj_;
@@ -424,7 +424,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
         bool? b_ = context.Operators.Not((bool?)(a_ is null));
         DataType d_ = a_?.Value;
-        object e_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, d_);
+        object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
         bool? f_ = context.Operators.And(b_, (bool?)(e_ is null));
 
         return f_;
@@ -436,7 +436,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_min
     {
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
         DataType b_ = a_?.Value;
-        object c_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, b_);
+        object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
         CqlQuantity d_ = context.Operators.Quantity(9m, "%");
         bool? e_ = context.Operators.Greater(c_ as CqlQuantity, d_);
 

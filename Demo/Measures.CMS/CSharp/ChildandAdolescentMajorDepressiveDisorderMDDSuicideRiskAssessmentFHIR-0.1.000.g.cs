@@ -14,17 +14,17 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR", "0.1.000")]
-public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_minus_0_1_000 : ILibrary, ISingleton<ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_minus_0_1_000>
+public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000 : ILibrary, ISingleton<ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000>
 {
-    private ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_minus_0_1_000() {}
+    private ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000() {}
 
-    public static ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_minus_0_1_000 Instance { get; } = new();
+    public static ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [SupplementalDataElements_minus_3_5_000.Instance, QICoreCommon_minus_2_1_000.Instance, FHIRHelpers_minus_4_4_000.Instance, CQMCommon_minus_2_2_000.Instance];
+    public ILibrary[] Dependencies => [SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -142,7 +142,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -151,7 +151,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -160,7 +160,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -169,7 +169,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_minus_3_5_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -210,18 +210,18 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
             List<CodeableConcept> ad_ = ValidEncounter?.ReasonCode;
             CqlConcept ae_(CodeableConcept @this)
             {
-                CqlConcept at_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
                 return at_;
             };
             IEnumerable<CqlConcept> af_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ad_, ae_);
             CqlValueSet ag_ = this.Major_Depressive_Disorder_Active(context);
             bool? ah_ = context.Operators.ConceptsInValueSet(af_, ag_);
-            IEnumerable<Condition> ai_ = CQMCommon_minus_2_2_000.Instance.encounterDiagnosis(context, ValidEncounter);
+            IEnumerable<Condition> ai_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, ValidEncounter);
             bool? aj_(Condition EncounterDiagnosis)
             {
                 CodeableConcept au_ = EncounterDiagnosis?.Code;
-                CqlConcept av_ = FHIRHelpers_minus_4_4_000.Instance.ToConcept(context, au_);
+                CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, au_);
                 CqlValueSet aw_ = this.Major_Depressive_Disorder_Active(context);
                 bool? ax_ = context.Operators.ConceptInValueSet(av_, aw_);
 
@@ -233,7 +233,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
             bool? an_ = context.Operators.And(ac_, am_);
             CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
             Period ap_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> aq_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, ap_);
+            CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
             bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, "day");
             bool? as_ = context.Operators.And(an_, ar_);
 
@@ -302,10 +302,10 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
                 string m_ = context.Operators.Convert<string>(l_);
                 bool? n_ = context.Operators.Equal(m_, "completed");
                 Period o_ = MDDEncounter?.Period;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_minus_4_4_000.Instance.ToInterval(context, o_);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                 DataType q_ = SuicideRiskAssessment?.Performed;
-                object r_ = FHIRHelpers_minus_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_minus_2_1_000.Instance.toInterval(context, r_);
+                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
                 bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, default);
                 bool? u_ = context.Operators.And(n_, t_);
 
