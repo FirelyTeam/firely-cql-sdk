@@ -144,7 +144,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
-        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.VersionedLibraryIdentifier)!;
+        private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -206,7 +206,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.VersionedLibraryIdentifier))
+                                .Select(dep => IdentifierNormalizer.Normalize(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
@@ -364,8 +364,8 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var name = CqlDefinition.Name;
             string quotedName = name.QuoteString();
-            string methodName = VariableNameGenerator.NormalizeIdentifier(name)!;
-            string fieldName = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
+            string methodName = IdentifierNormalizer.Normalize(name);
+            string fieldName = IdentifierNormalizer.Normalize($"_{name}");;
             var definitionAttributeTypeName = CqlDefinition.GetType().Name;
 
             switch (CqlDefinition)
@@ -391,7 +391,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         {
                             var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
                             var codeField = cqlCodeDefinition is not null
-                                                ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                                ? IdentifierNormalizer.Normalize($"_{cqlCodeDefinition.Name}")
                                                 : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
                             return $"""
 
@@ -418,7 +418,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         {
                             var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
                             var codeField = cqlCodeDefinition is not null
-                                       ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                       ? IdentifierNormalizer.Normalize($"_{cqlCodeDefinition.Name}")
                                        : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
                             return $"""
 
@@ -460,7 +460,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     foreach (var tagValue in tag.Values)
                         tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
-            VariableNameGenerator variableNameGenerator = new(Enumerable.Empty<string>(), postfix: "_");
+            VariableNameGenerator variableNameGenerator = new([], postfix: "_");
 
             var visitedBody = Transform(
                 ld.LambdaExpression.Body,
@@ -479,7 +479,13 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             var parameters = ld.LambdaExpression.Parameters.Skip(1);
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
-            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public");
+
+            // Extract original parameter names if this is a CqlFunctionDefinition
+            IReadOnlyDictionary<string, string>? originalParameterNames = CqlDefinition is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
+                ? functionDef.OriginalParameterNames
+                : null;
+
+            var definitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public", originalParameterNames);
             tw.WriteLine(definitionWithBody);
         }
 

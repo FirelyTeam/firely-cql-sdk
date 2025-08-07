@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingleton<DementiaCognitiveAssessmentFHIR_0_1_000>
 {
@@ -43,8 +43,8 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
     private static readonly CqlValueSet _Cognitive_Assessment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332", null);
 
     [CqlValueSetDefinition("Dementia & Mental Degenerations", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", valueSetVersion: null)]
-    public CqlValueSet Dementia_and_Mental_Degenerations(CqlContext _) => _Dementia_and_Mental_Degenerations;
-    private static readonly CqlValueSet _Dementia_and_Mental_Degenerations = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", null);
+    public CqlValueSet Dementia__and__Mental_Degenerations(CqlContext _) => _Dementia__and__Mental_Degenerations;
+    private static readonly CqlValueSet _Dementia__and__Mental_Degenerations = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", null);
 
     [CqlValueSetDefinition("Face-to-Face Interaction", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", valueSetVersion: null)]
     public CqlValueSet Face_to_Face_Interaction(CqlContext _) => _Face_to_Face_Interaction;
@@ -169,7 +169,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
         IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition(context);
         IEnumerable<Encounter> b_(Encounter EncounterAssessCognition)
         {
-            CqlValueSet d_ = this.Dementia_and_Mental_Degenerations(context);
+            CqlValueSet d_ = this.Dementia__and__Mental_Degenerations(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
             bool? f_(Condition Dementia)
             {

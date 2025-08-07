@@ -73,7 +73,4 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Include="Input\ELM\HL7\ValueSetExprExample-1.0.0.cql" />
-	</ItemGroup>
 </Project>

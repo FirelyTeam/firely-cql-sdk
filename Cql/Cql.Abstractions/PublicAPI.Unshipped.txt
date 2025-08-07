@@ -36,6 +36,9 @@ Hl7.Cql.Abstractions.CqlExpressionDefinitionAttribute
 Hl7.Cql.Abstractions.CqlExpressionDefinitionAttribute.CqlExpressionDefinitionAttribute(string! name) -> void
 Hl7.Cql.Abstractions.CqlFunctionDefinitionAttribute
 Hl7.Cql.Abstractions.CqlFunctionDefinitionAttribute.CqlFunctionDefinitionAttribute(string! name) -> void
+Hl7.Cql.Abstractions.CqlFunctionParameterAttribute
+Hl7.Cql.Abstractions.CqlFunctionParameterAttribute.CqlFunctionParameterAttribute(string! cqlParameterName) -> void
+Hl7.Cql.Abstractions.CqlFunctionParameterAttribute.CqlParameterName.get -> string!
 Hl7.Cql.Abstractions.CqlLibraryAttribute
 Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string! Version) -> void
 Hl7.Cql.Abstractions.CqlLibraryAttribute.Identifier.get -> string!
