@@ -35,7 +35,9 @@ internal static class IdentifierNormalizer
         if (span.Length > 0 && span[0] == '$')
             span = span[1..];
 
-        Span<char> buffer = stackalloc char[span.Length * 5]; // Allow for expansions like + -> plus
+        // Start with 1.5x the input length, minimum 16 characters
+        var initialSize = Math.Max(16, (int)(span.Length * 1.5));
+        char[] buffer = new char[initialSize];
         int bufferIndex = 0;
 
         foreach (var c in span)
@@ -46,30 +48,40 @@ internal static class IdentifierNormalizer
                 case '\'':
                     continue;
                 case '&':
+                    EnsureBufferCapacity(ref buffer, bufferIndex + 5);
+                    buffer[bufferIndex++] = '_';
                     buffer[bufferIndex++] = 'a';
                     buffer[bufferIndex++] = 'n';
                     buffer[bufferIndex++] = 'd';
+                    buffer[bufferIndex++] = '_';
                     continue;
                 case '+':
+                    EnsureBufferCapacity(ref buffer, bufferIndex + 6);
+                    buffer[bufferIndex++] = '_';
                     buffer[bufferIndex++] = 'p';
                     buffer[bufferIndex++] = 'l';
                     buffer[bufferIndex++] = 'u';
                     buffer[bufferIndex++] = 's';
+                    buffer[bufferIndex++] = '_';
                     continue;
                 case '-':
+                    EnsureBufferCapacity(ref buffer, bufferIndex + 7);
+                    buffer[bufferIndex++] = '_';
                     buffer[bufferIndex++] = 'm';
                     buffer[bufferIndex++] = 'i';
                     buffer[bufferIndex++] = 'n';
                     buffer[bufferIndex++] = 'u';
                     buffer[bufferIndex++] = 's';
+                    buffer[bufferIndex++] = '_';
                     continue;
                 default:
+                    EnsureBufferCapacity(ref buffer, bufferIndex + 1);
                     buffer[bufferIndex++] = SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_';
                     break;
             }
         }
 
-        var normalized = buffer[..bufferIndex].ToString();
+        var normalized = new string(buffer, 0, bufferIndex);
 
         if (normalized.Length > 0 && !SyntaxFacts.IsIdentifierStartCharacter(normalized[0]))
             leadingUnderscoreCount++;
@@ -85,5 +97,23 @@ internal static class IdentifierNormalizer
             normalized = $"@{normalized}";
 
         return normalized;
+    }
+
+    /// <summary>
+    /// Ensures the buffer has enough capacity for the required length.
+    /// If not, grows the buffer by 1.5x and copies existing content.
+    /// </summary>
+    /// <param name="buffer">The buffer to potentially resize</param>
+    /// <param name="requiredLength">The minimum required length</param>
+    private static void EnsureBufferCapacity(ref char[] buffer, int requiredLength)
+    {
+        if (requiredLength <= buffer.Length)
+            return;
+
+        // Grow by 1.5x, ensuring we meet the required length
+        var newSize = Math.Max(requiredLength, (int)(buffer.Length * 1.5));
+        var newBuffer = new char[newSize];
+        Array.Copy(buffer, newBuffer, buffer.Length);
+        buffer = newBuffer;
     }
 }

@@ -48,13 +48,10 @@ public class IdentifierNormalizerTests
     [TestMethod]
     public void Normalize_PlusAndMinus_ReplacedWithWords()
     {
-        // This is the key test case that the user is concerned about
-        // Based on old ExpressionBuilderContext.NormalizeIdentifier:
-        // identifier.Replace("+", "plus");
-        // identifier.Replace("-", "minus"); // Note: this had a bug with double dash replacement
-        IdentifierNormalizer.Normalize("param+test").Should().Be("paramplustest");
-        IdentifierNormalizer.Normalize("param-test").Should().Be("paramminustest");
-        IdentifierNormalizer.Normalize("add+subtract-multiply").Should().Be("addplussubtractminusmultiply");
+        // Updated to use underscore delimited format: + -> _plus_, - -> _minus_
+        IdentifierNormalizer.Normalize("param+test").Should().Be("param_plus_test");
+        IdentifierNormalizer.Normalize("param-test").Should().Be("param_minus_test");
+        IdentifierNormalizer.Normalize("add+subtract-multiply").Should().Be("add_plus_subtract_minus_multiply");
     }
 
     [TestMethod]
@@ -71,10 +68,9 @@ public class IdentifierNormalizerTests
     [TestMethod]
     public void Normalize_Ampersand_ReplacedWithAnd()
     {
-        // Based on old behavior:
-        // identifier.Replace("&", "and");
-        IdentifierNormalizer.Normalize("param&test").Should().Be("paramandtest");
-        IdentifierNormalizer.Normalize("this&that").Should().Be("thisandthat");
+        // Updated to use underscore delimited format: & -> _and_
+        IdentifierNormalizer.Normalize("param&test").Should().Be("param_and_test");
+        IdentifierNormalizer.Normalize("this&that").Should().Be("this_and_that");
     }
 
     [TestMethod]
@@ -110,9 +106,53 @@ public class IdentifierNormalizerTests
     [TestMethod]
     public void Normalize_ComplexExamples_MatchOldBehavior()
     {
-        // Complex test cases combining multiple transformations
-        IdentifierNormalizer.Normalize("\"param with spaces+and-dashes\"").Should().Be("param_with_spacesplusandminusdashes");
-        IdentifierNormalizer.Normalize("$test.param&value+sum").Should().Be("test_paramandvalueplussum");
+        // Updated complex test cases with new character mappings
+        IdentifierNormalizer.Normalize("\"param with spaces+and-dashes\"").Should().Be("param_with_spaces_plus__and__minus_dashes");
+        IdentifierNormalizer.Normalize("$test.param&value+sum").Should().Be("test_param_and_value_plus_sum");
         IdentifierNormalizer.Normalize("function(param1,param2)").Should().Be("function_param1_param2_");
+    }
+
+    [TestMethod]
+    public void Normalize_BufferGrowth_HandlesLargeExpansions()
+    {
+        // Test that buffer growth works correctly when many character expansions occur
+        var input = new string('+', 100); // 100 plus signs
+        var expected = string.Join("", Enumerable.Repeat("_plus_", 100));
+        IdentifierNormalizer.Normalize(input).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Normalize_BufferGrowth_HandlesSmallInitialBuffer()
+    {
+        // Test with input that will definitely require buffer growth
+        // Each + becomes _plus_ (6 chars), so 5 chars becomes 30 chars
+        var input = "+++++";
+        var expected = "_plus__plus__plus__plus__plus_";
+        IdentifierNormalizer.Normalize(input).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Normalize_BufferGrowth_MixedCharacters()
+    {
+        // Test buffer growth with mixed character types requiring different expansion lengths
+        var input = "a+b&c-d";
+        var expected = "a_plus_b_and_c_minus_d";
+        IdentifierNormalizer.Normalize(input).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Normalize_BufferGrowth_EmptyInput()
+    {
+        // Edge case: empty input should not cause buffer issues
+        IdentifierNormalizer.Normalize("").Should().Be("_");
+    }
+
+    [TestMethod]
+    public void Normalize_BufferGrowth_SingleCharacterExpansions()
+    {
+        // Test each special character individually
+        IdentifierNormalizer.Normalize("+").Should().Be("_plus_");
+        IdentifierNormalizer.Normalize("-").Should().Be("_minus_");
+        IdentifierNormalizer.Normalize("&").Should().Be("_and_");
     }
 }
