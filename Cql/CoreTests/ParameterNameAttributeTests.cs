@@ -8,9 +8,12 @@
 
 using System.Reflection;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
@@ -21,7 +24,7 @@ public class ParameterNameAttributeTests
     public void ParameterNameTest_CqlFunctionParameterAttribute_AddedForNormalizedParameters()
     {
         // Arrange: Load the ParameterNameTest ELM file
-        var elmFile = new FileInfo(@"Input\ELM\HL7\ParameterNameTest.json");
+        var elmFile = new FileInfo(Path.Combine("Input", "ELM", "HL7", "ParameterNameTest.json"));
         var elmLibrary = Library.LoadFromJson(elmFile);
 
         // Act: Generate C# code and compile to assembly using ElmToolkit
@@ -33,75 +36,40 @@ public class ParameterNameAttributeTests
         var assemblyBinary = assemblyResult.assemblyBinary;
         assemblyBinary.Should().NotBeNull("Assembly should be compiled successfully");
 
-        var assembly = Assembly.Load(assemblyBinary);
+        // Create InvocationToolkit and LibrarySetInvoker
+        var invocationToolkit = new InvocationToolkit()
+            .AddAssemblyBinaries(new[] { new AssemblyBinary(assemblyBinary) });
+        
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker();
 
-        // Assert: Check that the generated methods have the correct attributes
-        var libraryType = assembly.GetTypes().First(t => t.Name.Contains("ParameterNameTest"));
+        // Assert: Check that the DefinitionInvokers have the correct parameter names
+        var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.First();
 
         // Test 1: "Test Function" with "param with spaces" parameter
-        var testFunction = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-            .First(m => m.Name.Contains("Test_Function"));
-
-        var parameters = testFunction.GetParameters();
-
-        // Should have context parameter + 2 function parameters
-        parameters.Length.Should().Be(3);
-
-        // Find the parameter that was normalized from "param with spaces"
-        var paramWithSpaces = parameters.FirstOrDefault(p => p.Name.Contains("param_with_spaces"));
-        paramWithSpaces.Should().NotBeNull("Parameter 'param with spaces' should be normalized to contain underscores");
-
-        // This parameter should have the CqlFunctionParameterAttribute
-        var attribute = paramWithSpaces!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        attribute.Should().NotBeNull("Parameter with spaces should have CqlFunctionParameterAttribute");
-        attribute!.CqlParameterName.Should().Be("param with spaces", "Attribute should preserve original CQL parameter name");
-
-        // The normalParam parameter should NOT have the attribute (no normalization needed)
-        var normalParam = parameters.FirstOrDefault(p => p.Name == "normalParam");
-        normalParam.Should().NotBeNull("normalParam should exist without normalization");
-
-        var normalAttribute = normalParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        normalAttribute.Should().BeNull("normalParam should not have CqlFunctionParameterAttribute since no normalization was needed");
+        var testFunctionSignature = new DefinitionSignature("Test Function", new[] { typeof(int?), typeof(string) });
+        var testFunctionInvoker = libraryInvoker.Definitions[testFunctionSignature];
+        
+        testFunctionInvoker.Should().NotBeNull("Test Function definition should exist");
+        testFunctionInvoker.ParameterNames.Should().HaveCount(2, "Test Function should have 2 parameters");
+        testFunctionInvoker.ParameterNames[0].Should().Be("param with spaces", "First parameter should preserve original CQL name with spaces");
+        testFunctionInvoker.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
-        var anotherTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-            .First(m => m.Name.Contains("Another_Test"));
-
-        var dashParams = anotherTest.GetParameters();
-        dashParams.Length.Should().Be(2); // context + 1 function parameter
-
-        var paramWithDashes = dashParams.FirstOrDefault(p => p.Name.Contains("param_with_dashes"));
-        paramWithDashes.Should().NotBeNull("Parameter with dashes should be normalized");
-
-        var dashAttribute = paramWithDashes!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        dashAttribute.Should().NotBeNull("Parameter with dashes should have CqlFunctionParameterAttribute");
-        dashAttribute!.CqlParameterName.Should().Be("param-with-dashes", "Attribute should preserve original CQL parameter name with dashes");
+        var anotherTestSignature = new DefinitionSignature("Another Test", new[] { typeof(decimal?) });
+        var anotherTestInvoker = libraryInvoker.Definitions[anotherTestSignature];
+        
+        anotherTestInvoker.Should().NotBeNull("Another Test definition should exist");
+        anotherTestInvoker.ParameterNames.Should().HaveCount(1, "Another Test should have 1 parameter");
+        anotherTestInvoker.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
-        var keywordTest = libraryType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-            .First(m => m.Name.Contains("Keyword_Test"));
-
-        var keywordParams = keywordTest.GetParameters();
-        keywordParams.Length.Should().Be(4); // context + 3 function parameters
-
-        // C# keywords should be escaped with @ but should NOT have CqlFunctionParameterAttribute
-        // because the parameter name is the same as the original CQL name
-        var intParam = keywordParams.FirstOrDefault(p => p.Name == "int");
-        intParam.Should().NotBeNull("int parameter should be escaped with @");
-
-        var intAttribute = intParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        intAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
-
-        var refParam = keywordParams.FirstOrDefault(p => p.Name == "ref");
-        refParam.Should().NotBeNull("ref parameter should be escaped with @");
-
-        var refAttribute = refParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        refAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
-
-        var classParam = keywordParams.FirstOrDefault(p => p.Name == "class");
-        classParam.Should().NotBeNull("class parameter should be escaped with @");
-
-        var classAttribute = classParam!.GetCustomAttribute<CqlFunctionParameterAttribute>();
-        classAttribute.Should().BeNull("C# keyword parameters should not have CqlFunctionParameterAttribute");
+        var keywordTestSignature = new DefinitionSignature("Keyword Test", new[] { typeof(int?), typeof(string), typeof(bool?) });
+        var keywordTestInvoker = libraryInvoker.Definitions[keywordTestSignature];
+        
+        keywordTestInvoker.Should().NotBeNull("Keyword Test definition should exist");
+        keywordTestInvoker.ParameterNames.Should().HaveCount(3, "Keyword Test should have 3 parameters");
+        keywordTestInvoker.ParameterNames[0].Should().Be("int", "First parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.ParameterNames[1].Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.ParameterNames[2].Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
     }
 }

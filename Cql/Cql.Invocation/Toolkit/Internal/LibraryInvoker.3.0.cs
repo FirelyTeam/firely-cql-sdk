@@ -73,6 +73,10 @@ file sealed class DefinitionInvoker_3_0
               .Skip(1) // Skip CqlContext
               .Select(p => p.ParameterType)
               .ToArray(),
+    methodInfo.GetParameters()
+              .Skip(1) // Skip CqlContext
+              .Select(p => p.GetCustomAttribute<CqlFunctionParameterAttribute>()?.CqlParameterName ?? p.Name!)
+              .ToArray(),
     cqlDefinitionAttribute,
     methodInfo.GetCustomAttributes<CqlTagAttribute>()
               .ToArray())
