@@ -19,7 +19,7 @@ namespace Hl7.Cql.Runtime;
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
 public readonly record struct DefinitionSignatureWithNames(string Name, string[] ParameterNames, Type[] ParameterTypes)
-    {
+{
     /// <summary>
     /// Initializes a new instance of the <see cref="DefinitionSignatureWithNames"/> struct with the specified name
     /// and a collection of parameter type-name pairs.
