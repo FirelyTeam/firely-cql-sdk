@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -111,8 +112,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             string targetName,
             string memberName)
         {
-            var target = targetName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(targetName)}.Instance";
-            var member = VariableNameGenerator.NormalizeIdentifier(memberName);
+            var target = targetName == LibraryName ? "this" : $"{IdentifierNormalizer.NormalizeIdentifier(targetName)}.Instance";
+            var member = IdentifierNormalizer.NormalizeIdentifier(memberName);
             return $"{target}.{member}";
         }
 

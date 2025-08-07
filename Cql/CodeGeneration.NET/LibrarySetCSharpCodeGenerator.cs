@@ -144,7 +144,7 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
-        private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.VersionedLibraryIdentifier)!;
+        private string ClassName { get; } = IdentifierNormalizer.NormalizeIdentifier(Library.VersionedLibraryIdentifier);
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
@@ -206,7 +206,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.VersionedLibraryIdentifier))
+                                .Select(dep => IdentifierNormalizer.NormalizeIdentifier(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
@@ -364,8 +364,8 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var name = CqlDefinition.Name;
             string quotedName = name.QuoteString();
-            string methodName = VariableNameGenerator.NormalizeIdentifier(name)!;
-            string fieldName = VariableNameGenerator.NormalizeIdentifier($"_{name}")!;
+            string methodName = IdentifierNormalizer.NormalizeIdentifier(name);
+            string fieldName = IdentifierNormalizer.NormalizeIdentifier($"_{name}");;
             var definitionAttributeTypeName = CqlDefinition.GetType().Name;
 
             switch (CqlDefinition)
@@ -391,7 +391,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         {
                             var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
                             var codeField = cqlCodeDefinition is not null
-                                                ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                                ? IdentifierNormalizer.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
                                                 : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
                             return $"""
 
@@ -418,7 +418,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                         {
                             var cqlCodeDefinition = LibraryWriter.CodeDefinitions.FirstOrDefault(codeDefinition => codeDefinition.Code == code);
                             var codeField = cqlCodeDefinition is not null
-                                       ? VariableNameGenerator.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
+                                       ? IdentifierNormalizer.NormalizeIdentifier($"_{cqlCodeDefinition.Name}")
                                        : $"new CqlCode({code.code!.QuoteString()}, {code.system.QuoteOrNullString()})";
                             return $"""
 
