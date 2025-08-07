@@ -105,6 +105,21 @@ Use this header format with "Firely, NCQA":
 - Run relevant tests after modifications
 - Check that new projects are included in solution files (`*.sln`)
 
+### Code Generation Version Management
+**When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
+
+1. **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
+2. **Apply semantic versioning**: 
+   - **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
+   - **Minor version** (x.y.0.0): Non-breaking additions like new attributes or functionality
+   - **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
+3. **Check compatibility**: Ensure `LibraryInstanceInvoker_3_0.SupportsVersion` covers the new version range
+4. **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
+5. **Examples**:
+   - Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
+   - Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+   - Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+
 ### Generating ELM Files from CQL
 When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
 
