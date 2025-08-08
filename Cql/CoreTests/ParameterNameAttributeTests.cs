@@ -46,7 +46,9 @@ public class ParameterNameAttributeTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.First();
 
         // Test 1: "Test Function" with "param with spaces" parameter
-        var testFunctionSignature = new DefinitionSignatureWithNames("Test Function", new[] { "param with spaces", "normalParam" }, new[] { typeof(int?), typeof(string) });
+        var testFunctionSignature = new DefinitionSignatureWithNames("Test Function",
+            ("param with spaces", typeof(int?)),
+            ("normalParam", typeof(string)));
         var testFunctionInvoker = libraryInvoker.Definitions[testFunctionSignature];
 
         testFunctionInvoker.Should().NotBeNull("Test Function definition should exist");
@@ -55,7 +57,8 @@ public class ParameterNameAttributeTests
         testFunctionInvoker.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
-        var anotherTestSignature = new DefinitionSignatureWithNames("Another Test", new[] { "param-with-dashes" }, new[] { typeof(decimal?) });
+        var anotherTestSignature = new DefinitionSignatureWithNames("Another Test",
+            ("param-with-dashes", typeof(decimal?)));
         var anotherTestInvoker = libraryInvoker.Definitions[anotherTestSignature];
 
         anotherTestInvoker.Should().NotBeNull("Another Test definition should exist");
@@ -63,7 +66,10 @@ public class ParameterNameAttributeTests
         anotherTestInvoker.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
-        var keywordTestSignature = new DefinitionSignatureWithNames("Keyword Test", new[] { "int", "ref", "class" }, new[] { typeof(int?), typeof(string), typeof(bool?) });
+        var keywordTestSignature = new DefinitionSignatureWithNames("Keyword Test",
+            ("int", typeof(int?)),
+            ("ref", typeof(string)),
+            ("class", typeof(bool?)));
         var keywordTestInvoker = libraryInvoker.Definitions[keywordTestSignature];
 
         keywordTestInvoker.Should().NotBeNull("Keyword Test definition should exist");

@@ -28,7 +28,6 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     /// <param name="parameters">
     /// A collection of tuples where each tuple contains a parameter name and its corresponding type.
     /// </param>
-    [UsedImplicitly]
     public DefinitionSignatureWithNames(string name, params (string name, Type type)[] parameters) : this(
         name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type)) { }
 
@@ -38,14 +37,15 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     public string Name { get; } = Name ?? throw new ArgumentNullException(nameof(Name));
 
     /// <summary>
+    /// Gets the types of the parameters for the definition.
+    /// </summary>
+    public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
+
+    /// <summary>
     /// Gets the names of the parameters for the definition.
     /// </summary>
     public string[] ParameterNames { get; } = ParameterNames is { Length: > 0 } ? ParameterNames : [];
 
-    /// <summary>
-    /// Gets the types of the parameters for the definition.
-    /// </summary>
-    public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
 
     /// <summary>
     /// Retrieves an array of tuples, where each tuple contains a parameter name and its corresponding type.
