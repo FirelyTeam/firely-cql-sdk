@@ -14,6 +14,7 @@ namespace Hl7.Cql.Runtime;
 /// <summary>
 /// Represents the signature of a definition with parameter names, including its name, parameter types, and parameter names.
 /// </summary>
+/// <remarks>To get a representation of a definition with only its name and parameter types, use <see cref="DefinitionSignature"/>.</remarks>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>

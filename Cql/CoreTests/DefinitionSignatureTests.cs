@@ -199,7 +199,7 @@ public class DefinitionSignatureUnitTests
 
         // Assert
         Assert.AreEqual("TestFunction", name);
-        CollectionAssert.AreEqual(Type[] { typeof(int), typeof(string) }, parameterTypes);
+        CollectionAssert.AreEqual(new Type[] { typeof(int), typeof(string) }, parameterTypes);
     }
 }
 
@@ -235,8 +235,8 @@ public class DefinitionParametersUnitTests
 
         // Assert
         Assert.AreEqual(name, signature.Name);
-        CollectionAssert.AreEqual(string[] { "param1", "param2" }, signature.ParameterNames);
-        CollectionAssert.AreEqual(Type[] { typeof(int), typeof(string) }, signature.ParameterTypes);
+        CollectionAssert.AreEqual(new string[] { "param1", "param2" }, signature.ParameterNames);
+        CollectionAssert.AreEqual(new Type[] { typeof(int), typeof(string) }, signature.ParameterTypes);
     }
 
     [TestMethod]

@@ -75,21 +75,6 @@ public abstract class DefinitionInvoker(
     public DefinitionParameters DefinitionParameters { get; } = definitionParameters;
 
     /// <summary>
-    /// Gets the name of the definition.
-    /// </summary>
-    public string DefinitionName => DefinitionParameters.Name;
-
-    /// <summary>
-    /// Gets the parameter types of the method.
-    /// </summary>
-    public Type[] ParameterTypes => DefinitionParameters.ParameterTypes;
-
-    /// <summary>
-    /// Gets the original CQL parameter names.
-    /// </summary>
-    public string[] ParameterNames => DefinitionParameters.ParameterNames;
-
-    /// <summary>
     /// Gets the return type of the method.
     /// </summary>
     public Type ReturnType => returnType;
@@ -107,6 +92,7 @@ public abstract class DefinitionInvoker(
         StartBrace()
             .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
             .AppendMember(LibraryIdentifier)
-            .AppendMember(DefinitionName)
+            .AppendMember(ReturnType)
+            .AppendMember(DefinitionParameters)
             .EndBrace();
 }

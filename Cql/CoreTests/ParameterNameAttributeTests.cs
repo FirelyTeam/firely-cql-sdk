@@ -52,9 +52,9 @@ public class ParameterNameAttributeTests
         var testFunctionInvoker = libraryInvoker.Definitions[testFunctionSignature];
 
         testFunctionInvoker.Should().NotBeNull("Test Function definition should exist");
-        testFunctionInvoker.ParameterNames.Should().HaveCount(2, "Test Function should have 2 parameters");
-        testFunctionInvoker.ParameterNames[0].Should().Be("param with spaces", "First parameter should preserve original CQL name with spaces");
-        testFunctionInvoker.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
+        testFunctionInvoker.DefinitionParameters.ParameterNames.Should().HaveCount(2, "Test Function should have 2 parameters");
+        testFunctionInvoker.DefinitionParameters.ParameterNames[0].Should().Be("param with spaces", "First parameter should preserve original CQL name with spaces");
+        testFunctionInvoker.DefinitionParameters.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
         var anotherTestSignature = new DefinitionParameters("Another Test",
@@ -62,8 +62,8 @@ public class ParameterNameAttributeTests
         var anotherTestInvoker = libraryInvoker.Definitions[anotherTestSignature];
 
         anotherTestInvoker.Should().NotBeNull("Another Test definition should exist");
-        anotherTestInvoker.ParameterNames.Should().HaveCount(1, "Another Test should have 1 parameter");
-        anotherTestInvoker.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
+        anotherTestInvoker.DefinitionParameters.ParameterNames.Should().HaveCount(1, "Another Test should have 1 parameter");
+        anotherTestInvoker.DefinitionParameters.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
         var keywordTestSignature = new DefinitionParameters("Keyword Test",
@@ -73,9 +73,9 @@ public class ParameterNameAttributeTests
         var keywordTestInvoker = libraryInvoker.Definitions[keywordTestSignature];
 
         keywordTestInvoker.Should().NotBeNull("Keyword Test definition should exist");
-        keywordTestInvoker.ParameterNames.Should().HaveCount(3, "Keyword Test should have 3 parameters");
-        keywordTestInvoker.ParameterNames[0].Should().Be("int", "First parameter should preserve original CQL name even if it's a C# keyword");
-        keywordTestInvoker.ParameterNames[1].Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
-        keywordTestInvoker.ParameterNames[2].Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.DefinitionParameters.ParameterNames.Should().HaveCount(3, "Keyword Test should have 3 parameters");
+        keywordTestInvoker.DefinitionParameters.ParameterNames[0].Should().Be("int", "First parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.DefinitionParameters.ParameterNames[1].Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.DefinitionParameters.ParameterNames[2].Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
     }
 }
