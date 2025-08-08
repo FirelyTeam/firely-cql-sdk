@@ -46,7 +46,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var codes =
                 invoker.SelectExpressions()
                        .SelectResults(ctx)
-                       .ToDictionary(r => r.definitionInvoker.DefinitionInfo.Name, r => (CqlCode)r.invocationResult!);
+                       .ToDictionary(r => r.definitionInvoker.Name, r => (CqlCode)r.invocationResult!);
 
             // Assert
             Assert.AreEqual(new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female"), codes["FemaleCode"]);

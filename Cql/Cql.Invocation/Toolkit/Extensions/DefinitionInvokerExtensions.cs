@@ -74,13 +74,13 @@ public static class DefinitionInvokerExtensions
                 definitionInvoker =>
                 {
                     object?[] args = [];
-                    if (definitionInvoker.DefinitionInfo.ParameterTypes.Length > 0)
+                    if (definitionInvoker.ParameterTypes.Length > 0)
                     {
                         if (argumentsProviderCallback is null)
                             throw new ArgumentException($"The definition {definitionInvoker} has parameters, but no arguments were provided.");
                         args = argumentsProviderCallback(definitionInvoker, cqlContext);
-                        if (args.Length != definitionInvoker.DefinitionInfo.ParameterTypes.Length)
-                            throw new ArgumentException($"The number of arguments ({args.Length}) does not match the number of parameters ({definitionInvoker.DefinitionInfo.ParameterTypes.Length}) for definition {definitionInvoker}.");
+                        if (args.Length != definitionInvoker.ParameterTypes.Length)
+                            throw new ArgumentException($"The number of arguments ({args.Length}) does not match the number of parameters ({definitionInvoker.ParameterTypes.Length}) for definition {definitionInvoker}.");
                     }
 
                     preInvokeHandler?.Invoke(definitionInvoker, cqlContext, args);

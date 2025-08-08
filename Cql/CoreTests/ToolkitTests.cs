@@ -40,7 +40,7 @@ public class ToolkitTests
         var result = librarySetInvoker
                      .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
                      .SelectResults(ctx)
-                     .ToDictionary(t => t.definitionInvoker.DefinitionInfo.Name);
+                     .ToDictionary(t => t.definitionInvoker.Name);
 
         // Assert
         Assert.IsNotNull(result);
@@ -166,7 +166,7 @@ public class ToolkitTests
         var expressionsString = string.Join("\n", expressions);
         Assert.That.MultilinesAreEqual(
             """
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], DefinitionInfo: SimpleExpression}
+            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: SimpleExpression}
             """, expressionsString);
 
         // Act & Assert: Test for functions
@@ -178,8 +178,8 @@ public class ToolkitTests
         expressionsString = string.Join("\n", functions);
         Assert.That.MultilinesAreEqual(
             """
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], DefinitionInfo: Zero}
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], DefinitionInfo: Add(System.Int32? a, System.Int32? b, System.Int32? special name)}
+            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: Zero}
+            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: Add(System.Int32? a, System.Int32? b, System.Int32? special name)}
             """, expressionsString);
     }
 
@@ -218,36 +218,36 @@ public class ToolkitTests
 
         // Act: Get expressions and functions using the new method
         var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions)
-            .Where(d => d.DefinitionInfo.Name != "Patient") // Filter out the automatic Patient context definition
+            .Where(d => d.Name != "Patient") // Filter out the automatic Patient context definition
             .ToList();
 
         // Assert: Should include both expressions and functions
         expressionsAndFunctions.Should().HaveCount(5, "Should include 2 expressions and 3 functions");
 
         // Check that all expected definitions are present
-        var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionInfo.Name).ToList();
+        var definitionNames = expressionsAndFunctions.Select(d => d.Name).ToList();
         definitionNames.Should().Contain(["SimpleExpression", "CalculatedExpression", "AddIntegers", "Double", "ZeroFunction"]);
 
         // Verify expressions (no parameters)
-        var simpleExpression = expressionsAndFunctions.Single(d => d.DefinitionInfo.Name == "SimpleExpression");
-        simpleExpression.DefinitionInfo.ParameterTypes.Should().BeEmpty();
+        var simpleExpression = expressionsAndFunctions.Single(d => d.Name == "SimpleExpression");
+        simpleExpression.ParameterTypes.Should().BeEmpty();
         simpleExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
-        var calculatedExpression = expressionsAndFunctions.Single(d => d.DefinitionInfo.Name == "CalculatedExpression");
-        calculatedExpression.DefinitionInfo.ParameterTypes.Should().BeEmpty();
+        var calculatedExpression = expressionsAndFunctions.Single(d => d.Name == "CalculatedExpression");
+        calculatedExpression.ParameterTypes.Should().BeEmpty();
         calculatedExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
         // Verify functions (with parameters)
-        var addIntegers = expressionsAndFunctions.Single(d => d.DefinitionInfo.Name == "AddIntegers");
-        addIntegers.DefinitionInfo.ParameterTypes.Should().HaveCount(2);
+        var addIntegers = expressionsAndFunctions.Single(d => d.Name == "AddIntegers");
+        addIntegers.ParameterTypes.Should().HaveCount(2);
         addIntegers.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
-        var doubleFunction = expressionsAndFunctions.Single(d => d.DefinitionInfo.Name == "Double");
-        doubleFunction.DefinitionInfo.ParameterTypes.Should().HaveCount(1);
+        var doubleFunction = expressionsAndFunctions.Single(d => d.Name == "Double");
+        doubleFunction.ParameterTypes.Should().HaveCount(1);
         doubleFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
-        var zeroFunction = expressionsAndFunctions.Single(d => d.DefinitionInfo.Name == "ZeroFunction");
-        zeroFunction.DefinitionInfo.ParameterTypes.Should().BeEmpty();
+        var zeroFunction = expressionsAndFunctions.Single(d => d.Name == "ZeroFunction");
+        zeroFunction.ParameterTypes.Should().BeEmpty();
         zeroFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
     }
 
@@ -272,11 +272,11 @@ public class ToolkitTests
 
         // Act: Get all definitions, then filter to check what we get
         var allDefinitions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions).ToList();
-        var expressionsAndFunctions = allDefinitions.Where(d => d.DefinitionInfo.Name != "Patient").ToList();
+        var expressionsAndFunctions = allDefinitions.Where(d => d.Name != "Patient").ToList();
 
         // Assert - should have only our SimpleExpression
         expressionsAndFunctions.Should().HaveCount(1, "Library has one user-defined expression");
-        expressionsAndFunctions[0].DefinitionInfo.Name.Should().Be("SimpleExpression");
+        expressionsAndFunctions[0].Name.Should().Be("SimpleExpression");
     }
 
     [TestMethod]
@@ -312,17 +312,17 @@ public class ToolkitTests
         // All expressions should be in the combined result
         foreach (var expression in expressions)
         {
-            expressionsAndFunctions.Should().Contain(def => def.DefinitionInfo.Name == expression.DefinitionInfo.Name);
+            expressionsAndFunctions.Should().Contain(def => def.Name == expression.Name);
         }
 
         // All functions should be in the combined result
         foreach (var function in functions)
         {
-            expressionsAndFunctions.Should().Contain(def => def.DefinitionInfo.Name == function.DefinitionInfo.Name);
+            expressionsAndFunctions.Should().Contain(def => def.Name == function.Name);
         }
 
         // Combined result should not have duplicates
-        var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionInfo.Name).ToList();
+        var definitionNames = expressionsAndFunctions.Select(d => d.Name).ToList();
         definitionNames.Should().OnlyHaveUniqueItems();
     }
 }

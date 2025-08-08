@@ -14,7 +14,7 @@ namespace Hl7.Cql.Runtime;
 /// <summary>
 /// Represents the signature of a definition, including its name and parameter types.
 /// </summary>
-/// <remarks>To get a representation of a definition with its name, return type and parameter types and names, use <see cref="DefinitionInfo"/>.</remarks>
+/// <remarks>To get a representation of a definition with its name, return type and parameter types and names, use the individual properties on <see cref="DefinitionInvoker"/>.</remarks>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]

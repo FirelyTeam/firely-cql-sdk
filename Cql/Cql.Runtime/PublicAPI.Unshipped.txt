@@ -579,18 +579,6 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitions() -> System.Collection
 Hl7.Cql.Runtime.DefinitionDictionary<T>.SelectDefinitionsByLibraryName(string? libraryName) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.DefinitionSignature definitionSignature, T! definition)>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature].get -> T!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinition(string? libraryName, Hl7.Cql.Runtime.DefinitionSignature definitionSignature, out T? definition) -> bool
-Hl7.Cql.Runtime.DefinitionInfo
-Hl7.Cql.Runtime.DefinitionInfo.Deconstruct(out string! name, out System.Type! returnType, out (string! name, System.Type! type)[]! parameters) -> void
-Hl7.Cql.Runtime.DefinitionInfo.Deconstruct(out string! Name, out System.Type! ReturnType, out string![]! ParameterNames, out System.Type![]! ParameterTypes) -> void
-Hl7.Cql.Runtime.DefinitionInfo.DefinitionInfo() -> void
-Hl7.Cql.Runtime.DefinitionInfo.DefinitionInfo(string! name, System.Type! returnType, params (string! name, System.Type! type)[]! parameters) -> void
-Hl7.Cql.Runtime.DefinitionInfo.DefinitionInfo(string! Name, System.Type! ReturnType, string![]! ParameterNames, System.Type![]! ParameterTypes) -> void
-Hl7.Cql.Runtime.DefinitionInfo.Equals(Hl7.Cql.Runtime.DefinitionInfo other) -> bool
-Hl7.Cql.Runtime.DefinitionInfo.GetParameterTypeNames() -> (string! name, System.Type! type)[]!
-Hl7.Cql.Runtime.DefinitionInfo.Name.get -> string!
-Hl7.Cql.Runtime.DefinitionInfo.ParameterNames.get -> string![]!
-Hl7.Cql.Runtime.DefinitionInfo.ParameterTypes.get -> System.Type![]!
-Hl7.Cql.Runtime.DefinitionInfo.ReturnType.get -> System.Type!
 Hl7.Cql.Runtime.DefinitionSignature
 Hl7.Cql.Runtime.DefinitionSignature.Deconstruct(out string! Name, out System.Type![]! ParameterTypes) -> void
 Hl7.Cql.Runtime.DefinitionSignature.DefinitionSignature() -> void
@@ -657,8 +645,6 @@ override Hl7.Cql.Runtime.CqlLibraryVersion.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlLibraryVersion.ToString() -> string!
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
-override Hl7.Cql.Runtime.DefinitionInfo.GetHashCode() -> int
-override Hl7.Cql.Runtime.DefinitionInfo.ToString() -> string!
 override Hl7.Cql.Runtime.DefinitionSignature.GetHashCode() -> int
 override Hl7.Cql.Runtime.DefinitionSignature.ToString() -> string!
 override Hl7.Cql.Runtime.Parsing.CqlParseError.GetHashCode() -> int
@@ -693,10 +679,6 @@ static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result, Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler? onError = null) -> bool
-static Hl7.Cql.Runtime.DefinitionInfo.implicit operator Hl7.Cql.Runtime.DefinitionInfo(string! name) -> Hl7.Cql.Runtime.DefinitionInfo
-static Hl7.Cql.Runtime.DefinitionInfo.implicit operator Hl7.Cql.Runtime.DefinitionSignature(Hl7.Cql.Runtime.DefinitionInfo signature) -> Hl7.Cql.Runtime.DefinitionSignature
-static Hl7.Cql.Runtime.DefinitionInfo.operator !=(Hl7.Cql.Runtime.DefinitionInfo left, Hl7.Cql.Runtime.DefinitionInfo right) -> bool
-static Hl7.Cql.Runtime.DefinitionInfo.operator ==(Hl7.Cql.Runtime.DefinitionInfo left, Hl7.Cql.Runtime.DefinitionInfo right) -> bool
 static Hl7.Cql.Runtime.DefinitionSignature.implicit operator Hl7.Cql.Runtime.DefinitionSignature(string! name) -> Hl7.Cql.Runtime.DefinitionSignature
 static Hl7.Cql.Runtime.DefinitionSignature.operator !=(Hl7.Cql.Runtime.DefinitionSignature left, Hl7.Cql.Runtime.DefinitionSignature right) -> bool
 static Hl7.Cql.Runtime.DefinitionSignature.operator ==(Hl7.Cql.Runtime.DefinitionSignature left, Hl7.Cql.Runtime.DefinitionSignature right) -> bool
@@ -728,6 +710,5 @@ virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Pars
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
-~override Hl7.Cql.Runtime.DefinitionInfo.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.DefinitionSignature.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool
