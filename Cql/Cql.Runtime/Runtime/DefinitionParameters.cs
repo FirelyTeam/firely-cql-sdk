@@ -18,17 +18,17 @@ namespace Hl7.Cql.Runtime;
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionSignatureWithNames(string Name, string[] ParameterNames, Type[] ParameterTypes)
+public readonly record struct DefinitionParameters(string Name, string[] ParameterNames, Type[] ParameterTypes)
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DefinitionSignatureWithNames"/> struct with the specified name
+    /// Initializes a new instance of the <see cref="DefinitionParameters"/> struct with the specified name
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
     /// <param name="parameters">
     /// A collection of tuples where each tuple contains a parameter name and its corresponding type.
     /// </param>
-    public DefinitionSignatureWithNames(string name, params (string name, Type type)[] parameters) : this(
+    public DefinitionParameters(string name, params (string name, Type type)[] parameters) : this(
         name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type)) { }
 
     /// <summary>
@@ -89,11 +89,11 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     }
 
     /// <summary>
-    /// Determines whether the current instance is equal to another <see cref="DefinitionSignatureWithNames"/> instance.
+    /// Determines whether the current instance is equal to another <see cref="DefinitionParameters"/> instance.
     /// </summary>
-    /// <param name="other">The other <see cref="DefinitionSignatureWithNames"/> instance to compare.</param>
+    /// <param name="other">The other <see cref="DefinitionParameters"/> instance to compare.</param>
     /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
-    public bool Equals(DefinitionSignatureWithNames other)
+    public bool Equals(DefinitionParameters other)
     {
         if (_hashCode != other._hashCode) return false;
         if (Name != other.Name) return false;
@@ -120,7 +120,7 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     public override int GetHashCode() => _hashCode;
 
     /// <summary>
-    /// Deconstructs the current <see cref="DefinitionSignatureWithNames"/> instance into its name
+    /// Deconstructs the current <see cref="DefinitionParameters"/> instance into its name
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
@@ -135,14 +135,14 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     }
 
     /// <summary>
-    /// Implicitly converts a string to a <see cref="DefinitionSignatureWithNames"/> instance.
+    /// Implicitly converts a string to a <see cref="DefinitionParameters"/> instance.
     /// </summary>
-    /// <param name="name">The string value to be converted into a <see cref="DefinitionSignatureWithNames"/>.</param>
-    public static implicit operator DefinitionSignatureWithNames(string name) => new(name);
+    /// <param name="name">The string value to be converted into a <see cref="DefinitionParameters"/>.</param>
+    public static implicit operator DefinitionParameters(string name) => new(name);
 
     /// <summary>
-    /// Implicitly converts a <see cref="DefinitionSignatureWithNames"/> to a <see cref="DefinitionSignature"/> instance.
+    /// Implicitly converts a <see cref="DefinitionParameters"/> to a <see cref="DefinitionSignature"/> instance.
     /// </summary>
-    /// <param name="signature">The <see cref="DefinitionSignatureWithNames"/> value to be converted into a <see cref="DefinitionSignature"/>.</param>
-    public static implicit operator DefinitionSignature(DefinitionSignatureWithNames signature) => new (signature.Name, signature.ParameterTypes);
+    /// <param name="signature">The <see cref="DefinitionParameters"/> value to be converted into a <see cref="DefinitionSignature"/>.</param>
+    public static implicit operator DefinitionSignature(DefinitionParameters signature) => new (signature.Name, signature.ParameterTypes);
 }

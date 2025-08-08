@@ -46,7 +46,7 @@ public class ParameterNameAttributeTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.First();
 
         // Test 1: "Test Function" with "param with spaces" parameter
-        var testFunctionSignature = new DefinitionSignatureWithNames("Test Function",
+        var testFunctionSignature = new DefinitionParameters("Test Function",
             ("param with spaces", typeof(int?)),
             ("normalParam", typeof(string)));
         var testFunctionInvoker = libraryInvoker.Definitions[testFunctionSignature];
@@ -57,7 +57,7 @@ public class ParameterNameAttributeTests
         testFunctionInvoker.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
-        var anotherTestSignature = new DefinitionSignatureWithNames("Another Test",
+        var anotherTestSignature = new DefinitionParameters("Another Test",
             ("param-with-dashes", typeof(decimal?)));
         var anotherTestInvoker = libraryInvoker.Definitions[anotherTestSignature];
 
@@ -66,7 +66,7 @@ public class ParameterNameAttributeTests
         anotherTestInvoker.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
-        var keywordTestSignature = new DefinitionSignatureWithNames("Keyword Test",
+        var keywordTestSignature = new DefinitionParameters("Keyword Test",
             ("int", typeof(int?)),
             ("ref", typeof(string)),
             ("class", typeof(bool?)));
