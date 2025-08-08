@@ -17,8 +17,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
 /// <param name="returnType">The return type of the CQL definition.</param>
-/// <param name="parameterTypes">The parameter types required by the CQL definition.</param>
-/// <param name="parameterNames">The original CQL parameter names.</param>
+/// <param name="definitionParameters">The definition parameters including name, parameter types, and parameter names.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
@@ -35,8 +34,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
     Type returnType,
-    Type[] parameterTypes,
-    string[] parameterNames,
+    DefinitionParameters definitionParameters,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -72,19 +70,24 @@ public abstract class DefinitionInvoker(
     public CqlVersionedLibraryIdentifier LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
 
     /// <summary>
+    /// Gets the definition parameters including name, parameter types, and parameter names.
+    /// </summary>
+    public DefinitionParameters DefinitionParameters { get; } = definitionParameters;
+
+    /// <summary>
     /// Gets the name of the definition.
     /// </summary>
-    public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
+    public string DefinitionName => DefinitionParameters.Name;
 
     /// <summary>
     /// Gets the parameter types of the method.
     /// </summary>
-    public Type[] ParameterTypes { get; } = parameterTypes;
+    public Type[] ParameterTypes => DefinitionParameters.ParameterTypes;
 
     /// <summary>
     /// Gets the original CQL parameter names.
     /// </summary>
-    public string[] ParameterNames { get; } = parameterNames;
+    public string[] ParameterNames => DefinitionParameters.ParameterNames;
 
     /// <summary>
     /// Gets the return type of the method.

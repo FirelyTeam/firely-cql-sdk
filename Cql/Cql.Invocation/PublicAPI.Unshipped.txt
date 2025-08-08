@@ -5,8 +5,9 @@ abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.DependencyLibraryIdentifiers.
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.CqlDefinitionAttribute.get -> Hl7.Cql.Abstractions.CqlDefinitionAttribute!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, System.Type! returnType, System.Type![]! parameterTypes, string![]! parameterNames, Hl7.Cql.Abstractions.CqlDefinitionAttribute! cqlDefinitionAttribute, Hl7.Cql.Abstractions.CqlTagAttribute![]! cqlTagAttributes) -> void
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, System.Type! returnType, Hl7.Cql.Runtime.DefinitionParameters definitionParameters, Hl7.Cql.Abstractions.CqlDefinitionAttribute! cqlDefinitionAttribute, Hl7.Cql.Abstractions.CqlTagAttribute![]! cqlTagAttributes) -> void
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionParameters.get -> Hl7.Cql.Runtime.DefinitionParameters
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibrarySetName.get -> string!
