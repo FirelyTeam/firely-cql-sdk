@@ -18,7 +18,7 @@ public class DefinitionSignatureUnitTests
     {
         // Arrange
         const string name = "TestFunction";
-        var paramTypes = new[] { typeof(int), typeof(string) };
+        Type[] paramTypes = [typeof(int), typeof(string)];
 
         // Act
         var signature = new DefinitionSignature(name, paramTypes);
@@ -199,7 +199,7 @@ public class DefinitionSignatureUnitTests
 
         // Assert
         Assert.AreEqual("TestFunction", name);
-        CollectionAssert.AreEqual(new[] { typeof(int), typeof(string) }, parameterTypes);
+        CollectionAssert.AreEqual(Type[] { typeof(int), typeof(string) }, parameterTypes);
     }
 }
 
@@ -211,8 +211,8 @@ public class DefinitionParametersUnitTests
     {
         // Arrange
         const string name = "TestFunction";
-        var paramNames = new[] { "param1", "param2" };
-        var paramTypes = new[] { typeof(int), typeof(string) };
+        string[] paramNames = ["param1", "param2"];
+        Type[] paramTypes = [typeof(int), typeof(string)];
 
         // Act
         var signature = new DefinitionParameters(name, paramNames, paramTypes);
@@ -228,29 +228,29 @@ public class DefinitionParametersUnitTests
     {
         // Arrange
         const string name = "TestFunction";
-        var parameters = new[] { ("param1", typeof(int)), ("param2", typeof(string)) };
+        (string, Type)[] parameters = [("param1", typeof(int)), ("param2", typeof(string))];
 
         // Act
         var signature = new DefinitionParameters(name, parameters);
 
         // Assert
         Assert.AreEqual(name, signature.Name);
-        CollectionAssert.AreEqual(new[] { "param1", "param2" }, signature.ParameterNames);
-        CollectionAssert.AreEqual(new[] { typeof(int), typeof(string) }, signature.ParameterTypes);
+        CollectionAssert.AreEqual(string[] { "param1", "param2" }, signature.ParameterNames);
+        CollectionAssert.AreEqual(Type[] { typeof(int), typeof(string) }, signature.ParameterTypes);
     }
 
     [TestMethod]
     public void Constructor_WithNullName_ShouldThrowArgumentNullException()
     {
         // Act & Assert
-        Assert.ThrowsException<ArgumentNullException>(() => new DefinitionParameters(null!, new[] { "param1" }, new[] { typeof(int) }));
+        Assert.ThrowsException<ArgumentNullException>(() => new DefinitionParameters(null!, ["param1"], [typeof(int)]));
     }
 
     [TestMethod]
     public void Constructor_WithMismatchedArrayLengths_ShouldThrowArgumentException()
     {
         // Act & Assert
-        var ex = Assert.ThrowsException<ArgumentException>(() => new DefinitionParameters("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int) }));
+        var ex = Assert.ThrowsException<ArgumentException>(() => new DefinitionParameters("TestFunction", ["param1", "param2"], [typeof(int)]));
         Assert.IsTrue(ex.Message.Contains("same length"));
     }
 

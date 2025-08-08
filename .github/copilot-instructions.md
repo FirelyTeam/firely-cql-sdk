@@ -82,6 +82,13 @@ Use this header format with "Firely, NCQA":
 6. **When adding new utility files or functionality that are only used internally, keep those types as `internal`, not `public`** - Only expose public APIs when they are intended for external consumption
 7. **When creating new files or modifying existing ones, always remove unused usings at the top of the file** - Keep using statements clean and only include what is actually used
 8. **Do not add duplicate usings in files where the using is already included globally in `GlobalUsings.cs`** - Check GlobalUsings.cs first to avoid redundant using statements
+9. **Always use the latest C# language features** when appropriate:
+   - Use collection expressions `[]` instead of `new[] { ... }` for arrays and collections
+   - Use target-typed `new()` expressions when the type is clear from context
+   - Use pattern matching and switch expressions where applicable
+   - Use record types for immutable data structures
+   - Use nullable reference types and null-conditional operators
+   - Use string interpolation instead of `string.Format` or concatenation
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage
