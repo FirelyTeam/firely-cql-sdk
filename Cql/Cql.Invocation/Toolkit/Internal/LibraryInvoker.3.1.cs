@@ -24,11 +24,11 @@ internal sealed class LibraryInstanceInvoker_3_1 : LibraryInstanceInvoker
                       .GetType()
                       .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                       .SelectWhere(methodInfo => DefinitionInvoker_3_1.TryCreate(Library, this, methodInfo))
-                      .ToFrozenDictionary(o => o.DefinitionParameters, o => o)
+                      .ToFrozenDictionary(o => (DefinitionSignature)o.DefinitionParameters, o => o)
                       .AsReadOnly();
     }
 
-    public override IReadOnlyDictionary<DefinitionParameters, DefinitionInvoker> Definitions { get; }
+    public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType) =>
         libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
@@ -72,7 +72,8 @@ file sealed class DefinitionInvoker_3_1(
         cqlDefinitionAttribute.Name,
         methodInfo.GetParameters()
                   .Skip(1) // Skip CqlContext
-                  .Select(p => p.GetCustomAttribute<CqlFunctionParameterAttribute>()?.CqlParameterName ?? p.Name!)
+                  .Select(p =>
+                  p.GetCustomAttribute<CqlFunctionParameterAttribute>()?.CqlParameterName ?? p.Name!)
                   .ToArray(),
         methodInfo.GetParameters()
                   .Skip(1) // Skip CqlContext
