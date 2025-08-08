@@ -3497,7 +3497,7 @@ namespace CoreTests
         public void UnionListNullAndListNull()
         {
             var ops = GetNewContext().Operators;
-            var result = ops.Union<object>(new object[] { null }, new object[] { null });
+            var result = ops.Union<object>([null], [null]);
             var equal = ops.Equal(result, new object[] { null });
             Assert.IsTrue(equal);
         }

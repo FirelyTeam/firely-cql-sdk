@@ -27,11 +27,11 @@ namespace CoreTests
         [TestMethod]
         public void Age()
         {
-            var dataSource = new UnitTestDataSource(new[] {
+            var dataSource = new UnitTestDataSource([
                 new UnitTestPatient {
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
-            });
+            ]);
 
             var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataSource: dataSource,
@@ -43,11 +43,11 @@ namespace CoreTests
         [TestMethod]
         public void AgeAt()
         {
-            var dataSource = new UnitTestDataSource(new[] {
+            var dataSource = new UnitTestDataSource([
                 new UnitTestPatient {
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
-            });
+            ]);
             var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataSource: dataSource,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
@@ -62,7 +62,7 @@ namespace CoreTests
 
         private class UnitTestDataSource(IEnumerable<object> data) : IDataSource
         {
-            public IList<object> Data { get; } = data?.ToList() ?? new List<object>();
+            public IList<object> Data { get; } = data?.ToList() ?? [];
 
 #if VNEXT
             public event EventHandler DataChanged;

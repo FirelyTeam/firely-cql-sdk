@@ -15,23 +15,23 @@ namespace CoreTests.Elm
     {
         static TupleTypeSpecifier tt = new()
         {
-            element = new[]
-              {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } },
-              }
+            element =
+            [
+                new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } }
+            ]
         };
 
         static Library lib = new()
         {
-            statements = new[]
-            {
-                    new ExpressionDef { expression = new Literal { value = "hi", resultTypeSpecifier = tt }, name = "Foo" }
-            }
+            statements =
+            [
+                new ExpressionDef { expression = new Literal { value = "hi", resultTypeSpecifier = tt }, name = "Foo" }
+            ]
         };
 
         class ResultBuilder
         {
-            public List<string> Strings = new();
+            public List<string> Strings = [];
 
             public bool Visitor(object e)
             {

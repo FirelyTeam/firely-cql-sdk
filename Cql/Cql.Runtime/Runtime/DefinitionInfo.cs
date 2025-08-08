@@ -20,7 +20,7 @@ namespace Hl7.Cql.Runtime;
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
 /// <param name="ReturnType">The return type of the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionInfo(string Name, string[] ParameterNames, Type[] ParameterTypes, Type ReturnType)
+public readonly record struct DefinitionInfo(string Name, Type ReturnType, string[] ParameterNames, Type[] ParameterTypes)
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DefinitionInfo"/> struct with the specified name
@@ -32,7 +32,7 @@ public readonly record struct DefinitionInfo(string Name, string[] ParameterName
     /// A collection of tuples where each tuple contains a parameter name and its corresponding type.
     /// </param>
     public DefinitionInfo(string name, Type returnType, params (string name, Type type)[] parameters) : this(
-        name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type), returnType) { }
+        name, returnType, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type)) { }
 
     /// <summary>
     /// Gets the name of the definition.
@@ -117,10 +117,10 @@ public readonly record struct DefinitionInfo(string Name, string[] ParameterName
         if (ParameterTypes.Any())
         {
             var parameters = GetParameterTypeNames().Select(t => $"{t.type.ToCSharpString()} {t.name}");
-            return $"{Name}({string.Join(", ", parameters)})";
+            return $"{ReturnType.ToCSharpString()} {Name}({string.Join(", ", parameters)})";
         }
 
-        return Name;
+        return $"{ReturnType.ToCSharpString()} {Name}";
     }
 
     /// <summary>
@@ -134,13 +134,15 @@ public readonly record struct DefinitionInfo(string Name, string[] ParameterName
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
+    /// <param name="returnType">The return type of the definition.</param>
     /// <param name="parameters">
     /// An array of tuples, where each tuple contains a parameter name as a <see cref="string"/>
     /// and its corresponding type as a <see cref="Type"/>.
     /// </param>
-    public void Deconstruct(out string name, out (string name, Type type)[] parameters)
+    public void Deconstruct(out string name, out Type returnType, out (string name, Type type)[] parameters)
     {
         name = Name;
+        returnType = ReturnType;
         parameters = GetParameterTypeNames();
     }
 
@@ -148,7 +150,7 @@ public readonly record struct DefinitionInfo(string Name, string[] ParameterName
     /// Implicitly converts a string to a <see cref="DefinitionInfo"/> instance.
     /// </summary>
     /// <param name="name">The string value to be converted into a <see cref="DefinitionInfo"/>.</param>
-    public static implicit operator DefinitionInfo(string name) => new(name, [], [], typeof(object));
+    public static implicit operator DefinitionInfo(string name) => new(name, typeof(object), [], []);
 
     /// <summary>
     /// Implicitly converts a <see cref="DefinitionInfo"/> to a <see cref="DefinitionSignature"/> instance.

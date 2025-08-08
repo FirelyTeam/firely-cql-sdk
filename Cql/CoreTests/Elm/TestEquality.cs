@@ -15,29 +15,31 @@ namespace CoreTests.Elm
     {
         internal static readonly TypeSpecifier FullTT = new TupleTypeSpecifier
         {
-            element = new[]
-            {
-                    new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier { elementType = new ParameterTypeSpecifier { parameterName = "B" } } },
+            element =
+            [
+                new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier { elementType = new ParameterTypeSpecifier { parameterName = "B" } } },
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
-                    new TupleElementDefinition { name = "choice", elementType = new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { SystemTypes.IntegerType, new ParameterTypeSpecifier { parameterName = "D" }, new ParameterTypeSpecifier { parameterName = "E" } } } },
-                    new TupleElementDefinition { name = "named", elementType = SystemTypes.StringType },
-            }
+                    new TupleElementDefinition { name = "choice", elementType = new ChoiceTypeSpecifier { choice = [SystemTypes.IntegerType, new ParameterTypeSpecifier { parameterName = "D" }, new ParameterTypeSpecifier { parameterName = "E" }
+                    ]
+                } },
+                    new TupleElementDefinition { name = "named", elementType = SystemTypes.StringType }
+            ]
         };
 
         internal static readonly TypeSpecifier EmptyTT = new TupleTypeSpecifier
         {
-            element = new[]
-            {
-                    new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier()},
+            element =
+            [
+                new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier()},
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier()},
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier()},
                     new TupleElementDefinition { name = "choice", elementType = new ChoiceTypeSpecifier() },
                     new TupleElementDefinition { name = "named", elementType = new NamedTypeSpecifier() },
                     new TupleElementDefinition { name = "emptytt", elementType = new TupleTypeSpecifier()},
                     new TupleElementDefinition { name = "justname" },
-                    new TupleElementDefinition(),
-            }
+                    new TupleElementDefinition()
+            ]
         };
 
         private static void eq<T>(T a, T b) where T : TypeSpecifier
@@ -110,10 +112,10 @@ namespace CoreTests.Elm
         [TestMethod]
         public void TestTupleTypeSpecifierEquals()
         {
-            var tts1 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType } } };
-            var tts2 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType } } };
-            var tts3 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Bar", elementType = SystemTypes.LongType } } };
-            var tts4 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.BooleanType } } };
+            var tts1 = new TupleTypeSpecifier() { element = [new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType }] };
+            var tts2 = new TupleTypeSpecifier() { element = [new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType }] };
+            var tts3 = new TupleTypeSpecifier() { element = [new TupleElementDefinition() { name = "Bar", elementType = SystemTypes.LongType }] };
+            var tts4 = new TupleTypeSpecifier() { element = [new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.BooleanType }] };
             var tts5 = new TupleTypeSpecifier();
 
             eq(tts1, tts2);
@@ -129,9 +131,9 @@ namespace CoreTests.Elm
         [TestMethod]
         public void TestChoiceTypeSpecifierEquals()
         {
-            var cts1 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.StringType } };
-            var cts2 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.StringType } };
-            var cts3 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.BooleanType } };
+            var cts1 = new ChoiceTypeSpecifier() { choice = [SystemTypes.LongType, SystemTypes.StringType] };
+            var cts2 = new ChoiceTypeSpecifier() { choice = [SystemTypes.LongType, SystemTypes.StringType] };
+            var cts3 = new ChoiceTypeSpecifier() { choice = [SystemTypes.LongType, SystemTypes.BooleanType] };
             var cts4 = new ChoiceTypeSpecifier();
             cts1.Equals(cts4);
             eq(cts1, cts2);

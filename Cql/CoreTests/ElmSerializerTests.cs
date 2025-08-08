@@ -32,14 +32,12 @@ namespace CoreTests
             var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
             cts.choice.Should().HaveCount(1);
         }
-        private static readonly HashSet<string> AcceptableErrors = new()
-        {
-            // Although it seems enums are *always* serialized (even when they are set to the default
-            // value), sometimes they are not for accessLevel. That's acceptable.
+        private static readonly HashSet<string> AcceptableErrors =
+        [
             "Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.",
             //now removing empty values due to JAVA ELM having many empty arrays in the output
             @"Expected key 'relationship' (value '[]') not found in actual object. At $.library.statements.def[6].expression.else.element[0].value."
-        };
+        ];
         [TestMethod]
         public void Elm_Deserialize_FhirHelpers()
         {
@@ -136,20 +134,17 @@ namespace CoreTests
             if (actual is JsonValue actualValue)
             {
                 if (expectedValue.ToString() != actualValue.ToString())
-                    return new List<string>
-                    {
-                        $"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}."
-                    };
+                    return [$"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}."];
             }
             else
-                return new List<string> { $"Expected value, but found '{actual.GetType()}' at {actual.GetPath()}." };
+                return [$"Expected value, but found '{actual.GetType()}' at {actual.GetPath()}."];
 
-            return new List<string>();
+            return [];
         }
 
         private List<string> CompareArray(JsonNode actual, JsonArray expectedArray)
         {
-            List<string> result = new List<string>();
+            List<string> result = [];
 
             if (actual is JsonArray actualArray)
             {
@@ -172,7 +167,7 @@ namespace CoreTests
 
         private List<string> CompareObject(JsonNode actual, JsonObject expectedObj)
         {
-            List<string> result = new List<string>();
+            List<string> result = [];
 
             if (actual is JsonObject)
             {

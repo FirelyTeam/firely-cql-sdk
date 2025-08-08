@@ -73,26 +73,6 @@ public abstract class DefinitionInvoker(
     public DefinitionInfo DefinitionInfo { get; } = definitionInfo;
 
     /// <summary>
-    /// Gets the name of the definition.
-    /// </summary>
-    public string DefinitionName => DefinitionInfo.Name;
-
-    /// <summary>
-    /// Gets the parameter types of the method.
-    /// </summary>
-    public Type[] ParameterTypes => DefinitionInfo.ParameterTypes;
-
-    /// <summary>
-    /// Gets the original CQL parameter names.
-    /// </summary>
-    public string[] ParameterNames => DefinitionInfo.ParameterNames;
-
-    /// <summary>
-    /// Gets the return type of the method.
-    /// </summary>
-    public Type ReturnType => DefinitionInfo.ReturnType;
-
-    /// <summary>
     /// Invokes the definition with the given CQL context.
     /// </summary>
     /// <param name="cqlContext">The CQL context.</param>

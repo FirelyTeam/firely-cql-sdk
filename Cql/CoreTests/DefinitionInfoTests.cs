@@ -22,7 +22,7 @@ public class DefinitionInfoTests
         Type[] paramTypes = [typeof(int), typeof(string)];
 
         // Act
-        var signature = new DefinitionInfo(name, paramNames, paramTypes, typeof(void));
+        var signature = new DefinitionInfo(name, typeof(void), paramNames, paramTypes);
 
         // Assert
         Assert.AreEqual(name, signature.Name);
@@ -52,14 +52,14 @@ public class DefinitionInfoTests
     public void Constructor_WithNullName_ShouldThrowArgumentNullException()
     {
         // Act & Assert
-        Assert.ThrowsException<ArgumentNullException>(() => new DefinitionInfo(null!, ["param1"], [typeof(int)], typeof(void)));
+        Assert.ThrowsException<ArgumentNullException>(() => new DefinitionInfo(null!, typeof(void), ["param1"], [typeof(int)]));
     }
 
     [TestMethod]
     public void Constructor_WithMismatchedArrayLengths_ShouldThrowArgumentException()
     {
         // Act & Assert
-        var ex = Assert.ThrowsException<ArgumentException>(() => new DefinitionInfo("TestFunction", ["param1", "param2"], [typeof(int)], typeof(void)));
+        var ex = Assert.ThrowsException<ArgumentException>(() => new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int)]));
         Assert.IsTrue(ex.Message.Contains("same length"));
     }
 
@@ -70,7 +70,7 @@ public class DefinitionInfoTests
         const string name = "TestFunction";
 
         // Act
-        var signature = new DefinitionInfo(name, Array.Empty<string>(), Array.Empty<Type>(), typeof(string));
+        var signature = new DefinitionInfo(name, typeof(string), [], []);
 
         // Assert
         Assert.AreEqual(name, signature.Name);
@@ -86,7 +86,7 @@ public class DefinitionInfoTests
         const string name = "TestFunction";
 
         // Act
-        var signature = new DefinitionInfo(name, null!, null!, typeof(void));
+        var signature = new DefinitionInfo(name, typeof(void), null!, null!);
 
         // Assert
         Assert.AreEqual(name, signature.Name);
@@ -98,8 +98,8 @@ public class DefinitionInfoTests
     public void Equals_WithSameContent_ShouldReturnTrue()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
-        var signature2 = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signature1 = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
+        var signature2 = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act & Assert
         Assert.IsTrue(signature1.Equals(signature2));
@@ -111,8 +111,8 @@ public class DefinitionInfoTests
     public void Equals_WithDifferentNames_ShouldReturnFalse()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction1", new[] { "param1" }, new[] { typeof(int) }, typeof(bool));
-        var signature2 = new DefinitionInfo("TestFunction2", new[] { "param1" }, new[] { typeof(int) }, typeof(bool));
+        var signature1 = new DefinitionInfo("TestFunction1", typeof(bool), ["param1"], [typeof(int)]);
+        var signature2 = new DefinitionInfo("TestFunction2", typeof(bool), ["param1"], [typeof(int)]);
 
         // Act & Assert
         Assert.IsFalse(signature1.Equals(signature2));
@@ -123,8 +123,8 @@ public class DefinitionInfoTests
     public void Equals_WithDifferentParameterTypes_ShouldReturnFalse()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction", new[] { "param1" }, new[] { typeof(int) }, typeof(int));
-        var signature2 = new DefinitionInfo("TestFunction", new[] { "param1" }, new[] { typeof(string) }, typeof(int));
+        var signature1 = new DefinitionInfo("TestFunction", typeof(int), ["param1"], [typeof(int)]);
+        var signature2 = new DefinitionInfo("TestFunction", typeof(int), ["param1"], [typeof(string)]);
 
         // Act & Assert
         Assert.IsFalse(signature1.Equals(signature2));
@@ -135,8 +135,8 @@ public class DefinitionInfoTests
     public void Equals_WithDifferentParameterNames_ShouldReturnFalse()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction", new[] { "param1" }, new[] { typeof(int) }, typeof(int));
-        var signature2 = new DefinitionInfo("TestFunction", new[] { "param2" }, new[] { typeof(int) }, typeof(int));
+        var signature1 = new DefinitionInfo("TestFunction", typeof(int), ["param1"], [typeof(int)]);
+        var signature2 = new DefinitionInfo("TestFunction", typeof(int), ["param2"], [typeof(int)]);
 
         // Act & Assert
         Assert.IsFalse(signature1.Equals(signature2));
@@ -147,8 +147,8 @@ public class DefinitionInfoTests
     public void GetHashCode_WithSameContent_ShouldBeSame()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
-        var signature2 = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signature1 = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
+        var signature2 = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act & Assert
         Assert.AreEqual(signature1.GetHashCode(), signature2.GetHashCode());
@@ -158,8 +158,8 @@ public class DefinitionInfoTests
     public void GetHashCode_WithDifferentContent_ShouldBeDifferent()
     {
         // Arrange
-        var signature1 = new DefinitionInfo("TestFunction1", new[] { "param1" }, new[] { typeof(int) }, typeof(bool));
-        var signature2 = new DefinitionInfo("TestFunction2", new[] { "param1" }, new[] { typeof(int) }, typeof(bool));
+        var signature1 = new DefinitionInfo("TestFunction1", typeof(bool), ["param1"], [typeof(int)]);
+        var signature2 = new DefinitionInfo("TestFunction2", typeof(bool), ["param1"], [typeof(int)]);
 
         // Act & Assert
         Assert.AreNotEqual(signature1.GetHashCode(), signature2.GetHashCode());
@@ -169,7 +169,7 @@ public class DefinitionInfoTests
     public void GetHashCode_ShouldBeCached()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signature = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act
         var hash1 = signature.GetHashCode();
@@ -183,7 +183,7 @@ public class DefinitionInfoTests
     public void ToString_WithNoParameters_ShouldReturnNameOnly()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", Array.Empty<string>(), Array.Empty<Type>(), typeof(void));
+        var signature = new DefinitionInfo("TestFunction", typeof(void), [], []);
 
         // Act
         var result = signature.ToString();
@@ -196,7 +196,7 @@ public class DefinitionInfoTests
     public void ToString_WithParameters_ShouldIncludeParameterTypesAndNames()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", new[] { "count", "name" }, new[] { typeof(int), typeof(string) }, typeof(double));
+        var signature = new DefinitionInfo("TestFunction", typeof(double), ["count", "name"], [typeof(int), typeof(string)]);
 
         // Act
         var result = signature.ToString();
@@ -209,7 +209,7 @@ public class DefinitionInfoTests
     public void GetParameterTypeNames_ShouldReturnTupleArray()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signature = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act
         var result = signature.GetParameterTypeNames();
@@ -224,7 +224,7 @@ public class DefinitionInfoTests
     public void GetParameterTypeNames_WithNoParameters_ShouldReturnEmptyArray()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", Array.Empty<string>(), Array.Empty<Type>(), typeof(void));
+        var signature = new DefinitionInfo("TestFunction", typeof(void), [], []);
 
         // Act
         var result = signature.GetParameterTypeNames();
@@ -234,16 +234,17 @@ public class DefinitionInfoTests
     }
 
     [TestMethod]
-    public void Deconstruct_ShouldProvideNameAndParameterTuples()
+    public void Deconstruct_ShouldProvideNameReturnTypeAndParameterTuples()
     {
         // Arrange
-        var signature = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signature = new DefinitionInfo("TestFunction", typeof(bool), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act
-        var (name, parameters) = signature;
+        var (name, returnType, parameters) = signature;
 
         // Assert
         Assert.AreEqual("TestFunction", name);
+        Assert.AreEqual(typeof(bool), returnType);
         Assert.AreEqual(2, parameters.Length);
         Assert.AreEqual(("param1", typeof(int)), parameters[0]);
         Assert.AreEqual(("param2", typeof(string)), parameters[1]);
@@ -268,7 +269,7 @@ public class DefinitionInfoTests
     public void ImplicitConversion_ToDefinitionSignature_ShouldPreserveName()
     {
         // Arrange
-        var signatureWithNames = new DefinitionInfo("TestFunction", new[] { "param1", "param2" }, new[] { typeof(int), typeof(string) }, typeof(void));
+        var signatureWithNames = new DefinitionInfo("TestFunction", typeof(void), ["param1", "param2"], [typeof(int), typeof(string)]);
 
         // Act
         DefinitionSignature signature = signatureWithNames;

@@ -19,19 +19,22 @@ namespace CoreTests;
 [TestClass]
 public class ValueSetTests
 {
-    private static readonly CqlCode[] TestCodesA = new[] {
+    private static readonly CqlCode[] TestCodesA =
+    [
         new CqlCode("a", "http://nu.nl"),
         new CqlCode("b", "http://nu.nl"),
         new CqlCode("c", "HTTP://nu.nl"),
-        new CqlCode("d", null) };
+        new CqlCode("d", null)
+    ];
 
-    private static readonly CqlCode[] TestCodesB = new[] {
+    private static readonly CqlCode[] TestCodesB =
+    [
         new CqlCode("e", "http://nu.nl", display: "Letters"),
         new CqlCode("f", "http://nu.nl", display: "LETTERS"),
         new CqlCode("g", null, display: "Letters"),
         new CqlCode("h", "http://nu.nl"),
-        new CqlCode("h", "http://nu.nl", display: "Letters"),
-    };
+        new CqlCode("h", "http://nu.nl", display: "Letters")
+    ];
 
 
     [TestMethod]

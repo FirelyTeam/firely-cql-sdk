@@ -26,11 +26,10 @@ namespace CoreTests
             var score3 = dd.Score([typeof(DomainResource)], [typeof(Claim)]);
             Assert.IsNull(score3); // DomainResource is not assignable to Claim
 
-            var bestMatch = dd.BestMatch([typeof(Claim)], new[]
-            {
+            var bestMatch = dd.BestMatch([typeof(Claim)], [
                 ([typeof(DomainResource)], "DomainResource"),
-                (new[] { typeof(Claim) }, "Claim"),
-            });
+                ([typeof(Claim)], "Claim")
+            ]);
             Assert.AreEqual("Claim", bestMatch);
         }
 
@@ -43,11 +42,10 @@ namespace CoreTests
             var score2 = dd.Score([typeof(Claim), typeof(Claim)], [typeof(DomainResource), typeof(Claim)]);
             Assert.AreEqual(1, score2); // signature is 1 level removed from paramter type
 
-            var bestMatch = dd.BestMatch([typeof(Claim), typeof(Claim)], new[]
-            {
+            var bestMatch = dd.BestMatch([typeof(Claim), typeof(Claim)], [
                 ([typeof(DomainResource), typeof(Claim)], "DomainResource, Claim"),
-                (new[] { typeof(Claim), typeof(DomainResource) }, "Claim, DomainResource"),
-            });
+                ([typeof(Claim), typeof(DomainResource)], "Claim, DomainResource")
+            ]);
             Assert.IsNull(bestMatch);
         }
 
