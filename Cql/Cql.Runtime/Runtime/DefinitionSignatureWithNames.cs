@@ -25,17 +25,12 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
-    /// <param name="parameterTypeNamePairs">
-    /// A collection of key-value pairs, where each key represents the name of a parameter,
-    /// and each value represents the type of the corresponding parameter.
+    /// <param name="parameters">
+    /// A collection of tuples where each tuple contains a parameter name and its corresponding type.
     /// </param>
-    public DefinitionSignatureWithNames(string name, params KeyValuePair<string, Type>[] parameterTypeNamePairs)
-        : this(
-            name,
-            parameterTypeNamePairs.SelectToArray(p => p.Key),
-            parameterTypeNamePairs.SelectToArray(p => p.Value))
-    {
-    }
+    [UsedImplicitly]
+    public DefinitionSignatureWithNames(string name, params (string name, Type type)[] parameters) : this(
+        name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type)) { }
 
     /// <summary>
     /// Gets the name of the definition.
@@ -53,17 +48,14 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
 
     /// <summary>
-    /// Gets a collection of key-value pairs representing the parameter names and their corresponding types.
+    /// Retrieves an array of tuples, where each tuple contains a parameter name and its corresponding type.
     /// </summary>
-    /// <remarks>
-    /// Each key in the collection represents the name of a parameter, and each value represents the type of the corresponding parameter.
-    /// </remarks>
     /// <returns>
-    ///     An array of <see cref="KeyValuePair{TKey, TValue}"/> where the key is a <see cref="string"/> representing the parameter name,
-    ///     and the value is a <see cref="Type"/> representing the parameter type.
+    /// An array of tuples, where each tuple consists of a parameter name as a <see cref="string"/>
+    /// and its corresponding type as a <see cref="Type"/>.
     /// </returns>
-    public KeyValuePair<string, Type>[] GetParameterTypeNamePairs() =>
-        ParameterTypes.Zip(ParameterNames, (type, name) => new KeyValuePair<string, Type>(name, type)).ToArray();
+    public (string name, Type type)[] GetParameterTypeNames() =>
+        ParameterTypes.Zip(ParameterNames, (type, name) => (name, type)).ToArray();
 
     /// <summary>
     /// Cached hash code for performance optimization.
@@ -112,8 +104,13 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     /// <inheritdoc />
     public override string ToString()
     {
-        var parameters = ParameterTypes.Zip(ParameterNames, (type, name) => $"{type.ToCSharpString()} {name}");
-        return $"{Name}({string.Join(", ", parameters)})";
+        if (ParameterTypes.Any())
+        {
+            var parameters = GetParameterTypeNames().Select(t => $"{t.type.ToCSharpString()} {t.name}");
+            return $"{Name}({string.Join(", ", parameters)})";
+        }
+
+        return Name;
     }
 
     /// <summary>
@@ -121,6 +118,21 @@ public readonly record struct DefinitionSignatureWithNames(string Name, string[]
     /// </summary>
     /// <returns>The hash code for the current instance.</returns>
     public override int GetHashCode() => _hashCode;
+
+    /// <summary>
+    /// Deconstructs the current <see cref="DefinitionSignatureWithNames"/> instance into its name
+    /// and a collection of parameter type-name pairs.
+    /// </summary>
+    /// <param name="name">The name of the definition.</param>
+    /// <param name="parameters">
+    /// An array of tuples, where each tuple contains a parameter name as a <see cref="string"/>
+    /// and its corresponding type as a <see cref="Type"/>.
+    /// </param>
+    public void Deconstruct(out string name, out (string name, Type type)[] parameters)
+    {
+        name = Name;
+        parameters = GetParameterTypeNames();
+    }
 
     /// <summary>
     /// Implicitly converts a string to a <see cref="DefinitionSignatureWithNames"/> instance.

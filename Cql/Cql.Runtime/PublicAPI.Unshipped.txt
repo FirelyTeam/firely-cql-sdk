@@ -587,12 +587,13 @@ Hl7.Cql.Runtime.DefinitionSignature.Equals(Hl7.Cql.Runtime.DefinitionSignature o
 Hl7.Cql.Runtime.DefinitionSignature.Name.get -> string!
 Hl7.Cql.Runtime.DefinitionSignature.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Runtime.DefinitionSignatureWithNames
+Hl7.Cql.Runtime.DefinitionSignatureWithNames.Deconstruct(out string! name, out (string! name, System.Type! type)[]! parameters) -> void
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.Deconstruct(out string! Name, out string![]! ParameterNames, out System.Type![]! ParameterTypes) -> void
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.DefinitionSignatureWithNames() -> void
-Hl7.Cql.Runtime.DefinitionSignatureWithNames.DefinitionSignatureWithNames(string! name, params System.Collections.Generic.KeyValuePair<string!, System.Type!>[]! parameterTypeNamePairs) -> void
+Hl7.Cql.Runtime.DefinitionSignatureWithNames.DefinitionSignatureWithNames(string! name, params (string! name, System.Type! type)[]! parameters) -> void
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.DefinitionSignatureWithNames(string! Name, string![]! ParameterNames, System.Type![]! ParameterTypes) -> void
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.Equals(Hl7.Cql.Runtime.DefinitionSignatureWithNames other) -> bool
-Hl7.Cql.Runtime.DefinitionSignatureWithNames.GetParameterTypeNamePairs() -> System.Collections.Generic.KeyValuePair<string!, System.Type!>[]!
+Hl7.Cql.Runtime.DefinitionSignatureWithNames.GetParameterTypeNames() -> (string! name, System.Type! type)[]!
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.Name.get -> string!
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.ParameterNames.get -> string![]!
 Hl7.Cql.Runtime.DefinitionSignatureWithNames.ParameterTypes.get -> System.Type![]!
