@@ -16,8 +16,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Represents an abstract base class for invoking CQL definitions within a library context.
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
-/// <param name="returnType">The return type of the CQL definition.</param>
-/// <param name="definitionParameters">The definition parameters including name, parameter types, and parameter names.</param>
+/// <param name="definitionInfo">The definition information including name, parameter types, parameter names, and return type.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
@@ -33,8 +32,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </example>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    Type returnType,
-    DefinitionParameters definitionParameters,
+    DefinitionInfo definitionInfo,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -70,14 +68,29 @@ public abstract class DefinitionInvoker(
     public CqlVersionedLibraryIdentifier LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
 
     /// <summary>
-    /// Gets the definition parameters including name, parameter types, and parameter names.
+    /// Gets the definition information including name, parameter types, parameter names, and return type.
     /// </summary>
-    public DefinitionParameters DefinitionParameters { get; } = definitionParameters;
+    public DefinitionInfo DefinitionInfo { get; } = definitionInfo;
+
+    /// <summary>
+    /// Gets the name of the definition.
+    /// </summary>
+    public string DefinitionName => DefinitionInfo.Name;
+
+    /// <summary>
+    /// Gets the parameter types of the method.
+    /// </summary>
+    public Type[] ParameterTypes => DefinitionInfo.ParameterTypes;
+
+    /// <summary>
+    /// Gets the original CQL parameter names.
+    /// </summary>
+    public string[] ParameterNames => DefinitionInfo.ParameterNames;
 
     /// <summary>
     /// Gets the return type of the method.
     /// </summary>
-    public Type ReturnType => returnType;
+    public Type ReturnType => DefinitionInfo.ReturnType;
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
@@ -92,7 +105,6 @@ public abstract class DefinitionInvoker(
         StartBrace()
             .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
             .AppendMember(LibraryIdentifier)
-            .AppendMember(ReturnType)
-            .AppendMember(DefinitionParameters)
+            .AppendMember(DefinitionInfo)
             .EndBrace();
 }

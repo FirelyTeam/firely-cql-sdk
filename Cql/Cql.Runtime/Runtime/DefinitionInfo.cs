@@ -12,25 +12,27 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Represents the signature of a definition with parameter names, including its name, parameter types, and parameter names.
+/// Represents the signature of a definition with parameter names, including its name, parameter types, parameter names, and return type.
 /// </summary>
 /// <remarks>To get a representation of a definition with only its name and parameter types, use <see cref="DefinitionSignature"/>.</remarks>
 /// <param name="Name">The name of the definition.</param>
 /// <param name="ParameterTypes">The types of the parameters for the definition.</param>
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
+/// <param name="ReturnType">The return type of the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionParameters(string Name, string[] ParameterNames, Type[] ParameterTypes)
+public readonly record struct DefinitionInfo(string Name, string[] ParameterNames, Type[] ParameterTypes, Type ReturnType)
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DefinitionParameters"/> struct with the specified name
+    /// Initializes a new instance of the <see cref="DefinitionInfo"/> struct with the specified name
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
+    /// <param name="returnType">The return type of the definition.</param>
     /// <param name="parameters">
     /// A collection of tuples where each tuple contains a parameter name and its corresponding type.
     /// </param>
-    public DefinitionParameters(string name, params (string name, Type type)[] parameters) : this(
-        name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type)) { }
+    public DefinitionInfo(string name, Type returnType, params (string name, Type type)[] parameters) : this(
+        name, parameters.SelectToArray(p => p.name), parameters.SelectToArray(p => p.type), returnType) { }
 
     /// <summary>
     /// Gets the name of the definition.
@@ -43,11 +45,15 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
     public Type[] ParameterTypes { get; } = ParameterTypes is { Length: > 0 } ? ParameterTypes : [];
 
     /// <summary>
+    /// Gets the return type of the definition.
+    /// </summary>
+    public Type ReturnType { get; } = ReturnType ?? throw new ArgumentNullException(nameof(ReturnType));
+
+
+    /// <summary>
     /// Gets the names of the parameters for the definition.
     /// </summary>
     public string[] ParameterNames { get; } = ParameterNames is { Length: > 0 } ? ParameterNames : [];
-
-
     /// <summary>
     /// Retrieves an array of tuples, where each tuple contains a parameter name and its corresponding type.
     /// </summary>
@@ -61,16 +67,17 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
     /// <summary>
     /// Cached hash code for performance optimization.
     /// </summary>
-    private readonly int _hashCode = CalculateHashCode(Name, ParameterTypes, ParameterNames);
+    private readonly int _hashCode = CalculateHashCode(Name, ParameterTypes, ParameterNames, ReturnType);
 
     /// <summary>
-    /// Calculates the hash code for the given name, parameter types, and parameter names.
+    /// Calculates the hash code for the given name, parameter types, parameter names, and return type.
     /// </summary>
     /// <param name="name">The name to include in the hash code calculation.</param>
     /// <param name="parameterTypes">The parameter types to include in the hash code calculation.</param>
     /// <param name="parameterNames">The parameter names to include in the hash code calculation.</param>
+    /// <param name="returnType">The return type to include in the hash code calculation.</param>
     /// <returns>The calculated hash code.</returns>
-    private static int CalculateHashCode(string name, Type[] parameterTypes, string[] parameterNames)
+    private static int CalculateHashCode(string name, Type[] parameterTypes, string[] parameterNames, Type returnType)
     {
         var parameterTypesLength = parameterTypes?.Length ?? 0;
         var parameterNamesLength = parameterNames?.Length ?? 0;
@@ -79,6 +86,7 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
 
         var hashCode = new HashCode();
         hashCode.Add(name);
+        hashCode.Add(returnType);
         if (parameterTypesLength > 0)
         {
             foreach (var type in parameterTypes!)
@@ -90,14 +98,15 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
     }
 
     /// <summary>
-    /// Determines whether the current instance is equal to another <see cref="DefinitionParameters"/> instance.
+    /// Determines whether the current instance is equal to another <see cref="DefinitionInfo"/> instance.
     /// </summary>
-    /// <param name="other">The other <see cref="DefinitionParameters"/> instance to compare.</param>
+    /// <param name="other">The other <see cref="DefinitionInfo"/> instance to compare.</param>
     /// <returns><c>true</c> if the instances are equal; otherwise, <c>false</c>.</returns>
-    public bool Equals(DefinitionParameters other)
+    public bool Equals(DefinitionInfo other)
     {
         if (_hashCode != other._hashCode) return false;
         if (Name != other.Name) return false;
+        if (ReturnType != other.ReturnType) return false;
         if (!ParameterTypes.SequenceEqual(other.ParameterTypes)) return false;
         return ParameterNames.SequenceEqual(other.ParameterNames);
     }
@@ -121,7 +130,7 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
     public override int GetHashCode() => _hashCode;
 
     /// <summary>
-    /// Deconstructs the current <see cref="DefinitionParameters"/> instance into its name
+    /// Deconstructs the current <see cref="DefinitionInfo"/> instance into its name
     /// and a collection of parameter type-name pairs.
     /// </summary>
     /// <param name="name">The name of the definition.</param>
@@ -136,14 +145,14 @@ public readonly record struct DefinitionParameters(string Name, string[] Paramet
     }
 
     /// <summary>
-    /// Implicitly converts a string to a <see cref="DefinitionParameters"/> instance.
+    /// Implicitly converts a string to a <see cref="DefinitionInfo"/> instance.
     /// </summary>
-    /// <param name="name">The string value to be converted into a <see cref="DefinitionParameters"/>.</param>
-    public static implicit operator DefinitionParameters(string name) => new(name);
+    /// <param name="name">The string value to be converted into a <see cref="DefinitionInfo"/>.</param>
+    public static implicit operator DefinitionInfo(string name) => new(name, [], [], typeof(object));
 
     /// <summary>
-    /// Implicitly converts a <see cref="DefinitionParameters"/> to a <see cref="DefinitionSignature"/> instance.
+    /// Implicitly converts a <see cref="DefinitionInfo"/> to a <see cref="DefinitionSignature"/> instance.
     /// </summary>
-    /// <param name="signature">The <see cref="DefinitionParameters"/> value to be converted into a <see cref="DefinitionSignature"/>.</param>
-    public static implicit operator DefinitionSignature(DefinitionParameters signature) => new (signature.Name, signature.ParameterTypes);
+    /// <param name="signature">The <see cref="DefinitionInfo"/> value to be converted into a <see cref="DefinitionSignature"/>.</param>
+    public static implicit operator DefinitionSignature(DefinitionInfo signature) => new (signature.Name, signature.ParameterTypes);
 }
