@@ -109,7 +109,7 @@ public abstract class LibraryInvoker
     /// <summary>
     /// Gets the dictionary of definition invokers for the CQL library.
     /// </summary>
-    public abstract IReadOnlyDictionary<DefinitionInfo, DefinitionInvoker> Definitions { get; }
+    public abstract IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     /// <summary>
     /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.

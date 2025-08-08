@@ -24,11 +24,11 @@ internal sealed class LibraryInstanceInvoker_3_1 : LibraryInstanceInvoker
                       .GetType()
                       .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                       .SelectWhere(methodInfo => DefinitionInvoker_3_1.TryCreate(Library, this, methodInfo))
-                      .ToFrozenDictionary(o => o.DefinitionInfo, o => o)
+                      .ToFrozenDictionary(o => (DefinitionSignature)o.DefinitionInfo, o => o)
                       .AsReadOnly();
     }
 
-    public override IReadOnlyDictionary<DefinitionInfo, DefinitionInvoker> Definitions { get; }
+    public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType) =>
         libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)

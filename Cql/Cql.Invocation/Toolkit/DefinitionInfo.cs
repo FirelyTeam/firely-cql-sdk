@@ -8,8 +8,9 @@
 
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Invocation.Toolkit;
 
 /// <summary>
 /// Represents the signature of a definition with parameter names, including its name, parameter types, parameter names, and return type.
@@ -20,7 +21,11 @@ namespace Hl7.Cql.Runtime;
 /// <param name="ParameterNames">The names of the parameters for the definition.</param>
 /// <param name="ReturnType">The return type of the definition.</param>
 [DebuggerDisplay($"{{{nameof(ToString)}(),nq}}")]
-public readonly record struct DefinitionInfo(string Name, Type ReturnType, string[] ParameterNames, Type[] ParameterTypes)
+public readonly record struct DefinitionInfo(
+    string Name,
+    Type ReturnType,
+    string[] ParameterNames,
+    Type[] ParameterTypes)
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DefinitionInfo"/> struct with the specified name
