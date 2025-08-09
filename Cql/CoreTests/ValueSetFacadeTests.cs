@@ -17,21 +17,18 @@ namespace CoreTests
     [TestClass]
     public class ValueSetFacadeTests
     {
-        private static readonly IEnumerable<CqlCode> TestCodesA =
-        [
+        private static readonly IEnumerable<CqlCode> TestCodesA = new[] {
             new CqlCode("a", "http://nu.nl"),
             new CqlCode("b", "http://nu.nl"), new CqlCode("B", "http://nu.nl"),
             new CqlCode("c", "HTTP://nu.nl"),
-            new CqlCode("d", null)
-        ];
+            new CqlCode("d", null) };
 
-        private static readonly IEnumerable<CqlCode> TestCodesB =
-        [
+        private static readonly IEnumerable<CqlCode> TestCodesB = new[] {
             new CqlCode("e", "http://nu.nl", display: "Letters"),
             new CqlCode("f", "http://nu.nl", display: "LETTERS"),
             new CqlCode("g", null, display: "Letters"),
-            new CqlCode("h", "http://nu.nl"),new CqlCode("h", "http://nu.nl"),new CqlCode("h", "http://nu.nl", display: "Letters")
-        ];
+            new CqlCode("h", "http://nu.nl"),new CqlCode("h", "http://nu.nl"),new CqlCode("h", "http://nu.nl", display: "Letters"),
+        };
 
         private const string nu = "http://nu.nl";
         private const string NU = "HTTP://NU.NL";
