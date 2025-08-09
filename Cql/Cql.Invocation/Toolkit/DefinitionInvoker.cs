@@ -17,7 +17,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Represents an abstract base class for invoking CQL definitions within a library context.
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
-/// <param name="name">The name of the definition.</param>
+/// <param name="definitionName">The name of the definition.</param>
 /// <param name="returnType">The return type of the definition.</param>
 /// <param name="parameterNames">The names of the parameters for the definition.</param>
 /// <param name="parameterTypes">The types of the parameters for the definition.</param>
@@ -36,7 +36,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </example>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    string name,
+    string definitionName,
     Type returnType,
     string[] parameterNames,
     Type[] parameterTypes,
@@ -77,7 +77,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
-    public string Name { get; } = name ?? throw new ArgumentNullException(nameof(name));
+    public string DefinitionName { get; } = definitionName ?? throw new ArgumentNullException(nameof(definitionName));
 
     /// <summary>
     /// Gets the return type of the definition.
@@ -107,8 +107,9 @@ public abstract class DefinitionInvoker(
         StartBrace()
             .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
             .AppendMember(LibraryIdentifier)
+            .AppendMember(DefinitionName)
             .AppendMember($"ReturnType: {ReturnType.ToCSharpString()}")
-            .AppendMember($"Definition: {GetDefinitionString()}")
+            .AppendMemberIf(GetDefinitionString(), ParameterTypes.Any(), "Parameters")
             .EndBrace();
 
     private string GetDefinitionString()
@@ -116,8 +117,9 @@ public abstract class DefinitionInvoker(
         if (ParameterTypes.Any())
         {
             var parameters = ParameterTypes.Zip(ParameterNames, (type, name) => $"{type.ToCSharpString()} {name}");
-            return $"{Name}({string.Join(", ", parameters)})";
+            return $"{{{string.Join(", ", parameters)}}}";
         }
-        return Name;
+
+        return "";
     }
 }

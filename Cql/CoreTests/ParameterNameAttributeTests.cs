@@ -46,11 +46,7 @@ public class ParameterNameAttributeTests
         var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.First();
 
         // Test 1: "Test Function" with "param with spaces" parameter
-        var testFunctionInvoker = libraryInvoker.Definitions.Values
-            .FirstOrDefault(d => d.Name == "Test Function" && 
-                                d.ParameterTypes.Length == 2 &&
-                                d.ParameterTypes[0] == typeof(int?) &&
-                                d.ParameterTypes[1] == typeof(string));
+        var testFunctionInvoker = libraryInvoker.Definitions[new("Test Function", typeof(int?), typeof(string))];
 
         testFunctionInvoker.Should().NotBeNull("Test Function definition should exist");
         testFunctionInvoker.ParameterNames.Should().HaveCount(2, "Test Function should have 2 parameters");
@@ -58,22 +54,14 @@ public class ParameterNameAttributeTests
         testFunctionInvoker.ParameterNames[1].Should().Be("normalParam", "Second parameter should have original name");
 
         // Test 2: "Another Test" with "param-with-dashes" parameter
-        var anotherTestInvoker = libraryInvoker.Definitions.Values
-            .FirstOrDefault(d => d.Name == "Another Test" && 
-                                d.ParameterTypes.Length == 1 &&
-                                d.ParameterTypes[0] == typeof(decimal?));
+        var anotherTestInvoker = libraryInvoker.Definitions[new("Another Test", typeof(decimal?))];
 
         anotherTestInvoker.Should().NotBeNull("Another Test definition should exist");
         anotherTestInvoker.ParameterNames.Should().HaveCount(1, "Another Test should have 1 parameter");
         anotherTestInvoker.ParameterNames[0].Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
 
         // Test 3: "Keyword Test" with C# keyword parameters
-        var keywordTestInvoker = libraryInvoker.Definitions.Values
-            .FirstOrDefault(d => d.Name == "Keyword Test" && 
-                                d.ParameterTypes.Length == 3 &&
-                                d.ParameterTypes[0] == typeof(int?) &&
-                                d.ParameterTypes[1] == typeof(string) &&
-                                d.ParameterTypes[2] == typeof(bool?));
+        var keywordTestInvoker = libraryInvoker.Definitions[new ("Keyword Test", typeof(int?), typeof(string), typeof(bool?))];
 
         keywordTestInvoker.Should().NotBeNull("Keyword Test definition should exist");
         keywordTestInvoker.ParameterNames.Should().HaveCount(3, "Keyword Test should have 3 parameters");

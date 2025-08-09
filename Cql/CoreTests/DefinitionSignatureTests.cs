@@ -11,7 +11,7 @@ using Hl7.Cql.Runtime;
 namespace CoreTests;
 
 [TestClass]
-public class DefinitionSignatureUnitTests
+public class DefinitionSignatureTests
 {
     [TestMethod]
     public void Constructor_WithValidNameAndTypes_ShouldCreateInstance()

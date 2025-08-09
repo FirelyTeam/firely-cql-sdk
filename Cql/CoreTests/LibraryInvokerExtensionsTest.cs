@@ -12,7 +12,7 @@ using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
-internal static class LibraryInvokerTestExtensions
+internal static class LibraryInvokerExtensionsTest
 {
     /// <summary>
     /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/> with <paramref name="parameters"/>.
@@ -30,16 +30,13 @@ internal static class LibraryInvokerTestExtensions
         params object[] parameters)
     {
         var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
-        
+
         // Find the definition that matches the name and parameter types
-        var definition = libraryInvoker.Definitions
-            .FirstOrDefault(kvp => kvp.Key.Name == define && 
-                                   kvp.Key.ParameterTypes.SequenceEqual(parameterTypes))
-            .Value;
-            
+        var definition = libraryInvoker.Definitions[new(define, parameterTypes)];
+
         if (definition == null)
             throw new InvalidOperationException($"No definition found with name '{define}' and parameter types [{string.Join(", ", parameterTypes.Select(t => t.Name))}]");
-            
+
         var resultObj = definition.Invoke(rtx, parameters);
         var result = (T?)resultObj;
         return result;
