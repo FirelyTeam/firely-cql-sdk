@@ -36,7 +36,13 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Console.WriteLine($"Function: {definitionInvoker.DefinitionName}");
 /// Console.WriteLine($"Return Type: {definitionInvoker.ReturnType.Name}");
 /// 
-/// // Access parameter information
+/// // Access parameter information using Operands
+/// foreach (var operand in definitionInvoker.Operands)
+/// {
+///     Console.WriteLine($"Parameter: {operand.Name} ({operand.Type.Name})");
+/// }
+/// 
+/// // Or use convenience properties for backward compatibility
 /// for (int i = 0; i &lt; definitionInvoker.ParameterCqlNames.Length; i++)
 /// {
 ///     Console.WriteLine($"Parameter {i}: {definitionInvoker.ParameterCqlNames[i]} ({definitionInvoker.ParameterTypes[i].Name})");
@@ -96,16 +102,21 @@ public abstract class DefinitionInvoker(
     public Type ReturnType { get; } = returnType ?? throw new ArgumentNullException(nameof(returnType));
 
     /// <summary>
+    /// Gets the operand information for the definition, containing both CQL names and types.
+    /// </summary>
+    public CqlOperandInfo[] Operands { get; } = CreateOperands(parameterNames, parameterTypes);
+
+    /// <summary>
     /// Gets the original CQL parameter names for the definition.
     /// These are the parameter names as they appear in the CQL source code, 
     /// which may differ from the normalized C# method parameter names.
     /// </summary>
-    public string[] ParameterCqlNames { get; } = parameterNames is { Length: > 0 } ? parameterNames : [];
+    public string[] ParameterCqlNames => Operands.Select(op => op.Name).ToArray();
 
     /// <summary>
     /// Gets the types of the parameters for the definition.
     /// </summary>
-    public Type[] ParameterTypes { get; } = parameterTypes is { Length: > 0 } ? parameterTypes : [];
+    public Type[] ParameterTypes => Operands.Select(op => op.Type).ToArray();
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
@@ -135,14 +146,25 @@ public abstract class DefinitionInvoker(
             .AppendMember(DefinitionName)
             .AppendMember(CqlDefinitionAttribute.GetType().Name["Cql".Length .. ^"DefinitionAttribute".Length], "DefinitionType")
             .AppendMember(ReturnType.ToCSharpString(), nameof(ReturnType))
-            .AppendMemberIf(GetDefinitionString(), ParameterTypes.Any(), "Parameters")
+            .AppendMemberIf(GetDefinitionString(), Operands.Any(), "Parameters")
             .EndBrace();
+
+    private static CqlOperandInfo[] CreateOperands(string[] parameterNames, Type[] parameterTypes)
+    {
+        var names = parameterNames is { Length: > 0 } ? parameterNames : [];
+        var types = parameterTypes is { Length: > 0 } ? parameterTypes : [];
+        
+        if (names.Length != types.Length)
+            throw new ArgumentException("Parameter names and types arrays must have the same length.");
+        
+        return names.Zip(types, (name, type) => new CqlOperandInfo(name, type)).ToArray();
+    }
 
     private string GetDefinitionString()
     {
-        if (ParameterTypes.Any())
+        if (Operands.Any())
         {
-            var parameters = ParameterTypes.Zip(ParameterCqlNames, (type, name) => $"{type.ToCSharpString()} {name}");
+            var parameters = Operands.Select(op => $"{op.Type.ToCSharpString()} {op.Name}");
             return $"{{{string.Join(", ", parameters)}}}";
         }
 

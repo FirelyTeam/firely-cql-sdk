@@ -3,6 +3,10 @@ abstract Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Invoke(Hl7.Cql.Runtime.Cql
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.Definitions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.DefinitionSignature, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.DependencyLibraryIdentifiers.get -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.Invocation.Toolkit.CqlOperandInfo
+Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.CqlOperandInfo(string! Name, System.Type! Type) -> void
+Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Name.get -> string!
+Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Type.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.CqlDefinitionAttribute.get -> Hl7.Cql.Abstractions.CqlDefinitionAttribute!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, string! name, System.Type! returnType, string![]! parameterNames, System.Type![]! parameterTypes, Hl7.Cql.Abstractions.CqlDefinitionAttribute! cqlDefinitionAttribute, Hl7.Cql.Abstractions.CqlTagAttribute![]! cqlTagAttributes) -> void
@@ -10,6 +14,7 @@ Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryIdentifier.get -> Hl7.Cql.Ru
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibrarySetName.get -> string!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Operands.get -> Hl7.Cql.Invocation.Toolkit.CqlOperandInfo[]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterCqlNames.get -> string![]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
