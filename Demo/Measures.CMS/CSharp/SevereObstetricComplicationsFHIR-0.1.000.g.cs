@@ -514,7 +514,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
         {
             bool? g_(Extension @this)
             {
-                string o_ = @this?.Url;
+                FhirUri o_ = @this?.UrlElement;
                 FhirString p_ = context.Operators.Convert<FhirString>(o_);
                 string q_ = FHIRHelpers_4_4_000.Instance.ToString(context, p_);
                 bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -1433,7 +1433,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
         {
             bool? g_(Extension @this)
             {
-                string o_ = @this?.Url;
+                FhirUri o_ = @this?.UrlElement;
                 FhirString p_ = context.Operators.Convert<FhirString>(o_);
                 string q_ = FHIRHelpers_4_4_000.Instance.ToString(context, p_);
                 bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");

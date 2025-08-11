@@ -1194,13 +1194,12 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         List<Extension> a_ = domainResource?.Extension;
         bool? b_(Extension E)
         {
-            string g_ = E?.Url;
-            FhirUri h_ = context.Operators.Convert<FhirUri>(g_);
-            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            string j_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
-            bool? k_ = context.Operators.Equal(i_, j_);
+            FhirUri g_ = E?.UrlElement;
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
+            string i_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
+            bool? j_ = context.Operators.Equal(h_, i_);
 
-            return k_;
+            return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
@@ -1218,12 +1217,11 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         List<Extension> a_ = element?.Extension;
         bool? b_(Extension E)
         {
-            string g_ = E?.Url;
-            FhirUri h_ = context.Operators.Convert<FhirUri>(g_);
-            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            bool? j_ = context.Operators.Equal(i_, url);
+            FhirUri g_ = E?.UrlElement;
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
+            bool? i_ = context.Operators.Equal(h_, url);
 
-            return j_;
+            return i_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
@@ -1309,13 +1307,12 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         List<Extension> a_ = domainResource?.Extension;
         bool? b_(Extension E)
         {
-            string g_ = E?.Url;
-            FhirUri h_ = context.Operators.Convert<FhirUri>(g_);
-            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            string j_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", url);
-            bool? k_ = context.Operators.Equal(i_, j_);
+            FhirUri g_ = E?.UrlElement;
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
+            string i_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", url);
+            bool? j_ = context.Operators.Equal(h_, i_);
 
-            return k_;
+            return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
@@ -1345,13 +1342,12 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         List<Extension> a_ = element?.Extension;
         bool? b_(Extension E)
         {
-            string g_ = E?.Url;
-            FhirUri h_ = context.Operators.Convert<FhirUri>(g_);
-            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            string j_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", id);
-            bool? k_ = context.Operators.Equal(i_, j_);
+            FhirUri g_ = E?.UrlElement;
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
+            string i_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", id);
+            bool? j_ = context.Operators.Equal(h_, i_);
 
-            return k_;
+            return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
