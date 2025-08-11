@@ -17,7 +17,6 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Represents an abstract base class for invoking CQL definitions within a library context.
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
-/// <param name="definitionName">The name of the definition.</param>
 /// <param name="returnType">The return type of the definition.</param>
 /// <param name="parameterNames">The names of the parameters for the definition.</param>
 /// <param name="parameterTypes">The types of the parameters for the definition.</param>
@@ -25,12 +24,25 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
 /// This class provides the core functionality for invoking CQL definitions, including metadata
-/// such as the library identifier, definition name, parameter types, and return type. It also
-/// supports tagging definitions with attributes for categorization or filtering.
+/// such as the library identifier, definition name, parameter names and types, and return type. 
+/// The definition name is obtained from the <see cref="CqlDefinitionAttribute.Name"/> property.
+/// It also supports tagging definitions with attributes for categorization or filtering.
 /// </remarks>
 /// <example>
 /// Example usage:
 /// <code>
+/// // Access definition metadata directly
+/// var definitionInvoker = libraryInvoker.Definitions.Values.First();
+/// Console.WriteLine($"Function: {definitionInvoker.DefinitionName}");
+/// Console.WriteLine($"Return Type: {definitionInvoker.ReturnType.Name}");
+/// 
+/// // Access parameter information
+/// for (int i = 0; i &lt; definitionInvoker.ParameterNames.Length; i++)
+/// {
+///     Console.WriteLine($"Parameter {i}: {definitionInvoker.ParameterNames[i]} ({definitionInvoker.ParameterTypes[i].Name})");
+/// }
+/// 
+/// // Invoke the definition
 /// var result = definitionInvoker.Invoke(cqlContext);
 /// </code>
 /// </example>
@@ -101,7 +113,19 @@ public abstract class DefinitionInvoker(
     /// <returns>The result of the invocation (typically when calling a function definition).</returns>
     public abstract object? Invoke(CqlContext cqlContext, params object?[] args);
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Returns a string representation of the definition invoker, including library information, 
+    /// definition name, return type, and parameter details.
+    /// </summary>
+    /// <returns>A formatted string containing definition metadata.</returns>
+    /// <example>
+    /// Example output: 
+    /// <code>
+    /// {LibrarySetName: MyLibrarySet, LibraryIdentifier: TestLib-1.0.0, DefinitionName: MyFunction, 
+    ///  DefinitionType: Function, ReturnType: System.Boolean, 
+    ///  Parameters: {System.Int32 count, System.String name}}
+    /// </code>
+    /// </example>
     public override string ToString() =>
         StartBrace()
             .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
