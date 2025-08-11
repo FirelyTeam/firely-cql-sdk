@@ -99,6 +99,18 @@ public abstract class DefinitionInvoker(
     public CqlOperandInfo[] Operands { get; } = operands ?? throw new ArgumentNullException(nameof(operands));
 
     /// <summary>
+    /// Retrieves the signature of the definition, including its name and parameter types.
+    /// </summary>
+    /// <value>
+    ///   A <see cref="DefinitionSignature"/> object that contains the name of the definition
+    ///   and an array of parameter types.
+    /// </value>
+    public DefinitionSignature DefinitionSignature { get; } = CalcDefinitionSignature(cqlDefinitionAttribute.Name, operands);
+
+    private static DefinitionSignature CalcDefinitionSignature(string definitionName, CqlOperandInfo[] operands) =>
+        new(definitionName,operands.Select(op => op.Type).ToArray());
+
+    /// <summary>
     /// Invokes the definition with the given CQL context.
     /// </summary>
     /// <param name="cqlContext">The CQL context.</param>
@@ -126,10 +138,10 @@ public abstract class DefinitionInvoker(
             .AppendMember(DefinitionName)
             .AppendMember(CqlDefinitionAttribute.GetType().Name["Cql".Length .. ^"DefinitionAttribute".Length], "DefinitionType")
             .AppendMember(ReturnType.ToCSharpString(), nameof(ReturnType))
-            .AppendMemberIf(GetDefinitionString(), Operands.Any(), "Operands")
+            .AppendMemberIf(GetOperandString(), Operands.Any(), "Operands")
             .EndBrace();
 
-    private string GetDefinitionString()
+    private string GetOperandString()
     {
         if (Operands.Any())
         {

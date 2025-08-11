@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibrarySetInvokerExtensions
 {
     /// <summary>
-    /// Retrieves definitions from the specified library set based on the provided filter criteria.
+    /// Retrieves expression definitions from the specified library set based on the provided filter criteria.
     /// </summary>
     ///
     /// <remarks>
@@ -52,6 +52,21 @@ public static class LibrarySetInvokerExtensions
         librarySetInvoker
             .LibraryInvokers.Values
             .SelectMany(libraryInvoker => libraryInvoker.SelectExpressions(filter));
+
+    /// <summary>
+    /// Retrieves definitions from the specified library set.
+    /// </summary>
+    ///
+    /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions.</param>
+    ///
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects.
+    /// </returns>
+    public static IEnumerable<DefinitionInvoker> SelectDefinitions(
+        this LibrarySetInvoker librarySetInvoker) =>
+        librarySetInvoker
+            .LibraryInvokers.Values
+            .SelectMany(libraryInvoker => libraryInvoker.SelectDefinitions());
 
     /// <summary>
     /// Retrieves definitions from a particular library in the specified library set, matching its <paramref name="libraryIdentifier"/> and based on the provided filter criteria.

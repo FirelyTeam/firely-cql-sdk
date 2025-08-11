@@ -38,6 +38,11 @@ public static class DefinitionPredicates
     /// </summary>
     public static DefinitionPredicate FunctionsOnly { get; } = definitionInvoker =>
         definitionInvoker.CqlDefinitionAttribute is CqlFunctionDefinitionAttribute;
+
+    internal static bool IsExpressionFilter(DefinitionPredicate filter) =>
+        filter == ExpressionsOnly
+        || filter == FunctionsOnly
+        || filter == ExpressionsAndFunctions;
 }
 
 /// <summary>
