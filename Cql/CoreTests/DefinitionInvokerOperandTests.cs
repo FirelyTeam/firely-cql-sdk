@@ -6,23 +6,18 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Reflection;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
 [TestClass]
-public class ParameterNameAttributeTests
+public class DefinitionInvokerOperandTests
 {
     [TestMethod]
-    public void ParameterNameTest_CqlFunctionParameterAttribute_AddedForNormalizedParameters()
+    public void OperandNameTest_CqlFunctionParameterAttribute_AddedForNormalizedParameters()
     {
         // Arrange: Load the ParameterNameTest ELM file
         var elmFile = new FileInfo(Path.Combine("Input", "ELM", "HL7", "ParameterNameTest.json"));
