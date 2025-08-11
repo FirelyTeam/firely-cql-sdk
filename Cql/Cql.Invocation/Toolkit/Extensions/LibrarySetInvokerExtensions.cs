@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibrarySetInvokerExtensions
 {
     /// <summary>
-    /// Retrieves definitions from the specified library set based on the provided filter criteria.
+    /// Retrieves expression definitions from the specified library set based on the provided filter criteria.
     /// </summary>
     ///
     /// <remarks>
@@ -52,6 +52,21 @@ public static class LibrarySetInvokerExtensions
         librarySetInvoker
             .LibraryInvokers.Values
             .SelectMany(libraryInvoker => libraryInvoker.SelectExpressions(filter));
+
+    /// <summary>
+    /// Retrieves definitions from the specified library set.
+    /// </summary>
+    ///
+    /// <param name="librarySetInvoker">The <see cref="LibrarySetInvoker"/> containing the libraries with definitions.</param>
+    ///
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects.
+    /// </returns>
+    public static IEnumerable<DefinitionInvoker> SelectDefinitions(
+        this LibrarySetInvoker librarySetInvoker) =>
+        librarySetInvoker
+            .LibraryInvokers.Values
+            .SelectMany(libraryInvoker => libraryInvoker.SelectDefinitions());
 
     /// <summary>
     /// Retrieves definitions from a particular library in the specified library set, matching its <paramref name="libraryIdentifier"/> and based on the provided filter criteria.
@@ -124,18 +139,25 @@ public static class LibrarySetInvokerExtensions
         DefinitionSignature definitionSignature,
         params object?[] args)
     {
-        var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
         if (definitionSignature.ParameterTypes.Length is {} pLength
             && pLength != args.Length)
         {
             if (pLength != 0 || !args.All(a => a is not null))
-                throw new ArgumentException("The arguments must be the same amount as the signature types.", nameof(args));
+                throw new ArgumentException("The arguments must be the same amount as the parameters.", nameof(args));
 
             // Let's be nice and allow the user to call a definition with no arguments, provided they are not null and match the signature types exactly.
             var signature = args.SelectToArray(a => a!.GetType().MakeNullable() );
             definitionSignature = new DefinitionSignature(definitionSignature.Name, signature);
         }
-        var definitionInvoker = libraryInvoker.Definitions[definitionSignature];
+
+        var libraryInvoker = librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier);
+        if (libraryInvoker == null)
+            throw new InvalidOperationException($"No library found with name '{libraryIdentifier}'.");
+
+        var definitionInvoker = libraryInvoker.Definitions.GetValueOrDefault(definitionSignature);
+        if (definitionInvoker == null)
+            throw new InvalidOperationException($"Definition '{definitionSignature}' not found in library '{libraryIdentifier}'.");
+
         var result = definitionInvoker.Invoke(cqlContext, args);
         return result;
     }

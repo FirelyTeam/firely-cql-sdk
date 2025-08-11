@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 #nullable enable
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace CoreTests;
@@ -26,6 +27,7 @@ internal static class AssertExtensions
         }
     }
 
+    [DebuggerStepThrough]
     public static void MultilinesAreEqual(
         this Assert assert,
         string expected,
