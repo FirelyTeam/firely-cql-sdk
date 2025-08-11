@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibraryInvokerExtensions
 {
     /// <summary>
-    /// Retrieves definitions from the specified library based on the provided filter criteria.
+    /// Retrieves expression definitions from the specified library based on the provided filter criteria.
     /// </summary>
     ///
     /// <remarks>
@@ -49,7 +49,33 @@ public static class LibraryInvokerExtensions
     public static IEnumerable<DefinitionInvoker> SelectExpressions(
         this LibraryInvoker libraryInvoker,
         DefinitionPredicate? filter = null) =>
-        libraryInvoker.Definitions.Values.Where((filter ?? DefinitionPredicates.ExpressionsOnly).Invoke);
+        libraryInvoker.SelectDefinitions().Where(CalcExpressionPredicate(filter));
+
+    private static Func<DefinitionInvoker, bool> CalcExpressionPredicate(DefinitionPredicate? filter)
+    {
+        if (filter is null)
+            return DefinitionPredicates.ExpressionsOnly.Invoke;
+
+        // Return our own filters as-is
+        if (DefinitionPredicates.IsExpressionFilter(filter))
+            return filter.Invoke;
+
+        // Combine the custom filter
+        return def => DefinitionPredicates.ExpressionsAndFunctions(def) && filter(def);
+    }
+
+    /// <summary>
+    /// Retrieves expression definitions from the specified library.
+    /// </summary>
+    ///
+    /// <param name="libraryInvoker">The <see cref="LibraryInvoker"/> containing the definitions .</param>
+    ///
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="DefinitionInvoker"/> objects.
+    /// </returns>
+    public static IEnumerable<DefinitionInvoker> SelectDefinitions(
+        this LibraryInvoker libraryInvoker) =>
+        libraryInvoker.Definitions.Values;
 
     /// <summary>
     /// Enumerates the value sets in the library.
@@ -58,7 +84,7 @@ public static class LibraryInvokerExtensions
     public static IEnumerable<(DefinitionInvoker definition, CqlValueSet valueSet)> SelectValueSets(
         this LibraryInvoker libraryInvoker) =>
         libraryInvoker
-            .Definitions.Values
+            .SelectDefinitions()
             .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlValueSetDefinitionAttribute attr
                 ? (true, (definitionInvoker, new CqlValueSet(attr.ValueSetId, attr.ValueSetVersion)))
                 : default);
@@ -70,7 +96,7 @@ public static class LibraryInvokerExtensions
     public static IEnumerable<(DefinitionInvoker definition, CqlCode code)> SelectCodes(
         this LibraryInvoker libraryInvoker) =>
         libraryInvoker
-            .Definitions.Values
+            .SelectDefinitions()
             .SelectWhere(definitionInvoker => definitionInvoker.CqlDefinitionAttribute is CqlCodeDefinitionAttribute attr
                 ? (true, (definitionInvoker, new CqlCode(attr.CodeId, attr.CodeSystem, attr.CodeVersion, attr.CodeDisplay)))
                 : default);

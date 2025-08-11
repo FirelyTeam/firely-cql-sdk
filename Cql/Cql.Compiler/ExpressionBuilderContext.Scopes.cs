@@ -39,7 +39,7 @@ partial class ExpressionBuilderContext
 
     protected Expression GetScopeExpression(string elmAlias)
     {
-        var normalized = NormalizeIdentifier(elmAlias!)!;
+        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
         if (!Scopes.TryGetValue(normalized, out var kv))
             throw this.NewExpressionBuildingException(
                 $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
@@ -49,7 +49,7 @@ partial class ExpressionBuilderContext
 
     protected (Expression, Elm.Element) GetScope(string elmAlias)
     {
-        var normalized = NormalizeIdentifier(elmAlias!)!;
+        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
         if (!Scopes.TryGetValue(normalized, out var kv))
             throw this.NewExpressionBuildingException(
                 $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
@@ -71,7 +71,7 @@ partial class ExpressionBuilderContext
         {
             foreach (var (expr, element) in kvps)
             {
-                string? normalizedIdentifier = NormalizeIdentifier(expr);
+                string? normalizedIdentifier = IdentifierNormalizer.Normalize(expr);
                 if (string.IsNullOrWhiteSpace(normalizedIdentifier))
                     throw this.NewExpressionBuildingException("The normalized identifier is not available.");
 
@@ -82,13 +82,13 @@ partial class ExpressionBuilderContext
         {
             foreach (var (expr, element) in kvps)
             {
-                string? normalizedIdentifier = NormalizeIdentifier(expr);
+                string? normalizedIdentifier = IdentifierNormalizer.Normalize(expr);
                 if (string.IsNullOrWhiteSpace(normalizedIdentifier))
                     throw this.NewExpressionBuildingException("The normalize identifier is not available.");
 
                 if (!scopes.TryAdd(normalizedIdentifier, element))
                     throw this.NewExpressionBuildingException(
-                        $"Scope {expr}, normalized to {NormalizeIdentifier(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
+                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
             }
         }
 

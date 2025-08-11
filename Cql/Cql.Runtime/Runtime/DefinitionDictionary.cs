@@ -190,11 +190,11 @@ public class DefinitionDictionary<T> where T : class
     /// Retrieves all definitions associated with the specified library name.
     /// </summary>
     /// <param name="libraryName">
-    /// The name of the library for which definitions are to be retrieved. 
+    /// The name of the library for which definitions are to be retrieved.
     /// If <see langword="null"/>, an empty string is used as the library name.
     /// </param>
     /// <returns>
-    /// An enumerable collection of tuples, where each tuple contains a <see cref="DefinitionSignature"/> 
+    /// An enumerable collection of tuples, where each tuple contains a <see cref="DefinitionSignature"/>
     /// representing the signature of a definition and the corresponding definition of type <typeparamref name="T"/>.
     /// </returns>
     /// <exception cref="ArgumentException">

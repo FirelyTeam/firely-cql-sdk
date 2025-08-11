@@ -12,10 +12,10 @@ using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
-internal static class LibraryInvokerTestExtensions
+internal static class LibraryInvokerTestExtensions // These are extensions used in other tests
 {
     /// <summary>
-    /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/> with <paramref name="parameters"/>.
+    /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryInvoker"/> with <paramref name="parameters"/>.
     /// </summary>
     /// <typeparam name="T">The expected return type of the delegate.</typeparam>
     /// <param name="libraryInvoker">The delegates containing this definition.</param>
@@ -30,8 +30,14 @@ internal static class LibraryInvokerTestExtensions
         params object[] parameters)
     {
         var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
+
+        // Find the definition that matches the name and parameter types
         var definitionSignature = new DefinitionSignature(define, parameterTypes);
-        var definition = libraryInvoker.Definitions[definitionSignature];
+        var definition = libraryInvoker.Definitions.GetValueOrDefault(definitionSignature);
+
+        if (definition == null)
+            throw new InvalidOperationException($"No definition found with name '{define}' and parameter types [{string.Join(", ", parameterTypes.Select(t => t.Name))}]");
+
         var resultObj = definition.Invoke(rtx, parameters);
         var result = (T?)resultObj;
         return result;

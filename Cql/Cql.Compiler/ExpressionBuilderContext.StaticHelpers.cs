@@ -48,38 +48,6 @@ partial class ExpressionBuilderContext
         return lambda;
     }
 
-    internal static string NormalizeIdentifier(string identifier)
-    {
-        identifier = identifier.Replace(" ", "_");
-        identifier = identifier.Replace("-", "_");
-        identifier = identifier.Replace(".", "_");
-        identifier = identifier.Replace(",", "_");
-        identifier = identifier.Replace("[", "_");
-        identifier = identifier.Replace("]", "_");
-        identifier = identifier.Replace("(", "_");
-        identifier = identifier.Replace(")", "_");
-        identifier = identifier.Replace(":", "_");
-        identifier = identifier.Replace("/", "_");
-        identifier = identifier.Replace("+", "plus");
-        identifier = identifier.Replace("-", "minus");
-        identifier = identifier.Replace("\"", "");
-        identifier = identifier.Replace("'", "");
-        identifier = identifier.Replace(";", "_");
-        identifier = identifier.Replace("&", "and");
-
-
-        if (identifier.StartsWith("$"))
-            identifier = identifier.Substring(1);
-        var keyword = SyntaxFacts.GetKeywordKind(identifier);
-        if (keyword != SyntaxKind.None)
-        {
-            identifier = $"@{identifier}";
-        }
-        if (char.IsDigit(identifier[0]))
-            identifier = "_" + identifier;
-        return identifier;
-    }
-
     private static Expression HandleNullable(Expression expression, Type targetType) =>
         (
                 exprNullTypeArg: Nullable.GetUnderlyingType(expression.Type),
@@ -132,7 +100,7 @@ partial class ExpressionBuilderContext
             typeName = uniqueTypeName;
         }
 
-        return NormalizeIdentifier(typeName!)!;
+        return IdentifierNormalizer.Normalize(typeName!)!;
     }
 
     protected interface IPopToken : IDisposable

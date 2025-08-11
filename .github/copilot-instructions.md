@@ -78,6 +78,17 @@ Use this header format with "Firely, NCQA":
 2. Maintain existing code structure and patterns
 3. Run builds and tests to validate changes
 4. Use existing project conventions and naming patterns
+5. **Always ensure blank lines contain no spaces** - blank lines must be completely empty
+6. **When adding new utility files or functionality that are only used internally, keep those types as `internal`, not `public`** - Only expose public APIs when they are intended for external consumption
+7. **When creating new files or modifying existing ones, always remove unused usings at the top of the file** - Keep using statements clean and only include what is actually used
+8. **Do not add duplicate usings in files where the using is already included globally in `GlobalUsings.cs`** - Check GlobalUsings.cs first to avoid redundant using statements
+9. **Always use the latest C# language features** when appropriate:
+   - Use collection expressions `[]` instead of `new[] { ... }` for arrays and collections
+   - Use target-typed `new()` expressions when the type is clear from context
+   - Use pattern matching and switch expressions where applicable
+   - Use record types for immutable data structures
+   - Use nullable reference types and null-conditional operators
+   - Use string interpolation instead of `string.Format` or concatenation
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage
@@ -96,9 +107,33 @@ Use this header format with "Firely, NCQA":
   - Internal packages should describe what they do but not show how to use them directly
 
 ## Build and Test
+- **Always use `Cql-Sdk.slnf` to build the solution** - This is because `Cql-Sdk-All.sln` contains submodules to which you do not have access to
 - Always run `dotnet build` to validate changes
 - Run relevant tests after modifications
 - Check that new projects are included in solution files (`*.sln`)
+
+### Code Generation Version Management
+**When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
+
+1. **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
+2. **Apply semantic versioning**: 
+   - **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
+   - **Minor version** (x.y.0.0): Non-breaking additions like new attributes or functionality
+   - **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
+3. **Check compatibility**: Ensure `LibraryInstanceInvoker_3_0.SupportsVersion` covers the new version range
+4. **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
+5. **Examples**:
+   - Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
+   - Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+   - Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+
+### Generating ELM Files from CQL
+When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
+
+1. **Enable CQL to ELM conversion**: Find the commented out property `CqlToElmEnabled` in the csproj (e.g., `<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->`) and uncomment it to set `CqlToElmEnabled` to `true`
+2. **Build the project**: Build that particular csproj, which will generate the ELM files
+3. **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
+4. **Restore setting**: Roll back step 1 by commenting out `CqlToElmEnabled=true`
 
 ## Naming Conventions
 - Use `CqlSdk` prefix for SDK-related example projects
