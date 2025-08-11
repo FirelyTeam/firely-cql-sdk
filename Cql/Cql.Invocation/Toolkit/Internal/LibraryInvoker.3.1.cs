@@ -24,7 +24,7 @@ internal sealed class LibraryInstanceInvoker_3_1 : LibraryInstanceInvoker
                       .GetType()
                       .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                       .SelectWhere(methodInfo => DefinitionInvoker_3_1.TryCreate(Library, this, methodInfo))
-                      .ToFrozenDictionary(o => new DefinitionSignature(o.DefinitionName, o.ParameterTypes), o => o)
+                      .ToFrozenDictionary(o => new DefinitionSignature(o.DefinitionName, o.Operands.Select(op => op.Type).ToArray()), o => o)
                       .AsReadOnly();
     }
 
