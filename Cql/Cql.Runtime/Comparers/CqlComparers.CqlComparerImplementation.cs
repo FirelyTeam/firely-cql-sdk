@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using System.Collections.Immutable;
 
 namespace Hl7.Cql.Comparers;
 
