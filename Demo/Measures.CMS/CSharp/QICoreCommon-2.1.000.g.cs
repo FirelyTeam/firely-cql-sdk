@@ -868,7 +868,7 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         bool? a_(Extension E)
         {
-            string g_ = E?.Url;
+            FhirUri g_ = E?.UrlElement;
             FhirString h_ = context.Operators.Convert<FhirString>(g_);
             string i_ = h_?.Value;
             bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
