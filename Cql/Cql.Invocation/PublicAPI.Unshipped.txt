@@ -9,8 +9,8 @@ Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocatio
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibrarySetName.get -> string!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Name.get -> string!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterNames.get -> string![]!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterCqlNames.get -> string![]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ParameterTypes.get -> System.Type![]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>!

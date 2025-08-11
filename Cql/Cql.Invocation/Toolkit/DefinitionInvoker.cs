@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
 /// <param name="returnType">The return type of the definition.</param>
-/// <param name="parameterNames">The names of the parameters for the definition.</param>
+/// <param name="parameterNames">The original CQL parameter names for the definition.</param>
 /// <param name="parameterTypes">The types of the parameters for the definition.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
@@ -37,9 +37,9 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Console.WriteLine($"Return Type: {definitionInvoker.ReturnType.Name}");
 /// 
 /// // Access parameter information
-/// for (int i = 0; i &lt; definitionInvoker.ParameterNames.Length; i++)
+/// for (int i = 0; i &lt; definitionInvoker.ParameterCqlNames.Length; i++)
 /// {
-///     Console.WriteLine($"Parameter {i}: {definitionInvoker.ParameterNames[i]} ({definitionInvoker.ParameterTypes[i].Name})");
+///     Console.WriteLine($"Parameter {i}: {definitionInvoker.ParameterCqlNames[i]} ({definitionInvoker.ParameterTypes[i].Name})");
 /// }
 /// 
 /// // Invoke the definition
@@ -96,9 +96,11 @@ public abstract class DefinitionInvoker(
     public Type ReturnType { get; } = returnType ?? throw new ArgumentNullException(nameof(returnType));
 
     /// <summary>
-    /// Gets the names of the parameters for the definition.
+    /// Gets the original CQL parameter names for the definition.
+    /// These are the parameter names as they appear in the CQL source code, 
+    /// which may differ from the normalized C# method parameter names.
     /// </summary>
-    public string[] ParameterNames { get; } = parameterNames is { Length: > 0 } ? parameterNames : [];
+    public string[] ParameterCqlNames { get; } = parameterNames is { Length: > 0 } ? parameterNames : [];
 
     /// <summary>
     /// Gets the types of the parameters for the definition.
@@ -140,7 +142,7 @@ public abstract class DefinitionInvoker(
     {
         if (ParameterTypes.Any())
         {
-            var parameters = ParameterTypes.Zip(ParameterNames, (type, name) => $"{type.ToCSharpString()} {name}");
+            var parameters = ParameterTypes.Zip(ParameterCqlNames, (type, name) => $"{type.ToCSharpString()} {name}");
             return $"{{{string.Join(", ", parameters)}}}";
         }
 
