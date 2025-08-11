@@ -178,23 +178,22 @@ public class CqlContextOperatorTests
 		isEquivalent.Should().BeTrue("FHIR Code and equivalent CqlCode should be equivalent");
 	}
 
-	// TODO: Enable this test when bidirectional comparison is implemented
-	// [TestMethod]
-	// public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
-	// {
-	// 	// Arrange
-	// 	var rtx = GetNewContext();
+	[TestMethod]
+	public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
+	{
+		// Arrange
+		var rtx = GetNewContext();
 
-	// 	var enumVal = Encounter.EncounterStatus.Cancelled;
-	// 	var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
-	// 	var cqlCode = new CqlCode("cancelled", null, null, null);
+		var enumVal = Encounter.EncounterStatus.Cancelled;
+		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
+		var cqlCode = new CqlCode("cancelled", null, null, null);
 
-	// 	// Act
-	// 	var isEquivalent = rtx.Operators.Equivalent(cqlCode, fhirCode);
+		// Act
+		var isEquivalent = rtx.Operators.Equivalent(cqlCode, fhirCode);
 
-	// 	// Assert
-	// 	isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
-	// }
+		// Assert
+		isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
+	}
 
 	#endregion
 }
