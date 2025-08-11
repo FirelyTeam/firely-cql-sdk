@@ -23,7 +23,7 @@ namespace Hl7.Cql.Fhir
         {
             Inspector = inspector;
 
-            addTypesFromInspector();
+            AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
             adjust();
         }
@@ -54,9 +54,12 @@ namespace Hl7.Cql.Fhir
         protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
             PropertyInfo? result = null;
+
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
-                result = ReflectionHelper.FindProperty(type, "Value");
+                // Note the DeclaredOnly here, which is important to get to the Code<T>.Value property,
+                // not the inherited PrimitiveType.Value property.
+                result = type.GetProperty("Value", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
             }
             else
             {
@@ -70,8 +73,8 @@ namespace Hl7.Cql.Fhir
                     else
                     {
                         var propMapping = cm.FindMappedElementByName(propertyName);
-                        if (propMapping is not null)
-                            result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
+                        if (propMapping is { NativeProperty: { } nativeProperty })
+                            result = new FhirModelPropertyInfo(nativeProperty, propMapping);
                     }
                 }
                 else
@@ -122,19 +125,9 @@ namespace Hl7.Cql.Fhir
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }
 
-        private void addTypesFromInspector()
+        private void AddTypesFromInspector()
         {
-            var classes = Inspector.ClassMappings.Select(cm => (getTypeSpecFromMapping(cm), cm.NativeType));
-
-            static string getTypeSpecFromMapping(ClassMapping cm)
-            {
-                string fhirPrefix = "{http://hl7.org/fhir}";
-                return cm.IsBackboneType switch
-                {
-                    false => fhirPrefix + cm.Name,
-                    true => fhirPrefix + cm.DefinitionPath
-                };
-            }
+            var classes = Inspector.ClassMappings.Select(cm => ($"{{http://hl7.org/fhir}}{cm.Name}", cm.NativeType));
 
             // Ignore the valuesets, we have to resolve via bindings for now.
             foreach (var (name, type) in classes)

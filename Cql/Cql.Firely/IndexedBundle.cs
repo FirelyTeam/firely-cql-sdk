@@ -15,16 +15,16 @@ namespace Hl7.Cql.Fhir
     {
         public IndexedBundle(IEnumerable<Bundle.EntryComponent> entries)
         {
-            Entries = entries;
+            Entries = entries.ToList();
 
-            foreach (var entry in entries)
+            foreach (var entry in Entries.Where(e => e.Resource != null))
             {
-                var type = entry.Resource.GetType();
+                var type = entry.Resource!.GetType();
                 while (type != typeof(object) && type != null)
                 {
                     if (!_byType.TryGetValue(type, out var resources))
                     {
-                        resources = new List<Resource>();
+                        resources = [];
                         _byType.Add(type, resources);
                     }
                     resources.Add(entry.Resource);

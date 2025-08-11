@@ -25,7 +25,7 @@ internal class ResourceHelper
 
     private static readonly JsonSerializerOptions JsonSerializerOptions =
         new JsonSerializerOptions()
-            .ForFhir(new FhirJsonPocoDeserializerSettings
+            .ForFhir(new FhirJsonConverterOptions
             {
                 Validator = null
             });
@@ -108,12 +108,15 @@ internal class ResourceHelper
 
         var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
 
-        foreach ( var parameter in parametersResource.Parameter)
+        foreach (var parameter in parametersResource.Parameter)
         {
-            var cqltype = parameter.Value.GetType();
-            var typeEntry = crosswalk.TypeEntryFor(cqltype);
-            var converted = ConvertParameterToCqlModel(parameter, typeEntry);
-            parametersConverted.Add(parameter.Name, converted!);
+            if (parameter is { Value: not null, Name: not null })
+            {
+                var cqltype = parameter.Value.GetType();
+                var typeEntry = crosswalk.TypeEntryFor(cqltype);
+                var converted = ConvertParameterToCqlModel(parameter, typeEntry);
+                parametersConverted.Add(parameter.Name, converted!);
+            }
         }
 
         parametersConverted.DumpConsole("Input Parameters");

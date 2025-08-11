@@ -30,7 +30,7 @@ internal class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
                     throw new InvalidOperationException(
                         $"Precision '{precision}' is not supported for comparing Code<T> to string.");
 
-                return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
+                return StringComparer.Ordinal.Compare(xCode.JsonValue, yString);
             }
             default:
                 return inner.CompareValues(x, y, precision);

@@ -76,6 +76,8 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public async Task<IValueSetFacade> Add(ValueSet vs)
     {
+        if(vs.Url is null) throw new ArgumentNullException(nameof(vs), "ValueSet must have a URL to be added to the cache.");
+
         if (_valueSets.TryGetValue(vs.Url, out var valueSet)) return valueSet;
 
         // Not cached yet, build it first.
@@ -93,7 +95,7 @@ public class ValueSetSource : IValueSetDictionary
                 await expander.ExpandAsync(vs).ConfigureAwait(false);
             }
 
-            var codes = ToCodes(vs.Expansion.Contains);
+            var codes = ToCodes(vs.Expansion!.Contains);
             return new InMemoryValueSet(codes);
         }
     }

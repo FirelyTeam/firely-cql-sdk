@@ -78,11 +78,6 @@ namespace CoreTests
             var librarySet = new LibrarySet();
             librarySet.LoadLibraries(files);
 
-            var fdt = new FhirDateTime(2023, 12, 11, 9, 41, 30, TimeSpan.FromHours(-5));
-            var fdts = fdt.ToString();
-            var fs = new FhirDateTime(fdts);
-            Assert.AreEqual(fdt, fs);
-
             var librarySetExpressionBuilder = servicesScope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
             var definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);

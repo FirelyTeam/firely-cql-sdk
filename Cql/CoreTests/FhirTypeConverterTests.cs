@@ -305,14 +305,12 @@ namespace CoreTests
             var parameters = new ParameterComponent()
             {
                 Name = "param1",
-                Value = new Time(new Hl7.Cql.Iso8601.TimeIso8601(1, 1, 1, 1, 0, 0, false).ToString()),
+                Value = new Time(new TimeIso8601(1, 1, 1, 1, null, null, false).ToString()),
             };
 
             var converted = FhirTypeConverter.Convert<CqlTime>(parameters);
 
             Assert.IsNotNull(converted);
-
-            Assert.IsTrue(converted is CqlTime);
 
             Assert.AreEqual(1, converted.Value.Hour);
             Assert.AreEqual(1, converted.Value.Minute);
