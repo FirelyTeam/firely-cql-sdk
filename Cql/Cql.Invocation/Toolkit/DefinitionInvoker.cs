@@ -18,8 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
 /// <param name="returnType">The return type of the definition.</param>
-/// <param name="parameterNames">The original CQL parameter names for the definition.</param>
-/// <param name="parameterTypes">The types of the parameters for the definition.</param>
+/// <param name="operands">The operand information for the definition, containing both CQL names and types.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
@@ -42,12 +41,6 @@ namespace Hl7.Cql.Invocation.Toolkit;
 ///     Console.WriteLine($"Parameter: {operand.Name} ({operand.Type.Name})");
 /// }
 /// 
-/// // Or use convenience properties for backward compatibility
-/// for (int i = 0; i &lt; definitionInvoker.ParameterCqlNames.Length; i++)
-/// {
-///     Console.WriteLine($"Parameter {i}: {definitionInvoker.ParameterCqlNames[i]} ({definitionInvoker.ParameterTypes[i].Name})");
-/// }
-/// 
 /// // Invoke the definition
 /// var result = definitionInvoker.Invoke(cqlContext);
 /// </code>
@@ -55,8 +48,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
     Type returnType,
-    string[] parameterNames,
-    Type[] parameterTypes,
+    CqlOperandInfo[] operands,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -104,19 +96,12 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the operand information for the definition, containing both CQL names and types.
     /// </summary>
-    public CqlOperandInfo[] Operands { get; } = CreateOperands(parameterNames, parameterTypes);
-
-    /// <summary>
-    /// Gets the original CQL parameter names for the definition.
-    /// These are the parameter names as they appear in the CQL source code, 
-    /// which may differ from the normalized C# method parameter names.
-    /// </summary>
-    public string[] ParameterCqlNames => Operands.Select(op => op.Name).ToArray();
+    public CqlOperandInfo[] Operands { get; } = operands ?? throw new ArgumentNullException(nameof(operands));
 
     /// <summary>
     /// Gets the types of the parameters for the definition.
     /// </summary>
-    public Type[] ParameterTypes => Operands.Select(op => op.Type).ToArray();
+    internal Type[] ParameterTypes => Operands.Select(op => op.Type).ToArray();
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
@@ -148,17 +133,6 @@ public abstract class DefinitionInvoker(
             .AppendMember(ReturnType.ToCSharpString(), nameof(ReturnType))
             .AppendMemberIf(GetDefinitionString(), Operands.Any(), "Parameters")
             .EndBrace();
-
-    private static CqlOperandInfo[] CreateOperands(string[] parameterNames, Type[] parameterTypes)
-    {
-        var names = parameterNames is { Length: > 0 } ? parameterNames : [];
-        var types = parameterTypes is { Length: > 0 } ? parameterTypes : [];
-        
-        if (names.Length != types.Length)
-            throw new ArgumentException("Parameter names and types arrays must have the same length.");
-        
-        return names.Zip(types, (name, type) => new CqlOperandInfo(name, type)).ToArray();
-    }
 
     private string GetDefinitionString()
     {

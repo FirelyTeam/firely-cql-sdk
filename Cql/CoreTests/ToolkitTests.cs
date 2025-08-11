@@ -230,24 +230,24 @@ public class ToolkitTests
 
         // Verify expressions (no parameters)
         var simpleExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "SimpleExpression");
-        simpleExpression.ParameterTypes.Should().BeEmpty();
+        simpleExpression.Operands.Should().BeEmpty();
         simpleExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
         var calculatedExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "CalculatedExpression");
-        calculatedExpression.ParameterTypes.Should().BeEmpty();
+        calculatedExpression.Operands.Should().BeEmpty();
         calculatedExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
         // Verify functions (with parameters)
         var addIntegers = expressionsAndFunctions.Single(d => d.DefinitionName == "AddIntegers");
-        addIntegers.ParameterTypes.Should().HaveCount(2);
+        addIntegers.Operands.Should().HaveCount(2);
         addIntegers.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
         var doubleFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "Double");
-        doubleFunction.ParameterTypes.Should().HaveCount(1);
+        doubleFunction.Operands.Should().HaveCount(1);
         doubleFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
         var zeroFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "ZeroFunction");
-        zeroFunction.ParameterTypes.Should().BeEmpty();
+        zeroFunction.Operands.Should().BeEmpty();
         zeroFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
     }
 
