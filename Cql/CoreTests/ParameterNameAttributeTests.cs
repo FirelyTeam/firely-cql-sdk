@@ -43,7 +43,7 @@ public class ParameterNameAttributeTests
         using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker();
 
         // Assert: Check that the DefinitionInvokers have the correct parameter names
-        var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.First();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.Single();
 
         // Test 1: "Test Function" with "param with spaces" parameter
         var testFunctionInvoker = libraryInvoker.Definitions[new("Test Function", typeof(int?), typeof(string))];

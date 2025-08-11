@@ -67,7 +67,6 @@ file sealed class DefinitionInvoker_3_1(
     MethodInfo methodInfo,
     CqlDefinitionAttribute cqlDefinitionAttribute) : DefinitionInvoker(
     libraryInvoker,
-    cqlDefinitionAttribute.Name,
     methodInfo.ReturnType,
     methodInfo.GetParameters()
               .Skip(1) // Skip CqlContext

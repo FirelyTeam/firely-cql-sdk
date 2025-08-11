@@ -36,7 +36,6 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </example>
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
-    string definitionName,
     Type returnType,
     string[] parameterNames,
     Type[] parameterTypes,
@@ -77,7 +76,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
-    public string DefinitionName { get; } = definitionName ?? throw new ArgumentNullException(nameof(definitionName));
+    public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
 
     /// <summary>
     /// Gets the return type of the definition.
@@ -108,7 +107,8 @@ public abstract class DefinitionInvoker(
             .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
             .AppendMember(LibraryIdentifier)
             .AppendMember(DefinitionName)
-            .AppendMember($"ReturnType: {ReturnType.ToCSharpString()}")
+            .AppendMember(CqlDefinitionAttribute.GetType().Name["Cql".Length .. ^"DefinitionAttribute".Length], "DefinitionType")
+            .AppendMember(ReturnType.ToCSharpString(), nameof(ReturnType))
             .AppendMemberIf(GetDefinitionString(), ParameterTypes.Any(), "Parameters")
             .EndBrace();
 

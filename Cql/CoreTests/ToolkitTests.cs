@@ -166,7 +166,7 @@ public class ToolkitTests
         var expressionsString = string.Join("\n", expressions);
         Assert.That.MultilinesAreEqual(
             """
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: SimpleExpression}
+            {LibraryIdentifier: TestLib-1.0.0, DefinitionName: SimpleExpression, DefinitionType: Expression, ReturnType: System.Int32?}
             """, expressionsString);
 
         // Act & Assert: Test for functions
@@ -178,8 +178,8 @@ public class ToolkitTests
         expressionsString = string.Join("\n", functions);
         Assert.That.MultilinesAreEqual(
             """
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: Zero}
-            {LibraryIdentifier: TestLib-1.0.0, ReturnType: System.Nullable`1[System.Int32], Definition: Add(System.Int32? a, System.Int32? b, System.Int32? special name)}
+            {LibraryIdentifier: TestLib-1.0.0, DefinitionName: Zero, DefinitionType: Function, ReturnType: System.Int32?}
+            {LibraryIdentifier: TestLib-1.0.0, DefinitionName: Add, DefinitionType: Function, ReturnType: System.Int32?, Parameters: {System.Int32? a, System.Int32? b, System.Int32? special name}}
             """, expressionsString);
     }
 
