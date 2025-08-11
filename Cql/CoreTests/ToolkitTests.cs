@@ -9,14 +9,16 @@
 #nullable enable
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.CqlToElm.Toolkit.Extensions;
-using Hl7.Cql.Elm;
 
 namespace CoreTests;
 
@@ -179,7 +181,7 @@ public class ToolkitTests
         Assert.That.MultilinesAreEqual(
             """
             {LibraryIdentifier: TestLib-1.0.0, DefinitionName: Zero, DefinitionType: Function, ReturnType: System.Int32?}
-            {LibraryIdentifier: TestLib-1.0.0, DefinitionName: Add, DefinitionType: Function, ReturnType: System.Int32?, Operands: {System.Int32? a, System.Int32? b, System.Int32? special name}}
+            {LibraryIdentifier: TestLib-1.0.0, DefinitionName: Add, DefinitionType: Function, ReturnType: System.Int32?, Parameters: {System.Int32? 'a', System.Int32? 'b', System.Int32? 'special name'}}
             """, expressionsString);
     }
 
@@ -230,24 +232,24 @@ public class ToolkitTests
 
         // Verify expressions (no parameters)
         var simpleExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "SimpleExpression");
-        simpleExpression.Operands.Should().BeEmpty();
+        simpleExpression.Parameters.Should().BeEmpty();
         simpleExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
         var calculatedExpression = expressionsAndFunctions.Single(d => d.DefinitionName == "CalculatedExpression");
-        calculatedExpression.Operands.Should().BeEmpty();
+        calculatedExpression.Parameters.Should().BeEmpty();
         calculatedExpression.CqlDefinitionAttribute.Should().BeOfType<CqlExpressionDefinitionAttribute>();
 
         // Verify functions (with parameters)
         var addIntegers = expressionsAndFunctions.Single(d => d.DefinitionName == "AddIntegers");
-        addIntegers.Operands.Should().HaveCount(2);
+        addIntegers.Parameters.Should().HaveCount(2);
         addIntegers.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
         var doubleFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "Double");
-        doubleFunction.Operands.Should().HaveCount(1);
+        doubleFunction.Parameters.Should().HaveCount(1);
         doubleFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
 
         var zeroFunction = expressionsAndFunctions.Single(d => d.DefinitionName == "ZeroFunction");
-        zeroFunction.Operands.Should().BeEmpty();
+        zeroFunction.Parameters.Should().BeEmpty();
         zeroFunction.CqlDefinitionAttribute.Should().BeOfType<CqlFunctionDefinitionAttribute>();
     }
 
@@ -325,4 +327,54 @@ public class ToolkitTests
         var definitionNames = expressionsAndFunctions.Select(d => d.DefinitionName).ToList();
         definitionNames.Should().OnlyHaveUniqueItems();
     }
+
+    [TestMethod]
+    public void DefinitionInvokerParameters_Tests()
+    {
+        // Arrange: Load the ParameterNameTest ELM file
+        var elmFile = new FileInfo(Path.Combine("Input", "ELM", "HL7", "ParameterNameTest.json"));
+        var elmLibrary = Library.LoadFromJson(elmFile);
+
+        // Act: Generate C# code and compile to assembly using ElmToolkit
+        var elmToolkit = new ElmToolkit()
+            .AddElmLibraries([elmLibrary])
+            .CompileToAssemblies();
+
+        var assemblyResult = elmToolkit.GetElmToAssemblyResults().First();
+        var assemblyBinary = assemblyResult.assemblyBinary;
+        assemblyBinary.Should().NotBeNull("Assembly should be compiled successfully");
+
+        // Create InvocationToolkit and LibrarySetInvoker
+        var invocationToolkit = elmToolkit.CreateInvocationToolkit();
+
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker();
+
+        // Assert: Check that the DefinitionInvokers have the correct parameter names
+        var libraryInvoker = librarySetInvoker.LibraryInvokers.Values.Single();
+
+        // Test 1: "Test Function" with "param with spaces" parameter
+        var testFunctionInvoker = libraryInvoker.Definitions[new("Test Function", typeof(int?), typeof(string))];
+
+        testFunctionInvoker.Should().NotBeNull("Test Function definition should exist");
+        testFunctionInvoker.Parameters.Should().HaveCount(2, "Test Function should have 2 parameters");
+        testFunctionInvoker.Parameters[0].Name.Should().Be("param with spaces", "First parameter should preserve original CQL name with spaces");
+        testFunctionInvoker.Parameters[1].Name.Should().Be("normalParam", "Second parameter should have original name");
+
+        // Test 2: "Another Test" with "param-with-dashes" parameter
+        var anotherTestInvoker = libraryInvoker.Definitions[new("Another Test", typeof(decimal?))];
+
+        anotherTestInvoker.Should().NotBeNull("Another Test definition should exist");
+        anotherTestInvoker.Parameters.Should().HaveCount(1, "Another Test should have 1 parameter");
+        anotherTestInvoker.Parameters[0].Name.Should().Be("param-with-dashes", "Parameter should preserve original CQL name with dashes");
+
+        // Test 3: "Keyword Test" with C# keyword parameters
+        var keywordTestInvoker = libraryInvoker.Definitions[new("Keyword Test", typeof(int?), typeof(string), typeof(bool?))];
+
+        keywordTestInvoker.Should().NotBeNull("Keyword Test definition should exist");
+        keywordTestInvoker.Parameters.Should().HaveCount(3, "Keyword Test should have 3 parameters");
+        keywordTestInvoker.Parameters[0].Name.Should().Be("int", "First parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.Parameters[1].Name.Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
+        keywordTestInvoker.Parameters[2].Name.Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
+    }
+
 }

@@ -139,21 +139,25 @@ public static class LibrarySetInvokerExtensions
         DefinitionSignature definitionSignature,
         params object?[] args)
     {
-        var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
         if (definitionSignature.ParameterTypes.Length is {} pLength
             && pLength != args.Length)
         {
             if (pLength != 0 || !args.All(a => a is not null))
-                throw new ArgumentException("The arguments must be the same amount as the signature types.", nameof(args));
+                throw new ArgumentException("The arguments must be the same amount as the parameters.", nameof(args));
 
             // Let's be nice and allow the user to call a definition with no arguments, provided they are not null and match the signature types exactly.
             var signature = args.SelectToArray(a => a!.GetType().MakeNullable() );
             definitionSignature = new DefinitionSignature(definitionSignature.Name, signature);
         }
-        var definitionInvoker = libraryInvoker.Definitions.GetValueOrDefault(definitionSignature);
 
+        var libraryInvoker = librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier);
+        if (libraryInvoker == null)
+            throw new InvalidOperationException($"No library found with name '{libraryIdentifier}'.");
+
+        var definitionInvoker = libraryInvoker.Definitions.GetValueOrDefault(definitionSignature);
         if (definitionInvoker == null)
-            throw new InvalidOperationException($"No definition found with name '{definitionSignature.Name}' and parameter types [{string.Join(", ", definitionSignature.ParameterTypes.Select(t => t.Name))}]");
+            throw new InvalidOperationException($"Definition '{definitionSignature}' not found in library '{libraryIdentifier}'.");
+
         var result = definitionInvoker.Invoke(cqlContext, args);
         return result;
     }

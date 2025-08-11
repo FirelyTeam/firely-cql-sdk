@@ -70,7 +70,7 @@ file sealed class DefinitionInvoker_3_1(
     methodInfo.ReturnType,
     methodInfo.GetParameters()
               .Skip(1) // Skip CqlContext
-              .Select(p => new CqlOperandInfo(
+              .Select(p => new CqlParameterInfo(
                   p.GetCustomAttribute<CqlFunctionParameterAttribute>()?.CqlParameterName ?? p.Name!,
                   p.ParameterType))
               .ToArray(),

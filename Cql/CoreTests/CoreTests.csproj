@@ -68,6 +68,7 @@
 		<None Include="Input\ELM\Test\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<Compile Remove="ParameterNameAttributeTests.cs" />
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

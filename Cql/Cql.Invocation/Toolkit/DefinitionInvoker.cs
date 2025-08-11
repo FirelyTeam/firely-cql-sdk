@@ -18,7 +18,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 /// <param name="libraryInvoker">The invoker for the library containing the CQL definition.</param>
 /// <param name="returnType">The return type of the definition.</param>
-/// <param name="operands">The operand information for the definition, containing both CQL names and types.</param>
+/// <param name="parameters">The operand information for the definition, containing both CQL names and types.</param>
 /// <param name="cqlDefinitionAttribute">The attribute containing metadata about the CQL definition.</param>
 /// <param name="cqlTagAttributes">The attributes used to tag the CQL definition for categorization or filtering.</param>
 /// <remarks>
@@ -35,8 +35,8 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// Console.WriteLine($"Function: {definitionInvoker.DefinitionName}");
 /// Console.WriteLine($"Return Type: {definitionInvoker.ReturnType.Name}");
 ///
-/// // Access parameter information using Operands
-/// foreach (var operand in definitionInvoker.Operands)
+/// // Access parameter information using Parameters
+/// foreach (var operand in definitionInvoker.Parameters)
 /// {
 ///     Console.WriteLine($"Parameter: {operand.Name} ({operand.Type.Name})");
 /// }
@@ -48,7 +48,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
     Type returnType,
-    CqlOperandInfo[] operands,
+    CqlParameterInfo[] parameters,
     CqlDefinitionAttribute cqlDefinitionAttribute,
     CqlTagAttribute[] cqlTagAttributes)
 {
@@ -86,17 +86,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
-    public string DefinitionName { get; } = cqlDefinitionAttribute.Name;
-
-    /// <summary>
-    /// Gets the return type of the definition.
-    /// </summary>
-    public Type ReturnType { get; } = returnType ?? throw new ArgumentNullException(nameof(returnType));
-
-    /// <summary>
-    /// Gets the operand information for the definition, containing both CQL names and types.
-    /// </summary>
-    public CqlOperandInfo[] Operands { get; } = operands ?? throw new ArgumentNullException(nameof(operands));
+    public string DefinitionName => DefinitionSignature.Name;
 
     /// <summary>
     /// Retrieves the signature of the definition, including its name and parameter types.
@@ -105,9 +95,19 @@ public abstract class DefinitionInvoker(
     ///   A <see cref="DefinitionSignature"/> object that contains the name of the definition
     ///   and an array of parameter types.
     /// </value>
-    public DefinitionSignature DefinitionSignature { get; } = CalcDefinitionSignature(cqlDefinitionAttribute.Name, operands);
+    public DefinitionSignature DefinitionSignature { get; } = CalcDefinitionSignature(cqlDefinitionAttribute.Name, parameters);
 
-    private static DefinitionSignature CalcDefinitionSignature(string definitionName, CqlOperandInfo[] operands) =>
+    /// <summary>
+    /// Gets the return type of the definition.
+    /// </summary>
+    public Type ReturnType { get; } = returnType ?? throw new ArgumentNullException(nameof(returnType));
+
+    /// <summary>
+    /// Gets the parameter information for the definition (if it is a function definition), containing both the original CQL name and type.
+    /// </summary>
+    public CqlParameterInfo[] Parameters { get; } = parameters ?? throw new ArgumentNullException(nameof(parameters));
+
+    private static DefinitionSignature CalcDefinitionSignature(string definitionName, CqlParameterInfo[] operands) =>
         new(definitionName,operands.Select(op => op.Type).ToArray());
 
     /// <summary>
@@ -128,7 +128,7 @@ public abstract class DefinitionInvoker(
     /// <code>
     /// {LibrarySetName: MyLibrarySet, LibraryIdentifier: TestLib-1.0.0, DefinitionName: MyFunction,
     ///  DefinitionType: Function, ReturnType: System.Boolean,
-    ///  Operands: {System.Int32 count, System.String name}}
+    ///  Parameters: {System.Int32 'count', System.String 'name'}}
     /// </code>
     /// </example>
     public override string ToString() =>
@@ -138,14 +138,14 @@ public abstract class DefinitionInvoker(
             .AppendMember(DefinitionName)
             .AppendMember(CqlDefinitionAttribute.GetType().Name["Cql".Length .. ^"DefinitionAttribute".Length], "DefinitionType")
             .AppendMember(ReturnType.ToCSharpString(), nameof(ReturnType))
-            .AppendMemberIf(GetOperandString(), Operands.Any(), "Operands")
+            .AppendMemberIf(GetParametersString(), Parameters.Any(), "Parameters")
             .EndBrace();
 
-    private string GetOperandString()
+    private string GetParametersString()
     {
-        if (Operands.Any())
+        if (Parameters.Any())
         {
-            var parameters = Operands.Select(op => $"{op.Type.ToCSharpString()} {op.Name}");
+            var parameters = Parameters.Select(op => op.ToString());
             return $"{{{string.Join(", ", parameters)}}}";
         }
 
