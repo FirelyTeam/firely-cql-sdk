@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers;
@@ -31,6 +32,24 @@ internal class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
                         $"Precision '{precision}' is not supported for comparing Code<T> to string.");
 
                 return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
+            }
+            // Handle comparison between PrimitiveType (e.g., Code<T>) and CqlCode
+            case (PrimitiveType xCode, CqlCode yCqlCode):
+            {
+                if (precision != null)
+                    throw new InvalidOperationException(
+                        $"Precision '{precision}' is not supported for comparing Code<T> to CqlCode.");
+
+                return StringComparer.Ordinal.Compare(xCode.ObjectValue, yCqlCode.code);
+            }
+            // Handle comparison between CqlCode and PrimitiveType (e.g., Code<T>) - reverse case
+            case (CqlCode xCqlCode, PrimitiveType yCode):
+            {
+                if (precision != null)
+                    throw new InvalidOperationException(
+                        $"Precision '{precision}' is not supported for comparing CqlCode to Code<T>.");
+
+                return StringComparer.Ordinal.Compare(xCqlCode.code, yCode.ObjectValue);
             }
             default:
                 return inner.CompareValues(x, y, precision);
