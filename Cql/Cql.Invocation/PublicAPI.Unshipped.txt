@@ -3,24 +3,24 @@ abstract Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Invoke(Hl7.Cql.Runtime.Cql
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.Definitions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.DefinitionSignature, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.DependencyLibraryIdentifiers.get -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.CqlOperandInfo() -> void
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.CqlOperandInfo(string! Name, System.Type! Type) -> void
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Deconstruct(out string! Name, out System.Type! Type) -> void
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Equals(Hl7.Cql.Invocation.Toolkit.CqlOperandInfo other) -> bool
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Name.get -> string!
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Name.init -> void
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Type.get -> System.Type!
-Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Type.init -> void
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.CqlParameterInfo() -> void
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.CqlParameterInfo(string! Name, System.Type! Type) -> void
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Deconstruct(out string! Name, out System.Type! Type) -> void
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Equals(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo other) -> bool
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Name.get -> string!
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Name.init -> void
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Type.get -> System.Type!
+Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Type.init -> void
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.CqlDefinitionAttribute.get -> Hl7.Cql.Abstractions.CqlDefinitionAttribute!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, System.Type! returnType, Hl7.Cql.Invocation.Toolkit.CqlOperandInfo[]! operands, Hl7.Cql.Abstractions.CqlDefinitionAttribute! cqlDefinitionAttribute, Hl7.Cql.Abstractions.CqlTagAttribute![]! cqlTagAttributes) -> void
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, System.Type! returnType, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo[]! parameters, Hl7.Cql.Abstractions.CqlDefinitionAttribute! cqlDefinitionAttribute, Hl7.Cql.Abstractions.CqlTagAttribute![]! cqlTagAttributes) -> void
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionSignature.get -> Hl7.Cql.Runtime.DefinitionSignature
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibrarySetName.get -> string!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Operands.get -> Hl7.Cql.Invocation.Toolkit.CqlOperandInfo[]!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.Parameters.get -> Hl7.Cql.Invocation.Toolkit.CqlParameterInfo[]!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>!
 Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions
@@ -69,7 +69,8 @@ Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LibraryInvokers.get -> System.Colle
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LibrarySetName.get -> string!
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
-override Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.GetHashCode() -> int
+override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.GetHashCode() -> int
+override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.Equals(object? obj) -> bool
 override Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.GetHashCode() -> int
@@ -78,8 +79,8 @@ override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.DependencyLibraryIden
 override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 override Hl7.Cql.Invocation.Toolkit.LibraryInvoker.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.ToString() -> string?
-static Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.operator !=(Hl7.Cql.Invocation.Toolkit.CqlOperandInfo left, Hl7.Cql.Invocation.Toolkit.CqlOperandInfo right) -> bool
-static Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlOperandInfo left, Hl7.Cql.Invocation.Toolkit.CqlOperandInfo right) -> bool
+static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator !=(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo left, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo right) -> bool
+static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo left, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 static Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionInvokerExtensions.SelectResults(this System.Collections.Generic.IEnumerable<Hl7.Cql.Invocation.Toolkit.DefinitionInvoker!>! definitionInvokers, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? selectResultsOptions = null) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, object? invocationResult)>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionPredicates.ExpressionsAndFunctions.get -> Hl7.Cql.Invocation.Toolkit.Extensions.DefinitionPredicate!
@@ -112,5 +113,4 @@ virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.<Clone>$() ->
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.Equals(Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions? other) -> bool
 virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool
-~override Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.Equals(object obj) -> bool
-~override Hl7.Cql.Invocation.Toolkit.CqlOperandInfo.ToString() -> string
+~override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Equals(object obj) -> bool
