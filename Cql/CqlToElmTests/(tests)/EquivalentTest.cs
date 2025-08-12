@@ -1522,7 +1522,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/788")]
         public void FhirCodeableConcept_EquivalentTo_Code()
         {
             var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
@@ -1546,7 +1545,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                  define "Code1": Code { system: 'http://loinc.org', code: '8480-6', display: 'Systolic blood pressure' }
 
-                 define "AreEquivalent": "Fhir Codeable Concept" ~ "Code1"
+                 define "AreEquivalent": EquivalentCodeableConceptCode("Fhir Codeable Concept", "Code1")
                  """);
             Assert.IsNotNull(library.statements);
         }

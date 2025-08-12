@@ -109,6 +109,15 @@ define function ToConcept(concept FHIR.CodeableConcept):
             display: concept.text.value
         }
 
+define function "~"(left FHIR.CodeableConcept, right System.Code):
+    exists (left.coding C where ToCode(C) ~ right)
+
+define function "~"(left System.Code, right FHIR.CodeableConcept):
+    exists (right.coding C where left ~ ToCode(C))
+
+define function "EquivalentCodeableConceptCode"(left FHIR.CodeableConcept, right System.Code):
+    exists (left.coding coding where ToCode(coding) ~ right)
+
 
 define function ToString(value AccountStatus): value.value
 define function ToString(value ActionCardinalityBehavior): value.value

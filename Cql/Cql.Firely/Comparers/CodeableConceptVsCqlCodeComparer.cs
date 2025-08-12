@@ -26,5 +26,5 @@ internal class CodeableConceptVsCqlCodeComparer() : CqlComparerWrapper<object /*
     {
         CodeableConcept { Coding: [{ } coding] } => new CqlCode(coding.Code, coding.System, coding.Version, coding.Display),
         CqlCode c                                => c,
-        _                                        => throw new CouldNotConvertInstanceToTargetType(outer, typeof(CqlCode)).ToException(),
+        _                                        => throw new CouldNotConvertInstanceToTargetType(outer ?? new object(), typeof(CqlCode)).ToException(),
     });
