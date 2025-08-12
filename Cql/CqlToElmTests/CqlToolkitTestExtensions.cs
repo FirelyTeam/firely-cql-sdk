@@ -37,7 +37,7 @@ internal static class CqlToolkitTestExtensions
     public static SystemLibrary GetSystemLibrary(this CqlToolkit cqlToolkit) =>
         cqlToolkit.GetCqlRequiredService<SystemLibrary>();
 
-    private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.Parse(File.ReadAllText(Path.Combine("Input", "FHIRHelpers-4.0.1.cql")));
+    private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.Parse(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
 
     public static CqlToolkit AddFHIRHelpers(this CqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraries(FHIRHelpers);
 
