@@ -19,7 +19,7 @@ internal class BaseComparer(CqlComparers valueComparer) : CqlComparer<Base>
 
     /// <inheritdoc />
     protected override bool? EqualsValues(Base x, Base y, string? precision) =>
-        x == y ? true:
+        x == y ? true :
         valueComparer.Equals(x.EnumerateElements(), y.EnumerateElements(), precision);
 
     /// <inheritdoc />
