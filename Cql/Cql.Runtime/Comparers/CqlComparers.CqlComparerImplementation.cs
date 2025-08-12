@@ -6,10 +6,25 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+
 namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers : CqlComparer<object>
 {
+    private ImmutableList<(string Name, Func<Type, Type, bool> ShouldSwap)> _shouldTypeSwapPredicates =
+    [
+        // Any type in the System namespace is considered less than any type not in the System namespace.
+        ("SystemTypesLowestPriority", (xType, yType) => xType.Namespace == "System" && yType.Namespace != "System"),
+    ];
+
+    internal CqlComparers ConfigureTypeSwapPredicates(
+        Mutator<ImmutableList<(string Name, Func<Type, Type, bool> ShouldSwap)>> configure)
+    {
+        _shouldTypeSwapPredicates = configure(_shouldTypeSwapPredicates);
+        return this;
+    }
+
     protected override int? CompareValues(
         object x,
         object y,
@@ -21,13 +36,11 @@ partial class CqlComparers : CqlComparer<object>
             var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
-                // if x and y are not the same type, we prioritize them based on the following order:
-                // 1. If only one type is in the System namespace, we prioritize the other type
-                if (xType.Namespace == "System" && yType.Namespace != "System")
+                if (ShouldSwapTypes(xType, yType))
                 {
                     xySwapped = true;
                     (x, y) = (y, x);
-                    xType = yType; // yType won't be used again, so no need to swap it
+                    xType = yType; // yType won't be used again
                 }
             }
         }
@@ -66,12 +79,30 @@ partial class CqlComparers : CqlComparer<object>
         throw new ArgumentException($"Cannot compare type {xType.Name}");
     }
 
+    private bool ShouldSwapTypes(Type xType, Type yType)
+    {
+        Debug.Assert(xType != yType, "xType and yType must not be the same.");
+        var shouldSwapTypes = _shouldTypeSwapPredicates.Any(p => p.ShouldSwap(xType, yType));
+        return shouldSwapTypes;
+    }
+
     protected override bool EquivalentValues(
         object x,
         object y,
         string? precision)
     {
         var xType = GetKeyTypeForComparers(x);
+        {
+            var yType = GetKeyTypeForComparers(y);
+            if (xType != yType)
+            {
+                if (ShouldSwapTypes(xType, yType))
+                {
+                    (x, y) = (y, x);
+                    xType = yType; // yType won't be used again
+                }
+            }
+        }
 
         if (Comparers.TryGetValue(xType, out var comparer))
         {
@@ -98,6 +129,17 @@ partial class CqlComparers : CqlComparer<object>
         string? precision)
     {
         var xType = GetKeyTypeForComparers(x);
+        {
+            var yType = GetKeyTypeForComparers(y);
+            if (xType != yType)
+            {
+                if (ShouldSwapTypes(xType, yType))
+                {
+                    (x, y) = (y, x);
+                    xType = yType; // yType won't be used again
+                }
+            }
+        }
 
         if (Comparers.TryGetValue(xType, out var comparer))
         {

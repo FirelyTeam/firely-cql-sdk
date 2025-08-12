@@ -158,4 +158,42 @@ public class CqlContextOperatorTests
 	}
 
 	#endregion
+
+	#region Equivalent
+
+	[TestMethod]
+	public void Equivalent_FhirCodeAndCqlCode_MustBeEquivalent()
+	{
+		// Arrange
+		var rtx = GetNewContext();
+
+		var enumVal = Encounter.EncounterStatus.Cancelled;
+		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
+		var cqlCode = new CqlCode("cancelled", null, null, null); // This represents the string "CancelledObservationStatus" converted to CqlCode
+
+		// Act
+		var isEquivalent = rtx.Operators.Equivalent(fhirCode, cqlCode);
+
+		// Assert
+		isEquivalent.Should().BeTrue("FHIR Code and equivalent CqlCode should be equivalent");
+	}
+
+	[TestMethod]
+	public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
+	{
+		// Arrange
+		var rtx = GetNewContext();
+
+		var enumVal = Encounter.EncounterStatus.Cancelled;
+		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
+		var cqlCode = new CqlCode("cancelled", null, null, null);
+
+		// Act
+		var isEquivalent = rtx.Operators.Equivalent(cqlCode, fhirCode);
+
+		// Assert
+		isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
+	}
+
+	#endregion
 }
