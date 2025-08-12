@@ -24,7 +24,7 @@
 			Keep this in sync between cql-sdk.props and cql-demo.props
 		-->
 		<VersionPrefix>2.1.0</VersionPrefix>
-		<VersionSuffix>beta.1</VersionSuffix>
+		<VersionSuffix>rc.1</VersionSuffix>
 
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
