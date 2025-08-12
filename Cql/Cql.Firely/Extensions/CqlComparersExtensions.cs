@@ -59,6 +59,8 @@ namespace Hl7.Cql.Fhir.Extensions
                 return primitiveTypeAgainstStringComparer;
             });
 
+            comparers.Register(typeof(Base), new BaseComparer(comparers));
+
             return comparers;
         }
 
