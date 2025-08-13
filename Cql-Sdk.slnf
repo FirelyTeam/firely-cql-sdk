@@ -2,6 +2,7 @@
   "solution": {
     "path": "Cql-Sdk-All.sln",
     "projects": [
+      "Cql\\Benchmarks\\Benchmarks.csproj",
       "Cql\\CodeGeneration.NET\\CodeGeneration.NET.csproj",
       "Cql\\CoreTests\\CoreTests.csproj",
       "Cql\\Cql.Abstractions\\Cql.Abstractions.csproj",
@@ -9,15 +10,23 @@
       "Cql\\Cql.CqlToElm\\Cql.CqlToElm.csproj",
       "Cql\\Cql.Firely\\Cql.Firely.csproj",
       "Cql\\Cql.Grammar\\Cql.Grammar.csproj",
+      "Cql\\Cql.Invocation\\Cql.Invocation.csproj",
       "Cql\\Cql.Model\\Cql.Model.csproj",
       "Cql\\Cql.Packaging\\Cql.Packaging.csproj",
       "Cql\\Cql.Runtime\\Cql.Runtime.csproj",
       "Cql\\CqlToElmTests\\CqlToElmTests.csproj",
-      "Cql\\Cql.Invocation\\Cql.Invocation.csproj",
       "Cql\\Cql\\Cql.csproj",
       "Cql\\Elm\\Elm.csproj",
       "Cql\\Iso8601\\Iso8601.csproj",
-      "Cql\\PackagerCLI\\PackagerCLI.csproj"
+      "Cql\\PackagerCLI\\PackagerCLI.csproj",
+      "Demo\\CLI\\CLI.csproj",
+      "Demo\\Cql\\Cql.csproj",
+      "Demo\\Measures.Authoring\\Measures.Authoring.csproj",
+      "Demo\\Measures.CMS\\Measures.CMS.csproj",
+      "Demo\\Measures.Demo\\Measures.Demo.csproj",
+      "Demo\\Test.Measures.Demo\\Test.Measures.Demo.csproj",
+      "Examples\\CqlSdkExamplesPreview\\CqlSdkExamplesPreview.csproj",
+      "Examples\\CqlSdkExamples\\CqlSdkExamples.csproj"
     ]
   }
 }
