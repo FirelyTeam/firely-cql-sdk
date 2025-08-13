@@ -33,6 +33,8 @@ class GitAnalyzer:
     
     def __init__(self, repo_path="."):
         self.repo_path = repo_path
+        # Use FETCH_HEAD to get the main branch history, fallback to tag
+        self.target_ref = "FETCH_HEAD"  
         self.target_tag = "v2.1.0-rc.1"
         
     def run_git_command(self, command):
@@ -53,18 +55,31 @@ class GitAnalyzer:
             return ""
     
     def get_commit_history(self):
-        """Get detailed commit history up to target tag."""
-        # Get commits with detailed info
-        log_format = "--format='%H|%ad|%an|%ae|%s|%P'"
+        """Get detailed commit history from main repository data."""
+        log_format = '--format="%H|%ad|%an|%ae|%s|%P"'
         date_format = "--date=iso"
-        command = f"log {self.target_tag} {log_format} {date_format}"
         
+        # Use FETCH_HEAD (main branch data) primarily
+        command = f"log {self.target_ref} {log_format} {date_format}"
         commits_raw = self.run_git_command(command)
+        
+        # If FETCH_HEAD fails, try the tag
+        if not commits_raw.strip():
+            print(f"⚠️  {self.target_ref} not found, trying tag {self.target_tag}")
+            command = f"log {self.target_tag} {log_format} {date_format}"
+            commits_raw = self.run_git_command(command)
+            
+        # Last resort: all available commits
+        if not commits_raw.strip():
+            print(f"⚠️  Tag {self.target_tag} not found, analyzing all available commits")
+            command = f"log --all {log_format} {date_format}"
+            commits_raw = self.run_git_command(command)
+        
         commits = []
         
         for line in commits_raw.split('\n'):
             if line.strip():
-                parts = line.strip().strip("'").split('|')
+                parts = line.strip().split('|')
                 if len(parts) >= 5:
                     try:
                         commit_date = datetime.strptime(parts[1][:19], '%Y-%m-%d %H:%M:%S')
@@ -83,10 +98,20 @@ class GitAnalyzer:
         return sorted(commits, key=lambda x: x['date'])
     
     def get_line_stats(self):
-        """Get lines of code statistics."""
-        # Total changes up to target tag
-        command = f"log {self.target_tag} --pretty=tformat: --numstat"
+        """Get lines of code statistics for *.cs files only (excluding *.g.cs)."""
+        # Use FETCH_HEAD primarily, fallback to tag, then all commits
+        command = f"log {self.target_ref} --pretty=tformat: --numstat"
         stats_raw = self.run_git_command(command)
+        
+        # If no output with FETCH_HEAD, try the tag
+        if not stats_raw.strip():
+            command = f"log {self.target_tag} --pretty=tformat: --numstat"
+            stats_raw = self.run_git_command(command)
+            
+        # If still no output, try all commits
+        if not stats_raw.strip():
+            command = f"log --all --pretty=tformat: --numstat"
+            stats_raw = self.run_git_command(command)
         
         total_added = 0
         total_removed = 0
@@ -94,11 +119,14 @@ class GitAnalyzer:
         for line in stats_raw.split('\n'):
             if line.strip():
                 parts = line.split('\t')
-                if len(parts) >= 2:
+                if len(parts) >= 3:  # added, removed, filename
                     try:
-                        if parts[0].isdigit() and parts[1].isdigit():
-                            total_added += int(parts[0])
-                            total_removed += int(parts[1])
+                        filename = parts[2]
+                        # Only count .cs files, but exclude .g.cs generated files
+                        if filename.endswith('.cs') and not filename.endswith('.g.cs'):
+                            if parts[0].isdigit() and parts[1].isdigit():
+                                total_added += int(parts[0])
+                                total_removed += int(parts[1])
                     except (ValueError, IndexError):
                         continue
         
@@ -109,11 +137,11 @@ class GitAnalyzer:
         }
     
     def get_file_stats(self):
-        """Get current file statistics."""
-        # Count files and lines
+        """Get current file statistics for *.cs files only (excluding *.g.cs)."""
+        # Count files and lines for .cs files excluding .g.cs
         try:
             cs_files = subprocess.run(
-                "find . -name '*.cs' | wc -l",
+                "find . -name '*.cs' ! -name '*.g.cs' | wc -l",
                 shell=True,
                 cwd=self.repo_path,
                 capture_output=True,
@@ -121,16 +149,16 @@ class GitAnalyzer:
             ).stdout.strip()
             
             cs_lines = subprocess.run(
-                "find . -name '*.cs' -exec wc -l {} + | tail -1",
+                "find . -name '*.cs' ! -name '*.g.cs' -exec wc -l {} + 2>/dev/null | tail -1 | awk '{print $1}'",
                 shell=True,
                 cwd=self.repo_path,
                 capture_output=True,
                 text=True
-            ).stdout.strip().split()[0]
+            ).stdout.strip()
             
             return {
-                'cs_files': int(cs_files),
-                'cs_lines': int(cs_lines)
+                'cs_files': int(cs_files) if cs_files else 0,
+                'cs_lines': int(cs_lines) if cs_lines else 0
             }
         except:
             return {'cs_files': 0, 'cs_lines': 0}
