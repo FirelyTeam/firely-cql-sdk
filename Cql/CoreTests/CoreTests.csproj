@@ -45,7 +45,7 @@
 		<LibrarySet>CoreTests.HL7</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
-		<DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory>
+		<!-- <DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory> -->
 		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
