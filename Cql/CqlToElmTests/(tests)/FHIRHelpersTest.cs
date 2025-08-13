@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_To_Elm()
         {
-            var cql = File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql");
+            var cql = File.ReadAllText(Path.Combine("Input", "FHIRHelpers-4.0.1.cql"));
             var lib = CreateCqlToolkit().MakeLibrary(cql);
             lib.GetErrors().Should().BeEmpty();
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);
@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void FHIRHelpers_To_Expressions()
         {
-            var cql = File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql");
+            var cql = File.ReadAllText(Path.Combine("Input", "FHIRHelpers-4.0.1.cql"));
             var lib = CreateCqlToolkit().MakeLibrary(cql);
             lib.GetErrors().Should().BeEmpty();
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);

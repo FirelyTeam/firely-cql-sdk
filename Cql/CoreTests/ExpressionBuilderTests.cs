@@ -33,7 +33,7 @@ namespace CoreTests
         {
             using var serviceProvider = BuildServiceProvider();
             using var servicesScope = serviceProvider.CreateScope();
-            var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
+            var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "Aggregates-1.0.0.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
@@ -45,7 +45,7 @@ namespace CoreTests
         {
             using var serviceProvider = BuildServiceProvider();
             using var servicesScope = serviceProvider.CreateScope();
-            var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
+            var elm = new FileInfo(Path.Combine("Input", "ELM", "HL7", "FHIRConversionTest.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
@@ -57,7 +57,7 @@ namespace CoreTests
         {
             using var serviceProvider = BuildServiceProvider();
             using var servicesScope = serviceProvider.CreateScope();
-            var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
+            var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "QueriesTest-1.0.0.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
@@ -72,8 +72,8 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             FileInfo[] files =
             [
-                new(@"Input\ELM\Test\Medication_Request_Example.json"),
-                new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
+                new(Path.Combine("Input", "ELM", "Test", "Medication_Request_Example.json")),
+                new(Path.Combine("Input", "ELM", "Libs", "FHIRHelpers-4.0.1.json"))
             ];
             var librarySet = new LibrarySet();
             librarySet.LoadLibraries(files);
