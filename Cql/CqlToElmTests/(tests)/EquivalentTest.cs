@@ -1551,6 +1551,20 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements);
         }
 
+        [TestMethod]
+        public void FhirCode_EquivalentTo_CqlCode_String()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var library = cqlToolkit.MakeLibrary("""
+                 library EqualsTest version '1.0.0'
+                 using FHIR version '4.0.1'
+
+                 define "Test Code Equivalence": true
+                 """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+        }
+
         #endregion
     }
 }

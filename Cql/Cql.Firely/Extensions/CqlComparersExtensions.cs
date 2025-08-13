@@ -55,8 +55,16 @@ namespace Hl7.Cql.Fhir.Extensions
                     nameof(CodeOfEnumCqlComparer<DummyEnum>.Instance),
                     BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty,
                     null, null, [])!;
-                PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeOfEnumCqlComparerInstance);
-                return primitiveTypeAgainstStringComparer;
+
+                CodeOfTComparer codeOfTComparer = new CodeOfTComparer(codeOfEnumCqlComparerInstance);
+                return codeOfTComparer;
+            });
+
+             // This is important to ensure the step above works correctly.
+            comparers.ConfigureTypeSwapPredicates(typeSwapPredicates =>
+            {
+                // This ensures that the FHIR Code type is considered higher priority (comparand on left) than the CQL Code type (comparand of right).
+                return typeSwapPredicates.Add(("FhirTypeHigherPriorityThanCqlType", ShouldSwap: (xType, yType) => xType.Namespace!.StartsWith("Hl7.Cql") && yType.Namespace!.StartsWith("Hl7.Fhir")));
             });
 
             comparers.Register(typeof(Base), new BaseComparer(comparers));
