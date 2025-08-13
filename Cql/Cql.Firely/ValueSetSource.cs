@@ -76,7 +76,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public async Task<IValueSetFacade> Add(ValueSet vs)
     {
-        if(vs.Url is null) throw new ArgumentNullException(nameof(vs), "ValueSet must have a URL to be added to the cache.");
+        if(vs.Url is null) throw new ArgumentException("ValueSet must have a URL to be added to the cache.", nameof(vs));
 
         if (_valueSets.TryGetValue(vs.Url, out var valueSet)) return valueSet;
 
