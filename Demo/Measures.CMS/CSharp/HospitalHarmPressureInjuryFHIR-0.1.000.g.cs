@@ -189,7 +189,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                 bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
                 bool? n_(Extension @this)
                 {
-                    string w_ = @this?.Url;
+                    FhirUri w_ = @this?.UrlElement;
                     FhirString x_ = context.Operators.Convert<FhirString>(w_);
                     string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
                     bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -307,7 +307,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                 bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
                 bool? n_(Extension @this)
                 {
-                    string w_ = @this?.Url;
+                    FhirUri w_ = @this?.UrlElement;
                     FhirString x_ = context.Operators.Convert<FhirString>(w_);
                     string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
                     bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -465,7 +465,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                 bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
                 bool? n_(Extension @this)
                 {
-                    string w_ = @this?.Url;
+                    FhirUri w_ = @this?.UrlElement;
                     FhirString x_ = context.Operators.Convert<FhirString>(w_);
                     string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
                     bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -603,7 +603,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                 bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
                 bool? n_(Extension @this)
                 {
-                    string w_ = @this?.Url;
+                    FhirUri w_ = @this?.UrlElement;
                     FhirString x_ = context.Operators.Convert<FhirString>(w_);
                     string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
                     bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");

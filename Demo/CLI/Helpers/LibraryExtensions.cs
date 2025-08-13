@@ -43,6 +43,7 @@ internal static class LibraryExtensions
             // Resource example: https://fire.ly/fhir/Library/FHIRHelpers|4.0.001
             // First split out the version part
             // Second split out the Name part after Library/
+            if (relatedArtifact.Resource is null) return false;
 
             var arr = relatedArtifact.Resource.Split('|', 2);
             string name = arr[0];

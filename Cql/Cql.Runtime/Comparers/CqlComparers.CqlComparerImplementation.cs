@@ -45,12 +45,25 @@ partial class CqlComparers : CqlComparer<object>
             }
         }
 
-        ICqlComparer? comparer = null;
-        if (Comparers.TryGetValue(xType, out var c))
+        var comparer = SelectComparer(x, xType);
+
+        if (comparer != null)
         {
-            comparer = c;
+            var result = comparer.Compare(x, y, precision);
+            if (xySwapped) result = -result;
+            return result;
         }
-        else if (xType.IsGenericType)
+
+        throw new ArgumentException($"Cannot compare type {xType.Name}");
+    }
+
+    private ICqlComparer? SelectComparer(object x, Type xType)
+    {
+        ICqlComparer? comparer = null;
+
+        if (Comparers.TryGetValue(xType, out var c)) return c;
+
+        if (xType.IsGenericType)
         {
             var gtd = xType.GetGenericTypeDefinition();
             if (ComparerFactories.TryGetValue(gtd, out var factory))
@@ -69,14 +82,10 @@ partial class CqlComparers : CqlComparer<object>
             comparer = listComparer;
         }
 
-        if (comparer != null)
-        {
-            var result = comparer.Compare(x, y, precision);
-            if (xySwapped) result = -result;
-            return result;
-        }
+        if(comparer is null && xType.BaseType is not null)
+            comparer = SelectComparer(x, xType.BaseType);
 
-        throw new ArgumentException($"Cannot compare type {xType.Name}");
+        return comparer;
     }
 
     private bool ShouldSwapTypes(Type xType, Type yType)

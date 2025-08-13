@@ -377,7 +377,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
         {
             bool? u_(Extension @this)
             {
-                string ac_ = @this?.Url;
+                FhirUri ac_ = @this?.UrlElement;
                 FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
                 string ae_ = FHIRHelpers_4_4_000.Instance.ToString(context, ad_);
                 bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");

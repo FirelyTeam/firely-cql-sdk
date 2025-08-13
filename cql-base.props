@@ -11,7 +11,7 @@
 			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props
 			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
-		<FirelySdkVersion>5.12.0</FirelySdkVersion>
+		<FirelySdkVersion>6.0.0-beta2-20250722.6</FirelySdkVersion>
 
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>

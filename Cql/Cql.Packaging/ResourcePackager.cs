@@ -133,7 +133,7 @@ file static class MeasurePackager
         SysDateTime overrideDate)
     {
         var measure = new FhirMeasure();
-        var libName = fhirLibrary.Name;
+        var libName = fhirLibrary.Name ?? throw new ArgumentException("Library must have a name", nameof(fhirLibrary));
         var libVer = elmLibrary.identifier?.version!;
 
         measure.Id = fhirLibrary.Id; // was elmLibrary.identifier?.id
@@ -397,7 +397,7 @@ internal static class LibraryPackager
             }
         }
         library.RelatedArtifact.AddRange(result);
-        library.RelatedArtifact.Sort((x, y) => x.Display.CompareTo(y.Display));
+        library.RelatedArtifact.Sort((x, y) => string.Compare(x.Display, y.Display ?? "", StringComparison.Ordinal));
     }
 
     private static void AddDataRequirements(

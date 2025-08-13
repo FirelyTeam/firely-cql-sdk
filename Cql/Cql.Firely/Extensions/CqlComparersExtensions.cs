@@ -60,13 +60,14 @@ namespace Hl7.Cql.Fhir.Extensions
                 return codeOfTComparer;
             });
 
-            // This is important to ensure the step above works correctly.
+             // This is important to ensure the step above works correctly.
             comparers.ConfigureTypeSwapPredicates(typeSwapPredicates =>
             {
                 // This ensures that the FHIR Code type is considered higher priority (comparand on left) than the CQL Code type (comparand of right).
                 return typeSwapPredicates.Add(("FhirTypeHigherPriorityThanCqlType", ShouldSwap: (xType, yType) => xType.Namespace!.StartsWith("Hl7.Cql") && yType.Namespace!.StartsWith("Hl7.Fhir")));
             });
 
+            comparers.Register(typeof(Base), new BaseComparer(comparers));
 
             return comparers;
         }
