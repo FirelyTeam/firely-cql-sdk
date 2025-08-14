@@ -32,9 +32,13 @@
 		</None>
 	</ItemGroup>
 
-	<UsingTask Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+	<PropertyGroup>
+		<RoslynCodeTaskFactoryAssembly Condition="'$(RoslynCodeTaskFactoryAssembly)' == ''">$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</RoslynCodeTaskFactoryAssembly>
+	</PropertyGroup>
+
+	<!-- Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" -->
+	<UsingTask TaskName="UpdateCurrentDirectoryInSource" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(RoslynCodeTaskFactoryAssembly)">
 		<Task>
-			<Reference Include="System.Core" />
 			<Using Namespace="System" />
 			<Using Namespace="System.IO" />
 			<Using Namespace="System.Text.RegularExpressions" />
@@ -90,12 +94,11 @@
 		</Task>
 	</UsingTask>
 
-	<UsingTask Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+	<UsingTask TaskName="UpdateLaunchSettingsInSource" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(RoslynCodeTaskFactoryAssembly)">
 		<Task>
-			<Reference Include="System.Core" />
+			<!-- System.Memory is needed for ReadOnlySpan<> -->
 			<Reference Include="System.Memory" />
 			<Reference Include="System.Text.Json" />
-			<Reference Include="Microsoft.Bcl.AsyncInterfaces" />
 			<Using Namespace="System" />
 			<Using Namespace="System.Text.Json" />
 			<Using Namespace="System.Text.Json.Nodes" />
@@ -194,7 +197,7 @@
 		</Task>
 	</UsingTask>
 
-	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" BeforeTargets="CoreCompile">
+	<Target Name="ModifySources" BeforeTargets="CoreCompile">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
