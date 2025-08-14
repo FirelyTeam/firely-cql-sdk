@@ -1,8 +1,15 @@
 <Project>
 
-	<!-- Code Generation -->
+	<!--
+		This file is used to generate the Program.cs and launchSettings.json files in the CqlSdkExamples projects.
+		It's used to update the Environment.CurrentDirectory in the Program.cs files and to generate the launchSettings.json file
+		with all the examples in the project directory.
+		It's used in the CqlSdkExamples and CqlSdkExamplesPreview projects.
+		It is not to be used with `dotnet run` or `dotnet build` commands, but only with Visual Studio or MSBuild, hence the condition on MSBuildRuntimeType != Core
+		-->
 
-	<PropertyGroup Condition="'$(MSBuildRuntimeType)' != 'Core'">
+	<PropertyGroup
+		Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<RoslynCodeTaskFactoryAssembly Condition="'$(RoslynCodeTaskFactoryAssembly)' == ''">$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</RoslynCodeTaskFactoryAssembly>
 	</PropertyGroup>
 
@@ -176,7 +183,5 @@
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
-
-	<!-- Code Generation -->
 
 </Project>

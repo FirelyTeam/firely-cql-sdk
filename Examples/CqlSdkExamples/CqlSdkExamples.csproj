@@ -32,8 +32,6 @@
 		</None>
 	</ItemGroup>
 
-	<!-- Code Generation -->
-	<Import Project="..\CqlSdkExamples.targets" />
-	<!-- Code Generation -->
+	<Import Project="..\CqlSdkExamplesCodeGeneration.targets" />
 
 </Project>
