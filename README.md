@@ -73,30 +73,6 @@ The SDK has dependencies on the following key external packages:
 - **System.CommandLine.NamingConventionBinder**: Version 2.0.0-beta4.22272.1 - Command-line binding support
 - **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
 
-## Release Reports ##
-
-The repository includes a comprehensive release report generator that creates visual reports showing development progress and metrics:
-
-- **📊 Metrics**: Total commits, contributors, pull requests, lines of code, and development timeline
-- **🎯 Milestones**: Key development milestones and contributor tracking
-- **👥 Contributors**: Detailed contributor statistics with visual charts
-- **📈 Timeline**: Development activity visualization over time
-
-### Generate a Release Report
-
-```bash
-# Generate report for v2.1.0-rc.1 (default)
-./generate-release-report.sh
-
-# Generate report for a specific tag
-./generate-release-report.sh --tag v2.0.0
-
-# Custom output filename
-./generate-release-report.sh --output my-custom-report.html
-```
-
-For more details, see [tools/ReleaseReportGenerator/README.md](tools/ReleaseReportGenerator/README.md).
-
 ## Dev Start
 During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 

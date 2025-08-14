@@ -413,8 +413,3 @@ global.json
 
 # remove compressed files
 *.zip
-
-##
-## Release Reports
-##
-release-report*.html
