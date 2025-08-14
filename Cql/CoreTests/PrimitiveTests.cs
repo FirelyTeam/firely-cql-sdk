@@ -3407,7 +3407,7 @@ namespace CoreTests
         public void Aggregate_Query_Test()
         {
             var librarySet = new LibrarySet();
-            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"), "Aggregates", "1.0.0");
+            librarySet.LoadLibraryAndDependencies(new DirectoryInfo(Path.Combine("Input", "ELM", "Test")), "Aggregates", "1.0.0");
 
             var loggerFactory = new ServiceCollection()
                                 .AddDebugLogging()

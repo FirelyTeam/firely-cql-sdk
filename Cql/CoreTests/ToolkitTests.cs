@@ -8,7 +8,6 @@
 
 #nullable enable
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
@@ -16,7 +15,6 @@ using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 
@@ -26,28 +24,46 @@ namespace CoreTests;
 public class ToolkitTests
 {
     [TestMethod]
-    public void TestRuntimeScopeAgainstLibraryDefinitionResults()
+    public void TestNestedTupleResult_ToString_MatchesExpectedFormat()
     {
         // Arrange
-        var filePath = new DirectoryInfo(Directory.GetCurrentDirectory())
-                       .SelfAndParents()
-                       .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
-                       .First(File.Exists);
+        var cqlNestedTuples =
+            (CqlLibraryString)"""
+                              library CqlNestedTupleTest version '1.0.0'
+
+                              define "Result":
+                                Tuple{
+                                  status: 'success',
+                                  result: Tuple{
+                                      result1: 'some first result',
+                                      result2: 'some second result'
+                                      }
+                                }
+                              """;
+
         var ctx = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = new InvocationToolkit()
-                                      .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
-                                      .CreateLibrarySetInvoker();
+        using var librarySetInvoker =
+            new CqlToolkit()
+                .AddCqlLibraries(cqlNestedTuples)
+                .CreateLibrarySetInvoker();
 
         // Act
-        var result = librarySetInvoker
+        var results = librarySetInvoker
                      .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
                      .SelectResults(ctx)
                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         // Assert
-        Assert.IsNotNull(result);
-        result.TryGetValue("Result", out var obj);
+        Assert.IsNotNull(results);
+        results.TryGetValue("Result", out var obj);
         Assert.IsNotNull(obj);
+        Assert.IsNotNull(obj.invocationResult);
+        Assert.AreEqual(
+            // NOTE: This is the raw ToString() output of the value tuple returned from the CQL library.
+            // It is not a JSON string, but a C# value tuple string representation.
+            """
+            (["result", "status"], (["result1", "result2"], some first result, some second result), success)
+            """, obj.invocationResult.ToString());
     }
 
     [TestMethod]
@@ -220,8 +236,8 @@ public class ToolkitTests
 
         // Act: Get expressions and functions using the new method
         var expressionsAndFunctions = libraryInvoker.SelectExpressions(DefinitionPredicates.ExpressionsAndFunctions)
-            .Where(d => d.DefinitionName != "Patient") // Filter out the automatic Patient context definition
-            .ToList();
+                                                    .Where(d => d.DefinitionName != "Patient") // Filter out the automatic Patient context definition
+                                                    .ToList();
 
         // Assert: Should include both expressions and functions
         expressionsAndFunctions.Should().HaveCount(5, "Should include 2 expressions and 3 functions");
@@ -337,8 +353,8 @@ public class ToolkitTests
 
         // Act: Generate C# code and compile to assembly using ElmToolkit
         var elmToolkit = new ElmToolkit()
-            .AddElmLibraries([elmLibrary])
-            .CompileToAssemblies();
+                         .AddElmLibraries([elmLibrary])
+                         .CompileToAssemblies();
 
         var assemblyResult = elmToolkit.GetElmToAssemblyResults().First();
         var assemblyBinary = assemblyResult.assemblyBinary;
@@ -376,5 +392,4 @@ public class ToolkitTests
         keywordTestInvoker.Parameters[1].Name.Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
         keywordTestInvoker.Parameters[2].Name.Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
     }
-
 }

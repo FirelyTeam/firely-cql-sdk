@@ -43,7 +43,7 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deserialize_FhirHelpers()
         {
-            var originalElm = File.ReadAllText(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json");
+            var originalElm = File.ReadAllText(Path.Combine("Input", "ELM", "Libs", "FHIRHelpers-4.0.1.json"));
             var lib = Library.ParseFromJson(originalElm);
             var elm = lib.SerializeToJson();
 
@@ -88,7 +88,7 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deserialize_MixedXmlAnnotations()
         {
-            var originalElm = File.ReadAllText(@"Input\ELM\Test\CqlWithAnnotations.xml");
+            var originalElm = File.ReadAllText(Path.Combine("Input", "ELM", "Test", "CqlWithAnnotations.xml"));
             var x = new XmlSerializer(typeof(Library));
             var lib = (Library)x.Deserialize(new StringReader(originalElm))!;
             var annotation = lib.usings[1].annotation[0].Should().BeOfType<Annotation>().Subject;
