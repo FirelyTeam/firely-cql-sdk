@@ -32,12 +32,16 @@
 		</None>
 	</ItemGroup>
 
-	<PropertyGroup>
+	<!-- Code Generation -->
+
+	<PropertyGroup Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<RoslynCodeTaskFactoryAssembly Condition="'$(RoslynCodeTaskFactoryAssembly)' == ''">$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</RoslynCodeTaskFactoryAssembly>
 	</PropertyGroup>
 
-	<!-- Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" -->
-	<UsingTask TaskName="UpdateCurrentDirectoryInSource" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(RoslynCodeTaskFactoryAssembly)">
+	<UsingTask TaskName="UpdateCurrentDirectoryInSource"
+	           TaskFactory="RoslynCodeTaskFactory"
+	           AssemblyFile="$(RoslynCodeTaskFactoryAssembly)"
+	           Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<Task>
 			<Using Namespace="System" />
 			<Using Namespace="System.IO" />
@@ -94,7 +98,10 @@
 		</Task>
 	</UsingTask>
 
-	<UsingTask TaskName="UpdateLaunchSettingsInSource" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(RoslynCodeTaskFactoryAssembly)">
+	<UsingTask TaskName="UpdateLaunchSettingsInSource"
+	           TaskFactory="RoslynCodeTaskFactory"
+	           AssemblyFile="$(RoslynCodeTaskFactoryAssembly)"
+	           Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<Task>
 			<!-- System.Memory is needed for ReadOnlySpan<> -->
 			<Reference Include="System.Memory" />
@@ -189,17 +196,19 @@
 					var launchSettingsJsonTextNew = JsonSerializer.Serialize(launchSettingsJsonRoot, new JsonSerializerOptions() { WriteIndented = true } );
 					if (launchSettingsJsonText != launchSettingsJsonTextNew)
 						File.WriteAllText(launchSettingsJsonPath, launchSettingsJsonTextNew);
-
       ]]>
-
 			</Code>
 
 		</Task>
 	</UsingTask>
 
-	<Target Name="ModifySources" BeforeTargets="CoreCompile">
+	<Target Name="ModifySources"
+	        BeforeTargets="CoreCompile"
+	        Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
+
+	<!-- Code Generation -->
 
 </Project>
