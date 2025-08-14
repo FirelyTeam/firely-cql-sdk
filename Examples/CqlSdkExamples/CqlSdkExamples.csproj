@@ -32,7 +32,7 @@
 		</None>
 	</ItemGroup>
 
-	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+	<UsingTask Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" TaskName="UpdateCurrentDirectoryInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Using Namespace="System" />
@@ -90,7 +90,7 @@
 		</Task>
 	</UsingTask>
 
-	<UsingTask Condition="'$(Configuration)'=='Debug'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+	<UsingTask Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" TaskName="UpdateLaunchSettingsInSource" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
 		<Task>
 			<Reference Include="System.Core" />
 			<Reference Include="System.Memory" />
@@ -144,7 +144,7 @@
 						return false;
 					}
 
-					var launchSettingsJsonPath = Path.Combine(projectDir.FullName, @"Properties\launchSettings.json");
+					var launchSettingsJsonPath = Path.Combine(projectDir.FullName, "Properties", "launchSettings.json");
 					var launchSettingsJsonText = File.ReadAllText(launchSettingsJsonPath);
 					var launchSettingsJsonRoot = JsonSerializer.Deserialize<JsonObject>(launchSettingsJsonText);
 					var profiles = launchSettingsJsonRoot["profiles"].AsObject();
@@ -194,7 +194,7 @@
 		</Task>
 	</UsingTask>
 
-	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug'" BeforeTargets="CoreCompile">
+	<Target Name="ModifySources" Condition="'$(Configuration)'=='Debug' And '$(MSBuildRuntimeType)' != 'Core'" BeforeTargets="CoreCompile">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
