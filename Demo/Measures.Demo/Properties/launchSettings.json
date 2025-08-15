@@ -2,15 +2,15 @@
   "profiles": {
     "BCSEHEDISMY2022-1.0.0": {
       "commandName": "Project",
-      "commandLineArgs": "--l BCSEHEDISMY2022-1.0.0"
+      "commandLineArgs": "--l Library-BCSEHEDISMY2022-1.0.0"
     },
     "AdultOutpatientEncountersFHIR4-2.2.000": {
       "commandName": "Project",
-      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000"
+      "commandLineArgs": "--l Library-AdultOutpatientEncountersFHIR4-2.2.000"
     },
     "ColorectalCancerScreeningsFHIR-0.0.003": {
       "commandName": "Project",
-      "commandLineArgs": "--l ColorectalCancerScreeningsFHIR-0.0.003"
+      "commandLineArgs": "--l Library-ColorectalCancerScreeningsFHIR-0.0.003"
     }
   }
 }
