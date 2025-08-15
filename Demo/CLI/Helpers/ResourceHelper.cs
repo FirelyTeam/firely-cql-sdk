@@ -42,8 +42,13 @@ internal class ResourceHelper
         return bundle;
     }
 
-    public static IValueSetDictionary LoadValueSets(DirectoryInfo directory)
+    public static IValueSetDictionary LoadValueSets(
+        DirectoryInfo directory,
+        IEnumerable<string> valueSetIds)
     {
+        // TODO: Should this be used to validate the valuesets?
+        var valueSetIdSet = valueSetIds.ToHashSet();
+
         var valueSets = new List<ValueSet>();
         foreach (var file in directory.GetFiles("*.json", SearchOption.AllDirectories))
         {
