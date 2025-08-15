@@ -161,19 +161,28 @@ namespace CLI
             // Invoke all expressions and collect results
             var results = expressions.SelectResults(setup, new SelectResultsOptions(
                 InvocationExceptionCallback: (definition, exception, _) => 
-                    errors.Add(definition.DefinitionSignature.Name, exception)
+                {
+                    var errorKey = $"{definition.LibraryInvoker.LibraryIdentifier.Identifier}-{definition.DefinitionSignature.Name}";
+                    errors.TryAdd(errorKey, exception);
+                }
             )).ToList();
 
             // Process successful results
             foreach (var (definitionInvoker, invocationResult) in results)
             {
-                var declName = definitionInvoker.DefinitionSignature.Name;
-                Console.WriteLine($"Running definition: {declName}");
+                // Use library identifier and definition name to create unique key
+                var declName = $"{definitionInvoker.LibraryInvoker.LibraryIdentifier.Identifier}-{definitionInvoker.DefinitionSignature.Name}";
+                Console.WriteLine($"Running definition: {definitionInvoker.DefinitionSignature.Name}");
                 
-                values.Add(declName, invocationResult!);
+                // Use TryAdd to avoid duplicate key exceptions
+                if (!values.TryAdd(declName, invocationResult!))
+                {
+                    Console.WriteLine($"Warning: Duplicate definition {declName} skipped.");
+                    continue;
+                }
 
-                var json2 = JsonSerializer.Serialize(invocationResult, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
-                Console.WriteLine($"{declName} : {json2} \n");
+                var json2 = JsonSerializer.Serialize(invocationResult, new JsonSerializerOptions().ForFhir(new FhirJsonPocoDeserializerSettings { Validator = null }));
+                Console.WriteLine($"{definitionInvoker.DefinitionSignature.Name} : {json2} \n");
             }
 
             Console.WriteLine($"Results: {errors.Count} error(s), {values.Count} value(s)");
