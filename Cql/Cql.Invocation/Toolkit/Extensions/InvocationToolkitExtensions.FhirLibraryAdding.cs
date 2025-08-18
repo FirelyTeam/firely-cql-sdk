@@ -6,14 +6,15 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Model.CdsHooks;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 using System.Text.Json;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Fhir.Serialization.Extensions;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -61,6 +62,23 @@ partial class InvocationToolkitExtensions
             ;
 
         return invocationToolkit.AddAssemblyBinaries(assemblyBinaries);
+    }
+
+    public static IEnumerable<FhirResource> AddAssemblyBinariesInFhirLibraryAndDependencies(
+        this InvocationToolkit invocationToolkit,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        ResourceFileInfoFromIdentifierResolver fhirFileResolver)
+    {
+
+
+        FhirResource Load(CqlVersionedLibraryIdentifier identifier)
+        {
+            var file = fhirFileResolver(identifier);
+            if (!file.Exists)
+                throw new ArgumentException($"No file exists '{file}' for FHIR library '{identifier}'.");
+            var fhirLibrary = FhirLibraryUtilities.LoadFhirLibrary(file);
+            return fhirLibrary;
+        }
     }
 }
 
