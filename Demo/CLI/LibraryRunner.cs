@@ -68,8 +68,7 @@ namespace CLI
             Console.WriteLine("Loading value sets");
             var valueSetIds = GetValueSetIds(librarySetInvoker, opt.Library);
             IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(
-                new DirectoryInfo(opt.ValueSetsDirectory),
-                valueSetIds);
+                new DirectoryInfo(opt.ValueSetsDirectory));
 
             Console.WriteLine("Loading test case files");
             var testDataDir = Path.Join(opt.DataDirectory, (string)opt.LibraryIdentifier.Identifier);
