@@ -8,13 +8,10 @@
 
 using CLI.Helpers;
 using Dumpify;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
@@ -53,10 +50,6 @@ namespace CLI
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
             var libraryIdentifier = _opts.LibraryIdentifier;
-
-            // TODO: Not efficient to load all resources in the directory,
-            // still have to add an extension to InvocationToolkit to load only the library resource
-            // and its dependencies
             using var librarySetInvoker = new InvocationToolkit()
                                           .AddAssemblyBinariesInFhirLibrariesFromDirectory(new (_opts.ResourcesDirectory))
                                           .CreateLibrarySetInvoker(libraryIdentifier);
@@ -66,50 +59,12 @@ namespace CLI
         private void RunShared(CommandLineOptions opt, LibrarySetInvoker librarySetInvoker)
         {
             Console.WriteLine("Loading value sets");
-            var valueSetIds = GetValueSetIds(librarySetInvoker, opt.Library);
-            IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(
-                new DirectoryInfo(opt.ValueSetsDirectory));
+            IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetsDirectory));
 
             Console.WriteLine("Loading test case files");
             var testDataDir = Path.Join(opt.DataDirectory, (string)opt.LibraryIdentifier.Identifier);
             var patientList = ProcessTestPatients(testDataDir, librarySetInvoker, valueSets);
             //optionally use patientList Dictionary
-        }
-
-        /// <summary>
-        /// Retrieves a set of unique ValueSet IDs from the specified library and its dependencies.
-        /// </summary>
-        /// <param name="librarySetInvoker">
-        /// An instance of <see cref="LibrarySetInvoker"/> used to access library invokers and their dependencies.
-        /// </param>
-        /// <param name="libraryName">
-        /// The name of the library from which to retrieve ValueSet IDs. This should be a valid CQL library identifier.
-        /// </param>
-        /// <returns>
-        /// A <see cref="HashSet{T}"/> containing the unique ValueSet IDs defined in the specified library and its dependencies.
-        /// </returns>
-        /// <exception cref="KeyNotFoundException">
-        /// Thrown if the specified library name does not exist in the <paramref name="librarySetInvoker"/>.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Thrown if the <paramref name="libraryName"/> is not a valid CQL library identifier.
-        /// </exception>
-        private static List<string> GetValueSetIds(LibrarySetInvoker librarySetInvoker, string libraryName)
-        {
-            var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
-            var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
-            var libraryInvokerAndDependencies = libraryInvoker
-                                                .SelectDependencyLibraries(includeSelf: true, recursive: true)
-                                                .ToArray();
-            var valueSetIds = libraryInvokerAndDependencies
-                              .SelectMany(li => li.Definitions.Values)
-                              .SelectWhere(d =>
-                                               d.CqlDefinitionAttribute is CqlValueSetDefinitionAttribute vsda
-                                                   ? (true, vsda)
-                                                   : default)
-                              .Select(vsda => vsda.ValueSetId)
-                              .ToList();
-            return valueSetIds;
         }
 
         #region Processing Patients
@@ -284,23 +239,4 @@ namespace CLI
         }
         #endregion Writing Output
     }
-}
-
-file static class EnumerableExtensions
-{
-    /// <summary>
-    /// Projects each element of a collection into a new form based on a selector function, and filters out elements based on a condition.
-    /// </summary>
-    /// <typeparam name="T">The type of elements in the source collection.</typeparam>
-    /// <typeparam name="TR">The type of elements in the resulting collection.</typeparam>
-    /// <param name="source">The source collection.</param>
-    /// <param name="selector">A function to test each element for a condition and project the element into a new form.</param>
-    /// <returns>An enumerable collection that contains the transformed elements that satisfy the condition.</returns>
-    public static IEnumerable<TR> SelectWhere<T, TR>(this IEnumerable<T> source, Func<T, (bool include, TR resultOrDefault)> selector)
-    {
-        foreach (var item in source)
-            if (selector(item) is (include: true, { } resultOrDefault))
-                yield return resultOrDefault;
-    }
-
 }

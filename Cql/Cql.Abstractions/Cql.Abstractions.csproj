@@ -36,6 +36,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Invocation" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CLI" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>
