@@ -42,7 +42,8 @@ internal class ResourceHelper
         return bundle;
     }
 
-    public static IValueSetDictionary LoadValueSets(DirectoryInfo directory)
+    public static IValueSetDictionary LoadValueSets(
+        DirectoryInfo directory)
     {
         var valueSets = new List<ValueSet>();
         foreach (var file in directory.GetFiles("*.json", SearchOption.AllDirectories))
@@ -58,19 +59,6 @@ internal class ResourceHelper
         var vsd = valueSets.ToValueSetDictionary();
         return vsd;
     }
-
-    // public static LibrarySetInvoker CreateRuntimeScopeFromFhirLibraryFile(
-    //     DirectoryInfo dir,
-    //     string lib,
-    //     string version)
-    // {
-    //     var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
-    //     using var fs = libFile.OpenRead();
-    //     var library = fs.DeserializeJsonToFhir<Library>();
-    //     var deps = library.GetDependenciesAndSelf(dir);
-    //     return deps.ToLibrarySetInvoker();
-    // }
-
 
     public static Bundle CreateBundle(string[] files)
     {

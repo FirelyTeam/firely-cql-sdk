@@ -8,6 +8,8 @@
 
 using CommandLine;
 using Dumpify;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Parsing;
 
 namespace CLI.Helpers
 {
@@ -15,8 +17,8 @@ namespace CLI.Helpers
     {
         [Option('l', "library", Required = true, HelpText = "The name of a measure Library resource, which contains name and version.")]
         public string Library { get; set; } = "";
-        public string LibraryName => Library.Split('-')[1];
-        public string LibraryVersion => Library.Split('-')[2];
+
+        public CqlVersionedLibraryIdentifier LibraryIdentifier => CqlVersionedLibraryIdentifier.Parse(Library);
 
         [Option('d', "data", HelpText = "The folder for test data.")]
         public string DataDirectory { get; set; } = "";
@@ -45,10 +47,10 @@ namespace CLI.Helpers
         public static void EnsureValidOptions(CommandLineOptions options)
         {
             // Validate the library name format
-            if (options.Library.Count(c => c == '-') != 2
-                && !options.Library.StartsWith("Library-", StringComparison.OrdinalIgnoreCase))
+            CqlParseError? cqlParseError = null;
+            if (!CqlVersionedLibraryIdentifier.TryParse(options.Library, out _, err => cqlParseError = err))
             {
-                throw new InvalidOperationException($"The name of the Library resource '{options.Library}' should be written as 'Library-<name>-<version>'.");
+                throw new InvalidOperationException($"The name of the Library resource '{options.Library}' did not parse as a valid identifier ({cqlParseError}).");
             }
 
             // Check if the data directory is set

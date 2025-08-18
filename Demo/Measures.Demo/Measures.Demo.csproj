@@ -20,6 +20,7 @@
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
