@@ -18,7 +18,6 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Fhir.Serialization;
-using Hl7.Cql.Fhir.Serialization.Extensions;
 
 namespace Test
 {
@@ -51,17 +50,20 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator_FromResource_Passed()
         {
-            var lib = "BCSEHEDISMY2022";
-            var version = "1.0.0";
+            // The functionality to load a FHIR resource and its dependencies will be added back in issue:
+            // https://github.com/FirelyTeam/firely-cql-sdk/issues/949
+            var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("BCSEHEDISMY2022", "1.0.0");
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
-            var scope = CreateRuntimeScopeFromFhirResourceFile(dir, lib, version);
+            using var scope = new InvocationToolkit()
+                                          .AddAssemblyBinariesInFhirLibrariesFromDirectory(dir)
+                                          .CreateLibrarySetInvoker(libraryIdentifier);
 
             var patientEverything = new Bundle();                                // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary(); // Add valuesets
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = scope
-                          .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(lib, version))
+                          .SelectExpressionsForLibrary(libraryIdentifier)
                           .SelectResults(ctx)
                           .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
 
@@ -122,19 +124,6 @@ namespace Test
                    .SelectExpressionsForLibrary((CqlVersionedLibraryIdentifier)$"{lib}-{version}")
                    .SelectResults(context)
                    .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
-        }
-
-        private static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
-            DirectoryInfo dir,
-            string lib,
-            string version)
-        {
-            var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json")); // Library-BCSEHEDISMY2022-1.0.0
-            using var fs = libFile.OpenRead();
-            var library = fs.DeserializeJsonToFhir<Library>();
-            var allLibs = library.GetDependenciesAndSelf(dir);
-            //Runtime
-            return allLibs.ToLibrarySetInvoker();
         }
 
         private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
