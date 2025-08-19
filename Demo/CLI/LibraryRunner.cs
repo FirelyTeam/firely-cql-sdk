@@ -50,11 +50,8 @@ namespace CLI
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
             var libraryIdentifier = _opts.LibraryIdentifier;
-
-            // The functionality to load a FHIR resource and its dependencies will be added back in issue:
-            // https://github.com/FirelyTeam/firely-cql-sdk/issues/949
             using var librarySetInvoker = new InvocationToolkit()
-                                          .AddAssemblyBinariesInFhirLibrariesFromDirectory(new (_opts.ResourcesDirectory))
+                                          .AddAssemblyBinariesFromFhirLibraryAndDependencies(libraryIdentifier, ResourceFileInfoResolvers.FromDirectory(new(_opts.ResourcesDirectory)))
                                           .CreateLibrarySetInvoker(libraryIdentifier);
             RunShared(_opts, librarySetInvoker);
         }
