@@ -218,7 +218,9 @@ internal static class EnumerableExtensions
     /// <param name="source">The source collection.</param>
     /// <param name="selector">A function to test each element for a condition and project the element into a new form.</param>
     /// <returns>An enumerable collection that contains the transformed elements that satisfy the condition.</returns>
-    public static IEnumerable<TR> SelectWhere<T, TR>(this IEnumerable<T> source, Func<T, (bool include, TR resultOrDefault)> selector)
+    public static IEnumerable<TR> SelectWhere<T, TR>(
+        this IEnumerable<T> source,
+        Func<T, (bool include, TR resultOrDefault)> selector)
     {
         foreach (var item in source)
             if (selector(item) is (include: true, { } resultOrDefault))
@@ -228,20 +230,6 @@ internal static class EnumerableExtensions
     public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
         this IEnumerable<T> enumerable,
         Func<T, TR?> selectNullable)
-        where TR : struct =>
+        where TR : notnull =>
         enumerable.SelectWhere(o => selectNullable(o) is { } r ? (true, r) : default);
-
-    public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
-        this IEnumerable<T> enumerable,
-        Func<T, TR?> selectNullable)
-        where TR : class =>
-        enumerable.SelectWhere(o => selectNullable(o) is { } r ? (true, r) : default);
-
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
-        where T : class
-    {
-        return enumerable
-               .Where(x => x is not null)
-               .Select(x => x!);
-    }
 }
