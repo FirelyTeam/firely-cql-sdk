@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error = 0 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferModel = 2 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior

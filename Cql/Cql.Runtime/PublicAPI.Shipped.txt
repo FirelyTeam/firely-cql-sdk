@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.CannotSplitIdentifierAndVersionByDash = "Cannot split identifier and version by dash." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.ExpectedTokenNotFound_1 = "Expected {0} token not found." -> string!
 const Hl7.Cql.Runtime.Parsing.CqlParseErrors.MoreTokensAfterEndOfInput = "More tokens after expected end of input." -> string!

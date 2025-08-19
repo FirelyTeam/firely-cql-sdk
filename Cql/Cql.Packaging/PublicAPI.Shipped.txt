@@ -1,4 +1,5 @@
 
+#nullable enable
 Hl7.Cql.Packaging.CqlTypeToFhirMapping
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.init -> void

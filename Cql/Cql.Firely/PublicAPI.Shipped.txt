@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 Hl7.Cql.Fhir.FhirCqlContext
 Hl7.Cql.Fhir.FhirCqlContextOptions
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics

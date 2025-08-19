@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 Hl7.Cql.CodeGeneration.NET.AssemblyBinary
 Hl7.Cql.CodeGeneration.NET.AssemblyBinary.AssemblyBinary(byte[]? AssemblyBytes, byte[]? DebugSymbolsBytes = null) -> void
 Hl7.Cql.CodeGeneration.NET.AssemblyBinary.AssemblyBinary(Hl7.Cql.CodeGeneration.NET.AssemblyBinary! original) -> void

@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 Hl7.Cql.Iso8601.DateIso8601
 Hl7.Cql.Iso8601.DateIso8601.DateIso8601(int year, int? month, int? day, bool strict = false) -> void
 Hl7.Cql.Iso8601.DateIso8601.DateIso8601(System.DateTimeOffset dto, Hl7.Cql.Iso8601.DateTimePrecision precision, bool strict = false) -> void

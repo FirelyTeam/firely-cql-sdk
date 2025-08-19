@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 const Hl7.Cql.Elm.Library.JsonMimeType = "application/elm+json" -> string!
 const Hl7.Cql.Elm.Library.LibraryNodeProperty = "Library" -> string!
 const Hl7.Cql.Elm.Library.XmlMimeType = "application/elm+xml" -> string!

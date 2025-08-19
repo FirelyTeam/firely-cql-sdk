@@ -1,4 +1,4 @@
-﻿
+﻿#nullable enable
 Hl7.Cql.Model.BindingInfo
 Hl7.Cql.Model.BindingInfo.BindingInfo() -> void
 Hl7.Cql.Model.BindingInfo.strength.get -> Hl7.Cql.Model.BindingStrength
