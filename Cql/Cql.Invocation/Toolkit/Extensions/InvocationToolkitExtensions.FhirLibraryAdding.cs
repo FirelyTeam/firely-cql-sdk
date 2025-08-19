@@ -245,7 +245,24 @@ internal static partial class FhirLibraryUtilities
 
     // Regex to extract "Library", "NCQAAdvancedIllnessandFrailty", and optional "1.0.0" from resource string
     // Example: https://fire.ly/fhir/Library/NCQAAdvancedIllnessandFrailty|1.0.0
-    // Groups: 1=resourceType, 2=libraryName, 3=version (optional)
+    /// <summary>
+    /// Regex to extract the resource type, library name, and optional version from a FHIR Library resource string.
+    /// 
+    /// Capture groups:
+    ///   1. <b>resourceType</b>: The FHIR resource type (e.g., "Library").
+    ///   2. <b>libraryName</b>: The name of the library (e.g., "NCQAAdvancedIllnessandFrailty").
+    ///   3. <b>version</b> (optional): The version of the library (e.g., "1.0.0").
+    /// 
+    /// Examples of valid input strings and their capture groups:
+    ///   - <c>https://fire.ly/fhir/Library/NCQAAdvancedIllnessandFrailty|1.0.0</c>
+    ///       1 = "Library", 2 = "NCQAAdvancedIllnessandFrailty", 3 = "1.0.0"
+    ///   - <c>/Library/SomeLibrary|2.3.4</c>
+    ///       1 = "Library", 2 = "SomeLibrary", 3 = "2.3.4"
+    ///   - <c>/Library/AnotherLibrary</c>
+    ///       1 = "Library", 2 = "AnotherLibrary", 3 = null
+    ///   - <c>https://example.com/fhir/Library/MyLib</c>
+    ///       1 = "Library", 2 = "MyLib", 3 = null
+    /// </summary>
     [GeneratedRegex(@"\/([A-Za-z]+)\/([^|\/]+)(?:\|([0-9A-Za-z\.\-\+]+))?$")]
     private static partial Regex FhirLibraryResourceRegex();
 
