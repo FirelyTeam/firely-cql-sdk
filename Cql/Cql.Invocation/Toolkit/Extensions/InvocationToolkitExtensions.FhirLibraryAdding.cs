@@ -235,7 +235,7 @@ internal static partial class FhirLibraryUtilities
             if (shouldInclude)
             {
                 if (!file.Exists)
-                    throw new ArgumentException($"No file exists '{file}' for FHIR library '{identifier}'.");
+                    throw new FileNotFoundException($"No file exists '{file}' for FHIR library '{identifier}'.", file.FullName);
                 return file;
             }
             logger.LogDebug("Skipped loading file '{file}' by predicate.", file);
