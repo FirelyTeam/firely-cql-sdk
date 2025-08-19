@@ -7,7 +7,7 @@ and/or turning the contents of an ELM file into a .NET assembly so it can be cal
 
 ## Release notes
 This is release version 2.1 of the engine.
-Earlier 1.0 releases will be maintained with hotfixes, but will not receive new features.
+Earlier 1.x releases will be maintained with hotfixes, but will not receive new features.
 
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
 There is quite some variation in how CQL is written and interpreted, 
