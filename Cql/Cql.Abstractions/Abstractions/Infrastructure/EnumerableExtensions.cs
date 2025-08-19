@@ -228,12 +228,14 @@ internal static class EnumerableExtensions
     public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
         this IEnumerable<T> enumerable,
         Func<T, TR?> selectNullable)
-        where TR : class
-    {
-        return enumerable
-               .Select(selectNullable)
-               .WhereNotNull();
-    }
+        where TR : struct =>
+        enumerable.SelectWhere(o => selectNullable(o) is { } r ? (true, r) : default);
+
+    public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
+        this IEnumerable<T> enumerable,
+        Func<T, TR?> selectNullable)
+        where TR : class =>
+        enumerable.SelectWhere(o => selectNullable(o) is { } r ? (true, r) : default);
 
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
         where T : class
