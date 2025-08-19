@@ -25,7 +25,7 @@ partial class Program
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         // Add CQL libraries from directory
-        var cqlDirectory = new DirectoryInfo(Path.Combine(LibrarySetsDirectory, "Demo/Cql"));
+        var cqlDirectory = new DirectoryInfo(Path.Combine(LibrarySetsDirectory, "Demo", "Cql"));
         var cqlToolkit = new CqlToolkit(loggerFactory);
         cqlToolkit.SetIgnoreEnumerationExceptions();
         cqlToolkit.AddCqlLibrariesFromDirectory(
