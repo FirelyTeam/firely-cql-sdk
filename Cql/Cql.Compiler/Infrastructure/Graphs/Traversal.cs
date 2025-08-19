@@ -10,7 +10,25 @@ namespace Hl7.Cql.Compiler.Infrastructure.Graphs;
 
 internal static class Traversal
 {
-    public static IEnumerable<T> DepthFirst<T>(
+    /// <summary>
+    /// Performs a pre-ordered traversal of a graph, starting from the specified node.
+    /// </summary>
+    /// <typeparam name="T">The type of the nodes in the graph.</typeparam>
+    /// <param name="current">The starting node for the traversal.</param>
+    /// <param name="getNextItems">
+    /// A function that, given a node, returns the enumerable collection of its adjacent nodes.
+    /// </param>
+    /// <param name="callbacks">
+    /// Optional callbacks to handle events during the traversal, such as entering or exiting a node,
+    /// or determining whether to allow traversal to a specific node.
+    /// </param>
+    /// <param name="previous">
+    /// The node that was visited immediately before the current node. This is used to track the traversal path.
+    /// </param>
+    /// <returns>
+    /// An enumerable collection of nodes visited during the depth-first traversal, in the order they were visited.
+    /// </returns>
+    public static IEnumerable<T> PreOrder<T>(
         T current,
         Func<T, IEnumerable<T>> getNextItems,
         TraversalCallbacks<T> callbacks = default,
@@ -23,13 +41,14 @@ internal static class Traversal
         {
             if (callbacks.AllowEnter?.Invoke((previous, current, next)) ?? true)
             {
-                foreach (var grandChild in DepthFirst(next, getNextItems, callbacks, current))
+                foreach (var grandChild in PreOrder(next, getNextItems, callbacks, current))
+                {
                     yield return grandChild;
+                }
             }
         }
         callbacks.Exit?.Invoke((previous, current));
     }
-
 
     public static IEnumerable<T> GetRoots<T>(
         this IEnumerable<T> allItems,
@@ -80,7 +99,7 @@ internal static class Traversal
 
         while (unvisited.Count > 0)
         {
-            foreach (var _ in DepthFirst(unvisited.First(), getNextItems, traversalCallbacks))
+            foreach (var _ in PreOrder(unvisited.First(), getNextItems, traversalCallbacks))
             {
                 // We have to enumerate, even though the resulting item is not used.
             }

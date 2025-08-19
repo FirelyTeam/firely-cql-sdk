@@ -102,6 +102,7 @@ override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultArtifacts.GetHashCode()
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.Create(string! type, string! identifier, string? version = null) -> Hl7.Cql.Packaging.ResourceFileName
+static Hl7.Cql.Packaging.ResourceFileName.implicit operator string!(Hl7.Cql.Packaging.ResourceFileName resourceFileName) -> string!
 static Hl7.Cql.Packaging.ResourceFileName.operator !=(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.operator ==(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.Parse(string! s, System.IFormatProvider? provider) -> Hl7.Cql.Packaging.ResourceFileName
