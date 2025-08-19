@@ -24,19 +24,29 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 /// <remarks>
 /// It should not be assumed that the file exists.
 /// </remarks>
-public delegate FileInfo ResourceFileInfoFromIdentifierResolver(CqlVersionedLibraryIdentifier libraryIdentifier);
+public delegate FileInfo ResourceFileInfoResolver(CqlVersionedLibraryIdentifier libraryIdentifier);
 
+/// <summary>
+/// Provides extension methods for resolving file information related to FHIR resource libraries.
+/// </summary>
+/// <remarks>
+/// This class includes methods to create resolvers that map FHIR resource library identifiers
+/// to corresponding file information, such as resolving files from a specified directory.
+/// </remarks>
 public static class ResourceFileInfoResolvers
 {
     /// <summary>
-    /// Creates a <see cref="ResourceFileInfoFromIdentifierResolver"/> that resolves file information
+    /// Creates a <see cref="ResourceFileInfoResolver"/> that resolves file information
     /// for FHIR resource library located in a specified directory.
     /// </summary>
     /// <param name="directory">
     /// The directory from which the FHIR resource library files are resolved.
     /// </param>
+    /// <param name="resourceType">
+    /// The type of the resource, defaulting to "Library".
+    /// </param>
     /// <returns>
-    /// A <see cref="ResourceFileInfoFromIdentifierResolver"/> that resolves a <see cref="FileInfo"/>
+    /// A <see cref="ResourceFileInfoResolver"/> that resolves a <see cref="FileInfo"/>
     /// instance for a given <see cref="CqlVersionedLibraryIdentifier"/> by locating the corresponding
     /// file in the specified directory.
     /// </returns>
@@ -45,7 +55,7 @@ public static class ResourceFileInfoResolvers
     /// using the <see cref="ResourceFileName"/> to construct the file name.
     /// It does not guarantee that the resolved file exists.
     /// </remarks>
-    public static ResourceFileInfoFromIdentifierResolver FromDirectory(
+    public static ResourceFileInfoResolver FromDirectory(
         DirectoryInfo directory,
         string resourceType = "Library") =>
         libraryIdentifier =>
