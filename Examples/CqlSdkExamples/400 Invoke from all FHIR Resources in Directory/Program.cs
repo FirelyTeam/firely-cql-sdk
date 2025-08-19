@@ -22,7 +22,7 @@ namespace CqlSdkExamples;
 
 partial class Program
 {
-    void InvokingFromFhirResources()
+    void InvokingFromAllFhirResourcesInDirectory()
     {
         // This example first packages CQL libraries into FHIR resources,
         // then loads the packaged resources and invokes them.
@@ -30,7 +30,7 @@ partial class Program
         var enableDebugging = true; // Try stepping through InvokeLibraryDefinition during debugging
         var ignoreErrors = true;    // This ignores errors and tries to continue processing other definitions
 
-        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "400 Invoke from FHIR Resources"));
+        SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "400 Invoke from all FHIR Resources in Directory"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
@@ -74,7 +74,7 @@ partial class Program
 
         if (errors.Count > 0)
             Console.WriteLine($"There were {errors.Count} definition result(s) that failed.");
-        
+
         Console.WriteLine($"There were {results.Count} definition result(s) that succeeded.");
     }
 }
