@@ -11,13 +11,11 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using CoreTests;
 using Hl7.Cql.Compiler;
-using CLI.Helpers;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
-using Hl7.Cql.Fhir.Serialization;
 
 namespace Test
 {
@@ -50,19 +48,21 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator_FromResource_Passed()
         {
-            // The functionality to load a FHIR resource and its dependencies will be added back in issue:
-            // https://github.com/FirelyTeam/firely-cql-sdk/issues/949
             var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("BCSEHEDISMY2022", "1.0.0");
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
-            using var scope = new InvocationToolkit()
-                                          .AddAssemblyBinariesInFhirLibrariesFromDirectory(dir)
+            var loggerFactory = LoggerFactory.Create(lb => lb.AddConsole());
+            using var librarySetInvoker = new InvocationToolkit(loggerFactory)
+                                          .AddAssemblyBinariesFromFhirLibraryAndDependencies(
+                                              libraryIdentifier,
+                                              ResourceFileInfoResolvers.FromDirectory(dir))
                                           .CreateLibrarySetInvoker(libraryIdentifier);
+            Assert.AreEqual(12, librarySetInvoker.LibraryInvokers.Count);
 
             var patientEverything = new Bundle();                                // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary(); // Add valuesets
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = scope
+            var results = librarySetInvoker
                           .SelectExpressionsForLibrary(libraryIdentifier)
                           .SelectResults(ctx)
                           .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
@@ -91,8 +91,8 @@ namespace Test
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            using var scope = CreateRuntimeScopeFromElmLibraryFile(elmDir, lib, version);
-            var results = Run(scope, lib, version, context);
+            using var librarySetInvoker = CreateLibrarySetInvokerFromElmLibraryFile(elmDir, lib, version);
+            var results = Run(librarySetInvoker, lib, version, context);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 1: {elapsed}");
@@ -105,7 +105,7 @@ namespace Test
             var bundle2 = new Bundle();
             context = FhirCqlContext.ForBundle(bundle2, MY2023, valueSets);
             stopwatch.Restart();
-            results = Run(scope, lib, version, context);
+            results = Run(librarySetInvoker, lib, version, context);
             elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 2: {elapsed}");
@@ -126,7 +126,7 @@ namespace Test
                    .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.invocationResult);
         }
 
-        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateLibrarySetInvokerFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
@@ -135,16 +135,15 @@ namespace Test
         {
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(logLevel));
 
-            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
+            return CreateLibrarySetInvokerFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
         }
 
-        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateLibrarySetInvokerFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             int cacheSize,
-            ILoggerFactory? loggerFactory = null /*,
-            Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilder = null*/)
+            ILoggerFactory? loggerFactory = null)
         {
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
