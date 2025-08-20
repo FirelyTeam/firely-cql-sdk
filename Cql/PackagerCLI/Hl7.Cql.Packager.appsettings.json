@@ -27,8 +27,15 @@
       // These contain a union between incompatible tuples,
       // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
       "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
+      "CMS72FHIRSTKAntithromboticDay2.json",
+
       "IntensiveCareUnitVenousThromboembolismProphylaxisFHIR.json",
+      "CMS190VTEProphylaxisICUFHIR.json",
+
+
       "VenousThromboembolismProphylaxisFHIR.json",
+      "CMS108VTEProphylaxisFHIR.json",
+      "CMS108FHIRVTEProphylaxis.json",
 
       // These uses choice types, move into a property on such a choice, and then calls an
       // overloaded function, so we cannot find out which overload to call.
@@ -36,14 +43,20 @@
       // b) introduce runtime resolution, based on the runtime types of the arguments when one of
       // the arguments is a choice (=object).
       "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
+      "CMS506FHIRSafeUseofOpioids.json",
+
       "PCSBMIScreenAndFollowUpFHIR.json",
+      "CMS69FHIRPCSBMIScreenAndFollowUp",
 
       // Tuple element value does not have a resultTypeSpecifier
       "CADBetaBlockerTherapyPriorMIorLVSDFHIR.json",
+
       "PCSDepressionScreenAndFollowUpFHIR.json",
+      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
 
       // Multiple sort fields not supported yet
-      "HospitalHarmAcuteKidneyInjuryFHIR.json"
+      "HospitalHarmAcuteKidneyInjuryFHIR.json",
+      "CMS832HHAKIFHIR.json"
     ]
   },
   "Packaging": {
