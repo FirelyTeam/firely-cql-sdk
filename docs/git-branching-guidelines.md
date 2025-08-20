@@ -67,8 +67,7 @@ Firely's branching strategy is based on **Gitflow** with modifications to suppor
 2. **Complete feature:**
    - Create pull request against `develop`
    - Ensure all tests pass and code review is completed
-   - Merge using "Squash and merge" strategy *(applies to Firely Server and Auth)*
-   - Delete feature branch after merge *(applies to Firely Server and Auth)*
+   - Merge using merge commit
 
 #### Feature Development Flow
 
@@ -116,6 +115,7 @@ gitGraph
     commit id: "Version bump"
     commit id: "Bug fixes"
     branch support/2.x
+    checkout support/2.x
     merge release/2.1.0
     commit id: "Tag v2.1.0" tag: "v2.1.0"
     checkout develop
