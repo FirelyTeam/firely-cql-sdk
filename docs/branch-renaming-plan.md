@@ -39,7 +39,7 @@ The repository currently has an inconsistency where the README.md instructs cont
 After implementation:
 - **`main`** (protected) - Stable release branch
 - **`develop`** (protected) - Current 2.x development branch (renamed from `develop-2.0`)
-- **`develop-1.0`** (protected) - Legacy 1.x maintenance branch (renamed from `develop`)
+- **`support/1.x`** (protected) - Legacy 1.x maintenance branch (renamed from `develop`)
 
 ### Benefits of This Approach
 - ✅ Aligns with Git Flow conventions (develop = main development)
@@ -87,11 +87,11 @@ After implementation:
 
 2. **Branch Renaming Process**
    ```bash
-   # Step 1: Rename develop to develop-1.0
+   # Step 1: Rename develop to support/1.x
    git checkout develop
-   git branch -m develop develop-1.0
+   git branch -m develop support/1.x
    git push origin :develop
-   git push origin develop-1.0
+   git push origin support/1.x
    
    # Step 2: Rename develop-2.0 to develop  
    git checkout develop-2.0
@@ -164,7 +164,7 @@ After implementation:
 🚨 SCHEDULED MAINTENANCE: Branch Renaming
 
 The development branches will be renamed on [DATE] at [TIME]:
-- develop → develop-1.0 (1.x maintenance)
+- develop → support/1.x (1.x maintenance)
 - develop-2.0 → develop (current development)
 
 Expected downtime: 30 minutes
@@ -183,7 +183,7 @@ git fetch origin
 git remote prune origin
 git branch -d develop develop-2.0
 git checkout -b develop origin/develop
-git checkout -b develop-1.0 origin/develop-1.0
+git checkout -b support/1.x origin/support/1.x
 
 Verify: git branch -a
 

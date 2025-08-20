@@ -39,7 +39,7 @@ The team has chosen to implement the comprehensive branch renaming solution for 
 
 ### Chosen Approach: Comprehensive Branch Renaming
 - **Current State**: `develop` (1.x) and `develop-2.0` (2.x)
-- **Target State**: `develop-1.0` (1.x) and `develop` (2.x)
+- **Target State**: `support/1.x` (1.x) and `develop` (2.x)
 - **Timeline**: 1-2 weeks with coordination
 - **Risk Mitigation**: Comprehensive planning and rollback procedures
 
@@ -121,7 +121,7 @@ Duration: ~1 hour active work
 Impact: Temporary CI/CD disruption, local repo updates needed
 
 What's changing:
-- develop → develop-1.0 (1.x maintenance)
+- develop → support/1.x (1.x maintenance)
 - develop-2.0 → develop (current development)
 
 Action required: Update local repositories after completion
@@ -149,7 +149,7 @@ Updates: [COMMUNICATION CHANNEL]
 
 New structure:
 - develop: Current 2.x development (was develop-2.0)
-- develop-1.0: 1.x maintenance (was develop)
+- support/1.x: 1.x maintenance (was develop)
 
 REQUIRED: Update your local repository
 Instructions: [MIGRATION GUIDE LINK]

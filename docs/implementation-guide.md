@@ -5,7 +5,7 @@ This document provides detailed step-by-step implementation commands and procedu
 ## Implementation Overview
 
 **Objective:** Rename branches to align with Git Flow conventions
-- `develop` → `develop-1.0` (1.x maintenance)
+- `develop` → `support/1.x` (1.x maintenance)
 - `develop-2.0` → `develop` (current development)
 
 **Timeline:** 1-2 weeks with coordination, ~1 hour active implementation
@@ -77,7 +77,7 @@ Time: [INSERT TIME]
 Duration: ~1 hour
 
 Changes:
-- develop → develop-1.0 (1.x maintenance)
+- develop → support/1.x (1.x maintenance)
 - develop-2.0 → develop (current development)
 
 Action Required After Maintenance:
@@ -123,12 +123,12 @@ cd /home/runner/work/firely-cql-sdk/firely-cql-sdk
 git fetch origin
 git remote prune origin
 
-# Step 3a: Rename develop to develop-1.0
-echo "Renaming develop to develop-1.0..."
+# Step 3a: Rename develop to support/1.x
+echo "Renaming develop to support/1.x..."
 git checkout develop
 git pull origin develop  # Ensure latest
-git branch -m develop develop-1.0
-git push origin develop-1.0
+git branch -m develop support/1.x
+git push origin support/1.x
 git push origin :develop  # Delete remote develop
 
 # Step 3b: Rename develop-2.0 to develop  
@@ -155,7 +155,7 @@ git ls-remote --heads origin | grep -E "(develop|main)"
 2. Create protection rule for `develop`:
    - Use same settings as old `develop-2.0` had
    - Apply all previous restrictions and requirements
-3. Create protection rule for `develop-1.0`:
+2. Create protection rule for `support/1.x`:
    - Use same settings as old `develop` had
    - Apply appropriate maintenance branch restrictions
 
@@ -175,9 +175,9 @@ for pr_number in $(gh pr list --state open --json number,baseRefName | \
   gh pr edit $pr_number --base develop
 done
 
-# For any PRs that were targeting old develop (now develop-1.0)
+# For any PRs that were targeting old develop (now support/1.x)
 # These likely need manual review to determine correct target
-gh pr list --state open --base develop-1.0 --json number,title
+gh pr list --state open --base support/1.x --json number,title
 ```
 
 ### Step 2: Verification Testing
@@ -230,7 +230,7 @@ git branch -D develop develop-2.0 2>/dev/null || echo "Some branches didn't exis
 # Create new tracking branches
 echo "Setting up new branch tracking..."
 git checkout -b develop origin/develop
-git checkout -b develop-1.0 origin/develop-1.0
+git checkout -b support/1.x origin/support/1.x
 
 # Show current branch status
 echo "✅ Migration complete! Current branches:"
@@ -239,7 +239,7 @@ git branch -vv
 echo ""
 echo "📋 Quick Reference:"
 echo "- develop: Current 2.x development (was develop-2.0)"
-echo "- develop-1.0: 1.x maintenance (was develop)"
+echo "- support/1.x: 1.x maintenance (was develop)"
 echo "- main: Stable releases"
 EOF
 
@@ -278,11 +278,11 @@ git branch -m develop develop-2.0
 git push origin develop-2.0
 git push origin :develop
 
-# Rollback develop-1.0 back to develop
-git checkout develop-1.0  
-git branch -m develop-1.0 develop
+# Rollback support/1.x back to develop
+git checkout support/1.x  
+git branch -m support/1.x develop
 git push origin develop
-git push origin :develop-1.0
+git push origin :support/1.x
 
 # Step 3: Restore original branch protection rules (via GitHub web interface)
 
@@ -326,7 +326,7 @@ After implementation, verify each item:
 ✅ BRANCH RENAMING COMPLETE
 
 The branch renaming has been successfully completed:
-- develop → develop-1.0 (1.x maintenance)
+- develop → support/1.x (1.x maintenance)
 - develop-2.0 → develop (current development)
 
 Action Required:

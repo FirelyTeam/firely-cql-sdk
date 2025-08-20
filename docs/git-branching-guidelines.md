@@ -70,6 +70,23 @@ Firely's branching strategy is based on **Gitflow** with modifications to suppor
    - Merge using "Squash and merge" strategy *(applies to Firely Server and Auth)*
    - Delete feature branch after merge *(applies to Firely Server and Auth)*
 
+#### Feature Development Flow
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Dev commit 1"
+    commit id: "Dev commit 2"
+    branch feature/123-new-feature
+    commit id: "Feature work 1"
+    commit id: "Feature work 2"
+    commit id: "Feature work 3"
+    checkout develop
+    merge feature/123-new-feature
+    commit id: "Continue dev"
+```
+
 ### Release Process
 
 1. **Prepare release:**
@@ -87,6 +104,25 @@ Firely's branching strategy is based on **Gitflow** with modifications to suppor
    - Merge release branch back to source branch if needed
    - Delete release branch
 
+#### Release Process Flow
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Dev work"
+    commit id: "Ready for release"
+    branch release/2.1.0
+    commit id: "Version bump"
+    commit id: "Bug fixes"
+    branch support/2.x
+    merge release/2.1.0
+    commit id: "Tag v2.1.0" tag: "v2.1.0"
+    checkout develop
+    merge release/2.1.0
+    commit id: "Continue dev"
+```
+
 ### Hotfix Strategy
 
 #### For Latest Minor Version
@@ -95,10 +131,46 @@ Firely's branching strategy is based on **Gitflow** with modifications to suppor
 - Incorporate fix directly in `develop` for next release
 - If urgent release needed, create `release/X.Y.Z` branch from `develop`
 
+#### Hotfix Flow (from develop)
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Recent work"
+    branch support/2.x
+    commit id: "Released v2.1.0" tag: "v2.1.0"
+    checkout develop
+    branch release/2.1.1
+    commit id: "Hotfix changes"
+    checkout support/2.x
+    merge release/2.1.1
+    commit id: "Tag v2.1.1" tag: "v2.1.1"
+    checkout develop
+    merge release/2.1.1
+```
+
 **Alternative Approach: Fork from tag**
 - Start from specific version tag when develop approach not feasible
 - May require cherry-picking or rework due to pipeline/dependency changes
 - Use when develop has diverged significantly from released version
+
+#### Hotfix Flow (from tag)
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Breaking changes"
+    commit id: "Major refactor"
+    branch support/2.x
+    commit id: "Released v2.1.0" tag: "v2.1.0"
+    branch hotfix/2.1.1
+    commit id: "Critical fix"
+    checkout support/2.x
+    merge hotfix/2.1.1
+    commit id: "Tag v2.1.1" tag: "v2.1.1"
+```
 
 #### Decision Criteria
 - **Use develop approach when:**
@@ -122,84 +194,10 @@ When developing the next major version while maintaining current major:
 - `develop` - Working on version 4.0 features
 - `support/3.x` - Continuing 3.x minor releases (3.1, 3.2, etc.)
 
-## Git Flow Diagrams
-
-### Feature Development Flow
+#### Concurrent Major Development Flow
 
 ```mermaid
-gitgraph
-    commit id: "Initial"
-    branch develop
-    commit id: "Dev commit 1"
-    commit id: "Dev commit 2"
-    branch feature/123-new-feature
-    commit id: "Feature work 1"
-    commit id: "Feature work 2"
-    commit id: "Feature work 3"
-    checkout develop
-    merge feature/123-new-feature
-    commit id: "Continue dev"
-```
-
-### Release Process Flow
-
-```mermaid
-gitgraph
-    commit id: "Initial"
-    branch develop
-    commit id: "Dev work"
-    commit id: "Ready for release"
-    branch release/2.1.0
-    commit id: "Version bump"
-    commit id: "Bug fixes"
-    branch support/2.x
-    merge release/2.1.0
-    commit id: "Tag v2.1.0" tag: "v2.1.0"
-    checkout develop
-    merge release/2.1.0
-    commit id: "Continue dev"
-```
-
-### Hotfix Flow (from develop)
-
-```mermaid
-gitgraph
-    commit id: "Initial"
-    branch develop
-    commit id: "Recent work"
-    branch support/2.x
-    commit id: "Released v2.1.0" tag: "v2.1.0"
-    checkout develop
-    branch release/2.1.1
-    commit id: "Hotfix changes"
-    checkout support/2.x
-    merge release/2.1.1
-    commit id: "Tag v2.1.1" tag: "v2.1.1"
-    checkout develop
-    merge release/2.1.1
-```
-
-### Hotfix Flow (from tag)
-
-```mermaid
-gitgraph
-    commit id: "Initial"
-    branch develop
-    commit id: "Breaking changes"
-    commit id: "Major refactor"
-    branch support/2.x
-    commit id: "Released v2.1.0" tag: "v2.1.0"
-    branch hotfix/2.1.1
-    commit id: "Critical fix"
-    checkout support/2.x
-    merge hotfix/2.1.1
-    commit id: "Tag v2.1.1" tag: "v2.1.1"
-```
-
-### Concurrent Major Development
-
-```mermaid
-gitgraph
+gitGraph
     commit id: "Initial"
     branch develop
     commit id: "v4.0 features"
