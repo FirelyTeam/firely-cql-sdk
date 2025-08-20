@@ -1,12 +1,12 @@
-# Branch Renaming Investigation and Implementation Plan
+# Branch Renaming Implementation Plan
 
 **Issue:** #956 - Fix README OR Rename Branches  
 **Date:** 2025-01-27  
-**Status:** Investigation Complete - Awaiting Team Decision  
+**Status:** Implementation Approved - Branch Renaming Approach  
 
 ## Executive Summary
 
-The repository currently has an inconsistency where the README.md instructs contributors to submit PRs against the `develop` branch, but the active development appears to be happening on `develop-2.0`. This document provides a comprehensive analysis and implementation plan for resolving this issue.
+The repository currently has an inconsistency where the README.md instructs contributors to submit PRs against the `develop` branch, but the active development appears to be happening on `develop-2.0`. This document provides a comprehensive implementation plan for resolving this issue through branch renaming to align with Git Flow conventions.
 
 ## Current State Analysis
 
@@ -29,185 +29,192 @@ The repository currently has an inconsistency where the README.md instructs cont
    - Various README files in subdirectories contain general development references
    - No hardcoded branch references found in critical configuration files
 
-## Proposed Solutions
+## Approved Solution: Complete Branch Renaming
 
-### Option A: Update Documentation Only (RECOMMENDED - Minimal Risk)
-
-**Scope:** Low impact, immediate resolution  
-**Timeline:** 1-2 hours  
-**Risk Level:** Minimal  
-
-#### Changes Required:
-1. **README.md Updates**
-   ```diff
-   - [![Build Status](https://dev.azure.com/firely/firely-net-sdk/_apis/build/status%2FFirelyTeam.firely-cql-sdk?repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop)]
-   + [![Build Status](https://dev.azure.com/firely/firely-net-sdk/_apis/build/status%2FFirelyTeam.firely-cql-sdk?repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop-2.0)]
-   
-   - Please submit PRs with changes against the `develop` branch.
-   + Please submit PRs with changes against the `develop-2.0` branch.
-   ```
-
-2. **Verification Steps**
-   - Confirm build badge functionality with new branch
-   - Review all documentation for consistency
-   - Test contributor workflow
-
-#### Pros:
-- ✅ Immediate resolution with minimal risk
-- ✅ No impact on existing workflows or PRs
-- ✅ No coordination required with external systems
-- ✅ No disruption to developer environments
-
-#### Cons:
-- ❌ Branch naming remains potentially confusing (develop-2.0 vs develop)
-- ❌ Doesn't follow traditional Git Flow naming conventions
-
-### Option B: Branch Renaming (Complex Implementation)
-
-**Scope:** High impact, comprehensive change  
+**Scope:** High impact, comprehensive change to align with Git Flow conventions  
 **Timeline:** 1-2 weeks with team coordination  
-**Risk Level:** High  
+**Risk Level:** High - Requires careful coordination and risk mitigation  
 
-#### Phase 1: Preparation and Analysis
+### Target Branch Structure
+After implementation:
+- **`main`** (protected) - Stable release branch
+- **`develop`** (protected) - Current 2.x development branch (renamed from `develop-2.0`)
+- **`develop-1.0`** (protected) - Legacy 1.x maintenance branch (renamed from `develop`)
+
+### Benefits of This Approach
+- ✅ Aligns with Git Flow conventions (develop = main development)
+- ✅ Creates clear, intuitive branch structure for new contributors
+- ✅ Eliminates confusion about which branch is "current"
+- ✅ Better long-term maintainability
+- ✅ Standard naming that matches industry practices  
+
+## Implementation Phases
+
+### Phase 1: Preparation and Analysis (Days 1-3)
 
 1. **Pre-Implementation Audit**
    - [ ] Identify all open PRs targeting `develop` and `develop-2.0`
    - [ ] Catalog external systems referencing these branches
    - [ ] Survey development team for local environment impacts
    - [ ] Document all dependent repositories/submodules
+   - [ ] Create backup of current branch state
 
 2. **External Dependencies Assessment**
-   - [ ] Azure DevOps build definitions
+   - [ ] Azure DevOps build definitions (already supports both patterns ✅)
    - [ ] External CI/CD systems
    - [ ] Documentation sites and wikis
    - [ ] Developer tools and IDE configurations
+   - [ ] Third-party integrations
 
-#### Phase 2: Implementation Steps
+3. **Team Communication**
+   - [ ] Send advance notification (48+ hours before)
+   - [ ] Schedule team meeting to discuss timeline
+   - [ ] Prepare migration instructions for developers
+   - [ ] Set up emergency communication channels
 
-1. **Branch Renaming Process**
+### Phase 2: Implementation Steps (Day 4)
+
+**Prerequisites:**
+- [ ] GitHub admin access confirmed
+- [ ] All team members notified
+- [ ] Scheduled maintenance window confirmed
+- [ ] Backup procedures verified
+
+1. **Branch Protection Management**
+   - [ ] Document current protection rules
+   - [ ] Temporarily remove protection from branches to be renamed
+   - [ ] Prepare new protection rules for renamed branches
+
+2. **Branch Renaming Process**
    ```bash
    # Step 1: Rename develop to develop-1.0
+   git checkout develop
    git branch -m develop develop-1.0
    git push origin :develop
    git push origin develop-1.0
    
    # Step 2: Rename develop-2.0 to develop  
+   git checkout develop-2.0
    git branch -m develop-2.0 develop
    git push origin :develop-2.0
    git push origin develop
-   
-   # Step 3: Update default branch settings
-   # (Requires GitHub admin access)
    ```
 
-2. **Protected Branch Rules Transfer**
-   - [ ] Remove protection from old branch names
+3. **Repository Settings Updates**
+   - [ ] Update default branch to new `develop` (if needed)
    - [ ] Apply protection rules to new branch names
    - [ ] Update merge policies and restrictions
+   - [ ] Verify branch hierarchy in GitHub settings
 
-3. **Configuration Updates**
-   ```diff
-   # README.md - Build badge
-   - branchName=develop
-   + branchName=develop
-   # (No change needed after rename)
+### Phase 3: Post-Implementation Tasks (Days 5-7)
+
+1. **Pull Request Management**
+   - [ ] Identify all open PRs targeting old branch names
+   - [ ] Update PR targets to appropriate new branches
+   - [ ] Communicate changes to PR authors
+   - [ ] Verify no PRs are targeting non-existent branches
+
+2. **Documentation Updates**
+   - [ ] Verify README.md reflects correct branch names
+   - [ ] Update any other documentation referencing old branch names
+   - [ ] Update team onboarding materials
+   - [ ] Update contributor guidelines
+
+3. **Developer Environment Support**
+   - [ ] Send detailed migration instructions to team
+   - [ ] Provide support for local repository updates
+   - [ ] Monitor for and resolve migration issues
+   - [ ] Update team development guides
+
+## Risk Assessment and Mitigation
+
+### High-Risk Areas
+1. **Service Disruption**: Potential CI/CD pipeline failures during transition
+   - **Mitigation**: Schedule during low-activity period, have rollback plan ready
    
-   # README.md - Contributing
-   - submit PRs with changes against the `develop` branch
-   + submit PRs with changes against the `develop` branch  
-   # (No change needed after rename)
-   ```
+2. **Developer Disruption**: Team members need to update local environments
+   - **Mitigation**: Provide clear migration guide and support during transition
+   
+3. **PR Management**: Risk of losing work or causing confusion with open PRs
+   - **Mitigation**: Audit all open PRs beforehand, communicate with authors
+   
+4. **External Dependencies**: Risk of breaking dependent systems or documentation
+   - **Mitigation**: Comprehensive audit and stakeholder communication
 
-#### Phase 3: Impact Management
+### Risk Mitigation Strategies
+- **Advance Communication**: 48+ hour notice to all stakeholders
+- **Maintenance Window**: Schedule during low development activity
+- **Rollback Plan**: Documented procedure to reverse changes if needed
+- **Testing Protocol**: Verify all systems post-implementation
+- **Support Coverage**: Dedicated support for developer migration issues
 
-1. **Existing Pull Request Handling**
-   - [ ] Identify all open PRs targeting `develop`
-   - [ ] Identify all open PRs targeting `develop-2.0`
-   - [ ] Plan retargeting strategy (likely to new `develop`)
-   - [ ] Communicate with PR authors
+## Success Criteria
 
-2. **Developer Environment Updates**
-   - [ ] Provide migration guide for local repositories
-   - [ ] Update team documentation and onboarding materials
-   - [ ] Schedule team communication about changes
+- [ ] All branches renamed successfully without data loss
+- [ ] CI/CD pipelines functioning normally
+- [ ] All open PRs retargeted appropriately
+- [ ] Team members successfully migrated local environments
+- [ ] Documentation reflects new branch structure
+- [ ] No external integrations broken
 
-3. **External System Updates**
-   - [ ] Update any hardcoded branch references in CI/CD
-   - [ ] Update documentation sites
-   - [ ] Notify dependent project maintainers
+## Communication Templates
 
-#### Git Commands for Developer Migration
-```bash
-# For developers with local clones
-git fetch origin
-git branch -d develop develop-2.0  # Delete old local branches
-git checkout -b develop origin/develop  # Track new develop
-git checkout -b develop-1.0 origin/develop-1.0  # Track renamed branch
+### Team Notification (48 hours before)
+```
+🚨 SCHEDULED MAINTENANCE: Branch Renaming
+
+We will be renaming our development branches on [DATE] at [TIME]:
+- develop → develop-1.0 (1.x maintenance)
+- develop-2.0 → develop (current development)
+
+Expected downtime: 30 minutes
+Action required: Update local repositories (instructions will follow)
+
+Questions? Contact [TEAM_LEAD]
 ```
 
-## Risk Assessment
+### Migration Instructions (Day of implementation)
+```
+🔄 BRANCH RENAMING IN PROGRESS
 
-### Option A Risks (Low)
-- **Documentation Inconsistency**: Minimal risk of continued confusion
-- **External References**: Low risk - most external references are already generic
+Update your local repositories NOW:
 
-### Option B Risks (High)
-- **Service Disruption**: Potential CI/CD pipeline failures during transition
-- **Developer Disruption**: Team members need to update local environments
-- **PR Management**: Risk of losing work or causing confusion with open PRs
-- **External Dependencies**: Risk of breaking dependent systems or documentation
+git fetch origin
+git remote prune origin
+git branch -d develop develop-2.0
+git checkout -b develop origin/develop
+git checkout -b develop-1.0 origin/develop-1.0
 
-## Implementation Recommendations
+Verify: git branch -a
 
-### Recommended Approach: Option A + Future Planning
+Need help? Check [SUPPORT_CHANNEL] or contact [SUPPORT_CONTACT]
+```
 
-1. **Immediate Action (Option A)**
-   - Update README.md to reference `develop-2.0`
-   - Update build status badge
-   - Communicate change to development team
+## Timeline Summary
 
-2. **Future Consideration (Option B - If Desired)**
-   - Plan branch renaming for next major release cycle
-   - Include in release planning discussions
-   - Coordinate with broader team for minimal disruption
-
-### Timeline Recommendations
-
-**Option A Implementation:**
-- Day 1: Update documentation
-- Day 1: Test and verify changes
-- Day 2: Communicate to team
-
-**Option B Implementation (if chosen):**
-- Week 1: Team planning and external dependency analysis
-- Week 2: Implementation during low-activity period
-- Week 3: Developer migration support and issue resolution
-
-## Decision Matrix
-
-| Criteria | Option A (Update Docs) | Option B (Rename Branches) |
-|----------|------------------------|----------------------------|
-| **Implementation Time** | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| **Risk Level** | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| **Team Disruption** | ⭐⭐⭐⭐⭐ | ⭐ |
-| **Long-term Clarity** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Git Flow Compliance** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-
-## Conclusion
-
-**Recommendation: Implement Option A immediately** to resolve the contributor confusion with minimal risk and disruption. Option B can be considered for future implementation during a planned maintenance window or major release cycle.
-
-The current CI/CD infrastructure already supports both branch patterns, making either approach technically feasible. The choice should be based on team priorities regarding immediate resolution versus long-term branch naming consistency.
+**Day 1-3:** Preparation and team coordination  
+**Day 4:** Implementation (30-60 minutes active work)  
+**Day 5-7:** Support and issue resolution  
 
 ## Next Steps
 
-1. **Team Decision Required**: Choose between Option A (immediate fix) or Option B (comprehensive renaming)
-2. **Resource Allocation**: Assign team member(s) to implement chosen solution
-3. **Communication Plan**: Prepare developer communication for chosen approach
-4. **Implementation Scheduling**: Schedule implementation during appropriate time window
+1. **Assign Implementation Team**
+   - Primary: Repository admin with branch management access
+   - Secondary: DevOps team member for CI/CD verification
+   - Support: Team lead for developer assistance
+
+2. **Schedule Implementation**
+   - Choose low-activity time period
+   - Coordinate with team calendars
+   - Set up communication channels
+
+3. **Execute Preparation Phase**
+   - Complete all Phase 1 checklist items
+   - Verify all prerequisites
+   - Send team notifications
 
 ---
 
 **Prepared by:** GitHub Copilot  
-**Review Required by:** FirelyTeam Development Team  
-**Implementation:** Pending team decision
+**Approved by:** FirelyTeam Development Team  
+**Implementation:** Scheduled for [DATE]
