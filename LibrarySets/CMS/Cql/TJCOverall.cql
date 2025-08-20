@@ -1,4 +1,4 @@
-library TJCOverall version '8.14.000'
+library TJCOverall version '8.15.000'
 
 
 using QICore version '4.1.1'
@@ -17,21 +17,22 @@ valueset "Nonelective Inpatient Encounter": 'http://cts.nlm.nih.gov/fhir/ValueSe
 valueset "Patient Expired": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2026-12-31T23:59:59.999Z]
 
 context Patient
 
 
-define "Non Elective Inpatient Encounter with Age":
+define "Non Elective Inpatient Encounter With Age":
   ["Encounter": "Nonelective Inpatient Encounter"] NonElectiveEncounter
         where AgeInYearsAt(date from start of NonElectiveEncounter.period ) >= 18
          and NonElectiveEncounter.period ends during day of "Measurement Period"
 
 
 define "Ischemic Stroke Encounter":
-  "Non Elective Inpatient Encounter with Age" NonElectiveEncounterWithAge
+  "Non Elective Inpatient Encounter With Age" NonElectiveEncounterWithAge
     where NonElectiveEncounterWithAge.principalDiagnosis().code in "Ischemic Stroke"
 
-define "Ischemic Stroke Encounters with Discharge Disposition":
+define "Ischemic Stroke Encounters With Discharge Disposition":
   "Ischemic Stroke Encounter" IschemicStrokeEncounter
   let DischDisp: IschemicStrokeEncounter.hospitalization.dischargeDisposition
   	where  DischDisp in "Discharge To Acute Care Facility"
@@ -40,12 +41,12 @@ define "Ischemic Stroke Encounters with Discharge Disposition":
 		or DischDisp in "Discharged to Home for Hospice Care"
 		or DischDisp in "Discharged to Health Care Facility for Hospice Care"			
 
-define "Comfort Measures during Hospitalization":
+define "Comfort Measures During Hospitalization":
   "Ischemic Stroke Encounter" IschemicStrokeEncounter
     with "Intervention Comfort Measures" ComfortMeasure
      such that Coalesce(start of ComfortMeasure.performed.toInterval(), ComfortMeasure.authoredOn) during IschemicStrokeEncounter.hospitalizationWithObservation()
 
-define "Encounter with Comfort Measures during Hospitalization":
+define "Encounter With Comfort Measures During Hospitalization":
   "Ischemic Stroke Encounter" IschemicStrokeEncounter
     with "Intervention Comfort Measures" ComfortMeasure
      such that Coalesce(start of ComfortMeasure.performed.toInterval(), ComfortMeasure.authoredOn) during IschemicStrokeEncounter.hospitalizationWithObservation()

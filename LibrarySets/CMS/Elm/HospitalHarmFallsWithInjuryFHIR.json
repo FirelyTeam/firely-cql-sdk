@@ -7,7 +7,7 @@
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
-         "id" : "HospitalHarmFallsWithInjuryFHIR",
+         "id" : "FallsWithInjuryFHIR",
          "version" : "0.0.024"
       },
       "schemaIdentifier" : {

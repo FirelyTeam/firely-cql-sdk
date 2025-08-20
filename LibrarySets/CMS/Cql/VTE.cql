@@ -1,4 +1,4 @@
-library VTE version '8.8.000'
+library VTE version '8.9.000'
 
 
 using QICore version '4.1.1'
@@ -11,6 +11,7 @@ valueset "Obstetrics VTE": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.1138
 valueset "Venous Thromboembolism": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279' 
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2026-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -32,13 +33,3 @@ define "Encounter with Age Range and without VTE Diagnosis or Obstetrical Condit
  ( CQMCommon."Inpatient Encounter" InpatientEncounter
      where AgeInYearsAt(date from start of InpatientEncounter.period) >= 18 )
     intersect "Admission without VTE or Obstetrical Conditions"
-
-
-define fluent function "FromDayOfStartOfHospitalizationToDayAfterAdmission"(Encounter Encounter ):
-	Interval[ date from (start of Encounter.hospitalizationWithObservation()), date from (start of Encounter.period) + 1 days]
-
-define fluent function "StartOfFirstICU"(Encounter Encounter ):
-	start of Encounter.firstInpatientIntensiveCareUnit().period
-
-define fluent function "FromDayOfStartOfHospitalizationToDayAfterFirstICU"(Encounter Encounter ):
-	Interval[date from (start of Encounter.hospitalizationWithObservation()), date from (Encounter.StartOfFirstICU()) + 1 day]
