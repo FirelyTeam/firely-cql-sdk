@@ -2,20 +2,21 @@
 
 **Document Version:** 1.0  
 **Effective Date:** January 2025  
-**Last Updated:** 2025-01-27  
 
 ## Overview
 
-This document establishes the official git branching strategy and workflow guidelines for the Firely CQL SDK project. These guidelines ensure consistent development practices, clear release management, and efficient collaboration across the team.
+This document establishes the official Firely git branching strategy and workflow guidelines. These guidelines ensure consistent development practices, clear release management, and efficient collaboration across the team.
+
+**Scope:** These guidelines apply primarily to Firely Server and Firely Auth projects. For SDK projects, simplified workflows may be more appropriate depending on the project's specific requirements.
 
 ## Branching Strategy
 
 ### Core Philosophy
 
-Our branching strategy is based on **Gitflow** with modifications to support multiple active releases and long-term maintenance requirements. This approach recognizes that:
+Firely's branching strategy is based on **Gitflow** with modifications to support multiple active releases and long-term maintenance requirements. This approach recognizes that:
 
 - Features can be complex and require stabilization before release
-- We need to support multiple released versions simultaneously
+- Multiple released versions need simultaneous support
 - Releases are planned and coordinated rather than continuous
 - Careful testing and quality assurance are essential
 
@@ -36,7 +37,7 @@ Our branching strategy is based on **Gitflow** with modifications to support mul
 
 #### Short-Lived Branches
 
-1. **Feature branches** - `feature/feature-name` or `feature/issue-number`
+1. **Feature branches** - `feature/issue-number-feature-name` or `feature/issue-number`
    - Created from `develop` for new features
    - Merged back to `develop` via pull request
    - Deleted after successful merge
@@ -66,8 +67,8 @@ Our branching strategy is based on **Gitflow** with modifications to support mul
 2. **Complete feature:**
    - Create pull request against `develop`
    - Ensure all tests pass and code review is completed
-   - Merge using "Squash and merge" strategy
-   - Delete feature branch after merge
+   - Merge using "Squash and merge" strategy *(applies to Firely Server and Auth)*
+   - Delete feature branch after merge *(applies to Firely Server and Auth)*
 
 ### Release Process
 
@@ -120,6 +121,98 @@ When developing the next major version while maintaining current major:
 **Example:**
 - `develop` - Working on version 4.0 features
 - `support/3.x` - Continuing 3.x minor releases (3.1, 3.2, etc.)
+
+## Git Flow Diagrams
+
+### Feature Development Flow
+
+```mermaid
+gitgraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Dev commit 1"
+    commit id: "Dev commit 2"
+    branch feature/123-new-feature
+    commit id: "Feature work 1"
+    commit id: "Feature work 2"
+    commit id: "Feature work 3"
+    checkout develop
+    merge feature/123-new-feature
+    commit id: "Continue dev"
+```
+
+### Release Process Flow
+
+```mermaid
+gitgraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Dev work"
+    commit id: "Ready for release"
+    branch release/2.1.0
+    commit id: "Version bump"
+    commit id: "Bug fixes"
+    branch support/2.x
+    merge release/2.1.0
+    commit id: "Tag v2.1.0" tag: "v2.1.0"
+    checkout develop
+    merge release/2.1.0
+    commit id: "Continue dev"
+```
+
+### Hotfix Flow (from develop)
+
+```mermaid
+gitgraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Recent work"
+    branch support/2.x
+    commit id: "Released v2.1.0" tag: "v2.1.0"
+    checkout develop
+    branch release/2.1.1
+    commit id: "Hotfix changes"
+    checkout support/2.x
+    merge release/2.1.1
+    commit id: "Tag v2.1.1" tag: "v2.1.1"
+    checkout develop
+    merge release/2.1.1
+```
+
+### Hotfix Flow (from tag)
+
+```mermaid
+gitgraph
+    commit id: "Initial"
+    branch develop
+    commit id: "Breaking changes"
+    commit id: "Major refactor"
+    branch support/2.x
+    commit id: "Released v2.1.0" tag: "v2.1.0"
+    branch hotfix/2.1.1
+    commit id: "Critical fix"
+    checkout support/2.x
+    merge hotfix/2.1.1
+    commit id: "Tag v2.1.1" tag: "v2.1.1"
+```
+
+### Concurrent Major Development
+
+```mermaid
+gitgraph
+    commit id: "Initial"
+    branch develop
+    commit id: "v4.0 features"
+    commit id: "Breaking changes"
+    branch support/3.x
+    commit id: "Released v3.0.0" tag: "v3.0.0"
+    commit id: "v3.1 features"
+    commit id: "Released v3.1.0" tag: "v3.1.0"
+    checkout develop
+    commit id: "More v4.0 work"
+    checkout support/3.x
+    commit id: "v3.2 features"
+```
 
 ## Branch Protection Rules
 

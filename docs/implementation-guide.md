@@ -213,7 +213,7 @@ curl -s -H "Authorization: token $GITHUB_TOKEN" \
 cat << 'EOF' > /tmp/developer_migration.sh
 #!/bin/bash
 # Developer Migration Script for Branch Renaming
-# Run this in your local firely-cql-sdk repository
+# Run this in the local firely-cql-sdk repository
 
 set -e
 
@@ -330,8 +330,8 @@ The branch renaming has been successfully completed:
 - develop-2.0 → develop (current development)
 
 Action Required:
-1. Update your local repository using the migration script
-2. Verify your development workflow
+1. Update the local repository using the migration script
+2. Verify the development workflow
 3. Report any issues immediately
 
 Migration script: [LINK TO SCRIPT]
@@ -343,7 +343,7 @@ Support: [SUPPORT CONTACT]
 If you encounter issues after the branch renaming:
 
 1. 📝 Describe the problem
-2. 💻 Include your local git status: `git status && git branch -vv`
+2. 💻 Include local git status: `git status && git branch -vv`
 3. 🔗 Mention any affected PRs or workflows
 4. 📞 Contact: [EMERGENCY CONTACT]
 

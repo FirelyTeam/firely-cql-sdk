@@ -163,7 +163,7 @@ After implementation:
 ```
 🚨 SCHEDULED MAINTENANCE: Branch Renaming
 
-We will be renaming our development branches on [DATE] at [TIME]:
+The development branches will be renamed on [DATE] at [TIME]:
 - develop → develop-1.0 (1.x maintenance)
 - develop-2.0 → develop (current development)
 
@@ -177,7 +177,7 @@ Questions? Contact [TEAM_LEAD]
 ```
 🔄 BRANCH RENAMING IN PROGRESS
 
-Update your local repositories NOW:
+Local repositories should be updated immediately:
 
 git fetch origin
 git remote prune origin
