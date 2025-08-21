@@ -114,6 +114,7 @@ gitGraph
     branch release/2.1.0
     commit id: "Version bump"
     commit id: "Bug fixes"
+    checkout develop
     branch support/2.x
     checkout support/2.x
     merge release/2.1.0
