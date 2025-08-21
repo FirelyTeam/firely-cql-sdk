@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
+using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 
 namespace Hl7.Cql.Packager;
@@ -46,6 +47,7 @@ public class Program
             }
                 //.AddOptions(ElmToFhirCommand.Options)
                 .AddGlobalOptions(LoggingCommand.Options)
+                .AddGlobalOptions(GlobalCommand.Options)
                 //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
             ;
 
