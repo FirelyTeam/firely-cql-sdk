@@ -1,0 +1,23 @@
+﻿{
+  "Elm": {
+    "SkipFiles": [
+      // Union expects two arguments of the same list or interval type.
+      // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
+      "CMS72FHIRSTKAntithromboticDay2.json",
+      "CMS190VTEProphylaxisICUFHIR.json",
+      "CMS108FHIRVTEProphylaxis.json",
+      "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json",
+
+      // Tuple element value does not have a resultTypeSpecifier
+      "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json",
+      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
+
+      // Sort is broken in ELM XSD
+      "CMS986FHIRMalnutritionScore.json",
+      "CMS832HHAKIFHIR.json",
+
+      // Exception: Exception occurred during expression building. Argument types do not match
+      // "CMS871HHHyperFHIR.json"
+    ]
+  }
+}
