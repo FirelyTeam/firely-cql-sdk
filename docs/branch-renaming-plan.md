@@ -81,11 +81,17 @@ After implementation:
 - [ ] Backup procedures verified
 
 1. **Branch Protection Management**
-   - [ ] Document current protection rules
-   - [ ] Temporarily remove protection from branches to be renamed
-   - [ ] Prepare new protection rules for renamed branches
+   - [ ] Document current protection rules for `develop` and `develop-2.0`
+   - [ ] **CRITICAL**: Temporarily disable branch protection for both branches before renaming
+     - Navigate to Settings → Branches in GitHub repository
+     - For each protected branch (`develop`, `develop-2.0`):
+       - Click "Edit" next to branch protection rule
+       - Temporarily uncheck all protection options OR delete the rule entirely
+       - Save changes
+   - [ ] Prepare new protection rules configuration for `support/1.x` and new `develop`
 
 2. **Branch Renaming Process**
+   **⚠️ IMPORTANT**: Ensure branch protection is disabled before running these commands
    ```bash
    # Step 1: Rename develop to support/1.x
    git checkout develop
@@ -102,7 +108,10 @@ After implementation:
 
 3. **Repository Settings Updates**
    - [ ] Update default branch to new `develop` (if needed)
-   - [ ] Apply protection rules to new branch names
+   - [ ] **Re-enable branch protection rules**:
+     - For `develop` branch: Apply same protection rules that were on `develop-2.0`
+     - For `support/1.x` branch: Apply appropriate protection rules for maintenance branch
+     - Include: Require pull request reviews, dismiss stale reviews, require status checks
    - [ ] Update merge policies and restrictions
    - [ ] Verify branch hierarchy in GitHub settings
 
