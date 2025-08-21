@@ -5,13 +5,13 @@
 This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM,
 and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
-## Release notes
-This is release version 2.1 of the engine.
-Earlier 1.x releases will be maintained with hotfixes, but will not receive new features.
-
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
 There is quite some variation in how CQL is written and interpreted, 
 so it is likely at this early stage that there will be deviations from other engines currently available.
+
+## Release Notes
+This is release version 2.1 of the engine.
+Earlier 1.x releases will be maintained with hotfixes, but will not receive new features.
 
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
@@ -92,6 +92,8 @@ We actively monitor the issues coming in through the GitHub repository at [https
 We are welcoming contributions!
 
 If you want to participate in this project, we're using [Git Flow][nvie] for our branch management. Please submit PRs with changes against the `develop` branch.
+
+Current 2.x development is done against the `develop` branch, while hotfixes are done under the `support/1.x` branch. Please refer to our [Git Branching and Workflow Guidelines](https://github.com/FirelyTeam/firely-cql-sdk/wiki/Git-Branching-and-Workflow-Guidelines) on the wiki for detailed guidelines on git branching and naming conventions.
 
 [cql-spec]: https://cql.hl7.org/
 [netsdk-zulip]: https://chat.fhir.org/#narrow/stream/dotnet

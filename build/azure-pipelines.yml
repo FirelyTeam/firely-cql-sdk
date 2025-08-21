@@ -21,7 +21,6 @@ trigger:
   branches:
     include:
     - develop*
-    - develop-2.0*
     - release*
     - refs/tags/v*
     - spike*
