@@ -13,18 +13,18 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
-[CqlLibrary("CQMCommon", "2.2.000")]
-public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
+[CqlLibrary("CQMCommon", "4.1.000")]
+public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
-    private CQMCommon_2_2_000() {}
+    private CQMCommon_4_1_000() {}
 
-    public static CQMCommon_2_2_000 Instance { get; } = new();
+    public static CQMCommon_4_1_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "CQMCommon";
-    public string Version => "2.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Version => "4.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -62,6 +62,78 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     public CqlCode Billing(CqlContext _) => _Billing;
     private static readonly CqlCode _Billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
+    [CqlCodeDefinition("Admitting Diagnosis", codeId: "admitting", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Admitting_Diagnosis(CqlContext _) => _Admitting_Diagnosis;
+    private static readonly CqlCode _Admitting_Diagnosis = new CqlCode("admitting", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Clinical Diagnosis", codeId: "clinical", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Clinical_Diagnosis(CqlContext _) => _Clinical_Diagnosis;
+    private static readonly CqlCode _Clinical_Diagnosis = new CqlCode("clinical", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Differential Diagnosis", codeId: "differential", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Differential_Diagnosis(CqlContext _) => _Differential_Diagnosis;
+    private static readonly CqlCode _Differential_Diagnosis = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Discharge Diagnosis", codeId: "discharge", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Discharge_Diagnosis(CqlContext _) => _Discharge_Diagnosis;
+    private static readonly CqlCode _Discharge_Diagnosis = new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Laboratory Diagnosis", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Laboratory_Diagnosis(CqlContext _) => _Laboratory_Diagnosis;
+    private static readonly CqlCode _Laboratory_Diagnosis = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Nursing Diagnosis", codeId: "nursing", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Nursing_Diagnosis(CqlContext _) => _Nursing_Diagnosis;
+    private static readonly CqlCode _Nursing_Diagnosis = new CqlCode("nursing", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Prenatal Diagnosis", codeId: "prenatal", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Prenatal_Diagnosis(CqlContext _) => _Prenatal_Diagnosis;
+    private static readonly CqlCode _Prenatal_Diagnosis = new CqlCode("prenatal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Principal Diagnosis", codeId: "principal", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Principal_Diagnosis(CqlContext _) => _Principal_Diagnosis;
+    private static readonly CqlCode _Principal_Diagnosis = new CqlCode("principal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Radiology Diagnosis", codeId: "radiology", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Radiology_Diagnosis(CqlContext _) => _Radiology_Diagnosis;
+    private static readonly CqlCode _Radiology_Diagnosis = new CqlCode("radiology", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Remote Diagnosis", codeId: "remote", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Remote_Diagnosis(CqlContext _) => _Remote_Diagnosis;
+    private static readonly CqlCode _Remote_Diagnosis = new CqlCode("remote", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Retrospective Diagnosis", codeId: "retrospective", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Retrospective_Diagnosis(CqlContext _) => _Retrospective_Diagnosis;
+    private static readonly CqlCode _Retrospective_Diagnosis = new CqlCode("retrospective", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Self Diagnosis", codeId: "self", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
+    public CqlCode Self_Diagnosis(CqlContext _) => _Self_Diagnosis;
+    private static readonly CqlCode _Self_Diagnosis = new CqlCode("self", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+
+    [CqlCodeDefinition("Primary procedure", codeId: "primary", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-procedure-type")]
+    public CqlCode Primary_procedure(CqlContext _) => _Primary_procedure;
+    private static readonly CqlCode _Primary_procedure = new CqlCode("primary", "http://terminology.hl7.org/CodeSystem/ex-procedure-type");
+
+    [CqlCodeDefinition("POA-Y", codeId: "Y", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
+    public CqlCode POA_Y(CqlContext _) => _POA_Y;
+    private static readonly CqlCode _POA_Y = new CqlCode("Y", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+
+    [CqlCodeDefinition("POA-N", codeId: "N", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
+    public CqlCode POA_N(CqlContext _) => _POA_N;
+    private static readonly CqlCode _POA_N = new CqlCode("N", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+
+    [CqlCodeDefinition("POA-W", codeId: "W", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
+    public CqlCode POA_W(CqlContext _) => _POA_W;
+    private static readonly CqlCode _POA_W = new CqlCode("W", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+
+    [CqlCodeDefinition("POA-1", codeId: "1", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
+    public CqlCode POA_1(CqlContext _) => _POA_1;
+    private static readonly CqlCode _POA_1 = new CqlCode("1", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+
+    [CqlCodeDefinition("POA-U", codeId: "U", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
+    public CqlCode POA_U(CqlContext _) => _POA_U;
+    private static readonly CqlCode _POA_U = new CqlCode("U", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+
     #endregion Codes
 
     #region CodeSystems
@@ -72,6 +144,39 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, [
           _Billing]);
 
+    [CqlCodeSystemDefinition("Diagnosis Type", codeSystemId: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype", codeSystemVersion: null)]
+    public CqlCodeSystem Diagnosis_Type(CqlContext _) => _Diagnosis_Type;
+    private static readonly CqlCodeSystem _Diagnosis_Type =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/ex-diagnosistype", null, [
+          _Admitting_Diagnosis,
+          _Clinical_Diagnosis,
+          _Differential_Diagnosis,
+          _Discharge_Diagnosis,
+          _Laboratory_Diagnosis,
+          _Nursing_Diagnosis,
+          _Prenatal_Diagnosis,
+          _Principal_Diagnosis,
+          _Radiology_Diagnosis,
+          _Remote_Diagnosis,
+          _Retrospective_Diagnosis,
+          _Self_Diagnosis]);
+
+    [CqlCodeSystemDefinition("Procedure Type", codeSystemId: "http://terminology.hl7.org/CodeSystem/ex-procedure-type", codeSystemVersion: null)]
+    public CqlCodeSystem Procedure_Type(CqlContext _) => _Procedure_Type;
+    private static readonly CqlCodeSystem _Procedure_Type =
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/ex-procedure-type", null, [
+          _Primary_procedure]);
+
+    [CqlCodeSystemDefinition("Present On Admission Indicators", codeSystemId: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", codeSystemVersion: null)]
+    public CqlCodeSystem Present_On_Admission_Indicators(CqlContext _) => _Present_On_Admission_Indicators;
+    private static readonly CqlCodeSystem _Present_On_Admission_Indicators =
+      new CqlCodeSystem("https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", null, [
+          _POA_Y,
+          _POA_N,
+          _POA_W,
+          _POA_1,
+          _POA_U]);
+
     #endregion CodeSystems
 
     #region Parameters
@@ -79,12 +184,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime b_ = context.Operators.DateTime(2026, 12, 31, 23, 59, 59, 999, 0.0m);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
-        object d_ = context.ResolveParameter("CQMCommon-2.2.000", "Measurement Period", c_);
+        object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
 
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime>)a_;
     }
 
 
@@ -642,14 +744,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
         bool? b_(Location L)
         {
-            Id e_ = L?.IdElement;
-            string f_ = e_?.Value;
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = g_?.Value;
-            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
 
-            return j_;
+            return e_;
         };
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
@@ -3057,31 +3154,30 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     [CqlFunctionDefinition("EncounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resource referenced by the `diagnosis.condition` element of the Encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `encounterDiagnosis()` instead.")]
-    public IEnumerable<Condition> EncounterDiagnosis(CqlContext context, Encounter Encounter)
+    public IEnumerable<object> EncounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-        Condition b_(Encounter.DiagnosisComponent D)
+        object b_(Encounter.DiagnosisComponent D)
         {
-            IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            bool? f_(Condition C)
+            IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
+            bool? h_(object C)
             {
-                Id i_ = C?.IdElement;
-                string j_ = i_?.Value;
                 ResourceReference k_ = D?.Condition;
-                FhirString l_ = k_?.ReferenceElement;
-                string m_ = l_?.Value;
-                string n_ = QICoreCommon_2_1_000.Instance.getId(context, m_);
-                bool? o_ = context.Operators.Equal(j_, n_);
+                object l_ = context.Operators.LateBoundProperty<object>(C, "id");
+                string m_ = context.Operators.LateBoundProperty<string>(l_, "value");
+                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, k_, m_);
 
-                return o_;
+                return n_;
             };
-            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-            Condition h_ = context.Operators.SingletonFrom<Condition>(g_);
+            IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+            object j_ = context.Operators.SingletonFrom<object>(i_);
 
-            return h_;
+            return j_;
         };
-        IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
+        IEnumerable<object> c_ = context.Operators.Select<Encounter.DiagnosisComponent, object>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
+        IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
 
         return d_;
     }
@@ -3089,31 +3185,29 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
 
     [CqlFunctionDefinition("encounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resources referenced by the diagnosis element of the Encounter")]
-    public IEnumerable<Condition> encounterDiagnosis(CqlContext context, Encounter Encounter)
+    public IEnumerable<object> encounterDiagnosis(CqlContext context, Encounter Encounter)
     {
-        List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-        Condition b_(Encounter.DiagnosisComponent D)
+        List<ResourceReference> a_ = Encounter?.ReasonReference;
+        object b_(ResourceReference D)
         {
-            IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            bool? f_(Condition C)
+            IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
+            bool? h_(object C)
             {
-                Id i_ = C?.IdElement;
-                string j_ = i_?.Value;
-                ResourceReference k_ = D?.Condition;
-                FhirString l_ = k_?.ReferenceElement;
-                string m_ = l_?.Value;
-                string n_ = QICoreCommon_2_1_000.Instance.getId(context, m_);
-                bool? o_ = context.Operators.Equal(j_, n_);
+                object k_ = context.Operators.LateBoundProperty<object>(C, "id");
+                string l_ = context.Operators.LateBoundProperty<string>(k_, "value");
+                bool? m_ = QICoreCommon_4_0_000.Instance.references(context, D, l_);
 
-                return o_;
+                return m_;
             };
-            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-            Condition h_ = context.Operators.SingletonFrom<Condition>(g_);
+            IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+            object j_ = context.Operators.SingletonFrom<object>(i_);
 
-            return h_;
+            return j_;
         };
-        IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
+        IEnumerable<object> c_ = context.Operators.Select<ResourceReference, object>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
 
         return d_;
     }
@@ -3122,54 +3216,52 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     [CqlFunctionDefinition("GetCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getCondition()` instead")]
-    public Condition GetCondition(CqlContext context, ResourceReference reference)
+    public object GetCondition(CqlContext context, ResourceReference reference)
     {
-        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        bool? b_(Condition C)
+        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+        bool? d_(object C)
         {
-            Id e_ = C?.IdElement;
-            string f_ = e_?.Value;
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = g_?.Value;
-            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            object g_ = context.Operators.LateBoundProperty<object>(C, "id");
+            string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
+            bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
 
-            return j_;
+            return i_;
         };
-        IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
-        Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
+        IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
+        object f_ = context.Operators.SingletonFrom<object>(e_);
 
-        return d_;
+        return f_;
     }
 
 
     [CqlFunctionDefinition("getCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
-    public Condition getCondition(CqlContext context, ResourceReference reference)
+    public object getCondition(CqlContext context, ResourceReference reference)
     {
-        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-        bool? b_(Condition C)
+        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+        bool? d_(object C)
         {
-            Id e_ = C?.IdElement;
-            string f_ = e_?.Value;
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = g_?.Value;
-            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            object g_ = context.Operators.LateBoundProperty<object>(C, "id");
+            string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
+            bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
 
-            return j_;
+            return i_;
         };
-        IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
-        Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
+        IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
+        object f_ = context.Operators.SingletonFrom<object>(e_);
 
-        return d_;
+        return f_;
     }
 
 
     [CqlFunctionDefinition("PrincipalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `principalDiagnosis()` instead.")]
-    public Condition PrincipalDiagnosis(CqlContext context, Encounter Encounter)
+    public object PrincipalDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
         bool? b_(Encounter.DiagnosisComponent D)
@@ -3187,79 +3279,274 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
             return p_;
         };
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        Condition d_(Encounter.DiagnosisComponent PD)
+        object d_(Encounter.DiagnosisComponent PD)
         {
-            IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            bool? r_(Condition C)
+            IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            IEnumerable<object> s_ = context.Operators.Union<object>(q_ as IEnumerable<object>, r_ as IEnumerable<object>);
+            bool? t_(object C)
             {
-                Id u_ = C?.IdElement;
-                string v_ = u_?.Value;
                 ResourceReference w_ = PD?.Condition;
-                FhirString x_ = w_?.ReferenceElement;
-                string y_ = x_?.Value;
-                string z_ = QICoreCommon_2_1_000.Instance.getId(context, y_);
-                bool? aa_ = context.Operators.Equal(v_, z_);
+                object x_ = context.Operators.LateBoundProperty<object>(C, "id");
+                string y_ = context.Operators.LateBoundProperty<string>(x_, "value");
+                bool? z_ = QICoreCommon_4_0_000.Instance.references(context, w_, y_);
 
-                return aa_;
+                return z_;
             };
-            IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
-            Condition t_ = context.Operators.SingletonFrom<Condition>(s_);
+            IEnumerable<object> u_ = context.Operators.Where<object>(s_, t_);
+            object v_ = context.Operators.SingletonFrom<object>(u_);
 
-            return t_;
+            return v_;
         };
-        IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
-        IEnumerable<Condition> f_ = context.Operators.Distinct<Condition>(e_);
-        Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
+        IEnumerable<object> e_ = context.Operators.Select<Encounter.DiagnosisComponent, object>(c_, d_);
+        IEnumerable<object> f_ = context.Operators.Distinct<object>(e_);
+        object g_ = context.Operators.SingletonFrom<object>(f_);
 
         return g_;
     }
 
 
     [CqlFunctionDefinition("principalDiagnosis")]
-    [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
-    public Condition principalDiagnosis(CqlContext context, Encounter Encounter)
+    [CqlTag("description", "Returns the claim diagnosis element that is specified as the principal diagnosis for the encounter")]
+    [CqlTag("comment", "See the QICore 6 Authoring Patterns discussion on [Principal Diagnosis and Present on Admission](https://github.com/cqframework/CQL-Formatting-and-Usage-Wiki/wiki/Authoring-Patterns-QICore-v6.0.0#conditions-present-on-admission-and-principal-diagnoses) for more information")]
+    public Claim.DiagnosisComponent principalDiagnosis(CqlContext context, Encounter encounter)
     {
-        List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-        bool? b_(Encounter.DiagnosisComponent D)
+        IEnumerable<Claim.DiagnosisComponent> a_ = this.claimDiagnosis(context, encounter);
+        bool? b_(Claim.DiagnosisComponent CD)
         {
-            PositiveInt h_ = D?.RankElement;
-            int? i_ = h_?.Value;
-            bool? j_ = context.Operators.Equal(i_, 1);
-            CodeableConcept k_ = D?.Use;
-            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-            CqlCode m_ = this.Billing(context);
-            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-            bool? o_ = context.Operators.Equivalent(l_, n_);
-            bool? p_ = context.Operators.And(j_, o_);
+            List<CodeableConcept> e_ = CD?.Type;
+            CqlConcept f_(CodeableConcept @this)
+            {
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+
+                return j_;
+            };
+            IEnumerable<CqlConcept> g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
+            CqlCode h_ = this.Principal_Diagnosis(context);
+            bool? i_ = QICoreCommon_4_0_000.Instance.includesCode(context, g_, h_);
+
+            return i_;
+        };
+        IEnumerable<Claim.DiagnosisComponent> c_ = context.Operators.Where<Claim.DiagnosisComponent>(a_, b_);
+        Claim.DiagnosisComponent d_ = context.Operators.SingletonFrom<Claim.DiagnosisComponent>(c_);
+
+        return d_;
+    }
+
+
+    [CqlFunctionDefinition("claimDiagnosis")]
+    [CqlTag("description", "Returns the claim diagnosis elements for the given encounter")]
+    [CqlTag("comment", "See the QICore 6 Authoring Patterns discussion on [Principal Diagnosis and Present on Admission](https://github.com/cqframework/CQL-Formatting-and-Usage-Wiki/wiki/Authoring-Patterns-QICore-v6.0.0#conditions-present-on-admission-and-principal-diagnoses) for more information")]
+    public IEnumerable<Claim.DiagnosisComponent> claimDiagnosis(CqlContext context, Encounter encounter)
+    {
+        Encounter[] a_ = [
+            encounter,
+        ];
+        IEnumerable<Claim.DiagnosisComponent> b_(Encounter E)
+        {
+            IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
+            bool? g_(Claim C)
+            {
+                Code<FinancialResourceStatusCodes> p_ = C?.StatusElement;
+                FinancialResourceStatusCodes? q_ = p_?.Value;
+                Code<FinancialResourceStatusCodes> r_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(q_);
+                bool? s_ = context.Operators.Equal(r_, "active");
+                Code<ClaimUseCode> t_ = C?.UseElement;
+                ClaimUseCode? u_ = t_?.Value;
+                Code<ClaimUseCode> v_ = context.Operators.Convert<Code<ClaimUseCode>>(u_);
+                bool? w_ = context.Operators.Equal(v_, "claim");
+                bool? x_ = context.Operators.And(s_, w_);
+                List<Claim.ItemComponent> y_ = C?.Item;
+                bool? z_(Claim.ItemComponent I)
+                {
+                    List<ResourceReference> ad_ = I?.Encounter;
+                    bool? ae_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ad_, E);
+
+                    return ae_;
+                };
+                IEnumerable<Claim.ItemComponent> aa_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)y_, z_);
+                bool? ab_ = context.Operators.Exists<Claim.ItemComponent>(aa_);
+                bool? ac_ = context.Operators.And(x_, ab_);
+
+                return ac_;
+            };
+            IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
+            bool? i_(Claim @this)
+            {
+                List<Claim.DiagnosisComponent> af_ = @this?.Diagnosis;
+                bool? ag_ = context.Operators.Not((bool?)(af_ is null));
+
+                return ag_;
+            };
+            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
+            List<Claim.DiagnosisComponent> k_(Claim @this)
+            {
+                List<Claim.DiagnosisComponent> ah_ = @this?.Diagnosis;
+
+                return ah_;
+            };
+            IEnumerable<List<Claim.DiagnosisComponent>> l_ = context.Operators.Select<Claim, List<Claim.DiagnosisComponent>>(j_, k_);
+            IEnumerable<Claim.DiagnosisComponent> m_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)l_);
+            bool? n_(Claim.DiagnosisComponent D)
+            {
+                PositiveInt ai_ = D?.SequenceElement;
+                int? aj_ = ai_?.Value;
+                IEnumerable<Claim> ak_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
+                bool? al_(Claim C)
+                {
+                    Code<FinancialResourceStatusCodes> ba_ = C?.StatusElement;
+                    FinancialResourceStatusCodes? bb_ = ba_?.Value;
+                    Code<FinancialResourceStatusCodes> bc_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(bb_);
+                    bool? bd_ = context.Operators.Equal(bc_, "active");
+                    Code<ClaimUseCode> be_ = C?.UseElement;
+                    ClaimUseCode? bf_ = be_?.Value;
+                    Code<ClaimUseCode> bg_ = context.Operators.Convert<Code<ClaimUseCode>>(bf_);
+                    bool? bh_ = context.Operators.Equal(bg_, "claim");
+                    bool? bi_ = context.Operators.And(bd_, bh_);
+                    List<Claim.ItemComponent> bj_ = C?.Item;
+                    bool? bk_(Claim.ItemComponent I)
+                    {
+                        List<ResourceReference> bo_ = I?.Encounter;
+                        bool? bp_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bo_, E);
+
+                        return bp_;
+                    };
+                    IEnumerable<Claim.ItemComponent> bl_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bj_, bk_);
+                    bool? bm_ = context.Operators.Exists<Claim.ItemComponent>(bl_);
+                    bool? bn_ = context.Operators.And(bi_, bm_);
+
+                    return bn_;
+                };
+                IEnumerable<Claim> am_ = context.Operators.Where<Claim>(ak_, al_);
+                bool? an_(Claim @this)
+                {
+                    List<Claim.ItemComponent> bq_ = @this?.Item;
+                    bool? br_ = context.Operators.Not((bool?)(bq_ is null));
+
+                    return br_;
+                };
+                IEnumerable<Claim> ao_ = context.Operators.Where<Claim>(am_, an_);
+                List<Claim.ItemComponent> ap_(Claim @this)
+                {
+                    List<Claim.ItemComponent> bs_ = @this?.Item;
+
+                    return bs_;
+                };
+                IEnumerable<List<Claim.ItemComponent>> aq_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ao_, ap_);
+                IEnumerable<Claim.ItemComponent> ar_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)aq_);
+                bool? as_(Claim.ItemComponent I)
+                {
+                    List<ResourceReference> bt_ = I?.Encounter;
+                    bool? bu_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bt_, E);
+
+                    return bu_;
+                };
+                IEnumerable<Claim.ItemComponent> at_ = context.Operators.Where<Claim.ItemComponent>(ar_, as_);
+                bool? au_(Claim.ItemComponent @this)
+                {
+                    List<PositiveInt> bv_ = @this?.DiagnosisSequenceElement;
+                    int? bw_(PositiveInt @this)
+                    {
+                        int? bz_ = @this?.Value;
+
+                        return bz_;
+                    };
+                    IEnumerable<int?> bx_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bv_, bw_);
+                    bool? by_ = context.Operators.Not((bool?)(bx_ is null));
+
+                    return by_;
+                };
+                IEnumerable<Claim.ItemComponent> av_ = context.Operators.Where<Claim.ItemComponent>(at_, au_);
+                IEnumerable<int?> aw_(Claim.ItemComponent @this)
+                {
+                    List<PositiveInt> ca_ = @this?.DiagnosisSequenceElement;
+                    int? cb_(PositiveInt @this)
+                    {
+                        int? cd_ = @this?.Value;
+
+                        return cd_;
+                    };
+                    IEnumerable<int?> cc_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ca_, cb_);
+
+                    return cc_;
+                };
+                IEnumerable<IEnumerable<int?>> ax_ = context.Operators.Select<Claim.ItemComponent, IEnumerable<int?>>(av_, aw_);
+                IEnumerable<int?> ay_ = context.Operators.Flatten<int?>(ax_);
+                bool? az_ = context.Operators.In<int?>(aj_, ay_);
+
+                return az_;
+            };
+            IEnumerable<Claim.DiagnosisComponent> o_ = context.Operators.Where<Claim.DiagnosisComponent>(m_, n_);
+
+            return o_;
+        };
+        IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+
+        return e_;
+    }
+
+
+    [CqlFunctionDefinition("hasPrincipalDiagnosisOf")]
+    [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter and has a code in the given valueSet.")]
+    [CqlTag("comment", "See the QICore 6 Authoring Patterns discussion on [Principal Diagnosis and Present on Admission](https://github.com/cqframework/CQL-Formatting-and-Usage-Wiki/wiki/Authoring-Patterns-QICore-v6.0.0#conditions-present-on-admission-and-principal-diagnoses) for more information")]
+    public bool? hasPrincipalDiagnosisOf(CqlContext context, Encounter encounter, CqlValueSet valueSet)
+    {
+        Claim.DiagnosisComponent a_ = this.principalDiagnosis(context, encounter);
+        Claim.DiagnosisComponent[] b_ = [
+            a_,
+        ];
+        bool? c_(Claim.DiagnosisComponent PD)
+        {
+            DataType g_ = PD?.Diagnosis;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, valueSet);
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            object l_ = this.getCondition(context, k_ as ResourceReference);
+            object m_ = context.Operators.LateBoundProperty<object>(l_, "code");
+            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_ as CodeableConcept);
+            bool? o_ = context.Operators.ConceptInValueSet(n_, valueSet);
+            bool? p_ = context.Operators.Or(i_, o_);
 
             return p_;
         };
-        IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        Condition d_(Encounter.DiagnosisComponent PD)
+        IEnumerable<bool?> d_ = context.Operators.Select<Claim.DiagnosisComponent, bool?>((IEnumerable<Claim.DiagnosisComponent>)b_, c_);
+        IEnumerable<bool?> e_ = context.Operators.Distinct<bool?>(d_);
+        bool? f_ = context.Operators.SingletonFrom<bool?>(e_);
+
+        return f_;
+    }
+
+
+    [CqlFunctionDefinition("isDiagnosisPresentOnAdmission")]
+    [CqlTag("description", "Returns true if the given diagnosis is present on admission, based on the given poaValueSet")]
+    [CqlTag("comment", "See the QICore 6 Authoring Patterns discussion on [Principal Diagnosis and Present on Admission](https://github.com/cqframework/CQL-Formatting-and-Usage-Wiki/wiki/Authoring-Patterns-QICore-v6.0.0#conditions-present-on-admission-and-principal-diagnoses) for more information")]
+    public bool? isDiagnosisPresentOnAdmission(CqlContext context, Encounter encounter, CqlValueSet diagnosisValueSet, CqlValueSet poaValueSet)
+    {
+        IEnumerable<Claim.DiagnosisComponent> a_ = this.claimDiagnosis(context, encounter);
+        bool? b_(Claim.DiagnosisComponent CD)
         {
-            IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-            bool? r_(Condition C)
-            {
-                Id u_ = C?.IdElement;
-                string v_ = u_?.Value;
-                ResourceReference w_ = PD?.Condition;
-                FhirString x_ = w_?.ReferenceElement;
-                string y_ = x_?.Value;
-                string z_ = QICoreCommon_2_1_000.Instance.getId(context, y_);
-                bool? aa_ = context.Operators.Equal(v_, z_);
+            CodeableConcept e_ = CD?.OnAdmission;
+            CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
+            bool? g_ = context.Operators.ConceptInValueSet(f_, poaValueSet);
+            DataType h_ = CD?.Diagnosis;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            bool? j_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, diagnosisValueSet);
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            object m_ = this.getCondition(context, l_ as ResourceReference);
+            object n_ = context.Operators.LateBoundProperty<object>(m_, "code");
+            CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_ as CodeableConcept);
+            bool? p_ = context.Operators.ConceptInValueSet(o_, diagnosisValueSet);
+            bool? q_ = context.Operators.Or(j_, p_);
+            bool? r_ = context.Operators.And(g_, q_);
 
-                return aa_;
-            };
-            IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
-            Condition t_ = context.Operators.SingletonFrom<Condition>(s_);
-
-            return t_;
+            return r_;
         };
-        IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
-        IEnumerable<Condition> f_ = context.Operators.Distinct<Condition>(e_);
-        Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
+        IEnumerable<Claim.DiagnosisComponent> c_ = context.Operators.Where<Claim.DiagnosisComponent>(a_, b_);
+        bool? d_ = context.Operators.Exists<Claim.DiagnosisComponent>(c_);
 
-        return g_;
+        return d_;
     }
 
 
@@ -3270,14 +3557,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
         bool? b_(Location L)
         {
-            Id e_ = L?.IdElement;
-            string f_ = e_?.Value;
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = g_?.Value;
-            string i_ = QICoreCommon_2_1_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
 
-            return j_;
+            return e_;
         };
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
@@ -3313,16 +3595,11 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
                 IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
                 bool? i_(Medication M)
                 {
-                    Id n_ = M?.IdElement;
-                    string o_ = n_?.Value;
-                    DataType p_ = request?.Medication;
-                    object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                    FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-                    string s_ = r_?.Value;
-                    string t_ = QICoreCommon_2_1_000.Instance.getId(context, s_);
-                    bool? u_ = context.Operators.Equal(o_, t_);
+                    DataType n_ = request?.Medication;
+                    object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                    bool? p_ = QICoreCommon_4_0_000.Instance.references(context, o_ as ResourceReference, M);
 
-                    return u_;
+                    return p_;
                 };
                 IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
                 Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
@@ -3363,16 +3640,11 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
                 IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
                 bool? i_(Medication M)
                 {
-                    Id n_ = M?.IdElement;
-                    string o_ = n_?.Value;
-                    DataType p_ = request?.Medication;
-                    object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                    FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-                    string s_ = r_?.Value;
-                    string t_ = QICoreCommon_2_1_000.Instance.getId(context, s_);
-                    bool? u_ = context.Operators.Equal(o_, t_);
+                    DataType n_ = request?.Medication;
+                    object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                    bool? p_ = QICoreCommon_4_0_000.Instance.references(context, o_ as ResourceReference, M);
 
-                    return u_;
+                    return p_;
                 };
                 IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
                 Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
@@ -3384,6 +3656,171 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
         };
 
         return a_();
+    }
+
+
+    [CqlFunctionDefinition("principalProcedure")]
+    [CqlTag("description", "Returns the claim procedure elements for the given encounter")]
+    public Claim.ProcedureComponent principalProcedure(CqlContext context, Encounter encounter)
+    {
+        Encounter[] a_ = [
+            encounter,
+        ];
+        Claim.ProcedureComponent b_(Encounter E)
+        {
+            IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
+            bool? g_(Claim C)
+            {
+                Code<FinancialResourceStatusCodes> q_ = C?.StatusElement;
+                FinancialResourceStatusCodes? r_ = q_?.Value;
+                Code<FinancialResourceStatusCodes> s_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(r_);
+                bool? t_ = context.Operators.Equal(s_, "active");
+                Code<ClaimUseCode> u_ = C?.UseElement;
+                ClaimUseCode? v_ = u_?.Value;
+                Code<ClaimUseCode> w_ = context.Operators.Convert<Code<ClaimUseCode>>(v_);
+                bool? x_ = context.Operators.Equal(w_, "claim");
+                bool? y_ = context.Operators.And(t_, x_);
+                List<Claim.ItemComponent> z_ = C?.Item;
+                bool? aa_(Claim.ItemComponent I)
+                {
+                    List<ResourceReference> ae_ = I?.Encounter;
+                    bool? af_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ae_, E);
+
+                    return af_;
+                };
+                IEnumerable<Claim.ItemComponent> ab_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)z_, aa_);
+                bool? ac_ = context.Operators.Exists<Claim.ItemComponent>(ab_);
+                bool? ad_ = context.Operators.And(y_, ac_);
+
+                return ad_;
+            };
+            IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
+            bool? i_(Claim @this)
+            {
+                List<Claim.ProcedureComponent> ag_ = @this?.Procedure;
+                bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
+
+                return ah_;
+            };
+            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
+            List<Claim.ProcedureComponent> k_(Claim @this)
+            {
+                List<Claim.ProcedureComponent> ai_ = @this?.Procedure;
+
+                return ai_;
+            };
+            IEnumerable<List<Claim.ProcedureComponent>> l_ = context.Operators.Select<Claim, List<Claim.ProcedureComponent>>(j_, k_);
+            IEnumerable<Claim.ProcedureComponent> m_ = context.Operators.Flatten<Claim.ProcedureComponent>((IEnumerable<IEnumerable<Claim.ProcedureComponent>>)l_);
+            bool? n_(Claim.ProcedureComponent P)
+            {
+                PositiveInt aj_ = P?.SequenceElement;
+                int? ak_ = aj_?.Value;
+                IEnumerable<Claim> al_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
+                bool? am_(Claim C)
+                {
+                    Code<FinancialResourceStatusCodes> bh_ = C?.StatusElement;
+                    FinancialResourceStatusCodes? bi_ = bh_?.Value;
+                    Code<FinancialResourceStatusCodes> bj_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(bi_);
+                    bool? bk_ = context.Operators.Equal(bj_, "active");
+                    Code<ClaimUseCode> bl_ = C?.UseElement;
+                    ClaimUseCode? bm_ = bl_?.Value;
+                    Code<ClaimUseCode> bn_ = context.Operators.Convert<Code<ClaimUseCode>>(bm_);
+                    bool? bo_ = context.Operators.Equal(bn_, "claim");
+                    bool? bp_ = context.Operators.And(bk_, bo_);
+                    List<Claim.ItemComponent> bq_ = C?.Item;
+                    bool? br_(Claim.ItemComponent I)
+                    {
+                        List<ResourceReference> bv_ = I?.Encounter;
+                        bool? bw_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bv_, E);
+
+                        return bw_;
+                    };
+                    IEnumerable<Claim.ItemComponent> bs_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bq_, br_);
+                    bool? bt_ = context.Operators.Exists<Claim.ItemComponent>(bs_);
+                    bool? bu_ = context.Operators.And(bp_, bt_);
+
+                    return bu_;
+                };
+                IEnumerable<Claim> an_ = context.Operators.Where<Claim>(al_, am_);
+                bool? ao_(Claim @this)
+                {
+                    List<Claim.ItemComponent> bx_ = @this?.Item;
+                    bool? by_ = context.Operators.Not((bool?)(bx_ is null));
+
+                    return by_;
+                };
+                IEnumerable<Claim> ap_ = context.Operators.Where<Claim>(an_, ao_);
+                List<Claim.ItemComponent> aq_(Claim @this)
+                {
+                    List<Claim.ItemComponent> bz_ = @this?.Item;
+
+                    return bz_;
+                };
+                IEnumerable<List<Claim.ItemComponent>> ar_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ap_, aq_);
+                IEnumerable<Claim.ItemComponent> as_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)ar_);
+                bool? at_(Claim.ItemComponent I)
+                {
+                    List<ResourceReference> ca_ = I?.Encounter;
+                    bool? cb_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ca_, E);
+
+                    return cb_;
+                };
+                IEnumerable<Claim.ItemComponent> au_ = context.Operators.Where<Claim.ItemComponent>(as_, at_);
+                bool? av_(Claim.ItemComponent @this)
+                {
+                    List<PositiveInt> cc_ = @this?.ProcedureSequenceElement;
+                    int? cd_(PositiveInt @this)
+                    {
+                        int? cg_ = @this?.Value;
+
+                        return cg_;
+                    };
+                    IEnumerable<int?> ce_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)cc_, cd_);
+                    bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
+
+                    return cf_;
+                };
+                IEnumerable<Claim.ItemComponent> aw_ = context.Operators.Where<Claim.ItemComponent>(au_, av_);
+                IEnumerable<int?> ax_(Claim.ItemComponent @this)
+                {
+                    List<PositiveInt> ch_ = @this?.ProcedureSequenceElement;
+                    int? ci_(PositiveInt @this)
+                    {
+                        int? ck_ = @this?.Value;
+
+                        return ck_;
+                    };
+                    IEnumerable<int?> cj_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ch_, ci_);
+
+                    return cj_;
+                };
+                IEnumerable<IEnumerable<int?>> ay_ = context.Operators.Select<Claim.ItemComponent, IEnumerable<int?>>(aw_, ax_);
+                IEnumerable<int?> az_ = context.Operators.Flatten<int?>(ay_);
+                bool? ba_ = context.Operators.In<int?>(ak_, az_);
+                List<CodeableConcept> bb_ = P?.Type;
+                CqlConcept bc_(CodeableConcept @this)
+                {
+                    CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+
+                    return cl_;
+                };
+                IEnumerable<CqlConcept> bd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
+                CqlCode be_ = this.Primary_procedure(context);
+                bool? bf_ = QICoreCommon_4_0_000.Instance.includesCode(context, bd_, be_);
+                bool? bg_ = context.Operators.And(ba_, bf_);
+
+                return bg_;
+            };
+            IEnumerable<Claim.ProcedureComponent> o_ = context.Operators.Where<Claim.ProcedureComponent>(m_, n_);
+            Claim.ProcedureComponent p_ = context.Operators.SingletonFrom<Claim.ProcedureComponent>(o_);
+
+            return p_;
+        };
+        IEnumerable<Claim.ProcedureComponent> c_ = context.Operators.Select<Encounter, Claim.ProcedureComponent>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<Claim.ProcedureComponent> d_ = context.Operators.Distinct<Claim.ProcedureComponent>(c_);
+        Claim.ProcedureComponent e_ = context.Operators.SingletonFrom<Claim.ProcedureComponent>(d_);
+
+        return e_;
     }
 
 

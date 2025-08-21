@@ -13,17 +13,17 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
-[CqlLibrary("VTE", "8.8.000")]
-public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
+[CqlLibrary("VTE", "8.9.000")]
+public partial class VTE_8_9_000 : ILibrary, ISingleton<VTE_8_9_000>
 {
-    private VTE_8_8_000() {}
+    private VTE_8_9_000() {}
 
-    public static VTE_8_8_000 Instance { get; } = new();
+    public static VTE_8_9_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "VTE";
-    public string Version => "8.8.000";
+    public string Version => "8.9.000";
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
 
     #endregion ILibrary Implementation
@@ -49,9 +49,12 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object a_ = context.ResolveParameter("VTE-8.8.000", "Measurement Period", null);
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2026, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
+        object d_ = context.ResolveParameter("VTE-8.9.000", "Measurement Period", c_);
 
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime>)d_;
     }
 
 
@@ -138,52 +141,6 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
         IEnumerable<Encounter> a_ = this.Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(context);
 
         return a_;
-    }
-
-
-    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
-    public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
-    {
-        CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);
-        CqlDateTime b_ = context.Operators.Start(a_);
-        CqlDate c_ = context.Operators.DateFrom(b_);
-        Period d_ = Encounter?.Period;
-        CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, d_);
-        CqlDateTime f_ = context.Operators.Start(e_);
-        CqlDate g_ = context.Operators.DateFrom(f_);
-        CqlQuantity h_ = context.Operators.Quantity(1m, "days");
-        CqlDate i_ = context.Operators.Add(g_, h_);
-        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, true, true);
-
-        return j_;
-    }
-
-
-    [CqlFunctionDefinition("StartOfFirstICU")]
-    public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
-    {
-        Encounter.LocationComponent a_ = CQMCommon_2_2_000.Instance.firstInpatientIntensiveCareUnit(context, Encounter);
-        Period b_ = a_?.Period;
-        CqlInterval<CqlDateTime> c_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, b_);
-        CqlDateTime d_ = context.Operators.Start(c_);
-
-        return d_;
-    }
-
-
-    [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
-    public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
-    {
-        CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, Encounter);
-        CqlDateTime b_ = context.Operators.Start(a_);
-        CqlDate c_ = context.Operators.DateFrom(b_);
-        CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);
-        CqlDate e_ = context.Operators.DateFrom(d_);
-        CqlQuantity f_ = context.Operators.Quantity(1m, "day");
-        CqlDate g_ = context.Operators.Add(e_, f_);
-        CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, true, true);
-
-        return h_;
     }
 
 
