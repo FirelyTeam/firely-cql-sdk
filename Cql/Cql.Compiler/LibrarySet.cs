@@ -235,6 +235,10 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
         string libraryName,
         string version = "")
     {
+        // NOTE to Developer: At some point we may choose this functionality to become public.
+        // When that happens, consider adding this as an extension on ElmToolkit
+        // consistent with 'InvocationToolkitExtensions.AddAssemblyBinariesFromFhirLibraryAndDependencies'
+
         if (Path.GetExtension(libraryName).Equals(".cql", StringComparison.InvariantCultureIgnoreCase))
             libraryName = Path.GetFileNameWithoutExtension(libraryName);
 
