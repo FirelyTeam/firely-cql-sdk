@@ -14,7 +14,7 @@
     * pom.xml
     * Mvn.Targets.xml
     * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-		
+
 		The latest version number can be found under the releases tab of the CQL to ELM CLI repository
 		see: https://github.com/cqframework/clinical_quality_language/releases
 
@@ -22,7 +22,7 @@
 
 		After that, build the Cql project in Visual Studio, which will download the tooling again into target/dependency.
 		-->
-		<cql.version>3.27.0</cql.version>
+		<cql.version>3.28.0</cql.version>
 	</properties>
 	<repositories>
 		<repository>
