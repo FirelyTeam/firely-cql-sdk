@@ -54,8 +54,8 @@ internal static class PackagerCliServiceCollectionExtensions
         {
             files = files.Concat(
                 [
-                    Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.{p}.json"),
-                    Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{p}.json")
+                    Path.Combine(asmDirName, $"{asmFileNameNoExt}.{p}.appsettings.json"),
+                    Path.Combine(curDirName, $"{asmFileNameNoExt}.{p}.appsettings.json")
                 ]);
         }
         files = files.Distinct();

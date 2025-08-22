@@ -16,7 +16,7 @@ public sealed record GlobalCommand(string? Profile)
             Option<string?>(
                 "--profile",
                 """
-                The name of the profile to use from the configuration file. e.g. {App}.appsettings.{Profile}.json.
+                The name of the profile to use from the configuration file. e.g. {App}.{Profile}.appsettings.json.
                 This can be used to load different profiles, for example a name of a library set.
                 """
             )

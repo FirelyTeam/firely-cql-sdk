@@ -17,7 +17,7 @@
       "CMS832HHAKIFHIR.json",
 
       // Exception: Exception occurred during expression building. Argument types do not match
-      // "CMS871HHHyperFHIR.json"
+      "CMS871HHHyperFHIR.json"
     ]
   }
 }
