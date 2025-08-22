@@ -1688,7 +1688,7 @@ public partial class CMS1218HHRFFHIR_0_0_003 : ILibrary, ISingleton<CMS1218HHRFF
 
 
     [CqlExpressionDefinition("Risk Variable Encounter Procedures")]
-    public IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> Risk_Variable_Encounter_Procedures(CqlContext context)
+    public IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> Risk_Variable_Encounter_Procedures(CqlContext context)
     {
         IEnumerable<Procedure> a_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Encounter> b_ = this.Initial_Population(context);
@@ -1707,7 +1707,7 @@ public partial class CMS1218HHRFFHIR_0_0_003 : ILibrary, ISingleton<CMS1218HHRFF
             return l_;
         };
         IEnumerable<(CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)?> g_ = context.Operators.Where<(CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)?>(e_, f_);
-        (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)? h_((CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)? tuple_ajypvvhpcebtubornilvyiia)
+        (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)? h_((CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)? tuple_ajypvvhpcebtubornilvyiia)
         {
             Id m_ = tuple_ajypvvhpcebtubornilvyiia?.QualifyingEncounter?.IdElement;
             string n_ = m_?.Value;
@@ -1715,14 +1715,14 @@ public partial class CMS1218HHRFFHIR_0_0_003 : ILibrary, ISingleton<CMS1218HHRFF
             string p_ = o_?.Value;
             CodeableConcept q_ = tuple_ajypvvhpcebtubornilvyiia?.Procedure?.Code;
             CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-            (CqlTupleMetadata, IEnumerable<int?> rank)? s_ = HospitalHarm_1_1_000.Instance.procedureRank(context, tuple_ajypvvhpcebtubornilvyiia?.QualifyingEncounter);
+            (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? s_ = HospitalHarm_1_1_000.Instance.procedureRank(context, tuple_ajypvvhpcebtubornilvyiia?.QualifyingEncounter);
             CqlInterval<CqlDateTime> t_ = HospitalHarm_1_1_000.Instance.interval(context, tuple_ajypvvhpcebtubornilvyiia?.Procedure as object);
-            (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)? u_ = (CqlTupleMetadata_DTQgLbjNLPRWWWLHIcfKhKUV, n_, p_, r_, s_, t_);
+            (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)? u_ = (CqlTupleMetadata_BbNCOGSBhcIgYIEjBQEbZhLCN, n_, p_, r_, s_, t_);
 
             return u_;
         };
-        IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> i_ = context.Operators.Select<(CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)?, (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?>(g_, h_);
-        IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, IEnumerable<int?> rank)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?>(i_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> i_ = context.Operators.Select<(CqlTupleMetadata, Procedure Procedure, Encounter QualifyingEncounter)?, (CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?>(g_, h_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedurecode, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedurerank, CqlInterval<CqlDateTime> proceduretime)?>(i_);
 
         return j_;
     }
@@ -4304,6 +4304,10 @@ public partial class CMS1218HHRFFHIR_0_0_003 : ILibrary, ISingleton<CMS1218HHRFF
       [typeof(string), typeof(CqlQuantity)],
       ["encounterId", "firstCreatinine"]);
 
+    private static CqlTupleMetadata CqlTupleMetadata_BbNCOGSBhcIgYIEjBQEbZhLCN = new(
+      [typeof(string), typeof(string), typeof(CqlConcept), typeof((CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?), typeof(CqlInterval<CqlDateTime>)],
+      ["encounterId", "procedureId", "procedurecode", "procedurerank", "proceduretime"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_BfQVgXHgdPbXaCCNaATcWUQIS = new(
       [typeof(string), typeof(CqlQuantity)],
       ["encounterId", "firstOxygen"]);
@@ -4339,10 +4343,6 @@ public partial class CMS1218HHRFFHIR_0_0_003 : ILibrary, ISingleton<CMS1218HHRFF
     private static CqlTupleMetadata CqlTupleMetadata_DRJiPQgfGcEdKcWaigeAUFcdA = new(
       [typeof(string), typeof(CqlQuantity)],
       ["encounterId", "firstSystolic"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DTQgLbjNLPRWWWLHIcfKhKUV = new(
-      [typeof(string), typeof(string), typeof(CqlConcept), typeof((CqlTupleMetadata, IEnumerable<int?> rank)?), typeof(CqlInterval<CqlDateTime>)],
-      ["encounterId", "procedureId", "procedurecode", "procedurerank", "proceduretime"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EBQBKdiRYHXRXIBWeBXadThRE = new(
       [typeof(string), typeof(CqlQuantity)],
