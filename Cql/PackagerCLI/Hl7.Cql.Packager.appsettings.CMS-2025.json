@@ -1,18 +1,14 @@
 ﻿{
   "Elm": {
     "SkipFiles": [
-      // These uses choice types, move into a property on such a choice, and then calls an
-      // overloaded function, so we cannot find out which overload to call.
-      // A solution is to either a) Introduce choice types in our system instead of object,
-      // b) introduce runtime resolution, based on the runtime types of the arguments when one of
-      // the arguments is a choice (=object).
+      // Tuple element value does not have a resultTypeSpecifier
       "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
 
-      // Tuple element value does not have a resultTypeSpecifier
-      "CMS2FHIRPCSDepressionScreenAndFollowUp.json"
+      // Exception: cannot convert from 'Hl7.Fhir.Model.Id' to 'Hl7.Fhir.Model.Code<Hl7.Fhir.Model.Account.AccountStatus>'
+      "NHSNHelpers.json",
 
       // Exception: Cannot convert System.Collections.Generic.List`1[Hl7.Fhir.Model.ResourceReference] to Hl7.Fhir.Model.ResourceReference.
-      // "NHSNGlycemicControlHypoglycemiaInitialPopulation.json"
+      "NHSNGlycemicControlHypoglycemiaInitialPopulation.json"
     ]
   }
 }

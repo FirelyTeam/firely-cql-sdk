@@ -1280,7 +1280,7 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
 
 
     [CqlExpressionDefinition("Documented Reason for No PCI Performed Within 90 Minutes of ED Arrival")]
-    public IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> Documented_Reason_for_No_PCI_Performed_Within_90_Minutes_of_ED_Arrival(CqlContext context)
+    public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> Documented_Reason_for_No_PCI_Performed_Within_90_Minutes_of_ED_Arrival(CqlContext context)
     {
         CqlValueSet a_ = this.Percutaneous_Coronary_Intervention(context);
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
@@ -1300,7 +1300,7 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
             return s_;
         };
         IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
-        (CqlTupleMetadata, string id, FhirDateTime authoredOn)? h_(Procedure PCINotDone)
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? h_(Procedure PCINotDone)
         {
             Id t_ = PCINotDone?.IdElement;
             string u_ = t_?.Value;
@@ -1325,12 +1325,12 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
             IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, x_);
             DataType z_ = context.Operators.SingletonFrom<DataType>(y_);
             FhirDateTime aa_ = context.Operators.Convert<FhirDateTime>(z_);
-            (CqlTupleMetadata, string id, FhirDateTime authoredOn)? ab_ = (CqlTupleMetadata_EOIGQCcgaQBFZACEUUODRVWXI, u_, aa_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? ab_ = (CqlTupleMetadata_DYHTbOXdfZQfUafHTIcSiQAgf, u_, default, aa_);
 
             return ab_;
         };
-        IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> i_ = context.Operators.Select<Procedure, (CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(g_, h_);
-        IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(i_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> i_ = context.Operators.Select<Procedure, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(g_, h_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(i_);
 
         return j_;
     }
@@ -1342,8 +1342,8 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
         IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
         IEnumerable<Encounter> b_(Encounter EDwSTEMI)
         {
-            IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> d_ = this.Documented_Reason_for_No_PCI_Performed_Within_90_Minutes_of_ED_Arrival(context);
-            bool? e_((CqlTupleMetadata, string id, FhirDateTime authoredOn)? NoPCI)
+            IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> d_ = this.Documented_Reason_for_No_PCI_Performed_Within_90_Minutes_of_ED_Arrival(context);
+            bool? e_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? NoPCI)
             {
                 FhirDateTime i_ = NoPCI?.authoredOn;
                 CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
@@ -1353,10 +1353,10 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
 
                 return m_;
             };
-            IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(d_, e_);
-            Encounter g_((CqlTupleMetadata, string id, FhirDateTime authoredOn)? NoPCI) =>
+            IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(d_, e_);
+            Encounter g_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? NoPCI) =>
                 EDwSTEMI;
-            IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?, Encounter>(f_, g_);
+            IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?, Encounter>(f_, g_);
 
             return h_;
         };
@@ -1367,7 +1367,7 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
 
 
     [CqlExpressionDefinition("Documented Reason for Not Administering Fibrinolytic Therapy Within 30 Minutes of ED Arrival")]
-    public IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Within_30_Minutes_of_ED_Arrival(CqlContext context)
+    public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Within_30_Minutes_of_ED_Arrival(CqlContext context)
     {
         CqlValueSet a_ = this.Fibrinolytic_Therapy(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotadministered"));
@@ -1399,7 +1399,7 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
             return u_;
         };
         IEnumerable<MedicationAdministration> g_ = context.Operators.Where<MedicationAdministration>(e_, f_);
-        (CqlTupleMetadata, string id, FhirDateTime authoredOn)? h_(MedicationAdministration FibrinolyticNoMed)
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? h_(MedicationAdministration FibrinolyticNoMed)
         {
             Id x_ = FibrinolyticNoMed?.IdElement;
             string y_ = x_?.Value;
@@ -1424,12 +1424,12 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
             IEnumerable<DataType> ac_ = context.Operators.Select<Extension, DataType>(aa_, ab_);
             DataType ad_ = context.Operators.SingletonFrom<DataType>(ac_);
             FhirDateTime ae_ = context.Operators.Convert<FhirDateTime>(ad_);
-            (CqlTupleMetadata, string id, FhirDateTime authoredOn)? af_ = (CqlTupleMetadata_EOIGQCcgaQBFZACEUUODRVWXI, y_, ae_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? af_ = (CqlTupleMetadata_DYHTbOXdfZQfUafHTIcSiQAgf, y_, default, ae_);
 
             return af_;
         };
-        IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> i_ = context.Operators.Select<MedicationAdministration, (CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(g_, h_);
-        IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(i_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> i_ = context.Operators.Select<MedicationAdministration, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(g_, h_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(i_);
 
         return j_;
     }
@@ -1441,8 +1441,8 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
         IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
         IEnumerable<Encounter> b_(Encounter EDwSTEMI)
         {
-            IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> d_ = this.Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Within_30_Minutes_of_ED_Arrival(context);
-            bool? e_((CqlTupleMetadata, string id, FhirDateTime authoredOn)? NoFibrinolytic)
+            IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> d_ = this.Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Within_30_Minutes_of_ED_Arrival(context);
+            bool? e_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? NoFibrinolytic)
             {
                 FhirDateTime i_ = NoFibrinolytic?.authoredOn;
                 CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
@@ -1452,10 +1452,10 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
 
                 return m_;
             };
-            IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>(d_, e_);
-            Encounter g_((CqlTupleMetadata, string id, FhirDateTime authoredOn)? NoFibrinolytic) =>
+            IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?>(d_, e_);
+            Encounter g_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)? NoFibrinolytic) =>
                 EDwSTEMI;
-            IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?, Encounter>(f_, g_);
+            IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> MedicationStatusReason, FhirDateTime authoredOn)?, Encounter>(f_, g_);
 
             return h_;
         };
@@ -1734,9 +1734,9 @@ public partial class CMS996FHIRAptTxforSTEMI_1_2_001 : ILibrary, ISingleton<CMS9
 
     #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_EOIGQCcgaQBFZACEUUODRVWXI = new(
-      [typeof(string), typeof(FhirDateTime)],
-      ["id", "authoredOn"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DYHTbOXdfZQfUafHTIcSiQAgf = new(
+      [typeof(string), typeof(IEnumerable<CqlConcept>), typeof(FhirDateTime)],
+      ["id", "MedicationStatusReason", "authoredOn"]);
 
     #endregion CqlTupleMetadata Properties
 
