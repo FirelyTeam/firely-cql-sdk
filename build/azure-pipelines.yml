@@ -8,7 +8,7 @@ resources:
       name: FirelyTeam/azure-pipeline-templates
       endpoint: FirelyTeam
       ref: refs/tags/v1
-      
+
 variables:
   - group: CodeSigning
   - group: APIKeys
@@ -31,11 +31,11 @@ stages:
   jobs:
     - job: CheckDocChangesJob
       displayName: 'Check for changes in docs folder'
-      pool: 
+      pool:
         vmImage: ubuntu-latest
       steps:
         - checkout: self
-          fetchDepth: 0 
+          fetchDepth: 0
         - script: |
             echo "##vso[task.setvariable variable=SOURCE_BRANCH]$(Build.SourceBranch)"
             echo "##vso[task.setvariable variable=TARGET_BRANCH]$(System.PullRequest.TargetBranch)"
@@ -64,20 +64,21 @@ stages:
                     break
                 }
                 echo "File $file is in /docs/ folder"
-            }  
+            }
 
-          
+
             if ( $skipBuildStage -eq 'true') {
               Write-Host "Only /docs/ files changed, skipping build."
-            } 
+            }
             else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
-            echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$skipBuildStage" 
+            echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$skipBuildStage"
 
           displayName: 'Check for changes outside docs folder'
-          name: checkForDocChanges            
-- stage: build  
+          name: checkForDocChanges
+
+- stage: build
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
@@ -95,7 +96,8 @@ stages:
         **/*Tests/*Tests.csproj
         **/**/Test.Measures.Demo.csproj
         !**/Ncqa.HT.DeckTests.csproj
-        submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
+        # TODO: Reintroduce integration test back in issue: https://github.com/FirelyTeam/firely-cql-sdk/issues/971
+        # submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
       packageArtifacts: true
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed

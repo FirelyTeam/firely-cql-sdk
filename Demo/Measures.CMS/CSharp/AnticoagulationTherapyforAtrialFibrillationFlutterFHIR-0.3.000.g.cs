@@ -24,7 +24,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 
     public string Name => "AnticoagulationTherapyforAtrialFibrillationFlutterFHIR";
     public string Version => "0.3.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_15_000.Instance];
 
     #endregion ILibrary Implementation
 
@@ -107,7 +107,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = TJCOverall_8_14_000.Instance.Ischemic_Stroke_Encounter(context);
+        IEnumerable<Encounter> a_ = TJCOverall_8_15_000.Instance.Ischemic_Stroke_Encounter(context);
 
         return a_;
     }
@@ -116,7 +116,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     [CqlExpressionDefinition("Encounter with a History of Atrial Ablation")]
     public IEnumerable<Encounter> Encounter_with_a_History_of_Atrial_Ablation(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = TJCOverall_8_14_000.Instance.Ischemic_Stroke_Encounter(context);
+        IEnumerable<Encounter> a_ = TJCOverall_8_15_000.Instance.Ischemic_Stroke_Encounter(context);
         bool? b_(Encounter IschemicStrokeEncounter)
         {
             CqlValueSet l_ = this.Atrial_Ablation(context);
@@ -274,7 +274,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     [CqlExpressionDefinition("Encounter with Prior or Present Diagnosis of Atrial Fibrillation or Flutter")]
     public IEnumerable<Encounter> Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = TJCOverall_8_14_000.Instance.Ischemic_Stroke_Encounter(context);
+        IEnumerable<Encounter> a_ = TJCOverall_8_15_000.Instance.Ischemic_Stroke_Encounter(context);
         IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
         {
             CqlValueSet h_ = this.Atrial_Fibrillation_or_Flutter(context);
@@ -350,7 +350,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
         IEnumerable<Encounter> a_ = this.Denominator(context);
         IEnumerable<Encounter> b_(Encounter Encounter)
         {
-            IEnumerable<object> d_ = TJCOverall_8_14_000.Instance.Intervention_Comfort_Measures(context);
+            IEnumerable<object> d_ = TJCOverall_8_15_000.Instance.Intervention_Comfort_Measures(context);
             bool? e_(object ComfortMeasure)
             {
                 object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");

@@ -9,7 +9,7 @@ include FHIRHelpers version '4.4.000' called FHIRHelpers
 include CQMCommon version '2.2.000' called CQMCommon
 include QICoreCommon version '2.1.000' called QICoreCommon
 include SupplementalDataElements version '3.5.000' called SDE
-include TJCOverall version '8.14.000' called TJC
+include TJCOverall version '8.15.000' called TJC
 
 valueset "Antithrombotic Therapy for Ischemic Stroke": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62'
 valueset "Comfort Measures": 'http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45'

@@ -1,7 +1,7 @@
 /*
 @update: JKR 2024-04-02 ->
-Check display code accuracy against source system
-Ensure all fluent functions are not referencing any deprecated functions.
+Check display code accuracy against source system                                                        
+Ensure all fluent functions are not referencing any deprecated functions.   
 https://oncprojectracking.healthit.gov/support/browse/CQLIT-414
 */
 
@@ -24,7 +24,7 @@ codesystem "ConditionVerificationStatusCodes": 'http://terminology.hl7.org/CodeS
 codesystem "AllergyIntoleranceClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical'
 codesystem "AllergyIntoleranceVerificationStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification'
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
-codesystem "USCoreObservationCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category'
+codesystem "USCoreObservationCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category'  
 codesystem "ConditionCategory": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "USCoreConditionCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/condition-category'
 
@@ -399,7 +399,7 @@ define fluent function abatementInterval(condition Condition):
 /*
 @description: Returns an interval representing the normalized prevalence period of a given Condition.
 @comment: Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from
-onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting
+onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting 
 interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.
 @deprecated: This function is deprecated. Use the `prevalenceInterval()` fluent function instead
 */
@@ -418,7 +418,7 @@ else
 /*
 @description: Returns an interval representing the normalized prevalence period of a given Condition.
 @comment: Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from
-onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting
+onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting 
 interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.
 */
 define fluent function prevalenceInterval(condition Condition):
