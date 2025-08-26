@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<LibrarySet>CMS</LibrarySet>
+		<LibrarySet>ecqm-content-qicore-2024</LibrarySet>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
