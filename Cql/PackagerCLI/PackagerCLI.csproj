@@ -28,6 +28,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="bin\Release\net8.0\build.log" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="$(OutputPath)\build.log" Link="build.log" />
 	</ItemGroup>
 
@@ -45,6 +49,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Hl7.Cql.Packager.Demo.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Hl7.Cql.Packager.QI-Core-2025.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Hl7.Cql.Packager.CMS-2025.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Hl7.Cql.Packager.QI-Core-2024.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Hl7.Cql.Packager.appsettings.debug.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>

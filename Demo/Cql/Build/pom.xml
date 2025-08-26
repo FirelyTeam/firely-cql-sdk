@@ -14,7 +14,7 @@
     * pom.xml
     * Mvn.Targets.xml
     * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-		
+
 		The latest version number can be found under the releases tab of the CQL to ELM CLI repository
 		see: https://github.com/cqframework/clinical_quality_language/releases
 
