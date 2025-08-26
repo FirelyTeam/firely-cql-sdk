@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 
@@ -17,36 +18,39 @@ internal static class GlobalMethods
 
     private static IHostBuilder CreateHostBuilder(
         IConsole console,
+        string profile,
         Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null) =>
         Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration(
-                (context, config) =>
-                    config.AddPackagerCliAppSettings(additionalConfiguration))
-            .ConfigureLogging(
-                (context, logging) =>
-                    logging.AddPackagerCLiLogging(context.Configuration))
-            .ConfigureServices(
-                (context, services) =>
-                    services
-                        .AddPackagerCliOptions()
-                        .AddSingleton<OptionsConsoleDumper>()
-                        .AddSingleton<PdbOptionsValidator>()
-                        .AddSingleton(console))
+            .ConfigureAppConfiguration((context, config) => config.AddPackagerCliAppSettings(profile, additionalConfiguration))
+            .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
+            .ConfigureServices((context, services) =>
+                                   services
+                                       .AddPackagerCliOptions()
+                                       .AddSingleton<OptionsConsoleDumper>()
+                                       .AddSingleton<PdbOptionsValidator>()
+                                       .AddSingleton(console))
             .UseConsoleLifetime();
 
     internal static int RunProgram<TProgram>(
         IConsole console,
         LoggingCommand loggingCommand,
+        GlobalCommand globalCommand,
         Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null,
         Action<HostBuilderContext, IServiceCollection>? configureAdditionalServices = null)
         where TProgram : class, IProgram =>
-        CreateHostBuilder(console, () =>
-            {
-                var loggingConfig = loggingCommand.GetConfigMapping();
-                if (additionalConfiguration?.Invoke() is {} additionalConfig)
-                    loggingConfig = loggingConfig.Concat(additionalConfig);
-                return loggingConfig;
-            })
-          .ConfigureServices(configureAdditionalServices ?? delegate { })
-          .RunProgram<TProgram>();
+        CreateHostBuilder(
+                console,
+                globalCommand.Profile,
+                () =>
+                {
+                    IEnumerable<(object? value, string[] sectionPath)> config = [];
+                    config = config.Concat(loggingCommand.GetConfigMapping());
+
+                    if (additionalConfiguration?.Invoke() is { } additionalConfig)
+                        config = config.Concat(additionalConfig);
+
+                    return config;
+                })
+            .ConfigureServices(configureAdditionalServices ?? delegate { })
+            .RunProgram<TProgram>();
 }

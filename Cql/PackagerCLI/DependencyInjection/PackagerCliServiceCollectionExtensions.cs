@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections;
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
@@ -17,6 +18,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCliServiceCollectionExtensions
 {
+    public const string? EnvironmentVariablePrefix = "CQLPACKAGE";
+
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services) =>
         services.AddAndBindOptions<CqlOptions>()
@@ -26,6 +29,7 @@ internal static class PackagerCliServiceCollectionExtensions
 
     public static IConfigurationBuilder AddPackagerCliAppSettings(
         this IConfigurationBuilder config,
+        string profile,
         Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null)
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
@@ -36,15 +40,24 @@ internal static class PackagerCliServiceCollectionExtensions
         var asmDirName = asmFileInfo.DirectoryName!;
         var asmFileNameNoExt = asmFileInfo.Name[..^4]; // Trim ".dll"
 
-        config.AddEnvironmentVariables("CQLPACKAGE");
+        config.AddEnvironmentVariables(EnvironmentVariablePrefix);
 
         IEnumerable<string> files =
         [
             Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.json"),
             Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.json"),
             Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.{buildConfiguration}.json"),
-            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{buildConfiguration}.json")
+            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{buildConfiguration}.json"),
         ];
+
+        if (profile.Trim() is { Length: > 0 } p)
+        {
+            files = files.Concat(
+                [
+                    Path.Combine(asmDirName, $"{asmFileNameNoExt}.{p}.appsettings.json"),
+                    Path.Combine(curDirName, $"{asmFileNameNoExt}.{p}.appsettings.json")
+                ]);
+        }
         files = files.Distinct();
         foreach (var file in files)
             config.AddJsonFile(file, optional: true, reloadOnChange: false);
@@ -54,7 +67,7 @@ internal static class PackagerCliServiceCollectionExtensions
             ?.Invoke()
             .Where(ad => ad.value is not null)
             .Select(KeyValuePair!)
-            .ToArray() is { } additionalData)
+            .ToArray() is { Length: >= 0 } additionalData)
             config.Sources.Add(new MemoryConfigurationSource { InitialData = additionalData });
 
         return config;

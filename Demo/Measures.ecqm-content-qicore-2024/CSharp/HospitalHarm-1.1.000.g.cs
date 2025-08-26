@@ -68,7 +68,7 @@ public partial class HospitalHarm_1_1_000 : ILibrary, ISingleton<HospitalHarm_1_
 
 
     [CqlFunctionDefinition("procedureRank")]
-    public (CqlTupleMetadata, IEnumerable<int?> rank)? procedureRank(CqlContext context, Encounter theEncounter)
+    public (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? procedureRank(CqlContext context, Encounter theEncounter)
     {
         bool? a_(Extension E)
         {
@@ -86,7 +86,7 @@ public partial class HospitalHarm_1_1_000 : ILibrary, ISingleton<HospitalHarm_1_
         Extension[] d_ = [
             c_,
         ];
-        (CqlTupleMetadata, IEnumerable<int?> rank)? e_(Extension encext)
+        (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? e_(Extension encext)
         {
             List<Extension> m_ = encext?.Extension;
             bool? n_(Extension E)
@@ -108,13 +108,13 @@ public partial class HospitalHarm_1_1_000 : ILibrary, ISingleton<HospitalHarm_1_
             };
             IEnumerable<int?> q_ = context.Operators.Select<Extension, int?>(o_, p_);
             IEnumerable<int?> r_ = context.Operators.Distinct<int?>(q_);
-            (CqlTupleMetadata, IEnumerable<int?> rank)? s_ = (CqlTupleMetadata_GghjRCKVRPXfYIGcONEjAGGed, r_);
+            (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? s_ = (CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD, default, default, r_, default);
 
             return s_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<int?> rank)?> f_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<int?> rank)?>((IEnumerable<Extension>)d_, e_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<int?> rank)?> g_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<int?> rank)?>(f_);
-        (CqlTupleMetadata, IEnumerable<int?> rank)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<int?> rank)?>(g_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> f_ = context.Operators.Select<Extension, (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>((IEnumerable<Extension>)d_, e_);
+        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> g_ = context.Operators.Distinct<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(f_);
+        (CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?>(g_);
 
         return h_;
     }
@@ -235,9 +235,9 @@ public partial class HospitalHarm_1_1_000 : ILibrary, ISingleton<HospitalHarm_1_
 
     #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_GghjRCKVRPXfYIGcONEjAGGed = new(
-      [typeof(IEnumerable<int?>)],
-      ["rank"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD = new(
+      [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
+      ["encounterId", "condition", "rank", "POA"]);
 
     #endregion CqlTupleMetadata Properties
 
