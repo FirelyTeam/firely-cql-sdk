@@ -13,17 +13,17 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
-[CqlLibrary("AlaraCTIQRFHIR", "0.4.000")]
-public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHIR_0_4_000>
+[CqlLibrary("CMS1074AlaraCTIQRFHIR", "0.4.003")]
+public partial class CMS1074AlaraCTIQRFHIR_0_4_003 : ILibrary, ISingleton<CMS1074AlaraCTIQRFHIR_0_4_003>
 {
-    private AlaraCTIQRFHIR_0_4_000() {}
+    private CMS1074AlaraCTIQRFHIR_0_4_003() {}
 
-    public static AlaraCTIQRFHIR_0_4_000 Instance { get; } = new();
+    public static CMS1074AlaraCTIQRFHIR_0_4_003 Instance { get; } = new();
 
     #region ILibrary Implementation
 
-    public string Name => "AlaraCTIQRFHIR";
-    public string Version => "0.4.000";
+    public string Name => "CMS1074AlaraCTIQRFHIR";
+    public string Version => "0.4.003";
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
 
     #endregion ILibrary Implementation
@@ -64,10 +64,10 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime b_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2026, 12, 31, 23, 59, 59, 999, 0.0m);
         CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
-        object d_ = context.ResolveParameter("AlaraCTIQRFHIR-0.4.000", "Measurement Period", c_);
+        object d_ = context.ResolveParameter("CMS1074AlaraCTIQRFHIR-0.4.003", "Measurement Period", c_);
 
         return (CqlInterval<CqlDateTime>)d_;
     }

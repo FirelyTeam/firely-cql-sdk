@@ -13,17 +13,17 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
-[CqlLibrary("SevereObstetricComplicationsFHIR", "0.1.000")]
-public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingleton<SevereObstetricComplicationsFHIR_0_1_000>
+[CqlLibrary("CMS1028FHIRPCSevereOBComps", "0.1.002")]
+public partial class CMS1028FHIRPCSevereOBComps_0_1_002 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_0_1_002>
 {
-    private SevereObstetricComplicationsFHIR_0_1_000() {}
+    private CMS1028FHIRPCSevereOBComps_0_1_002() {}
 
-    public static SevereObstetricComplicationsFHIR_0_1_000 Instance { get; } = new();
+    public static CMS1028FHIRPCSevereOBComps_0_1_002 Instance { get; } = new();
 
     #region ILibrary Implementation
 
-    public string Name => "SevereObstetricComplicationsFHIR";
-    public string Version => "0.1.000";
+    public string Name => "CMS1028FHIRPCSevereOBComps";
+    public string Version => "0.1.002";
     public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
@@ -97,10 +97,6 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     [CqlValueSetDefinition("Conversion of Cardiac Rhythm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", valueSetVersion: null)]
     public CqlValueSet Conversion_of_Cardiac_Rhythm(CqlContext _) => _Conversion_of_Cardiac_Rhythm;
     private static readonly CqlValueSet _Conversion_of_Cardiac_Rhythm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", null);
-
-    [CqlValueSetDefinition("COVID 19 Confirmed", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", valueSetVersion: null)]
-    public CqlValueSet COVID_19_Confirmed(CqlContext _) => _COVID_19_Confirmed;
-    private static readonly CqlValueSet _COVID_19_Confirmed = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", null);
 
     [CqlValueSetDefinition("Delivery Procedures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", valueSetVersion: null)]
     public CqlValueSet Delivery_Procedures(CqlContext _) => _Delivery_Procedures;
@@ -262,14 +258,6 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     public CqlValueSet Renal_Disease(CqlContext _) => _Renal_Disease;
     private static readonly CqlValueSet _Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", null);
 
-    [CqlValueSetDefinition("Respiratory Conditions Related to COVID 19", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", valueSetVersion: null)]
-    public CqlValueSet Respiratory_Conditions_Related_to_COVID_19(CqlContext _) => _Respiratory_Conditions_Related_to_COVID_19;
-    private static readonly CqlValueSet _Respiratory_Conditions_Related_to_COVID_19 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", null);
-
-    [CqlValueSetDefinition("Respiratory Support Procedures Related to COVID 19", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", valueSetVersion: null)]
-    public CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19(CqlContext _) => _Respiratory_Support_Procedures_Related_to_COVID_19;
-    private static readonly CqlValueSet _Respiratory_Support_Procedures_Related_to_COVID_19 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", null);
-
     [CqlValueSetDefinition("Sepsis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", valueSetVersion: null)]
     public CqlValueSet Sepsis(CqlContext _) => _Sepsis;
     private static readonly CqlValueSet _Sepsis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", null);
@@ -360,7 +348,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
         CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime b_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
         CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
-        object d_ = context.ResolveParameter("SevereObstetricComplicationsFHIR-0.1.000", "Measurement Period", c_);
+        object d_ = context.ResolveParameter("CMS1028FHIRPCSevereOBComps-0.1.002", "Measurement Period", c_);
 
         return (CqlInterval<CqlDateTime>)d_;
     }
@@ -1238,95 +1226,6 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("Numerator")]
-    public IEnumerable<Encounter> Numerator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
-
-        return a_;
-    }
-
-
-    [CqlExpressionDefinition("Delivery Encounters with COVID and Respiratory Condition or Procedure")]
-    public IEnumerable<Encounter> Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
-        bool? b_(Encounter TwentyWeeksPlusEncounter)
-        {
-            IEnumerable<Condition> d_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, TwentyWeeksPlusEncounter);
-            bool? e_(Condition EncounterDiagnosis)
-            {
-                CodeableConcept s_ = EncounterDiagnosis?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.COVID_19_Confirmed(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-
-                return v_;
-            };
-            IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
-            bool? g_ = context.Operators.Exists<Condition>(f_);
-            bool? i_(Condition EncounterDiagnosis)
-            {
-                CodeableConcept w_ = EncounterDiagnosis?.Code;
-                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                CqlValueSet y_ = this.Respiratory_Conditions_Related_to_COVID_19(context);
-                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-
-                return z_;
-            };
-            IEnumerable<Condition> j_ = context.Operators.Where<Condition>(d_, i_);
-            bool? k_ = context.Operators.Exists<Condition>(j_);
-            CqlValueSet l_ = this.Respiratory_Support_Procedures_Related_to_COVID_19(context);
-            IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-            bool? n_(Procedure COVIDRespiratoryProcedure)
-            {
-                Code<EventStatus> aa_ = COVIDRespiratoryProcedure?.StatusElement;
-                EventStatus? ab_ = aa_?.Value;
-                string ac_ = context.Operators.Convert<string>(ab_);
-                bool? ad_ = context.Operators.Equal(ac_, "completed");
-                DataType ae_ = COVIDRespiratoryProcedure?.Performed;
-                object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_1_000.Instance.toInterval(context, af_);
-                CqlDateTime ah_ = context.Operators.Start(ag_);
-                CqlInterval<CqlDateTime> ai_ = PCMaternal_5_19_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
-                bool? aj_ = context.Operators.In<CqlDateTime>(ah_, ai_, "day");
-                bool? ak_ = context.Operators.And(ad_, aj_);
-
-                return ak_;
-            };
-            IEnumerable<Procedure> o_ = context.Operators.Where<Procedure>(m_, n_);
-            bool? p_ = context.Operators.Exists<Procedure>(o_);
-            bool? q_ = context.Operators.Or(k_, p_);
-            bool? r_ = context.Operators.And(g_, q_);
-
-            return r_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-
-        return c_;
-    }
-
-
-    [CqlExpressionDefinition("Denominator Exclusion")]
-    public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(context);
-
-        return a_;
-    }
-
-
-    [CqlExpressionDefinition("Stratification Encounter")]
-    public IEnumerable<Encounter> Stratification_Encounter(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Numerator(context);
-        IEnumerable<Encounter> b_ = this.Denominator_Exclusion(context);
-        IEnumerable<Encounter> c_ = context.Operators.Except<Encounter>(a_, b_);
-
-        return c_;
-    }
-
-
     [CqlExpressionDefinition("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions")]
     public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context)
     {
@@ -1338,14 +1237,12 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    [CqlExpressionDefinition("Stratum 1")]
-    public IEnumerable<Encounter> Stratum_1(CqlContext context)
+    [CqlExpressionDefinition("Numerator")]
+    public IEnumerable<Encounter> Numerator(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Stratification_Encounter(context);
-        IEnumerable<Encounter> b_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(context);
-        IEnumerable<Encounter> c_ = context.Operators.Intersect<Encounter>(a_, b_);
+        IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
 
-        return c_;
+        return a_;
     }
 
 
@@ -2070,7 +1967,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity af_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                 CqlDateTime ah_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, false);
+                CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
                 bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
                 Code<ObservationStatus> ak_ = Hematocrit?.StatusElement;
                 ObservationStatus? al_ = ak_?.Value;
@@ -2114,7 +2011,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity bd_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                 CqlDateTime bf_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, false);
+                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
                 bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
                 Code<ObservationStatus> bi_ = Hematocrit?.StatusElement;
                 ObservationStatus? bj_ = bi_?.Value;
@@ -2179,7 +2076,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity af_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                 CqlDateTime ah_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, false);
+                CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
                 bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
                 Code<ObservationStatus> ak_ = WBC?.StatusElement;
                 ObservationStatus? al_ = ak_?.Value;
@@ -2223,7 +2120,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity bd_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                 CqlDateTime bf_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, false);
+                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
                 bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
                 Code<ObservationStatus> bi_ = WBC?.StatusElement;
                 ObservationStatus? bj_ = bi_?.Value;
@@ -2287,7 +2184,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity ad_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
                 CqlDateTime af_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, true, false);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, true, true);
                 bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, default);
                 Code<ObservationStatus> ai_ = HeartRate?.StatusElement;
                 ObservationStatus? aj_ = ai_?.Value;
@@ -2325,7 +2222,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity aw_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
                 CqlDateTime ay_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, false);
+                CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, true);
                 bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, default);
                 Code<ObservationStatus> bb_ = HeartRate?.StatusElement;
                 ObservationStatus? bc_ = bb_?.Value;
@@ -2384,7 +2281,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity ah_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
                 CqlDateTime aj_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ai_, aj_, true, false);
+                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ai_, aj_, true, true);
                 bool? al_ = context.Operators.In<CqlDateTime>(ae_, ak_, default);
                 Code<ObservationStatus> am_ = BP?.StatusElement;
                 ObservationStatus? an_ = am_?.Value;
@@ -2461,7 +2358,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
                 CqlQuantity bt_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime bu_ = context.Operators.Subtract(bs_, bt_);
                 CqlDateTime bv_ = PCMaternal_5_19_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bu_, bv_, true, false);
+                CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bu_, bv_, true, true);
                 bool? bx_ = context.Operators.In<CqlDateTime>(bq_, bw_, default);
                 Code<ObservationStatus> by_ = BP?.StatusElement;
                 ObservationStatus? bz_ = by_?.Value;

@@ -13,17 +13,17 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
-[CqlLibrary("TJCOverall", "8.14.000")]
-public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_000>
+[CqlLibrary("TJCOverall", "8.15.000")]
+public partial class TJCOverall_8_15_000 : ILibrary, ISingleton<TJCOverall_8_15_000>
 {
-    private TJCOverall_8_14_000() {}
+    private TJCOverall_8_15_000() {}
 
-    public static TJCOverall_8_14_000 Instance { get; } = new();
+    public static TJCOverall_8_15_000 Instance { get; } = new();
 
     #region ILibrary Implementation
 
     public string Name => "TJCOverall";
-    public string Version => "8.14.000";
+    public string Version => "8.15.000";
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
@@ -69,9 +69,12 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        object a_ = context.ResolveParameter("TJCOverall-8.14.000", "Measurement Period", null);
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2026, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
+        object d_ = context.ResolveParameter("TJCOverall-8.15.000", "Measurement Period", c_);
 
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime>)d_;
     }
 
 
@@ -89,8 +92,8 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     }
 
 
-    [CqlExpressionDefinition("Non Elective Inpatient Encounter with Age")]
-    public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_with_Age(CqlContext context)
+    [CqlExpressionDefinition("Non Elective Inpatient Encounter With Age")]
+    public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context)
     {
         CqlValueSet a_ = this.Nonelective_Inpatient_Encounter(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -123,7 +126,7 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter_with_Age(context);
+        IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter_With_Age(context);
         bool? b_(Encounter NonElectiveEncounterWithAge)
         {
             Condition d_ = CQMCommon_2_2_000.Instance.principalDiagnosis(context, NonElectiveEncounterWithAge);
@@ -140,8 +143,8 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     }
 
 
-    [CqlExpressionDefinition("Ischemic Stroke Encounters with Discharge Disposition")]
-    public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context)
+    [CqlExpressionDefinition("Ischemic Stroke Encounters With Discharge Disposition")]
+    public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
         bool? b_(Encounter IschemicStrokeEncounter)
@@ -240,8 +243,8 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     }
 
 
-    [CqlExpressionDefinition("Comfort Measures during Hospitalization")]
-    public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context)
+    [CqlExpressionDefinition("Comfort Measures During Hospitalization")]
+    public IEnumerable<Encounter> Comfort_Measures_During_Hospitalization(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
         IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
@@ -273,8 +276,8 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     }
 
 
-    [CqlExpressionDefinition("Encounter with Comfort Measures during Hospitalization")]
-    public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context)
+    [CqlExpressionDefinition("Encounter With Comfort Measures During Hospitalization")]
+    public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
         IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
