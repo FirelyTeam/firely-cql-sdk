@@ -22,7 +22,7 @@ public class LibrarySetExpressionBuilderTests
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
         LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.QICore2024.ElmDir, "CumulativeMedicationDuration");
 
         new ElmToolkit()
             .AddElmLibraries(librarySet)
