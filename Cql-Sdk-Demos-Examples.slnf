@@ -22,8 +22,10 @@
       "Demo\\CLI\\CLI.csproj",
       "Demo\\Cql\\Cql.csproj",
       "Demo\\Measures.Authoring\\Measures.Authoring.csproj",
-      "Demo\\Measures.ecqm-content-qicore-2024\\Measures.ecqm-content-qicore-2024.csproj",
       "Demo\\Measures.Demo\\Measures.Demo.csproj",
+      "Demo\\Measures.ecqm-content-cms-2025\\Measures.ecqm-content-cms-2025.csproj",
+      "Demo\\Measures.ecqm-content-qicore-2024\\Measures.ecqm-content-qicore-2024.csproj",
+      "Demo\\Measures.ecqm-content-qicore-2025\\Measures.ecqm-content-qicore-2025.csproj",
       "Demo\\Test.Measures.Demo\\Test.Measures.Demo.csproj",
       "Examples\\CqlSdkExamplesPreview\\CqlSdkExamplesPreview.csproj",
       "Examples\\CqlSdkExamples\\CqlSdkExamples.csproj"
