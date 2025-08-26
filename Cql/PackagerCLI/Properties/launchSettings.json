@@ -97,22 +97,11 @@
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (clinical_quality_language/Examples CQL->FHIR)": {
-      "commandName": "Project",
-      "commandLineArgs": "cql --cql \"C:/Dev/cqframework/clinical_quality_language/Examples/\" --fhir \"C:/Dev/cqframework/clinical_quality_language/Examples/out/fhir\" --dll \"C:/Dev/cqframework/clinical_quality_language/Examples/out/dll\" --cs \"C:/Dev/cqframework/clinical_quality_language/Examples/out/cs\" "
-    },
     "PackageCLI (CoreTests CQL->C#)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/Cql/CoreTests/Input/ELM/HL7\" --cs \"$(CqlSolutionDir)/Cql/CoreTests/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "CoreTests"
-      }
-    },
-    "PackageCLI (ecqm-content-qicore-2024)": {
-      "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-qicore-2024/CSharp\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "QI-Core-2024"
       }
     },
     "PackageCLI (Measures.Authoring)": {
@@ -129,18 +118,25 @@
         "CQLPACKAGE_PROFILE": "NCQA.DQIC"
       }
     },
+    "PackageCLI (ecqm-content-qicore-2024)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-qicore-2024/CSharp\" ",
+      "environmentVariables": {
+        "CQLPACKAGE_PROFILE": "ecqm-content-qicore-2024"
+      }
+    },
     "PackageCLI (ecqm-content-qicore-2025)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-qicore-2025/CSharp\" ",
       "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "QI-Core-2025"
+        "CQLPACKAGE_PROFILE": "ecqm-content-qicore-2025"
       }
     },
     "PackageCLI (ecqm-content-cms-2025)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-cms-2025/CSharp\" ",
       "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "CMS-2025"
+        "CQLPACKAGE_PROFILE": "ecqm-content-cms-2025"
       }
     }
   }

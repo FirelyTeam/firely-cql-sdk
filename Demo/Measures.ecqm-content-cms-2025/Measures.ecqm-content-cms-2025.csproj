@@ -15,7 +15,7 @@
 
 	<PropertyGroup>
 		<LibrarySet>ecqm-content-cms-2025</LibrarySet>
-		<Profile>CMS-2025</Profile>
+		<Profile>ecqm-content-cms-2025</Profile>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>

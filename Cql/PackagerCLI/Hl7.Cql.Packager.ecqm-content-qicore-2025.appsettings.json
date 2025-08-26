@@ -10,7 +10,7 @@
 
       // Tuple element value does not have a resultTypeSpecifier
       "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json",
-      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
+      "CMS2FHIRPCSDepressionScreenAndFollowUp.json", 
 
       // Sort is broken in ELM XSD
       "CMS986FHIRMalnutritionScore.json",
