@@ -45,7 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{B00E560D-A
 		Demo\cql-demo.props = Demo\cql-demo.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.CMS", "Demo\Measures.CMS\Measures.CMS.csproj", "{B1161915-FFB0-412A-9C65-2F4E046FA9B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.ecqm-content-qicore-2024", "Demo\Measures.CMS\Measures.ecqm-content-qicore-2024.csproj", "{B1161915-FFB0-412A-9C65-2F4E046FA9B8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
 	EndProjectSection

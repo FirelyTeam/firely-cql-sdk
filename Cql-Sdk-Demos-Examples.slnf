@@ -22,8 +22,8 @@
       "Demo\\CLI\\CLI.csproj",
       "Demo\\Cql\\Cql.csproj",
       "Demo\\Measures.Authoring\\Measures.Authoring.csproj",
-      "Demo\\Measures.CMS\\Measures.CMS.csproj",
       "Demo\\Measures.Demo\\Measures.Demo.csproj",
+      "Demo\\Measures.Demo\\Measures.ecqm-content-qicore-2024.csproj",
       "Demo\\Test.Measures.Demo\\Test.Measures.Demo.csproj",
       "Examples\\CqlSdkExamplesPreview\\CqlSdkExamplesPreview.csproj",
       "Examples\\CqlSdkExamples\\CqlSdkExamples.csproj"
