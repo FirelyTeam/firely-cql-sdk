@@ -17,7 +17,7 @@
 
 		After that, build the Cql project in Visual Studio, which will download the tooling again into target/dependency.
 		-->
-		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+		<CqlToElmCliVersion>3.28.0</CqlToElmCliVersion>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
 		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
