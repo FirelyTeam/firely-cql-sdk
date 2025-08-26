@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.1.0",
+         "translatorVersion" : "3.28.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,12 +17,14 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1"
+            "version" : "4.0.1",
+            "annotation" : [ ]
          } ]
       },
       "includes" : {
@@ -29,7 +32,8 @@
             "locator" : "5:1-5:54",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.1"
+            "version" : "4.0.1",
+            "annotation" : [ ]
          } ]
       },
       "codeSystems" : {
@@ -38,7 +42,8 @@
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMED",
             "id" : "http://snomed.info/sct",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          } ]
       },
       "codes" : {
@@ -49,10 +54,12 @@
             "id" : "44054006",
             "display" : "Diabetes Mellitus",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "10:43-10:50",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "SNOMED"
+               "name" : "SNOMED",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "11:1-11:76",
@@ -61,10 +68,12 @@
             "id" : "38341003",
             "display" : "Hypertension",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "11:46-11:53",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "SNOMED"
+               "name" : "SNOMED",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "12:1-12:81",
@@ -73,10 +82,12 @@
             "id" : "763158003",
             "display" : "Medication Example",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "12:45-12:52",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "SNOMED"
+               "name" : "SNOMED",
+               "annotation" : [ ]
             }
          } ]
       },
@@ -86,37 +97,44 @@
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Diabetes",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "code" : [ {
                "locator" : "17:5-17:23",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-               "name" : "Diabetes Mellitus"
+               "name" : "Diabetes Mellitus",
+               "annotation" : [ ]
             } ]
          }, {
             "locator" : "21:1-24:1",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Hypertension",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "code" : [ {
                "locator" : "23:5-23:26",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-               "name" : "Hypertension Example"
+               "name" : "Hypertension Example",
+               "annotation" : [ ]
             } ]
          }, {
             "locator" : "27:1-30:1",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Medication",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "code" : [ {
                "locator" : "29:5-29:24",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-               "name" : "Medication Example"
+               "name" : "Medication Example",
+               "annotation" : [ ]
             } ]
          } ]
       },
       "contexts" : {
          "def" : [ {
             "locator" : "32:1-32:15",
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
@@ -124,13 +142,21 @@
             "locator" : "32:1-32:15",
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "locator" : "32:1-32:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          } ]
