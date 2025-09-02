@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.27.0",
+         "translatorVersion" : "3.28.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
