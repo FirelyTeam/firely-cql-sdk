@@ -21,6 +21,8 @@
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+		<!-- <ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory> -->
+		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 	</PropertyGroup>
 
 	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
