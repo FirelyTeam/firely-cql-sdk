@@ -1,0 +1,149 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Iso8601;
+using System.Reflection;
+using Hl7.Cql.Operators;
+using Hl7.Fhir.Model;
+using Range = Hl7.Fhir.Model.Range;
+using Task = Hl7.Fhir.Model.Task;
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[CqlLibrary("VTE", "8.9.000")]
+public partial class VTE_8_9_000 : ILibrary, ISingleton<VTE_8_9_000>
+{
+    private VTE_8_9_000() {}
+
+    public static VTE_8_9_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "VTE";
+    public string Version => "8.9.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region ValueSets
+
+    [CqlValueSetDefinition("Obstetrical or Pregnancy Related Conditions", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", valueSetVersion: null)]
+    public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions(CqlContext _) => _Obstetrical_or_Pregnancy_Related_Conditions;
+    private static readonly CqlValueSet _Obstetrical_or_Pregnancy_Related_Conditions = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", null);
+
+    [CqlValueSetDefinition("Obstetrics VTE", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", valueSetVersion: null)]
+    public CqlValueSet Obstetrics_VTE(CqlContext _) => _Obstetrics_VTE;
+    private static readonly CqlValueSet _Obstetrics_VTE = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", null);
+
+    [CqlValueSetDefinition("Venous Thromboembolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", valueSetVersion: null)]
+    public CqlValueSet Venous_Thromboembolism(CqlContext _) => _Venous_Thromboembolism;
+    private static readonly CqlValueSet _Venous_Thromboembolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", null);
+
+    #endregion ValueSets
+
+    #region Parameters
+
+    [CqlParameterDefinition("Measurement Period")]
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2026, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
+        object d_ = context.ResolveParameter("VTE-8.9.000", "Measurement Period", c_);
+
+        return (CqlInterval<CqlDateTime>)d_;
+    }
+
+
+    #endregion Parameters
+
+    #region Functions and Expressions
+
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+
+        return b_;
+    }
+
+
+    [CqlExpressionDefinition("Admission without VTE or Obstetrical Conditions")]
+    public IEnumerable<Encounter> Admission_without_VTE_or_Obstetrical_Conditions(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = CQMCommon_2_2_000.Instance.Inpatient_Encounter(context);
+        bool? b_(Encounter InpatientEncounter)
+        {
+            IEnumerable<Condition> d_ = CQMCommon_2_2_000.Instance.encounterDiagnosis(context, InpatientEncounter);
+            bool? e_(Condition EncDx)
+            {
+                CodeableConcept i_ = EncDx?.Code;
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
+                CqlValueSet k_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
+                bool? l_ = context.Operators.ConceptInValueSet(j_, k_);
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
+                CqlValueSet o_ = this.Venous_Thromboembolism(context);
+                bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
+                bool? q_ = context.Operators.Or(l_, p_);
+                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
+                CqlValueSet t_ = this.Obstetrics_VTE(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                bool? v_ = context.Operators.Or(q_, u_);
+
+                return v_;
+            };
+            IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
+            bool? g_ = context.Operators.Exists<Condition>(f_);
+            bool? h_ = context.Operators.Not(g_);
+
+            return h_;
+        };
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+
+        return c_;
+    }
+
+
+    [CqlExpressionDefinition("Encounter with Age Range and without VTE Diagnosis or Obstetrical Conditions")]
+    public IEnumerable<Encounter> Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = CQMCommon_2_2_000.Instance.Inpatient_Encounter(context);
+        bool? b_(Encounter InpatientEncounter)
+        {
+            Patient f_ = this.Patient(context);
+            Date g_ = f_?.BirthDateElement;
+            string h_ = g_?.Value;
+            CqlDate i_ = context.Operators.ConvertStringToDate(h_);
+            Period j_ = InpatientEncounter?.Period;
+            CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
+            CqlDateTime l_ = context.Operators.Start(k_);
+            CqlDate m_ = context.Operators.DateFrom(l_);
+            int? n_ = context.Operators.CalculateAgeAt(i_, m_, "year");
+            bool? o_ = context.Operators.GreaterOrEqual(n_, 18);
+
+            return o_;
+        };
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        IEnumerable<Encounter> d_ = this.Admission_without_VTE_or_Obstetrical_Conditions(context);
+        IEnumerable<Encounter> e_ = context.Operators.Intersect<Encounter>(c_, d_);
+
+        return e_;
+    }
+
+
+    [CqlExpressionDefinition("Initial Population")]
+    public IEnumerable<Encounter> Initial_Population(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = this.Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(context);
+
+        return a_;
+    }
+
+
+    #endregion Functions and Expressions
+
+}
