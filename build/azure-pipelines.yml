@@ -96,8 +96,7 @@ stages:
         **/*Tests/*Tests.csproj
         **/**/Test.Measures.Demo.csproj
         !**/Ncqa.HT.DeckTests.csproj
-        # TODO: Reintroduce integration test back in issue: https://github.com/FirelyTeam/firely-cql-sdk/issues/971
-        # submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
+        submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
       packageArtifacts: true
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
