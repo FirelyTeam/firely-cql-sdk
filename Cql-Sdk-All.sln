@@ -340,6 +340,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
-		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
+		FileExplorer = build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 	EndGlobalSection
 EndGlobal

@@ -23,6 +23,7 @@
 		<!-- Copy dll's to IntegrationRunner -->
 		<!-- <DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory> -->
 		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
+		<CqlToElmEnabled>true</CqlToElmEnabled>
 		<!-- <ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory> -->
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
