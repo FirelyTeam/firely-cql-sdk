@@ -244,7 +244,8 @@ partial class ExpressionBuilderContext
                     type = changeType(type);
 
                 return (type, el.name);
-            });
+            })
+            .ToList();
 
         return _tupleBuilderCache.CreateOrGetTupleTypeFor(tupleFields);
     }
