@@ -1918,7 +1918,7 @@ internal partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases));
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases).ToList());
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);
