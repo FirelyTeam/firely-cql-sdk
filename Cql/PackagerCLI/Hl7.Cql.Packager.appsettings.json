@@ -2,7 +2,7 @@
   "Logging": {
     "ConsoleLogLevel": "Information", // --console-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
     "FileLogLevel": "Information", // --file-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
-    "Append": false // --log-append
+    "Append": false, // --log-append
   },
   "Cql": {
     "Models": [ "ElmR1", "Fhir401" ],
@@ -29,6 +29,7 @@
   },
   "Packaging": {
     "JsonPretty": false, // --json-pretty
+    "ExitOnError": false,
     "CanonicalRootUrl": "https://fire.ly/fhir/", // --canonical-root-url
     "OverrideDate": null, // --override-utc-date-time eg. "2023-10-01T00:00:00Z",
     "FixedLibraryCanonicals": {
