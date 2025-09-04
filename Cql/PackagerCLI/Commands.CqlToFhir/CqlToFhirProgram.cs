@@ -67,7 +67,7 @@ public class CqlToFhirProgram
 
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt);
 
-            if (packOpt.ExitOnError)
+            if (!packOpt.ExitOnError)
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
 
             cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
