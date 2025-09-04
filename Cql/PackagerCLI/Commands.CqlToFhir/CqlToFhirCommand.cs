@@ -24,6 +24,7 @@ public record CqlToFhirCommand
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     bool? JsonPretty,
+    bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
@@ -33,7 +34,7 @@ public record CqlToFhirCommand
         "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources. " +
         "Take note of the disclaimer above." +
         Program.Disclaimer;
-    
+
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
@@ -124,6 +125,7 @@ public record CqlToFhirCommand
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (JsonPretty, [ElmOptions.ConfigSection, nameof(ElmOptions.JsonPretty)]),
+        (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
     ];
 }

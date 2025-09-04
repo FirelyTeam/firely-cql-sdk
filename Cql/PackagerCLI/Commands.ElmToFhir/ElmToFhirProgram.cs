@@ -56,9 +56,12 @@ internal sealed class ElmToFhirProgram
                 return exitCode;
             }
 
-            ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
-                                    .SetIgnoreEnumerationExceptions()
-                                    .AddElmFilesFromDirectory(
+            ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt);
+
+            if (!packOpt.ExitOnError)
+                elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
+
+            elmToolkit = elmToolkit.AddElmFilesFromDirectory(
                                         opt.ElmInDir,
                                         filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
             if (elmToolkit.ArtifactsById.Count == 0)
