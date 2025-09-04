@@ -219,7 +219,7 @@ partial class ExpressionBuilderContext
 
     private Type TupleTypeFor(Elm.Tuple tuple, Func<Type, Type>? changeType = null)
     {
-        var elements = tuple.element; 
+        var elements = tuple.element;
 
         if (elements?.Length == 0)
             return typeof(object);
