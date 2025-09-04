@@ -93,7 +93,7 @@ public class CqlToFhirProgram
             {
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
-                    writeIndented: elmOpt.JsonPretty,
+                    writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
