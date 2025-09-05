@@ -154,7 +154,7 @@ public partial class CMS1264FHIRECATREHQR_0_5_001 : ILibrary, ISingleton<CMS1264
                 "finished",
                 "triaged",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(i_, o_);
 
             return p_;
@@ -501,7 +501,7 @@ public partial class CMS1264FHIRECATREHQR_0_5_001 : ILibrary, ISingleton<CMS1264
                 "active",
                 "completed",
             ];
-            bool? y_ = context.Operators.In<string>(w_, x_ as IEnumerable<string>);
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(s_, y_);
 
             return z_;

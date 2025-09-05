@@ -281,7 +281,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
                     "amended",
                     "corrected",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 bool? ah_ = context.Operators.And(aa_, ag_);
 
                 return ah_;
@@ -395,7 +395,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
                     "amended",
                     "corrected",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, ab_ as IEnumerable<string>);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
                 bool? ad_ = context.Operators.And(w_, ac_);
 
                 return ad_;
@@ -471,7 +471,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
                     "amended",
                     "corrected",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, ag_ as IEnumerable<string>);
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ab_, ah_);
 
                 return ai_;

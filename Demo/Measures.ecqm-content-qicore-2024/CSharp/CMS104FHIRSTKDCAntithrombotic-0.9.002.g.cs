@@ -186,7 +186,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_0_9_002 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
             Code<MedicationRequest.MedicationRequestIntent> n_ = Antithrombotic?.IntentElement;
             MedicationRequest.MedicationRequestIntent? o_ = n_?.Value;
@@ -198,7 +198,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_0_9_002 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
 
             return s_;
@@ -298,7 +298,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_0_9_002 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
             Code<MedicationRequest.MedicationRequestIntent> n_ = PharmacologicalContraindications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? o_ = n_?.Value;
@@ -310,7 +310,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_0_9_002 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
 
             return s_;

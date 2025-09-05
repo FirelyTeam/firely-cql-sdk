@@ -322,7 +322,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
                 "corrected",
                 "preliminary",
             ];
-            bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
+            bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.And(aj_, ap_);
 
             return aq_;

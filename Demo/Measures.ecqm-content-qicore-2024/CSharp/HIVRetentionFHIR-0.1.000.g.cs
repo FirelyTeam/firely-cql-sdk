@@ -219,7 +219,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
                 return aw_;
             };
             IEnumerable<CqlCode> ad_ = context.Operators.Select<object, CqlCode>(ab_, ac_);
-            IEnumerable<CqlCode> ae_ = context.Operators.Union<CqlCode>(x_ as IEnumerable<CqlCode>, ad_);
+            IEnumerable<CqlCode> ae_ = context.Operators.Union<CqlCode>((IEnumerable<CqlCode>)x_, ad_);
             bool? af_(Extension @this)
             {
                 string ax_ = @this?.Url;

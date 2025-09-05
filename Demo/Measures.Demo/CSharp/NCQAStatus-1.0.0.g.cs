@@ -139,7 +139,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             string[] e_ = [
                 "completed",
             ];
-            bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
+            bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
 
             return f_;
         };
@@ -177,7 +177,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
                 "completed",
                 "in-progress",
             ];
-            bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
+            bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
 
             return f_;
         };

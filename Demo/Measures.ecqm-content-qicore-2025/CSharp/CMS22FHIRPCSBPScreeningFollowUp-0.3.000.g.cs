@@ -314,7 +314,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
+                bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
                 return aw_;
@@ -367,7 +367,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? br_ = context.Operators.In<string>(bp_, bq_ as IEnumerable<string>);
+                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
 
                 return bs_;
@@ -436,7 +436,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
+                bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
                 return aw_;
@@ -489,7 +489,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? br_ = context.Operators.In<string>(bp_, bq_ as IEnumerable<string>);
+                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
 
                 return bs_;
@@ -725,7 +725,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ch_ = context.Operators.In<string>(cf_, cg_ as IEnumerable<string>);
+                bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
 
                 return ci_;
@@ -786,7 +786,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? dp_ = context.Operators.In<string>(dn_, do_ as IEnumerable<string>);
+                bool? dp_ = context.Operators.In<string>(dn_, (IEnumerable<string>)do_);
                 bool? dq_ = context.Operators.And(dk_, dp_);
 
                 return dq_;
@@ -847,7 +847,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ex_ = context.Operators.In<string>(ev_, ew_ as IEnumerable<string>);
+                bool? ex_ = context.Operators.In<string>(ev_, (IEnumerable<string>)ew_);
                 bool? ey_ = context.Operators.And(es_, ex_);
 
                 return ey_;
@@ -908,7 +908,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? gf_ = context.Operators.In<string>(gd_, ge_ as IEnumerable<string>);
+                bool? gf_ = context.Operators.In<string>(gd_, (IEnumerable<string>)ge_);
                 bool? gg_ = context.Operators.And(ga_, gf_);
 
                 return gg_;
@@ -1232,7 +1232,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? cd_ = context.Operators.In<string>(cb_, cc_ as IEnumerable<string>);
+                bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
                 bool? ce_ = context.Operators.And(by_, cd_);
 
                 return ce_;
@@ -1285,7 +1285,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? cz_ = context.Operators.In<string>(cx_, cy_ as IEnumerable<string>);
+                bool? cz_ = context.Operators.In<string>(cx_, (IEnumerable<string>)cy_);
                 bool? da_ = context.Operators.And(cu_, cz_);
 
                 return da_;
@@ -1339,7 +1339,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? dv_ = context.Operators.In<string>(dt_, du_ as IEnumerable<string>);
+                bool? dv_ = context.Operators.In<string>(dt_, (IEnumerable<string>)du_);
                 bool? dw_ = context.Operators.And(dq_, dv_);
 
                 return dw_;
@@ -1390,7 +1390,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? er_ = context.Operators.In<string>(ep_, eq_ as IEnumerable<string>);
+                bool? er_ = context.Operators.In<string>(ep_, (IEnumerable<string>)eq_);
                 bool? es_ = context.Operators.And(em_, er_);
 
                 return es_;
@@ -1596,7 +1596,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? by_ = context.Operators.In<string>(bw_, bx_ as IEnumerable<string>);
+                bool? by_ = context.Operators.In<string>(bw_, (IEnumerable<string>)bx_);
                 bool? bz_ = context.Operators.And(bt_, by_);
 
                 return bz_;
@@ -1647,7 +1647,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? cu_ = context.Operators.In<string>(cs_, ct_ as IEnumerable<string>);
+                bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
                 bool? cv_ = context.Operators.And(cp_, cu_);
 
                 return cv_;
@@ -1698,7 +1698,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? dq_ = context.Operators.In<string>(do_, dp_ as IEnumerable<string>);
+                bool? dq_ = context.Operators.In<string>(do_, (IEnumerable<string>)dp_);
                 bool? dr_ = context.Operators.And(dl_, dq_);
 
                 return dr_;
@@ -1749,7 +1749,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_0_3_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? em_ = context.Operators.In<string>(ek_, el_ as IEnumerable<string>);
+                bool? em_ = context.Operators.In<string>(ek_, (IEnumerable<string>)el_);
                 bool? en_ = context.Operators.And(eh_, em_);
 
                 return en_;

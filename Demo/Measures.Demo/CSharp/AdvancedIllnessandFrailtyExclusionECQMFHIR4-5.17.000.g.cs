@@ -449,7 +449,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 "on-hold",
                 "completed",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             Code<RequestIntent> ak_ = FrailtyDeviceOrder?.IntentElement;
             string al_ = FHIRHelpers_4_0_001.Instance.ToString(context, ak_);
             bool? am_ = context.Operators.Equal(al_, "order");
@@ -474,7 +474,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 "amended",
                 "corrected",
             ];
-            bool? aw_ = context.Operators.In<string>(au_, av_ as IEnumerable<string>);
+            bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
             DataType ax_ = FrailtyDeviceApplied?.Effective;
             CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ax_);
             CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
@@ -529,7 +529,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 "amended",
                 "corrected",
             ];
-            bool? bq_ = context.Operators.In<string>(bo_, bp_ as IEnumerable<string>);
+            bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
             DataType br_ = FrailtySymptom?.Effective;
             CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, br_);
             CqlInterval<CqlDateTime> bt_ = this.Measurement_Period(context);

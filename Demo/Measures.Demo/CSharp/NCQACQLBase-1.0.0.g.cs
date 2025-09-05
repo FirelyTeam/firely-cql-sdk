@@ -350,7 +350,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         baseInterval,
                     ];
 
-                    return t_ as IEnumerable<CqlInterval<CqlDate>>;
+                    return (IEnumerable<CqlInterval<CqlDate>>)t_;
                 }
                 else
                 {
@@ -435,7 +435,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         bk_,
                     ];
 
-                    return bl_ as IEnumerable<CqlInterval<CqlDate>>;
+                    return (IEnumerable<CqlInterval<CqlDate>>)bl_;
                 }
             };
             (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? j_ = (CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK, h_(), i_());
@@ -491,7 +491,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         baseInterval,
                     ];
 
-                    return t_ as IEnumerable<CqlInterval<CqlDateTime>>;
+                    return (IEnumerable<CqlInterval<CqlDateTime>>)t_;
                 }
                 else
                 {
@@ -576,7 +576,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         bk_,
                     ];
 
-                    return bl_ as IEnumerable<CqlInterval<CqlDateTime>>;
+                    return (IEnumerable<CqlInterval<CqlDateTime>>)bl_;
                 }
             };
             (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? j_ = (CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg, h_(), i_());
@@ -635,7 +635,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         p_,
                         0,
                     ];
-                    int? r_ = context.Operators.Max<int?>(q_ as IEnumerable<int?>);
+                    int? r_ = context.Operators.Max<int?>((IEnumerable<int?>)q_);
 
                     return r_;
                 };
@@ -671,7 +671,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         af_,
                         0,
                     ];
-                    int? ah_ = context.Operators.Max<int?>(ag_ as IEnumerable<int?>);
+                    int? ah_ = context.Operators.Max<int?>((IEnumerable<int?>)ag_);
                     (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? ai_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, ah_);
 
                     return ai_;
@@ -716,7 +716,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         bk_,
                         0,
                     ];
-                    int? bm_ = context.Operators.Max<int?>(bl_ as IEnumerable<int?>);
+                    int? bm_ = context.Operators.Max<int?>((IEnumerable<int?>)bl_);
                     (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? bn_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, bm_);
 
                     return bn_;
@@ -743,7 +743,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         bs_,
                         0,
                     ];
-                    int? bu_ = context.Operators.Max<int?>(bt_ as IEnumerable<int?>);
+                    int? bu_ = context.Operators.Max<int?>((IEnumerable<int?>)bt_);
                     (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? bv_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, bu_);
 
                     return bv_;
@@ -766,7 +766,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                     be_,
                     0,
                 ];
-                int? bg_ = context.Operators.Max<int?>(bf_ as IEnumerable<int?>);
+                int? bg_ = context.Operators.Max<int?>((IEnumerable<int?>)bf_);
 
                 return bg_;
             }
@@ -1146,7 +1146,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         r_,
                         0,
                     ];
-                    int? t_ = context.Operators.Max<int?>(s_ as IEnumerable<int?>);
+                    int? t_ = context.Operators.Max<int?>((IEnumerable<int?>)s_);
 
                     return t_;
                 };
@@ -1183,7 +1183,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         aj_,
                         0,
                     ];
-                    int? al_ = context.Operators.Max<int?>(ak_ as IEnumerable<int?>);
+                    int? al_ = context.Operators.Max<int?>((IEnumerable<int?>)ak_);
                     (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? am_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, al_);
 
                     return am_;
@@ -1229,7 +1229,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         bs_,
                         0,
                     ];
-                    int? bu_ = context.Operators.Max<int?>(bt_ as IEnumerable<int?>);
+                    int? bu_ = context.Operators.Max<int?>((IEnumerable<int?>)bt_);
                     (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? bv_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, bu_);
 
                     return bv_;
@@ -1258,7 +1258,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         cc_,
                         0,
                     ];
-                    int? ce_ = context.Operators.Max<int?>(cd_ as IEnumerable<int?>);
+                    int? ce_ = context.Operators.Max<int?>((IEnumerable<int?>)cd_);
                     (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? cf_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, ce_);
 
                     return cf_;
@@ -1282,7 +1282,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                     bk_,
                     0,
                 ];
-                int? bm_ = context.Operators.Max<int?>(bl_ as IEnumerable<int?>);
+                int? bm_ = context.Operators.Max<int?>((IEnumerable<int?>)bl_);
 
                 return bm_;
             }

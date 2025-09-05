@@ -195,7 +195,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_001 : ILibrary, ISingleto
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, bl_ as IEnumerable<string>);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 object bn_()
                 {
                     bool bu_()
@@ -444,7 +444,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_001 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? q_ = context.Operators.In<string>(o_, p_ as IEnumerable<string>);
+                bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
                 bool? r_ = context.Operators.And(l_, q_);
                 Code<MedicationRequest.MedicationRequestIntent> s_ = DischargeAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? t_ = s_?.Value;
@@ -456,7 +456,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_001 : ILibrary, ISingleto
                     "filler-order",
                     "instance-order",
                 ];
-                bool? w_ = context.Operators.In<string>(u_, v_ as IEnumerable<string>);
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
                 bool? x_ = context.Operators.And(r_, w_);
                 FhirDateTime y_ = DischargeAnticoagulant?.AuthoredOnElement;
                 CqlDateTime z_ = context.Operators.Convert<CqlDateTime>(y_);
@@ -521,7 +521,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_001 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? x_ = context.Operators.In<string>(v_, w_ as IEnumerable<string>);
+            bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
             bool? y_ = context.Operators.And(s_, x_);
 
             return y_;

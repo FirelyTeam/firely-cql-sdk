@@ -297,7 +297,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 "completed",
                 "in-progress",
             ];
-            bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
+            bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
 
             return p_;
         };

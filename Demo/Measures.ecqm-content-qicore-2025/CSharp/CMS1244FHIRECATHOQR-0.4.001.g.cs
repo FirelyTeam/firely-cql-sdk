@@ -171,7 +171,7 @@ public partial class CMS1244FHIRECATHOQR_0_4_001 : ILibrary, ISingleton<CMS1244F
                 "finished",
                 "triaged",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(i_, o_);
 
             return p_;
@@ -545,7 +545,7 @@ public partial class CMS1244FHIRECATHOQR_0_4_001 : ILibrary, ISingleton<CMS1244F
                 "active",
                 "completed",
             ];
-            bool? j_ = context.Operators.In<string>(h_, i_ as IEnumerable<string>);
+            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
 
             return j_;
         };
@@ -752,7 +752,7 @@ public partial class CMS1244FHIRECATHOQR_0_4_001 : ILibrary, ISingleton<CMS1244F
                 "amended",
                 "corrected",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(p_, t_);
 
             return u_;
@@ -879,7 +879,7 @@ public partial class CMS1244FHIRECATHOQR_0_4_001 : ILibrary, ISingleton<CMS1244F
                 "active",
                 "completed",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
 
             return n_;
         };

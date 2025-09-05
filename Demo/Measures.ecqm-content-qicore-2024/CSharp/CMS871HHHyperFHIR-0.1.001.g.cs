@@ -341,7 +341,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
                     "amended",
                     "corrected",
                 ];
-                bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+                bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                 bool? w_ = context.Operators.And(p_, v_);
                 ObservationStatus? y_ = q_?.Value;
                 Code<ObservationStatus> z_ = context.Operators.Convert<Code<ObservationStatus>>(y_);
@@ -419,7 +419,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
             b_,
             e_,
         ];
-        CqlDateTime g_ = context.Operators.Min<CqlDateTime>(f_ as IEnumerable<CqlDateTime>);
+        CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
         return h_;
@@ -498,7 +498,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayExpand)
         {
             int? j_ = context.Operators.End(DayExpand);
@@ -559,7 +559,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+                    bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
                     ObservationStatus? al_ = ae_?.Value;
                     Code<ObservationStatus> am_ = context.Operators.Convert<Code<ObservationStatus>>(al_);
                     bool? an_ = context.Operators.Equal(am_, "cancelled");
@@ -643,7 +643,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? bx_ = context.Operators.In<string>(bv_, bw_ as IEnumerable<string>);
+                    bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
                     ObservationStatus? bz_ = bs_?.Value;
                     Code<ObservationStatus> ca_ = context.Operators.Convert<Code<ObservationStatus>>(bz_);
                     bool? cb_ = context.Operators.Equal(ca_, "cancelled");
@@ -727,7 +727,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? dl_ = context.Operators.In<string>(dj_, dk_ as IEnumerable<string>);
+                    bool? dl_ = context.Operators.In<string>(dj_, (IEnumerable<string>)dk_);
                     ObservationStatus? dn_ = dg_?.Value;
                     Code<ObservationStatus> do_ = context.Operators.Convert<Code<ObservationStatus>>(dn_);
                     bool? dp_ = context.Operators.Equal(do_, "cancelled");
@@ -891,7 +891,7 @@ public partial class CMS871HHHyperFHIR_0_1_001 : ILibrary, ISingleton<CMS871HHHy
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             object x_()
             {
