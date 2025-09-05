@@ -4,9 +4,9 @@
       // Union expects two arguments of the same list or interval type.
       // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
       // "CMS72FHIRSTKAntithromboticDay2.json", // FIXED!
-      // "CMS190VTEProphylaxisICUFHIR.json", // temporarily enabled for testing
-      "CMS108FHIRVTEProphylaxis.json",
-      "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json",
+      // "CMS190VTEProphylaxisICUFHIR.json", // FIXED!
+      // "CMS108FHIRVTEProphylaxis.json", // testing
+      // "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json", // testing
 
       // Tuple element value does not have a resultTypeSpecifier
       "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
