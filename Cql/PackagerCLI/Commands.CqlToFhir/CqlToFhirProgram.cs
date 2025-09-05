@@ -65,9 +65,12 @@ public class CqlToFhirProgram
                 return exitCode;
             }
 
-            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
-                                    .SetIgnoreEnumerationExceptions()
-                                    .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt);
+
+            if (!packOpt.ExitOnError)
+                cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
+
+            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
@@ -90,7 +93,7 @@ public class CqlToFhirProgram
             {
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
-                    writeIndented: elmOpt.JsonPretty,
+                    writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
