@@ -338,46 +338,14 @@ partial class ExpressionBuilderContext
             if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
-                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType)
-                {
-                    // Debug: log detailed type information
-                    _logger.LogDebug("Union comparing list element types: Left={LeftType} ({LeftNamespace}), Right={RightType} ({RightNamespace})", 
-                        leftListElemType, leftListElemType.Namespace, rightListElemType, rightListElemType.Namespace);
-                    
-                    if (IsTupleType(leftListElemType) && IsTupleType(rightListElemType))
-                    {
-                        var leftProps = leftListElemType.GetProperties();
-                        var rightProps = rightListElemType.GetProperties();
-                        _logger.LogDebug("Left tuple has {LeftCount} properties, Right tuple has {RightCount} properties", 
-                            leftProps.Length, rightProps.Length);
-                        
-                        for (int i = 0; i < Math.Min(leftProps.Length, rightProps.Length); i++)
-                        {
-                            _logger.LogDebug("Property {Index}: Left='{LeftName}' ({LeftType}), Right='{RightName}' ({RightType})", 
-                                i, leftProps[i].Name, leftProps[i].PropertyType, rightProps[i].Name, rightProps[i].PropertyType);
-                        }
-                    }
-                    
-                    if (AreTypesCompatibleForUnion(leftListElemType, rightListElemType))
-                    {
-                        _logger.LogDebug("Types are compatible for union");
-                        return [left, right];
-                    }
-                    else
-                    {
-                        _logger.LogDebug("Types are NOT compatible for union");
-                    }
-                }
+                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
+                    && AreTypesCompatibleForUnion(leftListElemType, rightListElemType))
+                    return [left, right];
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
-                    && right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    // Debug: log the types being compared
-                    _logger.LogDebug("Union comparing interval point types: Left={LeftType}, Right={RightType}", leftPointType, rightPointType);
-                    
-                    if (AreTypesCompatibleForUnion(leftPointType, rightPointType))
-                        return [left, right];
-                }
+                    && right.Type.IsCqlInterval(out var rightPointType)
+                    && AreTypesCompatibleForUnion(leftPointType, rightPointType))
+                    return [left, right];
             }
 
             throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
