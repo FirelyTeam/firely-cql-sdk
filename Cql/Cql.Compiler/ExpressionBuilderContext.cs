@@ -481,19 +481,27 @@ partial class ExpressionBuilderContext
         var @new = Expression.New(tupleType);
         if (tuple.element?.Length > 0)
         {
-            var elementBindings =
-                tuple.element!
-                     .SelectToArray(element =>
-                     {
-                         var value = TranslateArg(element.value!);
-                         var propInfo = GetProperty(tupleType, IdentifierNormalizer.Normalize(element.name!), _typeResolver)
-                                        ?? throw this.NewExpressionBuildingException(
-                                            $"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-                         var binding = Binding(value, propInfo);
-                         return binding;
-                     });
-            var init = Expression.MemberInit(@new, elementBindings);
-            return init;
+            // Filter out elements that don't have resultTypeSpecifier to match what TupleTypeFor does
+            var validElements = tuple.element!
+                .Where(e => e.value.resultTypeSpecifier != null)
+                .ToArray();
+                
+            if (validElements.Length > 0)
+            {
+                var elementBindings =
+                    validElements
+                         .SelectToArray(element =>
+                         {
+                             var value = TranslateArg(element.value!);
+                             var propInfo = GetProperty(tupleType, IdentifierNormalizer.Normalize(element.name!), _typeResolver)
+                                            ?? throw this.NewExpressionBuildingException(
+                                                $"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                             var binding = Binding(value, propInfo);
+                             return binding;
+                         });
+                var init = Expression.MemberInit(@new, elementBindings);
+                return init;
+            }
         }
 
         return @new;
