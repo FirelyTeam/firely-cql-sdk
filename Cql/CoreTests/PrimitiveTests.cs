@@ -31,8 +31,8 @@ namespace CoreTests
         public void CqlDate_Subtract_Months_From_Year()
         {
             Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
-            var result = baseDate.Subtract(new CqlQuantity(25m, UCUMUnits.Month));
-            Assert.AreEqual(2012, result.Value.Year);
+            var result = baseDate.Subtract(new CqlQuantity(25m, "month"));
+            Assert.AreEqual(2011, result.Value.Year);
             Assert.AreEqual(DateTimePrecision.Year, result.Precision);
         }
 
@@ -54,7 +54,7 @@ namespace CoreTests
             var plus365days = baseDate.Add(new CqlQuantity(365, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus365days.Value.Precision);
             Assert.IsNull(plus365days.Value.Month);
-            Assert.AreEqual("1961", plus365days.ToString());
+            Assert.AreEqual("1960", plus365days.ToString());
 
             var plus366days = baseDate.Add(new CqlQuantity(366, "day"));
             Assert.AreEqual(DateTimePrecision.Year, plus366days.Value.Precision);
@@ -69,7 +69,7 @@ namespace CoreTests
             var plus365DaysInSeconds = baseDate.Add(new CqlQuantity(365 * 24 * 60 * 60, "seconds"));
             Assert.AreEqual(DateTimePrecision.Year, plus365DaysInSeconds.Value.Precision);
             Assert.IsNull(plus365DaysInSeconds.Value.Month);
-            Assert.AreEqual("1961", plus365DaysInSeconds.ToString());
+            Assert.AreEqual("1960", plus365DaysInSeconds.ToString());
         }
 
         [TestMethod]
@@ -92,6 +92,11 @@ namespace CoreTests
             Assert.IsNull(plus2pt5Months.Value.Hour);
             Assert.AreEqual("2022-03-01", plus2pt5Months.ToString());
 
+            var plus1UcumMonth = baseDate.Add(new CqlQuantity(1m, "mo"));
+            Assert.AreEqual(DateTimePrecision.Day, plus1UcumMonth.Value.Precision);
+            Assert.IsNull(plus1UcumMonth.Value.Hour);
+            Assert.AreEqual("2022-01-31", plus1UcumMonth.ToString());
+
         }
 
         [TestMethod]
@@ -113,6 +118,28 @@ namespace CoreTests
             Assert.AreEqual(DateTimePrecision.Day, minus2pt5Months.Value.Precision);
             Assert.IsNull(minus2pt5Months.Value.Hour);
             Assert.AreEqual("2022-01-01", minus2pt5Months.ToString());
+
+            var minus1UcumMonth = baseDate.Subtract(new CqlQuantity(1m, "mo"));
+            Assert.AreEqual(DateTimePrecision.Day, minus1UcumMonth.Value.Precision);
+            Assert.IsNull(minus1UcumMonth.Value.Hour);
+            Assert.AreEqual("2022-01-29", minus1UcumMonth.ToString());
+
+        }
+
+        [TestMethod]
+        public void CqlDateTime_Subtract_Year()
+        {
+            Assert.IsTrue(CqlDateTime.TryParse("2025-03-01", out var baseDate));
+
+            var minus1Year = baseDate.Subtract(new CqlQuantity(1m, "year"));
+            Assert.AreEqual(DateTimePrecision.Day, minus1Year.Value.Precision);
+            Assert.IsNull(minus1Year.Value.Hour);
+            Assert.AreEqual("2024-03-01", minus1Year.ToString());
+
+            var minus1UcumYear = baseDate.Subtract(new CqlQuantity(1m, "a"));
+            Assert.AreEqual(DateTimePrecision.Day, minus1UcumYear.Value.Precision);
+            Assert.IsNull(minus1UcumYear.Value.Hour);
+            Assert.AreEqual("2024-02-29", minus1UcumYear.ToString());
 
         }
 
@@ -1075,7 +1102,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 0, 0, 6, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity(3, "secondd");
+            var quantity = new CqlQuantity(3, "second");
             List<CqlDateTime> expected =
             [
                 new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
@@ -1216,11 +1243,11 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity(2, "years");
+            var perQuantity = new CqlQuantity(2, "year");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand(interval, perQuantity);
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2985,11 +3012,11 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
-            var quantity = new CqlQuantity(2, "years");
+            var perQuantity = new CqlQuantity(2, "year");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand(interval, perQuantity);
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }

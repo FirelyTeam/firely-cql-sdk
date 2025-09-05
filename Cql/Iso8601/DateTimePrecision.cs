@@ -11,31 +11,32 @@ namespace Hl7.Cql.Iso8601
 {
     public static class DateTimePrecisionExtensions
     {
-        public static DateTimePrecision? ToDateTimePrecision(this string? ucumUnit)
+        public static DateTimePrecision? ToDateTimePrecision(this string? unit)
         {
-            if (ucumUnit == null)
+            if (unit == null)
                 return null;
-            else switch (ucumUnit[0])
+            else switch (unit)
                 {
-                    case 'a': // year
+                    case "year":
+                    case "years":
                         return DateTimePrecision.Year;
-                    case 'm': // month
-                        switch (ucumUnit[1])
-                        {
-                            case 'o': // mo = month
-                                return DateTimePrecision.Month;
-                            case 'i': // min = minute
-                                return DateTimePrecision.Minute;
-                            case 's':
-                                return DateTimePrecision.Millisecond;
-                            default: break;
-                        }
-                        break;
-                    case 'd':
+                    case "month":
+                    case "months":
+                        return DateTimePrecision.Month;
+                    case "minute":
+                    case "minutes":
+                        return DateTimePrecision.Minute;
+                    case "millisecond":
+                    case "milliseconds":
+                        return DateTimePrecision.Millisecond;
+                    case "day":
+                    case "days":
                         return DateTimePrecision.Day;
-                    case 'h':
+                    case "hour":
+                    case "hours":
                         return DateTimePrecision.Hour;
-                    case 's':
+                    case "second":
+                    case "seconds":
                         return DateTimePrecision.Second;
                     default:
                         break;
