@@ -284,7 +284,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_0_3_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             DataType o_ = BMI?.Effective;

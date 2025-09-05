@@ -200,7 +200,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
 
             return m_;
@@ -482,7 +482,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "entered-in-error",
                 "unknown",
             ];
-            bool? ce_ = context.Operators.In<string>(cc_, cd_ as IEnumerable<string>);
+            bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
             bool? cf_ = context.Operators.Not(ce_);
             bool? cg_ = context.Operators.And(by_, cf_);
 
@@ -520,7 +520,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "amended",
                 "corrected",
             ];
-            bool? db_ = context.Operators.In<string>(cz_, da_ as IEnumerable<string>);
+            bool? db_ = context.Operators.In<string>(cz_, (IEnumerable<string>)da_);
             bool? dc_ = context.Operators.And(cw_, db_);
 
             return dc_;
@@ -549,7 +549,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "active",
                 "completed",
             ];
-            bool? dr_ = context.Operators.In<string>(dp_, dq_ as IEnumerable<string>);
+            bool? dr_ = context.Operators.In<string>(dp_, (IEnumerable<string>)dq_);
             bool? ds_ = context.Operators.And(dl_, dr_);
             Code<RequestIntent> dt_ = HospiceOrder?.IntentElement;
             RequestIntent? du_ = dt_?.Value;
@@ -562,7 +562,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "filler-order",
                 "instance-order",
             ];
-            bool? dy_ = context.Operators.In<string>(dw_, dx_ as IEnumerable<string>);
+            bool? dy_ = context.Operators.In<string>(dw_, (IEnumerable<string>)dx_);
             bool? dz_ = context.Operators.And(ds_, dy_);
             FhirBoolean ea_ = HospiceOrder?.DoNotPerformElement;
             bool? eb_ = ea_?.Value;
@@ -661,7 +661,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "entered-in-error",
                 "unknown",
             ];
-            bool? es_ = context.Operators.In<string>(eq_, er_ as IEnumerable<string>);
+            bool? es_ = context.Operators.In<string>(eq_, (IEnumerable<string>)er_);
             bool? et_ = context.Operators.Not(es_);
             bool? eu_ = context.Operators.And(en_, et_);
 
@@ -723,7 +723,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "amended",
                 "corrected",
             ];
-            bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
+            bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.And(ak_, ap_);
 
             return aq_;
@@ -863,7 +863,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "entered-in-error",
                 "unknown",
             ];
-            bool? cc_ = context.Operators.In<string>(ca_, cb_ as IEnumerable<string>);
+            bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
             bool? cd_ = context.Operators.Not(cc_);
             bool? ce_ = context.Operators.And(bx_, cd_);
 
@@ -971,7 +971,7 @@ public partial class CMS159FHIRDepressionRemissionatTwelveMonths_0_3_000 : ILibr
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(q_, v_);
 
             return w_;

@@ -385,7 +385,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 "corrected",
                 "appended",
             ];
-            bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
+            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
             bool? t_ = context.Operators.And(o_, s_);
 
             return t_;
@@ -609,7 +609,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 "on-hold",
                 "completed",
             ];
-            bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
             bool? ah_ = context.Operators.And(ac_, ag_);
             Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
             string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
@@ -912,7 +912,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 "active",
                 "completed",
             ];
-            bool? cc_ = context.Operators.In<string>(ca_, cb_ as IEnumerable<string>);
+            bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
             bool? cd_ = context.Operators.And(by_, cc_);
             Code<MedicationRequest.MedicationRequestIntent> ce_ = StatinOrdered?.IntentElement;
             string cf_ = FHIRHelpers_4_0_001.Instance.ToString(context, ce_);
@@ -1097,7 +1097,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 "active",
                 "completed",
             ];
-            bool? cg_ = context.Operators.In<string>(ce_, cf_ as IEnumerable<string>);
+            bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
             bool? ch_ = context.Operators.And(cc_, cg_);
 
             return ch_;

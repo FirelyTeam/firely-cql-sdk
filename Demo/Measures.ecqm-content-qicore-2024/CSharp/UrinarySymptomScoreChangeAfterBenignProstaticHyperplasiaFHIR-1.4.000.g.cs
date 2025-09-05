@@ -255,7 +255,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             DataType o_ = IPSSAssessment?.Value;
             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
             bool? q_ = context.Operators.Not((bool?)(p_ is null));
@@ -349,7 +349,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             DataType o_ = AUASIAssessment?.Value;
             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
             bool? q_ = context.Operators.Not((bool?)(p_ is null));
@@ -536,7 +536,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
                     "amended",
                     "corrected",
                 ];
-                bool? bk_ = context.Operators.In<string>(bi_, bj_ as IEnumerable<string>);
+                bool? bk_ = context.Operators.In<string>(bi_, (IEnumerable<string>)bj_);
                 bool? bl_ = context.Operators.And(be_, bk_);
                 DataType bm_ = QOLAssessment?.Value;
                 object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
@@ -911,7 +911,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
                     "amended",
                     "corrected",
                 ];
-                bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+                bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                 bool? w_ = context.Operators.And(q_, v_);
                 DataType x_ = BMIExam?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);

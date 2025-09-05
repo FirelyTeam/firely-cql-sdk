@@ -335,7 +335,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(t_, z_);
 
             return aa_;
@@ -364,7 +364,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
                 "amended",
                 "corrected",
             ];
-            bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
+            bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.And(aj_, ap_);
 
             return aq_;

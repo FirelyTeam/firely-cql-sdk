@@ -181,7 +181,7 @@ public partial class CMS144FHIRHFBetaBlockerTherapyforLVSD_1_5_000 : ILibrary, I
                 "active",
                 "completed",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(i_, n_);
             Code<MedicationRequest.MedicationRequestIntent> p_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
@@ -193,7 +193,7 @@ public partial class CMS144FHIRHFBetaBlockerTherapyforLVSD_1_5_000 : ILibrary, I
                 "filler-order",
                 "instance-order",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
 
             return u_;
@@ -309,7 +309,7 @@ public partial class CMS144FHIRHFBetaBlockerTherapyforLVSD_1_5_000 : ILibrary, I
                 "amended",
                 "corrected",
             ];
-            bool? w_ = context.Operators.In<string>(u_, v_ as IEnumerable<string>);
+            bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
             CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);

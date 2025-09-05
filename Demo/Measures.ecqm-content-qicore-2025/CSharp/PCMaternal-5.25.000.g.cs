@@ -493,7 +493,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
             {
@@ -644,7 +644,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
             {
@@ -877,7 +877,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 "amended",
                 "corrected",
             ];
-            bool? ac_ = context.Operators.In<string>(aa_, ab_ as IEnumerable<string>);
+            bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object ae_()
             {

@@ -263,7 +263,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                 "completed",
                 "in-progress",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             CqlInterval<CqlDateTime> ak_ = tuple_brdbxsuhdqixbcfmgdsacwig?.Hospitalization?.hospitalizationPeriod;
             DataType al_ = tuple_brdbxsuhdqixbcfmgdsacwig?.HypoglycemicMed?.Effective;
             object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
@@ -360,7 +360,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                     "amended",
                     "corrected",
                 ];
-                bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+                bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
                 bool? v_ = context.Operators.And(p_, u_);
                 DataType w_ = GlucoseTest?.Value;
                 object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
@@ -433,7 +433,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
             b_,
             e_,
         ];
-        CqlDateTime g_ = context.Operators.Min<CqlDateTime>(f_ as IEnumerable<CqlDateTime>);
+        CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
         return h_;
@@ -512,7 +512,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayExpand)
         {
             int? j_ = context.Operators.End(DayExpand);
@@ -572,7 +572,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                    bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                     DataType aj_ = GlucoseTest?.Value;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
                     CqlQuantity al_ = context.Operators.Quantity(300m, "mg/dL");
@@ -650,7 +650,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? bp_ = context.Operators.In<string>(bn_, bo_ as IEnumerable<string>);
+                    bool? bp_ = context.Operators.In<string>(bn_, (IEnumerable<string>)bo_);
                     DataType bq_ = GlucoseTest?.Value;
                     object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
                     CqlQuantity bs_ = context.Operators.Quantity(200m, "mg/dL");
@@ -728,7 +728,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                         "amended",
                         "corrected",
                     ];
-                    bool? cw_ = context.Operators.In<string>(cu_, cv_ as IEnumerable<string>);
+                    bool? cw_ = context.Operators.In<string>(cu_, (IEnumerable<string>)cv_);
                     object cx_()
                     {
                         bool dc_()
@@ -886,7 +886,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                 "amended",
                 "corrected",
             ];
-            bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+            bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(p_, u_);
             object w_()
             {
@@ -1240,7 +1240,7 @@ public partial class CMS871HHHyperFHIR_0_3_000 : ILibrary, ISingleton<CMS871HHHy
                 "amended",
                 "corrected",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
             object v_()
             {

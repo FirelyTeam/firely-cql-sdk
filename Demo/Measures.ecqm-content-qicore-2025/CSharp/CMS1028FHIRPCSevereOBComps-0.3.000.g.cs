@@ -1970,7 +1970,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
     m_ ?? default(int),
             ];
 
-            return n_ as IEnumerable<object>;
+            return (IEnumerable<object>)n_;
         };
         IEnumerable<IEnumerable<object>> c_ = context.Operators.Select<Encounter, IEnumerable<object>>(a_, b_);
         IEnumerable<IEnumerable<object>> d_ = context.Operators.Distinct<IEnumerable<object>>(c_);
@@ -2361,7 +2361,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 DataType aq_ = Hematocrit?.Value;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
@@ -2405,7 +2405,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, bl_ as IEnumerable<string>);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType bo_ = Hematocrit?.Value;
                 object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -2470,7 +2470,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 DataType aq_ = WBC?.Value;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
@@ -2514,7 +2514,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, bl_ as IEnumerable<string>);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType bo_ = WBC?.Value;
                 object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -2578,7 +2578,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? am_ = context.Operators.In<string>(ak_, al_ as IEnumerable<string>);
+                bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
                 return an_;
@@ -2616,7 +2616,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bf_ = context.Operators.In<string>(bd_, be_ as IEnumerable<string>);
+                bool? bf_ = context.Operators.In<string>(bd_, (IEnumerable<string>)be_);
                 bool? bg_ = context.Operators.And(ba_, bf_);
 
                 return bg_;
@@ -2675,7 +2675,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? aq_ = context.Operators.In<string>(ao_, ap_ as IEnumerable<string>);
+                bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
                 bool? ar_ = context.Operators.And(al_, aq_);
                 List<Observation.ComponentComponent> as_ = BP?.Component;
                 bool? at_(Observation.ComponentComponent @this)
@@ -2752,7 +2752,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? cc_ = context.Operators.In<string>(ca_, cb_ as IEnumerable<string>);
+                bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
                 bool? cd_ = context.Operators.And(bx_, cc_);
                 List<Observation.ComponentComponent> ce_ = BP?.Component;
                 bool? cf_(Observation.ComponentComponent @this)

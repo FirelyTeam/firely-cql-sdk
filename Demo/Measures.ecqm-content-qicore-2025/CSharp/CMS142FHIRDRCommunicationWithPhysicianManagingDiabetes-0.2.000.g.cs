@@ -349,7 +349,7 @@ public partial class CMS142FHIRDRCommunicationWithPhysicianManagingDiabetes_0_2_
                 "corrected",
                 "preliminary",
             ];
-            bool? y_ = context.Operators.In<string>(w_, x_ as IEnumerable<string>);
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 
             return z_;

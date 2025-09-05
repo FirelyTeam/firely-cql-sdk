@@ -298,7 +298,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? w_ = context.Operators.In<string>(u_, v_ as IEnumerable<string>);
+            bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
             CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
