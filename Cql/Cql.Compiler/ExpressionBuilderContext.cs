@@ -127,6 +127,20 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(element))
             {
+                /*
+                This code is useful for setting breakpoints to inspect the expression tree at a specific element.
+                The ELM json must be modified to add an annotation tags with a debug counter first.
+
+                var debugCounter = element.annotation
+                                          ?.OfType<Annotation>()
+                                          .FirstOrDefault()?.t.FirstOrDefault(t => t.name == "debug")
+                                          ?.value;
+                if (debugCounter == "42") // Identify the correct debug counter from the ELM file
+                {
+                    ; // Set a breakpoint here
+                }
+                */
+
                 Expression? expression = element switch
                 {
                     //@formatter:off
@@ -442,8 +456,7 @@ partial class ExpressionBuilderContext
                 array = Expression.NewArrayBounds(elementType, Expression.Constant(0));
             }
 
-            var asEnumerable = array.NewTypeAsExpression(typeof(IEnumerable<>).MakeGenericType(elementType));
-            return asEnumerable;
+            return array;
         }
 
         throw this.NewExpressionBuildingException($"List is the wrong type");
