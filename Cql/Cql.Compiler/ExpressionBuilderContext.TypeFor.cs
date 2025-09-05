@@ -225,13 +225,8 @@ partial class ExpressionBuilderContext
             return typeof(object);
 
         var elementTuples = elements!
-            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier))
-            .Where(e => e.resultTypeSpecifier != null)
-            .ToArray();
-        
-        if (elementTuples.Length == 0)
-            return typeof(object);
-            
+            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier
+                                         ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier").WithContext(this)));
         return TupleTypeFor(elementTuples, changeType);
     }
 

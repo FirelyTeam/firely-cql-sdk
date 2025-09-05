@@ -481,27 +481,19 @@ partial class ExpressionBuilderContext
         var @new = Expression.New(tupleType);
         if (tuple.element?.Length > 0)
         {
-            // Filter out elements that don't have resultTypeSpecifier to match what TupleTypeFor does
-            var validElements = tuple.element!
-                .Where(e => e.value.resultTypeSpecifier != null)
-                .ToArray();
-                
-            if (validElements.Length > 0)
-            {
-                var elementBindings =
-                    validElements
-                         .SelectToArray(element =>
-                         {
-                             var value = TranslateArg(element.value!);
-                             var propInfo = GetProperty(tupleType, IdentifierNormalizer.Normalize(element.name!), _typeResolver)
-                                            ?? throw this.NewExpressionBuildingException(
-                                                $"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-                             var binding = Binding(value, propInfo);
-                             return binding;
-                         });
-                var init = Expression.MemberInit(@new, elementBindings);
-                return init;
-            }
+            var elementBindings =
+                tuple.element!
+                     .SelectToArray(element =>
+                     {
+                         var value = TranslateArg(element.value!);
+                         var propInfo = GetProperty(tupleType, IdentifierNormalizer.Normalize(element.name!), _typeResolver)
+                                        ?? throw this.NewExpressionBuildingException(
+                                            $"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                         var binding = Binding(value, propInfo);
+                         return binding;
+                     });
+            var init = Expression.MemberInit(@new, elementBindings);
+            return init;
         }
 
         return @new;
@@ -2451,6 +2443,49 @@ internal partial class ExpressionBuilderContext
             if (result == TypeConversion.NoMatch && throwOnError)
                 throw this.NewExpressionBuildingException($"Cannot convert {input.Type} to {outputType}.");
         }
+    }
+
+    /// <summary>
+    /// Pre-processes an expression tree to fix missing resultTypeSpecifier on AliasRef elements
+    /// by copying the type information from the source elements that define the aliases.
+    /// </summary>
+    /// <param name="elmExpression">The root ELM expression to process</param>
+    private void FixMissingAliasRefTypeSpecifiers(Elm.Expression elmExpression)
+    {
+        // First pass: Build dictionary of alias names to their source elements (with resultTypeSpecifier)
+        var aliasSources = new Dictionary<string, TypeSpecifier>();
+        
+        var aliasCollector = new ElmTreeWalker(node =>
+        {
+            switch (node)
+            {
+                case AliasedQuerySource aqs when !string.IsNullOrEmpty(aqs.alias) && aqs.expression?.resultTypeSpecifier != null:
+                    aliasSources[aqs.alias] = aqs.expression.resultTypeSpecifier;
+                    break;
+                    
+                case LetClause let when !string.IsNullOrEmpty(let.identifier) && let.expression?.resultTypeSpecifier != null:
+                    aliasSources[let.identifier] = let.expression.resultTypeSpecifier;
+                    break;
+            }
+            return true; // Continue walking children
+        });
+        
+        aliasCollector.Start(elmExpression);
+        
+        // Second pass: Find AliasRef elements without resultTypeSpecifier and copy it from the dictionary
+        var aliasRefFixer = new ElmTreeWalker(node =>
+        {
+            if (node is AliasRef aliasRef 
+                && !string.IsNullOrEmpty(aliasRef.name)
+                && aliasRef.resultTypeSpecifier == null
+                && aliasSources.TryGetValue(aliasRef.name, out var sourceTypeSpecifier))
+            {
+                aliasRef.resultTypeSpecifier = sourceTypeSpecifier;
+            }
+            return true; // Continue walking children
+        });
+        
+        aliasRefFixer.Start(elmExpression);
     }
 }
 
