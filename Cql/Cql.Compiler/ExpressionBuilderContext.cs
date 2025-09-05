@@ -338,18 +338,127 @@ partial class ExpressionBuilderContext
             if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
-                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && leftListElemType == rightListElemType)
-                    return [left, right];
+                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType)
+                {
+                    // Debug: log detailed type information
+                    _logger.LogDebug("Union comparing list element types: Left={LeftType} ({LeftNamespace}), Right={RightType} ({RightNamespace})", 
+                        leftListElemType, leftListElemType.Namespace, rightListElemType, rightListElemType.Namespace);
+                    
+                    if (IsTupleType(leftListElemType) && IsTupleType(rightListElemType))
+                    {
+                        var leftProps = leftListElemType.GetProperties();
+                        var rightProps = rightListElemType.GetProperties();
+                        _logger.LogDebug("Left tuple has {LeftCount} properties, Right tuple has {RightCount} properties", 
+                            leftProps.Length, rightProps.Length);
+                        
+                        for (int i = 0; i < Math.Min(leftProps.Length, rightProps.Length); i++)
+                        {
+                            _logger.LogDebug("Property {Index}: Left='{LeftName}' ({LeftType}), Right='{RightName}' ({RightType})", 
+                                i, leftProps[i].Name, leftProps[i].PropertyType, rightProps[i].Name, rightProps[i].PropertyType);
+                        }
+                    }
+                    
+                    if (AreTypesCompatibleForUnion(leftListElemType, rightListElemType))
+                    {
+                        _logger.LogDebug("Types are compatible for union");
+                        return [left, right];
+                    }
+                    else
+                    {
+                        _logger.LogDebug("Types are NOT compatible for union");
+                    }
+                }
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
-                    && right.Type.IsCqlInterval(out var rightPointType)
-                    && leftPointType == rightPointType)
-                    return [left, right];
+                    && right.Type.IsCqlInterval(out var rightPointType))
+                {
+                    // Debug: log the types being compared
+                    _logger.LogDebug("Union comparing interval point types: Left={LeftType}, Right={RightType}", leftPointType, rightPointType);
+                    
+                    if (AreTypesCompatibleForUnion(leftPointType, rightPointType))
+                        return [left, right];
+                }
             }
 
             throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
         }
+    }
+
+    private static bool AreTypesCompatibleForUnion(Type leftType, Type rightType)
+    {
+        // First check for exact equality
+        if (leftType == rightType)
+            return true;
+
+        // Check if one type is assignable from the other (for polymorphic cases)
+        if (leftType.IsAssignableFrom(rightType) || rightType.IsAssignableFrom(leftType))
+            return true;
+
+        // Check for structural equivalence of tuple types
+        if (AreTupleTypesStructurallyEquivalent(leftType, rightType))
+            return true;
+
+        return false;
+    }
+
+    private static bool AreTupleTypesStructurallyEquivalent(Type leftType, Type rightType)
+    {
+        // Check if both types are tuple-like (derive from TupleBaseType or have tuple-like properties)
+        if (!IsTupleType(leftType) || !IsTupleType(rightType))
+            return false;
+
+        var leftProps = leftType.GetProperties();
+        var rightProps = rightType.GetProperties();
+
+        // Check if they have the same number of properties
+        if (leftProps.Length != rightProps.Length)
+            return false;
+
+        // Check if each property has the same name and compatible type (order matters for tuples)
+        for (int i = 0; i < leftProps.Length; i++)
+        {
+            var leftProp = leftProps[i];
+            var rightProp = rightProps[i];
+
+            // Property names must match
+            if (leftProp.Name != rightProp.Name)
+                return false;
+
+            // For property types, check if they are the same or convertible
+            if (!ArePropertyTypesCompatible(leftProp.PropertyType, rightProp.PropertyType))
+                return false;
+        }
+
+        return true;
+    }
+
+    private static bool ArePropertyTypesCompatible(Type leftPropType, Type rightPropType)
+    {
+        // Exact match
+        if (leftPropType == rightPropType)
+            return true;
+
+        // Check assignability in both directions
+        if (leftPropType.IsAssignableFrom(rightPropType) || rightPropType.IsAssignableFrom(leftPropType))
+            return true;
+
+        // Special cases for known compatible CQL types
+        // CqlDateTime and FhirDateTime are convertible
+        if ((leftPropType == typeof(CqlDateTime) && rightPropType.Name == "FhirDateTime") ||
+            (rightPropType == typeof(CqlDateTime) && leftPropType.Name == "FhirDateTime"))
+            return true;
+
+        // Add other known convertible pairs as needed
+        
+        return false;
+    }
+
+    private static bool IsTupleType(Type type)
+    {
+        // Check if it's a dynamically generated tuple type by looking for the tuple namespace or base type
+        return type.Namespace == "Tuples" || 
+               type.BaseType == typeof(TupleBaseType) ||
+               (type.IsClass && type.GetProperties().Length > 0 && type.Name.StartsWith("Tuple_"));
     }
 
     protected Expression? Mutate(Element op, Expression? expression) =>
