@@ -222,21 +222,6 @@ partial class ExpressionBuilderContext
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
                     if (tsType is not null)
                     {
-                        // Special handling: if the expression is IEnumerable<T> and the target type is T,
-                        // this could indicate an incorrect type conversion from list to singleton.
-                        // Keep the expression as is if this appears to be the case.
-                        if (_typeResolver.IsListType(expression.Type) && !_typeResolver.IsListType(tsType))
-                        {
-                            var expressionElementType = _typeResolver.GetListElementType(expression.Type, true);
-                            if (expressionElementType == tsType)
-                            {
-                                // The expression is IEnumerable<T> and target is T. This often indicates
-                                // that the result type specifier is incorrectly set to the element type
-                                // instead of the list type. Keep the expression as is.
-                                return expression;
-                            }
-                        }
-                        
                         return ChangeType(expression, element.resultTypeSpecifier, throwOnError: true);
                     }
 
@@ -2360,6 +2345,24 @@ internal partial class ExpressionBuilderContext
             return input;
         }
 
+        // Handle flattening: IEnumerable<IEnumerable<T>> to IEnumerable<T>
+        if (_typeResolver.IsListType(input.Type) && _typeResolver.IsListType(outputType))
+        {
+            var inputElementType = _typeResolver.GetListElementType(input.Type, true);
+            if (inputElementType != null && _typeResolver.IsListType(inputElementType))
+            {
+                var inputNestedElementType = _typeResolver.GetListElementType(inputElementType, true);
+                var outputElementType = _typeResolver.GetListElementType(outputType, true);
+                
+                if (inputNestedElementType == outputElementType)
+                {
+                    // This is flattening IEnumerable<IEnumerable<T>> to IEnumerable<T>
+                    typeConversion = TypeConversion.OperatorConvert;
+                    return BindCqlOperator(nameof(ICqlOperators.Flatten), input);
+                }
+            }
+        }
+
         if (_typeResolver.IsListType(input.Type)
             && _typeResolver.IsListType(outputType))
         {
@@ -2371,21 +2374,7 @@ internal partial class ExpressionBuilderContext
             return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
         }
 
-        // Special case: if we're trying to convert IEnumerable<T> to T, but the input is actually
-        // a collection that should remain a collection, then return the input as-is instead of failing.
-        // However, allow legitimate conversions like IEnumerable<IEnumerable<T>> to IEnumerable<T> (flattening).
-        if (_typeResolver.IsListType(input.Type) && !_typeResolver.IsListType(outputType))
-        {
-            var inputElementType = _typeResolver.GetListElementType(input.Type, true);
-            if (inputElementType == outputType)
-            {
-                // This is converting IEnumerable<T> to T. This should be avoided if it's a singleton conversion
-                // that's happening incorrectly. However, we need to be careful not to prevent legitimate
-                // operations like SingletonFrom when it's actually intended.
-                typeConversion = TypeConversion.ExactType;
-                return input;
-            }
-        }
+
 
         Type toType = TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo)
                           ? correctedTo!
