@@ -78,7 +78,7 @@ partial class CqlOperatorsBinder
         if (leftListElementType != null && rightListElementType != null && leftListElementType != rightListElementType)
         {
             // Check if the element types are structurally compatible for union 
-            if (AreTypesCompatibleForUnion(leftListElementType, rightListElementType))
+            if (leftListElementType.AreCompatibleForUnionOperation(rightListElementType))
             {
                 // Cast both to IEnumerable<object> to allow union
                 var leftAsObjectEnumerable = left.NewTypeAsExpression<IEnumerable<object>>();
@@ -88,82 +88,6 @@ partial class CqlOperatorsBinder
         }
 
         return BindToBestMethodOverload(nameof(ICqlOperators.Union), [left, right], [])!;
-    }
-
-    private static bool AreTypesCompatibleForUnion(Type leftType, Type rightType)
-    {
-        // First check for exact equality
-        if (leftType == rightType)
-            return true;
-
-        // Check if one type is assignable from the other (for polymorphic cases)
-        if (leftType.IsAssignableFrom(rightType) || rightType.IsAssignableFrom(leftType))
-            return true;
-
-        // Check for structural equivalence of tuple types
-        if (AreTupleTypesStructurallyEquivalent(leftType, rightType))
-            return true;
-
-        return false;
-    }
-
-    private static bool AreTupleTypesStructurallyEquivalent(Type leftType, Type rightType)
-    {
-        // Check if both types are tuple-like (derive from TupleBaseType or have tuple-like properties)
-        if (!IsTupleType(leftType) || !IsTupleType(rightType))
-            return false;
-
-        var leftProps = leftType.GetProperties();
-        var rightProps = rightType.GetProperties();
-
-        // Check if they have the same number of properties
-        if (leftProps.Length != rightProps.Length)
-            return false;
-
-        // Check if each property has the same name and compatible type (order matters for tuples)
-        for (int i = 0; i < leftProps.Length; i++)
-        {
-            var leftProp = leftProps[i];
-            var rightProp = rightProps[i];
-
-            // Property names must match
-            if (leftProp.Name != rightProp.Name)
-                return false;
-
-            // For property types, check if they are the same or convertible
-            if (!ArePropertyTypesCompatible(leftProp.PropertyType, rightProp.PropertyType))
-                return false;
-        }
-
-        return true;
-    }
-
-    private static bool ArePropertyTypesCompatible(Type leftPropType, Type rightPropType)
-    {
-        // Exact match
-        if (leftPropType == rightPropType)
-            return true;
-
-        // Check assignability in both directions
-        if (leftPropType.IsAssignableFrom(rightPropType) || rightPropType.IsAssignableFrom(leftPropType))
-            return true;
-
-        // Special cases for known compatible CQL types
-        // CqlDateTime and FhirDateTime are convertible
-        if ((leftPropType.Name == "CqlDateTime" && rightPropType.Name == "FhirDateTime") ||
-            (rightPropType.Name == "CqlDateTime" && leftPropType.Name == "FhirDateTime"))
-            return true;
-
-        // Add other known convertible pairs as needed
-        
-        return false;
-    }
-
-    private static bool IsTupleType(Type type)
-    {
-        // Check if it's a dynamically generated tuple type by looking for the tuple namespace or base type
-        return type.Namespace == "Tuples" || 
-               (type.IsClass && type.GetProperties().Length > 0 && type.Name.StartsWith("Tuple_"));
     }
 
     private Expression ResolveValueSet(Expression expression)
