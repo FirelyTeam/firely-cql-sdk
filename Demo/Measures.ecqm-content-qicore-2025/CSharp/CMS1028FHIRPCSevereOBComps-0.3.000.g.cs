@@ -2834,7 +2834,7 @@ public partial class CMS1028FHIRPCSevereOBComps_0_3_000 : ILibrary, ISingleton<C
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> e_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>(c_, d_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> f_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(e_);
-        IEnumerable<Claim.DiagnosisComponent> g_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(f_);
+        IEnumerable<Claim.DiagnosisComponent> g_ = context.Operators.Flatten<Claim.DiagnosisComponent>(f_);
 
         return g_;
     }

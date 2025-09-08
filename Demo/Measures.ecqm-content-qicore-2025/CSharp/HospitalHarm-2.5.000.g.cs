@@ -253,7 +253,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
 
         return e_;
     }
@@ -409,7 +409,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
 
         return e_;
     }
@@ -561,7 +561,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.ProcedureComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.ProcedureComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.ProcedureComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.ProcedureComponent>>(c_);
-        IEnumerable<Claim.ProcedureComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.ProcedureComponent>>(d_);
+        IEnumerable<Claim.ProcedureComponent> e_ = context.Operators.Flatten<Claim.ProcedureComponent>(d_);
 
         return e_;
     }
@@ -724,7 +724,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -892,7 +892,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -1054,7 +1054,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -1216,7 +1216,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -1374,7 +1374,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -1728,7 +1728,7 @@ public partial class HospitalHarm_2_5_000 : ILibrary, ISingleton<HospitalHarm_2_
         };
         IEnumerable<IEnumerable<int?>> c_ = context.Operators.Select<Procedure, IEnumerable<int?>>((IEnumerable<Procedure>)a_, b_);
         IEnumerable<IEnumerable<int?>> d_ = context.Operators.Distinct<IEnumerable<int?>>(c_);
-        IEnumerable<int?> e_ = context.Operators.SingletonFrom<IEnumerable<int?>>(d_);
+        IEnumerable<int?> e_ = context.Operators.Flatten<int?>(d_);
         int? f_ = context.Operators.SingletonFrom<int?>(e_);
 
         return f_;

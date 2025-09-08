@@ -5777,7 +5777,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
 
         return e_;
     }
@@ -5993,7 +5993,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<IEnumerable<int?>> c_ = context.Operators.Select<Procedure, IEnumerable<int?>>((IEnumerable<Procedure>)a_, b_);
         IEnumerable<IEnumerable<int?>> d_ = context.Operators.Distinct<IEnumerable<int?>>(c_);
-        IEnumerable<int?> e_ = context.Operators.SingletonFrom<IEnumerable<int?>>(d_);
+        IEnumerable<int?> e_ = context.Operators.Flatten<int?>(d_);
         int? f_ = context.Operators.SingletonFrom<int?>(e_);
 
         return f_;

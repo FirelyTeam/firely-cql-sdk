@@ -680,7 +680,7 @@ public partial class CMS1017FHIRHHFI_0_3_000 : ILibrary, ISingleton<CMS1017FHIRH
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;
@@ -2177,7 +2177,7 @@ public partial class CMS1017FHIRHHFI_0_3_000 : ILibrary, ISingleton<CMS1017FHIRH
         };
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
-        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
+        IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.Flatten<Claim.DiagnosisComponent>(d_);
         bool? f_ = context.Operators.Exists<Claim.DiagnosisComponent>(e_);
 
         return f_;

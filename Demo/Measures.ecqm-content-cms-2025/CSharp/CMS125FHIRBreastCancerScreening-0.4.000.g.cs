@@ -209,40 +209,36 @@ public partial class CMS125FHIRBreastCancerScreening_0_4_000 : ILibrary, ISingle
             ];
             CqlConcept s_(object @this)
             {
-                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
 
-                return z_;
+                return x_;
             };
             IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
-            CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
-            CqlConcept[] v_ = [
-                u_,
-            ];
-            bool? w_(CqlConcept S)
+            bool? u_(CqlConcept S)
             {
-                CqlCode aa_ = this.Right__qualifier_value_(context);
-                CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                bool? ac_ = context.Operators.Equivalent(S, ab_);
+                CqlCode y_ = this.Right__qualifier_value_(context);
+                CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+                bool? aa_ = context.Operators.Equivalent(S, z_);
 
-                return ac_;
+                return aa_;
             };
-            IEnumerable<CqlConcept> x_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)v_, w_);
-            bool? y_ = context.Operators.Exists<CqlConcept>(x_);
+            IEnumerable<CqlConcept> v_ = context.Operators.Where<CqlConcept>(t_, u_);
+            bool? w_ = context.Operators.Exists<CqlConcept>(v_);
 
-            return y_;
+            return w_;
         };
         IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
         IEnumerable<object> m_ = context.Operators.Union<object>(e_, l_);
         IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
         bool? o_(object RightMastectomy)
         {
-            CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
-            CqlDateTime ae_ = context.Operators.Start(ad_);
-            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-            CqlDateTime ag_ = context.Operators.End(af_);
-            bool? ah_ = context.Operators.SameOrBefore(ae_, ag_, default);
+            CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
+            CqlDateTime ac_ = context.Operators.Start(ab_);
+            CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
+            CqlDateTime ae_ = context.Operators.End(ad_);
+            bool? af_ = context.Operators.SameOrBefore(ac_, ae_, default);
 
-            return ah_;
+            return af_;
         };
         IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
 
@@ -358,40 +354,36 @@ public partial class CMS125FHIRBreastCancerScreening_0_4_000 : ILibrary, ISingle
             ];
             CqlConcept s_(object @this)
             {
-                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
 
-                return z_;
+                return x_;
             };
             IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
-            CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
-            CqlConcept[] v_ = [
-                u_,
-            ];
-            bool? w_(CqlConcept S)
+            bool? u_(CqlConcept S)
             {
-                CqlCode aa_ = this.Left__qualifier_value_(context);
-                CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                bool? ac_ = context.Operators.Equivalent(S, ab_);
+                CqlCode y_ = this.Left__qualifier_value_(context);
+                CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+                bool? aa_ = context.Operators.Equivalent(S, z_);
 
-                return ac_;
+                return aa_;
             };
-            IEnumerable<CqlConcept> x_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)v_, w_);
-            bool? y_ = context.Operators.Exists<CqlConcept>(x_);
+            IEnumerable<CqlConcept> v_ = context.Operators.Where<CqlConcept>(t_, u_);
+            bool? w_ = context.Operators.Exists<CqlConcept>(v_);
 
-            return y_;
+            return w_;
         };
         IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
         IEnumerable<object> m_ = context.Operators.Union<object>(e_, l_);
         IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
         bool? o_(object LeftMastectomy)
         {
-            CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
-            CqlDateTime ae_ = context.Operators.Start(ad_);
-            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-            CqlDateTime ag_ = context.Operators.End(af_);
-            bool? ah_ = context.Operators.SameOrBefore(ae_, ag_, default);
+            CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
+            CqlDateTime ac_ = context.Operators.Start(ab_);
+            CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
+            CqlDateTime ae_ = context.Operators.End(ad_);
+            bool? af_ = context.Operators.SameOrBefore(ac_, ae_, default);
 
-            return ah_;
+            return af_;
         };
         IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
 
