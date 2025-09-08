@@ -45,6 +45,9 @@ Core SDK projects are located in the `Cql/` directory:
 
 ## Development Guidelines
 
+### Reference Implementation
+When there is doubt about functionality or implementation details, refer to the Java implementation in the [CQL Framework repository](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java) for guidance on behavior and approach.
+
 ### File Headers
 **IMPORTANT**: Copyright header requirements for C# source files (*.cs, excluding *.g.cs generated files):
 

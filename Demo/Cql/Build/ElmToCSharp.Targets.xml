@@ -16,7 +16,8 @@
 	<PropertyGroup>
 		<JsonPretty>true</JsonPretty>
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
-		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
+		<PackagerCLI Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+		<PackagerCLI Condition="!$([MSBuild]::IsOSPlatform('Windows'))">$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
