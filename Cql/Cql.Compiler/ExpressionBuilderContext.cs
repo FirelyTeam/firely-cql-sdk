@@ -222,6 +222,20 @@ partial class ExpressionBuilderContext
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
                     if (tsType is not null)
                     {
+                        // Special handling: if the expression is IEnumerable<T> and the target type is T,
+                        // but the resultTypeSpecifier is a ListTypeSpecifier, then we should keep it as IEnumerable<T>
+                        if (element.resultTypeSpecifier is ListTypeSpecifier && 
+                            _typeResolver.IsListType(expression.Type) &&
+                            !_typeResolver.IsListType(tsType))
+                        {
+                            var expressionElementType = _typeResolver.GetListElementType(expression.Type, true);
+                            if (expressionElementType == tsType)
+                            {
+                                // The expression is already the correct list type, don't convert
+                                return expression;
+                            }
+                        }
+                        
                         return ChangeType(expression, element.resultTypeSpecifier, throwOnError: true);
                     }
 
