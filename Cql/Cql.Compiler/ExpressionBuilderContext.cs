@@ -1759,13 +1759,16 @@ internal partial class ExpressionBuilderContext
             }
 
             // Because we promoted the source to a list, we now have to demote the result again.
+            // However, if the result should be a list, we should not demote to singleton.
             var wereAllSourcesPreviouslySingletons = sourcesPreviouslySingletons.All(b => b);
-            if (wereAllSourcesPreviouslySingletons)
+            var shouldReturnList = query.resultTypeSpecifier is ListTypeSpecifier;
+            
+            if (wereAllSourcesPreviouslySingletons && !shouldReturnList)
             {
                 @return = DemoteSourceListToSingleton(@return);
             }
 
-            if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.IsListType(@return.Type))
+            if (shouldReturnList && !_typeResolver.IsListType(@return.Type))
             {
                 @return = Expression.NewArrayInit(@return.Type, @return);
             }
