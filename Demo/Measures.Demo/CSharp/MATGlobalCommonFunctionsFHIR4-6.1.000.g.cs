@@ -383,7 +383,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
 
     [CqlFunctionDefinition("Hospitalization Locations")]
-    public IEnumerable<IEnumerable<Encounter.LocationComponent>> Hospitalization_Locations(CqlContext context, Encounter TheEncounter)
+    public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(CqlContext context, Encounter TheEncounter)
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
         Encounter[] b_ = [
@@ -391,37 +391,35 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         ];
         IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
         {
-            IEnumerable<Encounter.LocationComponent> h_()
+            IEnumerable<Encounter.LocationComponent> g_()
             {
                 if (EDEncounter is null)
                 {
-                    List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
+                    List<Encounter.LocationComponent> h_ = TheEncounter?.Location;
 
-                    return (IEnumerable<Encounter.LocationComponent>)i_;
+                    return (IEnumerable<Encounter.LocationComponent>)h_;
                 }
                 else
                 {
-                    List<Encounter.LocationComponent> j_ = EDEncounter?.Location;
-                    List<Encounter.LocationComponent> k_ = TheEncounter?.Location;
-                    IEnumerable<Encounter.LocationComponent>[] l_ = [
+                    List<Encounter.LocationComponent> i_ = EDEncounter?.Location;
+                    List<Encounter.LocationComponent> j_ = TheEncounter?.Location;
+                    IEnumerable<Encounter.LocationComponent>[] k_ = [
+                        (IEnumerable<Encounter.LocationComponent>)i_,
                         (IEnumerable<Encounter.LocationComponent>)j_,
-                        (IEnumerable<Encounter.LocationComponent>)k_,
                     ];
-                    IEnumerable<Encounter.LocationComponent> m_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)l_);
+                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
-                    return m_;
+                    return l_;
                 }
             };
 
-            return h_();
+            return g_();
         };
         IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<IEnumerable<Encounter.LocationComponent>> e_ = context.Operators.Distinct<IEnumerable<Encounter.LocationComponent>>(d_);
-        IEnumerable<Encounter.LocationComponent> f_(IEnumerable<Encounter.LocationComponent> ienumerable_locationcomponent) =>
-            ienumerable_locationcomponent;
-        IEnumerable<IEnumerable<Encounter.LocationComponent>> g_ = context.Operators.Select<IEnumerable<Encounter.LocationComponent>, IEnumerable<Encounter.LocationComponent>>(e_, f_);
+        IEnumerable<Encounter.LocationComponent> f_ = context.Operators.Flatten<Encounter.LocationComponent>(e_);
 
-        return g_;
+        return f_;
     }
 
 

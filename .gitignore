@@ -412,4 +412,4 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 global.json
 
 # remove compressed files
-*.zip
+*.zipDemo/Measures.Demo/CSharp/
