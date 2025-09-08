@@ -1,0 +1,101 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.88",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.88",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.88"
+    }
+  ],
+  "version": "20230426",
+  "name": "AcuteRespiratoryFailure",
+  "title": "Acute Respiratory Failure",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:10-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.821",
+        "display": "Acute postprocedural respiratory failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.822",
+        "display": "Acute and chronic postprocedural respiratory failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.00",
+        "display": "Acute respiratory failure, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.01",
+        "display": "Acute respiratory failure with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.02",
+        "display": "Acute respiratory failure with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.20",
+        "display": "Acute and chronic respiratory failure, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.21",
+        "display": "Acute and chronic respiratory failure with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.22",
+        "display": "Acute and chronic respiratory failure with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.90",
+        "display": "Respiratory failure, unspecified, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.91",
+        "display": "Respiratory failure, unspecified with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J96.92",
+        "display": "Respiratory failure, unspecified with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z99.11",
+        "display": "Dependence on respirator [ventilator] status"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z99.12",
+        "display": "Encounter for respirator [ventilator] dependence during power failure"
+      }
+    ]
+  }
+}

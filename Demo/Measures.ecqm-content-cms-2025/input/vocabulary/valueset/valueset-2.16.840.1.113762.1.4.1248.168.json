@@ -1,0 +1,1019 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.168",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.168"
+    }
+  ],
+  "version": "20221006",
+  "name": "DeliriumorDementiaandOtherPsychoses",
+  "title": "Delirium or Dementia and Other Psychoses",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:16-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.50",
+        "display": "Vascular dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.80",
+        "display": "Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.90",
+        "display": "Unspecified dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F05",
+        "display": "Delirium due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F06.0",
+        "display": "Psychotic disorder with hallucinations due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F06.2",
+        "display": "Psychotic disorder with delusions due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.121",
+        "display": "Alcohol abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.131",
+        "display": "Alcohol abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.150",
+        "display": "Alcohol abuse with alcohol-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.151",
+        "display": "Alcohol abuse with alcohol-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.159",
+        "display": "Alcohol abuse with alcohol-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.221",
+        "display": "Alcohol dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.231",
+        "display": "Alcohol dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.250",
+        "display": "Alcohol dependence with alcohol-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.251",
+        "display": "Alcohol dependence with alcohol-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.259",
+        "display": "Alcohol dependence with alcohol-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.27",
+        "display": "Alcohol dependence with alcohol-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.921",
+        "display": "Alcohol use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.931",
+        "display": "Alcohol use, unspecified with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.950",
+        "display": "Alcohol use, unspecified with alcohol-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.951",
+        "display": "Alcohol use, unspecified with alcohol-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.959",
+        "display": "Alcohol use, unspecified with alcohol-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F10.97",
+        "display": "Alcohol use, unspecified with alcohol-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.121",
+        "display": "Opioid abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.150",
+        "display": "Opioid abuse with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.151",
+        "display": "Opioid abuse with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.159",
+        "display": "Opioid abuse with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.221",
+        "display": "Opioid dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.250",
+        "display": "Opioid dependence with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.251",
+        "display": "Opioid dependence with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.259",
+        "display": "Opioid dependence with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.921",
+        "display": "Opioid use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.950",
+        "display": "Opioid use, unspecified with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.951",
+        "display": "Opioid use, unspecified with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.959",
+        "display": "Opioid use, unspecified with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.121",
+        "display": "Cannabis abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.150",
+        "display": "Cannabis abuse with psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.151",
+        "display": "Cannabis abuse with psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.159",
+        "display": "Cannabis abuse with psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.221",
+        "display": "Cannabis dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.250",
+        "display": "Cannabis dependence with psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.251",
+        "display": "Cannabis dependence with psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.259",
+        "display": "Cannabis dependence with psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.921",
+        "display": "Cannabis use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.950",
+        "display": "Cannabis use, unspecified with psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.951",
+        "display": "Cannabis use, unspecified with psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F12.959",
+        "display": "Cannabis use, unspecified with psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.121",
+        "display": "Sedative, hypnotic or anxiolytic abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.131",
+        "display": "Sedative, hypnotic or anxiolytic abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.150",
+        "display": "Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.151",
+        "display": "Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.159",
+        "display": "Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.221",
+        "display": "Sedative, hypnotic or anxiolytic dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.231",
+        "display": "Sedative, hypnotic or anxiolytic dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.250",
+        "display": "Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.251",
+        "display": "Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.259",
+        "display": "Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.27",
+        "display": "Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.921",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.931",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.950",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.951",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.959",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F13.97",
+        "display": "Sedative, hypnotic or anxiolytic use, unspecified with sedative, hypnotic or anxiolytic-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.121",
+        "display": "Cocaine abuse with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.150",
+        "display": "Cocaine abuse with cocaine-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.151",
+        "display": "Cocaine abuse with cocaine-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.159",
+        "display": "Cocaine abuse with cocaine-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.221",
+        "display": "Cocaine dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.250",
+        "display": "Cocaine dependence with cocaine-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.251",
+        "display": "Cocaine dependence with cocaine-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.259",
+        "display": "Cocaine dependence with cocaine-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.921",
+        "display": "Cocaine use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.950",
+        "display": "Cocaine use, unspecified with cocaine-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.951",
+        "display": "Cocaine use, unspecified with cocaine-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F14.959",
+        "display": "Cocaine use, unspecified with cocaine-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.121",
+        "display": "Other stimulant abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.150",
+        "display": "Other stimulant abuse with stimulant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.151",
+        "display": "Other stimulant abuse with stimulant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.159",
+        "display": "Other stimulant abuse with stimulant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.221",
+        "display": "Other stimulant dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.250",
+        "display": "Other stimulant dependence with stimulant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.251",
+        "display": "Other stimulant dependence with stimulant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.259",
+        "display": "Other stimulant dependence with stimulant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.921",
+        "display": "Other stimulant use, unspecified with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.950",
+        "display": "Other stimulant use, unspecified with stimulant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.951",
+        "display": "Other stimulant use, unspecified with stimulant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F15.959",
+        "display": "Other stimulant use, unspecified with stimulant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.121",
+        "display": "Hallucinogen abuse with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.150",
+        "display": "Hallucinogen abuse with hallucinogen-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.151",
+        "display": "Hallucinogen abuse with hallucinogen-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.159",
+        "display": "Hallucinogen abuse with hallucinogen-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.221",
+        "display": "Hallucinogen dependence with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.250",
+        "display": "Hallucinogen dependence with hallucinogen-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.251",
+        "display": "Hallucinogen dependence with hallucinogen-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.259",
+        "display": "Hallucinogen dependence with hallucinogen-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.921",
+        "display": "Hallucinogen use, unspecified with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.950",
+        "display": "Hallucinogen use, unspecified with hallucinogen-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.951",
+        "display": "Hallucinogen use, unspecified with hallucinogen-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F16.959",
+        "display": "Hallucinogen use, unspecified with hallucinogen-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.121",
+        "display": "Inhalant abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.150",
+        "display": "Inhalant abuse with inhalant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.151",
+        "display": "Inhalant abuse with inhalant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.159",
+        "display": "Inhalant abuse with inhalant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.17",
+        "display": "Inhalant abuse with inhalant-induced dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.221",
+        "display": "Inhalant dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.250",
+        "display": "Inhalant dependence with inhalant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.251",
+        "display": "Inhalant dependence with inhalant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.259",
+        "display": "Inhalant dependence with inhalant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.27",
+        "display": "Inhalant dependence with inhalant-induced dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.921",
+        "display": "Inhalant use, unspecified with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.950",
+        "display": "Inhalant use, unspecified with inhalant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.951",
+        "display": "Inhalant use, unspecified with inhalant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.959",
+        "display": "Inhalant use, unspecified with inhalant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F18.97",
+        "display": "Inhalant use, unspecified with inhalant-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.121",
+        "display": "Other psychoactive substance abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.131",
+        "display": "Other psychoactive substance abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.150",
+        "display": "Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.151",
+        "display": "Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.159",
+        "display": "Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.17",
+        "display": "Other psychoactive substance abuse with psychoactive substance-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.221",
+        "display": "Other psychoactive substance dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.231",
+        "display": "Other psychoactive substance dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.250",
+        "display": "Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.251",
+        "display": "Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.259",
+        "display": "Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.27",
+        "display": "Other psychoactive substance dependence with psychoactive substance-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.921",
+        "display": "Other psychoactive substance use, unspecified with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.931",
+        "display": "Other psychoactive substance use, unspecified with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.950",
+        "display": "Other psychoactive substance use, unspecified with psychoactive substance-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.951",
+        "display": "Other psychoactive substance use, unspecified with psychoactive substance-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.959",
+        "display": "Other psychoactive substance use, unspecified with psychoactive substance-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F19.97",
+        "display": "Other psychoactive substance use, unspecified with psychoactive substance-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.0",
+        "display": "Paranoid schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.1",
+        "display": "Disorganized schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.2",
+        "display": "Catatonic schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.3",
+        "display": "Undifferentiated schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.5",
+        "display": "Residual schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.81",
+        "display": "Schizophreniform disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.89",
+        "display": "Other schizophrenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F20.9",
+        "display": "Schizophrenia, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F21",
+        "display": "Schizotypal disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F22",
+        "display": "Delusional disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F23",
+        "display": "Brief psychotic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F24",
+        "display": "Shared psychotic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F25.0",
+        "display": "Schizoaffective disorder, bipolar type"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F25.1",
+        "display": "Schizoaffective disorder, depressive type"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F25.8",
+        "display": "Other schizoaffective disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F25.9",
+        "display": "Schizoaffective disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F28",
+        "display": "Other psychotic disorder not due to a substance or known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F29",
+        "display": "Unspecified psychosis not due to a substance or known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F30.2",
+        "display": "Manic episode, severe with psychotic symptoms"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F31.2",
+        "display": "Bipolar disorder, current episode manic severe with psychotic features"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F31.5",
+        "display": "Bipolar disorder, current episode depressed, severe, with psychotic features"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F31.64",
+        "display": "Bipolar disorder, current episode mixed, severe, with psychotic features"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F32.3",
+        "display": "Major depressive disorder, single episode, severe with psychotic features"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F33.3",
+        "display": "Major depressive disorder, recurrent, severe with psychotic symptoms"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F53.1",
+        "display": "Puerperal psychosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G30.0",
+        "display": "Alzheimer's disease with early onset"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G30.1",
+        "display": "Alzheimer's disease with late onset"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G30.8",
+        "display": "Other Alzheimer's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G30.9",
+        "display": "Alzheimer's disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.01",
+        "display": "Pick's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.09",
+        "display": "Other frontotemporal neurocognitive disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.83",
+        "display": "Neurocognitive disorder with Lewy bodies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "R41.0",
+        "display": "Disorientation, unspecified"
+      }
+    ]
+  }
+}

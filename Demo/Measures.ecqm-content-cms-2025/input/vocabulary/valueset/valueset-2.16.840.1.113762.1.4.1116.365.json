@@ -1,0 +1,77 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1116.365",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1116.365"
+    }
+  ],
+  "version": "20191010",
+  "name": "HospiceCareReferralorAdmission",
+  "title": "Hospice Care Referral or Admission",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:18-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "183919006",
+        "display": "Urgent admission to hospice (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "183920000",
+        "display": "Routine admission to hospice (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "183921001",
+        "display": "Admission to hospice for respite (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "305336008",
+        "display": "Admission to hospice (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "306205009",
+        "display": "Referral to hospice (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "385765002",
+        "display": "Hospice care management (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428361000124107",
+        "display": "Discharge to home for hospice care (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428371000124100",
+        "display": "Discharge to healthcare facility for hospice care (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "444933003",
+        "display": "Home hospice service (qualifier value)"
+      }
+    ]
+  }
+}

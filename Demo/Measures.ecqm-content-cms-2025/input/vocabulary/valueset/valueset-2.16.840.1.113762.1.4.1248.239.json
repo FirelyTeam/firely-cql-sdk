@@ -1,0 +1,2441 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.239",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.239",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.239"
+    }
+  ],
+  "version": "20230923",
+  "name": "NeuromuscularDisorder",
+  "title": "Neuromuscular Disorder",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E74.02",
+        "display": "Pompe disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.1",
+        "display": "Other inherited spinal muscular atrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.20",
+        "display": "Motor neuron disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.21",
+        "display": "Amyotrophic lateral sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.22",
+        "display": "Progressive bulbar palsy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.23",
+        "display": "Primary lateral sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.24",
+        "display": "Familial motor neuron disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.25",
+        "display": "Progressive spinal muscle atrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.29",
+        "display": "Other motor neuron disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.8",
+        "display": "Other spinal muscular atrophies and related syndromes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.9",
+        "display": "Spinal muscular atrophy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G14",
+        "display": "Postpolio syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.0",
+        "display": "Guillain-Barre syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.00",
+        "display": "Myasthenia gravis without (acute) exacerbation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.01",
+        "display": "Myasthenia gravis with (acute) exacerbation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.1",
+        "display": "Toxic myoneural disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.2",
+        "display": "Congenital and developmental myasthenia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.80",
+        "display": "Lambert-Eaton syndrome, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.81",
+        "display": "Lambert-Eaton syndrome in disease classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.89",
+        "display": "Other specified myoneural disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G70.9",
+        "display": "Myoneural disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.00",
+        "display": "Muscular dystrophy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.01",
+        "display": "Duchenne or Becker muscular dystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.02",
+        "display": "Facioscapulohumeral muscular dystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.031",
+        "display": "Autosomal dominant limb girdle muscular dystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.032",
+        "display": "Autosomal recessive limb girdle muscular dystrophy due to calpain-3 dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.033",
+        "display": "Limb girdle muscular dystrophy due to dysferlin dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.0340",
+        "display": "Limb girdle muscular dystrophy due to sarcoglycan dysfunction, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.0341",
+        "display": "Limb girdle muscular dystrophy due to alpha sarcoglycan dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.0342",
+        "display": "Limb girdle muscular dystrophy due to beta sarcoglycan dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.0349",
+        "display": "Limb girdle muscular dystrophy due to other sarcoglycan dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.035",
+        "display": "Limb girdle muscular dystrophy due to anoctamin-5 dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.038",
+        "display": "Other limb girdle muscular dystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.039",
+        "display": "Limb girdle muscular dystrophy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.09",
+        "display": "Other specified muscular dystrophies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.11",
+        "display": "Myotonic muscular dystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.12",
+        "display": "Myotonia congenita"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.13",
+        "display": "Myotonic chondrodystrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.19",
+        "display": "Other specified myotonic disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.20",
+        "display": "Congenital myopathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.21",
+        "display": "Nemaline myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.220",
+        "display": "X-linked myotubular myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.228",
+        "display": "Other centronuclear myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.29",
+        "display": "Other congenital myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.3",
+        "display": "Mitochondrial myopathy, not elsewhere classified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.8",
+        "display": "Other primary disorders of muscles"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G71.9",
+        "display": "Primary disorder of muscle, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.0",
+        "display": "Drug-induced myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.1",
+        "display": "Alcoholic myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.2",
+        "display": "Myopathy due to other toxic agents"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.3",
+        "display": "Periodic paralysis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.41",
+        "display": "Inclusion body myositis [IBM]"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.49",
+        "display": "Other inflammatory and immune myopathies, not elsewhere classified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.81",
+        "display": "Critical illness myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.89",
+        "display": "Other specified myopathies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G72.9",
+        "display": "Myopathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G73.1",
+        "display": "Lambert-Eaton syndrome in neoplastic disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G73.3",
+        "display": "Myasthenic syndromes in other diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G73.7",
+        "display": "Myopathy in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G80.0",
+        "display": "Spastic quadriplegic cerebral palsy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G82.50",
+        "display": "Quadriplegia, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G82.51",
+        "display": "Quadriplegia, C1-C4 complete"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G82.52",
+        "display": "Quadriplegia, C1-C4 incomplete"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G82.53",
+        "display": "Quadriplegia, C5-C7 complete"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G82.54",
+        "display": "Quadriplegia, C5-C7 incomplete"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.40",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified site"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.411",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right shoulder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.412",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left shoulder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.419",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified shoulder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.421",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right elbow"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.422",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left elbow"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.429",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified elbow"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.431",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right wrist"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.432",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left wrist"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.439",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified wrist"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.441",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right hand"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.442",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left hand"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.449",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified hand"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.451",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.452",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.459",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.461",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.462",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.469",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.471",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of right ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.472",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of left ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.479",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of unspecified ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.49",
+        "display": "Rheumatoid myopathy with rheumatoid arthritis of multiple sites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M33.01",
+        "display": "Juvenile dermatomyositis with respiratory involvement"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M33.11",
+        "display": "Other dermatomyositis with respiratory involvement"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M33.21",
+        "display": "Polymyositis with respiratory involvement"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M33.91",
+        "display": "Dermatopolymyositis, unspecified with respiratory involvement"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M34.82",
+        "display": "Systemic sclerosis with myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M35.03",
+        "display": "Sjögren syndrome with myopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.40",
+        "display": "Neuromuscular scoliosis, site unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.41",
+        "display": "Neuromuscular scoliosis, occipito-atlanto-axial region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.42",
+        "display": "Neuromuscular scoliosis, cervical region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.43",
+        "display": "Neuromuscular scoliosis, cervicothoracic region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.44",
+        "display": "Neuromuscular scoliosis, thoracic region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.45",
+        "display": "Neuromuscular scoliosis, thoracolumbar region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.46",
+        "display": "Neuromuscular scoliosis, lumbar region"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M41.47",
+        "display": "Neuromuscular scoliosis, lumbosacral region"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1010712009",
+        "display": "Autosomal dominant Emery-Dreifuss muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "103851000119100",
+        "display": "Restrictive lung disease due to amyotrophic lateral sclerosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111501005",
+        "display": "Congenital hereditary muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111502003",
+        "display": "Fukuyama congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111503008",
+        "display": "Merosin deficient congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111504002",
+        "display": "Walker-Warburg congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111505001",
+        "display": "Muscle-eye-brain disease, congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111506000",
+        "display": "Distal muscular dystrophy, Miyoshi type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111508004",
+        "display": "Emery-Dreifuss muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1144926009",
+        "display": "Sporadic inclusion body myositis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "11538006",
+        "display": "Quadriplegia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1156836006",
+        "display": "X-linked Emery-Dreifuss muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1156848009",
+        "display": "Autosomal recessive Emery-Dreifuss muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1172588008",
+        "display": "Early-onset progressive encephalopathy, spastic ataxia, distal spinal muscular atrophy syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1172688004",
+        "display": "Congenital muscular dystrophy, respiratory failure, skin abnormalities, joint hyperlaxity syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1172689007",
+        "display": "Prenatal-onset spinal muscular atrophy with congenital bone fractures (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1172703004",
+        "display": "Protein O-glucosyltransferase 1-related limb girdle muscular dystrophy R21 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1177122009",
+        "display": "Myotonic dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1179295004",
+        "display": "Blood vessel epicardial substance related limb girdle muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1179297007",
+        "display": "LIM zinc finger domain containing 2-related limb girdle muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197152005",
+        "display": "Distal hereditary motor neuropathy type 5 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197153000",
+        "display": "Typical nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197154006",
+        "display": "Childhood-onset nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197155007",
+        "display": "Amish nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197156008",
+        "display": "Intermediate nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197157004",
+        "display": "Severe congenital nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197523001",
+        "display": "Autosomal dominant amyotrophic lateral sclerosis type 1 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1197524007",
+        "display": "Autosomal recessive amyotrophic lateral sclerosis type 1 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1201863001",
+        "display": "Amyotrophic lateral sclerosis type 1 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1201947005",
+        "display": "Juvenile amyotrophic lateral sclerosis type 2 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1201950008",
+        "display": "Amyotrophic lateral sclerosis type 3 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1201961000",
+        "display": "Juvenile amyotrophic lateral sclerosis type 5 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1201964008",
+        "display": "Congenital fiber-type disproportion myopathy due to ZAK mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1202023003",
+        "display": "Congenital fiber-type disproportion myopathy due to selenoprotein N mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1202024009",
+        "display": "Autosomal dominant congenital fiber-type disproportion myopathy due to selenoprotein N mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1202025005",
+        "display": "Autosomal recessive congenital fiber-type disproportion myopathy due to selenoprotein N mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1204334005",
+        "display": "Amyotrophic lateral sclerosis type 6 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1204349002",
+        "display": "Amyotrophic lateral sclerosis type 7 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1204350002",
+        "display": "Amyotrophic lateral sclerosis type 8 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1204351003",
+        "display": "Amyotrophic lateral sclerosis type 9 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208412003",
+        "display": "Amyotrophic lateral sclerosis type 10 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208413008",
+        "display": "Congenital fiber-type disproportion myopathy due to actin alpha 1, skeletal muscle mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208414002",
+        "display": "Autosomal recessive congenital fiber-type disproportion myopathy due to actin alpha 1, skeletal muscle mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208415001",
+        "display": "Autosomal dominant congenital fiber-type disproportion myopathy due to actin alpha 1, skeletal muscle mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208416000",
+        "display": "Congenital fiber-type disproportion myopathy due to tropomyosin 3 mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208417009",
+        "display": "Autosomal recessive congenital fiber-type disproportion myopathy due to tropomyosin 3 mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1208418004",
+        "display": "Autosomal dominant congenital fiber-type disproportion myopathy due to tropomyosin 3 mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1209168005",
+        "display": "Congenital fiber-type disproportion myopathy due to myosin heavy chain 7 mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1217655004",
+        "display": "Disorder of neuromuscular junction due to Lambert-Eaton syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1230273004",
+        "display": "Megaconial congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1230343006",
+        "display": "Distal hereditary motor neuropathy type 2 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1231210003",
+        "display": "Mechanical strabismus due to disorder of skeletal muscle caused by local anaesthetic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1231685006",
+        "display": "Myopathy of extraocular muscle due to disorder of blood vessel (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "123391000119106",
+        "display": "Functional quadriplegia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1234819007",
+        "display": "Limb girdle muscular dystrophy due to protein O-mannose kinase deficiency (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259121008",
+        "display": "Amyotrophic lateral sclerosis, parkinsonism, dementia complex of West New Guinea (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259122001",
+        "display": "Amyotrophic lateral sclerosis with parkinsonism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259123006",
+        "display": "Amyotrophic lateral sclerosis, parkinsonism, dementia complex of Kii Peninsula (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259124000",
+        "display": "Amyotrophic lateral sclerosis with frontotemporal dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259125004",
+        "display": "Amyotrophic lateral sclerosis with multiple system atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259126003",
+        "display": "Amyotrophic lateral sclerosis with autonomic dysfunction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259127007",
+        "display": "Amyotrophic lateral sclerosis with cerebellar dysfunction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259129005",
+        "display": "Amyotrophic lateral sclerosis with spinocerebellar ataxia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "128212001",
+        "display": "Spinal muscular atrophy, type II (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "129620000",
+        "display": "Scapuloperoneal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "129621001",
+        "display": "Nemaline myopathy, early onset type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "129622008",
+        "display": "Nemaline myopathy, late onset type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "17940001",
+        "display": "Toxic neuromuscular junction disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193209005",
+        "display": "Myasthenic syndrome due to another disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193212008",
+        "display": "Myasthenic syndrome due to hypothyroidism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193213003",
+        "display": "Myasthenic syndrome due to pernicious anemia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193214009",
+        "display": "Myasthenic syndrome due to thyrotoxicosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193225000",
+        "display": "Hereditary progressive muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193230001",
+        "display": "Distal muscular dystrophy with juvenile onset (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193237003",
+        "display": "Myotonic disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193246009",
+        "display": "Symptomatic inflammatory myopathy associated with another disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193248005",
+        "display": "Myopathy due to disseminated lupus erythematosus (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193249002",
+        "display": "Myopathy due to polyarteritis nodosa (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193250002",
+        "display": "Myopathy due to rheumatoid arthritis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193251003",
+        "display": "Sarcoid myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193252005",
+        "display": "Myopathy due to scleroderma (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "193253000",
+        "display": "Myopathy due to Sjögren's disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "196136009",
+        "display": "Lung disease co-occurrent with polymyositis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "20305008",
+        "display": "Congenital myotonia, autosomal recessive form (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "203662005",
+        "display": "Neuromuscular scoliosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "22881000119100",
+        "display": "Quadriplegia with quadriparesis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "229221000119103",
+        "display": "Myopathy due to Cushing's syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230246005",
+        "display": "Progressive bulbar palsy of childhood (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230247001",
+        "display": "Distal spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230248006",
+        "display": "Scapuloperoneal spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230249003",
+        "display": "Facioscapulohumeral spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230250003",
+        "display": "Facioscapulohumeral spinal muscular atrophy with sensory loss (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230251004",
+        "display": "Scapulohumeral spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230252006",
+        "display": "Oculopharyngeal spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230254007",
+        "display": "Western Pacific motor neurone disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230255008",
+        "display": "Madras-type motor neurone disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230257000",
+        "display": "Paraneoplastic motor neurone disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230258005",
+        "display": "Amyotrophic lateral sclerosis with dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230274000",
+        "display": "Frontal lobe degeneration with motor neurone disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230672006",
+        "display": "Congenital myasthenic syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230685009",
+        "display": "Myasthenia gravis associated with thymoma (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230687001",
+        "display": "Myopathy in myasthenia gravis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240046001",
+        "display": "Muscular dystrophy with predominantly proximal limb girdle distribution (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240047005",
+        "display": "X-linked muscular dystrophy with limb girdle distribution (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240048000",
+        "display": "X-linked muscular dystrophy with abnormal dystrophin (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240049008",
+        "display": "Intermediate X-linked muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240051007",
+        "display": "X-linked limb girdle muscular dystrophy with normal dystrophin (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240054004",
+        "display": "Autosomal recessive muscular dystrophy with limb girdle distribution (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240055003",
+        "display": "Autosomal recessive muscular dystrophy with abnormal dystrophin-associated glycoprotein (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240058001",
+        "display": "Reunion-Indiana Amish type muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240060004",
+        "display": "Western type of congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240061000",
+        "display": "Congenital muscular dystrophy with arthrogryposis multiplex congenita (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240062007",
+        "display": "Ullrich congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240063002",
+        "display": "Eichsfeld type congenital muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240064008",
+        "display": "Hutterite type of muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240065009",
+        "display": "Adult onset autosomal recessive muscular dystrophy with normal dystrophin (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240067001",
+        "display": "Autosomal dominant muscular dystrophy with limb girdle distribution (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240068006",
+        "display": "Autosomal dominant muscular dystrophy with gene located at 5q31 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240069003",
+        "display": "Late onset proximal muscular dystrophy with dysarthria (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240070002",
+        "display": "Muscular dystrophy not predominantly limb girdle in distribution (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240071003",
+        "display": "X-linked muscular dystrophy not predominantly limb girdle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240073000",
+        "display": "Autosomal recessive muscular dystrophy not predominantly limb girdle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240074006",
+        "display": "Scapulohumeral muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240075007",
+        "display": "Autosomal dominant muscular dystrophy not predominantly limb girdle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240076008",
+        "display": "Benign scapuloperoneal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240077004",
+        "display": "Severe scapuloperoneal muscular dystrophy with cardiomyopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240078009",
+        "display": "Benign congenital muscular dystrophy with finger flexion contractures (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240081004",
+        "display": "Autosomal recessive centronuclear myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240100004",
+        "display": "Myopathy caused by snake bite (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "240104008",
+        "display": "Congenital myotonic dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "24800001000004103",
+        "display": "Functional quadriplegia due to multiple sclerosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "24861000119103",
+        "display": "Symptomatic inflammatory myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "257277002",
+        "display": "Combined disorder of muscle AND peripheral nerve (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "267604001",
+        "display": "Myasthenic syndrome due to diabetic mellitus (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "267607008",
+        "display": "Familial periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "274864009",
+        "display": "Glycogen storage disease, type II (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "275468009",
+        "display": "Congenital quadriplegia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "29145002",
+        "display": "Schwartz-Jampel syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "292991000119106",
+        "display": "Eaton Lambert syndrome without underlying malignancy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "296241000119107",
+        "display": "Disorder of respiratory system due to dermatomyositis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "304737009",
+        "display": "Familial hyperkalemic periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "30967002",
+        "display": "Thyrotoxic periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "31097004",
+        "display": "Post poliomyelitis syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "311671000119100",
+        "display": "Juvenile dermatomyositis co-occurrent with respiratory involvement (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314341000119101",
+        "display": "Neuromuscular scoliosis of cervical spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314351000119104",
+        "display": "Neuromuscular scoliosis of cervicothoracic spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314361000119102",
+        "display": "Neuromuscular scoliosis of lumbar spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314371000119108",
+        "display": "Neuromuscular scoliosis of lumbosacral spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314391000119109",
+        "display": "Neuromuscular scoliosis of thoracic spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "314401000119106",
+        "display": "Neuromuscular scoliosis of thoracolumbar spine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "31839002",
+        "display": "Myasthenia gravis, adult form (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "329741000119109",
+        "display": "Neuromuscular scoliosis of lumbar spine co-occurrent and due to cerebral palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "329841000119103",
+        "display": "Neuromuscular scoliosis due to poliomyelitis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "330471000119101",
+        "display": "Neuromuscular scoliosis co-occurrent and due to cerebral palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "330521000119103",
+        "display": "Neuromuscular scoliosis of thoracolumbar spine co-occurrent and due to cerebral palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "3434004",
+        "display": "Myotonia (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "37340000",
+        "display": "Motor neuron disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "387732009",
+        "display": "Becker muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "3971006",
+        "display": "Duchenne muscular dystrophy carrier detection (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "398102009",
+        "display": "Acute poliomyelitis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "399091004",
+        "display": "Facioscapulohumeral muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "40381009",
+        "display": "Familial normokalemic periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "40956001",
+        "display": "Guillain-Barré syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "422348008",
+        "display": "Andersen Tawil syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "441705005",
+        "display": "Complete quadriplegia due to spinal cord lesion between first and fourth cervical vertebra (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "441980007",
+        "display": "Complete quadriplegia due to spinal cord lesion between fifth and seventh cervical vertebra (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "443819006",
+        "display": "Critical illness myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "46804001",
+        "display": "Severe X-linked myotubular myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "48721008",
+        "display": "Quadriplegic cerebral palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "49793008",
+        "display": "Hereditary motor neuron disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "5262007",
+        "display": "Spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "54280009",
+        "display": "Kugelberg-Welander disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "54304004",
+        "display": "Progressive bulbar palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "56989000",
+        "display": "Eaton-Lambert syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "57938005",
+        "display": "Congenital myotonia, autosomal dominant form (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "58795000",
+        "display": "Distal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "608874000",
+        "display": "Eaton Lambert syndrome with underlying malignancy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "64383006",
+        "display": "Werdnig-Hoffmann disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "68437005",
+        "display": "Thyrotoxic myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "698741009",
+        "display": "Acute complete quadriplegia due to spinal cord lesion between first and fourth cervical vertebra (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "698743007",
+        "display": "Acute complete quadriplegia due to spinal cord lesion between fifth and seventh cervical vertebra (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "698846009",
+        "display": "Tibial muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "699866005",
+        "display": "Progressive bulbar palsy with sensorineural deafness (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "702343002",
+        "display": "Early onset myopathy with fatal cardiomyopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "702349003",
+        "display": "Actin accumulation myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "702380008",
+        "display": "Idiopathic inflammatory myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "702424003",
+        "display": "Dilated cardiomyopathy 3B (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "703524005",
+        "display": "Spinal muscular atrophy with progressive myoclonic epilepsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "703544004",
+        "display": "Inclusion body myopathy with early-onset Paget disease and frontotemporal dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "711406009",
+        "display": "Autosomal recessive axonal neuropathy with neuromyotonia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "711483003",
+        "display": "Spinal muscular atrophy with respiratory distress type 1 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715317001",
+        "display": "Proximal myotonic myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715340002",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2D (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715341003",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2A (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715429006",
+        "display": "Congenital muscular dystrophy with infantile cataract and hypogonadism syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715788001",
+        "display": "Myotonia fluctuans (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715789009",
+        "display": "Myotonia permanens (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715793003",
+        "display": "Acetazolamide responsive myotonia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "715863001",
+        "display": "Autoimmune necrotizing myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "716696006",
+        "display": "Autosomal dominant centronuclear myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "716722005",
+        "display": "Acute motor sensory axonal Guillain-Barré syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "716723000",
+        "display": "Guillain-Barré syndrome acute inflammatory demyelinating polyradiculoneuropathic form (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718176005",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2C (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718177001",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2F (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718179003",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2B (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718180000",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2I (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718555006",
+        "display": "Juvenile amyotrophic lateral sclerosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "718850008",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2E (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719836007",
+        "display": "X-linked distal arthrogryposis multiplex congenita (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719985001",
+        "display": "Autosomal dominant limb girdle muscular dystrophy type 1A (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719987009",
+        "display": "Autosomal dominant limb girdle muscular dystrophy type 1D (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719988004",
+        "display": "Autosomal dominant limb girdle muscular dystrophy type 1E (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719989007",
+        "display": "Autosomal dominant limb girdle muscular dystrophy type 1F (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "719990003",
+        "display": "Autosomal dominant limb girdle muscular dystrophy type 1G (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "720522001",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2G (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "720523006",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2K (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "721190004",
+        "display": "Myopathy due to magnesium deficiency (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "722060007",
+        "display": "Oculogastrointestinal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "722302009",
+        "display": "Glycogen storage disease type II infantile onset (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "722343009",
+        "display": "Glycogen storage disease type II late onset (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "722987009",
+        "display": "Amyotrophic lateral sclerosis plus syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "72315009",
+        "display": "Inclusion body myositis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "723308003",
+        "display": "Epidermolysis bullosa simplex with muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "723407009",
+        "display": "Muscular dystrophy Selcen type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "723612001",
+        "display": "Spinal muscular atrophy, Dandy-Walker malformation, cataract syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "724095006",
+        "display": "Myopathy due to calsequestrin and sarcoplasmic/endoplasmic reticulum calcium ATPase 1 protein overload (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "724559006",
+        "display": "Myopathy co-occurrent and due to hypercalcemia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "725042001",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2J (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "725043006",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2O (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "725420009",
+        "display": "Congenital muscular dystrophy Paradas type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "725907002",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2Y (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726051002",
+        "display": "Myotonia congenita (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726614009",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2P (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726615005",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2Q (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726616006",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2L (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726617002",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2N (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726618007",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2M (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "732929002",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2S (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "732930007",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2T (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "73297009",
+        "display": "Muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "7409003",
+        "display": "Secondary periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "74116004",
+        "display": "Nutritional muscular degeneration (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "75072002",
+        "display": "Nemaline myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "763067000",
+        "display": "Autosomal dominant congenital benign spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "763314009",
+        "display": "Congenital muscular dystrophy with hyperlaxity (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "763315005",
+        "display": "Congenital myopathy with myasthenic-like onset (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "763533003",
+        "display": "Distal hereditary motor neuropathy Jerash type (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "764944006",
+        "display": "Congenital muscular dystrophy type 1B (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "764945007",
+        "display": "Congenital myopathy with internal nuclei and atypical cores (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "76670001",
+        "display": "Duchenne muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "766706007",
+        "display": "Inflammatory myopathy with abundant macrophages (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "766715000",
+        "display": "Metabolic myopathy due to lactate transporter defect (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "766722008",
+        "display": "Paraparetic variant of Guillain-Barré syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "766764008",
+        "display": "X-linked distal spinal muscular atrophy type 3 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "770430000",
+        "display": "Autosomal recessive distal spinal muscular atrophy type 3 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "770630005",
+        "display": "Distal hereditary motor neuropathy type 1 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "770727008",
+        "display": "Spinal muscular atrophy with respiratory distress type 2 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "770792007",
+        "display": "Adult-onset distal myopathy due to valosin containing protein mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "77097004",
+        "display": "Oculopharyngeal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771081007",
+        "display": "Distal hereditary motor neuropathy type 7 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771267003",
+        "display": "Congenital muscular dystrophy with integrin alpha-7 deficiency (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771272007",
+        "display": "Congenital muscular dystrophy due to lamin A/C mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771302009",
+        "display": "Autosomal recessive lower motor neuron disease with childhood onset (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771334000",
+        "display": "Autosomal dominant limb-girdle muscular dystrophy type 1H (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "771475006",
+        "display": "Young adult-onset distal hereditary motor neuropathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "772129007",
+        "display": "Autosomal dominant childhood-onset proximal spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "774153002",
+        "display": "Periodic paralysis with transient compartment-like syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "774154008",
+        "display": "Periodic paralysis with later-onset distal motor neuropathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "77461000119109",
+        "display": "Myasthenia gravis with exacerbation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "77471000119103",
+        "display": "Myasthenia gravis without exacerbation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "77956009",
+        "display": "Steinert myotonic dystrophy syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "782772000",
+        "display": "Congenital muscular dystrophy with intellectual disability and severe epilepsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "782941005",
+        "display": "Richieri Costa-da Silva syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783010003",
+        "display": "Pharyngeal-cervical-brachial variant of Guillain-Barré syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783166000",
+        "display": "Distal anoctaminopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783174004",
+        "display": "Congenital muscular dystrophy with intellectual disability (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783175003",
+        "display": "Congenital muscular dystrophy without intellectual disability (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783176002",
+        "display": "Congenital muscular dystrophy with cerebellar involvement (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "783554002",
+        "display": "Autosomal recessive limb girdle muscular dystrophy type 2U (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "784341001",
+        "display": "Amyotrophic lateral sclerosis type 4 (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "784352007",
+        "display": "X-linked scapuloperoneal muscular dystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "784391002",
+        "display": "Autosomal dominant adult-onset proximal spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "787037000",
+        "display": "Congenital muscular dystrophy type 1A (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "80976008",
+        "display": "Myasthenic crisis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "81211007",
+        "display": "Primary lateral sclerosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "82077006",
+        "display": "Myotubular myopathy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "82732003",
+        "display": "Familial hypokalemic periodic paralysis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "838276009",
+        "display": "Amyotrophic lateral sclerosis, parkinsonism, dementia complex (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "84590007",
+        "display": "Lower motor neuron disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "85034001",
+        "display": "Myotonia acquisita (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "85505000",
+        "display": "Adult spinal muscular atrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "86044005",
+        "display": "Amyotrophic lateral sclerosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "866051002",
+        "display": "Motor neuron disease due to lead intoxication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "866103007",
+        "display": "Interstitial lung disease due to juvenile polymyositis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "870297003",
+        "display": "Myopathy due to chronic alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "870299000",
+        "display": "Myopathy due to calcium deficiency (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "890368007",
+        "display": "Congenital muscular dystrophy type 1C due to fukutin related protein gene mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "890395002",
+        "display": "Congenital muscular dystrophy type 1D large gene mutation (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "8960007",
+        "display": "Myotonia levior (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "91637004",
+        "display": "Myasthenia gravis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "95647008",
+        "display": "Upper motor neuron disease (disorder)"
+      }
+    ]
+  }
+}

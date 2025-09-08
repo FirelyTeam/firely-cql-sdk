@@ -1,0 +1,95 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.209",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.209",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.209"
+    }
+  ],
+  "version": "20240112",
+  "name": "NonInvasiveOxygenTherapybyNasalCannulaorMask",
+  "title": "Non Invasive Oxygen Therapy by Nasal Cannula or Mask",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1259025002",
+        "display": "Heated and humidified high flow oxygen therapy using nasal cannula (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "243136002",
+        "display": "Short-term oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "243137006",
+        "display": "Long-term oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "304577004",
+        "display": "Humidified oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "31253009",
+        "display": "Application of tracheostomy mask using jet humidifier (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "315041000",
+        "display": "High concentration oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "371907003",
+        "display": "Oxygen administration by nasal cannula (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "371908008",
+        "display": "Oxygen administration by mask (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "429253002",
+        "display": "Oxygen administration by Venturi mask (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "57485005",
+        "display": "Oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "71786000",
+        "display": "Intranasal oxygen therapy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "870533002",
+        "display": "Heated and humidified high flow oxygen therapy (procedure)"
+      }
+    ]
+  }
+}

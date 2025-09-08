@@ -1,0 +1,35 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.221",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.221",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.221"
+    }
+  ],
+  "version": "20230520",
+  "name": "Albuminlabtest",
+  "title": "Albumin lab test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:11-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "1751-7",
+        "display": "Albumin [Mass/volume] in Serum or Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "54347-0",
+        "display": "Albumin [Moles/volume] in Serum or Plasma"
+      }
+    ]
+  }
+}

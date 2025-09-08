@@ -1,0 +1,35 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.95",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.95",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.95"
+    }
+  ],
+  "version": "20240109",
+  "name": "CarbonDioxidePartialPressureinArterialBlood",
+  "title": "Carbon Dioxide Partial Pressure in Arterial Blood",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:13-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "2019-8",
+        "display": "Carbon dioxide [Partial pressure] in Arterial blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "32771-8",
+        "display": "Carbon dioxide [Partial pressure] adjusted to patient's actual temperature in Arterial blood"
+      }
+    ]
+  }
+}

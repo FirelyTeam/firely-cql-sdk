@@ -1,0 +1,53 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.198.12.1013",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113883.3.464.1003.198.12.1013"
+    }
+  ],
+  "version": "20170504",
+  "name": "HbA1cLaboratoryTest",
+  "title": "HbA1c Laboratory Test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:17-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "17855-8",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood by calculation"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "17856-6",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood by HPLC"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "4548-4",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "4549-2",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood by Electrophoresis"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "96595-4",
+        "display": "Hemoglobin A1c/Hemoglobin.total in DBS"
+      }
+    ]
+  }
+}

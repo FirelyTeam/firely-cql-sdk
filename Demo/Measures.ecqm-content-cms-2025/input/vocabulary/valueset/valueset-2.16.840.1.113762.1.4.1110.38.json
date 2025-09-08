@@ -1,0 +1,41 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1110.38",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1110.38"
+    }
+  ],
+  "version": "20190426",
+  "name": "OutpatientSurgeryService",
+  "title": "Outpatient Surgery Service",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "110468005",
+        "display": "Ambulatory surgery (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "709063003",
+        "display": "Admission to same day surgery center (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "711580002",
+        "display": "Minor ambulatory surgery (procedure)"
+      }
+    ]
+  }
+}

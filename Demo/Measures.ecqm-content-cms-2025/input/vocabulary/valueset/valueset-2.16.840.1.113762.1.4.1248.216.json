@@ -1,0 +1,47 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.216",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.216",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.216"
+    }
+  ],
+  "version": "20230512",
+  "name": "ProceduralHospitalLocations",
+  "title": "Procedural Hospital Locations",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "code": "1005-8",
+        "display": "Cardiac Catheterization Room/Suite"
+      },
+      {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "code": "1007-4",
+        "display": "Endoscopy Suite"
+      },
+      {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "code": "1096-7",
+        "display": "Operating Room/Suite"
+      },
+      {
+        "system": "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html",
+        "version": "2022",
+        "code": "1203-9",
+        "display": "Interventional Radiology"
+      }
+    ]
+  }
+}

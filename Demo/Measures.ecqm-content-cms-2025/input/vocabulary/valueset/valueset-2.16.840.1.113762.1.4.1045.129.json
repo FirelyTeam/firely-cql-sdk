@@ -1,0 +1,65 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1045.129",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1045.129"
+    }
+  ],
+  "version": "20230214",
+  "name": "WhiteBloodCellsCountLabTest",
+  "title": "White Blood Cells Count Lab Test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "12227-5",
+        "display": "Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "26464-8",
+        "display": "Leukocytes [#/volume] in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "33256-9",
+        "display": "Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "49498-9",
+        "display": "Leukocytes [#/volume] in Blood by Estimate"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "6690-2",
+        "display": "Leukocytes [#/volume] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "804-5",
+        "display": "Leukocytes [#/volume] in Blood by Manual count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "92635-2",
+        "display": "Leukocytes [#/volume] in Buffy Coat"
+      }
+    ]
+  }
+}

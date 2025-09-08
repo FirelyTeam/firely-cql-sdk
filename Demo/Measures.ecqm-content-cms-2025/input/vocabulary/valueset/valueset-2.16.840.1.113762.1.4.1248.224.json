@@ -1,0 +1,41 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.224",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.224",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.224"
+    }
+  ],
+  "version": "20230520",
+  "name": "Aspartatetransaminaselabtest",
+  "title": "Aspartate transaminase lab test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:12-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "1920-8",
+        "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "30239-8",
+        "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by With P-5'-P"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "88112-8",
+        "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P"
+      }
+    ]
+  }
+}

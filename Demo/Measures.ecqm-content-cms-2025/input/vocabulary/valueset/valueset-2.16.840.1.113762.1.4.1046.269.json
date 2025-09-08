@@ -1,0 +1,203 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1046.269",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.269",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1046.269"
+    }
+  ],
+  "version": "20240215",
+  "name": "MedicationsforOpioidUseDisorder(MOUD)",
+  "title": "Medications for Opioid Use Disorder (MOUD)",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:21-07:00",
+    "contains": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1010600",
+        "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1010604",
+        "display": "buprenorphine 8 MG / naloxone 2 MG Sublingual Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1307056",
+        "display": "buprenorphine 4 MG / naloxone 1 MG Sublingual Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1307061",
+        "display": "buprenorphine 12 MG / naloxone 3 MG Sublingual Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1431076",
+        "display": "buprenorphine 1.4 MG / naloxone 0.36 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1431102",
+        "display": "buprenorphine 5.7 MG / naloxone 1.4 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1432969",
+        "display": "168 HR buprenorphine 0.015 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1542390",
+        "display": "buprenorphine 2.1 MG / naloxone 0.3 MG Buccal Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1542997",
+        "display": "168 HR buprenorphine 0.0075 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1544851",
+        "display": "buprenorphine 4.2 MG / naloxone 0.7 MG Buccal Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1544854",
+        "display": "buprenorphine 6.3 MG / naloxone 1 MG Buccal Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1597568",
+        "display": "buprenorphine 11.4 MG / naloxone 2.9 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1597573",
+        "display": "buprenorphine 8.6 MG / naloxone 2.1 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1666338",
+        "display": "buprenorphine 2.9 MG / naloxone 0.71 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "238129",
+        "display": "1 ML buprenorphine 0.3 MG/ML Injection"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351264",
+        "display": "buprenorphine 2 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351265",
+        "display": "buprenorphine 8 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351266",
+        "display": "buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351267",
+        "display": "buprenorphine 8 MG / naloxone 2 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "637213",
+        "display": "naltrexone 380 MG Injection"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864706",
+        "display": "methadone hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864714",
+        "display": "methadone hydrochloride 10 MG/ML Injectable Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864718",
+        "display": "methadone hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864761",
+        "display": "methadone hydrochloride 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864769",
+        "display": "methadone hydrochloride 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "864978",
+        "display": "methadone hydrochloride 40 MG Tablet for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "904870",
+        "display": "168 HR buprenorphine 0.01 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "904876",
+        "display": "168 HR buprenorphine 0.02 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "904880",
+        "display": "168 HR buprenorphine 0.005 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991147",
+        "display": "methadone hydrochloride 10 MG/ML Oral Solution"
+      }
+    ]
+  }
+}

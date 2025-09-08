@@ -1,0 +1,63 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1258.2",
+  "meta": {
+    "versionId": "7",
+    "lastUpdated": "2024-10-12T01:02:34-04:00"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+      "valueDateTime": "2024-10-12T01:02:34-04:00"
+    }
+  ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1258.2",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113762.1.4.1258.2"
+    }
+  ],
+  "version": "20241012",
+  "name": "AbnormalWeightLoss",
+  "title": "Abnormal Weight Loss",
+  "status": "active",
+  "date": "2024-10-12T01:02:34-04:00",
+  "publisher": "Mathematica PSI Steward",
+  "expansion": {
+    "identifier": "urn:uuid:328d2894-10f2-40b0-af22-c4396861a9d0",
+    "timestamp": "2025-07-17T09:52:45-04:00",
+    "total": 3,
+    "offset": 0,
+    "parameter": [
+      {
+        "name": "count",
+        "valueInteger": 1000
+      },
+      {
+        "name": "offset",
+        "valueInteger": 0
+      }
+    ],
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2025",
+        "code": "R63.4",
+        "display": "Abnormal weight loss"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2025",
+        "code": "R64",
+        "display": "Cachexia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2025",
+        "code": "Z68.1",
+        "display": "Body mass index [BMI] 19.9 or less, adult"
+      }
+    ]
+  }
+}

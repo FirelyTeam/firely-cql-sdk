@@ -1,0 +1,185 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.162",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.162"
+    }
+  ],
+  "version": "20221006",
+  "name": "Obesity",
+  "title": "Obesity",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.01",
+        "display": "Morbid (severe) obesity due to excess calories"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.09",
+        "display": "Other obesity due to excess calories"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.1",
+        "display": "Drug-induced obesity"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.2",
+        "display": "Morbid (severe) obesity with alveolar hypoventilation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.8",
+        "display": "Other obesity"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E66.9",
+        "display": "Obesity, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.210",
+        "display": "Obesity complicating pregnancy, unspecified trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.211",
+        "display": "Obesity complicating pregnancy, first trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.212",
+        "display": "Obesity complicating pregnancy, second trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.213",
+        "display": "Obesity complicating pregnancy, third trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.214",
+        "display": "Obesity complicating childbirth"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.215",
+        "display": "Obesity complicating the puerperium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.30",
+        "display": "Body mass index [BMI] 30.0-30.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.31",
+        "display": "Body mass index [BMI] 31.0-31.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.32",
+        "display": "Body mass index [BMI] 32.0-32.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.33",
+        "display": "Body mass index [BMI] 33.0-33.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.34",
+        "display": "Body mass index [BMI] 34.0-34.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.35",
+        "display": "Body mass index [BMI] 35.0-35.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.36",
+        "display": "Body mass index [BMI] 36.0-36.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.37",
+        "display": "Body mass index [BMI] 37.0-37.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.38",
+        "display": "Body mass index [BMI] 38.0-38.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.39",
+        "display": "Body mass index [BMI] 39.0-39.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.41",
+        "display": "Body mass index [BMI] 40.0-44.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.42",
+        "display": "Body mass index [BMI] 45.0-49.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.43",
+        "display": "Body mass index [BMI] 50.0-59.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.44",
+        "display": "Body mass index [BMI] 60.0-69.9, adult"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z68.45",
+        "display": "Body mass index [BMI] 70 or greater, adult"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.85",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.85",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.85"
+    }
+  ],
+  "version": "20230518",
+  "name": "ElectiveInpatientEncounter",
+  "title": "Elective Inpatient Encounter",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:16-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "112689000",
+        "display": "Hospital admission, elective, with complete pre-admission work-up (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "15584006",
+        "display": "Hospital admission, elective, with partial pre-admission work-up (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "81672003",
+        "display": "Hospital admission, elective, without pre-admission work-up (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "8715000",
+        "display": "Hospital admission, elective (procedure)"
+      }
+    ]
+  }
+}

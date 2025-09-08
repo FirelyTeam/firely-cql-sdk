@@ -1,0 +1,755 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.163",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.163"
+    }
+  ],
+  "version": "20240119",
+  "name": "Antidepressants",
+  "title": "Antidepressants",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:11-07:00",
+    "contains": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000048",
+        "display": "doxepin 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000054",
+        "display": "doxepin 10 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000058",
+        "display": "doxepin 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000064",
+        "display": "doxepin 150 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000070",
+        "display": "doxepin 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000076",
+        "display": "doxepin 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000097",
+        "display": "doxepin 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1086772",
+        "display": "vilazodone hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1086778",
+        "display": "vilazodone hydrochloride 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1086784",
+        "display": "vilazodone hydrochloride 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099288",
+        "display": "desipramine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099292",
+        "display": "desipramine hydrochloride 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099296",
+        "display": "desipramine hydrochloride 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099300",
+        "display": "desipramine hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099304",
+        "display": "desipramine hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099316",
+        "display": "desipramine hydrochloride 75 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1190110",
+        "display": "fluoxetine 60 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298861",
+        "display": "maprotiline hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298870",
+        "display": "maprotiline hydrochloride 75 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1430122",
+        "display": "paroxetine mesylate 7.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1607617",
+        "display": "24 HR desvenlafaxine succinate 25 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738483",
+        "display": "paroxetine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738495",
+        "display": "paroxetine hydrochloride 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738503",
+        "display": "paroxetine hydrochloride 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738511",
+        "display": "paroxetine hydrochloride 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738515",
+        "display": "paroxetine mesylate 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738519",
+        "display": "paroxetine mesylate 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738523",
+        "display": "paroxetine mesylate 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738527",
+        "display": "paroxetine mesylate 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738803",
+        "display": "24 HR paroxetine hydrochloride 12.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738805",
+        "display": "24 HR paroxetine hydrochloride 25 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1738807",
+        "display": "24 HR paroxetine hydrochloride 37.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1874553",
+        "display": "24 HR desvenlafaxine succinate 100 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1874559",
+        "display": "24 HR desvenlafaxine succinate 50 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197363",
+        "display": "amoxapine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197364",
+        "display": "amoxapine 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197365",
+        "display": "amoxapine 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197366",
+        "display": "amoxapine 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198045",
+        "display": "nortriptyline 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198046",
+        "display": "nortriptyline 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198047",
+        "display": "nortriptyline 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "200371",
+        "display": "citalopram 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2200168",
+        "display": "Sprinkle duloxetine 20 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2200175",
+        "display": "Sprinkle duloxetine 30 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2200178",
+        "display": "Sprinkle duloxetine 40 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2200181",
+        "display": "Sprinkle duloxetine 60 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "248642",
+        "display": "fluoxetine 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "251201",
+        "display": "sertraline 200 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2532159",
+        "display": "PMDD fluoxetine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2532163",
+        "display": "PMDD fluoxetine 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2591786",
+        "display": "citalopram 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "283672",
+        "display": "citalopram 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "309313",
+        "display": "citalopram 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "309314",
+        "display": "citalopram 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310384",
+        "display": "fluoxetine 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310385",
+        "display": "fluoxetine 20 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310386",
+        "display": "fluoxetine 4 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312036",
+        "display": "nortriptyline 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312242",
+        "display": "paroxetine hydrochloride 2 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312938",
+        "display": "sertraline 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312940",
+        "display": "sertraline 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312941",
+        "display": "sertraline 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313496",
+        "display": "trimipramine 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313498",
+        "display": "trimipramine 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313499",
+        "display": "trimipramine 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313989",
+        "display": "fluoxetine 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313990",
+        "display": "fluoxetine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313995",
+        "display": "fluoxetine 90 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "317136",
+        "display": "nortriptyline 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349332",
+        "display": "escitalopram 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351249",
+        "display": "escitalopram 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351250",
+        "display": "escitalopram 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351285",
+        "display": "escitalopram 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403969",
+        "display": "fluoxetine 25 MG / olanzapine 6 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403970",
+        "display": "fluoxetine 25 MG / olanzapine 12 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403971",
+        "display": "fluoxetine 50 MG / olanzapine 12 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403972",
+        "display": "fluoxetine 50 MG / olanzapine 6 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "410584",
+        "display": "sertraline 150 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "596926",
+        "display": "duloxetine 20 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "596930",
+        "display": "duloxetine 30 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "596934",
+        "display": "duloxetine 60 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "616402",
+        "display": "duloxetine 40 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721787",
+        "display": "fluoxetine 25 MG / olanzapine 3 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "790264",
+        "display": "24 HR desvenlafaxine 100 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "790288",
+        "display": "24 HR desvenlafaxine 50 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "833135",
+        "display": "milnacipran hydrochloride 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "833141",
+        "display": "milnacipran hydrochloride 12.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "833144",
+        "display": "milnacipran hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "833147",
+        "display": "milnacipran hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835564",
+        "display": "imipramine hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835568",
+        "display": "imipramine hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835572",
+        "display": "imipramine pamoate 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835577",
+        "display": "imipramine pamoate 150 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835589",
+        "display": "imipramine pamoate 125 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835591",
+        "display": "imipramine pamoate 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835593",
+        "display": "imipramine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856706",
+        "display": "amitriptyline hydrochloride 10 MG / perphenazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856720",
+        "display": "amitriptyline hydrochloride 10 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856762",
+        "display": "amitriptyline hydrochloride 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856769",
+        "display": "amitriptyline hydrochloride 12.5 MG / chlordiazepoxide 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856773",
+        "display": "amitriptyline hydrochloride 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856783",
+        "display": "amitriptyline hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856792",
+        "display": "amitriptyline hydrochloride 25 MG / chlordiazepoxide 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856797",
+        "display": "amitriptyline hydrochloride 25 MG / perphenazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856825",
+        "display": "amitriptyline hydrochloride 25 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856834",
+        "display": "amitriptyline hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856840",
+        "display": "amitriptyline hydrochloride 50 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856845",
+        "display": "amitriptyline hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856853",
+        "display": "amitriptyline hydrochloride 75 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "857297",
+        "display": "clomipramine hydrochloride 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "857301",
+        "display": "clomipramine hydrochloride 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "857305",
+        "display": "clomipramine hydrochloride 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "861064",
+        "display": "sertraline 20 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "903873",
+        "display": "24 HR fluvoxamine maleate 100 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "903879",
+        "display": "24 HR fluvoxamine maleate 150 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "903884",
+        "display": "fluvoxamine maleate 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "903887",
+        "display": "fluvoxamine maleate 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "903891",
+        "display": "fluvoxamine maleate 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "905168",
+        "display": "protriptyline hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "905172",
+        "display": "protriptyline hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "966787",
+        "display": "doxepin 3 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "966793",
+        "display": "doxepin 6 MG Oral Tablet"
+      }
+    ]
+  }
+}

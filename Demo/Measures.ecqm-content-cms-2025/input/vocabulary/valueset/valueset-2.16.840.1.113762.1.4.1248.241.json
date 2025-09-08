@@ -1,0 +1,377 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.241",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.241",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.241"
+    }
+  ],
+  "version": "20230923",
+  "name": "DegenerativeNeurologicalDisorder",
+  "title": "Degenerative Neurological Disorder",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:16-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C0",
+        "display": "Vascular dementia, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C11",
+        "display": "Vascular dementia, severe, with agitation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C18",
+        "display": "Vascular dementia, severe, with other behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C2",
+        "display": "Vascular dementia, severe, with psychotic disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C3",
+        "display": "Vascular dementia, severe, with mood disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F01.C4",
+        "display": "Vascular dementia, severe, with anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C0",
+        "display": "Dementia in other diseases classified elsewhere, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C11",
+        "display": "Dementia in other diseases classified elsewhere, severe, with agitation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C18",
+        "display": "Dementia in other diseases classified elsewhere, severe, with other behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C2",
+        "display": "Dementia in other diseases classified elsewhere, severe, with psychotic disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C3",
+        "display": "Dementia in other diseases classified elsewhere, severe, with mood disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F02.C4",
+        "display": "Dementia in other diseases classified elsewhere, severe, with anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C0",
+        "display": "Unspecified dementia, severe, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C11",
+        "display": "Unspecified dementia, severe, with agitation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C18",
+        "display": "Unspecified dementia, severe, with other behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C2",
+        "display": "Unspecified dementia, severe, with psychotic disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C3",
+        "display": "Unspecified dementia, severe, with mood disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F03.C4",
+        "display": "Unspecified dementia, severe, with anxiety"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F04",
+        "display": "Amnestic disorder due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F05",
+        "display": "Delirium due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F06.0",
+        "display": "Psychotic disorder with hallucinations due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F06.1",
+        "display": "Catatonic disorder due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F06.8",
+        "display": "Other specified mental disorders due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F07.0",
+        "display": "Personality change due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F07.89",
+        "display": "Other personality and behavioral disorders due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F07.9",
+        "display": "Unspecified personality and behavioral disorder due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F09",
+        "display": "Unspecified mental disorder due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F48.2",
+        "display": "Pseudobulbar affect"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.01",
+        "display": "Pick's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.09",
+        "display": "Other frontotemporal neurocognitive disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.1",
+        "display": "Senile degeneration of brain, not elsewhere classified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.80",
+        "display": "Leukodystrophy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.83",
+        "display": "Neurocognitive disorder with Lewy bodies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.85",
+        "display": "Corticobasal degeneration"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G31.86",
+        "display": "Alexander disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.82",
+        "display": "Brain death"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "105451000119102",
+        "display": "Amnestic disorder associated with general medical condition (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "111479008",
+        "display": "Organic mental disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "130121000119104",
+        "display": "Dementia due to Rett's syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "135811000119107",
+        "display": "Lewy body dementia with behavioral disturbance (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1376001",
+        "display": "Obsessive compulsive personality disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "17262008",
+        "display": "Non-alcoholic Korsakoff's psychosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "191447007",
+        "display": "Organic psychotic condition (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "192781003",
+        "display": "Leukodystrophy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "21921000119103",
+        "display": "Dementia co-occurrent and due to Pick's disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230271008",
+        "display": "Pick's disease with Pick bodies (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230272001",
+        "display": "Pick's disease with Pick cells and no Pick bodies (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230802007",
+        "display": "Brainstem death (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231440006",
+        "display": "Delirium of mixed origin (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231442003",
+        "display": "Organic catatonic disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "249892007",
+        "display": "Progressive pseudobulbar palsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "268612007",
+        "display": "Senile and presenile organic psychotic conditions (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "33449004",
+        "display": "Personality disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428351000124105",
+        "display": "Severe dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "432776007",
+        "display": "Pseudobulbar affect (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "69482004",
+        "display": "Korsakoff's psychosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "80098002",
+        "display": "Diffuse Lewy body disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "81854007",
+        "display": "Alexander's disease (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "82351000119105",
+        "display": "Altered behavior due to Pick's disease (disorder)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.198.12.1005",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113883.3.464.1003.198.12.1005"
+    }
+  ],
+  "version": "20240105",
+  "name": "BilateralMastectomy",
+  "title": "Bilateral Mastectomy",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:12-07:00",
+    "contains": [
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0HTV0ZZ",
+        "display": "Resection of Bilateral Breast, Open Approach"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1268980002",
+        "display": "Simple mastectomy of right breast and prophylactic mastectomy of left breast (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1269061009",
+        "display": "Simple mastectomy of left breast and prophylactic mastectomy of right breast (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1279986002",
+        "display": "Excision of bilateral nipples (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "14693006",
+        "display": "Subcutaneous mammectomy of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "14714006",
+        "display": "Excision of bilateral breasts with excision of bilateral regional lymph nodes (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "17086001",
+        "display": "Modified radical mastectomy, bilateral (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "22418005",
+        "display": "Simple mastectomy of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "27865001",
+        "display": "Excision of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "456903003",
+        "display": "Extended radical mastectomy of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "52314009",
+        "display": "Extended simple mastectomy of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "60633004",
+        "display": "Subcutaneous mammectomy of bilateral breasts with synchronous implants (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "726636007",
+        "display": "Prophylactic bilateral mastectomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "76468001",
+        "display": "Radical mastectomy of bilateral breasts (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "836436008",
+        "display": "Simple mastectomy of bilateral breasts using robotic assistance (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "870629001",
+        "display": "Excision of bilateral breasts for female to male transsexual (procedure)"
+      }
+    ]
+  }
+}

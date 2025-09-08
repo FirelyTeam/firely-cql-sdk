@@ -1,0 +1,185 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.24",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.24"
+    }
+  ],
+  "version": "20221006",
+  "name": "MalignantBoneDisease",
+  "title": "Malignant Bone Disease",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:21-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.00",
+        "display": "Malignant neoplasm of scapula and long bones of unspecified upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.01",
+        "display": "Malignant neoplasm of scapula and long bones of right upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.02",
+        "display": "Malignant neoplasm of scapula and long bones of left upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.10",
+        "display": "Malignant neoplasm of short bones of unspecified upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.11",
+        "display": "Malignant neoplasm of short bones of right upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.12",
+        "display": "Malignant neoplasm of short bones of left upper limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.20",
+        "display": "Malignant neoplasm of long bones of unspecified lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.21",
+        "display": "Malignant neoplasm of long bones of right lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.22",
+        "display": "Malignant neoplasm of long bones of left lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.30",
+        "display": "Malignant neoplasm of short bones of unspecified lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.31",
+        "display": "Malignant neoplasm of short bones of right lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.32",
+        "display": "Malignant neoplasm of short bones of left lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.80",
+        "display": "Malignant neoplasm of overlapping sites of bone and articular cartilage of unspecified limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.81",
+        "display": "Malignant neoplasm of overlapping sites of bone and articular cartilage of right limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.82",
+        "display": "Malignant neoplasm of overlapping sites of bone and articular cartilage of left limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.90",
+        "display": "Malignant neoplasm of unspecified bones and articular cartilage of unspecified limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.91",
+        "display": "Malignant neoplasm of unspecified bones and articular cartilage of right limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C40.92",
+        "display": "Malignant neoplasm of unspecified bones and articular cartilage of left limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.0",
+        "display": "Malignant neoplasm of bones of skull and face"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.1",
+        "display": "Malignant neoplasm of mandible"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.2",
+        "display": "Malignant neoplasm of vertebral column"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.3",
+        "display": "Malignant neoplasm of ribs, sternum and clavicle"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.4",
+        "display": "Malignant neoplasm of pelvic bones, sacrum and coccyx"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C41.9",
+        "display": "Malignant neoplasm of bone and articular cartilage, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C79.51",
+        "display": "Secondary malignant neoplasm of bone"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C79.52",
+        "display": "Secondary malignant neoplasm of bone marrow"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "C80.0",
+        "display": "Disseminated malignant neoplasm, unspecified"
+      }
+    ]
+  }
+}

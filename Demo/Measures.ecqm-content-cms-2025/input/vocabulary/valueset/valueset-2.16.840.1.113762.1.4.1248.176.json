@@ -1,0 +1,1583 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.176",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.176"
+    }
+  ],
+  "version": "20240112",
+  "name": "Stroke",
+  "title": "Stroke",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G45.0",
+        "display": "Vertebro-basilar artery syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G45.1",
+        "display": "Carotid artery syndrome (hemispheric)"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G45.2",
+        "display": "Multiple and bilateral precerebral artery syndromes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.0",
+        "display": "Middle cerebral artery syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.1",
+        "display": "Anterior cerebral artery syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.2",
+        "display": "Posterior cerebral artery syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.3",
+        "display": "Brain stem stroke syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.4",
+        "display": "Cerebellar stroke syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.5",
+        "display": "Pure motor lacunar syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.6",
+        "display": "Pure sensory lacunar syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.7",
+        "display": "Other lacunar syndromes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G46.8",
+        "display": "Other vascular syndromes of brain in cerebrovascular diseases"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.00",
+        "display": "Nontraumatic subarachnoid hemorrhage from unspecified carotid siphon and bifurcation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.01",
+        "display": "Nontraumatic subarachnoid hemorrhage from right carotid siphon and bifurcation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.02",
+        "display": "Nontraumatic subarachnoid hemorrhage from left carotid siphon and bifurcation"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.10",
+        "display": "Nontraumatic subarachnoid hemorrhage from unspecified middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.11",
+        "display": "Nontraumatic subarachnoid hemorrhage from right middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.12",
+        "display": "Nontraumatic subarachnoid hemorrhage from left middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.2",
+        "display": "Nontraumatic subarachnoid hemorrhage from anterior communicating artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.30",
+        "display": "Nontraumatic subarachnoid hemorrhage from unspecified posterior communicating artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.31",
+        "display": "Nontraumatic subarachnoid hemorrhage from right posterior communicating artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.32",
+        "display": "Nontraumatic subarachnoid hemorrhage from left posterior communicating artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.4",
+        "display": "Nontraumatic subarachnoid hemorrhage from basilar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.50",
+        "display": "Nontraumatic subarachnoid hemorrhage from unspecified vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.51",
+        "display": "Nontraumatic subarachnoid hemorrhage from right vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.52",
+        "display": "Nontraumatic subarachnoid hemorrhage from left vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.6",
+        "display": "Nontraumatic subarachnoid hemorrhage from other intracranial arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.7",
+        "display": "Nontraumatic subarachnoid hemorrhage from unspecified intracranial artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.8",
+        "display": "Other nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I60.9",
+        "display": "Nontraumatic subarachnoid hemorrhage, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.0",
+        "display": "Nontraumatic intracerebral hemorrhage in hemisphere, subcortical"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.1",
+        "display": "Nontraumatic intracerebral hemorrhage in hemisphere, cortical"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.2",
+        "display": "Nontraumatic intracerebral hemorrhage in hemisphere, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.3",
+        "display": "Nontraumatic intracerebral hemorrhage in brain stem"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.4",
+        "display": "Nontraumatic intracerebral hemorrhage in cerebellum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.5",
+        "display": "Nontraumatic intracerebral hemorrhage, intraventricular"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.6",
+        "display": "Nontraumatic intracerebral hemorrhage, multiple localized"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.8",
+        "display": "Other nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I61.9",
+        "display": "Nontraumatic intracerebral hemorrhage, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.00",
+        "display": "Nontraumatic subdural hemorrhage, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.01",
+        "display": "Nontraumatic acute subdural hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.02",
+        "display": "Nontraumatic subacute subdural hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.03",
+        "display": "Nontraumatic chronic subdural hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.1",
+        "display": "Nontraumatic extradural hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I62.9",
+        "display": "Nontraumatic intracranial hemorrhage, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.00",
+        "display": "Cerebral infarction due to thrombosis of unspecified precerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.011",
+        "display": "Cerebral infarction due to thrombosis of right vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.012",
+        "display": "Cerebral infarction due to thrombosis of left vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.013",
+        "display": "Cerebral infarction due to thrombosis of bilateral vertebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.019",
+        "display": "Cerebral infarction due to thrombosis of unspecified vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.02",
+        "display": "Cerebral infarction due to thrombosis of basilar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.031",
+        "display": "Cerebral infarction due to thrombosis of right carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.032",
+        "display": "Cerebral infarction due to thrombosis of left carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.033",
+        "display": "Cerebral infarction due to thrombosis of bilateral carotid arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.039",
+        "display": "Cerebral infarction due to thrombosis of unspecified carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.09",
+        "display": "Cerebral infarction due to thrombosis of other precerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.10",
+        "display": "Cerebral infarction due to embolism of unspecified precerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.111",
+        "display": "Cerebral infarction due to embolism of right vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.112",
+        "display": "Cerebral infarction due to embolism of left vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.113",
+        "display": "Cerebral infarction due to embolism of bilateral vertebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.119",
+        "display": "Cerebral infarction due to embolism of unspecified vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.12",
+        "display": "Cerebral infarction due to embolism of basilar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.131",
+        "display": "Cerebral infarction due to embolism of right carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.132",
+        "display": "Cerebral infarction due to embolism of left carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.133",
+        "display": "Cerebral infarction due to embolism of bilateral carotid arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.139",
+        "display": "Cerebral infarction due to embolism of unspecified carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.19",
+        "display": "Cerebral infarction due to embolism of other precerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.20",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified precerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.211",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.212",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.213",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral vertebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.219",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified vertebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.22",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of basilar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.231",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right carotid arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.232",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left carotid arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.233",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral carotid arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.239",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified carotid artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.29",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of other precerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.30",
+        "display": "Cerebral infarction due to thrombosis of unspecified cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.311",
+        "display": "Cerebral infarction due to thrombosis of right middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.312",
+        "display": "Cerebral infarction due to thrombosis of left middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.313",
+        "display": "Cerebral infarction due to thrombosis of bilateral middle cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.319",
+        "display": "Cerebral infarction due to thrombosis of unspecified middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.321",
+        "display": "Cerebral infarction due to thrombosis of right anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.322",
+        "display": "Cerebral infarction due to thrombosis of left anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.323",
+        "display": "Cerebral infarction due to thrombosis of bilateral anterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.329",
+        "display": "Cerebral infarction due to thrombosis of unspecified anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.331",
+        "display": "Cerebral infarction due to thrombosis of right posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.332",
+        "display": "Cerebral infarction due to thrombosis of left posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.333",
+        "display": "Cerebral infarction due to thrombosis of bilateral posterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.339",
+        "display": "Cerebral infarction due to thrombosis of unspecified posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.341",
+        "display": "Cerebral infarction due to thrombosis of right cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.342",
+        "display": "Cerebral infarction due to thrombosis of left cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.343",
+        "display": "Cerebral infarction due to thrombosis of bilateral cerebellar arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.349",
+        "display": "Cerebral infarction due to thrombosis of unspecified cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.39",
+        "display": "Cerebral infarction due to thrombosis of other cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.40",
+        "display": "Cerebral infarction due to embolism of unspecified cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.411",
+        "display": "Cerebral infarction due to embolism of right middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.412",
+        "display": "Cerebral infarction due to embolism of left middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.413",
+        "display": "Cerebral infarction due to embolism of bilateral middle cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.419",
+        "display": "Cerebral infarction due to embolism of unspecified middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.421",
+        "display": "Cerebral infarction due to embolism of right anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.422",
+        "display": "Cerebral infarction due to embolism of left anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.423",
+        "display": "Cerebral infarction due to embolism of bilateral anterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.429",
+        "display": "Cerebral infarction due to embolism of unspecified anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.431",
+        "display": "Cerebral infarction due to embolism of right posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.432",
+        "display": "Cerebral infarction due to embolism of left posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.433",
+        "display": "Cerebral infarction due to embolism of bilateral posterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.439",
+        "display": "Cerebral infarction due to embolism of unspecified posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.441",
+        "display": "Cerebral infarction due to embolism of right cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.442",
+        "display": "Cerebral infarction due to embolism of left cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.443",
+        "display": "Cerebral infarction due to embolism of bilateral cerebellar arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.449",
+        "display": "Cerebral infarction due to embolism of unspecified cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.49",
+        "display": "Cerebral infarction due to embolism of other cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.50",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.511",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.512",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.513",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral middle cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.519",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified middle cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.521",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.522",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.523",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral anterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.529",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified anterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.531",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.532",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.533",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral posterior cerebral arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.539",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified posterior cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.541",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of right cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.542",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of left cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.543",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of bilateral cerebellar arteries"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.549",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified cerebellar artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.59",
+        "display": "Cerebral infarction due to unspecified occlusion or stenosis of other cerebral artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.6",
+        "display": "Cerebral infarction due to cerebral venous thrombosis, nonpyogenic"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.81",
+        "display": "Other cerebral infarction due to occlusion or stenosis of small artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.89",
+        "display": "Other cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I63.9",
+        "display": "Cerebral infarction, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.00",
+        "display": "Unspecified sequelae of nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.010",
+        "display": "Attention and concentration deficit following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.012",
+        "display": "Visuospatial deficit and spatial neglect following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.013",
+        "display": "Psychomotor deficit following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.014",
+        "display": "Frontal lobe and executive function deficit following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.015",
+        "display": "Cognitive social or emotional deficit following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.018",
+        "display": "Other symptoms and signs involving cognitive functions following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.019",
+        "display": "Unspecified symptoms and signs involving cognitive functions following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.041",
+        "display": "Monoplegia of lower limb following nontraumatic subarachnoid hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.042",
+        "display": "Monoplegia of lower limb following nontraumatic subarachnoid hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.043",
+        "display": "Monoplegia of lower limb following nontraumatic subarachnoid hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.044",
+        "display": "Monoplegia of lower limb following nontraumatic subarachnoid hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.049",
+        "display": "Monoplegia of lower limb following nontraumatic subarachnoid hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.051",
+        "display": "Hemiplegia and hemiparesis following nontraumatic subarachnoid hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.052",
+        "display": "Hemiplegia and hemiparesis following nontraumatic subarachnoid hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.053",
+        "display": "Hemiplegia and hemiparesis following nontraumatic subarachnoid hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.054",
+        "display": "Hemiplegia and hemiparesis following nontraumatic subarachnoid hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.059",
+        "display": "Hemiplegia and hemiparesis following nontraumatic subarachnoid hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.061",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.062",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.063",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.064",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.065",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage, bilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.069",
+        "display": "Other paralytic syndrome following nontraumatic subarachnoid hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.090",
+        "display": "Apraxia following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.093",
+        "display": "Ataxia following nontraumatic subarachnoid hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.110",
+        "display": "Attention and concentration deficit following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.111",
+        "display": "Memory deficit following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.112",
+        "display": "Visuospatial deficit and spatial neglect following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.113",
+        "display": "Psychomotor deficit following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.114",
+        "display": "Frontal lobe and executive function deficit following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.115",
+        "display": "Cognitive social or emotional deficit following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.118",
+        "display": "Other symptoms and signs involving cognitive functions following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.119",
+        "display": "Unspecified symptoms and signs involving cognitive functions following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.141",
+        "display": "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.142",
+        "display": "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.143",
+        "display": "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.144",
+        "display": "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.149",
+        "display": "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.151",
+        "display": "Hemiplegia and hemiparesis following nontraumatic intracerebral hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.152",
+        "display": "Hemiplegia and hemiparesis following nontraumatic intracerebral hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.153",
+        "display": "Hemiplegia and hemiparesis following nontraumatic intracerebral hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.154",
+        "display": "Hemiplegia and hemiparesis following nontraumatic intracerebral hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.159",
+        "display": "Hemiplegia and hemiparesis following nontraumatic intracerebral hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.161",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.162",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.163",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.164",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.165",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage, bilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.169",
+        "display": "Other paralytic syndrome following nontraumatic intracerebral hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.190",
+        "display": "Apraxia following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.193",
+        "display": "Ataxia following nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.198",
+        "display": "Other sequelae of nontraumatic intracerebral hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.20",
+        "display": "Unspecified sequelae of other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.210",
+        "display": "Attention and concentration deficit following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.211",
+        "display": "Memory deficit following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.212",
+        "display": "Visuospatial deficit and spatial neglect following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.213",
+        "display": "Psychomotor deficit following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.214",
+        "display": "Frontal lobe and executive function deficit following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.215",
+        "display": "Cognitive social or emotional deficit following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.218",
+        "display": "Other symptoms and signs involving cognitive functions following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.219",
+        "display": "Unspecified symptoms and signs involving cognitive functions following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.241",
+        "display": "Monoplegia of lower limb following other nontraumatic intracranial hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.242",
+        "display": "Monoplegia of lower limb following other nontraumatic intracranial hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.243",
+        "display": "Monoplegia of lower limb following other nontraumatic intracranial hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.244",
+        "display": "Monoplegia of lower limb following other nontraumatic intracranial hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.249",
+        "display": "Monoplegia of lower limb following other nontraumatic intracranial hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.251",
+        "display": "Hemiplegia and hemiparesis following other nontraumatic intracranial hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.252",
+        "display": "Hemiplegia and hemiparesis following other nontraumatic intracranial hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.253",
+        "display": "Hemiplegia and hemiparesis following other nontraumatic intracranial hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.254",
+        "display": "Hemiplegia and hemiparesis following other nontraumatic intracranial hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.259",
+        "display": "Hemiplegia and hemiparesis following other nontraumatic intracranial hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.261",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.262",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.263",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.264",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.265",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage, bilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.269",
+        "display": "Other paralytic syndrome following other nontraumatic intracranial hemorrhage affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.290",
+        "display": "Apraxia following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.293",
+        "display": "Ataxia following other nontraumatic intracranial hemorrhage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.310",
+        "display": "Attention and concentration deficit following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.311",
+        "display": "Memory deficit following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.312",
+        "display": "Visuospatial deficit and spatial neglect following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.313",
+        "display": "Psychomotor deficit following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.314",
+        "display": "Frontal lobe and executive function deficit following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.315",
+        "display": "Cognitive social or emotional deficit following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.318",
+        "display": "Other symptoms and signs involving cognitive functions following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.319",
+        "display": "Unspecified symptoms and signs involving cognitive functions following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.341",
+        "display": "Monoplegia of lower limb following cerebral infarction affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.342",
+        "display": "Monoplegia of lower limb following cerebral infarction affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.343",
+        "display": "Monoplegia of lower limb following cerebral infarction affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.344",
+        "display": "Monoplegia of lower limb following cerebral infarction affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.349",
+        "display": "Monoplegia of lower limb following cerebral infarction affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.351",
+        "display": "Hemiplegia and hemiparesis following cerebral infarction affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.352",
+        "display": "Hemiplegia and hemiparesis following cerebral infarction affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.353",
+        "display": "Hemiplegia and hemiparesis following cerebral infarction affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.354",
+        "display": "Hemiplegia and hemiparesis following cerebral infarction affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.359",
+        "display": "Hemiplegia and hemiparesis following cerebral infarction affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.361",
+        "display": "Other paralytic syndrome following cerebral infarction affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.362",
+        "display": "Other paralytic syndrome following cerebral infarction affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.363",
+        "display": "Other paralytic syndrome following cerebral infarction affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.364",
+        "display": "Other paralytic syndrome following cerebral infarction affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.365",
+        "display": "Other paralytic syndrome following cerebral infarction, bilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.369",
+        "display": "Other paralytic syndrome following cerebral infarction affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.390",
+        "display": "Apraxia following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.393",
+        "display": "Ataxia following cerebral infarction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.941",
+        "display": "Monoplegia of lower limb following unspecified cerebrovascular disease affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.942",
+        "display": "Monoplegia of lower limb following unspecified cerebrovascular disease affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.943",
+        "display": "Monoplegia of lower limb following unspecified cerebrovascular disease affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.944",
+        "display": "Monoplegia of lower limb following unspecified cerebrovascular disease affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.949",
+        "display": "Monoplegia of lower limb following unspecified cerebrovascular disease affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.951",
+        "display": "Hemiplegia and hemiparesis following unspecified cerebrovascular disease affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.952",
+        "display": "Hemiplegia and hemiparesis following unspecified cerebrovascular disease affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.953",
+        "display": "Hemiplegia and hemiparesis following unspecified cerebrovascular disease affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.954",
+        "display": "Hemiplegia and hemiparesis following unspecified cerebrovascular disease affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.959",
+        "display": "Hemiplegia and hemiparesis following unspecified cerebrovascular disease affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.961",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease affecting right dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.962",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease affecting left dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.963",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease affecting right non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.964",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease affecting left non-dominant side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.965",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease, bilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.969",
+        "display": "Other paralytic syndrome following unspecified cerebrovascular disease affecting unspecified side"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.990",
+        "display": "Apraxia following unspecified cerebrovascular disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I69.993",
+        "display": "Ataxia following unspecified cerebrovascular disease"
+      }
+    ]
+  }
+}

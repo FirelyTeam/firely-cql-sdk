@@ -1,0 +1,2927 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.134",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.134"
+    }
+  ],
+  "version": "20240119",
+  "name": "CentralNervousSystemDepressants",
+  "title": "Central Nervous System Depressants",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:13-07:00",
+    "contains": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000048",
+        "display": "doxepin 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000054",
+        "display": "doxepin 10 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000058",
+        "display": "doxepin 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000064",
+        "display": "doxepin 150 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000070",
+        "display": "doxepin 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000076",
+        "display": "doxepin 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000091",
+        "display": "doxepin hydrochloride 50 MG/ML Topical Cream"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1000097",
+        "display": "doxepin 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1006801",
+        "display": "clozapine 150 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "103968",
+        "display": "lamotrigine 100 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1040031",
+        "display": "lurasidone hydrochloride 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1040041",
+        "display": "lurasidone hydrochloride 80 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1046787",
+        "display": "atropine sulfate 0.00388 MG/ML / hyoscyamine sulfate 0.0207 MG/ML / phenobarbital 3.24 MG/ML / scopolamine hydrobromide 0.0013 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1046815",
+        "display": "atropine sulfate 0.0194 MG / hyoscyamine sulfate 0.1037 MG / phenobarbital 16.2 MG / scopolamine hydrobromide 0.0065 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1046997",
+        "display": "atropine sulfate 0.0582 MG / hyoscyamine sulfate 0.311 MG / phenobarbital 48.6 MG / scopolamine hydrobromide 0.0195 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1092357",
+        "display": "rufinamide 40 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1098608",
+        "display": "24 HR lamotrigine 300 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099563",
+        "display": "24 HR divalproex sodium 250 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099569",
+        "display": "24 HR divalproex sodium 500 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099596",
+        "display": "divalproex sodium 125 MG Delayed Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099625",
+        "display": "divalproex sodium 125 MG Delayed Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099678",
+        "display": "divalproex sodium 250 MG Delayed Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099681",
+        "display": "valproic acid 250 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099687",
+        "display": "valproic acid 50 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1099870",
+        "display": "divalproex sodium 500 MG Delayed Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1101338",
+        "display": "gabapentin enacarbil 600 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1146690",
+        "display": "24 HR lamotrigine 250 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1232194",
+        "display": "zolpidem tartrate 1.75 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1232202",
+        "display": "zolpidem tartrate 3.5 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1235247",
+        "display": "lurasidone hydrochloride 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1249617",
+        "display": "acetaminophen 300 MG / butalbital 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1251614",
+        "display": "butabarbital sodium 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1297278",
+        "display": "lurasidone hydrochloride 120 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298088",
+        "display": "flurazepam hydrochloride 15 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298091",
+        "display": "flurazepam hydrochloride 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298816",
+        "display": "molindone hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298906",
+        "display": "molindone hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1298910",
+        "display": "molindone hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1299903",
+        "display": "tiagabine hydrochloride 12 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1299909",
+        "display": "tiagabine hydrochloride 16 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1299911",
+        "display": "tiagabine hydrochloride 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1299914",
+        "display": "tiagabine hydrochloride 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1299917",
+        "display": "tiagabine hydrochloride 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1302827",
+        "display": "24 HR phentermine 7.5 MG / topiramate 46 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1302839",
+        "display": "24 HR phentermine 3.75 MG / topiramate 23 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1302850",
+        "display": "24 HR phentermine 15 MG / topiramate 92 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1313059",
+        "display": "24 HR phentermine 11.25 MG / topiramate 69 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1313112",
+        "display": "phenytoin 25 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1313885",
+        "display": "phenytoin 50 MG Chewable Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356557",
+        "display": "perampanel 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356570",
+        "display": "perampanel 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356574",
+        "display": "perampanel 6 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356578",
+        "display": "perampanel 8 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356582",
+        "display": "perampanel 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1356586",
+        "display": "perampanel 12 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1359010",
+        "display": "{7 (perampanel 2 MG Oral Tablet) / 7 (perampanel 4 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1365653",
+        "display": "24 HR oxcarbazepine 150 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1365842",
+        "display": "24 HR oxcarbazepine 300 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1365844",
+        "display": "24 HR oxcarbazepine 600 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1366192",
+        "display": "clobazam 2.5 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1367518",
+        "display": "1 ACTUAT loxapine 10 MG/ACTUAT Dry Powder Inhaler"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1369825",
+        "display": "clozapine 50 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "141935",
+        "display": "haloperidol 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1431235",
+        "display": "lurasidone hydrochloride 60 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1431286",
+        "display": "acetaminophen 300 MG / butalbital 50 MG / caffeine 40 MG / codeine phosphate 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1436239",
+        "display": "24 HR topiramate 50 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1437278",
+        "display": "24 HR topiramate 25 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1437283",
+        "display": "24 HR topiramate 100 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1437288",
+        "display": "24 HR topiramate 200 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1482507",
+        "display": "eslicarbazepine acetate 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1482515",
+        "display": "eslicarbazepine acetate 400 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1482521",
+        "display": "eslicarbazepine acetate 600 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1482525",
+        "display": "eslicarbazepine acetate 800 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1482820",
+        "display": "gabapentin enacarbil 300 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1490473",
+        "display": "tasimelteon 20 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1491642",
+        "display": "{7 (eslicarbazepine acetate 400 MG Oral Tablet) / 7 (eslicarbazepine acetate 800 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1494769",
+        "display": "Sprinkle 24 HR topiramate 150 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "151226",
+        "display": "topiramate 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1547104",
+        "display": "suvorexant 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1547112",
+        "display": "suvorexant 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1547116",
+        "display": "suvorexant 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1547573",
+        "display": "suvorexant 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1605362",
+        "display": "24 HR levetiracetam 1000 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1605372",
+        "display": "24 HR levetiracetam 1500 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1606337",
+        "display": "asenapine 2.5 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1648646",
+        "display": "{1 (24 HR quetiapine 200 MG Extended Release Oral Tablet) / 11 (24 HR quetiapine 300 MG Extended Release Oral Tablet) / 3 (24 HR quetiapine 50 MG Extended Release Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658319",
+        "display": "brexpiprazole 0.25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658327",
+        "display": "brexpiprazole 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658331",
+        "display": "brexpiprazole 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658335",
+        "display": "brexpiprazole 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658339",
+        "display": "brexpiprazole 3 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1658343",
+        "display": "brexpiprazole 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1667660",
+        "display": "cariprazine 1.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1667668",
+        "display": "cariprazine 3 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1667672",
+        "display": "cariprazine 4.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1667676",
+        "display": "cariprazine 6 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1721312",
+        "display": "{7 (perampanel 4 MG Oral Tablet) / 7 (perampanel 6 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1724446",
+        "display": "acetaminophen 325 MG / butalbital 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1736037",
+        "display": "levetiracetam 1000 MG Tablet for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1736045",
+        "display": "levetiracetam 250 MG Tablet for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1736048",
+        "display": "levetiracetam 500 MG Tablet for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1736051",
+        "display": "levetiracetam 750 MG Tablet for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739761",
+        "display": "brivaracetam 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739768",
+        "display": "brivaracetam 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739772",
+        "display": "brivaracetam 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739776",
+        "display": "brivaracetam 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739780",
+        "display": "brivaracetam 75 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1739785",
+        "display": "brivaracetam 10 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1741746",
+        "display": "{1 (cariprazine 1.5 MG Oral Capsule) / 6 (cariprazine 3 MG Oral Capsule) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1790122",
+        "display": "perampanel 0.5 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1806380",
+        "display": "Once-Daily gabapentin 300 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1806382",
+        "display": "Once-Daily gabapentin 600 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1812419",
+        "display": "Sprinkle 24 HR topiramate 200 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1812421",
+        "display": "Sprinkle 24 HR topiramate 25 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1812425",
+        "display": "Sprinkle 24 HR topiramate 50 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1812427",
+        "display": "Sprinkle 24 HR topiramate 100 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197303",
+        "display": "acetazolamide 125 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197304",
+        "display": "acetazolamide 250 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197321",
+        "display": "alprazolam 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197322",
+        "display": "alprazolam 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197426",
+        "display": "acetaminophen 325 MG / butalbital 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197441",
+        "display": "carbamazepine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197464",
+        "display": "clorazepate dipotassium 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197465",
+        "display": "clorazepate dipotassium 3.75 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197466",
+        "display": "clorazepate dipotassium 7.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197527",
+        "display": "clonazepam 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197528",
+        "display": "clonazepam 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197529",
+        "display": "clonazepam 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197535",
+        "display": "clozapine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197536",
+        "display": "clozapine 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197589",
+        "display": "diazepam 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197590",
+        "display": "diazepam 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197591",
+        "display": "diazepam 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197653",
+        "display": "estazolam 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197654",
+        "display": "estazolam 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197682",
+        "display": "ethosuximide 250 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197754",
+        "display": "haloperidol 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197900",
+        "display": "lorazepam 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197901",
+        "display": "lorazepam 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197902",
+        "display": "lorazepam 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "197949",
+        "display": "methsuximide 300 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198057",
+        "display": "oxazepam 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198059",
+        "display": "oxazepam 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198075",
+        "display": "perphenazine 16 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198076",
+        "display": "perphenazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198077",
+        "display": "perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198078",
+        "display": "perphenazine 8 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198083",
+        "display": "phenobarbital 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198085",
+        "display": "phenobarbital 16 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198086",
+        "display": "phenobarbital 16.2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198089",
+        "display": "phenobarbital 60 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198103",
+        "display": "pimozide 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198150",
+        "display": "primidone 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198159",
+        "display": "prochlorperazine 25 MG Rectal Suppository"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198183",
+        "display": "quazepam 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198241",
+        "display": "temazepam 15 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198242",
+        "display": "temazepam 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198243",
+        "display": "temazepam 7.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198270",
+        "display": "thioridazine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198274",
+        "display": "thioridazine 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198275",
+        "display": "thioridazine 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198317",
+        "display": "triazolam 0.125 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198318",
+        "display": "triazolam 0.25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198322",
+        "display": "trifluoperazine 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198323",
+        "display": "trifluoperazine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198324",
+        "display": "trifluoperazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198325",
+        "display": "trifluoperazine 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198358",
+        "display": "felbamate 400 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198359",
+        "display": "felbamate 600 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198365",
+        "display": "prochlorperazine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198427",
+        "display": "lamotrigine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198428",
+        "display": "lamotrigine 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198429",
+        "display": "lamotrigine 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "198430",
+        "display": "lamotrigine 25 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1988974",
+        "display": "24 HR pregabalin 165 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1988977",
+        "display": "24 HR pregabalin 330 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1988980",
+        "display": "24 HR pregabalin 82.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199164",
+        "display": "phenobarbital 97.2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199167",
+        "display": "phenobarbital 32.4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199168",
+        "display": "phenobarbital 64.8 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199322",
+        "display": "lamotrigine 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199378",
+        "display": "12 HR carbamazepine 100 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199387",
+        "display": "risperidone 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199450",
+        "display": "clobazam 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1995136",
+        "display": "acetaminophen 300 MG / butalbital 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199521",
+        "display": "vigabatrin 500 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998451",
+        "display": "Sensor aripiprazole 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998454",
+        "display": "Sensor aripiprazole 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998456",
+        "display": "Sensor aripiprazole 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998458",
+        "display": "Sensor aripiprazole 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998460",
+        "display": "Sensor aripiprazole 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "1998462",
+        "display": "Sensor aripiprazole 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199888",
+        "display": "topiramate 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199889",
+        "display": "topiramate 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "199890",
+        "display": "topiramate 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "200034",
+        "display": "olanzapine 2.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "200131",
+        "display": "12 HR carbamazepine 300 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2049269",
+        "display": "pimavanserin 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2049275",
+        "display": "pimavanserin 34 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "205315",
+        "display": "topiramate 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "205316",
+        "display": "topiramate 15 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2054973",
+        "display": "stiripentol 250 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2054981",
+        "display": "stiripentol 500 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2055011",
+        "display": "stiripentol 500 MG Powder for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2055015",
+        "display": "stiripentol 250 MG Powder for Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2058253",
+        "display": "clobazam 10 MG Oral Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2058254",
+        "display": "clobazam 20 MG Oral Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2058255",
+        "display": "clobazam 5 MG Oral Film"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2058900",
+        "display": "cannabidiol 100 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2173494",
+        "display": "midazolam 50 MG/ML Nasal Spray"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2261741",
+        "display": "24 HR asenapine 0.158 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2261750",
+        "display": "24 HR asenapine 0.238 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2261758",
+        "display": "24 HR asenapine 0.317 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2265695",
+        "display": "cenobamate 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2272613",
+        "display": "diazepam 100 MG/ML Nasal Spray"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2272626",
+        "display": "diazepam 50 MG/ML Nasal Spray"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2272632",
+        "display": "diazepam 75 MG/ML Nasal Spray"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2275607",
+        "display": "lumateperone 42 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283503",
+        "display": "cenobamate 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283507",
+        "display": "cenobamate 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283511",
+        "display": "cenobamate 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283514",
+        "display": "{28 (cenobamate 200 MG Oral Tablet) / 28 (cenobamate 50 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283517",
+        "display": "{28 (cenobamate 150 MG Oral Tablet) / 28 (cenobamate 200 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283520",
+        "display": "cenobamate 12.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283522",
+        "display": "cenobamate 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283523",
+        "display": "{14 (cenobamate 12.5 MG Oral Tablet) / 14 (cenobamate 25 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283535",
+        "display": "{14 (cenobamate 100 MG Oral Tablet) / 14 (cenobamate 50 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2283539",
+        "display": "{14 (cenobamate 150 MG Oral Tablet) / 14 (cenobamate 200 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2381138",
+        "display": "fenfluramine 2.2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "238134",
+        "display": "aspirin 325 MG / butalbital 50 MG / caffeine 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "238135",
+        "display": "aspirin 325 MG / butalbital 50 MG / caffeine 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "238153",
+        "display": "acetaminophen 325 MG / butalbital 50 MG / caffeine 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "238154",
+        "display": "acetaminophen 325 MG / butalbital 50 MG / caffeine 40 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2398511",
+        "display": "{9 (Once-Daily gabapentin 300 MG Oral Tablet) / 24 (Once-Daily gabapentin 600 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "246172",
+        "display": "clobazam 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2468312",
+        "display": "tasimelteon 4 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "249329",
+        "display": "lamotrigine 250 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "250820",
+        "display": "vigabatrin 500 MG Powder for Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "251322",
+        "display": "ethosuximide 50 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "252478",
+        "display": "lamotrigine 50 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "252479",
+        "display": "lamotrigine 200 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2540431",
+        "display": "{28 (cenobamate 100 MG Oral Tablet) / 28 (cenobamate 150 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2569564",
+        "display": "24 HR lorazepam 1 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2569573",
+        "display": "24 HR lorazepam 2 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2569577",
+        "display": "24 HR lorazepam 3 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2570392",
+        "display": "olanzapine 5 MG / samidorphan 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2570399",
+        "display": "olanzapine 10 MG / samidorphan 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2570402",
+        "display": "olanzapine 15 MG / samidorphan 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2570405",
+        "display": "olanzapine 20 MG / samidorphan 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2583731",
+        "display": "aspirin 500 MG / butalbital 50 MG / caffeine 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2586427",
+        "display": "topiramate 25 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2607529",
+        "display": "lumateperone 10.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2607533",
+        "display": "lumateperone 21 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2634743",
+        "display": "Once-Daily gabapentin 900 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2634747",
+        "display": "Once-Daily gabapentin 450 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2634751",
+        "display": "Once-Daily gabapentin 750 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2637018",
+        "display": "24 HR lacosamide 100 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2637027",
+        "display": "24 HR lacosamide 150 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2637032",
+        "display": "24 HR lacosamide 200 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2637353",
+        "display": "zolpidem tartrate 7.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "2641918",
+        "display": "{14 (perampanel 2 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "282401",
+        "display": "lamotrigine 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "283523",
+        "display": "gabapentin 50 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "283536",
+        "display": "oxcarbazepine 60 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "283639",
+        "display": "olanzapine 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "308047",
+        "display": "alprazolam 0.25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "308048",
+        "display": "alprazolam 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "308050",
+        "display": "alprazolam 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "309374",
+        "display": "clozapine 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "309843",
+        "display": "diazepam 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "309844",
+        "display": "diazepam 5 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310285",
+        "display": "felbamate 120 MG/ML Oral Suspension"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310430",
+        "display": "gabapentin 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310431",
+        "display": "gabapentin 300 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310432",
+        "display": "gabapentin 400 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310433",
+        "display": "gabapentin 600 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310434",
+        "display": "gabapentin 800 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310670",
+        "display": "haloperidol 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310671",
+        "display": "haloperidol 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "310672",
+        "display": "haloperidol 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311264",
+        "display": "lamotrigine 25 MG Chewable Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311265",
+        "display": "lamotrigine 5 MG Chewable Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311288",
+        "display": "levetiracetam 250 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311289",
+        "display": "levetiracetam 500 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311290",
+        "display": "levetiracetam 750 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311376",
+        "display": "lorazepam 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311385",
+        "display": "loxapine 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "311386",
+        "display": "loxapine 5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312076",
+        "display": "olanzapine 10 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312077",
+        "display": "olanzapine 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312078",
+        "display": "olanzapine 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312079",
+        "display": "olanzapine 7.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312134",
+        "display": "oxazepam 15 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312136",
+        "display": "oxcarbazepine 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312137",
+        "display": "oxcarbazepine 300 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312138",
+        "display": "oxcarbazepine 600 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312357",
+        "display": "phenobarbital 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312362",
+        "display": "phenobarbital 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312439",
+        "display": "pimozide 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312635",
+        "display": "prochlorperazine 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312743",
+        "display": "quetiapine 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312744",
+        "display": "quetiapine 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312745",
+        "display": "quetiapine 300 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312828",
+        "display": "risperidone 0.25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312829",
+        "display": "risperidone 0.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312830",
+        "display": "risperidone 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312831",
+        "display": "risperidone 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312832",
+        "display": "risperidone 3 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "312914",
+        "display": "secobarbital sodium 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313354",
+        "display": "thioridazine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313361",
+        "display": "thiothixene 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313362",
+        "display": "thiothixene 1 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313364",
+        "display": "thiothixene 2 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313366",
+        "display": "thiothixene 5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313761",
+        "display": "zaleplon 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313762",
+        "display": "zaleplon 5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313776",
+        "display": "ziprasidone 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313777",
+        "display": "ziprasidone 60 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "313778",
+        "display": "ziprasidone 80 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314034",
+        "display": "haloperidol 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314035",
+        "display": "haloperidol 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314075",
+        "display": "loxapine 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314078",
+        "display": "loxapine 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314154",
+        "display": "olanzapine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314155",
+        "display": "olanzapine 5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314211",
+        "display": "risperidone 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314285",
+        "display": "zonisamide 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "314286",
+        "display": "ziprasidone 20 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "317174",
+        "display": "quetiapine 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349010",
+        "display": "lamotrigine 2 MG Chewable Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349194",
+        "display": "clonazepam 0.125 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349195",
+        "display": "clonazepam 0.25 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349196",
+        "display": "clonazepam 1 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349197",
+        "display": "clonazepam 2 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349198",
+        "display": "clonazepam 0.5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349490",
+        "display": "aripiprazole 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349545",
+        "display": "aripiprazole 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349547",
+        "display": "aripiprazole 30 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "349553",
+        "display": "aripiprazole 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351107",
+        "display": "olanzapine 15 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "351108",
+        "display": "olanzapine 20 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "387003",
+        "display": "levetiracetam 1000 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "389201",
+        "display": "quetiapine 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "401953",
+        "display": "risperidone 1 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "401954",
+        "display": "risperidone 2 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "402131",
+        "display": "aripiprazole 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403825",
+        "display": "risperidone 0.5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403884",
+        "display": "levetiracetam 100 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403966",
+        "display": "zonisamide 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403967",
+        "display": "zonisamide 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403969",
+        "display": "fluoxetine 25 MG / olanzapine 6 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403970",
+        "display": "fluoxetine 25 MG / olanzapine 12 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403971",
+        "display": "fluoxetine 50 MG / olanzapine 12 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "403972",
+        "display": "fluoxetine 50 MG / olanzapine 6 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "422410",
+        "display": "midazolam 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "427538",
+        "display": "clobazam 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "429212",
+        "display": "clozapine 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "433798",
+        "display": "24 HR alprazolam 0.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "433799",
+        "display": "24 HR alprazolam 2 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "433800",
+        "display": "24 HR alprazolam 1 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "433801",
+        "display": "24 HR alprazolam 3 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "476177",
+        "display": "clozapine 100 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "476179",
+        "display": "clozapine 25 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483438",
+        "display": "pregabalin 100 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483440",
+        "display": "pregabalin 150 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483442",
+        "display": "pregabalin 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483444",
+        "display": "pregabalin 300 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483446",
+        "display": "pregabalin 200 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483448",
+        "display": "pregabalin 50 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "483450",
+        "display": "pregabalin 75 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485413",
+        "display": "alprazolam 0.25 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485414",
+        "display": "alprazolam 1 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485415",
+        "display": "alprazolam 0.5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485416",
+        "display": "alprazolam 2 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485440",
+        "display": "eszopiclone 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485442",
+        "display": "eszopiclone 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485465",
+        "display": "eszopiclone 3 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485489",
+        "display": "temazepam 22.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "485496",
+        "display": "aripiprazole 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "562524",
+        "display": "12 HR acetazolamide 500 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "577127",
+        "display": "pregabalin 225 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "602964",
+        "display": "aripiprazole 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "616483",
+        "display": "quetiapine 400 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "616487",
+        "display": "quetiapine 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "616698",
+        "display": "risperidone 3 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "616705",
+        "display": "risperidone 4 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "643019",
+        "display": "aripiprazole 10 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "643022",
+        "display": "aripiprazole 15 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "643027",
+        "display": "aripiprazole 20 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "643058",
+        "display": "aripiprazole 30 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "645037",
+        "display": "risperidone 0.25 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "672567",
+        "display": "24 HR paliperidone 3 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "672569",
+        "display": "24 HR paliperidone 6 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "672571",
+        "display": "24 HR paliperidone 9 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "702519",
+        "display": "phenobarbital 4 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721773",
+        "display": "clozapine 12.5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721787",
+        "display": "fluoxetine 25 MG / olanzapine 3 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721791",
+        "display": "24 HR quetiapine 200 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721794",
+        "display": "24 HR quetiapine 300 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "721796",
+        "display": "24 HR quetiapine 400 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "751139",
+        "display": "{35 (lamotrigine 25 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "751563",
+        "display": "{7 (lamotrigine 100 MG Oral Tablet) / 42 (lamotrigine 25 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "753451",
+        "display": "{14 (lamotrigine 100 MG Oral Tablet) / 84 (lamotrigine 25 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "756245",
+        "display": "acetaminophen 21.7 MG/ML / butalbital 3.33 MG/ML / caffeine 2.67 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "801957",
+        "display": "0.5 ML diazepam 5 MG/ML Rectal Gel"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "801961",
+        "display": "2 ML diazepam 5 MG/ML Rectal Gel"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "801966",
+        "display": "4 ML diazepam 5 MG/ML Rectal Gel"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "807832",
+        "display": "24 HR levetiracetam 500 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "809987",
+        "display": "lacosamide 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "809992",
+        "display": "lacosamide 150 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "809996",
+        "display": "lacosamide 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "810000",
+        "display": "lacosamide 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "824295",
+        "display": "rufinamide 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "824301",
+        "display": "rufinamide 400 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "828692",
+        "display": "zolpidem tartrate 5 MG/ACTUAT Oral Spray"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "835726",
+        "display": "acamprosate calcium 333 MG Delayed Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "836641",
+        "display": "zolpidem tartrate 10 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "836647",
+        "display": "zolpidem tartrate 5 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "846378",
+        "display": "24 HR levetiracetam 750 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848722",
+        "display": "iloperidone 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848728",
+        "display": "iloperidone 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848732",
+        "display": "iloperidone 12 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848736",
+        "display": "iloperidone 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848740",
+        "display": "iloperidone 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848744",
+        "display": "iloperidone 6 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848748",
+        "display": "iloperidone 8 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "848751",
+        "display": "{2 (iloperidone 1 MG Oral Tablet) / 2 (iloperidone 2 MG Oral Tablet) / 2 (iloperidone 4 MG Oral Tablet) / 2 (iloperidone 6 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "850087",
+        "display": "24 HR lamotrigine 100 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "850091",
+        "display": "24 HR lamotrigine 50 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "851748",
+        "display": "{21 (lamotrigine 25 MG Disintegrating Oral Tablet) / 7 (lamotrigine 50 MG Disintegrating Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "851750",
+        "display": "{7 (lamotrigine 100 MG Disintegrating Oral Tablet) / 14 (lamotrigine 25 MG Disintegrating Oral Tablet) / 14 (lamotrigine 50 MG Disintegrating Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "851752",
+        "display": "{14 (lamotrigine 100 MG Disintegrating Oral Tablet) / 42 (lamotrigine 50 MG Disintegrating Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "853201",
+        "display": "24 HR quetiapine 50 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "854873",
+        "display": "zolpidem tartrate 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "854876",
+        "display": "zolpidem tartrate 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "854880",
+        "display": "zolpidem tartrate 12.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "854894",
+        "display": "zolpidem tartrate 6.25 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "855671",
+        "display": "phenytoin sodium 100 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "855861",
+        "display": "phenytoin sodium 200 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "855869",
+        "display": "phenytoin sodium 30 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "855873",
+        "display": "phenytoin sodium 300 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856706",
+        "display": "amitriptyline hydrochloride 10 MG / perphenazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856720",
+        "display": "amitriptyline hydrochloride 10 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856769",
+        "display": "amitriptyline hydrochloride 12.5 MG / chlordiazepoxide 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856792",
+        "display": "amitriptyline hydrochloride 25 MG / chlordiazepoxide 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856797",
+        "display": "amitriptyline hydrochloride 25 MG / perphenazine 2 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856825",
+        "display": "amitriptyline hydrochloride 25 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "856840",
+        "display": "amitriptyline hydrochloride 50 MG / perphenazine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "859835",
+        "display": "fluphenazine hydrochloride 0.5 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "859841",
+        "display": "fluphenazine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "859975",
+        "display": "asenapine 10 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "859981",
+        "display": "asenapine 5 MG Sublingual Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "860918",
+        "display": "fluphenazine hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "861848",
+        "display": "fluphenazine hydrochloride 5 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "865117",
+        "display": "fluphenazine hydrochloride 1 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "865123",
+        "display": "fluphenazine hydrochloride 2.5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "866103",
+        "display": "24 HR paliperidone 1.5 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "881271",
+        "display": "{14 (lacosamide 100 MG Oral Tablet) / 14 (lacosamide 50 MG Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "889520",
+        "display": "acetaminophen 300 MG / butalbital 50 MG / caffeine 40 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "889614",
+        "display": "chlordiazepoxide hydrochloride 5 MG / clidinium bromide 2.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "895670",
+        "display": "24 HR quetiapine 150 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "898715",
+        "display": "pregabalin 20 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "900156",
+        "display": "24 HR lamotrigine 200 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "900164",
+        "display": "24 HR lamotrigine 25 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "900865",
+        "display": "{14 (24 HR lamotrigine 100 MG Extended Release Oral Tablet) / 7 (24 HR lamotrigine 200 MG Extended Release Oral Tablet) / 14 (24 HR lamotrigine 50 MG Extended Release Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "900890",
+        "display": "{7 (24 HR lamotrigine 100 MG Extended Release Oral Tablet) / 14 (24 HR lamotrigine 25 MG Extended Release Oral Tablet) / 14 (24 HR lamotrigine 50 MG Extended Release Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "900983",
+        "display": "{21 (24 HR lamotrigine 25 MG Extended Release Oral Tablet) / 7 (24 HR lamotrigine 50 MG Extended Release Oral Tablet) } Pack"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "905369",
+        "display": "chlordiazepoxide hydrochloride 10 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "905495",
+        "display": "chlordiazepoxide hydrochloride 25 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "905516",
+        "display": "chlordiazepoxide hydrochloride 5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "96304",
+        "display": "primidone 250 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "966787",
+        "display": "doxepin 3 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "966793",
+        "display": "doxepin 6 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991039",
+        "display": "chlorpromazine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991044",
+        "display": "chlorpromazine hydrochloride 100 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991053",
+        "display": "chlorpromazine hydrochloride 100 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991188",
+        "display": "chlorpromazine hydrochloride 200 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991194",
+        "display": "chlorpromazine hydrochloride 25 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991332",
+        "display": "chlorpromazine hydrochloride 30 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "991336",
+        "display": "chlorpromazine hydrochloride 50 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "993856",
+        "display": "lacosamide 10 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "993943",
+        "display": "acetaminophen 325 MG / butalbital 50 MG / caffeine 40 MG / codeine phosphate 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "994237",
+        "display": "aspirin 325 MG / butalbital 50 MG / caffeine 40 MG / codeine phosphate 30 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2024-01",
+        "code": "996921",
+        "display": "clozapine 200 MG Disintegrating Oral Tablet"
+      }
+    ]
+  }
+}

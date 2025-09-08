@@ -1,0 +1,323 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.220",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.220",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.220"
+    }
+  ],
+  "version": "20240112",
+  "name": "Smokingstatus",
+  "title": "Smoking status",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "105539002",
+        "display": "Non-smoker for personal reasons (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "105540000",
+        "display": "Non-smoker for religious reasons (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "105541001",
+        "display": "Non-smoker for medical reasons (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160603005",
+        "display": "Light cigarette smoker (1-9 cigs/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160604004",
+        "display": "Moderate cigarette smoker (10-19 cigs/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160605003",
+        "display": "Heavy cigarette smoker (20-39 cigs/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160606002",
+        "display": "Very heavy cigarette smoker (40+ cigs/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160620009",
+        "display": "Ex-pipe smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "160621008",
+        "display": "Ex-cigar smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230059006",
+        "display": "Occasional cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230060001",
+        "display": "Light cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230062009",
+        "display": "Moderate cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230063004",
+        "display": "Heavy cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230064005",
+        "display": "Very heavy cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "230065006",
+        "display": "Chain smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266920004",
+        "display": "Trivial cigarette smoker (less than one cigarette/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266921000",
+        "display": "Ex-trivial cigarette smoker (<1/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266922007",
+        "display": "Ex-light cigarette smoker (1-9/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266923002",
+        "display": "Ex-moderate cigarette smoker (10-19/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266924008",
+        "display": "Ex-heavy cigarette smoker (20-39/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266925009",
+        "display": "Ex-very heavy cigarette smoker (40+/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "266928006",
+        "display": "Ex-cigarette smoker amount unknown (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "281018007",
+        "display": "Ex-cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "360890004",
+        "display": "Intolerant ex-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "360900008",
+        "display": "Aggressive ex-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "360918006",
+        "display": "Aggressive non-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "360929005",
+        "display": "Intolerant non-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "405746006",
+        "display": "Current non smoker but past smoking history unknown (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428041000124106",
+        "display": "Occasional tobacco smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428061000124105",
+        "display": "Light tobacco smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428071000124103",
+        "display": "Heavy tobacco smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428081000124100",
+        "display": "Former heavy tobacco smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "428091000124102",
+        "display": "Former light tobacco smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "43381005",
+        "display": "Passive smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "449868002",
+        "display": "Smokes tobacco daily (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "450811000124104",
+        "display": "Cigarette smoker (5-9 cigarettes/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "450821000124107",
+        "display": "Cigarette smoker (1-4 cigarettes/day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "48031000119106",
+        "display": "Ex-smoker for more than 1 year (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "53896009",
+        "display": "Tolerant ex-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "56578002",
+        "display": "Moderate smoker (20 or less per day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "56771006",
+        "display": "Heavy smoker (over 20 per day) (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "59978006",
+        "display": "Cigar smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "65568007",
+        "display": "Cigarette smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "698289004",
+        "display": "Hookah pipe smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "735128000",
+        "display": "Ex-smoker for less than 1 year (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "77176002",
+        "display": "Smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "82302008",
+        "display": "Pipe smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "8392000",
+        "display": "Non-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "8517006",
+        "display": "Ex-smoker (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "87739003",
+        "display": "Tolerant non-smoker (finding)"
+      }
+    ]
+  }
+}

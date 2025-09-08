@@ -1,0 +1,71 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.89",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.89",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.89"
+    }
+  ],
+  "version": "20220719",
+  "name": "TracheostomyDiagnoses",
+  "title": "Tracheostomy Diagnoses",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.00",
+        "display": "Unspecified tracheostomy complication"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.01",
+        "display": "Hemorrhage from tracheostomy stoma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.02",
+        "display": "Infection of tracheostomy stoma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.03",
+        "display": "Malfunction of tracheostomy stoma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.04",
+        "display": "Tracheo-esophageal fistula following tracheostomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "J95.09",
+        "display": "Other tracheostomy complication"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z43.0",
+        "display": "Encounter for attention to tracheostomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "Z93.0",
+        "display": "Tracheostomy status"
+      }
+    ]
+  }
+}
