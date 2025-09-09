@@ -281,7 +281,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                     "amended",
                     "corrected",
                 ];
-                bool? cu_ = context.Operators.In<string>(cs_, ct_ as IEnumerable<string>);
+                bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
                 object cv_()
                 {
                     bool dc_()
@@ -641,7 +641,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 Code<MedicationRequest.MedicationRequestIntent> o_ = DischargeAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? p_ = o_?.Value;
                 string q_ = context.Operators.Convert<string>(p_);
@@ -652,7 +652,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                     "filler-order",
                     "instance-order",
                 ];
-                bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
+                bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
                 bool? t_ = context.Operators.And(n_, s_);
                 bool? u_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as object);
                 bool? v_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as object);
@@ -736,7 +736,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
             bool? ah_ = context.Operators.And(ab_, ag_);
             Code<MedicationRequest.MedicationRequestIntent> ai_ = NoAnticoagulant?.IntentElement;
             MedicationRequest.MedicationRequestIntent? aj_ = ai_?.Value;
@@ -748,7 +748,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? am_ = context.Operators.In<string>(ak_, al_ as IEnumerable<string>);
+            bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
             bool? an_ = context.Operators.And(ah_, am_);
 
             return an_;
@@ -806,7 +806,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_0_3_002 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? ca_ = context.Operators.In<string>(by_, bz_ as IEnumerable<string>);
+                bool? ca_ = context.Operators.In<string>(by_, (IEnumerable<string>)bz_);
                 bool? cb_ = context.Operators.And(bv_, ca_);
                 CodeableConcept cc_ = TaskReject?.Code;
                 CqlConcept cd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cc_);

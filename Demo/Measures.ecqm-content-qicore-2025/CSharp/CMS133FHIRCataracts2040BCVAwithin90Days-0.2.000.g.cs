@@ -1124,7 +1124,7 @@ public partial class CMS133FHIRCataracts2040BCVAwithin90Days_0_2_000 : ILibrary,
                     "corrected",
                     "preliminary",
                 ];
-                bool? ak_ = context.Operators.In<string>(ai_, aj_ as IEnumerable<string>);
+                bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
                 bool? al_ = context.Operators.And(af_, ak_);
                 DataType am_ = VisualAcuityExamPerformed?.Value;
                 object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);

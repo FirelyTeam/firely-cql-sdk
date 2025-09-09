@@ -311,7 +311,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
+                bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
                 return aw_;
@@ -371,7 +371,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? bz_ = context.Operators.In<string>(bx_, by_ as IEnumerable<string>);
+                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string>)by_);
                 bool? ca_ = context.Operators.And(bu_, bz_);
 
                 return ca_;
@@ -447,7 +447,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
+                bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
                 return aw_;
@@ -507,7 +507,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? bz_ = context.Operators.In<string>(bx_, by_ as IEnumerable<string>);
+                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string>)by_);
                 bool? ca_ = context.Operators.And(bu_, bz_);
 
                 return ca_;
@@ -750,7 +750,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? ch_ = context.Operators.In<string>(cf_, cg_ as IEnumerable<string>);
+                bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
 
                 return ci_;
@@ -818,7 +818,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? dx_ = context.Operators.In<string>(dv_, dw_ as IEnumerable<string>);
+                bool? dx_ = context.Operators.In<string>(dv_, (IEnumerable<string>)dw_);
                 bool? dy_ = context.Operators.And(ds_, dx_);
 
                 return dy_;
@@ -886,7 +886,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? fn_ = context.Operators.In<string>(fl_, fm_ as IEnumerable<string>);
+                bool? fn_ = context.Operators.In<string>(fl_, (IEnumerable<string>)fm_);
                 bool? fo_ = context.Operators.And(fi_, fn_);
 
                 return fo_;
@@ -954,7 +954,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? hd_ = context.Operators.In<string>(hb_, hc_ as IEnumerable<string>);
+                bool? hd_ = context.Operators.In<string>(hb_, (IEnumerable<string>)hc_);
                 bool? he_ = context.Operators.And(gy_, hd_);
 
                 return he_;
@@ -1313,7 +1313,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? cd_ = context.Operators.In<string>(cb_, cc_ as IEnumerable<string>);
+                bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
                 bool? ce_ = context.Operators.And(by_, cd_);
 
                 return ce_;
@@ -1373,7 +1373,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? dh_ = context.Operators.In<string>(df_, dg_ as IEnumerable<string>);
+                bool? dh_ = context.Operators.In<string>(df_, (IEnumerable<string>)dg_);
                 bool? di_ = context.Operators.And(dc_, dh_);
 
                 return di_;
@@ -1434,7 +1434,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? el_ = context.Operators.In<string>(ej_, ek_ as IEnumerable<string>);
+                bool? el_ = context.Operators.In<string>(ej_, (IEnumerable<string>)ek_);
                 bool? em_ = context.Operators.And(eg_, el_);
 
                 return em_;
@@ -1492,7 +1492,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? fp_ = context.Operators.In<string>(fn_, fo_ as IEnumerable<string>);
+                bool? fp_ = context.Operators.In<string>(fn_, (IEnumerable<string>)fo_);
                 bool? fq_ = context.Operators.And(fk_, fp_);
 
                 return fq_;
@@ -1705,7 +1705,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? by_ = context.Operators.In<string>(bw_, bx_ as IEnumerable<string>);
+                bool? by_ = context.Operators.In<string>(bw_, (IEnumerable<string>)bx_);
                 bool? bz_ = context.Operators.And(bt_, by_);
 
                 return bz_;
@@ -1763,7 +1763,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? dc_ = context.Operators.In<string>(da_, db_ as IEnumerable<string>);
+                bool? dc_ = context.Operators.In<string>(da_, (IEnumerable<string>)db_);
                 bool? dd_ = context.Operators.And(cx_, dc_);
 
                 return dd_;
@@ -1821,7 +1821,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? eg_ = context.Operators.In<string>(ee_, ef_ as IEnumerable<string>);
+                bool? eg_ = context.Operators.In<string>(ee_, (IEnumerable<string>)ef_);
                 bool? eh_ = context.Operators.And(eb_, eg_);
 
                 return eh_;
@@ -1879,7 +1879,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
                     "amended",
                     "corrected",
                 ];
-                bool? fk_ = context.Operators.In<string>(fi_, fj_ as IEnumerable<string>);
+                bool? fk_ = context.Operators.In<string>(fi_, (IEnumerable<string>)fj_);
                 bool? fl_ = context.Operators.And(ff_, fk_);
 
                 return fl_;

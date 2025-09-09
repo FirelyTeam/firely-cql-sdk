@@ -272,7 +272,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
             {
@@ -482,7 +482,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = Parity?.Value;
             object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
@@ -635,7 +635,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = PretermBirth?.Value;
             object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
@@ -788,7 +788,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = TermBirth?.Value;
             object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
@@ -970,7 +970,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? ah_ = context.Operators.In<string>(af_, ag_ as IEnumerable<string>);
+                        bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                         bool? ai_ = context.Operators.And(ac_, ah_);
 
                         return ai_;
@@ -1111,7 +1111,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? cn_ = context.Operators.In<string>(cl_, cm_ as IEnumerable<string>);
+                        bool? cn_ = context.Operators.In<string>(cl_, (IEnumerable<string>)cm_);
                         bool? co_ = context.Operators.And(ci_, cn_);
 
                         return co_;
@@ -1252,7 +1252,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? et_ = context.Operators.In<string>(er_, es_ as IEnumerable<string>);
+                        bool? et_ = context.Operators.In<string>(er_, (IEnumerable<string>)es_);
                         bool? eu_ = context.Operators.And(eo_, et_);
 
                         return eu_;
@@ -1393,7 +1393,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? gy_ = context.Operators.In<string>(gw_, gx_ as IEnumerable<string>);
+                        bool? gy_ = context.Operators.In<string>(gw_, (IEnumerable<string>)gx_);
                         bool? gz_ = context.Operators.And(gt_, gy_);
 
                         return gz_;
@@ -1533,7 +1533,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? jd_ = context.Operators.In<string>(jb_, jc_ as IEnumerable<string>);
+                        bool? jd_ = context.Operators.In<string>(jb_, (IEnumerable<string>)jc_);
                         bool? je_ = context.Operators.And(iy_, jd_);
 
                         return je_;
@@ -1673,7 +1673,7 @@ public partial class CMS0334FHIRPCCesareanBirth_0_6_000 : ILibrary, ISingleton<C
                             "amended",
                             "corrected",
                         ];
-                        bool? li_ = context.Operators.In<string>(lg_, lh_ as IEnumerable<string>);
+                        bool? li_ = context.Operators.In<string>(lg_, (IEnumerable<string>)lh_);
                         bool? lj_ = context.Operators.And(ld_, li_);
 
                         return lj_;

@@ -456,7 +456,7 @@ public partial class CMS143FHIRPOAGOpticNerveEvaluation_0_2_000 : ILibrary, ISin
                 "amended",
                 "corrected",
             ];
-            bool? y_ = context.Operators.In<string>(w_, x_ as IEnumerable<string>);
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 
             return z_;
@@ -507,7 +507,7 @@ public partial class CMS143FHIRPOAGOpticNerveEvaluation_0_2_000 : ILibrary, ISin
                 "amended",
                 "corrected",
             ];
-            bool? y_ = context.Operators.In<string>(w_, x_ as IEnumerable<string>);
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 
             return z_;

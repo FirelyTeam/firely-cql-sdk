@@ -215,7 +215,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, ag_ as IEnumerable<string>);
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = Temperature?.Value;
                 CqlQuantity ak_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aj_ as Quantity);
@@ -252,7 +252,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? az_ = context.Operators.In<string>(ax_, ay_ as IEnumerable<string>);
+                bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = Temperature?.Value;
                 CqlQuantity bc_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bb_ as Quantity);
@@ -310,7 +310,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, ag_ as IEnumerable<string>);
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = HeartRate?.Value;
                 CqlQuantity ak_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aj_ as Quantity);
@@ -347,7 +347,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? az_ = context.Operators.In<string>(ax_, ay_ as IEnumerable<string>);
+                bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = HeartRate?.Value;
                 CqlQuantity bc_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bb_ as Quantity);
@@ -406,7 +406,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+                bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
                 bool? ak_ = context.Operators.And(ae_, aj_);
                 DataType al_ = O2Saturation?.Value;
                 CqlQuantity am_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, al_ as Quantity);
@@ -444,7 +444,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bb_ = context.Operators.In<string>(az_, ba_ as IEnumerable<string>);
+                bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
                 bool? bc_ = context.Operators.And(aw_, bb_);
                 DataType bd_ = O2Saturation?.Value;
                 CqlQuantity be_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bd_ as Quantity);
@@ -502,7 +502,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? al_ = context.Operators.In<string>(aj_, ak_ as IEnumerable<string>);
+                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
                 List<Observation.ComponentComponent> an_ = BP?.Component;
                 bool? ao_(Observation.ComponentComponent @this)
@@ -574,7 +574,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 List<Observation.ComponentComponent> bu_ = BP?.Component;
                 bool? bv_(Observation.ComponentComponent @this)
@@ -699,7 +699,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = BicarbonateLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -788,7 +788,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = BicarbonateLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -898,7 +898,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = CreatinineLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -987,7 +987,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = CreatinineLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -1097,7 +1097,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = HematocritLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -1186,7 +1186,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = HematocritLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -1296,7 +1296,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = PlateletLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -1385,7 +1385,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = PlateletLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -1495,7 +1495,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = SodiumLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -1584,7 +1584,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = SodiumLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -1694,7 +1694,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = WhiteBloodCellLab?.Value;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -1783,7 +1783,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, br_ as IEnumerable<string>);
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = WhiteBloodCellLab?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
@@ -1862,7 +1862,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     "active",
                     "completed",
                 ];
-                bool? bd_ = context.Operators.In<string>(bb_, bc_ as IEnumerable<string>);
+                bool? bd_ = context.Operators.In<string>(bb_, (IEnumerable<string>)bc_);
                 bool? be_ = context.Operators.And(ax_, bd_);
                 Code<RequestIntent> bf_ = OxygenTherapyOrder?.IntentElement;
                 RequestIntent? bg_ = bf_?.Value;

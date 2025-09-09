@@ -287,7 +287,7 @@ public partial class HIVSTITestingFHIR_0_2_000 : ILibrary, ISingleton<HIVSTITest
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             object p_()
             {
@@ -374,7 +374,7 @@ public partial class HIVSTITestingFHIR_0_2_000 : ILibrary, ISingleton<HIVSTITest
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             object p_()
             {
@@ -461,7 +461,7 @@ public partial class HIVSTITestingFHIR_0_2_000 : ILibrary, ISingleton<HIVSTITest
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             object p_()
             {

@@ -442,7 +442,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 "corrected",
                 "appended",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
 
             return w_;
@@ -1034,7 +1034,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
                 "active",
                 "completed",
             ];
-            bool? bt_ = context.Operators.In<string>(br_, bs_ as IEnumerable<string>);
+            bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
             Code<MedicationRequest.MedicationRequestIntent> bu_ = StatinPrescribed?.IntentElement;
             MedicationRequest.MedicationRequestIntent? bv_ = bu_?.Value;
             string bw_ = context.Operators.Convert<string>(bv_);

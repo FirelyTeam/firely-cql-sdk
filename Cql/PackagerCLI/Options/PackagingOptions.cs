@@ -31,7 +31,16 @@ public record PackagingOptions : PackagingToolkitConfig, IBindOptions
         return value.Count > 0;
     }
 
+    /// <summary>
+    /// Gets a value indicating whether JSON output should be formatted with indentation and line breaks.
+    /// </summary>
     public bool JsonPretty { get; init; }
+
+    /// <summary>
+    /// Gets or sets a value which configures the application to exit upon an error.
+    /// The default is <c>false</c>, which allows the application to continue processing other items.
+    /// </summary>
+    public bool ExitOnError { get; init; } = false;
 
     static string IBindOptions.ConfigSection => ConfigSection;
 }

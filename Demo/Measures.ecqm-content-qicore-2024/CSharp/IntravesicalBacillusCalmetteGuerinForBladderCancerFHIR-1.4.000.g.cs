@@ -379,7 +379,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
                 "amended",
                 "corrected",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ad_, aj_);
 
             return ak_;
@@ -658,7 +658,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
                 "active",
                 "completed",
             ];
-            bool? ct_ = context.Operators.In<string>(cr_, cs_ as IEnumerable<string>);
+            bool? ct_ = context.Operators.In<string>(cr_, (IEnumerable<string>)cs_);
             Code<MedicationRequest.MedicationRequestIntent> cu_ = ImmunosuppressiveDrugs?.IntentElement;
             MedicationRequest.MedicationRequestIntent? cv_ = cu_?.Value;
             string cw_ = context.Operators.Convert<string>(cv_);
@@ -925,7 +925,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
                 "active",
                 "completed",
             ];
-            bool? cs_ = context.Operators.In<string>(cq_, cr_ as IEnumerable<string>);
+            bool? cs_ = context.Operators.In<string>(cq_, (IEnumerable<string>)cr_);
             Code<MedicationRequest.MedicationRequestIntent> ct_ = ExclusionMed?.IntentElement;
             MedicationRequest.MedicationRequestIntent? cu_ = ct_?.Value;
             string cv_ = context.Operators.Convert<string>(cu_);
@@ -1109,7 +1109,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
                 "in-progress",
                 "completed",
             ];
-            bool? bq_ = context.Operators.In<string>(bo_, bp_ as IEnumerable<string>);
+            bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
 
             return bq_;
         };

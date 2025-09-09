@@ -431,7 +431,7 @@ public partial class CMS165FHIRControllingHighBloodPressure_0_5_000 : ILibrary, 
                 "PRENC",
                 "SS",
             ];
-            bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
             bool? aj_ = context.Operators.Not(ai_);
             DataType ak_ = BloodPressure?.Effective;
             object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
@@ -499,7 +499,7 @@ public partial class CMS165FHIRControllingHighBloodPressure_0_5_000 : ILibrary, 
                 "PRENC",
                 "SS",
             ];
-            bool? ai_ = context.Operators.In<string>(ag_, ah_ as IEnumerable<string>);
+            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
             bool? aj_ = context.Operators.Not(ai_);
             DataType ak_ = BloodPressure?.Effective;
             object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
