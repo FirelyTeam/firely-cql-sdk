@@ -2376,18 +2376,18 @@ internal partial class ExpressionBuilderContext
     private void FixMissingAliasRefTypeSpecifiers(Elm.Expression elmExpression)
     {
         // First pass: Build dictionary of alias names to their source elements (with resultTypeSpecifier)
-        var aliasSources = new Dictionary<string, TypeSpecifier>();
+        var aliasSources = new Dictionary<string, (Element sourceElement, TypeSpecifier sourceResultTypeSpecifier)>();
 
         var aliasCollector = new ElmTreeWalker(node =>
         {
             switch (node)
             {
                 case AliasedQuerySource aqs when !string.IsNullOrEmpty(aqs.alias) && aqs.expression?.resultTypeSpecifier != null:
-                    aliasSources[aqs.alias] = aqs.expression.resultTypeSpecifier;
+                    aliasSources[aqs.alias] = (aqs, aqs.expression.resultTypeSpecifier);
                     break;
 
                 case LetClause let when !string.IsNullOrEmpty(let.identifier) && let.expression?.resultTypeSpecifier != null:
-                    aliasSources[let.identifier] = let.expression.resultTypeSpecifier;
+                    aliasSources[let.identifier] = (let, let.expression.resultTypeSpecifier);
                     break;
             }
             return true; // Continue walking children
@@ -2401,9 +2401,15 @@ internal partial class ExpressionBuilderContext
             if (node is AliasRef aliasRef
                 && !string.IsNullOrEmpty(aliasRef.name)
                 && aliasRef.resultTypeSpecifier == null
-                && aliasSources.TryGetValue(aliasRef.name, out var sourceTypeSpecifier))
+                && aliasSources.TryGetValue(aliasRef.name, out var source))
             {
-                aliasRef.resultTypeSpecifier = sourceTypeSpecifier;
+                _logger.LogDebug(
+                    "Fixing missing resultTypeSpecifier for AliasRef named '{alias}' @ {aliasLocator}, originating from {sourceType} @ {sourceLocator}. {expressionBuilderContext}",
+                    aliasRef.name, aliasRef.locator,
+                    source.sourceElement.GetType().Name,
+                    source.sourceElement.locator,
+                    DebuggerView);
+                aliasRef.resultTypeSpecifier = source.sourceResultTypeSpecifier;
             }
             return true; // Continue walking children
         });
