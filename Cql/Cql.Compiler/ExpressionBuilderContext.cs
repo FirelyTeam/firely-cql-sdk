@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -339,12 +339,12 @@ partial class ExpressionBuilderContext
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                     && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && leftListElemType.AreCompatibleForUnionOperation(rightListElemType))
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType))
                     return [left, right];
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
-                    && leftPointType.AreCompatibleForUnionOperation(rightPointType))
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftPointType, rightPointType))
                     return [left, right];
             }
 
@@ -2377,7 +2377,7 @@ internal partial class ExpressionBuilderContext
     {
         // First pass: Build dictionary of alias names to their source elements (with resultTypeSpecifier)
         var aliasSources = new Dictionary<string, TypeSpecifier>();
-        
+
         var aliasCollector = new ElmTreeWalker(node =>
         {
             switch (node)
@@ -2385,20 +2385,20 @@ internal partial class ExpressionBuilderContext
                 case AliasedQuerySource aqs when !string.IsNullOrEmpty(aqs.alias) && aqs.expression?.resultTypeSpecifier != null:
                     aliasSources[aqs.alias] = aqs.expression.resultTypeSpecifier;
                     break;
-                    
+
                 case LetClause let when !string.IsNullOrEmpty(let.identifier) && let.expression?.resultTypeSpecifier != null:
                     aliasSources[let.identifier] = let.expression.resultTypeSpecifier;
                     break;
             }
             return true; // Continue walking children
         });
-        
+
         aliasCollector.Start(elmExpression);
-        
+
         // Second pass: Find AliasRef elements without resultTypeSpecifier and copy it from the dictionary
         var aliasRefFixer = new ElmTreeWalker(node =>
         {
-            if (node is AliasRef aliasRef 
+            if (node is AliasRef aliasRef
                 && !string.IsNullOrEmpty(aliasRef.name)
                 && aliasRef.resultTypeSpecifier == null
                 && aliasSources.TryGetValue(aliasRef.name, out var sourceTypeSpecifier))
@@ -2407,7 +2407,7 @@ internal partial class ExpressionBuilderContext
             }
             return true; // Continue walking children
         });
-        
+
         aliasRefFixer.Start(elmExpression);
     }
 }
