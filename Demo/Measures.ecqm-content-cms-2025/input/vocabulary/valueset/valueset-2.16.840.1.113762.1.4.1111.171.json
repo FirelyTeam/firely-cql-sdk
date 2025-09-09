@@ -1,0 +1,185 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1111.171",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.171",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1111.171"
+    }
+  ],
+  "version": "20240215",
+  "name": "OpioidUseDisorder",
+  "title": "Opioid Use Disorder",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.20",
+        "display": "Opioid dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.220",
+        "display": "Opioid dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.221",
+        "display": "Opioid dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.222",
+        "display": "Opioid dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.229",
+        "display": "Opioid dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.23",
+        "display": "Opioid dependence with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.24",
+        "display": "Opioid dependence with opioid-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.250",
+        "display": "Opioid dependence with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.251",
+        "display": "Opioid dependence with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.259",
+        "display": "Opioid dependence with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.281",
+        "display": "Opioid dependence with opioid-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.282",
+        "display": "Opioid dependence with opioid-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.288",
+        "display": "Opioid dependence with other opioid-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "F11.29",
+        "display": "Opioid dependence with unspecified opioid-induced disorder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1081000119105",
+        "display": "Opioid dependence, on agonist therapy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1255013006",
+        "display": "Combined opioid with non-opioid substance dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1255015004",
+        "display": "Combined opioid with non-opioid substance dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1255018002",
+        "display": "Combined opioid with non-opioid substance dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "191819002",
+        "display": "Continuous opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "191820008",
+        "display": "Episodic opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231477003",
+        "display": "Dependence on diamorphine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231478008",
+        "display": "Methadone dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231479000",
+        "display": "Morphine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "231480002",
+        "display": "Opium dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "426001001",
+        "display": "Fentanyl dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "703845008",
+        "display": "Buprenorphine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "75544000",
+        "display": "Opioid dependence (disorder)"
+      }
+    ]
+  }
+}

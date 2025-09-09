@@ -1,0 +1,77 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1045.127",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1045.127"
+    }
+  ],
+  "version": "20230214",
+  "name": "PlateletCountLabTest",
+  "title": "Platelet Count Lab Test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "13056-7",
+        "display": "Platelets [#/volume] in Plasma by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "26515-7",
+        "display": "Platelets [#/volume] in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "26516-5",
+        "display": "Platelets [#/volume] in Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "34167-7",
+        "display": "Platelets Large [Presence] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "48386-7",
+        "display": "Platelets Large/Platelets in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "777-3",
+        "display": "Platelets [#/volume] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "778-1",
+        "display": "Platelets [#/volume] in Blood by Manual count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "96354-6",
+        "display": "Platelets Large [#/volume] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "97995-5",
+        "display": "Platelets [#/volume] in Blood by Automated count.optical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.175",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.175"
+    }
+  ],
+  "version": "20221006",
+  "name": "PeripheralNeuropathy",
+  "title": "Peripheral Neuropathy",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "A50.43",
+        "display": "Late congenital syphilitic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "A52.15",
+        "display": "Late syphilitic neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B02.23",
+        "display": "Postherpetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B26.84",
+        "display": "Mumps polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B27.01",
+        "display": "Gammaherpesviral mononucleosis with polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B27.11",
+        "display": "Cytomegaloviral mononucleosis with polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B27.81",
+        "display": "Other infectious mononucleosis with polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B27.91",
+        "display": "Infectious mononucleosis, unspecified with polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E08.40",
+        "display": "Diabetes mellitus due to underlying condition with diabetic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E08.41",
+        "display": "Diabetes mellitus due to underlying condition with diabetic mononeuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E08.42",
+        "display": "Diabetes mellitus due to underlying condition with diabetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E08.610",
+        "display": "Diabetes mellitus due to underlying condition with diabetic neuropathic arthropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E09.40",
+        "display": "Drug or chemical induced diabetes mellitus with neurological complications with diabetic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E09.41",
+        "display": "Drug or chemical induced diabetes mellitus with neurological complications with diabetic mononeuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E09.42",
+        "display": "Drug or chemical induced diabetes mellitus with neurological complications with diabetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E09.610",
+        "display": "Drug or chemical induced diabetes mellitus with diabetic neuropathic arthropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E10.40",
+        "display": "Type 1 diabetes mellitus with diabetic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E10.41",
+        "display": "Type 1 diabetes mellitus with diabetic mononeuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E10.42",
+        "display": "Type 1 diabetes mellitus with diabetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E10.610",
+        "display": "Type 1 diabetes mellitus with diabetic neuropathic arthropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E11.40",
+        "display": "Type 2 diabetes mellitus with diabetic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E11.41",
+        "display": "Type 2 diabetes mellitus with diabetic mononeuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E11.42",
+        "display": "Type 2 diabetes mellitus with diabetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E11.610",
+        "display": "Type 2 diabetes mellitus with diabetic neuropathic arthropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E13.40",
+        "display": "Other specified diabetes mellitus with diabetic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E13.41",
+        "display": "Other specified diabetes mellitus with diabetic mononeuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E13.42",
+        "display": "Other specified diabetes mellitus with diabetic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E13.610",
+        "display": "Other specified diabetes mellitus with diabetic neuropathic arthropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E71.522",
+        "display": "Adrenomyeloneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "E85.1",
+        "display": "Neuropathic heredofamilial amyloidosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G13.0",
+        "display": "Paraneoplastic neuromyopathy and neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.80",
+        "display": "Other specified mononeuropathies of unspecified lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.81",
+        "display": "Other specified mononeuropathies of right lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.82",
+        "display": "Other specified mononeuropathies of left lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.83",
+        "display": "Other specified mononeuropathies of bilateral lower limbs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.90",
+        "display": "Unspecified mononeuropathy of unspecified lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.91",
+        "display": "Unspecified mononeuropathy of right lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.92",
+        "display": "Unspecified mononeuropathy of left lower limb"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G57.93",
+        "display": "Unspecified mononeuropathy of bilateral lower limbs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G58.8",
+        "display": "Other specified mononeuropathies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G58.9",
+        "display": "Mononeuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G59",
+        "display": "Mononeuropathy in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.0",
+        "display": "Hereditary motor and sensory neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.1",
+        "display": "Refsum's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.2",
+        "display": "Neuropathy in association with hereditary ataxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.3",
+        "display": "Idiopathic progressive neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.8",
+        "display": "Other hereditary and idiopathic neuropathies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G60.9",
+        "display": "Hereditary and idiopathic neuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.0",
+        "display": "Guillain-Barre syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.81",
+        "display": "Chronic inflammatory demyelinating polyneuritis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.82",
+        "display": "Multifocal motor neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.89",
+        "display": "Other inflammatory polyneuropathies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G61.9",
+        "display": "Inflammatory polyneuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.0",
+        "display": "Drug-induced polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.1",
+        "display": "Alcoholic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.2",
+        "display": "Polyneuropathy due to other toxic agents"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.81",
+        "display": "Critical illness polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.82",
+        "display": "Radiation-induced polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.89",
+        "display": "Other specified polyneuropathies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G62.9",
+        "display": "Polyneuropathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G63",
+        "display": "Polyneuropathy in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G65.1",
+        "display": "Sequelae of other inflammatory polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G65.2",
+        "display": "Sequelae of toxic polyneuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.50",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of unspecified site"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.551",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of right hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.552",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of left hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.559",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of unspecified hip"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.561",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of right knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.562",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of left knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.569",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of unspecified knee"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.571",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of right ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.572",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of left ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.579",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of unspecified ankle and foot"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M05.59",
+        "display": "Rheumatoid polyneuropathy with rheumatoid arthritis of multiple sites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "M34.83",
+        "display": "Systemic sclerosis with polyneuropathy"
+      }
+    ]
+  }
+}

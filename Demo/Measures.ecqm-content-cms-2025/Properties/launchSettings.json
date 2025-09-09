@@ -1,12 +1,8 @@
 {
-  "profiles": {
+  "profiles": {   
     "CMS125FHIRBreastCancerScreening-0.4.000": {
       "commandName": "Project",
-      "commandLineArgs": "--l CMS125FHIRBreastCancerScreening-0.2.000"
-    },
-    "CMS1218FHIRHHRF-0.2.000": {
-      "commandName": "Project",
-      "commandLineArgs": "--l CMS1218FHIRHHRF-0.2.000"
+      "commandLineArgs": "--l CMS125FHIRBreastCancerScreening-0.4.000"
     }
   }
 }

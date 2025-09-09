@@ -1,0 +1,605 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.174",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.174"
+    }
+  ],
+  "version": "20221006",
+  "name": "NeurologicMovementandRelatedDisorders",
+  "title": "Neurologic Movement and Related Disorders",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G08",
+        "display": "Intracranial and intraspinal phlebitis and thrombophlebitis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G11.11",
+        "display": "Friedreich ataxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G11.2",
+        "display": "Late-onset cerebellar ataxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.20",
+        "display": "Motor neuron disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.21",
+        "display": "Amyotrophic lateral sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.22",
+        "display": "Progressive bulbar palsy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.23",
+        "display": "Primary lateral sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.24",
+        "display": "Familial motor neuron disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.25",
+        "display": "Progressive spinal muscle atrophy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.29",
+        "display": "Other motor neuron disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.8",
+        "display": "Other spinal muscular atrophies and related syndromes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G12.9",
+        "display": "Spinal muscular atrophy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G13.0",
+        "display": "Paraneoplastic neuromyopathy and neuropathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G13.1",
+        "display": "Other systemic atrophy primarily affecting central nervous system in neoplastic disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G13.2",
+        "display": "Systemic atrophy primarily affecting the central nervous system in myxedema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G13.8",
+        "display": "Systemic atrophy primarily affecting central nervous system in other diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G20.A1",
+        "display": "Parkinson's disease without dyskinesia, without mention of fluctuations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G20.A2",
+        "display": "Parkinson's disease without dyskinesia, with fluctuations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G20.B1",
+        "display": "Parkinson's disease with dyskinesia, without mention of fluctuations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G20.B2",
+        "display": "Parkinson's disease with dyskinesia, with fluctuations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G20.C",
+        "display": "Parkinsonism, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.0",
+        "display": "Malignant neuroleptic syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.11",
+        "display": "Neuroleptic induced parkinsonism"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.19",
+        "display": "Other drug induced secondary parkinsonism"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.2",
+        "display": "Secondary parkinsonism due to other external agents"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.3",
+        "display": "Postencephalitic parkinsonism"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.4",
+        "display": "Vascular parkinsonism"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.8",
+        "display": "Other secondary parkinsonism"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G21.9",
+        "display": "Secondary parkinsonism, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G23.2",
+        "display": "Striatonigral degeneration"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G23.3",
+        "display": "Hypomyelination with atrophy of the basal ganglia and cerebellum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G23.8",
+        "display": "Other specified degenerative diseases of basal ganglia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G23.9",
+        "display": "Degenerative disease of basal ganglia, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G24.09",
+        "display": "Other drug induced dystonia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G24.2",
+        "display": "Idiopathic nonfamilial dystonia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G24.8",
+        "display": "Other dystonia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.4",
+        "display": "Drug-induced chorea"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.5",
+        "display": "Other chorea"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.70",
+        "display": "Drug induced movement disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.71",
+        "display": "Drug induced akathisia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.79",
+        "display": "Other drug induced movement disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.83",
+        "display": "Benign shuddering attacks"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.89",
+        "display": "Other specified extrapyramidal and movement disorders"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G25.9",
+        "display": "Extrapyramidal and movement disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G26",
+        "display": "Extrapyramidal and movement disorders in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G32.0",
+        "display": "Subacute combined degeneration of spinal cord in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G32.81",
+        "display": "Cerebellar ataxia in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G32.89",
+        "display": "Other specified degenerative disorders of nervous system in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G35",
+        "display": "Multiple sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G36.0",
+        "display": "Neuromyelitis optica [Devic]"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G36.8",
+        "display": "Other specified acute disseminated demyelination"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G36.9",
+        "display": "Acute disseminated demyelination, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.0",
+        "display": "Diffuse sclerosis of central nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.1",
+        "display": "Central demyelination of corpus callosum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.2",
+        "display": "Central pontine myelinolysis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.3",
+        "display": "Acute transverse myelitis in demyelinating disease of central nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.4",
+        "display": "Subacute necrotizing myelitis of central nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.5",
+        "display": "Concentric sclerosis [Balo] of central nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.81",
+        "display": "Myelin oligodendrocyte glycoprotein antibody disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.89",
+        "display": "Other specified demyelinating diseases of central nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G37.9",
+        "display": "Demyelinating disease of central nervous system, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G47.411",
+        "display": "Narcolepsy with cataplexy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G47.419",
+        "display": "Narcolepsy without cataplexy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G47.421",
+        "display": "Narcolepsy in conditions classified elsewhere with cataplexy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G47.429",
+        "display": "Narcolepsy in conditions classified elsewhere without cataplexy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G89.0",
+        "display": "Central pain syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.0",
+        "display": "Communicating hydrocephalus"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.1",
+        "display": "Obstructive hydrocephalus"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.2",
+        "display": "(Idiopathic) normal pressure hydrocephalus"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.3",
+        "display": "Post-traumatic hydrocephalus, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.4",
+        "display": "Hydrocephalus in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.8",
+        "display": "Other hydrocephalus"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G91.9",
+        "display": "Hydrocephalus, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.0",
+        "display": "Cerebral cysts"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.40",
+        "display": "Encephalopathy, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.41",
+        "display": "Metabolic encephalopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.42",
+        "display": "Megaloencephalic leukoencephalopathy with subcortical cysts"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.43",
+        "display": "Leukoencephalopathy with calcifications and cysts"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.44",
+        "display": "Adult-onset leukodystrophy with axonal spheroids"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.49",
+        "display": "Other encephalopathy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.5",
+        "display": "Compression of brain"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.6",
+        "display": "Cerebral edema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.81",
+        "display": "Temporal sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.82",
+        "display": "Brain death"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.89",
+        "display": "Other specified disorders of brain"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G93.9",
+        "display": "Disorder of brain, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "G94",
+        "display": "Other disorders of brain in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.350",
+        "display": "Diseases of the nervous system complicating pregnancy, unspecified trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.351",
+        "display": "Diseases of the nervous system complicating pregnancy, first trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.352",
+        "display": "Diseases of the nervous system complicating pregnancy, second trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.353",
+        "display": "Diseases of the nervous system complicating pregnancy, third trimester"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.354",
+        "display": "Diseases of the nervous system complicating childbirth"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "O99.355",
+        "display": "Diseases of the nervous system complicating the puerperium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "P91.60",
+        "display": "Hypoxic ischemic encephalopathy [HIE], unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "P91.61",
+        "display": "Mild hypoxic ischemic encephalopathy [HIE]"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "P91.62",
+        "display": "Moderate hypoxic ischemic encephalopathy [HIE]"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "P91.63",
+        "display": "Severe hypoxic ischemic encephalopathy [HIE]"
+      }
+    ]
+  }
+}

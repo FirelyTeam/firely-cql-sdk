@@ -1,0 +1,53 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.222",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.222",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.222"
+    }
+  ],
+  "version": "20240112",
+  "name": "Leukocytecountlabtest",
+  "title": "Leukocyte count lab test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:18-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "26464-8",
+        "display": "Leukocytes [#/volume] in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "49498-9",
+        "display": "Leukocytes [#/volume] in Blood by Estimate"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "51383-8",
+        "display": "Leukocytes other [#/volume] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "6690-2",
+        "display": "Leukocytes [#/volume] in Blood by Automated count"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "804-5",
+        "display": "Leukocytes [#/volume] in Blood by Manual count"
+      }
+    ]
+  }
+}

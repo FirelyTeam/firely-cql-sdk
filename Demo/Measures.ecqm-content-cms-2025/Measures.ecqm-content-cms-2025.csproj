@@ -2,6 +2,7 @@
 	<Import Project="..\cql-demo.props" />
 
 	<PropertyGroup>
+		<OutputType>Exe</OutputType>
 		<Configurations>Debug;Release</Configurations>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>

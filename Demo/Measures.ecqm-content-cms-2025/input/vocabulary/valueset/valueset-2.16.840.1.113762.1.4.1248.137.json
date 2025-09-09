@@ -1,0 +1,131 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.137",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.137"
+    }
+  ],
+  "version": "20221006",
+  "name": "LiverDiseaseModeratetoSevere",
+  "title": "Liver Disease Moderate to Severe",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:18-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B19.0",
+        "display": "Unspecified viral hepatitis with hepatic coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B19.11",
+        "display": "Unspecified viral hepatitis B with hepatic coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "B19.21",
+        "display": "Unspecified viral hepatitis C with hepatic coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I85.00",
+        "display": "Esophageal varices without bleeding"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I85.01",
+        "display": "Esophageal varices with bleeding"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I85.10",
+        "display": "Secondary esophageal varices without bleeding"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I85.11",
+        "display": "Secondary esophageal varices with bleeding"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "I86.4",
+        "display": "Gastric varices"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K70.40",
+        "display": "Alcoholic hepatic failure without coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K70.41",
+        "display": "Alcoholic hepatic failure with coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K72.10",
+        "display": "Chronic hepatic failure without coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K72.11",
+        "display": "Chronic hepatic failure with coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K72.90",
+        "display": "Hepatic failure, unspecified without coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K72.91",
+        "display": "Hepatic failure, unspecified with coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K76.5",
+        "display": "Hepatic veno-occlusive disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K76.6",
+        "display": "Portal hypertension"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K76.7",
+        "display": "Hepatorenal syndrome"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "K91.82",
+        "display": "Postprocedural hepatic failure"
+      }
+    ]
+  }
+}

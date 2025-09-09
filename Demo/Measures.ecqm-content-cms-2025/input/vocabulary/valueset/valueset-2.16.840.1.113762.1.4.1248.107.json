@@ -1,0 +1,53 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.107",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.107",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.107"
+    }
+  ],
+  "version": "20220507",
+  "name": "MechanicalVentilation",
+  "title": "Mechanical Ventilation",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:21-07:00",
+    "contains": [
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "5A1935Z",
+        "display": "Respiratory Ventilation, Less than 24 Consecutive Hours"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "5A1945Z",
+        "display": "Respiratory Ventilation, 24-96 Consecutive Hours"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "5A1955Z",
+        "display": "Respiratory Ventilation, Greater than 96 Consecutive Hours"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1258985005",
+        "display": "Invasive mechanical ventilation (regime/therapy)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "243141005",
+        "display": "Mechanically assisted spontaneous ventilation (regime/therapy)"
+      }
+    ]
+  }
+}

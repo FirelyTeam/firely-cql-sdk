@@ -1,0 +1,137 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.181",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.181",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.181"
+    }
+  ],
+  "version": "20220719",
+  "name": "TracheostomyProcedures",
+  "title": "Tracheostomy Procedures",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:23-07:00",
+    "contains": [
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B110F4",
+        "display": "Bypass Trachea to Cutaneous with Tracheostomy Device, Open Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B110Z4",
+        "display": "Bypass Trachea to Cutaneous, Open Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B113F4",
+        "display": "Bypass Trachea to Cutaneous with Tracheostomy Device, Percutaneous Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B113Z4",
+        "display": "Bypass Trachea to Cutaneous, Percutaneous Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B114F4",
+        "display": "Bypass Trachea to Cutaneous with Tracheostomy Device, Percutaneous Endoscopic Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0B114Z4",
+        "display": "Bypass Trachea to Cutaneous, Percutaneous Endoscopic Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0BW10FZ",
+        "display": "Revision of Tracheostomy Device in Trachea, Open Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0BW13FZ",
+        "display": "Revision of Tracheostomy Device in Trachea, Percutaneous Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0BW14FZ",
+        "display": "Revision of Tracheostomy Device in Trachea, Percutaneous Endoscopic Approach"
+      },
+      {
+        "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+        "version": "2024",
+        "code": "0WB6XZ2",
+        "display": "Excision of Neck, Stoma, External Approach"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "232615005",
+        "display": "Exploration of tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "274969000",
+        "display": "Anterior tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "274970004",
+        "display": "Lateral tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "307007002",
+        "display": "Percutaneous tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "397930006",
+        "display": "Percutaneous dilational tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "50339005",
+        "display": "Complete laryngectomy with radical neck dissection, synchronous thyroidectomy and synchronous tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "52536006",
+        "display": "Mediastinal tracheostomy (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "55622001",
+        "display": "Tracheostomy, emergency procedure by transtracheal approach (procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "7240008",
+        "display": "Total laryngectomy with partial pharyngectomy and synchronous tracheostomy (procedure)"
+      }
+    ]
+  }
+}

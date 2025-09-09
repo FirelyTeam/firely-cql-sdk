@@ -1,0 +1,41 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.94",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.94",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.94"
+    }
+  ],
+  "version": "20240109",
+  "name": "OxygenPartialPressureinArterialBlood",
+  "title": "Oxygen Partial Pressure in Arterial Blood",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:22-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "19214-6",
+        "display": "Oxygen [Partial pressure] saturation adjusted to 0.5 in Arterial blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "19255-9",
+        "display": "Oxygen [Partial pressure] adjusted to patient's actual temperature in Arterial blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "2703-7",
+        "display": "Oxygen [Partial pressure] in Arterial blood"
+      }
+    ]
+  }
+}

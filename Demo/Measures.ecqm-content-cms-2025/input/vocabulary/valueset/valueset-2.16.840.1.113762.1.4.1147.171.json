@@ -1,0 +1,629 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1147.171",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1147.171"
+    }
+  ],
+  "version": "20210605",
+  "name": "InpatientFalls",
+  "title": "Inpatient Falls",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:18-07:00",
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.0XXA",
+        "display": "Fall on same level from slipping, tripping and stumbling without subsequent striking against object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.10XA",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.110A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against sharp glass, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.111A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against power tool or machine, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.118A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against other sharp object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.119A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against unspecified sharp object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.190A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against furniture, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W01.198A",
+        "display": "Fall on same level from slipping, tripping and stumbling with subsequent striking against other object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W03.XXXA",
+        "display": "Other fall on same level due to collision with another person, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W04.XXXA",
+        "display": "Fall while being carried or supported by other persons, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W05.0XXA",
+        "display": "Fall from non-moving wheelchair, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W05.1XXA",
+        "display": "Fall from non-moving nonmotorized scooter, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W05.2XXA",
+        "display": "Fall from non-moving motorized mobility scooter, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W06.XXXA",
+        "display": "Fall from bed, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W07.XXXA",
+        "display": "Fall from chair, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W08.XXXA",
+        "display": "Fall from other furniture, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W10.1XXA",
+        "display": "Fall (on)(from) sidewalk curb, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W10.2XXA",
+        "display": "Fall (on)(from) incline, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W10.8XXA",
+        "display": "Fall (on) (from) other stairs and steps, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W10.9XXA",
+        "display": "Fall (on) (from) unspecified stairs and steps, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W13.3XXA",
+        "display": "Fall through floor, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W13.4XXA",
+        "display": "Fall from, out of or through window, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W13.8XXA",
+        "display": "Fall from, out of or through other building or structure, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W13.9XXA",
+        "display": "Fall from, out of or through building, not otherwise specified, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W16.211A",
+        "display": "Fall in (into) filled bathtub causing drowning and submersion, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W16.212A",
+        "display": "Fall in (into) filled bathtub causing other injury, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W16.221A",
+        "display": "Fall in (into) bucket of water causing drowning and submersion, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W16.222A",
+        "display": "Fall in (into) bucket of water causing other injury, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W17.89XA",
+        "display": "Other fall from one level to another, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.00XA",
+        "display": "Striking against unspecified object with subsequent fall, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.01XA",
+        "display": "Striking against sports equipment with subsequent fall, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.02XA",
+        "display": "Striking against glass with subsequent fall, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.09XA",
+        "display": "Striking against other object with subsequent fall, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.11XA",
+        "display": "Fall from or off toilet without subsequent striking against object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.12XA",
+        "display": "Fall from or off toilet with subsequent striking against object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.2XXA",
+        "display": "Fall in (into) shower or empty bathtub, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.30XA",
+        "display": "Fall on same level, unspecified, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.31XA",
+        "display": "Fall on same level due to stepping on an object, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W18.39XA",
+        "display": "Other fall on same level, initial encounter"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2024",
+        "code": "W19.XXXA",
+        "display": "Unspecified fall, initial encounter"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "14047009",
+        "display": "Fall from building (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "161898004",
+        "display": "Falls (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "17886000",
+        "display": "Fall from wheelchair (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "1912002",
+        "display": "Fall (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "20902002",
+        "display": "Fall from bed (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217082002",
+        "display": "Accidental fall (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217083007",
+        "display": "Fall on or from stairs or steps (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217088003",
+        "display": "Fall on or from stairs (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217090002",
+        "display": "Fall from stairs (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217092005",
+        "display": "Fall on or from steps (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217093000",
+        "display": "Fall on steps (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217094006",
+        "display": "Fall from steps (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217142006",
+        "display": "Fall from chair or bed (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217154006",
+        "display": "Fall on same level from slipping, tripping or stumbling (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217155007",
+        "display": "Fall on same level from slipping (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217156008",
+        "display": "Fall on same level from tripping (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217157004",
+        "display": "Fall on same level from stumbling (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "217173005",
+        "display": "Fall from bump against object (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242389003",
+        "display": "Fall due to wet surface (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242390007",
+        "display": "Fall due to polished surface (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242391006",
+        "display": "Fall due to discarded object (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242392004",
+        "display": "Fall in bath or shower (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242394003",
+        "display": "Fall due to accidental trip by another person (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242395002",
+        "display": "Fall due to trip on loose carpet (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242396001",
+        "display": "Fall due to uneven surface indoors (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242398000",
+        "display": "Fall due to loss of equilibrium (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242399008",
+        "display": "Fall due to failure of support (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242400001",
+        "display": "Fall due to failure of rail (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242401002",
+        "display": "Fall due to leaning on insecure furniture (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242402009",
+        "display": "Fall on same level due to accidental impact with another person (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242403004",
+        "display": "Fall on same level due to deliberate assault by another person (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242413007",
+        "display": "Fall from furniture (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242415000",
+        "display": "Fall from hospital gurney (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242417008",
+        "display": "Fall from ambulance stretcher (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "242419006",
+        "display": "Fall from toilet seat (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "249995008",
+        "display": "Legs give way - falling (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "269699007",
+        "display": "Fall on same level from impact against object (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "274918000",
+        "display": "Fall on same level due to nature of surface (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "274919008",
+        "display": "Fall on same level due to impact against another person (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "279992002",
+        "display": "Recurrent falls (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "298344006",
+        "display": "Elderly fall (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "33036003",
+        "display": "Fall on same level (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "404911003",
+        "display": "Unexplained recurrent falls (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "404912005",
+        "display": "Unexplained falls (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "408561005",
+        "display": "Falls caused by medication (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "414190009",
+        "display": "Fall on stairs (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "427849003",
+        "display": "Fall on hard surface (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "429012000",
+        "display": "Fall on soft surface (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "429482004",
+        "display": "Fall from high place (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "429621003",
+        "display": "Fall on concrete (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "429636000",
+        "display": "Fall into water (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "435901000124102",
+        "display": "Fall due to seizure (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "44188002",
+        "display": "Fall in shower (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "48015001",
+        "display": "Fall through window (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "56307009",
+        "display": "Fall from table (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "60594001",
+        "display": "Fall while being carried (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "713397003",
+        "display": "Fall from operating room table (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "74541001",
+        "display": "Fall from bench (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "83468000",
+        "display": "Fall from chair (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "90619006",
+        "display": "Fall in bathtub (event)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "90639005",
+        "display": "Fall from window (event)"
+      }
+    ]
+  }
+}

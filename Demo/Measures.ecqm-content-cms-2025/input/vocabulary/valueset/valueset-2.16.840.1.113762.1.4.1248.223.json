@@ -1,0 +1,89 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.223",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.223",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.223"
+    }
+  ],
+  "version": "20240112",
+  "name": "Bilirubinlabtest",
+  "title": "Bilirubin lab test",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:12-07:00",
+    "contains": [
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "14631-6",
+        "display": "Bilirubin.total [Moles/volume] in Serum or Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "1975-2",
+        "display": "Bilirubin.total [Mass/volume] in Serum or Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "35194-0",
+        "display": "Bilirubin.total [Mass or Moles/volume] in Serum or Plasma"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "42719-5",
+        "display": "Bilirubin.total [Mass/volume] in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "54363-7",
+        "display": "Bilirubin.total [Moles/volume] in Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "59827-6",
+        "display": "Bilirubin.total [Mass/volume] in Arterial blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "59828-4",
+        "display": "Bilirubin.total [Mass/volume] in Venous blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "77137-8",
+        "display": "Bilirubin.total [Moles/volume] in Serum, Plasma or Blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "89871-8",
+        "display": "Bilirubin.total [Moles/volume] in Venous blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "89872-6",
+        "display": "Bilirubin.total [Moles/volume] in Arterial blood"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.76",
+        "code": "97770-2",
+        "display": "Bilirubin.total [Moles/volume] in Capillary blood"
+      }
+    ]
+  }
+}

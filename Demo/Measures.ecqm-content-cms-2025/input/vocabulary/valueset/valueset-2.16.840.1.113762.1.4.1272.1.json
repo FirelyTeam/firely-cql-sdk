@@ -1,0 +1,103 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1272.1",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2024-10-12T01:02:34-04:00"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+      "valueContactDetail": {
+        "name": "Mathematica PSI Author"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+      "valueDate": "2025-01-30"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+      "valueDateTime": "2024-10-12T01:02:34-04:00"
+    }
+  ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1272.1",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113762.1.4.1272.1"
+    }
+  ],
+  "version": "20241012",
+  "name": "Malnutrition",
+  "title": "Malnutrition",
+  "status": "active",
+  "date": "2024-10-12T01:02:34-04:00",
+  "publisher": "Mathematica PSI Steward",
+  "purpose": "(Clinical Focus: The purpose of this value set is to represent concepts for malnutrition),(Data Element Scope: This value set may use a model element related to Diagnosis),(Inclusion Criteria: Includes concepts representing malnutrition),(Exclusion Criteria: N/A)",
+  "compose": {
+    "include": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "concept": [
+          {
+            "code": "E40",
+            "display": "Kwashiorkor"
+          },
+          {
+            "code": "E41",
+            "display": "Nutritional marasmus"
+          },
+          {
+            "code": "E42",
+            "display": "Marasmic kwashiorkor"
+          },
+          {
+            "code": "E43",
+            "display": "Unspecified severe protein-calorie malnutrition"
+          },
+          {
+            "code": "E44.0",
+            "display": "Moderate protein-calorie malnutrition"
+          },
+          {
+            "code": "E44.1",
+            "display": "Mild protein-calorie malnutrition"
+          },
+          {
+            "code": "E46",
+            "display": "Unspecified protein-calorie malnutrition"
+          },
+          {
+            "code": "E64.0",
+            "display": "Sequelae of protein-calorie malnutrition"
+          },
+          {
+            "code": "O25.10",
+            "display": "Malnutrition in pregnancy, unspecified trimester"
+          },
+          {
+            "code": "O25.11",
+            "display": "Malnutrition in pregnancy, first trimester"
+          },
+          {
+            "code": "O25.12",
+            "display": "Malnutrition in pregnancy, second trimester"
+          },
+          {
+            "code": "O25.13",
+            "display": "Malnutrition in pregnancy, third trimester"
+          },
+          {
+            "code": "O25.2",
+            "display": "Malnutrition in childbirth"
+          },
+          {
+            "code": "O25.3",
+            "display": "Malnutrition in the puerperium"
+          }
+        ]
+      }
+    ]
+  }
+}

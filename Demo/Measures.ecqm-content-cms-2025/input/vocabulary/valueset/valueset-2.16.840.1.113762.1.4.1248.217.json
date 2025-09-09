@@ -1,0 +1,59 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1248.217",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.217",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "2.16.840.1.113762.1.4.1248.217"
+    }
+  ],
+  "version": "20230512",
+  "name": "ASAphysicalstatusclass",
+  "title": "ASA physical status class",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20240502",
+    "timestamp": "2025-01-10T13:55:10-07:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413495001",
+        "display": "American Society of Anesthesiologists physical status class 1 (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413496000",
+        "display": "American Society of Anesthesiologists physical status class 2 (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413497009",
+        "display": "American Society of Anesthesiologists physical status class 3 (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413498004",
+        "display": "American Society of Anesthesiologists physical status class 4 (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413499007",
+        "display": "American Society of Anesthesiologists physical status class 5 (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2023-09",
+        "code": "413500003",
+        "display": "American Society of Anesthesiologists physical status class 6 (finding)"
+      }
+    ]
+  }
+}
