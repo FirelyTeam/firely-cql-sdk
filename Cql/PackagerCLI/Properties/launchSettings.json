@@ -138,13 +138,6 @@
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "ecqm-content-cms-2025"
       }
-    },
-    "PackageCLI (hedis-2024)": {
-      "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/hedis-2024/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/hedis-2024/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/hedis-2024/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/hedis-2024/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/hedis-2024/CSharp\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "hedis-2024"
-      }
     }
   }
 }

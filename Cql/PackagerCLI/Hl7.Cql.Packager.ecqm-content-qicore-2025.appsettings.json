@@ -1,13 +1,6 @@
 ﻿{
   "Elm": {
     "SkipFiles": [
-      // Union expects two arguments of the same list or interval type.
-      // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
-      "CMS72FHIRSTKAntithromboticDay2.json",
-      "CMS190VTEProphylaxisICUFHIR.json",
-      "CMS108FHIRVTEProphylaxis.json",
-      "CMS145FHIRCADBetaBlockerTherapyPriorMIorLVSD.json",
-
       // Tuple element value does not have a resultTypeSpecifier
       "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
 

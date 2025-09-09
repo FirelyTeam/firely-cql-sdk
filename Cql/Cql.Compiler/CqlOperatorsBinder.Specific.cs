@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -69,6 +70,21 @@ partial class CqlOperatorsBinder
             if (rightElementType == typeof(CqlCode))
             {
                 return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left, right], [])!;
+            }
+        }
+
+        // Check if we have compatible list types with different element types
+        var leftListElementType = _typeResolver.GetListElementType(left.Type);
+        var rightListElementType = _typeResolver.GetListElementType(right.Type);
+        if (leftListElementType != null && rightListElementType != null && leftListElementType != rightListElementType)
+        {
+            // Check if the element types are structurally compatible for union
+            if (ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElementType, rightListElementType))
+            {
+                // Cast both to IEnumerable<object> to allow union
+                var leftAsObjectEnumerable = left.NewTypeAsExpression<IEnumerable<object>>();
+                var rightAsObjectEnumerable = right.NewTypeAsExpression<IEnumerable<object>>();
+                return BindToBestMethodOverload(nameof(ICqlOperators.Union), [leftAsObjectEnumerable, rightAsObjectEnumerable], [])!;
             }
         }
 

@@ -69,6 +69,7 @@ namespace Hl7.Cql.Compiler
                 ("Flatten"          ,0 , >=1)  => Flatten(args[0]),
                 ("InList"           ,0 , >=2)  => InList(args[0], args[1]),
                 ("LateBoundProperty",0 , >=3)  => LateBoundProperty(args[0], args[1], args[2]),
+                ("Union"            ,0 , >=2)  => Union(args[0], args[1]),
                 ("ListUnion"        ,0 , >=2)  => Union(args[0], args[1]),
                 ("ResolveValueSet"  ,0 , >=1)  => ResolveValueSet(args[0]),
                 ("Retrieve"         ,0 , >=3)  => Retrieve(args[0], args[1], args[2], args[3]),
