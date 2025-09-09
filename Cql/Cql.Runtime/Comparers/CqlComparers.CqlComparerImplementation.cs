@@ -36,6 +36,21 @@ partial class CqlComparers : CqlComparer<object>
             var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
+                // Try to handle IValue<T> vs T comparison before doing type swapping
+                var iValueResult = TryHandleIValueComparison(x, y, precision, (a, b, p) => {
+                    var compareResult = CompareValues(a, b, p);
+                    return compareResult ?? 0; // Convert nullable int to int for generic constraint
+                });
+                
+                // Check if this was actually an IValue comparison that should return a result
+                var xIValueInterface = GetIValueInterface(x.GetType());
+                var yIValueInterface = GetIValueInterface(y.GetType());
+                if ((xIValueInterface != null && yIValueInterface == null) ||
+                    (yIValueInterface != null && xIValueInterface == null))
+                {
+                    return iValueResult == 0 ? 0 : iValueResult; // Convert back to nullable
+                }
+
                 if (ShouldSwapTypes(xType, yType))
                 {
                     xySwapped = true;
@@ -96,6 +111,13 @@ partial class CqlComparers : CqlComparer<object>
             var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
+                // Try to handle IValue<T> vs T comparison before doing type swapping
+                var iValueResult = TryHandleIValueEquivalence(x, y, precision);
+                if (iValueResult.HasValue)
+                {
+                    return iValueResult.Value;
+                }
+
                 if (ShouldSwapTypes(xType, yType))
                 {
                     (x, y) = (y, x);
@@ -133,6 +155,21 @@ partial class CqlComparers : CqlComparer<object>
             var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
+                // Try to handle IValue<T> vs T comparison before doing type swapping
+                var iValueResult = TryHandleIValueComparison(x, y, precision, (a, b, p) => {
+                    var equalsResult = EqualsValues(a, b, p);
+                    return equalsResult ?? false; // Convert nullable bool to bool for generic constraint
+                });
+                
+                // Check if this was actually an IValue comparison that should return a result
+                var xIValueInterface = GetIValueInterface(x.GetType());
+                var yIValueInterface = GetIValueInterface(y.GetType());
+                if ((xIValueInterface != null && yIValueInterface == null) ||
+                    (yIValueInterface != null && xIValueInterface == null))
+                {
+                    return iValueResult ? true : (bool?)false; // Convert back to nullable
+                }
+
                 if (ShouldSwapTypes(xType, yType))
                 {
                     (x, y) = (y, x);
@@ -182,5 +219,110 @@ partial class CqlComparers : CqlComparer<object>
         }
 
         throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));
+    }
+
+    /// <summary>
+    /// Attempts to handle comparison between an IValue&lt;T&gt; type and its underlying type T.
+    /// </summary>
+    /// <param name="x">First operand</param>
+    /// <param name="y">Second operand</param>
+    /// <param name="precision">Precision for comparison</param>
+    /// <param name="comparisonMethod">The comparison method to call</param>
+    /// <returns>The comparison result, or null if this is not an IValue vs T comparison</returns>
+    private TResult? TryHandleIValueComparison<TResult>(
+        object x, 
+        object y, 
+        string? precision,
+        Func<object, object, string?, TResult> comparisonMethod)
+    {
+        // Check if one is an IValue<T> and the other is T
+        var xType = x.GetType();
+        var yType = y.GetType();
+        
+        // Look for IValue<T> interface
+        var xIValueInterface = GetIValueInterface(xType);
+        var yIValueInterface = GetIValueInterface(yType);
+        
+        if (xIValueInterface != null && yIValueInterface == null)
+        {
+            // x is IValue<T>, y might be T
+            var valueType = xIValueInterface.GetGenericArguments()[0];
+            if (valueType == yType || (valueType.IsAssignableFrom(yType)))
+            {
+                // Extract value from IValue<T>
+                var valueProperty = xIValueInterface.GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var xValue = valueProperty.GetValue(x);
+                    if (xValue != null)
+                    {
+                        return comparisonMethod(xValue, y, precision);
+                    }
+                }
+            }
+        }
+        else if (yIValueInterface != null && xIValueInterface == null)
+        {
+            // y is IValue<T>, x might be T
+            var valueType = yIValueInterface.GetGenericArguments()[0];
+            if (valueType == xType || (valueType.IsAssignableFrom(xType)))
+            {
+                // Extract value from IValue<T>
+                var valueProperty = yIValueInterface.GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var yValue = valueProperty.GetValue(y);
+                    if (yValue != null)
+                    {
+                        return comparisonMethod(x, yValue, precision);
+                    }
+                }
+            }
+        }
+        
+        return default(TResult);
+    }
+
+    /// <summary>
+    /// Attempts to handle equivalence comparison between an IValue&lt;T&gt; type and its underlying type T.
+    /// </summary>
+    private bool? TryHandleIValueEquivalence(object x, object y, string? precision)
+    {
+        // For equivalence, we need to handle the nullable bool specially since TResult can't be nullable with generic constraints
+        var result = TryHandleIValueComparison<bool>(x, y, precision, (a, b, p) => {
+            var equivResult = EquivalentValues(a, b, p);
+            return equivResult; // Convert bool to bool (removing nullable in this context)
+        });
+        
+        // Check if we got a meaningful result (not default value)
+        var xType = x.GetType();
+        var yType = y.GetType();
+        var xIValueInterface = GetIValueInterface(xType);
+        var yIValueInterface = GetIValueInterface(yType);
+        
+        if ((xIValueInterface != null && yIValueInterface == null) ||
+            (yIValueInterface != null && xIValueInterface == null))
+        {
+            return result;
+        }
+        
+        return null;
+    }
+
+    /// <summary>
+    /// Gets the IValue&lt;T&gt; interface from a type, if it implements one.
+    /// Excludes Code&lt;T&gt; types since they have specialized comparers.
+    /// </summary>
+    private static Type? GetIValueInterface(Type type)
+    {
+        // Exclude Code<T> types as they have specialized comparison logic
+        if (type.IsGenericType && type.GetGenericTypeDefinition().Name == "Code`1")
+        {
+            return null;
+        }
+        
+        return type.GetInterfaces()
+            .FirstOrDefault(i => i.IsGenericType && 
+                                i.GetGenericTypeDefinition().Name == "IValue`1");
     }
 }
