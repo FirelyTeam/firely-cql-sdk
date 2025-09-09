@@ -1,0 +1,54 @@
+{
+  "resourceType": "Patient",
+  "id": "cb4e080a-0fb4-4a02-b923-aef5a4264fb3",
+  "meta": {
+    "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+    "extension": [ {
+      "url": "ombCategory",
+      "valueCoding": {
+        "system": "urn:oid:2.16.840.1.113883.6.238",
+        "code": "2054-5",
+        "display": "Black or African American",
+        "userSelected": true
+      }
+    }, {
+      "url": "text",
+      "valueString": "Black or African American"
+    } ]
+  }, {
+    "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
+    "extension": [ {
+      "url": "ombCategory",
+      "valueCoding": {
+        "system": "urn:oid:2.16.840.1.113883.6.238",
+        "code": "2186-5",
+        "display": "Not Hispanic or Latino",
+        "userSelected": true
+      }
+    }, {
+      "url": "text",
+      "valueString": "Not Hispanic or Latino"
+    } ]
+  } ],
+  "identifier": [ {
+    "type": {
+      "coding": [ {
+        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+        "code": "MR"
+      } ]
+    },
+    "system": "https://bonnie-fhir.healthit.gov/",
+    "value": "61152a3b98086b7a79cbd7c1"
+  } ],
+  "active": true,
+  "name": [ {
+    "use": "usual",
+    "family": "NUMER1Pass",
+    "given": [ "2IntubsDurFirstORandAft2ndProc" ]
+  } ],
+  "gender": "female",
+  "birthDate": "1966-07-12"
+}

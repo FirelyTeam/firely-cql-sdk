@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "Measures": {
+    "CMS125FHIRBreastCancerScreening-0.4.000": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:64313;http://localhost:64318"
+      "commandLineArgs": "--l CMS125FHIRBreastCancerScreening-0.2.000"
+    },
+    "CMS1218FHIRHHRF-0.2.000": {
+      "commandName": "Project",
+      "commandLineArgs": "--l CMS1218FHIRHHRF-0.2.000"
     }
   }
 }
