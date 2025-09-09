@@ -84,7 +84,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 "final",
                 "amended",
             ];
-            bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
+            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
 
             return i_;
         };

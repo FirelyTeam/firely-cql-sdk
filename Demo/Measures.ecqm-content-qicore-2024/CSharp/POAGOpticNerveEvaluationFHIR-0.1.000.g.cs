@@ -460,7 +460,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(t_, z_);
 
             return aa_;
@@ -512,7 +512,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
                 "amended",
                 "corrected",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(t_, z_);
 
             return aa_;

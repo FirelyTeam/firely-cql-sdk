@@ -242,7 +242,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
             DataType l_ = RecentHbA1c?.Effective;
             CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
@@ -306,7 +306,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 "amended",
                 "corrected",
             ];
-            bool? j_ = context.Operators.In<string>(h_, i_ as IEnumerable<string>);
+            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
             DataType k_ = NoHbA1c?.Effective;
             CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);

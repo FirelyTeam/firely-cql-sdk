@@ -643,7 +643,7 @@ public partial class CMS996FHIRAptTxforSTEMI_1_4_001 : ILibrary, ISingleton<CMS9
                     "active",
                     "completed",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = OralAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
                 string aj_ = context.Operators.Convert<string>(ai_);

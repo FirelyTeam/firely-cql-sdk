@@ -176,7 +176,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 "completed",
                 "cancelled",
             ];
-            bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
             bool? ac_ = context.Operators.And(x_, ab_);
             Code<MedicationRequest.MedicationRequestIntent> ad_ = NoAntithromboticDischarge?.IntentElement;
             string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
@@ -255,7 +255,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 "active",
                 "completed",
             ];
-            bool? q_ = context.Operators.In<string>(o_, p_ as IEnumerable<string>);
+            bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
             bool? r_ = context.Operators.And(m_, q_);
             Code<MedicationRequest.MedicationRequestIntent> s_ = Pharmacological?.IntentElement;
             string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
@@ -365,7 +365,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 "active",
                 "completed",
             ];
-            bool? q_ = context.Operators.In<string>(o_, p_ as IEnumerable<string>);
+            bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
             bool? r_ = context.Operators.And(m_, q_);
             Code<MedicationRequest.MedicationRequestIntent> s_ = Antithrombotic?.IntentElement;
             string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);

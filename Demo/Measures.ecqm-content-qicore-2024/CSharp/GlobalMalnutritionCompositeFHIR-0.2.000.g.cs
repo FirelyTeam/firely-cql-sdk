@@ -271,7 +271,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "completed",
                 "in-progress",
             ];
-            bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+            bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(p_, u_);
             DataType w_ = tuple_blodcpfeecjfnodfofhfzlqfa?.HospitalDietitianReferral?.Performed;
             object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
@@ -321,7 +321,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter);
             DataType y_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
@@ -404,7 +404,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter);
             DataType y_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
@@ -484,7 +484,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter);
             DataType y_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
@@ -563,7 +563,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter);
             DataType y_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
@@ -626,7 +626,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter);
             DataType y_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
@@ -685,7 +685,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(p_, v_);
             CqlInterval<CqlDateTime> x_ = CQMCommon_2_2_000.Instance.hospitalizationWithObservation(context, tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter);
             DataType y_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
@@ -775,7 +775,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
                 "completed",
                 "in-progress",
             ];
-            bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+            bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(p_, u_);
             DataType w_ = tuple_igutmwhaufjcwzmijcgjeysm?.NutritionCarePlan?.Performed;
             object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
@@ -1027,7 +1027,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
             c_,
             d_,
         ];
-        int? f_ = context.Operators.Sum(e_ as IEnumerable<int?>);
+        int? f_ = context.Operators.Sum((IEnumerable<int?>)e_);
 
         return f_;
     }

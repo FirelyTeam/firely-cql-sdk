@@ -303,7 +303,7 @@ public partial class CMS50FHIRCRLReceiptofSpecialistReport_0_4_000 : ILibrary, I
                 "active",
                 "completed",
             ];
-            bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
+            bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
             Code<RequestIntent> q_ = ReferralOrder?.IntentElement;
             RequestIntent? r_ = q_?.Value;
             Code<RequestIntent> s_ = context.Operators.Convert<Code<RequestIntent>>(r_);

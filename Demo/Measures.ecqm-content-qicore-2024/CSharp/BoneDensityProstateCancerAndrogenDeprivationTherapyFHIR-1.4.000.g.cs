@@ -191,7 +191,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "active",
                 "completed",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             Code<MedicationRequest.MedicationRequestIntent> af_ = ADTActive?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
@@ -202,7 +202,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "filler-order",
                 "instance-order",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ae_, aj_);
 
             return ak_;
@@ -370,7 +370,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "active",
                 "completed",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             Code<MedicationRequest.MedicationRequestIntent> af_ = ADTOrder?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
@@ -381,7 +381,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "filler-order",
                 "instance-order",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ae_, aj_);
 
             return ak_;
@@ -576,7 +576,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                     "active",
                     "completed",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 bool? ah_ = context.Operators.And(aa_, ag_);
                 Code<RequestIntent> ai_ = OrderTwelveMonthADT?.IntentElement;
                 RequestIntent? aj_ = ai_?.Value;
@@ -679,7 +679,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "active",
                 "completed",
             ];
-            bool? bb_ = context.Operators.In<string>(az_, ba_ as IEnumerable<string>);
+            bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
             Code<RequestIntent> bc_ = DEXAOrdered?.IntentElement;
             RequestIntent? bd_ = bc_?.Value;
             Code<RequestIntent> be_ = context.Operators.Convert<Code<RequestIntent>>(bd_);
@@ -749,7 +749,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 "amended",
                 "corrected",
             ];
-            bool? dd_ = context.Operators.In<string>(db_, dc_ as IEnumerable<string>);
+            bool? dd_ = context.Operators.In<string>(db_, (IEnumerable<string>)dc_);
 
             return dd_;
         };

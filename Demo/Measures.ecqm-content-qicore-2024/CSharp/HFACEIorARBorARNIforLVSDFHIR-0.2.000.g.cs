@@ -419,7 +419,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
                 "filler-order",
                 "instance-order",
             ];
-            bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             List<CodeableConcept> ab_ = NoACEIOrARBOrARNIOrdered?.ReasonCode;
             CqlConcept ac_(CodeableConcept @this)
