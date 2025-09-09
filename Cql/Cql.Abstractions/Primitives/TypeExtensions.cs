@@ -52,7 +52,7 @@ public static class TypeExtensions
 
     internal static bool IsTupleBaseType(this Type type)
     {
-        var isTupleBaseType = type.Namespace == "Tuples" || type.IsAssignableTo(typeof(TupleBaseType));
+        var isTupleBaseType = type.IsAssignableTo(typeof(TupleBaseType));
         return isTupleBaseType;
     }
 }

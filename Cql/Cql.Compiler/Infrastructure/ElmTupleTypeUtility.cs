@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, Firely, NCQA and contributors
+ * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -7,13 +7,12 @@
  */
 
 using Hl7.Cql.Primitives;
+using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler.Infrastructure;
 
 internal static class ElmTupleTypeUtility
 {
-
-
     /// <summary>
     /// Determines whether two types are compatible for Union operations in ELM to LINQ conversion.
     /// This includes exact equality, assignability, and structural equivalence for tuple types.
@@ -90,8 +89,8 @@ internal static class ElmTupleTypeUtility
 
             // Special cases for known compatible CQL types
             // CqlDateTime and FhirDateTime are convertible
-            if ((leftPropType == typeof(CqlDateTime) && rightPropType.Name == "FhirDateTime") ||
-                (rightPropType == typeof(CqlDateTime) && leftPropType.Name == "FhirDateTime"))
+            if ((leftPropType == typeof(CqlDateTime) && rightPropType == typeof(FhirDateTime)||
+                (rightPropType == typeof(CqlDateTime) && leftPropType == typeof(FhirDateTime))))
                 return true;
 
             // Add other known convertible pairs as needed
