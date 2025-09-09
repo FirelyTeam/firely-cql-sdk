@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
