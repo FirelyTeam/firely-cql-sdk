@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
@@ -3538,6 +3539,45 @@ namespace CoreTests
             var ops = GetNewContext().Operators;
             var s = ops.ConvertQuantityToString(new CqlQuantity(125, "cm"));
             s.Should().Be("125 'cm'");
+        }
+
+        [TestMethod]
+        public void Add_Date_Quantity()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var inputDate = new CqlDate(9999, 12, 30);
+            var quantity = new CqlQuantity(1, "day");
+            CqlDate expectedDate = new CqlDate(9999, 12, 31);
+
+            var newDate = fcq.Add(inputDate, quantity);
+            Assert.IsNotNull(newDate);
+            Assert.AreEqual(expectedDate, newDate);
+
+            var inputDateMaxValue = CqlDate.MaxValue;
+
+            var newDateAddMax = fcq.Add(inputDateMaxValue, quantity);
+            Assert.IsNull(newDateAddMax);
+        }
+
+        [TestMethod]
+        public void Subtract_Date_Quantity()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var inputDate = new CqlDate(1, 1, 2);
+            var quantity = new CqlQuantity(1, "day");
+            CqlDate expectedDate = new CqlDate(1, 1, 1);
+
+            var newDate = fcq.Subtract(inputDate, quantity);
+            Assert.IsNotNull(newDate);
+            Assert.AreEqual(expectedDate, newDate);
+
+            var inputDateMinValue = CqlDate.MinValue;
+            var newDateSubtractedMin = fcq.Subtract(inputDateMinValue, quantity);
+            Assert.IsNull(newDateSubtractedMin);
         }
     }
 }

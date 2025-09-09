@@ -97,42 +97,50 @@ namespace Hl7.Cql.Primitives
             quantity = quantity.NormalizeTo(Precision);
             var value = quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-            switch (quantity.unit![0])
+            try
             {
-                case 'a':
-                    dto = dto.AddYears((int)value);
-                    break;
-                case 'm':
-                    if (quantity.unit.Length > 1)
-                    {
-                        switch (quantity.unit[1])
+                switch (quantity.unit![0])
+                {
+                    case 'a':
+                        dto = dto.AddYears((int)value);
+                        break;
+                    case 'm':
+                        if (quantity.unit.Length > 1)
                         {
-                            case 'o':
-                                dto = dto.AddMonths((int)value);
-                                break;
-                            case 'i':
-                                dto = dto.AddMinutes(Math.Truncate((double)value));
-                                break;
-                            case 's':
-                                dto = dto.AddMilliseconds(Math.Truncate((double)value));
-                                break;
-                            default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
+                            switch (quantity.unit[1])
+                            {
+                                case 'o':
+                                    dto = dto.AddMonths((int)value);
+                                    break;
+                                case 'i':
+                                    dto = dto.AddMinutes(Math.Truncate((double)value));
+                                    break;
+                                case 's':
+                                    dto = dto.AddMilliseconds(Math.Truncate((double)value));
+                                    break;
+                                default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
+                            }
                         }
-                    }
-                    break;
-                case 'd':
-                    dto = dto.AddDays((int)value!);
-                    break;
-                case 'w':
-                    dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
-                    break;
-                case 'h':
-                    dto = dto.AddHours(Math.Truncate((double)value));
-                    break;
-                case 's':
-                    dto = dto.AddSeconds(Math.Truncate((double)value));
-                    break;
-                default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
+                        break;
+                    case 'd':
+                        dto = dto.AddDays((int)value!);
+                        break;
+                    case 'w':
+                        dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
+                        break;
+                    case 'h':
+                        dto = dto.AddHours(Math.Truncate((double)value));
+                        break;
+                    case 's':
+                        dto = dto.AddSeconds(Math.Truncate((double)value));
+                        break;
+                    default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // In cases where e.g. Predecessor is called on minimum Date.
+                return null;
             }
 
             var newIsoDate = new DateIso8601(dto, Value.Precision);
