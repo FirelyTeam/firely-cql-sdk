@@ -14,15 +14,19 @@ namespace Hl7.Cql.Compiler;
 internal partial class LibrarySetExpressionBuilderContext
 {
     private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
+    private readonly LibraryPreprocessorBuilder _libraryPreprocessorBuilder;
 
     public LibrarySetExpressionBuilderContext(
         LibraryExpressionBuilder libraryExpressionBuilder,
+        LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
+        _libraryPreprocessorBuilder = libraryPreprocessorBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
         LibrarySet = librarySet;
+        LibraryPreprocessor = libraryPreprocessorBuilder.Build(librarySet);
         DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
     }
 
@@ -35,6 +39,8 @@ internal partial class LibrarySetExpressionBuilderContext
     /// Gets the library set being processed.
     /// </summary>
     public LibrarySet LibrarySet { get; }
+
+    public LibraryPreprocessor LibraryPreprocessor { get; }
 
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,

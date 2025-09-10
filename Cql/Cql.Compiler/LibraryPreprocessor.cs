@@ -14,14 +14,23 @@ namespace Hl7.Cql.Compiler;
 /// Pre-processes the ELM library to correct some well-known bugs or omissions in the ELM produced by
 /// the Java cql2elm tool.
 /// </summary>
-internal class ElmPreprocessor(LibrarySet librarySet)
+internal class LibraryPreprocessor(
+    LibrarySet librarySet,
+    ILoggerFactory loggerFactory)
 {
     public void Preprocess(Library library)
     {
+        _ = loggerFactory;
+
         var expressionRefCorrector = new ExpressionRefCorrector(librarySet);
         expressionRefCorrector.Fix(library);
 
         var profilesVsCorrector = new ProfiledValueSetPropertyCorrector();
         profilesVsCorrector.Fix(library);
     }
+}
+
+internal class LibraryPreprocessorBuilder(ILoggerFactory loggerFactory)
+{
+    public LibraryPreprocessor Build(LibrarySet librarySet) => new(librarySet, loggerFactory);
 }

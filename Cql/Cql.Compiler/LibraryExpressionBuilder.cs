@@ -15,7 +15,8 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class LibraryExpressionBuilder(
     ILogger<LibraryExpressionBuilder> logger,
-    ExpressionBuilder expressionBuilder)
+    ExpressionBuilder expressionBuilder,
+    LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
     public CqlDefinitionDictionary ProcessLibrary(
         Library library,
@@ -28,7 +29,7 @@ internal class LibraryExpressionBuilder(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
         LibrarySetExpressionBuilderContext? libsCtx = null) =>
-        new(logger, expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
+        new(logger, expressionBuilder, libraryPreprocessorBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,

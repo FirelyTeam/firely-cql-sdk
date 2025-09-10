@@ -16,10 +16,12 @@ internal partial class LibraryExpressionBuilderContext
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly CqlDefinitionDictionary _libraryDefinitions;
     private readonly LibrarySetExpressionBuilderContext? _libsCtx;
+    private readonly LibraryPreprocessor _libraryPreprocessor;
 
     public LibraryExpressionBuilderContext(
         ILogger<LibraryExpressionBuilder> logger,
         ExpressionBuilder expressionBuilder,
+        LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         Library library,
         CqlDefinitionDictionary libraryDefinitions,
         LibrarySetExpressionBuilderContext? libsCtx = null)
@@ -30,6 +32,9 @@ internal partial class LibraryExpressionBuilderContext
         _expressionBuilder = expressionBuilder;
         Library = library;
         LibraryVersionedIdentifier = Library.VersionedLibraryIdentifier;
+        _libraryPreprocessor =
+            LibrarySetContext?.LibraryPreprocessor
+            ?? libraryPreprocessorBuilder.Build(new LibrarySet(LibraryVersionedIdentifier, Library));
     }
 
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
@@ -56,9 +61,8 @@ internal partial class LibraryExpressionBuilderContext
             AmbiguousOverloadCorrector.Fix(Library);
 
             _logger.LogDebug("Preprocessing library '{library}' - ElmPreprocessor", LibraryVersionedIdentifier);
-            var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryVersionedIdentifier, Library);
-            var processor = new ElmPreprocessor(ls);
-            processor.Preprocess(Library);
+
+            _libraryPreprocessor.Preprocess(Library);
 
             _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);
 

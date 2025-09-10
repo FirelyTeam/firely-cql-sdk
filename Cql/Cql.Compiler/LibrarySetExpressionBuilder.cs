@@ -11,7 +11,9 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpressionBuilder)
+internal class LibrarySetExpressionBuilder(
+    LibraryExpressionBuilder libraryExpressionBuilder,
+    LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
@@ -24,5 +26,5 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions) =>
-        new(libraryExpressionBuilder, librarySet, librarySetDefinitions);
+        new(libraryExpressionBuilder, libraryPreprocessorBuilder, librarySet, librarySetDefinitions);
 }

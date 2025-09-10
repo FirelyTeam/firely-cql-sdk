@@ -70,6 +70,7 @@ internal readonly record struct ElmToolkitServices(
             return converter;
         });
 
+        services.TryAddSingleton<LibraryPreprocessorBuilder>();
         services.TryAddSingleton<CqlOperatorsBinder>();
         services.TryAddSingleton<CqlContextBinder>();
         services.TryAddSingleton(_ => expressionBuilderSettings);

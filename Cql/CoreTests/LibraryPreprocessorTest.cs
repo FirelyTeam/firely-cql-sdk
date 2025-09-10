@@ -8,11 +8,12 @@
 
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CoreTests
 {
     [TestClass]
-    public class ElmPreprocessorTest
+    public class LibraryPreprocessorTest
     {
         private Library FHIRHelpers() =>
             Library.LoadFromJson(new FileInfo(Path.Combine("..", "..", "..", "..", "..", "LibrarySets", "Demo", "Elm", "FHIRHelpers.json")));
@@ -30,7 +31,7 @@ namespace CoreTests
             rtsChecker.Nodes.Should().NotBeEmpty();
 
             var ls = new LibrarySet("", FHIRHelpers(), lib);
-            var pp = new ElmPreprocessor(ls);
+            var pp = new LibraryPreprocessor(ls, NullLoggerFactory.Instance);
             pp.Preprocess(lib);
             rtsChecker = new ResultTypeSpecifierChecker();
             rtsChecker.Start(lib);
