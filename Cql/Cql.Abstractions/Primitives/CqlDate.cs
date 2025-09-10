@@ -97,10 +97,6 @@ namespace Hl7.Cql.Primitives
             //quantity = quantity.NormalizeTo(Precision);
             var value = quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-
-            if (dto.Date.Equals(DateTimeOffset.MaxValue.Date))
-                return null;
-
             switch (quantity.unit)
             {
                 case "a":
@@ -169,10 +165,6 @@ namespace Hl7.Cql.Primitives
             //quantity = quantity.NormalizeTo(Precision);
             var value = -1 * quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-
-            if (dto.Date.Equals(DateTimeOffset.MinValue.Date))
-                return null;
-
             try
             {
                 switch (quantity.unit)

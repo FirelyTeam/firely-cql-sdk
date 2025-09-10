@@ -1047,23 +1047,26 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return null;
-
-            if (!source.Any())
-                return Enumerable.Empty<T>();
-
-            if (startIndex == null && endIndex == null)
-                return source;
-
-            if (startIndex < 0 || endIndex <= 0)
-                return Enumerable.Empty<T>();
-
-            if (endIndex == null)
+            if ((startIndex == null && endIndex == null) || !source.Any())
             {
-                return source.Skip(startIndex ?? 0).ToList();
+                return [];
+            }
+            var si = startIndex ?? 0;
+            if (source is List<T> list)
+            {
+                var lcm1 = list.Count - 1;
+                var ei = Math.Min(endIndex ?? lcm1, lcm1);
+                var count = ei - si + 1;
+                var slice = list.GetRange(si, count);
+                return slice;
             }
             else
             {
-                return source.Skip(startIndex ?? 0).Take((endIndex ?? 0) - (startIndex ?? 0)).ToList();
+                var skip = source.Skip(si);
+                var result = new List<T>();
+                foreach (var item in skip.Take(endIndex ?? int.MaxValue))
+                    result.Add(item);
+                return result;
             }
         }
 
