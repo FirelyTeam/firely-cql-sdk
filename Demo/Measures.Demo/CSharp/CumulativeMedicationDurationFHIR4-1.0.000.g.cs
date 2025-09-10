@@ -963,14 +963,14 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     m_,
                     n_,
                 ];
-                CqlDateTime p_ = context.Operators.Max<CqlDateTime>(o_ as IEnumerable<CqlDateTime>);
+                CqlDateTime p_ = context.Operators.Max<CqlDateTime>((IEnumerable<CqlDateTime>)o_);
                 CqlDateTime r_ = context.Operators.End(j_);
                 CqlDateTime t_ = context.Operators.Add(r_, l_);
                 CqlDateTime[] v_ = [
                     t_,
                     n_,
                 ];
-                CqlDateTime w_ = context.Operators.Max<CqlDateTime>(v_ as IEnumerable<CqlDateTime>);
+                CqlDateTime w_ = context.Operators.Max<CqlDateTime>((IEnumerable<CqlDateTime>)v_);
                 CqlDateTime y_ = context.Operators.End(X);
                 int? z_ = context.Operators.DurationBetween(n_, y_, "day");
                 decimal? aa_ = context.Operators.ConvertIntegerToDecimal(z_ ?? 0);
@@ -985,7 +985,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime>[] h_ = [
                 g_,
             ];
-            IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Union<CqlInterval<CqlDateTime>>(R, h_ as IEnumerable<CqlInterval<CqlDateTime>>);
+            IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Union<CqlInterval<CqlDateTime>>(R, (IEnumerable<CqlInterval<CqlDateTime>>)h_);
 
             return i_;
         };

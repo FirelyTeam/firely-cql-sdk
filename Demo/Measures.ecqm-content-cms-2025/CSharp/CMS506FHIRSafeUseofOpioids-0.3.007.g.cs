@@ -178,7 +178,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "active",
                 "completed",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = OpioidMedications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
@@ -190,7 +190,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "filler-order",
                 "instance-order",
             ];
-            bool? ak_ = context.Operators.In<string>(ai_, aj_ as IEnumerable<string>);
+            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
             return al_;
@@ -246,7 +246,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "active",
                 "completed",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = BenzoMedications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
@@ -258,7 +258,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "filler-order",
                 "instance-order",
             ];
-            bool? ak_ = context.Operators.In<string>(ai_, aj_ as IEnumerable<string>);
+            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
             return al_;
@@ -474,7 +474,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "active",
                 "completed",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = DischargeMedication?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
@@ -486,7 +486,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "filler-order",
                 "instance-order",
             ];
-            bool? ak_ = context.Operators.In<string>(ai_, aj_ as IEnumerable<string>);
+            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
             return al_;
@@ -589,7 +589,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                     "completed",
                     "in-progress",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(w_, ab_);
 
                 return ac_;
@@ -664,7 +664,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "completed",
                 "on-hold",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
 
             return o_;
         };
@@ -679,7 +679,7 @@ public partial class CMS506FHIRSafeUseofOpioids_0_3_007 : ILibrary, ISingleton<C
                 "completed",
                 "in-progress",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
 
             return t_;
         };

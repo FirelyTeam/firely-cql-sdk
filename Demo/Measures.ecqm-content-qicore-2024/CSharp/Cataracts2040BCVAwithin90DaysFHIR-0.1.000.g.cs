@@ -616,7 +616,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
                     "corrected",
                     "preliminary",
                 ];
-                bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(ai_, ao_);
                 DataType aq_ = VisualAcuityExamPerformed?.Value;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);

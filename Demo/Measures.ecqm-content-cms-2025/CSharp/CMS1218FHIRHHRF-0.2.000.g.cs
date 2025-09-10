@@ -1044,7 +1044,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
+                bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
                 DataType q_ = CarbonDioxide?.Effective;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
@@ -1317,7 +1317,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? er_ = context.Operators.In<string>(ep_, eq_ as IEnumerable<string>);
+                bool? er_ = context.Operators.In<string>(ep_, (IEnumerable<string>)eq_);
                 DataType es_ = BloodpH?.Effective;
                 object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
                 CqlInterval<CqlDateTime> eu_ = QICoreCommon_4_0_000.Instance.toInterval(context, et_);
@@ -1599,7 +1599,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 DataType o_ = Oxygen?.Effective;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
@@ -5822,7 +5822,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? r_ = context.Operators.In<string>(p_, q_ as IEnumerable<string>);
+                bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
                 bool? s_ = this.startsDuringHospitalization(context, ASAclass as object, QualifyingEncounter);
                 bool? t_ = context.Operators.And(r_, s_);
                 DataType u_ = ASAclass?.Value;
@@ -5884,7 +5884,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(w_, ab_);
 
                 return ac_;
@@ -6128,7 +6128,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstAlbuminTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6347,7 +6347,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstArterialpHTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6456,7 +6456,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstASTTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6565,7 +6565,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstBicarbonateTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6674,7 +6674,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstBilirubinTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6783,7 +6783,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstBUN as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -6893,7 +6893,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             DataType p_ = FirstBodyMass?.Effective;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
@@ -6962,7 +6962,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             DataType p_ = FirstTemperature?.Effective;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             CqlDateTime r_ = QICoreCommon_4_0_000.Instance.earliest(context, q_);
@@ -7029,7 +7029,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstCarbonDioxideTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7138,7 +7138,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstCreatinineTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7248,7 +7248,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             DataType p_ = FirstHeartBeats?.Effective;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             CqlDateTime r_ = QICoreCommon_4_0_000.Instance.earliest(context, q_);
@@ -7315,7 +7315,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstHematocritTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7424,7 +7424,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstHemoglobinTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7533,7 +7533,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstLeukocyteCount as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7642,7 +7642,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstOxygenTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7751,7 +7751,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstPlateletCount as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -7861,7 +7861,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             DataType p_ = FirstRespiration?.Effective;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             CqlDateTime r_ = QICoreCommon_4_0_000.Instance.earliest(context, q_);
@@ -7928,7 +7928,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstSodiumTest as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 
@@ -8036,7 +8036,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             DataType m_ = SBPReading?.Effective;
             object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlDateTime o_ = QICoreCommon_4_0_000.Instance.earliest(context, n_);
@@ -8137,7 +8137,7 @@ public partial class CMS1218FHIRHHRF_0_2_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = this.isEarliestDuringHospitalization(context, FirstWBCCount as object, QualifyingEncounter);
             bool? p_ = context.Operators.And(n_, o_);
 

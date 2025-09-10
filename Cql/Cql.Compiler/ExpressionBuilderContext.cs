@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -127,6 +127,20 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(element))
             {
+                /*
+                This code is useful for setting breakpoints to inspect the expression tree at a specific element.
+                The ELM json must be modified to add an annotation tags with a debug counter first.
+
+                var debugCounter = element.annotation
+                                          ?.OfType<Annotation>()
+                                          .FirstOrDefault()?.t.FirstOrDefault(t => t.name == "debug")
+                                          ?.value;
+                if (debugCounter == "42") // Identify the correct debug counter from the ELM file
+                {
+                    ; // Set a breakpoint here
+                }
+                */
+
                 Expression? expression = element switch
                 {
                     //@formatter:off
@@ -325,12 +339,12 @@ partial class ExpressionBuilderContext
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                     && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && leftListElemType == rightListElemType)
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType))
                     return [left, right];
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
-                    && leftPointType == rightPointType)
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftPointType, rightPointType))
                     return [left, right];
             }
 
@@ -442,8 +456,7 @@ partial class ExpressionBuilderContext
                 array = Expression.NewArrayBounds(elementType, Expression.Constant(0));
             }
 
-            var asEnumerable = array.NewTypeAsExpression(typeof(IEnumerable<>).MakeGenericType(elementType));
-            return asEnumerable;
+            return array;
         }
 
         throw this.NewExpressionBuildingException($"List is the wrong type");
@@ -1918,7 +1931,7 @@ internal partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases));
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases).ToList());
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);
@@ -2353,6 +2366,55 @@ internal partial class ExpressionBuilderContext
             if (result == TypeConversion.NoMatch && throwOnError)
                 throw this.NewExpressionBuildingException($"Cannot convert {input.Type} to {outputType}.");
         }
+    }
+
+    /// <summary>
+    /// Pre-processes an expression tree to fix missing resultTypeSpecifier on AliasRef elements
+    /// by copying the type information from the source elements that define the aliases.
+    /// </summary>
+    /// <param name="elmExpression">The root ELM expression to process</param>
+    private void FixMissingAliasRefTypeSpecifiers(Elm.Expression elmExpression)
+    {
+        // First pass: Build dictionary of alias names to their source elements (with resultTypeSpecifier)
+        var aliasSources = new Dictionary<string, (Element sourceElement, TypeSpecifier sourceResultTypeSpecifier)>();
+
+        var aliasCollector = new ElmTreeWalker(node =>
+        {
+            switch (node)
+            {
+                case AliasedQuerySource aqs when !string.IsNullOrEmpty(aqs.alias) && aqs.expression?.resultTypeSpecifier != null:
+                    aliasSources[aqs.alias] = (aqs, aqs.expression.resultTypeSpecifier);
+                    break;
+
+                case LetClause let when !string.IsNullOrEmpty(let.identifier) && let.expression?.resultTypeSpecifier != null:
+                    aliasSources[let.identifier] = (let, let.expression.resultTypeSpecifier);
+                    break;
+            }
+            return true; // Continue walking children
+        });
+
+        aliasCollector.Start(elmExpression);
+
+        // Second pass: Find AliasRef elements without resultTypeSpecifier and copy it from the dictionary
+        var aliasRefFixer = new ElmTreeWalker(node =>
+        {
+            if (node is AliasRef aliasRef
+                && !string.IsNullOrEmpty(aliasRef.name)
+                && aliasRef.resultTypeSpecifier == null
+                && aliasSources.TryGetValue(aliasRef.name, out var source))
+            {
+                _logger.LogDebug(
+                    "Fixing missing resultTypeSpecifier for AliasRef named '{alias}' @ {aliasLocator}, originating from {sourceType} @ {sourceLocator}. {expressionBuilderContext}",
+                    aliasRef.name, aliasRef.locator,
+                    source.sourceElement.GetType().Name,
+                    source.sourceElement.locator,
+                    DebuggerView);
+                aliasRef.resultTypeSpecifier = source.sourceResultTypeSpecifier;
+            }
+            return true; // Continue walking children
+        });
+
+        aliasRefFixer.Start(elmExpression);
     }
 }
 

@@ -269,7 +269,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.Calculated_CT_global_noise(context);
@@ -315,7 +315,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.Calculated_CT_size_adjusted_dose(context);
@@ -463,7 +463,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.Calculated_CT_global_noise(context);
@@ -509,7 +509,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, k_ as IEnumerable<string>);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.Calculated_CT_size_adjusted_dose(context);
