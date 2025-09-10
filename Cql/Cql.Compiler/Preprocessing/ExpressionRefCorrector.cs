@@ -6,23 +6,35 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Threading;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Preprocessing;
 
 /// <summary>
 /// Ensures that all ExpressionRefs and FunctionRefs have a resultTypeSpecifier.
 /// </summary>
-internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
+internal class ExpressionRefCorrector(
+    ILogger<ExpressionRefCorrector> logger,
+    LibrarySet librarySet) : BaseElmTreeWalker
 {
     private Library? _library;
 
     public void Fix(Library library)
     {
-        _library = library;
+        if (Interlocked.CompareExchange(ref _library, library, null) is not null)
+            throw new InvalidOperationException("Cannot process multiple libraries concurrently.");
 
-        base.Start(library);
+        logger.LogDebug("Preprocessing library '{library}' - {type}", library.VersionedLibraryIdentifier, nameof(ExpressionRefCorrector));
+        try
+        {
+            base.Start(library);
+        }
+        finally
+        {
+            Interlocked.Exchange(ref _library, null);
+        }
     }
 
     protected override bool Process(object node)
@@ -40,9 +52,7 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
 
         if(node is FunctionRef { signature: null } noSignature)
         {
-            if (librarySet.TryResolveDefinition(_library!, noSignature,
-                                                out IFunctionElement? expressionDef) &&
-                expressionDef is IHasSignature hasSig)
+            if (librarySet.TryResolveDefinition(_library!, noSignature, out IFunctionElement? expressionDef) && expressionDef is IHasSignature hasSig)
             {
                 // We can only correct signatures if we know the function & it has a single signature
                 // (it is not a function with overloads), since we don't want to re-implement overload resolution here.

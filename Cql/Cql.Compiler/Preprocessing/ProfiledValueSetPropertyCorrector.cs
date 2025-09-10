@@ -7,8 +7,9 @@
  */
 
 using Hl7.Cql.Elm;
+using Library = Hl7.Cql.Elm.Library;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Preprocessing;
 
 /// <summary>
 /// When the Java stack turns access to a bound element in profiled QICore into ELM, it doesn't set the resultType
@@ -16,10 +17,11 @@ namespace Hl7.Cql.Compiler;
 /// represents the bound valueset instead. This walker puts the right types in place, as if the ELM had been generated
 /// from unprofiled FHIR in the first place.
 /// </summary>
-internal class ProfiledValueSetPropertyCorrector : BaseElmTreeWalker
+internal class ProfiledValueSetPropertyCorrector(ILogger<ProfiledValueSetPropertyCorrector> logger) : BaseElmTreeWalker
 {
     public void Fix(Library library)
     {
+        logger.LogDebug("Preprocessing library '{library}' - {type}", library.VersionedLibraryIdentifier, nameof(ProfiledValueSetPropertyCorrector));
         base.Start(library);
     }
     protected override bool Process(object node)

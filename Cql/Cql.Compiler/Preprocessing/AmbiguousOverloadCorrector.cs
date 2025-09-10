@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Preprocessing;
 
 /// <summary>
 /// Ensures that there are no overloads with exactly the same signature.
@@ -19,10 +19,16 @@ namespace Hl7.Cql.Compiler;
 /// corrected in the compiler. Until that moment, we'll just pick the first overload.
 /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/438 for more info.
 /// </remarks>
-internal class AmbiguousOverloadCorrector()
+internal class AmbiguousOverloadCorrector(ILogger<AmbiguousOverloadCorrector> logger)
 {
     public void Fix(Library library)
     {
+        // Make sure all overloads in the library are unique.
+        // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
+        // We should remove this when the compiler is fixed.
+        // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
+        logger.LogDebug("Preprocessing library '{library}' - {type}", library.VersionedLibraryIdentifier, nameof(AmbiguousOverloadCorrector));
+
         if (library.statements is { Length: > 0 } expressionDefs)
         {
             var statementSet = new HashSet<IDefinitionElement>(expressionDefs, new ExpressionSignatureComparer());

@@ -50,7 +50,7 @@ internal abstract class BaseElmTreeWalker
         if (node is null)
             return;
 
-        if(!IsRelevant(node.GetType()))
+        if (!IsRelevant(node.GetType()))
             return;
 
         if (_visited.Any(i => ReferenceEquals(i, node)))
@@ -59,7 +59,8 @@ internal abstract class BaseElmTreeWalker
         if (Process(node))
             return;
 
-        var propertyTuples = node.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        var propertyTuples = node.GetType()
+                                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                  .Where(p => p.CanRead && IsRelevant(p.PropertyType))
                                  .Select(p => (p, p.GetValue(node)))
                                  .Where(v => v.Item2 is not null);

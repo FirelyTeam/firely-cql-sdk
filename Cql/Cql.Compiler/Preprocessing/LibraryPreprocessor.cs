@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.Preprocessing;
 
 /// <summary>
 /// Pre-processes the ELM library to correct some well-known bugs or omissions in the ELM produced by
@@ -18,15 +18,16 @@ internal class LibraryPreprocessor(
     LibrarySet librarySet,
     ILoggerFactory loggerFactory)
 {
+    private readonly AmbiguousOverloadCorrector _ambiguousOverloadCorrector = new(loggerFactory.CreateLogger<AmbiguousOverloadCorrector>());
+    private readonly ExpressionRefCorrector _expressionRefCorrector = new(loggerFactory.CreateLogger<ExpressionRefCorrector>(), librarySet);
+    private readonly ProfiledValueSetPropertyCorrector _profiledValueSetPropertyCorrector = new(loggerFactory.CreateLogger<ProfiledValueSetPropertyCorrector>());
+
+
     public void Preprocess(Library library)
     {
-        _ = loggerFactory;
-
-        var expressionRefCorrector = new ExpressionRefCorrector(librarySet);
-        expressionRefCorrector.Fix(library);
-
-        var profilesVsCorrector = new ProfiledValueSetPropertyCorrector();
-        profilesVsCorrector.Fix(library);
+        _ambiguousOverloadCorrector.Fix(library);
+        _expressionRefCorrector.Fix(library);
+        _profiledValueSetPropertyCorrector.Fix(library);
     }
 }
 
