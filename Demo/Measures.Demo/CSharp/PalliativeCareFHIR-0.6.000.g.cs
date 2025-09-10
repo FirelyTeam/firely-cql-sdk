@@ -108,7 +108,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             List<CodeableConcept> w_ = PalliativeAssessment?.Category;
             bool? x_(CodeableConcept PalliativeAssessmentCategory)
             {
@@ -160,7 +160,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 "completed",
                 "in-progress",
             ];
-            bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
+            bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
             DataType aw_ = PalliativeIntervention?.Performed;
             CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aw_);
             CqlInterval<CqlDateTime> ay_ = this.Measurement_Period(context);

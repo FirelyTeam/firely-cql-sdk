@@ -2176,7 +2176,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
             int? j_ = context.Operators.End(DayNumber);
@@ -2201,7 +2201,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
             int? j_ = context.Operators.End(DayNumber);

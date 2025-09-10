@@ -199,7 +199,7 @@ public partial class TJCOverall_8_15_000 : ILibrary, ISingleton<TJCOverall_8_15_
                 "completed",
                 "on-hold",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             Code<RequestIntent> p_ = SR?.IntentElement;
             RequestIntent? q_ = p_?.Value;
             Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
@@ -211,7 +211,7 @@ public partial class TJCOverall_8_15_000 : ILibrary, ISingleton<TJCOverall_8_15_
                 "filler-order",
                 "instance-order",
             ];
-            bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
+            bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(o_, u_);
             FhirBoolean w_ = SR?.DoNotPerformElement;
             bool? x_ = w_?.Value;
@@ -232,7 +232,7 @@ public partial class TJCOverall_8_15_000 : ILibrary, ISingleton<TJCOverall_8_15_
                 "completed",
                 "in-progress",
             ];
-            bool? af_ = context.Operators.In<string>(ad_, ae_ as IEnumerable<string>);
+            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
 
             return af_;
         };

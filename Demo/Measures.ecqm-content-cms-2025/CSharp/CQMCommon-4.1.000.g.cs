@@ -481,7 +481,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         (IEnumerable<Encounter.LocationComponent>)i_,
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
-                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>(k_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
+                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
                 }
@@ -523,7 +523,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         (IEnumerable<Encounter.LocationComponent>)i_,
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
-                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>(k_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
+                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
                 }

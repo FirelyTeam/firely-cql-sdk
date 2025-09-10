@@ -195,7 +195,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, bl_ as IEnumerable<string>);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 object bn_()
                 {
                     bool bu_()
@@ -472,7 +472,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                     "active",
                     "completed",
                 ];
-                bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
+                bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
                 bool? ak_ = context.Operators.And(ae_, aj_);
                 Code<MedicationRequest.MedicationRequestIntent> al_ = DischargeAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? am_ = al_?.Value;
@@ -484,7 +484,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                     "filler-order",
                     "instance-order",
                 ];
-                bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
+                bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
                 bool? aq_ = context.Operators.And(ak_, ap_);
                 FhirDateTime ar_ = DischargeAnticoagulant?.AuthoredOnElement;
                 CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
@@ -549,7 +549,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 "filler-order",
                 "instance-order",
             ];
-            bool? x_ = context.Operators.In<string>(v_, w_ as IEnumerable<string>);
+            bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
             bool? y_ = context.Operators.And(s_, x_);
 
             return y_;

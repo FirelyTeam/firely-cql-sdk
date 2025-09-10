@@ -295,7 +295,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = CervicalCytology?.Category;
             bool? j_(CodeableConcept CervicalCytologyCategory)
             {
@@ -348,7 +348,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = HPVTest?.Category;
             bool? j_(CodeableConcept HPVTestCategory)
             {
@@ -420,7 +420,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             "amended",
             "corrected",
         ];
-        bool? d_ = context.Operators.In<string>(b_, c_ as IEnumerable<string>);
+        bool? d_ = context.Operators.In<string>(b_, (IEnumerable<string>)c_);
 
         return d_;
     }

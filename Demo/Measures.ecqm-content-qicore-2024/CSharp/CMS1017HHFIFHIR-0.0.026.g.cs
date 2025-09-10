@@ -647,7 +647,7 @@ public partial class CMS1017HHFIFHIR_0_0_026 : ILibrary, ISingleton<CMS1017HHFIF
                     "amended",
                     "corrected",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, ab_ as IEnumerable<string>);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
                 bool? ad_ = context.Operators.And(w_, ac_);
 
                 return ad_;
@@ -894,7 +894,7 @@ public partial class CMS1017HHFIFHIR_0_0_026 : ILibrary, ISingleton<CMS1017HHFIF
                     "in-progress",
                     "completed",
                 ];
-                bool? an_ = context.Operators.In<string>(al_, am_ as IEnumerable<string>);
+                bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
                 bool? ao_ = context.Operators.And(ah_, an_);
 
                 return ao_;

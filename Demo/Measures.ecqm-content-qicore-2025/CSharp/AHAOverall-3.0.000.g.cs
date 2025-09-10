@@ -240,7 +240,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "amended",
                 "corrected",
             ];
-            bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
+            bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
 
             return af_;
@@ -730,7 +730,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "active",
                 "completed",
             ];
-            bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(i_, n_);
             Code<MedicationRequest.MedicationRequestIntent> p_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
@@ -742,7 +742,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "filler-order",
                 "instance-order",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
 
             return u_;
@@ -1018,7 +1018,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "active",
                 "completed",
             ];
-            bool? af_ = context.Operators.In<string>(ad_, ae_ as IEnumerable<string>);
+            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
             bool? ag_ = context.Operators.And(aa_, af_);
             Code<MedicationRequest.MedicationRequestIntent> ah_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1030,7 +1030,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "filler-order",
                 "instance-order",
             ];
-            bool? al_ = context.Operators.In<string>(aj_, ak_ as IEnumerable<string>);
+            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
 
             return am_;
@@ -1064,7 +1064,7 @@ public partial class AHAOverall_3_0_000 : ILibrary, ISingleton<AHAOverall_3_0_00
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(j_, o_);
 
             return p_;

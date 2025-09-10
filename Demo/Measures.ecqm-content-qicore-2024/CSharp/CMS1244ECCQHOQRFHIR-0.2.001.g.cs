@@ -359,7 +359,7 @@ public partial class CMS1244ECCQHOQRFHIR_0_2_001 : ILibrary, ISingleton<CMS1244E
                 "active",
                 "completed",
             ];
-            bool? y_ = context.Operators.In<string>(w_, x_ as IEnumerable<string>);
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(s_, y_);
 
             return z_;
@@ -549,7 +549,7 @@ public partial class CMS1244ECCQHOQRFHIR_0_2_001 : ILibrary, ISingleton<CMS1244E
                 "amended",
                 "corrected",
             ];
-            bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
+            bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
             bool? ab_ = context.Operators.And(u_, aa_);
 
             return ab_;

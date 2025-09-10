@@ -185,7 +185,7 @@ public partial class CMS826FHIRHHPI_0_3_000 : ILibrary, ISingleton<CMS826FHIRHHP
             "amended",
             "corrected",
         ];
-        bool? d_ = context.Operators.In<string>(b_, c_ as IEnumerable<string>);
+        bool? d_ = context.Operators.In<string>(b_, (IEnumerable<string>)c_);
         object e_ = context.Operators.LateBoundProperty<object>(observation, "effective");
         object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
         CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);

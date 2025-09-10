@@ -256,7 +256,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                     "amended",
                     "corrected",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(v_, ab_);
                 CodeableConcept ad_ = SkinExam?.Code;
                 CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
@@ -374,7 +374,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                     "amended",
                     "corrected",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(v_, ab_);
                 CodeableConcept ad_ = SkinExam?.Code;
                 CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
@@ -532,7 +532,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                     "amended",
                     "corrected",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(v_, ab_);
                 DataType ad_ = SkinExam?.Value;
                 object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
@@ -670,7 +670,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
                     "amended",
                     "corrected",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(v_, ab_);
                 DataType ad_ = SkinExam?.Value;
                 object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);

@@ -1842,7 +1842,7 @@ public partial class CMS56FHIRFunctionalStatusAssessmentforTotalHipReplacement_1
                 dl_,
                 dq_,
             ];
-            CqlDate ds_ = context.Operators.Max<CqlDate>(dr_ as IEnumerable<CqlDate>);
+            CqlDate ds_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)dr_);
 
             return ds_;
         };
@@ -2242,7 +2242,7 @@ public partial class CMS56FHIRFunctionalStatusAssessmentforTotalHipReplacement_1
                 ao_,
                 at_,
             ];
-            CqlDate av_ = context.Operators.Max<CqlDate>(au_ as IEnumerable<CqlDate>);
+            CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
         };
@@ -2461,7 +2461,7 @@ public partial class CMS56FHIRFunctionalStatusAssessmentforTotalHipReplacement_1
                 ao_,
                 at_,
             ];
-            CqlDate av_ = context.Operators.Max<CqlDate>(au_ as IEnumerable<CqlDate>);
+            CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
         };
@@ -2680,7 +2680,7 @@ public partial class CMS56FHIRFunctionalStatusAssessmentforTotalHipReplacement_1
                 ao_,
                 at_,
             ];
-            CqlDate av_ = context.Operators.Max<CqlDate>(au_ as IEnumerable<CqlDate>);
+            CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
         };

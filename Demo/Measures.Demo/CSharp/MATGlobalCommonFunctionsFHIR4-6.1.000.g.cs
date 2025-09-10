@@ -407,7 +407,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                         (IEnumerable<Encounter.LocationComponent>)i_,
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
-                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>(k_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
+                    IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
                 }

@@ -172,7 +172,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                 return aw_;
             };
             IEnumerable<CqlCode> ad_ = context.Operators.Select<object, CqlCode>(ab_, ac_);
-            IEnumerable<CqlCode> ae_ = context.Operators.Union<CqlCode>(x_ as IEnumerable<CqlCode>, ad_);
+            IEnumerable<CqlCode> ae_ = context.Operators.ValueSetUnion((IEnumerable<CqlCode>)x_, ad_);
             bool? af_(Extension @this)
             {
                 string ax_ = @this?.Url;
@@ -319,7 +319,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                 return aw_;
             };
             IEnumerable<CqlCode> ac_ = context.Operators.Select<object, CqlCode>(aa_, ab_);
-            IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>(w_, ac_);
+            IEnumerable<CqlCode> ad_ = context.Operators.ValueSetUnion(w_, ac_);
             bool? ae_(Extension @this)
             {
                 string ax_ = @this?.Url;

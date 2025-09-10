@@ -98,6 +98,12 @@ partial class ExpressionBuilderContext
                         null);
                 }
 
+                // Pre-process expression to fix missing resultTypeSpecifier on AliasRef elements
+                if (expressionDef.expression != null)
+                {
+                    FixMissingAliasRefTypeSpecifiers(expressionDef.expression);
+                }
+
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
                 Type[] parameterTypes = [];
                 ParameterExpression[] parameters = [CqlExpressions.ParameterExpression];

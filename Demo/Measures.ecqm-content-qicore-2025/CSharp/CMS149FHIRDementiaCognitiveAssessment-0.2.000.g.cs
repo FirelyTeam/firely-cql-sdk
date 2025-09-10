@@ -320,7 +320,7 @@ public partial class CMS149FHIRDementiaCognitiveAssessment_0_2_000 : ILibrary, I
                 "corrected",
                 "preliminary",
             ];
-            bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+            bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
             bool? ap_ = context.Operators.And(aj_, ao_);
 
             return ap_;

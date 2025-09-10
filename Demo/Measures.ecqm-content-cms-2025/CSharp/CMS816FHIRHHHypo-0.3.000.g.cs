@@ -285,7 +285,7 @@ public partial class CMS816FHIRHHHypo_0_3_000 : ILibrary, ISingleton<CMS816FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
+            bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(q_, v_);
             DataType x_ = tuple_fadhmfgiduzpspclbhmqonodh?.GlucoseTest?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
@@ -836,7 +836,7 @@ public partial class CMS816FHIRHHHypo_0_3_000 : ILibrary, ISingleton<CMS816FHIRH
                 "amended",
                 "corrected",
             ];
-            bool? aw_ = context.Operators.In<string>(au_, av_ as IEnumerable<string>);
+            bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
             bool? ax_ = context.Operators.And(ar_, aw_);
             DataType ay_ = tuple_fcmdncyhjlqsajxzjwdiopqvk?.FollowupGlucoseTest?.Value;
             object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
