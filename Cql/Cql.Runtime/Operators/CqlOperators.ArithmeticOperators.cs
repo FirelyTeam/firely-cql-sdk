@@ -56,7 +56,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left + right;
+                return checked(left + right);
             }
             catch (OverflowException e)
             {
@@ -70,7 +70,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left + right;
+                return checked(left + right);
             }
             catch (OverflowException e)
             {
@@ -83,7 +83,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left + right;
+                return checked(left + right);
             }
             catch (OverflowException e)
             {
@@ -700,7 +700,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left - right;
+                return checked(left - right);
             }
             catch (OverflowException e)
             {
@@ -714,7 +714,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left - right;
+                return checked(left - right);
             }
             catch (OverflowException e)
             {
@@ -727,7 +727,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             try
             {
-                return left - right;
+                return checked(left - right);
             }
             catch (OverflowException e)
             {
