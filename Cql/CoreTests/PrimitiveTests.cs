@@ -3549,13 +3549,19 @@ namespace CoreTests
             var inputDate = new CqlDate(9999, 12, 30);
             var quantity = new CqlQuantity(1, "day");
             CqlDate expectedDate = new CqlDate(9999, 12, 31);
-
             var newDate = fcq.Add(inputDate, quantity);
             Assert.IsNotNull(newDate);
             Assert.AreEqual(expectedDate, newDate);
+        }
 
+        [TestMethod]
+        public void Add_Date_Quantity_To_MaxDate()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+            
+            var quantity = new CqlQuantity(1, "day");
             var inputDateMaxValue = CqlDate.MaxValue;
-
             var newDateAddMax = fcq.Add(inputDateMaxValue, quantity);
             Assert.IsNull(newDateAddMax);
         }
@@ -3569,11 +3575,18 @@ namespace CoreTests
             var inputDate = new CqlDate(1, 1, 2);
             var quantity = new CqlQuantity(1, "day");
             CqlDate expectedDate = new CqlDate(1, 1, 1);
-
             var newDate = fcq.Subtract(inputDate, quantity);
             Assert.IsNotNull(newDate);
             Assert.AreEqual(expectedDate, newDate);
+        }
 
+        [TestMethod]
+        public void Subtract_Date_Quantity_To_MinDate()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var quantity = new CqlQuantity(1, "day");
             var inputDateMinValue = CqlDate.MinValue;
             var newDateSubtractedMin = fcq.Subtract(inputDateMinValue, quantity);
             Assert.IsNull(newDateSubtractedMin);
