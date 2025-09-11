@@ -27,7 +27,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Add", "Warning", "Ignored overflow errors from date addition, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from date addition, returned null.");
                 return null;
             }
         }
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Add", "Warning", "Ignored overflow errors from datetime addition, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from datetime addition, returned null.");
                 return null;
             }
         }
@@ -56,7 +56,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Add", "Warning", "Ignored overflow errors from time addition, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from time addition, returned null.");
                 return null;
             }
         }
@@ -351,7 +351,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Subtract", "Warning", "Ignored overflow errors from date subtraction, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from date subtraction, returned null.");
                 return null;
             }
         }
@@ -366,7 +366,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Subtract", "Warning", "Ignored overflow errors from datetime subtraction, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from datetime subtraction, returned null.");
                 return null;
             }
         }
@@ -381,7 +381,7 @@ namespace Hl7.Cql.Operators
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Message(new { left, right, e }, "CqlOperators.Subtract", "Warning", "Ignored overflow errors from time subtraction, returned null.");
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from time subtraction, returned null.");
                 return null;
             }
         }
