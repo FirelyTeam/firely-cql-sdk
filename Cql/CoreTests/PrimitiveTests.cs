@@ -3732,7 +3732,7 @@ namespace CoreTests
         */
 
         [TestMethod]
-        public void Slice_Skip2()
+        public void SliceSkip2()
         {
             //The Skip operator returns the elements in the list, skipping the first number elements. 
             //define "Skip2": Skip({ 1, 2, 3, 4, 5 }, 2) // { 3, 4, 5 }
@@ -3745,7 +3745,7 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Slice_SkipNull()
+        public void SliceSkipNull()
         {
             //If the number of elements is null, the result is the entire list, no elements are skipped.
             //define "SkipNull": Skip({ 1, 3, 5 }, null) // { 1, 3, 5 }
@@ -3758,7 +3758,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_SkipEmpty()
+        public void SliceSkipEmpty()
         {
             //If the number of elements is less than zero, the result is an empty list.
             //define "SkipEmpty": Skip({ 1, 3, 5 }, -1) // { }
@@ -3771,7 +3771,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_SkipIsNull()
+        public void SliceSkipIsNull()
         {
             //If the source list is null, the result is null.
             //define "SkipIsNull": Skip(null, 2)
@@ -3782,9 +3782,20 @@ namespace CoreTests
             Assert.IsNull(slicedList);
             Assert.AreEqual(expectedList, slicedList);
         }
-        
+
         [TestMethod]
-        public void Slice_Tail234()
+        public void SliceSkipZero()
+        {
+            var rtx = GetNewContext();
+            var inputList = new List<int> { 1, 2, 3, 4, 5 };
+            var expectedList = new List<int> { 1, 2, 3, 4, 5 };
+            var slicedList = rtx.Operators.Slice(inputList, 0, null);
+            Assert.IsNotNull(slicedList);
+            CollectionAssert.AreEqual(expectedList, slicedList.ToList());
+        }
+
+        [TestMethod]
+        public void SliceTail234()
         {
             //The Tail operator returns all but the first element from the given list. 
             //define "Tail234": Tail({ 1, 2, 3, 4 }) // { 2, 3, 4 }
@@ -3797,7 +3808,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_TailEmpty()
+        public void SliceTailEmpty()
         {
             //If the list is empty, the result is empty.
             //define "TailEmpty": Tail({ }) // { }
@@ -3810,7 +3821,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_TailIsNull()
+        public void SliceTailIsNull()
         {
             //If the source list is null, the result is null.
             //define "TailIsNull": Tail(null)
@@ -3823,7 +3834,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_Take2()
+        public void SliceTake2()
         {
             //The Take operator returns the first number elements from the given list.
             //define "Take2": Take({ 1, 2, 3, 4 }, 2) // { 1, 2 }
@@ -3836,7 +3847,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_TakeTooMany()
+        public void SliceTakeTooMany()
         {
             //If the list has less than number elements, the result only contains the elements in the list.
             //define "TakeTooMany": Take({ 1, 2 }, 3) // { 1, 2 }
@@ -3849,7 +3860,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_TakeEmpty()
+        public void SliceTakeEmpty()
         {
             //If number is null, or 0 or less, the result is an empty list.
             //define "TakeEmpty": Take({ 1, 2, 3, 4 }, null) // { }
@@ -3862,7 +3873,7 @@ namespace CoreTests
         }
         
         [TestMethod]
-        public void Slice_TakeIsNull()
+        public void SliceTakeIsNull()
         {
             //If the source list is null, the result is null.
             //define "TakeIsNull": Take(null, 2)
