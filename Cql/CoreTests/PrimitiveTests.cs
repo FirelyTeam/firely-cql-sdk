@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
@@ -3540,7 +3541,191 @@ namespace CoreTests
             s.Should().Be("125 'cm'");
         }
 
-        #region Slice tests
+        [TestMethod]
+        public void Add_Date_Quantity()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var inputDate = new CqlDate(9999, 12, 30);
+            var quantity = new CqlQuantity(1, "day");
+            CqlDate expectedDate = new CqlDate(9999, 12, 31);
+            var newDate = fcq.Add(inputDate, quantity);
+            Assert.IsNotNull(newDate);
+            Assert.AreEqual(expectedDate, newDate);
+        }
+
+        [TestMethod]
+        public void Add_Date_Quantity_To_MaxDate()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+            
+            var quantity = new CqlQuantity(1, "day");
+            var inputDateMaxValue = CqlDate.MaxValue;
+            var newDateAddMax = fcq.Add(inputDateMaxValue, quantity);
+            Assert.IsNull(newDateAddMax);
+        }
+
+        [TestMethod]
+        public void Subtract_Date_Quantity()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var inputDate = new CqlDate(1, 1, 2);
+            var quantity = new CqlQuantity(1, "day");
+            CqlDate expectedDate = new CqlDate(1, 1, 1);
+            var newDate = fcq.Subtract(inputDate, quantity);
+            Assert.IsNotNull(newDate);
+            Assert.AreEqual(expectedDate, newDate);
+        }
+
+        [TestMethod]
+        public void Subtract_Date_Quantity_To_MinDate()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var quantity = new CqlQuantity(1, "day");
+            var inputDateMinValue = CqlDate.MinValue;
+            var newDateSubtractedMin = fcq.Subtract(inputDateMinValue, quantity);
+            Assert.IsNull(newDateSubtractedMin);
+        }
+
+        [TestMethod]
+        public void Add_Integers()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            int expectedResult = 2;
+            var addedValue = fcq.Add(1, 1);
+            Assert.IsNotNull(addedValue);
+            Assert.AreEqual(expectedResult, addedValue);
+        }
+
+        [TestMethod]
+        public void Add_Integer_To_MaxInteger()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+            
+            var addedValue = fcq.Add(int.MaxValue, 1);
+            Assert.IsNull(addedValue);
+        }
+
+        [TestMethod]
+        public void Add_Longs()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            long expectedResult = 2L;
+            var addedValue = fcq.Add(1L, 1L);
+            Assert.IsNotNull(addedValue);
+            Assert.AreEqual(expectedResult, addedValue);
+        }
+
+        [TestMethod]
+        public void Add_Long_To_MaxLong()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var addedValue = fcq.Add(long.MaxValue, 1L);
+            Assert.IsNull(addedValue);
+        }
+
+        [TestMethod]
+        public void Add_Decimals()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            decimal expectedResult = 2m;
+            var addedValue = fcq.Add(1m, 1m);
+            Assert.IsNotNull(addedValue);
+            Assert.AreEqual(expectedResult, addedValue);
+        }
+
+        [TestMethod]
+        public void Add_Decimal_To_MaxDecimal()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var addedValue = fcq.Add(decimal.MaxValue, 1m);
+            Assert.IsNull(addedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Integers()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            int expectedResult = 1;
+            var subtractedValue = fcq.Subtract(2, 1);
+            Assert.IsNotNull(subtractedValue);
+            Assert.AreEqual(expectedResult, subtractedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Integer_To_MinInteger()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var subtractedValue = fcq.Subtract(int.MinValue, 1);
+            Assert.IsNull(subtractedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Longs()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            long expectedResult = 1L;
+            var subtractedValue = fcq.Subtract(2L, 1L);
+            Assert.IsNotNull(subtractedValue);
+            Assert.AreEqual(expectedResult, subtractedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Long_To_MinLong()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var subtractedValue = fcq.Subtract(long.MinValue, 1L);
+            Assert.IsNull(subtractedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Decimals()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            decimal expectedResult = 1m;
+            var subtractedValue = fcq.Subtract(2m, 1m);
+            Assert.IsNotNull(subtractedValue);
+            Assert.AreEqual(expectedResult, subtractedValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Decimal_To_MinDecimal()
+        {
+            var rc = GetNewContext();
+            var fcq = rc.Operators;
+
+            var subtractedValue = fcq.Subtract(decimal.MinValue, 1m);
+            Assert.IsNull(subtractedValue);
+        }
+      
+              #region Slice tests
 
         /* Refer http://cql.hl7.org/09-b-cqlreference.html for operation details on Skip, Tail and Take cql operators 
          * These CQL operators uses Slice semantics from http://cql.hl7.org/04-logicalspecification.html#slice
@@ -3722,7 +3907,6 @@ namespace CoreTests
             Assert.IsNotNull(slicedList);
             CollectionAssert.AreEqual(expectedList, slicedList.ToList());
         }
-
         #endregion
     }
 }
