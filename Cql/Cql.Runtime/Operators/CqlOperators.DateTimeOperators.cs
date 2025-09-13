@@ -21,20 +21,44 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            try
+            {
+                return left.Add(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from date addition, returned null.");
+                return null;
+            }
         }
         public CqlDateTime? Add(CqlDateTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            try
+            {
+                return left.Add(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from datetime addition, returned null.");
+                return null;
+            }
         }
 
         public CqlTime? Add(CqlTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            try
+            {
+                return left.Add(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from time addition, returned null.");
+                return null;
+            }
         }
 
         #endregion
@@ -321,20 +345,45 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            try
+            {
+                return left.Subtract(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from date subtraction, returned null.");
+                return null;
+            }
         }
+
         public CqlDateTime? Subtract(CqlDateTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            try
+            {
+                return left.Subtract(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from datetime subtraction, returned null.");
+                return null;
+            }
         }
 
         public CqlTime? Subtract(CqlTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            try
+            {
+                return left.Subtract(right);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from time subtraction, returned null.");
+                return null;
+            }
         }
 
         #endregion

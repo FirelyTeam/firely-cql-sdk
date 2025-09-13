@@ -165,63 +165,54 @@ namespace Hl7.Cql.Primitives
             //quantity = quantity.NormalizeTo(Precision);
             var value = -1 * quantity.value!.Value;
             var dto = Value.DateTimeOffset;
-            try
+            switch (quantity.unit)
             {
-                switch (quantity.unit)
-                {
-                    case "a":
-                        dto = dto.AddDays(-1 * UCUMUnits.DaysPerYearDouble);
-                        break;
-                    case "year":
-                    case "years":
-                        dto = dto.AddYears((int)value);
-                        break;
-                    case "mo":
-                        dto = dto.AddDays(-1 * UCUMUnits.DaysPerMonthDouble);
-                        break;
-                    case "month":
-                    case "months":
-                        dto = dto.AddMonths((int)value);
-                        break;
-                    case "wk":
-                    case "week":
-                    case "weeks":
-                        dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
-                        break;
-                    case "d":
-                    case "day":
-                    case "days":
-                        dto = dto.AddDays((int)value!);
-                        break;
-                    case "hour":
-                    case "hours":
-                        dto = dto.AddHours(Math.Truncate((double)value));
-                        break;
-                    case "min":
-                    case "minute":
-                    case "minutes":
-                        dto = dto.AddMinutes(Math.Truncate((double)value));
-                        break;
-                    case "s":
-                    case "second":
-                    case "seconds":
-                        dto = dto.AddSeconds(Math.Truncate((double)value));
-                        break;
-                    case "ms":
-                    case "millisecond":
-                    case "milliseconds":
-                        dto = dto.AddMilliseconds(Math.Truncate((double)value));
-                        break;
-                    default:
-                        throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
-                }
+                case "a":
+                    dto = dto.AddDays(-1 * UCUMUnits.DaysPerYearDouble);
+                    break;
+                case "year":
+                case "years":
+                    dto = dto.AddYears((int)value);
+                    break;
+                case "mo":
+                    dto = dto.AddDays(-1 * UCUMUnits.DaysPerMonthDouble);
+                    break;
+                case "month":
+                case "months":
+                    dto = dto.AddMonths((int)value);
+                    break;
+                case "wk":
+                case "week":
+                case "weeks":
+                    dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
+                    break;
+                case "d":
+                case "day":
+                case "days":
+                    dto = dto.AddDays((int)value!);
+                    break;
+                case "hour":
+                case "hours":
+                    dto = dto.AddHours(Math.Truncate((double)value));
+                    break;
+                case "min":
+                case "minute":
+                case "minutes":
+                    dto = dto.AddMinutes(Math.Truncate((double)value));
+                    break;
+                case "s":
+                case "second":
+                case "seconds":
+                    dto = dto.AddSeconds(Math.Truncate((double)value));
+                    break;
+                case "ms":
+                case "millisecond":
+                case "milliseconds":
+                    dto = dto.AddMilliseconds(Math.Truncate((double)value));
+                    break;
+                default:
+                    throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
             }
-            catch (ArgumentOutOfRangeException)
-            {
-                // In cases where e.g. Predecessor is called on minimum Date.
-                return null;
-            }
-
             var newIsoDate = new DateIso8601(dto, Value.Precision);
             var result = new CqlDate(newIsoDate);
             return result;

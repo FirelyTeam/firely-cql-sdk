@@ -54,18 +54,42 @@ namespace Hl7.Cql.Operators
         public int? Add(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type integer addition, returned null.");
+                return null;
+            }
         }
 
         public long? Add(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type long addition, returned null.");
+                return null;
+            }
         }
         public decimal? Add(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type decimal addition, returned null.");
+                return null;
+            }
         }
 
         public CqlQuantity? Add(CqlQuantity? left, CqlQuantity? right)
@@ -697,18 +721,42 @@ namespace Hl7.Cql.Operators
         public int? Subtract(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type integer subtraction, returned null.");
+                return null;
+            }
         }
 
         public long? Subtract(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type long subtraction, returned null.");
+                return null;
+            }
         }
         public decimal? Subtract(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type decimal subtraction, returned null.");
+                return null;
+            }
         }
 
         public CqlQuantity? Subtract(CqlQuantity? left, CqlQuantity? right)
