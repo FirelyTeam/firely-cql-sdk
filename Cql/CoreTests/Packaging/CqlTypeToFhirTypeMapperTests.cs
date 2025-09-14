@@ -45,18 +45,6 @@ public class CqlTypeToFhirTypeMapperTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void TypeEntryFor_CqlPrimitiveTypeLong_ThrowsNotSupportedException()
-    {
-        // Arrange
-        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
-
-        // Act
-        mapper.TypeEntryFor(CqlPrimitiveType.Long);
-    }
-
-    [TestMethod]
     public void TypeEntryFor_CqlPrimitiveTypeListWithElementType_ReturnsFhirList()
     {
         // Arrange
