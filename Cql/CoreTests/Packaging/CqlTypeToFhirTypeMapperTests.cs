@@ -97,4 +97,20 @@ public class CqlTypeToFhirTypeMapperTests
         Assert.AreEqual(FHIRAllTypes.Basic, result.FhirType);
         Assert.AreEqual(CqlPrimitiveType.Tuple, result.CqlType);
     }
+
+    [TestMethod]
+    public void TypeEntryFor_CqlLongTypeTuple_ReturnsFhirString()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+
+        // Act
+        var result = mapper.TypeEntryFor(CqlPrimitiveType.Long);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(FHIRAllTypes.String, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Long, result.CqlType);
+    }
 }
