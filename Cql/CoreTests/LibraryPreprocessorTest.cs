@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -32,7 +33,7 @@ namespace CoreTests
 
             var ls = new LibrarySet("", FHIRHelpers(), lib);
             var pp = new LibraryPreprocessor(ls, NullLoggerFactory.Instance);
-            pp.Preprocess(lib);
+            pp.PreprocessLibrary(lib);
             rtsChecker = new ResultTypeSpecifierChecker();
             rtsChecker.Start(lib);
             // after pre-processing the library, there should be no such nodes remaining.
