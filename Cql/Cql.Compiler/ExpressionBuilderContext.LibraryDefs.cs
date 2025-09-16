@@ -83,6 +83,9 @@ partial class ExpressionBuilderContext
     public void ProcessExpressionDef(
         ExpressionDef expressionDef)
     {
+        if (expressionDef.expression is not {} expressionDefExpression)
+            return;
+
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             using (PushElement(expressionDef))
@@ -96,12 +99,6 @@ partial class ExpressionBuilderContext
                     throw this.NewExpressionBuildingException(
                         $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.",
                         null);
-                }
-
-                // Pre-process expression to fix missing resultTypeSpecifier on AliasRef elements
-                if (expressionDef.expression != null)
-                {
-                    FixMissingAliasRefTypeSpecifiers(expressionDef.expression);
                 }
 
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
@@ -219,7 +216,7 @@ partial class ExpressionBuilderContext
             Type[] parameterTypes,
             IReadOnlyDictionary<string, string> originalParameterNames)
         {
-            var bodyExpression = TranslateArg(expressionDef.expression);
+            var bodyExpression = TranslateArg(expressionDefExpression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
             var tags = BuildTags();
             var def = expressionDef is FunctionDef

@@ -27,14 +27,34 @@ internal class AmbiguousOverloadCorrector(ILogger<AmbiguousOverloadCorrector> lo
         // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
         // We should remove this when the compiler is fixed.
         // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-        logger.LogDebug("Preprocessing library '{library}' - {type}", library.VersionedLibraryIdentifier, nameof(AmbiguousOverloadCorrector));
+        logger.LogDebug("Preprocessing library '{library}'", library.VersionedLibraryIdentifier);
 
         if (library.statements is { Length: > 0 } expressionDefs)
         {
-            var statementSet = new HashSet<IDefinitionElement>(expressionDefs, new ExpressionSignatureComparer());
+            const LogLevel logLevel = LogLevel.Information;
 
-            // Since we just only put ExpressionDefs into the HashSet, we can safely cast them back.
-            library.statements = statementSet.Cast<ExpressionDef>().ToArray();
+            if (logger.IsEnabled(logLevel))
+            {
+                // Use grouping to find duplicates, so we can log them.
+                var grouped = expressionDefs.GroupBy(def => def, ExpressionSignatureComparer.Instance).ToList();
+                var duplicates = grouped
+                                 .Where(g => g.Count() > 1)
+                                 .Select(g => g.Key.Name)
+                                 .ToList();
+                if (duplicates.Count > 0)
+                {
+                    logger.Log(logLevel, "Duplicate overloads found in library '{Library}': {Duplicates}", library.VersionedLibraryIdentifier, string.Join(", ", duplicates));
+                    library.statements = grouped.Select(g => (ExpressionDef)g.Key).ToArray(); // Since we just only put ExpressionDefs into the HashSet, we can safely cast them back.
+                }
+            }
+            else
+            {
+                var statementSet = new HashSet<IDefinitionElement>(expressionDefs, ExpressionSignatureComparer.Instance);
+                if (statementSet.Count < expressionDefs.Length)
+                {
+                    library.statements = statementSet.Cast<ExpressionDef>().ToArray(); // Since we just only put ExpressionDefs into the HashSet, we can safely cast them back.
+                }
+            }
         }
     }
 }

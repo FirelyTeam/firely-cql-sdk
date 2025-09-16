@@ -17,7 +17,7 @@ internal partial class LibraryExpressionBuilderContext
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly CqlDefinitionDictionary _libraryDefinitions;
     private readonly LibrarySetExpressionBuilderContext? _libsCtx;
-    private readonly LibraryPreprocessor _libraryPreprocessor;
+    private readonly LibraryPreprocessor _preprocessor;
 
     public LibraryExpressionBuilderContext(
         ILogger<LibraryExpressionBuilder> logger,
@@ -33,8 +33,8 @@ internal partial class LibraryExpressionBuilderContext
         _expressionBuilder = expressionBuilder;
         Library = library;
         LibraryVersionedIdentifier = Library.VersionedLibraryIdentifier;
-        _libraryPreprocessor =
-            LibrarySetContext?.LibraryPreprocessor
+        _preprocessor =
+            LibrarySetContext?.Preprocessor
             ?? libraryPreprocessorBuilder.Build(new LibrarySet(LibraryVersionedIdentifier, Library));
     }
 
@@ -52,7 +52,7 @@ internal partial class LibraryExpressionBuilderContext
     public CqlDefinitionDictionary ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            _libraryPreprocessor.Preprocess(Library);
+            _preprocessor.PreprocessLibrary(Library);
 
             _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);
 
