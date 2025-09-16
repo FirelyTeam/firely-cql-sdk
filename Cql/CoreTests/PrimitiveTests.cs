@@ -3886,5 +3886,72 @@ namespace CoreTests
         }
 
         #endregion
+
+        #region ListSkip and ListTake tests
+
+        [TestMethod]
+        public void ListSkipNull()
+        {
+            var rtx = GetNewContext();
+            var inputList = new List<int> { 1, 2, 3, 4, 5 };
+            var expectedList = new List<int> { 1, 2, 3, 4, 5 };
+            var skippedList = rtx.Operators.ListSkip(inputList, null);
+            Assert.IsNotNull(skippedList);
+            CollectionAssert.AreEqual(expectedList, skippedList.ToList());
+        }
+
+        [TestMethod]
+        public void ListSkipNullInput()
+        {
+            var rtx = GetNewContext();
+            var inputList = null as List<int>;
+            var skippedList = rtx.Operators.ListSkip(inputList, 2);
+            Assert.IsNull(skippedList);
+        }
+
+        [TestMethod]
+        public void ListSkip()
+        {
+            var rtx = GetNewContext();
+            var inputList = new List<int> { 1, 2, 3, 4, 5 };
+            var expectedList = new List<int> { 3, 4, 5 };
+            var skippedList = rtx.Operators.ListSkip(inputList, 2);
+            Assert.IsNotNull(skippedList);
+            CollectionAssert.AreEqual(expectedList, skippedList.ToList());
+        }
+
+        [TestMethod]
+        public void ListTakeNull()
+        {
+            var rtx = GetNewContext();
+            var inputList = new List<int> { 1, 2, 3, 4, 5 };
+            var expectedList = new List<int> { };
+            var takenList = rtx.Operators.ListTake(inputList, null);
+            Assert.IsNotNull(takenList);
+            CollectionAssert.AreEqual(expectedList, takenList.ToList());
+        }
+
+        [TestMethod]
+        public void ListTakeNullInput()
+        {
+            var rtx = GetNewContext();
+            var inputList = null as List<int>;
+            var takenList = rtx.Operators.ListTake(inputList, 2);
+            Assert.IsNull(takenList);
+        }
+
+        [TestMethod]
+        public void ListTake()
+        {
+            var rtx = GetNewContext();
+            var inputList = new List<int> { 1, 2, 3, 4, 5 };
+            var expectedList = new List<int> { 1, 2 };
+            var takenList = rtx.Operators.ListTake(inputList, 2);
+            Assert.IsNotNull(takenList);
+            CollectionAssert.AreEqual(expectedList, takenList.ToList());
+        }
+
+        #endregion
+
     }
 }

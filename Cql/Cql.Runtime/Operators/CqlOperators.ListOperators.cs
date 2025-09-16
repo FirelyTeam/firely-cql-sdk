@@ -1069,7 +1069,9 @@ namespace Hl7.Cql.Operators
 
         public IEnumerable<T>? ListSkip<T>(IEnumerable<T> argument, int? number)
         {
-            if (argument == null || number == null) return null;
+            if (number == null) return argument;
+
+            if (argument == null) return null;
             else return argument
                     .Skip(number.Value)
                     .ToList();
@@ -1087,7 +1089,9 @@ namespace Hl7.Cql.Operators
 
         public IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number)
         {
-            if (argument == null || number == null) return null;
+            if (number == null) return new List<T>();
+
+            if (argument == null) return null;
             else return argument
                     .Take(number.Value)
                     .ToList();
