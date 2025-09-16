@@ -52,9 +52,9 @@ internal partial class LibraryExpressionBuilderContext
     public CqlDefinitionDictionary ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            _preprocessor.PreprocessLibrary(Library);
-
             _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);
+
+            _preprocessor.PreprocessLibrary(Library);
 
             if (Library.includes is { Length: > 0 } includeDefs)
             {

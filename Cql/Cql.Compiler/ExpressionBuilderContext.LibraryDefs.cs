@@ -83,9 +83,6 @@ partial class ExpressionBuilderContext
     public void ProcessExpressionDef(
         ExpressionDef expressionDef)
     {
-        if (expressionDef.expression is not {} expressionDefExpression)
-            return;
-
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             using (PushElement(expressionDef))
@@ -134,7 +131,16 @@ partial class ExpressionBuilderContext
                     }
                 }
 
-                CreateAndAddDefinition(expressionDefName, parameters, parameterTypes, originalParameterNames);
+                if (expressionDef.expression is { } expressionDefExpression)
+                {
+                    var bodyExpression = TranslateArg(expressionDefExpression);
+                    var lambda = Expression.Lambda(bodyExpression, parameters);
+                    var tags = BuildTags();
+                    var def = expressionDef is FunctionDef
+                                  ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
+                                  : new CqlExpressionDefinition(lambda, expressionDefName, tags);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
+                }
             }
         });
 
@@ -208,21 +214,6 @@ partial class ExpressionBuilderContext
             }
 
             return (parameterTypes, originalNames);
-        }
-
-        void CreateAndAddDefinition(
-            string expressionDefName,
-            ParameterExpression[] parameters,
-            Type[] parameterTypes,
-            IReadOnlyDictionary<string, string> originalParameterNames)
-        {
-            var bodyExpression = TranslateArg(expressionDefExpression);
-            var lambda = Expression.Lambda(bodyExpression, parameters);
-            var tags = BuildTags();
-            var def = expressionDef is FunctionDef
-                          ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
-                          : new CqlExpressionDefinition(lambda, expressionDefName, tags);
-            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
         }
     }
 

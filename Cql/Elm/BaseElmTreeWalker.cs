@@ -8,7 +8,6 @@
 
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using System.Xml.Linq;
 
 namespace Hl7.Cql.Elm;
 
