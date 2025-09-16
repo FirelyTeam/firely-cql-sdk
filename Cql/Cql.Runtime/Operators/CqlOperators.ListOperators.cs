@@ -1063,7 +1063,7 @@ namespace Hl7.Cql.Operators
             }
             else
             {
-                return source.Skip(startIndex ?? 0).Take((endIndex ?? 0) - (startIndex ?? 0)).ToList();
+                return source.Skip(startIndex ?? 0).Take(endIndex.Value - (startIndex ?? 0)).ToList();
             }
         }
 
