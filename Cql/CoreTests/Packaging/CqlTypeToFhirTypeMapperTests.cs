@@ -45,18 +45,6 @@ public class CqlTypeToFhirTypeMapperTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void TypeEntryFor_CqlPrimitiveTypeLong_ThrowsNotSupportedException()
-    {
-        // Arrange
-        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
-
-        // Act
-        mapper.TypeEntryFor(CqlPrimitiveType.Long);
-    }
-
-    [TestMethod]
     public void TypeEntryFor_CqlPrimitiveTypeListWithElementType_ReturnsFhirList()
     {
         // Arrange
@@ -108,5 +96,21 @@ public class CqlTypeToFhirTypeMapperTests
         Assert.IsNotNull(result, "TypeEntryFor should return a non-null result for CQL value tuples");
         Assert.AreEqual(FHIRAllTypes.Basic, result.FhirType);
         Assert.AreEqual(CqlPrimitiveType.Tuple, result.CqlType);
+    }
+
+    [TestMethod]
+    public void TypeEntryFor_CqlLongTypeTuple_ReturnsFhirString()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+
+        // Act
+        var result = mapper.TypeEntryFor(CqlPrimitiveType.Long);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(FHIRAllTypes.String, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Long, result.CqlType);
     }
 }
