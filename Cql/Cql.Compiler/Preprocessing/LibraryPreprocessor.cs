@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, Firely, NCQA and contributors
+ * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -30,9 +30,4 @@ internal class LibraryPreprocessor(
         _missingResultTypeSpecifierCorrector.Fix(library);
         _profiledValueSetPropertyCorrector.Fix(library);
     }
-}
-
-internal class LibraryPreprocessorBuilder(ILoggerFactory loggerFactory)
-{
-    public LibraryPreprocessor Build(LibrarySet librarySet) => new(librarySet, loggerFactory);
 }
