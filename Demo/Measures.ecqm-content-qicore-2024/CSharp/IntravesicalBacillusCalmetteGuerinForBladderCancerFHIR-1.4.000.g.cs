@@ -1193,43 +1193,44 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
             {
                 bool? p_(Extension @this)
                 {
-                    string an_ = @this?.Url;
-                    FhirString ao_ = context.Operators.Convert<FhirString>(an_);
-                    string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
-                    bool? aq_ = context.Operators.Equal(ap_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    string ao_ = @this?.Url;
+                    FhirString ap_ = context.Operators.Convert<FhirString>(ao_);
+                    string aq_ = FHIRHelpers_4_4_000.Instance.ToString(context, ap_);
+                    bool? ar_ = context.Operators.Equal(aq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-                    return aq_;
+                    return ar_;
                 };
                 IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
                         ? (BCGNotGiven as DomainResource).Extension
                         : default), p_);
                 DataType r_(Extension @this)
                 {
-                    DataType ar_ = @this?.Value;
+                    DataType as_ = @this?.Value;
 
-                    return ar_;
+                    return as_;
                 };
                 IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
                 DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
-                CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
-                DataType v_ = FirstBladderCancerStaging?.Performed;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-                CqlDateTime y_ = context.Operators.Start(x_);
-                object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlInterval<CqlDateTime> ab_ = QICoreCommon_2_1_000.Instance.toInterval(context, aa_);
-                CqlDateTime ac_ = context.Operators.Start(ab_);
-                CqlQuantity ad_ = context.Operators.Quantity(6m, "months");
-                CqlDateTime ae_ = context.Operators.Add(ac_, ad_);
-                CqlInterval<CqlDateTime> af_ = context.Operators.Interval(y_, ae_, false, true);
-                bool? ag_ = context.Operators.In<CqlDateTime>(u_, af_, default);
-                object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_1_000.Instance.toInterval(context, ai_);
-                CqlDateTime ak_ = context.Operators.Start(aj_);
-                bool? al_ = context.Operators.Not((bool?)(ak_ is null));
-                bool? am_ = context.Operators.And(ag_, al_);
+                FhirDateTime u_ = context.Operators.Convert<FhirDateTime>(t_);
+                CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
+                DataType w_ = FirstBladderCancerStaging?.Performed;
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+                CqlDateTime z_ = context.Operators.Start(y_);
+                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_1_000.Instance.toInterval(context, ab_);
+                CqlDateTime ad_ = context.Operators.Start(ac_);
+                CqlQuantity ae_ = context.Operators.Quantity(6m, "months");
+                CqlDateTime af_ = context.Operators.Add(ad_, ae_);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(z_, af_, false, true);
+                bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, default);
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_);
+                CqlDateTime al_ = context.Operators.Start(ak_);
+                bool? am_ = context.Operators.Not((bool?)(al_ is null));
+                bool? an_ = context.Operators.And(ah_, am_);
 
-                return am_;
+                return an_;
             };
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
             MedicationAdministration n_(Procedure FirstBladderCancerStaging) =>
@@ -1241,18 +1242,18 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
         bool? h_(MedicationAdministration BCGNotGiven)
         {
-            List<CodeableConcept> as_ = BCGNotGiven?.StatusReason;
-            CqlConcept at_(CodeableConcept @this)
+            List<CodeableConcept> at_ = BCGNotGiven?.StatusReason;
+            CqlConcept au_(CodeableConcept @this)
             {
-                CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-                return ax_;
+                return ay_;
             };
-            IEnumerable<CqlConcept> au_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)as_, at_);
-            CqlValueSet av_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care(context);
-            bool? aw_ = context.Operators.ConceptsInValueSet(au_, av_);
+            IEnumerable<CqlConcept> av_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)at_, au_);
+            CqlValueSet aw_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care(context);
+            bool? ax_ = context.Operators.ConceptsInValueSet(av_, aw_);
 
-            return aw_;
+            return ax_;
         };
         IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 
