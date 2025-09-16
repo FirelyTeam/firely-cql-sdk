@@ -32,10 +32,6 @@ internal class LibraryPreprocessor(
         _missingResultTypeSpecifierCorrector.Fix(library);
         _profiledValueSetPropertyCorrector.Fix(library);
     }
-
-    public void PreprocessLibraryDefinition(string expressionKey, Elm.Expression elmExpression)
-    {
-    }
 }
 
 internal class LibraryPreprocessorBuilder(ILoggerFactory loggerFactory)
