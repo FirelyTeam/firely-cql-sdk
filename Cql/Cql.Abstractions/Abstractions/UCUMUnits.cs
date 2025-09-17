@@ -80,14 +80,6 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         public const string Centimeter = "cm";
         /// <summary>
-        /// List of UCUM units commonly used for date and time intervals.
-        /// Defines days per year
-        /// </summary>
-        public static readonly HashSet<string> DateTimeUnits = new HashSet<string>
-        {
-            Year, Month, Day, Hour, Minute, Second, Millisecond
-        };
-        /// <summary>
         /// Defines days per year
         /// </summary> 
         public const double DaysPerYearDouble = 365.25d;
