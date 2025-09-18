@@ -68,4 +68,23 @@ public class TypeExtensionsTests
         // Assert
         Assert.IsFalse(result);
     }
+
+    [TestMethod]
+    public void IsCqlValueTuple_ShouldReturnTrue_WhenTypeIsLargeCqlValueTuple()
+    {
+        // Arrange - Test large tuples with more than 8 items
+        var tuple9 = (new CqlTupleMetadata([], []), "item1", 2, 3, 4, 5, 6, 7, 8, 9);
+        var tuple10 = (new CqlTupleMetadata([], []), "item1", 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        var tuple15 = (new CqlTupleMetadata([], []), "item1", 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+        // Act
+        bool result9 = tuple9.GetType().IsCqlValueTuple();
+        bool result10 = tuple10.GetType().IsCqlValueTuple();
+        bool result15 = tuple15.GetType().IsCqlValueTuple();
+
+        // Assert
+        Assert.IsTrue(result9, "9-item tuple should be recognized as CqlValueTuple");
+        Assert.IsTrue(result10, "10-item tuple should be recognized as CqlValueTuple");
+        Assert.IsTrue(result15, "15-item tuple should be recognized as CqlValueTuple");
+    }
 }

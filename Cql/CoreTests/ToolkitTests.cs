@@ -16,6 +16,7 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace CoreTests;
@@ -391,5 +392,211 @@ public class ToolkitTests
         keywordTestInvoker.Parameters[0].Name.Should().Be("int", "First parameter should preserve original CQL name even if it's a C# keyword");
         keywordTestInvoker.Parameters[1].Name.Should().Be("ref", "Second parameter should preserve original CQL name even if it's a C# keyword");
         keywordTestInvoker.Parameters[2].Name.Should().Be("class", "Third parameter should preserve original CQL name even if it's a C# keyword");
+    }
+
+    [TestMethod]
+    public void TestLargeTupleParameterInvocation_9Items()
+    {
+        // Arrange: Create a CQL library with a function that takes a large tuple parameter (9 items)
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library LargeTupleInvocationTest version '1.0.0'
+            using FHIR version '4.0.1'
+
+            context Patient
+
+            define function "ProcessLargeTuple"(largeTuple Tuple{
+                item1 String,
+                item2 Integer,
+                item3 Boolean,
+                item4 Decimal,
+                item5 String,
+                item6 Integer,
+                item7 Boolean,
+                item8 Decimal,
+                item9 String
+            }): 
+                'Processed: ' + largeTuple.item1 + ', ' + largeTuple.item9
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var ctx = FhirCqlContext.ForBundle();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act: Inspect the function signature that was actually created by the CQL compiler
+        var processTupleFunction = libraryInvoker.Definitions.Values
+                                                .FirstOrDefault(d => d.DefinitionName == "ProcessLargeTuple");
+
+        // Assert: Function should be found and have the expected structure
+        processTupleFunction.Should().NotBeNull("ProcessLargeTuple function should exist");
+        processTupleFunction!.Parameters.Should().HaveCount(1, "Function should have exactly one parameter");
+
+        var parameterType = processTupleFunction.Parameters[0].Type;
+        parameterType.Should().NotBeNull("Parameter should have a type");
+
+        // Let's examine what type the CQL compiler actually generated
+        var underlyingType = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
+                           ? parameterType.GetGenericArguments()[0] 
+                           : parameterType;
+
+        // Verify this is indeed a large tuple with nested structure
+        underlyingType.IsCqlValueTuple().Should().BeTrue("The underlying ValueTuple should be recognized as a CQL value tuple");
+        typeof(ITuple).IsAssignableFrom(underlyingType).Should().BeTrue("The underlying ValueTuple should implement ITuple");
+
+        // Create a tuple instance that matches the discovered structure
+        var metadata = new CqlTupleMetadata([
+            typeof(string), typeof(int?), typeof(bool?), typeof(decimal?), typeof(string),
+            typeof(int?), typeof(bool?), typeof(decimal?), typeof(string)
+        ], ["item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9"]);
+
+        // Create the large tuple (9 items) that will have the nested structure
+        var largeTuple9 = (metadata, "first", (int?)42, (bool?)true, (decimal?)3.14m, "middle", 
+                          (int?)100, (bool?)false, (decimal?)99.99m, "last");
+
+        // Verify the created tuple matches the expected underlying type
+        largeTuple9.GetType().Should().Be(underlyingType, "Created tuple type should match the underlying function parameter type");
+
+        // Act: Invoke the function with the large tuple
+        var result = processTupleFunction.Invoke(ctx, largeTuple9);
+
+        // Assert: Function should execute successfully with large tuple
+        result.Should().NotBeNull("Function invocation should return a result");
+        result.Should().Be("Processed: first, last", "Function should process the large tuple correctly");
+        
+        // Verify that large tuple signature matching works properly for finding definitions
+        var signature = processTupleFunction.DefinitionSignature;
+        var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
+        
+        foundBySignature.Should().Be(processTupleFunction, "Should be able to find function by its signature");
+        foundBySignature!.DefinitionSignature.ParameterTypes.Should().HaveCount(1, "Signature should show one parameter");
+        foundBySignature.DefinitionSignature.ParameterTypes[0].Should().Be(parameterType, "Signature should include correct parameter type");
+    }
+
+    [TestMethod]
+    public void TestLargeTupleParameterSignature_15Items()
+    {
+        // Arrange: Create a CQL library with a function that takes a very large tuple parameter (15 items)
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library VerifyLargeTupleSignatureTest version '1.0.0'
+            using FHIR version '4.0.1'
+
+            context Patient
+
+            define function "ProcessVeryLargeTuple"(veryLargeTuple Tuple{
+                item1 String, item2 Integer, item3 Boolean, item4 Decimal, item5 String,
+                item6 Integer, item7 Boolean, item8 Decimal, item9 String, item10 Integer,
+                item11 Boolean, item12 Decimal, item13 String, item14 Integer, item15 Boolean
+            }): 'Processed 15 items'
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act: Find the function and inspect its signature
+        var processFunction = libraryInvoker.Definitions.Values
+                                           .FirstOrDefault(d => d.DefinitionName == "ProcessVeryLargeTuple");
+
+        // Assert: Function should be found with very large tuple parameter
+        processFunction.Should().NotBeNull("ProcessVeryLargeTuple function should exist");
+        processFunction!.Parameters.Should().HaveCount(1, "Function should have exactly one parameter");
+
+        var parameterType = processFunction.Parameters[0].Type;
+        
+        // Get underlying type (removing Nullable wrapper if present)
+        var underlyingType = parameterType!.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
+                           ? parameterType.GetGenericArguments()[0] 
+                           : parameterType;
+
+        // Verify this is a large tuple that uses nested ValueTuple structures
+        underlyingType.IsCqlValueTuple().Should().BeTrue("15-item tuple parameter should be recognized as a CQL value tuple");
+        typeof(ITuple).IsAssignableFrom(underlyingType).Should().BeTrue("15-item tuple should implement ITuple");
+
+        // Verify the function signature can be used for lookup
+        var signature = processFunction.DefinitionSignature;
+        var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
+        
+        foundBySignature.Should().Be(processFunction, "Should be able to find very large tuple function by its signature");
+        
+        // The fact that we can create a function with 15 tuple items and find it by signature
+        // demonstrates that large tuple signature discovery works correctly with the invocation toolkit
+    }
+
+    [TestMethod]
+    public void TestMultipleLargeTupleFunctions_SignatureDistinction()
+    {
+        // Arrange: Create CQL library with multiple functions having different large tuple signatures
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library MultipleLargeTupleFunctionsTest version '1.0.0'
+            using FHIR version '4.0.1'
+
+            context Patient
+
+            define function "ProcessTuple9"(tuple9 Tuple{
+                a String, b Integer, c Boolean, d Decimal, e String,
+                f Integer, g Boolean, h Decimal, i String
+            }): 'Tuple9 processed'
+
+            define function "ProcessTuple10"(tuple10 Tuple{
+                a String, b Integer, c Boolean, d Decimal, e String,
+                f Integer, g Boolean, h Decimal, i String, j Integer
+            }): 'Tuple10 processed'
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
+
+        // Act: Find both functions and verify they have different signatures
+        var tuple9Function = libraryInvoker.Definitions.Values
+                                          .FirstOrDefault(d => d.DefinitionName == "ProcessTuple9");
+        var tuple10Function = libraryInvoker.Definitions.Values
+                                           .FirstOrDefault(d => d.DefinitionName == "ProcessTuple10");
+
+        // Assert: Both functions should be found with distinct signatures
+        tuple9Function.Should().NotBeNull("ProcessTuple9 should be found");
+        tuple10Function.Should().NotBeNull("ProcessTuple10 should be found");
+
+        tuple9Function!.Parameters.Should().HaveCount(1, "ProcessTuple9 should have 1 parameter");
+        tuple10Function!.Parameters.Should().HaveCount(1, "ProcessTuple10 should have 1 parameter");
+
+        // Verify they have different parameter types (9 vs 10 items)
+        var param9Type = tuple9Function.Parameters[0].Type;
+        var param10Type = tuple10Function.Parameters[0].Type;
+
+        param9Type.Should().NotBe(param10Type, "9-item and 10-item tuple functions should have different parameter types");
+
+        // Both underlying types should be recognized as CQL value tuples
+        var underlying9 = param9Type!.IsGenericType && param9Type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                        ? param9Type.GetGenericArguments()[0] : param9Type;
+        var underlying10 = param10Type!.IsGenericType && param10Type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                         ? param10Type.GetGenericArguments()[0] : param10Type;
+
+        underlying9.IsCqlValueTuple().Should().BeTrue("9-item tuple parameter should be recognized as CQL value tuple");
+        underlying10.IsCqlValueTuple().Should().BeTrue("10-item tuple parameter should be recognized as CQL value tuple");
+
+        // Verify signature distinction works by looking up functions by their complete signatures
+        var signature9 = tuple9Function.DefinitionSignature;
+        var signature10 = tuple10Function.DefinitionSignature;
+
+        signature9.Should().NotBe(signature10, "Functions should have distinct signatures");
+
+        var foundBySignature9 = libraryInvoker.Definitions.GetValueOrDefault(signature9);
+        var foundBySignature10 = libraryInvoker.Definitions.GetValueOrDefault(signature10);
+
+        foundBySignature9.Should().Be(tuple9Function, "Should find ProcessTuple9 by its signature");
+        foundBySignature10.Should().Be(tuple10Function, "Should find ProcessTuple10 by its signature");
+        
+        // This demonstrates that the invocation toolkit can distinguish between 
+        // different large tuple signatures and find the correct definitions
     }
 }

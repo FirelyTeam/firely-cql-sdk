@@ -3885,6 +3885,28 @@ namespace CoreTests
             Assert.AreEqual(expectedList, slicedList);
         }
 
+        [TestMethod]
+        public void SliceEmptyEnumerableWithIEnumerableNotCollection()
+        {
+            // Test Slice with empty enumerable that's not a collection type
+            // This ensures behavior remains consistent after removing the redundant empty check
+            var rtx = GetNewContext();
+            var inputEnumerable = Enumerable.Empty<int>().Where(x => true); // Creates IEnumerable<int> not a collection
+            var expectedList = new List<int>();
+            
+            // Test various slice operations on empty enumerable
+            var slicedList1 = rtx.Operators.Slice(inputEnumerable, 0, 5);
+            var slicedList2 = rtx.Operators.Slice(inputEnumerable, 2, null);
+            var slicedList3 = rtx.Operators.Slice(inputEnumerable, null, null);
+            
+            Assert.IsNotNull(slicedList1);
+            Assert.IsNotNull(slicedList2);
+            Assert.IsNotNull(slicedList3);
+            CollectionAssert.AreEqual(expectedList, slicedList1.ToList());
+            CollectionAssert.AreEqual(expectedList, slicedList2.ToList());
+            CollectionAssert.AreEqual(expectedList, slicedList3.ToList());
+        }
+
         #endregion
 
         #region ListSkip and ListTake tests
