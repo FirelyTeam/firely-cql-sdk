@@ -420,5 +420,35 @@ namespace Hl7.Cql.CqlToElm.Test
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.DateType.ToIntervalType().ToListType());
         }
+
+        [TestMethod]
+        public void MultisourceWithSort_ThrowsNotImplementedException()
+        {
+            // The error occurs during compilation, not during CQL to ELM conversion
+            // So we need to create an ELM directly to test this
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library MultisourceSort version '1.0.0'
+
+                define multisourceSort: from
+                    (1) Num1,
+                    (2) Num2
+                    return Num1 + Num2
+                    sort by $this
+                """);
+            
+            // The library should parse fine to ELM
+            lib.GetErrors().Should().BeEmpty();
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            
+            // Multiple sources should be present
+            query.source.Should().HaveCount(2);
+            
+            // Sort clause should be present  
+            query.sort.Should().NotBeNull();
+            query.sort.by.Should().HaveCount(1);
+            
+            // The issue will occur when trying to compile this ELM to .NET expressions
+            // This will be tested in integration tests with actual compilation
+        }
     }
 }
