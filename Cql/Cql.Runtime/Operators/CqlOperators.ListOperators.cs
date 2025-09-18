@@ -1048,9 +1048,6 @@ namespace Hl7.Cql.Operators
             if (source == null)
                 return null;
 
-            if (!source.Any())
-                return Enumerable.Empty<T>();
-
             if (startIndex == null && endIndex == null)
                 return source;
 
