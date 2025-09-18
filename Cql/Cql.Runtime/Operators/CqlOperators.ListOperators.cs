@@ -1047,7 +1047,7 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return null;
-            if ((startIndex == null && endIndex == null) || !source.Any())
+            if (startIndex == null && endIndex == null)
             {
                 return [];
             }
