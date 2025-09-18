@@ -225,9 +225,90 @@ partial class ExpressionBuilderContext
             return typeof(object);
 
         var elementTuples = elements!
-            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier
-                                         ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier").WithContext(this)));
+            .SelectToArray(e => (e.name, GetTupleElementTypeSpecifier(e)));
         return TupleTypeFor(elementTuples, changeType);
+    }
+
+    private TypeSpecifier GetTupleElementTypeSpecifier(TupleElement element)
+    {
+        // If we already have a resultTypeSpecifier, use it
+        if (element.value.resultTypeSpecifier != null)
+            return element.value.resultTypeSpecifier;
+
+        // If we have a resultTypeName, create a NamedTypeSpecifier from it
+        if (element.value.resultTypeName != null)
+            return new NamedTypeSpecifier { name = element.value.resultTypeName };
+
+        // Try to infer the type from the element value
+        var inferredType = TypeFor(element.value, throwIfNotFound: false);
+        if (inferredType != null)
+        {
+            // Convert the inferred Type back to a TypeSpecifier
+            return CreateTypeSpecifierFromType(inferredType);
+        }
+
+        throw new InvalidOperationException($"Tuple element '{element.name}' value does not have a resultTypeSpecifier and type could not be inferred").WithContext(this);
+    }
+
+    private TypeSpecifier CreateTypeSpecifierFromType(Type type)
+    {
+        // Handle nullable types by unwrapping them
+        var actualType = Nullable.GetUnderlyingType(type) ?? type;
+
+        // Handle CQL primitive types
+        if (actualType == _typeResolver.StringType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("String", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.IntegerType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Integer", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.DecimalType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Decimal", "urn:hl7-org:elm-types:r1") };  
+        if (actualType == _typeResolver.BooleanType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Boolean", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.DateTimeType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("DateTime", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.DateType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Date", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.TimeType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Time", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.QuantityType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Quantity", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.CodeType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Code", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.ConceptType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Concept", "urn:hl7-org:elm-types:r1") };
+        if (actualType == _typeResolver.ValueSetType)
+            return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("ValueSet", "urn:hl7-org:elm-types:r1") };
+
+        // Handle generic IEnumerable<T> (lists)
+        if (_typeResolver.IsListType(actualType))
+        {
+            var elementType = _typeResolver.GetListElementType(actualType, throwError: false);
+            if (elementType != null)
+                return new ListTypeSpecifier { elementType = CreateTypeSpecifierFromType(elementType) };
+        }
+
+        // Handle CqlInterval<T>
+        if (actualType.IsGenericType && actualType.GetGenericTypeDefinition() == _typeResolver.IntervalType(typeof(object)).GetGenericTypeDefinition())
+        {
+            var pointType = actualType.GetGenericArguments()[0];
+            return new IntervalTypeSpecifier { pointType = CreateTypeSpecifierFromType(pointType) };
+        }
+
+        // For FHIR types and other model types, try to find a matching type name
+        // by checking if this type can be resolved by the type resolver
+        foreach (var ns in _typeResolver.ModelNamespaces)
+        {
+            var typeName = actualType.Name;
+            var fullTypeName = $"{{{ns}}}{typeName}";
+            var resolvedType = _typeResolver.ResolveType(fullTypeName, throwError: false);
+            if (resolvedType == actualType)
+            {
+                return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(typeName, ns) };
+            }
+        }
+
+        // Fallback to Any type
+        return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("Any", "urn:hl7-org:elm-types:r1") };
     }
 
     private Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, Func<Type, Type>? changeType)
