@@ -12,6 +12,6 @@
     ],
   },
   "Packaging": {
-    "ExitOnError": true
+    "ExitOnError": false
   }
 }

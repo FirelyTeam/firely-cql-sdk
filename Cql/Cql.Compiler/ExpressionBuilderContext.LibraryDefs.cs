@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -98,12 +98,6 @@ partial class ExpressionBuilderContext
                         null);
                 }
 
-                // Pre-process expression to fix missing resultTypeSpecifier on AliasRef elements
-                if (expressionDef.expression != null)
-                {
-                    FixMissingAliasRefTypeSpecifiers(expressionDef.expression);
-                }
-
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
                 Type[] parameterTypes = [];
                 ParameterExpression[] parameters = [CqlExpressions.ParameterExpression];
@@ -137,7 +131,16 @@ partial class ExpressionBuilderContext
                     }
                 }
 
-                CreateAndAddDefinition(expressionDefName, parameters, parameterTypes, originalParameterNames);
+                if (expressionDef.expression is { } expressionDefExpression)
+                {
+                    var bodyExpression = TranslateArg(expressionDefExpression);
+                    var lambda = Expression.Lambda(bodyExpression, parameters);
+                    var tags = BuildTags();
+                    var def = expressionDef is FunctionDef
+                                  ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
+                                  : new CqlExpressionDefinition(lambda, expressionDefName, tags);
+                    _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
+                }
             }
         });
 
@@ -211,21 +214,6 @@ partial class ExpressionBuilderContext
             }
 
             return (parameterTypes, originalNames);
-        }
-
-        void CreateAndAddDefinition(
-            string expressionDefName,
-            ParameterExpression[] parameters,
-            Type[] parameterTypes,
-            IReadOnlyDictionary<string, string> originalParameterNames)
-        {
-            var bodyExpression = TranslateArg(expressionDef.expression);
-            var lambda = Expression.Lambda(bodyExpression, parameters);
-            var tags = BuildTags();
-            var def = expressionDef is FunctionDef
-                          ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
-                          : new CqlExpressionDefinition(lambda, expressionDefName, tags);
-            _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
         }
     }
 
