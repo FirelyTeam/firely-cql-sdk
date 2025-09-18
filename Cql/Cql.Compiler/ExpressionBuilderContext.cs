@@ -1702,60 +1702,7 @@ internal partial class ExpressionBuilderContext
 
             if (query.sort is { by.Length: > 0 })
             {
-                if (sources.Length == 1)
-                    @return = SortClause(query, @return);
-                else
-                {
-                    throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(this);
-                    //foreach (var by in query.sort.by)
-                    //{
-                    //    var order = ListSortDirection.Ascending;
-                    //    if (by.direction == "desc" || by.direction == "descending")
-                    //        order = ListSortDirection.Descending;
-                    //    else if (by.direction == "asc" || by.direction == "ascending")
-                    //        order = ListSortDirection.Ascending;
-                    //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
-
-                    //    if (by.expression != null)
-                    //    {
-                    //        var parameterName = "@this";
-                    //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-                    //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
-                    //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
-                    //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-                    //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-                    //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-                    //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //    else if (by.path != null && by.resultTypeName != null)
-                    //    {
-                    //        var parameterName = "@this";
-                    //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-                    //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
-                    //        if (pathMemberType == null)
-                    //        {
-                    //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
-                    //            ctx.LogError(msg);
-                    //            throw ctx.NewExpressionBuildingException(msg);
-                    //        }
-                    //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
-                    //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-                    //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-                    //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-                    //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //    else
-                    //    {
-                    //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
-                    //            @return, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //}
-                }
+                @return = SortClause(query, @return);
             }
 
             // Because we promoted the source to a list, we now have to demote the result again.
