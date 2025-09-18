@@ -16,6 +16,8 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class ExpressionSignatureComparer : IEqualityComparer<IDefinitionElement>
 {
+    public static ExpressionSignatureComparer Instance { get; } = new();
+
     public bool Equals(IDefinitionElement? x, IDefinitionElement? y)
     {
         if (x == null || y == null) return x == y;

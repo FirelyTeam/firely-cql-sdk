@@ -7,6 +7,8 @@
  */
 
 
+using Hl7.Cql.Abstractions.Infrastructure;
+
 namespace Hl7.Cql.Elm;
 
 /// <summary>
@@ -16,8 +18,9 @@ internal abstract class BaseElmTreeWalker
 {
     public virtual void Start(object root)
     {
-        _visited = [];
-        Walk(root);
+        if (_parents.Count > 0)
+            throw new InvalidOperationException("Only one concurrent process allowed.");
+        Walk(root, null!);
     }
 
     /// <summary>
@@ -43,48 +46,83 @@ internal abstract class BaseElmTreeWalker
     /// </summary>
     protected abstract bool Process(object node);
 
-    private Stack<object> _visited = new();
+    private readonly List<(object node, string? path)> _parents = new();
 
-    private void Walk(object? node)
+    protected (object node, string? path)[] GetContextStack() => _parents.ToArray();
+
+    public string ContextStackString => string.Join(
+        "\n->",
+        _parents
+            .Select(t => t switch
+            {
+                ({} o, null) => $"{o}",
+                ({} o, {} p) => $"{p}({o})",
+            }));
+
+    private void Walk(object? node, string? path)
     {
         if (node is null)
             return;
 
-        if(!IsRelevant(node.GetType()))
+        if (!IsRelevant(node.GetType()))
             return;
 
-        if (_visited.Any(i => ReferenceEquals(i, node)))
+        if (_parents.Any(kv => ReferenceEquals(kv.node, node)))
             throw new InvalidOperationException("Cycle in ELM graph detected.");
 
-        if (Process(node))
-            return;
-
-        var propertyTuples = node.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                 .Where(p => p.CanRead && IsRelevant(p.PropertyType))
-                                 .Select(p => (p, p.GetValue(node)))
-                                 .Where(v => v.Item2 is not null);
-
+        _parents.Add((node, path!));
         try
         {
-            _visited.Push(node);
+            if (Process(node))
+                return;
 
-            foreach (var tuple in propertyTuples)
+            var propertyValues = node.GetType()
+                                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                     .Where(p => p.CanRead && IsRelevant(p.PropertyType))
+                                     .SelectWhere(property => property.GetValue(node) switch
+                                     {
+                                         { } value => (true, (name: property.Name, value)),
+                                         null      => default,
+                                     })
+                ;
+
+            foreach (var (name, value) in propertyValues)
             {
-                var propValue = tuple.Item2;
-                if (propValue is IEnumerable enumerable)
+                switch (value)
                 {
-                    foreach (var item in enumerable)
-                        Walk(item);
-                }
-                else
-                {
-                    Walk(propValue!);
+                    case string:
+                    {
+                        goto default;
+                    }
+
+                    case Array array:
+                    {
+                        for (int i = 0; i < array.Length; i++)
+                        {
+                            var item = array.GetValue(i);
+                            Walk(item, $"{name}[{i+1} of {array.Length}]");
+                        }
+
+                        break;
+                    }
+
+                    case IEnumerable:
+                    {
+                        throw new NotSupportedException();
+                    }
+
+                    default:
+                    {
+                        Walk(value, name);
+                        break;
+                    }
                 }
             }
+
         }
         finally
         {
-            _visited.Pop();
+            _parents.RemoveAt(_parents.Count-1);
         }
     }
 }

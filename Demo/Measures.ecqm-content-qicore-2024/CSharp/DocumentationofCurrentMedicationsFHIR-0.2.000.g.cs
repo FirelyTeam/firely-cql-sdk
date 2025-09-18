@@ -217,46 +217,47 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 bool? k_(Extension @this)
                 {
-                    string ae_ = @this?.Url;
-                    FhirString af_ = context.Operators.Convert<FhirString>(ae_);
-                    string ag_ = FHIRHelpers_4_4_000.Instance.ToString(context, af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    string af_ = @this?.Url;
+                    FhirString ag_ = context.Operators.Convert<FhirString>(af_);
+                    string ah_ = FHIRHelpers_4_4_000.Instance.ToString(context, ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-                    return ah_;
+                    return ai_;
                 };
                 IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
                         ? (MedicationsNotDocumented as DomainResource).Extension
                         : default), k_);
                 DataType m_(Extension @this)
                 {
-                    DataType ai_ = @this?.Value;
-
-                    return ai_;
-                };
-                IEnumerable<DataType> n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-                DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
-                CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
-                Period q_ = QualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, default);
-                Code<EventStatus> t_ = MedicationsNotDocumented?.StatusElement;
-                EventStatus? u_ = t_?.Value;
-                string v_ = context.Operators.Convert<string>(u_);
-                bool? w_ = context.Operators.Equal(v_, "not-done");
-                bool? x_ = context.Operators.And(s_, w_);
-                List<CodeableConcept> y_ = MedicationsNotDocumented?.ReasonCode;
-                CqlConcept z_(CodeableConcept @this)
-                {
-                    CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    DataType aj_ = @this?.Value;
 
                     return aj_;
                 };
-                IEnumerable<CqlConcept> aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
-                CqlValueSet ab_ = this.Medical_Reason(context);
-                bool? ac_ = context.Operators.ConceptsInValueSet(aa_, ab_);
-                bool? ad_ = context.Operators.And(x_, ac_);
+                IEnumerable<DataType> n_ = context.Operators.Select<Extension, DataType>(l_, m_);
+                DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
+                FhirDateTime p_ = context.Operators.Convert<FhirDateTime>(o_);
+                CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
+                Period r_ = QualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
+                bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
+                Code<EventStatus> u_ = MedicationsNotDocumented?.StatusElement;
+                EventStatus? v_ = u_?.Value;
+                string w_ = context.Operators.Convert<string>(v_);
+                bool? x_ = context.Operators.Equal(w_, "not-done");
+                bool? y_ = context.Operators.And(t_, x_);
+                List<CodeableConcept> z_ = MedicationsNotDocumented?.ReasonCode;
+                CqlConcept aa_(CodeableConcept @this)
+                {
+                    CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
-                return ad_;
+                    return ak_;
+                };
+                IEnumerable<CqlConcept> ab_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)z_, aa_);
+                CqlValueSet ac_ = this.Medical_Reason(context);
+                bool? ad_ = context.Operators.ConceptsInValueSet(ab_, ac_);
+                bool? ae_ = context.Operators.And(y_, ad_);
+
+                return ae_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
             Encounter i_(Procedure MedicationsNotDocumented) =>

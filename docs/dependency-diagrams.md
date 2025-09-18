@@ -32,6 +32,7 @@ classDiagram
         class TupleBuilderCache { }
         class CqlContextBinder { }
         class CqlOperatorsBinder { }       
+        class LibraryPreprocessorBuilder { }
     }
 
     namespace CodeGeneration {
@@ -69,7 +70,9 @@ classDiagram
     
     %% Dependencies                                                 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
+    LibraryPreprocessorBuilder ..> LibrarySetExpressionBuilder : injected
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
+    LibraryPreprocessorBuilder ..> LibraryExpressionBuilder : injected
 
     TypeResolver ..> ExpressionBuilder : injected
     CqlOperatorsBinder ..> ExpressionBuilder : injected

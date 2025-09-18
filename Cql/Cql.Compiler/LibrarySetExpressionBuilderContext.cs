@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Runtime;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -17,12 +18,14 @@ internal partial class LibrarySetExpressionBuilderContext
 
     public LibrarySetExpressionBuilderContext(
         LibraryExpressionBuilder libraryExpressionBuilder,
+        LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
         LibrarySet = librarySet;
+        Preprocessor = libraryPreprocessorBuilder.Build(librarySet);
         DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
     }
 
@@ -35,6 +38,8 @@ internal partial class LibrarySetExpressionBuilderContext
     /// Gets the library set being processed.
     /// </summary>
     public LibrarySet LibrarySet { get; }
+
+    public LibraryPreprocessor Preprocessor { get; }
 
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
