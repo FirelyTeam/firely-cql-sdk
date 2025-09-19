@@ -20,7 +20,7 @@ namespace Hl7.Cql.Conversion
     internal static class ConversionConstants
     {
         /// <summary>
-        /// Defines 365 days per year in <see cref="System.Decimal"/> precision.
+        /// Defines 365.25 days per year in <see cref="System.Decimal"/> precision.
         /// </summary>
         public const decimal DaysPerYear = 365.25m;
 
