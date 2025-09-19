@@ -85,7 +85,7 @@ namespace Hl7.Cql.Abstractions
         public const double DaysPerYearDouble = 365.25d;
         /// <summary>
         /// Defines days per month
-        /// </summary>        
+        /// </summary>
         public const double DaysPerMonthDouble = 30.4375d;
     }
 
