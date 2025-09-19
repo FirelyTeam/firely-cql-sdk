@@ -25,7 +25,7 @@ namespace Hl7.Cql.Conversion
         public const decimal DaysPerYear = 365.25m;
 
         /// <summary>
-        /// Defines 365 days per year in <see cref="System.Double"/> precision.
+        /// Defines 365.25 days per year in <see cref="System.Double"/> precision.
         /// </summary>
         public const double DaysPerYearAsDouble = 365.25d;
 
