@@ -420,5 +420,29 @@ namespace Hl7.Cql.CqlToElm.Test
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.DateType.ToIntervalType().ToListType());
         }
+
+        [TestMethod]
+        public void Multisource_sort_by_expression()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library MultisourceSort version '1.0.0'
+
+                define "Multisource sort by expression":
+                  from 
+                    ({3, 1}) Num1,
+                    ({4, 2}) Num2
+                  return Tuple { sum: Num1 + Num2, n1: Num1, n2: Num2 }
+                  sort by sum desc
+                """);
+
+            lib.GetErrors().Should().BeEmpty();
+            lib.statements.Should().HaveCount(1);
+            var expression = lib.statements[0].expression.Should().BeOfType<Query>().Subject;
+            expression.source.Should().HaveCount(2);
+            expression.sort.Should().NotBeNull();
+            expression.sort.by.Should().HaveCount(1);
+            var byExpression = expression.sort.by[0].Should().BeOfType<ByExpression>().Subject;
+            byExpression.direction.Should().Be(SortDirection.desc);
+        }
     }
 }

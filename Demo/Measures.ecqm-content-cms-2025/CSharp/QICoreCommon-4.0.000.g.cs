@@ -954,7 +954,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlFunctionDefinition("doNotPerform")]
     [CqlTag("description", "Returns true if the given DeviceRequest is a negation (i.e. do not perform this order)")]
     [CqlTag("deprecated", "This function is no longer required in QICore 6.0.0 and above")]
-    public object doNotPerform(CqlContext context, DeviceRequest deviceRequest)
+    public bool? doNotPerform(CqlContext context, DeviceRequest deviceRequest)
     {
         bool? a_(Extension @this)
         {
@@ -977,7 +977,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<object> d_ = context.Operators.Select<Extension, object>(b_, c_);
         object e_ = context.Operators.SingletonFrom<object>(d_);
 
-        return e_;
+        return (bool?)e_;
     }
 
 
