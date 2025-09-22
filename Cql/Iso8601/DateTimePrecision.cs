@@ -11,38 +11,19 @@ namespace Hl7.Cql.Iso8601
 {
     public static class DateTimePrecisionExtensions
     {
-        public static DateTimePrecision? ToDateTimePrecision(this string? unit)
-        {
-            if (unit == null)
-                return null;
-            else switch (unit)
-                {
-                    case "year":
-                    case "years":
-                        return DateTimePrecision.Year;
-                    case "month":
-                    case "months":
-                        return DateTimePrecision.Month;
-                    case "minute":
-                    case "minutes":
-                        return DateTimePrecision.Minute;
-                    case "millisecond":
-                    case "milliseconds":
-                        return DateTimePrecision.Millisecond;
-                    case "day":
-                    case "days":
-                        return DateTimePrecision.Day;
-                    case "hour":
-                    case "hours":
-                        return DateTimePrecision.Hour;
-                    case "second":
-                    case "seconds":
-                        return DateTimePrecision.Second;
-                    default:
-                        break;
-                }
-            return DateTimePrecision.Unknown;
-        }
+        public static DateTimePrecision? ToDateTimePrecision(this string? unit) =>
+            unit switch
+            {
+                null                            => null,
+                "year" or "years"               => DateTimePrecision.Year,
+                "month" or "months"             => DateTimePrecision.Month,
+                "minute" or "minutes"           => DateTimePrecision.Minute,
+                "millisecond" or "milliseconds" => DateTimePrecision.Millisecond,
+                "day" or "days"                 => DateTimePrecision.Day,
+                "hour" or "hours"               => DateTimePrecision.Hour,
+                "second" or "seconds"           => DateTimePrecision.Second,
+                _                               => DateTimePrecision.Unknown
+            };
     }
 
     public enum DateTimePrecision
