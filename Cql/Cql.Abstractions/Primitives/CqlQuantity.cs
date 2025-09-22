@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
@@ -15,7 +13,7 @@ namespace Hl7.Cql.Primitives
     /// </summary>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#quantity"/>
     [CqlPrimitiveType(CqlPrimitiveType.Quantity)]
-    public class CqlQuantity
+    public class CqlQuantity : IUnaryNegationOperators<CqlQuantity?, CqlQuantity?>
     {
         /// <summary>
         /// Creates an instance.
@@ -98,5 +96,14 @@ namespace Hl7.Cql.Primitives
             else return v;
         }
 
+        public static CqlQuantity? operator -(CqlQuantity? value) => Negate(value)!;
+
+        public static CqlQuantity? Negate(CqlQuantity? cqlQuantity) =>
+            cqlQuantity switch
+            {
+                { value: { } value, unit: var unit } => new CqlQuantity(-value, unit),
+                { value: null, unit: var unit }      => new CqlQuantity(null, unit),
+                null                                 => null,
+            };
     }
 }

@@ -17,7 +17,11 @@ namespace Hl7.Cql.Primitives
     /// </summary>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#datetime"/>
     [CqlPrimitiveType(CqlPrimitiveType.DateTime)]
-    public class CqlDateTime : ICqlComparable<CqlDateTime>, IEquivalentable<CqlDateTime>
+    public class CqlDateTime :
+        ICqlComparable<CqlDateTime>,
+        IEquivalentable<CqlDateTime>,
+        IAdditionOperators<CqlDateTime?, CqlQuantity?, CqlDateTime?>,
+        ISubtractionOperators<CqlDateTime?, CqlQuantity?, CqlDateTime?>
     {
         /// <summary>
         /// Defines the minimum value for System date times (@0001-01-01T00:00:00.000Z).
@@ -151,9 +155,9 @@ namespace Hl7.Cql.Primitives
             var dto = Value.DateTimeOffset;
             dto = unit switch
             {
-                "a"                                     => dto.AddDays(UCUMUnits.DaysPerYearDouble),
+                "a"                                     => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
                 "year" or "years"                       => dto.AddYears((int)value),
-                "mo"                                    => dto.AddDays(UCUMUnits.DaysPerMonthDouble),
+                "mo"                                    => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerMonthDouble),
                 "month" or "months"                     => dto.AddMonths((int)value),
                 "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                 "d" or "day" or "days"                  => dto.AddDays((int)value!),
@@ -175,31 +179,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new date time with <paramref name="quantity"/> subtracted from it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlDateTime? Subtract(CqlQuantity quantity)
-        {
-            if (quantity is not { value: { } value, unit: { } unit })
-                return null;
-
-            var dto = Value.DateTimeOffset;
-            dto = unit switch
-            {
-                "a"                                     => dto.AddDays(-1 * UCUMUnits.DaysPerYearDouble),
-                "year" or "years"                       => dto.AddYears((int)value),
-                "mo"                                    => dto.AddDays(-1 * UCUMUnits.DaysPerMonthDouble),
-                "month" or "months"                     => dto.AddMonths((int)value),
-                "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
-                "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
-                "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
-                "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
-                "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
-                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
-            };
-
-            var newIsoDate = new DateTimeIso8601(dto, Value.Precision);
-            var result = new CqlDateTime(newIsoDate);
-            return result;
-        }
+        public CqlDateTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>
         /// Gets the component of this date time.
@@ -503,15 +483,36 @@ namespace Hl7.Cql.Primitives
         /// Returns <see cref="DateTimeIso8601.ToString"/> for <see cref="Value"/>.
         /// </summary>
         public override string ToString() => Value.ToString();
+
         /// <summary>
         /// Compares this object to <paramref name="obj"/> for equality.
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
         public override bool Equals(object? obj) => Value.Equals((obj as CqlDateTime)?.Value!);
+
         /// <summary>
         /// Gets the value of <see cref="DateTimeIso8601.GetHashCode"/> for <see cref="Value"/>.
         /// </summary>
         public override int GetHashCode() => Value.GetHashCode();
+
+        /// <summary>
+        /// Adds a specified quantity to a CqlDateTime value, returning a new CqlDateTime that represents the result.
+        /// </summary>
+        /// <param name="left">The CqlDateTime value to which the quantity will be added. May be null.</param>
+        /// <param name="right">The CqlQuantity representing the amount to add to the date and time. May be null.</param>
+        /// <returns>A new CqlDateTime that is the result of adding the specified quantity to the original value, or null if
+        /// either operand is null.</returns>
+        public static CqlDateTime? operator +(CqlDateTime? left, CqlQuantity? right) => left?.Add(right);
+
+        /// <summary>
+        /// Subtracts a specified quantity from a CqlDateTime value, returning a new CqlDateTime that represents the
+        /// result.
+        /// </summary>
+        /// <param name="left">The CqlDateTime value from which to subtract. May be null.</param>
+        /// <param name="right">The CqlQuantity value to subtract from the CqlDateTime. May be null.</param>
+        /// <returns>A new CqlDateTime representing the result of subtracting the specified quantity from the original date and
+        /// time, or null if either operand is null.</returns>
+        public static CqlDateTime? operator -(CqlDateTime? left, CqlQuantity? right) => left?.Subtract(right);
     }
 }

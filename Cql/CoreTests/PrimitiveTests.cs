@@ -33,7 +33,7 @@ namespace CoreTests
         {
             Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
             var result = baseDate.Subtract(new CqlQuantity(25m, "month"));
-            Assert.AreEqual(2016, result.Value.Year);
+            Assert.AreEqual(2011, result.Value.Year);
             Assert.AreEqual(DateTimePrecision.Year, result.Precision);
         }
 

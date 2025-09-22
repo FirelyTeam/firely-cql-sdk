@@ -17,12 +17,17 @@ namespace Hl7.Cql.Primitives
     /// </summary>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#time"/>
     [CqlPrimitiveType(CqlPrimitiveType.Time)]
-    public class CqlTime : ICqlComparable<CqlTime>, IEquivalentable<CqlTime>
+    public class CqlTime :
+        ICqlComparable<CqlTime>,
+        IEquivalentable<CqlTime>,
+        IAdditionOperators<CqlTime?, CqlQuantity?, CqlTime?>,
+        ISubtractionOperators<CqlTime?, CqlQuantity?, CqlTime?>
     {
         /// <summary>
         /// Defines the minimum value for System times (00:00:00.000Z)
         /// </summary>
         public static readonly CqlTime MinValue = new(0, 0, 0, 0, 0, 0);
+
         /// <summary>
         /// Defines the maximum value for System times (23:59:59.999Z)
         /// </summary>
@@ -32,10 +37,12 @@ namespace Hl7.Cql.Primitives
         /// Gets the value of this time.
         /// </summary>
         public TimeIso8601 Value { get; }
+
         /// <summary>
         /// Gets the value of this time in UTC.
         /// </summary>
         public TimeIso8601 InUtc { get; }
+
         /// <summary>
         /// Gets the precision in which this time is specified.
         /// </summary>
@@ -50,10 +57,14 @@ namespace Hl7.Cql.Primitives
         /// <param name="millisecond">The day component, or <see langword="null"/> to indicate millisecond precision.</param>
         /// <param name="offsetHour">The time zone offset hours component, or <see langword="null"/> to indicate UTC.</param>
         /// <param name="offsetMinute">The time zone offset minutes component, or <see langword="null"/> to indicate UTC.</param>
-        public CqlTime(int hour, int? minute, int? second, int? millisecond, int? offsetHour, int? offsetMinute) :
-            this(new TimeIso8601(hour, minute, second, millisecond, offsetHour, offsetMinute))
-        {
-        }
+        public CqlTime(
+            int hour,
+            int? minute,
+            int? second,
+            int? millisecond,
+            int? offsetHour,
+            int? offsetMinute) :
+            this(new TimeIso8601(hour, minute, second, millisecond, offsetHour, offsetMinute)) { }
 
         /// <summary>
         /// Creates an instance for the given ISO time.
@@ -94,7 +105,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new time with <paramref name="quantity"/> added to it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlTime? Add(CqlQuantity quantity)
+        public CqlTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
@@ -122,26 +133,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new time with <paramref name="quantity"/> subtracted from it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlTime? Subtract(CqlQuantity quantity)
-        {
-            if (quantity is not { value: { } value, unit: { } unit })
-                return null;
-
-            var span = Value.TimeSpan;
-            span = unit switch
-            {
-                "min" or "minute" or "minutes"          => span - TimeSpan.FromMinutes(Math.Truncate((double)value)),
-                "ms" or "millisecond" or "milliseconds" => span - TimeSpan.FromMilliseconds(Math.Truncate((double)value)),
-                "d" or "day" or "days"                  => span - TimeSpan.FromDays(Math.Truncate((double)value)),
-                "wk" or "week" or "weeks"               => span - TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble),
-                "h" or "hour" or "hours"                => span - TimeSpan.FromHours(Math.Truncate((double)value)),
-                "s" or "second" or "seconds"            => span - TimeSpan.FromSeconds(Math.Truncate((double)value)),
-                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
-            };
-
-            var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
-            return new CqlTime(newIsoTime);
-        }
+        public CqlTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>
         /// Gets the component of this time.
@@ -164,7 +156,8 @@ namespace Hl7.Cql.Primitives
         /// <param name="high">The high time bound against which to calculate.</param>
         /// <param name="precision">The boundary precision to count.</param>
         /// <returns>The number of <paramref name="precision"/> boundaries crossed between this time and <paramref name="high"/>.</returns>
-        public int? BoundariesBetween(CqlTime high, string precision) => CqlDateTimeMath.BoundariesBetween(Value.DateTimeOffset, high.Value.DateTimeOffset, precision);
+        public int? BoundariesBetween(CqlTime high, string precision) =>
+            CqlDateTimeMath.BoundariesBetween(Value.DateTimeOffset, high.Value.DateTimeOffset, precision);
 
         /// <summary>
         /// Gets the number of whole calendar periods in <paramref name="precision"/> between this time and <paramref name="high"/>.
@@ -172,7 +165,8 @@ namespace Hl7.Cql.Primitives
         /// <param name="high">The high time bound against which to calculate.</param>
         /// <param name="precision">The calendar precision to count.</param>
         /// <returns>The number of <paramref name="precision"/> whole calendar periods between this time and <paramref name="high"/>.</returns>
-        public int? WholeCalendarPointsBetween(CqlTime high, string precision) => CqlDateTimeMath.WholeCalendarPeriodsBetween(Value.DateTimeOffset, high.Value.DateTimeOffset, precision);
+        public int? WholeCalendarPointsBetween(CqlTime high, string precision) =>
+            CqlDateTimeMath.WholeCalendarPeriodsBetween(Value.DateTimeOffset, high.Value.DateTimeOffset, precision);
 
         /// <summary>
         /// Gets the immediate predecessor of this value in its precision.
@@ -221,91 +215,96 @@ namespace Hl7.Cql.Primitives
             {
                 dtp = precision.ToDateTimePrecision() ?? DateTimePrecision.Unknown;
             }
+
             if (dtp == DateTimePrecision.Unknown)
                 throw new ArgumentException($"Invalid precision {precision}", nameof(precision));
             switch (dtp)
             {
 
                 case DateTimePrecision.Hour:
+                {
+                    var left = selfInUtc;
+                    var right = otherInUtc;
+                    if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                     {
-                        var left = selfInUtc;
-                        var right = otherInUtc;
-                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
-                        {
-                            left = self;
-                            right = other;
-                        }
-                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
-                        return hourComparison;
+                        left = self;
+                        right = other;
                     }
+
+                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
+                    return hourComparison;
+                }
                 case DateTimePrecision.Minute:
+                {
+                    var left = selfInUtc;
+                    var right = otherInUtc;
+                    if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                     {
-                        var left = selfInUtc;
-                        var right = otherInUtc;
-                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
-                        {
-                            left = self;
-                            right = other;
-                        }
-
-                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
-                        if (hourComparison == 0)
-                        {
-                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
-                            return minuteComparison;
-                        }
-                        else return hourComparison;
+                        left = self;
+                        right = other;
                     }
+
+                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
+                    if (hourComparison == 0)
+                    {
+                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
+                        return minuteComparison;
+                    }
+                    else return hourComparison;
+                }
                 case DateTimePrecision.Second:
+                {
+                    var left = selfInUtc;
+                    var right = otherInUtc;
+                    if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                     {
-                        var left = selfInUtc;
-                        var right = otherInUtc;
-                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
-                        {
-                            left = self;
-                            right = other;
-                        }
-                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
-                        if (hourComparison == 0)
-                        {
-                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
-                            if (minuteComparison == 0)
-                            {
-                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
-                                return secondComparison;
-                            }
-                            else return minuteComparison;
-                        }
-                        else return hourComparison;
+                        left = self;
+                        right = other;
+                    }
 
-                    }
-                case DateTimePrecision.Millisecond:
+                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
+                    if (hourComparison == 0)
                     {
-                        var left = selfInUtc;
-                        var right = otherInUtc;
-                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
+                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
+                        if (minuteComparison == 0)
                         {
-                            left = self;
-                            right = other;
+                            var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
+                            return secondComparison;
                         }
-                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
-                        if (hourComparison == 0)
-                        {
-                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
-                            if (minuteComparison == 0)
-                            {
-                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
-                                if (secondComparison == 0)
-                                {
-                                    var milliComparison = CompareTemporalIntegers(left.Millisecond, right.Millisecond);
-                                    return milliComparison;
-                                }
-                                return secondComparison;
-                            }
-                            else return minuteComparison;
-                        }
-                        else return hourComparison;
+                        else return minuteComparison;
                     }
+                    else return hourComparison;
+
+                }
+                case DateTimePrecision.Millisecond:
+                {
+                    var left = selfInUtc;
+                    var right = otherInUtc;
+                    if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
+                    {
+                        left = self;
+                        right = other;
+                    }
+
+                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
+                    if (hourComparison == 0)
+                    {
+                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
+                        if (minuteComparison == 0)
+                        {
+                            var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
+                            if (secondComparison == 0)
+                            {
+                                var milliComparison = CompareTemporalIntegers(left.Millisecond, right.Millisecond);
+                                return milliComparison;
+                            }
+
+                            return secondComparison;
+                        }
+                        else return minuteComparison;
+                    }
+                    else return hourComparison;
+                }
                 case DateTimePrecision.Unknown:
                 case DateTimePrecision.Year:
                 case DateTimePrecision.Month:
@@ -328,15 +327,36 @@ namespace Hl7.Cql.Primitives
         /// Returns <see cref="DateTimeIso8601.ToString"/> for <see cref="Value"/>.
         /// </summary>
         public override string ToString() => Value.ToString();
+
         /// <summary>
         /// Compares this object to <paramref name="obj"/> for equality.
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
         public override bool Equals(object? obj) => Value.Equals((obj as CqlTime)?.Value!);
+
         /// <summary>
         /// Gets the value of <see cref="DateTimeIso8601.GetHashCode"/> for <see cref="Value"/>.
         /// </summary>
         public override int GetHashCode() => Value.GetHashCode();
+
+        /// <summary>
+        /// Adds a specified quantity to a CqlTime value, returning a new CqlTime that represents the result.
+        /// </summary>
+        /// <param name="left">The CqlTime value to which the quantity will be added. May be null.</param>
+        /// <param name="right">The CqlQuantity representing the amount of time to add. May be null.</param>
+        /// <returns>A new CqlTime that is the result of adding the specified quantity to the given time. Returns null if either
+        /// parameter is null.</returns>
+        public static CqlTime? operator +(CqlTime? left, CqlQuantity? right) => left?.Add(right);
+
+        /// <summary>
+        /// Subtracts the specified quantity from the given time value, returning a new time that is offset by the
+        /// quantity.
+        /// </summary>
+        /// <param name="left">The time value from which to subtract the quantity. May be null.</param>
+        /// <param name="right">The quantity to subtract from the time value. May be null.</param>
+        /// <returns>A new <see cref="CqlTime"/> representing the result of subtracting <paramref name="right"/> from <paramref
+        /// name="left"/>. Returns null if <paramref name="left"/> is null.</returns>
+        public static CqlTime? operator -(CqlTime? left, CqlQuantity? right) => left?.Subtract(right);
     }
 }
