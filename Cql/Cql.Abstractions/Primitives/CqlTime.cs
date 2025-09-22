@@ -96,45 +96,20 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
         public CqlTime? Add(CqlQuantity quantity)
         {
-            if (quantity == null || quantity.value == null || quantity.unit == null)
+            if (quantity is not { value: { } value, unit: { } unit })
                 return null;
-            //quantity = quantity.NormalizeTo(Precision);
-            var value = quantity.value!.Value;
+
             var span = Value.TimeSpan;
-            switch (quantity.unit)
+            span = unit switch
             {
-                case "min":
-                case "minute":
-                case "minutes":
-                    span = span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value)));
-                    break;
-                case "ms":
-                case "millisecond":
-                case "milliseconds":
-                    span = span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value)));
-                    break;
-                case "d":
-                case "day":
-                case "days":
-                    span = span.Add(TimeSpan.FromDays(Math.Truncate((double)value)));
-                    break;
-                case "wk":
-                case "week":
-                case "weeks":
-                    span = span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble));
-                    break;
-                case "h":
-                case "hour":
-                case "hours":
-                    span = span.Add(TimeSpan.FromHours(Math.Truncate((double)value)));
-                    break;
-                case "s":
-                case "second":
-                case "seconds":
-                    span = span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value)));
-                    break;
-                default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
-            }
+                "min" or "minute" or "minutes"          => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
+                "ms" or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
+                "d" or "day" or "days"                  => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
+                "wk" or "week" or "weeks"               => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
+                "h" or "hour" or "hours"                => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
+                "s" or "second" or "seconds"            => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
+                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
             var result = new CqlTime(newIsoTime);
@@ -149,49 +124,23 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
         public CqlTime? Subtract(CqlQuantity quantity)
         {
-            if (quantity == null || quantity.value == null || quantity.unit == null)
+            if (quantity is not { value: { } value, unit: { } unit })
                 return null;
-            //quantity = quantity.NormalizeTo(Precision);
-            var value = quantity.value!.Value;
+
             var span = Value.TimeSpan;
-            switch (quantity.unit)
+            span = unit switch
             {
-                case "min":
-                case "minute":
-                case "minutes":
-                    span = span.Subtract(TimeSpan.FromMinutes(Math.Truncate((double)value)));
-                    break;
-                case "ms":
-                case "millisecond":
-                case "milliseconds":
-                    span = span.Subtract(TimeSpan.FromMilliseconds(Math.Truncate((double)value)));
-                    break;
-                case "d":
-                case "day":
-                case "days":
-                    span = span.Subtract(TimeSpan.FromDays(Math.Truncate((double)value)));
-                    break;
-                case "wk":
-                case "week":
-                case "weeks":
-                    span = span.Subtract(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble));
-                    break;
-                case "h":
-                case "hour":
-                case "hours":
-                    span = span.Subtract(TimeSpan.FromHours(Math.Truncate((double)value)));
-                    break;
-                case "s":
-                case "second":
-                case "seconds":
-                    span = span.Subtract(TimeSpan.FromSeconds(Math.Truncate((double)value)));
-                    break;
-                default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
-            }
+                "min" or "minute" or "minutes"          => span - TimeSpan.FromMinutes(Math.Truncate((double)value)),
+                "ms" or "millisecond" or "milliseconds" => span - TimeSpan.FromMilliseconds(Math.Truncate((double)value)),
+                "d" or "day" or "days"                  => span - TimeSpan.FromDays(Math.Truncate((double)value)),
+                "wk" or "week" or "weeks"               => span - TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble),
+                "h" or "hour" or "hours"                => span - TimeSpan.FromHours(Math.Truncate((double)value)),
+                "s" or "second" or "seconds"            => span - TimeSpan.FromSeconds(Math.Truncate((double)value)),
+                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
-            var result = new CqlTime(newIsoTime);
-            return result;
+            return new CqlTime(newIsoTime);
         }
 
         /// <summary>
@@ -199,22 +148,15 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="precision">The CQL or UCUM unit precision.</param>
         /// <returns>The individual component at the specified precision, or <see langword="null"/> if this date is not expressed in those units.</returns>
-        public int? Component(string precision)
-        {
-            switch (precision)
+        public int? Component(string precision) =>
+            precision switch
             {
-                case "hour":
-                    return Value.Hour;
-                case "minute":
-                    return Value.Minute;
-                case "second":
-                    return Value.Second;
-                case "millisecond":
-                    return Value.Millisecond;
-                default:
-                    return null;
-            }
-        }
+                "hour"        => Value.Hour,
+                "minute"      => Value.Minute,
+                "second"      => Value.Second,
+                "millisecond" => Value.Millisecond,
+                _             => null
+            };
 
         /// <summary>
         /// Gets the number of distinct boundaries in <paramref name="precision"/> between this time and <paramref name="high"/>.

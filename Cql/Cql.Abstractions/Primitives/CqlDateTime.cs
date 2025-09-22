@@ -145,60 +145,24 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
         public CqlDateTime? Add(CqlQuantity? quantity)
         {
-            if (quantity == null || quantity.value == null || quantity.unit == null)
+            if (quantity is not { value: { } value, unit: { } unit })
                 return null;
-            //quantity = quantity.NormalizeTo(Precision);
-            var value = quantity.value!.Value;
+
             var dto = Value.DateTimeOffset;
-            switch (quantity.unit)
+            dto = unit switch
             {
-                case "a":
-                    dto = dto.AddDays(UCUMUnits.DaysPerYearDouble);
-                    break;
-                case "year":
-                case "years":
-                    dto = dto.AddYears((int)value);
-                    break;
-                case "mo":
-                    dto = dto.AddDays(UCUMUnits.DaysPerMonthDouble);
-                    break;
-                case "month":
-                case "months":
-                    dto = dto.AddMonths((int)value);
-                    break;
-                case "wk":
-                case "week":
-                case "weeks":
-                    dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
-                    break;
-                case "d":
-                case "day":
-                case "days":
-                    dto = dto.AddDays((int)value!);
-                    break;
-                case "h":
-                case "hour":
-                case "hours":
-                    dto = dto.AddHours(Math.Truncate((double)value));
-                    break;
-                case "min":
-                case "minute":
-                case "minutes":
-                    dto = dto.AddMinutes(Math.Truncate((double)value));
-                    break;
-                case "s":
-                case "second":
-                case "seconds":
-                    dto = dto.AddSeconds(Math.Truncate((double)value));
-                    break;
-                case "ms":
-                case "millisecond":
-                case "milliseconds":
-                    dto = dto.AddMilliseconds(Math.Truncate((double)value));
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
-            }
+                "a"                                     => dto.AddDays(UCUMUnits.DaysPerYearDouble),
+                "year" or "years"                       => dto.AddYears((int)value),
+                "mo"                                    => dto.AddDays(UCUMUnits.DaysPerMonthDouble),
+                "month" or "months"                     => dto.AddMonths((int)value),
+                "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
+                "d" or "day" or "days"                  => dto.AddDays((int)value!),
+                "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
+                "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
+                "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
+                "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
+                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
 
             var newIsoDate = new DateTimeIso8601(dto, Value.Precision);
             var result = new CqlDateTime(newIsoDate);
@@ -213,60 +177,24 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
         public CqlDateTime? Subtract(CqlQuantity quantity)
         {
-            if (quantity == null || quantity.value == null || quantity.unit == null)
+            if (quantity is not { value: { } value, unit: { } unit })
                 return null;
-            //quantity = quantity.NormalizeTo(Precision);
-            var value = -1 * quantity.value!.Value;
+
             var dto = Value.DateTimeOffset;
-            switch (quantity.unit)
+            dto = unit switch
             {
-                case "a":
-                    dto = dto.AddDays(-1 * UCUMUnits.DaysPerYearDouble);
-                    break;
-                case "year":
-                case "years":
-                    dto = dto.AddYears((int)value);
-                    break;
-                case "mo":
-                    dto = dto.AddDays(-1 * UCUMUnits.DaysPerMonthDouble);
-                    break;
-                case "month":
-                case "months":
-                    dto = dto.AddMonths((int)value);
-                    break;
-                case "wk":
-                case "week":
-                case "weeks":
-                    dto = dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek));
-                    break;
-                case "d":
-                case "day":
-                case "days":
-                    dto = dto.AddDays((int)value!);
-                    break;
-                case "h":
-                case "hour":
-                case "hours":
-                    dto = dto.AddHours(Math.Truncate((double)value));
-                    break;
-                case "min":
-                case "minute":
-                case "minutes":
-                    dto = dto.AddMinutes(Math.Truncate((double)value));
-                    break;
-                case "s":
-                case "second":
-                case "seconds":
-                    dto = dto.AddSeconds(Math.Truncate((double)value));
-                    break;
-                case "ms":
-                case "millisecond":
-                case "milliseconds":
-                    dto = dto.AddMilliseconds(Math.Truncate((double)value));
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
-            }
+                "a"                                     => dto.AddDays(-1 * UCUMUnits.DaysPerYearDouble),
+                "year" or "years"                       => dto.AddYears((int)value),
+                "mo"                                    => dto.AddDays(-1 * UCUMUnits.DaysPerMonthDouble),
+                "month" or "months"                     => dto.AddMonths((int)value),
+                "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
+                "d" or "day" or "days"                  => dto.AddDays((int)value!),
+                "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
+                "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
+                "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
+                "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
+                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
 
             var newIsoDate = new DateTimeIso8601(dto, Value.Precision);
             var result = new CqlDateTime(newIsoDate);
@@ -278,28 +206,18 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="precision">The CQL or UCUM unit precision.</param>
         /// <returns>The individual component at the specified precision, or <see langword="null"/> if this date is not expressed in those units.</returns>
-        public int? Component(string precision)
-        {
-            switch (precision)
+        public int? Component(string precision) =>
+            precision switch
             {
-                case "year":
-                    return Value.Year;
-                case "month":
-                    return Value.Month;
-                case "day":
-                    return Value.Day;
-                case "hour":
-                    return Value.Hour;
-                case "minute":
-                    return Value.Minute;
-                case "second":
-                    return Value.Second;
-                case "millisecond":
-                    return Value.Millisecond;
-                default:
-                    return null;
-            }
-        }
+                "year"        => Value.Year,
+                "month"       => Value.Month,
+                "day"         => Value.Day,
+                "hour"        => Value.Hour,
+                "minute"      => Value.Minute,
+                "second"      => Value.Second,
+                "millisecond" => Value.Millisecond,
+                _             => null
+            };
 
         /// <summary>
         /// Gets the number of distinct boundaries in <paramref name="precision"/> between this date time and <paramref name="high"/>.
