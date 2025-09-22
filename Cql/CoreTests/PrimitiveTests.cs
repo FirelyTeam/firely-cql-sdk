@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -15,19 +14,17 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Hosting;
+using Hl7.Cql.Runtime.Hosting;                                 
 
 namespace CoreTests
-{
+{         
     using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
     using Expression = System.Linq.Expressions.Expression;
 
     [TestClass]
     [TestCategory("UnitTest")]
-    public class PrimitiveTests
+    public class CqlDateTests
     {
-        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
-
         [TestMethod]
         public void CqlDate_Subtract_Months_From_Year()
         {
@@ -36,6 +33,13 @@ namespace CoreTests
             Assert.AreEqual(2011, result.Value.Year);
             Assert.AreEqual(DateTimePrecision.Year, result.Precision);
         }
+    }
+
+    [TestClass]
+    [TestCategory("UnitTest")]
+    public class CqlDateTimeTests
+    {
+        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
@@ -150,19 +154,18 @@ namespace CoreTests
             var threeDays = new CqlQuantity(3, "days");
             var oneDay = new CqlQuantity(1, "day");
             var method = typeof(ICqlOperators)
-                            .GetMethods()
-                            .Where(x =>
-                                        x.Name == nameof(CqlOperators.Subtract) &&
-                                        x.GetParameters().Count() == 2 &&
-                                        x.GetParameters()[0].ParameterType == typeof(CqlQuantity) &&
-                                        x.GetParameters()[1].ParameterType == typeof(CqlQuantity)
-                                   ).First();
+                         .GetMethods()
+                         .Where(x =>
+                                    x.Name == nameof(CqlOperators.Subtract) &&
+                                    x.GetParameters().Count() == 2 &&
+                                    x.GetParameters()[0].ParameterType == typeof(CqlQuantity) &&
+                                    x.GetParameters()[1].ParameterType == typeof(CqlQuantity)
+                         ).First();
 
 
             var tdExpr = Expression.Constant(threeDays);
             var odExpr = Expression.Constant(oneDay);
-
-
+            
             var rc = GetNewContext();
             var fcq = rc.Operators;
             var memExpr = Expression.Constant(fcq);
@@ -273,6 +276,13 @@ namespace CoreTests
             Assert.AreEqual(16, boundariesBetween);
 
         }
+    }
+
+    [TestClass]
+    [TestCategory("UnitTest")]
+    public class PrimitiveTests
+    {
+        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 
         /// <summary>
         /// Handles Interval[3,null) contains 5 = null
