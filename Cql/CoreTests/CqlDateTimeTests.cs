@@ -257,4 +257,92 @@ public class CqlDateTimeTests
         Assert.AreEqual(16, boundariesBetween);
 
     }
+
+    [TestMethod]
+    public void Add_Years_OperatorAndMethod()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2, "year");
+
+        var resultMethod = dt.Add(quantity);
+        var resultOperator = dt + quantity;
+
+        Assert.IsNotNull(resultMethod);
+        Assert.IsNotNull(resultOperator);
+        Assert.AreEqual(2022, resultMethod.Value.Year);
+        Assert.AreEqual(2022, resultOperator.Value.Year);
+        Assert.AreEqual(dt.Value.Month, resultMethod.Value.Month);
+        Assert.AreEqual(dt.Value.Day, resultMethod.Value.Day);
+    }
+
+    [TestMethod]
+    public void Subtract_Years_OperatorAndMethod()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(3, "year");
+
+        var resultMethod = dt.Subtract(quantity);
+        var resultOperator = dt - quantity;
+
+        Assert.IsNotNull(resultMethod);
+        Assert.IsNotNull(resultOperator);
+        Assert.AreEqual(2017, resultMethod.Value.Year);
+        Assert.AreEqual(2017, resultOperator.Value.Year);
+        Assert.AreEqual(dt.Value.Month, resultMethod.Value.Month);
+        Assert.AreEqual(dt.Value.Day, resultMethod.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_Months()
+    {
+        var dt = new CqlDateTime(2021, 5, 15, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(7, "month");
+
+        var result = dt.Add(quantity);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2021, result.Value.Year);
+        Assert.AreEqual(12, result.Value.Month);
+        Assert.AreEqual(15, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Subtract_Days()
+    {
+        var dt = new CqlDateTime(2021, 1, 10, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(5, "day");
+
+        var result = dt.Subtract(quantity);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2021, result.Value.Year);
+        Assert.AreEqual(1, result.Value.Month);
+        Assert.AreEqual(5, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_NullQuantity_ReturnsNull()
+    {
+        var dt = new CqlDateTime(2021, 1, 1, 0, 0, 0, 0, 0, 0);
+        CqlQuantity? quantity = null;
+
+        var result = dt.Add(quantity);
+        var resultOp = dt + quantity;
+
+        Assert.IsNull(result);
+        Assert.IsNull(resultOp);
+    }
+
+    [TestMethod]
+    public void Operator_NullDateTime_ReturnsNull()
+    {
+        CqlDateTime? dt = null;
+        var quantity = new CqlQuantity(1, "year");
+
+        var resultAdd = dt + quantity;
+        var resultSub = dt - quantity;
+
+        Assert.IsNull(resultAdd);
+        Assert.IsNull(resultSub);
+    }
 }
