@@ -33,21 +33,18 @@ namespace Hl7.Cql.Primitives
 
             switch (precision)
             {
-                case UCUMUnits.Year:
-                    throw new NotImplementedException();
+                // https://cql.hl7.org/09-b-cqlreference.html#difference
+                // UCUM units not supported here
 
                 case "year":
                     var yearDiff = (secondDto.Year - firstDto.Year);
                     return yearDiff;
 
-                case UCUMUnits.Month:
-                    throw new NotImplementedException();
-
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
                     return monthDiff;
 
-                case "week" or UCUMUnits.Week:
+                case "week":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var weeks = span.TotalDays / 7d;
@@ -59,7 +56,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
 
-                case "day" or UCUMUnits.Day:
+                case "day":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalDays;
@@ -72,7 +69,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
 
-                case "hour" or UCUMUnits.Hour:
+                case "hour":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalHours;
@@ -85,7 +82,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
 
-                case "minute" or UCUMUnits.Minute:
+                case "minute":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalMinutes;
@@ -98,7 +95,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
 
-                case "second" or UCUMUnits.Second:
+                case "second":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalSeconds;
@@ -111,7 +108,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
 
-                case "millisecond" or UCUMUnits.Millisecond:
+                case "millisecond":
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalMilliseconds;
@@ -136,8 +133,8 @@ namespace Hl7.Cql.Primitives
             var calendar = new GregorianCalendar();
             switch (precision)
             {
-                case UCUMUnits.Year:
-                    throw new NotImplementedException();
+                // https://cql.hl7.org/09-b-cqlreference.html#difference
+                // UCUM units not supported here
 
                 case "year":
                     var yearDiff = secondDto.Year - firstDto.Year;
@@ -206,9 +203,6 @@ namespace Hl7.Cql.Primitives
                         yearDiff += 1;
                     return yearDiff;
 
-                case UCUMUnits.Month:
-                    throw new NotImplementedException();
-
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
                     if (monthDiff > 0 && secondDto.Day < firstDto.Day)
@@ -217,13 +211,13 @@ namespace Hl7.Cql.Primitives
                         monthDiff += 1;
                     return monthDiff;
 
-                case "week" or UCUMUnits.Week:        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
-                case "day" or UCUMUnits.Day:         return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour" or UCUMUnits.Hour:        return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute" or UCUMUnits.Minute:      return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second" or UCUMUnits.Second:      return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond" or UCUMUnits.Millisecond: return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
-                default:                              throw new ArgumentException($"Unit '{precision}' is not supported.");
+                case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                case "day":         return (int)secondDto.Subtract(firstDto).TotalDays;
+                case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
+                case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
+                case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
+                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
 
