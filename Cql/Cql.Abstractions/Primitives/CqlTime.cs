@@ -113,13 +113,13 @@ namespace Hl7.Cql.Primitives
             var span = Value.TimeSpan;
             span = unit switch
             {
-                "min" or "minute" or "minutes"          => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
-                "ms" or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
-                "d" or "day" or "days"                  => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
-                "wk" or "week" or "weeks"               => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
-                "h" or "hour" or "hours"                => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
-                "s" or "second" or "seconds"            => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
-                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                UCUMUnits.Minute or "minute" or "minutes" => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
+                UCUMUnits.Millisecond or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
+                UCUMUnits.Day or "day" or "days" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
+                UCUMUnits.Week or "week" or "weeks" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
+                UCUMUnits.Hour or "hour" or "hours" => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
+                UCUMUnits.Second or "second" or "seconds" => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
+                _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
             };
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);

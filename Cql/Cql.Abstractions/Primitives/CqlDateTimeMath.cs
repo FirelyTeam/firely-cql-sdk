@@ -28,20 +28,26 @@ namespace Hl7.Cql.Primitives
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#difference"/>
         internal static int? BoundariesBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
         {
-            if (low == null || high == null || precision == null)
+            if (low is not {} firstDto || high is not {} secondDto || precision is null)
                 return null;
 
-            var firstDto = low.Value;
-            var secondDto = high.Value;
             switch (precision)
             {
+                case UCUMUnits.Year:
+                    throw new NotImplementedException();
+
                 case "year":
                     var yearDiff = (secondDto.Year - firstDto.Year);
                     return yearDiff;
+
+                case UCUMUnits.Month:
+                    throw new NotImplementedException();
+
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
                     return monthDiff;
-                case "week":
+
+                case "week" or UCUMUnits.Week:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var weeks = span.TotalDays / 7d;
@@ -52,7 +58,8 @@ namespace Hl7.Cql.Primitives
                             return asInt + 1;
                         else return asInt;
                     }
-                case "day":
+
+                case "day" or UCUMUnits.Day:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalDays;
@@ -64,7 +71,8 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
-                case "hour":
+
+                case "hour" or UCUMUnits.Hour:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalHours;
@@ -76,7 +84,8 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
-                case "minute":
+
+                case "minute" or UCUMUnits.Minute:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalMinutes;
@@ -88,7 +97,8 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
-                case "second":
+
+                case "second" or UCUMUnits.Second:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalSeconds;
@@ -100,7 +110,8 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
-                case "millisecond":
+
+                case "millisecond" or UCUMUnits.Millisecond:
                     {
                         var span = secondDto.Subtract(firstDto);
                         var asInt = (int)span.TotalMilliseconds;
@@ -112,20 +123,22 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
+
                 default: throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
 
-        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string precision)
+        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
         {
-            if (low == null || high == null || precision == null)
+            if (low is not {} firstDto || high is not {} secondDto  || precision == null)
                 return null;
 
             var calendar = new GregorianCalendar();
-            var firstDto = low.Value;
-            var secondDto = high.Value;
             switch (precision)
             {
+                case UCUMUnits.Year:
+                    throw new NotImplementedException();
+
                 case "year":
                     var yearDiff = secondDto.Year - firstDto.Year;
                     var firstDayInYear = firstDto.DayOfYear;
@@ -192,6 +205,10 @@ namespace Hl7.Cql.Primitives
                     else if (yearDiff < 0 && firstDayInYear < secondDayInYear)
                         yearDiff += 1;
                     return yearDiff;
+
+                case UCUMUnits.Month:
+                    throw new NotImplementedException();
+
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
                     if (monthDiff > 0 && secondDto.Day < firstDto.Day)
@@ -199,13 +216,14 @@ namespace Hl7.Cql.Primitives
                     else if (monthDiff < 0 && firstDto.Day < secondDto.Day)
                         monthDiff += 1;
                     return monthDiff;
-                case "week": return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
-                case "day": return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour": return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute": return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second": return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
-                default: throw new ArgumentException($"Unit '{precision}' is not supported.");
+
+                case "week" or UCUMUnits.Week:        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                case "day" or UCUMUnits.Day:         return (int)secondDto.Subtract(firstDto).TotalDays;
+                case "hour" or UCUMUnits.Hour:        return (int)secondDto.Subtract(firstDto).TotalHours;
+                case "minute" or UCUMUnits.Minute:      return (int)secondDto.Subtract(firstDto).TotalMinutes;
+                case "second" or UCUMUnits.Second:      return (int)secondDto.Subtract(firstDto).TotalSeconds;
+                case "millisecond" or UCUMUnits.Millisecond: return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                default:                              throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
 
@@ -220,67 +238,67 @@ namespace Hl7.Cql.Primitives
             { DateTimePrecision.Year, new CqlQuantity(1m, "year") },
         };
 
-        /// <summary>
-        /// For datetime addition and subtraction, when quantity is more precise than the datetime, 
-        /// the quantity has to be normalized to the lesser precision and truncated.
-        /// </summary>
-        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#add-1" />
-        internal static CqlQuantity NormalizeTo(this CqlQuantity quantity, DateTimePrecision target)
-        {
-            // using the table found here:
-            // https://cql.hl7.org/09-b-cqlreference.html#equivalent
-            return (quantity.unit, target) switch
-            {
-                (null, _) => quantity,
-                ("mo", DateTimePrecision.Year) => 
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 12)!, UCUMUnits.Year),
-                
-                ("d", DateTimePrecision.Year) => 
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 365)!, UCUMUnits.Year),
-                ("d", DateTimePrecision.Month) =>
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 30)!, UCUMUnits.Month),
-                
-                ("h", DateTimePrecision.Year) => 
-                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 365)!, UCUMUnits.Year),
-                ("h", DateTimePrecision.Month) => 
-                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 30)!, UCUMUnits.Month),
-                ("h", DateTimePrecision.Day) =>
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 24)!, UCUMUnits.Day),
-                
-                ("mi", DateTimePrecision.Year) => 
-                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 365)!, UCUMUnits.Year),
-                ("mi", DateTimePrecision.Month) =>
-                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 30)!, UCUMUnits.Month),
-                ("mi", DateTimePrecision.Day) => 
-                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 24)!, UCUMUnits.Day),
-                ("mi", DateTimePrecision.Hour) =>
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Hour),
-
-                ("s", DateTimePrecision.Year) =>
-                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
-                ("s", DateTimePrecision.Month) =>
-                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
-                ("s", DateTimePrecision.Day) =>
-                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 60) / 24)!, UCUMUnits.Day),
-                ("s", DateTimePrecision.Hour) =>
-                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 60)!, UCUMUnits.Hour),
-                ("s", DateTimePrecision.Minute) =>
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Minute),
-
-                ("ms", DateTimePrecision.Year) =>
-                    new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
-                ("ms", DateTimePrecision.Month) =>
-                    new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
-                ("ms", DateTimePrecision.Day) =>
-                    new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 1000) / 60) / 60) / 24)!, UCUMUnits.Day),
-                ("ms", DateTimePrecision.Hour) =>
-                    new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 1000) / 60) / 60)!, UCUMUnits.Hour),
-                ("ms", DateTimePrecision.Minute) =>
-                    new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 1000) / 60)!, UCUMUnits.Minute),
-                ("ms", DateTimePrecision.Second) =>
-                    new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 1000)!, UCUMUnits.Second),
-                (_,_) => quantity
-            };
-        }
+        // /// <summary>
+        // /// For datetime addition and subtraction, when quantity is more precise than the datetime,
+        // /// the quantity has to be normalized to the lesser precision and truncated.
+        // /// </summary>
+        // /// <see href="https://cql.hl7.org/09-b-cqlreference.html#add-1" />
+        // internal static CqlQuantity NormalizeTo(this CqlQuantity quantity, DateTimePrecision target)
+        // {
+        //     // using the table found here:
+        //     // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+        //     return (quantity.unit, target) switch
+        //     {
+        //         (null, _) => quantity,
+        //         ("mo", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 12)!, UCUMUnits.Year),
+        //
+        //         ("d", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 365)!, UCUMUnits.Year),
+        //         ("d", DateTimePrecision.Month) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 30)!, UCUMUnits.Month),
+        //
+        //         ("h", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 365)!, UCUMUnits.Year),
+        //         ("h", DateTimePrecision.Month) =>
+        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 30)!, UCUMUnits.Month),
+        //         ("h", DateTimePrecision.Day) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 24)!, UCUMUnits.Day),
+        //
+        //         ("mi", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 365)!, UCUMUnits.Year),
+        //         ("mi", DateTimePrecision.Month) =>
+        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 30)!, UCUMUnits.Month),
+        //         ("mi", DateTimePrecision.Day) =>
+        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 24)!, UCUMUnits.Day),
+        //         ("mi", DateTimePrecision.Hour) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Hour),
+        //
+        //         ("s", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
+        //         ("s", DateTimePrecision.Month) =>
+        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
+        //         ("s", DateTimePrecision.Day) =>
+        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 60) / 24)!, UCUMUnits.Day),
+        //         ("s", DateTimePrecision.Hour) =>
+        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 60)!, UCUMUnits.Hour),
+        //         ("s", DateTimePrecision.Minute) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Minute),
+        //
+        //         ("ms", DateTimePrecision.Year) =>
+        //             new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
+        //         ("ms", DateTimePrecision.Month) =>
+        //             new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
+        //         ("ms", DateTimePrecision.Day) =>
+        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 1000) / 60) / 60) / 24)!, UCUMUnits.Day),
+        //         ("ms", DateTimePrecision.Hour) =>
+        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 1000) / 60) / 60)!, UCUMUnits.Hour),
+        //         ("ms", DateTimePrecision.Minute) =>
+        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 1000) / 60)!, UCUMUnits.Minute),
+        //         ("ms", DateTimePrecision.Second) =>
+        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 1000)!, UCUMUnits.Second),
+        //         (_,_) => quantity
+        //     };
+        // }
     }
 }

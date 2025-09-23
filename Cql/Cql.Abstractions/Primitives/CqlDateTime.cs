@@ -155,7 +155,7 @@ namespace Hl7.Cql.Primitives
             var dto = Value.DateTimeOffset;
             dto = unit switch
             {
-                "a"                                     => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
+                UCUMUnits.Year                         => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
                 "year" or "years"                       => dto.AddYears((int)value),
                 "mo"                                    => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerMonthDouble),
                 "month" or "months"                     => dto.AddMonths((int)value),
