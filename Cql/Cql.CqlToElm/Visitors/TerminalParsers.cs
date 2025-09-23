@@ -77,6 +77,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // This is either a unit, or a datetimeprecision (which we parse as text here)
             var unitText = context.unit().STRING().ParseString() ?? context.unit().GetText();
+
+            // We should actually validate the range of units here, but for now we just return it as-is.
             return (decimalValue, unitText!);
         }
 
