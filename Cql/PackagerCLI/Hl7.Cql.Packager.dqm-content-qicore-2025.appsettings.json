@@ -1,0 +1,11 @@
+﻿{
+  "Elm": {
+    "SkipFiles": [
+      // Tuple element value does not have a resultTypeSpecifier
+      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
+
+      // Exception: Cannot convert System.Collections.Generic.List`1[Hl7.Fhir.Model.ResourceReference] to Hl7.Fhir.Model.ResourceReference.
+      "NHSNGlycemicControlHypoglycemiaInitialPopulation.json"
+    ]
+  }
+}
