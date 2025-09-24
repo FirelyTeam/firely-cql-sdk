@@ -17,15 +17,6 @@ namespace CoreTests;
 public class CqlDateTests
 {
     [TestMethod]
-    public void CqlDate_Subtract_Months_From_Year()
-    {
-        Assert.IsTrue(CqlDateTime.TryParse("2014", out var baseDate));
-        var result = baseDate.Subtract(new CqlQuantity(25m, "month"));
-        Assert.AreEqual(2011, result.Value.Year);
-        Assert.AreEqual(DateTimePrecision.Year, result.Precision);
-    }
-
-    [TestMethod]
     public void Add_Years()
     {
         var date = new CqlDate(2020, 1, 1);
