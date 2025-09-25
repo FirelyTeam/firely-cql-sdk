@@ -39,8 +39,13 @@ internal class MissingResultTypeSpecifierCorrector(ILogger<MissingResultTypeSpec
                 {
                     resultTypeSpecifier: ListTypeSpecifier { elementType: { } elementType },
                     @return: { resultTypeSpecifier: null } returnClause,
-                })
+                } query)
             {
+                logger.LogDebug(
+                    "Setting missing ReturnClause.resultTypeSpecifier to ListTypeSpecifier.elementType to '{resultType}' on Query @ {locator}.\n{expressionKey}",
+                    elementType,
+                    query.locator,
+                    self.ContextStackString);
                 returnClause.resultTypeSpecifier = elementType;
             }
         }
@@ -51,17 +56,26 @@ internal class MissingResultTypeSpecifierCorrector(ILogger<MissingResultTypeSpec
                 {
                     resultTypeSpecifier: TupleTypeSpecifier tupleTypeSpecifier,
                     expression: Tuple { resultTypeSpecifier: null } tuple,
-                })
+                } clause)
             {
+                logger.LogDebug(
+                    "Setting missing Tuple.resultTypeSpecifier to TupleTypeSpecifier to '{resultType}' on ReturnClause @ {locator}.\n{expressionKey}",
+                    tupleTypeSpecifier,
+                    clause.locator,
+                    self.ContextStackString);
                 tuple.resultTypeSpecifier = tupleTypeSpecifier;
             }
         }
 
         {
             // If a Tuple has elements with missing resultTypeSpecifier but the Tuple itself has a TupleTypeSpecifier as resultTypeSpecifier, set the missing element resultTypeSpecifiers from the TupleTypeSpecifier
-            if (node is Tuple { element: { Length: > 0 } elements, resultTypeSpecifier: TupleTypeSpecifier tupleTypeSpecifier }
+            if (node is Tuple { element: { Length: > 0 } elements, resultTypeSpecifier: TupleTypeSpecifier tupleTypeSpecifier } tuple
                 && elements.Any(e => e.value.resultTypeSpecifier is null))
             {
+                logger.LogDebug(
+                    "Setting missing Tuple.element.value.resultTypeSpecifier from TupleTypeSpecifier on Tuple @ {locator}.\n{expressionKey}",
+                    tuple.locator,
+                    self.ContextStackString);
                 foreach (var (index, tupleElement) in elements.Select((v, i) => (i, v)))
                 {
                     tupleElement.value.resultTypeSpecifier ??= tupleTypeSpecifier.element[index].elementType;
