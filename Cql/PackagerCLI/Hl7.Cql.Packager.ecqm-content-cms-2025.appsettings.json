@@ -1,9 +1,6 @@
 ﻿{
   "Elm": {
     "SkipFiles": [
-      // Tuple element value does not have a resultTypeSpecifier
-      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
-
       // Exception: cannot convert from 'Hl7.Fhir.Model.Id' to 'Hl7.Fhir.Model.Code<Hl7.Fhir.Model.Account.AccountStatus>'
       "NHSNHelpers.json",
 
