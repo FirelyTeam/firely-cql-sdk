@@ -2,10 +2,30 @@
   "Elm": {
     "SkipFiles": [
       // Tuple element value does not have a resultTypeSpecifier
-      "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
+      // "CMS2FHIRPCSDepressionScreenAndFollowUp.json",
 
-      // Exception: Cannot convert System.Collections.Generic.List`1[Hl7.Fhir.Model.ResourceReference] to Hl7.Fhir.Model.ResourceReference.
-      "NHSNGlycemicControlHypoglycemiaInitialPopulation.json"
+      // Conversion Exceptions:
+      // - Cannot convert System.Collections.Generic.List`1[Hl7.Fhir.Model.ResourceReference] to Hl7.Fhir.Model.ResourceReference.
+      "NHSNGlycemicControlHypoglycemiaInitialPopulation.json",
+      // - Cannot convert Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate] to Hl7.Cql.Primitives.CqlInterval`1[System.Object]
+      "CMS1173FHIRDiagnosticDelayVTE-1.0.000.json",
+
+      // ArgumentException: Cannot resolve type for typeSpecifier {http://hl7.org/fhir}DoNotPerformReason
+      "CMS190FHIRVTEProphylaxisICU-1.0.000.json",
+      "CMS108FHIRVTEProphylaxis-1.0.000.json",
+      "CMS108FHIRVTEProphylaxis-1.0.000.json",
+      "CMS190FHIRVTEProphylaxisICU-1.0.000.json",
+      "CMS108FHIRVTEProphylaxis-1.0.000.json",
+
+      // Retrieve statements can only accept terminology expressions whose type is CqlValueSet or IEnumerable.  The expression provided has a type of Hl7.Cql.Primitives.CqlCode (Parameter 'codes')
+      "CMS69FHIRPCSBMIScreenAndFollowUp-1.0.000.json",
+
+      // Duplicate property name CrLabObsCategory in tuple. (Parameter 'tupleProps')
+      "CMS832FHIRHHAKI-1.0.000.json"
+
     ]
+  },
+  "Packaging": {
+    "ExitOnError": false
   }
 }

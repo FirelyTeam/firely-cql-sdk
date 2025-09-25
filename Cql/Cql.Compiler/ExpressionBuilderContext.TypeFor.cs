@@ -137,7 +137,7 @@ partial class ExpressionBuilderContext
             if (pointType == null)
             {
                 if (throwIfNotFound)
-                    throw new ArgumentException("Cannot resolve type for expression");
+                    throw new ArgumentException($"Cannot resolve type for typeSpecifier {interval.pointType}");
 
                 return null;
             }
@@ -150,7 +150,7 @@ partial class ExpressionBuilderContext
         {
             var type = _typeResolver.ResolveType(named.name.Name!, false);
             if (type == null && throwIfNotFound)
-                throw new ArgumentException("Cannot resolve type for expression");
+                throw new ArgumentException($"Cannot resolve type for typeSpecifier {named.name.Name}");
             return type!;
         }
 
@@ -173,8 +173,8 @@ partial class ExpressionBuilderContext
             if (elementType == null)
             {
                 if (throwIfNotFound)
-                    throw new ArgumentException("Cannot resolve type for expression");
-
+                    throw new ArgumentException($"Cannot resolve type for typeSpecifier {list.elementType}");
+                
                 return null;
             }
 
