@@ -22,7 +22,7 @@ public class LibrarySetExpressionBuilderTests
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
         LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.QICore2024.ElmDir, "CumulativeMedicationDuration");
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.DqmQiCore2025.ElmDir, "CumulativeMedicationDuration");
 
         new ElmToolkit()
             .AddElmLibraries(librarySet)
@@ -31,7 +31,7 @@ public class LibrarySetExpressionBuilderTests
                 var cqlContext = FhirCqlContext.CreateContext();
                 var cqlCode = librarySetInvoker.InvokeLibraryDefinition(
                                   cqlContext,
-                                  (CqlVersionedLibraryIdentifier)"CumulativeMedicationDuration-4.1.000",
+                                  (CqlVersionedLibraryIdentifier)"CumulativeMedicationDuration-6.0.000",
                                   "Every eight hours (qualifier value)") as CqlCode;
                 Assert.AreEqual(new CqlCode("307469008", "http://snomed.info/sct"), cqlCode);
             });
