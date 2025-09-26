@@ -19,6 +19,11 @@ internal class MissingResultTypeSpecifierCorrector(ILogger<MissingResultTypeSpec
 {
     private readonly ElmTreeWalker _walker = ElmTreeWalker.Create((self, node) =>
     {
+        // DO NOT turn this into a switch expression.
+        // It is possible to match multiple patterns in one node, e.g.
+        // Element with resultTypeName then Query with ListTypeSpecifier
+        // The order of these blocks matters too, starting with the most general ones first.
+
         {
             // If an Element has a resultTypeName but no resultTypeSpecifier, set resultTypeSpecifier to a NamedTypeSpecifier with the name from resultTypeName
             if (node is Element { resultTypeSpecifier: null, resultTypeName: { } resultTypeName } element)
