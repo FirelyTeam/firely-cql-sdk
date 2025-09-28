@@ -19,10 +19,6 @@
       "CMS506FHIRSafeUseofOpioids.json",
       "PCSBMIScreenAndFollowUpFHIR.json",
 
-      // Tuple element value does not have a resultTypeSpecifier
-      "CADBetaBlockerTherapyPriorMIorLVSDFHIR.json",
-      "PCSDepressionScreenAndFollowUpFHIR.json",
-
       // Multiple sort fields not supported yet
       "CMS986FHIRMalnutritionScore.json",
       "HospitalHarmAcuteKidneyInjuryFHIR.json",
