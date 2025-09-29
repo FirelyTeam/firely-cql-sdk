@@ -147,20 +147,20 @@ namespace Hl7.Cql.Operators
                     {
                         if (interval.low!.Precision == interval.high!.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
                         }
                         else if (interval.low.Precision < interval.high.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setHighPrecisionToPer = true;
                         }
                         else
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setLowPrecisionToPer = true;
                         }
@@ -169,7 +169,7 @@ namespace Hl7.Cql.Operators
                     {
                         switch (per.unit)
                         {
-                            case "mo":
+                            case "month":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Month
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Month)
                                     return expanded;
@@ -181,8 +181,8 @@ namespace Hl7.Cql.Operators
 
 
                                 break;
-                            case "d":
-                            case "wk":
+                            case "day":
+                            case "week":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Day
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Day)
                                     return expanded;
@@ -195,10 +195,10 @@ namespace Hl7.Cql.Operators
                                 break;
                             // parsed as a time unit when it's a date so default to the coarsest
                             // ex: Interval[2023-01-01, 2023-12-31] per minute
-                            case "h":
-                            case "min":
-                            case "s":
-                            case "ms":
+                            case "hour":
+                            case "minute":
+                            case "second":
+                            case "millisecond":
                                 return expanded!;
                         }
                     }
@@ -242,11 +242,11 @@ namespace Hl7.Cql.Operators
 
                     do
                     {
-                        var precision = UCUMUnits.FromDateTimePrecision(listItem!.Precision);
+                        Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
                         // high is one less than next grouping using the smallest precision of the interval
                         // expand { Interval[@2022-01-01, @2024-03-01] } per 2 years returns { [2022-01-01, 2023-12-31], [2024-01-01, 2025-12-31] }
-                        var onePrior = new CqlQuantity(1, precision);
+                        var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
                         var high = next!.Subtract(onePrior);
@@ -288,20 +288,20 @@ namespace Hl7.Cql.Operators
                     {
                         if (interval.low!.Precision == interval.high!.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
                         }
                         else if (interval.low.Precision < interval.high.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setHighPrecisionToPer = true;
                         }
                         else
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setLowPrecisionToPer = true;
                         }
@@ -310,7 +310,7 @@ namespace Hl7.Cql.Operators
                     {
                         switch (per.unit)
                         {
-                            case "mo":
+                            case "month":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Month
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Month)
                                     return expanded;
@@ -321,8 +321,8 @@ namespace Hl7.Cql.Operators
                                     setHighPrecisionToPer = true;
 
                                 break;
-                            case "d":
-                            case "wk":
+                            case "day":
+                            case "week":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Day
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Day)
                                     return expanded;
@@ -334,7 +334,7 @@ namespace Hl7.Cql.Operators
 
                                 break;
                             // per has a coarser precision than the interval so nothing is added
-                            case "h":
+                            case "hour":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Hour
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Hour)
                                     return expanded;
@@ -345,7 +345,7 @@ namespace Hl7.Cql.Operators
                                     setHighPrecisionToPer = true;
 
                                 break;
-                            case "min":
+                            case "minute":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Minute
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Minute)
                                     return expanded;
@@ -356,7 +356,7 @@ namespace Hl7.Cql.Operators
                                     setHighPrecisionToPer = true;
 
                                 break;
-                            case "s":
+                            case "second":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Second
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Second)
                                     return expanded;
@@ -433,10 +433,10 @@ namespace Hl7.Cql.Operators
 
                     do
                     {
-                        var precision = UCUMUnits.FromDateTimePrecision(listItem!.Precision);
+                        Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
                         // high is one less than next grouping using the smallest precision of the interval
-                        var onePrior = new CqlQuantity(1, precision);
+                        var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
                         var high = next!.Subtract(onePrior);
@@ -478,20 +478,20 @@ namespace Hl7.Cql.Operators
                     {
                         if (interval.low!.Precision == interval.high!.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
                         }
                         else if (interval.low.Precision < interval.high.Precision)
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setHighPrecisionToPer = true;
                         }
                         else
                         {
-                            Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                            per = new CqlQuantity(1, ucmunits);
+                            Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
+                            per = new CqlQuantity(1, cqlunits);
 
                             setLowPrecisionToPer = true;
                         }
@@ -501,7 +501,7 @@ namespace Hl7.Cql.Operators
                         switch (per.unit)
                         {
                             // per has a coarser precision than the interval so nothing is added
-                            case "h":
+                            case "hour":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Hour
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Hour)
                                     continue;
@@ -512,7 +512,7 @@ namespace Hl7.Cql.Operators
                                     setHighPrecisionToPer = true;
 
                                 break;
-                            case "min":
+                            case "minute":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Minute
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Minute)
                                     continue;
@@ -523,7 +523,7 @@ namespace Hl7.Cql.Operators
                                     setHighPrecisionToPer = true;
 
                                 break;
-                            case "s":
+                            case "second":
                                 if (interval.low!.Precision < Iso8601.DateTimePrecision.Second
                                     && interval.high!.Precision < Iso8601.DateTimePrecision.Second)
                                     continue;
@@ -537,10 +537,10 @@ namespace Hl7.Cql.Operators
                                 break;
                             // parsed as a date unit when it's a time so return empty list
                             // ex: Interval[@T10, @T10] per month
-                            case "a":
-                            case "mo":
-                            case "d":
-                            case "wk":
+                            case "year":
+                            case "month":
+                            case "day":
+                            case "week":
                                 continue;
                         }
                     }
@@ -589,10 +589,10 @@ namespace Hl7.Cql.Operators
 
                     do
                     {
-                        var precision = UCUMUnits.FromDateTimePrecision(listItem!.Precision);
+                        Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
                         // high is one less than next grouping using the smallest precision of the interval
-                        var onePrior = new CqlQuantity(1, precision);
+                        var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
                         var high = next!.Subtract(onePrior);
@@ -633,8 +633,8 @@ namespace Hl7.Cql.Operators
                         per = new CqlQuantity(1, "1");
                     else
                     {
-                        Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);
-                        if (ucumUnits != null)
+                        // If the per quantity is a datetime, bypass the expansion of input interval of type decimal
+                        if (per.unit is not null && Units.DatePrecisionToCqlUnits.Values.Contains(per.unit))
                             continue;
                     }
 
@@ -681,8 +681,8 @@ namespace Hl7.Cql.Operators
                         per = new CqlQuantity(1, "1");
                     else
                     {
-                        Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);
-                        if (ucumUnits != null)
+                        // If the per quantity is a datetime, bypass the expansion of input interval of type integer
+                        if (per.unit is not null && Units.DatePrecisionToCqlUnits.Values.Contains(per.unit))
                             continue;
                     }
 
@@ -729,8 +729,8 @@ namespace Hl7.Cql.Operators
                         per = new CqlQuantity(1, "1");
                     else
                     {
-                        Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);
-                        if (ucumUnits != null)
+                        // If the per quantity is a datetime, bypass the expansion of input interval of type long
+                        if (per.unit is not null && Units.DatePrecisionToCqlUnits.Values.Contains(per.unit))
                             continue;
                     }
 

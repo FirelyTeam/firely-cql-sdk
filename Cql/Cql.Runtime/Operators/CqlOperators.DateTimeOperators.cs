@@ -459,8 +459,6 @@ namespace Hl7.Cql.Operators
 
         protected bool GreaterOrSamePrecision(DateTimePrecision left, string precision)
         {
-            if (Units.CqlUnitsToUCUM.TryGetValue(precision, out var ucum))
-                precision = ucum;
             var right = precision.ToDateTimePrecision();
             if (right == null || right == DateTimePrecision.Unknown)
                 throw new ArgumentException($"Unknown precision {precision}", nameof(precision));

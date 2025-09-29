@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
@@ -15,7 +13,7 @@ namespace Hl7.Cql.Primitives
     /// </summary>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#quantity"/>
     [CqlPrimitiveType(CqlPrimitiveType.Quantity)]
-    public class CqlQuantity
+    public class CqlQuantity : IUnaryNegationOperators<CqlQuantity?, CqlQuantity?>
     {
         /// <summary>
         /// Creates an instance.
@@ -30,7 +28,7 @@ namespace Hl7.Cql.Primitives
         public CqlQuantity(decimal? value, string? unit)
         {
             this.value = value;
-            this.unit = unit != null && Units.CqlUnitsToUCUM.TryGetValue(unit, out var ucumUnits) ? ucumUnits : unit;
+            this.unit = unit;
         }
 
         /// <summary>
@@ -51,10 +49,6 @@ namespace Hl7.Cql.Primitives
             if (value == null || unit == null)
                 return null;
             var unitString = unit;
-            if (Units.UCUMUnitsToCql.TryGetValue(unit, out var cqlUnit))
-            {
-                unitString = cqlUnit;
-            }
 
             return string.Create(CultureInfo.InvariantCulture, $"{value} '{unitString}'");
         }
@@ -102,5 +96,26 @@ namespace Hl7.Cql.Primitives
             else return v;
         }
 
+        /// <summary>
+        /// Returns the negated value of the specified <see cref="CqlQuantity"/> instance.
+        /// </summary>
+        /// <param name="value">The <see cref="CqlQuantity"/> to negate. If <see langword="null"/>, the result is <see langword="null"/>.</param>
+        /// <returns>A <see cref="CqlQuantity"/> representing the negated value of <paramref name="value"/>; or <see
+        /// langword="null"/> if <paramref name="value"/> is <see langword="null"/>.</returns>
+        public static CqlQuantity? operator -(CqlQuantity? value) => Negate(value)!;
+
+        /// <summary>
+        /// Returns a new CqlQuantity with the value negated, preserving the unit. If the input value is null, the
+        /// result will also have a null value.
+        /// </summary>
+        /// <param name="cqlQuantity">The quantity to negate. May be null.</param>
+        /// <returns>A new CqlQuantity with the negated value and the same unit as the input; or null if the input is null.</returns>
+        public static CqlQuantity? Negate(CqlQuantity? cqlQuantity) =>
+            cqlQuantity switch
+            {
+                { value: { } value, unit: var unit } => new CqlQuantity(-value, unit),
+                { value: null, unit: var unit }      => new CqlQuantity(null, unit),
+                null                                 => null,
+            };
     }
 }

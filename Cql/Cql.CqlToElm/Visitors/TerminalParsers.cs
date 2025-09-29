@@ -77,22 +77,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // This is either a unit, or a datetimeprecision (which we parse as text here)
             var unitText = context.unit().STRING().ParseString() ?? context.unit().GetText();
-            var unit = translateUnit(unitText);
 
-            return (decimalValue, unit!);
-
-            static string translateUnit(string u) => u switch
-            {
-                "year" or "years" => "a",
-                "month" or "months" => "mo",
-                "week" or "weeks" => "wk",
-                "day" or "days" => "d",
-                "hour" or "hours" => "h",
-                "minute" or "minutes" => "min",
-                "second" or "seconds" => "s",
-                "millisecond" or "milliseconds" => "ms",
-                _ => u
-            };
+            // We should actually validate the range of units here, but for now we just return it as-is.
+            return (decimalValue, unitText!);
         }
 
 
@@ -140,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                _ => throw new InvalidOperationException($"Encountered invalid date time precision {context.GetText()}.")
            };
 
-        
+
 
 
         // : (qualifier '.')* identifier

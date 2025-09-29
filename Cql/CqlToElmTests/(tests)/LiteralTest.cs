@@ -1366,7 +1366,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(6m, quantity.value);
-                Assert.AreEqual("a", quantity.unit);
+                Assert.AreEqual("year", quantity.unit);
             }
         }
 
@@ -1388,7 +1388,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(6m, quantity.value);
-                Assert.AreEqual("a", quantity.unit);
+                Assert.AreEqual("years", quantity.unit);
             }
         }
 
@@ -1410,7 +1410,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1.245671213m, quantity.value);
-                Assert.AreEqual("mo", quantity.unit);
+                Assert.AreEqual("month", quantity.unit);
             }
         }
 
@@ -1432,7 +1432,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1.245671213m, quantity.value);
-                Assert.AreEqual("mo", quantity.unit);
+                Assert.AreEqual("months", quantity.unit);
             }
         }
 
@@ -1454,7 +1454,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
-                Assert.AreEqual("d", quantity.unit);
+                Assert.AreEqual("day", quantity.unit);
             }
         }
 
@@ -1476,7 +1476,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
-                Assert.AreEqual("d", quantity.unit);
+                Assert.AreEqual("days", quantity.unit);
             }
         }
 
@@ -1498,7 +1498,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
-                Assert.AreEqual("h", quantity.unit);
+                Assert.AreEqual("hour", quantity.unit);
             }
         }
 
@@ -1520,7 +1520,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
-                Assert.AreEqual("h", quantity.unit);
+                Assert.AreEqual("hours", quantity.unit);
             }
         }
 
@@ -1542,7 +1542,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0.25m, quantity.value);
-                Assert.AreEqual("min", quantity.unit);
+                Assert.AreEqual("minute", quantity.unit);
             }
         }
 
@@ -1564,7 +1564,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0.25m, quantity.value);
-                Assert.AreEqual("min", quantity.unit);
+                Assert.AreEqual("minutes", quantity.unit);
             }
         }
 
@@ -1586,7 +1586,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1m, quantity.value);
-                Assert.AreEqual("s", quantity.unit);
+                Assert.AreEqual("second", quantity.unit);
             }
         }
 
@@ -1609,7 +1609,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1m, quantity.value);
-                Assert.AreEqual("s", quantity.unit);
+                Assert.AreEqual("seconds", quantity.unit);
             }
         }
 
@@ -1631,7 +1631,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(2000000m, quantity.value);
-                Assert.AreEqual("ms", quantity.unit);
+                Assert.AreEqual("millisecond", quantity.unit);
             }
         }
 
@@ -1653,7 +1653,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(2000000m, quantity.value);
-                Assert.AreEqual("ms", quantity.unit);
+                Assert.AreEqual("milliseconds", quantity.unit);
             }
         }
 

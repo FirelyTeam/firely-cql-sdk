@@ -99,8 +99,16 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
-            else return new CqlQuantity(Add(left.value, right.value), left.unit);
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
+            else
+                return new CqlQuantity(Add(left.value, right.value), left.unit);
         }
 
         #endregion
@@ -464,7 +472,14 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
         }
@@ -743,7 +758,14 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
         }
 
@@ -837,6 +859,33 @@ namespace Hl7.Cql.Operators
             else
                 return new CqlQuantity(TruncatedDivide(left.value, right.value), "1");
         }
+        private static void CompareNormalizedUnits(string? leftUnit, string? rightUnit)
+        {
+            string normalizedLeftUnit = leftUnit ?? string.Empty;
+            string normalizedRightUnit = rightUnit ?? string.Empty;
+
+            if (!string.IsNullOrEmpty(leftUnit) && leftUnit.EndsWith("s"))
+            {
+                var singularLeft = leftUnit.Substring(0, leftUnit.Length - 1);
+                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularLeft, out _ ))
+                {
+                    normalizedLeftUnit = singularLeft;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(rightUnit) && rightUnit.EndsWith("s"))
+            {
+                var singularRight = rightUnit.Substring(0, rightUnit.Length - 1);
+                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularRight, out _))
+                {
+                    normalizedRightUnit = singularRight;
+                }
+            }
+
+            if (normalizedLeftUnit != normalizedRightUnit)
+                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+        }
+
         #endregion
     }
 }
