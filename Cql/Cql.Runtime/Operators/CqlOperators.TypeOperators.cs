@@ -205,8 +205,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || argument.value == null || unit == null)
                 return null;
-            if (Units.CqlUnitsToUCUM.TryGetValue(unit, out var converted))
-                unit = converted;
+
             var newQuantity = UnitConverter.ChangeUnits(argument, unit);
             return newQuantity;
         }

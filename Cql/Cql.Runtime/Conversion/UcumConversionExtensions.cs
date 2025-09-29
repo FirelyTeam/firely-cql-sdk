@@ -12,7 +12,7 @@ using M = Fhir.Metrics;
 namespace Hl7.Cql.Conversion
 {
     /// <summary>
-    /// Utility functions for working with Fireky's UCUM library, which allows full support for conversions within the UCUM unit system.
+    /// Utility functions for working with Firely's UCUM library, which allows full support for conversions within the UCUM unit system.
     /// </summary>
     internal static class Ucum
     {
