@@ -18,7 +18,7 @@ public class LibrarySetTests
     public void LoadLibraryAndDependencies_ReturnsLibraryAndDependencies_WhenGivenDirectoryAndLibraryName()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.QICore2024.ElmDir, "BreastCancerScreeningFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.DqmQiCore2025.ElmDir, "CMS125FHIRBreastCancerScreen");
         Assert.IsTrue(libraries.Count == 10, "Expected 10 libraries to load for BreastCancerScreeningFHIR");
         Assert.IsTrue(librarySet.Cast<object>().Count() == 10, "Expected to enumerate over 10 libraries for BreastCancerScreeningFHIR");
     }
@@ -27,8 +27,8 @@ public class LibrarySetTests
     public void LoadLibraryAndDependencies_ReturnsTopologicallyOrderedLibraries_WhenEnumerating()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.QICore2024.ElmDir, "BreastCancerScreeningFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.DqmQiCore2025.ElmDir, "CMS125FHIRBreastCancerScreen");
         var list = string.Join(", ", libraries.Select(l => l.identifier.id));
-        Assert.AreEqual("BreastCancerScreeningFHIR, FHIRHelpers, SupplementalDataElements, QICoreCommon, AdultOutpatientEncounters, Hospice, Status, PalliativeCare, AdvancedIllnessandFrailty, CumulativeMedicationDuration", list);
+        Assert.AreEqual("CMS125FHIRBreastCancerScreen, FHIRHelpers, SupplementalDataElements, QICoreCommon, AdultOutpatientEncounters, Hospice, Status, PalliativeCare, AdvancedIllnessandFrailty, CumulativeMedicationDuration", list);
     }
 }

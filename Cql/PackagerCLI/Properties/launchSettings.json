@@ -20,13 +20,6 @@
       "commandName": "Project",
       "commandLineArgs": ""
     },
-    "PackageCLI (RR23 CQL->FHIR)": {
-      "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/RR23/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/RR23/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/RR23/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/RR23/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/RR23/CSharp\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "RR23"
-      }
-    },
     "PackageCLI (Demo CQL->ELM)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/ElmOut\" ",
@@ -111,6 +104,13 @@
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
+    "PackageCLI (RR23 CQL->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/RR23/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/RR23/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/RR23/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/RR23/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/RR23/CSharp\" ",
+      "environmentVariables": {
+        "CQLPACKAGE_PROFILE": "RR23"
+      }
+    },
     "PackageCLI (Ncqa.DQIC)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" ",
@@ -118,25 +118,11 @@
         "CQLPACKAGE_PROFILE": "NCQA.DQIC"
       }
     },
-    "PackageCLI (ecqm-content-qicore-2024)": {
+    "PackageCLI (dqm-content-qicore-2025)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2024/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-qicore-2024/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.dqm-content-qicore-2025/CSharp\" ",
       "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "ecqm-content-qicore-2024"
-      }
-    },
-    "PackageCLI (ecqm-content-qicore-2025)": {
-      "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-qicore-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-qicore-2025/CSharp\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "ecqm-content-qicore-2025"
-      }
-    },
-    "PackageCLI (ecqm-content-cms-2025)": {
-      "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/ecqm-content-cms-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.ecqm-content-cms-2025/CSharp\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "ecqm-content-cms-2025"
+        "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     }
   }

@@ -1,0 +1,3388 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.28.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "CMS104FHIRSTKDCAntithrombotic",
+         "version" : "1.0.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
+         }, {
+            "locator" : "3:1-3:28",
+            "localIdentifier" : "QICore",
+            "uri" : "http://hl7.org/fhir",
+            "annotation" : [ ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "5:1-5:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.4.000",
+            "annotation" : [ ]
+         }, {
+            "locator" : "6:1-6:52",
+            "localIdentifier" : "CQMCommon",
+            "path" : "CQMCommon",
+            "version" : "4.1.000",
+            "annotation" : [ ]
+         }, {
+            "locator" : "7:1-7:58",
+            "localIdentifier" : "QICoreCommon",
+            "path" : "QICoreCommon",
+            "version" : "4.0.000",
+            "annotation" : [ ]
+         }, {
+            "locator" : "8:1-8:61",
+            "localIdentifier" : "SDE",
+            "path" : "SupplementalDataElements",
+            "version" : "5.1.000",
+            "annotation" : [ ]
+         }, {
+            "locator" : "9:1-9:48",
+            "localIdentifier" : "TJC",
+            "path" : "TJCOverall",
+            "version" : "8.25.000",
+            "annotation" : [ ]
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "16:1-16:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "annotation" : [ ],
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "16:32-16:49",
+               "type" : "IntervalTypeSpecifier",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "229",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "locator" : "16:41-16:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "11:1-11:123",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Antithrombotic Therapy for Ischemic Stroke",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
+         }, {
+            "locator" : "12:1-12:127",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Medical Reason For Not Providing Treatment",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
+         }, {
+            "locator" : "13:1-13:99",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Patient Refusal",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
+         }, {
+            "locator" : "14:1-14:141",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "18:1-18:15",
+            "name" : "Patient",
+            "annotation" : [ ]
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "18:1-18:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
+               "operand" : {
+                  "locator" : "18:1-18:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "locator" : "20:1-21:33",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "21:3-21:33",
+               "name" : "Ischemic Stroke Encounter",
+               "libraryName" : "TJC",
+               "type" : "ExpressionRef",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "23:1-24:22",
+            "name" : "Denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "24:3-24:22",
+               "name" : "Initial Population",
+               "type" : "ExpressionRef",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "26:1-28:70",
+            "name" : "Denominator Exclusions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "27:3-28:70",
+               "type" : "Union",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               }, {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "operand" : [ {
+                  "locator" : "27:3-27:61",
+                  "name" : "Ischemic Stroke Encounters With Discharge Disposition",
+                  "libraryName" : "TJC",
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               }, {
+                  "locator" : "28:11-28:70",
+                  "name" : "Encounter With Comfort Measures During Hospitalization",
+                  "libraryName" : "TJC",
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "30:1-42:9",
+            "name" : "Numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "31:3-42:9",
+               "type" : "Query",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "31:3-31:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "31:3-31:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "locator" : "32:5-42:9",
+                  "alias" : "DischargeAntithrombotic",
+                  "type" : "With",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "32:10-32:76",
+                     "type" : "Union",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "annotation" : [ ],
+                        "codes" : {
+                           "locator" : "32:32-32:75",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef",
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }, {
+                        "locator" : "32:10-32:76",
+                        "type" : "Query",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "source" : [ {
+                           "locator" : "32:10-32:76",
+                           "alias" : "MR",
+                           "annotation" : [ ],
+                           "expression" : {
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           }
+                        } ],
+                        "let" : [ ],
+                        "relationship" : [ {
+                           "locator" : "32:10-32:76",
+                           "alias" : "M",
+                           "type" : "With",
+                           "annotation" : [ ],
+                           "expression" : {
+                              "dataType" : "{http://hl7.org/fhir}Medication",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           },
+                           "suchThat" : {
+                              "type" : "And",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "type" : "Equal",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "path" : "id.value",
+                                    "scope" : "M",
+                                    "type" : "Property",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "Last",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    } ],
+                                    "source" : {
+                                       "type" : "Split",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "stringToSplit" : {
+                                          "path" : "medication.reference.value",
+                                          "scope" : "MR",
+                                          "type" : "Property",
+                                          "annotation" : [ ]
+                                       },
+                                       "separator" : {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : "/",
+                                          "type" : "Literal",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "InValueSet",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "code" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "M",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    } ]
+                                 },
+                                 "valueset" : {
+                                    "locator" : "32:32-32:75",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }
+                        } ]
+                     } ]
+                  },
+                  "suchThat" : {
+                     "locator" : "33:17-42:9",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "locator" : "33:17-38:84",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "locator" : "33:17-37:9",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           } ],
+                           "operand" : [ {
+                              "locator" : "33:17-34:125",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "And",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "33:17-33:75",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "33:17-33:46",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "annotation" : [ ],
+                                    "source" : {
+                                       "path" : "status",
+                                       "scope" : "DischargeAntithrombotic",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "locator" : "33:51-33:75",
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "element" : [ {
+                                       "locator" : "33:53-33:60",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "active",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "33:63-33:73",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "completed",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "34:13-34:125",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "34:13-34:42",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "annotation" : [ ],
+                                    "source" : {
+                                       "path" : "intent",
+                                       "scope" : "DischargeAntithrombotic",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "locator" : "34:47-34:125",
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "element" : [ {
+                                       "locator" : "34:49-34:55",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "order",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "34:58-34:73",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "original-order",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "34:76-34:89",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "reflex-order",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "34:92-34:105",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "filler-order",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "34:108-34:123",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "instance-order",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "35:13-37:9",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Or",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "35:15-35:53",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "name" : "isCommunity",
+                                 "libraryName" : "QICoreCommon",
+                                 "type" : "FunctionRef",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ]
+                                 } ],
+                                 "operand" : [ {
+                                    "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "locator" : "35:15-35:37",
+                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "DischargeAntithrombotic",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    },
+                                    "asTypeSpecifier" : {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ]
+                                    }
+                                 } ]
+                              }, {
+                                 "locator" : "36:16-36:54",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "name" : "isDischarge",
+                                 "libraryName" : "QICoreCommon",
+                                 "type" : "FunctionRef",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ]
+                                 } ],
+                                 "operand" : [ {
+                                    "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "locator" : "36:16-36:38",
+                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "DischargeAntithrombotic",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    },
+                                    "asTypeSpecifier" : {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ]
+                                    }
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "38:13-38:84",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           } ],
+                           "operand" : [ {
+                              "locator" : "38:13-38:46",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "path" : "value",
+                              "type" : "Property",
+                              "annotation" : [ ],
+                              "source" : {
+                                 "path" : "authoredOn",
+                                 "scope" : "DischargeAntithrombotic",
+                                 "type" : "Property",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "locator" : "38:55-38:84",
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "path" : "period",
+                                 "scope" : "IschemicStrokeEncounter",
+                                 "type" : "Property",
+                                 "annotation" : [ ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "locator" : "39:13-42:9",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Not",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : {
+                           "locator" : "39:17-42:9",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Exists",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Task",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           } ],
+                           "operand" : {
+                              "locator" : "39:24-42:9",
+                              "type" : "Query",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Task",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "source" : [ {
+                                 "locator" : "39:26-39:52",
+                                 "alias" : "TaskReject",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Task",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "expression" : {
+                                    "locator" : "39:26-39:41",
+                                    "dataType" : "{http://hl7.org/fhir}Task",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected",
+                                    "type" : "Retrieve",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Task",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
+                                 }
+                              } ],
+                              "let" : [ ],
+                              "relationship" : [ ],
+                              "where" : {
+                                 "locator" : "40:13-41:58",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "And",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "40:19-40:73",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "name" : "references",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Reference",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Resource",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ],
+                                    "operand" : [ {
+                                       "locator" : "40:19-40:34",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Reference",
+                                       "path" : "focus",
+                                       "scope" : "TaskReject",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "40:49-40:71",
+                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "DischargeAntithrombotic",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    } ]
+                                 }, {
+                                    "locator" : "41:19-41:58",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "Equivalent",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ],
+                                    "operand" : [ {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : [ {
+                                          "path" : "code",
+                                          "scope" : "TaskReject",
+                                          "type" : "Property",
+                                          "annotation" : [ ]
+                                       } ]
+                                    }, {
+                                       "type" : "ToConcept",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "operand" : {
+                                          "locator" : "41:37-41:58",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "name" : "Fulfill",
+                                          "libraryName" : "QICoreCommon",
+                                          "type" : "CodeRef",
+                                          "annotation" : [ ]
+                                       }
+                                    } ]
+                                 } ]
+                              }
+                           }
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "53:1-72:5",
+            "name" : "Reason For Not Giving Antithrombotic At Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "ChoiceTypeSpecifier",
+                  "annotation" : [ ],
+                  "choice" : [ {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }, {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  } ]
+               }
+            },
+            "expression" : {
+               "locator" : "54:3-72:5",
+               "type" : "Union",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "annotation" : [ ],
+                     "choice" : [ {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               },
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "annotation" : [ ],
+                     "choice" : [ {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               }, {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "annotation" : [ ],
+                     "choice" : [ {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               } ],
+               "operand" : [ {
+                  "type" : "As",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "operand" : {
+                     "locator" : "54:3-63:3",
+                     "type" : "Query",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "source" : [ {
+                        "locator" : "54:5-54:102",
+                        "alias" : "NoAntithromboticDischarge",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "expression" : {
+                           "locator" : "54:5-54:76",
+                           "type" : "Union",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           } ],
+                           "operand" : [ {
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "codes" : {
+                                 "locator" : "54:32-54:75",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef",
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           }, {
+                              "locator" : "54:5-54:76",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "~",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "54:32-54:75",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef",
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           } ]
+                        }
+                     } ],
+                     "let" : [ ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "locator" : "55:7-62:127",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "locator" : "55:13-61:73",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           } ],
+                           "operand" : [ {
+                              "locator" : "55:13-60:9",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "And",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "55:13-57:7",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "Or",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "55:15-55:98",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "AnyInValueSet",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    } ],
+                                    "codes" : {
+                                       "locator" : "55:15-55:50",
+                                       "type" : "Query",
+                                       "annotation" : [ ],
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "source" : [ {
+                                          "alias" : "$this",
+                                          "annotation" : [ ],
+                                          "expression" : {
+                                             "path" : "reasonCode",
+                                             "scope" : "NoAntithromboticDischarge",
+                                             "type" : "Property",
+                                             "annotation" : [ ]
+                                          }
+                                       } ],
+                                       "let" : [ ],
+                                       "relationship" : [ ],
+                                       "return" : {
+                                          "distinct" : false,
+                                          "annotation" : [ ],
+                                          "expression" : {
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "annotation" : [ ],
+                                             "signature" : [ ],
+                                             "operand" : [ {
+                                                "name" : "$this",
+                                                "type" : "AliasRef",
+                                                "annotation" : [ ]
+                                             } ]
+                                          }
+                                       }
+                                    },
+                                    "valueset" : {
+                                       "locator" : "55:55-55:98",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Medical Reason For Not Providing Treatment",
+                                       "preserve" : true,
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "locator" : "56:14-56:70",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "AnyInValueSet",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    } ],
+                                    "codes" : {
+                                       "locator" : "56:14-56:49",
+                                       "type" : "Query",
+                                       "annotation" : [ ],
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "source" : [ {
+                                          "alias" : "$this",
+                                          "annotation" : [ ],
+                                          "expression" : {
+                                             "path" : "reasonCode",
+                                             "scope" : "NoAntithromboticDischarge",
+                                             "type" : "Property",
+                                             "annotation" : [ ]
+                                          }
+                                       } ],
+                                       "let" : [ ],
+                                       "relationship" : [ ],
+                                       "return" : {
+                                          "distinct" : false,
+                                          "annotation" : [ ],
+                                          "expression" : {
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "annotation" : [ ],
+                                             "signature" : [ ],
+                                             "operand" : [ {
+                                                "name" : "$this",
+                                                "type" : "AliasRef",
+                                                "annotation" : [ ]
+                                             } ]
+                                          }
+                                       }
+                                    },
+                                    "valueset" : {
+                                       "locator" : "56:54-56:70",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Patient Refusal",
+                                       "preserve" : true,
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "locator" : "58:13-60:9",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "Or",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "58:15-58:55",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "name" : "isCommunity",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ]
+                                    } ],
+                                    "operand" : [ {
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "locator" : "58:15-58:39",
+                                          "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "name" : "NoAntithromboticDischarge",
+                                          "type" : "AliasRef",
+                                          "annotation" : [ ]
+                                       },
+                                       "asTypeSpecifier" : {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "choice" : [ {
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          } ]
+                                       }
+                                    } ]
+                                 }, {
+                                    "locator" : "59:16-59:56",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "name" : "isDischarge",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ]
+                                    } ],
+                                    "operand" : [ {
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "locator" : "59:16-59:40",
+                                          "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "name" : "NoAntithromboticDischarge",
+                                          "type" : "AliasRef",
+                                          "annotation" : [ ]
+                                       },
+                                       "asTypeSpecifier" : {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "choice" : [ {
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
+                                          } ]
+                                       }
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "61:13-61:73",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "In",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "61:13-61:44",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "annotation" : [ ],
+                                 "source" : {
+                                    "path" : "status",
+                                    "scope" : "NoAntithromboticDischarge",
+                                    "type" : "Property",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "locator" : "61:49-61:73",
+                                 "type" : "List",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "element" : [ {
+                                    "locator" : "61:51-61:58",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "active",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "locator" : "61:61-61:71",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "completed",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "62:13-62:127",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           } ],
+                           "operand" : [ {
+                              "locator" : "62:13-62:44",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "path" : "value",
+                              "type" : "Property",
+                              "annotation" : [ ],
+                              "source" : {
+                                 "path" : "intent",
+                                 "scope" : "NoAntithromboticDischarge",
+                                 "type" : "Property",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "locator" : "62:49-62:127",
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "element" : [ {
+                                 "locator" : "62:51-62:57",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "order",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "locator" : "62:60-62:75",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "original-order",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "locator" : "62:78-62:91",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "reflex-order",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "locator" : "62:94-62:107",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "filler-order",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "locator" : "62:110-62:125",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "instance-order",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              } ]
+                           } ]
+                        } ]
+                     }
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "annotation" : [ ],
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ]
+                     }
+                  }
+               }, {
+                  "type" : "As",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "operand" : {
+                     "locator" : "64:11-72:5",
+                     "type" : "Query",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "source" : [ {
+                        "locator" : "64:13-64:100",
+                        "alias" : "MedReqAntithrombotic",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "expression" : {
+                           "locator" : "64:13-64:79",
+                           "type" : "Union",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "signature" : [ {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           } ],
+                           "operand" : [ {
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "codes" : {
+                                 "locator" : "64:35-64:78",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef",
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           }, {
+                              "locator" : "64:13-64:79",
+                              "type" : "Query",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "source" : [ {
+                                 "locator" : "64:13-64:79",
+                                 "alias" : "MR",
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                    "type" : "Retrieve",
+                                    "annotation" : [ ],
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
+                                 }
+                              } ],
+                              "let" : [ ],
+                              "relationship" : [ {
+                                 "locator" : "64:13-64:79",
+                                 "alias" : "M",
+                                 "type" : "With",
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "dataType" : "{http://hl7.org/fhir}Medication",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication",
+                                    "type" : "Retrieve",
+                                    "annotation" : [ ],
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
+                                 },
+                                 "suchThat" : {
+                                    "type" : "And",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ],
+                                    "operand" : [ {
+                                       "type" : "Equal",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "operand" : [ {
+                                          "path" : "id.value",
+                                          "scope" : "M",
+                                          "type" : "Property",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "Last",
+                                          "annotation" : [ ],
+                                          "signature" : [ {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
+                                             }
+                                          } ],
+                                          "source" : {
+                                             "type" : "Split",
+                                             "annotation" : [ ],
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
+                                             } ],
+                                             "stringToSplit" : {
+                                                "path" : "medication.reference.value",
+                                                "scope" : "MR",
+                                                "type" : "Property",
+                                                "annotation" : [ ]
+                                             },
+                                             "separator" : {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                "value" : "/",
+                                                "type" : "Literal",
+                                                "annotation" : [ ]
+                                             }
+                                          }
+                                       } ]
+                                    }, {
+                                       "type" : "InValueSet",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "code" : {
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "annotation" : [ ],
+                                          "signature" : [ ],
+                                          "operand" : [ {
+                                             "path" : "code",
+                                             "scope" : "M",
+                                             "type" : "Property",
+                                             "annotation" : [ ]
+                                          } ]
+                                       },
+                                       "valueset" : {
+                                          "locator" : "64:35-64:78",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                          "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                                          "preserve" : true,
+                                          "annotation" : [ ]
+                                       }
+                                    } ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     } ],
+                     "let" : [ ],
+                     "relationship" : [ {
+                        "locator" : "65:9-71:56",
+                        "alias" : "TaskReject",
+                        "type" : "With",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Task",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "expression" : {
+                           "locator" : "65:14-65:29",
+                           "dataType" : "{http://hl7.org/fhir}Task",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected",
+                           "type" : "Retrieve",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Task",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
+                        },
+                        "suchThat" : {
+                           "locator" : "66:21-71:56",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           } ],
+                           "operand" : [ {
+                              "locator" : "66:21-70:72",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "And",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "66:21-69:13",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "And",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "66:21-66:72",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "name" : "references",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Reference",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Resource",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ],
+                                    "operand" : [ {
+                                       "locator" : "66:21-66:36",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Reference",
+                                       "path" : "focus",
+                                       "scope" : "TaskReject",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "66:51-66:70",
+                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "MedReqAntithrombotic",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    } ]
+                                 }, {
+                                    "locator" : "67:17-69:13",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "type" : "Or",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    } ],
+                                    "operand" : [ {
+                                       "locator" : "67:19-67:89",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "InValueSet",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "code" : {
+                                          "locator" : "67:19-67:41",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "annotation" : [ ],
+                                          "signature" : [ ],
+                                          "operand" : [ {
+                                             "path" : "statusReason",
+                                             "scope" : "TaskReject",
+                                             "type" : "Property",
+                                             "annotation" : [ ]
+                                          } ]
+                                       },
+                                       "valueset" : {
+                                          "locator" : "67:46-67:89",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                          "name" : "Medical Reason For Not Providing Treatment",
+                                          "preserve" : true,
+                                          "annotation" : [ ]
+                                       }
+                                    }, {
+                                       "locator" : "68:20-68:63",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "InValueSet",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "code" : {
+                                          "locator" : "68:20-68:42",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "annotation" : [ ],
+                                          "signature" : [ ],
+                                          "operand" : [ {
+                                             "path" : "statusReason",
+                                             "scope" : "TaskReject",
+                                             "type" : "Property",
+                                             "annotation" : [ ]
+                                          } ]
+                                       },
+                                       "valueset" : {
+                                          "locator" : "68:47-68:63",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                          "name" : "Patient Refusal",
+                                          "preserve" : true,
+                                          "annotation" : [ ]
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "70:17-70:72",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "70:17-70:43",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "annotation" : [ ],
+                                    "source" : {
+                                       "path" : "status",
+                                       "scope" : "MedReqAntithrombotic",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "locator" : "70:48-70:72",
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "element" : [ {
+                                       "locator" : "70:50-70:57",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "active",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "locator" : "70:60-70:70",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "completed",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "71:17-71:56",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Equivalent",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "path" : "code",
+                                    "scope" : "TaskReject",
+                                    "type" : "Property",
+                                    "annotation" : [ ]
+                                 } ]
+                              }, {
+                                 "type" : "ToConcept",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : {
+                                    "locator" : "71:35-71:56",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "name" : "Fulfill",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "CodeRef",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     } ]
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "annotation" : [ ],
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ]
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "48:1-51:90",
+            "name" : "Encounter With Documented Reason For No Antithrombotic At Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "49:3-51:90",
+               "type" : "Query",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "49:3-49:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "49:3-49:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "locator" : "50:5-51:90",
+                  "alias" : "NoDischargeAntithrombotic",
+                  "type" : "With",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "annotation" : [ ],
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "50:10-50:60",
+                     "name" : "Reason For Not Giving Antithrombotic At Discharge",
+                     "type" : "ExpressionRef",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "annotation" : [ ],
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }, {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "locator" : "51:17-51:90",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "annotation" : [ ],
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "locator" : "51:17-51:52",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "annotation" : [ ],
+                        "source" : {
+                           "path" : "authoredOn",
+                           "scope" : "NoDischargeAntithrombotic",
+                           "type" : "Property",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "locator" : "51:61-51:90",
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Period",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "path" : "period",
+                           "scope" : "IschemicStrokeEncounter",
+                           "type" : "Property",
+                           "annotation" : [ ]
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "79:1-85:132",
+            "name" : "Pharmacological Contraindications For Antithrombotic Therapy At Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "80:3-85:132",
+               "type" : "Query",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "80:3-80:120",
+                  "alias" : "PharmacologicalContraindications",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "80:3-80:87",
+                     "type" : "Union",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "annotation" : [ ],
+                        "codes" : {
+                           "locator" : "80:25-80:86",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+                           "preserve" : true,
+                           "type" : "ValueSetRef",
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }, {
+                        "locator" : "80:3-80:87",
+                        "type" : "Query",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "source" : [ {
+                           "locator" : "80:3-80:87",
+                           "alias" : "MR",
+                           "annotation" : [ ],
+                           "expression" : {
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           }
+                        } ],
+                        "let" : [ ],
+                        "relationship" : [ {
+                           "locator" : "80:3-80:87",
+                           "alias" : "M",
+                           "type" : "With",
+                           "annotation" : [ ],
+                           "expression" : {
+                              "dataType" : "{http://hl7.org/fhir}Medication",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication",
+                              "type" : "Retrieve",
+                              "annotation" : [ ],
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           },
+                           "suchThat" : {
+                              "type" : "And",
+                              "annotation" : [ ],
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ],
+                              "operand" : [ {
+                                 "type" : "Equal",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "operand" : [ {
+                                    "path" : "id.value",
+                                    "scope" : "M",
+                                    "type" : "Property",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "Last",
+                                    "annotation" : [ ],
+                                    "signature" : [ {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }
+                                    } ],
+                                    "source" : {
+                                       "type" : "Split",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
+                                       } ],
+                                       "stringToSplit" : {
+                                          "path" : "medication.reference.value",
+                                          "scope" : "MR",
+                                          "type" : "Property",
+                                          "annotation" : [ ]
+                                       },
+                                       "separator" : {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : "/",
+                                          "type" : "Literal",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "InValueSet",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ],
+                                 "code" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "M",
+                                       "type" : "Property",
+                                       "annotation" : [ ]
+                                    } ]
+                                 },
+                                 "valueset" : {
+                                    "locator" : "80:25-80:86",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }
+                        } ]
+                     } ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "81:5-85:132",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "annotation" : [ ],
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  } ],
+                  "operand" : [ {
+                     "locator" : "81:11-84:78",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "locator" : "81:11-83:5",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "locator" : "81:13-81:60",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "isCommunity",
+                           "libraryName" : "QICoreCommon",
+                           "type" : "FunctionRef",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "type" : "ChoiceTypeSpecifier",
+                              "annotation" : [ ],
+                              "choice" : [ {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ]
+                           } ],
+                           "operand" : [ {
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "locator" : "81:13-81:44",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "PharmacologicalContraindications",
+                                 "type" : "AliasRef",
+                                 "annotation" : [ ]
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "ChoiceTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "choice" : [ {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ]
+                              }
+                           } ]
+                        }, {
+                           "locator" : "82:12-82:59",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "isDischarge",
+                           "libraryName" : "QICoreCommon",
+                           "type" : "FunctionRef",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "type" : "ChoiceTypeSpecifier",
+                              "annotation" : [ ],
+                              "choice" : [ {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              } ]
+                           } ],
+                           "operand" : [ {
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "locator" : "82:12-82:43",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "PharmacologicalContraindications",
+                                 "type" : "AliasRef",
+                                 "annotation" : [ ]
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "ChoiceTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "choice" : [ {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
+                                 } ]
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "locator" : "84:11-84:78",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "In",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }, {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        } ],
+                        "operand" : [ {
+                           "locator" : "84:11-84:49",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "value",
+                           "type" : "Property",
+                           "annotation" : [ ],
+                           "source" : {
+                              "path" : "status",
+                              "scope" : "PharmacologicalContraindications",
+                              "type" : "Property",
+                              "annotation" : [ ]
+                           }
+                        }, {
+                           "locator" : "84:54-84:78",
+                           "type" : "List",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "element" : [ {
+                              "locator" : "84:56-84:63",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "active",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "locator" : "84:66-84:76",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "completed",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        } ]
+                     } ]
+                  }, {
+                     "locator" : "85:11-85:132",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "locator" : "85:11-85:49",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "value",
+                        "type" : "Property",
+                        "annotation" : [ ],
+                        "source" : {
+                           "path" : "intent",
+                           "scope" : "PharmacologicalContraindications",
+                           "type" : "Property",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "locator" : "85:54-85:132",
+                        "type" : "List",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "element" : [ {
+                           "locator" : "85:56-85:62",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "order",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }, {
+                           "locator" : "85:65-85:80",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "original-order",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }, {
+                           "locator" : "85:83-85:96",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "reflex-order",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }, {
+                           "locator" : "85:99-85:112",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "filler-order",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }, {
+                           "locator" : "85:115-85:130",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "instance-order",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "74:1-77:89",
+            "name" : "Encounter With Pharmacological Contraindications For Antithrombotic Therapy At Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "75:3-77:89",
+               "type" : "Query",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "75:3-75:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "75:3-75:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "locator" : "76:5-77:89",
+                  "alias" : "DischargePharmacological",
+                  "type" : "With",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "76:10-76:84",
+                     "name" : "Pharmacological Contraindications For Antithrombotic Therapy At Discharge",
+                     "type" : "ExpressionRef",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "locator" : "77:17-77:89",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "IntervalTypeSpecifier",
+                        "annotation" : [ ],
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "locator" : "77:17-77:51",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "annotation" : [ ],
+                        "source" : {
+                           "path" : "authoredOn",
+                           "scope" : "DischargePharmacological",
+                           "type" : "Property",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "locator" : "77:60-77:89",
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Period",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "path" : "period",
+                           "scope" : "IschemicStrokeEncounter",
+                           "type" : "Property",
+                           "annotation" : [ ]
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "44:1-46:100",
+            "name" : "Denominator Exceptions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "locator" : "45:3-46:100",
+               "type" : "Union",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               }, {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "operand" : [ {
+                  "locator" : "45:3-45:71",
+                  "name" : "Encounter With Documented Reason For No Antithrombotic At Discharge",
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               }, {
+                  "locator" : "46:11-46:100",
+                  "name" : "Encounter With Pharmacological Contraindications For Antithrombotic Therapy At Discharge",
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "87:1-88:21",
+            "name" : "SDE Ethnicity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "annotation" : [ ],
+               "element" : [ {
+                  "name" : "codes",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "88:3-88:21",
+               "name" : "SDE Ethnicity",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
+                  "element" : [ {
+                     "name" : "codes",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "90:1-91:17",
+            "name" : "SDE Payer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
+                  "element" : [ {
+                     "name" : "code",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }, {
+                     "name" : "period",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "annotation" : [ ],
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  } ]
+               }
+            },
+            "expression" : {
+               "locator" : "91:3-91:17",
+               "name" : "SDE Payer",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "TupleTypeSpecifier",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "code",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "name" : "period",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "93:1-94:16",
+            "name" : "SDE Race",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "annotation" : [ ],
+               "element" : [ {
+                  "name" : "codes",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "94:3-94:16",
+               "name" : "SDE Race",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
+                  "element" : [ {
+                     "name" : "codes",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "96:1-97:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "SDE Sex",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "locator" : "97:3-97:15",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+               "name" : "SDE Sex",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "annotation" : [ ]
+            }
+         } ]
+      }
+   }
+}
+
