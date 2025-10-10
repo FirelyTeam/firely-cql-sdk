@@ -551,6 +551,7 @@ Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictiona
 Hl7.Cql.Runtime.CqlContext.MessageReceived -> System.EventHandler<Hl7.Cql.Operators.MessageEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
+Hl7.Cql.Runtime.CqlContext.Parameters.set -> void
 Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! eventData) -> Hl7.Cql.Runtime.CqlContext!
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
 Hl7.Cql.Runtime.CqlLibraryIdentifier

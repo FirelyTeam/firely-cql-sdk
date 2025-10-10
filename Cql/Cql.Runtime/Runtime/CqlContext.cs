@@ -34,7 +34,7 @@ namespace Hl7.Cql.Runtime
         /// To scope a parameter globally, omit the library name and version.  If two libraries define the same parameter name but use different types, runtime errors will occur.
         /// If the value provided for a given parameter name is the incorrect type, a runtime error will occur.
         /// </remarks>
-        public IDictionary<string, object> Parameters { get; }
+        public IDictionary<string, object> Parameters { get; set; }
 
         /// <summary>
         /// Creates an instance.

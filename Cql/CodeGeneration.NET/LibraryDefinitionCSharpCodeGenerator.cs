@@ -10,6 +10,8 @@ using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Elm;
+using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -116,6 +118,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             var target = targetName == LibraryName
                              ? "this"
                              : $"{IdentifierNormalizer.Normalize(targetName)}.Instance";
+
+            if (targetName.StartsWith("Cache") && target.Contains(".Instance"))
+                target = "cache";
+
             var member = IdentifierNormalizer.Normalize(memberName);
             return $"{target}.{member}";
         }
@@ -575,6 +581,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             LambdaExpression function,
             string name,
             string specifiers,
+            Library library,
             IReadOnlyDictionary<string, string>? originalParameterNames = null)
         {
             var funcSb = new StringBuilder();
