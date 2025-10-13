@@ -393,11 +393,18 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var lambdaExpression = lambdaDef.LambdaExpression;
                     var methodName = IdentifierNormalizer.Normalize(lambdaDef.Name);
                     bool isCachableDefine = isDefinition(lambdaExpression);
+                    bool isCacheLibrary = library.identifier.id.StartsWith("Cache") || (library.includes != null && !library.includes.Any(i => i.libraryName != null && i.libraryName.StartsWith("Cache")));
                     if (isCachableDefine)
                     {
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
                         var returnType = LibrarySetWriter.TypeToCSharpConverter.ToCSharp(lambdaExpression.ReturnType);
-                        IndentedTextWriter.WriteLine($$"""
+
+                        if(isCacheLibrary)
+                            IndentedTextWriter.WriteLine($$"""
+                                                   public Lazy<{{returnType}}> {{cachedValueName}};
+                                                   """);
+                        else
+                            IndentedTextWriter.WriteLine($$"""
                                                internal Lazy<{{returnType}}> {{cachedValueName}};
                                                """);
                     }
@@ -594,7 +601,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (library.contexts != null && isCachableDefine)
             {
                 var cachedMethodName = methodName + "_Value";
-                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames);
+                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames, useLazy: true);
                 tw.WriteLine(cachedDefinitionWithBody);
 
                 var funcSb = new StringBuilder();
@@ -602,7 +609,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                 funcSb.Append(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
                 //TODO: Fix context parameter for public methods - should not require context at all
                 //however, currently the initial lambdas that are being written to CS are already adding a context in its expression body
-                funcSb.Append(methodName + "(CqlContext context = null) =>");
+                funcSb.Append(methodName + "() =>");
+                //funcSb.Append(methodName + "(CqlContext context = null) =>");
                 funcSb.AppendLine();
                 funcSb.Append("    __" + methodName + "?.Value;");
                 funcSb.AppendLine();

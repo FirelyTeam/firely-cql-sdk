@@ -97,6 +97,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
             sb.Append(targetMember);
             sb.Append("(context)");
+            //sb.Append("()");
             return sb.ToString();
         }
 
@@ -577,12 +578,32 @@ namespace Hl7.Cql.CodeGeneration.NET
             return funcSb.ToString();
         }
 
+        private string RemoveContextFromThisCalls(string lambdaBody)
+        {
+            // Replace: this.<Identifier>(context) with this.<Identifier>()
+            lambdaBody = System.Text.RegularExpressions.Regex.Replace(
+                lambdaBody,
+                @"this\.(\w+)\s*\(\s*context\s*\)",
+                "this.$1()"
+            );
+
+            // Replace: cache.<Identifier>(context) with cache.__<Identifier>?.Value
+            lambdaBody = System.Text.RegularExpressions.Regex.Replace(
+                lambdaBody,
+                @"cache\.(\w+)\s*\(\s*context\s*\)",
+                "cache.__$1?.Value"
+            );
+
+            return lambdaBody;
+        }
+
         public string ProcessDefinition(
             LambdaExpression function,
             string name,
             string specifiers,
             Library library,
-            IReadOnlyDictionary<string, string>? originalParameterNames = null)
+            IReadOnlyDictionary<string, string>? originalParameterNames = null,
+            bool useLazy=false)
         {
             var funcSb = new StringBuilder();
 
@@ -591,6 +612,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             funcSb.Append(name);
 
             var lambda = ConvertLambdaExpression(function, functionMode: true, originalParameterNames: originalParameterNames);
+
+            if (useLazy)
+                lambda = RemoveContextFromThisCalls(lambda);
+
             funcSb.Append(lambda);
 
             if (function.Body is not BlockExpression)
