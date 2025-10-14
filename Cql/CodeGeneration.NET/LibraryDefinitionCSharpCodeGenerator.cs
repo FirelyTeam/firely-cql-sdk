@@ -97,7 +97,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
             sb.Append(targetMember);
             sb.Append("(context)");
-            //sb.Append("()");
             return sb.ToString();
         }
 
@@ -602,8 +601,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string name,
             string specifiers,
             Library library,
-            IReadOnlyDictionary<string, string>? originalParameterNames = null,
-            bool useLazy=false)
+            IReadOnlyDictionary<string, string>? originalParameterNames = null)
         {
             var funcSb = new StringBuilder();
 
@@ -613,7 +611,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var lambda = ConvertLambdaExpression(function, functionMode: true, originalParameterNames: originalParameterNames);
 
-            if (useLazy)
+            if (library.contexts != null)
                 lambda = RemoveContextFromThisCalls(lambda);
 
             funcSb.Append(lambda);

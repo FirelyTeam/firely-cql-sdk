@@ -477,9 +477,9 @@ internal partial class LibrarySetCSharpCodeGenerator
             string quotedName = name.QuoteString();
             string methodName = IdentifierNormalizer.Normalize(name);
             string fieldName = IdentifierNormalizer.Normalize($"_{name}");;
-            var definitionAttributeTypeName = CqlDefinition.GetType().Name;
+            var definitionAttributeTypeName = CqlDefinition.GetType().Name;            
 
-            switch (CqlDefinition)
+                switch (CqlDefinition)
             {
                 case CqlValueSetDefinition vsd:
                 {
@@ -601,16 +601,13 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (library.contexts != null && isCachableDefine)
             {
                 var cachedMethodName = methodName + "_Value";
-                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames, useLazy: true);
+                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames);
                 tw.WriteLine(cachedDefinitionWithBody);
 
                 var funcSb = new StringBuilder();
                 funcSb.Append("public ");
                 funcSb.Append(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
-                //TODO: Fix context parameter for public methods - should not require context at all
-                //however, currently the initial lambdas that are being written to CS are already adding a context in its expression body
                 funcSb.Append(methodName + "() =>");
-                //funcSb.Append(methodName + "(CqlContext context = null) =>");
                 funcSb.AppendLine();
                 funcSb.Append("    __" + methodName + "?.Value;");
                 funcSb.AppendLine();
