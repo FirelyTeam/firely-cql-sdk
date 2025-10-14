@@ -600,10 +600,6 @@ internal partial class LibrarySetCSharpCodeGenerator
             bool isCachableDefine = isDefinition(lambdaExpression);
             if (library.contexts != null && isCachableDefine)
             {
-                var cachedMethodName = methodName + "_Value";
-                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames);
-                tw.WriteLine(cachedDefinitionWithBody);
-
                 var funcSb = new StringBuilder();
                 funcSb.Append("public ");
                 funcSb.Append(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
@@ -612,6 +608,10 @@ internal partial class LibrarySetCSharpCodeGenerator
                 funcSb.Append("    __" + methodName + "?.Value;");
                 funcSb.AppendLine();
                 tw.WriteLine(funcSb.ToString());
+
+                var cachedMethodName = methodName + "_Value";
+                var cachedDefinitionWithBody = definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, cachedMethodName, specifiers: "private", library, originalParameterNames);
+                tw.WriteLine(cachedDefinitionWithBody);
             }
             else
             {
