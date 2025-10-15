@@ -20,9 +20,9 @@ internal static class LibrarySetsDirs
         public static DirectoryInfo ResourcesDir { get; } = GetDir("LibrarySets", "Demo", "Resources");
     }
 
-    public static class Cms
+    public static class DqmQiCore2025
     {
-        public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "CMS", "Elm");
+        public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Elm");
     }
 
     private static DirectoryInfo GetDir(params string[] subPaths)

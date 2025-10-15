@@ -10,6 +10,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packaging.Toolkit;
@@ -55,9 +56,12 @@ internal sealed class ElmToFhirProgram
                 return exitCode;
             }
 
-            ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
-                                    .SetIgnoreEnumerationExceptions()
-                                    .AddElmFilesFromDirectory(
+            ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt);
+
+            if (!packOpt.ExitOnError)
+                elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
+
+            elmToolkit = elmToolkit.AddElmFilesFromDirectory(
                                         opt.ElmInDir,
                                         filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
             if (elmToolkit.ArtifactsById.Count == 0)
@@ -152,10 +156,12 @@ internal sealed class ElmToFhirProgram
     internal static int CommandHandler(
         IConsole console,
         LoggingCommand loggingCommand,
+        GlobalCommand globalCommand,
         ElmToFhirCommand elmToFhirCommand) =>
         RunProgram<ElmToFhirProgram>(
             console,
             loggingCommand,
+            globalCommand,
             elmToFhirCommand.GetConfigMapping,
             (_, services) =>
                 services.AddAndBindOptions<ElmToFhirOptions>());

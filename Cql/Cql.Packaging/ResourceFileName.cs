@@ -6,8 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Text.Json.Serialization;
 using Hl7.Cql.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Packaging;
 
@@ -22,6 +22,14 @@ namespace Hl7.Cql.Packaging;
 [JsonConverter(typeof(StringEncapsulatedValueJsonConverter<ResourceFileName>))]
 public readonly record struct ResourceFileName : IParsable<ResourceFileName>
 {
+    /// <summary>
+    /// Implicitly converts a <see cref="ResourceFileName"/> to a <see cref="string"/>
+    /// using the <see cref="FileName"/>.
+    /// </summary>
+    /// <param name="resourceFileName">The <see cref="ResourceFileName"/> to convert.</param>
+    /// <returns>The file name of the resource.</returns>
+    public static implicit operator string(ResourceFileName resourceFileName) => resourceFileName.FileName;
+
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url
     // !! Special handling around hyphens as it is used to delimit between resource type, identifier and version
 

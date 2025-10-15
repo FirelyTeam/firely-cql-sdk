@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Elm;
+using Library = Hl7.Cql.Elm.Library;
+
+namespace Hl7.Cql.Compiler.Preprocessing;
+
+/// <summary>
+/// When the Java stack turns access to a bound element in profiled QICore into ELM, it doesn't set the resultType
+/// for the `value` property correctly. This property should be of type `string`, but it is set to to the type that
+/// represents the bound valueset instead. This walker puts the right types in place, as if the ELM had been generated
+/// from unprofiled FHIR in the first place.
+/// </summary>
+internal class ProfiledValueSetPropertyCorrector(ILogger<ProfiledValueSetPropertyCorrector> logger)
+{
+    public void Fix(Library library)
+    {
+        logger.LogDebug("Preprocessing library '{library}'", library.VersionedLibraryIdentifier);
+        _walker.Start(library);
+    }
+
+    private readonly ElmTreeWalker _walker = new(node =>
+    {
+        switch (node)
+        {
+            // Correct this for the valueset UnitsOfTime, the only place where this causes problems in the current
+            // set of CMS measures. We cannot fix this in general though, and will need to report this to Bryn Rhodes
+            // so he can correct the Java stack to handle this better.
+            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/502 should be resolved before we can remove this.
+            case Property { path: "value", source: Property { path: "periodUnit" } puProp } valueProp:
+                valueProp.WithResultType(SystemTypes.StringType);
+                puProp.WithResultType(new NamedTypeSpecifier("http://hl7.org/fhir", "UnitsOfTime"));
+                break;
+        }
+
+        return false; // Continue walking children
+    });
+}

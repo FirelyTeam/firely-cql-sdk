@@ -1,6 +1,6 @@
 ﻿{
   "Logging": {
-    "ConsoleLogLevel": "Information",
+    "ConsoleLogLevel": "Debug",
     "FileLogLevel": "Debug"
   },
   "Elm": {

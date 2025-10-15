@@ -10,6 +10,8 @@
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<!-- Ensure the PackagerCLI is build first, so that the ElmToCSharp targets file succeeds -->
+		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -20,6 +22,7 @@
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />

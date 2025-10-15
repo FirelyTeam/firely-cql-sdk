@@ -33,15 +33,18 @@ internal class TupleBuilderCache : IDisposable
         }
 
         public bool TryFindTupleType(
-            IEnumerable<(Type propType, string propName, string cqlName)> tupleProps3,
+            IReadOnlyCollection<(Type propType, string propName, string cqlName)> tupleProps3,
             [NotNullWhen(true)]out Type? type)
         {
             type = _tupleTypeList
                 .FirstOrDefault(tupleType =>
                 {
-                    var isMatch = tupleProps3.All(
-                        tf => tupleType.GetProperty(tf.propName) is { PropertyType: { } tuplePropertyType }
-                              && tuplePropertyType == tf.propType);
+                    var isMatch =
+                        tupleProps3.Count == tupleType.GetProperties().Length
+                        &&
+                        tupleProps3.All(tf =>
+                                            tupleType.GetProperty(tf.propName) is { PropertyType: { } tuplePropertyType }
+                                              && tuplePropertyType == tf.propType);
                     return isMatch;
                 });
             return type != null;
@@ -70,7 +73,7 @@ internal class TupleBuilderCache : IDisposable
     /// </summary>
     /// <param name="tupleProps">A readonly collection of property names with their corresponding types.</param>
     /// <returns>Gets the type that matches the properties.</returns>
-    public Type CreateOrGetTupleTypeFor(IEnumerable<(Type propType, string cqlName)> tupleProps)
+    public Type CreateOrGetTupleTypeFor(IReadOnlyCollection<(Type propType, string cqlName)> tupleProps)
     {
         HashSet<string> propNameDuplicates = new();
         List<(Type propType, string propName, string cqlName)> tupleProps3 =
@@ -83,7 +86,6 @@ internal class TupleBuilderCache : IDisposable
                 return (tupleProp.propType, propName, tupleProp.cqlName);
             })
             .ToList();
-
         if (!_tupleTypeCache.TryFindTupleType(tupleProps3, out var tupleType))
         {
             tupleType = DefineType(tupleProps3);

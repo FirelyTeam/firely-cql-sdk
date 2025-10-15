@@ -1,0 +1,31 @@
+﻿{
+  "Elm": {
+    "SkipFiles": [
+      // Conversion Exceptions:
+      // - Cannot convert System.Collections.Generic.List`1[Hl7.Fhir.Model.ResourceReference] to Hl7.Fhir.Model.ResourceReference.
+      "NHSNGlycemicControlHypoglycemiaInitialPopulation.json",
+      // - Cannot convert Hl7.Cql.Primitives.CqlInterval`1[Hl7.Cql.Primitives.CqlDate] to Hl7.Cql.Primitives.CqlInterval`1[System.Object]
+      "CMS1173FHIRDiagnosticDelayVTE.json",
+
+      // ArgumentException: Cannot resolve type for typeSpecifier {http://hl7.org/fhir}DoNotPerformReason
+      "CMS190FHIRVTEProphylaxisICU.json",
+      "CMS108FHIRVTEProphylaxis.json",
+      "CMS108FHIRVTEProphylaxis.json",
+      "CMS190FHIRVTEProphylaxisICU.json",
+      "CMS108FHIRVTEProphylaxis.json",
+
+      // Retrieve statements can only accept terminology expressions whose type is CqlValueSet or IEnumerable.  The expression provided has a type of Hl7.Cql.Primitives.CqlCode (Parameter 'codes')
+      "CMS69FHIRPCSBMIScreenAndFollowUp.json",
+
+      // Duplicate property name CrLabObsCategory in tuple. (Parameter 'tupleProps')
+      "CMS832FHIRHHAKI.json",
+
+      // Packaging Error: Cannot resolve CodeSystemRef with name TaskCodeSystem. Library Identifier: 'CMS50FHIRReceiptofSpecialistReport-1.0.000'.
+      // "CMS50FHIRReceiptofSpecialistReport.json"
+
+    ]
+  },
+  "Packaging": {
+    "ExitOnError": false
+  }
+}

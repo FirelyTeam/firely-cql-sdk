@@ -6,7 +6,7 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<BoxHeader>CQL to ELM: </BoxHeader>
+		<BoxHeader>$(MSBuildProjectName) </BoxHeader>
 		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
 	</PropertyGroup>
@@ -38,14 +38,20 @@
 			<ElmFiles Include="$(ElmDirectory)/*.json"/>
 		</ItemGroup>
 
-		<!--~1~ Delete old ELM files @1@
+		<!-- Delete old ELM files -->
 		<Message Text="$(Box.Replace({Text}, Deleting ELM files))" Importance="High" />
 
-		<Delete Files="@(ElmFiles)" />-->
+		<Delete Files="@(ElmFiles)" />
 
 		<!-- Generate ELM files -->
 		<Message
 			Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
+
+		<Exec
+			Command="java --version"
+			ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
+		</Exec>
 
 		<Exec
 			Command="$(JavaCLI)"

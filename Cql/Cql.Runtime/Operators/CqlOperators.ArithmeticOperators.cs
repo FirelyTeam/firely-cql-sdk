@@ -54,18 +54,42 @@ namespace Hl7.Cql.Operators
         public int? Add(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type integer addition, returned null.");
+                return null;
+            }
         }
 
         public long? Add(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type long addition, returned null.");
+                return null;
+            }
         }
         public decimal? Add(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            else return left + right;
+            try
+            {
+                return checked(left + right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type decimal addition, returned null.");
+                return null;
+            }
         }
 
         public CqlQuantity? Add(CqlQuantity? left, CqlQuantity? right)
@@ -75,8 +99,16 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
-            else return new CqlQuantity(Add(left.value, right.value), left.unit);
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
+            else
+                return new CqlQuantity(Add(left.value, right.value), left.unit);
         }
 
         #endregion
@@ -440,7 +472,14 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
         }
@@ -674,18 +713,42 @@ namespace Hl7.Cql.Operators
         public int? Subtract(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type integer subtraction, returned null.");
+                return null;
+            }
         }
 
         public long? Subtract(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type long subtraction, returned null.");
+                return null;
+            }
         }
         public decimal? Subtract(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            else return left - right;
+            try
+            {
+                return checked(left - right);
+            }
+            catch (OverflowException e)
+            {
+                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type decimal subtraction, returned null.");
+                return null;
+            }
         }
 
         public CqlQuantity? Subtract(CqlQuantity? left, CqlQuantity? right)
@@ -695,7 +758,14 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != right.unit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+            {
+                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                string? leftUnit = left.unit;
+                string? rightUnit = right.unit;
+                CompareNormalizedUnits(leftUnit, rightUnit);
+
+                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+            }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
         }
 
@@ -789,6 +859,33 @@ namespace Hl7.Cql.Operators
             else
                 return new CqlQuantity(TruncatedDivide(left.value, right.value), "1");
         }
+        private static void CompareNormalizedUnits(string? leftUnit, string? rightUnit)
+        {
+            string normalizedLeftUnit = leftUnit ?? string.Empty;
+            string normalizedRightUnit = rightUnit ?? string.Empty;
+
+            if (!string.IsNullOrEmpty(leftUnit) && leftUnit.EndsWith("s"))
+            {
+                var singularLeft = leftUnit.Substring(0, leftUnit.Length - 1);
+                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularLeft, out _ ))
+                {
+                    normalizedLeftUnit = singularLeft;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(rightUnit) && rightUnit.EndsWith("s"))
+            {
+                var singularRight = rightUnit.Substring(0, rightUnit.Length - 1);
+                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularRight, out _))
+                {
+                    normalizedRightUnit = singularRight;
+                }
+            }
+
+            if (normalizedLeftUnit != normalizedRightUnit)
+                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
+        }
+
         #endregion
     }
 }

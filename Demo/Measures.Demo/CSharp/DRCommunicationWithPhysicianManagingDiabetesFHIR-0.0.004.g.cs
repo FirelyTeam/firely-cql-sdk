@@ -642,7 +642,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 "amended",
                 "corrected",
             ];
-            bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             DataType u_ = MacularExam?.Value;
             bool? v_ = context.Operators.Not((bool?)(u_ is null));
             bool? w_ = context.Operators.And(t_, v_);

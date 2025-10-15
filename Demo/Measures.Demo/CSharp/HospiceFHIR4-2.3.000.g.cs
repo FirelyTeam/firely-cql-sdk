@@ -132,7 +132,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 "active",
                 "completed",
             ];
-            bool? ar_ = context.Operators.In<string>(ap_, aq_ as IEnumerable<string>);
+            bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
             Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
             string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
             bool? au_ = context.Operators.Equal(at_, "order");

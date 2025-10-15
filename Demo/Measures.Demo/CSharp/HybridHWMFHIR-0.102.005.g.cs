@@ -302,7 +302,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     "amended",
                     "preliminary",
                 ];
-                bool? bb_ = context.Operators.In<string>(az_, ba_ as IEnumerable<string>);
+                bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
                 bool? bc_ = context.Operators.And(ax_, bb_);
                 DataType bd_ = Exam?.Value;
                 bool? be_ = context.Operators.Not((bool?)(bd_ is null));
@@ -353,7 +353,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     "amended",
                     "preliminary",
                 ];
-                bool? cg_ = context.Operators.In<string>(ce_, cf_ as IEnumerable<string>);
+                bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
                 bool? ch_ = context.Operators.And(cc_, cg_);
                 DataType ci_ = Exam?.Value;
                 bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
@@ -422,7 +422,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     "amended",
                     "preliminary",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, aw_ as IEnumerable<string>);
+                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
                 bool? ay_ = context.Operators.And(at_, ax_);
                 DataType az_ = Lab?.Value;
                 bool? ba_ = context.Operators.Not((bool?)(az_ is null));
@@ -467,7 +467,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     "amended",
                     "preliminary",
                 ];
-                bool? bx_ = context.Operators.In<string>(bv_, bw_ as IEnumerable<string>);
+                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
                 bool? by_ = context.Operators.And(bt_, bx_);
                 DataType bz_ = Lab?.Value;
                 bool? ca_ = context.Operators.Not((bool?)(bz_ is null));
@@ -546,7 +546,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
             ad_,
             ag_,
         ];
-        IEnumerable<string> ai_ = context.Operators.Flatten<string>(ah_ as IEnumerable<IEnumerable<string>>);
+        IEnumerable<string> ai_ = context.Operators.Flatten<string>((IEnumerable<IEnumerable<string>>)ah_);
 
         return ai_;
     }

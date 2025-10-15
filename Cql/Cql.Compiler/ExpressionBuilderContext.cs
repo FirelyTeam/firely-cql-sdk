@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -127,6 +127,20 @@ partial class ExpressionBuilderContext
         {
             using (PushElement(element))
             {
+                /*
+                This code is useful for setting breakpoints to inspect the expression tree at a specific element.
+                The ELM json must be modified to add an annotation tags with a debug counter first.
+
+                var debugCounter = element.annotation
+                                          ?.OfType<Annotation>()
+                                          .FirstOrDefault()?.t.FirstOrDefault(t => t.name == "debug")
+                                          ?.value;
+                if (debugCounter == "42") // Identify the correct debug counter from the ELM file
+                {
+                    ; // Set a breakpoint here
+                }
+                */
+
                 Expression? expression = element switch
                 {
                     //@formatter:off
@@ -325,12 +339,12 @@ partial class ExpressionBuilderContext
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                     && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && leftListElemType == rightListElemType)
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType))
                     return [left, right];
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
-                    && leftPointType == rightPointType)
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftPointType, rightPointType))
                     return [left, right];
             }
 
@@ -442,8 +456,7 @@ partial class ExpressionBuilderContext
                 array = Expression.NewArrayBounds(elementType, Expression.Constant(0));
             }
 
-            var asEnumerable = array.NewTypeAsExpression(typeof(IEnumerable<>).MakeGenericType(elementType));
-            return asEnumerable;
+            return array;
         }
 
         throw this.NewExpressionBuildingException($"List is the wrong type");
@@ -1689,60 +1702,7 @@ internal partial class ExpressionBuilderContext
 
             if (query.sort is { by.Length: > 0 })
             {
-                if (sources.Length == 1)
-                    @return = SortClause(query, @return);
-                else
-                {
-                    throw new NotImplementedException("Sort is broken in ELM XSD?").WithContext(this);
-                    //foreach (var by in query.sort.by)
-                    //{
-                    //    var order = ListSortDirection.Ascending;
-                    //    if (by.direction == "desc" || by.direction == "descending")
-                    //        order = ListSortDirection.Descending;
-                    //    else if (by.direction == "asc" || by.direction == "ascending")
-                    //        order = ListSortDirection.Ascending;
-                    //    else throw ctx.NewExpressionBuildingException($"Invalid sort order {by.direction}");
-
-                    //    if (by.expression != null)
-                    //    {
-                    //        var parameterName = "@this";
-                    //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-                    //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    //        var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, by.expression);
-                    //        var sortMemberExpression = TranslateExpression(by.expression, subContext);
-                    //        var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-                    //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-                    //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-                    //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //    else if (by.path != null && by.resultTypeName != null)
-                    //    {
-                    //        var parameterName = "@this";
-                    //        var returnElementType = TypeResolver.GetListElementType(@return.Type);
-                    //        var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                    //        var pathMemberType = TypeResolver.ResolveType(by.resultTypeName);
-                    //        if (pathMemberType == null)
-                    //        {
-                    //            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
-                    //            ctx.LogError(msg);
-                    //            throw ctx.NewExpressionBuildingException(msg);
-                    //        }
-                    //        var pathExpression = PropertyHelper(sortMemberParameter, by.path, pathMemberType!, ctx);
-                    //        var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-                    //        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
-                    //        var sort = Operators.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
-                    //            @return, sortLambda, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //    else
-                    //    {
-                    //        var sort = Operators.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
-                    //            @return, Expression.Constant(order, typeof(SortOrder)));
-                    //        @return = sort;
-                    //    }
-                    //}
-                }
+                @return = SortClause(query, @return);
             }
 
             // Because we promoted the source to a list, we now have to demote the result again.
@@ -1918,7 +1878,7 @@ internal partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases));
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases).ToList());
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);

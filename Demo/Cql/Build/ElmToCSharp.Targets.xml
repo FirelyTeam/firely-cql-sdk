@@ -7,7 +7,7 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<BoxHeader>ELM to C#: </BoxHeader>
+		<BoxHeader></BoxHeader>
 		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
 	</PropertyGroup>
@@ -39,6 +39,7 @@
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(Profile)'!=''">$(PackagerCLIArgs) --profile "$(Profile)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" elm $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>

@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
+using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 
 namespace Hl7.Cql.Packager;
@@ -19,7 +20,7 @@ public class Program
     /// The version of the Java CQL to ELM tool that this packager is compatible with.
     /// Keep this in sync with &lt;cql.version> in the pom.xml file in this repository.
     /// </summary>
-    private const string JavaToolVersion = "3.27.0";
+    private const string JavaToolVersion = "3.28.0";
 
     internal static readonly string Disclaimer =
         Environment.NewLine +
@@ -46,6 +47,7 @@ public class Program
             }
                 //.AddOptions(ElmToFhirCommand.Options)
                 .AddGlobalOptions(LoggingCommand.Options)
+                .AddGlobalOptions(GlobalCommand.Options)
                 //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
             ;
 

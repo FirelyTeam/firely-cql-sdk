@@ -378,7 +378,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             b_,
             e_,
         ];
-        CqlDateTime g_ = context.Operators.Min<CqlDateTime>(f_ as IEnumerable<CqlDateTime>);
+        CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
         return h_;
@@ -457,7 +457,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayExpand)
         {
             int? j_ = context.Operators.End(DayExpand);

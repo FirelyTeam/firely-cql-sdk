@@ -10,6 +10,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packaging.Toolkit;
@@ -32,10 +33,12 @@ public class CqlToFhirProgram
     public static int CommandHandler(
         IConsole console,
         LoggingCommand loggingCommand,
+        GlobalCommand globalCommand,
         CqlToFhirCommand cqlToFhirCommand) =>
         RunProgram<CqlToFhirProgram>(
             console,
             loggingCommand,
+            globalCommand,
             cqlToFhirCommand.GetConfigMapping,
             (_, services) =>
                 services.AddAndBindOptions<CqlToFhirOptions>());
@@ -62,9 +65,12 @@ public class CqlToFhirProgram
                 return exitCode;
             }
 
-            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
-                                    .SetIgnoreEnumerationExceptions()
-                                    .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt);
+
+            if (!packOpt.ExitOnError)
+                cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
+
+            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
@@ -87,7 +93,7 @@ public class CqlToFhirProgram
             {
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
-                    writeIndented: elmOpt.JsonPretty,
+                    writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }

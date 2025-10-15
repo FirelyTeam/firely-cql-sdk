@@ -18,19 +18,17 @@ public class LibrarySetTests
     public void LoadLibraryAndDependencies_ReturnsLibraryAndDependencies_WhenGivenDirectoryAndLibraryName()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir,"DischargedonAntithromboticTherapyFHIR");
-        Assert.IsTrue(libraries.Count == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
-        Assert.IsTrue(librarySet.Cast<object>().Count() == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.DqmQiCore2025.ElmDir, "CMS125FHIRBreastCancerScreen");
+        Assert.IsTrue(libraries.Count == 10, "Expected 10 libraries to load for BreastCancerScreeningFHIR");
+        Assert.IsTrue(librarySet.Cast<object>().Count() == 10, "Expected to enumerate over 10 libraries for BreastCancerScreeningFHIR");
     }
 
     [TestMethod]
     public void LoadLibraryAndDependencies_ReturnsTopologicallyOrderedLibraries_WhenEnumerating()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "DischargedonAntithromboticTherapyFHIR");
-        Assert.IsTrue(libraries.Count == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
-        Assert.IsTrue(librarySet.Cast<object>().Count() == 6, "Expected 6 libraries to load for DischargedonAntithromboticTherapyFHIR");
+        var libraries = librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.DqmQiCore2025.ElmDir, "CMS125FHIRBreastCancerScreen");
         var list = string.Join(", ", libraries.Select(l => l.identifier.id));
-        Assert.AreEqual("DischargedonAntithromboticTherapyFHIR, FHIRHelpers, CQMCommon, QICoreCommon, SupplementalDataElements, TJCOverall", list);
+        Assert.AreEqual("CMS125FHIRBreastCancerScreen, FHIRHelpers, SupplementalDataElements, QICoreCommon, AdultOutpatientEncounters, Hospice, Status, PalliativeCare, AdvancedIllnessandFrailty, CumulativeMedicationDuration", list);
     }
 }
