@@ -98,8 +98,9 @@ namespace Hl7.Cql.Primitives
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
-
             var dto = Value.DateTimeOffset;
+            if (dto.Date.Equals(DateTimeOffset.MaxValue.Date) || dto.Date.Equals(DateTimeOffset.MinValue.Date))
+                return null;
             dto = unit switch
             {
                 "a"                                     => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
