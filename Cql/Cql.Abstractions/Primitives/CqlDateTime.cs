@@ -145,28 +145,37 @@ namespace Hl7.Cql.Primitives
         /// Adds the given quantity to this date time.
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
-        /// <returns>A new date time with <paramref name="quantity"/> added to it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new date time with <paramref name="quantity"/> added to it, or <see langword="null"/> if the operation would result in an overflow.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlDateTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
             var dto = Value.DateTimeOffset;
-            dto = unit switch
+            
+            try
             {
-                UCUMUnits.Year                         => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
-                "year" or "years"                       => dto.AddYears((int)value),
-                "mo"                                    => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerMonthDouble),
-                "month" or "months"                     => dto.AddMonths((int)value),
-                "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
-                "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
-                "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
-                "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
-                "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
-                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
-            };
+                dto = unit switch
+                {
+                    UCUMUnits.Year                         => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
+                    "year" or "years"                       => dto.AddYears((int)value),
+                    "mo"                                    => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerMonthDouble),
+                    "month" or "months"                     => dto.AddMonths((int)value),
+                    "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
+                    "d" or "day" or "days"                  => dto.AddDays((int)value!),
+                    "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
+                    "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
+                    "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
+                    "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
+                    _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                };
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // Return null when the operation would result in an overflow
+                return null;
+            }
 
             var newIsoDate = new DateTimeIso8601(dto, Value.Precision);
             var result = new CqlDateTime(newIsoDate);
@@ -177,8 +186,8 @@ namespace Hl7.Cql.Primitives
         /// Subtracts the given quantity from this date time.
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
-        /// <returns>A new date time with <paramref name="quantity"/> subtracted from it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new date time with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the operation would result in an overflow.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlDateTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>

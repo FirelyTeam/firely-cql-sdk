@@ -354,4 +354,40 @@ public class CqlDateTimeTests
         Assert.IsNull(resultAdd);
         Assert.IsNull(resultSub);
     }
+
+    [TestMethod]
+    public void Add_Days_ToMaxDateTime_ReturnsNull()
+    {
+        var dateTime = CqlDateTime.MaxValue; // 9999-12-31T23:59:59.999Z
+        var quantity = new CqlQuantity(1, "day");
+        var result = dateTime.Add(quantity);
+        Assert.IsNull(result, "Adding days to maximum datetime should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Subtract_Days_FromMinDateTime_ReturnsNull()
+    {
+        var dateTime = CqlDateTime.MinValue; // 0001-01-01T00:00:00.000Z
+        var quantity = new CqlQuantity(1, "day");
+        var result = dateTime.Subtract(quantity);
+        Assert.IsNull(result, "Subtracting days from minimum datetime should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Add_Years_ToMaxDateTime_ReturnsNull()
+    {
+        var dateTime = CqlDateTime.MaxValue; // 9999-12-31T23:59:59.999Z
+        var quantity = new CqlQuantity(1, "year");
+        var result = dateTime.Add(quantity);
+        Assert.IsNull(result, "Adding years to maximum datetime should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Subtract_Years_FromMinDateTime_ReturnsNull()
+    {
+        var dateTime = CqlDateTime.MinValue; // 0001-01-01T00:00:00.000Z
+        var quantity = new CqlQuantity(1, "year");
+        var result = dateTime.Subtract(quantity);
+        Assert.IsNull(result, "Subtracting years from minimum datetime should return null to prevent overflow");
+    }
 }

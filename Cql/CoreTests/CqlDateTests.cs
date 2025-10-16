@@ -123,4 +123,67 @@ public class CqlDateTests
         var result = date - quantity;
         Assert.IsNull(result);
     }
+
+    [TestMethod]
+    public void Add_Days_ToMaxDate_ReturnsNull()
+    {
+        var date = CqlDate.MaxValue; // 9999-12-31
+        var quantity = new CqlQuantity(1, "day");
+        var result = date.Add(quantity);
+        Assert.IsNull(result, "Adding days to maximum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Subtract_Days_FromMinDate_ReturnsNull()
+    {
+        var date = CqlDate.MinValue; // 0001-01-01
+        var quantity = new CqlQuantity(1, "day");
+        var result = date.Subtract(quantity);
+        Assert.IsNull(result, "Subtracting days from minimum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Add_Years_ToMaxDate_ReturnsNull()
+    {
+        var date = CqlDate.MaxValue; // 9999-12-31
+        var quantity = new CqlQuantity(1, "year");
+        var result = date.Add(quantity);
+        Assert.IsNull(result, "Adding years to maximum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Subtract_Years_FromMinDate_ReturnsNull()
+    {
+        var date = CqlDate.MinValue; // 0001-01-01
+        var quantity = new CqlQuantity(1, "year");
+        var result = date.Subtract(quantity);
+        Assert.IsNull(result, "Subtracting years from minimum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Add_Months_ToMaxDate_ReturnsNull()
+    {
+        var date = CqlDate.MaxValue; // 9999-12-31
+        var quantity = new CqlQuantity(1, "month");
+        var result = date.Add(quantity);
+        Assert.IsNull(result, "Adding months to maximum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Subtract_Months_FromMinDate_ReturnsNull()
+    {
+        var date = CqlDate.MinValue; // 0001-01-01
+        var quantity = new CqlQuantity(1, "month");
+        var result = date.Subtract(quantity);
+        Assert.IsNull(result, "Subtracting months from minimum date should return null to prevent overflow");
+    }
+
+    [TestMethod]
+    public void Add_Hours_ToMaxDate_ReturnsNull()
+    {
+        var date = CqlDate.MaxValue; // 9999-12-31
+        var quantity = new CqlQuantity(24, "hour"); // Adding 24 hours would push to next day (year 10000)
+        var result = date.Add(quantity);
+        Assert.IsNull(result, "Adding 24 hours to maximum date should return null to prevent overflow");
+    }
 }
