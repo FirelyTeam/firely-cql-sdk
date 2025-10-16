@@ -1819,7 +1819,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? u_ = context.Operators.Or(p_, t_);
                 bool? v_(Extension @this)
                 {
-                    string ag_ = @this?.Url;
+                    FhirUri ag_ = @this?.UrlElement;
                     FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
                     string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
                     bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -1893,7 +1893,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? w_ = context.Operators.Or(q_, v_);
                 bool? x_(Extension @this)
                 {
-                    string ak_ = @this?.Url;
+                    FhirUri ak_ = @this?.UrlElement;
                     FhirString al_ = context.Operators.Convert<FhirString>(ak_);
                     string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
                     bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");

@@ -2427,7 +2427,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             {
                 bool? p_(Extension @this)
                 {
-                    string al_ = @this?.Url;
+                    FhirUri al_ = @this?.UrlElement;
                     FhirString am_ = context.Operators.Convert<FhirString>(al_);
                     string an_ = FHIRHelpers_4_4_000.Instance.ToString(context, am_);
                     bool? ao_ = context.Operators.Equal(an_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");

@@ -921,7 +921,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 bool? z_ = context.Operators.And(v_, y_);
                 bool? aa_(Extension @this)
                 {
-                    string aj_ = @this?.Url;
+                    FhirUri aj_ = @this?.UrlElement;
                     FhirString ak_ = context.Operators.Convert<FhirString>(aj_);
                     string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
                     bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -986,7 +986,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 bool? aa_ = context.Operators.And(w_, z_);
                 bool? ab_(Extension @this)
                 {
-                    string ak_ = @this?.Url;
+                    FhirUri ak_ = @this?.UrlElement;
                     FhirString al_ = context.Operators.Convert<FhirString>(ak_);
                     string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
                     bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");

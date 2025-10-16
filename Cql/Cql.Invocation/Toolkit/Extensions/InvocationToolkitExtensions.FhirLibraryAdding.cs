@@ -58,7 +58,7 @@ partial class InvocationToolkitExtensions
                                                    (fhirLibrary, logMessage) =>
                                                        logMessage("Could not extract assembly binary from FHIR library resource: {id}",
                                                                   CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(
-                                                                      fhirLibrary.Name, fhirLibrary.Version))))
+                                                                      fhirLibrary.Name!, fhirLibrary.Version))))
                                .ToList()
             ;
 
@@ -118,7 +118,7 @@ partial class InvocationToolkitExtensions
                                                     (fhirLibrary, logMessage) =>
                                                         logMessage("Could not extract assembly binary from FHIR library resource: {id}",
                                                                    CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(
-                                                                       fhirLibrary.Name, fhirLibrary.Version))))
+                                                                       fhirLibrary.Name!, fhirLibrary.Version))))
                                 .ToList();
         return invocationToolkit.AddAssemblyBinaries(assemblyBinaries);
     }
@@ -247,12 +247,12 @@ internal static partial class FhirLibraryUtilities
     // Example: https://fire.ly/fhir/Library/NCQAAdvancedIllnessandFrailty|1.0.0
     /// <summary>
     /// Regex to extract the resource type, library name, and optional version from a FHIR Library resource string.
-    /// 
+    ///
     /// Capture groups:
     ///   1. <b>resourceType</b>: The FHIR resource type (e.g., "Library").
     ///   2. <b>libraryName</b>: The name of the library (e.g., "NCQAAdvancedIllnessandFrailty").
     ///   3. <b>version</b> (optional): The version of the library (e.g., "1.0.0").
-    /// 
+    ///
     /// Examples of valid input strings and their capture groups:
     ///   - <c>https://fire.ly/fhir/Library/NCQAAdvancedIllnessandFrailty|1.0.0</c>
     ///       1 = "Library", 2 = "NCQAAdvancedIllnessandFrailty", 3 = "1.0.0"
@@ -278,7 +278,7 @@ internal static partial class FhirLibraryUtilities
     {
         configureJsonSerializerOptions += opt =>
         {
-            opt.Ignoring([CodedValidationException.ID_LITERAL_INVALID_CODE]);
+            opt.Ignoring([CodedValidationException.LITERAL_INVALID_CODE]);
             return opt;
         };
         using var fs = file.OpenRead();

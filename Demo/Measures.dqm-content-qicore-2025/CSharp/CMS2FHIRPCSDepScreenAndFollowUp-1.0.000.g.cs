@@ -1278,7 +1278,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         {
             bool? s_(Extension @this)
             {
-                string ak_ = @this?.Url;
+                FhirUri ak_ = @this?.UrlElement;
                 FhirString al_ = context.Operators.Convert<FhirString>(ak_);
                 string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
                 bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -1302,7 +1302,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? aa_ = context.Operators.Equivalent(x_, z_);
             bool? ab_(Extension @this)
             {
-                string ap_ = @this?.Url;
+                FhirUri ap_ = @this?.UrlElement;
                 FhirString aq_ = context.Operators.Convert<FhirString>(ap_);
                 string ar_ = FHIRHelpers_4_4_000.Instance.ToString(context, aq_);
                 bool? as_ = context.Operators.Equal(ar_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -1424,7 +1424,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         {
             bool? s_(Extension @this)
             {
-                string ak_ = @this?.Url;
+                FhirUri ak_ = @this?.UrlElement;
                 FhirString al_ = context.Operators.Convert<FhirString>(ak_);
                 string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
                 bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -1448,7 +1448,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? aa_ = context.Operators.Equivalent(x_, z_);
             bool? ab_(Extension @this)
             {
-                string ap_ = @this?.Url;
+                FhirUri ap_ = @this?.UrlElement;
                 FhirString aq_ = context.Operators.Convert<FhirString>(ap_);
                 string ar_ = FHIRHelpers_4_4_000.Instance.ToString(context, aq_);
                 bool? as_ = context.Operators.Equal(ar_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");

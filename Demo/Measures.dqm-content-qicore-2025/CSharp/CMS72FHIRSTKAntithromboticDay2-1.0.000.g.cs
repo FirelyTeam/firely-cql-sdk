@@ -849,7 +849,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             string y_ = x_?.Value;
             bool? z_(Extension @this)
             {
-                string ag_ = @this?.Url;
+                FhirUri ag_ = @this?.UrlElement;
                 FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
                 string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
                 bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");

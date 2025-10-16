@@ -644,7 +644,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         };
         bool? l_(Extension @this)
         {
-            string an_ = @this?.Url;
+            FhirUri an_ = @this?.UrlElement;
             FhirString ao_ = context.Operators.Convert<FhirString>(an_);
             string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
             bool? aq_ = context.Operators.Equal(ap_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");

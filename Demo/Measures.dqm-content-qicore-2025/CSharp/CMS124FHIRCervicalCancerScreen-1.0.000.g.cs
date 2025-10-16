@@ -186,7 +186,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         };
         bool? l_(Extension @this)
         {
-            string z_ = @this?.Url;
+            FhirUri z_ = @this?.UrlElement;
             FhirString aa_ = context.Operators.Convert<FhirString>(z_);
             string ab_ = FHIRHelpers_4_4_000.Instance.ToString(context, aa_);
             bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");

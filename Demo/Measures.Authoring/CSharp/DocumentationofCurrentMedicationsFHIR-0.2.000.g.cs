@@ -217,7 +217,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 bool? k_(Extension @this)
                 {
-                    string af_ = @this?.Url;
+                    FhirUri af_ = @this?.UrlElement;
                     FhirString ag_ = context.Operators.Convert<FhirString>(af_);
                     string ah_ = FHIRHelpers_4_3_000.Instance.ToString(context, ag_);
                     bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");

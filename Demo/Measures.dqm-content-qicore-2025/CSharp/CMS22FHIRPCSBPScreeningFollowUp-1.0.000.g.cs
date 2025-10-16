@@ -2125,7 +2125,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 bool? x_ = context.Operators.In<CqlDateTime>(u_, w_, "day");
                 bool? y_(Extension @this)
                 {
-                    string aq_ = @this?.Url;
+                    FhirUri aq_ = @this?.UrlElement;
                     FhirString ar_ = context.Operators.Convert<FhirString>(aq_);
                     string as_ = FHIRHelpers_4_4_000.Instance.ToString(context, ar_);
                     bool? at_ = context.Operators.Equal(as_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -2148,7 +2148,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
                 bool? ag_(Extension @this)
                 {
-                    string av_ = @this?.Url;
+                    FhirUri av_ = @this?.UrlElement;
                     FhirString aw_ = context.Operators.Convert<FhirString>(av_);
                     string ax_ = FHIRHelpers_4_4_000.Instance.ToString(context, aw_);
                     bool? ay_ = context.Operators.Equal(ax_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -2228,7 +2228,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_(Extension @this)
             {
-                string au_ = @this?.Url;
+                FhirUri au_ = @this?.UrlElement;
                 FhirString av_ = context.Operators.Convert<FhirString>(au_);
                 string aw_ = FHIRHelpers_4_4_000.Instance.ToString(context, av_);
                 bool? ax_ = context.Operators.Equal(aw_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2288,7 +2288,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_(Extension @this)
             {
-                string ae_ = @this?.Url;
+                FhirUri ae_ = @this?.UrlElement;
                 FhirString af_ = context.Operators.Convert<FhirString>(ae_);
                 string ag_ = FHIRHelpers_4_4_000.Instance.ToString(context, af_);
                 bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2345,7 +2345,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_(Extension @this)
             {
-                string ag_ = @this?.Url;
+                FhirUri ag_ = @this?.UrlElement;
                 FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
                 string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
                 bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2406,7 +2406,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_(Extension @this)
             {
-                string ao_ = @this?.Url;
+                FhirUri ao_ = @this?.UrlElement;
                 FhirString ap_ = context.Operators.Convert<FhirString>(ao_);
                 string aq_ = FHIRHelpers_4_4_000.Instance.ToString(context, ap_);
                 bool? ar_ = context.Operators.Equal(aq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2495,7 +2495,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 bool? ax_ = context.Operators.And(aq_, aw_);
                 bool? ay_(Extension @this)
                 {
-                    string bh_ = @this?.Url;
+                    FhirUri bh_ = @this?.UrlElement;
                     FhirString bi_ = context.Operators.Convert<FhirString>(bh_);
                     string bj_ = FHIRHelpers_4_4_000.Instance.ToString(context, bi_);
                     bool? bk_ = context.Operators.Equal(bj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2582,7 +2582,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 bool? cw_ = context.Operators.And(cp_, cv_);
                 bool? cx_(Extension @this)
                 {
-                    string dg_ = @this?.Url;
+                    FhirUri dg_ = @this?.UrlElement;
                     FhirString dh_ = context.Operators.Convert<FhirString>(dg_);
                     string di_ = FHIRHelpers_4_4_000.Instance.ToString(context, dh_);
                     bool? dj_ = context.Operators.Equal(di_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");

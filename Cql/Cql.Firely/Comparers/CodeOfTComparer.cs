@@ -35,7 +35,7 @@ internal class CodeOfTComparer(ICqlComparer inner) :
                     throw new InvalidOperationException(
                         $"Precision '{precision}' is not supported for comparing Code<T> to string.");
 
-                return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
+                return StringComparer.Ordinal.Compare(xCode.JsonValue, yString);
             }
 
             case (CodeOfT xCode, CqlCode yCqlCode):
@@ -48,7 +48,7 @@ internal class CodeOfTComparer(ICqlComparer inner) :
                     throw new InvalidOperationException(
                         $"Precision '{precision}' is not supported for comparing Code<T> to CqlCode.");
 
-                return StringComparer.Ordinal.Compare(xCode.ObjectValue, yCqlCode.code);
+                return StringComparer.Ordinal.Compare(xCode.JsonValue, yCqlCode.code);
             }
 
             default:

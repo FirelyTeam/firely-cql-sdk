@@ -85,7 +85,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         };
         bool? b_(Extension @this)
         {
-            string n_ = @this?.Url;
+            FhirUri n_ = @this?.UrlElement;
             FhirString o_ = context.Operators.Convert<FhirString>(n_);
             string p_ = FHIRHelpers_4_3_000.Instance.ToString(context, o_);
             bool? q_ = context.Operators.Equal(p_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
@@ -101,7 +101,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         {
             bool? r_(Extension @this)
             {
-                string am_ = @this?.Url;
+                FhirUri am_ = @this?.UrlElement;
                 FhirString an_ = context.Operators.Convert<FhirString>(am_);
                 string ao_ = FHIRHelpers_4_3_000.Instance.ToString(context, an_);
                 bool? ap_ = context.Operators.Equal(ao_, "ombCategory");
@@ -125,7 +125,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             ];
             bool? y_(Extension @this)
             {
-                string ar_ = @this?.Url;
+                FhirUri ar_ = @this?.UrlElement;
                 FhirString as_ = context.Operators.Convert<FhirString>(ar_);
                 string at_ = FHIRHelpers_4_3_000.Instance.ToString(context, as_);
                 bool? au_ = context.Operators.Equal(at_, "detailed");
@@ -152,7 +152,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             IEnumerable<CqlCode> ae_ = context.Operators.ValueSetUnion((IEnumerable<CqlCode>)x_, ad_);
             bool? af_(Extension @this)
             {
-                string ax_ = @this?.Url;
+                FhirUri ax_ = @this?.UrlElement;
                 FhirString ay_ = context.Operators.Convert<FhirString>(ax_);
                 string az_ = FHIRHelpers_4_3_000.Instance.ToString(context, ay_);
                 bool? ba_ = context.Operators.Equal(az_, "text");
@@ -230,7 +230,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         };
         bool? b_(Extension @this)
         {
-            string n_ = @this?.Url;
+            FhirUri n_ = @this?.UrlElement;
             FhirString o_ = context.Operators.Convert<FhirString>(n_);
             string p_ = FHIRHelpers_4_3_000.Instance.ToString(context, o_);
             bool? q_ = context.Operators.Equal(p_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
@@ -246,7 +246,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         {
             bool? r_(Extension @this)
             {
-                string al_ = @this?.Url;
+                FhirUri al_ = @this?.UrlElement;
                 FhirString am_ = context.Operators.Convert<FhirString>(al_);
                 string an_ = FHIRHelpers_4_3_000.Instance.ToString(context, am_);
                 bool? ao_ = context.Operators.Equal(an_, "ombCategory");
@@ -272,7 +272,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             IEnumerable<CqlCode> w_ = context.Operators.Select<object, CqlCode>(u_, v_);
             bool? x_(Extension @this)
             {
-                string ar_ = @this?.Url;
+                FhirUri ar_ = @this?.UrlElement;
                 FhirString as_ = context.Operators.Convert<FhirString>(ar_);
                 string at_ = FHIRHelpers_4_3_000.Instance.ToString(context, as_);
                 bool? au_ = context.Operators.Equal(at_, "detailed");
@@ -299,7 +299,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             IEnumerable<CqlCode> ad_ = context.Operators.ValueSetUnion(w_, ac_);
             bool? ae_(Extension @this)
             {
-                string ax_ = @this?.Url;
+                FhirUri ax_ = @this?.UrlElement;
                 FhirString ay_ = context.Operators.Convert<FhirString>(ax_);
                 string az_ = FHIRHelpers_4_3_000.Instance.ToString(context, ay_);
                 bool? ba_ = context.Operators.Equal(az_, "text");

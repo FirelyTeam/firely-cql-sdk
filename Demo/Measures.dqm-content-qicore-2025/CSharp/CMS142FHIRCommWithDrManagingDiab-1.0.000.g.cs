@@ -526,7 +526,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             {
                 bool? l_(Extension @this)
                 {
-                    string v_ = @this?.Url;
+                    FhirUri v_ = @this?.UrlElement;
                     FhirString w_ = context.Operators.Convert<FhirString>(v_);
                     string x_ = FHIRHelpers_4_4_000.Instance.ToString(context, w_);
                     bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -591,7 +591,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             {
                 bool? l_(Extension @this)
                 {
-                    string v_ = @this?.Url;
+                    FhirUri v_ = @this?.UrlElement;
                     FhirString w_ = context.Operators.Convert<FhirString>(v_);
                     string x_ = FHIRHelpers_4_4_000.Instance.ToString(context, w_);
                     bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -656,7 +656,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             {
                 bool? l_(Extension @this)
                 {
-                    string v_ = @this?.Url;
+                    FhirUri v_ = @this?.UrlElement;
                     FhirString w_ = context.Operators.Convert<FhirString>(v_);
                     string x_ = FHIRHelpers_4_4_000.Instance.ToString(context, w_);
                     bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");

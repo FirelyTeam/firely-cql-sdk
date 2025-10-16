@@ -24,6 +24,6 @@ public class ExpressionBuilderContextTests
         using var serviceProvider = ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
         var property = ExpressionBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", serviceProvider.GetRequiredService<TypeResolver>())!;
         Assert.AreEqual(typeof(Element), property.DeclaringType);
-        Assert.AreEqual(nameof(Element.ElementId), property.Name);
+        Assert.AreEqual(nameof(Element.ElementIdElement), property.Name);
     }
 }

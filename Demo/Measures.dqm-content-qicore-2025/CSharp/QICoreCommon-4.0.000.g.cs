@@ -958,7 +958,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         bool? a_(Extension @this)
         {
-            string f_ = @this?.Url;
+            FhirUri f_ = @this?.UrlElement;
             FhirString g_ = context.Operators.Convert<FhirString>(f_);
             string h_ = FHIRHelpers_4_4_000.Instance.ToString(context, g_);
             bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhir/5.0/StructureDefinition/extension-DeviceRequest.doNotPerform");
