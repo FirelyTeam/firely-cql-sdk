@@ -10,7 +10,7 @@ There is quite some variation in how CQL is written and interpreted,
 so it is likely at this early stage that there will be deviations from other engines currently available.
 
 ## Release Notes
-This is release version 2.1 of the engine.
+This is release version 2.2 of the engine.
 Earlier 1.x releases will be maintained with hotfixes, but will not receive new features.
 
 The releases notes 
