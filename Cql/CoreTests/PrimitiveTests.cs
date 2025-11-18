@@ -3750,5 +3750,98 @@ namespace CoreTests
 
         #endregion
 
+        #region Sum tests
+
+        // Refer https://cql.hl7.org/09-b-cqlreference.html#sum for operation details on Sum cql operator
+
+        [TestMethod]
+        public void SumIntNullSource()
+        {
+            var rtx = GetNewContext();
+            var inputSource = null as List<int?>;
+            var computedValue = rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumIntSourceWithAllNull()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<int?> { null, null, null };
+            var computedValue= rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumInt()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<int?> { 1, 2, 3 };
+            int expectedValue = 6;
+            var computedValue = rtx.Operators.Sum(inputSource);
+            
+            Assert.AreEqual(expectedValue, computedValue);
+        }
+
+        [TestMethod]
+        public void SumLongNullSource()
+        {
+            var rtx = GetNewContext();
+            var inputSource = null as List<long?>;
+            var computedValue = rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumLongSourceWithAllNull()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<long?> { null, null, null };
+            var computedValue = rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumLong()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<long?> { 1, 2, 3 };
+            int expectedValue = 6;
+            var computedValue = rtx.Operators.Sum(inputSource);
+
+            Assert.AreEqual(expectedValue, computedValue);
+        }
+
+        [TestMethod]
+        public void SumDecimalNullSource()
+        {
+            var rtx = GetNewContext();
+            var inputSource = null as List<decimal?>;
+            var computedValue = rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumDecimalSourceWithAllNull()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<decimal?> { null, null, null };
+            var computedValue = rtx.Operators.Sum(inputSource);
+            Assert.IsNull(computedValue);
+        }
+
+        [TestMethod]
+        public void SumDecimal()
+        {
+            var rtx = GetNewContext();
+            var inputSource = new List<decimal?> { 1.1m, 2.2m, 3.3m };
+            decimal expectedValue = 6.6m;
+            var computedValue = rtx.Operators.Sum(inputSource);
+
+            Assert.AreEqual(expectedValue, computedValue);
+        }
+
+        #endregion
+
     }
 }
