@@ -2,11 +2,7 @@
 
 	<Import Project="..\cql-demo.props" />
 
-	<PropertyGroup>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-	</PropertyGroup>
-
-	<Import Project="Build\Mvn.Targets.xml" />
+	<Import Project="Build\CqlToElm.Targets.Xml" />
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />

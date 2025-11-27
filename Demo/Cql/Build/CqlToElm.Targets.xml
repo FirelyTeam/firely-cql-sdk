@@ -1,8 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 
-	<!-- Turn off visual studio msbuild automatics -->
+	<!-- #### Download Java Tooling Dependencies -->
+
 	<PropertyGroup>
+		<CleanJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Clean.ps1</CleanJavaDependenciesScript>
+		<DownloadJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Download.ps1</DownloadJavaDependenciesScript>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="$(TargetDependencies)" />
+	</ItemGroup>
+
+	<Target
+		Name="Download CQL to ELM CLI"
+		BeforeTargets="PreBuildEvent">
+		<Exec Command="pwsh -File &quot;$(DownloadJavaDependenciesScript)&quot;" />
+	</Target>
+
+	<ItemGroup>
+		<JarDependencies Include="$(TargetDependencies)/*.jar" />
+	</ItemGroup>
+
+	<Target
+		Name="Delete JAR Dependencies"
+		AfterTargets="Clean">
+		<Exec Command="pwsh -File &quot;$(CleanJavaDependenciesScript)&quot;" />
+	</Target>
+
+	<!-- #### CQL to ELM Target -->
+
+	<PropertyGroup>
+		<!-- Turn off visual studio msbuild automatics -->
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
