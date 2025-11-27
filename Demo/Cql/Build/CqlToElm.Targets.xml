@@ -4,6 +4,7 @@
 	<!-- #### Download Java Tooling Dependencies -->
 
 	<PropertyGroup>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<CleanJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Clean.ps1</CleanJavaDependenciesScript>
 		<DownloadJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Download.ps1</DownloadJavaDependenciesScript>
 	</PropertyGroup>
