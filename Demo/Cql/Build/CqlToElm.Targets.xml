@@ -34,7 +34,6 @@
 		<!-- Turn off visual studio msbuild automatics -->
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<BoxHeader>$(MSBuildProjectName) </BoxHeader>
 		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
