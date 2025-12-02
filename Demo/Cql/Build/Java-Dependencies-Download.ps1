@@ -16,8 +16,8 @@ $mutexName = "Global\CqlJavaDependenciesDownload"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 try {
-    # Wait up to 5 minutes for the mutex
-    $acquired = $mutex.WaitOne([TimeSpan]::FromMinutes(5))
+    # Wait up to 2 minutes for the mutex (sufficient for Maven operations)
+    $acquired = $mutex.WaitOne([TimeSpan]::FromMinutes(2))
     if (-not $acquired) {
         Write-Error "Timeout waiting for Java dependencies download lock"
         exit 1
@@ -63,8 +63,10 @@ try {
         }
     }
     finally {
-        # Always release the mutex
-        $mutex.ReleaseMutex()
+        # Release the mutex only if it was successfully acquired
+        if ($acquired) {
+            $mutex.ReleaseMutex()
+        }
     }
 }
 finally {
