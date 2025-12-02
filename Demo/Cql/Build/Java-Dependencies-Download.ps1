@@ -25,12 +25,18 @@ if ($needDownload) {
     }
     # Download CQL to ELM CLI via Maven
     Write-Host "Downloading CQL to ELM CLI via Maven..."
-    $mvnOutput = & mvn -f $PomXmlPath dependency:copy-dependencies
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Maven dependency download failed"
+    $mvnOutput = & mvn -f $PomXmlPath dependency:copy-dependencies 2>&1
+    $mvnExitCode = $LASTEXITCODE
+    $mvnOutput | Out-File -FilePath $MvnBuildLog -Encoding Unicode
+    
+    # Check if dependencies were actually downloaded successfully by verifying JARs exist
+    $jarFiles = Get-ChildItem -Path $TargetDependencies -Filter *.jar -File -ErrorAction SilentlyContinue
+    if (@($jarFiles).Count -eq 0) {
+        Write-Error "Maven dependency download failed - no JAR files found in $TargetDependencies"
+        Write-Error "Maven exit code: $mvnExitCode"
         exit 1
     }
-    $mvnOutput | Out-File -FilePath $MvnBuildLog -Encoding Unicode
+    Write-Host "Successfully downloaded $(@($jarFiles).Count) dependency JAR file(s)"
 } else {
     Write-Host "Dependencies already present in $TargetDependencies. Use -Force to re-download."
 }
