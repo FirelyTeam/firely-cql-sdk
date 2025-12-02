@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($TargetDependencies)) {
 }
 
 # Clean JAR dependencies (delete)
-if (-not [string]::IsNullOrWhiteSpace($TargetDependencies) -and (Test-Path -LiteralPath $TargetDependencies)) {
+if (Test-Path -LiteralPath $TargetDependencies) {
     Write-Host "Deleting JAR Dependencies..."
 
     if ([string]::IsNullOrWhiteSpace($PomXmlPath)) {
@@ -16,9 +16,13 @@ if (-not [string]::IsNullOrWhiteSpace($TargetDependencies) -and (Test-Path -Lite
     }
 
     if (-not (Test-Path -LiteralPath $PomXmlPath)) {
-        Write-Error "PomXmlPath not does not exist. Value='$PomXmlPath'"
+        Write-Error "PomXmlPath does not exist. Value='$PomXmlPath'"
         exit 1
     }
 
     & mvn clean -f $PomXmlPath
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Maven clean failed"
+        exit 1
+    }
 }

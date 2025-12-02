@@ -16,7 +16,7 @@
 	<Target
 		Name="Download CQL to ELM CLI"
 		BeforeTargets="PreBuildEvent">
-		<Exec Command="pwsh -File &quot;$(DownloadJavaDependenciesScript)&quot;" />
+		<Exec Command="pwsh -File &quot;$(DownloadJavaDependenciesScript)&quot;" ContinueOnError="false" />
 	</Target>
 
 	<ItemGroup>
