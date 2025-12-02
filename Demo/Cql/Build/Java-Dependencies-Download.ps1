@@ -14,6 +14,7 @@ function Get-JarFileCount {
 # Use a mutex to prevent parallel execution across multiple MSBuild processes
 $mutexName = "Global\CqlJavaDependenciesDownload"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
+$acquired = $false
 
 try {
     # Wait up to 2 minutes for the mutex (sufficient for Maven operations)
