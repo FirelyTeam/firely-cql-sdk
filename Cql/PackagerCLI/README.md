@@ -118,6 +118,7 @@ We HIGHLY recommend using the `elm` command to package ELM files that have been 
 (see the getting-started.md documentation for more information, and the [Java Tooling README](https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/README.md#generate-an-elm-representation-of-cql-logic)).
 
 The version of the Java Tooling that is used to generate the ELM files must be compatible with the version of the CQL Packager you are using.
+The Java tooling version is configured in `Demo/Cql/Build/Java-Dependencies-Vars.ps1` and should be kept in sync with the version referenced in this file's source code.
 For more information, see the Disclaimer section in the help documentation when running `cql-package --help`.
 
 

@@ -11,7 +11,7 @@ if (-not (Test-Path $TargetDependencies)) {
     $needDownload = $true
 } else {
     $jarFiles = Get-ChildItem -Path $TargetDependencies -Filter *.jar -File -ErrorAction SilentlyContinue
-    if (-not $jarFiles) {
+    if (@($jarFiles).Count -eq 0) {
         $needDownload = $true
     }
 }
