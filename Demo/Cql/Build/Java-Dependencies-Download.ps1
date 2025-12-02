@@ -5,13 +5,18 @@ param(
 # Source required variables
 . (Join-Path $PSScriptRoot "Java-Dependencies-Vars.ps1")
 
+# Helper function to count JAR files in target directory
+function Get-JarFileCount {
+    $jarFiles = Get-ChildItem -Path $TargetDependencies -Filter *.jar -File -ErrorAction SilentlyContinue
+    return @($jarFiles).Count
+}
+
 # Check if target/dependency folder exists and contains JARs, or if -Force is specified
 $needDownload = $false
 if (-not (Test-Path $TargetDependencies)) {
     $needDownload = $true
 } else {
-    $jarFiles = Get-ChildItem -Path $TargetDependencies -Filter *.jar -File -ErrorAction SilentlyContinue
-    if (@($jarFiles).Count -eq 0) {
+    if ((Get-JarFileCount) -eq 0) {
         $needDownload = $true
     }
 }
@@ -30,13 +35,13 @@ if ($needDownload) {
     $mvnOutput | Out-File -FilePath $MvnBuildLog -Encoding Unicode
     
     # Check if dependencies were actually downloaded successfully by verifying JARs exist
-    $jarFiles = Get-ChildItem -Path $TargetDependencies -Filter *.jar -File -ErrorAction SilentlyContinue
-    if (@($jarFiles).Count -eq 0) {
+    $jarCount = Get-JarFileCount
+    if ($jarCount -eq 0) {
         Write-Error "Maven dependency download failed - no JAR files found in $TargetDependencies"
         Write-Error "Maven exit code: $mvnExitCode"
         exit 1
     }
-    Write-Host "Successfully downloaded $(@($jarFiles).Count) dependency JAR file(s)"
+    Write-Host "Successfully downloaded $jarCount dependency JAR file(s)"
 } else {
     Write-Host "Dependencies already present in $TargetDependencies. Use -Force to re-download."
 }
