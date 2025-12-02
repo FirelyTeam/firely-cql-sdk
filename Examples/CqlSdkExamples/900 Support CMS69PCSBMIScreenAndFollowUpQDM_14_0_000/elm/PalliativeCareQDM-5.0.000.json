@@ -1,0 +1,1139 @@
+{
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.14.0",
+         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes,EnableDetailedErrors,DisableListDemotion,DisableListPromotion",
+         "signatureLevel" : "None",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "226",
+            "s" : [ {
+               "value" : [ "","library PalliativeCareQDM version '5.0.000'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "PalliativeCareQDM",
+         "version" : "5.0.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "locator" : "3:1-3:23",
+            "localIdentifier" : "QDM",
+            "uri" : "urn:healthit-gov:qdm:v5_6",
+            "version" : "5.6",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "QDM" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '5.6'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "207",
+            "locator" : "5:1-5:52",
+            "localIdentifier" : "Global",
+            "path" : "CQMCommonQDM",
+            "version" : "9.0.000",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "207",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "CQMCommonQDM" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'9.0.000'"," called ","Global" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "214",
+            "locator" : "15:1-15:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "214",
+                  "s" : [ {
+                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
+                  }, {
+                     "r" : "215",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "216",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "219",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "localId" : "215",
+               "locator" : "15:32-15:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "217",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "218",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "localId" : "216",
+                  "locator" : "15:41-15:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "208",
+            "locator" : "7:1-7:51",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "LOINC",
+            "id" : "urn:oid:2.16.840.1.113883.6.1",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "208",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"LOINC\"",": ","'urn:oid:2.16.840.1.113883.6.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "209",
+            "locator" : "9:1-9:81",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Diagnosis",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.1167",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "209",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Palliative Care Diagnosis\"",": ","'urn:oid:2.16.840.1.113883.3.464.1003.1167'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
+         }, {
+            "localId" : "210",
+            "locator" : "10:1-10:88",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Encounter",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1090",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "210",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Palliative Care Encounter\"",": ","'urn:oid:2.16.840.1.113883.3.464.1003.101.12.1090'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
+         }, {
+            "localId" : "211",
+            "locator" : "11:1-11:91",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Intervention",
+            "id" : "urn:oid:2.16.840.1.113883.3.464.1003.198.12.1135",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "211",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Palliative Care Intervention\"",": ","'urn:oid:2.16.840.1.113883.3.464.1003.198.12.1135'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "212",
+            "locator" : "13:1-13:226",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+            "id" : "71007-9",
+            "display" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)\"",": ","'71007-9'"," from " ]
+                  }, {
+                     "r" : "213",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "213",
+               "locator" : "13:117-13:123",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "LOINC"
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "224",
+            "locator" : "17:1-17:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "226",
+            "locator" : "19:1-31:5",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Has Palliative Care in the Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "226",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Has Palliative Care in the Measurement Period\"",":\n  " ]
+                  }, {
+                     "r" : "227",
+                     "s" : [ {
+                        "r" : "228",
+                        "s" : [ {
+                           "r" : "229",
+                           "s" : [ {
+                              "r" : "230",
+                              "s" : [ {
+                                 "value" : [ "exists " ]
+                              }, {
+                                 "r" : "261",
+                                 "s" : [ {
+                                    "value" : [ "( " ]
+                                 }, {
+                                    "r" : "261",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "231",
+                                          "s" : [ {
+                                             "r" : "234",
+                                             "s" : [ {
+                                                "r" : "234",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Assessment, Performed\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","PalliativeAssessment" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n      " ]
+                                    }, {
+                                       "r" : "260",
+                                       "s" : [ {
+                                          "value" : [ "where " ]
+                                       }, {
+                                          "r" : "260",
+                                          "s" : [ {
+                                             "r" : "252",
+                                             "s" : [ {
+                                                "r" : "243",
+                                                "s" : [ {
+                                                   "value" : [ "Global" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "252",
+                                                "s" : [ {
+                                                   "value" : [ "\"NormalizeInterval\""," ( " ]
+                                                }, {
+                                                   "r" : "245",
+                                                   "s" : [ {
+                                                      "r" : "244",
+                                                      "s" : [ {
+                                                         "value" : [ "PalliativeAssessment" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "245",
+                                                      "s" : [ {
+                                                         "value" : [ "relevantDatetime" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ", " ]
+                                                }, {
+                                                   "r" : "247",
+                                                   "s" : [ {
+                                                      "r" : "246",
+                                                      "s" : [ {
+                                                         "value" : [ "PalliativeAssessment" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "247",
+                                                      "s" : [ {
+                                                         "value" : [ "relevantPeriod" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " )" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "r" : "260",
+                                             "value" : [ " ","overlaps day of"," " ]
+                                          }, {
+                                             "r" : "257",
+                                             "s" : [ {
+                                                "value" : [ "\"Measurement Period\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n  )" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    or " ]
+                           }, {
+                              "r" : "266",
+                              "s" : [ {
+                                 "value" : [ "exists " ]
+                              }, {
+                                 "r" : "288",
+                                 "s" : [ {
+                                    "value" : [ "( " ]
+                                 }, {
+                                    "r" : "288",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "r" : "267",
+                                          "s" : [ {
+                                             "r" : "270",
+                                             "s" : [ {
+                                                "r" : "270",
+                                                "s" : [ {
+                                                   "value" : [ "[","\"Diagnosis\"",": " ]
+                                                }, {
+                                                   "s" : [ {
+                                                      "value" : [ "\"Palliative Care Diagnosis\"" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "]" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","PalliativeDiagnosis" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n        " ]
+                                    }, {
+                                       "r" : "287",
+                                       "s" : [ {
+                                          "value" : [ "where " ]
+                                       }, {
+                                          "r" : "287",
+                                          "s" : [ {
+                                             "r" : "279",
+                                             "s" : [ {
+                                                "r" : "278",
+                                                "s" : [ {
+                                                   "value" : [ "PalliativeDiagnosis" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "279",
+                                                "s" : [ {
+                                                   "value" : [ "prevalencePeriod" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "r" : "287",
+                                             "value" : [ " ","overlaps day of"," " ]
+                                          }, {
+                                             "r" : "284",
+                                             "s" : [ {
+                                                "value" : [ "\"Measurement Period\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n    )" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    or " ]
+                        }, {
+                           "r" : "293",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "315",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "315",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "r" : "294",
+                                       "s" : [ {
+                                          "r" : "297",
+                                          "s" : [ {
+                                             "r" : "297",
+                                             "s" : [ {
+                                                "value" : [ "[","\"Encounter, Performed\"",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Palliative Care Encounter\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","PalliativeEncounter" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n        " ]
+                                 }, {
+                                    "r" : "314",
+                                    "s" : [ {
+                                       "value" : [ "where " ]
+                                    }, {
+                                       "r" : "314",
+                                       "s" : [ {
+                                          "r" : "306",
+                                          "s" : [ {
+                                             "r" : "305",
+                                             "s" : [ {
+                                                "value" : [ "PalliativeEncounter" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "306",
+                                             "s" : [ {
+                                                "value" : [ "relevantPeriod" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "r" : "314",
+                                          "value" : [ " ","overlaps day of"," " ]
+                                       }, {
+                                          "r" : "311",
+                                          "s" : [ {
+                                             "value" : [ "\"Measurement Period\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n    )" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    or " ]
+                     }, {
+                        "r" : "320",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "350",
+                           "s" : [ {
+                              "value" : [ "( " ]
+                           }, {
+                              "r" : "350",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "321",
+                                    "s" : [ {
+                                       "r" : "324",
+                                       "s" : [ {
+                                          "r" : "324",
+                                          "s" : [ {
+                                             "value" : [ "[","\"Intervention, Performed\"",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Palliative Care Intervention\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","PalliativeIntervention" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n        " ]
+                              }, {
+                                 "r" : "349",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "349",
+                                    "s" : [ {
+                                       "r" : "341",
+                                       "s" : [ {
+                                          "r" : "332",
+                                          "s" : [ {
+                                             "value" : [ "Global" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "341",
+                                          "s" : [ {
+                                             "value" : [ "\"NormalizeInterval\""," ( " ]
+                                          }, {
+                                             "r" : "334",
+                                             "s" : [ {
+                                                "r" : "333",
+                                                "s" : [ {
+                                                   "value" : [ "PalliativeIntervention" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "334",
+                                                "s" : [ {
+                                                   "value" : [ "relevantDatetime" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ", " ]
+                                          }, {
+                                             "r" : "336",
+                                             "s" : [ {
+                                                "r" : "335",
+                                                "s" : [ {
+                                                   "value" : [ "PalliativeIntervention" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "336",
+                                                "s" : [ {
+                                                   "value" : [ "relevantPeriod" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " )" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "r" : "349",
+                                       "value" : [ " ","overlaps day of"," " ]
+                                    }, {
+                                       "r" : "346",
+                                       "s" : [ {
+                                          "value" : [ "\"Measurement Period\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    )" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "227",
+               "locator" : "20:3-31:5",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Or",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "228",
+                  "locator" : "20:3-28:5",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "signature" : [ ],
+                  "operand" : [ {
+                     "localId" : "229",
+                     "locator" : "20:3-25:5",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Or",
+                     "signature" : [ ],
+                     "operand" : [ {
+                        "localId" : "230",
+                        "locator" : "20:3-22:3",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Exists",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "261",
+                           "locator" : "20:10-22:3",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "localId" : "264",
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "localId" : "265",
+                                 "name" : "{urn:healthit-gov:qdm:v5_6}PositiveAssessmentPerformed",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "localId" : "231",
+                              "locator" : "20:12-20:153",
+                              "alias" : "PalliativeAssessment",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "241",
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "localId" : "242",
+                                    "name" : "{urn:healthit-gov:qdm:v5_6}PositiveAssessmentPerformed",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "expression" : {
+                                 "localId" : "234",
+                                 "locator" : "20:12-20:132",
+                                 "dataType" : "{urn:healthit-gov:qdm:v5_6}PositiveAssessmentPerformed",
+                                 "templateId" : "PositiveAssessmentPerformed",
+                                 "codeProperty" : "code",
+                                 "codeComparator" : "~",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "239",
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "localId" : "240",
+                                       "name" : "{urn:healthit-gov:qdm:v5_6}PositiveAssessmentPerformed",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "localId" : "236",
+                                    "type" : "ToList",
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "localId" : "233",
+                                       "locator" : "20:38-20:131",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "name" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+                                       "type" : "CodeRef"
+                                    }
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
+                              }
+                           } ],
+                           "let" : [ ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "localId" : "260",
+                              "locator" : "21:7-21:154",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "precision" : "Day",
+                              "type" : "Overlaps",
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "localId" : "252",
+                                 "locator" : "21:13-21:117",
+                                 "name" : "NormalizeInterval",
+                                 "libraryName" : "Global",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "255",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "256",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "localId" : "245",
+                                    "locator" : "21:42-21:78",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "path" : "relevantDatetime",
+                                    "scope" : "PalliativeAssessment",
+                                    "type" : "Property"
+                                 }, {
+                                    "localId" : "247",
+                                    "locator" : "21:81-21:115",
+                                    "path" : "relevantPeriod",
+                                    "scope" : "PalliativeAssessment",
+                                    "type" : "Property",
+                                    "resultTypeSpecifier" : {
+                                       "localId" : "250",
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "localId" : "251",
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 } ]
+                              }, {
+                                 "localId" : "257",
+                                 "locator" : "21:135-21:154",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "258",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "259",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              } ]
+                           }
+                        }
+                     }, {
+                        "localId" : "266",
+                        "locator" : "23:8-25:5",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Exists",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "288",
+                           "locator" : "23:15-25:5",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "localId" : "291",
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "localId" : "292",
+                                 "name" : "{urn:healthit-gov:qdm:v5_6}Diagnosis",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "localId" : "267",
+                              "locator" : "23:17-23:78",
+                              "alias" : "PalliativeDiagnosis",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "276",
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "localId" : "277",
+                                    "name" : "{urn:healthit-gov:qdm:v5_6}Diagnosis",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "expression" : {
+                                 "localId" : "270",
+                                 "locator" : "23:17-23:58",
+                                 "dataType" : "{urn:healthit-gov:qdm:v5_6}Diagnosis",
+                                 "codeProperty" : "code",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "274",
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "localId" : "275",
+                                       "name" : "{urn:healthit-gov:qdm:v5_6}Diagnosis",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "localId" : "269",
+                                    "locator" : "23:31-23:57",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Palliative Care Diagnosis",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
+                              }
+                           } ],
+                           "let" : [ ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "localId" : "287",
+                              "locator" : "24:9-24:87",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "precision" : "Day",
+                              "type" : "Overlaps",
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "localId" : "279",
+                                 "locator" : "24:15-24:50",
+                                 "path" : "prevalencePeriod",
+                                 "scope" : "PalliativeDiagnosis",
+                                 "type" : "Property",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "282",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "283",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              }, {
+                                 "localId" : "284",
+                                 "locator" : "24:68-24:87",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "285",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "286",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              } ]
+                           }
+                        }
+                     } ]
+                  }, {
+                     "localId" : "293",
+                     "locator" : "26:8-28:5",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Exists",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "315",
+                        "locator" : "26:15-28:5",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "localId" : "318",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "319",
+                              "name" : "{urn:healthit-gov:qdm:v5_6}PositiveEncounterPerformed",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "localId" : "294",
+                           "locator" : "26:17-26:89",
+                           "alias" : "PalliativeEncounter",
+                           "resultTypeSpecifier" : {
+                              "localId" : "303",
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "localId" : "304",
+                                 "name" : "{urn:healthit-gov:qdm:v5_6}PositiveEncounterPerformed",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "localId" : "297",
+                              "locator" : "26:17-26:69",
+                              "dataType" : "{urn:healthit-gov:qdm:v5_6}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "301",
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "localId" : "302",
+                                    "name" : "{urn:healthit-gov:qdm:v5_6}PositiveEncounterPerformed",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "localId" : "296",
+                                 "locator" : "26:42-26:68",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Palliative Care Encounter",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
+                           }
+                        } ],
+                        "let" : [ ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "314",
+                           "locator" : "27:9-27:85",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "precision" : "Day",
+                           "type" : "Overlaps",
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "localId" : "306",
+                              "locator" : "27:15-27:48",
+                              "path" : "relevantPeriod",
+                              "scope" : "PalliativeEncounter",
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "309",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "310",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }, {
+                              "localId" : "311",
+                              "locator" : "27:66-27:85",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "312",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "313",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        }
+                     }
+                  } ]
+               }, {
+                  "localId" : "320",
+                  "locator" : "29:8-31:5",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Exists",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "350",
+                     "locator" : "29:15-31:5",
+                     "type" : "Query",
+                     "resultTypeSpecifier" : {
+                        "localId" : "353",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "354",
+                           "name" : "{urn:healthit-gov:qdm:v5_6}PositiveInterventionPerformed",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "source" : [ {
+                        "localId" : "321",
+                        "locator" : "29:17-29:98",
+                        "alias" : "PalliativeIntervention",
+                        "resultTypeSpecifier" : {
+                           "localId" : "330",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "331",
+                              "name" : "{urn:healthit-gov:qdm:v5_6}PositiveInterventionPerformed",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "expression" : {
+                           "localId" : "324",
+                           "locator" : "29:17-29:75",
+                           "dataType" : "{urn:healthit-gov:qdm:v5_6}PositiveInterventionPerformed",
+                           "templateId" : "PositiveInterventionPerformed",
+                           "codeProperty" : "code",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "resultTypeSpecifier" : {
+                              "localId" : "328",
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "localId" : "329",
+                                 "name" : "{urn:healthit-gov:qdm:v5_6}PositiveInterventionPerformed",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "codes" : {
+                              "localId" : "323",
+                              "locator" : "29:45-29:74",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Palliative Care Intervention",
+                              "preserve" : true,
+                              "type" : "ValueSetRef"
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
+                        }
+                     } ],
+                     "let" : [ ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "349",
+                        "locator" : "30:9-30:160",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "precision" : "Day",
+                        "type" : "Overlaps",
+                        "signature" : [ ],
+                        "operand" : [ {
+                           "localId" : "341",
+                           "locator" : "30:15-30:123",
+                           "name" : "NormalizeInterval",
+                           "libraryName" : "Global",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "localId" : "344",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "345",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "localId" : "334",
+                              "locator" : "30:44-30:82",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "path" : "relevantDatetime",
+                              "scope" : "PalliativeIntervention",
+                              "type" : "Property"
+                           }, {
+                              "localId" : "336",
+                              "locator" : "30:85-30:121",
+                              "path" : "relevantPeriod",
+                              "scope" : "PalliativeIntervention",
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "339",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "340",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        }, {
+                           "localId" : "346",
+                           "locator" : "30:141-30:160",
+                           "name" : "Measurement Period",
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "localId" : "347",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "348",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        } ]
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "222",
+            "locator" : "17:1-17:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "223",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "221",
+                  "locator" : "17:1-17:15",
+                  "dataType" : "{urn:healthit-gov:qdm:v5_6}Patient",
+                  "templateId" : "Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         } ]
+      }
+   }
+}

@@ -9,6 +9,9 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
+using System;
+using System.Runtime.Intrinsics.Arm;
+
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
@@ -40,6 +43,34 @@ namespace Hl7.Cql.Runtime
                 { "{urn:hl7-org:elm-types:r1}Time"      , TimeType       },
                 { "{urn:hl7-org:elm-types:r1}ValueSet"  , ValueSetType   },
                 { "{urn:hl7-org:elm-types:r1}Vocabulary", VocabularyType },
+                //external add
+                 { "{urn:healthit-gov:qdm:v5_6}EncounterPerformed"       , EncounterPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositiveEncounterPerformed"       , PositiveEncounterPerformedTypes        },
+                 { "{urn:healthit-gov:qdm:v5_6}FacilityLocation"       , FacilityLocationType        },
+                 { "{urn:healthit-gov:qdm:v5_6}Patient"       , PatientTypes        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositiveAssessmentPerformed"       , PositiveAssessmentPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}Diagnosis"       , DiagnosisType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositiveInterventionOrder"       , PositiveInterventionOrderType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositiveInterventionPerformed"       , PositiveInterventionPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}NegativeInterventionOrder"       , NegativeInterventionOrderType        },
+                 { "{urn:healthit-gov:qdm:v5_6}NegativeInterventionPerformed"       , NegativeInterventionPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}NegativeMedicationOrder"       , NegativeMedicationOrderType        },
+                 { "{urn:healthit-gov:qdm:v5_6}NegativePhysicalExamPerformed"       , NegativePhysicalExamPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositivePhysicalExamPerformed"       , PositivePhysicalExamPerformedType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PositiveMedicationOrder"       , PositiveMedicationOrderType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PatientCharacteristicEthnicity"       , PatientCharacteristicEthnicityType        },
+                 { "{urn:healthit-gov:qdm:v5_6}PatientCharacteristicPayer"       , PatientCharacteristicPayerType        },
+
+
+                 { "{urn:healthit-gov:qdm:v5_6}PatientCharacteristicRace"       , PatientCharacteristicRaceType        },
+
+                 { "{urn:healthit-gov:qdm:v5_6}PatientCharacteristicSex"       , PatientCharacteristicSexType        },
+
+                 { "{urn:healthit-gov:qdm:v5_6}NegativeProcedurePerformed"       , NegativeProcedurePerformedType        },
+                  { "{urn:healthit-gov:qdm:v5_6}PositiveProcedurePerformed"       , PositiveProcedurePerformedType        },
+
+                 
+                 //{urn:healthit-gov:qdm:v5_6}{urn:healthit-gov:qdm:v5_6}FacilityLocation
             };
 
         /// <inheritdoc />
@@ -89,6 +120,29 @@ namespace Hl7.Cql.Runtime
 
         /// <inheritdoc />
         internal override Type VocabularyType => typeof(CqlVocabulary);
+
+        
+        internal virtual Type EncounterPerformedType => typeof(EncounterPerformed);
+        internal override Type PositiveEncounterPerformedTypes => typeof(PositiveEncounterPerformed);
+        internal override Type FacilityLocationType => typeof(FacilityLocation);
+        internal override Type PatientTypes => typeof(PatientDetails);
+        internal override Type PositiveAssessmentPerformedType => typeof(PositiveAssessmentPerformed);
+        internal override Type DiagnosisType => typeof(Diagnosis);
+        internal override Type PositiveInterventionOrderType => typeof(PositiveInterventionOrder);
+        internal override Type PositiveInterventionPerformedType => typeof(PositiveInterventionPerformed);
+        internal override Type NegativeInterventionOrderType => typeof(NegativeInterventionOrder);
+        internal override Type NegativeInterventionPerformedType => typeof(NegativeInterventionPerformed);
+        internal override Type PositiveMedicationOrderType => typeof(PositiveMedicationOrder);
+        internal override Type NegativeMedicationOrderType => typeof(NegativeMedicationOrder);
+        internal override Type PositivePhysicalExamPerformedType => typeof(PositivePhysicalExamPerformed);
+        internal override Type NegativePhysicalExamPerformedType => typeof(NegativePhysicalExamPerformed);
+        internal override Type PositiveProcedurePerformedType => typeof(PositiveProcedurePerformed);
+        internal override Type NegativeProcedurePerformedType => typeof(NegativeProcedurePerformed);
+        internal override Type PatientCharacteristicEthnicityType => typeof(PatientCharacteristicEthnicity);
+        internal override Type PatientCharacteristicPayerType => typeof(PatientCharacteristicPayer);
+        internal override Type PatientCharacteristicRaceType => typeof(PatientCharacteristicRace);
+        internal override Type PatientCharacteristicSexType => typeof(PatientCharacteristicSex);
+
 
         /// <inheritdoc/>
         internal override Type IntervalType(Type pointType) =>
@@ -141,6 +195,7 @@ namespace Hl7.Cql.Runtime
             return null;
         }
 
+    
         private static string CorrectQiCoreExtensionTypes(string typeSpecifier) =>
             typeSpecifier switch
             {
@@ -186,4 +241,5 @@ namespace Hl7.Cql.Runtime
             else return null;
         }
     }
+  
 }

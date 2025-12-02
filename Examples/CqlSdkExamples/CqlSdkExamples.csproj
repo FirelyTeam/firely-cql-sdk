@@ -27,9 +27,22 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<Compile Remove="**\input\**\*.g.cs" />
+		<Compile Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\cs\**" />
+		<Compile Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\resources\**" />
 		<None Include="**\input\**\*.g.cs">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\cs\**" />
+	  <EmbeddedResource Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\resources\**" />
+	  <None Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\cs\**" />
+	  <None Remove="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\resources\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000\elm\" />
 	</ItemGroup>
 
 	<Import Project="..\CqlSdkExamplesCodeGeneration.targets" />

@@ -31,6 +31,7 @@ internal partial class Program
             case "400": InvokingFromAllFhirResourcesInDirectory(); return;
             case "410": InvokingFromFhirResourceAndDependenciesInDirectory(); return;
             case "500": ExtendingFunctionalityLogLibraryStatements(); return;
+            case "900": SupportCMS69PCSBMIScreenAndFollowUpQDM(); return;
         }
         // </codegen-switch>
     }
@@ -42,6 +43,12 @@ internal partial class Program
     }
 
     private static readonly string InitialCurrentDirectory = Environment.CurrentDirectory;
+
+    private static readonly string ProjectDirectory =
+        (new DirectoryInfo(Environment.CurrentDirectory)
+            .FindParentDirectoryContaining("*.csproj")
+            ?? throw new DirectoryNotFoundException("Could not find the project directory."))
+        .FullName;
 
     private static readonly string LibrarySetsDirectory =
         (new DirectoryInfo(Environment.CurrentDirectory)

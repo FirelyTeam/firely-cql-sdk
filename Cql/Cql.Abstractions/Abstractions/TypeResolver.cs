@@ -103,6 +103,52 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         internal abstract Type VocabularyType { get; }
 
+        //internal abstract Type PositiveEncounterPerformedType { get; }
+
+
+        internal abstract Type PositiveEncounterPerformedTypes { get; }
+        internal abstract Type FacilityLocationType { get; }
+
+        internal abstract Type PatientTypes { get; }
+        internal abstract Type PositiveAssessmentPerformedType { get; }
+
+        internal abstract Type DiagnosisType { get; }
+
+        internal abstract Type PositiveInterventionOrderType { get; }
+
+        internal abstract Type PositiveInterventionPerformedType { get; }
+
+        internal abstract Type NegativeInterventionOrderType { get; }
+
+        internal abstract Type NegativeInterventionPerformedType { get; }
+
+        internal abstract Type PositiveMedicationOrderType { get; }
+
+        internal abstract Type NegativeMedicationOrderType { get; }
+
+        internal abstract Type PositivePhysicalExamPerformedType { get; }
+
+        internal abstract Type NegativePhysicalExamPerformedType { get; }
+
+        internal abstract Type PositiveProcedurePerformedType { get; }
+
+
+        internal abstract Type NegativeProcedurePerformedType { get; }
+
+
+        internal abstract Type PatientCharacteristicEthnicityType { get; }
+
+        internal abstract Type PatientCharacteristicPayerType { get; }
+
+
+        internal abstract Type PatientCharacteristicRaceType { get; }
+
+        internal abstract Type PatientCharacteristicSexType { get; }
+
+
+
+
+
         #endregion
 
         /// <summary>

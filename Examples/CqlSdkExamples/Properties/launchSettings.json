@@ -55,6 +55,10 @@
     "500 Extending Functionality - Log Statements per Library": {
       "commandName": "Project",
       "commandLineArgs": "500"
+    },
+    "900 Support CMS69PCSBMIScreenAndFollowUpQDM_14_0_000": {
+      "commandName": "Project",
+      "commandLineArgs": "900"
     }
   }
 }
