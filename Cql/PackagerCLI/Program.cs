@@ -15,11 +15,13 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
-    /// <summary>
-    /// ** KEEP THIS IN SYNC WITH THE POM.XML FILE **
-    /// The version of the Java CQL to ELM tool that this packager is compatible with.
-    /// Keep this in sync with &lt;cql.version> in the pom.xml file in this repository.
-    /// </summary>
+    // The latest version number can be found under the releases tab of the CQL to ELM CLI repository
+    // see: https://github.com/cqframework/clinical_quality_language/releases
+    //
+    // If you change the version here, you also need to update it in these places too:
+    // * pom.xml
+    // * Java-Dependencies-Vars.ps1
+    // * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
     private const string JavaToolVersion = "3.28.0";
 
     internal static readonly string Disclaimer =

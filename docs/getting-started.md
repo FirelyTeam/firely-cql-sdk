@@ -66,14 +66,20 @@ Just like with the CQL, building the solution should be a simple matter of hitti
 
 ### 1. Turning CQL into ELM (using Java Tooling)
 
-Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. Unfortunately, there is no .NET tool for doing this yet, so this step involves running the existing CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java).  The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
+Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. While this repository includes a .NET-based CQL to ELM converter, it is not yet mature enough for production use. Therefore, **the preferred and recommended approach** is to use the battle-tested Java-based CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java). The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
 
 Prerequisites:
 1. Install JDK
 2. Install [Maven](https://maven.apache.org/install.html). Be sure to set the PATH variable mentioned in the link.
-3. As of this documentation JDK 21 and Maven 3.9.5 are working - Oct 13 2023.
+3. Install PowerShell (pwsh) - PowerShell Core 7.0 or later is recommended
+4. As of this documentation JDK 21 and Maven 3.9.5 are working - Oct 13 2023.
 
-Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains the build target (including the Maven configuration files). This project is used for common build targets.
+Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains:
+- PowerShell scripts for managing Java dependencies (`Java-Dependencies-*.ps1`)
+- MSBuild targets that invoke these scripts (`CqlToElm.Targets.xml`)
+- Maven configuration files (`pom.xml`)
+
+The build process automatically downloads and manages the Java tooling dependencies using these scripts.
 
  There are multiple `Measures.*` projects where the `input` folder contains a set of demo CQL files. 
  Select the `Generate-CQL-to-ELM` build configuration in the solution explorer,
@@ -119,10 +125,16 @@ With the 2.x SDK update, the Demo projects have been refactored and improved tha
 ### Cql Project
 The functionality in the 1.x `ELM` project has been merged to the `CQL` project. The goal of the `CQL` project is to:
 
-1. Pull down the JAVA cql-to-elm tooling using Maven
-2. Invoke the cql-to-elm tooling to convert `CQL` to `ELM` (this will be retired soon when the CQL SDK cql-to-elm C# implementation is complete.)
+1. Pull down the JAVA cql-to-elm tooling using Maven (managed via PowerShell scripts in the `Build` directory)
+2. Invoke the cql-to-elm tooling to convert `CQL` to `ELM`
 
 Because there are now multiple `Measures.[name]` projects the build targets are located in this project to be shared amongst the others.
+
+The `Build` directory contains:
+- **Java-Dependencies-Vars.ps1**: Configuration for Java dependency versions and paths
+- **Java-Dependencies-Download.ps1**: Downloads Java dependencies via Maven (checks if JARs already exist to avoid unnecessary downloads)
+- **Java-Dependencies-Clean.ps1**: Cleans downloaded dependencies
+- **CqlToElm.Targets.xml**: MSBuild targets that invoke the PowerShell scripts and Java tooling
 
 ### CLI Project
 The `CLI` project is now standalone and is referenced by all of the `Measures.[name]` projects to reuse the functionality within. Some highlights of functionality:
