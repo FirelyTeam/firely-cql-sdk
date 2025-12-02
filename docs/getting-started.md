@@ -126,7 +126,7 @@ With the 2.x SDK update, the Demo projects have been refactored and improved tha
 The functionality in the 1.x `ELM` project has been merged to the `CQL` project. The goal of the `CQL` project is to:
 
 1. Pull down the JAVA cql-to-elm tooling using Maven (managed via PowerShell scripts in the `Build` directory)
-2. Invoke the cql-to-elm tooling to convert `CQL` to `ELM` (this will be retired soon when the CQL SDK cql-to-elm C# implementation is complete.)
+2. Invoke the cql-to-elm tooling to convert `CQL` to `ELM`
 
 Because there are now multiple `Measures.[name]` projects the build targets are located in this project to be shared amongst the others.
 
