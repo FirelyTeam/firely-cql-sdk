@@ -72,7 +72,7 @@ The SDK depends on the following key external packages:
 ### Configuration & Logging
 - **Microsoft.Extensions.Configuration**: Version 9.0.3 - Configuration framework
 - **Microsoft.Extensions.DependencyInjection**: Version 8.0.0 - Dependency injection container
-- **Microsoft.Extensions.Logging**: Version 8.0.0 - Logging abstractions and providers
+- **Microsoft.Extensions.Logging**: Version 8.0.0 - Logging abstractions
 - **Microsoft.Extensions.Hosting**: Version 8.0.0 - Generic host for .NET applications
 
 ### Command-line Tool Dependencies
