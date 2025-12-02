@@ -66,7 +66,7 @@ Just like with the CQL, building the solution should be a simple matter of hitti
 
 ### 1. Turning CQL into ELM (using Java Tooling)
 
-Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. Unfortunately, there is no .NET tool for doing this yet, so this step involves running the existing CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java).  The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
+Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. While this repository includes a .NET-based CQL to ELM converter, it is not yet mature enough for production use. Therefore, **the preferred and recommended approach** is to use the battle-tested Java-based CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java). The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
 
 Prerequisites:
 1. Install JDK
