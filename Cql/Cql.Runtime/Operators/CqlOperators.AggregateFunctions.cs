@@ -620,9 +620,44 @@ namespace Hl7.Cql.Operators
 
         #region Sum
 
-        public int? Sum(IEnumerable<int?> values) => values?.Sum();
-        public long? Sum(IEnumerable<long?> values) => values?.Sum();
-        public decimal? Sum(IEnumerable<decimal?> values) => values?.Sum();
+        public int? Sum(IEnumerable<int?> values)
+        {
+            if (values == null)
+                return null;
+            var nonNull = values
+                .Where(q => q != null)
+                .ToArray();
+            if (nonNull.Length == 0)
+                return null;
+
+            return nonNull.Sum();
+        }
+
+        public long? Sum(IEnumerable<long?> values)
+        {
+            if (values == null)
+                return null;
+            var nonNull = values
+                .Where(q => q != null)
+                .ToArray();
+            if (nonNull.Length == 0)
+                return null;
+
+            return nonNull.Sum();
+        }
+
+        public decimal? Sum(IEnumerable<decimal?> values)
+        {
+            if (values == null)
+                return null;
+            var nonNull = values
+                .Where(q => q != null)
+                .ToArray();
+            if (nonNull.Length == 0)
+                return null;
+
+            return nonNull.Sum();
+        }
 
         public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? argument)
         {
