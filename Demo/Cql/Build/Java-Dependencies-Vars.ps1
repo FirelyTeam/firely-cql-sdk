@@ -8,7 +8,7 @@
 if (-not (Test-Path variable:CqlToElmCliVersion)) {
     # The latest version number can be found under the releases tab of the CQL to ELM CLI repository
 	# see: https://github.com/cqframework/clinical_quality_language/releases
-    #
+	#
 	# If you change the version here, you also need to update it in these places too:
 	# * pom.xml
 	# * Java-Dependencies-Vars.ps1

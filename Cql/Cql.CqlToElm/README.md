@@ -6,6 +6,8 @@ A support package for HL7.Cql that contains functionality to convert CQL to ELM.
 
 This package provides the conversion functionality that transforms Clinical Quality Language (CQL) source code into Expression Logical Model (ELM) representation. This is a critical step in the CQL compilation pipeline.
 
+> **Important**: This .NET-based CQL to ELM converter is currently in early development and only supports basic CQL translation. **It is NOT PRODUCTION READY.** For production use, we **strongly recommend** using the mature, battle-tested [Java-based CQL to ELM tooling](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java) instead.
+
 ## Key Features
 
 - **CQL to ELM Conversion**: Complete conversion from CQL text to ELM JSON
