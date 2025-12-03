@@ -677,7 +677,7 @@ namespace Hl7.Cql.Operators
                         return (true, value: v);
 
                     default:
-                        return (false, 0!);
+                        return default;
                 }
             }
 
@@ -741,36 +741,24 @@ file static class CqlMath
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TNumber? CqlSum<TNumber>(
         this IEnumerable<TNumber?>? values)
-        where TNumber : struct, INumberBase<TNumber>
-    {
-        if (values == null)
-            return null;
-
-        TNumber sum = TNumber.Zero;
-        bool hasValue = false;
-        foreach (var v in values)
-        {
-            if (!v.HasValue)
-                continue;
-
-            hasValue = true;
-            checked { sum += v.Value; }
-        }
-        return hasValue ? sum : null;
-    }
+        where TNumber : struct, INumberBase<TNumber> =>
+        CqlAggregate<TNumber?, TNumber, TNumber?>(
+            values,
+            v => v.HasValue ? (true, v.Value) : default,
+            (acc, value) => checked((acc ?? TNumber.Zero) + value));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TAccumulate? CqlAggregate<TSource, TValue, TAccumulate>(
         this IEnumerable<TSource?>? values,
         Func<TSource?, (bool hasValue, TValue value)> hasValue,
-        Func<TAccumulate, TValue, TAccumulate> aggregator,
-        TAccumulate initialAccumulate = default(TAccumulate))
+        Func<TAccumulate?, TValue, TAccumulate> aggregator,
+        TAccumulate? initialAccumulate = default)
     {
         if (values == null)
             return default;
 
         bool any = false;
-        TAccumulate acc = initialAccumulate;
+        TAccumulate? acc = initialAccumulate;
 
         foreach (var v in values)
         {
