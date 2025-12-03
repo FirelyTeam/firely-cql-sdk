@@ -7,7 +7,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Primitives;
+using System.Numerics;
 
 namespace Hl7.Cql.Operators
 {
@@ -620,29 +622,92 @@ namespace Hl7.Cql.Operators
 
         #region Sum
 
-        public int? Sum(IEnumerable<int?> values) => values?.Sum();
-        public long? Sum(IEnumerable<long?> values) => values?.Sum();
-        public decimal? Sum(IEnumerable<decimal?> values) => values?.Sum();
-
-        public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? argument)
+        public int? Sum(IEnumerable<int?>? values)
         {
-            if (argument == null)
-                return null;
-            var nonNull = argument
-                .Where(q => q != null && q.value != null)
-                .ToArray();
-            if (nonNull.Length == 0)
-                return null;
-            decimal? product = 1;
-            string? unit = null;
-            foreach (var v in nonNull)
+            try
             {
-                unit ??= (v!.unit ?? "1");
-                if (unit != v!.unit)
-                    throw new NotSupportedException("Unlike units are not supported.");
-                product *= v.value!.Value;
+                return values.CqlSum();
             }
-            return new CqlQuantity(product, unit ?? "1");
+            catch (OverflowException e)
+            {
+                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type integer summation, returned null.");
+                return null;
+            }
+        }
+
+        public long? Sum(IEnumerable<long?>? values)
+        {
+            try
+            {
+                return values.CqlSum();
+            }
+            catch (OverflowException e)
+            {
+                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type long summation, returned null.");
+                return null;
+            }
+        }
+
+        public decimal? Sum(IEnumerable<decimal?>? values)
+        {
+            try
+            {
+                return values.CqlSum();
+            }
+            catch (OverflowException e)
+            {
+                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type decimal summation, returned null.");
+                return null;
+            }
+        }
+
+        public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? values)
+        {
+            string? unit = null;
+
+            (bool hasValue, decimal value) GetValueAndCheckUnit(CqlQuantity? quantity)
+            {
+                switch (quantity)
+                {
+                    case { value: { } v, unit: var u }:
+                        u ??= "1";
+                        if (unit != u)
+                            throw new NotSupportedException("Inconsistent units are not supported.");
+
+                        return (true, value: v);
+
+                    default:
+                        return default;
+                }
+            }
+
+            decimal? Aggregate(decimal? quantityAcc, decimal quantityValue)
+            {
+                checked
+                {
+                    return (quantityAcc ?? 0m) + quantityValue;
+                }
+            }
+
+            try
+            {
+                decimal? initialAccumulate = null;
+                return values.CqlAggregate(GetValueAndCheckUnit, Aggregate, initialAccumulate) switch
+                {
+                    null    => null,
+                    { } sum => new CqlQuantity(sum, unit ?? "1")
+                };
+            }
+            catch (NotSupportedException e)
+            {
+                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored inconsistent units errors from type CqlQuantity summation, returned null.");
+                return null;
+            }
+            catch (OverflowException e)
+            {
+                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type CqlQuantity summation, returned null.");
+                return null;
+            }
         }
 
         #endregion
@@ -669,4 +734,43 @@ namespace Hl7.Cql.Operators
         #endregion
     }
 }
+
+
+file static class CqlMath
+{
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TNumber? CqlSum<TNumber>(
+        this IEnumerable<TNumber?>? values)
+        where TNumber : struct, INumberBase<TNumber> =>
+        CqlAggregate<TNumber?, TNumber, TNumber?>(
+            values,
+            v => v.HasValue ? (true, v.Value) : default,
+            (acc, value) => checked((acc ?? TNumber.Zero) + value));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TAccumulate? CqlAggregate<TSource, TValue, TAccumulate>(
+        this IEnumerable<TSource?>? values,
+        Func<TSource?, (bool hasValue, TValue value)> hasValue,
+        Func<TAccumulate?, TValue, TAccumulate> aggregator,
+        TAccumulate? initialAccumulate = default)
+    {
+        if (values == null)
+            return default;
+
+        bool any = false;
+        TAccumulate? acc = initialAccumulate;
+
+        foreach (var v in values)
+        {
+            if (hasValue(v) is (true, var value))
+            {
+                any = true;
+                acc = aggregator(acc, value);
+            }
+        }
+
+        return any ? acc : default;
+    }
+}
+
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

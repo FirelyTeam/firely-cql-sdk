@@ -477,10 +477,10 @@ Hl7.Cql.Operators.ICqlOperators.Successor(Hl7.Cql.Primitives.CqlQuantity? argume
 Hl7.Cql.Operators.ICqlOperators.Successor(Hl7.Cql.Primitives.CqlTime? argument) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Successor(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Successor(long? argument) -> long?
-Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<decimal?>! values) -> decimal?
-Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? argument) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<int?>! values) -> int?
-Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<long?>! values) -> long?
+Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<decimal?>? values) -> decimal?
+Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? values) -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<int?>? values) -> int?
+Hl7.Cql.Operators.ICqlOperators.Sum(System.Collections.Generic.IEnumerable<long?>? values) -> long?
 Hl7.Cql.Operators.ICqlOperators.Tail<T>(System.Collections.Generic.IEnumerable<T>! argument) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Time(int? hour, int? minute, int? second, int? millisecond) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.TimeComponent(Hl7.Cql.Primitives.CqlDateTime? argument) -> Hl7.Cql.Primitives.CqlTime?
