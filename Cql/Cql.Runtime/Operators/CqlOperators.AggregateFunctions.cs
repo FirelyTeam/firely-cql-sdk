@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Numerics;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -620,54 +621,24 @@ namespace Hl7.Cql.Operators
 
         #region Sum
 
-        public int? Sum(IEnumerable<int?> values)
+        public int? Sum(IEnumerable<int?>? values) => values.CqlSum();
+
+        public long? Sum(IEnumerable<long?>? values) => values.CqlSum();
+
+        public decimal? Sum(IEnumerable<decimal?>? values) => values.CqlSum();
+
+        public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? values)
         {
             if (values == null)
                 return null;
+
             var nonNull = values
-                .Where(q => q != null)
+                .Where(q => q is { value: not null })
                 .ToArray();
+
             if (nonNull.Length == 0)
                 return null;
 
-            return nonNull.Sum();
-        }
-
-        public long? Sum(IEnumerable<long?> values)
-        {
-            if (values == null)
-                return null;
-            var nonNull = values
-                .Where(q => q != null)
-                .ToArray();
-            if (nonNull.Length == 0)
-                return null;
-
-            return nonNull.Sum();
-        }
-
-        public decimal? Sum(IEnumerable<decimal?> values)
-        {
-            if (values == null)
-                return null;
-            var nonNull = values
-                .Where(q => q != null)
-                .ToArray();
-            if (nonNull.Length == 0)
-                return null;
-
-            return nonNull.Sum();
-        }
-
-        public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? argument)
-        {
-            if (argument == null)
-                return null;
-            var nonNull = argument
-                .Where(q => q != null && q.value != null)
-                .ToArray();
-            if (nonNull.Length == 0)
-                return null;
             decimal? product = 1;
             string? unit = null;
             foreach (var v in nonNull)
@@ -704,4 +675,32 @@ namespace Hl7.Cql.Operators
         #endregion
     }
 }
+
+
+file static class CqlMath
+{
+    public static TAddable? CqlSum<TAddable>(
+        this IEnumerable<TAddable?>? values)
+        where TAddable : struct, IAdditionOperators<TAddable, TAddable, TAddable>
+    {
+        if (values == null)
+            return null;
+
+        TAddable sum = default(TAddable);
+        bool hasValue = false;
+        foreach (var v in values)
+        {
+            if (!v.HasValue)
+                continue;
+
+            hasValue = true;
+            checked
+            {
+                sum += v.Value;
+            }
+        }
+        return hasValue ? sum : null;
+    }
+}
+
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
