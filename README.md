@@ -28,6 +28,56 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
+### Quick Start with Invocation Toolkit (Recommended)
+
+The **Invocation Toolkit** is the recommended way to work with CQL libraries in the SDK. It provides a high-level, fluent API that simplifies the process of loading, compiling, and executing CQL:
+
+```csharp
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Microsoft.Extensions.Logging;
+
+// Create a CQL toolkit with logging
+var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+var cqlToolkit = new CqlToolkit(loggerFactory);
+
+// Define your CQL
+var cql = (CqlLibraryString)"""
+    library HelloWorld version '1.0.0'
+    define "Greeting" : 'Hello from CQL!'
+    """;
+
+// Add the CQL library and create an invoker
+using var librarySetInvoker = cqlToolkit
+    .AddCqlLibraries(cql)
+    .CreateLibrarySetInvoker();
+
+// Create a CQL context with FHIR data
+var cqlContext = FhirCqlContext.WithDataSource();
+
+// Invoke the definition
+var result = librarySetInvoker.InvokeLibraryDefinition(
+    cqlContext: cqlContext,
+    libraryIdentifier: cql.LibraryIdentifier,
+    definitionSignature: "Greeting");
+
+Console.WriteLine(result); // Output: Hello from CQL!
+```
+
+**Why use the Invocation Toolkit?**
+
+- **Simplified API**: Fluent, builder-style API reduces boilerplate code
+- **Integrated Pipeline**: Automatically handles CQL→ELM→C#→DLL conversion
+- **Resource Management**: Proper lifecycle management with IDisposable pattern
+- **Error Handling**: Built-in error handling and logging support
+- **FHIR Integration**: Seamless integration with FHIR resources and data sources
+- **Production Ready**: Designed for production use with proper dependency injection support
+
+For more examples, see the [Examples/CqlSdkExamples](Examples/CqlSdkExamples) directory.
+
 ## SDK Packages
 
 This SDK consists of the following packages:
@@ -37,7 +87,7 @@ This SDK consists of the following packages:
 - **Hl7.Cql.Abstractions**: Core interfaces and abstractions used throughout the SDK
 - **Hl7.Cql.Runtime**: Runtime execution engine for CQL expressions
 - **Hl7.Cql.Compiler**: ELM to .NET compilation
-- **Hl7.Cql.Invocation**: High-level APIs for invoking CQL libraries and expressions
+- **Hl7.Cql.Invocation**: High-level APIs for invoking CQL libraries and expressions (includes the **Invocation Toolkit**)
 
 ### Integration & Data Packages
 - **Hl7.Cql.Firely**: FHIR integration layer
@@ -61,8 +111,8 @@ This SDK consists of the following packages:
 The SDK depends on the following key external packages:
 
 ### FHIR Support
-- **Hl7.Fhir.Base**: Version 5.12.0 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
+- **Hl7.Fhir.Base**: Version 6.0.1 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Version 6.0.1 - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 
 ### Parsing & Compilation
@@ -73,6 +123,7 @@ The SDK depends on the following key external packages:
 - **Microsoft.Extensions.Configuration**: Version 9.0.3 - Configuration framework
 - **Microsoft.Extensions.DependencyInjection**: Version 8.0.0 - Dependency injection container
 - **Microsoft.Extensions.Logging**: Version 8.0.0 - Logging abstractions
+- **Microsoft.Extensions.Logging.Console**: Version 8.0.1 - Console logging provider
 - **Microsoft.Extensions.Hosting**: Version 8.0.0 - Generic host for .NET applications
 
 ### Command-line Tool Dependencies

@@ -31,7 +31,51 @@ This package includes all core CQL functionality by referencing:
 
 ## Usage
 
-This package provides everything needed to execute CQL in .NET applications.
+This package provides everything needed to execute CQL in .NET applications. However, **we strongly recommend using the Invocation Toolkit** (included in the `Hl7.Cql.Invocation` package) rather than directly using the lower-level APIs.
+
+### Recommended: Use the Invocation Toolkit
+
+The Invocation Toolkit provides a simplified, high-level API for working with CQL:
+
+```csharp
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Microsoft.Extensions.Logging;
+
+// Create a CQL toolkit with logging
+var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+var cqlToolkit = new CqlToolkit(loggerFactory);
+
+// Define your CQL
+var cql = (CqlLibraryString)"""
+    library MyLibrary version '1.0.0'
+    define "Result" : 'Hello from CQL!'
+    """;
+
+// Add the CQL library and create an invoker
+using var librarySetInvoker = cqlToolkit
+    .AddCqlLibraries(cql)
+    .CreateLibrarySetInvoker();
+
+// Create a CQL context and invoke
+var cqlContext = FhirCqlContext.WithDataSource();
+var result = librarySetInvoker.InvokeLibraryDefinition(
+    cqlContext: cqlContext,
+    libraryIdentifier: cql.LibraryIdentifier,
+    definitionSignature: "Result");
+```
+
+**Why use the Invocation Toolkit?**
+- Simplified, fluent API reduces boilerplate code
+- Automatic handling of the CQL→ELM→C#→DLL pipeline
+- Proper resource management with IDisposable pattern
+- Built-in error handling and logging support
+- Production-ready with dependency injection support
+
+For more examples, see the [Examples/CqlSdkExamples](../../Examples/CqlSdkExamples) directory.
 
 ## Further Reading
 

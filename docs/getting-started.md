@@ -41,6 +41,81 @@ It is used in the Demo project,
 so if you'd like to see example use for it (until we write the documentation),
 take a look at the provided `"ELM to C#"` build target in the Elm project within the Demo solution.
 
+## The Invocation Toolkit (Recommended Approach)
+
+**For most production applications, we recommend using the Invocation Toolkit** rather than working directly with the lower-level Demo projects. The Invocation Toolkit provides a simplified, high-level API for loading, compiling, and executing CQL libraries.
+
+### Why Use the Invocation Toolkit?
+
+The Invocation Toolkit offers several advantages:
+
+1. **Simplified API**: Fluent, builder-style interface reduces boilerplate code
+2. **Complete Pipeline**: Automatically handles CQL→ELM→C#→DLL conversion
+3. **Resource Management**: Proper lifecycle management with IDisposable pattern
+4. **Error Handling**: Built-in error handling with configurable continuation policies
+5. **FHIR Integration**: Seamless integration with FHIR resources and data sources
+6. **Production Ready**: Designed for production use with dependency injection support
+
+### Quick Start with Invocation Toolkit
+
+```csharp
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Microsoft.Extensions.Logging;
+
+// Create a CQL toolkit with logging
+var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+var cqlToolkit = new CqlToolkit(loggerFactory);
+
+// Define your CQL
+var cql = (CqlLibraryString)"""
+    library HelloWorld version '1.0.0'
+    define "Greeting" : 'Hello from CQL!'
+    """;
+
+// Add the CQL library and create an invoker
+using var librarySetInvoker = cqlToolkit
+    .AddCqlLibraries(cql)
+    .CreateLibrarySetInvoker();
+
+// Create a CQL context with FHIR data
+var cqlContext = FhirCqlContext.WithDataSource();
+
+// Invoke the definition
+var result = librarySetInvoker.InvokeLibraryDefinition(
+    cqlContext: cqlContext,
+    libraryIdentifier: cql.LibraryIdentifier,
+    definitionSignature: "Greeting");
+
+Console.WriteLine(result); // Output: Hello from CQL!
+```
+
+### Examples Directory
+
+For comprehensive examples using the Invocation Toolkit, see the `Examples/CqlSdkExamples/` directory:
+- **310 Invoking CQL Hello World**: Basic CQL invocation
+- **320 Invoking CQL Hello World with Parameter**: Using CQL parameters
+- **330 Invoking CQL Hello World function with Argument**: Function invocation with arguments
+- **400 Invoke from all FHIR Resources in Directory**: Loading from FHIR resources
+- **410 Invoke from all FHIR Resource and Dependencies in Directory**: With dependencies
+
+### When to Use the Demo Projects vs. Invocation Toolkit
+
+**Use the Invocation Toolkit when:**
+- Building production applications
+- You need a simple, high-level API
+- Working with FHIR resources
+- You want automatic pipeline management
+
+**Use the Demo projects to learn about:**
+- The internal architecture of the CQL engine
+- How the CQL→ELM→C# compilation pipeline works
+- Advanced customization and extension points
+- Contributing to the SDK development
+
 ## The Demo folder
 
 * Explore the Demo solution projects to see practical examples of the CQL engine in action.
@@ -50,6 +125,8 @@ take a look at the provided `"ELM to C#"` build target in the Elm project within
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
 so the names of the classes in the presentation will differ from the examples in the Demo project itself.
+
+**Note**: The Demo projects demonstrate lower-level APIs. For production use, we recommend the Invocation Toolkit (see above).
 
 It is important that you either build the Cql engine yourself before you try to build the Demo solution, 
 since that uses parts of the Cql solution. 
