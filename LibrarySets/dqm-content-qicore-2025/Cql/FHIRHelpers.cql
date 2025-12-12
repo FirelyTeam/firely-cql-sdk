@@ -710,4 +710,3 @@ define function ToString(value string): value.value
 define function ToTime(value time): value.value
 define function ToString(value uri): value.value
 define function ToString(value xhtml): value.value
-define function ToString(value FHIR.id): value.value
