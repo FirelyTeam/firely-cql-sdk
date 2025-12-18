@@ -139,3 +139,13 @@ virtual Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PrintMembers(System.Tex
 ~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitInputArtifacts.ToString() -> string
 ~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultArtifacts.Equals(object obj) -> bool
 ~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultArtifacts.ToString() -> string
+Hl7.Cql.Packaging.Internal.FhirLibraryUtilities
+static Hl7.Cql.Packaging.Internal.FhirLibraryUtilities.ExtractAssemblyBinary(Hl7.Fhir.Model.Library! library) -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
+static Hl7.Cql.Packaging.Internal.FhirLibraryUtilities.ExtractCqlFromFhirLibrary(Hl7.Fhir.Model.Library! library) -> string!
+static Hl7.Cql.Packaging.Internal.FhirLibraryUtilities.ExtractElmJsonFromFhirLibrary(Hl7.Fhir.Model.Library! library) -> string!
+static Hl7.Cql.Packaging.Internal.FhirLibraryUtilities.LoadFhirLibraryAndDependencies(Microsoft.Extensions.Logging.ILogger! logger, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Packaging.Internal.ResourceFileInfoResolver! fhirFileResolver, System.Func<System.IO.FileInfo!, bool>? filePredicate = null, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureJsonSerializerOptions = null) -> System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Library!>!
+static Hl7.Cql.Packaging.Internal.FhirLibraryUtilities.LoadFhirLibraryFromFileInfo(System.IO.FileInfo! file, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureJsonSerializerOptions = null) -> Hl7.Fhir.Model.Library!
+Hl7.Cql.Packaging.Internal.ResourceFileInfoResolver
+Hl7.Cql.Packaging.Internal.ResourceFileInfoResolvers
+static Hl7.Cql.Packaging.Internal.ResourceFileInfoResolvers.FromDirectory(System.IO.DirectoryInfo! directory, string! resourceType = "Library") -> Hl7.Cql.Packaging.Internal.ResourceFileInfoResolver!
+virtual Hl7.Cql.Packaging.Internal.ResourceFileInfoResolver.Invoke(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier) -> System.IO.FileInfo!

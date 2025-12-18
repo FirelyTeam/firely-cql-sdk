@@ -12,6 +12,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Packaging.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;

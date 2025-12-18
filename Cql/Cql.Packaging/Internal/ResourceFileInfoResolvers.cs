@@ -6,25 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Invocation.Toolkit.Extensions;
-
-/// <summary>
-/// Represents a delegate that resolves a <see cref="FileInfo"/> instance
-/// for a given <see cref="CqlVersionedLibraryIdentifier"/>.
-/// </summary>
-/// <param name="libraryIdentifier">
-/// The versioned identifier of the FHIR resource library for which the file information is being resolved.
-/// </param>
-/// <returns>
-/// A <see cref="FileInfo"/> instance representing the resolved FHIR resource file resolved from the library identifier.
-/// </returns>
-/// <remarks>
-/// It should not be assumed that the file exists.
-/// </remarks>
-public delegate FileInfo ResourceFileInfoResolver(CqlVersionedLibraryIdentifier libraryIdentifier);
+namespace Hl7.Cql.Packaging.Internal;
 
 /// <summary>
 /// Provides extension methods for resolving file information related to FHIR resource libraries.
@@ -33,6 +17,7 @@ public delegate FileInfo ResourceFileInfoResolver(CqlVersionedLibraryIdentifier 
 /// This class includes methods to create resolvers that map FHIR resource library identifiers
 /// to corresponding file information, such as resolving files from a specified directory.
 /// </remarks>
+[EditorBrowsable(EditorBrowsableState.Advanced)]
 public static class ResourceFileInfoResolvers
 {
     /// <summary>

@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 using System.Text.Json;
+using Hl7.Cql.Packaging.Internal;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 

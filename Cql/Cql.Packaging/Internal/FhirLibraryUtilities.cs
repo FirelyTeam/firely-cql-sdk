@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir.Serialization.Extensions;
@@ -7,7 +6,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 
-namespace Hl7.Cql.Invocation.Toolkit.Extensions;
+namespace Hl7.Cql.Packaging.Internal;
 
 /// <summary>
 /// Provides utility methods for loading, extracting, and processing FHIR Library resources and their dependencies. 
