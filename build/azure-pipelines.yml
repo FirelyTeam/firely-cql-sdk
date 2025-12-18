@@ -122,7 +122,7 @@ stages:
   jobs:
   - deployment: gitHub
     pool:
-      vmImage: 'windows-latest'
+      vmImage: $(vmImage)
     displayName: Deploy Packages to GitHub
     environment: GitHub
     strategy:
@@ -141,6 +141,8 @@ stages:
   condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
   jobs:
   - deployment: NuGet
+    pool:
+      vmImage: $(vmImage)
     displayName: Deploy Packages to Nuget
     environment: NuGet
     strategy:
