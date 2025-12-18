@@ -10,12 +10,12 @@ There is quite some variation in how CQL is written and interpreted,
 so it is likely at this early stage that there will be deviations from other engines currently available.
 
 ## Release Notes
-This is release version 2.3 of the engine.
-Earlier 1.x releases will be maintained with hotfixes, but will not receive new features.
+This is release version 2.3.1 of the engine.
 
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
 
+1.* Releases will be maintained with hotfixes, but will not receive new features.
 
 ## Getting Started
 
