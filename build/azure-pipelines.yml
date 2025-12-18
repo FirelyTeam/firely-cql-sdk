@@ -121,6 +121,8 @@ stages:
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   jobs:
   - deployment: gitHub
+    pool:
+      vmImage: 'windows-latest'
     displayName: Deploy Packages to GitHub
     environment: GitHub
     strategy:
