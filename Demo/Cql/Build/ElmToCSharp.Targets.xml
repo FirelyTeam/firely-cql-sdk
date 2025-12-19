@@ -15,8 +15,16 @@
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<JsonPretty>true</JsonPretty>
-		<!-- This PackagerCLI reference can remain relative to the is file. -->
+	</PropertyGroup>
+
+	<!-- Windows: Use .exe extension -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
 		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+	</PropertyGroup>
+
+	<!-- Unix: No .exe extension -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
