@@ -44,7 +44,7 @@ try {
             }
             # Download CQL to ELM CLI via Maven
             Write-Host "Downloading CQL to ELM CLI via Maven..."
-            $mvnOutput = & mvn -f $PomXmlPath dependency:copy-dependencies 2>&1
+            $mvnOutput = & mvn -f $PomXmlPath dependency:copy-dependencies -DoutputDirectory="$TargetDependencies" 2>&1
             $mvnExitCode = $LASTEXITCODE
             
             # Check if dependencies were actually downloaded successfully by verifying JARs exist

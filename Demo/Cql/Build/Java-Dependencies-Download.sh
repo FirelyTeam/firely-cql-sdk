@@ -28,7 +28,9 @@ get_jar_file_count() {
 }
 
 # Use a lock file to prevent parallel execution across multiple MSBuild processes
-LOCK_FILE="/tmp/cql-java-dependencies-download.lock"
+# Place lock file in the build directory to avoid /tmp issues
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOCK_FILE="$SCRIPT_DIR/.java-dependencies-download.lock"
 LOCK_FD=200
 
 # Open the lock file
@@ -69,7 +71,8 @@ if [ "$NEED_DOWNLOAD" = true ]; then
     echo "Downloading CQL to ELM CLI via Maven..."
     
     # Run Maven and capture output and exit code
-    MVN_OUTPUT=$(mvn -f "$PomXmlPath" dependency:copy-dependencies 2>&1)
+    # Explicitly specify output directory to ensure correct location
+    MVN_OUTPUT=$(mvn -f "$PomXmlPath" dependency:copy-dependencies -DoutputDirectory="$TargetDependencies" 2>&1)
     MVN_EXIT_CODE=$?
     
     # Check if dependencies were actually downloaded successfully by verifying JARs exist
