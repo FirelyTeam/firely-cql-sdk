@@ -413,3 +413,6 @@ global.json
 
 # remove compressed files
 *.zip
+
+# remove lock files
+*.lock
