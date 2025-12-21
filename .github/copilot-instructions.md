@@ -112,6 +112,27 @@ Use this header format with "Firely, NCQA":
 - Run relevant tests after modifications
 - Check that new projects are included in solution files (`*.sln`)
 
+### Cross-Platform Compatibility
+**CRITICAL**: Any changes to build scripts or project files MUST work on both Windows and non-Windows operating systems (Linux, macOS, WSL).
+
+#### Requirements for Script Changes
+- **Always maintain both PowerShell (.ps1) and Bash (.sh) script variants** with equivalent functionality
+- Use OS-conditional logic in MSBuild targets: `Condition="'$(OS)' == 'Windows_NT'"` for Windows, `Condition="'$(OS)' != 'Windows_NT'"` for Unix
+- Ensure Bash scripts are executable: `chmod +x script.sh`
+- Test changes on both platforms when possible, or verify OS-conditional logic is correct
+
+#### Requirements for Path Changes
+- **Use correct case for all directory paths** - Unix filesystems are case-sensitive
+- Verify paths match actual directory names exactly (e.g., `Input/ELM/HL7` not `input/elm/hl7`)
+- Avoid hardcoded path separators - use MSBuild properties like `$(MSBuildThisFileDirectory)`
+- Test that paths work on case-insensitive (Windows) and case-sensitive (Unix) filesystems
+
+#### Platform-Specific Considerations
+- **Executable extensions**: Windows uses `.exe`, Unix does not - handle conditionally
+- **Line endings**: Git should handle automatically, but be aware of CRLF (Windows) vs LF (Unix)
+- **Shell availability**: Use `pwsh` for PowerShell, `bash` for Bash - don't assume shell locations
+- **File locking**: Use portable mechanisms (e.g., directory-based locking with `mkdir`) instead of platform-specific tools like `flock` (not available on macOS by default)
+
 ### Code Generation Version Management
 **When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
 
