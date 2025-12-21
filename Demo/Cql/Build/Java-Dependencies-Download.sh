@@ -27,29 +27,40 @@ get_jar_file_count() {
     fi
 }
 
-# Use a lock file to prevent parallel execution across multiple MSBuild processes
-# Place lock file in the build directory to avoid /tmp issues
+# Use a lock directory to prevent parallel execution across multiple MSBuild processes
+# Using directory-based locking for cross-platform compatibility (works on Linux, macOS, etc.)
+# Place lock in the build directory to avoid /tmp issues
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOCK_FILE="$SCRIPT_DIR/.java-dependencies-download.lock"
-LOCK_FD=200
+LOCK_DIR="$SCRIPT_DIR/.java-dependencies-download.lock.d"
 
-# Open the lock file
-exec 200>"$LOCK_FILE"
-
-# Try to acquire exclusive lock (wait up to 2 minutes)
-if ! flock -x -w 120 200; then
-    echo "Error: Timeout waiting for Java dependencies download lock" >&2
-    exit 1
-fi
+# Function to acquire lock with timeout (2 minutes = 120 seconds)
+acquire_lock() {
+    local timeout=120
+    local elapsed=0
+    
+    while ! mkdir "$LOCK_DIR" 2>/dev/null; do
+        if [ $elapsed -ge $timeout ]; then
+            echo "Error: Timeout waiting for Java dependencies download lock" >&2
+            return 1
+        fi
+        sleep 1
+        elapsed=$((elapsed + 1))
+    done
+    return 0
+}
 
 # Function to release lock and clean up
 cleanup() {
-    flock -u 200 2>/dev/null || true
-    exec 200>&- 2>/dev/null || true
+    rmdir "$LOCK_DIR" 2>/dev/null || true
 }
 
 # Set trap to cleanup on exit
 trap cleanup EXIT
+
+# Acquire the lock
+if ! acquire_lock; then
+    exit 1
+fi
 
 # Check if target/dependency folder exists and contains JARs, or if -Force is specified
 NEED_DOWNLOAD=false
