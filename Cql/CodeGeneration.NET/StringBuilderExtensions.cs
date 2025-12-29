@@ -8,22 +8,10 @@
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal static class TextWriterExtensions
+internal static class StringBuilderExtensions
 {
     public const int SpacesPerIndentLevel = 4;
 
-    public static void WriteLine(
-        this StringWriter writer,
-        int indent,
-        string text = "")
-    {
-        var sb = writer.GetStringBuilder();
-        sb.AppendLine(indent, text);
-    }
-}
-
-internal static class StringBuilderExtensions
-{
     public static void AppendLine(
         this StringBuilder sb,
         int indent,
@@ -37,15 +25,6 @@ internal static class StringBuilderExtensions
             sb.AppendLine(text);
         }
     }
-
-    // public static void AppendLine(
-    //     this StringBuilder sb,
-    //     int indent,
-    //     string text)
-    // {
-    //     sb.Append(StringExtensions.IndentString(indent));
-    //     sb.AppendLine(text);
-    // }
 
     public static void Append(
         this StringBuilder sb,
