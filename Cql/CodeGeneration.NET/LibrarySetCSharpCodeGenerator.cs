@@ -19,7 +19,9 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
 /// </summary>
-internal partial class LibrarySetCSharpCodeGenerator
+internal partial class LibrarySetCSharpCodeGenerator(
+    TypeResolver typeResolver,
+    TypeToCSharpConverter typeToCSharpConverter)
 {
     /// <summary>
     /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
@@ -27,12 +29,12 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// </summary>
     internal static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
 
-    private readonly TypeToCSharpConverter _typeToCSharpConverter;
+    private readonly TypeToCSharpConverter _typeToCSharpConverter = typeToCSharpConverter;
 
     /// <summary>
     /// Gets the <see langword="using"/> statements to be included in the generated code.
     /// </summary>
-    private readonly HashSet<string> _usings;
+    private readonly HashSet<string> _usings = BuildUsings(typeResolver);
 
     /// <summary>
     /// Gets the aliased <see langword="using"/> statements to be included in the generated code.
@@ -41,16 +43,7 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// using Item1 = Item2;
     /// </code>
     /// </summary>
-    private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
-
-    public LibrarySetCSharpCodeGenerator(
-        TypeResolver typeResolver,
-        TypeToCSharpConverter typeToCSharpConverter)
-    {
-        _typeToCSharpConverter = typeToCSharpConverter;
-        _usings = BuildUsings(typeResolver);
-        _aliasedUsings = typeResolver.Aliases.ToList();
-    }
+    private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings = typeResolver.Aliases.ToList();
 
     private static string GetGeneratorToolNameFromAssemblyProductName() =>
         typeof(LibrarySetCSharpCodeGenerator)
@@ -90,5 +83,14 @@ internal partial class LibrarySetCSharpCodeGenerator
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
+    }
+
+    internal static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition cqlDefinition)
+    {
+        var name = cqlDefinition.Name;
+        string quotedName = name.QuoteString();
+        string methodName = IdentifierNormalizer.Normalize(name);
+        string fieldName = IdentifierNormalizer.Normalize($"_{name}");
+        return (quotedName, methodName, fieldName);
     }
 }

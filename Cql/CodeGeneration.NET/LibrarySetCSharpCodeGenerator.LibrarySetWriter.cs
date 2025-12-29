@@ -5,8 +5,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private record LibrarySetWriter
-    (
+    private record LibrarySetWriter(
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
         CqlDefinitionDictionary Definitions)

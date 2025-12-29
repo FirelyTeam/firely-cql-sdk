@@ -9,8 +9,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private record LibraryWriter
-    (
+    private record LibraryWriter(
         LibrarySetWriter LibrarySetWriter,
         ElmLibrary Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>

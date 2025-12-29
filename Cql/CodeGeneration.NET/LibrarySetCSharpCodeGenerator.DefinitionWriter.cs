@@ -37,68 +37,12 @@ partial class LibrarySetCSharpCodeGenerator
                     return;
 
                 case CqlLambdaDefinition ld:
-                    WriteLambdaDefinition(ld);
+                    new LambdaDefinitionWriter(LibraryWriter).WriteDefinition(ld, tw);
                     break;
 
                 default:
                     throw new NotSupportedException($"No support for {CqlDefinition.GetType()}");
             }
-        }
-
-        private (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition cqlDefinition)
-        {
-            var name = cqlDefinition.Name;
-            string quotedName = name.QuoteString();
-            string methodName = IdentifierNormalizer.Normalize(name);
-            string fieldName = IdentifierNormalizer.Normalize($"_{name}");
-            return (quotedName, methodName, fieldName);
-        }
-
-        private void WriteLambdaDefinition(
-            CqlLambdaDefinition ld)
-        {
-            var definitionAttributeTypeName = ld.GetType().Name;
-            var (quotedName, methodName, _) = GetMemberNames(CqlDefinition);
-
-            tw.WriteLine(
-                $"""
-                 [{definitionAttributeTypeName}({quotedName})]
-                 """);
-
-            if (CqlDefinition is CqlExpressionDefinition ed)
-                foreach (var tag in ed.Tags)
-                    foreach (var tagValue in tag.Values)
-                        tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
-
-            VariableNameGenerator variableNameGenerator = new([], postfix: "_");
-
-            var visitedBody = Transform(
-                ld.LambdaExpression.Body,
-                new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(variableNameGenerator),
-                new LocalVariableDeduper(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter)
-            );
-
-            // Skip CqlContext
-            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
-                LibraryWriter.LibrarySetWriter.TupleMetadataBuilder,
-                LibraryWriter.LibraryName,
-                LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
-                0);
-
-            var parameters = ld.LambdaExpression.Parameters.Skip(1);
-            var transformedLambda = Expression.Lambda(visitedBody, parameters);
-
-            // Extract original parameter names if this is a CqlFunctionDefinition
-            IReadOnlyDictionary<string, string>? originalParameterNames =
-                CqlDefinition is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
-                    ? functionDef.OriginalParameterNames
-                    : null;
-
-            var definitionWithBody =
-                definitionToCSharpCodeProcessor.ProcessDefinition(transformedLambda, methodName, specifiers: "public", originalParameterNames);
-            tw.WriteLine(definitionWithBody);
         }
 
         private void WriteCodeDefinition(
@@ -183,12 +127,6 @@ partial class LibrarySetCSharpCodeGenerator
                   public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
                   private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
                   """);
-        }
-
-        private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
-        {
-            foreach (var visitor in visitors) body = visitor.Visit(body);
-            return body;
         }
     }
 }
