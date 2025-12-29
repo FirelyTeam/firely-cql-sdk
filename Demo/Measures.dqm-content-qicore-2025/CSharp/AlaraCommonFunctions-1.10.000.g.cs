@@ -265,10 +265,10 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
@@ -311,10 +311,10 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
@@ -459,10 +459,10 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
@@ -505,10 +505,10 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             CodeableConcept m_ = C?.Code;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);

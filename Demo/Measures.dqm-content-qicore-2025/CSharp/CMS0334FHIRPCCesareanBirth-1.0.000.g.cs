@@ -273,10 +273,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? o_ = n_?.Value;
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
@@ -483,10 +483,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? w_ = v_?.Value;
             string x_ = context.Operators.Convert<string>(w_);
             string[] y_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = Parity?.Value;
@@ -636,10 +636,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? w_ = v_?.Value;
             string x_ = context.Operators.Convert<string>(w_);
             string[] y_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = PretermBirth?.Value;
@@ -789,10 +789,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? w_ = v_?.Value;
             string x_ = context.Operators.Convert<string>(w_);
             string[] y_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             bool? aa_ = context.Operators.And(u_, z_);
             DataType ab_ = TermBirth?.Value;
@@ -971,10 +971,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? an_ = am_?.Value;
                         string ao_ = context.Operators.Convert<string>(an_);
                         string[] ap_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
                         bool? ar_ = context.Operators.And(al_, aq_);
 
@@ -1112,10 +1112,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? ct_ = cs_?.Value;
                         string cu_ = context.Operators.Convert<string>(ct_);
                         string[] cv_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? cw_ = context.Operators.In<string>(cu_, (IEnumerable<string>)cv_);
                         bool? cx_ = context.Operators.And(cr_, cw_);
 
@@ -1253,10 +1253,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? ez_ = ey_?.Value;
                         string fa_ = context.Operators.Convert<string>(ez_);
                         string[] fb_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? fc_ = context.Operators.In<string>(fa_, (IEnumerable<string>)fb_);
                         bool? fd_ = context.Operators.And(ex_, fc_);
 
@@ -1394,10 +1394,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? he_ = hd_?.Value;
                         string hf_ = context.Operators.Convert<string>(he_);
                         string[] hg_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? hh_ = context.Operators.In<string>(hf_, (IEnumerable<string>)hg_);
                         bool? hi_ = context.Operators.And(hc_, hh_);
 
@@ -1534,10 +1534,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? jj_ = ji_?.Value;
                         string jk_ = context.Operators.Convert<string>(jj_);
                         string[] jl_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? jm_ = context.Operators.In<string>(jk_, (IEnumerable<string>)jl_);
                         bool? jn_ = context.Operators.And(jh_, jm_);
 
@@ -1674,10 +1674,10 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         ObservationStatus? lo_ = ln_?.Value;
                         string lp_ = context.Operators.Convert<string>(lo_);
                         string[] lq_ = [
-                        "final",
-                        "amended",
-                        "corrected",
-                            ];
+                            "final",
+                            "amended",
+                            "corrected",
+                        ];
                         bool? lr_ = context.Operators.In<string>(lp_, (IEnumerable<string>)lq_);
                         bool? ls_ = context.Operators.And(lm_, lr_);
 

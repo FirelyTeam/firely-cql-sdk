@@ -144,20 +144,20 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = DischargeAntithrombotic?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
                 string aj_ = context.Operators.Convert<string>(ai_);
                 string[] ak_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-                    ];
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
                 bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
                 bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as object);
@@ -241,21 +241,21 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             MedicationRequest.MedicationrequestStatus? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
             string[] ai_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ae_, aj_);
             Code<MedicationRequest.MedicationRequestIntent> al_ = NoAntithromboticDischarge?.IntentElement;
             MedicationRequest.MedicationRequestIntent? am_ = al_?.Value;
             string an_ = context.Operators.Convert<string>(am_);
             string[] ao_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.And(ak_, ap_);
 
@@ -311,9 +311,9 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 MedicationRequest.MedicationrequestStatus? ca_ = bz_?.Value;
                 string cb_ = context.Operators.Convert<string>(ca_);
                 string[] cc_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
                 bool? ce_ = context.Operators.And(by_, cd_);
                 CodeableConcept cf_ = TaskReject?.Code;
@@ -411,21 +411,21 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = PharmacologicalContraindications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
             string ai_ = context.Operators.Convert<string>(ah_);
             string[] aj_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 

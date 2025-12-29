@@ -134,10 +134,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -158,21 +158,21 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
 
@@ -194,21 +194,21 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
 
@@ -230,21 +230,21 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
 
@@ -266,21 +266,21 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
 
@@ -301,10 +301,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             List<CodeableConcept> h_ = O?.Category;
             CqlConcept i_(CodeableConcept @this)
@@ -415,10 +415,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -442,12 +442,12 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             MedicationRequest.MedicationRequestIntent? h_ = g_?.Value;
             string i_ = context.Operators.Convert<string>(h_);
             string[] j_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
             bool? l_ = context.Operators.And(f_, k_);
 
@@ -468,10 +468,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "completed",
-            "in-progress",
-            "on-hold",
-                ];
+                "completed",
+                "in-progress",
+                "on-hold",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -491,20 +491,20 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
 
@@ -525,10 +525,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             List<CodeableConcept> h_ = O?.Category;
             CqlConcept i_(CodeableConcept @this)
@@ -567,10 +567,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -590,10 +590,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -613,10 +613,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -636,10 +636,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -659,10 +659,10 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -700,11 +700,11 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-            "preliminary",
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "preliminary",
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;

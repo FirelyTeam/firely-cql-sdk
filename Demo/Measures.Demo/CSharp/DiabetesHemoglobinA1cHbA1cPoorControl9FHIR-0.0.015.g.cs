@@ -238,10 +238,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             Code<ObservationStatus> h_ = RecentHbA1c?.StatusElement;
             string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             string[] j_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
             DataType l_ = RecentHbA1c?.Effective;
             CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
@@ -302,10 +302,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string[] i_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
             DataType k_ = NoHbA1c?.Effective;
             CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, k_);

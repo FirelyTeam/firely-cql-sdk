@@ -309,10 +309,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
 
@@ -347,8 +347,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adolescent_Depression_Screening(context);
         Observation[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         bool? c_(Observation AdolescentScreen)
         {
             DataType g_ = AdolescentScreen?.Value;
@@ -445,21 +445,21 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? ce_ = cd_?.Value;
                 string cf_ = context.Operators.Convert<string>(ce_);
                 string[] cg_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
                 Code<MedicationRequest.MedicationRequestIntent> cj_ = AdolescentMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ck_ = cj_?.Value;
                 string cl_ = context.Operators.Convert<string>(ck_);
                 string[] cm_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-                    ];
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
                 bool? cn_ = context.Operators.In<string>(cl_, (IEnumerable<string>)cm_);
                 bool? co_ = context.Operators.And(ci_, cn_);
 
@@ -482,9 +482,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> cr_ = context.Operators.Convert<Code<RequestStatus>>(cq_);
             string cs_ = context.Operators.Convert<string>(cr_);
             string[] ct_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
 
             return cu_;
@@ -514,8 +514,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adolescent_Depression_Screening(context);
         Observation[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         IEnumerable<object> c_ = this.Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening(context);
         IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
         IEnumerable<ValueTuple<Observation, object, Encounter>> e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
@@ -781,10 +781,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
 
@@ -819,8 +819,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adult_Depression_Screening(context);
         Observation[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         bool? c_(Observation AdultScreen)
         {
             DataType g_ = AdultScreen?.Value;
@@ -917,21 +917,21 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? ce_ = cd_?.Value;
                 string cf_ = context.Operators.Convert<string>(ce_);
                 string[] cg_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
                 Code<MedicationRequest.MedicationRequestIntent> cj_ = AdultMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ck_ = cj_?.Value;
                 string cl_ = context.Operators.Convert<string>(ck_);
                 string[] cm_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-                    ];
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
                 bool? cn_ = context.Operators.In<string>(cl_, (IEnumerable<string>)cm_);
                 bool? co_ = context.Operators.And(ci_, cn_);
 
@@ -954,9 +954,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> cr_ = context.Operators.Convert<Code<RequestStatus>>(cq_);
             string cs_ = context.Operators.Convert<string>(cr_);
             string[] ct_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
 
             return cu_;
@@ -986,8 +986,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adult_Depression_Screening(context);
         Observation[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         IEnumerable<object> c_ = this.Follow_Up_Intervention_for_Positive_Adult_Depression_Screening(context);
         IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
         IEnumerable<ValueTuple<Observation, object, Encounter>> e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
@@ -1369,10 +1369,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
@@ -1515,10 +1515,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 

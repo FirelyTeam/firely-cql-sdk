@@ -490,11 +490,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             ObservationStatus? r_ = q_?.Value;
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-            "final",
-            "amended",
-            "corrected",
-            "appended",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                "appended",
+            ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(p_, u_);
 
@@ -651,10 +651,10 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             ObservationStatus? v_ = u_?.Value;
             string w_ = context.Operators.Convert<string>(v_);
             string[] x_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 
@@ -930,9 +930,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 List<CodeableConcept> ak_ = NoStatinTherapyOrdered?.ReasonCode;
@@ -1089,21 +1089,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? bu_ = bt_?.Value;
             string bv_ = context.Operators.Convert<string>(bu_);
             string[] bw_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
             bool? by_ = context.Operators.And(bs_, bx_);
             Code<MedicationRequest.MedicationRequestIntent> bz_ = StatinRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ca_ = bz_?.Value;
             string cb_ = context.Operators.Convert<string>(ca_);
             string[] cc_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filter-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filter-order",
+                "instance-order",
+            ];
             bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
             bool? ce_ = context.Operators.And(by_, cd_);
 
@@ -1224,9 +1224,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? cd_ = cc_?.Value;
             string ce_ = context.Operators.Convert<string>(cd_);
             string[] cf_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
             bool? ch_ = context.Operators.And(cb_, cg_);
 

@@ -248,8 +248,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter an_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ao_ = [
-            an_,
-                ];
+                an_,
+            ];
             bool? ap_(Encounter FirstSUDEpisode)
             {
                 object at_()
@@ -412,8 +412,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter em_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] en_ = [
-            em_,
-                ];
+                em_,
+            ];
             bool? eo_(Encounter FirstSUDEpisode)
             {
                 Period es_ = SUDEncounterDx?.Period;
@@ -543,8 +543,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter if_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ig_ = [
-            if_,
-                ];
+                if_,
+            ];
             bool? ih_(Encounter FirstSUDEpisode)
             {
                 FhirDateTime il_ = SUDMedication?.AuthoredOnElement;
@@ -710,8 +710,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter l_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] m_ = [
-            l_,
-                ];
+                l_,
+            ];
             bool? n_(Encounter FirstSUDEpisode)
             {
                 object r_()
@@ -893,8 +893,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter co_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] cp_ = [
-            co_,
-                ];
+                co_,
+            ];
             bool? cq_(Encounter FirstSUDEpisode)
             {
                 object cu_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitEncounter, "period");
@@ -1014,8 +1014,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter bh_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] bi_ = [
-            bh_,
-                ];
+                bh_,
+            ];
             bool? bj_(Encounter FirstSUDEpisode)
             {
                 FhirDateTime bn_ = SUDMedication?.AuthoredOnElement;
@@ -1066,8 +1066,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter cj_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ck_ = [
-            cj_,
-                ];
+                cj_,
+            ];
             bool? cl_(Encounter FirstSUDEpisode)
             {
                 object cp_()
@@ -1272,8 +1272,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> z_ = context.Operators.Union<CqlDate>(x_, y_);
             CqlDate aa_ = context.Operators.Min<CqlDate>(z_);
             CqlDate[] ab_ = [
-            aa_,
-                ];
+                aa_,
+            ];
             bool? ac_(CqlDate InitiationTreatmentDate)
             {
                 object ag_()
@@ -1413,8 +1413,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> cq_ = context.Operators.Union<CqlDate>(co_, cp_);
             CqlDate cr_ = context.Operators.Min<CqlDate>(cq_);
             CqlDate[] cs_ = [
-            cr_,
-                ];
+                cr_,
+            ];
             bool? ct_(CqlDate InitiationTreatmentDate)
             {
                 FhirDateTime cx_ = ShortActingMedOrder?.AuthoredOnElement;
@@ -1491,8 +1491,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> ah_ = context.Operators.Union<CqlDate>(af_, ag_);
             CqlDate ai_ = context.Operators.Min<CqlDate>(ah_);
             CqlDate[] aj_ = [
-            ai_,
-                ];
+                ai_,
+            ];
             bool? ak_(CqlDate InitiationTreatmentDate)
             {
                 FhirDateTime ao_ = LongActingMedOrder?.AuthoredOnElement;
@@ -1527,8 +1527,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> bb_ = context.Operators.Union<CqlDate>(az_, ba_);
             CqlDate bc_ = context.Operators.Min<CqlDate>(bb_);
             CqlDate[] bd_ = [
-            bc_,
-                ];
+                bc_,
+            ];
             bool? be_(CqlDate InitiationTreatmentDate)
             {
                 object bi_()

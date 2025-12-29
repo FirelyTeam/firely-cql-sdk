@@ -382,10 +382,10 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 Code<ObservationStatus> bp_ = context.Operators.Convert<Code<ObservationStatus>>(bo_);
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bm_, bs_);
                 bool? bu_ = context.Operators.And(bi_, bt_);

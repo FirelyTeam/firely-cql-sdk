@@ -283,10 +283,10 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             ObservationStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
 
@@ -774,21 +774,21 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(i_, n_);
             Code<MedicationRequest.MedicationRequestIntent> p_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
             string r_ = context.Operators.Convert<string>(q_);
             string[] s_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
             IEnumerable<Task> v_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
@@ -835,21 +835,21 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "completed",
-            "active",
-                ];
+                "completed",
+                "active",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(i_, n_);
             Code<MedicationRequest.MedicationRequestIntent> p_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
             string r_ = context.Operators.Convert<string>(q_);
             string[] s_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
             IEnumerable<Task> v_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
@@ -1133,21 +1133,21 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             MedicationRequest.MedicationrequestStatus? ac_ = ab_?.Value;
             string ad_ = context.Operators.Convert<string>(ac_);
             string[] ae_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
             bool? ag_ = context.Operators.And(aa_, af_);
             Code<MedicationRequest.MedicationRequestIntent> ah_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
             string aj_ = context.Operators.Convert<string>(ai_);
             string[] ak_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
             IEnumerable<Task> an_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
@@ -1196,10 +1196,10 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             ObservationStatus? l_ = k_?.Value;
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(j_, o_);
 

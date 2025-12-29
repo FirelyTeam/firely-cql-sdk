@@ -344,10 +344,10 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             ObservationStatus? al_ = ak_?.Value;
             string am_ = context.Operators.Convert<string>(al_);
             string[] an_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
             bool? ap_ = context.Operators.And(aj_, ao_);
 

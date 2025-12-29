@@ -277,9 +277,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             MedicationAdministration.MedicationAdministrationStatusCodes? aj_ = ai_?.Value;
             string ak_ = context.Operators.Convert<string>(aj_);
             string[] al_ = [
-            "in-progress",
-            "completed",
-                ];
+                "in-progress",
+                "completed",
+            ];
             bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
 
             return am_;
@@ -604,9 +604,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationAdministration.MedicationAdministrationStatusCodes? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                "in-progress",
-                "completed",
-                    ];
+                    "in-progress",
+                    "completed",
+                ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 DataType ah_ = Antithrombotic?.Effective;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -688,21 +688,21 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             MedicationRequest.MedicationrequestStatus? ai_ = ah_?.Value;
             string aj_ = context.Operators.Convert<string>(ai_);
             string[] ak_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
             Code<MedicationRequest.MedicationRequestIntent> an_ = NoAntithromboticOrder?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ao_ = an_?.Value;
             string ap_ = context.Operators.Convert<string>(ao_);
             string[] aq_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
             bool? as_ = context.Operators.And(am_, ar_);
 
@@ -770,9 +770,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationRequest.MedicationrequestStatus? ch_ = cg_?.Value;
                 string ci_ = context.Operators.Convert<string>(ch_);
                 string[] cj_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ck_ = context.Operators.In<string>(ci_, (IEnumerable<string>)cj_);
                 CodeableConcept cl_ = TaskReject?.Code;
                 CqlConcept cm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cl_);
@@ -978,9 +978,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationAdministration.MedicationAdministrationStatusCodes? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                "in-progress",
-                "completed",
-                    ];
+                    "in-progress",
+                    "completed",
+                ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 DataType ah_ = PharmacologicalContraindications?.Effective;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1038,10 +1038,10 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 ObservationStatus? o_ = n_?.Value;
                 string p_ = context.Operators.Convert<string>(o_);
                 string[] q_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
                 bool? s_ = context.Operators.And(m_, r_);
                 Instant t_ = INR?.IssuedElement;

@@ -334,10 +334,10 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 ObservationStatus? l_ = k_?.Value;
                 string m_ = context.Operators.Convert<string>(l_);
                 string[] n_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 DataType q_ = ViralLoadTest?.Effective;

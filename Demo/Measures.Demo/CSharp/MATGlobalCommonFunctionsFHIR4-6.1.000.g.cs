@@ -345,8 +345,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
         Encounter[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         CqlInterval<CqlDateTime> c_(Encounter X)
         {
             CqlInterval<CqlDateTime> g_()
@@ -387,8 +387,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
         Encounter[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
         {
             IEnumerable<Encounter.LocationComponent> g_()
@@ -404,9 +404,9 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     List<Encounter.LocationComponent> i_ = EDEncounter?.Location;
                     List<Encounter.LocationComponent> j_ = TheEncounter?.Location;
                     IEnumerable<Encounter.LocationComponent>[] k_ = [
-                    (IEnumerable<Encounter.LocationComponent>)i_,
-                    (IEnumerable<Encounter.LocationComponent>)j_,
-                        ];
+                        (IEnumerable<Encounter.LocationComponent>)i_,
+                        (IEnumerable<Encounter.LocationComponent>)j_,
+                    ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
@@ -480,8 +480,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-        TheEncounter,
-            ];
+            TheEncounter,
+        ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);
@@ -1249,8 +1249,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
         Encounter.DiagnosisComponent d_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(c_);
         Encounter.DiagnosisComponent[] e_ = [
-        d_,
-            ];
+            d_,
+        ];
         Condition f_(Encounter.DiagnosisComponent PD)
         {
             IEnumerable<Condition> n_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -1447,8 +1447,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -1482,8 +1482,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()

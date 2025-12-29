@@ -1151,10 +1151,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 ObservationStatus? ah_ = ag_?.Value;
                 string ai_ = context.Operators.Convert<string>(ah_);
                 string[] aj_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
                 bool? al_ = context.Operators.And(af_, ak_);
                 DataType am_ = VisualAcuityExamPerformed?.Value;

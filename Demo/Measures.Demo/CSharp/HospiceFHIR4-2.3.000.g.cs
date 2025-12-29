@@ -129,9 +129,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
             Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
             string ap_ = FHIRHelpers_4_0_001.Instance.ToString(context, ao_);
             string[] aq_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
             Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
             string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);

@@ -445,10 +445,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<RequestStatus> ag_ = FrailtyDeviceOrder?.StatusElement;
             string ah_ = FHIRHelpers_4_0_001.Instance.ToString(context, ag_);
             string[] ai_ = [
-            "active",
-            "on-hold",
-            "completed",
-                ];
+                "active",
+                "on-hold",
+                "completed",
+            ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             Code<RequestIntent> ak_ = FrailtyDeviceOrder?.IntentElement;
             string al_ = FHIRHelpers_4_0_001.Instance.ToString(context, ak_);
@@ -470,10 +470,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<ObservationStatus> at_ = FrailtyDeviceApplied?.StatusElement;
             string au_ = FHIRHelpers_4_0_001.Instance.ToString(context, at_);
             string[] av_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
             DataType ax_ = FrailtyDeviceApplied?.Effective;
             CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ax_);
@@ -524,11 +524,11 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<ObservationStatus> bn_ = FrailtySymptom?.StatusElement;
             string bo_ = FHIRHelpers_4_0_001.Instance.ToString(context, bn_);
             string[] bp_ = [
-            "preliminary",
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "preliminary",
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
             DataType br_ = FrailtySymptom?.Effective;
             CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, br_);

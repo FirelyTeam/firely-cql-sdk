@@ -263,10 +263,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             ObservationStatus? t_ = s_?.Value;
             string u_ = context.Operators.Convert<string>(t_);
             string[] v_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;

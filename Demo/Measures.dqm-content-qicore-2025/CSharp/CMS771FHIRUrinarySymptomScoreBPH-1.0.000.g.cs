@@ -267,10 +267,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             ObservationStatus? j_ = i_?.Value;
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             DataType n_ = IPSSAssessment?.Value;
             object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
@@ -360,10 +360,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             ObservationStatus? j_ = i_?.Value;
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             DataType n_ = AUASIAssessment?.Value;
             object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
@@ -546,10 +546,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 ObservationStatus? bf_ = be_?.Value;
                 string bg_ = context.Operators.Convert<string>(bf_);
                 string[] bh_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? bi_ = context.Operators.In<string>(bg_, (IEnumerable<string>)bh_);
                 bool? bj_ = context.Operators.And(bd_, bi_);
                 DataType bk_ = QOLAssessment?.Value;
@@ -653,8 +653,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         {
             object g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             object[] h_ = [
-            g_,
-                ];
+                g_,
+            ];
             bool? i_(object InitialBPHDiagnosis)
             {
                 CqlDateTime m_ = USSAssessment?.effectiveDatetime;
@@ -700,8 +700,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         {
             object g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             object[] h_ = [
-            g_,
-                ];
+                g_,
+            ];
             bool? i_(object InitialBPHDiagnosis)
             {
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
@@ -760,8 +760,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         {
             object j_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             object[] k_ = [
-            j_,
-                ];
+                j_,
+            ];
             bool? l_(object InitialBPHDiagnosis)
             {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UrinaryRetention);
@@ -804,8 +804,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         object a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
         object[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         IEnumerable<object> c_(object InitialBPHDiagnosis)
         {
             CqlValueSet f_ = this.Hospital_Services_for_Urology_Care(context);
@@ -856,8 +856,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         {
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? j_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] k_ = [
-            j_,
-                ];
+                j_,
+            ];
             bool? l_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)
             {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MorbidObesityDiagnosis);
@@ -900,8 +900,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         {
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? h_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] i_ = [
-            h_,
-                ];
+                h_,
+            ];
             bool? j_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)
             {
                 DataType n_ = BMIExam?.Value;
@@ -912,10 +912,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 ObservationStatus? s_ = r_?.Value;
                 string t_ = context.Operators.Convert<string>(s_);
                 string[] u_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                 bool? w_ = context.Operators.And(q_, v_);
                 DataType x_ = BMIExam?.Effective;
@@ -988,12 +988,12 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? a_ = this.Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis(context);
         (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? c_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
         (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] d_ = [
-        c_,
-            ];
+            c_,
+        ];
         IEnumerable<ValueTuple<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>> e_ = context.Operators.CrossJoin<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)b_, (IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)d_);
         (CqlTupleMetadata, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? f_(ValueTuple<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> _valueTuple)
         {
@@ -1023,8 +1023,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         int? a_ = this.Urinary_Symptom_Score_Change(context);
         int?[] b_ = [
-        a_,
-            ];
+            a_,
+        ];
         bool? c_(int? USSImprovement)
         {
             bool? g_ = context.Operators.GreaterOrEqual(USSImprovement, 3);

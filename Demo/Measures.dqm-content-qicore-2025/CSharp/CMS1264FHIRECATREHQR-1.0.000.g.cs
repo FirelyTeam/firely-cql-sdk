@@ -161,9 +161,9 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-            "finished",
-            "triaged",
-                ];
+                "finished",
+                "triaged",
+            ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(i_, o_);
 
@@ -523,9 +523,9 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             Code<RequestStatus> v_ = context.Operators.Convert<Code<RequestStatus>>(u_);
             string w_ = context.Operators.Convert<string>(v_);
             string[] x_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(s_, y_);
 

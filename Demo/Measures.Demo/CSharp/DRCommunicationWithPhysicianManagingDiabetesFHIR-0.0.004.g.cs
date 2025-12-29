@@ -638,10 +638,10 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             Code<ObservationStatus> q_ = MacularExam?.StatusElement;
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
             string[] s_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             DataType u_ = MacularExam?.Value;
             bool? v_ = context.Operators.Not((bool?)(u_ is null));

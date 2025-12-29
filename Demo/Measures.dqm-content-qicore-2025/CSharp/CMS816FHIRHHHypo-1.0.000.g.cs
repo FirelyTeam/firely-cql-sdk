@@ -282,10 +282,10 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             ObservationStatus? s_ = r_?.Value;
             string t_ = context.Operators.Convert<string>(s_);
             string[] u_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             bool? w_ = context.Operators.And(q_, v_);
             DataType x_ = tuple_fadhmfgiduzpspclbhmqonodh?.GlucoseTest?.Value;
@@ -833,10 +833,10 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             ObservationStatus? at_ = as_?.Value;
             string au_ = context.Operators.Convert<string>(at_);
             string[] av_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
             bool? ax_ = context.Operators.And(ar_, aw_);
             DataType ay_ = tuple_fcmdncyhjlqsajxzjwdiopqvk?.FollowupGlucoseTest?.Value;

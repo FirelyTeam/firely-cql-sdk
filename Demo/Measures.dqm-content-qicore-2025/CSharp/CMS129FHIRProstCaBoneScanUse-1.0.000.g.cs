@@ -417,8 +417,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         {
             Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
             Procedure[] n_ = [
-            m_,
-                ];
+                m_,
+            ];
             bool? o_(Procedure FirstProstateCancerTreatment)
             {
                 DataType s_ = ProstateCancerStaging?.Effective;
@@ -499,10 +499,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 ObservationStatus? ab_ = aa_?.Value;
                 string ac_ = context.Operators.Convert<string>(ab_);
                 string[] ad_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
                 bool? af_ = context.Operators.And(z_, ae_);
 
@@ -528,8 +528,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
         Observation h_ = context.Operators.Last<Observation>(g_);
         Observation[] i_ = [
-        h_,
-            ];
+            h_,
+        ];
         bool? j_(Observation LastProstateCancerStaging)
         {
             DataType bi_ = LastProstateCancerStaging?.Value;
@@ -571,8 +571,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         {
             Observation m_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
             Observation[] n_ = [
-            m_,
-                ];
+                m_,
+            ];
             bool? o_(Observation MostRecentProstateCancerStaging)
             {
                 CqlInterval<CqlDateTime> s_()
@@ -612,10 +612,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 ObservationStatus? y_ = x_?.Value;
                 string z_ = context.Operators.Convert<string>(y_);
                 string[] aa_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(w_, ab_);
 
@@ -641,8 +641,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Observation g_ = context.Operators.Last<Observation>(f_);
         Observation[] h_ = [
-        g_,
-            ];
+            g_,
+        ];
         bool? i_(Observation LastPSATest)
         {
             DataType av_ = LastPSATest?.Value;
@@ -670,8 +670,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         {
             Procedure n_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
             Procedure[] o_ = [
-            n_,
-                ];
+                n_,
+            ];
             bool? p_(Procedure FirstProstateCancerTreatment)
             {
                 DataType t_ = GleasonScore?.Effective;
@@ -752,10 +752,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 ObservationStatus? ac_ = ab_?.Value;
                 string ad_ = context.Operators.Convert<string>(ac_);
                 string[] ae_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
 
@@ -781,8 +781,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
         Observation h_ = context.Operators.Last<Observation>(g_);
         Observation[] i_ = [
-        h_,
-            ];
+            h_,
+        ];
         bool? j_(Observation LastGleasonScore)
         {
             DataType bj_ = LastGleasonScore?.Value;
@@ -858,10 +858,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             ObservationStatus? z_ = y_?.Value;
             string aa_ = context.Operators.Convert<string>(z_);
             string[] ab_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
 

@@ -450,10 +450,10 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 object u_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "status");
                 string v_ = context.Operators.LateBoundProperty<string>(u_, "value");
                 string[] w_ = [
-                "final",
-                "corrected",
-                "amended",
-                    ];
+                    "final",
+                    "corrected",
+                    "amended",
+                ];
                 bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
                 bool? y_ = context.Operators.And(t_, x_);
 

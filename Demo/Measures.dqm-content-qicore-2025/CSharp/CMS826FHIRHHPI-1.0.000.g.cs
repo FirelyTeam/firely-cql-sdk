@@ -217,10 +217,10 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         object a_ = context.Operators.LateBoundProperty<object>(observation, "status");
         string b_ = context.Operators.LateBoundProperty<string>(a_, "value");
         string[] c_ = [
-        "final",
-        "amended",
-        "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+        ];
         bool? d_ = context.Operators.In<string>(b_, (IEnumerable<string>)c_);
         CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
         object f_ = context.Operators.LateBoundProperty<object>(observation, "effective");

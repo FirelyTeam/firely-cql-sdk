@@ -459,10 +459,10 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             ObservationStatus? v_ = u_?.Value;
             string w_ = context.Operators.Convert<string>(v_);
             string[] x_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 
@@ -510,10 +510,10 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             ObservationStatus? v_ = u_?.Value;
             string w_ = context.Operators.Convert<string>(v_);
             string[] x_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
             bool? z_ = context.Operators.And(t_, y_);
 

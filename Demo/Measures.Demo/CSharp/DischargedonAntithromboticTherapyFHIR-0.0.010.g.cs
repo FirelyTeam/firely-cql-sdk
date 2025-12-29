@@ -173,9 +173,9 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             Code<MedicationRequest.MedicationrequestStatus> y_ = NoAntithromboticDischarge?.StatusElement;
             string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
             string[] aa_ = [
-            "completed",
-            "cancelled",
-                ];
+                "completed",
+                "cancelled",
+            ];
             bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
             bool? ac_ = context.Operators.And(x_, ab_);
             Code<MedicationRequest.MedicationRequestIntent> ad_ = NoAntithromboticDischarge?.IntentElement;
@@ -252,9 +252,9 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             Code<MedicationRequest.MedicationrequestStatus> n_ = Pharmacological?.StatusElement;
             string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
             string[] p_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
             bool? r_ = context.Operators.And(m_, q_);
             Code<MedicationRequest.MedicationRequestIntent> s_ = Pharmacological?.IntentElement;
@@ -362,9 +362,9 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             Code<MedicationRequest.MedicationrequestStatus> n_ = Antithrombotic?.StatusElement;
             string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
             string[] p_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
             bool? r_ = context.Operators.And(m_, q_);
             Code<MedicationRequest.MedicationRequestIntent> s_ = Antithrombotic?.IntentElement;

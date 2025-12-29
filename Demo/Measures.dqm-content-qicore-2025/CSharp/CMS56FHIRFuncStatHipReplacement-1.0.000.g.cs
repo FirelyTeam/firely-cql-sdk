@@ -1854,12 +1854,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime dp_ = context.Operators.Start(do_);
             CqlDate dq_ = context.Operators.DateFrom(dp_);
             CqlDate[] dr_ = [
-            cw_,
-            db_,
-            dg_,
-            dl_,
-            dq_,
-                ];
+                cw_,
+                db_,
+                dg_,
+                dl_,
+                dq_,
+            ];
             CqlDate ds_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)dr_);
 
             return ds_;
@@ -2257,9 +2257,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-            ao_,
-            at_,
-                ];
+                ao_,
+                at_,
+            ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
@@ -2476,9 +2476,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-            ao_,
-            at_,
-                ];
+                ao_,
+                at_,
+            ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
@@ -2695,9 +2695,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-            ao_,
-            at_,
-                ];
+                ao_,
+                at_,
+            ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;

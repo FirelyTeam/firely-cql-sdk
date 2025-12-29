@@ -185,9 +185,9 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             EventStatus? p_ = o_?.Value;
             string q_ = context.Operators.Convert<string>(p_);
             string[] r_ = [
-            "completed",
-            "in-progress",
-                ];
+                "completed",
+                "in-progress",
+            ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
             bool? t_ = context.Operators.And(n_, s_);
 

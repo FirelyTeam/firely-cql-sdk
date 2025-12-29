@@ -108,9 +108,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             Code<RequestStatus> p_ = context.Operators.Convert<Code<RequestStatus>>(o_);
             string q_ = context.Operators.Convert<string>(p_);
             string[] r_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
 
             return s_;
@@ -329,9 +329,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             MedicationAdministration.MedicationAdministrationStatusCodes? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
             string[] ai_ = [
-            "completed",
-            "in-progress",
-                ];
+                "completed",
+                "in-progress",
+            ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             CqlInterval<CqlDateTime> ak_ = tuple_brdbxsuhdqixbcfmgdsacwig?.Hospitalization?.hospitalizationPeriod;
             DataType al_ = tuple_brdbxsuhdqixbcfmgdsacwig?.HypoglycemicMed?.Effective;
@@ -425,10 +425,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 ObservationStatus? r_ = q_?.Value;
                 string s_ = context.Operators.Convert<string>(r_);
                 string[] t_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
                 bool? v_ = context.Operators.And(p_, u_);
                 DataType w_ = GlucoseTest?.Value;
@@ -499,9 +499,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
         CqlQuantity d_ = context.Operators.Quantity(10m, "days");
         CqlDateTime e_ = context.Operators.Add(a_, d_);
         CqlDateTime[] f_ = [
-        b_,
-        e_,
-            ];
+            b_,
+            e_,
+        ];
         CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
@@ -551,10 +551,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     ObservationStatus? af_ = ae_?.Value;
                     string ag_ = context.Operators.Convert<string>(af_);
                     string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                        ];
+                        "final",
+                        "amended",
+                        "corrected",
+                    ];
                     bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                     DataType aj_ = GlucoseTest?.Value;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
@@ -629,10 +629,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     ObservationStatus? bm_ = bl_?.Value;
                     string bn_ = context.Operators.Convert<string>(bm_);
                     string[] bo_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                        ];
+                        "final",
+                        "amended",
+                        "corrected",
+                    ];
                     bool? bp_ = context.Operators.In<string>(bn_, (IEnumerable<string>)bo_);
                     DataType bq_ = GlucoseTest?.Value;
                     object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
@@ -707,10 +707,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     ObservationStatus? ct_ = cs_?.Value;
                     string cu_ = context.Operators.Convert<string>(ct_);
                     string[] cv_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                        ];
+                        "final",
+                        "amended",
+                        "corrected",
+                    ];
                     bool? cw_ = context.Operators.In<string>(cu_, (IEnumerable<string>)cv_);
                     object cx_()
                     {
@@ -865,10 +865,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             ObservationStatus? r_ = q_?.Value;
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(p_, u_);
             object w_()
@@ -1219,10 +1219,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             ObservationStatus? q_ = p_?.Value;
             string r_ = context.Operators.Convert<string>(q_);
             string[] s_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(o_, t_);
             object v_()

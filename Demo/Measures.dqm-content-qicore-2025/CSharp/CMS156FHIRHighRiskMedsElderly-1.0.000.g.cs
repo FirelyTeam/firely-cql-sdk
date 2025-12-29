@@ -1089,8 +1089,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     public decimal? medicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
-        Request,
-            ];
+            Request,
+        ];
         decimal? b_(MedicationRequest R)
         {
             MedicationRequest.DispenseRequestComponent f_ = R?.DispenseRequest;
@@ -1228,8 +1228,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     public CqlQuantity averageDailyDose(CqlContext context, MedicationRequest MedicationRequest)
     {
         MedicationRequest[] a_ = [
-        MedicationRequest,
-            ];
+            MedicationRequest,
+        ];
         CqlQuantity b_(MedicationRequest Order)
         {
             CqlQuantity f_()

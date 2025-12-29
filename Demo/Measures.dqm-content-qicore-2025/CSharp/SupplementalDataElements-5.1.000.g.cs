@@ -118,8 +118,8 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
         Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension[] e_ = [
-        d_,
-            ];
+            d_,
+        ];
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension E)
         {
             bool? r_(Extension @this)
@@ -144,8 +144,8 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             object v_ = context.Operators.SingletonFrom<object>(u_);
             CqlCode w_ = FHIRHelpers_4_4_000.Instance.ToCode(context, v_ as Coding);
             CqlCode[] x_ = [
-            w_,
-                ];
+                w_,
+            ];
             bool? y_(Extension @this)
             {
                 FhirUri ar_ = @this?.UrlElement;
@@ -263,8 +263,8 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
         Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension[] e_ = [
-        d_,
-            ];
+            d_,
+        ];
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension R)
         {
             bool? r_(Extension @this)

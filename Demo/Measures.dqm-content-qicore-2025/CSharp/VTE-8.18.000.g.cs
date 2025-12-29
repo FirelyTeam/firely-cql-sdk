@@ -73,8 +73,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public bool? hasEncDiagnosisOf(CqlContext context, Encounter TheEncounter, CqlValueSet DiagnosisValueSet)
     {
         Encounter[] a_ = [
-        TheEncounter,
-            ];
+            TheEncounter,
+        ];
         bool? b_(Encounter E)
         {
             IEnumerable<object> f_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, E);
@@ -197,8 +197,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public bool? hasPrincipalProcedureOf(CqlContext context, Encounter TheEncounter, CqlValueSet DiagnosisValueSet)
     {
         Encounter[] a_ = [
-        TheEncounter,
-            ];
+            TheEncounter,
+        ];
         bool? b_(Encounter E)
         {
             Claim.ProcedureComponent f_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);

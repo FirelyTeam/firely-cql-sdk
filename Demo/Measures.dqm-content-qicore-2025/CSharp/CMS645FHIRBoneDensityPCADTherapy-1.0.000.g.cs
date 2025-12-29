@@ -160,20 +160,20 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             Code<MedicationRequest.MedicationRequestIntent> af_ = ADTActive?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
             string[] ai_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ae_, aj_);
 
@@ -355,10 +355,10 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> cj_ = context.Operators.First<CqlInterval<CqlDateTime>>(ci_);
             CqlDateTime ck_ = context.Operators.End(cj_);
             CqlDateTime[] cl_ = [
-            au_,
-            bp_,
-            ck_,
-                ];
+                au_,
+                bp_,
+                ck_,
+            ];
             CqlDateTime cm_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)cl_);
 
             return cm_;
@@ -409,20 +409,20 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             Code<MedicationRequest.MedicationRequestIntent> af_ = ADTOrder?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
             string ah_ = context.Operators.Convert<string>(ag_);
             string[] ai_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             bool? ak_ = context.Operators.And(ae_, aj_);
 
@@ -565,10 +565,10 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> cb_ = context.Operators.First<CqlInterval<CqlDateTime>>(ca_);
             CqlDateTime cc_ = context.Operators.End(cb_);
             CqlDateTime[] cd_ = [
-            am_,
-            bh_,
-            cc_,
-                ];
+                am_,
+                bh_,
+                cc_,
+            ];
             CqlDateTime ce_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)cd_);
 
             return ce_;
@@ -686,8 +686,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
         {
             CqlDateTime f_ = this.First_ADT_in_3_Months_Before_to_9_Months_After_Start_of_Measurement_Period(context);
             CqlDateTime[] g_ = [
-            f_,
-                ];
+                f_,
+            ];
             bool? h_(CqlDateTime FirstADTMP)
             {
                 FhirDateTime l_ = OrderTwelveMonthADT?.AuthoredOnElement;
@@ -709,9 +709,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 Code<RequestStatus> ad_ = context.Operators.Convert<Code<RequestStatus>>(ac_);
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                "active",
-                "completed",
-                    ];
+                    "active",
+                    "completed",
+                ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 bool? ah_ = context.Operators.And(aa_, ag_);
                 Code<RequestIntent> ai_ = OrderTwelveMonthADT?.IntentElement;
@@ -807,9 +807,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             Code<RequestStatus> ay_ = context.Operators.Convert<Code<RequestStatus>>(ax_);
             string az_ = context.Operators.Convert<string>(ay_);
             string[] ba_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
             Code<RequestIntent> bc_ = DEXAOrdered?.IntentElement;
             RequestIntent? bd_ = bc_?.Value;
@@ -870,10 +870,10 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             ObservationStatus? cu_ = ct_?.Value;
             string cv_ = context.Operators.Convert<string>(cu_);
             string[] cw_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? cx_ = context.Operators.In<string>(cv_, (IEnumerable<string>)cw_);
 
             return cx_;

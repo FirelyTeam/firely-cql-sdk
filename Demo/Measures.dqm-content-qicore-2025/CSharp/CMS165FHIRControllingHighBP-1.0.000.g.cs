@@ -432,13 +432,13 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlCode am_ = FHIRHelpers_4_4_000.Instance.ToCode(context, al_);
             string an_ = am_?.code;
             string[] ao_ = [
-            "EMER",
-            "IMP",
-            "ACUTE",
-            "NONAC",
-            "PRENC",
-            "SS",
-                ];
+                "EMER",
+                "IMP",
+                "ACUTE",
+                "NONAC",
+                "PRENC",
+                "SS",
+            ];
             bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.Not(ap_);
             DataType ar_ = BloodPressure?.Effective;

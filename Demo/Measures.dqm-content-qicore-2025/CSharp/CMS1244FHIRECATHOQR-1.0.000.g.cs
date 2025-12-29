@@ -178,9 +178,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-            "finished",
-            "triaged",
-                ];
+                "finished",
+                "triaged",
+            ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(i_, o_);
 
@@ -567,9 +567,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             Code<RequestStatus> g_ = context.Operators.Convert<Code<RequestStatus>>(f_);
             string h_ = context.Operators.Convert<string>(g_);
             string[] i_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
 
             return j_;
@@ -788,10 +788,10 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             object q_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "status");
             string r_ = context.Operators.LateBoundProperty<string>(q_, "value");
             string[] s_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(p_, t_);
 
@@ -916,9 +916,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             Code<RequestStatus> k_ = context.Operators.Convert<Code<RequestStatus>>(j_);
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
 
             return n_;

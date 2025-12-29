@@ -375,9 +375,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         CqlQuantity d_ = context.Operators.Quantity(10m, "days");
         CqlDateTime e_ = context.Operators.Add(a_, d_);
         CqlDateTime[] f_ = [
-        b_,
-        e_,
-            ];
+            b_,
+            e_,
+        ];
         CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
@@ -455,8 +455,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-        d_,
-            ];
+            d_,
+        ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayExpand)
         {

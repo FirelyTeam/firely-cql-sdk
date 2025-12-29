@@ -455,11 +455,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             Code<ObservationStatus> f_ = Mammogram?.StatusElement;
             string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
             string[] h_ = [
-            "final",
-            "amended",
-            "corrected",
-            "appended",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                "appended",
+            ];
             bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
             DataType j_ = Mammogram?.Effective;
             CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
@@ -495,11 +495,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
             string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
             string[] h_ = [
-            "final",
-            "amended",
-            "corrected",
-            "appended",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                "appended",
+            ];
             bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
             DataType j_ = Mammogram?.Effective;
             CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
@@ -562,11 +562,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             Code<ObservationStatus> f_ = Mammogram?.StatusElement;
             string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
             string[] h_ = [
-            "final",
-            "amended",
-            "corrected",
-            "appended",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                "appended",
+            ];
             bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
             bool? j_ = context.Operators.Not(i_);
             DataType k_ = Mammogram?.Effective;
@@ -603,11 +603,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
             string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
             string[] h_ = [
-            "final",
-            "amended",
-            "corrected",
-            "appended",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                "appended",
+            ];
             bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
             bool? j_ = context.Operators.Not(i_);
             DataType k_ = Mammogram?.Effective;

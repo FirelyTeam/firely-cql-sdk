@@ -285,8 +285,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     public bool? overlapsDayOfEncounter(CqlContext context, Condition Diagnosis, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-        TheEncounter,
-            ];
+            TheEncounter,
+        ];
         bool? b_(Encounter Visit)
         {
             bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, Diagnosis as object);
@@ -746,10 +746,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             ObservationStatus? t_ = s_?.Value;
             string u_ = context.Operators.Convert<string>(t_);
             string[] v_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.Value;
@@ -770,10 +770,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 ObservationStatus? av_ = au_?.Value;
                 string aw_ = context.Operators.Convert<string>(av_);
                 string[] ax_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
                 bool? az_ = context.Operators.And(at_, ay_);
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
@@ -871,20 +871,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     object k_ = context.Operators.LateBoundProperty<object>(Order, "status");
                     string l_ = context.Operators.LateBoundProperty<string>(k_, "value");
                     string[] m_ = [
-                    "active",
-                    "completed",
-                        ];
+                        "active",
+                        "completed",
+                    ];
                     bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                     bool? o_ = context.Operators.And(j_, n_);
                     object p_ = context.Operators.LateBoundProperty<object>(Order, "intent");
                     string q_ = context.Operators.LateBoundProperty<string>(p_, "value");
                     string[] r_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                        ];
+                        "order",
+                        "original-order",
+                        "reflex-order",
+                        "filler-order",
+                        "instance-order",
+                    ];
                     bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
                     bool? t_ = context.Operators.And(o_, s_);
                     object u_ = context.Operators.LateBoundProperty<object>(Order, "doNotPerform");
@@ -905,12 +905,12 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     object ae_ = context.Operators.LateBoundProperty<object>(Order, "intent");
                     string af_ = context.Operators.LateBoundProperty<string>(ae_, "value");
                     string[] ag_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                        ];
+                        "order",
+                        "original-order",
+                        "reflex-order",
+                        "filler-order",
+                        "instance-order",
+                    ];
                     bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                     bool? ai_ = context.Operators.And(ad_, ah_);
 
@@ -1046,20 +1046,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? ax_ = aw_?.Value;
             string ay_ = context.Operators.Convert<string>(ax_);
             string[] az_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ba_ = context.Operators.In<string>(ay_, (IEnumerable<string>)az_);
             Code<MedicationRequest.MedicationRequestIntent> bb_ = ActiveBetaBlockerForLVSD?.IntentElement;
             MedicationRequest.MedicationRequestIntent? bc_ = bb_?.Value;
             string bd_ = context.Operators.Convert<string>(bc_);
             string[] be_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? bf_ = context.Operators.In<string>(bd_, (IEnumerable<string>)be_);
             bool? bg_ = context.Operators.And(ba_, bf_);
 
@@ -1197,20 +1197,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? ax_ = aw_?.Value;
             string ay_ = context.Operators.Convert<string>(ax_);
             string[] az_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? ba_ = context.Operators.In<string>(ay_, (IEnumerable<string>)az_);
             Code<MedicationRequest.MedicationRequestIntent> bb_ = ActiveBetaBlocker?.IntentElement;
             MedicationRequest.MedicationRequestIntent? bc_ = bb_?.Value;
             string bd_ = context.Operators.Convert<string>(bc_);
             string[] be_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? bf_ = context.Operators.In<string>(bd_, (IEnumerable<string>)be_);
             bool? bg_ = context.Operators.And(ba_, bf_);
 
@@ -1462,10 +1462,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             ObservationStatus? t_ = s_?.Value;
             string u_ = context.Operators.Convert<string>(t_);
             string[] v_ = [
-            "final",
-            "amended",
-            "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+            ];
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.Value;
@@ -1486,10 +1486,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 ObservationStatus? av_ = au_?.Value;
                 string aw_ = context.Operators.Convert<string>(av_);
                 string[] ax_ = [
-                "final",
-                "amended",
-                "corrected",
-                    ];
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
                 bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
                 bool? az_ = context.Operators.And(at_, ay_);
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
@@ -1877,20 +1877,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? s_ = r_?.Value;
             string t_ = context.Operators.Convert<string>(s_);
             string[] u_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             Code<MedicationRequest.MedicationRequestIntent> w_ = NoBetaBlockerForLVSDOrdered?.IntentElement;
             MedicationRequest.MedicationRequestIntent? x_ = w_?.Value;
             string y_ = context.Operators.Convert<string>(x_);
             string[] z_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
             bool? ab_ = context.Operators.And(v_, aa_);
             List<CodeableConcept> ac_ = NoBetaBlockerForLVSDOrdered?.ReasonCode;
@@ -1981,20 +1981,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? s_ = r_?.Value;
             string t_ = context.Operators.Convert<string>(s_);
             string[] u_ = [
-            "active",
-            "completed",
-                ];
+                "active",
+                "completed",
+            ];
             bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             Code<MedicationRequest.MedicationRequestIntent> w_ = NoBetaBlockerForLVSDOrdered?.IntentElement;
             MedicationRequest.MedicationRequestIntent? x_ = w_?.Value;
             string y_ = context.Operators.Convert<string>(x_);
             string[] z_ = [
-            "order",
-            "original-order",
-            "reflex-order",
-            "filler-order",
-            "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
             bool? ab_ = context.Operators.And(v_, aa_);
             List<CodeableConcept> ac_ = NoBetaBlockerForLVSDOrdered?.ReasonCode;

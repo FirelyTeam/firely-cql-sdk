@@ -294,9 +294,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             Code<EventStatus> m_ = InterventionPerformed?.StatusElement;
             string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
             string[] o_ = [
-            "completed",
-            "in-progress",
-                ];
+                "completed",
+                "in-progress",
+            ];
             bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
 
             return p_;

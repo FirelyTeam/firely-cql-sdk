@@ -163,8 +163,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             bool? i_ = context.Operators.Equivalent(f_, h_);
             Condition j_ = this.Latest_injury_due_to_falling_rock(context);
             Condition[] k_ = [
-            j_,
-                ];
+                j_,
+            ];
             bool? l_(Condition C)
             {
                 DataType q_ = C?.Onset;
