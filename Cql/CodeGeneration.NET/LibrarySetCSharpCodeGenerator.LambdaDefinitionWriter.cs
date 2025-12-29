@@ -3,6 +3,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -57,7 +58,21 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ? functionDef.OriginalParameterNames
                     : null;
 
-            var definitionWithBody = ProcessDefinition(transformedLambda, methodName, specifiers: "public", originalParameterNames);
+            var funcSb = new StringBuilder();
+
+            funcSb.Append("public" + " ");
+            funcSb.Append(TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
+            funcSb.Append(methodName);
+
+            var lambda = ConvertLambdaExpression(transformedLambda, functionMode: true, originalParameterNames: originalParameterNames);
+            funcSb.Append(lambda);
+
+            if (transformedLambda.Body is not BlockExpression)
+                funcSb.AppendLine(";");
+            else
+                funcSb.AppendLine();
+            var definitionWithBody = funcSb.ToString();
+
             tw.WriteLine(definitionWithBody);
         }
 
@@ -65,29 +80,6 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             foreach (var visitor in visitors) body = visitor.Visit(body);
             return body;
-        }
-
-        private string ProcessDefinition(
-            LambdaExpression function,
-            string name,
-            string specifiers,
-            IReadOnlyDictionary<string, string>? originalParameterNames = null)
-        {
-            var funcSb = new StringBuilder();
-
-            funcSb.Append(specifiers + " ");
-            funcSb.Append(TypeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
-            funcSb.Append(name);
-
-            var lambda = ConvertLambdaExpression(function, functionMode: true, originalParameterNames: originalParameterNames);
-            funcSb.Append(lambda);
-
-            if (function.Body is not BlockExpression)
-                funcSb.AppendLine(";");
-            else
-                funcSb.AppendLine();
-
-            return funcSb.ToString();
         }
 
         private LambdaDefinitionWriter WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>

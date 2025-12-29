@@ -8,7 +8,7 @@
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int Indent = 0) : IAddIndentMutable<IndentedTextWriter>
+internal readonly record struct IndentedTextWriter(StringWriter TextWriter, int Indent = 0) : IAddIndentMutable<IndentedTextWriter>
 {
     /// <summary>
     /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent.
@@ -22,20 +22,25 @@ internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int In
     /// </summary>
     public void WriteLine(int addIndent, string multilineText = "")
     {
+        var sb = GetStringBuilder();
         foreach (var line in multilineText.Split(Environment.NewLine))
         {
             if (line.Length > 0)
             {
+                if (!sb.AtBeginningOfLine())
+                    throw new InvalidOperationException("Expecting indents to start at beginning of a line");
+
                 int leadingTabs = line.TakeWhile(c => c == '\t').Count();
                 var strippedLeadingTabs = line[leadingTabs..];
                 if (strippedLeadingTabs.Length > 0)
                 {
-                    TextWriter.WriteLine(Indent + leadingTabs + addIndent, strippedLeadingTabs);
+                    var finalIndent = Indent + leadingTabs + addIndent;
+                    sb.AppendLine(finalIndent, strippedLeadingTabs);
                     continue;
                 }
             }
 
-            TextWriter.WriteLine();
+            sb.AppendLine();
         }
     }
 
@@ -44,7 +49,9 @@ internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int In
         return this with { Indent = Indent + addIndent };
     }
 
-    private TextWriter TextWriter { get; } = TextWriter;
+    private StringWriter TextWriter { get; } = TextWriter;
 
     public int Indent { get; private init; } = Indent;
+
+    private StringBuilder GetStringBuilder() => TextWriter.GetStringBuilder();
 }

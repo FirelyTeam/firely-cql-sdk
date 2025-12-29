@@ -14,16 +14,16 @@ using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
-internal sealed class LibraryInstanceInvoker_4_0 : LibraryInstanceInvoker
+internal sealed class LibraryInstanceInvoker_3_1 : LibraryInstanceInvoker
 {
-    private LibraryInstanceInvoker_4_0(
+    private LibraryInstanceInvoker_3_1(
         LibrarySetInvoker librarySetInvoker,
         ILibrary library) : base(librarySetInvoker, library)
     {
         Definitions = library
                       .GetType()
                       .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                      .SelectWhere(methodInfo => DefinitionInvoker_4_0.TryCreate(Library, this, methodInfo))
+                      .SelectWhere(methodInfo => DefinitionInvoker_3_1.TryCreate(Library, this, methodInfo))
                       .ToFrozenDictionary(o => o.DefinitionSignature, o => o)
                       .AsReadOnly();
     }
@@ -40,7 +40,7 @@ internal sealed class LibraryInstanceInvoker_4_0 : LibraryInstanceInvoker
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = librarySetInvoker.CreateLogger<LibraryInstanceInvoker_4_0>();
+        var logger = librarySetInvoker.CreateLogger<LibraryInstanceInvoker_3_1>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
@@ -48,7 +48,7 @@ internal sealed class LibraryInstanceInvoker_4_0 : LibraryInstanceInvoker
             return false;
         }
 
-        libraryInvoker = new LibraryInstanceInvoker_4_0(librarySetInvoker, asILibrary);
+        libraryInvoker = new LibraryInstanceInvoker_3_1(librarySetInvoker, asILibrary);
         return true;
     }
 
@@ -57,11 +57,11 @@ internal sealed class LibraryInstanceInvoker_4_0 : LibraryInstanceInvoker
     /// The current CQL tool version can be referenced by <see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>.
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
-        cqlToolVersion >= new Version(4, 0, 0, 0)
-        && cqlToolVersion < new Version(4, 1, 0, 0);
+        cqlToolVersion >= new Version(3, 1, 0, 0)
+        && cqlToolVersion < new Version(4, 0, 0, 0);
 }
 
-file sealed class DefinitionInvoker_4_0(
+file sealed class DefinitionInvoker_3_1(
     ILibrary library,
     LibraryInvoker libraryInvoker,
     MethodInfo methodInfo,
@@ -87,7 +87,7 @@ file sealed class DefinitionInvoker_4_0(
         if (cqlDefinitionAttributes is not [{ } cqlDefinitionAttribute])
             return default;
 
-        var definitionInvoker = new DefinitionInvoker_4_0(library, libraryInvoker, methodInfo, cqlDefinitionAttribute);
+        var definitionInvoker = new DefinitionInvoker_3_1(library, libraryInvoker, methodInfo, cqlDefinitionAttribute);
         return (true, definitionInvoker);
     }
 

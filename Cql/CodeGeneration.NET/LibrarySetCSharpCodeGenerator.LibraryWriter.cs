@@ -17,7 +17,7 @@ partial class LibrarySetCSharpCodeGenerator
         public LibraryWriter(
             LibrarySetWriter librarySetWriter,
             ElmLibrary library,
-            TextWriter textWriter,
+            StringWriter textWriter,
             int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
 
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
