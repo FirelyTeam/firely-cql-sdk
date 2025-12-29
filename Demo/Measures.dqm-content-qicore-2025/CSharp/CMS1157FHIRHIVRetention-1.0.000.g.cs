@@ -309,7 +309,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             };
             IEnumerable<object> ao_ = context.Operators.Where<object>(am_, an_);
             Encounter ap_(object HIVDiagnosis) =>
-                ValidEncounter;
+            ValidEncounter;
             IEnumerable<Encounter> aq_ = context.Operators.Select<object, Encounter>(ao_, ap_);
 
             return aq_;
@@ -334,10 +334,10 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 ObservationStatus? l_ = k_?.Value;
                 string m_ = context.Operators.Convert<string>(l_);
                 string[] n_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 DataType q_ = ViralLoadTest?.Effective;
@@ -368,7 +368,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             };
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
             Encounter i_(Observation ViralLoadTest) =>
-                EncounterWithHIV;
+            EncounterWithHIV;
             IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
             return j_;
@@ -406,7 +406,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
             Encounter h_(Encounter AnotherEncounterWithHIV) =>
-                EncounterWithHIV;
+            EncounterWithHIV;
             IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
             return i_;

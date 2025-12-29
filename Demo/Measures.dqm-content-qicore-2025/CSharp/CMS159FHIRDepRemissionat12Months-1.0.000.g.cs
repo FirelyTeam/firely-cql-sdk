@@ -183,10 +183,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             string[] k_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
 
@@ -298,7 +298,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
             Encounter h_(object Depression) =>
-                ValidEncounter;
+            ValidEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<object, Encounter>(g_, h_);
 
             return i_;
@@ -335,7 +335,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter DepressionEncounter) =>
-                DepressionAssessment;
+            DepressionAssessment;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -390,8 +390,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     {
         Observation a_ = this.Index_Depression_Assessment(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlInterval<CqlDate> c_(Observation FirstIndexAssessment)
         {
             DataType g_ = FirstIndexAssessment?.Effective;
@@ -479,10 +479,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             Code<Encounter.EncounterStatus> cb_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ca_);
             string cc_ = context.Operators.Convert<string>(cb_);
             string[] cd_ = [
-                "cancelled",
-                "entered-in-error",
-                "unknown",
-            ];
+            "cancelled",
+            "entered-in-error",
+            "unknown",
+                ];
             bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
             bool? cf_ = context.Operators.Not(ce_);
             bool? cg_ = context.Operators.And(by_, cf_);
@@ -517,10 +517,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             ObservationStatus? cy_ = cx_?.Value;
             string cz_ = context.Operators.Convert<string>(cy_);
             string[] da_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? db_ = context.Operators.In<string>(cz_, (IEnumerable<string>)da_);
             bool? dc_ = context.Operators.And(cw_, db_);
 
@@ -547,9 +547,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             Code<RequestStatus> do_ = context.Operators.Convert<Code<RequestStatus>>(dn_);
             string dp_ = context.Operators.Convert<string>(do_);
             string[] dq_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? dr_ = context.Operators.In<string>(dp_, (IEnumerable<string>)dq_);
             bool? ds_ = context.Operators.And(dl_, dr_);
             Code<RequestIntent> dt_ = HospiceOrder?.IntentElement;
@@ -557,12 +557,12 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             Code<RequestIntent> dv_ = context.Operators.Convert<Code<RequestIntent>>(du_);
             string dw_ = context.Operators.Convert<string>(dv_);
             string[] dx_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? dy_ = context.Operators.In<string>(dw_, (IEnumerable<string>)dx_);
             bool? dz_ = context.Operators.And(ds_, dy_);
 
@@ -653,10 +653,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             EventStatus? ek_ = ej_?.Value;
             string el_ = context.Operators.Convert<string>(ek_);
             string[] em_ = [
-                "not-done",
-                "entered-in-error",
-                "unknown",
-            ];
+            "not-done",
+            "entered-in-error",
+            "unknown",
+                ];
             bool? en_ = context.Operators.In<string>(el_, (IEnumerable<string>)em_);
             bool? eo_ = context.Operators.Not(en_);
             bool? ep_ = context.Operators.And(ei_, eo_);
@@ -715,10 +715,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             ObservationStatus? am_ = al_?.Value;
             string an_ = context.Operators.Convert<string>(am_);
             string[] ao_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
             bool? aq_ = context.Operators.And(ak_, ap_);
 
@@ -855,10 +855,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             EventStatus? bz_ = by_?.Value;
             string ca_ = context.Operators.Convert<string>(bz_);
             string[] cb_ = [
-                "not-done",
-                "entered-in-error",
-                "unknown",
-            ];
+            "not-done",
+            "entered-in-error",
+            "unknown",
+                ];
             bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
             bool? cd_ = context.Operators.Not(cc_);
             bool? ce_ = context.Operators.And(bx_, cd_);
@@ -969,10 +969,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             ObservationStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
 
@@ -1039,8 +1039,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     {
         Observation a_ = this.Index_Depression_Assessment(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Observation IndexAssessment)
         {
             Patient g_ = this.Patient(context);
@@ -1071,8 +1071,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     {
         Observation a_ = this.Index_Depression_Assessment(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Observation IndexAssessment)
         {
             Patient g_ = this.Patient(context);

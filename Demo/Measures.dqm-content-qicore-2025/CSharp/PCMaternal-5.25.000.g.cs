@@ -130,8 +130,8 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.ED_Visit_and_OB_Triage(context);
@@ -450,7 +450,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure DeliveryProcedure) =>
-                EncounterWithAge;
+            EncounterWithAge;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -489,10 +489,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             ObservationStatus? o_ = n_?.Value;
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
@@ -640,10 +640,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             ObservationStatus? o_ = n_?.Value;
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
             object t_()
@@ -873,10 +873,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             ObservationStatus? z_ = y_?.Value;
             string aa_ = context.Operators.Convert<string>(z_);
             string[] ab_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object ae_()

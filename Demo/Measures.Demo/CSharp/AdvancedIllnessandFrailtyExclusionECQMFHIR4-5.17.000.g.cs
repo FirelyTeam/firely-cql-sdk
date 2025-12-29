@@ -137,7 +137,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -259,7 +259,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
             Encounter w_(Condition AdvancedIllnessDiagnosis) =>
-                OutpatientEncounter;
+            OutpatientEncounter;
             IEnumerable<Encounter> x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
             return x_;
@@ -298,7 +298,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         };
         IEnumerable<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
         Encounter h_((CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) =>
-            tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
+        tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
@@ -422,7 +422,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
             Encounter n_(Condition AdvancedIllnessDiagnosis) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
 
             return o_;
@@ -445,10 +445,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<RequestStatus> ag_ = FrailtyDeviceOrder?.StatusElement;
             string ah_ = FHIRHelpers_4_0_001.Instance.ToString(context, ag_);
             string[] ai_ = [
-                "active",
-                "on-hold",
-                "completed",
-            ];
+            "active",
+            "on-hold",
+            "completed",
+                ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
             Code<RequestIntent> ak_ = FrailtyDeviceOrder?.IntentElement;
             string al_ = FHIRHelpers_4_0_001.Instance.ToString(context, ak_);
@@ -470,10 +470,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<ObservationStatus> at_ = FrailtyDeviceApplied?.StatusElement;
             string au_ = FHIRHelpers_4_0_001.Instance.ToString(context, at_);
             string[] av_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
             DataType ax_ = FrailtyDeviceApplied?.Effective;
             CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ax_);
@@ -524,11 +524,11 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<ObservationStatus> bn_ = FrailtySymptom?.StatusElement;
             string bo_ = FHIRHelpers_4_0_001.Instance.ToString(context, bn_);
             string[] bp_ = [
-                "preliminary",
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "preliminary",
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
             DataType br_ = FrailtySymptom?.Effective;
             CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, br_);

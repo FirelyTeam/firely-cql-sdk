@@ -95,8 +95,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
         Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension E)
         {
             bool? r_(Extension @this)
@@ -109,8 +109,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return ap_;
             };
             IEnumerable<Extension> s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-                    ? (E as Element).Extension
-                    : default), r_);
+                ? (E as Element).Extension
+                : default), r_);
             object t_(Extension @this)
             {
                 DataType aq_ = @this?.Value;
@@ -121,8 +121,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             object v_ = context.Operators.SingletonFrom<object>(u_);
             CqlCode w_ = FHIRHelpers_4_3_000.Instance.ToCode(context, v_ as Coding);
             CqlCode[] x_ = [
-                w_,
-            ];
+            w_,
+                ];
             bool? y_(Extension @this)
             {
                 FhirUri ar_ = @this?.UrlElement;
@@ -133,8 +133,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return au_;
             };
             IEnumerable<Extension> z_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-                    ? (E as Element).Extension
-                    : default), y_);
+                ? (E as Element).Extension
+                : default), y_);
             object aa_(Extension @this)
             {
                 DataType av_ = @this?.Value;
@@ -160,8 +160,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return ba_;
             };
             IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-                    ? (E as Element).Extension
-                    : default), af_);
+                ? (E as Element).Extension
+                : default), af_);
             DataType ah_(Extension @this)
             {
                 DataType bb_ = @this?.Value;
@@ -240,8 +240,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
         Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension R)
         {
             bool? r_(Extension @this)
@@ -254,8 +254,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return ao_;
             };
             IEnumerable<Extension> s_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-                    ? (R as Element).Extension
-                    : default), r_);
+                ? (R as Element).Extension
+                : default), r_);
             object t_(Extension @this)
             {
                 DataType ap_ = @this?.Value;
@@ -280,8 +280,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return au_;
             };
             IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-                    ? (R as Element).Extension
-                    : default), x_);
+                ? (R as Element).Extension
+                : default), x_);
             object z_(Extension @this)
             {
                 DataType av_ = @this?.Value;
@@ -307,8 +307,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return ba_;
             };
             IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-                    ? (R as Element).Extension
-                    : default), ae_);
+                ? (R as Element).Extension
+                : default), ae_);
             DataType ag_(Extension @this)
             {
                 DataType bb_ = @this?.Value;

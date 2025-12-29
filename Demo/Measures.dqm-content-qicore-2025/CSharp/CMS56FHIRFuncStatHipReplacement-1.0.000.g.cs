@@ -745,7 +745,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> k_ = context.Operators.Where<object>(i_, j_);
             Procedure l_(object LowerBodyFracture) =>
-                THAProcedure;
+            THAProcedure;
             IEnumerable<Procedure> m_ = context.Operators.Select<object, Procedure>(k_, l_);
 
             return m_;
@@ -910,7 +910,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
             Procedure j_(Procedure THAProcedure) =>
-                PartialTHAProcedure;
+            PartialTHAProcedure;
             IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
             return k_;
@@ -1075,7 +1075,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
             Procedure j_(Procedure RevisionTHAProcedure) =>
-                THAProcedure;
+            THAProcedure;
             IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
             return k_;
@@ -1176,7 +1176,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
             object l_(Procedure THAProcedure) =>
-                MalignantNeoplasm;
+            MalignantNeoplasm;
             IEnumerable<object> m_ = context.Operators.Select<Procedure, object>(k_, l_);
 
             return m_;
@@ -1277,7 +1277,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
             object l_(Procedure THAProcedure) =>
-                MechanicalComplications;
+            MechanicalComplications;
             IEnumerable<object> m_ = context.Operators.Select<Procedure, object>(k_, l_);
 
             return m_;
@@ -1524,7 +1524,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> i_ = context.Operators.Where<Procedure>(g_, h_);
             Procedure j_(Procedure ElectiveTHAProcedure) =>
-                THAProcedure;
+            THAProcedure;
             IEnumerable<Procedure> k_ = context.Operators.Select<Procedure, Procedure>(i_, j_);
 
             return k_;
@@ -1854,12 +1854,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime dp_ = context.Operators.Start(do_);
             CqlDate dq_ = context.Operators.DateFrom(dp_);
             CqlDate[] dr_ = [
-                cw_,
-                db_,
-                dg_,
-                dl_,
-                dq_,
-            ];
+            cw_,
+            db_,
+            dg_,
+            dl_,
+            dq_,
+                ];
             CqlDate ds_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)dr_);
 
             return ds_;
@@ -1980,7 +1980,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>(aj_, ak_);
             CqlInterval<CqlDateTime> am_(CqlDate InitialHipAssessmentHOOS) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(al_, am_);
 
             return an_;
@@ -2007,7 +2007,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> bn_ = context.Operators.Where<CqlDate>(bl_, bm_);
             CqlInterval<CqlDateTime> bo_(CqlDate FollowUpHipAssessmentHOOS) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(bn_, bo_);
 
             return bp_;
@@ -2161,7 +2161,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>(aj_, ak_);
             CqlInterval<CqlDateTime> am_(CqlDate InitialHipAssessment) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(al_, am_);
 
             return an_;
@@ -2188,7 +2188,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> bn_ = context.Operators.Where<CqlDate>(bl_, bm_);
             CqlInterval<CqlDateTime> bo_(CqlDate FollowUpHipAssessment) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(bn_, bo_);
 
             return bp_;
@@ -2257,9 +2257,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-                ao_,
-                at_,
-            ];
+            ao_,
+            at_,
+                ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
@@ -2380,7 +2380,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>(aj_, ak_);
             CqlInterval<CqlDateTime> am_(CqlDate InitialHipAssessmentPROMIS10) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(al_, am_);
 
             return an_;
@@ -2407,7 +2407,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> bn_ = context.Operators.Where<CqlDate>(bl_, bm_);
             CqlInterval<CqlDateTime> bo_(CqlDate FollowUpHipAssessmentPROMIS10) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(bn_, bo_);
 
             return bp_;
@@ -2476,9 +2476,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-                ao_,
-                at_,
-            ];
+            ao_,
+            at_,
+                ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
@@ -2599,7 +2599,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>(aj_, ak_);
             CqlInterval<CqlDateTime> am_(CqlDate InitialHipAssessmentOblique) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(al_, am_);
 
             return an_;
@@ -2626,7 +2626,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> bn_ = context.Operators.Where<CqlDate>(bl_, bm_);
             CqlInterval<CqlDateTime> bo_(CqlDate FollowUpHipAssessmentOblique) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(bn_, bo_);
 
             return bp_;
@@ -2695,9 +2695,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime as_ = context.Operators.Start(ar_);
             CqlDate at_ = context.Operators.DateFrom(as_);
             CqlDate[] au_ = [
-                ao_,
-                at_,
-            ];
+            ao_,
+            at_,
+                ];
             CqlDate av_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)au_);
 
             return av_;
@@ -2818,7 +2818,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>(aj_, ak_);
             CqlInterval<CqlDateTime> am_(CqlDate InitialHipAssessmentOrthogonal) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> an_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(al_, am_);
 
             return an_;
@@ -2845,7 +2845,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<CqlDate> bn_ = context.Operators.Where<CqlDate>(bl_, bm_);
             CqlInterval<CqlDateTime> bo_(CqlDate FollowUpHipAssessmentOrthogonal) =>
-                TotalHip;
+            TotalHip;
             IEnumerable<CqlInterval<CqlDateTime>> bp_ = context.Operators.Select<CqlDate, CqlInterval<CqlDateTime>>(bn_, bo_);
 
             return bp_;

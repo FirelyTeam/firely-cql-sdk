@@ -170,10 +170,10 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                 ObservationStatus? l_ = k_?.Value;
                 string m_ = context.Operators.Convert<string>(l_);
                 string[] n_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
                 DataType p_ = CTScan?.Effective;
                 object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
@@ -194,7 +194,7 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
             Observation i_(Encounter InpatientEncounters) =>
-                CTScan;
+            CTScan;
             IEnumerable<Observation> j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
 
             return j_;

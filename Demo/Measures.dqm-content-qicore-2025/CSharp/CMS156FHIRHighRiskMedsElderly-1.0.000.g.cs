@@ -502,14 +502,14 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
             MedicationRequest j_(MedicationRequest OrderMedication2) =>
-                OrderMedication1;
+            OrderMedication1;
             IEnumerable<MedicationRequest> k_ = context.Operators.Select<MedicationRequest, MedicationRequest>(i_, j_);
 
             return k_;
         };
         IEnumerable<MedicationRequest> c_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
         MedicationRequest d_(MedicationRequest OrderMedication1) =>
-            OrderMedication1;
+        OrderMedication1;
         IEnumerable<MedicationRequest> e_ = context.Operators.Select<MedicationRequest, MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Distinct<MedicationRequest>(e_);
 
@@ -543,7 +543,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> eq_ = context.Operators.Where<Medication>(eo_, ep_);
             MedicationRequest er_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> es_ = context.Operators.Select<Medication, MedicationRequest>(eq_, er_);
 
             return es_;
@@ -573,7 +573,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> ff_ = context.Operators.Where<Medication>(fd_, fe_);
             MedicationRequest fg_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> fh_ = context.Operators.Select<Medication, MedicationRequest>(ff_, fg_);
 
             return fh_;
@@ -604,7 +604,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> fu_ = context.Operators.Where<Medication>(fs_, ft_);
             MedicationRequest fv_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> fw_ = context.Operators.Select<Medication, MedicationRequest>(fu_, fv_);
 
             return fw_;
@@ -634,7 +634,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> gj_ = context.Operators.Where<Medication>(gh_, gi_);
             MedicationRequest gk_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> gl_ = context.Operators.Select<Medication, MedicationRequest>(gj_, gk_);
 
             return gl_;
@@ -666,7 +666,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> gy_ = context.Operators.Where<Medication>(gw_, gx_);
             MedicationRequest gz_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ha_ = context.Operators.Select<Medication, MedicationRequest>(gy_, gz_);
 
             return ha_;
@@ -696,7 +696,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> hn_ = context.Operators.Where<Medication>(hl_, hm_);
             MedicationRequest ho_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> hp_ = context.Operators.Select<Medication, MedicationRequest>(hn_, ho_);
 
             return hp_;
@@ -728,7 +728,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> ic_ = context.Operators.Where<Medication>(ia_, ib_);
             MedicationRequest id_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ie_ = context.Operators.Select<Medication, MedicationRequest>(ic_, id_);
 
             return ie_;
@@ -758,7 +758,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> ir_ = context.Operators.Where<Medication>(ip_, iq_);
             MedicationRequest is_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> it_ = context.Operators.Select<Medication, MedicationRequest>(ir_, is_);
 
             return it_;
@@ -792,7 +792,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> jg_ = context.Operators.Where<Medication>(je_, jf_);
             MedicationRequest jh_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ji_ = context.Operators.Select<Medication, MedicationRequest>(jg_, jh_);
 
             return ji_;
@@ -822,7 +822,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> jw_ = context.Operators.Where<Medication>(ju_, jv_);
             MedicationRequest jx_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> jy_ = context.Operators.Select<Medication, MedicationRequest>(jw_, jx_);
 
             return jy_;
@@ -854,7 +854,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> kl_ = context.Operators.Where<Medication>(kj_, kk_);
             MedicationRequest km_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> kn_ = context.Operators.Select<Medication, MedicationRequest>(kl_, km_);
 
             return kn_;
@@ -884,7 +884,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> la_ = context.Operators.Where<Medication>(ky_, kz_);
             MedicationRequest lb_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> lc_ = context.Operators.Select<Medication, MedicationRequest>(la_, lb_);
 
             return lc_;
@@ -916,7 +916,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> lp_ = context.Operators.Where<Medication>(ln_, lo_);
             MedicationRequest lq_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> lr_ = context.Operators.Select<Medication, MedicationRequest>(lp_, lq_);
 
             return lr_;
@@ -946,7 +946,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> me_ = context.Operators.Where<Medication>(mc_, md_);
             MedicationRequest mf_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> mg_ = context.Operators.Select<Medication, MedicationRequest>(me_, mf_);
 
             return mg_;
@@ -978,7 +978,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> mt_ = context.Operators.Where<Medication>(mr_, ms_);
             MedicationRequest mu_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> mv_ = context.Operators.Select<Medication, MedicationRequest>(mt_, mu_);
 
             return mv_;
@@ -1008,7 +1008,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> ni_ = context.Operators.Where<Medication>(ng_, nh_);
             MedicationRequest nj_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> nk_ = context.Operators.Select<Medication, MedicationRequest>(ni_, nj_);
 
             return nk_;
@@ -1040,7 +1040,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> nx_ = context.Operators.Where<Medication>(nv_, nw_);
             MedicationRequest ny_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> nz_ = context.Operators.Select<Medication, MedicationRequest>(nx_, ny_);
 
             return nz_;
@@ -1070,7 +1070,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> om_ = context.Operators.Where<Medication>(ok_, ol_);
             MedicationRequest on_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> oo_ = context.Operators.Select<Medication, MedicationRequest>(om_, on_);
 
             return oo_;
@@ -1089,8 +1089,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     public decimal? medicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
-            Request,
-        ];
+        Request,
+            ];
         decimal? b_(MedicationRequest R)
         {
             MedicationRequest.DispenseRequestComponent f_ = R?.DispenseRequest;
@@ -1201,7 +1201,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> o_ = context.Operators.Where<Medication>(m_, n_);
             MedicationRequest p_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> q_ = context.Operators.Select<Medication, MedicationRequest>(o_, p_);
 
             return q_;
@@ -1228,8 +1228,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     public CqlQuantity averageDailyDose(CqlContext context, MedicationRequest MedicationRequest)
     {
         MedicationRequest[] a_ = [
-            MedicationRequest,
-        ];
+        MedicationRequest,
+            ];
         CqlQuantity b_(MedicationRequest Order)
         {
             CqlQuantity f_()
@@ -1536,7 +1536,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> x_ = context.Operators.Where<Medication>(v_, w_);
             MedicationRequest y_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> z_ = context.Operators.Select<Medication, MedicationRequest>(x_, y_);
 
             return z_;
@@ -1576,7 +1576,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
             MedicationRequest aq_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
 
             return ar_;
@@ -1640,7 +1640,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -1706,7 +1706,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> q_ = context.Operators.Where<Medication>(o_, p_);
             MedicationRequest r_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> s_ = context.Operators.Select<Medication, MedicationRequest>(q_, r_);
 
             return s_;
@@ -1766,7 +1766,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -1871,7 +1871,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> q_ = context.Operators.Where<Medication>(o_, p_);
             MedicationRequest r_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> s_ = context.Operators.Select<Medication, MedicationRequest>(q_, r_);
 
             return s_;

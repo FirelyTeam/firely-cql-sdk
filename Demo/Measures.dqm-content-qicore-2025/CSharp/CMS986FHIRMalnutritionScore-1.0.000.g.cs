@@ -229,22 +229,22 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             Code<RequestIntent> p_ = HospiceStatusOrder?.IntentElement;
             RequestIntent? q_ = p_?.Value;
             Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(o_, u_);
 
@@ -258,9 +258,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             EventStatus? x_ = w_?.Value;
             string y_ = context.Operators.Convert<string>(x_);
             string[] z_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
 
             return aa_;
@@ -359,7 +359,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object HospiceStatus) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -393,22 +393,22 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             Code<RequestIntent> p_ = DietitianReferralOrder?.IntentElement;
             RequestIntent? q_ = p_?.Value;
             Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(o_, u_);
 
@@ -422,9 +422,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             EventStatus? x_ = w_?.Value;
             string y_ = context.Operators.Convert<string>(x_);
             string[] z_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
 
             return aa_;
@@ -523,7 +523,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object DietitianReferral) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -548,10 +548,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ObservationStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = MalnutritionRiskScreening?.Effective;
@@ -569,7 +569,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation MalnutritionRiskScreening) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -594,10 +594,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ObservationStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = MalnutritionRiskScreening?.Effective;
@@ -615,7 +615,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation MalnutritionRiskScreening) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -678,8 +678,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
         {
             string h_ = NutritionAssessmentTuple?.HospEncId;
             string i_ = (QualifyingEncounter is Resource
-        ? (QualifyingEncounter as Resource).IdElement
-        : default)?.Value;
+                ? (QualifyingEncounter as Resource).IdElement
+                : default)?.Value;
             bool? j_ = context.Operators.Equal(h_, i_);
 
             return j_;
@@ -719,10 +719,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             ObservationStatus? n_ = m_?.Value;
             string o_ = context.Operators.Convert<string>(n_);
             string[] p_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
             CqlInterval<CqlDateTime> r_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter);
             DataType s_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
@@ -820,10 +820,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ObservationStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = NutritionAssessment?.Effective;
@@ -905,7 +905,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -930,10 +930,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ObservationStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = NutritionAssessment?.Effective;
@@ -1011,7 +1011,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -1036,10 +1036,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ObservationStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = NutritionAssessment?.Effective;
@@ -1113,7 +1113,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -1264,9 +1264,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 EventStatus? k_ = j_?.Value;
                 string l_ = context.Operators.Convert<string>(k_);
                 string[] m_ = [
-                    "completed",
-                    "in-progress",
-                ];
+                "completed",
+                "in-progress",
+                    ];
                 bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                 DataType o_ = NutritionCarePlan?.Performed;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
@@ -1279,7 +1279,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure NutritionCarePlan) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -1292,9 +1292,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     [CqlFunctionDefinition("Measure Observation 1")]
     public int? Measure_Observation_1(CqlContext context, Encounter MalnutritionRiskScreening) =>
-        ((context.Operators.Contains<Encounter>(this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
-            ? 1
-            : 0);
+    ((context.Operators.Contains<Encounter>(this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
+        ? 1
+        : 0);
 
 
     [CqlFunctionDefinition("Measure Observation 2")]
@@ -1573,11 +1573,11 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
         int? c_ = this.Measure_Observation_3(context, QualifyingEncounter);
         int? d_ = this.Measure_Observation_4(context, QualifyingEncounter);
         int?[] e_ = [
-            a_,
-            b_,
-            c_,
-            d_,
-        ];
+        a_,
+        b_,
+        c_,
+        d_,
+            ];
         int? f_ = context.Operators.Sum((IEnumerable<int?>)e_);
 
         return f_;

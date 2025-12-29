@@ -137,8 +137,8 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             string[] e_ = [
-                "completed",
-            ];
+            "completed",
+                ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
 
             return f_;
@@ -174,9 +174,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<EventStatus> c_ = P?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             string[] e_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
 
             return f_;

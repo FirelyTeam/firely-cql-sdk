@@ -185,9 +185,9 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             EventStatus? p_ = o_?.Value;
             string q_ = context.Operators.Convert<string>(p_);
             string[] r_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
             bool? t_ = context.Operators.And(n_, s_);
 
@@ -542,7 +542,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
         };
         IEnumerable<(CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, object CancerDx)?> q_ = context.Operators.Where<(CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, object CancerDx)?>(o_, p_);
         Encounter r_((CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, object CancerDx)? tuple_gjjpxhacftczdvrnpdupakjlc) =>
-            tuple_gjjpxhacftczdvrnpdupakjlc?.FaceToFaceOrTelehealthEncounter;
+        tuple_gjjpxhacftczdvrnpdupakjlc?.FaceToFaceOrTelehealthEncounter;
         IEnumerable<Encounter> s_ = context.Operators.Select<(CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, object CancerDx)?, Encounter>(q_, r_);
         IEnumerable<Encounter> t_ = context.Operators.Distinct<Encounter>(s_);
 
@@ -590,7 +590,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             };
             IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
             Encounter n_(object CancerDx) =>
-                RadiationTreatmentManagement;
+            RadiationTreatmentManagement;
             IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
 
             return o_;
@@ -673,7 +673,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
             Encounter g_(Observation PainAssessed) =>
-                FaceToFaceOrTelehealthEncounterWithChemo;
+            FaceToFaceOrTelehealthEncounterWithChemo;
             IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
 
             return h_;
@@ -757,7 +757,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
             Encounter g_(Observation PainAssessed) =>
-                RadiationManagementEncounter;
+            RadiationManagementEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
 
             return h_;

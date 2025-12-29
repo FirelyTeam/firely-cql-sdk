@@ -374,8 +374,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
         Encounter[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlInterval<CqlDateTime> c_(Encounter X)
         {
             CqlInterval<CqlDateTime> g_()
@@ -417,8 +417,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         Encounter a_ = this.edVisit(context, TheEncounter);
         Encounter[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlInterval<CqlDateTime> c_(Encounter X)
         {
             CqlInterval<CqlDateTime> g_()
@@ -461,8 +461,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         Encounter a_ = this.ED_Visit(context, TheEncounter);
         Encounter[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
         {
             IEnumerable<Encounter.LocationComponent> g_()
@@ -478,9 +478,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     List<Encounter.LocationComponent> i_ = EDEncounter?.Location;
                     List<Encounter.LocationComponent> j_ = TheEncounter?.Location;
                     IEnumerable<Encounter.LocationComponent>[] k_ = [
-                        (IEnumerable<Encounter.LocationComponent>)i_,
-                        (IEnumerable<Encounter.LocationComponent>)j_,
-                    ];
+                    (IEnumerable<Encounter.LocationComponent>)i_,
+                    (IEnumerable<Encounter.LocationComponent>)j_,
+                        ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
@@ -503,8 +503,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         Encounter a_ = this.edVisit(context, TheEncounter);
         Encounter[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
         {
             IEnumerable<Encounter.LocationComponent> g_()
@@ -520,9 +520,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     List<Encounter.LocationComponent> i_ = EDEncounter?.Location;
                     List<Encounter.LocationComponent> j_ = TheEncounter?.Location;
                     IEnumerable<Encounter.LocationComponent>[] k_ = [
-                        (IEnumerable<Encounter.LocationComponent>)i_,
-                        (IEnumerable<Encounter.LocationComponent>)j_,
-                    ];
+                    (IEnumerable<Encounter.LocationComponent>)i_,
+                    (IEnumerable<Encounter.LocationComponent>)j_,
+                        ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
 
                     return l_;
@@ -793,8 +793,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Outpatient_Surgery_Service(context);
@@ -1684,8 +1684,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Outpatient_Surgery_Service(context);
@@ -2576,8 +2576,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);
@@ -2810,8 +2810,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlInterval<CqlDateTime> hospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);
@@ -3340,8 +3340,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public IEnumerable<Claim.DiagnosisComponent> claimDiagnosis(CqlContext context, Encounter encounter)
     {
         Encounter[] a_ = [
-            encounter,
-        ];
+        encounter,
+            ];
         IEnumerable<Claim.DiagnosisComponent> b_(Encounter E)
         {
             IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
@@ -3495,8 +3495,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         Claim.DiagnosisComponent a_ = this.principalDiagnosis(context, encounter);
         Claim.DiagnosisComponent[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Claim.DiagnosisComponent PD)
         {
             DataType g_ = PD?.Diagnosis;
@@ -3664,8 +3664,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Claim.ProcedureComponent principalProcedure(CqlContext context, Encounter encounter)
     {
         Encounter[] a_ = [
-            encounter,
-        ];
+        encounter,
+            ];
         Claim.ProcedureComponent b_(Encounter E)
         {
             IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));

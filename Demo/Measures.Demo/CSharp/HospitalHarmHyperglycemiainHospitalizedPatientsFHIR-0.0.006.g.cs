@@ -208,7 +208,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
             (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Condition DiabetesDiagnosis) =>
-                EncounterWithHospitalization;
+            EncounterWithHospitalization;
             IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
 
             return l_;
@@ -256,7 +256,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Medication> r_ = context.Operators.Where<Medication>(p_, q_);
             MedicationAdministration s_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationAdministration> t_ = context.Operators.Select<Medication, MedicationAdministration>(r_, s_);
 
             return t_;
@@ -326,7 +326,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
             (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Observation BloodGlucoseLab) =>
-                EncounterWithHospitalization;
+            EncounterWithHospitalization;
             IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Observation, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
 
             return l_;
@@ -375,9 +375,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         CqlQuantity d_ = context.Operators.Quantity(10m, "days");
         CqlDateTime e_ = context.Operators.Add(a_, d_);
         CqlDateTime[] f_ = [
-            b_,
-            e_,
-        ];
+        b_,
+        e_,
+            ];
         CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
         CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
@@ -455,8 +455,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayExpand)
         {

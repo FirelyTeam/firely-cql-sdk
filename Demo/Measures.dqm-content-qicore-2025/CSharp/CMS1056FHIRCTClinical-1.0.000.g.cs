@@ -124,10 +124,10 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             ObservationStatus? g_ = f_?.Value;
             string h_ = context.Operators.Convert<string>(g_);
             string[] i_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
             DataType k_ = CTScanResult?.Effective;
             object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);

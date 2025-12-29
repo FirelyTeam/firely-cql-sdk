@@ -148,7 +148,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationAdministration l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
 
             return m_;
@@ -220,7 +220,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             };
             IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
             Encounter g_(MedicationAdministration OpioidGiven) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
             return h_;
@@ -275,7 +275,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationAdministration l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
 
             return m_;
@@ -388,7 +388,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         };
         IEnumerable<(CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?> h_ = context.Operators.Where<(CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)? tuple_htckrtcfdeaiwittzheehxihp) =>
-            tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization;
+        tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
 

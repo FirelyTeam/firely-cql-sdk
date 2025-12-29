@@ -167,8 +167,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure e_ = this.First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(context);
             Procedure[] f_ = [
-                e_,
-            ];
+            e_,
+                ];
             bool? g_(Procedure FirstBladderCancerStagingMP)
             {
                 Id j_ = FirstBladderCancerStagingMP?.IdElement;
@@ -364,7 +364,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
             Procedure n_(object BladderCancer) =>
-                BladderCancerStaging;
+            BladderCancerStaging;
             IEnumerable<Procedure> o_ = context.Operators.Select<object, Procedure>(m_, n_);
 
             return o_;
@@ -491,8 +491,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     {
         Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure(context);
         Procedure[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Procedure FirstBladderCancerStaging)
         {
             CqlDate f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period(context);
@@ -620,10 +620,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             ObservationStatus? af_ = ae_?.Value;
             string ag_ = context.Operators.Convert<string>(af_);
             string[] ah_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
             bool? aj_ = context.Operators.And(ad_, ai_);
 
@@ -699,8 +699,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] k_ = [
-                j_,
-            ];
+            j_,
+                ];
             bool? l_(Procedure FirstBladderCancerStaging)
             {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveTuberculosis);
@@ -926,7 +926,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
             object n_(Procedure FirstBladderCancerStaging) =>
-                ActiveTuberculosis;
+            ActiveTuberculosis;
             IEnumerable<object> o_ = context.Operators.Select<Procedure, object>(m_, n_);
 
             return o_;
@@ -970,7 +970,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationRequest n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
@@ -981,8 +981,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure z_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] aa_ = [
-                z_,
-            ];
+            z_,
+                ];
             bool? ab_(Procedure FirstBladderCancerStaging)
             {
                 List<Dosage> af_ = ImmunosuppressiveDrugs?.DosageInstruction;
@@ -1168,7 +1168,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aa_, ab_);
             MedicationRequest ad_(Procedure FirstBladderCancerStaging) =>
-                ImmunosuppressiveDrugs;
+            ImmunosuppressiveDrugs;
             IEnumerable<MedicationRequest> ae_ = context.Operators.Select<Procedure, MedicationRequest>(ac_, ad_);
 
             return ae_;
@@ -1180,9 +1180,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             MedicationRequest.MedicationrequestStatus? dn_ = dm_?.Value;
             string do_ = context.Operators.Convert<string>(dn_);
             string[] dp_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? dq_ = context.Operators.In<string>(do_, (IEnumerable<string>)dp_);
             Code<MedicationRequest.MedicationRequestIntent> dr_ = ImmunosuppressiveDrugs?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ds_ = dr_?.Value;
@@ -1207,8 +1207,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure g_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] h_ = [
-                g_,
-            ];
+            g_,
+                ];
             bool? i_(Procedure FirstBladderCancerStaging)
             {
                 object m_()
@@ -1498,7 +1498,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
             Procedure k_(Procedure FirstBladderCancerStaging) =>
-                Cystectomy;
+            Cystectomy;
             IEnumerable<Procedure> l_ = context.Operators.Select<Procedure, Procedure>(j_, k_);
 
             return l_;
@@ -1540,8 +1540,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure w_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] x_ = [
-                w_,
-            ];
+            w_,
+                ];
             bool? y_(Procedure FirstBladderCancerStaging)
             {
                 CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
@@ -1696,7 +1696,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> z_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)x_, y_);
             object aa_(Procedure FirstBladderCancerStaging) =>
-                ExclusionDiagnosis;
+            ExclusionDiagnosis;
             IEnumerable<object> ab_ = context.Operators.Select<Procedure, object>(z_, aa_);
 
             return ab_;
@@ -1741,7 +1741,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
             MedicationRequest w_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> x_ = context.Operators.Select<Medication, MedicationRequest>(v_, w_);
 
             return x_;
@@ -1752,8 +1752,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure ai_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] aj_ = [
-                ai_,
-            ];
+            ai_,
+                ];
             bool? ak_(Procedure FirstBladderCancerStaging)
             {
                 List<Dosage> ao_ = ExclusionMed?.DosageInstruction;
@@ -2040,7 +2040,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> al_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aj_, ak_);
             MedicationRequest am_(Procedure FirstBladderCancerStaging) =>
-                ExclusionMed;
+            ExclusionMed;
             IEnumerable<MedicationRequest> an_ = context.Operators.Select<Procedure, MedicationRequest>(al_, am_);
 
             return an_;
@@ -2052,9 +2052,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             MedicationRequest.MedicationrequestStatus? fg_ = ff_?.Value;
             string fh_ = context.Operators.Convert<string>(fg_);
             string[] fi_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? fj_ = context.Operators.In<string>(fh_, (IEnumerable<string>)fi_);
             Code<MedicationRequest.MedicationRequestIntent> fk_ = ExclusionMed?.IntentElement;
             MedicationRequest.MedicationRequestIntent? fl_ = fk_?.Value;
@@ -2072,8 +2072,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure fp_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] fq_ = [
-                fp_,
-            ];
+            fp_,
+                ];
             bool? fr_(Procedure FirstBladderCancerStaging)
             {
                 object fv_()
@@ -2363,7 +2363,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> fs_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)fq_, fr_);
             Procedure ft_(Procedure FirstBladderCancerStaging) =>
-                ExclusionProcedure;
+            ExclusionProcedure;
             IEnumerable<Procedure> fu_ = context.Operators.Select<Procedure, Procedure>(fs_, ft_);
 
             return fu_;
@@ -2375,9 +2375,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             EventStatus? kg_ = kf_?.Value;
             string kh_ = context.Operators.Convert<string>(kg_);
             string[] ki_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? kj_ = context.Operators.In<string>(kh_, (IEnumerable<string>)ki_);
 
             return kj_;
@@ -2421,8 +2421,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] k_ = [
-                j_,
-            ];
+            j_,
+                ];
             bool? l_(Procedure FirstBladderCancerStaging)
             {
                 bool? p_(Extension @this)
@@ -2435,8 +2435,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return ao_;
                 };
                 IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
-                        ? (BCGNotGiven as DomainResource).Extension
-                        : default), p_);
+                    ? (BCGNotGiven as DomainResource).Extension
+                    : default), p_);
                 DataType r_(Extension @this)
                 {
                     DataType ap_ = @this?.Value;
@@ -2665,7 +2665,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
             MedicationAdministration n_(Procedure FirstBladderCancerStaging) =>
-                BCGNotGiven;
+            BCGNotGiven;
             IEnumerable<MedicationAdministration> o_ = context.Operators.Select<Procedure, MedicationAdministration>(m_, n_);
 
             return o_;
@@ -2728,7 +2728,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
             MedicationAdministration q_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
             return r_;
@@ -2739,8 +2739,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         {
             Procedure ac_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] ad_ = [
-                ac_,
-            ];
+            ac_,
+                ];
             bool? ae_(Procedure FirstBladderCancerStaging)
             {
                 DataType ai_ = BCG?.Effective;
@@ -2971,7 +2971,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> af_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)ad_, ae_);
             MedicationAdministration ag_(Procedure FirstBladderCancerStaging) =>
-                BCG;
+            BCG;
             IEnumerable<MedicationAdministration> ah_ = context.Operators.Select<Procedure, MedicationAdministration>(af_, ag_);
 
             return ah_;
@@ -2983,9 +2983,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             MedicationAdministration.MedicationAdministrationStatusCodes? ed_ = ec_?.Value;
             string ee_ = context.Operators.Convert<string>(ed_);
             string[] ef_ = [
-                "in-progress",
-                "completed",
-            ];
+            "in-progress",
+            "completed",
+                ];
             bool? eg_ = context.Operators.In<string>(ee_, (IEnumerable<string>)ef_);
 
             return eg_;

@@ -299,9 +299,9 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             Code<RequestStatus> j_ = context.Operators.Convert<Code<RequestStatus>>(i_);
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             Code<RequestIntent> n_ = ReferralOrder?.IntentElement;
             RequestIntent? o_ = n_?.Value;
@@ -406,8 +406,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
         {
             ServiceRequest g_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
             ServiceRequest[] h_ = [
-                g_,
-            ];
+            g_,
+                ];
             bool? i_(ServiceRequest FirstReferral)
             {
                 ResourceReference m_ = ConsultantReportObtained?.Focus;
@@ -442,7 +442,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>((IEnumerable<ServiceRequest>)h_, i_);
             Task k_(ServiceRequest FirstReferral) =>
-                ConsultantReportObtained;
+            ConsultantReportObtained;
             IEnumerable<Task> l_ = context.Operators.Select<ServiceRequest, Task>(j_, k_);
 
             return l_;

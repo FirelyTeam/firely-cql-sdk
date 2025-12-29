@@ -525,10 +525,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = FecalOccult?.Category;
             bool? j_(CodeableConcept FecalOccultCategory)
@@ -565,8 +565,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
                 string[] ae_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? af_ = context.Operators.Equivalent<string>(ad_, (IEnumerable<string>)ae_);
 
                 return af_;
@@ -601,10 +601,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = FecalOccult?.Category;
             bool? j_(CodeableConcept FecalOccultCategory)
@@ -641,8 +641,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
                 string[] ae_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? af_ = context.Operators.Equivalent<string>(ad_, (IEnumerable<string>)ae_);
 
                 return af_;
@@ -709,8 +709,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> y_ = context.Operators.Select<Code, string>(w_, x_);
                 string[] z_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? aa_ = context.Operators.Equivalent<string>(y_, (IEnumerable<string>)z_);
                 bool? ab_ = context.Operators.Not(aa_);
 
@@ -745,10 +745,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             bool? i_ = context.Operators.Not(h_);
             DataType j_ = FecalOccult?.Value;
@@ -881,10 +881,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = FitDNA?.Category;
             bool? j_(CodeableConcept FitDNACategory)
@@ -921,8 +921,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
                 string[] ao_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? ap_ = context.Operators.Equivalent<string>(an_, (IEnumerable<string>)ao_);
 
                 return ap_;
@@ -965,10 +965,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = FitDNA?.Category;
             bool? j_(CodeableConcept FitDNACategory)
@@ -1005,8 +1005,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
                 string[] ao_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? ap_ = context.Operators.Equivalent<string>(an_, (IEnumerable<string>)ao_);
 
                 return ap_;
@@ -1081,8 +1081,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 };
                 IEnumerable<string> ai_ = context.Operators.Select<Code, string>(ag_, ah_);
                 string[] aj_ = [
-                    "laboratory",
-                ];
+                "laboratory",
+                    ];
                 bool? ak_ = context.Operators.Equivalent<string>(ai_, (IEnumerable<string>)aj_);
                 bool? al_ = context.Operators.Not(ak_);
 
@@ -1125,10 +1125,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = FitDNA?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             bool? i_ = context.Operators.Not(h_);
             DataType j_ = FitDNA?.Value;
@@ -1204,11 +1204,11 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = Colonography?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-                "appended",
-            ];
+            "final",
+            "amended",
+            "corrected",
+            "appended",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             DataType i_ = Colonography?.Effective;
             CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
@@ -1243,11 +1243,11 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             Code<ObservationStatus> e_ = Colonography?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-                "appended",
-            ];
+            "final",
+            "amended",
+            "corrected",
+            "appended",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             bool? i_ = context.Operators.Not(h_);
             DataType j_ = Colonography?.Effective;

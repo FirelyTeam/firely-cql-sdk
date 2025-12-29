@@ -310,7 +310,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
             Encounter h_(Condition Hypertension) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
@@ -341,10 +341,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? as_ = ar_?.Value;
                 string at_ = context.Operators.Convert<string>(as_);
                 string[] au_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
@@ -394,10 +394,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? bo_ = bn_?.Value;
                 string bp_ = context.Operators.Convert<string>(bo_);
                 string[] bq_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
 
@@ -463,10 +463,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? as_ = ar_?.Value;
                 string at_ = context.Operators.Convert<string>(as_);
                 string[] au_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
                 bool? aw_ = context.Operators.And(aq_, av_);
 
@@ -516,10 +516,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? bo_ = bn_?.Value;
                 string bp_ = context.Operators.Convert<string>(bo_);
                 string[] bq_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
 
@@ -610,12 +610,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestIntent> s_ = context.Operators.Convert<Code<RequestIntent>>(r_);
             string t_ = context.Operators.Convert<string>(s_);
             string[] u_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
 
             return v_;
@@ -648,12 +648,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(i_, o_);
 
@@ -684,7 +684,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
             Encounter m_(ServiceRequest Twoto6MonthRescreen) =>
-                ElevatedEncounter;
+            ElevatedEncounter;
             IEnumerable<Encounter> n_ = context.Operators.Select<ServiceRequest, Encounter>(l_, m_);
 
             return n_;
@@ -705,7 +705,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
             Encounter w_(ServiceRequest NonPharmInterventions) =>
-                ElevatedEncounter;
+            ElevatedEncounter;
             IEnumerable<Encounter> x_ = context.Operators.Select<ServiceRequest, Encounter>(v_, w_);
 
             return x_;
@@ -726,7 +726,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> af_ = context.Operators.Where<ServiceRequest>(ad_, ae_);
             Encounter ag_(ServiceRequest Referral) =>
-                ElevatedEncounter;
+            ElevatedEncounter;
             IEnumerable<Encounter> ah_ = context.Operators.Select<ServiceRequest, Encounter>(af_, ag_);
 
             return ah_;
@@ -768,10 +768,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? ce_ = cd_?.Value;
                 string cf_ = context.Operators.Convert<string>(ce_);
                 string[] cg_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
 
@@ -829,10 +829,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? dm_ = dl_?.Value;
                 string dn_ = context.Operators.Convert<string>(dm_);
                 string[] do_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? dp_ = context.Operators.In<string>(dn_, (IEnumerable<string>)do_);
                 bool? dq_ = context.Operators.And(dk_, dp_);
 
@@ -890,10 +890,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? eu_ = et_?.Value;
                 string ev_ = context.Operators.Convert<string>(eu_);
                 string[] ew_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ex_ = context.Operators.In<string>(ev_, (IEnumerable<string>)ew_);
                 bool? ey_ = context.Operators.And(es_, ex_);
 
@@ -951,10 +951,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? gc_ = gb_?.Value;
                 string gd_ = context.Operators.Convert<string>(gc_);
                 string[] ge_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? gf_ = context.Operators.In<string>(gd_, (IEnumerable<string>)ge_);
                 bool? gg_ = context.Operators.And(ga_, gf_);
 
@@ -1020,10 +1020,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? bu_ = bt_?.Value;
                 string bv_ = context.Operators.Convert<string>(bu_);
                 string[] bw_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
                 bool? by_ = context.Operators.And(bs_, bx_);
 
@@ -1071,10 +1071,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? cq_ = cp_?.Value;
                 string cr_ = context.Operators.Convert<string>(cq_);
                 string[] cs_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ct_ = context.Operators.In<string>(cr_, (IEnumerable<string>)cs_);
                 bool? cu_ = context.Operators.And(co_, ct_);
 
@@ -1122,10 +1122,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? dm_ = dl_?.Value;
                 string dn_ = context.Operators.Convert<string>(dm_);
                 string[] do_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? dp_ = context.Operators.In<string>(dn_, (IEnumerable<string>)do_);
                 bool? dq_ = context.Operators.And(dk_, dp_);
 
@@ -1173,10 +1173,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? ei_ = eh_?.Value;
                 string ej_ = context.Operators.Convert<string>(ei_);
                 string[] ek_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? el_ = context.Operators.In<string>(ej_, (IEnumerable<string>)ek_);
                 bool? em_ = context.Operators.And(eg_, el_);
 
@@ -1247,12 +1247,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Code<RequestIntent> w_ = context.Operators.Convert<Code<RequestIntent>>(v_);
                 string x_ = context.Operators.Convert<string>(w_);
                 string[] y_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+                    ];
                 bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
                 bool? aa_ = context.Operators.And(t_, z_);
 
@@ -1260,7 +1260,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
             ServiceRequest j_(ServiceRequest NonPharmInterventionsHTN) =>
-                FourWeekRescreen;
+            FourWeekRescreen;
             IEnumerable<ServiceRequest> k_ = context.Operators.Select<ServiceRequest, ServiceRequest>(i_, j_);
 
             return k_;
@@ -1292,7 +1292,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> f_ = context.Operators.Where<ServiceRequest>(d_, e_);
             Encounter g_(ServiceRequest FirstHTNIntervention) =>
-                FirstHTNEncounter;
+            FirstHTNEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<ServiceRequest, Encounter>(f_, g_);
 
             return h_;
@@ -1323,10 +1323,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? bz_ = by_?.Value;
                 string ca_ = context.Operators.Convert<string>(bz_);
                 string[] cb_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
                 bool? cd_ = context.Operators.And(bx_, cc_);
 
@@ -1376,10 +1376,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? cv_ = cu_?.Value;
                 string cw_ = context.Operators.Convert<string>(cv_);
                 string[] cx_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? cy_ = context.Operators.In<string>(cw_, (IEnumerable<string>)cx_);
                 bool? cz_ = context.Operators.And(ct_, cy_);
 
@@ -1430,10 +1430,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? dr_ = dq_?.Value;
                 string ds_ = context.Operators.Convert<string>(dr_);
                 string[] dt_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? du_ = context.Operators.In<string>(ds_, (IEnumerable<string>)dt_);
                 bool? dv_ = context.Operators.And(dp_, du_);
 
@@ -1481,10 +1481,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? en_ = em_?.Value;
                 string eo_ = context.Operators.Convert<string>(en_);
                 string[] ep_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? eq_ = context.Operators.In<string>(eo_, (IEnumerable<string>)ep_);
                 bool? er_ = context.Operators.And(el_, eq_);
 
@@ -1553,12 +1553,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestIntent> o_ = context.Operators.Convert<Code<RequestIntent>>(n_);
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
 
             return r_;
@@ -1591,7 +1591,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> h_ = context.Operators.Where<ServiceRequest>(f_, g_);
             ServiceRequest i_(ServiceRequest LabECGIntervention) =>
-                Rescreen2to6;
+            Rescreen2to6;
             IEnumerable<ServiceRequest> j_ = context.Operators.Select<ServiceRequest, ServiceRequest>(h_, i_);
 
             return j_;
@@ -1611,7 +1611,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
             ServiceRequest w_(ServiceRequest NonPharmSecondIntervention) =>
-                Rescreen2to6;
+            Rescreen2to6;
             IEnumerable<ServiceRequest> x_ = context.Operators.Select<ServiceRequest, ServiceRequest>(v_, w_);
 
             return x_;
@@ -1641,7 +1641,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             Encounter k_(ServiceRequest EncounterInterventions) =>
-                SecondHTNEncounterReading;
+            SecondHTNEncounterReading;
             IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
             return l_;
@@ -1662,7 +1662,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
             Encounter u_(ServiceRequest ReferralForHTN) =>
-                SecondHTNEncounterReading;
+            SecondHTNEncounterReading;
             IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
             return v_;
@@ -1694,10 +1694,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? bu_ = bt_?.Value;
                 string bv_ = context.Operators.Convert<string>(bu_);
                 string[] bw_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
                 bool? by_ = context.Operators.And(bs_, bx_);
 
@@ -1745,10 +1745,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? cq_ = cp_?.Value;
                 string cr_ = context.Operators.Convert<string>(cq_);
                 string[] cs_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ct_ = context.Operators.In<string>(cr_, (IEnumerable<string>)cs_);
                 bool? cu_ = context.Operators.And(co_, ct_);
 
@@ -1796,10 +1796,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? dm_ = dl_?.Value;
                 string dn_ = context.Operators.Convert<string>(dm_);
                 string[] do_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? dp_ = context.Operators.In<string>(dn_, (IEnumerable<string>)do_);
                 bool? dq_ = context.Operators.And(dk_, dp_);
 
@@ -1847,10 +1847,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? ei_ = eh_?.Value;
                 string ej_ = context.Operators.Convert<string>(ei_);
                 string[] ek_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? el_ = context.Operators.In<string>(ej_, (IEnumerable<string>)ek_);
                 bool? em_ = context.Operators.And(eg_, el_);
 
@@ -1921,12 +1921,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Code<RequestIntent> y_ = context.Operators.Convert<Code<RequestIntent>>(x_);
                 string z_ = context.Operators.Convert<string>(y_);
                 string[] aa_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+                    ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(v_, ab_);
                 Code<RequestIntent> ad_ = ECGLabTest?.IntentElement;
@@ -1940,7 +1940,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> k_ = context.Operators.Where<ServiceRequest>(i_, j_);
             ServiceRequest l_(ServiceRequest ECGLabTest) =>
-                WeeksRescreen;
+            WeeksRescreen;
             IEnumerable<ServiceRequest> m_ = context.Operators.Select<ServiceRequest, ServiceRequest>(k_, l_);
 
             return m_;
@@ -1960,7 +1960,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> am_ = context.Operators.Where<ServiceRequest>(ak_, al_);
             ServiceRequest an_(ServiceRequest HTNInterventions) =>
-                WeeksRescreen;
+            WeeksRescreen;
             IEnumerable<ServiceRequest> ao_ = context.Operators.Select<ServiceRequest, ServiceRequest>(am_, an_);
 
             return ao_;
@@ -1991,7 +1991,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 };
                 IEnumerable<Medication> bf_ = context.Operators.Where<Medication>(bd_, be_);
                 MedicationRequest bg_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> bh_ = context.Operators.Select<Medication, MedicationRequest>(bf_, bg_);
 
                 return bh_;
@@ -2008,9 +2008,9 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? bx_ = bw_?.Value;
                 string by_ = context.Operators.Convert<string>(bx_);
                 string[] bz_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ca_ = context.Operators.In<string>(by_, (IEnumerable<string>)bz_);
                 bool? cb_ = context.Operators.And(bv_, ca_);
 
@@ -2018,7 +2018,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<MedicationRequest> ba_ = context.Operators.Where<MedicationRequest>(ay_, az_);
             ServiceRequest bb_(MedicationRequest Medications) =>
-                WeeksRescreen;
+            WeeksRescreen;
             IEnumerable<ServiceRequest> bc_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ba_, bb_);
 
             return bc_;
@@ -2048,7 +2048,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             Encounter k_(ServiceRequest SecondHTN140Over90Interventions) =>
-                SecondHTNEncounterReading140Over90;
+            SecondHTNEncounterReading140Over90;
             IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
             return l_;
@@ -2069,7 +2069,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
             Encounter u_(ServiceRequest ReferralToProfessional) =>
-                SecondHTNEncounterReading140Over90;
+            SecondHTNEncounterReading140Over90;
             IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
             return v_;
@@ -2133,8 +2133,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     return at_;
                 };
                 IEnumerable<Extension> z_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-                        ? (NoBPScreen as DomainResource).Extension
-                        : default), y_);
+                    ? (NoBPScreen as DomainResource).Extension
+                    : default), y_);
                 object aa_(Extension @this)
                 {
                     DataType au_ = @this?.Value;
@@ -2156,8 +2156,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     return ay_;
                 };
                 IEnumerable<Extension> ah_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-                        ? (NoBPScreen as DomainResource).Extension
-                        : default), ag_);
+                    ? (NoBPScreen as DomainResource).Extension
+                    : default), ag_);
                 object ai_(Extension @this)
                 {
                     DataType az_ = @this?.Value;
@@ -2176,7 +2176,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(n_, o_);
             Encounter q_(Observation NoBPScreen) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> r_ = context.Operators.Select<Observation, Encounter>(p_, q_);
 
             return r_;
@@ -2221,10 +2221,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> ah_ = context.Operators.Convert<Code<RequestStatus>>(ag_);
             string ai_ = context.Operators.Convert<string>(ah_);
             string[] aj_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_(Extension @this)
             {
@@ -2236,8 +2236,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return ax_;
             };
             IEnumerable<Extension> am_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NonPharmIntervention is DomainResource
-                    ? (NonPharmIntervention as DomainResource).Extension
-                    : default), al_);
+                ? (NonPharmIntervention as DomainResource).Extension
+                : default), al_);
             object an_(Extension @this)
             {
                 DataType ay_ = @this?.Value;
@@ -2281,10 +2281,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> r_ = context.Operators.Convert<Code<RequestStatus>>(q_);
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_(Extension @this)
             {
@@ -2296,8 +2296,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return ah_;
             };
             IEnumerable<Extension> w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(LabECGNotDone is DomainResource
-                    ? (LabECGNotDone as DomainResource).Extension
-                    : default), v_);
+                ? (LabECGNotDone as DomainResource).Extension
+                : default), v_);
             object x_(Extension @this)
             {
                 DataType ai_ = @this?.Value;
@@ -2338,10 +2338,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> t_ = context.Operators.Convert<Code<RequestStatus>>(s_);
             string u_ = context.Operators.Convert<string>(t_);
             string[] v_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_(Extension @this)
             {
@@ -2353,8 +2353,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return aj_;
             };
             IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTNDeclinedReferralAndFollowUp is DomainResource
-                    ? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
-                    : default), x_);
+                ? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
+                : default), x_);
             object z_(Extension @this)
             {
                 DataType ak_ = @this?.Value;
@@ -2399,10 +2399,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> ab_ = context.Operators.Convert<Code<RequestStatus>>(aa_);
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_(Extension @this)
             {
@@ -2414,8 +2414,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return ar_;
             };
             IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTN140Over90ReferralFollowUpNotDone is DomainResource
-                    ? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
-                    : default), af_);
+                ? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
+                : default), af_);
             object ah_(Extension @this)
             {
                 DataType as_ = @this?.Value;
@@ -2442,9 +2442,9 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             MedicationRequest.MedicationrequestStatus? au_ = at_?.Value;
             string av_ = context.Operators.Convert<string>(au_);
             string[] aw_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
 
             return ax_;
@@ -2487,10 +2487,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Code<RequestStatus> at_ = context.Operators.Convert<Code<RequestStatus>>(as_);
                 string au_ = context.Operators.Convert<string>(at_);
                 string[] av_ = [
-                    "active",
-                    "completed",
-                    "on-hold",
-                ];
+                "active",
+                "completed",
+                "on-hold",
+                    ];
                 bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
                 bool? ax_ = context.Operators.And(aq_, aw_);
                 bool? ay_(Extension @this)
@@ -2503,8 +2503,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     return bk_;
                 };
                 IEnumerable<Extension> az_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(ElevatedBPDeclinedInterventions is DomainResource
-                        ? (ElevatedBPDeclinedInterventions as DomainResource).Extension
-                        : default), ay_);
+                    ? (ElevatedBPDeclinedInterventions as DomainResource).Extension
+                    : default), ay_);
                 object ba_(Extension @this)
                 {
                     DataType bl_ = @this?.Value;
@@ -2522,7 +2522,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> aj_ = context.Operators.Where<ServiceRequest>(ah_, ai_);
             Encounter ak_(ServiceRequest ElevatedBPDeclinedInterventions) =>
-                ElevatedBPEncounter;
+            ElevatedBPEncounter;
             IEnumerable<Encounter> al_ = context.Operators.Select<ServiceRequest, Encounter>(aj_, ak_);
 
             return al_;
@@ -2543,7 +2543,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> bo_ = context.Operators.Where<ServiceRequest>(bm_, bn_);
             Encounter bp_(ServiceRequest NotOrdered) =>
-                ElevatedBPEncounter;
+            ElevatedBPEncounter;
             IEnumerable<Encounter> bq_ = context.Operators.Select<ServiceRequest, Encounter>(bo_, bp_);
 
             return bq_;
@@ -2574,10 +2574,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Code<RequestStatus> cs_ = context.Operators.Convert<Code<RequestStatus>>(cr_);
                 string ct_ = context.Operators.Convert<string>(cs_);
                 string[] cu_ = [
-                    "active",
-                    "completed",
-                    "on-hold",
-                ];
+                "active",
+                "completed",
+                "on-hold",
+                    ];
                 bool? cv_ = context.Operators.In<string>(ct_, (IEnumerable<string>)cu_);
                 bool? cw_ = context.Operators.And(cp_, cv_);
                 bool? cx_(Extension @this)
@@ -2590,8 +2590,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     return dj_;
                 };
                 IEnumerable<Extension> cy_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FirstHTNDeclinedInterventions is DomainResource
-                        ? (FirstHTNDeclinedInterventions as DomainResource).Extension
-                        : default), cx_);
+                    ? (FirstHTNDeclinedInterventions as DomainResource).Extension
+                    : default), cx_);
                 object cz_(Extension @this)
                 {
                     DataType dk_ = @this?.Value;
@@ -2609,7 +2609,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> ci_ = context.Operators.Where<ServiceRequest>(cg_, ch_);
             Encounter cj_(ServiceRequest FirstHTNDeclinedInterventions) =>
-                FirstHTNEncounter;
+            FirstHTNEncounter;
             IEnumerable<Encounter> ck_ = context.Operators.Select<ServiceRequest, Encounter>(ci_, cj_);
 
             return ck_;
@@ -2630,7 +2630,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> dn_ = context.Operators.Where<ServiceRequest>(dl_, dm_);
             Encounter do_(ServiceRequest NoNonPharm) =>
-                FirstHTNEncounter;
+            FirstHTNEncounter;
             IEnumerable<Encounter> dp_ = context.Operators.Select<ServiceRequest, Encounter>(dn_, do_);
 
             return dp_;
@@ -2654,7 +2654,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> dx_ = context.Operators.Where<ServiceRequest>(dv_, dw_);
             Encounter dy_(ServiceRequest SecondHTNDeclinedInterventions) =>
-                SecondHTNEncounter;
+            SecondHTNEncounter;
             IEnumerable<Encounter> dz_ = context.Operators.Select<ServiceRequest, Encounter>(dx_, dy_);
 
             return dz_;
@@ -2676,7 +2676,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> eh_ = context.Operators.Where<object>(ef_, eg_);
             Encounter ei_(object SecondHTN140Over90DeclinedInterventions) =>
-                SecondHTN140Over90Encounter;
+            SecondHTN140Over90Encounter;
             IEnumerable<Encounter> ej_ = context.Operators.Select<object, Encounter>(eh_, ei_);
 
             return ej_;

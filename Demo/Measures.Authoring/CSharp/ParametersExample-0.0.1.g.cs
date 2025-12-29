@@ -75,8 +75,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     {
         Patient a_ = this.Patient(context);
         Patient[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Patient P)
         {
             Code<AdministrativeGender> f_ = P?.GenderElement;

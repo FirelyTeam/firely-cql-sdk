@@ -197,8 +197,8 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         {
             object q_ = context.Operators.LateBoundProperty<object>(UnilateralMastectomyDiagnosis, "bodySite");
             object[] r_ = [
-                q_,
-            ];
+            q_,
+                ];
             CqlConcept s_(object @this)
             {
                 CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -208,8 +208,8 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
             CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
             CqlConcept[] v_ = [
-                u_,
-            ];
+            u_,
+                ];
             bool? w_(CqlConcept S)
             {
                 CqlCode aa_ = this.Right__qualifier_value_(context);
@@ -346,8 +346,8 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         {
             object q_ = context.Operators.LateBoundProperty<object>(UnilateralMastectomyDiagnosis, "bodySite");
             object[] r_ = [
-                q_,
-            ];
+            q_,
+                ];
             CqlConcept s_(object @this)
             {
                 CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -357,8 +357,8 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
             CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
             CqlConcept[] v_ = [
-                u_,
-            ];
+            u_,
+                ];
             bool? w_(CqlConcept S)
             {
                 CqlCode aa_ = this.Left__qualifier_value_(context);

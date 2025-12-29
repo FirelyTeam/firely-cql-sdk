@@ -158,7 +158,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             CqlValueSet k_ = this.Substance_Use_Disorder(context);
             IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             object m_(Condition X) =>
-                X as object;
+            X as object;
             IEnumerable<object> n_ = context.Operators.Select<Condition, object>(l_, m_);
             IEnumerable<object> o_ = Status_1_15_000.Instance.verified(context, n_);
             bool? p_(object SUDDiagnosis)
@@ -183,7 +183,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<object> q_ = context.Operators.Where<object>(o_, p_);
             Encounter r_(object SUDDiagnosis) =>
-                ValidEncounters;
+            ValidEncounters;
             IEnumerable<Encounter> s_ = context.Operators.Select<object, Encounter>(q_, r_);
 
             return s_;
@@ -248,8 +248,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter an_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ao_ = [
-                an_,
-            ];
+            an_,
+                ];
             bool? ap_(Encounter FirstSUDEpisode)
             {
                 object at_()
@@ -373,7 +373,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> aq_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)ao_, ap_);
             Procedure ar_(Encounter FirstSUDEpisode) =>
-                Interventions;
+            Interventions;
             IEnumerable<Procedure> as_ = context.Operators.Select<Encounter, Procedure>(aq_, ar_);
 
             return as_;
@@ -412,8 +412,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter em_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] en_ = [
-                em_,
-            ];
+            em_,
+                ];
             bool? eo_(Encounter FirstSUDEpisode)
             {
                 Period es_ = SUDEncounterDx?.Period;
@@ -471,7 +471,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> ep_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)en_, eo_);
             Encounter eq_(Encounter FirstSUDEpisode) =>
-                SUDEncounterDx;
+            SUDEncounterDx;
             IEnumerable<Encounter> er_ = context.Operators.Select<Encounter, Encounter>(ep_, eq_);
 
             return er_;
@@ -501,7 +501,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> hd_ = context.Operators.Where<Medication>(hb_, hc_);
             MedicationRequest he_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> hf_ = context.Operators.Select<Medication, MedicationRequest>(hd_, he_);
 
             return hf_;
@@ -530,7 +530,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> hs_ = context.Operators.Where<Medication>(hq_, hr_);
             MedicationRequest ht_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> hu_ = context.Operators.Select<Medication, MedicationRequest>(hs_, ht_);
 
             return hu_;
@@ -543,8 +543,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter if_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ig_ = [
-                if_,
-            ];
+            if_,
+                ];
             bool? ih_(Encounter FirstSUDEpisode)
             {
                 FhirDateTime il_ = SUDMedication?.AuthoredOnElement;
@@ -601,7 +601,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> ii_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)ig_, ih_);
             MedicationRequest ij_(Encounter FirstSUDEpisode) =>
-                SUDMedication;
+            SUDMedication;
             IEnumerable<MedicationRequest> ik_ = context.Operators.Select<Encounter, MedicationRequest>(ii_, ij_);
 
             return ik_;
@@ -710,8 +710,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter l_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] m_ = [
-                l_,
-            ];
+            l_,
+                ];
             bool? n_(Encounter FirstSUDEpisode)
             {
                 object r_()
@@ -807,7 +807,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> o_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)m_, n_);
             object p_(Encounter FirstSUDEpisode) =>
-                PsychosocialVisitProcedure;
+            PsychosocialVisitProcedure;
             IEnumerable<object> q_ = context.Operators.Select<Encounter, object>(o_, p_);
 
             return q_;
@@ -893,8 +893,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter co_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] cp_ = [
-                co_,
-            ];
+            co_,
+                ];
             bool? cq_(Encounter FirstSUDEpisode)
             {
                 object cu_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitEncounter, "period");
@@ -924,7 +924,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> cr_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)cp_, cq_);
             object cs_(Encounter FirstSUDEpisode) =>
-                PsychosocialVisitEncounter;
+            PsychosocialVisitEncounter;
             IEnumerable<object> ct_ = context.Operators.Select<Encounter, object>(cr_, cs_);
 
             return ct_;
@@ -972,7 +972,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> af_ = context.Operators.Where<Medication>(ad_, ae_);
             MedicationRequest ag_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ah_ = context.Operators.Select<Medication, MedicationRequest>(af_, ag_);
 
             return ah_;
@@ -1001,7 +1001,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> au_ = context.Operators.Where<Medication>(as_, at_);
             MedicationRequest av_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> aw_ = context.Operators.Select<Medication, MedicationRequest>(au_, av_);
 
             return aw_;
@@ -1014,8 +1014,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter bh_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] bi_ = [
-                bh_,
-            ];
+            bh_,
+                ];
             bool? bj_(Encounter FirstSUDEpisode)
             {
                 FhirDateTime bn_ = SUDMedication?.AuthoredOnElement;
@@ -1039,7 +1039,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> bk_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)bi_, bj_);
             MedicationRequest bl_(Encounter FirstSUDEpisode) =>
-                SUDMedication;
+            SUDMedication;
             IEnumerable<MedicationRequest> bm_ = context.Operators.Select<Encounter, MedicationRequest>(bk_, bl_);
 
             return bm_;
@@ -1066,8 +1066,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         {
             Encounter cj_ = this.First_SUD_Episode_During_Measurement_Period(context);
             Encounter[] ck_ = [
-                cj_,
-            ];
+            cj_,
+                ];
             bool? cl_(Encounter FirstSUDEpisode)
             {
                 object cp_()
@@ -1156,7 +1156,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Encounter> cm_ = context.Operators.Where<Encounter>((IEnumerable<Encounter>)ck_, cl_);
             Procedure cn_(Encounter FirstSUDEpisode) =>
-                SUDMedAdministration;
+            SUDMedAdministration;
             IEnumerable<Procedure> co_ = context.Operators.Select<Encounter, Procedure>(cm_, cn_);
 
             return co_;
@@ -1272,8 +1272,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> z_ = context.Operators.Union<CqlDate>(x_, y_);
             CqlDate aa_ = context.Operators.Min<CqlDate>(z_);
             CqlDate[] ab_ = [
-                aa_,
-            ];
+            aa_,
+                ];
             bool? ac_(CqlDate InitiationTreatmentDate)
             {
                 object ag_()
@@ -1366,14 +1366,14 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<CqlDate> ad_ = context.Operators.Where<CqlDate>((IEnumerable<CqlDate>)ab_, ac_);
             object ae_(CqlDate InitiationTreatmentDate) =>
-                ShortActingTreatment;
+            ShortActingTreatment;
             IEnumerable<object> af_ = context.Operators.Select<CqlDate, object>(ad_, ae_);
 
             return af_;
         };
         IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
         object h_(object ShortActingTreatment) =>
-            ShortActingTreatment;
+        ShortActingTreatment;
         IEnumerable<object> i_ = context.Operators.Select<object, object>(g_, h_);
         CqlValueSet j_ = this.Substance_Use_Disorder_Short_Acting_Medication(context);
         IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1398,7 +1398,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> cb_ = context.Operators.Where<Medication>(bz_, ca_);
             MedicationRequest cc_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> cd_ = context.Operators.Select<Medication, MedicationRequest>(cb_, cc_);
 
             return cd_;
@@ -1413,8 +1413,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> cq_ = context.Operators.Union<CqlDate>(co_, cp_);
             CqlDate cr_ = context.Operators.Min<CqlDate>(cq_);
             CqlDate[] cs_ = [
-                cr_,
-            ];
+            cr_,
+                ];
             bool? ct_(CqlDate InitiationTreatmentDate)
             {
                 FhirDateTime cx_ = ShortActingMedOrder?.AuthoredOnElement;
@@ -1433,14 +1433,14 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<CqlDate> cu_ = context.Operators.Where<CqlDate>((IEnumerable<CqlDate>)cs_, ct_);
             MedicationRequest cv_(CqlDate InitiationTreatmentDate) =>
-                ShortActingMedOrder;
+            ShortActingMedOrder;
             IEnumerable<MedicationRequest> cw_ = context.Operators.Select<CqlDate, MedicationRequest>(cu_, cv_);
 
             return cw_;
         };
         IEnumerable<MedicationRequest> r_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(p_, q_);
         MedicationRequest s_(MedicationRequest ShortActingMedOrder) =>
-            ShortActingMedOrder;
+        ShortActingMedOrder;
         IEnumerable<MedicationRequest> t_ = context.Operators.Select<MedicationRequest, MedicationRequest>(r_, s_);
         IEnumerable<object> u_ = context.Operators.Union<object>(i_ as IEnumerable<object>, t_ as IEnumerable<object>);
         int? v_ = context.Operators.Count<object>(u_);
@@ -1476,7 +1476,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> s_ = context.Operators.Where<Medication>(q_, r_);
             MedicationRequest t_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> u_ = context.Operators.Select<Medication, MedicationRequest>(s_, t_);
 
             return u_;
@@ -1491,8 +1491,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> ah_ = context.Operators.Union<CqlDate>(af_, ag_);
             CqlDate ai_ = context.Operators.Min<CqlDate>(ah_);
             CqlDate[] aj_ = [
-                ai_,
-            ];
+            ai_,
+                ];
             bool? ak_(CqlDate InitiationTreatmentDate)
             {
                 FhirDateTime ao_ = LongActingMedOrder?.AuthoredOnElement;
@@ -1511,7 +1511,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<CqlDate> al_ = context.Operators.Where<CqlDate>((IEnumerable<CqlDate>)aj_, ak_);
             MedicationRequest am_(CqlDate InitiationTreatmentDate) =>
-                LongActingMedOrder;
+            LongActingMedOrder;
             IEnumerable<MedicationRequest> an_ = context.Operators.Select<CqlDate, MedicationRequest>(al_, am_);
 
             return an_;
@@ -1527,8 +1527,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlDate> bb_ = context.Operators.Union<CqlDate>(az_, ba_);
             CqlDate bc_ = context.Operators.Min<CqlDate>(bb_);
             CqlDate[] bd_ = [
-                bc_,
-            ];
+            bc_,
+                ];
             bool? be_(CqlDate InitiationTreatmentDate)
             {
                 object bi_()
@@ -1612,7 +1612,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<CqlDate> bf_ = context.Operators.Where<CqlDate>((IEnumerable<CqlDate>)bd_, be_);
             Procedure bg_(CqlDate InitiationTreatmentDate) =>
-                LongActingTreatment;
+            LongActingTreatment;
             IEnumerable<Procedure> bh_ = context.Operators.Select<CqlDate, Procedure>(bf_, bg_);
 
             return bh_;

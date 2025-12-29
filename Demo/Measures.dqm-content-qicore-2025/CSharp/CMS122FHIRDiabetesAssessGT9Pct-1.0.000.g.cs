@@ -366,7 +366,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         CqlValueSet n_ = this.Diabetes(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         object p_(Condition X) =>
-            X as object;
+        X as object;
         IEnumerable<object> q_ = context.Operators.Select<Condition, object>(o_, p_);
         IEnumerable<object> r_ = Status_1_15_000.Instance.verified(context, q_);
         bool? s_(object DiabetesDiagnosis)

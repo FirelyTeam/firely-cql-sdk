@@ -234,7 +234,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
             Condition h_(Encounter QualifyingEncounter) =>
-                BipolarDiagnosis;
+            BipolarDiagnosis;
             IEnumerable<Condition> i_ = context.Operators.Select<Encounter, Condition>(g_, h_);
 
             return i_;
@@ -309,10 +309,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
 
@@ -320,7 +320,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Observation l_(Encounter QualifyingEncounter) =>
-                AdolescentDepressionScreening;
+            AdolescentDepressionScreening;
             IEnumerable<Observation> m_ = context.Operators.Select<Encounter, Observation>(k_, l_);
 
             return m_;
@@ -347,8 +347,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adolescent_Depression_Screening(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Observation AdolescentScreen)
         {
             DataType g_ = AdolescentScreen?.Value;
@@ -393,7 +393,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> u_ = context.Operators.Where<Medication>(s_, t_);
             MedicationRequest v_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> w_ = context.Operators.Select<Medication, MedicationRequest>(u_, v_);
 
             return w_;
@@ -445,21 +445,21 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? ce_ = cd_?.Value;
                 string cf_ = context.Operators.Convert<string>(ce_);
                 string[] cg_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
                 Code<MedicationRequest.MedicationRequestIntent> cj_ = AdolescentMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ck_ = cj_?.Value;
                 string cl_ = context.Operators.Convert<string>(ck_);
                 string[] cm_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+                    ];
                 bool? cn_ = context.Operators.In<string>(cl_, (IEnumerable<string>)cm_);
                 bool? co_ = context.Operators.And(ci_, cn_);
 
@@ -467,7 +467,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
             MedicationRequest ak_(Encounter QualifyingEncounter) =>
-                AdolescentMed;
+            AdolescentMed;
             IEnumerable<MedicationRequest> al_ = context.Operators.Select<Encounter, MedicationRequest>(aj_, ak_);
 
             return al_;
@@ -482,9 +482,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> cr_ = context.Operators.Convert<Code<RequestStatus>>(cq_);
             string cs_ = context.Operators.Convert<string>(cr_);
             string[] ct_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
 
             return cu_;
@@ -514,8 +514,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adolescent_Depression_Screening(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         IEnumerable<object> c_ = this.Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening(context);
         IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
         IEnumerable<ValueTuple<Observation, object, Encounter>> e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
@@ -781,10 +781,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
 
@@ -792,7 +792,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Observation l_(Encounter QualifyingEncounter) =>
-                AdultDepressionScreening;
+            AdultDepressionScreening;
             IEnumerable<Observation> m_ = context.Operators.Select<Encounter, Observation>(k_, l_);
 
             return m_;
@@ -819,8 +819,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adult_Depression_Screening(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         bool? c_(Observation AdultScreen)
         {
             DataType g_ = AdultScreen?.Value;
@@ -865,7 +865,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> u_ = context.Operators.Where<Medication>(s_, t_);
             MedicationRequest v_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> w_ = context.Operators.Select<Medication, MedicationRequest>(u_, v_);
 
             return w_;
@@ -917,21 +917,21 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 MedicationRequest.MedicationrequestStatus? ce_ = cd_?.Value;
                 string cf_ = context.Operators.Convert<string>(ce_);
                 string[] cg_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ch_ = context.Operators.In<string>(cf_, (IEnumerable<string>)cg_);
                 bool? ci_ = context.Operators.And(cc_, ch_);
                 Code<MedicationRequest.MedicationRequestIntent> cj_ = AdultMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ck_ = cj_?.Value;
                 string cl_ = context.Operators.Convert<string>(ck_);
                 string[] cm_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+                    ];
                 bool? cn_ = context.Operators.In<string>(cl_, (IEnumerable<string>)cm_);
                 bool? co_ = context.Operators.And(ci_, cn_);
 
@@ -939,7 +939,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
             MedicationRequest ak_(Encounter QualifyingEncounter) =>
-                AdultMed;
+            AdultMed;
             IEnumerable<MedicationRequest> al_ = context.Operators.Select<Encounter, MedicationRequest>(aj_, ak_);
 
             return al_;
@@ -954,9 +954,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             Code<RequestStatus> cr_ = context.Operators.Convert<Code<RequestStatus>>(cq_);
             string cs_ = context.Operators.Convert<string>(cr_);
             string[] ct_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? cu_ = context.Operators.In<string>(cs_, (IEnumerable<string>)ct_);
 
             return cu_;
@@ -986,8 +986,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         Observation a_ = this.Most_Recent_Adult_Depression_Screening(context);
         Observation[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         IEnumerable<object> c_ = this.Follow_Up_Intervention_for_Positive_Adult_Depression_Screening(context);
         IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
         IEnumerable<ValueTuple<Observation, object, Encounter>> e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
@@ -1268,7 +1268,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Observation k_(Encounter QualifyingEncounter) =>
-                NoAdolescentScreen;
+            NoAdolescentScreen;
             IEnumerable<Observation> l_ = context.Operators.Select<Encounter, Observation>(j_, k_);
 
             return l_;
@@ -1286,8 +1286,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return an_;
             };
             IEnumerable<Extension> t_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
-                    ? (NoAdolescentScreen as DomainResource).Extension
-                    : default), s_);
+                ? (NoAdolescentScreen as DomainResource).Extension
+                : default), s_);
             object u_(Extension @this)
             {
                 DataType ao_ = @this?.Value;
@@ -1310,8 +1310,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return as_;
             };
             IEnumerable<Extension> ac_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
-                    ? (NoAdolescentScreen as DomainResource).Extension
-                    : default), ab_);
+                ? (NoAdolescentScreen as DomainResource).Extension
+                : default), ab_);
             object ad_(Extension @this)
             {
                 DataType at_ = @this?.Value;
@@ -1369,10 +1369,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
@@ -1380,7 +1380,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter QualifyingEncounter) =>
-                AdolescentScreening;
+            AdolescentScreening;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -1414,7 +1414,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Observation k_(Encounter QualifyingEncounter) =>
-                NoAdultScreen;
+            NoAdultScreen;
             IEnumerable<Observation> l_ = context.Operators.Select<Encounter, Observation>(j_, k_);
 
             return l_;
@@ -1432,8 +1432,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return an_;
             };
             IEnumerable<Extension> t_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
-                    ? (NoAdultScreen as DomainResource).Extension
-                    : default), s_);
+                ? (NoAdultScreen as DomainResource).Extension
+                : default), s_);
             object u_(Extension @this)
             {
                 DataType ao_ = @this?.Value;
@@ -1456,8 +1456,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return as_;
             };
             IEnumerable<Extension> ac_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
-                    ? (NoAdultScreen as DomainResource).Extension
-                    : default), ab_);
+                ? (NoAdultScreen as DomainResource).Extension
+                : default), ab_);
             object ad_(Extension @this)
             {
                 DataType at_ = @this?.Value;
@@ -1515,10 +1515,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 ObservationStatus? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
@@ -1526,7 +1526,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter QualifyingEncounter) =>
-                AdultScreening;
+            AdultScreening;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;

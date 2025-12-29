@@ -233,7 +233,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object Dementia) =>
-                EncounterAssessCognition;
+            EncounterAssessCognition;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -329,7 +329,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterDementia) =>
-                CognitiveAssessment;
+            CognitiveAssessment;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;
@@ -344,10 +344,10 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             ObservationStatus? al_ = ak_?.Value;
             string am_ = context.Operators.Convert<string>(al_);
             string[] an_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
             bool? ap_ = context.Operators.And(aj_, ao_);
 
@@ -393,7 +393,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterDementia) =>
-                NoCognitiveAssessment;
+            NoCognitiveAssessment;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;
@@ -411,8 +411,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return af_;
             };
             IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
-                    ? (NoCognitiveAssessment as DomainResource).Extension
-                    : default), u_);
+                ? (NoCognitiveAssessment as DomainResource).Extension
+                : default), u_);
             object w_(Extension @this)
             {
                 DataType ag_ = @this?.Value;

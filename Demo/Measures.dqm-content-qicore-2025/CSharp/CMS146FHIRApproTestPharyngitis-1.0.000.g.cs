@@ -305,7 +305,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> q_ = context.Operators.Where<Medication>(o_, p_);
                 MedicationRequest r_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> s_ = context.Operators.Select<Medication, MedicationRequest>(q_, r_);
 
                 return s_;
@@ -334,7 +334,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
             Encounter m_(MedicationRequest AntibioticOrdered) =>
-                EDOrAmbulatoryVisit;
+            EDOrAmbulatoryVisit;
             IEnumerable<Encounter> n_ = context.Operators.Select<MedicationRequest, Encounter>(l_, m_);
 
             return n_;
@@ -354,7 +354,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         object f_(Condition X) =>
-            X as object;
+        X as object;
         IEnumerable<object> g_ = context.Operators.Select<Condition, object>(e_, f_);
         IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
 
@@ -387,7 +387,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?>(e_, f_);
         Encounter h_((CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? tuple_dxfrqbqjrcafyrpcehuvuotch) =>
-            tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic;
+        tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
@@ -415,7 +415,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
+        EncounterWithPharyngitis;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -456,11 +456,11 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         object e_(Condition X) =>
-            X as object;
+        X as object;
         IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
         IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
         Condition h_(object X) =>
-            X as Condition;
+        X as Condition;
         IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
@@ -487,7 +487,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> ah_ = context.Operators.Where<Medication>(af_, ag_);
             MedicationRequest ai_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> aj_ = context.Operators.Select<Medication, MedicationRequest>(ah_, ai_);
 
             return aj_;
@@ -563,7 +563,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(e_, f_);
         Encounter h_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij) =>
-            tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis;
+        tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
@@ -592,7 +592,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
+        EncounterWithPharyngitis;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -621,7 +621,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
+        EncounterWithPharyngitis;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -649,7 +649,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
+        EncounterWithPharyngitis;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 

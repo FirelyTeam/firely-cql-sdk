@@ -93,10 +93,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -136,10 +136,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -217,9 +217,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -245,9 +245,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -273,9 +273,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -301,9 +301,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -329,9 +329,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -357,9 +357,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
@@ -385,10 +385,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -409,10 +409,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -433,12 +433,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<Encounter.EncounterStatus> e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "finished",
-                "arrived",
-                "triaged",
-                "in-progress",
-                "onleave",
-            ];
+            "finished",
+            "arrived",
+            "triaged",
+            "in-progress",
+            "onleave",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -459,12 +459,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<Encounter.EncounterStatus> e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "finished",
-                "arrived",
-                "triaged",
-                "in-progress",
-                "onleave",
-            ];
+            "finished",
+            "arrived",
+            "triaged",
+            "in-progress",
+            "onleave",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -575,10 +575,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -618,10 +618,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -707,10 +707,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "completed",
-                "in-progress",
-                "on-hold",
-            ];
+            "completed",
+            "in-progress",
+            "on-hold",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -731,10 +731,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "completed",
-                "in-progress",
-                "on-hold",
-            ];
+            "completed",
+            "in-progress",
+            "on-hold",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -754,9 +754,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
@@ -781,9 +781,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
@@ -809,10 +809,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -852,10 +852,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             List<CodeableConcept> i_ = O?.Category;
             CqlConcept j_(CodeableConcept @this)
@@ -894,10 +894,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -917,10 +917,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -940,10 +940,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -963,10 +963,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -986,10 +986,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -1009,10 +1009,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -1032,10 +1032,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -1055,10 +1055,10 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ObservationStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             string[] f_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
             return g_;
@@ -1079,11 +1079,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "preliminary",
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "preliminary",
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;
@@ -1104,11 +1104,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
             string f_ = context.Operators.Convert<string>(e_);
             string[] g_ = [
-                "preliminary",
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "preliminary",
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             return h_;

@@ -448,8 +448,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -459,8 +459,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(category);
@@ -481,8 +481,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -492,8 +492,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.problem_list_item(context);
@@ -515,8 +515,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -526,8 +526,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.encounter_diagnosis(context);
@@ -549,8 +549,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -560,8 +560,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.health_concern(context);
@@ -583,8 +583,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -594,8 +594,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.social_history(context);
@@ -617,8 +617,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -628,8 +628,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.vital_signs(context);
@@ -651,8 +651,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -662,8 +662,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.imaging(context);
@@ -685,8 +685,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -696,8 +696,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.laboratory(context);
@@ -719,8 +719,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -730,8 +730,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.procedure(context);
@@ -753,8 +753,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -764,8 +764,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.survey(context);
@@ -787,8 +787,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -798,8 +798,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.exam(context);
@@ -821,8 +821,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -832,8 +832,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.therapy(context);
@@ -855,8 +855,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -866,8 +866,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.activity(context);
@@ -889,8 +889,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(medicationRequest, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -900,8 +900,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.Community(context);
@@ -923,8 +923,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         object a_ = context.Operators.LateBoundProperty<object>(medicationRequest, "category");
         object[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlConcept c_(object @this)
         {
             CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
@@ -934,8 +934,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
         CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
         CqlConcept[] f_ = [
-            e_,
-        ];
+        e_,
+            ];
         bool? g_(CqlConcept C)
         {
             CqlCode k_ = this.Discharge(context);
@@ -966,8 +966,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return i_;
         };
         IEnumerable<Extension> b_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(deviceRequest is DomainResource
-                ? (deviceRequest as DomainResource).ModifierExtension
-                : default), a_);
+            ? (deviceRequest as DomainResource).ModifierExtension
+            : default), a_);
         object c_(Extension @this)
         {
             DataType j_ = @this?.Value;
@@ -1720,8 +1720,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlInterval<CqlDateTime> aa_ = this.ToAbatementInterval(context, condition);
                 CqlDateTime ab_ = context.Operators.End(aa_);
                 CqlDateTime[] ac_ = [
-                    ab_,
-                ];
+                ab_,
+                    ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
                     CqlInterval<CqlDateTime> ah_()
@@ -1806,8 +1806,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlInterval<CqlDateTime> aa_ = this.abatementInterval(context, condition);
                 CqlDateTime ab_ = context.Operators.End(aa_);
                 CqlDateTime[] ac_ = [
-                    ab_,
-                ];
+                ab_,
+                    ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
                     CqlInterval<CqlDateTime> ah_()
@@ -2025,8 +2025,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -2061,8 +2061,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -2098,8 +2098,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -2134,8 +2134,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -2174,8 +2174,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
@@ -2199,8 +2199,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {

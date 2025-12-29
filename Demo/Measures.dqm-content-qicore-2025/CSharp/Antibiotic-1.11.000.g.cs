@@ -79,14 +79,14 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(comorbidConditions, f_);
             Encounter h_(Condition comcondition) =>
-                episode;
+            episode;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodes, a_);
         Encounter c_(Encounter episode) =>
-            episode;
+        episode;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
@@ -121,14 +121,14 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(competingConditions, f_);
             Encounter h_(Condition competcondition) =>
-                episode;
+            episode;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodes, a_);
         Encounter c_(Encounter episode) =>
-            episode;
+        episode;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
@@ -162,7 +162,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
             };
             IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
             Encounter e_(MedicationRequest ActiveMedication) =>
-                episode;
+            episode;
             IEnumerable<Encounter> f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
 
             return f_;

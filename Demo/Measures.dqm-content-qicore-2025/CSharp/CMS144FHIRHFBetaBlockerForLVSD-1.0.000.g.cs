@@ -207,7 +207,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
             MedicationRequest m_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
 
             return n_;
@@ -263,10 +263,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             ObservationStatus? t_ = s_?.Value;
             string u_ = context.Operators.Convert<string>(t_);
             string[] v_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
             bool? x_ = context.Operators.And(r_, w_);
             DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
@@ -314,7 +314,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         };
         IEnumerable<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(e_, f_);
         Observation h_((CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf) =>
-            tuple_fufpmqdratbglhghdwfuubanf?.HeartRate;
+        tuple_fufpmqdratbglhghdwfuubanf?.HeartRate;
         IEnumerable<Observation> i_ = context.Operators.Select<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?, Observation>(g_, h_);
         IEnumerable<Observation> j_ = context.Operators.Distinct<Observation>(i_);
         bool? k_ = context.Operators.Exists<Observation>(j_);
@@ -343,7 +343,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             MedicationRequest k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-                NoBetaBlockerOrdered;
+            NoBetaBlockerOrdered;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
             return l_;
@@ -674,7 +674,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-                ImplantedCardiacPacer;
+            ImplantedCardiacPacer;
             IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
             return l_;

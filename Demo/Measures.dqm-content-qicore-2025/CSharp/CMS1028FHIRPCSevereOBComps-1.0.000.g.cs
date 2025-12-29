@@ -703,7 +703,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure BloodTransfusion) =>
-                TwentyWeeksPlusEncounter;
+            TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -818,7 +818,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure Hysterectomy) =>
-                TwentyWeeksPlusEncounter;
+            TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -935,7 +935,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
             Encounter g_(Procedure ConvTrachVentProcedures) =>
-                TwentyWeeksPlusEncounter;
+            TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Procedure, Encounter>(f_, g_);
 
             return h_;
@@ -2001,9 +2001,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             object[] n_ = [
-                TwentyWeeksPlusEncounter,
-    m_ ?? default(int),
-            ];
+            TwentyWeeksPlusEncounter,
+            m_ ?? default(int),
+                ];
 
             return (IEnumerable<object>)n_;
         };
@@ -2381,10 +2381,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 DataType aq_ = Hematocrit?.Value;
@@ -2425,10 +2425,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? bj_ = bi_?.Value;
                 string bk_ = context.Operators.Convert<string>(bj_);
                 string[] bl_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType bo_ = Hematocrit?.Value;
@@ -2490,10 +2490,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? al_ = ak_?.Value;
                 string am_ = context.Operators.Convert<string>(al_);
                 string[] an_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 DataType aq_ = WBC?.Value;
@@ -2534,10 +2534,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? bj_ = bi_?.Value;
                 string bk_ = context.Operators.Convert<string>(bj_);
                 string[] bl_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType bo_ = WBC?.Value;
@@ -2598,10 +2598,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
@@ -2636,10 +2636,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? bc_ = bb_?.Value;
                 string bd_ = context.Operators.Convert<string>(bc_);
                 string[] be_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bf_ = context.Operators.In<string>(bd_, (IEnumerable<string>)be_);
                 bool? bg_ = context.Operators.And(ba_, bf_);
 
@@ -2695,10 +2695,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? ao_ = an_?.Value;
                 string ap_ = context.Operators.Convert<string>(ao_);
                 string[] aq_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
                 bool? as_ = context.Operators.And(am_, ar_);
                 List<Observation.ComponentComponent> at_ = BP?.Component;
@@ -2773,10 +2773,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 ObservationStatus? ca_ = bz_?.Value;
                 string cb_ = context.Operators.Convert<string>(ca_);
                 string[] cc_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
                 bool? ce_ = context.Operators.And(by_, cd_);
                 List<Observation.ComponentComponent> cf_ = BP?.Component;

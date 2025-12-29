@@ -169,7 +169,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> s_ = context.Operators.Where<Medication>(q_, r_);
             MedicationDispense t_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationDispense> u_ = context.Operators.Select<Medication, MedicationDispense>(s_, t_);
 
             return u_;
@@ -361,7 +361,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> o_ = context.Operators.Where<Medication>(m_, n_);
             MedicationRequest p_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> q_ = context.Operators.Select<Medication, MedicationRequest>(o_, p_);
 
             return q_;
@@ -424,7 +424,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationDispense n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
 
             return o_;
@@ -496,7 +496,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationDispense n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
 
             return o_;

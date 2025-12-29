@@ -246,7 +246,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
         };
         IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(g_, h_);
         Encounter j_((CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) =>
-            tuple_efskhgutuclexzenturvljend?.InpatientEncounter;
+        tuple_efskhgutuclexzenturvljend?.InpatientEncounter;
         IEnumerable<Encounter> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?, Encounter>(i_, j_);
         IEnumerable<Encounter> l_ = context.Operators.Distinct<Encounter>(k_);
 
@@ -298,10 +298,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 Code<ObservationStatus> ay_ = Exam?.StatusElement;
                 string az_ = FHIRHelpers_4_0_001.Instance.ToString(context, ay_);
                 string[] ba_ = [
-                    "final",
-                    "amended",
-                    "preliminary",
-                ];
+                "final",
+                "amended",
+                "preliminary",
+                    ];
                 bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
                 bool? bc_ = context.Operators.And(ax_, bb_);
                 DataType bd_ = Exam?.Value;
@@ -349,10 +349,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 Code<ObservationStatus> cd_ = Exam?.StatusElement;
                 string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
                 string[] cf_ = [
-                    "final",
-                    "amended",
-                    "preliminary",
-                ];
+                "final",
+                "amended",
+                "preliminary",
+                    ];
                 bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
                 bool? ch_ = context.Operators.And(cc_, cg_);
                 DataType ci_ = Exam?.Value;
@@ -418,10 +418,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 Code<ObservationStatus> au_ = Lab?.StatusElement;
                 string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_);
                 string[] aw_ = [
-                    "final",
-                    "amended",
-                    "preliminary",
-                ];
+                "final",
+                "amended",
+                "preliminary",
+                    ];
                 bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
                 bool? ay_ = context.Operators.And(at_, ax_);
                 DataType az_ = Lab?.Value;
@@ -463,10 +463,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 Code<ObservationStatus> bu_ = Lab?.StatusElement;
                 string bv_ = FHIRHelpers_4_0_001.Instance.ToString(context, bu_);
                 string[] bw_ = [
-                    "final",
-                    "amended",
-                    "preliminary",
-                ];
+                "final",
+                "amended",
+                "preliminary",
+                    ];
                 bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
                 bool? by_ = context.Operators.And(bt_, bx_);
                 DataType bz_ = Lab?.Value;
@@ -535,17 +535,17 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
         IEnumerable<Observation> af_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
         IEnumerable<string> ag_ = this.FirstLabTestWithEncounterId(context, af_, "FirstCreatinine");
         IEnumerable<string>[] ah_ = [
-            d_,
-            h_,
-            k_,
-            o_,
-            r_,
-            u_,
-            x_,
-            aa_,
-            ad_,
-            ag_,
-        ];
+        d_,
+        h_,
+        k_,
+        o_,
+        r_,
+        u_,
+        x_,
+        aa_,
+        ad_,
+        ag_,
+            ];
         IEnumerable<string> ai_ = context.Operators.Flatten<string>((IEnumerable<IEnumerable<string>>)ah_);
 
         return ai_;
@@ -591,8 +591,8 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
     {
         Encounter[] a_ = [
-            TheEncounter,
-        ];
+        TheEncounter,
+            ];
         CqlInterval<CqlDateTime> b_(Encounter Visit)
         {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);

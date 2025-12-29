@@ -380,11 +380,11 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             Code<ObservationStatus> p_ = LDL?.StatusElement;
             string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
             string[] r_ = [
-                "final",
-                "amended",
-                "corrected",
-                "appended",
-            ];
+            "final",
+            "amended",
+            "corrected",
+            "appended",
+                ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
             bool? t_ = context.Operators.And(o_, s_);
 
@@ -605,10 +605,10 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder?.StatusElement;
             string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
             string[] af_ = [
-                "active",
-                "on-hold",
-                "completed",
-            ];
+            "active",
+            "on-hold",
+            "completed",
+                ];
             bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
             bool? ah_ = context.Operators.And(ac_, ag_);
             Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
@@ -829,7 +829,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
             MedicationRequest z_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
 
             return aa_;
@@ -860,7 +860,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
             MedicationRequest aq_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
 
             return ar_;
@@ -892,7 +892,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> bg_ = context.Operators.Where<Medication>(be_, bf_);
             MedicationRequest bh_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> bi_ = context.Operators.Select<Medication, MedicationRequest>(bg_, bh_);
 
             return bi_;
@@ -909,9 +909,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             Code<MedicationRequest.MedicationrequestStatus> bz_ = StatinOrdered?.StatusElement;
             string ca_ = FHIRHelpers_4_0_001.Instance.ToString(context, bz_);
             string[] cb_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
             bool? cd_ = context.Operators.And(by_, cc_);
             Code<MedicationRequest.MedicationRequestIntent> ce_ = StatinOrdered?.IntentElement;
@@ -955,7 +955,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
             MedicationRequest z_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
 
             return aa_;
@@ -986,7 +986,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
             MedicationRequest aq_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
 
             return ar_;
@@ -1018,7 +1018,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             };
             IEnumerable<Medication> bg_ = context.Operators.Where<Medication>(be_, bf_);
             MedicationRequest bh_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> bi_ = context.Operators.Select<Medication, MedicationRequest>(bg_, bh_);
 
             return bi_;
@@ -1094,9 +1094,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             Code<MedicationRequest.MedicationrequestStatus> cd_ = ActiveStatin?.StatusElement;
             string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
             string[] cf_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
             bool? ch_ = context.Operators.And(cc_, cg_);
 

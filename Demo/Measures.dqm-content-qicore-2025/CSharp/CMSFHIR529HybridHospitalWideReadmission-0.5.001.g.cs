@@ -170,7 +170,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             };
             IEnumerable<Coverage> k_ = context.Operators.Where<Coverage>(i_, j_);
             Encounter l_(Coverage MedicarePayer) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
 
             return m_;
@@ -210,10 +210,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ae_ = ad_?.Value;
                 string af_ = context.Operators.Convert<string>(ae_);
                 string[] ag_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = Temperature?.Value;
@@ -247,10 +247,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? aw_ = av_?.Value;
                 string ax_ = context.Operators.Convert<string>(aw_);
                 string[] ay_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = Temperature?.Value;
@@ -305,10 +305,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ae_ = ad_?.Value;
                 string af_ = context.Operators.Convert<string>(ae_);
                 string[] ag_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = HeartRate?.Value;
@@ -342,10 +342,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? aw_ = av_?.Value;
                 string ax_ = context.Operators.Convert<string>(aw_);
                 string[] ay_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = HeartRate?.Value;
@@ -401,10 +401,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ag_ = af_?.Value;
                 string ah_ = context.Operators.Convert<string>(ag_);
                 string[] ai_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
                 bool? ak_ = context.Operators.And(ae_, aj_);
                 DataType al_ = O2Saturation?.Value;
@@ -439,10 +439,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ay_ = ax_?.Value;
                 string az_ = context.Operators.Convert<string>(ay_);
                 string[] ba_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
                 bool? bc_ = context.Operators.And(aw_, bb_);
                 DataType bd_ = O2Saturation?.Value;
@@ -497,10 +497,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ae_ = ad_?.Value;
                 string af_ = context.Operators.Convert<string>(ae_);
                 string[] ag_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = Respirations?.Value;
@@ -534,10 +534,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? aw_ = av_?.Value;
                 string ax_ = context.Operators.Convert<string>(aw_);
                 string[] ay_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = Respirations?.Value;
@@ -592,10 +592,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ai_ = ah_?.Value;
                 string aj_ = context.Operators.Convert<string>(ai_);
                 string[] ak_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
                 List<Observation.ComponentComponent> an_ = BP?.Component;
@@ -664,10 +664,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 List<Observation.ComponentComponent> bu_ = BP?.Component;
@@ -789,10 +789,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = bicarbonatelab?.Value;
@@ -878,10 +878,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = bicarbonatelab?.Value;
@@ -988,10 +988,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = CreatinineLab?.Value;
@@ -1077,10 +1077,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = CreatinineLab?.Value;
@@ -1187,10 +1187,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = GlucoseLab?.Value;
@@ -1276,10 +1276,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = GlucoseLab?.Value;
@@ -1386,10 +1386,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = HematocritLab?.Value;
@@ -1475,10 +1475,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = HematocritLab?.Value;
@@ -1585,10 +1585,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = PotassiumLab?.Value;
@@ -1674,10 +1674,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = PotassiumLab?.Value;
@@ -1784,10 +1784,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = SodiumLab?.Value;
@@ -1873,10 +1873,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = SodiumLab?.Value;
@@ -1983,10 +1983,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 string[] ah_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 DataType ak_ = WhiteBloodCellLab?.Value;
@@ -2072,10 +2072,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? bp_ = bo_?.Value;
                 string bq_ = context.Operators.Convert<string>(bp_);
                 string[] br_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
                 bool? bt_ = context.Operators.And(bn_, bs_);
                 DataType bu_ = WhiteBloodCellLab?.Value;
@@ -2131,10 +2131,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? ae_ = ad_?.Value;
                 string af_ = context.Operators.Convert<string>(ae_);
                 string[] ag_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
                 DataType aj_ = WeightExam?.Value;
@@ -2168,10 +2168,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 ObservationStatus? aw_ = av_?.Value;
                 string ax_ = context.Operators.Convert<string>(aw_);
                 string[] ay_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
                 bool? ba_ = context.Operators.And(au_, az_);
                 DataType bb_ = WeightExam?.Value;
@@ -2247,9 +2247,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 Code<RequestStatus> ba_ = context.Operators.Convert<Code<RequestStatus>>(az_);
                 string bb_ = context.Operators.Convert<string>(ba_);
                 string[] bc_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? bd_ = context.Operators.In<string>(bb_, (IEnumerable<string>)bc_);
                 bool? be_ = context.Operators.And(ax_, bd_);
                 Code<RequestIntent> bf_ = OxygenTherapyOrder?.IntentElement;

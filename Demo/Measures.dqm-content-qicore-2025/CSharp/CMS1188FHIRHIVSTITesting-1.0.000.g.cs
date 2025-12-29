@@ -274,10 +274,10 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             ObservationStatus? j_ = i_?.Value;
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             bool? n_ = context.Operators.And(h_, m_);
             object o_()
@@ -360,10 +360,10 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             ObservationStatus? j_ = i_?.Value;
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             bool? n_ = context.Operators.And(h_, m_);
             object o_()
@@ -446,10 +446,10 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             ObservationStatus? j_ = i_?.Value;
             string k_ = context.Operators.Convert<string>(j_);
             string[] l_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
             bool? n_ = context.Operators.And(h_, m_);
             object o_()

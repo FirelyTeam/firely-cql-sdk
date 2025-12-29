@@ -104,10 +104,10 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             Code<ObservationStatus> s_ = PalliativeAssessment?.StatusElement;
             string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
             string[] u_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
             List<CodeableConcept> w_ = PalliativeAssessment?.Category;
             bool? x_(CodeableConcept PalliativeAssessmentCategory)
@@ -157,9 +157,9 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             Code<EventStatus> as_ = PalliativeIntervention?.StatusElement;
             string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
             string[] au_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
             DataType aw_ = PalliativeIntervention?.Performed;
             CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aw_);

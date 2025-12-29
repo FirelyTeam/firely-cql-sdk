@@ -49,7 +49,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        true;
+    true;
 
 
     [CqlExpressionDefinition("Exclusion")]
@@ -57,7 +57,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        false;
+    false;
 
 
     [CqlExpressionDefinition("Denominator")]
@@ -79,14 +79,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        true;
+    true;
 
 
     [CqlExpressionDefinition("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        false;
+    false;
 
 
     #endregion Functions and Expressions

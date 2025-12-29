@@ -156,7 +156,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -172,21 +172,21 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = OpioidMedications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
             string ai_ = context.Operators.Convert<string>(ah_);
             string[] aj_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
@@ -224,7 +224,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -240,21 +240,21 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = BenzoMedications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
             string ai_ = context.Operators.Convert<string>(ah_);
             string[] aj_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
@@ -288,7 +288,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
             Encounter i_(MedicationRequest OpioidOrBenzodiazepineAtDischarge) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<MedicationRequest, Encounter>(h_, i_);
 
             return j_;
@@ -486,7 +486,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -502,21 +502,21 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
             string ac_ = context.Operators.Convert<string>(ab_);
             string[] ad_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
             bool? af_ = context.Operators.And(z_, ae_);
             Code<MedicationRequest.MedicationRequestIntent> ag_ = DischargeMedication?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
             string ai_ = context.Operators.Convert<string>(ah_);
             string[] aj_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
 
@@ -617,9 +617,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? y_ = x_?.Value;
                 string z_ = context.Operators.Convert<string>(y_);
                 string[] aa_ = [
-                    "completed",
-                    "in-progress",
-                ];
+                "completed",
+                "in-progress",
+                    ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                 bool? ac_ = context.Operators.And(w_, ab_);
 
@@ -627,7 +627,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
             MedicationRequest l_(Procedure MAT) =>
-                MedicationTreatment;
+            MedicationTreatment;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Procedure, MedicationRequest>(k_, l_);
 
             return m_;
@@ -653,7 +653,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Condition> be_ = context.Operators.Where<Condition>(bc_, bd_);
             MedicationRequest bf_(Condition OUD) =>
-                MedicationTreatment;
+            MedicationTreatment;
             IEnumerable<MedicationRequest> bg_ = context.Operators.Select<Condition, MedicationRequest>(be_, bf_);
 
             return bg_;
@@ -677,10 +677,10 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
 
             return o_;
@@ -693,9 +693,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             EventStatus? q_ = p_?.Value;
             string r_ = context.Operators.Convert<string>(q_);
             string[] s_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
 
             return t_;

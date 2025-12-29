@@ -264,7 +264,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationRequest n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
@@ -396,8 +396,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         IEnumerable<Observation> q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
         Observation r_ = context.Operators.Last<Observation>(q_);
         Observation[] s_ = [
-            r_,
-        ];
+        r_,
+            ];
         bool? t_(Observation LastHousingStatus)
         {
             DataType aj_ = LastHousingStatus?.Value;

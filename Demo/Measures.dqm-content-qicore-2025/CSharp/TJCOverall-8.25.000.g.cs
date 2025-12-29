@@ -189,22 +189,22 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "active",
-                "completed",
-                "on-hold",
-            ];
+            "active",
+            "completed",
+            "on-hold",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             Code<RequestIntent> p_ = ComfortCare?.IntentElement;
             RequestIntent? q_ = p_?.Value;
             Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
             string s_ = context.Operators.Convert<string>(r_);
             string[] t_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
             bool? v_ = context.Operators.And(o_, u_);
 
@@ -218,9 +218,9 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             EventStatus? x_ = w_?.Value;
             string y_ = context.Operators.Convert<string>(x_);
             string[] z_ = [
-                "completed",
-                "in-progress",
-            ];
+            "completed",
+            "in-progress",
+                ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
 
             return aa_;
@@ -319,7 +319,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;

@@ -477,7 +477,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<AllergyIntolerance> g_ = context.Operators.Where<AllergyIntolerance>(e_, f_);
             Encounter h_(AllergyIntolerance ThrombolyticAllergy) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> i_ = context.Operators.Select<AllergyIntolerance, Encounter>(g_, h_);
 
             return i_;
@@ -518,7 +518,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<AdverseEvent> g_ = context.Operators.Where<AdverseEvent>(e_, f_);
             Encounter h_(AdverseEvent ThrombolyticAdverseEvent) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> i_ = context.Operators.Select<AdverseEvent, Encounter>(g_, h_);
 
             return i_;
@@ -553,7 +553,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
             IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
             object u_(Condition X) =>
-                X as object;
+            X as object;
             IEnumerable<object> v_ = context.Operators.Select<Condition, object>(t_, u_);
             IEnumerable<object> w_ = Status_1_15_000.Instance.verified(context, v_);
             bool? x_(object ActiveExclusionDx)
@@ -567,7 +567,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
             Encounter z_(object ActiveExclusionDx) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> aa_ = context.Operators.Select<object, Encounter>(y_, z_);
 
             return aa_;
@@ -607,7 +607,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -620,9 +620,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = OralAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -650,7 +650,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest OralAnticoagulant) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -692,7 +692,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
             Encounter n_(object LongTermAnticoagulant) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
 
             return o_;
@@ -749,7 +749,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> ad_ = context.Operators.Union<Condition>(aa_, ac_);
             IEnumerable<Condition> ae_ = context.Operators.Union<Condition>(x_, ad_);
             object af_(Condition X) =>
-                X as object;
+            X as object;
             IEnumerable<object> ag_ = context.Operators.Select<Condition, object>(ae_, af_);
             IEnumerable<object> ah_ = Status_1_15_000.Instance.verified(context, ag_);
             bool? ai_(object ExclusionDiagnosis)
@@ -778,7 +778,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<object> aj_ = context.Operators.Where<object>(ah_, ai_);
             Encounter ak_(object ExclusionDiagnosis) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> al_ = context.Operators.Select<object, Encounter>(aj_, ak_);
 
             return al_;
@@ -963,7 +963,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure MajorSurgery) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -1151,7 +1151,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
             Encounter k_(Procedure AirwayProcedure) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> l_ = context.Operators.Select<Procedure, Encounter>(j_, k_);
 
             return l_;
@@ -1177,7 +1177,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
             object l_(Condition X) =>
-                X as object;
+            X as object;
             IEnumerable<object> m_ = context.Operators.Select<Condition, object>(k_, l_);
             IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
             bool? o_(object ExclusionCondition)
@@ -1198,7 +1198,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
             Encounter q_(object ExclusionCondition) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> r_ = context.Operators.Select<object, Encounter>(p_, q_);
 
             return r_;
@@ -1311,7 +1311,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure CranialorSpinalSurgery) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -1662,7 +1662,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             CqlValueSet am_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             object ao_(Condition X) =>
-                X as object;
+            X as object;
             IEnumerable<object> ap_ = context.Operators.Select<Condition, object>(an_, ao_);
             IEnumerable<object> aq_ = Status_1_15_000.Instance.verified(context, ap_);
             bool? ar_(object HospiceCareDiagnosis)
@@ -1717,7 +1717,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
             Encounter g_(Observation PregStatus) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
 
             return h_;
@@ -1786,7 +1786,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
             Encounter n_(object TPA) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
 
             return o_;
@@ -1827,8 +1827,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return aj_;
                 };
                 IEnumerable<Extension> w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(PCINotDone is DomainResource
-                        ? (PCINotDone as DomainResource).Extension
-                        : default), v_);
+                    ? (PCINotDone as DomainResource).Extension
+                    : default), v_);
                 DataType x_(Extension @this)
                 {
                     DataType ak_ = @this?.Value;
@@ -1848,7 +1848,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
             Encounter k_(Procedure PCINotDone) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> l_ = context.Operators.Select<Procedure, Encounter>(j_, k_);
 
             return l_;
@@ -1901,8 +1901,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return an_;
                 };
                 IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FibrinolyticNoMed is DomainResource
-                        ? (FibrinolyticNoMed as DomainResource).Extension
-                        : default), x_);
+                    ? (FibrinolyticNoMed as DomainResource).Extension
+                    : default), x_);
                 DataType z_(Extension @this)
                 {
                     DataType ao_ = @this?.Value;
@@ -1922,7 +1922,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
             Encounter k_(MedicationAdministration FibrinolyticNoMed) =>
-                EDwSTEMI;
+            EDwSTEMI;
             IEnumerable<Encounter> l_ = context.Operators.Select<MedicationAdministration, Encounter>(j_, k_);
 
             return l_;
@@ -2034,7 +2034,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -2064,7 +2064,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration Fibrinolytic) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -2171,7 +2171,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure PCI) =>
-                EDwithSTEMI;
+            EDwithSTEMI;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;

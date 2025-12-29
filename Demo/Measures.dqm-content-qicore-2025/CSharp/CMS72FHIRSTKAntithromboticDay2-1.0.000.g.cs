@@ -227,7 +227,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -264,7 +264,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
             MedicationAdministration w_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationAdministration> x_ = context.Operators.Select<Medication, MedicationAdministration>(v_, w_);
 
             return x_;
@@ -277,9 +277,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             MedicationAdministration.MedicationAdministrationStatusCodes? aj_ = ai_?.Value;
             string ak_ = context.Operators.Convert<string>(aj_);
             string[] al_ = [
-                "in-progress",
-                "completed",
-            ];
+            "in-progress",
+            "completed",
+                ];
             bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
 
             return am_;
@@ -435,7 +435,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ThrombolyticTherapy) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -591,7 +591,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -604,9 +604,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationAdministration.MedicationAdministrationStatusCodes? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "in-progress",
-                    "completed",
-                ];
+                "in-progress",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 DataType ah_ = Antithrombotic?.Effective;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -635,7 +635,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration Antithrombotic) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -688,21 +688,21 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             MedicationRequest.MedicationrequestStatus? ai_ = ah_?.Value;
             string aj_ = context.Operators.Convert<string>(ai_);
             string[] ak_ = [
-                "active",
-                "completed",
-            ];
+            "active",
+            "completed",
+                ];
             bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
             Code<MedicationRequest.MedicationRequestIntent> an_ = NoAntithromboticOrder?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ao_ = an_?.Value;
             string ap_ = context.Operators.Convert<string>(ao_);
             string[] aq_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
+            "order",
+            "original-order",
+            "reflex-order",
+            "filler-order",
+            "instance-order",
+                ];
             bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
             bool? as_ = context.Operators.And(am_, ar_);
 
@@ -743,7 +743,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> bc_ = context.Operators.Where<Medication>(ba_, bb_);
             MedicationRequest bd_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> be_ = context.Operators.Select<Medication, MedicationRequest>(bc_, bd_);
 
             return be_;
@@ -770,9 +770,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationRequest.MedicationrequestStatus? ch_ = cg_?.Value;
                 string ci_ = context.Operators.Convert<string>(ch_);
                 string[] cj_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ck_ = context.Operators.In<string>(ci_, (IEnumerable<string>)cj_);
                 CodeableConcept cl_ = TaskReject?.Code;
                 CqlConcept cm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cl_);
@@ -786,7 +786,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Task> br_ = context.Operators.Where<Task>(bp_, bq_);
             MedicationRequest bs_(Task TaskReject) =>
-                MedReqAntithrombotic;
+            MedReqAntithrombotic;
             IEnumerable<MedicationRequest> bt_ = context.Operators.Select<Task, MedicationRequest>(br_, bs_);
 
             return bt_;
@@ -857,8 +857,8 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return aj_;
             };
             IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationAdm is DomainResource
-                    ? (MedicationAdm as DomainResource).Extension
-                    : default), z_);
+                ? (MedicationAdm as DomainResource).Extension
+                : default), z_);
             DataType ab_(Extension @this)
             {
                 DataType ak_ = @this?.Value;
@@ -886,7 +886,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> b_ = this.Reason_For_Not_Administering_Antithrombotic(context);
         IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
         (CqlTupleMetadata, string id, CqlDateTime authoredOn)? d_(object @object) =>
-            ((CqlTupleMetadata, string id, CqlDateTime authoredOn)?)@object;
+        ((CqlTupleMetadata, string id, CqlDateTime authoredOn)?)@object;
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> e_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(c_, d_);
 
         return e_;
@@ -925,7 +925,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(d_, e_);
             Encounter g_((CqlTupleMetadata, string id, CqlDateTime authoredOn)? NoAntithrombotic) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?, Encounter>(f_, g_);
 
             return h_;
@@ -965,7 +965,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -978,9 +978,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 MedicationAdministration.MedicationAdministrationStatusCodes? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "in-progress",
-                    "completed",
-                ];
+                "in-progress",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 DataType ah_ = PharmacologicalContraindications?.Effective;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1009,7 +1009,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration PharmacologicalContraindications) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -1038,10 +1038,10 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 ObservationStatus? o_ = n_?.Value;
                 string p_ = context.Operators.Convert<string>(o_);
                 string[] q_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
                 bool? s_ = context.Operators.And(m_, r_);
                 Instant t_ = INR?.IssuedElement;
@@ -1070,7 +1070,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation INR) =>
-                IschemicStrokeEncounter;
+            IschemicStrokeEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;

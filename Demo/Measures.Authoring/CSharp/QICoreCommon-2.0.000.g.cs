@@ -908,8 +908,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             return j_;
         };
         IEnumerable<Extension> b_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
-                ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
-                : default), a_);
+            ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
+            : default), a_);
         bool? c_(Extension E)
         {
             DataType k_ = E?.Value;
@@ -1664,8 +1664,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> aa_ = this.ToAbatementInterval(context, condition);
                 CqlDateTime ab_ = context.Operators.End(aa_);
                 CqlDateTime[] ac_ = [
-                    ab_,
-                ];
+                ab_,
+                    ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
                     CqlInterval<CqlDateTime> ah_()
@@ -1750,8 +1750,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> aa_ = this.ToAbatementInterval(context, condition);
                 CqlDateTime ab_ = context.Operators.End(aa_);
                 CqlDateTime[] ac_ = [
-                    ab_,
-                ];
+                ab_,
+                    ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
                     CqlInterval<CqlDateTime> ah_()
@@ -1882,8 +1882,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -1918,8 +1918,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -1955,8 +1955,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -1991,8 +1991,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         CqlInterval<CqlDateTime> a_ = this.toInterval(context, choice);
         CqlInterval<CqlDateTime>[] b_ = [
-            a_,
-        ];
+        a_,
+            ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
             CqlDateTime g_()
@@ -2031,8 +2031,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
@@ -2056,8 +2056,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
         CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
         CqlInterval<int?>[] e_ = [
-            d_,
-        ];
+        d_,
+            ];
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
         int? g_(CqlInterval<int?> DayNumber)
         {

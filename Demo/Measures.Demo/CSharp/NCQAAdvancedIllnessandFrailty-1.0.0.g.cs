@@ -340,7 +340,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         };
         IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> g_ = context.Operators.Where<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(e_, f_);
         CqlDate h_((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) =>
-            tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
+        tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
         IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?, CqlDate>(g_, h_);
         IEnumerable<CqlDate> j_ = context.Operators.Distinct<CqlDate>(i_);
         bool? k_ = context.Operators.Exists<CqlDate>(j_);
@@ -445,7 +445,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationDispense n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
 
             return o_;

@@ -462,8 +462,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Observation g_ = context.Operators.Last<Observation>(f_);
         Observation[] h_ = [
-            g_,
-        ];
+        g_,
+            ];
         bool? i_(Observation MostRecentTobaccoUseScreening)
         {
             DataType u_ = MostRecentTobaccoUseScreening?.Value;
@@ -529,8 +529,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Observation g_ = context.Operators.Last<Observation>(f_);
         Observation[] h_ = [
-            g_,
-        ];
+        g_,
+            ];
         bool? i_(Observation MostRecentTobaccoUseScreening)
         {
             DataType u_ = MostRecentTobaccoUseScreening?.Value;
@@ -701,7 +701,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
             MedicationRequest m_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
 
             return n_;
@@ -773,7 +773,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
             MedicationRequest m_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> n_ = context.Operators.Select<Medication, MedicationRequest>(l_, m_);
 
             return n_;

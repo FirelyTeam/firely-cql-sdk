@@ -342,10 +342,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? p_ = o_?.Value;
             string q_ = context.Operators.Convert<string>(p_);
             string[] r_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
             bool? t_ = context.Operators.And(n_, s_);
 
@@ -374,10 +374,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? l_ = k_?.Value;
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(j_, o_);
             DataType q_ = uACRTest?.Value;
@@ -418,10 +418,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? o_ = n_?.Value;
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
 
@@ -453,10 +453,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             ObservationStatus? o_ = n_?.Value;
             string p_ = context.Operators.Convert<string>(o_);
             string[] q_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             bool? s_ = context.Operators.And(m_, r_);
 

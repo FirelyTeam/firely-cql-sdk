@@ -320,7 +320,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<AdverseEvent> g_ = context.Operators.Where<AdverseEvent>(e_, f_);
             Encounter h_(AdverseEvent FallsDocumentation) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<AdverseEvent, Encounter>(g_, h_);
 
             return i_;
@@ -592,10 +592,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 ObservationStatus? w_ = v_?.Value;
                 string x_ = context.Operators.Convert<string>(w_);
                 string[] y_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
+                "final",
+                "amended",
+                "corrected",
+                    ];
                 bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
                 bool? aa_ = context.Operators.And(u_, z_);
 
@@ -603,7 +603,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter InpatientEncounter) =>
-                BMI;
+            BMI;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -850,7 +850,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -863,9 +863,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = Anticoagulants?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -922,7 +922,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest Anticoagulants) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -962,7 +962,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -981,9 +981,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationAdministration.MedicationAdministrationStatusCodes? aj_ = ai_?.Value;
                 string ak_ = context.Operators.Convert<string>(aj_);
                 string[] al_ = [
-                    "in-progress",
-                    "completed",
-                ];
+                "in-progress",
+                "completed",
+                    ];
                 bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 bool? an_ = context.Operators.And(ah_, am_);
 
@@ -991,7 +991,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration Anticoagulants) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -1031,7 +1031,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -1044,9 +1044,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = AntidepressantMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1103,7 +1103,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest AntidepressantMed) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -1143,7 +1143,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -1156,9 +1156,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = BPMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1215,7 +1215,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest BPMed) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -1255,7 +1255,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -1268,9 +1268,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = CNSMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1327,7 +1327,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest CNSMed) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -1367,7 +1367,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -1380,9 +1380,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = DiureticMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1439,7 +1439,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest DiureticMed) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -1479,7 +1479,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -1492,9 +1492,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                 string ae_ = context.Operators.Convert<string>(ad_);
                 string[] af_ = [
-                    "active",
-                    "completed",
-                ];
+                "active",
+                "completed",
+                    ];
                 bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
                 Code<MedicationRequest.MedicationRequestIntent> ah_ = OpioidMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -1551,7 +1551,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest OpioidMed) =>
-                InpatientEncounter;
+            InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;

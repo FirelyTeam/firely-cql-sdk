@@ -81,9 +81,9 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
             Code<ObservationStatus> f_ = O?.StatusElement;
             string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             string[] h_ = [
-                "final",
-                "amended",
-            ];
+            "final",
+            "amended",
+                ];
             bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
 
             return i_;

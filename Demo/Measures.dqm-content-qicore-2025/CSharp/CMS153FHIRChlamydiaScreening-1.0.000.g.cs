@@ -363,7 +363,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationRequest n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
@@ -419,7 +419,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationRequest n_(Medication M) =>
-                MR;
+            MR;
             IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
@@ -731,7 +731,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<ServiceRequest> u_ = context.Operators.Where<ServiceRequest>(s_, t_);
             ServiceRequest v_(ServiceRequest XrayOrder) =>
-                PregnancyTest;
+            PregnancyTest;
             IEnumerable<ServiceRequest> w_ = context.Operators.Select<ServiceRequest, ServiceRequest>(u_, v_);
 
             return w_;
@@ -775,7 +775,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 };
                 IEnumerable<Medication> bl_ = context.Operators.Where<Medication>(bj_, bk_);
                 MedicationRequest bm_(Medication M) =>
-                    MR;
+                MR;
                 IEnumerable<MedicationRequest> bn_ = context.Operators.Select<Medication, MedicationRequest>(bl_, bm_);
 
                 return bn_;
@@ -810,7 +810,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<MedicationRequest> bg_ = context.Operators.Where<MedicationRequest>(be_, bf_);
             ServiceRequest bh_(MedicationRequest AccutaneOrder) =>
-                PregnancyTestOrder;
+            PregnancyTestOrder;
             IEnumerable<ServiceRequest> bi_ = context.Operators.Select<MedicationRequest, ServiceRequest>(bg_, bh_);
 
             return bi_;

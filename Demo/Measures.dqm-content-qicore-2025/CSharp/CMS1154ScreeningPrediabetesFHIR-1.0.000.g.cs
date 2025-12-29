@@ -329,10 +329,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             ObservationStatus? h_ = g_?.Value;
             string i_ = context.Operators.Convert<string>(h_);
             string[] j_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
 
             return k_;
@@ -451,10 +451,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             ObservationStatus? k_ = j_?.Value;
             string l_ = context.Operators.Convert<string>(k_);
             string[] m_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(i_, n_);
 
@@ -598,10 +598,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             ObservationStatus? l_ = k_?.Value;
             string m_ = context.Operators.Convert<string>(l_);
             string[] n_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
+            "final",
+            "amended",
+            "corrected",
+                ];
             bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
             bool? p_ = context.Operators.And(j_, o_);
 

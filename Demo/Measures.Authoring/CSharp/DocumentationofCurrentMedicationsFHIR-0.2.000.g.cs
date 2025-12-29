@@ -193,7 +193,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
             Encounter i_(Procedure MedicationsDocumented) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
             return j_;
@@ -225,8 +225,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                     return ai_;
                 };
                 IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
-                        ? (MedicationsNotDocumented as DomainResource).Extension
-                        : default), k_);
+                    ? (MedicationsNotDocumented as DomainResource).Extension
+                    : default), k_);
                 DataType m_(Extension @this)
                 {
                     DataType aj_ = @this?.Value;
@@ -261,7 +261,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
             Encounter i_(Procedure MedicationsNotDocumented) =>
-                QualifyingEncounter;
+            QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
             return j_;

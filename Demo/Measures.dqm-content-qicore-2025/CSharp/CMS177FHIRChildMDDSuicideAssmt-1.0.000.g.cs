@@ -416,7 +416,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
             Encounter i_(Procedure SuicideRiskAssessmentProcedure) =>
-                MDDEncounter;
+            MDDEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
             return j_;
@@ -450,10 +450,10 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 object u_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "status");
                 string v_ = context.Operators.LateBoundProperty<string>(u_, "value");
                 string[] w_ = [
-                    "final",
-                    "corrected",
-                    "amended",
-                ];
+                "final",
+                "corrected",
+                "amended",
+                    ];
                 bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
                 bool? y_ = context.Operators.And(t_, x_);
 
@@ -461,7 +461,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
             Encounter m_(object ObservationSuicideRiskAssmt) =>
-                MDDEncounter;
+            MDDEncounter;
             IEnumerable<Encounter> n_ = context.Operators.Select<object, Encounter>(l_, m_);
 
             return n_;

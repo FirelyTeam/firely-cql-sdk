@@ -468,9 +468,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     [CqlFunctionDefinition("ToValueSet")]
     [CqlTag("description", "Converts the given value (assumed to be a URI) to a CQL [ValueSet](https://cql.hl7.org/09-b-cqlreference.html#valueset)")]
     public CqlValueSet ToValueSet(CqlContext context, string uri) =>
-        (uri is null
-            ? default
-            : new CqlValueSet(uri, default));
+    (uri is null
+        ? default
+        : new CqlValueSet(uri, default));
 
 
     [CqlFunctionDefinition("reference")]
@@ -500,7 +500,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     [CqlFunctionDefinition("reference")]
     public ResourceReference reference(CqlContext context, Resource resource) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
 
 
     [CqlFunctionDefinition("ToValue")]
@@ -700,132 +700,132 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, string reference) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
     [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, ResourceReference reference) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
     [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, Element element, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
     [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, DomainResource resource, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
     [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, BackboneElement element, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
     [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, DomainResource resource, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
     [CqlFunctionDefinition("hasValue")]
     public bool? hasValue(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
 
 
     [CqlFunctionDefinition("getValue")]
     public object getValue(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
 
 
     [CqlFunctionDefinition("ofType")]
     public IEnumerable<object> ofType(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
 
 
     [CqlFunctionDefinition("is")]
     public bool? @is(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
 
 
     [CqlFunctionDefinition("as")]
     public object @as(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
 
 
     [CqlFunctionDefinition("elementDefinition")]
     public ElementDefinition elementDefinition(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
 
 
     [CqlFunctionDefinition("slice")]
     public IEnumerable<Element> slice(CqlContext context, Element element, string url, string name) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource, string modifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element, string modifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("conformsTo")]
     public bool? conformsTo(CqlContext context, Resource resource, string structure) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Code code, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Coding coding, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, CodeableConcept concept, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, Coding coding, Coding subsumedCoding) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
     [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, CodeableConcept concept, CodeableConcept subsumedConcept) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
     [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, Coding coding, Coding subsumingCoding) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
     [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, CodeableConcept concept, CodeableConcept subsumingConcept) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
     [CqlFunctionDefinition("htmlChecks")]
     public bool? htmlChecks(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
 
 
     [CqlFunctionDefinition("ToString")]
