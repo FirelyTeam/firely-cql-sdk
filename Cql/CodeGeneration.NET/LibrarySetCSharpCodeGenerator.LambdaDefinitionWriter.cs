@@ -22,7 +22,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string LibraryName => LibraryWriter.LibraryName;
         private TypeToCSharpConverter TypeToCSharpConverter => LibraryWriter.LibrarySetWriter.TypeToCSharpConverter;
         // ReSharper disable once InconsistentNaming
-        private IndentedStringBuilder sb => LibraryWriter.sb;
+        private IndentedStringBuilder isb => LibraryWriter.isb;
 
         public void WriteDefinition(
             CqlLambdaDefinition ld)
@@ -30,7 +30,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, _) = GetMemberNames(ld);
             var definitionAttributeTypeName = ld.GetType().Name;
 
-            sb.AppendLine(
+            isb.AppendLine(
                 $"""
                  [{definitionAttributeTypeName}({quotedName})]
                  """);
@@ -38,7 +38,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (ld is CqlExpressionDefinition ed)
                 foreach (var tag in ed.Tags)
                     foreach (var tagValue in tag.Values)
-                        sb.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
+                        isb.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
             VariableNameGenerator variableNameGenerator = new([], postfix: "_");
 
@@ -59,7 +59,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ? functionDef.OriginalParameterNames
                     : null;
 
-            var funcSb = new StringBuilder();
+            var funcSb = isb;
 
             funcSb.Append("public" + " ");
             funcSb.Append(TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
@@ -74,7 +74,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 funcSb.AppendLine();
             var definitionWithBody = funcSb.ToString();
 
-            sb.AppendLine(definitionWithBody);
+            isb.AppendLine(definitionWithBody);
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

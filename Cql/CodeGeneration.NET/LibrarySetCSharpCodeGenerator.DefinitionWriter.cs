@@ -15,7 +15,7 @@ partial class LibrarySetCSharpCodeGenerator
             this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
         // ReSharper disable once InconsistentNaming
-        private IndentedStringBuilder sb => LibraryWriter.sb;
+        private IndentedStringBuilder isb => LibraryWriter.isb;
 
         public void WriteDefinition()
         {
@@ -52,7 +52,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             var quotedCodeId = cd.Code.code!.QuoteString();
             var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
-            sb.AppendLine(
+            isb.AppendLine(
                 $$"""
                   [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
                   public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
@@ -79,7 +79,7 @@ partial class LibrarySetCSharpCodeGenerator
                                   {codeField}
                             """;
                 }));
-            sb.AppendLine(
+            isb.AppendLine(
                 $$"""
                   [CqlCodeSystemDefinition({{quotedName}}, codeSystemId: {{quotedCodeSystemId}}, codeSystemVersion: {{quotedCodeSystemVersion}})]
                   public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
@@ -106,7 +106,7 @@ partial class LibrarySetCSharpCodeGenerator
                                   {codeField}
                             """;
                 }));
-            sb.AppendLine(
+            isb.AppendLine(
                 $$"""
                   [CqlConceptDefinition({{quotedName}})]
                   public CqlConcept {{methodName}}(CqlContext _) => {{fieldName}};
@@ -122,7 +122,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedValueSetId = vsd.ValueSetId.QuoteString();
             string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
-            sb.AppendLine(
+            isb.AppendLine(
                 $$"""
                   [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
                   public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};

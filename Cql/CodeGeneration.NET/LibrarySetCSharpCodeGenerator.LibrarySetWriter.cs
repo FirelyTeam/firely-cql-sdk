@@ -26,10 +26,10 @@ partial class LibrarySetCSharpCodeGenerator
                     {
                         onBeforeProcessLibrary?.Invoke(library);
 
-                        var sb = new IndentedStringBuilder();
-                        var libraryWriter = new LibraryWriter(this, library, sb);
+                        var isb = new IndentedStringBuilder();
+                        var libraryWriter = new LibraryWriter(this, library, isb);
                         libraryWriter.WriteLibraryFile();
-                        var cSharp = sb.ToString();
+                        var cSharp = isb.ToString();
                         return (library, cSharp);
                     },
                     buildExceptionHandlingStrategy);

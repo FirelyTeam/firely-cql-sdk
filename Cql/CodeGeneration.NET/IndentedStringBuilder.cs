@@ -8,10 +8,20 @@
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal readonly record struct IndentedStringBuilder(
-    StringBuilder? StringBuilder = null,
-    int Indent = 0) : IAddIndentMutable<IndentedStringBuilder>
+internal class IndentedStringBuilder(
+    StringBuilder? stringBuilder = null,
+    int indent = 0) : IAddIndentMutable<IndentedStringBuilder>
 {
+    /// <summary>
+    /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
+    /// Leading tabs will be treated as indents.
+    /// </summary>
+    public IndentedStringBuilder Append(string text = "")
+    {
+        StringBuilder.Append(text);
+        return this;
+    }
+
     /// <summary>
     /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
     /// Leading tabs will be treated as indents.
@@ -46,12 +56,11 @@ internal readonly record struct IndentedStringBuilder(
         return this;
     }
 
-    public IndentedStringBuilder AddIndent(int addIndent = 1) =>
-        this with { Indent = Indent + addIndent };
+    public IndentedStringBuilder AddIndent(int addIndent = 1) => new(StringBuilder, Indent + addIndent);
 
-    public int Indent { get; private init; } = Indent;
+    public int Indent { get; } = indent;
 
-    public StringBuilder StringBuilder { get; } = StringBuilder ?? new();
+    public StringBuilder StringBuilder { get; } = stringBuilder ?? new();
 
     public override string ToString() => StringBuilder.ToString();
 }
