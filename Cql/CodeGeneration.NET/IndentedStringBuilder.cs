@@ -16,43 +16,52 @@ internal class IndentedStringBuilder(
     /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public IndentedStringBuilder Append(string text = "")
-    {
-        StringBuilder.Append(text);
-        return this;
-    }
+    public IndentedStringBuilder Append(string text = "") =>
+        AppendCore(0, text, addNewLine: false);
 
     /// <summary>
     /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public IndentedStringBuilder AppendLine(string text = "") => AppendLine(0, text);
+    public IndentedStringBuilder AppendLine(string text = "") =>
+        AppendCore(0, text, addNewLine: true);
 
     /// <summary>
     /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent plus an additional indent from <paramref name="addIndent"/>.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public IndentedStringBuilder AppendLine(int addIndent, string multilineText = "")
+    public IndentedStringBuilder AppendLine(int addIndent, string multilineText = "") =>
+        AppendCore(addIndent, multilineText, addNewLine: true);
+
+    private IndentedStringBuilder AppendCore(
+        int addIndent,
+        string multilineText,
+        bool addNewLine = false)
     {
-        foreach (var line in multilineText.Split(Environment.NewLine))
+        var lines = multilineText.Split(Environment.NewLine);
+        var sb = StringBuilder;
+
+        for (var index = 0; index < lines.Length; index++)
         {
+            var line = lines[index];
             if (line.Length > 0)
             {
-                if (!StringBuilder.AtBeginningOfLine())
-                    throw new InvalidOperationException("Expecting indents to start at beginning of a line");
-
-                int leadingTabs = line.TakeWhile(c => c == '\t').Count();
-                var strippedLeadingTabs = line[leadingTabs..];
-                if (strippedLeadingTabs.Length > 0)
+                int finalIndent = 0;
+                if (sb.AtBeginningOfLine())
                 {
-                    var finalIndent = Indent + leadingTabs + addIndent;
-                    StringBuilder.AppendLine(finalIndent, strippedLeadingTabs);
-                    continue;
+                    int leadingTabs = line.TakeWhile(c => c == '\t').Count();
+                    line = line[leadingTabs..];
+                    if (line.Length > 0)
+                        finalIndent = Indent + leadingTabs + addIndent;
                 }
+
+                sb.Append(finalIndent, line);
             }
 
-            StringBuilder.AppendLine();
+            if (addNewLine || index < lines.Length - 1)
+                sb.AppendLine();
         }
+
         return this;
     }
 

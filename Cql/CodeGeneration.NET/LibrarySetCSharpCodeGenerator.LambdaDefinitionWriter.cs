@@ -59,8 +59,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ? functionDef.OriginalParameterNames
                     : null;
 
-            var funcSb = isb;
-
+            var funcSb = isb;//new StringBuilder();
             funcSb.Append("public" + " ");
             funcSb.Append(TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
             funcSb.Append(methodName);
@@ -72,9 +71,10 @@ internal partial class LibrarySetCSharpCodeGenerator
                 funcSb.AppendLine(";");
             else
                 funcSb.AppendLine();
-            var definitionWithBody = funcSb.ToString();
 
-            isb.AppendLine(definitionWithBody);
+            //var definitionWithBody = funcSb.ToString();
+            //isb.AppendLine(definitionWithBody);
+            isb.AppendLine();
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
