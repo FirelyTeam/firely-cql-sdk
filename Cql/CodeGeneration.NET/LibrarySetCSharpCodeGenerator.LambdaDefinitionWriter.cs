@@ -58,7 +58,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ? functionDef.OriginalParameterNames
                     : null;
 
-            var funcSb = isb;//new StringBuilder();
+            var funcSb = isb;
             funcSb.Append("public" + " ");
             funcSb.Append(TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType) + " ");
             funcSb.Append(methodName);
@@ -71,8 +71,6 @@ internal partial class LibrarySetCSharpCodeGenerator
             else
                 funcSb.AppendLine();
 
-            //var definitionWithBody = funcSb.ToString();
-            //isb.AppendLine(definitionWithBody);
             isb.AppendLine();
         }
 
@@ -83,7 +81,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         }
 
         private LambdaDefinitionWriter WithIndentLevel(int indent) =>
-            this;
+            this with { ContextBuilder = new IndentedStringBuilder(indent: indent) };
             //this with { ContextBuilder = new IndentedStringBuilder(indent: indent) };
 
         private LambdaDefinitionWriter WithAddedIndent(int addIndent = 1) => WithIndentLevel(ContextBuilder.Indent + addIndent);
@@ -92,8 +90,9 @@ internal partial class LibrarySetCSharpCodeGenerator
 
         private IndentedStringBuilder CreateBuilder(bool includeIndent = true) =>
             new()
-            // new(indent: includeIndent ? ContextBuilder.Indent : 0)
-        ;
+            //new(indent: includeIndent ? 1 : 0)
+            //new(indent: includeIndent ? ContextBuilder.Indent : 0)
+            ;
 
         private string ConvertExpression(
             Expression expression)
@@ -515,14 +514,15 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var newArraySb = CreateBuilder(includeIndent: false);
                     newArraySb.AppendLine("[");
 
+                    var elementBuilder = newArraySb.AddIndent(1);
                     var nextContext = WithAddedIndent(1);
                     foreach (var expr in newArray.Expressions)
                     {
                         var exprCode = nextContext.ConvertExpression(expr);
-                        newArraySb.AppendLine($"{exprCode},");
+                        elementBuilder.AppendLine($"{exprCode},");
                     }
 
-                    newArraySb.Append(ContextBuilder.Indent, "]");
+                    newArraySb.Append("]");
                     return newArraySb.ToString();
                 }
                 case ExpressionType.NewArrayBounds:
