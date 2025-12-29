@@ -44,15 +44,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (intervals is null)
             {
-                CqlInterval<CqlDate>[] e_ = []
-                ;
+                CqlInterval<CqlDate>[] e_ = [];
 
                 return e_ as IEnumerable<CqlInterval<CqlDate>>;
             }
             else if (b_())
             {
-                CqlInterval<CqlDate>[] f_ = []
-                ;
+                CqlInterval<CqlDate>[] f_ = [];
 
                 return f_ as IEnumerable<CqlInterval<CqlDate>>;
             }
@@ -119,15 +117,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (intervals is null)
             {
-                CqlInterval<CqlDateTime>[] e_ = []
-                ;
+                CqlInterval<CqlDateTime>[] e_ = [];
 
                 return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
             else if (b_())
             {
-                CqlInterval<CqlDateTime>[] f_ = []
-                ;
+                CqlInterval<CqlDateTime>[] f_ = [];
 
                 return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
@@ -194,15 +190,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (intervals is null)
             {
-                CqlInterval<CqlDate>[] e_ = []
-                ;
+                CqlInterval<CqlDate>[] e_ = [];
 
                 return e_ as IEnumerable<CqlInterval<CqlDate>>;
             }
             else if (b_())
             {
-                CqlInterval<CqlDate>[] f_ = []
-                ;
+                CqlInterval<CqlDate>[] f_ = [];
 
                 return f_ as IEnumerable<CqlInterval<CqlDate>>;
             }
@@ -248,15 +242,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (intervals is null)
             {
-                CqlInterval<CqlDateTime>[] e_ = []
-                ;
+                CqlInterval<CqlDateTime>[] e_ = [];
 
                 return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
             else if (b_())
             {
-                CqlInterval<CqlDateTime>[] f_ = []
-                ;
+                CqlInterval<CqlDateTime>[] f_ = [];
 
                 return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
             }
@@ -416,8 +408,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 };
                 if (ax_())
                 {
-                    CqlInterval<CqlDate>[] bb_ = []
-                    ;
+                    CqlInterval<CqlDate>[] bb_ = [];
 
                     return bb_ as IEnumerable<CqlInterval<CqlDate>>;
                 }
@@ -557,8 +548,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 };
                 if (ax_())
                 {
-                    CqlInterval<CqlDateTime>[] bb_ = []
-                    ;
+                    CqlInterval<CqlDateTime>[] bb_ = [];
 
                     return bb_ as IEnumerable<CqlInterval<CqlDateTime>>;
                 }

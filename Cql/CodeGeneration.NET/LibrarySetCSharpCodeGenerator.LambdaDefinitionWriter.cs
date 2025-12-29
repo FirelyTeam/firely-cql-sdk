@@ -499,7 +499,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 case ExpressionType.NewArrayBounds:
                 {
                     var newArraySb = new IndentedStringBuilder();
-                    newArraySb.AppendLine("[]");
+                    newArraySb.Append("[]");
                     return newArraySb.ToString();
                 }
 
