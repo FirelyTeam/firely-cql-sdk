@@ -298,7 +298,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
             Encounter h_(object Depression) =>
-            ValidEncounter;
+                ValidEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<object, Encounter>(g_, h_);
 
             return i_;
@@ -335,7 +335,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter DepressionEncounter) =>
-            DepressionAssessment;
+                DepressionAssessment;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;

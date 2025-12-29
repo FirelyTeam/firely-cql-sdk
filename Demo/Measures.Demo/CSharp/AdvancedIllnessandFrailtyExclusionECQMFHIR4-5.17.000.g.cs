@@ -137,7 +137,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -259,7 +259,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
             Encounter w_(Condition AdvancedIllnessDiagnosis) =>
-            OutpatientEncounter;
+                OutpatientEncounter;
             IEnumerable<Encounter> x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
             return x_;
@@ -298,7 +298,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         };
         IEnumerable<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
         Encounter h_((CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) =>
-        tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
+            tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
@@ -422,7 +422,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             };
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
             Encounter n_(Condition AdvancedIllnessDiagnosis) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
 
             return o_;

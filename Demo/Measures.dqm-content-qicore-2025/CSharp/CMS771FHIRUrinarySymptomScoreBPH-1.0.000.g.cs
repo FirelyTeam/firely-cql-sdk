@@ -673,7 +673,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> j_ = context.Operators.Where<object>((IEnumerable<object>)h_, i_);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(object InitialBPHDiagnosis) =>
-            USSAssessment;
+                USSAssessment;
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<object, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
 
             return l_;
@@ -715,7 +715,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> j_ = context.Operators.Where<object>((IEnumerable<object>)h_, i_);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(object InitialBPHDiagnosis) =>
-            USSAssessment;
+                USSAssessment;
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<object, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
 
             return l_;
@@ -781,7 +781,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> m_ = context.Operators.Where<object>((IEnumerable<object>)k_, l_);
             object n_(object InitialBPHDiagnosis) =>
-            UrinaryRetention;
+                UrinaryRetention;
             IEnumerable<object> o_ = context.Operators.Select<object, object>(m_, n_);
 
             return o_;
@@ -833,7 +833,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             object j_(Encounter UrologyHospitalServices) =>
-            InitialBPHDiagnosis;
+                InitialBPHDiagnosis;
             IEnumerable<object> k_ = context.Operators.Select<Encounter, object>(i_, j_);
 
             return k_;
@@ -872,7 +872,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> m_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)k_, l_);
             object n_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) =>
-            MorbidObesityDiagnosis;
+                MorbidObesityDiagnosis;
             IEnumerable<object> o_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, object>(m_, n_);
 
             return o_;
@@ -934,7 +934,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> k_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)i_, j_);
             Observation l_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) =>
-            BMIExam;
+                BMIExam;
             IEnumerable<Observation> m_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, Observation>(k_, l_);
 
             return m_;

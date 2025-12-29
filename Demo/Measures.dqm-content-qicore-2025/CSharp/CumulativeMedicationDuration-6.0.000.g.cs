@@ -1570,9 +1570,9 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     [CqlFunctionDefinition("Quantity")]
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) =>
-    ((context.Operators.Not((bool?)(value is null))) ?? false
-        ? new CqlQuantity(value, unit)
-        : default);
+        ((context.Operators.Not((bool?)(value is null))) ?? false
+            ? new CqlQuantity(value, unit)
+            : default);
 
 
     [CqlFunctionDefinition("medicationRequestPeriod")]

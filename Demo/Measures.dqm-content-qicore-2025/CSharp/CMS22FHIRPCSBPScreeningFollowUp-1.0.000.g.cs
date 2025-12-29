@@ -310,7 +310,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
             Encounter h_(Condition Hypertension) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
@@ -684,7 +684,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
             Encounter m_(ServiceRequest Twoto6MonthRescreen) =>
-            ElevatedEncounter;
+                ElevatedEncounter;
             IEnumerable<Encounter> n_ = context.Operators.Select<ServiceRequest, Encounter>(l_, m_);
 
             return n_;
@@ -705,7 +705,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
             Encounter w_(ServiceRequest NonPharmInterventions) =>
-            ElevatedEncounter;
+                ElevatedEncounter;
             IEnumerable<Encounter> x_ = context.Operators.Select<ServiceRequest, Encounter>(v_, w_);
 
             return x_;
@@ -726,7 +726,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> af_ = context.Operators.Where<ServiceRequest>(ad_, ae_);
             Encounter ag_(ServiceRequest Referral) =>
-            ElevatedEncounter;
+                ElevatedEncounter;
             IEnumerable<Encounter> ah_ = context.Operators.Select<ServiceRequest, Encounter>(af_, ag_);
 
             return ah_;
@@ -1260,7 +1260,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
             ServiceRequest j_(ServiceRequest NonPharmInterventionsHTN) =>
-            FourWeekRescreen;
+                FourWeekRescreen;
             IEnumerable<ServiceRequest> k_ = context.Operators.Select<ServiceRequest, ServiceRequest>(i_, j_);
 
             return k_;
@@ -1292,7 +1292,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> f_ = context.Operators.Where<ServiceRequest>(d_, e_);
             Encounter g_(ServiceRequest FirstHTNIntervention) =>
-            FirstHTNEncounter;
+                FirstHTNEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<ServiceRequest, Encounter>(f_, g_);
 
             return h_;
@@ -1591,7 +1591,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> h_ = context.Operators.Where<ServiceRequest>(f_, g_);
             ServiceRequest i_(ServiceRequest LabECGIntervention) =>
-            Rescreen2to6;
+                Rescreen2to6;
             IEnumerable<ServiceRequest> j_ = context.Operators.Select<ServiceRequest, ServiceRequest>(h_, i_);
 
             return j_;
@@ -1611,7 +1611,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
             ServiceRequest w_(ServiceRequest NonPharmSecondIntervention) =>
-            Rescreen2to6;
+                Rescreen2to6;
             IEnumerable<ServiceRequest> x_ = context.Operators.Select<ServiceRequest, ServiceRequest>(v_, w_);
 
             return x_;
@@ -1641,7 +1641,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             Encounter k_(ServiceRequest EncounterInterventions) =>
-            SecondHTNEncounterReading;
+                SecondHTNEncounterReading;
             IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
             return l_;
@@ -1662,7 +1662,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
             Encounter u_(ServiceRequest ReferralForHTN) =>
-            SecondHTNEncounterReading;
+                SecondHTNEncounterReading;
             IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
             return v_;
@@ -1940,7 +1940,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> k_ = context.Operators.Where<ServiceRequest>(i_, j_);
             ServiceRequest l_(ServiceRequest ECGLabTest) =>
-            WeeksRescreen;
+                WeeksRescreen;
             IEnumerable<ServiceRequest> m_ = context.Operators.Select<ServiceRequest, ServiceRequest>(k_, l_);
 
             return m_;
@@ -1960,7 +1960,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> am_ = context.Operators.Where<ServiceRequest>(ak_, al_);
             ServiceRequest an_(ServiceRequest HTNInterventions) =>
-            WeeksRescreen;
+                WeeksRescreen;
             IEnumerable<ServiceRequest> ao_ = context.Operators.Select<ServiceRequest, ServiceRequest>(am_, an_);
 
             return ao_;
@@ -1991,7 +1991,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 };
                 IEnumerable<Medication> bf_ = context.Operators.Where<Medication>(bd_, be_);
                 MedicationRequest bg_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> bh_ = context.Operators.Select<Medication, MedicationRequest>(bf_, bg_);
 
                 return bh_;
@@ -2018,7 +2018,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<MedicationRequest> ba_ = context.Operators.Where<MedicationRequest>(ay_, az_);
             ServiceRequest bb_(MedicationRequest Medications) =>
-            WeeksRescreen;
+                WeeksRescreen;
             IEnumerable<ServiceRequest> bc_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ba_, bb_);
 
             return bc_;
@@ -2048,7 +2048,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             Encounter k_(ServiceRequest SecondHTN140Over90Interventions) =>
-            SecondHTNEncounterReading140Over90;
+                SecondHTNEncounterReading140Over90;
             IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
             return l_;
@@ -2069,7 +2069,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
             Encounter u_(ServiceRequest ReferralToProfessional) =>
-            SecondHTNEncounterReading140Over90;
+                SecondHTNEncounterReading140Over90;
             IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
             return v_;
@@ -2176,7 +2176,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(n_, o_);
             Encounter q_(Observation NoBPScreen) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> r_ = context.Operators.Select<Observation, Encounter>(p_, q_);
 
             return r_;
@@ -2522,7 +2522,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> aj_ = context.Operators.Where<ServiceRequest>(ah_, ai_);
             Encounter ak_(ServiceRequest ElevatedBPDeclinedInterventions) =>
-            ElevatedBPEncounter;
+                ElevatedBPEncounter;
             IEnumerable<Encounter> al_ = context.Operators.Select<ServiceRequest, Encounter>(aj_, ak_);
 
             return al_;
@@ -2543,7 +2543,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> bo_ = context.Operators.Where<ServiceRequest>(bm_, bn_);
             Encounter bp_(ServiceRequest NotOrdered) =>
-            ElevatedBPEncounter;
+                ElevatedBPEncounter;
             IEnumerable<Encounter> bq_ = context.Operators.Select<ServiceRequest, Encounter>(bo_, bp_);
 
             return bq_;
@@ -2609,7 +2609,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> ci_ = context.Operators.Where<ServiceRequest>(cg_, ch_);
             Encounter cj_(ServiceRequest FirstHTNDeclinedInterventions) =>
-            FirstHTNEncounter;
+                FirstHTNEncounter;
             IEnumerable<Encounter> ck_ = context.Operators.Select<ServiceRequest, Encounter>(ci_, cj_);
 
             return ck_;
@@ -2630,7 +2630,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> dn_ = context.Operators.Where<ServiceRequest>(dl_, dm_);
             Encounter do_(ServiceRequest NoNonPharm) =>
-            FirstHTNEncounter;
+                FirstHTNEncounter;
             IEnumerable<Encounter> dp_ = context.Operators.Select<ServiceRequest, Encounter>(dn_, do_);
 
             return dp_;
@@ -2654,7 +2654,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<ServiceRequest> dx_ = context.Operators.Where<ServiceRequest>(dv_, dw_);
             Encounter dy_(ServiceRequest SecondHTNDeclinedInterventions) =>
-            SecondHTNEncounter;
+                SecondHTNEncounter;
             IEnumerable<Encounter> dz_ = context.Operators.Select<ServiceRequest, Encounter>(dx_, dy_);
 
             return dz_;
@@ -2676,7 +2676,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> eh_ = context.Operators.Where<object>(ef_, eg_);
             Encounter ei_(object SecondHTN140Over90DeclinedInterventions) =>
-            SecondHTN140Over90Encounter;
+                SecondHTN140Over90Encounter;
             IEnumerable<Encounter> ej_ = context.Operators.Select<object, Encounter>(eh_, ei_);
 
             return ej_;

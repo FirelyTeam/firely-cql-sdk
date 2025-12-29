@@ -203,7 +203,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             };
             IEnumerable<Patient> f_ = context.Operators.Where<Patient>(d_, e_);
             Encounter g_(Patient BirthDate) =>
-            AllStrokeEncounter;
+                AllStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Patient, Encounter>(f_, g_);
 
             return h_;
@@ -327,7 +327,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -359,7 +359,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;

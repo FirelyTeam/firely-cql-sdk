@@ -208,7 +208,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
             (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Condition DiabetesDiagnosis) =>
-            EncounterWithHospitalization;
+                EncounterWithHospitalization;
             IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
 
             return l_;
@@ -256,7 +256,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Medication> r_ = context.Operators.Where<Medication>(p_, q_);
             MedicationAdministration s_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationAdministration> t_ = context.Operators.Select<Medication, MedicationAdministration>(r_, s_);
 
             return t_;
@@ -326,7 +326,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             };
             IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
             (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Observation BloodGlucoseLab) =>
-            EncounterWithHospitalization;
+                EncounterWithHospitalization;
             IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Observation, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
 
             return l_;

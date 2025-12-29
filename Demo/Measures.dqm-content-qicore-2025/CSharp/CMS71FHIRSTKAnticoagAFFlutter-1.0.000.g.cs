@@ -242,7 +242,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Condition> bh_ = context.Operators.Where<Condition>(bf_, bg_);
             Encounter bi_(Condition AtrialAblationDiagnosis) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> bj_ = context.Operators.Select<Condition, Encounter>(bh_, bi_);
 
             return bj_;
@@ -327,7 +327,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Observation> cn_ = context.Operators.Where<Observation>(cl_, cm_);
             Encounter co_(Observation AtrialAblationObservation) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> cp_ = context.Operators.Select<Observation, Encounter>(cn_, co_);
 
             return cp_;
@@ -368,7 +368,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Condition> dx_ = context.Operators.Where<Condition>(dv_, dw_);
             Encounter dy_(Condition AtrialAblationEncDiagnosis) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> dz_ = context.Operators.Select<Condition, Encounter>(dx_, dy_);
 
             return dz_;
@@ -420,7 +420,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
             Encounter l_(Condition AtrialFibrillationFlutter) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<Condition, Encounter>(k_, l_);
 
             return m_;
@@ -548,7 +548,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-            Encounter;
+                Encounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -635,7 +635,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -697,7 +697,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest DischargeAnticoagulant) =>
-            Encounter;
+                Encounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -788,7 +788,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> av_ = context.Operators.Where<Medication>(at_, au_);
             MedicationRequest aw_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ax_ = context.Operators.Select<Medication, MedicationRequest>(av_, aw_);
 
             return ax_;
@@ -831,7 +831,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Task> bk_ = context.Operators.Where<Task>(bi_, bj_);
             MedicationRequest bl_(Task TaskReject) =>
-            MedReqAntiCoagulant;
+                MedReqAntiCoagulant;
             IEnumerable<MedicationRequest> bm_ = context.Operators.Select<Task, MedicationRequest>(bk_, bl_);
 
             return bm_;
@@ -862,7 +862,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object NoDischargeAnticoagulant) =>
-            Encounter;
+                Encounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;

@@ -210,7 +210,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
             Encounter g_(MedicationRequest NoDischargeAntithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
             return h_;
@@ -289,7 +289,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
             Encounter g_(MedicationRequest DischargePharmacological) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
             return h_;
@@ -399,7 +399,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
             Encounter g_(MedicationRequest DischargeAntithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
             return h_;

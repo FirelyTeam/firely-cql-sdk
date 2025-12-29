@@ -411,7 +411,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter EDEncounter) =>
-            EDTriageinMP;
+                EDTriageinMP;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -760,7 +760,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter EncounterInpatient) =>
-            EDEncounter;
+                EDEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -857,7 +857,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter EncounterInpatient) =>
-            EDEncounter;
+                EDEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -948,7 +948,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter InpatientEncounter) =>
-            EDEncounter;
+                EDEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -1012,7 +1012,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter Inpatient) =>
-            EDEncounter;
+                EDEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -1063,7 +1063,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
             Encounter h_(Encounter EDEncounter) =>
-            EDObsEncounter;
+                EDObsEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
             return i_;

@@ -194,7 +194,7 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
             Observation i_(Encounter InpatientEncounters) =>
-            CTScan;
+                CTScan;
             IEnumerable<Observation> j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
 
             return j_;

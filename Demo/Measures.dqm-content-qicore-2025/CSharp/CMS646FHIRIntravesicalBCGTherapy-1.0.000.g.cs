@@ -364,7 +364,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
             Procedure n_(object BladderCancer) =>
-            BladderCancerStaging;
+                BladderCancerStaging;
             IEnumerable<Procedure> o_ = context.Operators.Select<object, Procedure>(m_, n_);
 
             return o_;
@@ -926,7 +926,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
             object n_(Procedure FirstBladderCancerStaging) =>
-            ActiveTuberculosis;
+                ActiveTuberculosis;
             IEnumerable<object> o_ = context.Operators.Select<Procedure, object>(m_, n_);
 
             return o_;
@@ -970,7 +970,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
             MedicationRequest n_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
 
             return o_;
@@ -1168,7 +1168,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aa_, ab_);
             MedicationRequest ad_(Procedure FirstBladderCancerStaging) =>
-            ImmunosuppressiveDrugs;
+                ImmunosuppressiveDrugs;
             IEnumerable<MedicationRequest> ae_ = context.Operators.Select<Procedure, MedicationRequest>(ac_, ad_);
 
             return ae_;
@@ -1498,7 +1498,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
             Procedure k_(Procedure FirstBladderCancerStaging) =>
-            Cystectomy;
+                Cystectomy;
             IEnumerable<Procedure> l_ = context.Operators.Select<Procedure, Procedure>(j_, k_);
 
             return l_;
@@ -1696,7 +1696,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> z_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)x_, y_);
             object aa_(Procedure FirstBladderCancerStaging) =>
-            ExclusionDiagnosis;
+                ExclusionDiagnosis;
             IEnumerable<object> ab_ = context.Operators.Select<Procedure, object>(z_, aa_);
 
             return ab_;
@@ -1741,7 +1741,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
             MedicationRequest w_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> x_ = context.Operators.Select<Medication, MedicationRequest>(v_, w_);
 
             return x_;
@@ -2040,7 +2040,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> al_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)aj_, ak_);
             MedicationRequest am_(Procedure FirstBladderCancerStaging) =>
-            ExclusionMed;
+                ExclusionMed;
             IEnumerable<MedicationRequest> an_ = context.Operators.Select<Procedure, MedicationRequest>(al_, am_);
 
             return an_;
@@ -2363,7 +2363,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> fs_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)fq_, fr_);
             Procedure ft_(Procedure FirstBladderCancerStaging) =>
-            ExclusionProcedure;
+                ExclusionProcedure;
             IEnumerable<Procedure> fu_ = context.Operators.Select<Procedure, Procedure>(fs_, ft_);
 
             return fu_;
@@ -2665,7 +2665,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
             MedicationAdministration n_(Procedure FirstBladderCancerStaging) =>
-            BCGNotGiven;
+                BCGNotGiven;
             IEnumerable<MedicationAdministration> o_ = context.Operators.Select<Procedure, MedicationAdministration>(m_, n_);
 
             return o_;
@@ -2728,7 +2728,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
             MedicationAdministration q_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
             return r_;
@@ -2971,7 +2971,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Procedure> af_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)ad_, ae_);
             MedicationAdministration ag_(Procedure FirstBladderCancerStaging) =>
-            BCG;
+                BCG;
             IEnumerable<MedicationAdministration> ah_ = context.Operators.Select<Procedure, MedicationAdministration>(af_, ag_);
 
             return ah_;

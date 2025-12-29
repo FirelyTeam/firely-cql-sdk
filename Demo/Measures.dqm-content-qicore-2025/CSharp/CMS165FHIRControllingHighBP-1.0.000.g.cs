@@ -405,7 +405,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
             Observation w_(Encounter DisqualifyingEncounter) =>
-            BloodPressure;
+                BloodPressure;
             IEnumerable<Observation> x_ = context.Operators.Select<Encounter, Observation>(v_, w_);
 
             return x_;

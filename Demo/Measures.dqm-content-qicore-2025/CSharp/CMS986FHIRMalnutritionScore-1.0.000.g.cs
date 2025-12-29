@@ -359,7 +359,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object HospiceStatus) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -523,7 +523,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object DietitianReferral) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -569,7 +569,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation MalnutritionRiskScreening) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -615,7 +615,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation MalnutritionRiskScreening) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -905,7 +905,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -1011,7 +1011,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -1113,7 +1113,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation NutritionAssessment) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -1279,7 +1279,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure NutritionCarePlan) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -1292,9 +1292,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     [CqlFunctionDefinition("Measure Observation 1")]
     public int? Measure_Observation_1(CqlContext context, Encounter MalnutritionRiskScreening) =>
-    ((context.Operators.Contains<Encounter>(this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
-        ? 1
-        : 0);
+        ((context.Operators.Contains<Encounter>(this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
+            ? 1
+            : 0);
 
 
     [CqlFunctionDefinition("Measure Observation 2")]

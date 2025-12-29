@@ -156,7 +156,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -224,7 +224,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -288,7 +288,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
             Encounter i_(MedicationRequest OpioidOrBenzodiazepineAtDischarge) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<MedicationRequest, Encounter>(h_, i_);
 
             return j_;
@@ -486,7 +486,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -627,7 +627,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
             MedicationRequest l_(Procedure MAT) =>
-            MedicationTreatment;
+                MedicationTreatment;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Procedure, MedicationRequest>(k_, l_);
 
             return m_;
@@ -653,7 +653,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Condition> be_ = context.Operators.Where<Condition>(bc_, bd_);
             MedicationRequest bf_(Condition OUD) =>
-            MedicationTreatment;
+                MedicationTreatment;
             IEnumerable<MedicationRequest> bg_ = context.Operators.Select<Condition, MedicationRequest>(be_, bf_);
 
             return bg_;

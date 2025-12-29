@@ -241,7 +241,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> el_ = context.Operators.Where<Medication>(ej_, ek_);
             MedicationRequest em_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> en_ = context.Operators.Select<Medication, MedicationRequest>(el_, em_);
 
             return en_;
@@ -270,7 +270,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> fa_ = context.Operators.Where<Medication>(ey_, ez_);
             MedicationRequest fb_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> fc_ = context.Operators.Select<Medication, MedicationRequest>(fa_, fb_);
 
             return fc_;
@@ -300,7 +300,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> fp_ = context.Operators.Where<Medication>(fn_, fo_);
             MedicationRequest fq_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> fr_ = context.Operators.Select<Medication, MedicationRequest>(fp_, fq_);
 
             return fr_;
@@ -330,7 +330,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> ge_ = context.Operators.Where<Medication>(gc_, gd_);
             MedicationRequest gf_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> gg_ = context.Operators.Select<Medication, MedicationRequest>(ge_, gf_);
 
             return gg_;
@@ -360,7 +360,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> gt_ = context.Operators.Where<Medication>(gr_, gs_);
             MedicationRequest gu_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> gv_ = context.Operators.Select<Medication, MedicationRequest>(gt_, gu_);
 
             return gv_;
@@ -392,7 +392,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> hi_ = context.Operators.Where<Medication>(hg_, hh_);
             MedicationRequest hj_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> hk_ = context.Operators.Select<Medication, MedicationRequest>(hi_, hj_);
 
             return hk_;
@@ -422,7 +422,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> hy_ = context.Operators.Where<Medication>(hw_, hx_);
             MedicationRequest hz_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ia_ = context.Operators.Select<Medication, MedicationRequest>(hy_, hz_);
 
             return ia_;
@@ -452,7 +452,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> in_ = context.Operators.Where<Medication>(il_, im_);
             MedicationRequest io_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ip_ = context.Operators.Select<Medication, MedicationRequest>(in_, io_);
 
             return ip_;
@@ -482,7 +482,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> jc_ = context.Operators.Where<Medication>(ja_, jb_);
             MedicationRequest jd_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> je_ = context.Operators.Select<Medication, MedicationRequest>(jc_, jd_);
 
             return je_;
@@ -523,7 +523,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> jw_ = context.Operators.Where<Medication>(ju_, jv_);
             MedicationRequest jx_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> jy_ = context.Operators.Select<Medication, MedicationRequest>(jw_, jx_);
 
             return jy_;
@@ -551,7 +551,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> kl_ = context.Operators.Where<Medication>(kj_, kk_);
             MedicationRequest km_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> kn_ = context.Operators.Select<Medication, MedicationRequest>(kl_, km_);
 
             return kn_;
@@ -580,7 +580,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> la_ = context.Operators.Where<Medication>(ky_, kz_);
             MedicationRequest lb_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> lc_ = context.Operators.Select<Medication, MedicationRequest>(la_, lb_);
 
             return lc_;
@@ -609,7 +609,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> lp_ = context.Operators.Where<Medication>(ln_, lo_);
             MedicationRequest lq_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> lr_ = context.Operators.Select<Medication, MedicationRequest>(lp_, lq_);
 
             return lr_;
@@ -638,7 +638,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> me_ = context.Operators.Where<Medication>(mc_, md_);
             MedicationRequest mf_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> mg_ = context.Operators.Select<Medication, MedicationRequest>(me_, mf_);
 
             return mg_;
@@ -669,7 +669,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> mt_ = context.Operators.Where<Medication>(mr_, ms_);
             MedicationRequest mu_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> mv_ = context.Operators.Select<Medication, MedicationRequest>(mt_, mu_);
 
             return mv_;
@@ -698,7 +698,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> nj_ = context.Operators.Where<Medication>(nh_, ni_);
             MedicationRequest nk_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> nl_ = context.Operators.Select<Medication, MedicationRequest>(nj_, nk_);
 
             return nl_;
@@ -727,7 +727,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> ny_ = context.Operators.Where<Medication>(nw_, nx_);
             MedicationRequest nz_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> oa_ = context.Operators.Select<Medication, MedicationRequest>(ny_, nz_);
 
             return oa_;
@@ -756,7 +756,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> on_ = context.Operators.Where<Medication>(ol_, om_);
             MedicationRequest oo_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> op_ = context.Operators.Select<Medication, MedicationRequest>(on_, oo_);
 
             return op_;
@@ -801,7 +801,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> rx_ = context.Operators.Where<Medication>(rv_, rw_);
                 MedicationRequest ry_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> rz_ = context.Operators.Select<Medication, MedicationRequest>(rx_, ry_);
 
                 return rz_;
@@ -830,7 +830,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> sm_ = context.Operators.Where<Medication>(sk_, sl_);
                 MedicationRequest sn_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> so_ = context.Operators.Select<Medication, MedicationRequest>(sm_, sn_);
 
                 return so_;
@@ -860,7 +860,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> tb_ = context.Operators.Where<Medication>(sz_, ta_);
                 MedicationRequest tc_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> td_ = context.Operators.Select<Medication, MedicationRequest>(tb_, tc_);
 
                 return td_;
@@ -890,7 +890,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> tq_ = context.Operators.Where<Medication>(to_, tp_);
                 MedicationRequest tr_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> ts_ = context.Operators.Select<Medication, MedicationRequest>(tq_, tr_);
 
                 return ts_;
@@ -920,7 +920,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> uf_ = context.Operators.Where<Medication>(ud_, ue_);
                 MedicationRequest ug_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> uh_ = context.Operators.Select<Medication, MedicationRequest>(uf_, ug_);
 
                 return uh_;
@@ -952,7 +952,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> uu_ = context.Operators.Where<Medication>(us_, ut_);
                 MedicationRequest uv_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> uw_ = context.Operators.Select<Medication, MedicationRequest>(uu_, uv_);
 
                 return uw_;
@@ -982,7 +982,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> vk_ = context.Operators.Where<Medication>(vi_, vj_);
                 MedicationRequest vl_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> vm_ = context.Operators.Select<Medication, MedicationRequest>(vk_, vl_);
 
                 return vm_;
@@ -1012,7 +1012,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> vz_ = context.Operators.Where<Medication>(vx_, vy_);
                 MedicationRequest wa_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> wb_ = context.Operators.Select<Medication, MedicationRequest>(vz_, wa_);
 
                 return wb_;
@@ -1042,7 +1042,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> wo_ = context.Operators.Where<Medication>(wm_, wn_);
                 MedicationRequest wp_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> wq_ = context.Operators.Select<Medication, MedicationRequest>(wo_, wp_);
 
                 return wq_;
@@ -1070,7 +1070,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationRequest> rs_ = context.Operators.Where<MedicationRequest>(rq_, rr_);
             MedicationRequest rt_(MedicationRequest ActiveADHDMedication) =>
-            ADHDMedicationOrder;
+                ADHDMedicationOrder;
             IEnumerable<MedicationRequest> ru_ = context.Operators.Select<MedicationRequest, MedicationRequest>(rs_, rt_);
 
             return ru_;
@@ -1423,7 +1423,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> fb_ = context.Operators.Where<Medication>(ez_, fa_);
             MedicationRequest fc_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> fd_ = context.Operators.Select<Medication, MedicationRequest>(fb_, fc_);
 
             return fd_;
@@ -1485,7 +1485,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> fy_ = context.Operators.Where<Medication>(fw_, fx_);
             MedicationRequest fz_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ga_ = context.Operators.Select<Medication, MedicationRequest>(fy_, fz_);
 
             return ga_;
@@ -1548,7 +1548,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> gv_ = context.Operators.Where<Medication>(gt_, gu_);
             MedicationRequest gw_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> gx_ = context.Operators.Select<Medication, MedicationRequest>(gv_, gw_);
 
             return gx_;
@@ -1610,7 +1610,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> hs_ = context.Operators.Where<Medication>(hq_, hr_);
             MedicationRequest ht_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> hu_ = context.Operators.Select<Medication, MedicationRequest>(hs_, ht_);
 
             return hu_;
@@ -1674,7 +1674,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> ip_ = context.Operators.Where<Medication>(in_, io_);
             MedicationRequest iq_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ir_ = context.Operators.Select<Medication, MedicationRequest>(ip_, iq_);
 
             return ir_;
@@ -1736,7 +1736,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> jm_ = context.Operators.Where<Medication>(jk_, jl_);
             MedicationRequest jn_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> jo_ = context.Operators.Select<Medication, MedicationRequest>(jm_, jn_);
 
             return jo_;
@@ -1800,7 +1800,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> kj_ = context.Operators.Where<Medication>(kh_, ki_);
             MedicationRequest kk_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> kl_ = context.Operators.Select<Medication, MedicationRequest>(kj_, kk_);
 
             return kl_;
@@ -1864,7 +1864,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> lg_ = context.Operators.Where<Medication>(le_, lf_);
             MedicationRequest lh_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> li_ = context.Operators.Select<Medication, MedicationRequest>(lg_, lh_);
 
             return li_;
@@ -1928,7 +1928,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> me_ = context.Operators.Where<Medication>(mc_, md_);
             MedicationRequest mf_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> mg_ = context.Operators.Select<Medication, MedicationRequest>(me_, mf_);
 
             return mg_;
@@ -2188,7 +2188,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<CqlDate> l_ = context.Operators.Where<CqlDate>(j_, k_);
             CqlDate m_(CqlDate Encounter2) =>
-            Encounter1;
+                Encounter1;
             IEnumerable<CqlDate> n_ = context.Operators.Select<CqlDate, CqlDate>(l_, m_);
 
             return n_;

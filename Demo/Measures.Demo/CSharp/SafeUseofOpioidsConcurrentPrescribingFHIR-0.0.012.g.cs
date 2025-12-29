@@ -167,7 +167,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 };
                 IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
                 MedicationRequest z_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
 
                 return aa_;
@@ -198,7 +198,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 };
                 IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
                 MedicationRequest aq_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
 
                 return ar_;
@@ -244,7 +244,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             };
             IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
             Encounter u_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> v_ = context.Operators.Select<MedicationRequest, Encounter>(t_, u_);
 
             return v_;
@@ -349,7 +349,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             };
             IEnumerable<MedicationRequest> ab_ = context.Operators.Where<MedicationRequest>(z_, aa_);
             Encounter ac_(MedicationRequest OpioidsDischarge) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> ad_ = context.Operators.Select<MedicationRequest, Encounter>(ab_, ac_);
 
             return ad_;
@@ -371,7 +371,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             };
             IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(ak_, al_);
             Encounter an_(MedicationRequest BenzodiazepinesDischarge) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> ao_ = context.Operators.Select<MedicationRequest, Encounter>(am_, an_);
 
             return ao_;
@@ -464,7 +464,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter InpatientEncounter) =>
-        InpatientEncounter;
+            InpatientEncounter;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 

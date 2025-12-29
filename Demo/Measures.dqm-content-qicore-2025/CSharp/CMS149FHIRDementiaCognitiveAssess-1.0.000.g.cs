@@ -233,7 +233,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object Dementia) =>
-            EncounterAssessCognition;
+                EncounterAssessCognition;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -329,7 +329,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterDementia) =>
-            CognitiveAssessment;
+                CognitiveAssessment;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;
@@ -393,7 +393,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterDementia) =>
-            NoCognitiveAssessment;
+                NoCognitiveAssessment;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;

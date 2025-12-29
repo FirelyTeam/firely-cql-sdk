@@ -234,7 +234,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
             Condition h_(Encounter QualifyingEncounter) =>
-            BipolarDiagnosis;
+                BipolarDiagnosis;
             IEnumerable<Condition> i_ = context.Operators.Select<Encounter, Condition>(g_, h_);
 
             return i_;
@@ -320,7 +320,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Observation l_(Encounter QualifyingEncounter) =>
-            AdolescentDepressionScreening;
+                AdolescentDepressionScreening;
             IEnumerable<Observation> m_ = context.Operators.Select<Encounter, Observation>(k_, l_);
 
             return m_;
@@ -393,7 +393,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> u_ = context.Operators.Where<Medication>(s_, t_);
             MedicationRequest v_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> w_ = context.Operators.Select<Medication, MedicationRequest>(u_, v_);
 
             return w_;
@@ -467,7 +467,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
             MedicationRequest ak_(Encounter QualifyingEncounter) =>
-            AdolescentMed;
+                AdolescentMed;
             IEnumerable<MedicationRequest> al_ = context.Operators.Select<Encounter, MedicationRequest>(aj_, ak_);
 
             return al_;
@@ -792,7 +792,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Observation l_(Encounter QualifyingEncounter) =>
-            AdultDepressionScreening;
+                AdultDepressionScreening;
             IEnumerable<Observation> m_ = context.Operators.Select<Encounter, Observation>(k_, l_);
 
             return m_;
@@ -865,7 +865,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> u_ = context.Operators.Where<Medication>(s_, t_);
             MedicationRequest v_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> w_ = context.Operators.Select<Medication, MedicationRequest>(u_, v_);
 
             return w_;
@@ -939,7 +939,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
             MedicationRequest ak_(Encounter QualifyingEncounter) =>
-            AdultMed;
+                AdultMed;
             IEnumerable<MedicationRequest> al_ = context.Operators.Select<Encounter, MedicationRequest>(aj_, ak_);
 
             return al_;
@@ -1268,7 +1268,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Observation k_(Encounter QualifyingEncounter) =>
-            NoAdolescentScreen;
+                NoAdolescentScreen;
             IEnumerable<Observation> l_ = context.Operators.Select<Encounter, Observation>(j_, k_);
 
             return l_;
@@ -1380,7 +1380,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter QualifyingEncounter) =>
-            AdolescentScreening;
+                AdolescentScreening;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -1414,7 +1414,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Observation k_(Encounter QualifyingEncounter) =>
-            NoAdultScreen;
+                NoAdultScreen;
             IEnumerable<Observation> l_ = context.Operators.Select<Encounter, Observation>(j_, k_);
 
             return l_;
@@ -1526,7 +1526,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter QualifyingEncounter) =>
-            AdultScreening;
+                AdultScreening;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;

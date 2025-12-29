@@ -131,7 +131,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationRequest q_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
 
                 return r_;
@@ -193,7 +193,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
             Encounter l_(MedicationRequest DischargeAntithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
 
             return m_;
@@ -284,7 +284,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> av_ = context.Operators.Where<Medication>(at_, au_);
             MedicationRequest aw_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ax_ = context.Operators.Select<Medication, MedicationRequest>(av_, aw_);
 
             return ax_;
@@ -327,7 +327,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Task> bk_ = context.Operators.Where<Task>(bi_, bj_);
             MedicationRequest bl_(Task TaskReject) =>
-            MedReqAntithrombotic;
+                MedReqAntithrombotic;
             IEnumerable<MedicationRequest> bm_ = context.Operators.Select<Task, MedicationRequest>(bk_, bl_);
 
             return bm_;
@@ -358,7 +358,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object NoDischargeAntithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -395,7 +395,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationRequest l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> m_ = context.Operators.Select<Medication, MedicationRequest>(k_, l_);
 
             return m_;
@@ -456,7 +456,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
             Encounter g_(MedicationRequest DischargePharmacological) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
             return h_;

@@ -170,7 +170,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             };
             IEnumerable<Coverage> k_ = context.Operators.Where<Coverage>(i_, j_);
             Encounter l_(Coverage MedicarePayer) =>
-            InpatientEncounter;
+                InpatientEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
 
             return m_;

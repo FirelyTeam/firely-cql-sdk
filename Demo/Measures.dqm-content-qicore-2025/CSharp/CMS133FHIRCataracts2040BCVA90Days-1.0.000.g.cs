@@ -896,7 +896,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             };
             IEnumerable<object> lv_ = context.Operators.Where<object>(lt_, lu_);
             Procedure lw_(object ComorbidDiagnosis) =>
-            CataractSurgeryPerformed;
+                CataractSurgeryPerformed;
             IEnumerable<Procedure> lx_ = context.Operators.Select<object, Procedure>(lv_, lw_);
 
             return lx_;
@@ -1167,7 +1167,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             };
             IEnumerable<Observation> k_ = context.Operators.Where<Observation>(i_, j_);
             Procedure l_(Observation VisualAcuityExamPerformed) =>
-            CataractSurgeryPerformed;
+                CataractSurgeryPerformed;
             IEnumerable<Procedure> m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
 
             return m_;

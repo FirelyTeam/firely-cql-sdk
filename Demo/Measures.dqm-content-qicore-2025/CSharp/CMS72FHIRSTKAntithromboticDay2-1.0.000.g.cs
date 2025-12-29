@@ -227,7 +227,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ComfortMeasure) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -264,7 +264,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
             MedicationAdministration w_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationAdministration> x_ = context.Operators.Select<Medication, MedicationAdministration>(v_, w_);
 
             return x_;
@@ -435,7 +435,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object ThrombolyticTherapy) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -591,7 +591,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -635,7 +635,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration Antithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -743,7 +743,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Medication> bc_ = context.Operators.Where<Medication>(ba_, bb_);
             MedicationRequest bd_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> be_ = context.Operators.Select<Medication, MedicationRequest>(bc_, bd_);
 
             return be_;
@@ -786,7 +786,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Task> br_ = context.Operators.Where<Task>(bp_, bq_);
             MedicationRequest bs_(Task TaskReject) =>
-            MedReqAntithrombotic;
+                MedReqAntithrombotic;
             IEnumerable<MedicationRequest> bt_ = context.Operators.Select<Task, MedicationRequest>(br_, bs_);
 
             return bt_;
@@ -886,7 +886,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> b_ = this.Reason_For_Not_Administering_Antithrombotic(context);
         IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
         (CqlTupleMetadata, string id, CqlDateTime authoredOn)? d_(object @object) =>
-        ((CqlTupleMetadata, string id, CqlDateTime authoredOn)?)@object;
+            ((CqlTupleMetadata, string id, CqlDateTime authoredOn)?)@object;
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> e_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(c_, d_);
 
         return e_;
@@ -925,7 +925,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(d_, e_);
             Encounter g_((CqlTupleMetadata, string id, CqlDateTime authoredOn)? NoAntithrombotic) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?, Encounter>(f_, g_);
 
             return h_;
@@ -965,7 +965,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 };
                 IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
                 MedicationAdministration q_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
 
                 return r_;
@@ -1009,7 +1009,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
             Encounter l_(MedicationAdministration PharmacologicalContraindications) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
 
             return m_;
@@ -1070,7 +1070,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation INR) =>
-            IschemicStrokeEncounter;
+                IschemicStrokeEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;

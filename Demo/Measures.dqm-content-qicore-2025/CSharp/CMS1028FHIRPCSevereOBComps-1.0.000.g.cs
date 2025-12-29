@@ -703,7 +703,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure BloodTransfusion) =>
-            TwentyWeeksPlusEncounter;
+                TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -818,7 +818,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure Hysterectomy) =>
-            TwentyWeeksPlusEncounter;
+                TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -935,7 +935,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             };
             IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
             Encounter g_(Procedure ConvTrachVentProcedures) =>
-            TwentyWeeksPlusEncounter;
+                TwentyWeeksPlusEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<Procedure, Encounter>(f_, g_);
 
             return h_;

@@ -266,7 +266,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object DiabeticRetinopathy) =>
-            ValidQualifyingEncounter;
+                ValidQualifyingEncounter;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -318,7 +318,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter EncounterDiabeticRetinopathy) =>
-            MacularExam;
+                MacularExam;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -385,7 +385,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            LevelOfSeverityCommunicated;
+                LevelOfSeverityCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;
@@ -431,7 +431,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            MacularEdemaAbsentCommunicated;
+                MacularEdemaAbsentCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;
@@ -477,7 +477,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            MacularEdemaPresentCommunicated;
+                MacularEdemaPresentCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;
@@ -554,7 +554,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            LevelOfSeverityNotCommunicated;
+                LevelOfSeverityNotCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;
@@ -619,7 +619,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            MacularEdemaAbsentNotCommunicated;
+                MacularEdemaAbsentNotCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;
@@ -684,7 +684,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Communication j_(Encounter EncounterDiabeticRetinopathy) =>
-            MacularEdemaPresentNotCommunicated;
+                MacularEdemaPresentNotCommunicated;
             IEnumerable<Communication> k_ = context.Operators.Select<Encounter, Communication>(i_, j_);
 
             return k_;

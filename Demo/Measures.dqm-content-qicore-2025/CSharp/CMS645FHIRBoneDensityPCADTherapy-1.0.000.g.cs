@@ -147,7 +147,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> n_ = context.Operators.Where<Medication>(l_, m_);
             MedicationRequest o_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> p_ = context.Operators.Select<Medication, MedicationRequest>(n_, o_);
 
             return p_;
@@ -396,7 +396,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<Medication> n_ = context.Operators.Where<Medication>(l_, m_);
             MedicationRequest o_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> p_ = context.Operators.Select<Medication, MedicationRequest>(n_, o_);
 
             return p_;
@@ -663,7 +663,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             CqlDateTime k_(object ProstateCancer) =>
-            ADTDateTime;
+                ADTDateTime;
             IEnumerable<CqlDateTime> l_ = context.Operators.Select<object, CqlDateTime>(j_, k_);
 
             return l_;
@@ -724,7 +724,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<CqlDateTime> i_ = context.Operators.Where<CqlDateTime>((IEnumerable<CqlDateTime>)g_, h_);
             ServiceRequest j_(CqlDateTime FirstADTMP) =>
-            OrderTwelveMonthADT;
+                OrderTwelveMonthADT;
             IEnumerable<ServiceRequest> k_ = context.Operators.Select<CqlDateTime, ServiceRequest>(i_, j_);
 
             return k_;
@@ -794,7 +794,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<ServiceRequest> q_ = context.Operators.Where<ServiceRequest>(o_, p_);
             ServiceRequest r_(ServiceRequest OrderTwelveMonthsADT) =>
-            DEXAOrdered;
+                DEXAOrdered;
             IEnumerable<ServiceRequest> s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
             return s_;
@@ -858,7 +858,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<ServiceRequest> bj_ = context.Operators.Where<ServiceRequest>(bh_, bi_);
             Observation bk_(ServiceRequest OrderTwelveMonthsADT) =>
-            DEXAPerformed;
+                DEXAPerformed;
             IEnumerable<Observation> bl_ = context.Operators.Select<ServiceRequest, Observation>(bj_, bk_);
 
             return bl_;
@@ -948,7 +948,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             ServiceRequest k_(ServiceRequest OrderTwelveMonthsADT) =>
-            DEXANotOrdered;
+                DEXANotOrdered;
             IEnumerable<ServiceRequest> l_ = context.Operators.Select<ServiceRequest, ServiceRequest>(j_, k_);
 
             return l_;
@@ -1013,7 +1013,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
             Observation k_(ServiceRequest OrderTwelveMonthsADT) =>
-            DEXANotPerformed;
+                DEXANotPerformed;
             IEnumerable<Observation> l_ = context.Operators.Select<ServiceRequest, Observation>(j_, k_);
 
             return l_;

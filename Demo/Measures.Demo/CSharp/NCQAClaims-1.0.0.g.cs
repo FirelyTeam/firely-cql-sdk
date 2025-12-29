@@ -361,7 +361,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<object> ap_ = context.Operators.Select<object, object>(an_, ao_);
                             IEnumerable<object> aq_ = context.Operators.FlattenLateBoundList(ap_);
                             Coding ar_(object @object) =>
-                            (Coding)@object;
+                                (Coding)@object;
                             IEnumerable<Coding> as_ = context.Operators.Select<object, Coding>(aq_, ar_);
                             bool? at_(Coding HeaderCode)
                             {
@@ -525,7 +525,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         IEnumerable<object> ad_ = context.Operators.Select<object, object>(ab_, ac_);
                         IEnumerable<object> ae_ = context.Operators.FlattenLateBoundList(ad_);
                         Coding af_(object @object) =>
-                        (Coding)@object;
+                            (Coding)@object;
                         IEnumerable<Coding> ag_ = context.Operators.Select<object, Coding>(ae_, af_);
                         bool? ah_(Coding HeaderCode)
                         {
@@ -960,7 +960,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         IEnumerable<object> ah_ = context.Operators.Select<object, object>(af_, ag_);
                         IEnumerable<object> ai_ = context.Operators.FlattenLateBoundList(ah_);
                         Coding aj_(object @object) =>
-                        (Coding)@object;
+                            (Coding)@object;
                         IEnumerable<Coding> ak_ = context.Operators.Select<object, Coding>(ai_, aj_);
                         bool? al_(Coding HeaderCode)
                         {
@@ -1036,7 +1036,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 IEnumerable<object> bx_ = context.Operators.Select<object, object>(bv_, bw_);
                                 IEnumerable<object> by_ = context.Operators.FlattenLateBoundList(bx_);
                                 Coding bz_(object @object) =>
-                                (Coding)@object;
+                                    (Coding)@object;
                                 IEnumerable<Coding> ca_ = context.Operators.Select<object, Coding>(by_, bz_);
                                 bool? cb_(Coding ProcedureHeaderCode)
                                 {
@@ -1292,7 +1292,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<object> bb_ = context.Operators.Select<object, object>(az_, ba_);
                             IEnumerable<object> bc_ = context.Operators.FlattenLateBoundList(bb_);
                             Coding bd_(object @object) =>
-                            (Coding)@object;
+                                (Coding)@object;
                             IEnumerable<Coding> be_ = context.Operators.Select<object, Coding>(bc_, bd_);
                             bool? bf_(Coding HeaderCode)
                             {
@@ -1721,7 +1721,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         };
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
                         (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) =>
-                        pClaim;
+                            pClaim;
                         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
 
                         return ae_;
@@ -2050,7 +2050,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<object> aa_ = context.Operators.Select<object, object>(y_, z_);
             IEnumerable<object> ab_ = context.Operators.FlattenLateBoundList(aa_);
             Coding ac_(object @object) =>
-            (Coding)@object;
+                (Coding)@object;
             IEnumerable<Coding> ad_ = context.Operators.Select<object, Coding>(ab_, ac_);
             bool? ae_(Coding DiagnosisCode)
             {
@@ -2202,7 +2202,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         };
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
                         (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) =>
-                        pClaim;
+                            pClaim;
                         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
 
                         return ae_;
@@ -2409,7 +2409,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<object> aa_ = context.Operators.Select<object, object>(y_, z_);
             IEnumerable<object> ab_ = context.Operators.FlattenLateBoundList(aa_);
             Coding ac_(object @object) =>
-            (Coding)@object;
+                (Coding)@object;
             IEnumerable<Coding> ad_ = context.Operators.Select<object, Coding>(ab_, ac_);
             bool? ae_(Coding DiagnosisCode)
             {
@@ -2611,7 +2611,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         };
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
                         (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) =>
-                        pClaim;
+                            pClaim;
                         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
 
                         return ae_;
@@ -2936,7 +2936,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         };
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
                         (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) =>
-                        pClaim;
+                            pClaim;
                         IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
 
                         return ae_;
@@ -3329,7 +3329,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                     IEnumerable<Claim> br_ = context.Operators.Where<Claim>(bp_, bq_);
                     Claim bs_(Claim inpatientStay) =>
-                    nonAcuteInpatientStay;
+                        nonAcuteInpatientStay;
                     IEnumerable<Claim> bt_ = context.Operators.Select<Claim, Claim>(br_, bs_);
 
                     return bt_;
@@ -3348,7 +3348,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                     IEnumerable<Claim> bz_ = context.Operators.Where<Claim>(bx_, by_);
                     Claim ca_(Claim nonAcuteInpatientStay) =>
-                    inpatientStay;
+                        inpatientStay;
                     IEnumerable<Claim> cb_ = context.Operators.Select<Claim, Claim>(bz_, ca_);
 
                     return cb_;
@@ -3550,7 +3550,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                     IEnumerable<Identifier> ck_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cc_, cj_);
                     Identifier cl_(Identifier l) =>
-                    l;
+                        l;
                     IEnumerable<Identifier> cm_ = context.Operators.Select<Identifier, Identifier>(ck_, cl_);
                     (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? cn_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, ch_, cm_);
 
@@ -3623,7 +3623,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<IEnumerable<FhirString>> ek_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(ei_, ej_);
                             IEnumerable<FhirString> el_ = context.Operators.Flatten<FhirString>(ek_);
                             FhirString em_(FhirString X) =>
-                            X;
+                                X;
                             IEnumerable<FhirString> en_ = context.Operators.Select<FhirString, FhirString>(el_, em_);
                             IEnumerable<FhirString> eo_ = context.Operators.Distinct<FhirString>(en_);
                             int? ep_ = context.Operators.Count<FhirString>(eo_);
@@ -3702,7 +3702,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             };
             IEnumerable<object> q_ = context.Operators.Select<Claim.ItemComponent, object>(o_, p_);
             ResourceReference r_(object l) =>
-            l as ResourceReference;
+                l as ResourceReference;
             IEnumerable<ResourceReference> s_ = context.Operators.Select<object, ResourceReference>(q_, r_);
             bool? u_(Claim.ItemComponent i)
             {
@@ -3850,7 +3850,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                     IEnumerable<Identifier> cn_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cf_, cm_);
                     Identifier co_(Identifier l) =>
-                    l;
+                        l;
                     IEnumerable<Identifier> cp_ = context.Operators.Select<Identifier, Identifier>(cn_, co_);
                     (CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? cq_ = (CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj, ck_, cp_);
 
@@ -3926,7 +3926,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<IEnumerable<FhirString>> ep_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(en_, eo_);
                             IEnumerable<FhirString> eq_ = context.Operators.Flatten<FhirString>(ep_);
                             FhirString er_(FhirString X) =>
-                            X;
+                                X;
                             IEnumerable<FhirString> es_ = context.Operators.Select<FhirString, FhirString>(eq_, er_);
                             IEnumerable<FhirString> et_ = context.Operators.Distinct<FhirString>(es_);
                             int? eu_ = context.Operators.Count<FhirString>(et_);

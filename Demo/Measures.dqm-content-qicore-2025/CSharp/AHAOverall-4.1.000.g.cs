@@ -244,7 +244,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
             Encounter m_(object HeartFailure) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> n_ = context.Operators.Select<object, Encounter>(l_, m_);
 
             return n_;
@@ -351,7 +351,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object LVSDFindings) =>
-            HFOutpatientEncounter;
+                HFOutpatientEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -390,7 +390,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<Encounter> m_ = context.Operators.Where<Encounter>(k_, l_);
             object n_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            HeartTransplantComplications;
+                HeartTransplantComplications;
             IEnumerable<object> o_ = context.Operators.Select<Encounter, object>(m_, n_);
 
             return o_;
@@ -498,7 +498,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            LVADPlacement;
+                LVADPlacement;
             IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
             return l_;
@@ -548,7 +548,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<Encounter> m_ = context.Operators.Where<Encounter>(k_, l_);
             object n_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            LVADComplications;
+                LVADComplications;
             IEnumerable<object> o_ = context.Operators.Select<Encounter, object>(m_, n_);
 
             return o_;
@@ -690,7 +690,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            HeartTransplant;
+                HeartTransplant;
             IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
             return l_;
@@ -742,7 +742,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             };
             IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
             Encounter u_(Encounter Encounter2) =>
-            Encounter1;
+                Encounter1;
             IEnumerable<Encounter> v_ = context.Operators.Select<Encounter, Encounter>(t_, u_);
 
             return v_;

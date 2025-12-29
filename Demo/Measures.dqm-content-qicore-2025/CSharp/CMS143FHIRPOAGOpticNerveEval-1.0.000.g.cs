@@ -244,7 +244,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object PrimaryOpenAngleGlaucoma) =>
-            ValidQualifyingEncounter;
+                ValidQualifyingEncounter;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -307,7 +307,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterWithPOAG) =>
-            CupToDiscExamNotPerformed;
+                CupToDiscExamNotPerformed;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;
@@ -370,7 +370,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
             Observation m_(Encounter EncounterWithPOAG) =>
-            OpticDiscExamNotPerformed;
+                OpticDiscExamNotPerformed;
             IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
             return n_;
@@ -444,7 +444,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter EncounterWithPOAG) =>
-            CupToDiscExamPerformed;
+                CupToDiscExamPerformed;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;
@@ -495,7 +495,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter EncounterWithPOAG) =>
-            OpticDiscExamPerformed;
+                OpticDiscExamPerformed;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;

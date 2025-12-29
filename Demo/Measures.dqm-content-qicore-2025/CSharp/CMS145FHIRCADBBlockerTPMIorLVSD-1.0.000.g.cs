@@ -329,7 +329,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object CoronaryArteryDisease) =>
-            ValidQualifyingEncounter;
+                ValidQualifyingEncounter;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -433,7 +433,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure CardiacSurgeryProcedure) =>
-            ValidQualifyingEncounter;
+                ValidQualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -484,7 +484,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
             Encounter u_(Encounter Encounter2) =>
-            Encounter1;
+                Encounter1;
             IEnumerable<Encounter> v_ = context.Operators.Select<Encounter, Encounter>(t_, u_);
 
             return v_;
@@ -538,7 +538,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
             Encounter k_(object MyocardialInfarction) =>
-            EncounterWithCADProxy;
+                EncounterWithCADProxy;
             IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
 
             return l_;
@@ -692,7 +692,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
             Procedure i_(Encounter CADEncounterMI) =>
-            ImplantedCardiacPacer;
+                ImplantedCardiacPacer;
             IEnumerable<Procedure> j_ = context.Operators.Select<Encounter, Procedure>(h_, i_);
 
             return j_;
@@ -843,7 +843,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
             Encounter g_(object LVSDFindings) =>
-            EncounterWithCADProxy;
+                EncounterWithCADProxy;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
             return h_;
@@ -1034,7 +1034,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             MedicationRequest k_(Encounter CADEncounterModerateOrSevereLVSD) =>
-            ActiveBetaBlockerForLVSD;
+                ActiveBetaBlockerForLVSD;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
             return l_;
@@ -1185,7 +1185,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             MedicationRequest k_(Encounter CADEncounterMI) =>
-            ActiveBetaBlocker;
+                ActiveBetaBlocker;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
             return l_;
@@ -1408,7 +1408,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
             Procedure i_(Encounter CADEncounterModerateOrSevereLVSD) =>
-            ImplantedCardiacPacer;
+                ImplantedCardiacPacer;
             IEnumerable<Procedure> j_ = context.Operators.Select<Encounter, Procedure>(h_, i_);
 
             return j_;
@@ -1865,7 +1865,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             MedicationRequest k_(Encounter LVSDVisit) =>
-            NoBetaBlockerForLVSDOrdered;
+                NoBetaBlockerForLVSDOrdered;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
             return l_;
@@ -1969,7 +1969,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
             MedicationRequest k_(Encounter PriorMIVisit) =>
-            NoBetaBlockerForLVSDOrdered;
+                NoBetaBlockerForLVSDOrdered;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
             return l_;

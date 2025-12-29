@@ -442,7 +442,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>((IEnumerable<ServiceRequest>)h_, i_);
             Task k_(ServiceRequest FirstReferral) =>
-            ConsultantReportObtained;
+                ConsultantReportObtained;
             IEnumerable<Task> l_ = context.Operators.Select<ServiceRequest, Task>(j_, k_);
 
             return l_;

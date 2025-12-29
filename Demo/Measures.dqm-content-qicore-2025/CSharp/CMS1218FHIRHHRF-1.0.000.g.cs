@@ -445,7 +445,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure SurgeryWithAnesthesia) =>
-            ElectiveEncounter;
+                ElectiveEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -653,7 +653,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure HeadNeckProcedures) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -953,7 +953,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure Ventilation) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -1280,7 +1280,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
             Encounter j_(Observation CarbonDioxide) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> k_ = context.Operators.Select<Observation, Encounter>(i_, j_);
 
             return k_;
@@ -1553,7 +1553,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Observation> ek_ = context.Operators.Where<Observation>(ei_, ej_);
             Encounter el_(Observation BloodpH) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> em_ = context.Operators.Select<Observation, Encounter>(ek_, el_);
 
             return em_;
@@ -1835,7 +1835,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
             Encounter h_(Observation Oxygen) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
             return i_;
@@ -2223,7 +2223,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure TracheostomySurgery) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -2402,7 +2402,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure TracheostomySurgery) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -3045,7 +3045,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Location> h_ = context.Operators.Where<Location>(f_, g_);
             Encounter.LocationComponent i_(Location Location) =>
-            EncounterLocation;
+                EncounterLocation;
             IEnumerable<Encounter.LocationComponent> j_ = context.Operators.Select<Location, Encounter.LocationComponent>(h_, i_);
 
             return j_;
@@ -3225,7 +3225,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)?>(g_, h_);
         Procedure j_((CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)? tuple_fccbecjtombnskgdhjbefdudj) =>
-        tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation;
+            tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation;
         IEnumerable<Procedure> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)?, Procedure>(i_, j_);
         IEnumerable<Procedure> l_ = context.Operators.Distinct<Procedure>(k_);
 
@@ -3499,7 +3499,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure EndotrachealTubeIn) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -4051,7 +4051,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)?>(g_, h_);
         Encounter j_((CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)? tuple_qajmwefzjrlyudjfgicwdhsi) =>
-        tuple_qajmwefzjrlyudjfgicwdhsi?.EncounterWithSurgery;
+            tuple_qajmwefzjrlyudjfgicwdhsi?.EncounterWithSurgery;
         IEnumerable<Encounter> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)?, Encounter>(i_, j_);
         IEnumerable<Encounter> l_ = context.Operators.Distinct<Encounter>(k_);
 
@@ -4642,7 +4642,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)?> j_ = context.Operators.Where<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)?>(h_, i_);
         Procedure k_((CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)? tuple_bmexejitjfqtagoadebdecoag) =>
-        tuple_bmexejitjfqtagoadebdecoag?.Extubation;
+            tuple_bmexejitjfqtagoadebdecoag?.Extubation;
         IEnumerable<Procedure> l_ = context.Operators.Select<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)?, Procedure>(j_, k_);
         IEnumerable<Procedure> m_ = context.Operators.Distinct<Procedure>(l_);
 
@@ -4818,7 +4818,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         };
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)?> j_ = context.Operators.Where<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)?>(h_, i_);
         Procedure k_((CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)? tuple_ekminbgfrptfmgtchtshrgjuc) =>
-        tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation;
+            tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation;
         IEnumerable<Procedure> l_ = context.Operators.Select<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)?, Procedure>(j_, k_);
         IEnumerable<Procedure> m_ = context.Operators.Distinct<Procedure>(l_);
 
@@ -4853,7 +4853,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Location> h_ = context.Operators.Where<Location>(f_, g_);
             Encounter.LocationComponent i_(Location Location) =>
-            EncounterLocation;
+                EncounterLocation;
             IEnumerable<Encounter.LocationComponent> j_ = context.Operators.Select<Location, Encounter.LocationComponent>(h_, i_);
 
             return j_;
@@ -5091,7 +5091,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
             Encounter i_(Procedure Extubation) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
             return j_;
@@ -5609,7 +5609,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
             Encounter h_(Procedure Ventilation) =>
-            EncounterWithSurgery;
+                EncounterWithSurgery;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
             return i_;
@@ -5843,7 +5843,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
             Observation l_(Encounter QualifyingEncounter) =>
-            ASAclass;
+                ASAclass;
             IEnumerable<Observation> m_ = context.Operators.Select<Encounter, Observation>(k_, l_);
 
             return m_;
@@ -5897,7 +5897,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
             Observation j_(Encounter InpatientEncounter) =>
-            BMI;
+                BMI;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
             return k_;

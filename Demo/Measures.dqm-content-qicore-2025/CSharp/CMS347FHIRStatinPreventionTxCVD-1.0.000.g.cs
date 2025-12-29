@@ -951,7 +951,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
             MedicationRequest x_(Encounter QualifyingEncounter) =>
-            NoStatinTherapyOrdered;
+                NoStatinTherapyOrdered;
             IEnumerable<MedicationRequest> y_ = context.Operators.Select<Encounter, MedicationRequest>(w_, x_);
 
             return y_;
@@ -1012,7 +1012,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
             MedicationRequest z_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
 
             return aa_;
@@ -1041,7 +1041,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> an_ = context.Operators.Where<Medication>(al_, am_);
             MedicationRequest ao_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ap_ = context.Operators.Select<Medication, MedicationRequest>(an_, ao_);
 
             return ap_;
@@ -1071,7 +1071,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> bc_ = context.Operators.Where<Medication>(ba_, bb_);
             MedicationRequest bd_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> be_ = context.Operators.Select<Medication, MedicationRequest>(bc_, bd_);
 
             return be_;
@@ -1141,7 +1141,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
             MedicationRequest z_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
 
             return aa_;
@@ -1170,7 +1170,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> an_ = context.Operators.Where<Medication>(al_, am_);
             MedicationRequest ao_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ap_ = context.Operators.Select<Medication, MedicationRequest>(an_, ao_);
 
             return ap_;
@@ -1200,7 +1200,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             };
             IEnumerable<Medication> bc_ = context.Operators.Where<Medication>(ba_, bb_);
             MedicationRequest bd_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> be_ = context.Operators.Select<Medication, MedicationRequest>(bc_, bd_);
 
             return be_;

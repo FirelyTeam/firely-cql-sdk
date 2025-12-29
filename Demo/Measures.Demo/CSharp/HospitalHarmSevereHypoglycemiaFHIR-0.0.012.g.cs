@@ -209,7 +209,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             };
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
             MedicationAdministration l_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
 
             return m_;
@@ -253,7 +253,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             };
             IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
             Encounter g_(MedicationAdministration HypoglycemicMedication) =>
-            QualifyingEncounter;
+                QualifyingEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
             return h_;
@@ -329,7 +329,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 };
                 IEnumerable<MedicationAdministration> t_ = context.Operators.Where<MedicationAdministration>(r_, s_);
                 Observation u_(MedicationAdministration HypoglycemicMeds) =>
-                BloodGlucoseLab;
+                    BloodGlucoseLab;
                 IEnumerable<Observation> v_ = context.Operators.Select<MedicationAdministration, Observation>(t_, u_);
 
                 return v_;
@@ -375,7 +375,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 };
                 IEnumerable<MedicationAdministration> bf_ = context.Operators.Where<MedicationAdministration>(bd_, be_);
                 Observation bg_(MedicationAdministration HypoglycemicMeds) =>
-                BloodGlucoseLab;
+                    BloodGlucoseLab;
                 IEnumerable<Observation> bh_ = context.Operators.Select<MedicationAdministration, Observation>(bf_, bg_);
 
                 return bh_;
@@ -426,7 +426,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 };
                 IEnumerable<Observation> cs_ = context.Operators.Where<Observation>(cq_, cr_);
                 Observation ct_(Observation FollowupBloodGlucoseLab) =>
-                BloodGlucoseLab;
+                    BloodGlucoseLab;
                 IEnumerable<Observation> cu_ = context.Operators.Select<Observation, Observation>(cs_, ct_);
 
                 return cu_;

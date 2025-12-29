@@ -283,7 +283,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         CqlValueSet b_ = this.Upper_Respiratory_Infection(context);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         object d_(Condition X) =>
-        X as object;
+            X as object;
         IEnumerable<object> e_ = context.Operators.Select<Condition, object>(c_, d_);
         IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
         IEnumerable<ValueTuple<Encounter, object>> g_ = context.Operators.CrossJoin<Encounter, object>(a_, f_);
@@ -309,7 +309,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         };
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?> k_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?>(i_, j_);
         Encounter l_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) =>
-        tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters;
+            tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters;
         IEnumerable<Encounter> m_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?, Encounter>(k_, l_);
         IEnumerable<Encounter> n_ = context.Operators.Distinct<Encounter>(m_);
 
@@ -337,7 +337,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithURI) =>
-        EncounterWithURI;
+            EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -378,11 +378,11 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         object e_(Condition X) =>
-        X as object;
+            X as object;
         IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
         IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
         Condition h_(object X) =>
-        X as Condition;
+            X as Condition;
         IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
@@ -409,7 +409,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<Medication> an_ = context.Operators.Where<Medication>(al_, am_);
             MedicationRequest ao_(Medication M) =>
-            MR;
+                MR;
             IEnumerable<MedicationRequest> ap_ = context.Operators.Select<Medication, MedicationRequest>(an_, ao_);
 
             return ap_;
@@ -466,7 +466,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 };
                 IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
                 MedicationRequest w_(Medication M) =>
-                MR;
+                    MR;
                 IEnumerable<MedicationRequest> x_ = context.Operators.Select<Medication, MedicationRequest>(v_, w_);
 
                 return x_;
@@ -496,7 +496,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             };
             IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(o_, p_);
             Encounter r_(MedicationRequest OrderedAntibiotic) =>
-            EncounterWithURI;
+                EncounterWithURI;
             IEnumerable<Encounter> s_ = context.Operators.Select<MedicationRequest, Encounter>(q_, r_);
 
             return s_;
@@ -504,7 +504,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(a_, d_);
         Encounter f_(Encounter EncounterWithURI) =>
-        EncounterWithURI;
+            EncounterWithURI;
         IEnumerable<Encounter> g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);
         IEnumerable<Encounter> h_ = context.Operators.Distinct<Encounter>(g_);
 
@@ -540,7 +540,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithURI) =>
-        EncounterWithURI;
+            EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -569,7 +569,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithURI) =>
-        EncounterWithURI;
+            EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
@@ -597,7 +597,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter EncounterWithURI) =>
-        EncounterWithURI;
+            EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 

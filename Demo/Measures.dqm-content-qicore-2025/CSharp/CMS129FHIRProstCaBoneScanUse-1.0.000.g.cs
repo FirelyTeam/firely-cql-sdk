@@ -510,7 +510,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
             Observation q_(Procedure FirstProstateCancerTreatment) =>
-            ProstateCancerStaging;
+                ProstateCancerStaging;
             IEnumerable<Observation> r_ = context.Operators.Select<Procedure, Observation>(p_, q_);
 
             return r_;
@@ -623,7 +623,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>((IEnumerable<Observation>)n_, o_);
             Observation q_(Observation MostRecentProstateCancerStaging) =>
-            PSATest;
+                PSATest;
             IEnumerable<Observation> r_ = context.Operators.Select<Observation, Observation>(p_, q_);
 
             return r_;
@@ -763,7 +763,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)o_, p_);
             Observation r_(Procedure FirstProstateCancerTreatment) =>
-            GleasonScore;
+                GleasonScore;
             IEnumerable<Observation> s_ = context.Operators.Select<Procedure, Observation>(q_, r_);
 
             return s_;
@@ -840,7 +840,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
             Observation j_(Condition ActiveProstateCancer) =>
-            BoneScan;
+                BoneScan;
             IEnumerable<Observation> k_ = context.Operators.Select<Condition, Observation>(i_, j_);
 
             return k_;
@@ -908,7 +908,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
             object l_(Condition ActiveProstateCancer) =>
-            ProstateCancerPain;
+                ProstateCancerPain;
             IEnumerable<object> m_ = context.Operators.Select<Condition, object>(k_, l_);
 
             return m_;
@@ -1012,7 +1012,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             };
             IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
             Procedure i_(Condition ActiveProstateCancer) =>
-            SalvageTherapy;
+                SalvageTherapy;
             IEnumerable<Procedure> j_ = context.Operators.Select<Condition, Procedure>(h_, i_);
 
             return j_;

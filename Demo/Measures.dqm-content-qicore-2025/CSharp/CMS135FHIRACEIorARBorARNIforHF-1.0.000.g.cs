@@ -343,7 +343,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
             object q_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            PregnancyDiagnosis;
+                PregnancyDiagnosis;
             IEnumerable<object> r_ = context.Operators.Select<Encounter, object>(p_, q_);
 
             return r_;
@@ -394,7 +394,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             };
             IEnumerable<Encounter> an_ = context.Operators.Where<Encounter>(al_, am_);
             Observation ao_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-            PregnantObservation;
+                PregnantObservation;
             IEnumerable<Observation> ap_ = context.Operators.Select<Encounter, Observation>(an_, ao_);
 
             return ap_;

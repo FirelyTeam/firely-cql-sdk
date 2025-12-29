@@ -394,7 +394,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             };
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
             Encounter g_(Encounter EDEncounter) =>
-            EDTriageinMP;
+                EDTriageinMP;
             IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
 
             return h_;
@@ -698,7 +698,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
             Encounter h_(Encounter EDStay) =>
-            EDObsEncounter;
+                EDObsEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
             return i_;
