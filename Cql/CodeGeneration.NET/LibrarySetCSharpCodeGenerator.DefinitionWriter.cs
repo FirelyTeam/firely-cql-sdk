@@ -14,7 +14,8 @@ partial class LibrarySetCSharpCodeGenerator
         public DefinitionWriter AddIndent(int addIndent = 1) =>
             this with { LibraryWriter = LibraryWriter.AddIndent(addIndent) };
 
-        private IndentedTextWriter tw => LibraryWriter.IndentedTextWriter;
+        // ReSharper disable once InconsistentNaming
+        private IndentedStringBuilder sb => LibraryWriter.sb;
 
         public void WriteDefinition()
         {
@@ -37,7 +38,7 @@ partial class LibrarySetCSharpCodeGenerator
                     return;
 
                 case CqlLambdaDefinition ld:
-                    new LambdaDefinitionWriter(LibraryWriter).WriteDefinition(ld, tw);
+                    new LambdaDefinitionWriter(LibraryWriter).WriteDefinition(ld);
                     break;
 
                 default:
@@ -51,7 +52,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             var quotedCodeId = cd.Code.code!.QuoteString();
             var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
-            tw.WriteLine(
+            sb.AppendLine(
                 $$"""
                   [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
                   public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
@@ -78,7 +79,7 @@ partial class LibrarySetCSharpCodeGenerator
                                   {codeField}
                             """;
                 }));
-            tw.WriteLine(
+            sb.AppendLine(
                 $$"""
                   [CqlCodeSystemDefinition({{quotedName}}, codeSystemId: {{quotedCodeSystemId}}, codeSystemVersion: {{quotedCodeSystemVersion}})]
                   public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
@@ -105,7 +106,7 @@ partial class LibrarySetCSharpCodeGenerator
                                   {codeField}
                             """;
                 }));
-            tw.WriteLine(
+            sb.AppendLine(
                 $$"""
                   [CqlConceptDefinition({{quotedName}})]
                   public CqlConcept {{methodName}}(CqlContext _) => {{fieldName}};
@@ -121,7 +122,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedValueSetId = vsd.ValueSetId.QuoteString();
             string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
-            tw.WriteLine(
+            sb.AppendLine(
                 $$"""
                   [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
                   public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};

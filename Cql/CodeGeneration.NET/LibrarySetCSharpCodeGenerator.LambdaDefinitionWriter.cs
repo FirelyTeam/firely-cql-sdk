@@ -21,15 +21,16 @@ internal partial class LibrarySetCSharpCodeGenerator
         private TupleMetadataBuilder TupleMetadataBuilder => LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
         private string LibraryName => LibraryWriter.LibraryName;
         private TypeToCSharpConverter TypeToCSharpConverter => LibraryWriter.LibrarySetWriter.TypeToCSharpConverter;
+        // ReSharper disable once InconsistentNaming
+        private IndentedStringBuilder sb => LibraryWriter.sb;
 
         public void WriteDefinition(
-            CqlLambdaDefinition ld,
-            IndentedTextWriter tw)
+            CqlLambdaDefinition ld)
         {
             var (quotedName, methodName, _) = GetMemberNames(ld);
             var definitionAttributeTypeName = ld.GetType().Name;
 
-            tw.WriteLine(
+            sb.AppendLine(
                 $"""
                  [{definitionAttributeTypeName}({quotedName})]
                  """);
@@ -37,7 +38,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (ld is CqlExpressionDefinition ed)
                 foreach (var tag in ed.Tags)
                     foreach (var tagValue in tag.Values)
-                        tw.WriteLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
+                        sb.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
             VariableNameGenerator variableNameGenerator = new([], postfix: "_");
 
@@ -73,7 +74,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 funcSb.AppendLine();
             var definitionWithBody = funcSb.ToString();
 
-            tw.WriteLine(definitionWithBody);
+            sb.AppendLine(definitionWithBody);
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

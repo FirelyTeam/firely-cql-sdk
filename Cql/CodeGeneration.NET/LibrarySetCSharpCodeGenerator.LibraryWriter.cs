@@ -12,21 +12,16 @@ partial class LibrarySetCSharpCodeGenerator
     private record LibraryWriter(
         LibrarySetWriter LibrarySetWriter,
         ElmLibrary Library,
-        IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
+        // ReSharper disable once InconsistentNaming
+        IndentedStringBuilder sb) : IAddIndentMutable<LibraryWriter>
     {
-        public LibraryWriter(
-            LibrarySetWriter librarySetWriter,
-            ElmLibrary library,
-            StringWriter textWriter,
-            int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
-
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
         private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
 
         public LibraryWriter AddIndent(int addIndent = 1)
         {
-            return this with { IndentedTextWriter = IndentedTextWriter.AddIndent(addIndent) };
+            return this with { sb = sb.AddIndent(addIndent) };
         }
 
         public void WriteLibraryFile()
@@ -46,7 +41,7 @@ partial class LibrarySetCSharpCodeGenerator
             {
                 if (first)
                 {
-                    IndentedTextWriter.WriteLine("""
+                    sb.AppendLine("""
                                                  #region CqlTupleMetadata Properties
 
                                                  """);
@@ -55,7 +50,7 @@ partial class LibrarySetCSharpCodeGenerator
 
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
-                IndentedTextWriter.WriteLine($"""
+                sb.AppendLine($"""
                                               private static CqlTupleMetadata {propertyName} = new(
                                                 [{types}],
                                                 [{names}]);
@@ -65,7 +60,7 @@ partial class LibrarySetCSharpCodeGenerator
 
             if (!first)
             {
-                IndentedTextWriter.WriteLine(
+                sb.AppendLine(
                     """
                     #endregion CqlTupleMetadata Properties
 
@@ -75,7 +70,7 @@ partial class LibrarySetCSharpCodeGenerator
 
         private void WriteLibraryInterfaceImplementation()
         {
-            IndentedTextWriter.WriteLine($"""
+            sb.AppendLine($"""
                                           #region ILibrary Implementation
 
                                           public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
@@ -86,7 +81,7 @@ partial class LibrarySetCSharpCodeGenerator
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => IdentifierNormalizer.Normalize(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
-            IndentedTextWriter.WriteLine($"""
+            sb.AppendLine($"""
                                           public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
 
                                           #endregion ILibrary Implementation
@@ -97,20 +92,20 @@ partial class LibrarySetCSharpCodeGenerator
         private void WriteUsings()
         {
             foreach (var @using in LibrarySetWriter.Usings)
-                IndentedTextWriter.WriteLine($"using {@using};");
+                sb.AppendLine($"using {@using};");
 
             foreach (var @using in LibrarySetWriter.AliasedUsings)
-                IndentedTextWriter.WriteLine($"using {@using.Item1} = {@using.Item2};");
+                sb.AppendLine($"using {@using.Item1} = {@using.Item2};");
 
-            IndentedTextWriter.WriteLine();
+            sb.AppendLine();
         }
 
         private void WriteNamespaceFileScope()
         {
             if (LibrarySetWriter.Namespace is { Length: > 0 } @namespace)
             {
-                IndentedTextWriter.WriteLine($"namespace {@namespace};");
-                IndentedTextWriter.WriteLine();
+                sb.AppendLine($"namespace {@namespace};");
+                sb.AppendLine();
             }
         }
 
@@ -158,13 +153,13 @@ partial class LibrarySetCSharpCodeGenerator
                 {
                     if (lastDefinitionRegion != "")
                     {
-                        IndentedTextWriter.WriteLine($"""
+                        sb.AppendLine($"""
                                                       #endregion {lastDefinitionRegion}
 
                                                       """);
                     }
 
-                    IndentedTextWriter.WriteLine($"""
+                    sb.AppendLine($"""
                                                   #region {definitionRegion}
 
                                                   """);
@@ -174,12 +169,12 @@ partial class LibrarySetCSharpCodeGenerator
 
                 var methodWriter = new DefinitionWriter(this, definition);
                 methodWriter.WriteDefinition();
-                IndentedTextWriter.WriteLine();
+                sb.AppendLine();
             }
 
             if (lastDefinitionRegion != "")
             {
-                IndentedTextWriter.WriteLine($"""
+                sb.AppendLine($"""
                                               #endregion {lastDefinitionRegion}
 
                                               """);
@@ -188,15 +183,15 @@ partial class LibrarySetCSharpCodeGenerator
 
         private void WriteClass()
         {
-            IndentedTextWriter.WriteLine(
+            sb.AppendLine(
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
-            IndentedTextWriter.WriteLine(
+            sb.AppendLine(
                 LibraryVersionedIdentifier.Version is { } version && Version.TryParse(version, out _)
                     ? $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
                     : $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()})]");
 
-            IndentedTextWriter.WriteLine($$"""
+            sb.AppendLine($$"""
                                            public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
                                            {
                                            """);
@@ -208,12 +203,12 @@ partial class LibrarySetCSharpCodeGenerator
                 classBlockContext.WriteMethods();
                 classBlockContext.WriteCqlTupleMetadataProperties();
             }
-            IndentedTextWriter.WriteLine("}");
+            sb.AppendLine("}");
         }
 
         private void WriteSingletonInstanceProperty()
         {
-            IndentedTextWriter.WriteLine($$"""
+            sb.AppendLine($$"""
                                            public static {{ClassName}} Instance { get; } = new();
 
                                            """);
@@ -221,7 +216,7 @@ partial class LibrarySetCSharpCodeGenerator
 
         private void WriteClassConstructor()
         {
-            IndentedTextWriter.WriteLine($$"""
+            sb.AppendLine($$"""
                                            private {{ClassName}}() {}
 
                                            """);

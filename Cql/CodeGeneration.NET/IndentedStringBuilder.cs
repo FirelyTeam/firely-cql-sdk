@@ -8,26 +8,27 @@
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal readonly record struct IndentedTextWriter(StringWriter TextWriter, int Indent = 0) : IAddIndentMutable<IndentedTextWriter>
+internal readonly record struct IndentedStringBuilder(
+    StringBuilder? StringBuilder = null,
+    int Indent = 0) : IAddIndentMutable<IndentedStringBuilder>
 {
     /// <summary>
-    /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent.
+    /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public void WriteLine(string text = "") => WriteLine(0, text);
+    public IndentedStringBuilder AppendLine(string text = "") => AppendLine(0, text);
 
     /// <summary>
-    /// Writes a multiline text to the <see cref="TextWriter"/> while following a consistent indent plus an additional indent from <paramref name="addIndent"/>.
+    /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent plus an additional indent from <paramref name="addIndent"/>.
     /// Leading tabs will be treated as indents.
     /// </summary>
-    public void WriteLine(int addIndent, string multilineText = "")
+    public IndentedStringBuilder AppendLine(int addIndent, string multilineText = "")
     {
-        var sb = GetStringBuilder();
         foreach (var line in multilineText.Split(Environment.NewLine))
         {
             if (line.Length > 0)
             {
-                if (!sb.AtBeginningOfLine())
+                if (!StringBuilder.AtBeginningOfLine())
                     throw new InvalidOperationException("Expecting indents to start at beginning of a line");
 
                 int leadingTabs = line.TakeWhile(c => c == '\t').Count();
@@ -35,23 +36,22 @@ internal readonly record struct IndentedTextWriter(StringWriter TextWriter, int 
                 if (strippedLeadingTabs.Length > 0)
                 {
                     var finalIndent = Indent + leadingTabs + addIndent;
-                    sb.AppendLine(finalIndent, strippedLeadingTabs);
+                    StringBuilder.AppendLine(finalIndent, strippedLeadingTabs);
                     continue;
                 }
             }
 
-            sb.AppendLine();
+            StringBuilder.AppendLine();
         }
+        return this;
     }
 
-    public IndentedTextWriter AddIndent(int addIndent = 1)
-    {
-        return this with { Indent = Indent + addIndent };
-    }
-
-    private StringWriter TextWriter { get; } = TextWriter;
+    public IndentedStringBuilder AddIndent(int addIndent = 1) =>
+        this with { Indent = Indent + addIndent };
 
     public int Indent { get; private init; } = Indent;
 
-    private StringBuilder GetStringBuilder() => TextWriter.GetStringBuilder();
+    public StringBuilder StringBuilder { get; } = StringBuilder ?? new();
+
+    public override string ToString() => StringBuilder.ToString();
 }
