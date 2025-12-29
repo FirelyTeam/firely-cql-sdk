@@ -609,8 +609,8 @@ internal partial class LibrarySetCSharpCodeGenerator
             else
             {
                 lambdaSb.AppendLine(" =>");
-                var lambdaBody = WithAddedIndent(1).ConvertExpression(lambda.Body);
-                lambdaSb.Append(lambdaBody);
+                var lambdaBody = ConvertExpression(lambda.Body);
+                lambdaSb.AddIndent().Append(lambdaBody);
             }
 
             return lambdaSb.ToString();
