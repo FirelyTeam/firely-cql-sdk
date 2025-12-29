@@ -11,13 +11,12 @@ internal partial class LibrarySetCSharpCodeGenerator
 {
     private record LambdaDefinitionWriter(
         LibraryWriter LibraryWriter,
-        int Indent = LambdaDefinitionWriter.DefaultIndent,
-        bool UseIndent = LambdaDefinitionWriter.DefaultUseIndent)
+        IndentedStringBuilder ContextBuilder)
     {
-        private const int DefaultIndent = 0;
-        private const bool DefaultUseIndent = true;
+        internal LambdaDefinitionWriter(LibraryWriter LibraryWriter) : this(LibraryWriter, new IndentedStringBuilder())
+        {
+        }
 
-        private string IndentString => UseIndent ? StringExtensions.IndentString(Indent) : string.Empty;
         private TupleMetadataBuilder TupleMetadataBuilder => LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
         private string LibraryName => LibraryWriter.LibraryName;
         private TypeToCSharpConverter TypeToCSharpConverter => LibraryWriter.LibrarySetWriter.TypeToCSharpConverter;
@@ -83,12 +82,18 @@ internal partial class LibrarySetCSharpCodeGenerator
             return body;
         }
 
-        private LambdaDefinitionWriter WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
-            this with { Indent = indentFn?.Invoke(Indent) ?? Indent, UseIndent = useIndentFn?.Invoke(UseIndent) ?? UseIndent };
+        private LambdaDefinitionWriter WithIndentLevel(int indent) =>
+            this;
+            //this with { ContextBuilder = new IndentedStringBuilder(indent: indent) };
 
-        private LambdaDefinitionWriter WithDontUseIndent() => WithOverride(useIndentFn: _ => false);
+        private LambdaDefinitionWriter WithAddedIndent(int addIndent = 1) => WithIndentLevel(ContextBuilder.Indent + addIndent);
 
-        private LambdaDefinitionWriter WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
+        private LambdaDefinitionWriter WithoutIndent() => WithIndentLevel(0);
+
+        private IndentedStringBuilder CreateBuilder(bool includeIndent = true) =>
+            new()
+            // new(indent: includeIndent ? ContextBuilder.Indent : 0)
+        ;
 
         private string ConvertExpression(
             Expression expression)
@@ -100,7 +105,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ConstantExpression constant => ConvertConstantExpression(constant),
                     NewExpression @new => ConvertNewExpression(@new),
                     MethodCallExpression call => ConvertMethodCallExpression(call),
-                    LambdaExpression lambda => ConvertLambdaExpression(lambda),
+                    LambdaExpression lambda => ConvertLambdaExpression(lambda, includeContextParameter: false),
                     BinaryExpression binary => ConvertBinaryExpression(binary),
                     UnaryExpression unary => ConvertUnaryExpression(unary),
                     NewArrayExpression newArray => ConvertNewArrayExpression(newArray),
@@ -143,8 +148,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertDefinitionCallExpression(
             DefinitionCallExpression dce)
         {
-            var sb = new StringBuilder();
-            sb.Append(IndentString);
+            var sb = CreateBuilder();
             var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
             sb.Append(targetMember);
             sb.Append("(context)");
@@ -154,8 +158,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertFunctionCallExpression(
             FunctionCallExpression fce)
         {
-            var sb = new StringBuilder();
-            sb.Append(IndentString);
+            var sb = CreateBuilder();
             var targetMember = GetTargetedMemberName(fce.LibraryName, fce.FunctionName);
             sb.Append(targetMember);
             sb.Append(ConvertArguments(fce.Arguments));
@@ -176,15 +179,17 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertBlockExpression(
             BlockExpression block)
         {
-            var sb = new StringBuilder();
+            var sb = CreateBuilder();
 
-            sb.AppendLine(Indent, "{");
+            sb.AppendLine("{");
+
+            var blockBodyBuilder = sb.AddIndent(1);
 
             var lastExpression = block.Expressions.LastOrDefault();
             var isFirstStatement = true;
 
-            var nextArgsUseIndentTrue = WithOverride(indent => indent + 1, _ => true);
-            var nextArgsUseIndentFalse = WithOverride(indent => indent + 1, _ => false);
+            var nextArgsUseIndentTrue = WithAddedIndent(1);
+            var nextArgsUseIndentFalse = WithAddedIndent(1).WithoutIndent();
             foreach (var childStatement in block.Expressions)
             {
                 if (ReferenceEquals(childStatement, lastExpression))
@@ -192,31 +197,32 @@ internal partial class LibrarySetCSharpCodeGenerator
                     if (childStatement is not
                         (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
-                        if (!isFirstStatement) sb.AppendLine();
-                        sb.Append(Indent + 1, "return ");
+                        if (!isFirstStatement)
+                            blockBodyBuilder.AppendLine();
+                        blockBodyBuilder.Append("return ");
                     }
 
-                    sb.Append(nextArgsUseIndentFalse.ConvertExpression(childStatement));
+                    blockBodyBuilder.Append(nextArgsUseIndentFalse.ConvertExpression(childStatement));
                 }
                 else
                 {
-                    sb.Append(nextArgsUseIndentTrue.ConvertExpression(childStatement));
+                    blockBodyBuilder.Append(nextArgsUseIndentTrue.ConvertExpression(childStatement));
                 }
 
                 switch (childStatement)
                 {
                     case CaseWhenThenExpression:
-                        sb.AppendLine("");
+                        blockBodyBuilder.AppendLine();
                         break;
                     default:
-                        sb.AppendLine(";");
+                        blockBodyBuilder.AppendLine(";");
                         break;
                 }
 
                 isFirstStatement = false;
             }
 
-            sb.Append(Indent, "}");
+            sb.Append("}");
 
             return sb.ToString();
         }
@@ -224,9 +230,13 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertNullConditionalMemberExpression(
             NullConditionalMemberExpression nullp)
         {
-            var @object = WithOverride(indent => 0, useIndent => true).ConvertExpression(nullp.MemberExpression.Expression!);
+            var @object = WithIndentLevel(0).ConvertExpression(nullp.MemberExpression.Expression!);
             @object = @object.ParenthesizeIfNeeded();
-            return $"{IndentString}{@object}?.{nullp.MemberExpression.Member.Name}";
+            var sb = CreateBuilder();
+            sb.Append(@object);
+            sb.Append("?.");
+            sb.Append(nullp.MemberExpression.Member.Name);
+            return sb.ToString();
         }
 
         private string ConvertConstantExpression(
@@ -265,7 +275,9 @@ internal partial class LibrarySetCSharpCodeGenerator
                 };
             }
 
-            return $"{IndentString}{text}";
+            var builder = CreateBuilder();
+            builder.Append(text);
+            return builder.ToString();
 
             string DefaultExpressionForType()
             {
@@ -281,14 +293,21 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertParameterExpression(
             ParameterExpression pe)
         {
-            return $"{IndentString}{StringExtensions.GetOrCreateName(pe)}";
+            var builder = CreateBuilder();
+            builder.Append(StringExtensions.GetOrCreateName(pe));
+            return builder.ToString();
         }
 
         private string ConvertInvocationExpression(
             InvocationExpression invoc)
         {
             if (invoc.Expression is ParameterExpression pe && !invoc.Arguments.Any())
-                return $"{IndentString}{pe.Name}()";
+            {
+                var builder = CreateBuilder();
+                builder.Append(pe.Name ?? string.Empty);
+                builder.Append("()");
+                return builder.ToString();
+            }
             else
                 throw new NotImplementedException();
         }
@@ -296,19 +315,18 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertMethodCallExpression(
             MethodCallExpression call)
         {
-            var sb = new StringBuilder();
-            sb.Append(IndentString);
+            var sb = CreateBuilder();
 
             var @object = call switch
             {
-                { Object: not null } => $"{WithDontUseIndent().ConvertExpression(call.Object)}.",
+                { Object: not null } => $"{WithoutIndent().ConvertExpression(call.Object)}.",
                 { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
-                    $"{WithDontUseIndent().ConvertExpression(call.Arguments[0])}.",
+                    $"{WithoutIndent().ConvertExpression(call.Arguments[0])}.",
                 { Method.IsStatic: true } => $"{TypeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
                 _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
 
-            sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}");
+            sb.Append($"{@object}{PrettyMethodName(call.Method)}");
 
             var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
 
@@ -319,27 +337,23 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertArguments(
             IEnumerable<Expression> paramList)
         {
-            var sb = new StringBuilder();
+            var sb = CreateBuilder(includeIndent: false);
             sb.Append("(");
 
             bool firstArg = true;
-            var argsForArgument = WithOverride(indent => indent + 1, _ => false);
+            var argsForArgument = WithoutIndent().WithAddedIndent(1);
             foreach (var argument in paramList)
             {
                 var argAsCode = argsForArgument.ConvertExpression(argument);
-                if (firstArg)
-                {
-                    sb.Append(argAsCode);
-                    firstArg = false;
-                }
-                else
-                {
+
+                if (!firstArg)
                     sb.Append(", ");
-                    sb.Append(argAsCode);
-                }
+
+                sb.Append(argAsCode);
+                firstArg = false;
             }
 
-            sb.Append(')');
+            sb.Append(")");
 
             return sb.ToString();
         }
@@ -349,7 +363,9 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
             var defaultExpression = isNullableType ? "null" : $"default({TypeToCSharpConverter.ToCSharp(de.Type)})";
-            return $"{IndentString}{defaultExpression}";
+            var builder = CreateBuilder();
+            builder.Append(defaultExpression);
+            return builder.ToString();
         }
 
         private string ConvertTypeBinaryExpression(
@@ -357,10 +373,13 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
-                var left = WithDontUseIndent().ConvertExpression(typeBinary.Expression);
+                var left = WithoutIndent().ConvertExpression(typeBinary.Expression);
                 var type = TypeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
-                var @is = $"{left} is {type}";
-                return @is;
+                var sb = CreateBuilder(includeIndent: false);
+                sb.Append(left);
+                sb.Append(" is ");
+                sb.Append(type);
+                return sb.ToString();
             }
             else
                 throw new NotSupportedException($"Don't know how to convert a type binary operator {typeBinary.NodeType} into C#.");
@@ -369,18 +388,18 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertConditionalExpression(
             ConditionalExpression ce)
         {
-            var conditionalSb = new StringBuilder();
-            conditionalSb.Append(IndentString);
-            conditionalSb.Append('(');
-            var nextArgs = WithDontUseIndent();
+            var conditionalSb = CreateBuilder();
+            conditionalSb.Append("(");
+            var nextArgs = WithoutIndent();
             var test = nextArgs.ConvertExpression(ce.Test);
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{test}");
+            conditionalSb.AppendLine(test);
 
-            var nextArgs2 = nextArgs.WithOverride(indent => indent + 2);
+            var nextArgs2 = nextArgs.WithAddedIndent(2);
             var ifTrue = $"{nextArgs2.ConvertExpression(ce.IfTrue)}";
             var ifFalse = $"{nextArgs2.ConvertExpression(ce.IfFalse)}";
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{StringExtensions.IndentString(Indent + 1)}? {ifTrue}");
-            conditionalSb.Append(CultureInfo.InvariantCulture, $"{StringExtensions.IndentString(Indent + 1)}: {ifFalse})");
+            var indentedConditionalSb = conditionalSb.AddIndent(1);
+            indentedConditionalSb.AppendLine($"? {ifTrue}");
+            indentedConditionalSb.Append($": {ifFalse})");
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
                 return $"({TypeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb}";
@@ -391,24 +410,19 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertCaseWhenThenExpression(
             CaseWhenThenExpression conditional)
         {
-            var sb = new StringBuilder();
+            var sb = CreateBuilder();
 
             bool firstCase = true;
-            var nextArgs = WithOverride(indent => indent + 1, _ => false);
+            var nextArgs = WithoutIndent().WithAddedIndent(1);
             foreach (var c in conditional.WhenThenCases)
             {
-                if (firstCase)
-                    sb.Append(Indent, "if (");
-                else
-                    sb.Append(Indent, "else if (");
-
-                sb.Append(nextArgs.ConvertExpression(c.When));
-                sb.AppendLine(")");
+                var condition = nextArgs.ConvertExpression(c.When);
+                sb.AppendLine(firstCase ? $"if ({condition})" : $"else if ({condition})");
                 sb.AppendLine(ConvertConditionalStatementBlock(c.Then));
                 firstCase = false;
             }
 
-            sb.AppendLine(Indent, "else");
+            sb.AppendLine("else");
             sb.Append(ConvertConditionalStatementBlock(conditional.ElseCase));
 
             return sb.ToString();
@@ -417,19 +431,20 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertConditionalStatementBlock(
             Expression conditionalActionBlock)
         {
-            var nextArgs = WithOverride(indent => indent + 1, _ => false);
+            var nextArgs = WithoutIndent().WithAddedIndent(1);
             if (conditionalActionBlock is BlockExpression)
             {
-                return WithDoUseIndent().ConvertExpression(conditionalActionBlock);
+                return ConvertExpression(conditionalActionBlock);
             }
             else
             {
-                var sb = new StringBuilder();
-                sb.AppendLine(Indent, "{");
-                sb.Append(nextArgs.Indent, "return ");
-                sb.Append(nextArgs.ConvertExpression(conditionalActionBlock));
-                sb.AppendLine(";");
-                sb.Append(Indent, "}");
+                var sb = CreateBuilder();
+                sb.AppendLine("{");
+                var returnBuilder = sb.AddIndent(1);
+                returnBuilder.Append("return ");
+                returnBuilder.Append(nextArgs.ConvertExpression(conditionalActionBlock));
+                returnBuilder.AppendLine(";");
+                sb.Append("}");
 
                 return sb.ToString();
             }
@@ -441,35 +456,26 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (TypeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
                 return ConvertMemberInitTupleExpression(memberInit);
 
-            var memberInitSb = new StringBuilder();
-            memberInitSb.Append(IndentString);
+            var memberInitSb = CreateBuilder();
             var typeName = TypeToCSharpConverter.ToCSharp(memberInit.Type);
-#pragma warning disable CA1305 // Specify IFormatProvider
             memberInitSb.AppendLine($"new {typeName}");
-#pragma warning restore CA1305 // Specify IFormatProvider
-            var braceIndent = StringExtensions.IndentString(Indent);
-            memberInitSb.Append(braceIndent);
             memberInitSb.AppendLine("{");
-            var braceIndentPlusOne = StringExtensions.IndentString(Indent + 1);
+            var innerMemberSb = memberInitSb.AddIndent(1);
 
-            var nextContext = WithOverride(indent => indent + 1, _ => false);
+            var nextContext = WithoutIndent().WithAddedIndent(1);
             foreach (var binding in memberInit.Bindings)
             {
                 if (binding is MemberAssignment assignment)
                 {
                     var memberName = assignment.Member.Name;
                     var assignmentCode = nextContext.ConvertExpression(assignment.Expression);
-                    memberInitSb.Append(braceIndentPlusOne);
-#pragma warning disable CA1305 // Specify IFormatProvider
-                    memberInitSb.Append($"{memberName} = {assignmentCode}");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                    memberInitSb.AppendLine(",");
+                    innerMemberSb.Append($"{memberName} = {assignmentCode}");
+                    innerMemberSb.AppendLine(",");
                 }
                 else
                     throw new NotSupportedException($"Don't know how to convert a new member init of type {binding.GetType()} into C#.");
             }
 
-            memberInitSb.Append(braceIndent);
             memberInitSb.Append("}");
 
             return memberInitSb.ToString();
@@ -483,7 +489,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                           .Cast<MemberAssignment>()
                           .ToDictionary(
                               ma => ma.Member.Name,
-                              ma => WithOverride(indent => 0, useIndent => false).ConvertExpression(ma.Expression));
+                              ma => WithoutIndent().ConvertExpression(ma.Expression));
 
             var tupleProperties = TypeToCSharpConverter
                                   .GetTupleProperties(memberInit.Type)
@@ -506,31 +512,23 @@ internal partial class LibrarySetCSharpCodeGenerator
             {
                 case ExpressionType.NewArrayInit:
                 {
-                    var newArraySb = new StringBuilder();
-                    var braceIndent = StringExtensions.IndentString(Indent);
+                    var newArraySb = CreateBuilder(includeIndent: false);
                     newArraySb.AppendLine("[");
 
-                    var nextContext = WithOverride(indent => indent + 1, _ => true);
+                    var nextContext = WithAddedIndent(1);
                     foreach (var expr in newArray.Expressions)
                     {
                         var exprCode = nextContext.ConvertExpression(expr);
-                        newArraySb.Append(exprCode);
-                        newArraySb.AppendLine(",");
+                        newArraySb.AppendLine($"{exprCode},");
                     }
 
-                    newArraySb.Append(braceIndent);
-                    newArraySb.Append(']');
+                    newArraySb.Append(ContextBuilder.Indent, "]");
                     return newArraySb.ToString();
                 }
                 case ExpressionType.NewArrayBounds:
                 {
-                    var newArraySb = new StringBuilder();
-                    newArraySb.Append(IndentString);
-                    // var arrayType = _typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
-                    // var size = ConvertExpression(0, newArray.Expressions[0], false);
-#pragma warning disable CA1305 // Specify IFormatProvider
+                    var newArraySb = CreateBuilder();
                     newArraySb.AppendLine("[]");
-#pragma warning restore CA1305 // Specify IFormatProvider
                     return newArraySb.ToString();
                 }
 
@@ -542,12 +540,12 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertNewExpression(
             NewExpression @new)
         {
-            var nextContext = WithOverride(indent => 0, _ => true);
+            var nextContext = WithIndentLevel(0);
             var arguments = @new.Arguments.Select(a => nextContext.ConvertExpression(a));
             var argString = string.Join(", ", arguments);
-            var newSb = new StringBuilder();
-            newSb.Append(CultureInfo.InvariantCulture, $"{IndentString}new {TypeToCSharpConverter.ToCSharp(@new.Type)}");
-            newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
+            var newSb = CreateBuilder();
+            newSb.Append($"new {TypeToCSharpConverter.ToCSharp(@new.Type)}");
+            newSb.Append($"({argString})");
             return newSb.ToString();
         }
 
@@ -556,19 +554,25 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var nullProp = TypeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
             var @object = me.Expression is not null
-                              ? WithOverride(_ => 0, _ => true).ConvertExpression(me.Expression)
+                              ? WithIndentLevel(0).ConvertExpression(me.Expression)
                               : TypeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
             @object = @object.ParenthesizeIfNeeded();
             var memberName = me.Member.Name.EscapeKeywords();
-            return $"{IndentString}{@object}{nullProp}.{memberName}";
+            var builder = CreateBuilder();
+            builder.Append(@object);
+            builder.Append(nullProp);
+            builder.Append(".");
+            builder.Append(memberName);
+            return builder.ToString();
         }
 
         private string ConvertLambdaExpression(
             LambdaExpression lambda,
             bool functionMode = false,
-            IReadOnlyDictionary<string, string>? originalParameterNames = null)
+            IReadOnlyDictionary<string, string>? originalParameterNames = null,
+            bool includeContextParameter = true)
         {
-            var lambdaSb = new StringBuilder();
+            var lambdaSb = CreateBuilder(includeIndent: false);
 
             var parameters = lambda.Parameters.Select(p =>
             {
@@ -586,7 +590,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             }).ToList();
 
             // inserts the context parameter in the start of the lambda expression
-            if (Indent == 0)
+            if (includeContextParameter)
                 parameters.Insert(0, "CqlContext context");
 
             var lambdaParameters = $"({string.Join(", ", parameters)})";
@@ -599,13 +603,13 @@ internal partial class LibrarySetCSharpCodeGenerator
                 else
                     lambdaSb.AppendLine();
 
-                var lambdaBody = WithDoUseIndent().ConvertExpression(lambda.Body);
+                var lambdaBody = ConvertExpression(lambda.Body);
                 lambdaSb.Append(lambdaBody);
             }
             else
             {
                 lambdaSb.AppendLine(" =>");
-                var lambdaBody = WithOverride(indent => indent + 1, _ => true).ConvertExpression(lambda.Body);
+                var lambdaBody = WithAddedIndent(1).ConvertExpression(lambda.Body);
                 lambdaSb.Append(lambdaBody);
             }
 
@@ -616,12 +620,12 @@ internal partial class LibrarySetCSharpCodeGenerator
             LambdaExpression function,
             string name)
         {
-            var funcSb = new StringBuilder();
-            funcSb.Append(IndentString);
-            funcSb.Append(TypeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
+            var funcSb = CreateBuilder();
+            funcSb.Append(TypeToCSharpConverter.ToCSharp(function.ReturnType));
+            funcSb.Append(" ");
             funcSb.Append(name);
 
-            var lambda = ConvertLambdaExpression(function, functionMode: true);
+            var lambda = ConvertLambdaExpression(function, functionMode: true, includeContextParameter: false);
             funcSb.Append(lambda);
 
             return funcSb.ToString();
@@ -633,7 +637,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             var stripped = StripBoxing(unary);
 
             if (stripped is not UnaryExpression strippedUnary)
-                return WithDontUseIndent().ConvertExpression(stripped);
+                return WithoutIndent().ConvertExpression(stripped);
 
             switch (strippedUnary.NodeType)
             {
@@ -641,18 +645,21 @@ internal partial class LibrarySetCSharpCodeGenerator
                 case ExpressionType.Convert:
                 case ExpressionType.TypeAs:
                 {
-                    var operand = WithDontUseIndent().ConvertExpression(strippedUnary.Operand);
+                    var operand = WithoutIndent().ConvertExpression(strippedUnary.Operand);
                     operand = operand.ParenthesizeIfNeeded();
                     var typeName = TypeToCSharpConverter.ToCSharp(strippedUnary.Type);
-                    var code = strippedUnary.NodeType == ExpressionType.TypeAs
-                                   ? $"{IndentString}{operand} as {typeName}"
-                                   : $"{IndentString}({typeName}){operand}";
-                    return code;
+                    var builder = CreateBuilder();
+                    builder.Append(strippedUnary.NodeType == ExpressionType.TypeAs
+                        ? $"{operand} as {typeName}"
+                        : $"({typeName}){operand}");
+                    return builder.ToString();
                 }
                 case ExpressionType.Throw:
                 {
-                    var operand = WithDontUseIndent().ConvertExpression(strippedUnary.Operand);
-                    return $"{IndentString}throw ({operand})";
+                    var operand = WithoutIndent().ConvertExpression(strippedUnary.Operand);
+                    var builder = CreateBuilder();
+                    builder.Append($"throw ({operand})");
+                    return builder.ToString();
                 }
                 default:
                     throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
@@ -662,7 +669,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         private string ConvertBinaryExpression(
             BinaryExpression binary)
         {
-            var nextArgs = WithDontUseIndent();
+            var nextArgs = WithoutIndent();
             var left = StripBoxing(binary.Left);
             var right = StripBoxing(binary.Right);
 
@@ -674,8 +681,9 @@ internal partial class LibrarySetCSharpCodeGenerator
 
                 var rightCode = nextArgs.ConvertExpression(right);
                 var typeDeclaration = TypeToCSharpConverter.ToCSharp(left.Type);
-                var assignment = $"{IndentString}{typeDeclaration} {StringExtensions.GetOrCreateName(parameter)} = {rightCode}";
-                return assignment;
+                var builder = CreateBuilder();
+                builder.Append($"{typeDeclaration} {StringExtensions.GetOrCreateName(parameter)} = {rightCode}");
+                return builder.ToString();
             }
             else
             {
@@ -692,7 +700,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
                     // (null is null) --> true
                     "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
-                    _                                                                           => $"{IndentString}{leftCode} {@operator} {rightCode}"
+                    _                                                                           => CreateBuilder().Append($"{leftCode} {@operator} {rightCode}").ToString()
                 };
                 return binaryString;
             }

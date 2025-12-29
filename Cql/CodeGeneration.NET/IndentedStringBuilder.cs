@@ -12,10 +12,9 @@ internal class IndentedStringBuilder(
     StringBuilder? stringBuilder = null,
     int indent = 0) : IAddIndentMutable<IndentedStringBuilder>
 {
-    /// <summary>
-    /// Writes a multiline text to the underlying <see cref="System.Text.StringBuilder"/> while following a consistent indent.
-    /// Leading tabs will be treated as indents.
-    /// </summary>
+    public IndentedStringBuilder Append(int addIndent, string text = "") =>
+        AppendCore(addIndent, text, addNewLine: false);
+
     public IndentedStringBuilder Append(string text = "") =>
         AppendCore(0, text, addNewLine: false);
 
