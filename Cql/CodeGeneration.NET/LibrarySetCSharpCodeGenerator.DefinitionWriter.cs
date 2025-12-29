@@ -38,7 +38,7 @@ partial class LibrarySetCSharpCodeGenerator
                     return;
 
                 case CqlLambdaDefinition ld:
-                    new LambdaDefinitionWriter(LibraryWriter, LibraryWriter.isb).WriteDefinition(ld);
+                    new LambdaDefinitionWriter(LibraryWriter).WriteDefinition(ld);
                     break;
 
                 default:

@@ -6,8 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
+
 namespace Hl7.Cql.CodeGeneration.NET;
 
+[DebuggerDisplay("{ToString(),nq}")]
 internal class IndentedStringBuilder(
     StringBuilder? stringBuilder = null,
     int indent = 0) : IAddIndentMutable<IndentedStringBuilder>
