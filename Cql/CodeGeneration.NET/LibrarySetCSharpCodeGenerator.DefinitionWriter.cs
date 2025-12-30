@@ -7,11 +7,22 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private record DefinitionWriter(
-        LibraryWriter LibraryWriter,
-        CqlDefinition CqlDefinition)
+    private class DefinitionWriter
     {
+        private readonly LambdaDefinitionWriter _lambdaDefinitionWriter;
+
+        public DefinitionWriter(
+            LibraryWriter LibraryWriter,
+            CqlDefinition CqlDefinition)
+        {
+            this.LibraryWriter = LibraryWriter;
+            this.CqlDefinition = CqlDefinition;
+            _lambdaDefinitionWriter = new LambdaDefinitionWriter(this.LibraryWriter);
+        }
+
         private IndentedStringBuilder ISB => LibraryWriter.ISB;
+        public LibraryWriter LibraryWriter { get; }
+        public CqlDefinition CqlDefinition { get; }
 
         public void AppendDefinition()
         {
@@ -34,7 +45,7 @@ partial class LibrarySetCSharpCodeGenerator
                     return;
 
                 case CqlLambdaDefinition ld:
-                    new LambdaDefinitionWriter(LibraryWriter).AppendLambdaDefinition(ld);
+                    _lambdaDefinitionWriter.AppendLambdaDefinition(ld);
                     break;
 
                 default:
@@ -124,6 +135,14 @@ partial class LibrarySetCSharpCodeGenerator
                   public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
                   private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
                   """);
+        }
+
+        public void Deconstruct(
+            out LibraryWriter LibraryWriter,
+            out CqlDefinition CqlDefinition)
+        {
+            LibraryWriter = this.LibraryWriter;
+            CqlDefinition = this.CqlDefinition;
         }
     }
 }

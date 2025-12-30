@@ -9,15 +9,14 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private record LibraryWriter
-    (
-        LibrarySetWriter LibrarySetWriter,
-        ElmLibrary Library,
-        IndentedStringBuilder ISB)
+    private class LibraryWriter(
+        LibrarySetWriter librarySetWriter,
+        ElmLibrary library,
+        IndentedStringBuilder isb)
     {
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
-        public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
-        private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
+        public string LibraryName { get; } = library.VersionedLibraryIdentifier;
+        private string ClassName { get; } = IdentifierNormalizer.Normalize(library.VersionedLibraryIdentifier);
 
         private readonly Dictionary<string, int> _cacheFieldNameCount = new();
 
@@ -39,14 +38,14 @@ partial class LibrarySetCSharpCodeGenerator
             return fieldName;
         }
 
-        public void WriteLibraryFile()
+        public void AppendLibraryFile()
         {
-            WriteUsings();
-            WriteNamespaceFileScope();
-            WriteClass();
+            AppendUsings();
+            AppendNamespaceFileScope();
+            AppendClass();
         }
 
-        private void WriteCqlTupleMetadataProperties()
+        private void AppendCqlTupleMetadataProperties()
         {
             var tupleMetadataBuilder = LibrarySetWriter.TupleMetadataBuilder;
             bool first = true;
@@ -85,7 +84,7 @@ partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private void WriteLibraryInterfaceImplementation()
+        private void AppendLibraryInterfaceImplementation()
         {
             ISB.AppendLine(
                 $"""
@@ -108,7 +107,7 @@ partial class LibrarySetCSharpCodeGenerator
                  """);
         }
 
-        private void WriteUsings()
+        private void AppendUsings()
         {
             foreach (var @using in LibrarySetWriter.Usings)
                 ISB.AppendLine($"using {@using};");
@@ -119,7 +118,7 @@ partial class LibrarySetCSharpCodeGenerator
             ISB.AppendLine();
         }
 
-        private void WriteNamespaceFileScope()
+        private void AppendNamespaceFileScope()
         {
             if (LibrarySetWriter.Namespace is { Length: > 0 } @namespace)
             {
@@ -148,7 +147,11 @@ partial class LibrarySetCSharpCodeGenerator
                       .OfType<CqlCodeDefinition>()
                       .ToArray());
 
-        private void WriteMethods()
+        public LibrarySetWriter LibrarySetWriter { get; } = librarySetWriter;
+        public ElmLibrary Library { get; } = library;
+        public IndentedStringBuilder ISB { get; } = isb;
+
+        private void AppendMethods()
         {
             string lastDefinitionRegion = "";
 
@@ -202,7 +205,7 @@ partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private void WriteClass()
+        private void AppendClass()
         {
             ISB.AppendLine(
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
@@ -217,20 +220,20 @@ partial class LibrarySetCSharpCodeGenerator
                   public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
                   {
                   """);
+
             using (ISB.Indent())
             {
-                WriteClassConstructor();
-                WriteSingletonInstanceProperty();
-                WriteLibraryInterfaceImplementation();
-                WriteNestedTypeCached();
-                WriteMethods();
-                WriteCqlTupleMetadataProperties();
+                AppendClassConstructor();
+                AppendSingletonInstanceProperty();
+                AppendLibraryInterfaceImplementation();
+                AppendNestedTypeCached();
+                AppendMethods();
+                AppendCqlTupleMetadataProperties();
             }
-
             ISB.AppendLine("}");
         }
 
-        private void WriteNestedTypeCached()
+        private void AppendNestedTypeCached()
         {
             ISB.AppendLine(
                 """
@@ -271,7 +274,7 @@ partial class LibrarySetCSharpCodeGenerator
                 """);
         }
 
-        private void WriteSingletonInstanceProperty()
+        private void AppendSingletonInstanceProperty()
         {
             ISB.AppendLine(
                 $$"""
@@ -280,7 +283,7 @@ partial class LibrarySetCSharpCodeGenerator
                   """);
         }
 
-        private void WriteClassConstructor()
+        private void AppendClassConstructor()
         {
             ISB.AppendLine(
                 $$"""
