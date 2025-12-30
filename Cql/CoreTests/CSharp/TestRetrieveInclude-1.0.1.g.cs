@@ -28,6 +28,37 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
@@ -58,13 +89,17 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("InDemographic")]
-    public IEnumerable<Observation> InDemographic(CqlContext context)
-    {
-        IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+    private Cached<IEnumerable<Observation>> _InDemographic_Cached = new();
 
-        return a_;
-    }
+    [CqlExpressionDefinition("InDemographic")]
+    public IEnumerable<Observation> InDemographic(CqlContext context) =>
+        _InDemographic_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+                return a_;
+            });
 
 
     #endregion Functions and Expressions

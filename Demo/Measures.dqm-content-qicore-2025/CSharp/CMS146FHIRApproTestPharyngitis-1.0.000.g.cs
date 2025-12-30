@@ -28,6 +28,37 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Acute Pharyngitis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011", valueSetVersion: null)]
@@ -128,533 +159,589 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     #region Parameters
 
-    [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-    {
-        object a_ = context.ResolveParameter("CMS146FHIRApproTestPharyngitis-1.0.000", "Measurement Period", null);
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
-        return (CqlInterval<CqlDateTime>)a_;
-    }
+    [CqlParameterDefinition("Measurement Period")]
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+        _Measurement_Period_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                object a_ = context.ResolveParameter("CMS146FHIRApproTestPharyngitis-1.0.000", "Measurement Period", null);
+                return (CqlInterval<CqlDateTime>)a_;
+            });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
+    private Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
-    {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+        _SDE_Ethnicity_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
-    {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
+        _SDE_Payer_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
-    {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+        _SDE_Race_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
-    public CqlCode SDE_Sex(CqlContext context)
-    {
-        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+    public CqlCode SDE_Sex(CqlContext context) =>
+        _SDE_Sex_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
-    public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
-    {
-        CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet c_ = this.Home_Healthcare_Services(context);
-        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-        CqlValueSet f_ = this.Medical_Disability_Exam(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet h_ = this.Office_Visit(context);
-        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet n_ = this.Virtual_Encounter(context);
-        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-        CqlValueSet r_ = this.Outpatient_Consultation(context);
-        IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet t_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
-        IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
-        CqlValueSet x_ = this.Preventive_Care_Services_Group_Counseling(context);
-        IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? aa_(Encounter E)
-        {
-            List<CodeableConcept> at_ = E?.Type;
-            CqlConcept au_(CodeableConcept @this)
+    public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
+        _Qualifying_Encounters_Cached.GetOrReplace(
+            context,
+            () =>
             {
-                CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
+                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet c_ = this.Home_Healthcare_Services(context);
+                IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+                CqlValueSet f_ = this.Medical_Disability_Exam(context);
+                IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet h_ = this.Office_Visit(context);
+                IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+                IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+                CqlValueSet l_ = this.Telephone_Visits(context);
+                IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet n_ = this.Virtual_Encounter(context);
+                IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+                IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+                CqlValueSet r_ = this.Outpatient_Consultation(context);
+                IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet t_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+                IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
+                IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+                CqlValueSet x_ = this.Preventive_Care_Services_Group_Counseling(context);
+                IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                bool? aa_(Encounter E)
+                {
+                    List<CodeableConcept> at_ = E?.Type;
+                    CqlConcept au_(CodeableConcept @this)
+                    {
+                        CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                        return az_;
+                    };
+                    IEnumerable<CqlConcept> av_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)at_, au_);
+                    bool? aw_(CqlConcept T)
+                    {
+                        CqlCode ba_ = this.Unlisted_preventive_medicine_service(context);
+                        CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
+                        bool? bc_ = context.Operators.Equivalent(T, bb_);
+                        return bc_;
+                    };
+                    IEnumerable<CqlConcept> ax_ = context.Operators.Where<CqlConcept>(av_, aw_);
+                    bool? ay_ = context.Operators.Exists<CqlConcept>(ax_);
+                    return ay_;
+                };
+                IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
+                IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(y_, ab_);
+                IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(w_, ac_);
+                CqlValueSet ae_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
+                IEnumerable<Encounter> af_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet ag_ = this.Preventive_Care_Services_Individual_Counseling(context);
+                IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(af_, ah_);
+                IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ad_, ai_);
+                CqlValueSet ak_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+                IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                CqlValueSet am_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
+                IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+                IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(al_, an_);
+                IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(aj_, ao_);
+                IEnumerable<Encounter> aq_ = Status_1_15_000.Instance.isEncounterPerformed(context, ap_);
+                bool? ar_(Encounter ValidEncounter)
+                {
+                    Period bd_ = ValidEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    CqlDateTime bf_ = context.Operators.End(be_);
+                    CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
+                    CqlDateTime bh_ = context.Operators.Start(bg_);
+                    CqlDateTime bj_ = context.Operators.End(bg_);
+                    CqlQuantity bk_ = context.Operators.Quantity(3m, "days");
+                    CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
+                    CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, true, true);
+                    bool? bn_ = context.Operators.In<CqlDateTime>(bf_, bm_, "day");
+                    return bn_;
+                };
+                IEnumerable<Encounter> as_ = context.Operators.Where<Encounter>(aq_, ar_);
+                return as_;
+            });
 
-                return az_;
-            };
-            IEnumerable<CqlConcept> av_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)at_, au_);
-            bool? aw_(CqlConcept T)
-            {
-                CqlCode ba_ = this.Unlisted_preventive_medicine_service(context);
-                CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
-                bool? bc_ = context.Operators.Equivalent(T, bb_);
 
-                return bc_;
-            };
-            IEnumerable<CqlConcept> ax_ = context.Operators.Where<CqlConcept>(av_, aw_);
-            bool? ay_ = context.Operators.Exists<CqlConcept>(ax_);
-
-            return ay_;
-        };
-        IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
-        IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(y_, ab_);
-        IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(w_, ac_);
-        CqlValueSet ae_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter> af_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet ag_ = this.Preventive_Care_Services_Individual_Counseling(context);
-        IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(af_, ah_);
-        IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ad_, ai_);
-        CqlValueSet ak_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet am_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(al_, an_);
-        IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(aj_, ao_);
-        IEnumerable<Encounter> aq_ = Status_1_15_000.Instance.isEncounterPerformed(context, ap_);
-        bool? ar_(Encounter ValidEncounter)
-        {
-            Period bd_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-            CqlDateTime bf_ = context.Operators.End(be_);
-            CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
-            CqlDateTime bh_ = context.Operators.Start(bg_);
-            CqlDateTime bj_ = context.Operators.End(bg_);
-            CqlQuantity bk_ = context.Operators.Quantity(3m, "days");
-            CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
-            CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, true, true);
-            bool? bn_ = context.Operators.In<CqlDateTime>(bf_, bm_, "day");
-
-            return bn_;
-        };
-        IEnumerable<Encounter> as_ = context.Operators.Where<Encounter>(aq_, ar_);
-
-        return as_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Encounter_With_Antibiotic_Ordered_Within_Three_Days_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Antibiotic Ordered Within Three Days")]
-    public IEnumerable<Encounter> Encounter_With_Antibiotic_Ordered_Within_Three_Days(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
-        IEnumerable<Encounter> b_(Encounter EDOrAmbulatoryVisit)
-        {
-            CqlValueSet d_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-            IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> g_(MedicationRequest MR)
+    public IEnumerable<Encounter> Encounter_With_Antibiotic_Ordered_Within_Three_Days(CqlContext context) =>
+        _Encounter_With_Antibiotic_Ordered_Within_Three_Days_Cached.GetOrReplace(
+            context,
+            () =>
             {
-                IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                bool? p_(Medication M)
+                IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
+                IEnumerable<Encounter> b_(Encounter EDOrAmbulatoryVisit)
                 {
-                    object t_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object u_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> v_ = context.Operators.Split((string)u_, "/");
-                    string w_ = context.Operators.Last<string>(v_);
-                    bool? x_ = context.Operators.Equal(t_, w_);
-                    CodeableConcept y_ = M?.Code;
-                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-                    CqlValueSet aa_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                    bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
-                    bool? ac_ = context.Operators.And(x_, ab_);
-
-                    return ac_;
+                    CqlValueSet d_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                    IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+                    IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+                    IEnumerable<MedicationRequest> g_(MedicationRequest MR)
+                    {
+                        IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+                        bool? p_(Medication M)
+                        {
+                            object t_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                            object u_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                            IEnumerable<string> v_ = context.Operators.Split((string)u_, "/");
+                            string w_ = context.Operators.Last<string>(v_);
+                            bool? x_ = context.Operators.Equal(t_, w_);
+                            CodeableConcept y_ = M?.Code;
+                            CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                            CqlValueSet aa_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                            bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+                            bool? ac_ = context.Operators.And(x_, ab_);
+                            return ac_;
+                        };
+                        IEnumerable<Medication> q_ = context.Operators.Where<Medication>(o_, p_);
+                        MedicationRequest r_(Medication M) =>
+                        MR;
+                        IEnumerable<MedicationRequest> s_ = context.Operators.Select<Medication, MedicationRequest>(q_, r_);
+                        return s_;
+                    };
+                    IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
+                    IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
+                    IEnumerable<MedicationRequest> j_ = Status_1_15_000.Instance.isMedicationOrder(context, i_);
+                    bool? k_(MedicationRequest AntibioticOrdered)
+                    {
+                        Period ad_ = EDOrAmbulatoryVisit?.Period;
+                        CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
+                        CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_ as object);
+                        CqlDateTime ag_ = context.Operators.Start(af_);
+                        FhirDateTime ah_ = AntibioticOrdered?.AuthoredOnElement;
+                        CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
+                        CqlQuantity aj_ = context.Operators.Quantity(3m, "days");
+                        CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
+                        CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(ah_);
+                        CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
+                        bool? ao_ = context.Operators.In<CqlDateTime>(ag_, an_, "day");
+                        CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ah_);
+                        bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
+                        bool? as_ = context.Operators.And(ao_, ar_);
+                        return as_;
+                    };
+                    IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
+                    Encounter m_(MedicationRequest AntibioticOrdered) =>
+                    EDOrAmbulatoryVisit;
+                    IEnumerable<Encounter> n_ = context.Operators.Select<MedicationRequest, Encounter>(l_, m_);
+                    return n_;
                 };
-                IEnumerable<Medication> q_ = context.Operators.Where<Medication>(o_, p_);
-                MedicationRequest r_(Medication M) =>
-                    MR;
-                IEnumerable<MedicationRequest> s_ = context.Operators.Select<Medication, MedicationRequest>(q_, r_);
+                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                return c_;
+            });
 
-                return s_;
-            };
-            IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
-            IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
-            IEnumerable<MedicationRequest> j_ = Status_1_15_000.Instance.isMedicationOrder(context, i_);
-            bool? k_(MedicationRequest AntibioticOrdered)
-            {
-                Period ad_ = EDOrAmbulatoryVisit?.Period;
-                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_ as object);
-                CqlDateTime ag_ = context.Operators.Start(af_);
-                FhirDateTime ah_ = AntibioticOrdered?.AuthoredOnElement;
-                CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
-                CqlQuantity aj_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
-                CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(ah_);
-                CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
-                bool? ao_ = context.Operators.In<CqlDateTime>(ag_, an_, "day");
-                CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ah_);
-                bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
-                bool? as_ = context.Operators.And(ao_, ar_);
 
-                return as_;
-            };
-            IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
-            Encounter m_(MedicationRequest AntibioticOrdered) =>
-                EDOrAmbulatoryVisit;
-            IEnumerable<Encounter> n_ = context.Operators.Select<MedicationRequest, Encounter>(l_, m_);
-
-            return n_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
-
-        return c_;
-    }
-
+    private Cached<IEnumerable<object>> _Pharyngitis_or_Tonsillitis_Cached = new();
 
     [CqlExpressionDefinition("Pharyngitis or Tonsillitis")]
-    public IEnumerable<object> Pharyngitis_or_Tonsillitis(CqlContext context)
-    {
-        CqlValueSet a_ = this.Acute_Pharyngitis(context);
-        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        CqlValueSet c_ = this.Acute_Tonsillitis(context);
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
-        object f_(Condition X) =>
-            X as object;
-        IEnumerable<object> g_ = context.Operators.Select<Condition, object>(e_, f_);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+    public IEnumerable<object> Pharyngitis_or_Tonsillitis(CqlContext context) =>
+        _Pharyngitis_or_Tonsillitis_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlValueSet a_ = this.Acute_Pharyngitis(context);
+                IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+                CqlValueSet c_ = this.Acute_Tonsillitis(context);
+                IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+                IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
+                object f_(Condition X) =>
+                X as object;
+                IEnumerable<object> g_ = context.Operators.Select<Condition, object>(e_, f_);
+                IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+                return h_;
+            });
 
-        return h_;
-    }
 
+    private Cached<IEnumerable<Encounter>> _Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Pharyngitis or Tonsillitis With Antibiotic")]
-    public IEnumerable<Encounter> Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days(context);
-        IEnumerable<object> b_ = this.Pharyngitis_or_Tonsillitis(context);
-        IEnumerable<ValueTuple<Encounter, object>> c_ = context.Operators.CrossJoin<Encounter, object>(a_, b_);
-        (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? d_(ValueTuple<Encounter, object> _valueTuple)
-        {
-            (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? k_ = (CqlTupleMetadata_CgFHHRTZBEBaeiUhMVLiFJRQP, _valueTuple.Item1, _valueTuple.Item2);
+    public IEnumerable<Encounter> Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(CqlContext context) =>
+        _Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days(context);
+                IEnumerable<object> b_ = this.Pharyngitis_or_Tonsillitis(context);
+                IEnumerable<ValueTuple<Encounter, object>> c_ = context.Operators.CrossJoin<Encounter, object>(a_, b_);
+                (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? d_(ValueTuple<Encounter, object> _valueTuple)
+                {
+                    (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? k_ = (CqlTupleMetadata_CgFHHRTZBEBaeiUhMVLiFJRQP, _valueTuple.Item1, _valueTuple.Item2);
+                    return k_;
+                };
+                IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?> e_ = context.Operators.Select<ValueTuple<Encounter, object>, (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?>(c_, d_);
+                bool? f_((CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? tuple_dxfrqbqjrcafyrpcehuvuotch)
+                {
+                    CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_dxfrqbqjrcafyrpcehuvuotch?.AcutePharyngitisTonsillitis);
+                    CqlDateTime m_ = context.Operators.Start(l_);
+                    Period n_ = tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic?.Period;
+                    CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+                    bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
+                    return p_;
+                };
+                IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?>(e_, f_);
+                Encounter h_((CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? tuple_dxfrqbqjrcafyrpcehuvuotch) =>
+                tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic;
+                IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?, Encounter>(g_, h_);
+                IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
+                return j_;
+            });
 
-            return k_;
-        };
-        IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?> e_ = context.Operators.Select<ValueTuple<Encounter, object>, (CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?>(c_, d_);
-        bool? f_((CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? tuple_dxfrqbqjrcafyrpcehuvuotch)
-        {
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_dxfrqbqjrcafyrpcehuvuotch?.AcutePharyngitisTonsillitis);
-            CqlDateTime m_ = context.Operators.Start(l_);
-            Period n_ = tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic?.Period;
-            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-            bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
 
-            return p_;
-        };
-        IEnumerable<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?>(e_, f_);
-        Encounter h_((CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)? tuple_dxfrqbqjrcafyrpcehuvuotch) =>
-            tuple_dxfrqbqjrcafyrpcehuvuotch?.VisitWithAntibiotic;
-        IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter VisitWithAntibiotic, object AcutePharyngitisTonsillitis)?, Encounter>(g_, h_);
-        IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
-
-        return j_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
-    public IEnumerable<Encounter> Initial_Population(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        bool? b_(Encounter EncounterWithPharyngitis)
-        {
-            Patient g_ = this.Patient(context);
-            Date h_ = g_?.BirthDateElement;
-            string i_ = h_?.Value;
-            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlDate m_ = context.Operators.DateFrom(l_);
-            int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-            bool? o_ = context.Operators.GreaterOrEqual(n_, 3);
+    public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
+        _Initial_Population_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                bool? b_(Encounter EncounterWithPharyngitis)
+                {
+                    Patient g_ = this.Patient(context);
+                    Date h_ = g_?.BirthDateElement;
+                    string i_ = h_?.Value;
+                    CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+                    CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+                    CqlDateTime l_ = context.Operators.Start(k_);
+                    CqlDate m_ = context.Operators.DateFrom(l_);
+                    int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
+                    bool? o_ = context.Operators.GreaterOrEqual(n_, 3);
+                    return o_;
+                };
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                Encounter d_(Encounter EncounterWithPharyngitis) =>
+                EncounterWithPharyngitis;
+                IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
+                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+                return f_;
+            });
 
-            return o_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
-        IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
-        IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
-        return f_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
-    public IEnumerable<Encounter> Denominator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Initial_Population(context);
+    public IEnumerable<Encounter> Denominator(CqlContext context) =>
+        _Denominator_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Initial_Population(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<IEnumerable<Encounter>> _Encounters_and_Assessments_with_Hospice_Patient_Cached = new();
 
     [CqlExpressionDefinition("Encounters and Assessments with Hospice Patient")]
-    public IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Initial_Population(context);
-        bool? b_(Encounter EligibleEncounters)
-        {
-            bool? d_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+    public IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient(CqlContext context) =>
+        _Encounters_and_Assessments_with_Hospice_Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Initial_Population(context);
+                bool? b_(Encounter EligibleEncounters)
+                {
+                    bool? d_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+                    return d_;
+                };
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                return c_;
+            });
 
-            return d_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
-        return c_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
-    public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounters_and_Assessments_with_Hospice_Patient(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        object e_(Condition X) =>
-            X as object;
-        IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
-        IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
-        Condition h_(object X) =>
-            X as Condition;
-        IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
-        IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
-        CqlValueSet m_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-        IEnumerable<MedicationRequest> n_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> o_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> p_(MedicationRequest MR)
-        {
-            IEnumerable<Medication> af_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-            bool? ag_(Medication M)
+    public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
+        _Denominator_Exclusions_Cached.GetOrReplace(
+            context,
+            () =>
             {
-                object ak_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object al_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> am_ = context.Operators.Split((string)al_, "/");
-                string an_ = context.Operators.Last<string>(am_);
-                bool? ao_ = context.Operators.Equal(ak_, an_);
-                CodeableConcept ap_ = M?.Code;
-                CqlConcept aq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ap_);
-                CqlValueSet ar_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                bool? as_ = context.Operators.ConceptInValueSet(aq_, ar_);
-                bool? at_ = context.Operators.And(ao_, as_);
+                IEnumerable<Encounter> a_ = this.Encounters_and_Assessments_with_Hospice_Patient(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
+                IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+                object e_(Condition X) =>
+                X as object;
+                IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
+                IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
+                Condition h_(object X) =>
+                X as Condition;
+                IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
+                IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
+                IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
+                CqlValueSet m_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                IEnumerable<MedicationRequest> n_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+                IEnumerable<MedicationRequest> o_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+                IEnumerable<MedicationRequest> p_(MedicationRequest MR)
+                {
+                    IEnumerable<Medication> af_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+                    bool? ag_(Medication M)
+                    {
+                        object ak_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                        object al_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                        IEnumerable<string> am_ = context.Operators.Split((string)al_, "/");
+                        string an_ = context.Operators.Last<string>(am_);
+                        bool? ao_ = context.Operators.Equal(ak_, an_);
+                        CodeableConcept ap_ = M?.Code;
+                        CqlConcept aq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ap_);
+                        CqlValueSet ar_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                        bool? as_ = context.Operators.ConceptInValueSet(aq_, ar_);
+                        bool? at_ = context.Operators.And(ao_, as_);
+                        return at_;
+                    };
+                    IEnumerable<Medication> ah_ = context.Operators.Where<Medication>(af_, ag_);
+                    MedicationRequest ai_(Medication M) =>
+                    MR;
+                    IEnumerable<MedicationRequest> aj_ = context.Operators.Select<Medication, MedicationRequest>(ah_, ai_);
+                    return aj_;
+                };
+                IEnumerable<MedicationRequest> q_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(o_, p_);
+                IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(n_, q_);
+                IEnumerable<MedicationRequest> s_ = Status_1_15_000.Instance.isMedicationActive(context, r_);
+                IEnumerable<Encounter> t_ = Antibiotic_1_11_000.Instance.Encounter_with_Antibiotic_Medication_History(context, b_, s_);
+                CqlValueSet v_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
+                IEnumerable<Condition> w_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+                IEnumerable<object> y_ = context.Operators.Select<Condition, object>(w_, e_);
+                IEnumerable<object> z_ = Status_1_15_000.Instance.verified(context, y_);
+                IEnumerable<Condition> ab_ = context.Operators.Select<object, Condition>(z_, h_);
+                IEnumerable<Encounter> ac_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, ab_);
+                IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(t_, ac_);
+                IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(k_, ad_);
+                return ae_;
+            });
 
-                return at_;
-            };
-            IEnumerable<Medication> ah_ = context.Operators.Where<Medication>(af_, ag_);
-            MedicationRequest ai_(Medication M) =>
-                MR;
-            IEnumerable<MedicationRequest> aj_ = context.Operators.Select<Medication, MedicationRequest>(ah_, ai_);
 
-            return aj_;
-        };
-        IEnumerable<MedicationRequest> q_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(o_, p_);
-        IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(n_, q_);
-        IEnumerable<MedicationRequest> s_ = Status_1_15_000.Instance.isMedicationActive(context, r_);
-        IEnumerable<Encounter> t_ = Antibiotic_1_11_000.Instance.Encounter_with_Antibiotic_Medication_History(context, b_, s_);
-        CqlValueSet v_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
-        IEnumerable<Condition> w_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> y_ = context.Operators.Select<Condition, object>(w_, e_);
-        IEnumerable<object> z_ = Status_1_15_000.Instance.verified(context, y_);
-        IEnumerable<Condition> ab_ = context.Operators.Select<object, Condition>(z_, h_);
-        IEnumerable<Encounter> ac_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, ab_);
-        IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(t_, ac_);
-        IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(k_, ad_);
-
-        return ae_;
-    }
-
+    private Cached<IEnumerable<Observation>> _Group_A_Streptococcus_Lab_Test_With_Result_Cached = new();
 
     [CqlExpressionDefinition("Group A Streptococcus Lab Test With Result")]
-    public IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result(CqlContext context)
-    {
-        CqlValueSet a_ = this.Group_A_Streptococcus_Test(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
-        bool? d_(Observation GroupAStreptococcusTest)
-        {
-            DataType f_ = GroupAStreptococcusTest?.Value;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            bool? h_ = context.Operators.Not((bool?)(g_ is null));
+    public IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result(CqlContext context) =>
+        _Group_A_Streptococcus_Lab_Test_With_Result_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlValueSet a_ = this.Group_A_Streptococcus_Test(context);
+                IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+                IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
+                bool? d_(Observation GroupAStreptococcusTest)
+                {
+                    DataType f_ = GroupAStreptococcusTest?.Value;
+                    object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+                    bool? h_ = context.Operators.Not((bool?)(g_ is null));
+                    return h_;
+                };
+                IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                return e_;
+            });
 
-            return h_;
-        };
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
-        return e_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
-    public IEnumerable<Encounter> Numerator(CqlContext context)
-    {
-        IEnumerable<Observation> a_ = this.Group_A_Streptococcus_Lab_Test_With_Result(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-        (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? d_(ValueTuple<Observation, Encounter> _valueTuple)
-        {
-            (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? k_ = (CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV, _valueTuple.Item1, _valueTuple.Item2);
+    public IEnumerable<Encounter> Numerator(CqlContext context) =>
+        _Numerator_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Observation> a_ = this.Group_A_Streptococcus_Lab_Test_With_Result(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
+                (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? d_(ValueTuple<Observation, Encounter> _valueTuple)
+                {
+                    (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? k_ = (CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV, _valueTuple.Item1, _valueTuple.Item2);
+                    return k_;
+                };
+                IEnumerable<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(c_, d_);
+                bool? f_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij)
+                {
+                    DataType l_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest?.Effective;
+                    object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+                    CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
+                    CqlDateTime o_ = context.Operators.Start(n_);
+                    Period p_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
+                    CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                    CqlDateTime r_ = context.Operators.End(q_);
+                    CqlQuantity s_ = context.Operators.Quantity(3m, "days");
+                    CqlDateTime t_ = context.Operators.Subtract(r_, s_);
+                    CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                    CqlDateTime w_ = context.Operators.End(v_);
+                    CqlDateTime y_ = context.Operators.Add(w_, s_);
+                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, true, true);
+                    bool? aa_ = context.Operators.In<CqlDateTime>(o_, z_, "day");
+                    return aa_;
+                };
+                IEnumerable<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(e_, f_);
+                Encounter h_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij) =>
+                tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis;
+                IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?, Encounter>(g_, h_);
+                IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
+                return j_;
+            });
 
-            return k_;
-        };
-        IEnumerable<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(c_, d_);
-        bool? f_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij)
-        {
-            DataType l_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest?.Effective;
-            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-            CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-            CqlDateTime o_ = context.Operators.Start(n_);
-            Period p_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
-            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(3m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-            CqlDateTime w_ = context.Operators.End(v_);
-            CqlDateTime y_ = context.Operators.Add(w_, s_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime>(o_, z_, "day");
 
-            return aa_;
-        };
-        IEnumerable<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(e_, f_);
-        Encounter h_((CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij) =>
-            tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis;
-        IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?, Encounter>(g_, h_);
-        IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
-
-        return j_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Stratification_1_Cached = new();
 
     [CqlExpressionDefinition("Stratification 1")]
-    public IEnumerable<Encounter> Stratification_1(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        bool? b_(Encounter EncounterWithPharyngitis)
-        {
-            Patient g_ = this.Patient(context);
-            Date h_ = g_?.BirthDateElement;
-            string i_ = h_?.Value;
-            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlDate m_ = context.Operators.DateFrom(l_);
-            int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-            CqlInterval<int?> o_ = context.Operators.Interval(3, 17, true, true);
-            bool? p_ = context.Operators.In<int?>(n_, o_, default);
+    public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
+        _Stratification_1_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                bool? b_(Encounter EncounterWithPharyngitis)
+                {
+                    Patient g_ = this.Patient(context);
+                    Date h_ = g_?.BirthDateElement;
+                    string i_ = h_?.Value;
+                    CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+                    CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+                    CqlDateTime l_ = context.Operators.Start(k_);
+                    CqlDate m_ = context.Operators.DateFrom(l_);
+                    int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
+                    CqlInterval<int?> o_ = context.Operators.Interval(3, 17, true, true);
+                    bool? p_ = context.Operators.In<int?>(n_, o_, default);
+                    return p_;
+                };
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                Encounter d_(Encounter EncounterWithPharyngitis) =>
+                EncounterWithPharyngitis;
+                IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
+                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+                return f_;
+            });
 
-            return p_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
-        IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
-        IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
-        return f_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Stratification_2_Cached = new();
 
     [CqlExpressionDefinition("Stratification 2")]
-    public IEnumerable<Encounter> Stratification_2(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        bool? b_(Encounter EncounterWithPharyngitis)
-        {
-            Patient g_ = this.Patient(context);
-            Date h_ = g_?.BirthDateElement;
-            string i_ = h_?.Value;
-            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlDate m_ = context.Operators.DateFrom(l_);
-            int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-            CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
-            bool? p_ = context.Operators.In<int?>(n_, o_, default);
+    public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
+        _Stratification_2_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                bool? b_(Encounter EncounterWithPharyngitis)
+                {
+                    Patient g_ = this.Patient(context);
+                    Date h_ = g_?.BirthDateElement;
+                    string i_ = h_?.Value;
+                    CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+                    CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+                    CqlDateTime l_ = context.Operators.Start(k_);
+                    CqlDate m_ = context.Operators.DateFrom(l_);
+                    int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
+                    CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
+                    bool? p_ = context.Operators.In<int?>(n_, o_, default);
+                    return p_;
+                };
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                Encounter d_(Encounter EncounterWithPharyngitis) =>
+                EncounterWithPharyngitis;
+                IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
+                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+                return f_;
+            });
 
-            return p_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
-        IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
-        IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
-        return f_;
-    }
-
+    private Cached<IEnumerable<Encounter>> _Stratification_3_Cached = new();
 
     [CqlExpressionDefinition("Stratification 3")]
-    public IEnumerable<Encounter> Stratification_3(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
-        bool? b_(Encounter EncounterWithPharyngitis)
-        {
-            Patient g_ = this.Patient(context);
-            Date h_ = g_?.BirthDateElement;
-            string i_ = h_?.Value;
-            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlDate m_ = context.Operators.DateFrom(l_);
-            int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-            bool? o_ = context.Operators.GreaterOrEqual(n_, 65);
-
-            return o_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithPharyngitis) =>
-            EncounterWithPharyngitis;
-        IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
-        IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
-
-        return f_;
-    }
+    public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
+        _Stratification_3_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
+                bool? b_(Encounter EncounterWithPharyngitis)
+                {
+                    Patient g_ = this.Patient(context);
+                    Date h_ = g_?.BirthDateElement;
+                    string i_ = h_?.Value;
+                    CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+                    CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+                    CqlDateTime l_ = context.Operators.Start(k_);
+                    CqlDate m_ = context.Operators.DateFrom(l_);
+                    int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
+                    bool? o_ = context.Operators.GreaterOrEqual(n_, 65);
+                    return o_;
+                };
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                Encounter d_(Encounter EncounterWithPharyngitis) =>
+                EncounterWithPharyngitis;
+                IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
+                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+                return f_;
+            });
 
 
     #endregion Functions and Expressions

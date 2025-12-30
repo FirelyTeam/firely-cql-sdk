@@ -28,6 +28,37 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
     [CqlFunctionDefinition("ToInterval")]
@@ -48,7 +79,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 FhirDateTime d_ = period?.EndElement;
                 CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
                 CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, false, true);
-
                 return f_;
             }
             else
@@ -58,11 +88,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 FhirDateTime i_ = period?.EndElement;
                 CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
                 CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
-
                 return k_;
             }
         };
-
         return a_();
     }
 
@@ -88,7 +116,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                         Quantity.QuantityComparator? h_ = g_?.Value;
                         string i_ = context.Operators.Convert<string>(h_);
                         bool? j_ = context.Operators.Equal(i_, "<");
-
                         return j_ ?? false;
                     };
                     bool d_()
@@ -97,7 +124,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                         Quantity.QuantityComparator? l_ = k_?.Value;
                         string m_ = context.Operators.Convert<string>(l_);
                         bool? n_ = context.Operators.Equal(m_, "<=");
-
                         return n_ ?? false;
                     };
                     bool e_()
@@ -106,7 +132,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                         Quantity.QuantityComparator? p_ = o_?.Value;
                         string q_ = context.Operators.Convert<string>(p_);
                         bool? r_ = context.Operators.Equal(q_, ">=");
-
                         return r_ ?? false;
                     };
                     bool f_()
@@ -115,50 +140,42 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                         Quantity.QuantityComparator? t_ = s_?.Value;
                         string u_ = context.Operators.Convert<string>(t_);
                         bool? v_ = context.Operators.Equal(u_, ">");
-
                         return v_ ?? false;
                     };
                     if (c_())
                     {
                         CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
                         CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
-
                         return x_;
                     }
                     else if (d_())
                     {
                         CqlQuantity y_ = this.ToQuantityIgnoringComparator(context, quantity);
                         CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
-
                         return z_;
                     }
                     else if (e_())
                     {
                         CqlQuantity aa_ = this.ToQuantityIgnoringComparator(context, quantity);
                         CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
-
                         return ab_;
                     }
                     else if (f_())
                     {
                         CqlQuantity ac_ = this.ToQuantityIgnoringComparator(context, quantity);
                         CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
-
                         return ad_;
                     }
                     else
                     {
                         CqlQuantity ae_ = this.ToQuantity(context, quantity);
                         CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, true, true);
-
                         return ag_;
                     }
                 };
-
                 return b_();
             }
         };
-
         return a_();
     }
 
@@ -180,11 +197,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 Quantity d_ = range?.High;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
                 CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
-
                 return f_;
             }
         };
-
         return a_();
     }
 
@@ -233,7 +248,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 return unit;
             }
         };
-
         return a_();
     }
 
@@ -250,7 +264,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             {
                 Code<Quantity.QuantityComparator> d_ = quantity?.ComparatorElement;
                 bool? e_ = context.Operators.Not((bool?)(d_ is null));
-
                 return e_ ?? false;
             };
             bool c_()
@@ -262,7 +275,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string l_ = f_?.Value;
                 bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 bool? n_ = context.Operators.Or(j_, m_);
-
                 return n_ ?? false;
             };
             if (quantity is null)
@@ -276,7 +288,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             else if (b_())
             {
                 object o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
-
                 return o_ as CqlQuantity;
             }
             else if (c_())
@@ -288,7 +299,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 FhirString t_ = quantity?.UnitElement;
                 string u_ = t_?.Value;
                 string v_ = this.ToCalendarUnit(context, (s_ ?? u_) ?? "1");
-
                 return new CqlQuantity(q_, v_);
             }
             else
@@ -306,11 +316,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string ag_ = context.Operators.Concatenate(ad_ ?? "", af_ ?? "");
                 string ah_ = context.Operators.Concatenate(ag_ ?? "", ")");
                 object ai_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
-
                 return ai_ as CqlQuantity;
             }
         };
-
         return a_();
     }
 
@@ -332,7 +340,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string i_ = c_?.Value;
                 bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 bool? k_ = context.Operators.Or(g_, j_);
-
                 return k_ ?? false;
             };
             if (quantity is null)
@@ -352,7 +359,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 FhirString p_ = quantity?.UnitElement;
                 string q_ = p_?.Value;
                 string r_ = this.ToCalendarUnit(context, (o_ ?? q_) ?? "1");
-
                 return new CqlQuantity(m_, r_);
             }
             else
@@ -370,11 +376,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
                 string ad_ = context.Operators.Concatenate(ac_ ?? "", ")");
                 object ae_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
-
                 return ae_ as CqlQuantity;
             }
         };
-
         return a_();
     }
 
@@ -395,11 +399,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 CqlQuantity c_ = this.ToQuantity(context, b_);
                 Quantity d_ = ratio?.Denominator;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
-
                 return new CqlRatio(c_, e_);
             }
         };
-
         return a_();
     }
 
@@ -424,11 +426,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string g_ = f_?.Value;
                 FhirString h_ = coding?.DisplayElement;
                 string i_ = h_?.Value;
-
                 return new CqlCode(c_, e_, g_, i_);
             }
         };
-
         return a_();
     }
 
@@ -449,18 +449,15 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 CqlCode c_(Coding C)
                 {
                     CqlCode h_ = this.ToCode(context, C);
-
                     return h_;
                 };
                 IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
                 IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
                 FhirString f_ = concept?.TextElement;
                 string g_ = f_?.Value;
-
                 return new CqlConcept(e_, g_);
             }
         };
-
         return a_();
     }
 
@@ -468,9 +465,9 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     [CqlFunctionDefinition("ToValueSet")]
     [CqlTag("description", "Converts the given value (assumed to be a URI) to a CQL [ValueSet](https://cql.hl7.org/09-b-cqlreference.html#valueset)")]
     public CqlValueSet ToValueSet(CqlContext context, string uri) =>
-        (uri is null
-            ? default
-            : new CqlValueSet(uri, default));
+    (uri is null
+        ? default
+        : new CqlValueSet(uri, default));
 
 
     [CqlFunctionDefinition("reference")]
@@ -489,18 +486,16 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 {
                     ReferenceElement = new FhirString(reference),
                 };
-
                 return b_;
             }
         };
-
         return a_();
     }
 
 
     [CqlFunctionDefinition("reference")]
     public ResourceReference reference(CqlContext context, Resource resource) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
 
 
     [CqlFunctionDefinition("ToValue")]
@@ -514,178 +509,149 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             {
                 byte[] b_ = (value as Base64Binary)?.Value;
                 string c_ = context.Operators.Convert<string>(b_);
-
                 return c_ as object;
             }
             else if (value is FhirBoolean)
             {
                 bool? d_ = (value as FhirBoolean)?.Value;
-
                 return d_;
             }
             else if (value is Canonical)
             {
                 string e_ = (value as Canonical)?.Value;
-
                 return e_ as object;
             }
             else if (value is Code)
             {
                 string f_ = (value as Code)?.Value;
-
                 return f_ as object;
             }
             else if (value is Date)
             {
                 string g_ = (value as Date)?.Value;
                 CqlDate h_ = context.Operators.ConvertStringToDate(g_);
-
                 return h_ as object;
             }
             else if (value is FhirDateTime)
             {
                 CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(value as FhirDateTime);
-
                 return i_ as object;
             }
             else if (value is FhirDecimal)
             {
                 decimal? j_ = (value as FhirDecimal)?.Value;
-
                 return j_;
             }
             else if (value is Id)
             {
                 string k_ = (value as Id)?.Value;
-
                 return k_ as object;
             }
             else if (value is Instant)
             {
                 DateTimeOffset? l_ = (value as Instant)?.Value;
                 CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
-
                 return m_ as object;
             }
             else if (value is Integer)
             {
                 int? n_ = (value as Integer)?.Value;
-
                 return n_;
             }
             else if (value is Markdown)
             {
                 string o_ = (value as Markdown)?.Value;
-
                 return o_ as object;
             }
             else if (value is Oid)
             {
                 string p_ = (value as Oid)?.Value;
-
                 return p_ as object;
             }
             else if (value is Integer)
             {
                 int? q_ = (value as Integer)?.Value;
-
                 return q_;
             }
             else if (value is FhirString)
             {
                 string r_ = (value as FhirString)?.Value;
-
                 return r_ as object;
             }
             else if (value is Time)
             {
                 string s_ = (value as Time)?.Value;
                 CqlTime t_ = context.Operators.ConvertStringToTime(s_);
-
                 return t_ as object;
             }
             else if (value is Integer)
             {
                 int? u_ = (value as Integer)?.Value;
-
                 return u_;
             }
             else if (value is FhirUri)
             {
                 string v_ = (value as FhirUri)?.Value;
-
                 return v_ as object;
             }
             else if (value is FhirUrl)
             {
                 string w_ = (value as FhirUrl)?.Value;
-
                 return w_ as object;
             }
             else if (value is Uuid)
             {
                 string x_ = (value as Uuid)?.Value;
-
                 return x_ as object;
             }
             else if (value is Age)
             {
                 CqlQuantity y_ = this.ToQuantity(context, value as Age);
-
                 return y_ as object;
             }
             else if (value is CodeableConcept)
             {
                 CqlConcept z_ = this.ToConcept(context, value as CodeableConcept);
-
                 return z_ as object;
             }
             else if (value is Coding)
             {
                 CqlCode aa_ = this.ToCode(context, value as Coding);
-
                 return aa_ as object;
             }
             else if (value is Count)
             {
                 CqlQuantity ab_ = this.ToQuantity(context, value as Count);
-
                 return ab_ as object;
             }
             else if (value is Distance)
             {
                 CqlQuantity ac_ = this.ToQuantity(context, value as Distance);
-
                 return ac_ as object;
             }
             else if (value is Duration)
             {
                 CqlQuantity ad_ = this.ToQuantity(context, value as Duration);
-
                 return ad_ as object;
             }
             else if (value is Quantity)
             {
                 CqlQuantity ae_ = this.ToQuantity(context, value as Quantity);
-
                 return ae_ as object;
             }
             else if (value is Range)
             {
                 CqlInterval<CqlQuantity> af_ = this.ToInterval(context, value as Range);
-
                 return af_ as object;
             }
             else if (value is Period)
             {
                 CqlInterval<CqlDateTime> ag_ = this.ToInterval(context, value as Period);
-
                 return ag_ as object;
             }
             else if (value is Ratio)
             {
                 CqlRatio ah_ = this.ToRatio(context, value as Ratio);
-
                 return ah_ as object;
             }
             else
@@ -693,139 +659,138 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 return value as object;
             }
         };
-
         return a_();
     }
 
 
     [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, string reference) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
     [CqlFunctionDefinition("resolve")]
     public Resource resolve(CqlContext context, ResourceReference reference) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
 
     [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, Element element, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
     [CqlFunctionDefinition("extension")]
     public IEnumerable<Extension> extension(CqlContext context, DomainResource resource, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
 
     [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, BackboneElement element, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
     [CqlFunctionDefinition("modifierExtension")]
     public IEnumerable<Extension> modifierExtension(CqlContext context, DomainResource resource, string url) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
 
     [CqlFunctionDefinition("hasValue")]
     public bool? hasValue(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
 
 
     [CqlFunctionDefinition("getValue")]
     public object getValue(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
 
 
     [CqlFunctionDefinition("ofType")]
     public IEnumerable<object> ofType(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
 
 
     [CqlFunctionDefinition("is")]
     public bool? @is(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
 
 
     [CqlFunctionDefinition("as")]
     public object @as(CqlContext context, string identifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
 
 
     [CqlFunctionDefinition("elementDefinition")]
     public ElementDefinition elementDefinition(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
 
 
     [CqlFunctionDefinition("slice")]
     public IEnumerable<Element> slice(CqlContext context, Element element, string url, string name) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Resource checkModifiers(CqlContext context, Resource resource, string modifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("checkModifiers")]
     public Element checkModifiers(CqlContext context, Element element, string modifier) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
 
     [CqlFunctionDefinition("conformsTo")]
     public bool? conformsTo(CqlContext context, Resource resource, string structure) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Code code, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, Coding coding, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("memberOf")]
     public bool? memberOf(CqlContext context, CodeableConcept concept, string valueSet) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
 
     [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, Coding coding, Coding subsumedCoding) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
     [CqlFunctionDefinition("subsumes")]
     public bool? subsumes(CqlContext context, CodeableConcept concept, CodeableConcept subsumedConcept) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
 
     [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, Coding coding, Coding subsumingCoding) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
     [CqlFunctionDefinition("subsumedBy")]
     public bool? subsumedBy(CqlContext context, CodeableConcept concept, CodeableConcept subsumingConcept) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
 
     [CqlFunctionDefinition("htmlChecks")]
     public bool? htmlChecks(CqlContext context, Element element) =>
-        throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
+    throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
 
 
     [CqlFunctionDefinition("ToString")]
@@ -833,7 +798,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Account.AccountStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -843,7 +807,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionCardinalityBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -853,7 +816,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionConditionKind? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -863,7 +825,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionGroupingBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -873,7 +834,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionParticipantType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -883,7 +843,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionPrecheckBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -893,7 +852,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionRelationshipType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -903,7 +861,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionRequiredBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -913,7 +870,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActionSelectionBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -923,7 +879,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ActivityDefinition.RequestResourceType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -933,7 +888,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Address.AddressType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -943,7 +897,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Address.AddressUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -953,7 +906,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AdministrativeGender? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -963,7 +915,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AdverseEvent.AdverseEventActuality? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -973,7 +924,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ElementDefinition.AggregationMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -983,7 +933,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AllergyIntolerance.AllergyIntoleranceCategory? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -993,7 +942,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AllergyIntolerance.AllergyIntoleranceCriticality? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1003,7 +951,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AllergyIntolerance.AllergyIntoleranceSeverity? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1013,7 +960,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AllergyIntolerance.AllergyIntoleranceType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1023,7 +969,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Appointment.AppointmentStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1033,7 +978,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestScript.AssertionDirectionType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1043,7 +987,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestScript.AssertionOperatorType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1053,7 +996,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestScript.AssertionResponseTypes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1063,7 +1005,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AuditEvent.AuditEventAction? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1073,7 +1014,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AuditEvent.AuditEventAgentNetworkType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1083,7 +1023,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         AuditEvent.AuditEventOutcome? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1093,7 +1032,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         BindingStrength? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1103,7 +1041,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1113,7 +1050,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1123,7 +1059,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1133,7 +1068,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Bundle.BundleType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1143,7 +1077,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatementKind? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1153,7 +1086,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CarePlan.CarePlanActivityKind? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1163,7 +1095,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CarePlan.CarePlanActivityStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1173,7 +1104,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CarePlan.CarePlanIntent? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1183,7 +1113,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         RequestStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1193,7 +1122,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CareTeam.CareTeamStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1203,7 +1131,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CatalogEntry.CatalogEntryRelationType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1213,7 +1140,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         InvoicePriceComponentType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1223,7 +1149,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ChargeItem.ChargeItemStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1233,7 +1158,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FinancialResourceStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1243,7 +1167,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ClinicalImpression.ClinicalImpressionStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1253,7 +1176,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TerminologyCapabilities.CodeSearchSupport? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1263,7 +1185,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CodeSystemContentMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1273,7 +1194,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CodeSystem.CodeSystemHierarchyMeaning? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1283,7 +1203,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         RequestPriority? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1293,7 +1212,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         EventStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1303,7 +1221,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CompartmentType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1313,7 +1230,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Composition.CompositionAttestationMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1323,7 +1239,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CompositionStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1333,7 +1248,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ConceptMapEquivalence? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1343,7 +1257,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ConceptMap.ConceptMapGroupUnmappedMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1353,7 +1266,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.ConditionalDeleteStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1363,7 +1275,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.ConditionalReadStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1373,7 +1284,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Consent.ConsentDataMeaning? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1383,7 +1293,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Consent.ConsentProvisionType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1393,7 +1302,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Consent.ConsentState? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1403,7 +1311,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ConstraintSeverity? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1413,7 +1320,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ContactPoint.ContactPointSystem? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1423,7 +1329,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ContactPoint.ContactPointUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1433,7 +1338,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Contract.ContractResourcePublicationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1443,7 +1347,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Contract.ContractResourceStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1453,7 +1356,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Contributor.ContributorType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1463,7 +1365,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Money.Currencies? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1473,7 +1374,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DaysOfWeek? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1483,7 +1383,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DetectedIssue.DetectedIssueSeverity? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1493,7 +1392,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ObservationStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1503,7 +1401,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceMetric.DeviceMetricCalibrationState? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1513,7 +1410,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceMetric.DeviceMetricCalibrationType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1523,7 +1419,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceMetric.DeviceMetricCategory? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1533,7 +1428,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceMetric.DeviceMetricColor? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1543,7 +1437,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceMetric.DeviceMetricOperationalStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1553,7 +1446,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceNameType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1563,7 +1455,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DeviceUseStatement.DeviceUseStatementStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1573,7 +1464,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DiagnosticReport.DiagnosticReportStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1583,7 +1473,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ElementDefinition.DiscriminatorType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1593,7 +1482,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Composition.V3ConfidentialityClassification? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1603,7 +1491,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.DocumentMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1613,7 +1500,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DocumentReferenceStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1623,7 +1509,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DocumentRelationshipType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1633,7 +1518,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CoverageEligibilityRequest.EligibilityRequestPurpose? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1643,7 +1527,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CoverageEligibilityResponse.EligibilityResponsePurpose? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1653,7 +1536,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Questionnaire.EnableWhenBehavior? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1663,7 +1545,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Encounter.EncounterLocationStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1673,7 +1554,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Encounter.EncounterStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1683,7 +1563,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Endpoint.EndpointStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1693,7 +1572,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         EpisodeOfCare.EpisodeOfCareStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1703,7 +1581,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.EventCapabilityMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1713,7 +1590,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Timing.EventTiming? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1723,7 +1599,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         VariableTypeCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1733,7 +1608,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ExampleScenario.ExampleScenarioActorType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1743,7 +1617,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ExplanationOfBenefit.ExplanationOfBenefitStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1753,7 +1626,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         EffectEvidenceSynthesis.ExposureStateCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1763,7 +1635,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureDefinition.ExtensionContextType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1773,7 +1644,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FHIRAllTypes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1783,7 +1653,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FHIRDefinedType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1793,7 +1662,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Device.FHIRDeviceStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1803,7 +1671,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ResourceType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1813,7 +1680,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Substance.FHIRSubstanceStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1823,7 +1689,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FHIRVersion? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1833,7 +1698,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FamilyMemberHistory.FamilyHistoryStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1843,7 +1707,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         FilterOperator? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1853,7 +1716,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Flag.FlagStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1863,7 +1725,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Goal.GoalLifecycleStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1873,7 +1734,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         GraphDefinition.GraphCompartmentRule? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1883,7 +1743,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         GraphDefinition.GraphCompartmentUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1893,7 +1752,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         GroupMeasureCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1903,7 +1761,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Group.GroupType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1913,7 +1770,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         GuidanceResponse.GuidanceResponseStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1923,7 +1779,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ImplementationGuide.GuidePageGeneration? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1933,7 +1788,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ImplementationGuide.GuideParameterCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1943,7 +1797,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Bundle.HTTPVerb? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1953,7 +1806,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Identifier.IdentifierUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1963,7 +1815,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Person.IdentityAssuranceLevel? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1973,7 +1824,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ImagingStudy.ImagingStudyStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1983,7 +1833,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -1993,7 +1842,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Immunization.ImmunizationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2003,7 +1851,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Invoice.InvoiceStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2013,7 +1860,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         OperationOutcome.IssueSeverity? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2023,7 +1869,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         OperationOutcome.IssueType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2033,7 +1878,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Patient.LinkType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2043,7 +1887,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Linkage.LinkageType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2053,7 +1896,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ListMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2063,7 +1905,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         List.ListStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2073,7 +1914,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Location.LocationMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2083,7 +1923,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Location.LocationStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2093,7 +1932,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MeasureReport.MeasureReportStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2103,7 +1941,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MeasureReport.MeasureReportType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2113,7 +1950,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationAdministration.MedicationAdministrationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2123,7 +1959,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationDispense.MedicationDispenseStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2133,7 +1968,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationKnowledge.MedicationKnowledgeStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2143,7 +1977,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationRequest.MedicationRequestIntent? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2153,7 +1986,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationRequest.MedicationrequestStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2163,7 +1995,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MedicationStatement.MedicationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2173,7 +2004,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Medication.MedicationStatusCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2183,7 +2013,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MessageDefinition.MessageSignificanceCategory? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2193,7 +2022,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MessageheaderResponseRequest? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2202,7 +2030,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public string ToString(CqlContext context, Code value)
     {
         string a_ = value?.Value;
-
         return a_;
     }
 
@@ -2212,7 +2039,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         HumanName.NameUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2222,7 +2048,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         NamingSystem.NamingSystemIdentifierType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2232,7 +2057,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         NamingSystem.NamingSystemType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2242,7 +2066,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Narrative.NarrativeStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2252,7 +2075,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         NoteType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2262,7 +2084,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         RequestIntent? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2272,7 +2093,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ObservationDefinition.ObservationDataType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2282,7 +2102,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ObservationDefinition.ObservationRangeCategory? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2292,7 +2111,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         OperationDefinition.OperationKind? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2302,7 +2120,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         OperationParameterUse? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2312,7 +2129,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MolecularSequence.OrientationType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2322,7 +2138,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Appointment.ParticipantRequired? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2332,7 +2147,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ParticipationStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2342,7 +2156,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ElementDefinition.PropertyRepresentation? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2352,7 +2165,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CodeSystem.PropertyType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2362,7 +2174,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Provenance.ProvenanceEntityRole? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2372,7 +2183,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         PublicationStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2382,7 +2192,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MolecularSequence.QualityType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2392,7 +2201,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Quantity.QuantityComparator? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2402,7 +2210,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Questionnaire.QuestionnaireItemOperator? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2412,7 +2219,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Questionnaire.QuestionnaireItemType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2422,7 +2228,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         QuestionnaireResponse.QuestionnaireResponseStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2432,7 +2237,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.ReferenceHandlingPolicy? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2442,7 +2246,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ElementDefinition.ReferenceVersionRules? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2452,7 +2255,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         RelatedArtifact.RelatedArtifactType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2462,7 +2264,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ClaimProcessingCodes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2472,7 +2273,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MolecularSequence.RepositoryType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2482,7 +2282,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ResearchElementDefinition.ResearchElementType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2492,7 +2291,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ResearchStudy.ResearchStudyStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2502,7 +2300,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ResearchSubject.ResearchSubjectStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2512,7 +2309,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.ResourceVersionPolicy? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2522,7 +2318,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MessageHeader.ResponseType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2532,7 +2327,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.RestfulCapabilityMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2542,7 +2336,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ImplementationGuide.SPDXLicense? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2552,7 +2345,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SearchParameter.SearchComparator? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2562,7 +2354,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Bundle.SearchEntryMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2572,7 +2363,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SearchParameter.SearchModifierCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2582,7 +2372,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SearchParamType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2592,7 +2381,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MolecularSequence.SequenceType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2602,7 +2390,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ElementDefinition.SlicingRules? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2612,7 +2399,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Slot.SlotStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2622,7 +2408,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DataRequirement.SortDirection? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2632,7 +2417,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SpecimenDefinition.SpecimenContainedPreference? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2642,7 +2426,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Specimen.SpecimenStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2652,7 +2435,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         VerificationResult.StatusCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2662,7 +2444,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         MolecularSequence.StrandType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2672,7 +2453,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureDefinition.StructureDefinitionKind? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2682,7 +2462,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapContextType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2692,7 +2471,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapGroupTypeMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2702,7 +2480,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapInputMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2712,7 +2489,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapModelMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2722,7 +2498,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapSourceListMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2732,7 +2507,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapTargetListMode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2742,7 +2516,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureMap.StructureMapTransform? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2752,7 +2525,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Subscription.SubscriptionChannelType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2762,7 +2534,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Subscription.SubscriptionStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2772,7 +2543,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SupplyDelivery.SupplyDeliveryStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2782,7 +2552,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SupplyRequest.SupplyRequestStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2792,7 +2561,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.SystemRestfulInteraction? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2802,7 +2570,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Task.TaskIntent? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2812,7 +2579,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Task.TaskStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2822,7 +2588,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestReport.TestReportActionResult? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2832,7 +2597,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestReport.TestReportParticipantType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2842,7 +2606,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestReport.TestReportResult? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2852,7 +2615,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestReport.TestReportStatus? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2862,7 +2624,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TestScript.TestScriptRequestMethodCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2872,7 +2633,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         TriggerDefinition.TriggerType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2882,7 +2642,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         StructureDefinition.TypeDerivationRule? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2892,7 +2651,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         CapabilityStatement.TypeRestfulInteraction? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2902,7 +2660,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Device.UDIEntryType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2912,7 +2669,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         Timing.UnitsOfTime? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2922,7 +2678,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         ClaimUseCode? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2932,7 +2687,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         VisionPrescription.VisionBase? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2942,7 +2696,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         VisionPrescription.VisionEyes? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2952,7 +2705,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         SearchParameter.XPathUsageType? a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2962,7 +2714,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         byte[] a_ = value?.Value;
         string b_ = context.Operators.Convert<string>(a_);
-
         return b_;
     }
 
@@ -2971,7 +2722,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public string ToString(CqlContext context, FhirString value)
     {
         string a_ = value?.Value;
-
         return a_;
     }
 
@@ -2980,7 +2730,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public string ToString(CqlContext context, FhirUri value)
     {
         string a_ = value?.Value;
-
         return a_;
     }
 
@@ -2989,7 +2738,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public string ToString(CqlContext context, XHtml value)
     {
         string a_ = value?.Value;
-
         return a_;
     }
 
@@ -2998,7 +2746,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {
         bool? a_ = value?.Value;
-
         return a_;
     }
 
@@ -3008,7 +2755,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         string a_ = value?.Value;
         CqlDate b_ = context.Operators.ConvertStringToDate(a_);
-
         return b_;
     }
 
@@ -3017,7 +2763,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public CqlDateTime ToDateTime(CqlContext context, FhirDateTime value)
     {
         CqlDateTime a_ = context.Operators.Convert<CqlDateTime>(value);
-
         return a_;
     }
 
@@ -3027,7 +2772,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         DateTimeOffset? a_ = value?.Value;
         CqlDateTime b_ = context.Operators.Convert<CqlDateTime>(a_);
-
         return b_;
     }
 
@@ -3036,7 +2780,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public decimal? ToDecimal(CqlContext context, FhirDecimal value)
     {
         decimal? a_ = value?.Value;
-
         return a_;
     }
 
@@ -3045,7 +2788,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     public int? ToInteger(CqlContext context, Integer value)
     {
         int? a_ = value?.Value;
-
         return a_;
     }
 
@@ -3055,7 +2797,6 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
     {
         string a_ = value?.Value;
         CqlTime b_ = context.Operators.ConvertStringToTime(a_);
-
         return b_;
     }
 

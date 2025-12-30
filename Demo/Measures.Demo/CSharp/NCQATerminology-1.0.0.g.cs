@@ -28,6 +28,37 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Codes
 
     [CqlCodeDefinition("problem-list-item", codeId: "problem-list-item", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-category")]

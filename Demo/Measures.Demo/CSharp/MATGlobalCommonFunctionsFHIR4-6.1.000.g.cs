@@ -28,6 +28,37 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
@@ -228,30 +259,38 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
     #region Parameters
 
-    [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-    {
-        CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-        object d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
-        return (CqlInterval<CqlDateTime>)d_;
-    }
+    [CqlParameterDefinition("Measurement Period")]
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+        _Measurement_Period_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+                CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+                CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+                object d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
+                return (CqlInterval<CqlDateTime>)d_;
+            });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    private Cached<Patient> _Patient_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
 
     [CqlFunctionDefinition("LengthInDays")]
@@ -260,38 +299,40 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         CqlDateTime a_ = context.Operators.Start(Value);
         CqlDateTime b_ = context.Operators.End(Value);
         int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
-
         return c_;
     }
 
 
+    private Cached<IEnumerable<Encounter>> _Inpatient_Encounter_Cached = new();
+
     [CqlExpressionDefinition("Inpatient Encounter")]
-    public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context)
-    {
-        CqlValueSet a_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-        bool? c_(Encounter EncounterInpatient)
-        {
-            Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
-            string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-            bool? g_ = context.Operators.Equal(f_, "finished");
-            Period h_ = EncounterInpatient?.Period;
-            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
-            int? j_ = this.LengthInDays(context, i_);
-            bool? k_ = context.Operators.LessOrEqual(j_, 120);
-            bool? l_ = context.Operators.And(g_, k_);
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
-            CqlDateTime o_ = context.Operators.End(n_);
-            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-            bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
-            bool? r_ = context.Operators.And(l_, q_);
-
-            return r_;
-        };
-        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-
-        return d_;
-    }
+    public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
+        _Inpatient_Encounter_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlValueSet a_ = this.Encounter_Inpatient(context);
+                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+                bool? c_(Encounter EncounterInpatient)
+                {
+                    Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
+                    string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
+                    bool? g_ = context.Operators.Equal(f_, "finished");
+                    Period h_ = EncounterInpatient?.Period;
+                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
+                    int? j_ = this.LengthInDays(context, i_);
+                    bool? k_ = context.Operators.LessOrEqual(j_, 120);
+                    bool? l_ = context.Operators.And(g_, k_);
+                    CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
+                    CqlDateTime o_ = context.Operators.End(n_);
+                    CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
+                    bool? r_ = context.Operators.And(l_, q_);
+                    return r_;
+                };
+                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+                return d_;
+            });
 
 
     [CqlFunctionDefinition("ED Visit")]
@@ -321,7 +362,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             bool? aa_ = context.Operators.Not((bool?)(z_ is null));
             bool? ab_ = context.Operators.And(w_, aa_);
             bool? ac_ = context.Operators.And(j_, ab_);
-
             return ac_;
         };
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -330,12 +370,10 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             Period ad_ = @this?.Period;
             CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ad_);
             CqlDateTime af_ = context.Operators.End(ae_);
-
             return af_;
         };
         IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter g_ = context.Operators.Last<Encounter>(f_);
-
         return g_;
     }
 
@@ -355,7 +393,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 {
                     Period h_ = TheEncounter?.Period;
                     CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
-
                     return i_;
                 }
                 else
@@ -367,17 +404,14 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
                     CqlDateTime o_ = context.Operators.End(n_);
                     CqlInterval<CqlDateTime> p_ = context.Operators.Interval(l_, o_, true, true);
-
                     return p_;
                 }
             };
-
             return g_();
         };
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(d_);
         CqlInterval<CqlDateTime> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
-
         return f_;
     }
 
@@ -396,7 +430,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 if (EDEncounter is null)
                 {
                     List<Encounter.LocationComponent> h_ = TheEncounter?.Location;
-
                     return (IEnumerable<Encounter.LocationComponent>)h_;
                 }
                 else
@@ -408,17 +441,14 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
-
                     return l_;
                 }
             };
-
             return g_();
         };
         IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<IEnumerable<Encounter.LocationComponent>> e_ = context.Operators.Distinct<IEnumerable<Encounter.LocationComponent>>(d_);
         IEnumerable<Encounter.LocationComponent> f_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(e_);
-
         return f_;
     }
 
@@ -428,7 +458,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
         int? b_ = this.LengthInDays(context, a_);
-
         return b_;
     }
 
@@ -438,7 +467,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
         CqlDateTime b_ = context.Operators.Start(a_);
-
         return b_;
     }
 
@@ -449,7 +477,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         Period a_ = TheEncounter?.Period;
         CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
         CqlDateTime c_ = context.Operators.End(b_);
-
         return c_;
     }
 
@@ -463,7 +490,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             Period h_ = @this?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
-
             return j_;
         };
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
@@ -471,7 +497,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.Start(f_);
-
         return g_;
     }
 
@@ -511,7 +536,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlDateTime cr_ = context.Operators.Start(cq_);
                     bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
                     bool? ct_ = context.Operators.And(co_, cs_);
-
                     return ct_;
                 };
                 IEnumerable<Encounter> am_ = context.Operators.Where<Encounter>(ak_, al_);
@@ -520,7 +544,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     Period cu_ = @this?.Period;
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cu_);
                     CqlDateTime cw_ = context.Operators.End(cv_);
-
                     return cw_;
                 };
                 IEnumerable<Encounter> ao_ = context.Operators.SortBy<Encounter>(am_, an_, System.ComponentModel.ListSortDirection.Ascending);
@@ -552,7 +575,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlDateTime dm_ = context.Operators.Start(dl_);
                     bool? dn_ = context.Operators.Not((bool?)(dm_ is null));
                     bool? do_ = context.Operators.And(dj_, dn_);
-
                     return do_;
                 };
                 IEnumerable<Encounter> bb_ = context.Operators.Where<Encounter>(az_, ba_);
@@ -561,7 +583,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     Period dp_ = @this?.Period;
                     CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dp_);
                     CqlDateTime dr_ = context.Operators.End(dq_);
-
                     return dr_;
                 };
                 IEnumerable<Encounter> bd_ = context.Operators.SortBy<Encounter>(bb_, bc_, System.ComponentModel.ListSortDirection.Ascending);
@@ -592,7 +613,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlDateTime eh_ = context.Operators.Start(eg_);
                     bool? ei_ = context.Operators.Not((bool?)(eh_ is null));
                     bool? ej_ = context.Operators.And(ee_, ei_);
-
                     return ej_;
                 };
                 IEnumerable<Encounter> bq_ = context.Operators.Where<Encounter>(bo_, bp_);
@@ -601,7 +621,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     Period ek_ = @this?.Period;
                     CqlInterval<CqlDateTime> el_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ek_);
                     CqlDateTime em_ = context.Operators.End(el_);
-
                     return em_;
                 };
                 IEnumerable<Encounter> bs_ = context.Operators.SortBy<Encounter>(bq_, br_, System.ComponentModel.ListSortDirection.Ascending);
@@ -613,7 +632,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlDateTime bz_ = context.Operators.Start(by_);
                 bool? ca_ = context.Operators.Not((bool?)((bw_ ?? bz_) is null));
                 bool? cb_ = context.Operators.And(bm_, ca_);
-
                 return cb_;
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
@@ -622,7 +640,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 Period en_ = @this?.Period;
                 CqlInterval<CqlDateTime> eo_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, en_);
                 CqlDateTime ep_ = context.Operators.End(eo_);
-
                 return ep_;
             };
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
@@ -650,7 +667,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlDateTime ff_ = context.Operators.Start(fe_);
                 bool? fg_ = context.Operators.Not((bool?)(ff_ is null));
                 bool? fh_ = context.Operators.And(fc_, fg_);
-
                 return fh_;
             };
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
@@ -659,7 +675,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 Period fi_ = @this?.Period;
                 CqlInterval<CqlDateTime> fj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, fi_);
                 CqlDateTime fk_ = context.Operators.End(fj_);
-
                 return fk_;
             };
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
@@ -673,13 +688,11 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, z_);
             CqlDateTime ae_ = context.Operators.End(ad_);
             CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
-
             return af_;
         };
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
         CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
-
         return e_;
     }
 
@@ -693,20 +706,17 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             {
                 CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as FhirDateTime);
                 CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
-
                 return d_;
             }
             else if (choice is Period)
             {
                 CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, choice as Period);
-
                 return e_;
             }
             else if (choice is Instant)
             {
                 CqlDateTime f_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as Instant);
                 CqlInterval<CqlDateTime> h_ = context.Operators.Interval(f_, f_, true, true);
-
                 return h_;
             }
             else if (choice is Age)
@@ -753,7 +763,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> bm_ = context.Operators.Interval(be_, bl_, true, false);
                 bool? bn_ = bm_?.highClosed;
                 CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(w_, al_, az_, bn_);
-
                 return bo_;
             }
             else if (choice is Range)
@@ -809,19 +818,16 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> eb_ = context.Operators.Interval(ds_, ea_, true, false);
                 bool? ec_ = eb_?.highClosed;
                 CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(cf_, cw_, dm_, ec_);
-
                 return ed_;
             }
             else if (choice is Timing)
             {
                 CqlInterval<CqlDateTime> ee_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
-
                 return ee_;
             }
             else if (choice is FhirString)
             {
                 CqlInterval<CqlDateTime> ef_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
-
                 return ef_;
             }
             else
@@ -829,7 +835,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 return null as CqlInterval<CqlDateTime>;
             }
         };
-
         return a_();
     }
 
@@ -843,42 +848,36 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             {
                 DataType h_ = condition?.Abatement;
                 bool i_ = h_ is FhirDateTime;
-
                 return i_;
             };
             bool c_()
             {
                 DataType j_ = condition?.Abatement;
                 bool k_ = j_ is Period;
-
                 return k_;
             };
             bool d_()
             {
                 DataType l_ = condition?.Abatement;
                 bool m_ = l_ is FhirString;
-
                 return m_;
             };
             bool e_()
             {
                 DataType n_ = condition?.Abatement;
                 bool o_ = n_ is Age;
-
                 return o_;
             };
             bool f_()
             {
                 DataType p_ = condition?.Abatement;
                 bool q_ = p_ is Range;
-
                 return q_;
             };
             bool g_()
             {
                 DataType r_ = condition?.Abatement;
                 bool s_ = r_ is FhirBoolean;
-
                 return s_;
             };
             if (b_())
@@ -887,20 +886,17 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlDateTime u_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, t_ as FhirDateTime);
                 CqlDateTime w_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, t_ as FhirDateTime);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
-
                 return x_;
             }
             else if (c_())
             {
                 DataType y_ = condition?.Abatement;
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, y_ as Period);
-
                 return z_;
             }
             else if (d_())
             {
                 CqlInterval<CqlDateTime> aa_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
-
                 return aa_;
             }
             else if (e_())
@@ -955,7 +951,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> cn_ = context.Operators.Interval(ce_, cm_, true, false);
                 bool? co_ = cn_?.highClosed;
                 CqlInterval<CqlDateTime> cp_ = context.Operators.Interval(ar_, bi_, by_, co_);
-
                 return cp_;
             }
             else if (f_())
@@ -1018,7 +1013,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> fk_ = context.Operators.Interval(fa_, fj_, true, false);
                 bool? fl_ = fk_?.highClosed;
                 CqlInterval<CqlDateTime> fm_ = context.Operators.Interval(di_, eb_, et_, fl_);
-
                 return fm_;
             }
             else if (g_())
@@ -1029,7 +1023,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 FhirDateTime fq_ = condition?.RecordedDateElement;
                 CqlDateTime fr_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, fq_);
                 CqlInterval<CqlDateTime> fs_ = context.Operators.Interval(fp_, fr_, true, false);
-
                 return fs_;
             }
             else
@@ -1037,7 +1030,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 return null as CqlInterval<CqlDateTime>;
             }
         };
-
         return a_();
     }
 
@@ -1064,7 +1056,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
                 bool? s_ = context.Operators.Or(m_, r_);
-
                 return s_ ?? false;
             };
             if (b_())
@@ -1075,7 +1066,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> w_ = this.Normalize_Abatement(context, condition);
                 CqlDateTime x_ = context.Operators.End(w_);
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, true);
-
                 return y_;
             }
             else
@@ -1086,11 +1076,9 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> ac_ = this.Normalize_Abatement(context, condition);
                 CqlDateTime ad_ = context.Operators.End(ac_);
                 CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, false);
-
                 return ae_;
             }
         };
-
         return a_();
     }
 
@@ -1100,7 +1088,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         IEnumerable<string> a_ = context.Operators.Split(uri, "/");
         string b_ = context.Operators.Last<string>(a_);
-
         return b_;
     }
 
@@ -1121,17 +1108,14 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
                 string n_ = this.GetId(context, m_);
                 bool? o_ = context.Operators.Equal(j_, n_);
-
                 return o_;
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
             Condition h_ = context.Operators.SingletonFrom<Condition>(g_);
-
             return h_;
         };
         IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
         IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
-
         return d_;
     }
 
@@ -1148,12 +1132,10 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string i_ = this.GetId(context, h_);
             bool? j_ = context.Operators.Equal(f_, i_);
-
             return j_;
         };
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
         Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
-
         return d_;
     }
 
@@ -1163,7 +1145,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         Extension a_ = this.GetExtension(context, element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
         DataType b_ = a_?.Value;
-
         return b_ as CodeableConcept;
     }
 
@@ -1173,7 +1154,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         IEnumerable<Extension> a_ = this.GetExtensions(context, domainResource, url);
         Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
         return b_;
     }
 
@@ -1183,7 +1163,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         IEnumerable<Extension> a_ = this.GetExtensions(context, element, url);
         Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
         return b_;
     }
 
@@ -1198,15 +1177,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string i_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
             bool? j_ = context.Operators.Equal(h_, i_);
-
             return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
-            E;
+        E;
         IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
         IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
-
         return f_;
     }
 
@@ -1220,15 +1197,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             FhirUri g_ = E?.UrlElement;
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             bool? i_ = context.Operators.Equal(h_, url);
-
             return i_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
-            E;
+        E;
         IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
         IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
-
         return f_;
     }
 
@@ -1243,7 +1218,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             Integer k_ = context.Operators.Convert<Integer>(j_);
             int? l_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, k_);
             bool? m_ = context.Operators.Equal(l_, 1);
-
             return m_;
         };
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
@@ -1263,18 +1237,15 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
                 string w_ = this.GetId(context, v_);
                 bool? x_ = context.Operators.Equal(s_, w_);
-
                 return x_;
             };
             IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
             Condition q_ = context.Operators.SingletonFrom<Condition>(p_);
-
             return q_;
         };
         IEnumerable<Condition> g_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)e_, f_);
         IEnumerable<Condition> h_ = context.Operators.Distinct<Condition>(g_);
         Condition i_ = context.Operators.SingletonFrom<Condition>(h_);
-
         return i_;
     }
 
@@ -1291,12 +1262,10 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string i_ = this.GetId(context, h_);
             bool? j_ = context.Operators.Equal(f_, i_);
-
             return j_;
         };
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
-
         return d_;
     }
 
@@ -1311,15 +1280,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string i_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", url);
             bool? j_ = context.Operators.Equal(h_, i_);
-
             return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
-            E;
+        E;
         IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
         IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
-
         return f_;
     }
 
@@ -1329,7 +1296,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         IEnumerable<Extension> a_ = this.GetBaseExtensions(context, domainResource, url);
         Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
         return b_;
     }
 
@@ -1346,15 +1312,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             string i_ = context.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", id);
             bool? j_ = context.Operators.Equal(h_, i_);
-
             return j_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) =>
-            E;
+        E;
         IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
         IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
-
         return f_;
     }
 
@@ -1366,7 +1330,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     {
         IEnumerable<Extension> a_ = this.BaseExtensions(context, element, id);
         Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
-
         return b_;
     }
 
@@ -1380,13 +1343,11 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             {
                 DataType c_ = request?.Medication;
                 bool d_ = c_ is CodeableConcept;
-
                 return d_;
             };
             if (b_())
             {
                 DataType e_ = request?.Medication;
-
                 return e_ as CodeableConcept;
             }
             else
@@ -1401,17 +1362,14 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
                     string p_ = this.GetId(context, o_);
                     bool? q_ = context.Operators.Equal(l_, p_);
-
                     return q_;
                 };
                 IEnumerable<Medication> h_ = context.Operators.Where<Medication>(f_, g_);
                 Medication i_ = context.Operators.SingletonFrom<Medication>(h_);
                 CodeableConcept j_ = i_?.Code;
-
                 return j_;
             }
         };
-
         return a_();
     }
 
@@ -1424,7 +1382,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         bool? d_ = context.Operators.Equal(a_, c_);
         bool? e_ = context.Operators.Or((bool?)(a_ is null), d_);
         bool? f_ = context.Operators.Not(e_);
-
         return f_;
     }
 
@@ -1437,7 +1394,6 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         bool? d_ = context.Operators.Equal(a_, c_);
         bool? e_ = context.Operators.Or((bool?)(a_ is null), d_);
         bool? f_ = context.Operators.Not(e_);
-
         return f_;
     }
 
@@ -1456,23 +1412,19 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 if ((this.HasEnd(context, period)) ?? false)
                 {
                     CqlDateTime h_ = context.Operators.End(period);
-
                     return h_;
                 }
                 else
                 {
                     CqlDateTime i_ = context.Operators.Start(period);
-
                     return i_;
                 }
             };
-
             return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
-
         return f_;
     }
 
@@ -1491,23 +1443,19 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 if ((this.HasStart(context, period)) ?? false)
                 {
                     CqlDateTime h_ = context.Operators.Start(period);
-
                     return h_;
                 }
                 else
                 {
                     CqlDateTime i_ = context.Operators.End(period);
-
                     return i_;
                 }
             };
-
             return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
-
         return f_;
     }
 

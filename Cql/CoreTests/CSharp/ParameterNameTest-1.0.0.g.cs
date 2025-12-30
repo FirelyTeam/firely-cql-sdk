@@ -28,13 +28,43 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
     [CqlFunctionDefinition("Test Function")]
     public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
     {
         int? a_ = context.Operators.Add(param_with_spaces, 10);
-
         return a_;
     }
 
@@ -43,7 +73,6 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
     {
         decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
-
         return a_;
     }
 
@@ -52,7 +81,6 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
     {
         int? a_ = context.Operators.Add(@int, 5);
-
         return a_;
     }
 

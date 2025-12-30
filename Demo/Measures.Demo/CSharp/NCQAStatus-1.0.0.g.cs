@@ -28,16 +28,51 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    private Cached<Patient> _Patient_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
 
     [CqlFunctionDefinition("Active Allergy")]
@@ -50,11 +85,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             CqlCode e_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equal(d_, f_);
-
             return g_;
         };
         IEnumerable<AllergyIntolerance> b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
-
         return b_;
     }
 
@@ -69,11 +102,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             CqlCode e_ = NCQATerminology_1_0_0.Instance.active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equal(d_, f_);
-
             return g_;
         };
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
-
         return b_;
     }
 
@@ -86,11 +117,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "finished");
-
             return e_;
         };
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
-
         return b_;
     }
 
@@ -103,11 +132,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
-
             return e_;
         };
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
-
         return b_;
     }
 
@@ -120,11 +147,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
-
             return e_;
         };
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
-
         return b_;
     }
 
@@ -140,11 +165,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
                 "completed",
             ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
-
             return f_;
         };
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(Med, a_);
-
         return b_;
     }
 
@@ -157,11 +180,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             Code<EventStatus> c_ = P?.StatusElement;
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
-
             return e_;
         };
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
-
         return b_;
     }
 
@@ -178,11 +199,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
                 "in-progress",
             ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
-
             return f_;
         };
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
-
         return b_;
     }
 

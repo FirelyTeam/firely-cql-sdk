@@ -28,6 +28,37 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Codes
 
     [CqlCodeDefinition("laboratory", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
@@ -73,14 +104,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    private Cached<Patient> _Patient_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
 
     [CqlFunctionDefinition("Final Survey Observation")]
@@ -102,7 +137,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -111,17 +145,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.survey(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -145,7 +176,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -154,17 +184,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.survey(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -179,11 +206,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlCode e_ = this.active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
-
             return g_;
         };
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
-
         return b_;
     }
 
@@ -198,11 +223,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlCode e_ = this.active(context);
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
-
             return g_;
         };
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
-
         return b_;
     }
 
@@ -226,11 +249,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
-
         return b_;
     }
 
@@ -254,11 +275,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
-
         return b_;
     }
 
@@ -282,11 +301,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
-
         return b_;
     }
 
@@ -310,11 +327,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
-
         return b_;
     }
 
@@ -338,11 +353,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
-
         return b_;
     }
 
@@ -366,11 +379,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
-
             return m_;
         };
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
-
         return b_;
     }
 
@@ -390,11 +401,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -414,11 +423,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -440,11 +447,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "onleave",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
-
         return b_;
     }
 
@@ -466,11 +471,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "onleave",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
-
         return b_;
     }
 
@@ -484,11 +487,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Immunization.ImmunizationStatusCodes? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
-
             return f_;
         };
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
-
         return b_;
     }
 
@@ -502,11 +503,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             Immunization.ImmunizationStatusCodes? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
-
             return f_;
         };
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
-
         return b_;
     }
 
@@ -520,11 +519,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             EventStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
-
             return f_;
         };
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
-
         return b_;
     }
 
@@ -538,11 +535,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             EventStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
-
             return f_;
         };
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
-
         return b_;
     }
 
@@ -556,11 +551,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             EventStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
-
             return f_;
         };
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
-
         return b_;
     }
 
@@ -584,7 +577,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -593,17 +585,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.laboratory(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -627,7 +616,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -636,17 +624,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.laboratory(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -665,11 +650,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string i_ = context.Operators.Convert<string>(h_);
             bool? j_ = context.Operators.Equal(i_, "order");
             bool? k_ = context.Operators.And(f_, j_);
-
             return k_;
         };
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
-
         return b_;
     }
 
@@ -688,11 +671,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string i_ = context.Operators.Convert<string>(h_);
             bool? j_ = context.Operators.Equal(i_, "order");
             bool? k_ = context.Operators.And(f_, j_);
-
             return k_;
         };
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
-
         return b_;
     }
 
@@ -712,11 +693,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "on-hold",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
-
         return b_;
     }
 
@@ -736,11 +715,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "on-hold",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
-
         return b_;
     }
 
@@ -763,11 +740,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string j_ = context.Operators.Convert<string>(i_);
             bool? k_ = context.Operators.Equal(j_, "order");
             bool? l_ = context.Operators.And(g_, k_);
-
             return l_;
         };
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
-
         return b_;
     }
 
@@ -790,11 +765,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string j_ = context.Operators.Convert<string>(i_);
             bool? k_ = context.Operators.Equal(j_, "order");
             bool? l_ = context.Operators.And(g_, k_);
-
             return l_;
         };
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
-
         return b_;
     }
 
@@ -818,7 +791,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -827,17 +799,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.exam(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -861,7 +830,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept j_(CodeableConcept @this)
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-
                 return p_;
             };
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
@@ -870,17 +838,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlCode q_ = this.exam(context);
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
-
                 return s_;
             };
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
-
             return o_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -899,11 +864,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -922,11 +885,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -945,11 +906,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -968,11 +927,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -991,11 +948,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -1014,11 +969,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -1037,11 +990,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -1060,11 +1011,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-
             return g_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -1085,11 +1034,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 
@@ -1110,11 +1057,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-
             return h_;
         };
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
-
         return b_;
     }
 

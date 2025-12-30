@@ -28,6 +28,37 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Codes
 
     [CqlCodeDefinition("Abdomen and Pelvis High Dose", codeId: "LA31754-7", codeSystem: "http://loinc.org")]
@@ -143,14 +174,18 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
 
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    private Cached<Patient> _Patient_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
 
     [CqlFunctionDefinition("CT Scan Qualifies")]
@@ -232,7 +267,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? ci_ = context.Operators.ConvertIntegerToDecimal(3092);
         bool? cj_ = this.qualifies(context, Result, cg_, bi_, ci_);
         bool? ck_ = context.Operators.Or(cf_, cj_);
-
         return ck_;
     }
 
@@ -250,7 +284,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         bool? h_ = context.Operators.GreaterOrEqual(g_, sizeDoseThreshold);
         bool? i_ = context.Operators.Or(f_, h_);
         bool? j_ = context.Operators.And(d_, i_);
-
         return j_;
     }
 
@@ -281,7 +314,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             string u_ = (t_ as CqlQuantity)?.unit;
             bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
             bool? w_ = context.Operators.And(r_, v_);
-
             return w_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
@@ -290,13 +322,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
-
             return z_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
-
         return g_;
     }
 
@@ -327,7 +357,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             string u_ = (t_ as CqlQuantity)?.unit;
             bool? v_ = context.Operators.Equal(u_, "mGy.cm");
             bool? w_ = context.Operators.And(r_, v_);
-
             return w_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
@@ -336,13 +365,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
-
             return z_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
-
         return g_;
     }
 
@@ -426,7 +453,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? ci_ = context.Operators.ConvertIntegerToDecimal(3092);
         bool? cj_ = this.qualifies(context, Result, cg_, bi_, ci_);
         bool? ck_ = context.Operators.Or(cf_, cj_);
-
         return ck_;
     }
 
@@ -444,7 +470,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         bool? h_ = context.Operators.GreaterOrEqual(g_, sizeDoseThreshold);
         bool? i_ = context.Operators.Or(f_, h_);
         bool? j_ = context.Operators.And(d_, i_);
-
         return j_;
     }
 
@@ -475,7 +500,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             string u_ = (t_ as CqlQuantity)?.unit;
             bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
             bool? w_ = context.Operators.And(r_, v_);
-
             return w_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
@@ -484,13 +508,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
-
             return z_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
-
         return g_;
     }
 
@@ -521,7 +543,6 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             string u_ = (t_ as CqlQuantity)?.unit;
             bool? v_ = context.Operators.Equal(u_, "mGy.cm");
             bool? w_ = context.Operators.And(r_, v_);
-
             return w_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
@@ -530,13 +551,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
-
             return z_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
-
         return g_;
     }
 

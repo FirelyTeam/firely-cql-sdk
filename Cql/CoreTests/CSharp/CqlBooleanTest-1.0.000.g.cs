@@ -28,16 +28,51 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
-    public bool? SomethingTrueEqualsTrue(CqlContext context)
-    {
-        bool? a_ = context.Operators.Equal(1, 1);
-        bool? b_ = context.Operators.Equal(a_, true);
+    private Cached<bool?> _SomethingTrueEqualsTrue_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
+    public bool? SomethingTrueEqualsTrue(CqlContext context) =>
+        _SomethingTrueEqualsTrue_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                bool? a_ = context.Operators.Equal(1, 1);
+                bool? b_ = context.Operators.Equal(a_, true);
+                return b_;
+            });
 
 
     #endregion Functions and Expressions

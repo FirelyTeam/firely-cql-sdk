@@ -28,6 +28,37 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Palliative Care Assessment", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", valueSetVersion: null)]
@@ -85,7 +116,6 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDate an_ = context.Operators.DateFrom(am_);
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, true, true);
             bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
-
             return ap_;
         };
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -109,7 +139,6 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDate bc_ = context.Operators.DateFrom(bb_);
             CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, true, true);
             bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
-
             return be_;
         };
         IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
@@ -134,7 +163,6 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDate br_ = context.Operators.DateFrom(bq_);
             CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, true, true);
             bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
-
             return bt_;
         };
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
@@ -158,13 +186,11 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDate ce_ = context.Operators.DateFrom(cd_);
             CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
             bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
-
             return cg_;
         };
         IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
         bool? z_ = context.Operators.Exists<Condition>(y_);
         bool? aa_ = context.Operators.Or(s_, z_);
-
         return aa_;
     }
 

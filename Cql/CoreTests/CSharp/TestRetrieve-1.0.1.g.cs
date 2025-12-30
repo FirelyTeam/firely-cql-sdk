@@ -28,6 +28,37 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion ILibrary Implementation
 
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheToken, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            if (cqlContext.CacheToken is null)
+            {
+                // No caching
+                CacheToken = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            {
+                return CachedValue;
+            }
+            else
+            {
+                var value = factory();
+                CachedValue = value;
+                CacheToken = cqlContext.CacheToken;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("HIV", valueSetId: "2.16.840.1.113883.3.464.1003.120.12.1003", valueSetVersion: null)]
@@ -96,52 +127,68 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #region Parameters
 
-    [CqlParameterDefinition("MeasurementPeriod")]
-    public object MeasurementPeriod(CqlContext context)
-    {
-        CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-        object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
+    private Cached<object> _MeasurementPeriod_Cached = new();
 
-        return d_;
-    }
+    [CqlParameterDefinition("MeasurementPeriod")]
+    public object MeasurementPeriod(CqlContext context) =>
+        _MeasurementPeriod_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
+                CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
+                CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+                object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
+                return d_;
+            });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
+    private Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private Cached<IEnumerable<Patient>> _InDemographic_Cached = new();
 
     [CqlExpressionDefinition("InDemographic")]
-    public IEnumerable<Patient> InDemographic(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+    public IEnumerable<Patient> InDemographic(CqlContext context) =>
+        _InDemographic_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private Cached<bool?> _SexuallyActive_Cached = new();
 
     [CqlExpressionDefinition("SexuallyActive")]
-    public bool? SexuallyActive(CqlContext context)
-    {
-        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? b_ = context.Operators.Exists<Condition>(a_);
-        IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-        bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
-        bool? e_ = context.Operators.Or(b_, d_);
-
-        return e_;
-    }
+    public bool? SexuallyActive(CqlContext context) =>
+        _SexuallyActive_Cached.GetOrReplace(
+            context,
+            () =>
+            {
+                IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+                bool? b_ = context.Operators.Exists<Condition>(a_);
+                IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+                bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
+                bool? e_ = context.Operators.Or(b_, d_);
+                return e_;
+            });
 
 
     #endregion Functions and Expressions
