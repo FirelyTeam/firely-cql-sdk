@@ -11,13 +11,12 @@ partial class LibrarySetCSharpCodeGenerator
         CqlDefinitionDictionary definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
-        public TypeToCSharpConverter TypeToCSharpConverter => LibrarySetCSharpCodeGenerator._typeToCSharpConverter;
-        public IReadOnlyList<(string alias, string type)> AliasedUsings => LibrarySetCSharpCodeGenerator._aliasedUsings;
-        public HashSet<string> Usings => LibrarySetCSharpCodeGenerator._usings;
+        public TypeToCSharpConverter TypeToCSharpConverter => librarySetCSharpCodeGenerator._typeToCSharpConverter;
+        public IReadOnlyList<(string alias, string type)> AliasedUsings => librarySetCSharpCodeGenerator._aliasedUsings;
+        public HashSet<string> Usings => librarySetCSharpCodeGenerator._usings;
         public string? Namespace { get; } = null; // Not used right now
-        public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; init; } = librarySetCSharpCodeGenerator;
-        public LibrarySet LibrarySet { get; init; } = librarySet;
-        public CqlDefinitionDictionary Definitions { get; init; } = definitions;
+        public LibrarySet LibrarySet { get; } = librarySet;
+        public CqlDefinitionDictionary Definitions { get; } = definitions;
 
         public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
             BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,

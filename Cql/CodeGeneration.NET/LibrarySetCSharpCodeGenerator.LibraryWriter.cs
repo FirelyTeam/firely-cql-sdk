@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Threading;
+using System.Linq;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
@@ -9,15 +9,29 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private class LibraryWriter(
-        LibrarySetWriter librarySetWriter,
-        ElmLibrary library,
-        IndentedStringBuilder isb)
+    private class LibraryWriter
     {
-        private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
-        public string LibraryName { get; } = library.VersionedLibraryIdentifier;
-        private string ClassName { get; } = IdentifierNormalizer.Normalize(library.VersionedLibraryIdentifier);
+        public LibraryWriter(
+            LibrarySetWriter librarySetWriter,
+            ElmLibrary library,
+            IndentedStringBuilder isb)
+        {
+            LibrarySetWriter = librarySetWriter;
+            _library = library;
+            ISB = isb;
+            _className = IdentifierNormalizer.Normalize(library.VersionedLibraryIdentifier);
+            _definitions = librarySetWriter
+                           .Definitions
+                           .SelectDefinitionsByLibraryName(LibraryName)
+                           .Select(t => t.definition)
+                           .ToArray();
+            CodeDefinitions = _definitions
+                               .OfType<CqlCodeDefinition>()
+                               .ToArray();
+        }
 
+        internal CqlVersionedLibraryIdentifier LibraryName => _library.VersionedLibraryIdentifier!;
+        private readonly string _className;
         private readonly Dictionary<string, int> _cacheFieldNameCount = new();
 
         public string GetUniqueCacheFieldName(string baseName)
@@ -48,20 +62,16 @@ partial class LibrarySetCSharpCodeGenerator
         private void AppendCqlTupleMetadataProperties()
         {
             var tupleMetadataBuilder = LibrarySetWriter.TupleMetadataBuilder;
-            bool first = true;
-
-            // Cql Tuple Metadata
-            foreach (var (propertyName, signature) in tupleMetadataBuilder.GetLibraryTupleMetadataPropertySignatures(LibraryName))
+            var signatures = tupleMetadataBuilder.GetLibraryTupleMetadataPropertySignatures(LibraryName).ToList();
+            for (var i = 0; i < signatures.Count; i++)
             {
-                if (first)
-                {
+                var (propertyName, signature) = signatures[i];
+                if (i == 0)
                     ISB.AppendLine(
                         """
                         #region CqlTupleMetadata Properties
 
                         """);
-                    first = false;
-                }
 
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
@@ -74,14 +84,12 @@ partial class LibrarySetCSharpCodeGenerator
                      """);
             }
 
-            if (!first)
-            {
+            if (signatures.Count > 0)
                 ISB.AppendLine(
                     """
                     #endregion CqlTupleMetadata Properties
 
                     """);
-            }
         }
 
         private void AppendLibraryInterfaceImplementation()
@@ -90,8 +98,8 @@ partial class LibrarySetCSharpCodeGenerator
                 $"""
                  #region ILibrary Implementation
 
-                 public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
-                 public string Version => {LibraryVersionedIdentifier.Version?.ToString().QuoteOrNullString()};
+                 public string Name => {LibraryName!.Identifier.ToString().QuoteString()};
+                 public string Version => {LibraryName!.Version?.ToString().QuoteOrNullString()};
                  """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
@@ -122,41 +130,28 @@ partial class LibrarySetCSharpCodeGenerator
         {
             if (LibrarySetWriter.Namespace is { Length: > 0 } @namespace)
             {
-                ISB.AppendLine($"namespace {@namespace};");
-                ISB.AppendLine();
+                ISB.AppendLine(
+                    $"""
+                     namespace {@namespace};
+
+                     """);
             }
         }
 
-        private CqlDefinition[]? definitions;
+        private readonly CqlDefinition[] _definitions;
 
-        public CqlDefinition[] Definitions =>
-            LazyInitializer.EnsureInitialized(
-                ref definitions,
-                () => LibrarySetWriter
-                      .Definitions
-                      .SelectDefinitionsByLibraryName(LibraryName)
-                      .Select(t => t.definition)
-                      .ToArray());
+        public CqlCodeDefinition[] CodeDefinitions { get; }
 
-        private CqlCodeDefinition[]? codeDefinitions;
-
-        public CqlCodeDefinition[] CodeDefinitions =>
-            LazyInitializer.EnsureInitialized(
-                ref codeDefinitions,
-                () => Definitions
-                      .OfType<CqlCodeDefinition>()
-                      .ToArray());
-
-        public LibrarySetWriter LibrarySetWriter { get; } = librarySetWriter;
-        public ElmLibrary Library { get; } = library;
-        public IndentedStringBuilder ISB { get; } = isb;
+        public LibrarySetWriter LibrarySetWriter { get; }
+        private readonly ElmLibrary _library;
+        public IndentedStringBuilder ISB { get; }
 
         private void AppendMethods()
         {
             string lastDefinitionRegion = "";
 
             // Assumption: definitions are already sorted by definition type
-            foreach (var definition in Definitions)
+            foreach (var definition in _definitions)
             {
                 // Assumption: type name will be Cql....Definition
                 Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
@@ -211,13 +206,13 @@ partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             ISB.AppendLine(
-                LibraryVersionedIdentifier.Version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
-                    : $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()})]");
+                LibraryName!.Version is { } version && Version.TryParse(version, out _)
+                    ? $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
+                    : $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()})]");
 
             ISB.AppendLine(
                 $$"""
-                  public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
+                  public partial class {{_className}} : ILibrary, ISingleton<{{_className}}>
                   {
                   """);
 
@@ -230,6 +225,7 @@ partial class LibrarySetCSharpCodeGenerator
                 AppendMethods();
                 AppendCqlTupleMetadataProperties();
             }
+
             ISB.AppendLine("}");
         }
 
@@ -278,7 +274,7 @@ partial class LibrarySetCSharpCodeGenerator
         {
             ISB.AppendLine(
                 $$"""
-                  public static {{ClassName}} Instance { get; } = new();
+                  public static {{_className}} Instance { get; } = new();
 
                   """);
         }
@@ -287,7 +283,7 @@ partial class LibrarySetCSharpCodeGenerator
         {
             ISB.AppendLine(
                 $$"""
-                  private {{ClassName}}() {}
+                  private {{_className}}() {}
 
                   """);
         }
