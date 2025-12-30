@@ -19,6 +19,24 @@ partial class LibrarySetCSharpCodeGenerator
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
         private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
 
+        private readonly Dictionary<string, int> _cacheFieldNameCount = new();
+        public string GetUniqueCacheFieldName(string baseName)
+        {
+            if (string.IsNullOrEmpty(baseName))
+                throw new ArgumentException("Base name cannot be null or empty.", nameof(baseName));
+
+            var count = _cacheFieldNameCount.GetValueOrDefault(baseName, 0);
+            string fieldName;
+            do
+            {
+                fieldName = count == 0 ? baseName : $"{baseName}_{count}";
+                count++;
+            } while (_cacheFieldNameCount.ContainsKey(fieldName));
+            _cacheFieldNameCount[baseName] = count;
+            _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
+            return fieldName;
+        }
+
         public LibraryWriter AddIndent(int addIndent = 1)
         {
             return this with { isb = isb.AddIndent(addIndent) };
