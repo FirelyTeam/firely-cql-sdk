@@ -105,8 +105,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Observation>> _Smoking_status_observation_Cached = new();
@@ -120,8 +119,8 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 CqlCode a_ = this.Tobacco_Smoking_Status(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? d_(Observation O)
-                {
+
+                bool? d_(Observation O) {
                     Code<ObservationStatus> f_ = O?.StatusElement;
                     string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
                     string[] h_ = [
@@ -131,11 +130,10 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                     bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
                     return i_;
                 }
-                ;
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Condition>> _Lung_cancer_diagnosis_Cached = new();
@@ -148,19 +146,18 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
             {
                 CqlValueSet a_ = this.Lung_Cancer(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? c_(Condition C)
-                {
+
+                bool? c_(Condition C) {
                     CodeableConcept e_ = C?.ClinicalStatus;
                     CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
                     CqlValueSet g_ = this.Condition_Clinical_Status(context);
                     bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
                     return h_;
                 }
-                ;
+
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

@@ -103,8 +103,8 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
     {
         CqlValueSet a_ = this.Palliative_Care_Assessment(context);
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? c_(Observation PalliativeAssessment)
-        {
+
+        bool? c_(Observation PalliativeAssessment) {
             DataType ab_ = PalliativeAssessment?.Effective;
             CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_);
             CqlDateTime ad_ = context.Operators.Start(ac_);
@@ -121,14 +121,14 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
             return ap_;
         }
-        ;
+
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
         bool? e_ = context.Operators.Exists<Observation>(d_);
         CqlValueSet f_ = this.Palliative_Care_Encounter(context);
         IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
         IEnumerable<Encounter> h_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, g_);
-        bool? i_(Encounter PalliativeEncounter)
-        {
+
+        bool? i_(Encounter PalliativeEncounter) {
             Period aq_ = PalliativeEncounter?.Period;
             CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
             CqlDateTime as_ = context.Operators.Start(ar_);
@@ -145,15 +145,15 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
             return be_;
         }
-        ;
+
         IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
         bool? k_ = context.Operators.Exists<Encounter>(j_);
         bool? l_ = context.Operators.Or(e_, k_);
         CqlValueSet m_ = this.Palliative_Care_Intervention(context);
         IEnumerable<Procedure> n_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
         IEnumerable<Procedure> o_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, n_);
-        bool? p_(Procedure PalliativeIntervention)
-        {
+
+        bool? p_(Procedure PalliativeIntervention) {
             DataType bf_ = PalliativeIntervention?.Performed;
             CqlInterval<CqlDateTime> bg_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bf_);
             CqlDateTime bh_ = context.Operators.Start(bg_);
@@ -170,7 +170,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
             return bt_;
         }
-        ;
+
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
         bool? r_ = context.Operators.Exists<Procedure>(q_);
         bool? s_ = context.Operators.Or(l_, r_);
@@ -178,8 +178,8 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
         IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
         IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, u_, "http://hl7.org/fhir/StructureDefinition/Condition"));
         IEnumerable<Condition> w_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, v_);
-        bool? x_(Condition PalliativeDiagnosis)
-        {
+
+        bool? x_(Condition PalliativeDiagnosis) {
             CqlInterval<CqlDateTime> bu_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, PalliativeDiagnosis);
             CqlDateTime bv_ = context.Operators.Start(bu_);
             CqlDate bw_ = context.Operators.DateFrom(bv_);
@@ -194,13 +194,12 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
             return cg_;
         }
-        ;
+
         IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
         bool? z_ = context.Operators.Exists<Condition>(y_);
         bool? aa_ = context.Operators.Or(s_, z_);
         return aa_;
     }
-
 
 
     #endregion Functions and Expressions

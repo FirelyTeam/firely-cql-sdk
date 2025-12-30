@@ -107,8 +107,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("DocumentationofCurrentMedicationsFHIR-0.2.000", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -126,8 +125,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
@@ -140,8 +138,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
@@ -154,8 +151,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
@@ -168,8 +164,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -182,8 +177,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_during_day_of_Measurement_Period_Cached = new();
@@ -196,8 +190,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 CqlValueSet a_ = this.Encounter_to_Document_Medications(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? c_(Encounter ValidEncounter)
-                {
+
+                bool? c_(Encounter ValidEncounter) {
                     Code<Encounter.EncounterStatus> e_ = ValidEncounter?.StatusElement;
                     Encounter.EncounterStatus? f_ = e_?.Value;
                     Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
@@ -209,11 +203,10 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                     bool? m_ = context.Operators.And(h_, l_);
                     return m_;
                 }
-                ;
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
@@ -226,8 +219,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
@@ -240,8 +232,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
@@ -253,13 +244,13 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
-                IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
                     CqlCode d_ = this.Documentation_of_current_medications__procedure_(context);
                     IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
                     IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-                    bool? g_(Procedure MedicationsDocumented)
-                    {
+
+                    bool? g_(Procedure MedicationsDocumented) {
                         DataType k_ = MedicationsDocumented?.Performed;
                         object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
                         CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.Instance.toInterval(context, l_);
@@ -274,18 +265,16 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                         bool? v_ = context.Operators.And(q_, u_);
                         return v_;
                     }
-                    ;
+
                     IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-                    Encounter i_(Procedure MedicationsDocumented) =>
-                    QualifyingEncounter;
+                    Encounter i_(Procedure MedicationsDocumented) => QualifyingEncounter;
                     IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
                     return j_;
                 }
-                ;
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
@@ -297,31 +286,31 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
-                IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
                     CqlCode d_ = this.Documentation_of_current_medications__procedure_(context);
                     IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
                     IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
-                    bool? g_(Procedure MedicationsNotDocumented)
-                    {
-                        bool? k_(Extension @this)
-                        {
+
+                    bool? g_(Procedure MedicationsNotDocumented) {
+
+                        bool? k_(Extension @this) {
                             FhirUri af_ = @this?.UrlElement;
                             FhirString ag_ = context.Operators.Convert<FhirString>(af_);
                             string ah_ = FHIRHelpers_4_3_000.Instance.ToString(context, ag_);
                             bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
                             return ai_;
                         }
-                        ;
+
                         IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
                             ? (MedicationsNotDocumented as DomainResource).Extension
                             : default), k_);
-                        DataType m_(Extension @this)
-                        {
+
+                        DataType m_(Extension @this) {
                             DataType aj_ = @this?.Value;
                             return aj_;
                         }
-                        ;
+
                         IEnumerable<DataType> n_ = context.Operators.Select<Extension, DataType>(l_, m_);
                         DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
                         FhirDateTime p_ = context.Operators.Convert<FhirDateTime>(o_);
@@ -335,30 +324,28 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                         bool? x_ = context.Operators.Equal(w_, "not-done");
                         bool? y_ = context.Operators.And(t_, x_);
                         List<CodeableConcept> z_ = MedicationsNotDocumented?.ReasonCode;
-                        CqlConcept aa_(CodeableConcept @this)
-                        {
+
+                        CqlConcept aa_(CodeableConcept @this) {
                             CqlConcept ak_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                             return ak_;
                         }
-                        ;
+
                         IEnumerable<CqlConcept> ab_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)z_, aa_);
                         CqlValueSet ac_ = this.Medical_Reason(context);
                         bool? ad_ = context.Operators.ConceptsInValueSet(ab_, ac_);
                         bool? ae_ = context.Operators.And(y_, ad_);
                         return ae_;
                     }
-                    ;
+
                     IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-                    Encounter i_(Procedure MedicationsNotDocumented) =>
-                    QualifyingEncounter;
+                    Encounter i_(Procedure MedicationsNotDocumented) => QualifyingEncounter;
                     IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
                     return j_;
                 }
-                ;
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

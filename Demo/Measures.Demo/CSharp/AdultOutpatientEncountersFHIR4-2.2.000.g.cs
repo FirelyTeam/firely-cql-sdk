@@ -98,8 +98,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
             {
                 object a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -117,8 +116,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
@@ -143,8 +141,8 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                 CqlValueSet l_ = this.Home_Healthcare_Services(context);
                 IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
                 IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
-                bool? o_(Encounter ValidEncounter)
-                {
+
+                bool? o_(Encounter ValidEncounter) {
                     Code<Encounter.EncounterStatus> q_ = ValidEncounter?.StatusElement;
                     string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
                     bool? s_ = context.Operators.Equal(r_, "finished");
@@ -155,11 +153,10 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                     bool? x_ = context.Operators.And(s_, w_);
                     return x_;
                 }
-                ;
+
                 IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
                 return p_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

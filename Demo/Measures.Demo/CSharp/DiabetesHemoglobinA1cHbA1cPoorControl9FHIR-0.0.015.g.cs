@@ -144,8 +144,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 object a_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -163,8 +162,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -177,8 +175,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -191,8 +188,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -205,8 +201,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -219,8 +214,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Telehealth_Services_Cached = new();
@@ -233,8 +227,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 CqlValueSet a_ = this.Telephone_Visits(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                bool? c_(Encounter TelehealthEncounter)
-                {
+
+                bool? c_(Encounter TelehealthEncounter) {
                     Code<Encounter.EncounterStatus> e_ = TelehealthEncounter?.StatusElement;
                     string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
                     bool? g_ = context.Operators.Equal(f_, "finished");
@@ -245,11 +239,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                     bool? l_ = context.Operators.And(g_, k_);
                     return l_;
                 }
-                ;
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Initial_Population_Cached = new();
@@ -277,20 +270,19 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 bool? o_ = context.Operators.And(j_, n_);
                 CqlValueSet p_ = this.Diabetes(context);
                 IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? r_(Condition Diabetes)
-                {
+
+                bool? r_(Condition Diabetes) {
                     CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
                     CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
                     bool? x_ = context.Operators.Overlaps(v_, w_, default);
                     return x_;
                 }
-                ;
+
                 IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
                 bool? t_ = context.Operators.Exists<Condition>(s_);
                 bool? u_ = context.Operators.And(o_, t_);
                 return u_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -303,8 +295,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<Observation> _Most_Recent_HbA1c_Cached = new();
@@ -317,8 +308,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation RecentHbA1c)
-                {
+
+                bool? c_(Observation RecentHbA1c) {
                     Code<ObservationStatus> h_ = RecentHbA1c?.StatusElement;
                     string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
                     string[] j_ = [
@@ -334,21 +325,20 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                     bool? p_ = context.Operators.And(k_, o_);
                     return p_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-                object e_(Observation @this)
-                {
+
+                object e_(Observation @this) {
                     DataType q_ = @this?.Effective;
                     CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
                     CqlDateTime s_ = context.Operators.Start(r_);
                     return s_;
                 }
-                ;
+
                 IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
                 Observation g_ = context.Operators.Last<Observation>(f_);
                 return g_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Has_Most_Recent_HbA1c_Without_Result_Cached = new();
@@ -364,8 +354,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 DataType d_ = a_?.Value;
                 bool? e_ = context.Operators.And(b_, (bool?)(d_ is null));
                 return e_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Has_Most_Recent_Elevated_HbA1c_Cached = new();
@@ -382,8 +371,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 CqlQuantity d_ = context.Operators.Quantity(9m, "%");
                 bool? e_ = context.Operators.Greater(c_, d_);
                 return e_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Has_No_Record_Of_HbA1c_Cached = new();
@@ -396,8 +384,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             {
                 CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation NoHbA1c)
-                {
+
+                bool? c_(Observation NoHbA1c) {
                     Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;
                     string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
                     string[] i_ = [
@@ -413,13 +401,12 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                     bool? o_ = context.Operators.And(j_, n_);
                     return o_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 bool? f_ = context.Operators.Not(e_);
                 return f_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -436,8 +423,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 bool? d_ = this.Has_No_Record_Of_HbA1c(context);
                 bool? e_ = context.Operators.Or(c_, d_);
                 return e_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -466,8 +452,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 bool? p_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
                 bool? q_ = context.Operators.Or(o_, p_);
                 return q_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

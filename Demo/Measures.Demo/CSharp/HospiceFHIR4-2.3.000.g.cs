@@ -109,8 +109,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
             {
                 object a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -128,8 +127,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Has_Hospice_Cached = new();
@@ -142,8 +140,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
             {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                bool? c_(Encounter DischargeHospice)
-                {
+
+                bool? c_(Encounter DischargeHospice) {
                     Code<Encounter.EncounterStatus> r_ = DischargeHospice?.StatusElement;
                     string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
                     bool? t_ = context.Operators.Equal(s_, "finished");
@@ -168,13 +166,13 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? an_ = context.Operators.And(ah_, am_);
                     return an_;
                 }
-                ;
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 bool? e_ = context.Operators.Exists<Encounter>(d_);
                 CqlValueSet f_ = this.Hospice_care_ambulatory(context);
                 IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-                bool? h_(ServiceRequest HospiceOrder)
-                {
+
+                bool? h_(ServiceRequest HospiceOrder) {
                     Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
                     string ap_ = FHIRHelpers_4_0_001.Instance.ToString(context, ao_);
                     string[] aq_ = [
@@ -193,13 +191,13 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? ba_ = context.Operators.And(av_, az_);
                     return ba_;
                 }
-                ;
+
                 IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
                 bool? j_ = context.Operators.Exists<ServiceRequest>(i_);
                 bool? k_ = context.Operators.Or(e_, j_);
                 IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-                bool? n_(Procedure HospicePerformed)
-                {
+
+                bool? n_(Procedure HospicePerformed) {
                     Code<EventStatus> bb_ = HospicePerformed?.StatusElement;
                     string bc_ = FHIRHelpers_4_0_001.Instance.ToString(context, bb_);
                     bool? bd_ = context.Operators.Equal(bc_, "completed");
@@ -210,13 +208,12 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? bi_ = context.Operators.And(bd_, bh_);
                     return bi_;
                 }
-                ;
+
                 IEnumerable<Procedure> o_ = context.Operators.Where<Procedure>(m_, n_);
                 bool? p_ = context.Operators.Exists<Procedure>(o_);
                 bool? q_ = context.Operators.Or(k_, p_);
                 return q_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

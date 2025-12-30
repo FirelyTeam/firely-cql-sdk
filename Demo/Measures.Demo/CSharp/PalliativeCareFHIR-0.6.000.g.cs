@@ -114,8 +114,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             {
                 object a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -133,8 +132,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Palliative_Care_in_the_Measurement_Period_Cached = new();
@@ -148,8 +146,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? d_(Observation PalliativeAssessment)
-                {
+
+                bool? d_(Observation PalliativeAssessment) {
                     Code<ObservationStatus> s_ = PalliativeAssessment?.StatusElement;
                     string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
                     string[] u_ = [
@@ -159,15 +157,15 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     ];
                     bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                     List<CodeableConcept> w_ = PalliativeAssessment?.Category;
-                    bool? x_(CodeableConcept PalliativeAssessmentCategory)
-                    {
+
+                    bool? x_(CodeableConcept PalliativeAssessmentCategory) {
                         CqlCode ag_ = this.survey(context);
                         CqlConcept ah_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PalliativeAssessmentCategory);
                         IReadOnlyList<CqlCode> ai_ = ah_?.codes;
                         bool? aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
                         return aj_;
                     }
-                    ;
+
                     IEnumerable<CodeableConcept> y_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)w_, x_);
                     bool? z_ = context.Operators.Exists<CodeableConcept>(y_);
                     bool? aa_ = context.Operators.And(v_, z_);
@@ -178,13 +176,13 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? af_ = context.Operators.And(aa_, ae_);
                     return af_;
                 }
-                ;
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 bool? f_ = context.Operators.Exists<Observation>(e_);
                 CqlValueSet g_ = this.Palliative_Care_Encounter(context);
                 IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                bool? i_(Encounter PalliativeEncounter)
-                {
+
+                bool? i_(Encounter PalliativeEncounter) {
                     Code<Encounter.EncounterStatus> ak_ = PalliativeEncounter?.StatusElement;
                     string al_ = FHIRHelpers_4_0_001.Instance.ToString(context, ak_);
                     bool? am_ = context.Operators.Equal(al_, "finished");
@@ -195,14 +193,14 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? ar_ = context.Operators.And(am_, aq_);
                     return ar_;
                 }
-                ;
+
                 IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
                 bool? k_ = context.Operators.Exists<Encounter>(j_);
                 bool? l_ = context.Operators.Or(f_, k_);
                 CqlValueSet m_ = this.Palliative_Care_Intervention(context);
                 IEnumerable<Procedure> n_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-                bool? o_(Procedure PalliativeIntervention)
-                {
+
+                bool? o_(Procedure PalliativeIntervention) {
                     Code<EventStatus> as_ = PalliativeIntervention?.StatusElement;
                     string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
                     string[] au_ = [
@@ -217,13 +215,12 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? ba_ = context.Operators.And(av_, az_);
                     return ba_;
                 }
-                ;
+
                 IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
                 bool? q_ = context.Operators.Exists<Procedure>(p_);
                 bool? r_ = context.Operators.Or(l_, q_);
                 return r_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

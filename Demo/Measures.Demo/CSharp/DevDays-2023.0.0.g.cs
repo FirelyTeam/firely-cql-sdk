@@ -97,8 +97,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             {
                 object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -116,8 +115,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Condition>> _Jet_engine_conditions_Cached = new();
@@ -129,18 +127,18 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             () =>
             {
                 IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? b_(Condition c)
-                {
+
+                bool? b_(Condition c) {
                     CodeableConcept d_ = c?.Code;
                     List<Coding> e_ = d_?.Coding;
-                    bool? f_(Coding coding)
-                    {
+
+                    bool? f_(Coding coding) {
                         CqlCode n_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
                         CqlCode o_ = this.Sucked_into_jet_engine(context);
                         bool? p_ = context.Operators.Equivalent(n_, o_);
                         return p_;
                     }
-                    ;
+
                     IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
                     bool? h_ = context.Operators.Exists<Coding>(g_);
                     DataType i_ = c?.Onset;
@@ -150,11 +148,10 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                     bool? m_ = context.Operators.And(h_, l_);
                     return m_;
                 }
-                ;
+
                 IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Condition>> _Subsequent_encounters_Cached = new();
@@ -166,18 +163,18 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             () =>
             {
                 IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? b_(Condition c)
-                {
+
+                bool? b_(Condition c) {
                     CodeableConcept d_ = c?.Code;
                     List<Coding> e_ = d_?.Coding;
-                    bool? f_(Coding coding)
-                    {
+
+                    bool? f_(Coding coding) {
                         CqlCode n_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
                         CqlCode o_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
                         bool? p_ = context.Operators.Equivalent(n_, o_);
                         return p_;
                     }
-                    ;
+
                     IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
                     bool? h_ = context.Operators.Exists<Coding>(g_);
                     DataType i_ = c?.Onset;
@@ -187,11 +184,10 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                     bool? m_ = context.Operators.And(h_, l_);
                     return m_;
                 }
-                ;
+
                 IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Initial_population_Cached = new();
@@ -205,8 +201,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 IEnumerable<Condition> a_ = this.Jet_engine_conditions(context);
                 bool? b_ = context.Operators.Exists<Condition>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -220,8 +215,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 IEnumerable<Condition> a_ = this.Subsequent_encounters(context);
                 bool? b_ = context.Operators.Exists<Condition>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

@@ -92,7 +92,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return k_;
             };
         }
-        ;
 
         return a_();
     }
@@ -119,7 +118,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                         bool? j_ = context.Operators.Equal(i_, "<");
                         return j_ ?? false;
                     }
-                    ;
 
 
                     bool d_() {
@@ -129,7 +127,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                         bool? n_ = context.Operators.Equal(m_, "<=");
                         return n_ ?? false;
                     }
-                    ;
 
 
                     bool e_() {
@@ -139,7 +136,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                         bool? r_ = context.Operators.Equal(q_, ">=");
                         return r_ ?? false;
                     }
-                    ;
 
 
                     bool f_() {
@@ -149,7 +145,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                         bool? v_ = context.Operators.Equal(u_, ">");
                         return v_ ?? false;
                     }
-                    ;
 
                     if (c_())
                     {
@@ -182,12 +177,10 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                         return ag_;
                     };
                 }
-                ;
 
                 return b_();
             };
         }
-        ;
 
         return a_();
     }
@@ -212,7 +205,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return f_;
             };
         }
-        ;
 
         return a_();
     }
@@ -260,7 +252,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return unit;
             };
         }
-        ;
 
         return a_();
     }
@@ -277,7 +268,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 bool? e_ = context.Operators.Not((bool?)(d_ is null));
                 return e_ ?? false;
             }
-            ;
 
 
             bool c_() {
@@ -290,7 +280,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 bool? n_ = context.Operators.Or(j_, m_);
                 return n_ ?? false;
             }
-            ;
 
             if (quantity is null)
             {
@@ -334,7 +323,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return ai_ as CqlQuantity;
             };
         }
-        ;
 
         return a_();
     }
@@ -356,7 +344,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 bool? k_ = context.Operators.Or(g_, j_);
                 return k_ ?? false;
             }
-            ;
 
             if (quantity is null)
             {
@@ -395,7 +382,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return ae_ as CqlQuantity;
             };
         }
-        ;
 
         return a_();
     }
@@ -419,7 +405,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return new CqlRatio(c_, e_);
             };
         }
-        ;
 
         return a_();
     }
@@ -447,7 +432,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return new CqlCode(c_, e_, g_, i_);
             };
         }
-        ;
 
         return a_();
     }
@@ -470,7 +454,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                     CqlCode h_ = this.ToCode(context, C);
                     return h_;
                 }
-                ;
 
                 IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
                 IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
@@ -479,7 +462,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return new CqlConcept(e_, g_);
             };
         }
-        ;
 
         return a_();
     }

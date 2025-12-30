@@ -127,8 +127,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -146,8 +145,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -160,8 +158,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -174,8 +171,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -188,8 +184,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Inpatient_Encounter_During_Measurement_Period_Cached = new();
@@ -202,8 +197,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                bool? c_(Encounter EncounterInpatient)
-                {
+
+                bool? c_(Encounter EncounterInpatient) {
                     Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
                     string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
                     bool? g_ = context.Operators.Equal(f_, "finished");
@@ -215,11 +210,10 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     bool? m_ = context.Operators.And(g_, l_);
                     return m_;
                 }
-                ;
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_Cached = new();
@@ -231,8 +225,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Inpatient_Encounter_During_Measurement_Period(context);
-                bool? b_(Encounter InpatientEncounter)
-                {
+
+                bool? b_(Encounter InpatientEncounter) {
                     Patient d_ = this.Patient(context);
                     Date e_ = d_?.BirthDateElement;
                     string f_ = e_?.Value;
@@ -243,11 +237,10 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
                     return k_;
                 }
-                ;
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<MedicationAdministration>> _Hypoglycemic_Medication_Administration_Cached = new();
@@ -261,11 +254,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
                 IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
                 IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-                IEnumerable<MedicationAdministration> d_(MedicationAdministration MR)
-                {
+
+                IEnumerable<MedicationAdministration> d_(MedicationAdministration MR) {
                     IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
-                    bool? j_(Medication M)
-                    {
+
+                    bool? j_(Medication M) {
                         Id n_ = M?.IdElement;
                         string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
                         object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
@@ -280,18 +273,17 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         bool? y_ = context.Operators.And(t_, x_);
                         return y_;
                     }
-                    ;
+
                     IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
-                    MedicationAdministration l_(Medication M) =>
-                    MR;
+                    MedicationAdministration l_(Medication M) => MR;
                     IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
                     return m_;
                 }
-                ;
+
                 IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
                 IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
-                bool? g_(MedicationAdministration HypoMedication)
-                {
+
+                bool? g_(MedicationAdministration HypoMedication) {
                     Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = HypoMedication?.StatusElement;
                     string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
                     bool? ab_ = context.Operators.Equal(aa_, "completed");
@@ -301,11 +293,10 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     bool? ag_ = context.Operators.And(ab_, af_);
                     return ag_;
                 }
-                ;
+
                 IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
                 return h_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_with_Hypoglycemic_Medication_Administration_Cached = new();
@@ -317,11 +308,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
-                IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
                     IEnumerable<MedicationAdministration> d_ = this.Hypoglycemic_Medication_Administration(context);
-                    bool? e_(MedicationAdministration HypoglycemicMedication)
-                    {
+
+                    bool? e_(MedicationAdministration HypoglycemicMedication) {
                         DataType i_ = HypoglycemicMedication?.Effective;
                         CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                         CqlDateTime k_ = context.Operators.Start(j_);
@@ -329,18 +320,16 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
                         return m_;
                     }
-                    ;
+
                     IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
-                    Encounter g_(MedicationAdministration HypoglycemicMedication) =>
-                    QualifyingEncounter;
+                    Encounter g_(MedicationAdministration HypoglycemicMedication) => QualifyingEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
                     return h_;
                 }
-                ;
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
@@ -353,8 +342,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter_with_Hypoglycemic_Medication_Administration(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
@@ -367,8 +355,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Severe_Hypoglycemic_Harm_Event_Cached = new();
@@ -380,15 +367,15 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                bool? b_(Encounter QualifyingEncounter)
-                {
+
+                bool? b_(Encounter QualifyingEncounter) {
                     CqlValueSet d_ = this.Glucose_lab_test(context);
                     IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                    IEnumerable<Observation> f_(Observation BloodGlucoseLab)
-                    {
+
+                    IEnumerable<Observation> f_(Observation BloodGlucoseLab) {
                         IEnumerable<MedicationAdministration> r_ = this.Hypoglycemic_Medication_Administration(context);
-                        bool? s_(MedicationAdministration HypoglycemicMeds)
-                        {
+
+                        bool? s_(MedicationAdministration HypoglycemicMeds) {
                             DataType w_ = HypoglycemicMeds?.Effective;
                             CqlInterval<CqlDateTime> x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, w_);
                             CqlDateTime y_ = context.Operators.Start(x_);
@@ -420,21 +407,20 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                             bool? bc_ = context.Operators.And(aw_, bb_);
                             return bc_;
                         }
-                        ;
+
                         IEnumerable<MedicationAdministration> t_ = context.Operators.Where<MedicationAdministration>(r_, s_);
-                        Observation u_(MedicationAdministration HypoglycemicMeds) =>
-                        BloodGlucoseLab;
+                        Observation u_(MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
                         IEnumerable<Observation> v_ = context.Operators.Select<MedicationAdministration, Observation>(t_, u_);
                         return v_;
                     }
-                    ;
+
                     IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
                     IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                    IEnumerable<Observation> j_(Observation BloodGlucoseLab)
-                    {
+
+                    IEnumerable<Observation> j_(Observation BloodGlucoseLab) {
                         IEnumerable<MedicationAdministration> bd_ = this.Hypoglycemic_Medication_Administration(context);
-                        bool? be_(MedicationAdministration HypoglycemicMeds)
-                        {
+
+                        bool? be_(MedicationAdministration HypoglycemicMeds) {
                             DataType bi_ = HypoglycemicMeds?.Effective;
                             CqlInterval<CqlDateTime> bj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bi_);
                             CqlDateTime bk_ = context.Operators.Start(bj_);
@@ -466,21 +452,20 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                             bool? co_ = context.Operators.And(ci_, cn_);
                             return co_;
                         }
-                        ;
+
                         IEnumerable<MedicationAdministration> bf_ = context.Operators.Where<MedicationAdministration>(bd_, be_);
-                        Observation bg_(MedicationAdministration HypoglycemicMeds) =>
-                        BloodGlucoseLab;
+                        Observation bg_(MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
                         IEnumerable<Observation> bh_ = context.Operators.Select<MedicationAdministration, Observation>(bf_, bg_);
                         return bh_;
                     }
-                    ;
+
                     IEnumerable<Observation> k_ = context.Operators.SelectMany<Observation, Observation>(i_, j_);
-                    IEnumerable<Observation> l_(Observation BloodGlucoseLab)
-                    {
+
+                    IEnumerable<Observation> l_(Observation BloodGlucoseLab) {
                         CqlValueSet cp_ = this.Glucose_lab_test(context);
                         IEnumerable<Observation> cq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, cp_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                        bool? cr_(Observation FollowupBloodGlucoseLab)
-                        {
+
+                        bool? cr_(Observation FollowupBloodGlucoseLab) {
                             DataType cv_ = FollowupBloodGlucoseLab?.Effective;
                             CqlInterval<CqlDateTime> cw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cv_);
                             CqlDateTime cx_ = context.Operators.Start(cw_);
@@ -517,18 +502,17 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                             bool? eg_ = context.Operators.And(eb_, ef_);
                             return eg_;
                         }
-                        ;
+
                         IEnumerable<Observation> cs_ = context.Operators.Where<Observation>(cq_, cr_);
-                        Observation ct_(Observation FollowupBloodGlucoseLab) =>
-                        BloodGlucoseLab;
+                        Observation ct_(Observation FollowupBloodGlucoseLab) => BloodGlucoseLab;
                         IEnumerable<Observation> cu_ = context.Operators.Select<Observation, Observation>(cs_, ct_);
                         return cu_;
                     }
-                    ;
+
                     IEnumerable<Observation> m_ = context.Operators.SelectMany<Observation, Observation>(k_, l_);
                     IEnumerable<Observation> n_ = context.Operators.Except<Observation>(g_, m_);
-                    bool? o_(Observation BloodGlucoseLab)
-                    {
+
+                    bool? o_(Observation BloodGlucoseLab) {
                         DataType eh_ = BloodGlucoseLab?.Effective;
                         CqlInterval<CqlDateTime> ei_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, eh_);
                         CqlDateTime ej_ = context.Operators.Start(ei_);
@@ -541,16 +525,15 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         bool? eq_ = context.Operators.And(el_, ep_);
                         return eq_;
                     }
-                    ;
+
                     IEnumerable<Observation> p_ = context.Operators.Where<Observation>(n_, o_);
                     bool? q_ = context.Operators.Exists<Observation>(p_);
                     return q_;
                 }
-                ;
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
@@ -563,8 +546,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<Encounter> a_ = this.Severe_Hypoglycemic_Harm_Event(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -577,8 +559,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions

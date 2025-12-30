@@ -139,8 +139,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            }
-            );
+            });
 
 
     #endregion Parameters
@@ -158,8 +157,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -172,8 +170,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -186,8 +183,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -200,8 +196,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -214,8 +209,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
@@ -243,8 +237,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
                 IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
                 IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-                bool? r_(Encounter ValidEncounter)
-                {
+
+                bool? r_(Encounter ValidEncounter) {
                     Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
                     string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
                     bool? v_ = context.Operators.Equal(u_, "finished");
@@ -255,11 +249,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? aa_ = context.Operators.And(v_, z_);
                     return aa_;
                 }
-                ;
+
                 IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
                 return s_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Initial_Population_Cached = new();
@@ -288,8 +281,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 bool? q_ = context.Operators.Exists<Encounter>(p_);
                 bool? r_ = context.Operators.And(o_, q_);
                 return r_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -302,8 +294,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<object>> _Absence_of_Cervix_Cached = new();
@@ -316,8 +307,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlValueSet a_ = this.Hysterectomy_with_No_Residual_Cervix(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-                bool? c_(Procedure NoCervixProcedure)
-                {
+
+                bool? c_(Procedure NoCervixProcedure) {
                     Code<EventStatus> j_ = NoCervixProcedure?.StatusElement;
                     string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
                     bool? l_ = context.Operators.Equal(k_, "completed");
@@ -330,12 +321,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? s_ = context.Operators.And(l_, r_);
                     return s_;
                 }
-                ;
+
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 CqlValueSet e_ = this.Congenital_or_Acquired_Absence_of_Cervix(context);
                 IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? g_(Condition NoCervixDiagnosis)
-                {
+
+                bool? g_(Condition NoCervixDiagnosis) {
                     CqlInterval<CqlDateTime> t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, NoCervixDiagnosis);
                     CqlDateTime u_ = context.Operators.Start(t_);
                     CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
@@ -343,12 +334,11 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? x_ = context.Operators.SameOrBefore(u_, w_, default);
                     return x_;
                 }
-                ;
+
                 IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
                 IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
                 return i_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -366,8 +356,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 bool? e_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
                 bool? f_ = context.Operators.Or(d_, e_);
                 return f_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Observation>> _Cervical_Cytology_Within_3_Years_Cached = new();
@@ -380,8 +369,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlValueSet a_ = this.Pap_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation CervicalCytology)
-                {
+
+                bool? c_(Observation CervicalCytology) {
                     Code<ObservationStatus> e_ = CervicalCytology?.StatusElement;
                     string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
                     string[] g_ = [
@@ -391,15 +380,15 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     ];
                     bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
                     List<CodeableConcept> i_ = CervicalCytology?.Category;
-                    bool? j_(CodeableConcept CervicalCytologyCategory)
-                    {
+
+                    bool? j_(CodeableConcept CervicalCytologyCategory) {
                         CqlCode af_ = this.laboratory(context);
                         CqlConcept ag_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, CervicalCytologyCategory);
                         IReadOnlyList<CqlCode> ah_ = ag_?.codes;
                         bool? ai_ = context.Operators.In<CqlCode>(af_, (IEnumerable<CqlCode>)ah_);
                         return ai_;
                     }
-                    ;
+
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -421,11 +410,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? ae_ = context.Operators.And(ab_, ad_);
                     return ae_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     private Cached<IEnumerable<Observation>> _HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Cached = new();
@@ -438,8 +426,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlValueSet a_ = this.HPV_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation HPVTest)
-                {
+
+                bool? c_(Observation HPVTest) {
                     Code<ObservationStatus> e_ = HPVTest?.StatusElement;
                     string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
                     string[] g_ = [
@@ -449,15 +437,15 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     ];
                     bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
                     List<CodeableConcept> i_ = HPVTest?.Category;
-                    bool? j_(CodeableConcept HPVTestCategory)
-                    {
+
+                    bool? j_(CodeableConcept HPVTestCategory) {
                         CqlCode aq_ = this.laboratory(context);
                         CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, HPVTestCategory);
                         IReadOnlyList<CqlCode> as_ = ar_?.codes;
                         bool? at_ = context.Operators.In<CqlCode>(aq_, (IEnumerable<CqlCode>)as_);
                         return at_;
                     }
-                    ;
+
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -489,11 +477,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? ap_ = context.Operators.And(am_, ao_);
                     return ap_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -510,8 +497,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 bool? d_ = context.Operators.Exists<Observation>(c_);
                 bool? e_ = context.Operators.Or(b_, d_);
                 return e_;
-            }
-            );
+            });
 
 
     [CqlFunctionDefinition("isComplete")]
@@ -529,25 +515,23 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
-
     [CqlFunctionDefinition("isLaboratoryTest")]
     public bool? isLaboratoryTest(CqlContext context, Observation observation)
     {
         List<CodeableConcept> a_ = observation?.Category;
-        bool? b_(CodeableConcept category)
-        {
+
+        bool? b_(CodeableConcept category) {
             CqlCode e_ = this.laboratory(context);
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, category);
             IReadOnlyList<CqlCode> g_ = f_?.codes;
             bool? h_ = context.Operators.In<CqlCode>(e_, (IEnumerable<CqlCode>)g_);
             return h_;
         }
-        ;
+
         IEnumerable<CodeableConcept> c_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_ = context.Operators.Exists<CodeableConcept>(c_);
         return d_;
     }
-
 
 
     [CqlFunctionDefinition("latest")]
@@ -556,7 +540,6 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         CqlDateTime a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, choice);
         return a_;
     }
-
 
 
     private Cached<IEnumerable<Observation>> _Cervical_Cytology_Within_3_Years__2__Cached = new();
@@ -569,8 +552,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlValueSet a_ = this.Pap_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation CervicalCytology)
-                {
+
+                bool? c_(Observation CervicalCytology) {
                     bool? e_ = this.isComplete(context, CervicalCytology);
                     bool? f_ = this.isLaboratoryTest(context, CervicalCytology);
                     bool? g_ = context.Operators.And(e_, f_);
@@ -592,11 +575,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? y_ = context.Operators.And(v_, x_);
                     return y_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     [CqlFunctionDefinition("toInterval")]
@@ -605,7 +587,6 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, choice);
         return a_;
     }
-
 
 
     private Cached<IEnumerable<Observation>> _HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2__Cached = new();
@@ -618,8 +599,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             {
                 CqlValueSet a_ = this.HPV_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                bool? c_(Observation HPVTest)
-                {
+
+                bool? c_(Observation HPVTest) {
                     bool? e_ = this.isComplete(context, HPVTest);
                     bool? f_ = this.isLaboratoryTest(context, HPVTest);
                     bool? g_ = context.Operators.And(e_, f_);
@@ -651,11 +632,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                     bool? aj_ = context.Operators.And(ag_, ai_);
                     return aj_;
                 }
-                ;
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            }
-            );
+            });
 
 
     #endregion Functions and Expressions
