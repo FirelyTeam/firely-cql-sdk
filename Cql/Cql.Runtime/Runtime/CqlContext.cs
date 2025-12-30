@@ -10,21 +10,6 @@ using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Runtime
 {
-    public interface ICqlContextInternals
-    {
-        public object CacheToken { get; }
-    }
-
-    partial class CqlContext : ICqlContextInternals
-    {
-        private object _cacheToken = new();
-
-        /// <summary> TODO </summary>
-        public void ResetCache() => _cacheToken = new();
-
-        object ICqlContextInternals.CacheToken => _cacheToken;
-    }
-
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>

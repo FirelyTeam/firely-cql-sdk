@@ -1,2 +1,5 @@
 #nullable enable
-
+Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
+Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
+Hl7.Cql.Runtime.ICqlContextInternals
+Hl7.Cql.Runtime.ICqlContextInternals.CacheVersion.get -> object?
