@@ -94,8 +94,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -111,8 +110,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -125,8 +123,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         _Qualifying_Encounters_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Office_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
                 CqlValueSet c_ = this.Annual_Wellness_Visit(context);

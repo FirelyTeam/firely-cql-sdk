@@ -126,8 +126,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS986FHIRMalnutritionScore-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -143,8 +142,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -157,8 +155,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -170,8 +167,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type(CqlContext context) =>
         _SDE_Payer_Type_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -183,8 +179,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -196,8 +191,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });
@@ -209,8 +203,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -256,8 +249,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Measure_Population(CqlContext context) =>
         _Measure_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -269,8 +261,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care(CqlContext context) =>
         _Encounters_with_Discharge_for_Hospice_Care_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 bool? b_(Encounter QualifyingEncounter) {
@@ -293,8 +284,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Intervention_Hospice_Care(CqlContext context) =>
         _Intervention_Hospice_Care_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Hospice_Status(context);
                 IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -352,8 +342,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter(CqlContext context) =>
         _Encounters_with_Hospice_during_Eligible_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -450,8 +439,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Measure_Population_Exclusion(CqlContext context) =>
         _Measure_Population_Exclusion_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Discharge_for_Hospice_Care(context);
                 IEnumerable<Encounter> b_ = this.Encounters_with_Hospice_during_Eligible_Encounter(context);
                 IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -465,8 +453,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Intervention_Dietitian_Referral(CqlContext context) =>
         _Intervention_Dietitian_Referral_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Dietitian_Referral(context);
                 IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -524,8 +511,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Dietitian_Referral(CqlContext context) =>
         _Encounters_with_Dietitian_Referral_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -622,8 +608,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(CqlContext context) =>
         _Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -671,8 +656,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk(CqlContext context) =>
         _Encounters_with_Malnutrition_Risk_Screening_At_Risk_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -720,8 +704,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening(CqlContext context) =>
         _Encounters_with_Malnutrition_Risk_Screening_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(context);
                 IEnumerable<Encounter> b_ = this.Encounters_with_Malnutrition_Risk_Screening_At_Risk(context);
                 IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -735,8 +718,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(CqlContext context) =>
         _Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening(context);
                 IEnumerable<Encounter> b_ = this.Encounters_with_Dietitian_Referral(context);
                 IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -750,8 +732,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral(CqlContext context) =>
         _Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(context);
                 IEnumerable<Encounter> b_ = this.Encounters_with_Dietitian_Referral(context);
                 IEnumerable<Encounter> c_ = context.Operators.Except<Encounter>(a_, b_);
@@ -765,8 +746,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral(CqlContext context) =>
         _Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening_At_Risk(context);
                 IEnumerable<Encounter> b_ = this.Encounters_with_Dietitian_Referral(context);
                 IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -808,8 +788,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<(CqlTupleMetadata, string HospEncId, CqlDateTime NutrAssessTimingLatest)?> Nutrition_Assessment_Performed(CqlContext context) =>
         _Nutrition_Assessment_Performed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
                 CqlValueSet b_ = this.Nutrition_Assessment(context);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -917,8 +896,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(CqlContext context) =>
         _Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -1028,8 +1006,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished(CqlContext context) =>
         _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -1135,8 +1112,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished(CqlContext context) =>
         _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {
@@ -1268,8 +1244,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Condition> Has_Malnutrition_Diagnosis(CqlContext context) =>
         _Has_Malnutrition_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Malnutrition_Diagnosis(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1293,8 +1268,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis(CqlContext context) =>
         _Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 bool? b_(Encounter QualifyingEncounter) {
@@ -1343,8 +1317,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis(CqlContext context) =>
         _Encounters_with_Malnutrition_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 bool? b_(Encounter QualifyingEncounter) {
@@ -1375,8 +1348,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan(CqlContext context) =>
         _Encounters_with_Nutrition_Care_Plan_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Measure_Population(context);
 
                 IEnumerable<Encounter> b_(Encounter QualifyingEncounter) {

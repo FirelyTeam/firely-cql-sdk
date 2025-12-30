@@ -134,8 +134,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -151,8 +150,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -165,8 +163,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context) =>
         _October_1_Two_Years_Prior_to_the_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -183,8 +180,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public CqlInterval<CqlDateTime> Participation_Period(CqlContext context) =>
         _Participation_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlDateTime a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
                 CqlInterval<CqlDateTime> b_ = this.Measurement_Period(context);
                 CqlDateTime c_ = context.Operators.End(b_);
@@ -199,8 +195,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Coverage> Member_Coverage(CqlContext context) =>
         _Member_Coverage_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Coverage> a_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
 
                 bool? b_(Coverage C) {
@@ -222,8 +217,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Enrolled_During_Participation_Period(CqlContext context) =>
         _Enrolled_During_Participation_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Coverage> a_ = this.Member_Coverage(context);
                 CqlInterval<CqlDateTime> b_ = this.Measurement_Period(context);
                 CqlDateTime c_ = context.Operators.End(b_);
@@ -267,8 +261,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -296,8 +289,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -309,8 +301,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context) =>
         _Right_Mastectomy_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Absence_of_Right_Breast(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
                 IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
@@ -335,8 +326,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context) =>
         _Right_Mastectomy_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Unilateral_Mastectomy_Right(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
                 IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
@@ -402,8 +392,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context) =>
         _Left_Mastectomy_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Absence_of_Left_Breast(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
                 IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
@@ -428,8 +417,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context) =>
         _Left_Mastectomy_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Unilateral_Mastectomy_Left(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
                 IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
@@ -495,8 +483,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
         _Bilateral_Mastectomy_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.History_of_Bilateral_Mastectomy(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
                 IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
@@ -521,8 +508,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context) =>
         _Bilateral_Mastectomy_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Bilateral_Mastectomy(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
                 IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
@@ -588,8 +574,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Mastectomy_Exclusion(CqlContext context) =>
         _Mastectomy_Exclusion_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Condition> a_ = this.Right_Mastectomy_Diagnosis(context);
                 bool? b_ = context.Operators.Exists<Condition>(a_);
                 IEnumerable<Procedure> c_ = this.Right_Mastectomy_Procedure(context);
@@ -617,8 +602,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Exclusions(CqlContext context) =>
         _Exclusions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = NCQAHospice_1_0_0.Instance.Hospice_Intervention_or_Encounter(context);
                 bool? b_ = this.Mastectomy_Exclusion(context);
                 bool? c_ = context.Operators.Or(a_, b_);
@@ -637,8 +621,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Mammography(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 

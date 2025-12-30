@@ -186,8 +186,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS159FHIRDepRemissionat12Months-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -203,8 +202,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -217,8 +215,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Depression_Assessments_Greater_Than_9(CqlContext context) =>
         _Depression_Assessments_Greater_Than_9_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.PHQ_9_and_PHQ_9M_Tools(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
 
@@ -280,8 +277,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Depression_Diagnoses(CqlContext context) =>
         _Depression_Diagnoses_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Major_Depression_Including_Remission(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -308,8 +304,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Denominator_Identification_Period(CqlContext context) =>
         _Denominator_Identification_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 CqlQuantity c_ = context.Operators.Quantity(14m, "months");
@@ -328,8 +323,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<Encounter> Depression_Encounter(CqlContext context) =>
         _Depression_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Contact_or_Office_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -371,8 +365,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public Observation Index_Depression_Assessment(CqlContext context) =>
         _Index_Depression_Assessment_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Observation> a_ = this.Depression_Assessments_Greater_Than_9(context);
 
                 IEnumerable<Observation> b_(Observation DepressionAssessment) {
@@ -422,8 +415,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -445,8 +437,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -458,8 +449,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDate> Measure_Assessment_Period(CqlContext context) =>
         _Measure_Assessment_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Observation a_ = this.Index_Depression_Assessment(context);
                 Observation[] b_ = [
                     a_,
@@ -498,8 +488,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
         _Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -771,8 +760,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
         _Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -952,8 +940,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Patient_Expired(CqlContext context) =>
         _Patient_Expired_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 DataType b_ = a_?.Deceased;
                 object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
@@ -971,8 +958,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Mental_Health_Disorder_Diagnoses(CqlContext context) =>
         _Has_Mental_Health_Disorder_Diagnoses_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Bipolar_Disorder(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1017,8 +1003,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exclusions(CqlContext context) =>
         _Denominator_Exclusions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(context);
                 bool? b_ = this.Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(context);
                 bool? c_ = context.Operators.Or(a_, b_);
@@ -1036,8 +1021,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.PHQ_9_and_PHQ_9M_Tools(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
 
@@ -1093,8 +1077,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -1106,8 +1089,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -1119,8 +1101,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -1132,8 +1113,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });
@@ -1145,8 +1125,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Stratification_1(CqlContext context) =>
         _Stratification_1_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Observation a_ = this.Index_Depression_Assessment(context);
                 Observation[] b_ = [
                     a_,
@@ -1181,8 +1160,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Stratification_2(CqlContext context) =>
         _Stratification_2_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Observation a_ = this.Index_Depression_Assessment(context);
                 Observation[] b_ = [
                     a_,

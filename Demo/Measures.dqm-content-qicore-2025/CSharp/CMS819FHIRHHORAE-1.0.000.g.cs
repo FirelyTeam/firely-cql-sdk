@@ -103,8 +103,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS819FHIRHHORAE-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -120,8 +119,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -134,8 +132,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         _Qualifying_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -174,8 +171,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<MedicationAdministration> Opioid_Administration(CqlContext context) =>
         _Opioid_Administration_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Opioids__All(context);
                 IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
                 IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
@@ -225,8 +221,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Encounter_With_Opioid_Administration_Outside_Of_Operating_Room(CqlContext context) =>
         _Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
                 IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -289,8 +284,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Opioid_Administration_Outside_Of_Operating_Room(context);
                 return a_;
             });
@@ -302,8 +296,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -315,8 +308,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<MedicationAdministration> Non_Enteral_Opioid_Antagonist_Administration(CqlContext context) =>
         _Non_Enteral_Opioid_Antagonist_Administration_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Opioid_Antagonist(context);
                 IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
                 IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
@@ -369,8 +361,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration(CqlContext context) =>
         _Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<MedicationAdministration> a_ = this.Non_Enteral_Opioid_Antagonist_Administration(context);
                 IEnumerable<MedicationAdministration> b_ = this.Opioid_Administration(context);
                 IEnumerable<Encounter> c_ = this.Denominator(context);
@@ -468,8 +459,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration(context);
                 return a_;
             });
@@ -481,8 +471,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -494,8 +483,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -507,8 +495,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -520,8 +507,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });

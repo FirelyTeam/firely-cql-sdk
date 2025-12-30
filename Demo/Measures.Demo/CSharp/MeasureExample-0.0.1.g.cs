@@ -70,8 +70,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -91,8 +90,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Initial_population(CqlContext context) =>
         _Initial_population_Cached.GetOrReplace(
             context,
-            () =>
-            true);
+            () => true);
 
 
     private Cached<bool?> _Exclusion_Cached = new();
@@ -104,8 +102,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Exclusion(CqlContext context) =>
         _Exclusion_Cached.GetOrReplace(
             context,
-            () =>
-            false);
+            () => false);
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -117,8 +114,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_population(context);
                 bool? b_ = this.Exclusion(context);
                 bool? c_ = context.Operators.Not(b_);
@@ -135,8 +131,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Numerator_1(CqlContext context) =>
         _Numerator_1_Cached.GetOrReplace(
             context,
-            () =>
-            true);
+            () => true);
 
 
     private Cached<bool?> _Numerator_2_Cached = new();
@@ -147,8 +142,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Numerator_2(CqlContext context) =>
         _Numerator_2_Cached.GetOrReplace(
             context,
-            () =>
-            false);
+            () => false);
 
 
     #endregion Functions and Expressions

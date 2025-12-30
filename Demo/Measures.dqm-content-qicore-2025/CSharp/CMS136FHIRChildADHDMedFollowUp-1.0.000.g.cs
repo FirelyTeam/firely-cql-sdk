@@ -192,8 +192,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS136FHIRChildADHDMedFollowUp-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -209,8 +208,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -223,8 +221,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDateTime March_1_of_Year_Prior_to_Measurement_Period(CqlContext context) =>
         _March_1_of_Year_Prior_to_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -241,8 +238,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period(CqlContext context) =>
         _Last_Calendar_Day_of_February_of_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -260,8 +256,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
         _Intake_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlDateTime a_ = this.March_1_of_Year_Prior_to_Measurement_Period(context);
                 CqlDateTime b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period(context);
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -275,8 +270,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(CqlContext context) =>
         _ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Atomoxetine(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                 IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1134,8 +1128,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period(CqlContext context) =>
         _First_ADHD_Medication_Prescribed_During_Intake_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(context);
 
                 bool? b_((CqlTupleMetadata, CqlDate startDate)? @this) {
@@ -1163,8 +1156,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDate IPSD(CqlContext context) =>
         _IPSD_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlDate a_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
                 return a_;
             });
@@ -1176,8 +1168,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         _Qualifying_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Office_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 CqlValueSet c_ = this.Home_Healthcare_Services(context);
@@ -1214,8 +1205,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis(CqlContext context) =>
         _Inpatient_Stay_with_Qualifying_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -1237,8 +1227,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(CqlContext context) =>
         _Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis(context);
 
                 bool? b_(Encounter InpatientStay) {
@@ -1267,8 +1256,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Initial_Population_1(CqlContext context) =>
         _Initial_Population_1_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -1306,8 +1294,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_1(CqlContext context) =>
         _Denominator_1_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population_1(context);
                 return a_;
             });
@@ -1319,8 +1306,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<object> Narcolepsy_Exclusion(CqlContext context) =>
         _Narcolepsy_Exclusion_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Narcolepsy(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1347,8 +1333,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_Exclusions(CqlContext context) =>
         _Denominator_Exclusions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
                 IEnumerable<object> b_ = this.Narcolepsy_Exclusion(context);
                 bool? c_ = context.Operators.Exists<object>(b_);
@@ -1363,8 +1348,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Numerator_Encounter(CqlContext context) =>
         _Qualifying_Numerator_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Office_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 CqlValueSet c_ = this.Preventive_Care_Services_Group_Counseling(context);
@@ -1436,8 +1420,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context) =>
         _Encounter_During_Initiation_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
                 IEnumerable<Encounter> b_ = Status_1_15_000.Instance.isEncounterPerformed(context, a_);
 
@@ -1467,8 +1450,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Numerator_1(CqlContext context) =>
         _Numerator_1_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase(context);
                 bool? b_ = context.Operators.Exists<Encounter>(a_);
                 return b_;
@@ -1481,8 +1463,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
         _ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Atomoxetine(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                 IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -2064,8 +2045,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context) =>
         _ADHD_Cumulative_Medication_Duration_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(context);
                 int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
                 return b_;
@@ -2078,8 +2058,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(CqlContext context) =>
         _Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 int? a_ = this.ADHD_Cumulative_Medication_Duration(context);
                 bool? b_ = context.Operators.GreaterOrEqual(a_, 210);
                 return b_;
@@ -2092,8 +2071,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
         _Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis(context);
 
                 bool? b_(Encounter InpatientStay) {
@@ -2122,8 +2100,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Initial_Population_2(CqlContext context) =>
         _Initial_Population_2_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -2163,8 +2140,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_2(CqlContext context) =>
         _Denominator_2_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population_2(context);
                 return a_;
             });
@@ -2176,8 +2152,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         _Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
                 IEnumerable<Encounter> b_ = Status_1_15_000.Instance.isEncounterPerformed(context, a_);
 
@@ -2218,8 +2193,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         _Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<CqlDate> a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
                 int? b_ = context.Operators.Count<CqlDate>(a_);
                 bool? c_ = context.Operators.GreaterOrEqual(b_, 2);
@@ -2233,8 +2207,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlDate> Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         _Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Virtual_Encounter(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -2276,8 +2249,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Numerator_2(CqlContext context) =>
         _Numerator_2_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase(context);
                 bool? b_ = context.Operators.Exists<Encounter>(a_);
                 bool? c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
@@ -2316,8 +2288,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -2329,8 +2300,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -2342,8 +2312,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -2355,8 +2324,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });

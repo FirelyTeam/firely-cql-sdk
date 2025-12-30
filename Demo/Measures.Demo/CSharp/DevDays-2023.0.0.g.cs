@@ -93,8 +93,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -110,8 +109,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -124,8 +122,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context) =>
         _Jet_engine_conditions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
                 bool? b_(Condition c) {
@@ -160,8 +157,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context) =>
         _Subsequent_encounters_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
                 bool? b_(Condition c) {
@@ -196,8 +192,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public bool? Initial_population(CqlContext context) =>
         _Initial_population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Condition> a_ = this.Jet_engine_conditions(context);
                 bool? b_ = context.Operators.Exists<Condition>(a_);
                 return b_;
@@ -210,8 +205,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Condition> a_ = this.Subsequent_encounters(context);
                 bool? b_ = context.Operators.Exists<Condition>(a_);
                 return b_;

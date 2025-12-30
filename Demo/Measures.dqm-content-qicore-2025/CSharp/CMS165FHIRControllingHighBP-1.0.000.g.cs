@@ -137,8 +137,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS165FHIRControllingHighBP-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -154,8 +153,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -168,8 +166,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Essential_Hypertension_Diagnosis(CqlContext context) =>
         _Essential_Hypertension_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Essential_Hypertension(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -199,8 +196,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -227,8 +223,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -240,8 +235,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Pregnancy_or_Renal_Diagnosis(CqlContext context) =>
         _Pregnancy_or_Renal_Diagnosis_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Pregnancy(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -281,8 +275,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context) =>
         _End_Stage_Renal_Disease_Procedures_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Kidney_Transplant(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 CqlValueSet c_ = this.Dialysis_Services(context);
@@ -374,8 +367,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context) =>
         _End_Stage_Renal_Disease_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.ESRD_Monthly_Outpatient_Services(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -401,8 +393,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Denominator_Exclusions(CqlContext context) =>
         _Denominator_Exclusions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
                 IEnumerable<object> b_ = this.Pregnancy_or_Renal_Diagnosis(context);
                 bool? c_ = context.Operators.Exists<object>(b_);
@@ -450,8 +441,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Observation> Qualifying_Blood_Pressure_Reading(CqlContext context) =>
         _Qualifying_Blood_Pressure_Reading_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
                 IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBP(context, a_);
                 IEnumerable<Observation> d_ = Status_1_15_000.Instance.isObservationBP(context, a_);
@@ -532,8 +522,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context) =>
         _Blood_Pressure_Days_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Observation> a_ = this.Qualifying_Blood_Pressure_Reading(context);
 
                 CqlDate b_(Observation BPExam) {
@@ -556,8 +545,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         _Most_Recent_Blood_Pressure_Day_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<CqlDate> a_ = this.Blood_Pressure_Days(context);
                 IEnumerable<CqlDate> b_ = context.Operators.ListSort<CqlDate>(a_, System.ComponentModel.ListSortDirection.Ascending);
                 CqlDate c_ = context.Operators.Last<CqlDate>(b_);
@@ -571,8 +559,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         _Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Observation> a_ = this.Qualifying_Blood_Pressure_Reading(context);
 
                 bool? b_(Observation BPReading) {
@@ -627,8 +614,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context) =>
         _Has_Systolic_Blood_Pressure_Less_Than_140_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlQuantity a_ = this.Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
                 CqlQuantity b_ = context.Operators.Quantity(140m, "mm[Hg]");
                 bool? c_ = context.Operators.Less(a_, b_);
@@ -642,8 +628,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         _Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Observation> a_ = this.Qualifying_Blood_Pressure_Reading(context);
 
                 bool? b_(Observation BPReading) {
@@ -698,8 +683,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context) =>
         _Has_Diastolic_Blood_Pressure_Less_Than_90_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlQuantity a_ = this.Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
                 CqlQuantity b_ = context.Operators.Quantity(90m, "mm[Hg]");
                 bool? c_ = context.Operators.Less(a_, b_);
@@ -713,8 +697,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
                 bool? b_ = this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
                 bool? c_ = context.Operators.And(a_, b_);
@@ -728,8 +711,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -741,8 +723,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -754,8 +735,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -767,8 +747,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });

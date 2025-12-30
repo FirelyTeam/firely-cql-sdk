@@ -113,8 +113,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -127,8 +126,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 List<Extension> a_() {
 
@@ -254,8 +252,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Payer_Type(context);
                 IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 
@@ -280,8 +277,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 List<Extension> a_() {
 
@@ -409,8 +405,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 CqlCode a_() {
 

@@ -171,8 +171,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -188,8 +187,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -202,8 +200,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -215,8 +212,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -228,8 +224,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -241,8 +236,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
             });
@@ -254,8 +248,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
         _Qualifying_Encounter_During_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Office_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
                 CqlValueSet c_ = this.Ophthalmological_Services(context);
@@ -294,8 +287,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context) =>
         _Diabetic_Retinopathy_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 
                 IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter) {
@@ -363,8 +355,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context) =>
         _Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
                 IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -457,8 +448,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context) =>
         _Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlCode b_ = this.Macular_edema_absent__situation_(context);
                 IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -552,8 +542,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context) =>
         _Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlValueSet b_ = this.Macular_Edema_Findings_Present(context);
                 IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -646,8 +635,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Denominator_Exceptions(CqlContext context) =>
         _Denominator_Exceptions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Communication> a_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(context);
                 bool? b_ = context.Operators.Exists<Communication>(a_);
                 IEnumerable<Communication> c_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(context);
@@ -666,8 +654,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Date b_ = a_?.BirthDateElement;
                 string c_ = b_?.Value;
@@ -689,8 +676,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context) =>
         _Macular_Exam_Performed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Macular_Exam(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -740,8 +726,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population(context);
                 IEnumerable<Observation> b_ = this.Macular_Exam_Performed(context);
                 bool? c_ = context.Operators.Exists<Observation>(b_);
@@ -756,8 +741,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context) =>
         _Level_of_Severity_of_Retinopathy_Findings_Communicated_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
                 IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -801,8 +785,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context) =>
         _Macular_Edema_Absence_Communicated_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlCode b_ = this.Macular_edema_absent__situation_(context);
                 IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -847,8 +830,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context) =>
         _Macular_Edema_Presence_Communicated_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
                 CqlValueSet b_ = this.Macular_Edema_Findings_Present(context);
                 IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -892,8 +874,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context) =>
         _Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
                 bool? b_ = context.Operators.Exists<Communication>(a_);
                 IEnumerable<Communication> c_ = this.Macular_Edema_Absence_Communicated(context);
@@ -912,8 +893,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
                 bool? b_ = context.Operators.Exists<Communication>(a_);
                 IEnumerable<Communication> c_ = this.Macular_Edema_Absence_Communicated(context);

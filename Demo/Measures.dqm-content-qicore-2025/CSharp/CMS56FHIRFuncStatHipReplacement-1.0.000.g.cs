@@ -212,8 +212,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("CMS56FHIRFuncStatHipReplacement-1.0.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -229,8 +228,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -243,8 +241,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         _SDE_Ethnicity_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
                 return a_;
             });
@@ -256,8 +253,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         _SDE_Payer_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
                 return a_;
             });
@@ -269,8 +265,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         _SDE_Race_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
                 return a_;
             });
@@ -282,8 +277,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public CqlCode SDE_Sex(CqlContext context) =>
         _SDE_Sex_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
                 return a_;
             });
@@ -295,8 +289,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public CqlDateTime August_1_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
         _August_1_Year_Prior_to_the_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -313,8 +306,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
         _Has_Qualifying_Encounter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Outpatient_Consultation(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 CqlValueSet c_ = this.Office_Visit(context);
@@ -377,8 +369,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context) =>
         _November_1_Two_Years_Prior_to_the_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -395,8 +386,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public CqlDateTime October_31_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
         _October_31_Year_Prior_to_the_Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
                 CqlDateTime b_ = context.Operators.Start(a_);
                 int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -413,8 +403,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure(CqlContext context) =>
         _Total_Hip_Arthroplasty_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Primary_THA_Procedure(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
@@ -504,8 +493,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Has_Qualifying_Encounter(context);
                 IEnumerable<Procedure> b_ = this.Total_Hip_Arthroplasty_Procedure(context);
                 bool? c_ = context.Operators.Exists<Procedure>(b_);
@@ -530,8 +518,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Denominator(CqlContext context) =>
         _Denominator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
             });
@@ -543,8 +530,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Severe_Cognitive_Impairment(CqlContext context) =>
         _Has_Severe_Cognitive_Impairment_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.Severe_cognitive_impairment__finding_(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -603,8 +589,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(CqlContext context) =>
         _Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 IEnumerable<Procedure> b_(Procedure THAProcedure) {
@@ -843,8 +828,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Partial_Hip_Arthroplasty_Procedure(CqlContext context) =>
         _Has_Partial_Hip_Arthroplasty_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Partial_Arthroplasty_of_Hip(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
@@ -1005,8 +989,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(CqlContext context) =>
         _Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 IEnumerable<Procedure> b_(Procedure THAProcedure) {
@@ -1167,8 +1150,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(CqlContext context) =>
         _Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1268,8 +1250,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_Mechanical_Complication(CqlContext context) =>
         _Has_Mechanical_Complication_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1369,8 +1350,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(CqlContext context) =>
         _Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 IEnumerable<Procedure> b_(Procedure THAProcedure) {
@@ -1610,8 +1590,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Death_Within_300_Days_of_the_THA_Procedure(CqlContext context) =>
         _Death_Within_300_Days_of_the_THA_Procedure_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 bool? b_(Procedure THAProcedure) {
@@ -1772,8 +1751,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Denominator_Exclusions(CqlContext context) =>
         _Denominator_Exclusions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
                 bool? b_ = this.Has_Severe_Cognitive_Impairment(context);
                 bool? c_ = context.Operators.Or(a_, b_);
@@ -1801,8 +1779,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed(CqlContext context) =>
         _Date_HOOS_Total_Assessment_Completed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.Quality_of_life_score__HOOS_(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1951,8 +1928,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(CqlContext context) =>
         _Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 CqlInterval<CqlDateTime> b_(Procedure THAProcedure) {
@@ -2098,8 +2074,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed(CqlContext context) =>
         _Date_HOOSJr_Total_Assessment_Completed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.Total_interval_score__HOOSJR_(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -2135,8 +2110,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(CqlContext context) =>
         _Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 CqlInterval<CqlDateTime> b_(Procedure THAProcedure) {
@@ -2282,8 +2256,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context) =>
         _Date_PROMIS10_Total_Assessment_Completed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -2357,8 +2330,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context) =>
         _Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 CqlInterval<CqlDateTime> b_(Procedure THAProcedure) {
@@ -2504,8 +2476,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context) =>
         _Date_VR12_Oblique_Total_Assessment_Completed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -2579,8 +2550,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context) =>
         _Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 CqlInterval<CqlDateTime> b_(Procedure THAProcedure) {
@@ -2726,8 +2696,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
         _Date_VR12_Orthogonal_Total_Assessment_Completed_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -2801,8 +2770,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context) =>
         _Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
                 CqlInterval<CqlDateTime> b_(Procedure THAProcedure) {
@@ -2948,8 +2916,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     public bool? Numerator(CqlContext context) =>
         _Numerator_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 bool? a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(context);
                 bool? b_ = this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(context);
                 bool? c_ = context.Operators.Or(a_, b_);

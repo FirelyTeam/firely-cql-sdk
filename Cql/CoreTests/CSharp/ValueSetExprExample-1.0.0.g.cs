@@ -90,8 +90,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public string ChosenSubCategory(CqlContext context) =>
         _ChosenSubCategory_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
                 return (string)a_;
             });
@@ -103,8 +102,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlCode ChosenCode(CqlContext context) =>
         _ChosenCode_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
                 return (CqlCode)a_;
             });
@@ -120,8 +118,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlValueSet ValueSetA(CqlContext context) =>
         _ValueSetA_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 CqlValueSet a_() {
 
@@ -164,8 +161,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlValueSet ValueSetB(CqlContext context) =>
         _ValueSetB_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 CqlValueSet a_() {
 
@@ -208,8 +204,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public string Result(CqlContext context) =>
         _Result_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
 
                 string a_() {
 

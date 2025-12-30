@@ -78,8 +78,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public int? AgeThreshold(CqlContext context) =>
         _AgeThreshold_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
                 return (int?)a_;
             });
@@ -95,8 +94,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -109,8 +107,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public CqlDate CurrentDate(CqlContext context) =>
         _CurrentDate_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 CqlDate a_ = context.Operators.Today();
                 return a_;
             });
@@ -122,8 +119,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Patient Patient_Filter(CqlContext context) =>
         _Patient_Filter_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient(context);
                 Patient[] b_ = [
                     a_,
@@ -161,8 +157,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Date Patient_Birthdate(CqlContext context) =>
         _Patient_Birthdate_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Patient a_ = this.Patient_Filter(context);
                 Date b_ = a_?.BirthDateElement;
                 return b_;
@@ -175,8 +170,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public int? Patient_Age_in_Years(CqlContext context) =>
         _Patient_Age_in_Years_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 Date a_ = this.Patient_Birthdate(context);
                 CqlDate b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
                 CqlDate c_ = this.CurrentDate(context);
@@ -191,8 +185,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
         _Patient_Older_Than_AgeThreshold_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 int? a_ = this.Patient_Age_in_Years(context);
                 int? b_ = this.AgeThreshold(context);
                 bool? c_ = context.Operators.Greater(a_, b_);

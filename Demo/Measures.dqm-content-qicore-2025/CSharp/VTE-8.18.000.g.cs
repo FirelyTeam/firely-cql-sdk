@@ -86,8 +86,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         _Measurement_Period_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
             });
@@ -103,8 +102,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public Patient Patient(CqlContext context) =>
         _Patient_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
@@ -164,8 +162,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
         _Admission_Without_VTE_Or_Obstetrical_Conditions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
                 bool? b_(Encounter InpatientEncounter) {
@@ -192,8 +189,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
         _Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
 
                 bool? b_(Encounter EncounterWithoutConditions) {
@@ -221,8 +217,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         _Initial_Population_Cached.GetOrReplace(
             context,
-            () =>
-            {
+            () => {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
                 return a_;
             });
