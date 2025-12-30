@@ -24,13 +24,9 @@ internal partial class LibrarySetCSharpCodeGenerator
         {
             var (quotedName, methodName, fieldName) = GetMemberNames(ld);
 
-            // Extract original parameter names if this is a CqlFunctionDefinition
-            IReadOnlyDictionary<string, string>? originalParameterNames =
-                ld is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
-                    ? functionDef.OriginalParameterNames
-                    : null;
+            var parameters = ld.LambdaExpression.Parameters.Skip(1).ToList(); // CqlContext is always first parameter, which we ignore here
 
-            var useCache = (originalParameterNames?.Count ?? 0) == 0;
+            var useCache = parameters is not { Count:>0 };
             string? cacheFieldName = null;
             if (useCache)
             {
@@ -60,23 +56,29 @@ internal partial class LibrarySetCSharpCodeGenerator
                 new RenameVariablesVisitor(new([], postfix: "_")),
                 new LocalVariableDeduper(TypeToCSharpConverter)
             );
-            var parameters = ld.LambdaExpression.Parameters.Skip(1);
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
 
             // Signature
             var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);
             isb.Append($"public {returnType} {methodName}");
 
-            // Body
+            // Extract original parameter names if this is a CqlFunctionDefinition
+            IReadOnlyDictionary<string, string>? originalParameterNames =
+                ld is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
+                    ? functionDef.OriginalParameterNames
+                    : null;
             var lambdaParameters = ConvertLambdaExpressionParameters(transformedLambda, originalParameterNames, true);
+
+            // Body
             var lambdaBody = ConvertExpression(transformedLambda.Body);
 
             if (useCache)
             {
                 isb.AppendLine($"{lambdaParameters} =>");
                 var isb1 = isb.AddIndent();
-                isb1.AppendLine($"context.Cache.GetOrAdd<{returnType}>(");
+                isb1.AppendLine($"GetOrAddCache<{returnType}>(");
                 var isb2 = isb1.AddIndent();
+                isb2.AppendLine("context.Cache,");
                 isb2.AppendLine($"ref {cacheFieldName},");
                 isb2.AppendLine("() =>");
                 isb2.Append(lambdaBody);
@@ -91,17 +93,6 @@ internal partial class LibrarySetCSharpCodeGenerator
                 isb.AppendLine($"{lambdaBody}{semicolon}");
                 isb.AppendLine();
             }
-
-            // public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam) =>
-            //     context.Cache.GetOrAdd(
-            //         ref _cacheix_Test_Function,
-            //         () =>
-            //         {
-            //             int? a_ = context.Operators.Add(param_with_spaces, 10);
-            //
-            //             return a_;
-            //         });
-
         }
 
     private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

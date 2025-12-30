@@ -218,6 +218,15 @@ partial class LibrarySetCSharpCodeGenerator
                 classBlockContext.WriteClassConstructor();
                 classBlockContext.WriteSingletonInstanceProperty();
                 classBlockContext.WriteLibraryInterfaceImplementation();
+                isb.AddIndent().AppendLine(
+                    """
+                    #region Caching
+
+                    private T GetOrAddCache<T>(CqlContextCache cache, ref int cacheix, Func<T> factory) => cache.GetOrAdd<T>(ref cacheix, factory);
+
+                    #endregion
+
+                    """);
                 classBlockContext.WriteMethods();
                 classBlockContext.WriteCqlTupleMetadataProperties();
             }

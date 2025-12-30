@@ -85,7 +85,7 @@ internal partial class LibrarySetCSharpCodeGenerator(
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 
-    internal static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition cqlDefinition)
+    private static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition cqlDefinition)
     {
         var name = cqlDefinition.Name;
         string quotedName = name.QuoteString();
