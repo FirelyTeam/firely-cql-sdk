@@ -135,13 +135,5 @@ partial class LibrarySetCSharpCodeGenerator
                   private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
                   """);
         }
-
-        public void Deconstruct(
-            out LibraryWriter LibraryWriter,
-            out CqlDefinition CqlDefinition)
-        {
-            LibraryWriter = this.LibraryWriter;
-            CqlDefinition = this.CqlDefinition;
-        }
     }
 }
