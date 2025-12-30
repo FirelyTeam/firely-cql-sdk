@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
@@ -40,8 +39,11 @@ internal partial class LibrarySetCSharpCodeGenerator
             {
                 cacheFieldName = LibraryWriter.GetUniqueCacheFieldName(fieldName);
                 cacheFieldName = $"{cacheFieldName}_Cached";
-                ISB.AppendLine($"private Cached<{returnType}> {cacheFieldName} = new();");
-                ISB.AppendLine();
+                ISB.AppendLine(
+                    $"""
+                     private Cached<{returnType}> {cacheFieldName} = new();
+
+                     """);
             }
 
             var definitionAttributeTypeName = ld.GetType().Name;
@@ -78,22 +80,25 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ISB.AppendLine($"{cacheFieldName}.GetOrReplace(");
                     using (ISB.Indent())
                     {
-                        ISB.AppendLine("context,");
-                        ISB.AppendLine("() =>");
-                        ISB.Append(lambdaBody);
-                        ISB.AppendLine(");");
+                        ISB.AppendLine(
+                            $"""
+                            context,
+                            () => {lambdaBody});
+
+                            """);
                     }
                 }
-
-                ISB.AppendLine();
             }
             else
             {
                 var lambdaOperator = BuildLambdaOperator(transformedLambda, true);
                 var semicolon = transformedLambda.Body is BlockExpression ? "" : ";";
-                ISB.AppendLine($"{lambdaParameters}{lambdaOperator}");
-                ISB.AppendLine($"{lambdaBody}{semicolon}");
-                ISB.AppendLine();
+                ISB.AppendLine(
+                    $"""
+                     {lambdaParameters}{lambdaOperator}
+                     {lambdaBody}{semicolon}
+
+                     """);
             }
         }
 
@@ -208,33 +213,16 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var childStatementCode = BuildExpression(childStatement);
                     switch (childStatement)
                     {
-                        // case CaseWhenThenExpression:
-                        //     isb.AppendLine($"{childStatementCode};");
-                        //     break;
-
-                        case BinaryExpression {Right.NodeType: ExpressionType.Lambda, Right: LambdaExpression { Body.NodeType: ExpressionType.Block} le}:
+                        case BinaryExpression { Right.NodeType: ExpressionType.Lambda, Right: LambdaExpression { Body.NodeType: ExpressionType.Block } le }:
                             // Give local function definitions some space before and after
-                            isb.AppendLine();
-                            isb.AppendLine($"{childStatementCode.TrimEnd()}");
-                            isb.AppendLine();
-                            //
-                            // if (le.Body.NodeType is ExpressionType.Block)
-                            //     isb.AppendLine(); // No semicolon needed after block-bodied local functions
-                            // else
-                            //     isb.AppendLine(";");
+                            isb.AppendLine(
+                                $"""
+
+                                 {childStatementCode.TrimEnd()}
+
+                                 """);
                             break;
 
-                        // case BinaryExpression {Right.NodeType: ExpressionType.Lambda, Right: LambdaExpression le}:
-                        //     // Give local function definitions some space before and after
-                        //     isb.AppendLine();
-                        //
-                        //     isb.Append($"{childStatementCode.TrimEnd()}");
-                        //
-                        //     if (le.Body.NodeType is ExpressionType.Block)
-                        //         isb.AppendLine(); // No semicolon needed after block-bodied local functions
-                        //     else
-                        //         isb.AppendLine(";");
-                        //     break;
 
                         default:
                             isb.AppendLine($"{childStatementCode.TrimEnd()};");
@@ -242,6 +230,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     }
                 }
             }
+
             isb.Append("}");
             bool isScope = block.GetType().Name == "ScopeN";
             _ = isScope;

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
@@ -12,26 +11,13 @@ partial class LibrarySetCSharpCodeGenerator
     private class LibraryWriter
     {
         public LibraryWriter(
-            LibrarySetWriter librarySetWriter,
-            ElmLibrary library,
-            IndentedStringBuilder isb)
+            LibrarySetWriter librarySetWriter)
         {
             LibrarySetWriter = librarySetWriter;
-            _library = library;
-            ISB = isb;
-            _className = IdentifierNormalizer.Normalize(library.VersionedLibraryIdentifier);
-            _definitions = librarySetWriter
-                           .Definitions
-                           .SelectDefinitionsByLibraryName(LibraryName)
-                           .Select(t => t.definition)
-                           .ToArray();
-            CodeDefinitions = _definitions
-                               .OfType<CqlCodeDefinition>()
-                               .ToArray();
         }
 
-        internal CqlVersionedLibraryIdentifier LibraryName => _library.VersionedLibraryIdentifier!;
-        private readonly string _className;
+        internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
+        private string _className = string.Empty;
         private readonly Dictionary<string, int> _cacheFieldNameCount = new();
 
         public string GetUniqueCacheFieldName(string baseName)
@@ -52,8 +38,20 @@ partial class LibrarySetCSharpCodeGenerator
             return fieldName;
         }
 
-        public void AppendLibraryFile()
+        public void AppendLibraryFile(ElmLibrary library, IndentedStringBuilder isb)
         {
+            _library = library;
+            ISB = isb;
+            _className = IdentifierNormalizer.Normalize(library.VersionedLibraryIdentifier);
+            _definitions = LibrarySetWriter
+                           .Definitions
+                           .SelectDefinitionsByLibraryName(LibraryName)
+                           .Select(t => t.definition)
+                           .ToArray();
+            CodeDefinitions = _definitions
+                               .OfType<CqlCodeDefinition>()
+                               .ToArray();
+
             AppendUsings();
             AppendNamespaceFileScope();
             AppendClass();
@@ -138,13 +136,13 @@ partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private readonly CqlDefinition[] _definitions;
+        private CqlDefinition[] _definitions = Array.Empty<CqlDefinition>();
 
-        public CqlCodeDefinition[] CodeDefinitions { get; }
+        public CqlCodeDefinition[] CodeDefinitions { get; private set; } = Array.Empty<CqlCodeDefinition>();
 
         public LibrarySetWriter LibrarySetWriter { get; }
-        private readonly ElmLibrary _library;
-        public IndentedStringBuilder ISB { get; }
+        private ElmLibrary? _library;
+        public IndentedStringBuilder ISB { get; private set; } = new();
 
         private void AppendMethods()
         {
