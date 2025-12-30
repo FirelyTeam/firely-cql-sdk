@@ -1,25 +1,24 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using System.Diagnostics;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
-using System.Linq;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal partial class LibrarySetCSharpCodeGenerator
 {
-    private record LambdaDefinitionWriter(
-        LibraryWriter LibraryWriter)
+    private record LambdaDefinitionWriter(LibraryWriter LibraryWriter)
     {
         private TupleMetadataBuilder TupleMetadataBuilder => LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
         private string LibraryName => LibraryWriter.LibraryName;
         private TypeToCSharpConverter TypeToCSharpConverter => LibraryWriter.LibrarySetWriter.TypeToCSharpConverter;
-        // ReSharper disable once InconsistentNaming
-        private IndentedStringBuilder isb => LibraryWriter.isb;
 
-        public void WriteDefinition(
+        private IndentedStringBuilder ISB => LibraryWriter.ISB;
+
+        public void AppendLambdaDefinition(
             CqlLambdaDefinition ld)
         {
             var (quotedName, methodName, fieldName) = GetMemberNames(ld);
@@ -35,20 +34,20 @@ internal partial class LibrarySetCSharpCodeGenerator
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
             var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);
 
-            var useCache = parameters is not { Count:>0 };
+            var useCache = parameters is not { Count: > 0 };
             string? cacheFieldName = null;
             if (useCache)
             {
                 cacheFieldName = LibraryWriter.GetUniqueCacheFieldName(fieldName);
                 cacheFieldName = $"{cacheFieldName}_Cached";
-                isb.AppendLine($"private Cached<{returnType}> {cacheFieldName} = new();");
-                isb.AppendLine();
+                ISB.AppendLine($"private Cached<{returnType}> {cacheFieldName} = new();");
+                ISB.AppendLine();
             }
 
             var definitionAttributeTypeName = ld.GetType().Name;
 
             // [CqlExpressionDefinition("Patient")] or [CqlFunctionDefinition("Patient")]
-            isb.AppendLine($"[{definitionAttributeTypeName}({quotedName})]");
+            ISB.AppendLine($"[{definitionAttributeTypeName}({quotedName})]");
 
             // [CqlTag("tagName1", "tagValue")]
             // [CqlTag("tagName1", "tagValue")]
@@ -56,79 +55,85 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (ld is CqlExpressionDefinition ed)
                 foreach (var tag in ed.Tags)
                     foreach (var tagValue in tag.Values)
-                        isb.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
+                        ISB.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
             // Signature
-            isb.Append($"public {returnType} {methodName}");
+            ISB.Append($"public {returnType} {methodName}");
 
             // Extract original parameter names if this is a CqlFunctionDefinition
             IReadOnlyDictionary<string, string>? originalParameterNames =
                 ld is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
                     ? functionDef.OriginalParameterNames
                     : null;
-            var lambdaParameters = ConvertLambdaExpressionParameters(transformedLambda, originalParameterNames, true);
+            var lambdaParameters = BuildLambdaExpressionParameters(transformedLambda, originalParameterNames, true);
 
             // Body
-            var lambdaBody = ConvertExpression(transformedLambda.Body);
+            var lambdaBody = BuildExpression(transformedLambda.Body);
 
             if (useCache)
             {
-                isb.AppendLine($"{lambdaParameters} =>");
-                var isb1 = isb.AddIndent();
-                isb1.AppendLine($"{cacheFieldName}.GetOrReplace(");
-                var isb2 = isb1.AddIndent();
-                isb2.AppendLine("context,");
-                isb2.AppendLine("() =>");
-                isb2.Append(lambdaBody);
-                isb2.AppendLine(");");
-                isb.AppendLine();
+                ISB.AppendLine($"{lambdaParameters} =>");
+                using (ISB.Indent())
+                {
+                    ISB.AppendLine($"{cacheFieldName}.GetOrReplace(");
+                    using (ISB.Indent())
+                    {
+                        ISB.AppendLine("context,");
+                        ISB.AppendLine("() =>");
+                        ISB.Append(lambdaBody);
+                        ISB.AppendLine(");");
+                    }
+                }
+
+                ISB.AppendLine();
             }
             else
             {
                 var lambdaOperator = BuildLambdaOperator(transformedLambda, true);
                 var semicolon = transformedLambda.Body is BlockExpression ? "" : ";";
-                isb.AppendLine($"{lambdaParameters}{lambdaOperator}");
-                isb.AppendLine($"{lambdaBody}{semicolon}");
-                isb.AppendLine();
+                ISB.AppendLine($"{lambdaParameters}{lambdaOperator}");
+                ISB.AppendLine($"{lambdaBody}{semicolon}");
+                ISB.AppendLine();
             }
         }
 
-    private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
+        private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {
             foreach (var visitor in visitors) body = visitor.Visit(body);
             return body;
         }
 
-        private string ConvertExpression(
+        private string BuildExpression(
             Expression expression)
         {
             try
             {
                 var result = expression switch
                 {
-                    ConstantExpression constant => ConvertConstantExpression(constant),
-                    NewExpression @new => ConvertNewExpression(@new),
-                    MethodCallExpression call => ConvertMethodCallExpression(call),
-                    LambdaExpression lambda => ConvertLambdaExpression(lambda, includeContextParameter: false),
-                    BinaryExpression binary => ConvertBinaryExpression(binary),
-                    UnaryExpression unary => ConvertUnaryExpression(unary),
-                    NewArrayExpression newArray => ConvertNewArrayExpression(newArray),
-                    MemberExpression me => ConvertMemberExpression(me),
-                    MemberInitExpression memberInit => ConvertMemberInitExpression(memberInit),
-                    ConditionalExpression ce => ConvertConditionalExpression(ce),
-                    TypeBinaryExpression typeBinary => ConvertTypeBinaryExpression(typeBinary),
-                    ParameterExpression pe => ConvertParameterExpression(pe),
-                    DefaultExpression de => ConvertDefaultExpression(de),
-                    NullConditionalMemberExpression nullp => ConvertNullConditionalMemberExpression(nullp),
-                    BlockExpression block => ConvertBlockExpression(block),
-                    InvocationExpression invocation => ConvertInvocationExpression(invocation),
-                    CaseWhenThenExpression cwt => ConvertCaseWhenThenExpression(cwt),
-                    FunctionCallExpression fce => ConvertFunctionCallExpression(fce),
-                    DefinitionCallExpression dce => ConvertDefinitionCallExpression(dce),
-                    ElmAsExpression ea => ConvertExpression(ea.Reduce()),
+                    ConstantExpression constant => BuildConstantExpression(constant),
+                    NewExpression @new => BuildNewExpression(@new),
+                    MethodCallExpression call => BuildMethodCallExpression(call),
+                    LambdaExpression lambda => BuildLambdaExpression(lambda, includeContextParameter: false),
+                    BinaryExpression binary => BuildBinaryExpression(binary),
+                    UnaryExpression unary => BuildUnaryExpression(unary),
+                    NewArrayExpression newArray => BuildNewArrayExpression(newArray),
+                    MemberExpression me => BuildMemberExpression(me),
+                    MemberInitExpression memberInit => BuildMemberInitExpression(memberInit),
+                    ConditionalExpression ce => BuildConditionalExpression(ce),
+                    TypeBinaryExpression typeBinary => BuildTypeBinaryExpression(typeBinary),
+                    ParameterExpression pe => BuildParameterExpression(pe),
+                    DefaultExpression de => BuildDefaultExpression(de),
+                    NullConditionalMemberExpression nullp => BuildNullConditionalMemberExpression(nullp),
+                    BlockExpression block => BuildBlockExpression(block),
+                    InvocationExpression invocation => BuildInvocationExpression(invocation),
+                    CaseWhenThenExpression cwt => BuildCaseWhenThenExpression(cwt),
+                    FunctionCallExpression fce => BuildFunctionCallExpression(fce),
+                    DefinitionCallExpression dce => BuildDefinitionCallExpression(dce),
+                    ElmAsExpression ea => BuildExpression(ea.Reduce()),
                     _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
                 };
                 return result;
+                //return $"{result} /* {expression.GetType().Name} */";
             }
             catch (Exception e)
             {
@@ -149,18 +154,18 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private string ConvertDefinitionCallExpression(
+        private string BuildDefinitionCallExpression(
             DefinitionCallExpression dce)
         {
             var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
             return $"{targetMember}(context)";
         }
 
-        private string ConvertFunctionCallExpression(
+        private string BuildFunctionCallExpression(
             FunctionCallExpression fce)
         {
             var targetMember = GetTargetedMemberName(fce.LibraryName, fce.FunctionName);
-            var arguments = ConvertArguments(fce.Arguments);
+            var arguments = BuildArguments(fce.Arguments);
             return $"{targetMember}{arguments}";
         }
 
@@ -175,60 +180,83 @@ internal partial class LibrarySetCSharpCodeGenerator
             return $"{target}.{member}";
         }
 
-        private string ConvertBlockExpression(
+        private string BuildBlockExpression(
             BlockExpression block)
         {
-            var sb = new IndentedStringBuilder();
-            sb.AppendLine("{");
-
-            var blockBodyBuilder = sb.AddIndent();
-
-            var lastIndex = block.Expressions.Count - 1;
-
-            for (var i = 0; i <= lastIndex; i++)
+            var isb = new IndentedStringBuilder();
+            isb.AppendLine("{");
+            using (isb.Indent())
             {
-                var childStatement = block.Expressions[i];
+                var lastIndex = block.Expressions.Count - 1;
 
-                if (i == lastIndex)
+                for (var i = 0; i <= lastIndex; i++)
                 {
+                    var childStatement = block.Expressions[i];
+
+                    if (i == lastIndex)
+                    {
+                        switch (childStatement)
+                        {
+                            case CaseWhenThenExpression:                             break;
+                            case UnaryExpression { NodeType: ExpressionType.Throw }: break;
+                            default:
+                                isb.Append("return ");
+                                break;
+                        }
+                    }
+
+                    var childStatementCode = BuildExpression(childStatement);
                     switch (childStatement)
                     {
-                        case CaseWhenThenExpression: break;
-                        case UnaryExpression { NodeType: ExpressionType.Throw }: break;
+                        // case CaseWhenThenExpression:
+                        //     isb.AppendLine($"{childStatementCode};");
+                        //     break;
+
+                        case BinaryExpression {Right.NodeType: ExpressionType.Lambda, Right: LambdaExpression { Body.NodeType: ExpressionType.Block} le}:
+                            // Give local function definitions some space before and after
+                            isb.AppendLine();
+                            isb.AppendLine($"{childStatementCode.TrimEnd()}");
+                            isb.AppendLine();
+                            //
+                            // if (le.Body.NodeType is ExpressionType.Block)
+                            //     isb.AppendLine(); // No semicolon needed after block-bodied local functions
+                            // else
+                            //     isb.AppendLine(";");
+                            break;
+
+                        // case BinaryExpression {Right.NodeType: ExpressionType.Lambda, Right: LambdaExpression le}:
+                        //     // Give local function definitions some space before and after
+                        //     isb.AppendLine();
+                        //
+                        //     isb.Append($"{childStatementCode.TrimEnd()}");
+                        //
+                        //     if (le.Body.NodeType is ExpressionType.Block)
+                        //         isb.AppendLine(); // No semicolon needed after block-bodied local functions
+                        //     else
+                        //         isb.AppendLine(";");
+                        //     break;
+
                         default:
-                            blockBodyBuilder.Append("return ");
+                            isb.AppendLine($"{childStatementCode.TrimEnd()};");
                             break;
                     }
                 }
-
-                var childStatementCode = ConvertExpression(childStatement);
-                blockBodyBuilder.Append(childStatementCode);
-
-                switch (childStatement)
-                {
-                    case CaseWhenThenExpression:
-                        blockBodyBuilder.AppendLine();
-                        break;
-                    default:
-                        blockBodyBuilder.AppendLine(";");
-                        break;
-                }
             }
-
-            sb.Append("}");
-
-            return sb.ToString();
+            isb.Append("}");
+            bool isScope = block.GetType().Name == "ScopeN";
+            _ = isScope;
+            return isb;
         }
 
-        private string ConvertNullConditionalMemberExpression(
+        private string BuildNullConditionalMemberExpression(
             NullConditionalMemberExpression nullp)
         {
-            var @object = ConvertExpression(nullp.MemberExpression.Expression!);
+            var @object = BuildExpression(nullp.MemberExpression.Expression!);
             @object = @object.ParenthesizeIfNeeded();
             return $"{@object}?.{nullp.MemberExpression.Member.Name}";
         }
 
-        private string ConvertConstantExpression(
+        private string BuildConstantExpression(
             ConstantExpression constant)
         {
             string text;
@@ -277,13 +305,13 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private string ConvertParameterExpression(
+        private string BuildParameterExpression(
             ParameterExpression pe)
         {
             return StringExtensions.GetOrCreateName(pe);
         }
 
-        private string ConvertInvocationExpression(
+        private string BuildInvocationExpression(
             InvocationExpression invoc)
         {
             if (invoc.Expression is ParameterExpression pe && !invoc.Arguments.Any())
@@ -292,48 +320,46 @@ internal partial class LibrarySetCSharpCodeGenerator
                 throw new NotImplementedException();
         }
 
-        private string ConvertMethodCallExpression(
+        private string BuildMethodCallExpression(
             MethodCallExpression call)
         {
             var @object = call switch
             {
-                { Object: not null } => $"{ConvertExpression(call.Object)}.",
-                { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() => $"{ConvertExpression(call.Arguments[0])}.",
+                { Object: not null } => $"{BuildExpression(call.Object)}.",
+                { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() => $"{BuildExpression(call.Arguments[0])}.",
                 { Method.IsStatic: true } => $"{TypeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
-                _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
+                _ => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
 
-            var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
-
+            IReadOnlyCollection<Expression> paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1).ToList() : call.Arguments;
             var methodName = PrettyMethodName(call.Method);
-            var arguments = ConvertArguments(paramList);
+            var arguments = BuildArguments(paramList);
             return $"{@object}{methodName}{arguments}";
         }
 
-        private string ConvertArguments(
-            IEnumerable<Expression> paramList)
+        private string BuildArguments(
+            IReadOnlyCollection<Expression> paramList)
         {
-            var sb = new IndentedStringBuilder();
-            sb.Append("(");
+            var isb = new IndentedStringBuilder();
+            isb.Append("(");
 
             bool firstArg = true;
             foreach (var argument in paramList)
             {
-                var argAsCode = ConvertExpression(argument);
+                var argAsCode = BuildExpression(argument);
 
                 if (!firstArg)
-                    sb.Append(", ");
+                    isb.Append(", ");
 
-                sb.Append(argAsCode);
+                isb.Append(argAsCode);
                 firstArg = false;
             }
 
-            sb.Append(")");
-
-            return sb.ToString();
+            isb.Append(")");
+            return isb;
         }
 
-        private string ConvertDefaultExpression(
+        private string BuildDefaultExpression(
             DefaultExpression de)
         {
             var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
@@ -341,12 +367,12 @@ internal partial class LibrarySetCSharpCodeGenerator
             return defaultExpression;
         }
 
-        private string ConvertTypeBinaryExpression(
+        private string BuildTypeBinaryExpression(
             TypeBinaryExpression typeBinary)
         {
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
-                var left = ConvertExpression(typeBinary.Expression);
+                var left = BuildExpression(typeBinary.Expression);
                 var type = TypeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
                 return $"{left} is {type}";
             }
@@ -354,98 +380,102 @@ internal partial class LibrarySetCSharpCodeGenerator
                 throw new NotSupportedException($"Don't know how to convert a type binary operator {typeBinary.NodeType} into C#.");
         }
 
-        private string ConvertConditionalExpression(
+        private string BuildConditionalExpression(
             ConditionalExpression ce)
         {
-            var conditionalSb = new IndentedStringBuilder();
-            conditionalSb.Append("(");
-            var test = ConvertExpression(ce.Test);
-            conditionalSb.AppendLine(test);
+            var isb = new IndentedStringBuilder();
+            isb.Append("(");
+            var test = BuildExpression(ce.Test);
+            isb.AppendLine(test);
 
-            var ifTrue = $"{ConvertExpression(ce.IfTrue)}";
-            var ifFalse = $"{ConvertExpression(ce.IfFalse)}";
-            var indentedConditionalSb = conditionalSb.AddIndent();
-            indentedConditionalSb.AppendLine($"? {ifTrue}");
-            indentedConditionalSb.Append($": {ifFalse})");
+            var ifTrue = $"{BuildExpression(ce.IfTrue)}";
+            var ifFalse = $"{BuildExpression(ce.IfFalse)}";
+            using (isb.Indent())
+            {
+                isb.AppendLine($"? {ifTrue}");
+                isb.Append($": {ifFalse})");
+            }
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
-                return $"({TypeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb}";
+                return $"({TypeToCSharpConverter.ToCSharp(ce.Type)}){isb}";
             else
-                return conditionalSb.ToString();
+                return isb;
         }
 
-        private string ConvertCaseWhenThenExpression(
+        private string BuildCaseWhenThenExpression(
             CaseWhenThenExpression conditional)
         {
-            var sb = new IndentedStringBuilder();
+            var isb = new IndentedStringBuilder();
 
             bool firstCase = true;
             foreach (var c in conditional.WhenThenCases)
             {
-                var condition = ConvertExpression(c.When);
-                sb.AppendLine(firstCase ? $"if ({condition})" : $"else if ({condition})");
-                sb.AppendLine(ConvertConditionalStatementBlock(c.Then));
+                var condition = BuildExpression(c.When);
+                isb.AppendLine(firstCase ? $"if ({condition})" : $"else if ({condition})");
+                isb.AppendLine(BuildConditionalStatementBlock(c.Then));
                 firstCase = false;
             }
 
-            sb.AppendLine("else");
-            sb.Append(ConvertConditionalStatementBlock(conditional.ElseCase));
+            isb.AppendLine("else");
+            isb.Append(BuildConditionalStatementBlock(conditional.ElseCase));
 
-            return sb.ToString();
+            return isb;
         }
 
-        private string ConvertConditionalStatementBlock(
+        private string BuildConditionalStatementBlock(
             Expression conditionalActionBlock)
         {
+            var code = BuildExpression(conditionalActionBlock);
+
             if (conditionalActionBlock is BlockExpression)
             {
-                return ConvertExpression(conditionalActionBlock);
+                return code;
             }
             else
             {
-                var sb = new IndentedStringBuilder();
-                sb.AppendLine("{");
-                var returnBuilder = sb.AddIndent();
-                returnBuilder.Append("return ");
-                returnBuilder.Append(ConvertExpression(conditionalActionBlock));
-                returnBuilder.AppendLine(";");
-                sb.Append("}");
+                var isb = new IndentedStringBuilder();
+                isb.AppendLine("{");
+                using (isb.Indent())
+                {
+                    isb.AppendLine($"return {code};");
+                }
 
-                return sb.ToString();
+                isb.Append("}");
+                return isb;
             }
         }
 
-        private string ConvertMemberInitExpression(
+        private string BuildMemberInitExpression(
             MemberInitExpression memberInit)
         {
             if (TypeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
-                return ConvertMemberInitTupleExpression(memberInit);
+                return BuildMemberInitTupleExpression(memberInit);
 
-            var memberInitSb = new IndentedStringBuilder();
+            var isb = new IndentedStringBuilder();
             var typeName = TypeToCSharpConverter.ToCSharp(memberInit.Type);
-            memberInitSb.AppendLine($"new {typeName}");
-            memberInitSb.AppendLine("{");
-            var innerMemberSb = memberInitSb.AddIndent();
-
-            foreach (var binding in memberInit.Bindings)
+            isb.AppendLine($"new {typeName}");
+            isb.AppendLine("{");
+            using (isb.Indent())
             {
-                if (binding is MemberAssignment assignment)
+                foreach (var binding in memberInit.Bindings)
                 {
-                    var memberName = assignment.Member.Name;
-                    var assignmentCode = ConvertExpression(assignment.Expression);
-                    innerMemberSb.Append($"{memberName} = {assignmentCode}");
-                    innerMemberSb.AppendLine(",");
+                    if (binding is MemberAssignment assignment)
+                    {
+                        var memberName = assignment.Member.Name;
+                        var assignmentCode = BuildExpression(assignment.Expression);
+                        isb.Append($"{memberName} = {assignmentCode}");
+                        isb.AppendLine(",");
+                    }
+                    else
+                        throw new NotSupportedException($"Don't know how to convert a new member init of type {binding.GetType()} into C#.");
                 }
-                else
-                    throw new NotSupportedException($"Don't know how to convert a new member init of type {binding.GetType()} into C#.");
             }
 
-            memberInitSb.Append("}");
-
-            return memberInitSb.ToString();
+            isb.Append("}");
+            return isb;
         }
 
-        private string ConvertMemberInitTupleExpression(
+        private string BuildMemberInitTupleExpression(
             MemberInitExpression memberInit)
         {
             var memberAssignmentsByMemberName =
@@ -453,7 +483,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                           .Cast<MemberAssignment>()
                           .ToDictionary(
                               ma => ma.Member.Name,
-                              ma => ConvertExpression(ma.Expression));
+                              ma => BuildExpression(ma.Expression));
 
             var tupleProperties = TypeToCSharpConverter
                                   .GetTupleProperties(memberInit.Type)
@@ -469,77 +499,75 @@ internal partial class LibrarySetCSharpCodeGenerator
             return tupleAssignmentCode;
         }
 
-        private string ConvertNewArrayExpression(
+        private string BuildNewArrayExpression(
             NewArrayExpression newArray)
         {
             switch (newArray.NodeType)
             {
                 case ExpressionType.NewArrayInit:
                 {
-                    var newArraySb = new IndentedStringBuilder();
-                    newArraySb.AppendLine("[");
-
-                    var elementBuilder = newArraySb.AddIndent();
-                    foreach (var expr in newArray.Expressions)
+                    var isb = new IndentedStringBuilder();
+                    isb.AppendLine("[");
+                    using (isb.Indent())
                     {
-                        var exprCode = ConvertExpression(expr);
-                        elementBuilder.AppendLine($"{exprCode},");
+                        foreach (var expr in newArray.Expressions)
+                        {
+                            var exprCode = BuildExpression(expr);
+                            isb.AppendLine($"{exprCode},");
+                        }
                     }
 
-                    newArraySb.Append("]");
-                    return newArraySb.ToString();
+                    isb.Append("]");
+                    return isb;
                 }
+
                 case ExpressionType.NewArrayBounds:
-                {
-                    var newArraySb = new IndentedStringBuilder();
-                    newArraySb.Append("[]");
-                    return newArraySb.ToString();
-                }
+                    return "[]";
 
                 default:
                     throw new NotSupportedException($"Don't know how to convert new array operator {newArray.NodeType} into C#.");
             }
         }
 
-        private string ConvertNewExpression(
+        private string BuildNewExpression(
             NewExpression @new)
         {
-            var arguments = @new.Arguments.Select(a => ConvertExpression(a));
+            var arguments = @new.Arguments.Select(a => BuildExpression(a));
             var argString = string.Join(", ", arguments);
             return $"new {TypeToCSharpConverter.ToCSharp(@new.Type)}({argString})";
         }
 
-        private string ConvertMemberExpression(
+        private string BuildMemberExpression(
             MemberExpression me)
         {
             var nullProp = TypeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
             var @object = me.Expression is not null
-                              ? ConvertExpression(me.Expression)
+                              ? BuildExpression(me.Expression)
                               : TypeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
             @object = @object.ParenthesizeIfNeeded();
             var memberName = me.Member.Name.EscapeKeywords();
             return $"{@object}{nullProp}.{memberName}";
         }
 
-        private string ConvertLambdaExpression(
+        private string BuildLambdaExpression(
             LambdaExpression lambda,
             bool functionMode = false,
             IReadOnlyDictionary<string, string>? originalParameterNames = null,
             bool includeContextParameter = true)
         {
-            var parameters = ConvertLambdaExpressionParameters(lambda, originalParameterNames, includeContextParameter);
+            var parameters = BuildLambdaExpressionParameters(lambda, originalParameterNames, includeContextParameter);
             var lambdaOperator = BuildLambdaOperator(lambda, functionMode);
-            var lambdaBody = ConvertExpression(lambda.Body);
+            var lambdaBody = BuildExpression(lambda.Body);
 
             var ibs = new IndentedStringBuilder();
-            ibs.AppendLine($"{parameters}{lambdaOperator}");
-            ibs.Append(lambdaBody);
-            return ibs.ToString();
+            ibs.AppendLine($"{parameters}{lambdaOperator} {lambdaBody}");
+            //ibs.Append(lambdaBody);
+            return ibs;
         }
 
-        private static string BuildLambdaOperator(LambdaExpression lambda,bool functionMode) => lambda.Body is BlockExpression && functionMode ? "" : " =>";
+        private static string BuildLambdaOperator(LambdaExpression lambda, bool functionMode) => lambda.Body is BlockExpression && functionMode ? "" : " =>";
 
-        private string ConvertLambdaExpressionParameters(
+        private string BuildLambdaExpressionParameters(
             LambdaExpression lambda,
             IReadOnlyDictionary<string, string>? originalParameterNames,
             bool includeContextParameter)
@@ -566,7 +594,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             return $"({string.Join(", ", parameters)})";
         }
 
-        private string ConvertLocalFunctionDefinition(
+        private string BuildLocalFunctionDefinition(
             LambdaExpression function,
             string name)
         {
@@ -575,19 +603,19 @@ internal partial class LibrarySetCSharpCodeGenerator
             funcSb.Append(" ");
             funcSb.Append(name);
 
-            var lambda = ConvertLambdaExpression(function, functionMode: true, includeContextParameter: false);
+            var lambda = BuildLambdaExpression(function, functionMode: true, includeContextParameter: false);
             funcSb.Append(lambda);
 
-            return funcSb.ToString();
+            return funcSb;
         }
 
-        private string ConvertUnaryExpression(
+        private string BuildUnaryExpression(
             UnaryExpression unary)
         {
             var stripped = StripBoxing(unary);
 
             if (stripped is not UnaryExpression strippedUnary)
-                return ConvertExpression(stripped);
+                return BuildExpression(stripped);
 
             switch (strippedUnary.NodeType)
             {
@@ -595,16 +623,16 @@ internal partial class LibrarySetCSharpCodeGenerator
                 case ExpressionType.Convert:
                 case ExpressionType.TypeAs:
                 {
-                    var operand = ConvertExpression(strippedUnary.Operand);
+                    var operand = BuildExpression(strippedUnary.Operand);
                     operand = operand.ParenthesizeIfNeeded();
                     var typeName = TypeToCSharpConverter.ToCSharp(strippedUnary.Type);
                     return strippedUnary.NodeType == ExpressionType.TypeAs
-                        ? $"{operand} as {typeName}"
-                        : $"({typeName}){operand}";
+                               ? $"{operand} as {typeName}"
+                               : $"({typeName}){operand}";
                 }
                 case ExpressionType.Throw:
                 {
-                    var operand = ConvertExpression(strippedUnary.Operand);
+                    var operand = BuildExpression(strippedUnary.Operand);
                     return $"throw ({operand})";
                 }
                 default:
@@ -612,7 +640,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
         }
 
-        private string ConvertBinaryExpression(
+        private string BuildBinaryExpression(
             BinaryExpression binary)
         {
             var left = StripBoxing(binary.Left);
@@ -622,9 +650,9 @@ internal partial class LibrarySetCSharpCodeGenerator
                 left is ParameterExpression parameter)
             {
                 if (right is LambdaExpression le)
-                    return ConvertLocalFunctionDefinition(le, parameter.Name!);
+                    return BuildLocalFunctionDefinition(le, parameter.Name!);
 
-                var rightCode = ConvertExpression(right);
+                var rightCode = BuildExpression(right);
                 var typeDeclaration = TypeToCSharpConverter.ToCSharp(left.Type);
                 var paramName = StringExtensions.GetOrCreateName(parameter);
                 return $"{typeDeclaration} {paramName} = {rightCode}";
@@ -635,9 +663,9 @@ internal partial class LibrarySetCSharpCodeGenerator
                                     ? "is"
                                     : BinaryOperatorFor(binary.NodeType);
 
-                var leftCode = ConvertExpression(left);
+                var leftCode = BuildExpression(left);
                 leftCode = leftCode.ParenthesizeIfNeeded();
-                var rightCode = ConvertExpression(right);
+                var rightCode = BuildExpression(right);
                 string binaryString = @operator switch
                 {
                     // (constant value is null) --> false

@@ -9,17 +9,18 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    private record LibraryWriter(
+    private record LibraryWriter
+    (
         LibrarySetWriter LibrarySetWriter,
         ElmLibrary Library,
-        // ReSharper disable once InconsistentNaming
-        IndentedStringBuilder isb) : IAddIndentMutable<LibraryWriter>
+        IndentedStringBuilder ISB)
     {
         private CqlVersionedLibraryIdentifier LibraryVersionedIdentifier => Library.VersionedLibraryIdentifier!;
         public string LibraryName { get; } = Library.VersionedLibraryIdentifier;
         private string ClassName { get; } = IdentifierNormalizer.Normalize(Library.VersionedLibraryIdentifier);
 
         private readonly Dictionary<string, int> _cacheFieldNameCount = new();
+
         public string GetUniqueCacheFieldName(string baseName)
         {
             if (string.IsNullOrEmpty(baseName))
@@ -32,14 +33,10 @@ partial class LibrarySetCSharpCodeGenerator
                 fieldName = count == 0 ? baseName : $"{baseName}_{count}";
                 count++;
             } while (_cacheFieldNameCount.ContainsKey(fieldName));
+
             _cacheFieldNameCount[baseName] = count;
             _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
             return fieldName;
-        }
-
-        public LibraryWriter AddIndent(int addIndent = 1)
-        {
-            return this with { isb = isb.AddIndent(addIndent) };
         }
 
         public void WriteLibraryFile()
@@ -59,26 +56,28 @@ partial class LibrarySetCSharpCodeGenerator
             {
                 if (first)
                 {
-                    isb.AppendLine("""
-                                                 #region CqlTupleMetadata Properties
+                    ISB.AppendLine(
+                        """
+                        #region CqlTupleMetadata Properties
 
-                                                 """);
+                        """);
                     first = false;
                 }
 
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
-                isb.AppendLine($"""
-                                              private static CqlTupleMetadata {propertyName} = new(
-                                                [{types}],
-                                                [{names}]);
+                ISB.AppendLine(
+                    $"""
+                     private static CqlTupleMetadata {propertyName} = new(
+                        [{types}],
+                        [{names}]);
 
-                                              """);
+                     """);
             }
 
             if (!first)
             {
-                isb.AppendLine(
+                ISB.AppendLine(
                     """
                     #endregion CqlTupleMetadata Properties
 
@@ -88,42 +87,44 @@ partial class LibrarySetCSharpCodeGenerator
 
         private void WriteLibraryInterfaceImplementation()
         {
-            isb.AppendLine($"""
-                                          #region ILibrary Implementation
+            ISB.AppendLine(
+                $"""
+                 #region ILibrary Implementation
 
-                                          public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
-                                          public string Version => {LibraryVersionedIdentifier.Version?.ToString().QuoteOrNullString()};
-                                          """);
+                 public string Name => {LibraryVersionedIdentifier.Identifier.ToString().QuoteString()};
+                 public string Version => {LibraryVersionedIdentifier.Version?.ToString().QuoteOrNullString()};
+                 """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => IdentifierNormalizer.Normalize(dep.VersionedLibraryIdentifier))
                                 .Select(typeName => $"{typeName}.Instance");
-            isb.AppendLine($"""
-                                          public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
+            ISB.AppendLine(
+                $"""
+                 public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];
 
-                                          #endregion ILibrary Implementation
+                 #endregion ILibrary Implementation
 
-                                          """);
+                 """);
         }
 
         private void WriteUsings()
         {
             foreach (var @using in LibrarySetWriter.Usings)
-                isb.AppendLine($"using {@using};");
+                ISB.AppendLine($"using {@using};");
 
             foreach (var @using in LibrarySetWriter.AliasedUsings)
-                isb.AppendLine($"using {@using.Item1} = {@using.Item2};");
+                ISB.AppendLine($"using {@using.Item1} = {@using.Item2};");
 
-            isb.AppendLine();
+            ISB.AppendLine();
         }
 
         private void WriteNamespaceFileScope()
         {
             if (LibrarySetWriter.Namespace is { Length: > 0 } @namespace)
             {
-                isb.AppendLine($"namespace {@namespace};");
-                isb.AppendLine();
+                ISB.AppendLine($"namespace {@namespace};");
+                ISB.AppendLine();
             }
         }
 
@@ -171,111 +172,121 @@ partial class LibrarySetCSharpCodeGenerator
                 {
                     if (lastDefinitionRegion != "")
                     {
-                        isb.AppendLine($"""
-                                                      #endregion {lastDefinitionRegion}
+                        ISB.AppendLine(
+                            $"""
+                             #endregion {lastDefinitionRegion}
 
-                                                      """);
+                             """);
                     }
 
-                    isb.AppendLine($"""
-                                                  #region {definitionRegion}
+                    ISB.AppendLine(
+                        $"""
+                         #region {definitionRegion}
 
-                                                  """);
+                         """);
                 }
 
                 lastDefinitionRegion = definitionRegion;
 
                 var methodWriter = new DefinitionWriter(this, definition);
-                methodWriter.WriteDefinition();
-                isb.AppendLine();
+                methodWriter.AppendDefinition();
+                ISB.AppendLine();
             }
 
             if (lastDefinitionRegion != "")
             {
-                isb.AppendLine($"""
-                                              #endregion {lastDefinitionRegion}
+                ISB.AppendLine($"""
+                                #endregion {lastDefinitionRegion}
 
-                                              """);
+                                """);
             }
         }
 
         private void WriteClass()
         {
-            isb.AppendLine(
+            ISB.AppendLine(
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
-            isb.AppendLine(
+            ISB.AppendLine(
                 LibraryVersionedIdentifier.Version is { } version && Version.TryParse(version, out _)
                     ? $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
                     : $"[CqlLibrary({LibraryVersionedIdentifier.Identifier.ToString().QuoteString()})]");
 
-            isb.AppendLine($$"""
-                                           public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
-                                           {
-                                           """);
+            ISB.AppendLine(
+                $$"""
+                  public partial class {{ClassName}} : ILibrary, ISingleton<{{ClassName}}>
+                  {
+                  """);
+            using (ISB.Indent())
             {
-                var classBlockContext = AddIndent();
-                classBlockContext.WriteClassConstructor();
-                classBlockContext.WriteSingletonInstanceProperty();
-                classBlockContext.WriteLibraryInterfaceImplementation();
-                isb.AddIndent().AppendLine(
-                    """
-                    #region Nested Type - Cached<T>
+                WriteClassConstructor();
+                WriteSingletonInstanceProperty();
+                WriteLibraryInterfaceImplementation();
+                WriteNestedTypeCached();
+                WriteMethods();
+                WriteCqlTupleMetadataProperties();
+            }
 
-                    private struct Cached<T>(object CacheVersion, T CachedValue)
+            ISB.AppendLine("}");
+        }
+
+        private void WriteNestedTypeCached()
+        {
+            ISB.AppendLine(
+                """
+                #region Nested Type - Cached<T>
+
+                private struct Cached<T>(object CacheVersion, T CachedValue)
+                {
+                    public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
                     {
-                        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+                        var cqlContextCacheVersion = cqlContext.CacheVersion;
+                        if (cqlContextCacheVersion is null)
                         {
-                            var cqlContextCacheVersion = cqlContext.CacheVersion;
-                            if (cqlContextCacheVersion is null)
-                            {
-                                // No caching, clear out previous values
-                                CacheVersion = null;
-                                CachedValue = default;
-                                var value = factory();
-                                return value;
-                            }
+                            // No caching, clear out previous values
+                            CacheVersion = null;
+                            CachedValue = default;
+                            var value = factory();
+                            return value;
+                        }
 
-                            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
-                            {
-                                // Cache hit
-                                return CachedValue;
-                            }
-                            else
-                            {
-                                // Cache miss, refresh and store
-                                var value = factory();
-                                CachedValue = value;
-                                CacheVersion = cqlContextCacheVersion;
-                                return value;
-                            }
+                        if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+                        {
+                            // Cache hit
+                            return CachedValue;
+                        }
+                        else
+                        {
+                            // Cache miss, refresh and store
+                            var value = factory();
+                            CachedValue = value;
+                            CacheVersion = cqlContextCacheVersion;
+                            return value;
                         }
                     }
+                }
 
-                    #endregion
+                #endregion
 
-                    """);
-                classBlockContext.WriteMethods();
-                classBlockContext.WriteCqlTupleMetadataProperties();
-            }
-            isb.AppendLine("}");
+                """);
         }
 
         private void WriteSingletonInstanceProperty()
         {
-            isb.AppendLine($$"""
-                                           public static {{ClassName}} Instance { get; } = new();
+            ISB.AppendLine(
+                $$"""
+                  public static {{ClassName}} Instance { get; } = new();
 
-                                           """);
+                  """);
         }
 
         private void WriteClassConstructor()
         {
-            isb.AppendLine($$"""
-                                           private {{ClassName}}() {}
+            ISB.AppendLine(
+                $$"""
+                  private {{ClassName}}() {}
 
-                                           """);
+                  """);
         }
     }
-
 }

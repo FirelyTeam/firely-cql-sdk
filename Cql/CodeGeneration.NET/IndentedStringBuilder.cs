@@ -11,10 +11,20 @@ using System.Diagnostics;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 [DebuggerDisplay("{ToString(),nq}")]
-internal class IndentedStringBuilder(
-    StringBuilder? stringBuilder = null,
-    int indent = 0) : IAddIndentMutable<IndentedStringBuilder>
+internal class IndentedStringBuilder
 {
+    public static implicit operator string(IndentedStringBuilder isb) => isb.ToString();
+
+    private IndentScope _leafIndentScope;
+
+    public IndentedStringBuilder(
+        StringBuilder? stringBuilder = null,
+        int indent = 0)
+    {
+        _leafIndentScope = new IndentScope(this, indent);
+        StringBuilder = stringBuilder ?? new();
+    }
+
     public IndentedStringBuilder Append(int addIndent, string text = "") =>
         AppendCore(addIndent, text, addNewLine: false);
 
@@ -54,7 +64,7 @@ internal class IndentedStringBuilder(
                     int leadingTabs = line.TakeWhile(c => c == '\t').Count();
                     line = line[leadingTabs..];
                     if (line.Length > 0)
-                        finalIndent = Indent + leadingTabs + addIndent;
+                        finalIndent = IndentLevel + leadingTabs + addIndent;
                 }
 
                 sb.Append(finalIndent, line);
@@ -67,11 +77,56 @@ internal class IndentedStringBuilder(
         return this;
     }
 
-    public IndentedStringBuilder AddIndent(int addIndent = 1) => new(StringBuilder, Indent + addIndent);
+    public IndentScope Indent(int addIndent = 1)
+    {
+        if (addIndent < 1)
+            throw new ArgumentOutOfRangeException(nameof(addIndent), addIndent, "Must be one or greater.");
 
-    public int Indent { get; } = indent;
+        var indentScope = new IndentScope(this, addIndent);
+        _leafIndentScope = indentScope;
+        return _leafIndentScope;
+    }
 
-    public StringBuilder StringBuilder { get; } = stringBuilder ?? new();
+    public IndentedStringBuilder Unindent() =>
+        _leafIndentScope.Unindent();
+
+    public int IndentLevel => _leafIndentScope.IndentLevel;
+
+    public StringBuilder StringBuilder { get; }
 
     public override string ToString() => StringBuilder.ToString();
+
+    public class IndentScope : IDisposable
+    {
+        public IndentedStringBuilder Builder { get; }
+
+        private readonly IndentScope _previousScope; // null? then we are the root
+
+        public int IndentLevel { get; }
+
+        internal IndentScope(
+            IndentedStringBuilder owner,
+            int addIndent)
+        {
+            Builder = owner;
+            IndentScope? ownerLeafIndentScope = owner?._leafIndentScope; // the root scope will be null, since we are constructing it before setting it to the field
+            _previousScope = ownerLeafIndentScope ?? this;
+            IndentLevel = _previousScope.IndentLevel + addIndent;
+        }
+
+        public IndentedStringBuilder Unindent()
+        {
+            if (ReferenceEquals(_previousScope, this))
+                return Builder; // We are the root scope, so nothing to unindent.
+
+            if (Builder._leafIndentScope != this)
+                throw new InvalidOperationException("Scoped Unindent should occur in reverse sequence.");
+
+            Builder._leafIndentScope = _previousScope;
+            return Builder;
+        }
+
+        void IDisposable.Dispose() => Unindent(); // Only unindent on an explicit Dispose and not via finalizer.
+    }
 }
+
