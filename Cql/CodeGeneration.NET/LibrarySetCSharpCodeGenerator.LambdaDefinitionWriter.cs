@@ -25,14 +25,23 @@ internal partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(ld);
 
             var parameters = ld.LambdaExpression.Parameters.Skip(1).ToList(); // CqlContext is always first parameter, which we ignore here
+            var visitedBody = Transform(
+                ld.LambdaExpression.Body,
+                new RedundantCastsTransformer(),
+                new SimplifyExpressionsVisitor(),
+                new RenameVariablesVisitor(new([], postfix: "_")),
+                new LocalVariableDeduper(TypeToCSharpConverter)
+            );
+            var transformedLambda = Expression.Lambda(visitedBody, parameters);
+            var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);
 
             var useCache = parameters is not { Count:>0 };
             string? cacheFieldName = null;
             if (useCache)
             {
                 cacheFieldName = LibraryWriter.GetUniqueCacheFieldName(fieldName);
-                cacheFieldName = $"{cacheFieldName}_cacheix";
-                isb.AppendLine($"private int {cacheFieldName} = -1;");
+                cacheFieldName = $"{cacheFieldName}_Cached";
+                isb.AppendLine($"private Cached<{returnType}> {cacheFieldName} = new();");
                 isb.AppendLine();
             }
 
@@ -49,17 +58,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     foreach (var tagValue in tag.Values)
                         isb.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
 
-            var visitedBody = Transform(
-                ld.LambdaExpression.Body,
-                new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(new([], postfix: "_")),
-                new LocalVariableDeduper(TypeToCSharpConverter)
-            );
-            var transformedLambda = Expression.Lambda(visitedBody, parameters);
-
             // Signature
-            var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);
             isb.Append($"public {returnType} {methodName}");
 
             // Extract original parameter names if this is a CqlFunctionDefinition
@@ -76,10 +75,9 @@ internal partial class LibrarySetCSharpCodeGenerator
             {
                 isb.AppendLine($"{lambdaParameters} =>");
                 var isb1 = isb.AddIndent();
-                isb1.AppendLine($"GetOrAddCache<{returnType}>(");
+                isb1.AppendLine($"{cacheFieldName}.GetOrReplace(");
                 var isb2 = isb1.AddIndent();
-                isb2.AppendLine("context.Cache,");
-                isb2.AppendLine($"ref {cacheFieldName},");
+                isb2.AppendLine("context,");
                 isb2.AppendLine("() =>");
                 isb2.Append(lambdaBody);
                 isb2.AppendLine(");");

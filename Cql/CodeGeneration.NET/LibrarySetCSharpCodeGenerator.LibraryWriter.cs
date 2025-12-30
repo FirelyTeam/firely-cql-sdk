@@ -220,9 +220,34 @@ partial class LibrarySetCSharpCodeGenerator
                 classBlockContext.WriteLibraryInterfaceImplementation();
                 isb.AddIndent().AppendLine(
                     """
-                    #region Caching
+                    #region Nested Type - Cached<T>
 
-                    private T GetOrAddCache<T>(CqlContextCache cache, ref int cacheix, Func<T> factory) => cache.GetOrAdd<T>(ref cacheix, factory);
+                    private struct Cached<T>(object CacheToken, T CachedValue)
+                    {
+                        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+                        {
+                            if (cqlContext.CacheToken is null)
+                            {
+                                // No caching
+                                CacheToken = null;
+                                CachedValue = default;
+                                var value = factory();
+                                return value;
+                            }
+
+                            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+                            {
+                                return CachedValue;
+                            }
+                            else
+                            {
+                                var value = factory();
+                                CachedValue = value;
+                                CacheToken = cqlContext.CacheToken;
+                                return value;
+                            }
+                        }
+                    }
 
                     #endregion
 

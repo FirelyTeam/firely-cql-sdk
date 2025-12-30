@@ -10,28 +10,19 @@ using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Runtime
 {
-    partial class CqlContext
+    public interface ICqlContextInternals
     {
-        private CqlContextCache _cache = new(1);
-
-        /// <summary> TODO </summary>
-        public CqlContextCache Cache => _cache;
-
-        /// <summary> TODO </summary>
-        public void ResetCache() => _cache = new CqlContextCache(_cache.Version + 1);
+        public object CacheToken { get; }
     }
 
-    /// <summary> TODO </summary>
-    public class CqlContextCache(int version)
+    partial class CqlContext : ICqlContextInternals
     {
-        /// <summary> TODO </summary>
-        public int Version { get; } = version;
+        private object _cacheToken = new();
 
         /// <summary> TODO </summary>
-        public T GetOrAdd<T>(ref int cacheIx, Func<T> func)
-        {
-            return func();
-        }
+        public void ResetCache() => _cacheToken = new();
+
+        object ICqlContextInternals.CacheToken => _cacheToken;
     }
 
     /// <summary>
