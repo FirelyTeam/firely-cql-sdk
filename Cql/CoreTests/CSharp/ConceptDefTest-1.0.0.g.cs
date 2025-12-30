@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("ConceptDefTest", "1.0.0")]
 public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_1_0_0>
 {

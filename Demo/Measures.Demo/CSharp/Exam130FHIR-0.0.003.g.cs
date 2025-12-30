@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_003>
 {
