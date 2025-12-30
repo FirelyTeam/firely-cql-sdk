@@ -30,28 +30,31 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     #region Nested Type - Cached<T>
 
-    private struct Cached<T>(object CacheToken, T CachedValue)
+    private struct Cached<T>(object CacheVersion, T CachedValue)
     {
         public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
         {
-            if (cqlContext.CacheToken is null)
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
             {
-                // No caching
-                CacheToken = null;
+                // No caching, clear out previous values
+                CacheVersion = null;
                 CachedValue = default;
                 var value = factory();
                 return value;
             }
 
-            if (ReferenceEquals(CacheToken, cqlContext.CacheToken))
+            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
             {
+                // Cache hit
                 return CachedValue;
             }
             else
             {
+                // Cache miss, refresh and store
                 var value = factory();
                 CachedValue = value;
-                CacheToken = cqlContext.CacheToken;
+                CacheVersion = cqlContextCacheVersion;
                 return value;
             }
         }
